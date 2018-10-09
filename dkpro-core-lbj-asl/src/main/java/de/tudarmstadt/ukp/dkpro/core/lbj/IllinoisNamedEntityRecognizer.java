@@ -43,11 +43,16 @@ import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
 import edu.illinois.cs.cogcomp.ner.NERAnnotator;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for the Illinois named entity recognizer from the Cognitive Computation Group (CCG).
  */
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "Illinois CCG Named Entity Recognizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -56,16 +61,6 @@ import edu.illinois.cs.cogcomp.ner.NERAnnotator;
 public class IllinoisNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
 {
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-    
     /**
      * Log the tag set(s) when a model is loaded.
      */
@@ -191,6 +186,6 @@ public class IllinoisNamedEntityRecognizer
             throw new IllegalStateException(e);
         }
         
-        ConvertToUima.convertNamedEntity(aJCas, document, mappingProvider, internTags);
+        ConvertToUima.convertNamedEntity(aJCas, document, mappingProvider);
     }
 }

@@ -15,18 +15,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <version>1.9.1-SNAPSHOT</version>
+    <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-io-xces-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IO - XCES-XML</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -71,7 +74,11 @@
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-    </dependency>  
+    </dependency>
+    <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -102,12 +109,6 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-en-chunking</usedDependency>
             </usedDependencies>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2017
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -213,9 +213,9 @@ public class StanfordNamedEntityRecognizerTest
         JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
         String[] ne = {
-                "[  0,  6]Person(I-PER) (Markus)",
-                "[ 35, 38]Organization(I-ORG) (SAP)",
-                "[ 42, 53]Location(I-LOC) (Deutschland)" };
+                "[  0,  6]Person(PERSON) (Markus)",
+                "[ 35, 38]Organization(ORGANIZATION) (SAP)",
+                "[ 42, 53]Location(LOCATION) (Deutschland)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }

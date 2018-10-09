@@ -38,11 +38,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Tokenizer and sentence splitter using UDPipe.
  */
 @ResourceMetaData(name = "UDPipe Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -64,6 +66,20 @@ public class UDPipeSegmenter
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */

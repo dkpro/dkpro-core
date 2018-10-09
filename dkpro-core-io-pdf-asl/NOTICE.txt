@@ -3,6 +3,11 @@ AnnoLab project by Richard Eckart de Castilho. They were originally licensed und
 the LGPL and have been relicenced under the Apache License 2.0 by the original
 author.
 
+LegacyPDFStreamEngine.java:
+
+This class was copied from PDFbox 2.0.9 because it could not be extended as it was package-private
+in PDFBox.
+
 
 PDFLayoutEventStripper.java:
 

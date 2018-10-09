@@ -39,11 +39,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Language detector based on n-gram frequency counts, e.g. as provided by Web1T
  */
+@Component(OperationType.LANGUAGE_IDENTIFIER)
 @ResourceMetaData(name = "Web1T Language Detector")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class LanguageDetectorWeb1T
     extends JCasAnnotator_ImplBase
 {
@@ -51,8 +56,8 @@ public class LanguageDetectorWeb1T
      * An array of external resources of frequency providers (one for each language that should be
      * detected).
      */
-    public static final String PARAM_FREQUENCY_PROVIDER_RESOURCES = "frequencyProviders";
-    @ExternalResource(key = PARAM_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)
+    public static final String RES_FREQUENCY_PROVIDER_RESOURCES = "frequencyProviders";
+    @ExternalResource(key = RES_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)
     private FrequencyCountProvider[] frequencyProviders;
 
     /**

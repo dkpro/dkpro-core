@@ -25,11 +25,16 @@ import org.apache.uima.jcas.JCas;
 
 import cn.com.cjf.CJFBeanFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformer_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Converts traditional Chinese to simplified Chinese or vice-versa.
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Chinese Traditional/Simplified Converter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("zh")
 public class CjfNormalizer
     extends JCasTransformer_ImplBase
@@ -39,6 +44,10 @@ public class CjfNormalizer
         TO_SIMPLIFIED
     };
     
+    /**
+     * Direction in which to perform the conversion ({@link Direction#TO_TRADITIONAL} or
+     * {@link Direction#TO_SIMPLIFIED});
+     */
     public static final String PARAM_DIRECTION = "direction";
     @ConfigurationParameter(name = PARAM_DIRECTION, mandatory = true, defaultValue = "TO_SIMPLIFIED")
     private Direction direction; 

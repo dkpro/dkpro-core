@@ -35,11 +35,16 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Split up existing tokens again if they are camel-case text.
  */
+@Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "CamelCase Token Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
@@ -48,8 +53,6 @@ public class CamelCaseTokenSegmenter
 {
     /**
      * Whether to remove the original token.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
     @ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")

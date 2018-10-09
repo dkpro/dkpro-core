@@ -100,7 +100,7 @@ public class JazzyCheckerTest
                     ),
                     createEngineDescription(
                         CorrectionsContextualizer.class,
-                        CorrectionsContextualizer.FREQUENCY_PROVIDER_RESOURCE, resource
+                        CorrectionsContextualizer.RES_FREQUENCY_PROVIDER, resource
                     )
                 )
         );

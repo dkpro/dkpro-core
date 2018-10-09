@@ -35,6 +35,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
@@ -46,12 +47,18 @@ import org.dkpro.core.io.xces.models.XcesToken;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import javanet.staxutils.IndentingXMLEventWriter;
 
+/**
+ * Writer for the XCES XML format.
+ */
 @ResourceMetaData(name = "XCES XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -59,12 +66,17 @@ import javanet.staxutils.IndentingXMLEventWriter;
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
+@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES})
 public class XcesXmlWriter
     extends JCasFileWriter_ImplBase
 {
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
-    private String filenameSuffix;
+    /**
+     * Use this filename extension.
+     */
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
+    private String filenameExtension;
 
     /**
      * Character encoding of the output data.
@@ -81,7 +93,7 @@ public class XcesXmlWriter
         OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
         try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
+            docOS = getOutputStream(aJCas, filenameExtension);
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlEventWriter = new IndentingXMLEventWriter(
                     xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));

@@ -388,7 +388,7 @@ a model produces, not those that it consumes.
 | `pos.tagset`
 |
 
-| `morph.tagset`
+| `morph.tagset`
 | 
 
 |====
@@ -413,16 +413,16 @@ change in the future.
 [options="header"]
 |====
 |Entry|Description
-| `DC.title`
+| `DC.title`
 | 
 
-| `DC.creator`
+| `DC.creator`
 | 
 
-| `DC.identifier`
+| `DC.identifier`
 | 
 
-| `DC.rights`
+| `DC.rights`
 | 
 
 |====
@@ -431,16 +431,16 @@ change in the future.
 [options="header"]
 |====
 |Entry|Description
-| `mstparser.param.order`
+| `mstparser.param.order`
 | Used by the MstParser component to indicate the type of model
 
-| `flushSequence`
+| `flushSequence`
 | Used by the TreeTagger components to mark the boundary between two documents.
 
 | `pos.tagset.tagSplitPattern`
 |
 
-| `pos.tag.map.XXX`
+| `pos.tag.map.XXX`
 | 
 
 |====

@@ -30,6 +30,9 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Annotator to be used for post-processing of German corpora that have been lemmatized and
@@ -43,7 +46,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * of particle-verbs (e.g., fangen) by the proper verb lemma (e.g. anfangen) and leaves the lemma of
  * the separated particle unchanged.
  */
+@Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "German Separated Particle Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("de")
 @TypeCapability(
         inputs = {

@@ -15,19 +15,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <version>1.9.1-SNAPSHOT</version>
+    <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-udpipe-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - UDPipe (v ${udpipe.version})</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <udpipe.version>1.1.0</udpipe.version>
   </properties>
@@ -73,6 +75,10 @@
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-udpipe-bin</artifactId>
       <version>20170425.0</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

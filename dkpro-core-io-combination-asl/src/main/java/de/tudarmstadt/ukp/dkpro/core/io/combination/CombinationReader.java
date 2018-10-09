@@ -37,14 +37,22 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.xml.sax.SAXException;
 
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
+
 /**
  * Combines multiple readers into a single reader.
  */
+@Component(value = OperationType.READER)
 @ResourceMetaData(name = "Combining Meta-Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 public class CombinationReader
     extends CasCollectionReader_ImplBase
 {
-
+    /**
+     * Locations of UIMA reader description files.
+     */
     public static final String PARAM_READERS = "readers";
     @ConfigurationParameter(name = PARAM_READERS, mandatory = true)
     private String[] readerFiles;

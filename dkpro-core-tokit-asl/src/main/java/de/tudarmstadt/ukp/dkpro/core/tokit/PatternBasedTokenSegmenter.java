@@ -35,6 +35,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Split up existing tokens again at particular split-chars.
@@ -42,7 +45,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * If the {@link #INCLUDE_PREFIX} precedes the split pattern, the pattern is included.
  * Consequently, patterns following the {@link #EXCLUDE_PREFIX}, will not be added as a Token.
  */
+@Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "Pattern-based Token Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
@@ -55,9 +60,7 @@ public class PatternBasedTokenSegmenter
     public static final String EXCLUDE_PREFIX = "-|";
 
     /**
-     * Wether to remove the original token.
-     *
-     * Default: {@code true}
+     * Whether to remove the original token.
      */
     public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
     @ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")

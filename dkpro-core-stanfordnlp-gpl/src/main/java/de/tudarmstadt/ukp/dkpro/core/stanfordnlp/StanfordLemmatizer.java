@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2017
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -55,6 +55,9 @@ import edu.stanford.nlp.pipeline.MorphaAnnotator;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Stanford Lemmatizer component. The Stanford Morphology-class computes the base form of English
@@ -66,7 +69,9 @@ import edu.stanford.nlp.util.CoreMap;
  * 
  * <p>This only works for ENGLISH.</p>
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "CoreNLP Lemmatizer (old API)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("en")
 @TypeCapability(
         inputs = {

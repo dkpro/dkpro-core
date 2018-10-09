@@ -29,15 +29,16 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * BreakIterator segmenter.
  */
 @ResourceMetaData(name = "Java BreakIterator Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "ar", "be", "bg", "ca", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr",
-        "ga", "hi", "hr", "hu", "in", "is", "it", "iw", "ja", "ko", "lt", "lv", "mk", "ms", "mt",
-        "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sr", "sv", "th", "tr", "uk", "vi",
-        "zh" })
+        "ga", "hi", "hr", "hu", "is", "it", "ja", "ko", "lt", "lv", "mk", "ms", "mt", "nl", "no",
+        "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sr", "sv", "th", "tr", "uk", "vi", "zh" })
 @TypeCapability(
     outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

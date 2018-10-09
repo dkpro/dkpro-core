@@ -26,11 +26,15 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * A {@link JCasTransformerChangeBased_ImplBase} implementation that replaces tokens based on a
@@ -39,7 +43,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * The parameters {@link #PARAM_REGEX} defines the regular expression to be searcher,
  * {@link #PARAM_REPLACEMENT} defines the string with which matching patterns are replaces.
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Regex-based Token Transformer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class RegexBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

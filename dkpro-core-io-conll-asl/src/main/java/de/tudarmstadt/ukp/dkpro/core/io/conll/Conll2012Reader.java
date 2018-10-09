@@ -65,6 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a file in the CoNLL-2012 format.
@@ -73,6 +74,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
  */
 @ResourceMetaData(name = "CoNLL 2012 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(
         outputs = { 
@@ -86,11 +88,17 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 public class Conll2012Reader
     extends JCasResourceCollectionReader_ImplBase
 {
+    /**
+     * Character encoding of the input data.
+     */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String encoding;
 
+    /**
+     * Read part-of-speech information.
+     */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
@@ -114,6 +122,8 @@ public class Conll2012Reader
     protected String posMappingLocation;
     
     /**
+     * Read lemma information.
+     * <p>
      * Disabled by default because CoNLL 2012 format does not include lemmata for all words, only
      * for predicates.
      */
@@ -121,22 +131,38 @@ public class Conll2012Reader
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "false")
     private boolean readLemma;
 
-    public static final String PARAM_READ_SEMANTIC_PREDICATE = "readSemanticPredicate";
+    /**
+     * Read semantic predicate information.
+     */
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = 
+            ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
     @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean readSemanticPredicate;
 
+    /**
+     * Read word sense information.
+     */
     public static final String PARAM_READ_WORD_SENSE = "readWordSense";
     @ConfigurationParameter(name = PARAM_READ_WORD_SENSE, mandatory = true, defaultValue = "true")
     private boolean readWordSense;
 
+    /**
+     * Read syntactic constituent information.
+     */
     public static final String PARAM_READ_CONSTITUENT = ComponentParameters.PARAM_READ_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, mandatory = true, defaultValue = "true")
     private boolean readConstituent;
 
+    /**
+     * Read co-reference information.
+     */
     public static final String PARAM_READ_COREFERENCE = ComponentParameters.PARAM_READ_COREFERENCE;
     @ConfigurationParameter(name = PARAM_READ_COREFERENCE, mandatory = true, defaultValue = "true")
     private boolean readCoreference;
 
+    /**
+     * Read named entity information.
+     */
     public static final String PARAM_READ_NAMED_ENTITY = 
             ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
@@ -162,15 +188,8 @@ public class Conll2012Reader
     protected String constituentMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
+     * Whether to render traces into the document text.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-    
     public static final String PARAM_WRITE_TRACES_TO_TEXT = "writeTracesToText";
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;
@@ -215,7 +234,6 @@ public class Conll2012Reader
                 constituentMappingLocation, constituentTagset, getLanguage());
         
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
-        converter.setInternTags(internTags);
         converter.setWriteTracesToText(writeTracesToText);
         converter.setCreatePosTags(false); // We handle POS tags via the column already
         converter.setRootLabel("TOP");
@@ -298,7 +316,7 @@ public class Conll2012Reader
                     Type posTag = posMappingProvider.getTagType(word[POS]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POS].intern());
+                    pos.setPosValue(word[POS] != null ? word[POS].intern() : null);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
@@ -452,7 +470,9 @@ public class Conll2012Reader
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
             sentence.addToIndexes();
             
-            converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
+            if (readConstituent) {
+                converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
+            }
 
             // Once sentence per line.
             doc.add("\n");

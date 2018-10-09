@@ -23,7 +23,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.json.JsonWriter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class JsonWriterTest

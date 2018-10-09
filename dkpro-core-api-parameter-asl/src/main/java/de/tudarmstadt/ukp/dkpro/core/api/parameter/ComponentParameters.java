@@ -48,7 +48,19 @@ public final class ComponentParameters
     public static final String PARAM_ACCEPTED_TAGS_REGEX = "acceptedTagsRegex";
 
     /**
-     * Location from which the model is read.
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = "modelArtifactUri";
+    
+    /**
+     * Location from which the model is read. This is either a local path or a classpath location.
+     * In the latter case, the model artifact (if any) is searched as well.
      */
     public static final String PARAM_MODEL_LOCATION = "modelLocation";
 
@@ -101,12 +113,6 @@ public final class ComponentParameters
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = "printTagSet";
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spamming
-     * the heap with thousands of strings representing only a few different tags.
-     */
-    public static final String PARAM_INTERN_TAGS = "internTags";
 
     /**
      * When splitting an annotation into multiple parts, e.g. when splitting a token that is a
@@ -190,6 +196,8 @@ public final class ComponentParameters
 
     private static final String NAMED_ENTITY = "NamedEntity";
 
+    private static final String SEMANTIC_PREDICATE = "SemPred";
+
     // =============================================================================================
     // Verbs for parameters
     // =============================================================================================
@@ -205,6 +213,8 @@ public final class ComponentParameters
     private static final String TAG_SET = "TagSet";
 
     private static final String MAPPING_LOCATION = "MappingLocation";
+    
+    private static final String COVERED_TEXT = "CoveredText";
 
     // =============================================================================================
     // Enable / disable reading or writing of particular annotation types.
@@ -238,6 +248,8 @@ public final class ComponentParameters
 
     public static final String PARAM_READ_NAMED_ENTITY = READ + NAMED_ENTITY;
 
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = READ + SEMANTIC_PREDICATE;
+
     public static final String PARAM_WRITE_PARAGRAPH = WRITE + PARAGRAPH;
 
     public static final String PARAM_WRITE_SENTENCE = WRITE + SENTENCE;
@@ -265,6 +277,10 @@ public final class ComponentParameters
     public static final String PARAM_WRITE_DEPENDENCY = WRITE + DEPENDENCY;
 
     public static final String PARAM_WRITE_NAMED_ENTITY = WRITE + NAMED_ENTITY;
+    
+    public static final String PARAM_WRITE_COVERED_TEXT = WRITE + COVERED_TEXT;
+
+    public static final String PARAM_WRITE_SEMANTIC_PREDICATE = WRITE + SEMANTIC_PREDICATE;
 
     // =============================================================================================
     // Configure tag sets for different kinds of annotations.

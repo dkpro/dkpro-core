@@ -37,11 +37,16 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Simple dictionary-based hyphenation remover. 
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Hyphenation Remover")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class HyphenationRemover
     extends JCasTransformerChangeBased_ImplBase
 {
@@ -53,10 +58,17 @@ public class HyphenationRemover
     private static final Pattern HYPHEN_PATTERN = Pattern.compile(
             "\\b(\\p{L}+)-[\\p{Space}]+(\\p{L}+)\\b");
     
+    /**
+     * Location from which the model is read. This is either a local path or a classpath location.
+     * In the latter case, the model artifact (if any) is searched as well.
+     */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private String modelLocation;
 
+    /**
+     * The character encoding used by the model.
+     */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
