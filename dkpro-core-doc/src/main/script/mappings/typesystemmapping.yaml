@@ -40,7 +40,8 @@ de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain:
   features:
     first:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Coreference', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink:
   features:
     next:
@@ -49,7 +50,8 @@ de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink:
       externalReferences: []
     referenceRelation:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Coreference', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseArgument:
   features:
     parentRelationId:
@@ -159,7 +161,8 @@ de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures:
       externalReferences: []
     reflex:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/MorphologicalAnnotationType', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ:
   features: {}
   externalReferences:
@@ -198,6 +201,8 @@ de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS:
       externalReferences:
       - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#posTag', rel: similar}
       - {source: GATE, id: 'Token:pos', rel: similar }
+      - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/PartOfSpeech', rel: similar }
+      - {source: OLiA, id: 'http://purl.org/olia/olia-top.owl#MorphosyntacticCategory', rel: similar }
   externalReferences:
   - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP:
@@ -261,6 +266,7 @@ de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData:
       externalReferences: []
   externalReferences:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Document', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/DocumentAnnotationType', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField:
   features:
     key:
@@ -298,6 +304,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Date:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Date', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-6123', rel: similar}
   - {source: 'schema.org', id: 'http://schema.org/Date', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Date', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Disease:
   features: {}
   externalReferences: []
@@ -333,6 +340,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location:
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-4339', rel: similar}
   - {source: 'schema.org', id: 'http://schema.org/Location', rel: similar}
   - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Location', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Location', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Money:
   features: {}
   externalReferences: []
@@ -349,6 +357,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2275', rel: similar}
   - {source: OWL, id: 'http://www.w3.org/2002/07/owl#Thing', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#EntityOccurrence', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/NamedEntity', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Nationality:
   features: {}
   externalReferences: []
@@ -368,6 +377,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization:
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2979', rel: similar}
   - {source: 'schema.org', id: 'http://schema.org/Organization', rel: similar}
   - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Organization', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Organization', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.PerDesc:
   features: {}
   externalReferences: []
@@ -381,6 +391,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person:
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2978', rel: similar}
   - {source: 'schema.org', id: 'http://schema.org/Person', rel: similar}
   - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Location', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Person', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Plant:
   features: {}
   externalReferences: []
@@ -440,6 +451,7 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma:
       externalReferences:
       - {source: GATE, id: 'Token:lemma', rel: similar }
       - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#lemma', rel: similar}
+      - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Lemma', rel: similar}
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme:
   features: {}
@@ -454,6 +466,7 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph:
   externalReferences:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Paragraph', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Paragraph', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Paragraph', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
   features:
     id:
@@ -463,6 +476,8 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Sentence', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1386', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Sentence', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Sentence', rel: similar}
+  - {source: OLiA, id: 'http://purl.org/olia/olia-top.owl#Sentence', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split:
   features:
     splits:
@@ -474,7 +489,9 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem:
       externalReferences:
       - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#stem', rel: similar}
       - {source: GATE, id: 'Token:stem', rel: similar }
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Stem', rel: similar }
+  - {source: OLiA, id: 'http://purl.org/olia/olia-top.owl#Stem', rel: similar }
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord:
   features: {}
   externalReferences: []
@@ -497,10 +514,14 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Token', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1403', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Sentence', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Token', rel: similar}
+  - {source: OLiA, id: 'http://purl.org/olia/olia-top.owl#Token', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument:
   features:
     role:
       externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField:
   features:
@@ -513,12 +534,22 @@ de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate:
       externalReferences: []
     arguments:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/SemanticFrame', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred:
+  features:
+    category:
+      externalReferences: []
+    arguments:
+      externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/SemanticFrame', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense:
   features:
     value:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/WordSense', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field:
   features:
     name:
@@ -549,7 +580,8 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk:
   features:
     chunkValue:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Chunk', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.INTJ:
   features: {}
   externalReferences: []
@@ -594,6 +626,8 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent:
       externalReferences: []
   externalReferences:
   - {source: LAPPS, id: 'http//vocab.lappsgrid.org/Constituent', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Constituent', rel: similar}
+  - {source: OLiA, id: 'http://purl.org/olia/olia-top.owl#Constituent', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.FRAG:
   features: {}
   externalReferences: []
@@ -629,7 +663,9 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.QP:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/ConstituencyTree', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Constituent', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.RRC:
   features: {}
   externalReferences: []
@@ -745,6 +781,7 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:
       externalReferences: []
   externalReferences:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Dependency', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Dependency', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.EXPL:
   features: {}
   externalReferences: []
@@ -840,7 +877,9 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.REL:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/DependencyTree', rel: similar}
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Dependency', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.TMOD:
   features: {}
   externalReferences: []
@@ -953,11 +992,14 @@ de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation:
       externalReferences: []
     veryPositive:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Sentiment', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore:
   features:
     measureName:
       externalReferences: []
     score:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Readability', rel: similar}
+  
