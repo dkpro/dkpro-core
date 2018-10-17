@@ -140,6 +140,17 @@ public class OpenNlpPosTaggerTest
             }
         }
     }
+    
+    @Test
+    public void testAfrikaans()
+        throws Exception
+    {
+        runTest("af", "afribooms", "Betalings aan die SAID kan op enigeen van die volgende maniere gemaak word .",
+                new String[] { "NOUN",     "ADP",     "DET",     "X",     "VERB",     "ADP",     "PRON",     "ADP",     "DET",     "ADJ",     "NOUN",     "VERB",     "VERB",    "PUNCT" },
+                new String[] { "POS_NOUN", "POS_ADP", "POS_DET", "POS_X", "POS_VERB", "POS_ADP", "POS_PRON", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_PUNCT"  });
+
+    }
+    
     @Test
     public void testEnglish()
         throws Exception

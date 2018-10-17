@@ -125,6 +125,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms</artifactId>
+		<version>20181017.1</version>
+		<scope>test</scope>
+	</dependency>
+    <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
       <scope>test</scope>
