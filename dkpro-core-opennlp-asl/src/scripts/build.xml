@@ -16,31 +16,31 @@
    limitations under the License.
 -->
 <project basedir="../.." default="separate-jars">
-	<import>
-		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.7.0/ant-macros.xml"/>
-	</import>
+    <import>
+        <url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.7.0/ant-macros.xml"/>
+    </import>
 
-	<!-- 
-	  - Output package configuration
-	  -->
-	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/opennlp/lib"/>
+    <!-- 
+      - Output package configuration
+      -->
+    <property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/opennlp/lib"/>
 
-	<target name="local-maven">
-		<property name="install-artifact-mode" value="local"/>
-		<antcall target="separate-jars"/>
-	</target>
-	
-	<target name="remote-maven">
-		<property name="install-artifact-mode" value="remote"/>
-		<antcall target="separate-jars"/>
-	</target>
-	
-	<target name="separate-jars" depends="af, da, de, en, es, it, nb, nl, pt, sv"/>
+    <target name="local-maven">
+        <property name="install-artifact-mode" value="local"/>
+        <antcall target="separate-jars"/>
+    </target>
+    
+    <target name="remote-maven">
+        <property name="install-artifact-mode" value="remote"/>
+        <antcall target="separate-jars"/>
+    </target>
+    
+    <target name="separate-jars" depends="af, da, de, en, es, it, nb, nl, pt, sv"/>
 
-	<target name="af">
-			<antcall target="af-tagger-perceptron"/>
-	</target>
-	
+    <target name="af">
+            <antcall target="af-tagger-perceptron"/>
+    </target>
+    
     <target name="af-tagger-perceptron">
        <mkdir dir="target/download"/>
 
@@ -74,213 +74,213 @@
             </additionalUpstreamContent>
        </install-stub-and-upstream-file>
     </target>
-	
-	<target name="da">
-		<antcall target="da-sentence-maxent"/>
-		<antcall target="da-token-maxent"/>
-		<antcall target="da-tagger-maxent"/>
-		<antcall target="da-tagger-perceptron"/>
-	</target>
-	
-	<target name="da-sentence-maxent">
-		<mkdir dir="target/download"/>
-		
-		<!-- FILE: models-1.5/da-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | f304792bd8f1d93963ce4091847c6c7e
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/da-sent.bin" 
-    		dest="target/download/da-sentence-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/da-sentence-maxent.bin" 
-    		md5="f304792bd8f1d93963ce4091847c6c7e"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="sentence" 
-    		language="da" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="da-token-maxent">
-		<!-- FILE: models-1.5/da-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | 4ae06365f2e956885133f69542f3c30d
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/da-token.bin" 
-    		dest="target/download/da-token-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/da-token-maxent.bin" 
-    		md5="4ae06365f2e956885133f69542f3c30d"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="token" 
-    		language="da" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="da-tagger-maxent">
-		<!-- FILE: models-1.5/da-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | 5194e5c81bde38b7df95a1550e3f4998
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/da-pos-maxent.bin" 
-    		dest="target/download/da-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/da-pos-maxent.bin" 
-    		md5="5194e5c81bde38b7df95a1550e3f4998"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="da" 
-    		variant="maxent" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="ddt"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="da-tagger-perceptron">
-		<!-- FILE: models-1.5/da-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 595322af76e464a647b745b463847008
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/da-pos-perceptron.bin" 
-    		dest="target/download/da-pos-perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/da-pos-perceptron.bin" 
-    		md5="595322af76e464a647b745b463847008"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="da" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="ddt"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="de">
-		<antcall target="de-sentence-maxent"/>
-		<antcall target="de-token-maxent"/>
-		<antcall target="de-tagger-maxent"/>
-		<antcall target="de-tagger-perceptron"/>
-		<antcall target="de-chunker-default"/>
+    
+    <target name="da">
+        <antcall target="da-sentence-maxent"/>
+        <antcall target="da-token-maxent"/>
+        <antcall target="da-tagger-maxent"/>
+        <antcall target="da-tagger-perceptron"/>
+    </target>
+    
+    <target name="da-sentence-maxent">
+        <mkdir dir="target/download"/>
+        
+        <!-- FILE: models-1.5/da-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | f304792bd8f1d93963ce4091847c6c7e
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/da-sent.bin" 
+            dest="target/download/da-sentence-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/da-sentence-maxent.bin" 
+            md5="f304792bd8f1d93963ce4091847c6c7e"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="sentence" 
+            language="da" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="da-token-maxent">
+        <!-- FILE: models-1.5/da-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | 4ae06365f2e956885133f69542f3c30d
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/da-token.bin" 
+            dest="target/download/da-token-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/da-token-maxent.bin" 
+            md5="4ae06365f2e956885133f69542f3c30d"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="token" 
+            language="da" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="da-tagger-maxent">
+        <!-- FILE: models-1.5/da-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | 5194e5c81bde38b7df95a1550e3f4998
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/da-pos-maxent.bin" 
+            dest="target/download/da-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/da-pos-maxent.bin" 
+            md5="5194e5c81bde38b7df95a1550e3f4998"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="da" 
+            variant="maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ddt"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="da-tagger-perceptron">
+        <!-- FILE: models-1.5/da-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 595322af76e464a647b745b463847008
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/da-pos-perceptron.bin" 
+            dest="target/download/da-pos-perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/da-pos-perceptron.bin" 
+            md5="595322af76e464a647b745b463847008"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="da" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ddt"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="de">
+        <antcall target="de-sentence-maxent"/>
+        <antcall target="de-token-maxent"/>
+        <antcall target="de-tagger-maxent"/>
+        <antcall target="de-tagger-perceptron"/>
+        <antcall target="de-chunker-default"/>
         <antcall target="de-ner-nemgp"/>
-	</target>
-	
-	<target name="de-sentence-maxent">
-		<mkdir dir="target/download"/>
+    </target>
+    
+    <target name="de-sentence-maxent">
+        <mkdir dir="target/download"/>
 
-		<!-- FILE: models-1.5/de-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 1e8a9b9ce05d91abbd1d1d9f4192fdeb
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/de-sent.bin" 
-    		dest="target/download/de-sentence-maxent.bin" skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/de-sentence-maxent.bin" 
-    		md5="1e8a9b9ce05d91abbd1d1d9f4192fdeb"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="sentence" 
-    		language="de" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="de-token-maxent">
-		<!-- FILE: models-1.5/de-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | c74d9064dadb542abf89151d60d0377f
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/de-token.bin" 
-    		dest="target/download/de-token-maxent.bin" skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/de-token-maxent.bin" 
-    		md5="c74d9064dadb542abf89151d60d0377f"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="token" 
-    		language="de" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="de-tagger-maxent">
-		<!-- FILE: models-1.5/de-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | c55c14eeb598885170678293745aea15
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/de-pos-maxent.bin" 
-    		dest="target/download/de-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/de-pos-maxent.bin" 
-    		md5="c55c14eeb598885170678293745aea15"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="de" 
-    		variant="maxent" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="stts"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="de-tagger-perceptron">
-		<!-- FILE: models-1.5/de-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 568ca555cbe29b5e0e6ba24cc7da573a
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/de-pos-perceptron.bin" 
-    		dest="target/download/de-pos-perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/de-pos-perceptron.bin" 
-    		md5="568ca555cbe29b5e0e6ba24cc7da573a"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="de" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="stts"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-	
+        <!-- FILE: models-1.5/de-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 1e8a9b9ce05d91abbd1d1d9f4192fdeb
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/de-sent.bin" 
+            dest="target/download/de-sentence-maxent.bin" skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/de-sentence-maxent.bin" 
+            md5="1e8a9b9ce05d91abbd1d1d9f4192fdeb"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="sentence" 
+            language="de" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="de-token-maxent">
+        <!-- FILE: models-1.5/de-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | c74d9064dadb542abf89151d60d0377f
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/de-token.bin" 
+            dest="target/download/de-token-maxent.bin" skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/de-token-maxent.bin" 
+            md5="c74d9064dadb542abf89151d60d0377f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="token" 
+            language="de" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="de-tagger-maxent">
+        <!-- FILE: models-1.5/de-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | c55c14eeb598885170678293745aea15
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/de-pos-maxent.bin" 
+            dest="target/download/de-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/de-pos-maxent.bin" 
+            md5="c55c14eeb598885170678293745aea15"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="de" 
+            variant="maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="stts"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="de-tagger-perceptron">
+        <!-- FILE: models-1.5/de-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 568ca555cbe29b5e0e6ba24cc7da573a
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/de-pos-perceptron.bin" 
+            dest="target/download/de-pos-perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/de-pos-perceptron.bin" 
+            md5="568ca555cbe29b5e0e6ba24cc7da573a"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="de" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="stts"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
     <target name="de-ner-nemgp">
         <!-- FILE: nemgp_opennlp_01.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           - 2014-10-24 | now        | 699fa598f94cee6d5ff3074b0a6cfdda
@@ -309,176 +309,176 @@
         </install-stub-and-upstream-file>
     </target>
     
-	<target name="de-chunker-default">
-		<!-- This model is quite useless. It only knows of noun phrases -->
-		<!-- FILE: OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip - - - - - - - - - - - - - - - - - -
-		  - 2011-09-05 | now        | 412cd69c1a67e2e1e6dc947c6815dcaa
-    	<get 
-    		src="http://gromgull.net/2010/01/npchunking/OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip" 
-    		dest="target/download/de-parser-chunking.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/de-parser-chunking.bin" 
-    		md5="412cd69c1a67e2e1e6dc947c6815dcaa"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20110905"
-    		metaDataVersion="1"
-    		tool="chunker" 
-    		language="de" 
-    		variant="default" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="stts"/>
-			</metadata>
-    	</install-stub-and-upstream-file>
-		  -->
-	</target>
+    <target name="de-chunker-default">
+        <!-- This model is quite useless. It only knows of noun phrases -->
+        <!-- FILE: OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip - - - - - - - - - - - - - - - - - -
+          - 2011-09-05 | now        | 412cd69c1a67e2e1e6dc947c6815dcaa
+        <get 
+            src="http://gromgull.net/2010/01/npchunking/OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip" 
+            dest="target/download/de-parser-chunking.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/de-parser-chunking.bin" 
+            md5="412cd69c1a67e2e1e6dc947c6815dcaa"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20110905"
+            metaDataVersion="1"
+            tool="chunker" 
+            language="de" 
+            variant="default" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="stts"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+          -->
+    </target>
 
-	<target name="en">
-		<antcall target="en-chunker-default"/>
+    <target name="en">
+        <antcall target="en-chunker-default"/>
         <antcall target="en-chunker-perceptron-ixa"/>
-		<antcall target="en-ner-date"/>
-		<antcall target="en-ner-location"/>
-		<antcall target="en-ner-money"/>
-		<antcall target="en-ner-organization"/>
-		<antcall target="en-ner-percentage"/>
-		<antcall target="en-ner-person"/>
-		<antcall target="en-ner-time"/>
-		<antcall target="en-parser-chunking"/>
+        <antcall target="en-ner-date"/>
+        <antcall target="en-ner-location"/>
+        <antcall target="en-ner-money"/>
+        <antcall target="en-ner-organization"/>
+        <antcall target="en-ner-percentage"/>
+        <antcall target="en-ner-person"/>
+        <antcall target="en-ner-time"/>
+        <antcall target="en-parser-chunking"/>
         <antcall target="en-parser-chunking-ixa"/>
-		<antcall target="en-sentence-maxent"/>
-		<antcall target="en-tagger-maxent"/>
-		<antcall target="en-tagger-perceptron"/>
-		<antcall target="en-tagger-perceptron-ixa"/>
-		<antcall target="en-token-maxent"/>
-	</target>
+        <antcall target="en-sentence-maxent"/>
+        <antcall target="en-tagger-maxent"/>
+        <antcall target="en-tagger-perceptron"/>
+        <antcall target="en-tagger-perceptron-ixa"/>
+        <antcall target="en-token-maxent"/>
+    </target>
 
-	<target name="en-sentence-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 3822c5f82cb4ba139284631d2f6b7fde
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-sent.bin" 
-    		dest="target/download/en-sentence-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-sentence-maxent.bin" 
-    		md5="3822c5f82cb4ba139284631d2f6b7fde"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="sentence" 
-    		language="en" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-sentence-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 3822c5f82cb4ba139284631d2f6b7fde
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-sent.bin" 
+            dest="target/download/en-sentence-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-sentence-maxent.bin" 
+            md5="3822c5f82cb4ba139284631d2f6b7fde"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="sentence" 
+            language="en" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-token-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | f38628ea25fc246e99fc5e93f9bb5497
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-token.bin" 
-    		dest="target/download/en-token-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-token-maxent.bin" 
-    		md5="f38628ea25fc246e99fc5e93f9bb5497"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="token" 
-    		language="en" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-token-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | f38628ea25fc246e99fc5e93f9bb5497
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-token.bin" 
+            dest="target/download/en-token-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-token-maxent.bin" 
+            md5="f38628ea25fc246e99fc5e93f9bb5497"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="token" 
+            language="en" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-tagger-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | db2cd70395b9e2e4c6b9957015a10607
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin" 
-    		dest="target/download/en-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-pos-maxent.bin" 
-    		md5="db2cd70395b9e2e4c6b9957015a10607"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="en" 
-    		variant="maxent" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="ptb"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-tagger-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | db2cd70395b9e2e4c6b9957015a10607
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin" 
+            dest="target/download/en-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-pos-maxent.bin" 
+            md5="db2cd70395b9e2e4c6b9957015a10607"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-tagger-perceptron">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | d25e11a2da118803aefa131b00c590bf
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-pos-perceptron.bin" 
-    		dest="target/download/en-pos-perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-pos-perceptron.bin" 
-    		md5="d25e11a2da118803aefa131b00c590bf"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="en" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="ptb"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-tagger-perceptron">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | d25e11a2da118803aefa131b00c590bf
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-pos-perceptron.bin" 
+            dest="target/download/en-pos-perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-pos-perceptron.bin" 
+            md5="d25e11a2da118803aefa131b00c590bf"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-chunker-default">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-chunker.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | f058c62bcdab7b6d6113a3ceea213b91
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-chunker.bin" 
-    		dest="target/download/en-chunker.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-chunker.bin" 
-    		md5="f058c62bcdab7b6d6113a3ceea213b91"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="1"
-    		tool="chunker" 
-    		language="en" 
-    		variant="default" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="ptb"/>
-				<!-- http://www.ai.mit.edu/projects/jmlr/papers/volume2/zhang02c/zhang02c.pdf -->
-	    		<entry key="chunk.tagset" value="conll2000"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-chunker-default">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-chunker.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | f058c62bcdab7b6d6113a3ceea213b91
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-chunker.bin" 
+            dest="target/download/en-chunker.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-chunker.bin" 
+            md5="f058c62bcdab7b6d6113a3ceea213b91"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="1"
+            tool="chunker" 
+            language="en" 
+            variant="default" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <!-- http://www.ai.mit.edu/projects/jmlr/papers/volume2/zhang02c/zhang02c.pdf -->
+                <entry key="chunk.tagset" value="conll2000"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
     <target name="en-chunker-perceptron-ixa" depends="download-ixa-chunk-resources">
         <mkdir dir="target/download"/>
@@ -503,224 +503,224 @@
         </install-stub-and-upstream-file>
     </target>
 
-	<target name="en-parser-chunking">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-parser-chunking.bin" 
-    		dest="target/download/en-parser-chunking.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-parser-chunking.bin" 
-    		md5="47c1b3f4dd7d08e992abdca4e16638ce"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="parser" 
-    		language="en" 
-    		variant="chunking" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="ptb"/>
-	    		<entry key="constituent.tagset" value="ptb"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-parser-chunking">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-parser-chunking.bin" 
+            dest="target/download/en-parser-chunking.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-parser-chunking.bin" 
+            md5="47c1b3f4dd7d08e992abdca4e16638ce"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="parser" 
+            language="en" 
+            variant="chunking" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="constituent.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-ner-date">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-ner-date.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-07 | now        | 4bf8335b9db6ced81a5f35f1c04c187d
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-ner-date.bin" 
-    		dest="target/download/en-ner-date.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-ner-date.bin" 
-    		md5="4bf8335b9db6ced81a5f35f1c04c187d"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100907"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="en" 
-    		variant="date" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-ner-date">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-ner-date.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-07 | now        | 4bf8335b9db6ced81a5f35f1c04c187d
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-ner-date.bin" 
+            dest="target/download/en-ner-date.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-ner-date.bin" 
+            md5="4bf8335b9db6ced81a5f35f1c04c187d"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100907"
+            metaDataVersion="0"
+            tool="ner" 
+            language="en" 
+            variant="date" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-ner-location">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-ner-location.bin - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-07 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-ner-location.bin" 
-    		dest="target/download/en-ner-location.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-ner-location.bin" 
-    		md5="0e67e6ad484406c125faead56b5c225e"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100907"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="en" 
-    		variant="location" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-ner-location">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-ner-location.bin - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-07 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-ner-location.bin" 
+            dest="target/download/en-ner-location.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-ner-location.bin" 
+            md5="0e67e6ad484406c125faead56b5c225e"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100907"
+            metaDataVersion="0"
+            tool="ner" 
+            language="en" 
+            variant="location" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-ner-money">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-ner-money.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-07 | now        | af6fa575ace9f9ad81eb7ba21ff0b421
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-ner-money.bin" 
-    		dest="target/download/en-ner-money.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-ner-money.bin" 
-    		md5="af6fa575ace9f9ad81eb7ba21ff0b421"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100907"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="en" 
-    		variant="money" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-ner-money">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-ner-money.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-07 | now        | af6fa575ace9f9ad81eb7ba21ff0b421
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-ner-money.bin" 
+            dest="target/download/en-ner-money.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-ner-money.bin" 
+            md5="af6fa575ace9f9ad81eb7ba21ff0b421"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100907"
+            metaDataVersion="0"
+            tool="ner" 
+            language="en" 
+            variant="money" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-ner-organization">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-ner-organization.bin - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-07 | now        | 8042a4164d73879abcf2a53c91bd247a
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-ner-organization.bin" 
-    		dest="target/download/en-ner-organization.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-ner-organization.bin" 
-    		md5="8042a4164d73879abcf2a53c91bd247a"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100907"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="en" 
-    		variant="organization" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-ner-organization">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-ner-organization.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-07 | now        | 8042a4164d73879abcf2a53c91bd247a
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-ner-organization.bin" 
+            dest="target/download/en-ner-organization.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-ner-organization.bin" 
+            md5="8042a4164d73879abcf2a53c91bd247a"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100907"
+            metaDataVersion="0"
+            tool="ner" 
+            language="en" 
+            variant="organization" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-ner-percentage">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-ner-percentage.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-07 | now        | b3f1b2cba4c28efbe6e0c9ccca3c9a23
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-ner-percentage.bin" 
-    		dest="target/download/en-ner-percentage.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-ner-percentage.bin" 
-    		md5="b3f1b2cba4c28efbe6e0c9ccca3c9a23"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100907"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="en" 
-    		variant="percentage" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-ner-percentage">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-ner-percentage.bin - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-07 | now        | b3f1b2cba4c28efbe6e0c9ccca3c9a23
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-ner-percentage.bin" 
+            dest="target/download/en-ner-percentage.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-ner-percentage.bin" 
+            md5="b3f1b2cba4c28efbe6e0c9ccca3c9a23"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100907"
+            metaDataVersion="0"
+            tool="ner" 
+            language="en" 
+            variant="percentage" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-ner-person">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-ner-person.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-06-24 | now        | 909b9017a13b2d69ccdca4cf91a9639c
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-ner-person.bin" 
-    		dest="target/download/en-ner-person.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-ner-person.bin" 
-    		md5="909b9017a13b2d69ccdca4cf91a9639c"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130624"
-    		metaDataVersion="1"
-    		tool="ner" 
-    		language="en" 
-    		variant="person" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-ner-person">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-ner-person.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2013-06-24 | now        | 909b9017a13b2d69ccdca4cf91a9639c
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-ner-person.bin" 
+            dest="target/download/en-ner-person.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-ner-person.bin" 
+            md5="909b9017a13b2d69ccdca4cf91a9639c"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20130624"
+            metaDataVersion="1"
+            tool="ner" 
+            language="en" 
+            variant="person" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-ner-time">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/en-ner-time.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-07 | now        | 692f8074bfa60d21afe67cef5fa2e2a7
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/en-ner-time.bin" 
-    		dest="target/download/en-ner-time.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/en-ner-time.bin" 
-    		md5="692f8074bfa60d21afe67cef5fa2e2a7"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100907"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="en" 
-    		variant="time" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-ner-time">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/en-ner-time.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-07 | now        | 692f8074bfa60d21afe67cef5fa2e2a7
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/en-ner-time.bin" 
+            dest="target/download/en-ner-time.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/en-ner-time.bin" 
+            md5="692f8074bfa60d21afe67cef5fa2e2a7"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100907"
+            metaDataVersion="0"
+            tool="ner" 
+            language="en" 
+            variant="time" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="en-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
-		<mkdir dir="target/download"/>
-		<!-- FILE: en-pos-perceptron-c0-b3-dev.bin - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-11-15 | now        | bf0545ff008f211bb282ce08f6977872
-		  -->
-    	<install-stub-and-upstream-file 
-    		file="target/download/ixa-pos-resources/en-pos-perceptron-c0-b3-dev.bin" 
-    		md5="bf0545ff008f211bb282ce08f6977872"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20131115"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="en" 
-    		variant="perceptron-ixa" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="en-pos-perceptron-c0-b3-dev.bin"/>
-				<entry key="DC.creator" value="Rodrigo Agerri"/>
-				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#en-pos-perceptron-c0-b3-dev.bin"/>
-	    		<entry key="pos.tagset" value="ptb"/>
-				<!--
-			      - Contains 78 tags because it includes multitags such as "IN|RB" or "RB|IN", looks
-		          - otherwise like PTB tagset. We tell OpenNlpPosTagger to keep only the first
-		          - tag.
-				  -->
-				<entry key="pos.tagset.tagSplitPattern" value="\|"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="en-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
+        <mkdir dir="target/download"/>
+        <!-- FILE: en-pos-perceptron-c0-b3-dev.bin - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2013-11-15 | now        | bf0545ff008f211bb282ce08f6977872
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-pos-resources/en-pos-perceptron-c0-b3-dev.bin" 
+            md5="bf0545ff008f211bb282ce08f6977872"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20131115"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="perceptron-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-pos-perceptron-c0-b3-dev.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri"/>
+                <entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#en-pos-perceptron-c0-b3-dev.bin"/>
+                <entry key="pos.tagset" value="ptb"/>
+                <!--
+                  - Contains 78 tags because it includes multitags such as "IN|RB" or "RB|IN", looks
+                  - otherwise like PTB tagset. We tell OpenNlpPosTagger to keep only the first
+                  - tag.
+                  -->
+                <entry key="pos.tagset.tagSplitPattern" value="\|"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
     <target name="en-parser-chunking-ixa" depends="download-ixa-parser-resources">
         <!-- FILE: en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -748,258 +748,258 @@
     </target>
     
 
-	<target name="es">
-		<antcall target="es-ner-location"/>
-		<antcall target="es-ner-misc"/>
-		<antcall target="es-ner-organization"/>
-		<antcall target="es-ner-person"/>
-		<antcall target="es-tagger-maxent"/>
-		<antcall target="es-tagger-maxent-ixa"/>
-		<antcall target="es-tagger-maxent-universal"/>
-		<antcall target="es-tagger-perceptron"/>
-		<antcall target="es-tagger-perceptron-ixa"/>
-		<antcall target="es-tagger-perceptron-universal"/>
+    <target name="es">
+        <antcall target="es-ner-location"/>
+        <antcall target="es-ner-misc"/>
+        <antcall target="es-ner-organization"/>
+        <antcall target="es-ner-person"/>
+        <antcall target="es-tagger-maxent"/>
+        <antcall target="es-tagger-maxent-ixa"/>
+        <antcall target="es-tagger-maxent-universal"/>
+        <antcall target="es-tagger-perceptron"/>
+        <antcall target="es-tagger-perceptron-ixa"/>
+        <antcall target="es-tagger-perceptron-universal"/>
         <antcall target="es-parser-chunking-ixa"/>
-	</target>
+    </target>
 
-	<target name="es-tagger-maxent">
-		<mkdir dir="target/download"/>
+    <target name="es-tagger-maxent">
+        <mkdir dir="target/download"/>
 
-		<!-- FILE: opennlp-es-maxent-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-04-10 | now        | 39ecc4c56e037b3dde859cb6d90b4b6a
-		  -->
-    	<get 
-    		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-es.bin" 
-    		dest="target/download/es-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-pos-maxent.bin" 
-    		md5="39ecc4c56e037b3dde859cb6d90b4b6a"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120410"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="maxent" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="parole-reduced"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+        <!-- FILE: opennlp-es-maxent-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-04-10 | now        | 39ecc4c56e037b3dde859cb6d90b4b6a
+          -->
+        <get 
+            src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-es.bin" 
+            dest="target/download/es-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-pos-maxent.bin" 
+            md5="39ecc4c56e037b3dde859cb6d90b4b6a"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120410"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="es" 
+            variant="maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="parole-reduced"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-tagger-maxent-universal">
-		<!-- FILE: opennlp-es-maxent-pos-universal.bin - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-04-10 | now        | 967160032df49afc160d471bc41c7daa
-		  -->
-    	<get 
-    		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-universal.bin" 
-    		dest="target/download/es-pos-maxent-universal.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-pos-maxent-universal.bin" 
-    		md5="967160032df49afc160d471bc41c7daa"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120410"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="maxent-universal" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="universal"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-tagger-maxent-universal">
+        <!-- FILE: opennlp-es-maxent-pos-universal.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-04-10 | now        | 967160032df49afc160d471bc41c7daa
+          -->
+        <get 
+            src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-universal.bin" 
+            dest="target/download/es-pos-maxent-universal.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-pos-maxent-universal.bin" 
+            md5="967160032df49afc160d471bc41c7daa"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120410"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="es" 
+            variant="maxent-universal" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="universal"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-tagger-perceptron">
-		<!-- FILE: opennlp-es-perceptron-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-04-10 | now        | 5930da28536eed424fd0e478b1b52143
-		  -->
-    	<get 
-    		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-es.bin" 
-    		dest="target/download/es-pos-perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-pos-perceptron.bin" 
-    		md5="5930da28536eed424fd0e478b1b52143"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120410"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="parole-reduced"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-tagger-perceptron">
+        <!-- FILE: opennlp-es-perceptron-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-04-10 | now        | 5930da28536eed424fd0e478b1b52143
+          -->
+        <get 
+            src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-es.bin" 
+            dest="target/download/es-pos-perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-pos-perceptron.bin" 
+            md5="5930da28536eed424fd0e478b1b52143"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120410"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="es" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="parole-reduced"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-tagger-perceptron-universal">
-		<!-- FILE: opennlp-es-perceptron-pos-universal.bin - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-04-10 | now        | b4ac9cc413f455649e78db8f0f0c67fa
-		  -->
-    	<get 
-    		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-universal.bin" 
-    		dest="target/download/es-pos-perceptron-universal.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-pos-perceptron-universal.bin" 
-    		md5="b4ac9cc413f455649e78db8f0f0c67fa"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120410"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="perceptron-universal" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="universal"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-tagger-perceptron-universal">
+        <!-- FILE: opennlp-es-perceptron-pos-universal.bin - - - - - - - - - - - - - - - - - - - - -
+          - 2012-04-10 | now        | b4ac9cc413f455649e78db8f0f0c67fa
+          -->
+        <get 
+            src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-universal.bin" 
+            dest="target/download/es-pos-perceptron-universal.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-pos-perceptron-universal.bin" 
+            md5="b4ac9cc413f455649e78db8f0f0c67fa"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120410"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="es" 
+            variant="perceptron-universal" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="universal"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-ner-person">
-		<!-- FILE: models-1.5/es-ner-person.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2010-09-08 | now        | 383b1bb68554cdfddbaa053325300a48
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/es-ner-person.bin" 
-    		dest="target/download/es-ner-person.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-ner-person.bin" 
-    		md5="383b1bb68554cdfddbaa053325300a48"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="es" 
-    		variant="person" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-ner-person">
+        <!-- FILE: models-1.5/es-ner-person.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2010-09-08 | now        | 383b1bb68554cdfddbaa053325300a48
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/es-ner-person.bin" 
+            dest="target/download/es-ner-person.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-ner-person.bin" 
+            md5="383b1bb68554cdfddbaa053325300a48"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="es" 
+            variant="person" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-ner-organization">
-		<!-- FILE: models-1.5/es-ner-organization.bin - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2010-09-08 | now        | e498aaf5784cfcb9c32ff921b93cb178
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/es-ner-organization.bin" 
-    		dest="target/download/es-ner-organization.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-ner-organization.bin" 
-    		md5="e498aaf5784cfcb9c32ff921b93cb178"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="es" 
-    		variant="organization" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-ner-organization">
+        <!-- FILE: models-1.5/es-ner-organization.bin - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2010-09-08 | now        | e498aaf5784cfcb9c32ff921b93cb178
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/es-ner-organization.bin" 
+            dest="target/download/es-ner-organization.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-ner-organization.bin" 
+            md5="e498aaf5784cfcb9c32ff921b93cb178"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="es" 
+            variant="organization" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-ner-location">
-		<!-- FILE: models-1.5/es-ner-location.bin - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2010-09-08 | now        | cc0d07a0a2373ae71da60b6108fe010f
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/es-ner-location.bin" 
-    		dest="target/download/es-ner-location.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-ner-location.bin" 
-    		md5="cc0d07a0a2373ae71da60b6108fe010f"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="es" 
-    		variant="location" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-ner-location">
+        <!-- FILE: models-1.5/es-ner-location.bin - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2010-09-08 | now        | cc0d07a0a2373ae71da60b6108fe010f
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/es-ner-location.bin" 
+            dest="target/download/es-ner-location.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-ner-location.bin" 
+            md5="cc0d07a0a2373ae71da60b6108fe010f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="es" 
+            variant="location" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-ner-misc">
-		<!-- FILE: models-1.5/es-ner-misc.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-08 | now        | a287e609616d6c185995ede1fd25788f
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/es-ner-misc.bin" 
-    		dest="target/download/es-ner-misc.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/es-ner-misc.bin" 
-    		md5="a287e609616d6c185995ede1fd25788f"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="es" 
-    		variant="misc" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-ner-misc">
+        <!-- FILE: models-1.5/es-ner-misc.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-08 | now        | a287e609616d6c185995ede1fd25788f
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/es-ner-misc.bin" 
+            dest="target/download/es-ner-misc.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/es-ner-misc.bin" 
+            md5="a287e609616d6c185995ede1fd25788f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="es" 
+            variant="misc" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-tagger-maxent-ixa" depends="download-ixa-pos-resources">
-		<!-- FILE: es-pos-maxent-700-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2014-04-25 | now        | 6893840d709c581e378750b53f24531b
-		  -->
-    	<install-stub-and-upstream-file 
-    		file="target/download/ixa-pos-resources/es-pos-maxent-700-c0-b3.bin" 
-    		md5="6893840d709c581e378750b53f24531b"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20140425"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="maxent-ixa" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="es-pos-maxent-700-c0-b3.bin"/>
-				<entry key="DC.creator" value="Rodrigo Agerri"/>
-				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#es-pos-maxent-700-c0-b3.bin"/>
-	    		<entry key="pos.tagset" value="ancora-ixa"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="es-tagger-maxent-ixa" depends="download-ixa-pos-resources">
+        <!-- FILE: es-pos-maxent-700-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-04-25 | now        | 6893840d709c581e378750b53f24531b
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-pos-resources/es-pos-maxent-700-c0-b3.bin" 
+            md5="6893840d709c581e378750b53f24531b"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20140425"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="es" 
+            variant="maxent-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="es-pos-maxent-700-c0-b3.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri"/>
+                <entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#es-pos-maxent-700-c0-b3.bin"/>
+                <entry key="pos.tagset" value="ancora-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="es-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
-		<!-- FILE: es-pos-perceptron-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-11-15 | now        | 148d7ff4c56c89624e6050fe608f6d8a
-		  -->
-    	<install-stub-and-upstream-file 
-    		file="target/download/ixa-pos-resources/es-pos-perceptron-c0-b3.bin" 
-    		md5="148d7ff4c56c89624e6050fe608f6d8a"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20131115"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="perceptron-ixa" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="es-pos-perceptron-c0-b3.bin"/>
-				<entry key="DC.creator" value="Rodrigo Agerri"/>
-				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#es-pos-perceptron-c0-b3.bin"/>
-	    		<entry key="pos.tagset" value="ancora-ixa"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-	
+    <target name="es-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
+        <!-- FILE: es-pos-perceptron-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2013-11-15 | now        | 148d7ff4c56c89624e6050fe608f6d8a
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-pos-resources/es-pos-perceptron-c0-b3.bin" 
+            md5="148d7ff4c56c89624e6050fe608f6d8a"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20131115"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="es" 
+            variant="perceptron-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="es-pos-perceptron-c0-b3.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri"/>
+                <entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#es-pos-perceptron-c0-b3.bin"/>
+                <entry key="pos.tagset" value="ancora-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
     <target name="es-parser-chunking-ixa" depends="download-ixa-parser-resources">
         <!-- FILE: es-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           - 2014-04-26 | now        | 42589e408c5ed89beaf8107662bc751c
@@ -1027,696 +1027,696 @@
                 <entry key="constituent.tag.map.GRUP.ADV" value="grup.adv"/>
                 <entry key="constituent.tag.map.GRUP.NOM" value="grup.nom"/>
                 <entry key="constituent.tag.map.GRUP.VERB" value="grup.verb"/>
-            	<entry key="constituent.tag.map.INC" value="inc"/>
+                <entry key="constituent.tag.map.INC" value="inc"/>
                 <entry key="constituent.tag.map.INFINITIU" value="infinitiu"/>
                 <entry key="constituent.tag.map.INTERJECCIO" value="interjeccio"/>
                 <entry key="constituent.tag.map.MORFEMA.PRONOMINAL" value="morfema.pronominal"/>
                 <entry key="constituent.tag.map.MORFEMA.VERBAL" value="morfema.verbal"/>
                 <entry key="constituent.tag.map.NEG" value="neg"/>
-            	<!-- entry key="constituent.tag.map.O" -->
+                <!-- entry key="constituent.tag.map.O" -->
                 <entry key="constituent.tag.map.PARTICIPI" value="participi"/>
                 <entry key="constituent.tag.map.PREP" value="prep"/>
                 <entry key="constituent.tag.map.RELATIU" value="relatiu"/>
-            	<!-- entry key="constituent.tag.map.S" -->
+                <!-- entry key="constituent.tag.map.S" -->
                 <entry key="constituent.tag.map.S.A" value="s.a"/>
-            	<entry key="constituent.tag.map.SA" value="sa"/>
+                <entry key="constituent.tag.map.SA" value="sa"/>
                 <entry key="constituent.tag.map.SADV" value="sadv"/>
                 <entry key="constituent.tag.map.SENTENCE" value="sentence"/>
                 <entry key="constituent.tag.map.SN" value="sn"/>
                 <entry key="constituent.tag.map.SP" value="sp"/>
-            	<!-- entry key="constituent.tag.map.TOP" -->
+                <!-- entry key="constituent.tag.map.TOP" -->
             </metadata>
         </install-stub-and-upstream-file>
     </target>
     
-	<target name="it">
-		<antcall target="it-sentence-maxent"/>
-		<antcall target="it-tagger-maxent"/>
-		<antcall target="it-tagger-perceptron"/>
-		<antcall target="it-token-maxent"/>
-	</target>
+    <target name="it">
+        <antcall target="it-sentence-maxent"/>
+        <antcall target="it-tagger-maxent"/>
+        <antcall target="it-tagger-perceptron"/>
+        <antcall target="it-token-maxent"/>
+    </target>
 
-	<target name="it-sentence-maxent">
-		<mkdir dir="target/download"/>
+    <target name="it-sentence-maxent">
+        <mkdir dir="target/download"/>
 
-		<!-- FILE: it-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-06-18 | now        | b8d6248590f0c0e0af7271ff389aa18e
-		  -->
-    	<get 
-    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-sent.bin" 
-    		dest="target/download/it-sent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/it-sent.bin" 
-    		md5="b8d6248590f0c0e0af7271ff389aa18e"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130618"
-    		metaDataVersion="0"
-    		tool="sentence" 
-    		language="it" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+        <!-- FILE: it-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2013-06-18 | now        | b8d6248590f0c0e0af7271ff389aa18e
+          -->
+        <get 
+            src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-sent.bin" 
+            dest="target/download/it-sent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/it-sent.bin" 
+            md5="b8d6248590f0c0e0af7271ff389aa18e"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20130618"
+            metaDataVersion="0"
+            tool="sentence" 
+            language="it" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="it-token-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: it-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-06-18 | now        | fec71d44b64742ba2566d5fc16b69f63
-		  -->
-    	<get 
-    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-token.bin" 
-    		dest="target/download/it-token.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/it-token.bin" 
-    		md5="fec71d44b64742ba2566d5fc16b69f63"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130618"
-    		metaDataVersion="0"
-    		tool="token" 
-    		language="it" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="it-token-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: it-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2013-06-18 | now        | fec71d44b64742ba2566d5fc16b69f63
+          -->
+        <get 
+            src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-token.bin" 
+            dest="target/download/it-token.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/it-token.bin" 
+            md5="fec71d44b64742ba2566d5fc16b69f63"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20130618"
+            metaDataVersion="0"
+            tool="token" 
+            language="it" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="it-tagger-perceptron">
-		<mkdir dir="target/download"/>
-		<!-- FILE: it-pos_perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 95d966c9790da33173ba192e266aca60
- 		  -->
-    	<get 
-    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-pos_perceptron.bin" 
-    		dest="target/download/it-pos_perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/it-pos_perceptron.bin" 
-    		md5="95d966c9790da33173ba192e266aca60"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130618"
-    		metaDataVersion="0"
-    		tool="tagger" 
-    		language="it" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-				<!-- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset -->
-	    		<entry key="pos.tagset" value="tanl"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="it-tagger-perceptron">
+        <mkdir dir="target/download"/>
+        <!-- FILE: it-pos_perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 95d966c9790da33173ba192e266aca60
+           -->
+        <get 
+            src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-pos_perceptron.bin" 
+            dest="target/download/it-pos_perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/it-pos_perceptron.bin" 
+            md5="95d966c9790da33173ba192e266aca60"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20130618"
+            metaDataVersion="0"
+            tool="tagger" 
+            language="it" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <!-- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset -->
+                <entry key="pos.tagset" value="tanl"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="it-tagger-maxent">
-		<mkdir dir="target/download"/>
-		<!-- This file is too large, we cannot download it using HTTP from github. It would be
-		  - necessary to check out the repository -->
-		<!-- FILE: it-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 39ecc4c56e037b3dde859cb6d90b4b6a
-    	<get 
-    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-pos-maxent.bin" 
-    		dest="target/download/it-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-model-file 
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		file="target/download/it-pos-maxent.bin" 
-    		md5="39ecc4c56e037b3dde859cb6d90b4b6a"
-    		tool="tagger" 
-    		language="it" 
-    		variant="maxent" 
-    		extension="bin" 
-    		version="20130618.0">
-			<metadata>
-				<!- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset ->
-	    		<entry key="pos.tagset" value="tanl"/>
-			</metadata>
-    	</install-model-file>	
-		  -->
-	</target>	
-	
-	<target name="nb">
-		<antcall target="nb-sentence-maxent"/>
-		<antcall target="nb-token-maxent"/>
-	</target>
+    <target name="it-tagger-maxent">
+        <mkdir dir="target/download"/>
+        <!-- This file is too large, we cannot download it using HTTP from github. It would be
+          - necessary to check out the repository -->
+        <!-- FILE: it-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 39ecc4c56e037b3dde859cb6d90b4b6a
+        <get 
+            src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-pos-maxent.bin" 
+            dest="target/download/it-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-model-file 
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            file="target/download/it-pos-maxent.bin" 
+            md5="39ecc4c56e037b3dde859cb6d90b4b6a"
+            tool="tagger" 
+            language="it" 
+            variant="maxent" 
+            extension="bin" 
+            version="20130618.0">
+            <metadata>
+                <!- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset ->
+                <entry key="pos.tagset" value="tanl"/>
+            </metadata>
+        </install-model-file>    
+          -->
+    </target>    
+    
+    <target name="nb">
+        <antcall target="nb-sentence-maxent"/>
+        <antcall target="nb-token-maxent"/>
+    </target>
 
-	<target name="nb-sentence-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: nob-nowac-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-01-31 | now        | d9e960e375a1a7843600d28451f719e6
-		  -->
-    	<get 
-    		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/nob/nob-nowac-sent.bin" 
-    		dest="target/download/nb-sentence-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nb-sentence-maxent.bin" 
-    		md5="d9e960e375a1a7843600d28451f719e6"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120131"
-    		metaDataVersion="1"
-    		tool="sentence" 
-    		language="nb" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nb-sentence-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: nob-nowac-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-01-31 | now        | d9e960e375a1a7843600d28451f719e6
+          -->
+        <get 
+            src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/nob/nob-nowac-sent.bin" 
+            dest="target/download/nb-sentence-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nb-sentence-maxent.bin" 
+            md5="d9e960e375a1a7843600d28451f719e6"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120131"
+            metaDataVersion="1"
+            tool="sentence" 
+            language="nb" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nb-token-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: nob-nowac-tok.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-01-31 | now        | 8c6568a8734a71ccfa9210eba48d63ad
-		  -->
-    	<get 
-    		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/nob/nob-nowac-tok.bin" 
-    		dest="target/download/nb-token-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nb-token-maxent.bin" 
-    		md5="8c6568a8734a71ccfa9210eba48d63ad"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120131"
-    		metaDataVersion="1"
-    		tool="token" 
-    		language="nb" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nb-token-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: nob-nowac-tok.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-01-31 | now        | 8c6568a8734a71ccfa9210eba48d63ad
+          -->
+        <get 
+            src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/nob/nob-nowac-tok.bin" 
+            dest="target/download/nb-token-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nb-token-maxent.bin" 
+            md5="8c6568a8734a71ccfa9210eba48d63ad"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120131"
+            metaDataVersion="1"
+            tool="token" 
+            language="nb" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl">
-		<antcall target="nl-ner-location"/>
-		<antcall target="nl-ner-misc"/>
-		<antcall target="nl-ner-organization"/>
-		<antcall target="nl-ner-person"/>
-		<antcall target="nl-sentence-maxent"/>
-		<antcall target="nl-tagger-maxent"/>
-		<antcall target="nl-tagger-perceptron"/>
-		<antcall target="nl-token-maxent"/>
-	</target>
+    <target name="nl">
+        <antcall target="nl-ner-location"/>
+        <antcall target="nl-ner-misc"/>
+        <antcall target="nl-ner-organization"/>
+        <antcall target="nl-ner-person"/>
+        <antcall target="nl-sentence-maxent"/>
+        <antcall target="nl-tagger-maxent"/>
+        <antcall target="nl-tagger-perceptron"/>
+        <antcall target="nl-token-maxent"/>
+    </target>
 
-	<target name="nl-sentence-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | ecada3d204663a244d6cca24aa5b89b4
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-sent.bin" 
-    		dest="target/download/nl-sentence-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-sentence-maxent.bin" 
-    		md5="ecada3d204663a244d6cca24aa5b89b4"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="sentence" 
-    		language="nl" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nl-sentence-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | ecada3d204663a244d6cca24aa5b89b4
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-sent.bin" 
+            dest="target/download/nl-sentence-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-sentence-maxent.bin" 
+            md5="ecada3d204663a244d6cca24aa5b89b4"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="sentence" 
+            language="nl" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl-token-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | b83a0b4134e83995ab56c6a71d0c7a07
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-token.bin" 
-    		dest="target/download/nl-token-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-token-maxent.bin" 
-    		md5="b83a0b4134e83995ab56c6a71d0c7a07"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="token" 
-    		language="nl" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nl-token-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | b83a0b4134e83995ab56c6a71d0c7a07
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-token.bin" 
+            dest="target/download/nl-token-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-token-maxent.bin" 
+            md5="b83a0b4134e83995ab56c6a71d0c7a07"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="token" 
+            language="nl" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl-tagger-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | 4f61da5d7bef54ff98d3605fcafa5a70
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-pos-maxent.bin" 
-    		dest="target/download/nl-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-pos-maxent.bin" 
-    		md5="4f61da5d7bef54ff98d3605fcafa5a70"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="nl" 
-    		variant="maxent" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="alpino"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nl-tagger-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | 4f61da5d7bef54ff98d3605fcafa5a70
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-pos-maxent.bin" 
+            dest="target/download/nl-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-pos-maxent.bin" 
+            md5="4f61da5d7bef54ff98d3605fcafa5a70"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="nl" 
+            variant="maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="alpino"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl-tagger-perceptron">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | d81d2e3745ad194fa2e40e9264175f4f
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-pos-perceptron.bin" 
-    		dest="target/download/nl-pos-perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-pos-perceptron.bin" 
-    		md5="d81d2e3745ad194fa2e40e9264175f4f"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="nl" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="alpino"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nl-tagger-perceptron">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | d81d2e3745ad194fa2e40e9264175f4f
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-pos-perceptron.bin" 
+            dest="target/download/nl-pos-perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-pos-perceptron.bin" 
+            md5="d81d2e3745ad194fa2e40e9264175f4f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="nl" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="alpino"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl-ner-person">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-ner-person.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2010-09-08 | now        | 2587cde2383916ef39f1079d9d109510
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-ner-person.bin" 
-    		dest="target/download/nl-ner-person.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-ner-person.bin" 
-    		md5="2587cde2383916ef39f1079d9d109510"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="nl" 
-    		variant="person" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nl-ner-person">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-ner-person.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2010-09-08 | now        | 2587cde2383916ef39f1079d9d109510
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-ner-person.bin" 
+            dest="target/download/nl-ner-person.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-ner-person.bin" 
+            md5="2587cde2383916ef39f1079d9d109510"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="nl" 
+            variant="person" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl-ner-organization">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-ner-organization.bin - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2010-09-08 | now        | a6b49193d9d89c0dd6e27ca3e8648ef6
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-ner-organization.bin" 
-    		dest="target/download/nl-ner-organization.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-ner-organization.bin" 
-    		md5="a6b49193d9d89c0dd6e27ca3e8648ef6"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="nl" 
-    		variant="organization" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nl-ner-organization">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-ner-organization.bin - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2010-09-08 | now        | a6b49193d9d89c0dd6e27ca3e8648ef6
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-ner-organization.bin" 
+            dest="target/download/nl-ner-organization.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-ner-organization.bin" 
+            md5="a6b49193d9d89c0dd6e27ca3e8648ef6"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="nl" 
+            variant="organization" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl-ner-location">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-ner-location.bin - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-08 | now        | 5904fa5e5eede095529ea4aec2c12736
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-ner-location.bin" 
-    		dest="target/download/nl-ner-location.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-ner-location.bin" 
-    		md5="5904fa5e5eede095529ea4aec2c12736"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="nl" 
-    		variant="location" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="nl-ner-location">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-ner-location.bin - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-08 | now        | 5904fa5e5eede095529ea4aec2c12736
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-ner-location.bin" 
+            dest="target/download/nl-ner-location.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-ner-location.bin" 
+            md5="5904fa5e5eede095529ea4aec2c12736"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="nl" 
+            variant="location" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="nl-ner-misc">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/nl-ner-misc.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-09-08 | now        | 34989e1fb6137b0e63cba70591d49e62
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/nl-ner-misc.bin" 
-    		dest="target/download/nl-ner-misc.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/nl-ner-misc.bin" 
-    		md5="34989e1fb6137b0e63cba70591d49e62"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20100908"
-    		metaDataVersion="0"
-    		tool="ner" 
-    		language="nl" 
-    		variant="misc" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="pt">
-		<antcall target="pt-sentence-maxent"/>
-		<antcall target="pt-tagger-maxent"/>
-		<antcall target="pt-tagger-mm-maxent"/>
-		<antcall target="pt-tagger-mm-perceptron"/>
-		<antcall target="pt-tagger-perceptron"/>
-		<antcall target="pt-token-maxent"/>
-	</target>
+    <target name="nl-ner-misc">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/nl-ner-misc.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2010-09-08 | now        | 34989e1fb6137b0e63cba70591d49e62
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/nl-ner-misc.bin" 
+            dest="target/download/nl-ner-misc.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nl-ner-misc.bin" 
+            md5="34989e1fb6137b0e63cba70591d49e62"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20100908"
+            metaDataVersion="0"
+            tool="ner" 
+            language="nl" 
+            variant="misc" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="pt">
+        <antcall target="pt-sentence-maxent"/>
+        <antcall target="pt-tagger-maxent"/>
+        <antcall target="pt-tagger-mm-maxent"/>
+        <antcall target="pt-tagger-mm-perceptron"/>
+        <antcall target="pt-tagger-perceptron"/>
+        <antcall target="pt-token-maxent"/>
+    </target>
 
-	<target name="pt-sentence-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/pt-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 3bde4737d5b9ad9a8a8410d29c94bb84
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/pt-sent.bin" 
-    		dest="target/download/pt-sentence-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/pt-sentence-maxent.bin" 
-    		md5="3bde4737d5b9ad9a8a8410d29c94bb84"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="sentence" 
-    		language="pt" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="pt-sentence-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/pt-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 3bde4737d5b9ad9a8a8410d29c94bb84
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/pt-sent.bin" 
+            dest="target/download/pt-sentence-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/pt-sentence-maxent.bin" 
+            md5="3bde4737d5b9ad9a8a8410d29c94bb84"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="sentence" 
+            language="pt" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="pt-token-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/pt-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 0fd481285c400c7c93c5b625f8844eb3
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/pt-token.bin" 
-    		dest="target/download/pt-token-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/pt-token-maxent.bin" 
-    		md5="0fd481285c400c7c93c5b625f8844eb3"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="token" 
-    		language="pt" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="pt-token-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/pt-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 0fd481285c400c7c93c5b625f8844eb3
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/pt-token.bin" 
+            dest="target/download/pt-token-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/pt-token-maxent.bin" 
+            md5="0fd481285c400c7c93c5b625f8844eb3"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="token" 
+            language="pt" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="pt-tagger-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/pt-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 517c428be748b79ec2d0ad084f5329b1
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/pt-pos-maxent.bin" 
-    		dest="target/download/pt-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/pt-pos-maxent.bin" 
-    		md5="517c428be748b79ec2d0ad084f5329b1"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="pt" 
-    		variant="maxent" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="bosque"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="pt-tagger-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/pt-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | 517c428be748b79ec2d0ad084f5329b1
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/pt-pos-maxent.bin" 
+            dest="target/download/pt-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/pt-pos-maxent.bin" 
+            md5="517c428be748b79ec2d0ad084f5329b1"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="pt" 
+            variant="maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="bosque"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="pt-tagger-perceptron">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/pt-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | d53490bda3717523e16250fc7328ff86
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/pt-pos-perceptron.bin" 
-    		dest="target/download/pt-pos-perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/pt-pos-perceptron.bin" 
-    		md5="d53490bda3717523e16250fc7328ff86"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="pt" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="bosque"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="pt-tagger-perceptron">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/pt-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2012-06-16 | now        | d53490bda3717523e16250fc7328ff86
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/pt-pos-perceptron.bin" 
+            dest="target/download/pt-pos-perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/pt-pos-perceptron.bin" 
+            md5="d53490bda3717523e16250fc7328ff86"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="pt" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="bosque"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="pt-tagger-mm-maxent">
-		<mkdir dir="target/download"/>
-		<get 
-    		src="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
-    		dest="target/download/aelius.zip" 
-    		skipexisting="true"/>
+    <target name="pt-tagger-mm-maxent">
+        <mkdir dir="target/download"/>
+        <get 
+            src="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
+            dest="target/download/aelius.zip" 
+            skipexisting="true"/>
 
-		<!-- FILE: AeliusMaxentOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-04-19 | now        | ed1545b69ac33b079033fd1c8bc3153b
-		  -->
-		<unzip src="target/download/aelius.zip" dest="target/download">
-			<patternset>
-				<include name="*/aelius_data/AeliusMaxentOpenNLP.bin" />
-			</patternset>
-			<mapper type="flatten" />
-		</unzip>
-		<install-stub-and-upstream-file 
-    		file="target/download/AeliusMaxentOpenNLP.bin" 
-    		md5="ed1545b69ac33b079033fd1c8bc3153b"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130121"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="pt" 
-    		variant="mm-maxent" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="AeliusMaxentOpenNLP.bin"/>
-				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
-				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusMaxentOpenNLP.bin"/>
-				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
-	    		<entry key="pos.tagset" value="mm"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+        <!-- FILE: AeliusMaxentOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2011-04-19 | now        | ed1545b69ac33b079033fd1c8bc3153b
+          -->
+        <unzip src="target/download/aelius.zip" dest="target/download">
+            <patternset>
+                <include name="*/aelius_data/AeliusMaxentOpenNLP.bin" />
+            </patternset>
+            <mapper type="flatten" />
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/AeliusMaxentOpenNLP.bin" 
+            md5="ed1545b69ac33b079033fd1c8bc3153b"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20130121"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="pt" 
+            variant="mm-maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="AeliusMaxentOpenNLP.bin"/>
+                <entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
+                <entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusMaxentOpenNLP.bin"/>
+                <entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
+                <entry key="pos.tagset" value="mm"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="pt-tagger-mm-perceptron">
-		<mkdir dir="target/download"/>
-		<!-- FILE: AeliusPerceptronOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-01-19 | now        | 38f62c6ad10de98ac2b8e837de4dd655
-		  -->
-		<unzip src="target/download/aelius.zip" dest="target/download">
-			<patternset>
-				<include name="*/aelius_data/AeliusPerceptronOpenNLP.bin" />
-			</patternset>
-			<mapper type="flatten" />
-		</unzip>
-		<install-stub-and-upstream-file 
-    		file="target/download/AeliusPerceptronOpenNLP.bin" 
-    		md5="38f62c6ad10de98ac2b8e837de4dd655"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130121"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="pt" 
-    		variant="mm-perceptron" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="AeliusPerceptronOpenNLP.bin"/>
-				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
-				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusPerceptronOpenNLP.bin"/>
-				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
-	    		<entry key="pos.tagset" value="mm"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="pt-tagger-mm-perceptron">
+        <mkdir dir="target/download"/>
+        <!-- FILE: AeliusPerceptronOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2013-01-19 | now        | 38f62c6ad10de98ac2b8e837de4dd655
+          -->
+        <unzip src="target/download/aelius.zip" dest="target/download">
+            <patternset>
+                <include name="*/aelius_data/AeliusPerceptronOpenNLP.bin" />
+            </patternset>
+            <mapper type="flatten" />
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/AeliusPerceptronOpenNLP.bin" 
+            md5="38f62c6ad10de98ac2b8e837de4dd655"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20130121"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="pt" 
+            variant="mm-perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="AeliusPerceptronOpenNLP.bin"/>
+                <entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
+                <entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusPerceptronOpenNLP.bin"/>
+                <entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
+                <entry key="pos.tagset" value="mm"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="sv">
-		<antcall target="sv-sentence-maxent"/>
-		<antcall target="sv-tagger-maxent"/>
-		<antcall target="sv-tagger-perceptron"/>
-		<antcall target="sv-token-maxent"/>
-	</target>
+    <target name="sv">
+        <antcall target="sv-sentence-maxent"/>
+        <antcall target="sv-tagger-maxent"/>
+        <antcall target="sv-tagger-perceptron"/>
+        <antcall target="sv-token-maxent"/>
+    </target>
 
-	<target name="sv-sentence-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/se-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | 81a3bf1d4c552db190a90630acc4d15f
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/se-sent.bin" 
-    		dest="target/download/sv-sentence-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/sv-sentence-maxent.bin" 
-    		md5="81a3bf1d4c552db190a90630acc4d15f"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="sentence" 
-    		language="sv" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="sv-sentence-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/se-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | 81a3bf1d4c552db190a90630acc4d15f
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/se-sent.bin" 
+            dest="target/download/sv-sentence-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/sv-sentence-maxent.bin" 
+            md5="81a3bf1d4c552db190a90630acc4d15f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="sentence" 
+            language="sv" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="sv-token-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/se-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | f49dbe3706547e308f4f70fb470992c2
-		  -->
-    	<get 
-			src="http://opennlp.sourceforge.net/models-1.5/se-token.bin" 
-    		dest="target/download/sv-token-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/sv-token-maxent.bin" 
-    		md5="f49dbe3706547e308f4f70fb470992c2"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="token" 
-    		language="sv" 
-    		variant="maxent" 
-    		extension="bin">
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="sv-token-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/se-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | f49dbe3706547e308f4f70fb470992c2
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/se-token.bin" 
+            dest="target/download/sv-token-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/sv-token-maxent.bin" 
+            md5="f49dbe3706547e308f4f70fb470992c2"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="token" 
+            language="sv" 
+            variant="maxent" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="sv-tagger-maxent">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/se-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | 8cd96306df690f24ced060f0071e506e
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/se-pos-maxent.bin" 
-    		dest="target/download/sv-pos-maxent.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/sv-pos-maxent.bin" 
-    		md5="8cd96306df690f24ced060f0071e506e"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="sv" 
-    		variant="maxent" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="talbanken05"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
+    <target name="sv-tagger-maxent">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/se-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | 8cd96306df690f24ced060f0071e506e
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/se-pos-maxent.bin" 
+            dest="target/download/sv-pos-maxent.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/sv-pos-maxent.bin" 
+            md5="8cd96306df690f24ced060f0071e506e"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="sv" 
+            variant="maxent" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="talbanken05"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-	<target name="sv-tagger-perceptron">
-		<mkdir dir="target/download"/>
-		<!-- FILE: models-1.5/se-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | d38f7eccf72033e3c8b1703396db72ec
-		  -->
-    	<get 
-    		src="http://opennlp.sourceforge.net/models-1.5/se-pos-perceptron.bin" 
-    		dest="target/download/sv-pos-perceptron.bin" 
-    		skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/sv-pos-perceptron.bin" 
-    		md5="d38f7eccf72033e3c8b1703396db72ec"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="sv" 
-    		variant="perceptron" 
-    		extension="bin">
-			<metadata>
-	    		<entry key="pos.tagset" value="talbanken05"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="-check-download-ixa-pos-resources">
-		<available 
-			property="download-ixa-pos-resources.DONE" 
-			file="target/download/ixa-pos-resources/DONE"/>
-	</target>
+    <target name="sv-tagger-perceptron">
+        <mkdir dir="target/download"/>
+        <!-- FILE: models-1.5/se-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2012-06-16 | now        | d38f7eccf72033e3c8b1703396db72ec
+          -->
+        <get 
+            src="http://opennlp.sourceforge.net/models-1.5/se-pos-perceptron.bin" 
+            dest="target/download/sv-pos-perceptron.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/sv-pos-perceptron.bin" 
+            md5="d38f7eccf72033e3c8b1703396db72ec"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20120616"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="sv" 
+            variant="perceptron" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="talbanken05"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
+    <target name="-check-download-ixa-pos-resources">
+        <available 
+            property="download-ixa-pos-resources.DONE" 
+            file="target/download/ixa-pos-resources/DONE"/>
+    </target>
 
-	<target name="download-ixa-pos-resources" depends="-check-download-ixa-pos-resources" unless="download-ixa-pos-resources.DONE">
-		<mkdir dir="target/download/ixa-pos-resources"/>
-    	<get 
-    		src="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz" 
-    		dest="target/download/ixa-pos-resources/pos-resources.tgz" 
-    		skipexisting="true"/>
-		<untar 
-			src="target/download/ixa-pos-resources/pos-resources.tgz" 
-			dest="target/download/ixa-pos-resources"
+    <target name="download-ixa-pos-resources" depends="-check-download-ixa-pos-resources" unless="download-ixa-pos-resources.DONE">
+        <mkdir dir="target/download/ixa-pos-resources"/>
+        <get 
+            src="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz" 
+            dest="target/download/ixa-pos-resources/pos-resources.tgz" 
+            skipexisting="true"/>
+        <untar 
+            src="target/download/ixa-pos-resources/pos-resources.tgz" 
+            dest="target/download/ixa-pos-resources"
             compression="gzip">
-    		<patternset>
-    			<include name="**/*.bin"/>		
-			</patternset>
-    		<chainedmapper>
-	    		<mapper type="flatten"/>
-    		</chainedmapper>
-    	</untar>
-		<touch file="target/download/ixa-pos-resources/DONE"/>
-	</target>
-	
+            <patternset>
+                <include name="**/*.bin"/>        
+            </patternset>
+            <chainedmapper>
+                <mapper type="flatten"/>
+            </chainedmapper>
+        </untar>
+        <touch file="target/download/ixa-pos-resources/DONE"/>
+    </target>
+    
     <target name="-check-download-ixa-parser-resources">
         <available 
             property="download-ixa-parser-resources.DONE" 
@@ -1730,8 +1730,8 @@
             dest="target/download/ixa-parser-resources/parse-models.tgz" 
             skipexisting="true"/>
         <untar 
-        	src="target/download/ixa-parser-resources/parse-models.tgz" 
-        	dest="target/download/ixa-parser-resources"
+            src="target/download/ixa-parser-resources/parse-models.tgz" 
+            dest="target/download/ixa-parser-resources"
             compression="gzip">
             <patternset>
                 <include name="**/*.bin"/>      
@@ -1750,16 +1750,16 @@
     </target>
 
     <target name="download-ixa-chunk-resources" depends="-check-download-ixa-chunk-resources" 
-    	unless="download-ixa-chunk-resources.DONE">
+        unless="download-ixa-chunk-resources.DONE">
         <mkdir dir="target/download/ixa-chunk-resources"/>
         <get 
             src="http://ixa2.si.ehu.es/ixa-pipes/models/chunk-models-1.1.0.tar.gz" 
             dest="target/download/ixa-chunk-resources/chunk-models-1.1.0.tar.gz" 
             skipexisting="true"/>
         <untar 
-        	src="target/download/ixa-chunk-resources/chunk-models-1.1.0.tar.gz" 
-        	dest="target/download/ixa-chunk-resources"
-        	compression="gzip">
+            src="target/download/ixa-chunk-resources/chunk-models-1.1.0.tar.gz" 
+            dest="target/download/ixa-chunk-resources"
+            compression="gzip">
             <patternset>
                 <include name="**/*.bin"/>      
             </patternset>
