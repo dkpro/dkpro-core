@@ -41,39 +41,39 @@
 			<antcall target="af-tagger-perceptron"/>
 	</target>
 	
-	<target name="af-tagger-perceptron">
-				<mkdir dir="target/download"/>
+    <target name="af-tagger-perceptron">
+       <mkdir dir="target/download"/>
 
-				<get 
-		    		src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-af-afribooms.tar.gz" 
-		    		dest="target/download/opennlp-af-afribooms.gz" 
-		    		skipexisting="true"/>
-				<untar 
-					src="target/download/opennlp-af-afribooms.gz" 
-					dest="target/download/" 
-					compression="gzip"/>
-				
-				<install-stub-and-upstream-file 
-		    		file="target/download/opennlp-af-afribooms/model-tagger-af.bin" 
-		    		groupId="de.tudarmstadt.ukp.dkpro.core"
-					md5="cb9be0243fe7908d00a0749b760b81f5"
-		    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-		    		upstreamVersion="20181017"
-		    		metaDataVersion="1"
-		    		tool="tagger"
-		    		language="af"
-					variant="afribooms"
-					extension="bin">
-					<metadata>
-						<entry key="DC.rights" value="https://creativecommons.org/licenses/by-sa/4.0/"/>
-						<entry key="pos.tagset" value="ud"/>
-						<entry key="model.encoding" value="utf-8"/>
-					</metadata>
-					 <additionalUpstreamContent>
-					 	<copy file="target/download/opennlp-af-afribooms/ref.cff" todir="target/model-staging/META-INF/"/>
-					 </additionalUpstreamContent>
-				</install-stub-and-upstream-file>
-			</target>
+       <get 
+             src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-af-afribooms.tar.gz" 
+             dest="target/download/opennlp-af-afribooms.gz" 
+             skipexisting="true"/>
+       <untar 
+             src="target/download/opennlp-af-afribooms.gz" 
+             dest="target/download/" 
+             compression="gzip"/>
+  
+       <install-stub-and-upstream-file 
+          file="target/download/opennlp-af-afribooms/model-tagger-af.bin" 
+          groupId="de.tudarmstadt.ukp.dkpro.core"
+          md5="cb9be0243fe7908d00a0749b760b81f5"
+          artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+          upstreamVersion="20181017"
+          metaDataVersion="1"
+          tool="tagger"
+          language="af"
+          variant="afribooms"
+          extension="bin">
+            <metadata>
+               <entry key="DC.rights" value="https://creativecommons.org/licenses/by-sa/4.0/"/>
+               <entry key="pos.tagset" value="ud"/>
+               <entry key="model.encoding" value="utf-8"/>
+            </metadata>
+            <additionalUpstreamContent>
+               <copy file="target/download/opennlp-af-afribooms/ref.cff" todir="target/model-staging/META-INF/"/>
+            </additionalUpstreamContent>
+       </install-stub-and-upstream-file>
+    </target>
 	
 	<target name="da">
 		<antcall target="da-sentence-maxent"/>
