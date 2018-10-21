@@ -126,7 +126,7 @@
     </dependency>
     <dependency>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms</artifactId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</artifactId>
 		<scope>test</scope>
 	</dependency>
     <dependency>
@@ -304,8 +304,8 @@
       </dependency>
       <dependency>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms</artifactId>
-		<version>20181017.1</version>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</artifactId>
+		<version>20181021.1</version>
 	  </dependency>        
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -486,7 +486,7 @@
       <dependencies>
       <dependency>
 		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms</artifactId>
+		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</artifactId>
 		  <scope>test</scope>
 	    </dependency>           
         <dependency>
@@ -604,7 +604,7 @@
               <configuration>
                 <usedDependencies combine.children="append">
                   <!-- Models not detected by byte-code analysis -->                  
-                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-perceptron</usedDependency>
