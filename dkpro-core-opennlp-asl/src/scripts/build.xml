@@ -65,6 +65,9 @@
           variant="afribooms-perceptron"
           extension="bin">
             <metadata>
+               <entry key="DC.title" value="afribooms-perceptron.bin"/>
+               <entry key="DC.creator" value="DKPro Organization"/>
+               <entry key="DC.identifier" value="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-af-afribooms-perceptron.tar.gz"/>
                <entry key="DC.rights" value="https://creativecommons.org/licenses/by-sa/4.0/"/>
                <entry key="pos.tagset" value="ud"/>
                <entry key="model.encoding" value="utf-8"/>
