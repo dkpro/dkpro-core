@@ -35,8 +35,8 @@
         <antcall target="separate-jars"/>
     </target>
     
-	<target name="separate-jars" depends="af, da, de, en, es, it, nb, nl, pt, sv"/>
-
+	<target name="separate-jars" depends="af"/>
+	
     <target name="af">
             <antcall target="af-tagger-perceptron"/>
     </target>
@@ -74,6 +74,7 @@
             </metadata>
             <additionalUpstreamContent>
                <copy file="target/download/opennlp-af-afribooms-perceptron/ref.cff" todir="target/model-staging/META-INF/"/>
+            	<copy file="target/download/opennlp-af-afribooms-perceptron/LICENSE.txt" todir="target/model-staging/META-INF/"/>
             </additionalUpstreamContent>
        </install-stub-and-upstream-file>
     </target>
