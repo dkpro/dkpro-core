@@ -35,7 +35,7 @@
         <antcall target="separate-jars"/>
     </target>
     
-	<target name="separate-jars" depends="af"/>
+    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, nl, pt, sv"/>
 	
     <target name="af">
             <antcall target="af-tagger-perceptron"/>
@@ -66,7 +66,7 @@
           extension="bin">
             <metadata>
                <entry key="DC.title" value="afribooms-perceptron.bin"/>
-               <entry key="DC.creator" value="University of Duisburg-Essen, Language Technology Lab"/>
+               <entry key="DC.creator" value="Language Technology Lab, University of Duisburg-Essen"/>
                <entry key="DC.identifier" value="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-af-afribooms-perceptron.tar.gz"/>
                <entry key="DC.rights" value="https://creativecommons.org/licenses/by-sa/4.0/"/>
                <entry key="pos.tagset" value="ud"/>
@@ -1051,6 +1051,48 @@
                 <!-- entry key="constituent.tag.map.TOP" -->
             </metadata>
         </install-stub-and-upstream-file>
+    </target>
+	
+    <target name="gd">
+        <antcall target="gd-tagger-perceptron"/>
+    </target>	
+    
+    <target name="gd-tagger-perceptron">
+       <mkdir dir="target/download"/>
+
+       <get 
+             src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-gd-arcosg-perceptron.tar.gz" 
+             dest="target/download/opennlp-gd-arcosg-perceptron.gz" 
+             skipexisting="true"/>
+       <untar 
+             src="target/download/opennlp-gd-arcosg-perceptron.gz" 
+             dest="target/download/" 
+             compression="gzip"/>
+  
+       <install-stub-and-upstream-file 
+          file="target/download/opennlp-gd-arcosg-perceptron/model-tagger-gd.bin" 
+          groupId="de.tudarmstadt.ukp.dkpro.core"
+          md5="9823db5eccd24b245a54ef3d03e33c87"
+          artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+          upstreamVersion="20181022"
+          metaDataVersion="1"
+          tool="tagger"
+          language="gd"
+          variant="arcosg-perceptron"
+          extension="bin">
+            <metadata>
+               <entry key="DC.title" value="arcosg-perceptron.bin"/>
+               <entry key="DC.creator" value="Language Technology Lab, University of Duisburg-Essen"/>
+               <entry key="DC.identifier" value="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-gd-arcosg-perceptron.tar.gz"/>
+               <entry key="DC.rights" value="https://creativecommons.org/licenses/by/4.0/legalcode.txt"/>
+               <entry key="pos.tagset" value="arcosg"/>
+               <entry key="model.encoding" value="utf-8"/>
+            </metadata>
+            <additionalUpstreamContent>
+                <copy file="target/download/opennlp-gd-arcosg-perceptron/ref.cff" todir="target/model-staging/META-INF/"/>
+                <copy file="target/download/opennlp-gd-arcosg-perceptron/LICENSE.txt" todir="target/model-staging/META-INF/"/>
+            </additionalUpstreamContent>
+       </install-stub-and-upstream-file>
     </target>
     
     <target name="it">

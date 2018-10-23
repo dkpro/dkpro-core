@@ -222,6 +222,19 @@ public class OpenNlpPosTaggerTest
                 new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
                 new String[] { "POS_PRON", "POS_VERB",    "POS_DET", "POS_NOUN", "POS_PUNCT" });
     }
+    
+    @Test
+    public void testScottishGaelic()
+        throws Exception
+    {
+    	runTest("gd", null, "Rinn Mairearad marbhrann do Ailean , mac Lachlainn Bhròlais , a chaochail an 1722 .",
+                new String[] { "V-s",      "Nn-fn",    "Ncsmn",    "Sp",      "Nn-md",    "Fi",        "Ncsmn",    "Nn-mg",    "Nt",      "Fi",        "Sp",      "V-s",      "Sp",      "Mn",      "Fe" },
+                new String[] { "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN","POS_PUNCT", "POS_ADP", "POS_VERB", "POS_ADP", "POS_NUM", "POS_PUNCT" });
+    	
+    	runTest("gd", "arcosg-perceptron", "Rinn Mairearad marbhrann do Ailean , mac Lachlainn Bhròlais , a chaochail an 1722 .",
+                new String[] { "V-s",      "Nn-fn",    "Ncsmn",    "Sp",      "Nn-md",    "Fi",        "Ncsmn",    "Nn-mg",    "Nt",      "Fi",        "Sp",      "V-s",      "Sp",      "Mn",      "Fe" },
+                new String[] { "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN","POS_PUNCT", "POS_ADP", "POS_VERB", "POS_ADP", "POS_NUM", "POS_PUNCT" });
+    }
 
     @Ignore("We don't have these models integrated yet")
     @Test
