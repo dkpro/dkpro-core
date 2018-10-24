@@ -224,6 +224,19 @@ public class OpenNlpPosTaggerTest
     }
     
     @Test
+    public void testNepali()
+        throws Exception
+    {
+        runTest("ne", null, "६१ वर्षीय पियरे भिन्केन नोभेम्बर २९ बाट सल्लाहकारको रूप मा सञ्चालक समितिमा आउनुहुनेछ ।",
+                new String[] { "CD",      "JJ",       "NNP",       "NNP",       "NNP",       "CD",      "POP",     "VBKO",     "NN",       "POP",     "NN",       "NN",       "VBX",      "YF"},
+                new String[] { "POS_NUM", "POS_ADJ",  "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_NUM", "POS_ADP", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_NOUN", "POS_VERB", "POS_PUNCT" });
+        
+        runTest("ne", "cle-perceptron", "६१ वर्षीय पियरे भिन्केन नोभेम्बर २९ बाट सल्लाहकारको रूप मा सञ्चालक समितिमा आउनुहुनेछ ।",
+                new String[] { "CD",      "JJ",       "NNP",       "NNP",       "NNP",       "CD",      "POP",     "VBKO",     "NN",       "POP",     "NN",       "NN",       "VBX",      "YF"},
+                new String[] { "POS_NUM", "POS_ADJ",  "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_NUM", "POS_ADP", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_NOUN", "POS_VERB", "POS_PUNCT" });
+    }
+    
+    @Test
     public void testScottishGaelic()
         throws Exception
     {

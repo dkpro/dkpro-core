@@ -35,7 +35,7 @@
         <antcall target="separate-jars"/>
     </target>
     
-    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, nl, pt, sv"/>
+    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, ne, nl, pt, sv"/>
 	
     <target name="af">
             <antcall target="af-tagger-perceptron"/>
@@ -1254,6 +1254,47 @@
             extension="bin">
         </install-stub-and-upstream-file>
     </target>
+
+   <target name="ne">
+        <antcall target="ne-tagger-perceptron"/>
+    </target>
+    
+   <target name="ne-tagger-perceptron">
+       <mkdir dir="target/download"/>
+
+       <get 
+             src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-ne-cle-perceptron.tar.gz" 
+             dest="target/download/opennlp-ne-cle-perceptron.gz" 
+             skipexisting="true"/>
+       <untar 
+             src="target/download/opennlp-ne-cle-perceptron.gz" 
+             dest="target/download/" 
+             compression="gzip"/>
+  
+       <install-stub-and-upstream-file 
+          file="target/download/opennlp-ne-cle-perceptron/model-tagger-ne.bin" 
+          groupId="de.tudarmstadt.ukp.dkpro.core"
+          md5="2c8f187dbe2a054a095452d0d2ec07a2"
+          artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+          upstreamVersion="20181024"
+          metaDataVersion="1"
+          tool="tagger"
+          language="ne"
+          variant="cle-perceptron"
+          extension="bin">
+            <metadata>
+               <entry key="DC.title" value="cle-perceptron.bin"/>
+               <entry key="DC.creator" value="Language Technology Lab, University of Duisburg-Essen"/>
+               <entry key="DC.identifier" value="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-ne-cle-perceptron.tar.gz"/>
+               <entry key="DC.rights" value="https://creativecommons.org/licenses/by-nc-sa/3.0/"/>
+               <entry key="pos.tagset" value="cle"/>
+               <entry key="model.encoding" value="utf-8"/>
+            </metadata>
+            <additionalUpstreamContent>
+               <copy file="target/download/opennlp-ne-cle-perceptron/LICENSE.txt" todir="target/model-staging/META-INF/"/>
+            </additionalUpstreamContent>
+       </install-stub-and-upstream-file>
+    </target>    
 
     <target name="nl">
         <antcall target="nl-ner-location"/>
