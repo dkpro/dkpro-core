@@ -1052,6 +1052,48 @@
             </metadata>
         </install-stub-and-upstream-file>
     </target>
+    
+    <target name="fr">
+        <antcall target="fr-tagger-perceptron"/>
+    </target>	
+    
+    <target name="fr-tagger-perceptron">
+       <mkdir dir="target/download"/>
+
+       <get 
+             src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-fr-sequoia-perceptron.tar.gz" 
+             dest="target/download/opennlp-fr-sequoia-perceptron.gz" 
+             skipexisting="true"/>
+       <untar 
+             src="target/download/opennlp-fr-sequoia-perceptron.gz" 
+             dest="target/download/" 
+             compression="gzip"/>
+  
+       <install-stub-and-upstream-file 
+          file="target/download/opennlp-fr-sequoia-perceptron/model-tagger-fr.bin" 
+          groupId="de.tudarmstadt.ukp.dkpro.core"
+          md5="4e223582c6d559c333a36a0d40faa79d"
+          artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+          upstreamVersion="20181024"
+          metaDataVersion="1"
+          tool="tagger"
+          language="fr"
+          variant="sequoia-perceptron"
+          extension="bin">
+            <metadata>
+               <entry key="DC.title" value="arcosg-perceptron.bin"/>
+               <entry key="DC.creator" value="Language Technology Lab, University of Duisburg-Essen"/>
+               <entry key="DC.identifier" value="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-fr-sequoia-perceptron.tar.gz"/>
+               <entry key="DC.rights" value="https://raw.githubusercontent.com/UnitexGramLab/LGPLLR/master/LGPLLR"/>
+               <entry key="pos.tagset" value="sequoia"/>
+               <entry key="model.encoding" value="utf-8"/>
+            </metadata>
+            <additionalUpstreamContent>
+                <copy file="target/download/opennlp-fr-sequoia-perceptron/LICENSE.txt" todir="target/model-staging/META-INF/"/>
+                <copy file="target/download/opennlp-fr-sequoia-perceptron/README.txt" todir="target/model-staging/META-INF/"/>
+            </additionalUpstreamContent>
+       </install-stub-and-upstream-file>
+    </target>    
 	
     <target name="gd">
         <antcall target="gd-tagger-perceptron"/>
