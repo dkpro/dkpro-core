@@ -192,6 +192,15 @@ public class OpenNlpPosTaggerTest
                 new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
                         "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
     }
+    
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        runTest("fr", "sequoia-perceptron", "Les enfants fêtent saint Honoré",
+                new String[] { "DET",     "NC",       "V",       "NC",       "NPP" },
+                new String[] { "POS_DET", "POS_NOUN", "POS_VERB", "POS_NOUN", "POS_PROPN" });
+    }
 
     @Test
     public void testGerman()

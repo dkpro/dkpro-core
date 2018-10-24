@@ -141,6 +141,11 @@
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-fr-sequoia-perceptron</artifactId>
+      <scope>test</scope>
+    </dependency>    
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-is-mim1.0-perceptron</artifactId>
       <scope>test</scope>
     </dependency>    
@@ -342,6 +347,11 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-perceptron-ixa</artifactId>
         <version>20131115.1</version>
       </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-fr-sequoia-perceptron</artifactId>
+        <version>20181024.1</version>
+      </dependency>          
       <dependency>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-gd-arcosg-perceptron</artifactId>
