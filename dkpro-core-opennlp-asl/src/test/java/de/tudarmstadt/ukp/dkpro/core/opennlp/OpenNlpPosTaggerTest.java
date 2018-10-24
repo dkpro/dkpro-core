@@ -224,6 +224,19 @@ public class OpenNlpPosTaggerTest
     }
     
     @Test
+    public void testIcelandic()
+        throws Exception
+    {
+        runTest("is", null, "Þegar hin börn­in eru far­in að sofa þá græt ég",
+                new String[] { "c",        "fahfn",    "nhfng",    "sfg3fn",   "sþghfn",    "cn",       "sng",      "aa" ,     "sfg1en",   "fp1en" },
+                new String[] { "POS_CONJ", "POS_PRON", "POS_NOUN", "POS_VERB", "POS_PUNCT", "POS_CONJ", "POS_VERB", "POS_ADP", "POS_VERB", "POS_PRON" });
+        
+        runTest("is", "mim1.0-perceptron", "Þegar hin börn­in eru far­in að sofa þá græt ég",
+                new String[] { "c",        "fahfn",    "nhfng",    "sfg3fn",   "sþghfn",    "cn",       "sng",      "aa" ,     "sfg1en",   "fp1en" },
+                new String[] { "POS_CONJ", "POS_PRON", "POS_NOUN", "POS_VERB", "POS_PUNCT", "POS_CONJ", "POS_VERB", "POS_ADP", "POS_VERB", "POS_PRON" });
+    }
+    
+    @Test
     public void testNepali()
         throws Exception
     {
