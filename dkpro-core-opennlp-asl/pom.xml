@@ -448,6 +448,11 @@
         <version>20181025.1</version>
       </dependency>      
       <dependency>
+	    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+	    <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</artifactId>
+	    <version>20181025.1</version>
+	  </dependency> 	               
+      <dependency>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
 		<version>20181025.1</version>
@@ -652,7 +657,12 @@
 		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
 		  <scope>test</scope>
-	    </dependency>      
+	    </dependency> 
+        <dependency>
+		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</artifactId>
+		  <scope>test</scope>
+	    </dependency> 	         
       </dependencies>
       <build>
         <pluginManagement>
@@ -666,10 +676,14 @@
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-fr-sequoia-perceptron</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-fr-sequoia-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-perceptron-ixa</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-gd-arcosg-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ne-cle-perceptron</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sk-multext1984-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sv-maxent</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-it-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-is-mim1.0-perceptron</usedDependency>

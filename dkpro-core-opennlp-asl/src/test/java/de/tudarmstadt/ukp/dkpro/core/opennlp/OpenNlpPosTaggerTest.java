@@ -259,6 +259,19 @@ public class OpenNlpPosTaggerTest
     }
     
     @Test
+    public void testNorwegian()
+        throws Exception
+    {
+        runTest("no", null, "Danmark har alltid hatt mykje høgare folketal enn Noreg .",
+                new String[] { "subst",    "verb",     "adv",     "verb",     "adj",     "adj",     "subst",    "prep",    "subst",    "clb"},
+                new String[] { "POS_NOUN", "POS_VERB", "POS_ADV", "POS_VERB", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT"});
+
+        runTest("no", "dtb1.01-perceptron", "Danmark har alltid hatt mykje høgare folketal enn Noreg .",
+                new String[] { "subst",    "verb",     "adv",     "verb",     "adj",     "adj",     "subst",    "prep",    "subst",    "clb"},
+                new String[] { "POS_NOUN", "POS_VERB", "POS_ADV", "POS_VERB", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT"});
+    }
+    
+    @Test
     public void testScottishGaelic()
         throws Exception
     {
