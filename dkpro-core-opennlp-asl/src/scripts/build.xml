@@ -35,7 +35,7 @@
         <antcall target="separate-jars"/>
     </target>
     
-    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, ne, nl, pt, sk, sv"/>    
+    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, ne, nl, pt, sk, sv, ur"/>
 	
     <target name="af">
             <antcall target="af-tagger-perceptron"/>
@@ -1900,7 +1900,48 @@
             	<copy file="target/download/opennlp-sk-multext1984-perceptron/LICENSE.txt" todir="target/model-staging/META-INF/"/>
             </additionalUpstreamContent>
        </install-stub-and-upstream-file>
-    </target>    
+    </target>   
+    
+   <target name="ur">
+        <antcall target="ur-tagger-perceptron"/>
+    </target>
+    
+   <target name="ur-tagger-perceptron">
+       <mkdir dir="target/download"/>
+
+       <get 
+             src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-ur-cle-perceptron.tar.gz" 
+             dest="target/download/opennlp-ur-cle-perceptron.gz" 
+             skipexisting="true"/>
+       <untar 
+             src="target/download/opennlp-ur-cle-perceptron.gz" 
+             dest="target/download/" 
+             compression="gzip"/>
+  
+       <install-stub-and-upstream-file 
+          file="target/download/opennlp-ur-cle-perceptron/model-tagger-ur.bin" 
+          groupId="de.tudarmstadt.ukp.dkpro.core"
+          md5="e9ac00693d14660e19fadea6a487c8fe"
+          artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+          upstreamVersion="20181025"
+          metaDataVersion="1"
+          tool="tagger"
+          language="ur"
+          variant="cle-perceptron"
+          extension="bin">
+            <metadata>
+               <entry key="DC.title" value="cle-perceptron.bin"/>
+               <entry key="DC.creator" value="Language Technology Lab, University of Duisburg-Essen"/>
+               <entry key="DC.identifier" value="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-ur-cle-perceptron.tar.gz"/>
+               <entry key="DC.rights" value="https://creativecommons.org/licenses/by-nc-sa/3.0/"/>
+               <entry key="pos.tagset" value="cle"/>
+               <entry key="model.encoding" value="utf-8"/>
+            </metadata>
+            <additionalUpstreamContent>
+               <copy file="target/download/opennlp-ur-cle-perceptron/LICENSE.txt" todir="target/model-staging/META-INF/"/>
+            </additionalUpstreamContent>
+       </install-stub-and-upstream-file>
+    </target>         
     
     <target name="-check-download-ixa-pos-resources">
         <available 

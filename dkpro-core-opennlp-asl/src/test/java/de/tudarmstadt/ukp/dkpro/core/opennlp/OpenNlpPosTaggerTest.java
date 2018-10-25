@@ -355,6 +355,15 @@ public class OpenNlpPosTaggerTest
                 new String[] { "PO",  "AV",  "EN",  "NN",  "IP"    },
                 new String[] { "POS", "POS", "POS", "POS", "POS" });
     }
+    
+    @Test
+    public void testUrdu()
+        throws Exception
+    {
+    	runTest("ur", "cle-perceptron", "ماہانہ فروخت مارچ سے ہر ماہ ریکارڈ قائم کرتی رہی ہے ۔",
+				new String[] { "JJ",      "NN",       "NNP",      "CM",    "Q",     "NN",       "NN",       "JJ",      "VB",       "AUXA",  "AUXT",  "SM" },
+                new String[] { "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_X", "POS_X", "POS_NOUN", "POS_NOUN", "POS_ADJ", "POS_VERB", "POS_X", "POS_X", "POS_PUNCT"});
+    }  
 
     private JCas runTest(String language, String variant, String testDocument, String[] tags,
             String[] tagClasses)

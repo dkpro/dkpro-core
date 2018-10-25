@@ -448,6 +448,11 @@
         <version>20181025.1</version>
       </dependency>      
       <dependency>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
+		<version>20181025.1</version>
+	  </dependency>      
+      <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-da-maxent</artifactId>
         <version>20120616.1</version>
@@ -643,6 +648,11 @@
           <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-perceptron-ixa</artifactId>
           <scope>test</scope>
         </dependency>
+        <dependency>
+		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
+		  <scope>test</scope>
+	    </dependency>      
       </dependencies>
       <build>
         <pluginManagement>
