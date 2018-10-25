@@ -1,3 +1,5 @@
+__META_SOURCE_URL__=http://nl.ijs.si/ME/Vault/V3/msd/html/
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
 ,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNCT
 .=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNCT
