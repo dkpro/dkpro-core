@@ -270,6 +270,19 @@ public class OpenNlpPosTaggerTest
                 new String[] { "V-s",      "Nn-fn",    "Ncsmn",    "Sp",      "Nn-md",    "Fi",        "Ncsmn",    "Nn-mg",    "Nt",      "Fi",        "Sp",      "V-s",      "Sp",      "Mn",      "Fe" },
                 new String[] { "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN","POS_PUNCT", "POS_ADP", "POS_VERB", "POS_ADP", "POS_NUM", "POS_PUNCT" });
     }
+    
+    @Test
+    public void testSlovakMultext1984()
+        throws Exception
+    {
+    	runTest("sk", null, "Tovar sa vyrábať musí , ale nesmie sa distribuovať .",
+                new String[] { "Ncmsn",      "Px---a--ypn",    "Vmn-----n-----p",    "Voip3s--n-----p",      ",",    "Cs",        "Vmip3s--y-----p",    "Px---a--ypn",    "Vmn-----n-----a", "."},
+                new String[] { "POS_NOUN", "POS_PRON", "POS_VERB", "POS_VERB", "POS_PUNCT", "POS_SCONJ", "POS_VERB", "POS_PRON", "POS_VERB", "POS_PUNCT"});
+    	
+    	runTest("sk", "multext1984-perceptron", "Tovar sa vyrábať musí , ale nesmie sa distribuovať .",
+                new String[] { "Ncmsn",      "Px---a--ypn",    "Vmn-----n-----p",    "Voip3s--n-----p",      ",",    "Cs",        "Vmip3s--y-----p",    "Px---a--ypn",    "Vmn-----n-----a", "."},
+                new String[] { "POS_NOUN", "POS_PRON", "POS_VERB", "POS_VERB", "POS_PUNCT", "POS_SCONJ", "POS_VERB", "POS_PRON", "POS_VERB", "POS_PUNCT"});
+    }    
 
     @Ignore("We don't have these models integrated yet")
     @Test

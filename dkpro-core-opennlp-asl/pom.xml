@@ -444,6 +444,11 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sk-multext1984-perceptron</artifactId>
+        <version>20181025.1</version>
+      </dependency>      
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-da-maxent</artifactId>
         <version>20120616.1</version>
       </dependency>
@@ -554,6 +559,11 @@
           <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sv-maxent</artifactId>
           <scope>test</scope>
         </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sk-multext1984-perceptron</artifactId>
+          <scope>test</scope>
+        </dependency>              
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-it-maxent</artifactId>

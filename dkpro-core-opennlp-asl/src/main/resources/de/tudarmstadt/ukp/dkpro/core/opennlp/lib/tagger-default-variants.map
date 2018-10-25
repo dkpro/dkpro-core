@@ -3,4 +3,5 @@ gd=arcosg-perceptron
 it=perceptron
 is=mim1.0-perceptron
 ne=cle-perceptron
+sk=multext1984-perceptron
 *=maxent

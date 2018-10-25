@@ -35,7 +35,7 @@
         <antcall target="separate-jars"/>
     </target>
     
-    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, ne, nl, pt, sv"/>    
+    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, ne, nl, pt, sk, sv"/>    
 	
     <target name="af">
             <antcall target="af-tagger-perceptron"/>
@@ -1860,6 +1860,47 @@
             </metadata>
         </install-stub-and-upstream-file>
     </target>
+    
+    <target name="sk">
+        <antcall target="sk-tagger-perceptron"/>
+    </target>
+
+    <target name="sk-tagger-perceptron">
+        <mkdir dir="target/download"/>
+        
+		<get 
+             src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-sk-multext1984-perceptron.tar.gz" 
+             dest="target/download/opennlp-sk-multext1984-perceptron.gz" 
+             skipexisting="true"/>
+       <untar 
+             src="target/download/opennlp-sk-multext1984-perceptron.gz" 
+             dest="target/download/" 
+             compression="gzip"/>        
+
+       <install-stub-and-upstream-file 
+             file="target/download/opennlp-sk-multext1984-perceptron/model-tagger-sk.bin" 
+             groupId="de.tudarmstadt.ukp.dkpro.core"
+             md5="6fc4d00cf72dac2a36c4b5c870f74c46"
+             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+             upstreamVersion="20181025"
+             metaDataVersion="1"
+             tool="tagger"
+             language="sk"
+             variant="multext1984-perceptron"
+             extension="bin">
+            <metadata>
+               <entry key="DC.title" value="model-tagger-sk.bin"/>
+               <entry key="DC.creator" value="Language Technology Lab, University of Duisburg-Essen"/>
+               <entry key="DC.identifier" value="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=opennlp-sk-multext1984-perceptron.tar.gz"/>
+               <entry key="DC.rights" value="https://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+               <entry key="pos.tagset" value="multext"/>
+               <entry key="model.encoding" value="utf-8"/>
+            </metadata>
+            <additionalUpstreamContent>
+            	<copy file="target/download/opennlp-sk-multext1984-perceptron/LICENSE.txt" todir="target/model-staging/META-INF/"/>
+            </additionalUpstreamContent>
+       </install-stub-and-upstream-file>
+    </target>    
     
     <target name="-check-download-ixa-pos-resources">
         <available 
