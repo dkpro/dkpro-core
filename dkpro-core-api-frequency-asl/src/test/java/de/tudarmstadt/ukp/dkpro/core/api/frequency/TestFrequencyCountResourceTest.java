@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -59,7 +59,7 @@ public class TestFrequencyCountResourceTest
     {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
                 Annotator.FREQUENCY_COUNT_RESOURCE,
-                createExternalResourceDescription(TestFrequencyCountResource.class,
+                createResourceDescription(TestFrequencyCountResource.class,
                         TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"));
 
         // Check the external resource was injected

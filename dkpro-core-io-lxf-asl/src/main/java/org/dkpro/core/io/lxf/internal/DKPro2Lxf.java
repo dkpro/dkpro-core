@@ -28,6 +28,7 @@ import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.LAYER_TOKEN;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.cas.FeatureStructure;
@@ -77,14 +78,18 @@ public class DKPro2Lxf
                 ids.put(n.getType(), n.getOrigin());
             }
         }
-        if (!ids.containsKey(LAYER_DEPENDENCY))
+        if (!ids.containsKey(LAYER_DEPENDENCY)) {
             ids.put(LAYER_DEPENDENCY, toolName);
-        if (!ids.containsKey(LAYER_MORPHOLOGY))
+        }
+        if (!ids.containsKey(LAYER_MORPHOLOGY)) {
             ids.put(LAYER_MORPHOLOGY, toolName);
-        if (!ids.containsKey(LAYER_SENTENCE))
+        }
+        if (!ids.containsKey(LAYER_SENTENCE)) {
             ids.put(LAYER_SENTENCE, toolName);
-        if (!ids.containsKey(LAYER_TOKEN))
+        }
+        if (!ids.containsKey(LAYER_TOKEN)) {
             ids.put(LAYER_TOKEN, toolName);
+        }
         return ids;
     }
 
@@ -115,10 +120,9 @@ public class DKPro2Lxf
         ToolGeneratorIndex toolRegionIndex = new ToolGeneratorIndex(ids.values());
         NodeIterator iter = new NodeIterator(aSource);
 
-        Map<Sentence, Collection<Token>> idxSentTok = indexCovered(aJCas, Sentence.class,
-                Token.class);
+        Map<Sentence, List<Token>> idxSentTok = indexCovered(aJCas, Sentence.class, Token.class);
 
-        Map<Sentence, Collection<Dependency>> idxSentDep = indexCovered(aJCas, Sentence.class,
+        Map<Sentence, List<Dependency>> idxSentDep = indexCovered(aJCas, Sentence.class,
                 Dependency.class);
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
@@ -219,8 +223,9 @@ public class DKPro2Lxf
 
             for (Dependency dep : deps) {
 
-                if (aSource != null && !needsExport(aJCas, dep))
+                if (aSource != null && !needsExport(aJCas, dep)) {
                     continue;
+                }
 
                 LxfNode depNode = new LxfNode(LAYER_DEPENDENCY, toolid,
                         toolNodeIndex.nextIndex(toolid), 0);

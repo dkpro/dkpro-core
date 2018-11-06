@@ -69,7 +69,7 @@ public class TreeTaggerPosTaggerTest
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
                 System.getProperty("treetagger.home") != null);
 
-        URL aUrl = new URL("http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz");
+        URL aUrl = new URL("http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english.par.gz");
         File targetFile = File.createTempFile("model", ".bin");
         
         try (InputStream input = new CompressorStreamFactory()
@@ -941,7 +941,7 @@ public class TreeTaggerPosTaggerTest
 
         // test POS annotations
         String[] expectedTags = { "DT", "VBZ", "DT", "NN", "SENT" };
-        String[] expectedTagClasses = { "POS_ART", "POS_V", "POS_ART", "POS_NN", "POS_PUNC" };
+        String[] expectedTagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
         for (int i = 0; i < actualTags.size(); i++) {
             POS posAnnotation = actualTags.get(i);
@@ -951,7 +951,7 @@ public class TreeTaggerPosTaggerTest
         }
 
         System.out.println("Successfully tagged document with " + testString.length() +
-                " characters");
+                " characters and " + actualTags.size() + " tokens");
     }
 
     /**

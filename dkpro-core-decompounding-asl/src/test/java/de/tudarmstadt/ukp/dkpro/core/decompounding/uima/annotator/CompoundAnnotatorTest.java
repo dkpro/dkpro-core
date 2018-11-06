@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -79,13 +79,13 @@ public class CompoundAnnotatorTest
     public void testWithoutRanking() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
-                createExternalResourceDescription(
+                CompoundAnnotator.RES_SPLITTING_ALGO,
+                createResourceDescription(
                         LeftToRightSplitterResource.class,
                         SplitterResource.PARAM_DICT_RESOURCE,
-                        createExternalResourceDescription(SharedDictionary.class),
+                        createResourceDescription(SharedDictionary.class),
                         SplitterResource.PARAM_MORPHEME_RESOURCE,
-                        createExternalResourceDescription(SharedLinkingMorphemes.class)));
+                        createResourceDescription(SharedLinkingMorphemes.class)));
         String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine"};
         String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine"};
         runAnnotator(aed, splits, compoundsParts);
@@ -95,20 +95,20 @@ public class CompoundAnnotatorTest
     public void testWithAsvToolbox() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
-                createExternalResourceDescription(
+                CompoundAnnotator.RES_SPLITTING_ALGO,
+                createResourceDescription(
                         AsvToolboxSplitterResource.class,
                         AsvToolboxSplitterResource.PARAM_DICT_RESOURCE,
-                        createExternalResourceDescription(SharedDictionary.class),
+                        createResourceDescription(SharedDictionary.class),
                         AsvToolboxSplitterResource.PARAM_MORPHEME_RESOURCE,
-                        createExternalResourceDescription(SharedLinkingMorphemes.class),
+                        createResourceDescription(SharedLinkingMorphemes.class),
                         AsvToolboxSplitterResource.PARAM_PATRICIA_TRIES_RESOURCE,
-                        createExternalResourceDescription(SharedPatriciaTries.class)),
-                CompoundAnnotator.PARAM_RANKING_ALGO,
-                createExternalResourceDescription(
+                        createResourceDescription(SharedPatriciaTries.class)),
+                CompoundAnnotator.RES_RANKING_ALGO,
+                createResourceDescription(
                         FrequencyRankerResource.class,
                         RankerResource.PARAM_FINDER_RESOURCE,
-                        createExternalResourceDescription(SharedFinder.class,
+                        createResourceDescription(SharedFinder.class,
                                 SharedFinder.PARAM_INDEX_PATH, indexPath,
                                 SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath)));
         String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine",
@@ -123,18 +123,18 @@ public class CompoundAnnotatorTest
     public void testWithDefaults() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
-                createExternalResourceDescription(
+                CompoundAnnotator.RES_SPLITTING_ALGO,
+                createResourceDescription(
                         LeftToRightSplitterResource.class,
                         SplitterResource.PARAM_DICT_RESOURCE,
-                        createExternalResourceDescription(SharedDictionary.class),
+                        createResourceDescription(SharedDictionary.class),
                         SplitterResource.PARAM_MORPHEME_RESOURCE,
-                        createExternalResourceDescription(SharedLinkingMorphemes.class)),
-                CompoundAnnotator.PARAM_RANKING_ALGO,
-                createExternalResourceDescription(
+                        createResourceDescription(SharedLinkingMorphemes.class)),
+                CompoundAnnotator.RES_RANKING_ALGO,
+                createResourceDescription(
                         FrequencyRankerResource.class,
                         RankerResource.PARAM_FINDER_RESOURCE,
-                        createExternalResourceDescription(SharedFinder.class,
+                        createResourceDescription(SharedFinder.class,
                                 SharedFinder.PARAM_INDEX_PATH, indexPath,
                                 SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath)));
         String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine",

@@ -37,7 +37,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
@@ -49,10 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 public class MalletLdaTopicsProportionsSortedWriter
     extends JCasFileWriter_ImplBase
 {
-    public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
-    @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
-    private File targetLocation;
-
+    /**
+     * Number of topics to generate.
+     */
     public static final String PARAM_N_TOPICS = "nTopics";
     @ConfigurationParameter(name = PARAM_N_TOPICS, mandatory = true, defaultValue = "3")
     private int nTopics;
@@ -65,6 +63,7 @@ public class MalletLdaTopicsProportionsSortedWriter
     {
         super.initialize(context);
 
+        File targetLocation = new File(getTargetLocation());
         targetLocation.getParentFile().mkdirs();
         try {
             writer = new BufferedWriter(new FileWriter(targetLocation));
@@ -126,6 +125,6 @@ public class MalletLdaTopicsProportionsSortedWriter
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        getLogger().info("Output written to " + targetLocation);
+        getLogger().info("Output written to " + getTargetLocation());
     }
 }

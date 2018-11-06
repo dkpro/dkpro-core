@@ -17,7 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -25,8 +24,6 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
@@ -57,6 +55,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
 @ResourceMetaData(name = "CoNLL-U Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
         inputs = { 
@@ -81,62 +80,97 @@ public class ConllUWriter
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
+    /**
+     * Write fine-grained part-of-speech information.
+     */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
+    /**
+     * Write coarse-grained part-of-speech information.
+     */
     public static final String PARAM_WRITE_CPOS = ComponentParameters.PARAM_WRITE_CPOS;
     @ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
     private boolean writeCPos;
 
+    /**
+     * Write morphological features.
+     */
     public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
 
+    /**
+     * Write lemma information.
+     */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
+    /**
+     * Write syntactic dependency information.
+     */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
     
+    /**
+     * Write text covered by the token instead of the token form.
+     */
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
+    
+    /**
+     * Include the full sentence text as a comment in front of each sentence.
+     */
+    public static final String PARAM_WRITE_TEXT_COMMENT = "writeTextComment";
+    @ConfigurationParameter(name = PARAM_WRITE_TEXT_COMMENT, mandatory = true, defaultValue = "true")
+    private boolean writeTextHeader;
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
-                    targetEncoding));
+        try (PrintWriter out = new PrintWriter(
+                new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding));) {
             convert(aJCas, out);
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
         }
-        finally {
-            closeQuietly(out);
-        }
     }
 
     private void convert(JCas aJCas, PrintWriter aOut)
     {
-        Map<SurfaceForm, Collection<Token>> surfaceIdx = indexCovered(aJCas, SurfaceForm.class,
+        Map<SurfaceForm, List<Token>> surfaceIdx = indexCovered(aJCas, SurfaceForm.class,
                 Token.class);
         Int2ObjectMap<SurfaceForm> surfaceBeginIdx = new Int2ObjectOpenHashMap<>();
         for (SurfaceForm sf : select(aJCas, SurfaceForm.class)) {
             surfaceBeginIdx.put(sf.getBegin(), sf);
         }
         
-        
         for (Sentence sentence : select(aJCas, Sentence.class)) {
-            HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
+            Map<Token, Row> ctokens = new LinkedHashMap<>();
 
+            // Comments
+            if (sentence.getId() != null) {
+                aOut.printf("# %s = %s\n", ConllUReader.META_SEND_ID, sentence.getId());
+            }
+            if (writeTextHeader) {
+                aOut.printf("# %s = %s\n", ConllUReader.META_TEXT, sentence.getCoveredText());
+            }
+            
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
             
@@ -162,13 +196,20 @@ public class ConllUWriter
 
             // Write sentence in CONLL-U format
             for (Row row : ctokens.values()) {
+                
+                String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
+                
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
                 }
 
                 String pos = UNUSED;
-                if (writePos && (row.token.getPos() != null)) {
+                if (writePos && (row.token.getPos() != null)
+                    && row.token.getPos().getPosValue() != null) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                 }
@@ -239,7 +280,7 @@ public class ConllUWriter
                 }
                 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, deps,
+                        form, lemma, cpos, pos, feats, head, deprel, deps,
                         misc);
             }
 

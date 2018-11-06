@@ -35,14 +35,21 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Parameters;
 import opennlp.tools.util.model.BaseModel;
 
 /**
  * Train a model for OpenNLP.
  */
+@Parameters(
+        exclude = { 
+                OpenNlpTrainerBase.PARAM_TARGET_LOCATION  })
 public abstract class OpenNlpTrainerBase<T extends CasSampleStreamBase>
     extends JCasConsumer_ImplBase
 {
+    /**
+     * Location to which the output is written.
+     */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;

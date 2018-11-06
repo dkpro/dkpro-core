@@ -58,7 +58,7 @@ public class MalletLdaTopicProportionsWriter
 
     /**
      * If {@link #PARAM_SINGULAR_TARGET} is set to false (default), this extension will be appended
-     * to the output files. Default: {@code .topics}.
+     * to the output files.
      */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;

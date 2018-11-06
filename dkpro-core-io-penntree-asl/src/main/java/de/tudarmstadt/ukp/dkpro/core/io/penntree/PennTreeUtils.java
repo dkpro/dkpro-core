@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static java.util.Collections.singletonList;
-import static org.apache.uima.fit.util.FSCollectionFactory.create;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +31,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.jcas.cas.TOP;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -62,7 +63,7 @@ public class PennTreeUtils
         }
 
         List<PennTreeNode> children = new ArrayList<PennTreeNode>();
-        for (FeatureStructure c : create(aConstituent.getChildren())) {
+        for (FeatureStructure c : select(aConstituent.getChildren(), TOP.class)) {
             if (c instanceof Constituent) {
                 children.add(convertPennTree((Constituent) c));
             }

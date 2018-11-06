@@ -45,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes the CoNLL 2000 chunking format.
@@ -52,6 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */
 @ResourceMetaData(name = "CoNLL 2000 Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2000})
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -70,19 +72,36 @@ public class Conll2000Writer
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
+    /**
+     * Write part-of-speech information.
+     */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
+    /**
+     * Write chunking information.
+     */
     public static final String PARAM_WRITE_CHUNK = ComponentParameters.PARAM_WRITE_CHUNK;
     @ConfigurationParameter(name = PARAM_WRITE_CHUNK, mandatory = true, defaultValue = "true")
     private boolean writeChunk;
-
+    
+    /**
+     * Write text covered by the token instead of the token form.
+     */
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
+    
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -124,6 +143,11 @@ public class Conll2000Writer
 
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
+                String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
+                
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
@@ -135,7 +159,7 @@ public class Conll2000Writer
                     chunk = row.chunk;
                 }
 
-                aOut.printf("%s %s %s\n", row.token.getCoveredText(), pos, chunk);
+                aOut.printf("%s %s %s\n", form, pos, chunk);
             }
 
             aOut.println();

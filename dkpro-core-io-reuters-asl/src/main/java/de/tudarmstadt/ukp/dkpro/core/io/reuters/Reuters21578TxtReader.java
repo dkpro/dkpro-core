@@ -36,6 +36,7 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Read a Reuters-21578 corpus that has been transformed into text format using
@@ -52,6 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  *      "https://github.com/apache/mahout/blob/master/examples/bin/cluster-reuters.sh">cluster-reuters.sh</a>
  */
 @ResourceMetaData(name = "Reuters-21578 Corpus Text Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_REUTERS21578})
 @TypeCapability(
         outputs = { 

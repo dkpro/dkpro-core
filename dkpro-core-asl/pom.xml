@@ -26,6 +26,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
   <packaging>pom</packaging>
   <name>DKPro Core ASL</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <licenses>
     <license>
       <name>Apache License Version 2.0</name>
@@ -267,6 +268,11 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lcc-asl</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lif-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
@@ -298,6 +304,11 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-pubannotation-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -333,6 +344,11 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tika-asl</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-webanno-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -500,6 +516,11 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>org-dkpro-core-udpipe-asl</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modules>
@@ -548,6 +569,7 @@
     <module>../dkpro-core-io-nyt-asl</module>
     <module>../dkpro-core-io-pdf-asl</module>
     <module>../dkpro-core-io-penntree-asl</module>
+    <module>../dkpro-core-io-pubannotation-asl</module>
     <module>../dkpro-core-io-reuters-asl</module>
     <module>../dkpro-core-io-rtf-asl</module>
     <module>../dkpro-core-io-solr-asl</module>
@@ -559,6 +581,7 @@
     <module>../dkpro-core-io-tuepp-asl</module>
     <module>../dkpro-core-io-tuebadz-asl</module>
     <module>../dkpro-core-io-web1t-asl</module>
+    <module>../dkpro-core-io-webanno-asl</module>
     <module>../dkpro-core-io-xmi-asl</module>
     <module>../dkpro-core-io-xml-asl</module>
     <module>../dkpro-core-io-xces-asl</module>
@@ -606,6 +629,7 @@
     <module>../dkpro-core-tokit-asl</module>
     <module>../dkpro-core-treetagger-asl</module>
     <module>../dkpro-core-textnormalizer-asl</module>
+    <module>../dkpro-core-udpipe-asl</module>
   </modules>
   <profiles>
     <!-- Modules from this profile are not included in the release and in default builds -->
@@ -708,7 +732,6 @@
         -->
         <!-- Processing modules -->
         <module>../dkpro-core-lbj-asl</module>
-        <module>../dkpro-core-udpipe-asl</module>
       </modules>
       <dependencyManagement>
         <dependencies>

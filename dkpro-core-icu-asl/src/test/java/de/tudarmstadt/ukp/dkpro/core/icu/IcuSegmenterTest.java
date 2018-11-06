@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.icu;
 
+import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -52,6 +53,13 @@ public class IcuSegmenterTest
             .distinct()
             .sorted()
             .filter(lang -> lang.length() == 2)
+            // These language codes do not comply with ISO 639 / OMTD-SHARE
+            // "in" (Indonesian, should be "id")
+            // "iw" (Hebrew, should be "he")
+            // "ji" (Yiddish, should be "yi")
+            // Cf.: https://bugs.java.com/view_bug.do?bug_id=6457127
+            // Cf.: https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4140555
+            .filter(lang -> !asList("in", "iw", "ji").contains(lang))
             .collect(Collectors.toList());
         
         System.out.printf("[");

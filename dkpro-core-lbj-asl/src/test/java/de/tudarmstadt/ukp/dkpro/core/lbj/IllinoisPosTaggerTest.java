@@ -41,7 +41,7 @@ public class IllinoisPosTaggerTest
         throws Exception
     {
         File tempFile = File.createTempFile("dkpro", ".txt");
-        FileUtils.write(tempFile, "This is a test .");
+        FileUtils.write(tempFile, "This is a test .", "UTF-8");
         POSTagPlain.main(new String[] { tempFile.getAbsolutePath() });
     }
     

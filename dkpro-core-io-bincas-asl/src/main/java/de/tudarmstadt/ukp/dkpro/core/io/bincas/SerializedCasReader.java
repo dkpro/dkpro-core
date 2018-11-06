@@ -35,11 +35,13 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * @deprecated use {@code BinaryCasReader} instead.
  */
 @ResourceMetaData(name = "UIMA Serialized CAS Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @Deprecated
 public class SerializedCasReader
     extends ResourceCollectionReaderBase

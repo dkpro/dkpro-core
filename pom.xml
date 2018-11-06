@@ -15,13 +15,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>17</version>
+    <version>19</version>
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
@@ -37,11 +38,12 @@
   </organization> 
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <currentYear>2017</currentYear>
+    <currentYear>2018</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <uima.version>3.0.0</uima.version>
     <uimafit.version>3.0.0-SNAPSHOT</uimafit.version>
     <uimafit.plugin.version>3.0.0-SNAPSHOT</uimafit.plugin.version>
+    <omtd.version>3.0.2.7</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>3.2.16.RELEASE</spring.version>
@@ -55,60 +57,74 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-      <repository>
-        <id>jcenter</id>
-        <url>http://jcenter.bintray.com</url>
-        <snapshots>
-          <enabled>false</enabled>
-        </snapshots>
-      </repository>
-      <!-- For UIMA/uimaFIT RCs -->
-      <!--
-      <repository>
-        <id>ext-staging</id>
-        <name>Staging repo</name>
-        <url>https://repository.apache.org/content/repositories/orgapacheuima-1183/</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-      </repository>
-      -->
-      <!-- For UIMA/uimaFIT SNAPSHOT -->
-      <repository>
-        <id>apache.snapshots</id>
-        <name>Apache Snapshot Repository</name>
-        <url>http://repository.apache.org/snapshots</url>
-        <releases>
-          <enabled>false</enabled>
-        </releases>
-        <snapshots>
+    <repository>
+      <id>jcenter</id>
+      <url>http://jcenter.bintray.com</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- For UIMA/uimaFIT RCs -->
+    <!--
+    <repository>
+      <id>ext-staging</id>
+      <name>Staging repo</name>
+      <url>https://repository.apache.org/content/repositories/orgapacheuima-1183/</url>
+      <releases>
           <enabled>true</enabled>
-        </snapshots>
-      </repository>
-      <!-- For SNAPSHOTs from the DKPro family -->
-      <!--
-      <repository>
-        <id>ukp-oss-snapshots</id>
-        <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
-        <releases>
-          <enabled>false</enabled>
-        </releases>
-        <snapshots>
-          <enabled>true</enabled>
-        </snapshots>
-      </repository>
-      -->
+      </releases>
+    </repository>
+    -->
+    <!-- For UIMA/uimaFIT SNAPSHOT -->
+    <repository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>http://repository.apache.org/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <!-- For SNAPSHOTs from the DKPro family -->
+    <!--
+    <repository>
+      <id>ukp-oss-snapshots</id>
+      <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    -->
+    <!-- For SNAPSHOTs from OpenMinTeD -->
+    <!--
+    <repository>
+      <id>omtd-snapshots</id>
+      <layout>default</layout>
+      <url>https://repo.openminted.eu/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    -->
   </repositories>
   <pluginRepositories>
     <!-- For UIMA/uimaFIT RCs -->
     <!--
     <pluginRepository>
-        <id>ext-staging</id>
-        <name>Staging repo</name>
-        <url>https://repository.apache.org/content/repositories/orgapacheuima-1183/</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
+      <id>ext-staging</id>
+      <name>Staging repo</name>
+      <url>https://repository.apache.org/content/repositories/orgapacheuima-1134</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
     </pluginRepository>
     -->
     <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
@@ -119,10 +135,24 @@
       <releases>
         <enabled>false</enabled>
       </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </pluginRepository>
+    <!-- For SNAPSHOTs from OpenMinTeD -->
+    <!--  
+    <pluginRepository>
+      <id>omtd-snapshots</id>
+      <layout>default</layout>
+      <url>https://repo.openminted.eu/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+    -->
   </pluginRepositories>
   <mailingLists>
     <mailingList>
@@ -251,7 +281,7 @@
       <dependency>
         <groupId>com.ibm.icu</groupId>
         <artifactId>icu4j</artifactId>
-        <version>60.2</version>
+        <version>61.1</version>
       </dependency>
       <dependency>
         <groupId>commons-logging</groupId>
@@ -301,12 +331,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.7</version>
+        <version>3.8</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.16.1</version>
+        <version>1.18</version>
       </dependency>
       <dependency>
         <groupId>org.tukaani</groupId>
@@ -417,10 +447,48 @@
         <artifactId>ivy</artifactId>
         <version>2.4.0</version>
       </dependency>
+      <dependency>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-api</artifactId>
+        <version>${omtd.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>analyze-only</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <failOnWarning>true</failOnWarning>
+          <usedDependencies combine.children="append">
+            <!-- 
+              - Logging is used via reflection and cannot be detected by Maven
+            <usedDependency>org.apache.logging.log4j:log4j-slf4j-impl</usedDependency>
+            <usedDependency>org.apache.logging.log4j:log4j-core</usedDependency>
+            <usedDependency>org.slf4j:log4j-over-slf4j</usedDependency>
+            <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
+            <usedDependency>commons-logging:commons-logging</usedDependency>
+            -->
+            <!-- 
+              - JAXB is used via reflection and cannot be detected by Maven
+            <usedDependency>javax.xml.bind:jaxb-api</usedDependency>
+            <usedDependency>com.sun.xml.bind:jaxb-core</usedDependency>
+            <usedDependency>com.sun.xml.bind:jaxb-impl</usedDependency>
+            <usedDependency>javax.activation:javax.activation-api</usedDependency>
+            -->
+          </usedDependencies>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -476,38 +544,71 @@
       <plugin>
         <groupId>org.apache.uima</groupId>
         <artifactId>uimafit-maven-plugin</artifactId>
+        <configuration>
+          <componentVendor>DKPro Core Project</componentVendor>
+          <componentCopyright>
+            Copyright ${project.inceptionYear}-${currentYear}
+            Ubiquitous Knowledge Processing (UKP) Lab
+            Technische Universität Darmstadt
+          </componentCopyright>
+          <failOnMissingMetaData>true</failOnMissingMetaData>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>enhance</goal>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorLocation>withClasses</descriptorLocation>
+          <uimaTypeMappings>
+            <uimaTypeMapping>META-INF/eu.openminted.share/uimaTypeMapping.map</uimaTypeMapping>
+          </uimaTypeMappings>
+          <mimeTypeMappings>
+            <mimeTypeMapping>META-INF/eu.openminted.share/mimeTypeMapping.map</mimeTypeMapping>
+          </mimeTypeMappings>
+          <properties>
+            <docbase>https://dkpro.github.io/dkpro-core/releases/${project.version}/docs</docbase>
+            <resourceNameAddon>(DKPro Core)</resourceNameAddon>
+            <resourceCopyright>
+              Copyright ${project.inceptionYear}-${currentYear}
+              Ubiquitous Knowledge Processing (UKP) Lab
+              Technische Universität Darmstadt
+              (Applies only to the DKPro Core UIMA wrapper. The copyright for wrapped tools and underlying
+              libraries remains with the respective copyright owners.)
+            </resourceCopyright>
+          </properties>
+        </configuration>
       </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.20</version>
-        </plugin>
-        <plugin>
           <groupId>org.apache.uima</groupId>
           <artifactId>uimafit-maven-plugin</artifactId>
           <version>${uimafit.plugin.version}</version>
-          <configuration>
-            <componentVendor>DKPro Core Project</componentVendor>
-            <componentCopyright>
-              Copyright ${project.inceptionYear}-${currentYear}
-              Ubiquitous Knowledge Processing (UKP) Lab
-              Technische Universität Darmstadt
-            </componentCopyright>
-            <failOnMissingMetaData>false</failOnMissingMetaData>
-          </configuration>
-          <executions>
-            <execution>
-              <id>default</id>
-              <phase>process-classes</phase>
-              <goals>
-                <goal>enhance</goal>
-                <goal>generate</goal>
-              </goals>
-            </execution>
-          </executions>
+        </plugin>
+        <plugin>
+          <groupId>eu.openminted.share.annotations</groupId>
+          <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+          <version>${omtd.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -598,46 +699,14 @@
       </build>
     </profile>
     <profile>
-      <id>run-omtd-plugin</id>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>omtd.snapshots</id>
-          <name>OpenMinTeD SNAPSHOTs</name>
-          <url>https://repo.openminted.eu/content/repositories/snapshots</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </pluginRepository>
-      </pluginRepositories>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>eu.openminted.share.annotations</groupId>
-            <artifactId>omtd-share-annotations-maven-plugin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <executions>
-              <execution>
-                <id>default</id>
-                <phase>process-classes</phase>
-                <goals>
-                  <goal>generate</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>checkstyle</id>
+      <!--  
       <activation>
         <file>
           <exists>src</exists>
         </file>
       </activation>
+      -->
       <build>
         <plugins>
           <plugin>

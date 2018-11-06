@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.UIMAException;
@@ -70,8 +70,8 @@ public class SemanticFieldAnnotatorTest
                         SemanticFieldAnnotator.class,
                         SemanticFieldAnnotator.PARAM_ANNOTATION_TYPE, Token.class,
                         SemanticFieldAnnotator.PARAM_CONSTRAINT, ".[pos/posValue = 'NN']",
-                        SemanticFieldAnnotator.PARAM_SEMANTIC_FIELD_RESOURCE,
-                        createExternalResourceDescription(SemanticTagResource.class,
+                        SemanticFieldAnnotator.RES_SEMANTIC_FIELD_RESOURCE,
+                        createResourceDescription(SemanticTagResource.class,
                                 SemanticTagResource.PARAM_RESOURCE_PATH,
                                 "src/test/resources/nounSemanticFieldMapTest.txt")));
 

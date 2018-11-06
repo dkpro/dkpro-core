@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2017
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.arktools;
 
@@ -31,11 +31,13 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import cmu.arktweetnlp.Twokenize;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * ArkTweet tokenizer.
  */
 @ResourceMetaData(name = "ArkTweet Tokenizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class ArktweetTokenizer
     extends CasAnnotator_ImplBase
 {

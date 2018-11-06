@@ -30,6 +30,8 @@ public final class MimeTypes
     
     // DKPro application types
     public final static String APPLICATION_X_ANCORA_XML = "application/x.org.dkpro.ancora+xml";
+    public final static String APPLICATION_X_BNC = "application/x.org.dkpro.bnc+xml";
+    public final static String APPLICATION_X_BRAT = "application/x.org.dkpro.brat";
     public final static String APPLICATION_X_DITOP = "application/x.org.dkpro.ditop";
     public final static String APPLICATION_X_FANGORN = "application/x.org.dkpro.fangorn";
     public final static String APPLICATION_X_GATE_XML = "application/x.org.dkpro.gate+xml";
@@ -39,9 +41,11 @@ public final class MimeTypes
     public final static String APPLICATION_X_UIMA_BINARY = "application/x.org.dkpro.uima+binary";
     public final static String APPLICATION_X_LIF_JSON = "application/x.org.dkpro.lif+json";
     public final static String APPLICATION_X_LXF_JSON = "application/x.org.dkpro.lxf+json";
+    public final static String APPLICATION_X_PUB_ANNOTATION_JSON = "application/x.org.dkpro.pubannotation+json";
     public final static String APPLICATION_X_NEGRA3 = "application/x.org.dkpro.negra3";
     public final static String APPLICATION_X_NEGRA4 = "application/x.org.dkpro.negra4";
     public final static String APPLICATION_X_NIF_TURTLE = "application/x.org.dkpro.nif+turtle";
+    public final static String APPLICATION_X_NITF_XML = "application/x.org.dkpro.nitf+xml";
     public final static String APPLICATION_X_UIMA_RDF = "application/x.org.dkpro.uima+rdf";
     public final static String APPLICATION_X_REUTERS21578_SGML = "application/x.org.dkpro.reuters21578+sgml";
     public final static String APPLICATION_X_TGREP2 = "application/x.org.dkpro.tgrep2";
@@ -49,6 +53,8 @@ public final class MimeTypes
     public final static String APPLICATION_X_SEMEVAL_2010_XML = "application/x.org.dkpro.semeval-2010+xml";
     public final static String APPLICATION_X_TUEPP_XML = "application/x.org.dkpro.tuepp+xml";
     public final static String APPLICATION_X_TUEBADZ_CHUNK = "application/x.org.dkpro.tuebadz-chunk";
+    public final static String APPLICATION_X_XCES = "application/x.org.dkpro.xces+xml";
+    public final static String APPLICATION_X_XCES_BASIC = "application/x.org.dkpro.xces-basic+xml";
     
     // Standard text types (http://www.iana.org/assignments/media-types/media-types.xhtml)
     public final static String TEXT_CSV = "text/csv";
@@ -69,6 +75,7 @@ public final class MimeTypes
     public final static String TEXT_X_CONLL_2008 = "text/x.org.dkpro.conll-2008";
     public final static String TEXT_X_CONLL_2009 = "text/x.org.dkpro.conll-2009";
     public final static String TEXT_X_CONLL_2012 = "text/x.org.dkpro.conll-2012";
+    public final static String TEXT_X_CONLL_CORENLP = "text/x.org.dkpro.conll-corenpl";
     public final static String TEXT_X_CONLL_U = "text/x.org.dkpro.conll-u";
     public final static String TEXT_X_IMSCWB = "text/x.org.dkpro.imscwb";
     public final static String TEXT_X_GERMEVAL_2014 = "text/x.org.dkpro.germeval-2014";
@@ -93,6 +100,9 @@ public final class MimeTypes
 
     // LingPipe model types
     public final static String APPLICATION_X_LINGPIPE_NER = "application/x.org.dkpro.core.lingpipe.ner";
+
+    // ArkTweet model types
+    public final static String APPLICATION_X_ARKTWEET_TAGGER = "application/x.org.dkpro.core.arktweet.tagger";
 
     private MimeTypes()
     {

@@ -15,7 +15,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -26,11 +28,10 @@
   <packaging>jar</packaging>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.doc-asl</artifactId>
   <name>DKPro Core ASL - Documentation</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
-    <groovy.version>2.4.7</groovy.version>
-    <asciidoctor.version>1.5.4.1</asciidoctor.version>
-    <asciidoctor.pdf.version>1.5.0-alpha.11</asciidoctor.pdf.version>
+    <groovy.version>2.4.15</groovy.version>
   </properties>
   <dependencies>
     <dependency>
@@ -321,7 +322,6 @@
         <plugin>
           <groupId>org.asciidoctor</groupId>
           <artifactId>asciidoctor-maven-plugin</artifactId>
-          <version>1.5.3</version>
           <configuration>
             <attributes>
               <toclevels>8</toclevels>
@@ -332,18 +332,6 @@
               <icons>font</icons>
             </attributes>
           </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj</artifactId>
-              <version>${asciidoctor.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj-pdf</artifactId>
-              <version>${asciidoctor.pdf.version}</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

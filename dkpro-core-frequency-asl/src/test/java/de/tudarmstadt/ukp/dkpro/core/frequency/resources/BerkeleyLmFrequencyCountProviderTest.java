@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -49,7 +49,7 @@ public class BerkeleyLmFrequencyCountProviderTest
     @Test
     public void configureAggregatedExample() throws Exception {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-                Annotator.MODEL_KEY, createExternalResourceDescription(
+                Annotator.MODEL_KEY, createResourceDescription(
                         BerkeleyLmFrequencyCountProvider.class,
                         BerkeleyLmFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
                         BerkeleyLmFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));

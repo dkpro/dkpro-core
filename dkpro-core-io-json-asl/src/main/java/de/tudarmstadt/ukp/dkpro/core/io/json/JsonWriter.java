@@ -40,11 +40,13 @@ import org.xml.sax.SAXException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * UIMA JSON format writer.
  */
 @ResourceMetaData(name = "UIMA JSON CAS Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_JSON})
 @TypeCapability(
         inputs = {
@@ -65,14 +67,23 @@ public class JsonWriter
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
     private File typeSystemFile;
     
+    /**
+     * Whether to pretty-print the JSON output.
+     */
     public static final String PARAM_PRETTY_PRINT = "prettyPrint";
     @ConfigurationParameter(name = PARAM_PRETTY_PRINT, mandatory = true, defaultValue = "true")
     private boolean prettyPrint;
     
+    /**
+     * Whether to fields that have their default values from the JSON output.
+     */
     public static final String PARAM_OMIT_DEFAULT_VALUES = "omitDefaultValues";
     @ConfigurationParameter(name = PARAM_OMIT_DEFAULT_VALUES, mandatory = true, defaultValue = "true")
     private boolean omitDefaultValues;
 
+    /**
+     * The level of detail to use for the context (i.e. type system) information. 
+     */
     public static final String PARAM_JSON_CONTEXT_FORMAT = "jsonContextFormat";
     @ConfigurationParameter(name = PARAM_JSON_CONTEXT_FORMAT, mandatory = true, defaultValue = "omitExpandedTypeNames")
     private String jsonContextFormat;

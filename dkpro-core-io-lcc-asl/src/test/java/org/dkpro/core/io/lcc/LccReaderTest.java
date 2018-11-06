@@ -38,13 +38,13 @@ public class LccReaderTest
                 LccReader.class, 
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt");
         
-        int i=0;
+        int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-        	if (i==0) {
-        		assertEquals(3904, jcas.getDocumentText().length());
-        	}
-        	i++;
-        };
+            if (i == 0) {
+                assertEquals(3904, jcas.getDocumentText().length());
+            }
+            i++;
+        }
     
         assertEquals(3, i);
     }
@@ -58,13 +58,13 @@ public class LccReaderTest
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt",
                 LccReader.PARAM_SENTENCES_PER_CAS, 2);
         
-        int i=0;
+        int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-        	if (i==0) {
-        		assertEquals(91, jcas.getDocumentText().length());
-        	}
-        	i++;
-        };
+            if (i == 0) {
+                assertEquals(91, jcas.getDocumentText().length());
+            }
+            i++;
+        }
     
         assertEquals(120, i);
     }
@@ -78,13 +78,13 @@ public class LccReaderTest
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt",
                 LccReader.PARAM_SENTENCES_PER_CAS, 300);
         
-        int i=0;
+        int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-        	if (i==0) {
-        		assertEquals(10579, jcas.getDocumentText().length());
-        	}
-        	i++;
-        };
+            if (i == 0) {
+                assertEquals(10579, jcas.getDocumentText().length());
+            }
+            i++;
+        }
     
         assertEquals(1, i);
     }
@@ -99,16 +99,16 @@ public class LccReaderTest
                 LccReader.PARAM_SENTENCES_PER_CAS, 100,
                 LccReader.PARAM_WRITE_SENTENCE, true);
         
-        int i=0;
+        int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-        	if (i==2) {
-            	assertEquals(39, JCasUtil.select(jcas, Sentence.class).size());     		
-        	}
-        	else {
-            	assertEquals(100, JCasUtil.select(jcas, Sentence.class).size());     		        		
-        	}
-        	i++;
-        };
+            if (i == 2) {
+                assertEquals(39, JCasUtil.select(jcas, Sentence.class).size());
+            }
+            else {
+                assertEquals(100, JCasUtil.select(jcas, Sentence.class).size());
+            }
+            i++;
+        }
     
         assertEquals(3, i);
     }

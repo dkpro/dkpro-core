@@ -33,11 +33,17 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
  * Web1T n-gram index format writer.
  */
 @ResourceMetaData(name = "Web1T N-Gram Index Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                Web1TWriter.PARAM_TARGET_LOCATION  })
 @MimeTypeCapability({MimeTypes.TEXT_X_NGRAM})
 @TypeCapability(
         inputs = {
@@ -70,8 +76,6 @@ public class Web1TWriter
 
     /**
      * Minimum n-gram length.
-     *
-     * Default: {@code 1}
      */
     public static final String PARAM_MIN_NGRAM_LENGTH = "minNgramLength";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_LENGTH, mandatory = false, defaultValue = "1")
@@ -79,8 +83,6 @@ public class Web1TWriter
 
     /**
      * Maximum n-gram length.
-     *
-     * Default: {@code 3}
      */
     public static final String PARAM_MAX_NGRAM_LENGTH = "maxNgramLength";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_LENGTH, mandatory = false, defaultValue = "3")

@@ -45,6 +45,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Takes a plain text file with phrases as input and annotates the phrases in the CAS file. The
@@ -59,7 +62,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * another phrase
  * </pre>
  */
+@Component(OperationType.GAZETEER_BASED_MATCHER)
 @ResourceMetaData(name = "Dictionary Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -153,7 +158,7 @@ public class DictionaryAnnotator
             List<Token> tokens = new ArrayList<>(selectCovered(Token.class, currSentence));
 
             for (int i = 0; i < tokens.size(); i++) {
-                List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size() - 1);
+                List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size());
                 String[] sentenceToEnd = new String[tokens.size()];
 
                 for (int j = 0; j < tokensToSentenceEnd.size(); j++) {

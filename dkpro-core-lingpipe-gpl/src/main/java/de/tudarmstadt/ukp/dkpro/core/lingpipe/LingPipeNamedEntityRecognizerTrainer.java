@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2017
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.lingpipe;
 
@@ -31,6 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -61,14 +62,25 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * LingPipe named entity recognizer trainer.
  */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_LINGPIPE_NER)
+@Parameters(
+        exclude = { 
+                LingPipeNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "LingPipe Named Entity Recognizer Trainer")
-public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase {
-
+public class LingPipeNamedEntityRecognizerTrainer
+    extends JCasConsumer_ImplBase
+{
+    /**
+     * Location to which the output is written.
+     */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;
@@ -103,8 +115,8 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
             }
         }
 
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
-        Map<Token, Collection<NamedEntity>> neIndex = getNamedEntityIndex(aJCas);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Token, List<NamedEntity>> neIndex = getNamedEntityIndex(aJCas);
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
@@ -136,16 +148,16 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
         }
     }
 
-    private Map<Token, Collection<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
-        Map<Token, Collection<NamedEntity>> idx = indexCovered(aJCas, Token.class,
-                NamedEntity.class);
+    private Map<Token, List<NamedEntity>> getNamedEntityIndex(JCas aJCas)
+    {
+        Map<Token, List<NamedEntity>> idx = indexCovered(aJCas, Token.class, NamedEntity.class);
 
         if (acceptedTagsRegex != null) {
             Pattern pattern = Pattern.compile(acceptedTagsRegex);
 
-            Map<Token, Collection<NamedEntity>> filteredIdx = new HashMap<>();
+            Map<Token, List<NamedEntity>> filteredIdx = new HashMap<>();
             for (Token token : idx.keySet()) {
-                Collection<NamedEntity> nes = new ArrayList<>();
+                List<NamedEntity> nes = new ArrayList<>();
 
                 for (NamedEntity ne : idx.get(token)) {
                     if (pattern.matcher(ne.getValue()).matches()) {

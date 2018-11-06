@@ -19,7 +19,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -245,7 +245,7 @@ public class ResourceCollectionReaderBaseTest
     public void testExternalLoaderLocator()
         throws Exception
     {
-        ExternalResourceDescription locator = createExternalResourceDescription(
+        ExternalResourceDescription locator = createResourceDescription(
                 ResourceLoaderLocator.class);
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,

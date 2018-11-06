@@ -1,0 +1,17 @@
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound=http://w3id.org/meta-share/omtd-share/Compound
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div=http://w3id.org/meta-share/omtd-share/StructuralAnnotationType
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document=http://w3id.org/meta-share/omtd-share/StructuralAnnotationType
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading=http://w3id.org/meta-share/omtd-share/StructuralAnnotationType
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma=http://w3id.org/meta-share/omtd-share/Lemma
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph=http://w3id.org/meta-share/omtd-share/Paragraph
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence=http://w3id.org/meta-share/omtd-share/Sentence
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem=http://w3id.org/meta-share/omtd-share/Stem
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token=http://w3id.org/meta-share/omtd-share/Token
+#de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm

@@ -60,11 +60,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the CoNLL-2012 format.
  */
 @ResourceMetaData(name = "CoNLL 2012 Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(
         inputs = { 
@@ -90,22 +92,42 @@ public class Conll2012Writer
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
+    /**
+     * Write part-of-speech information.
+     */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
+    /**
+     * Write lemma information.
+     */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
+    /**
+     * Write semantic predicate infomation.
+     */
     public static final String PARAM_WRITE_SEMANTIC_PREDICATE = "writeSemanticPredicate";
     @ConfigurationParameter(name = PARAM_WRITE_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean writeSemanticPredicate;
+    
+    /**
+     * Write text covered by the token instead of the token form.
+     */
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
 
     @Override
     public void process(JCas aJCas)
@@ -136,13 +158,12 @@ public class Conll2012Writer
 
     private void convert(JCas aJCas, PrintWriter aOut)
     {
-        Map<Token, Collection<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
-        Map<SemArg, Collection<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
-        Map<Token, Collection<NamedEntity>> neIdx = indexCovering(aJCas, Token.class,
-                NamedEntity.class);
-        Map<Token, Collection<WordSense>> wordSenseIdx = indexCovered(aJCas, Token.class,
+        Map<Token, List<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
+        Map<SemArg, List<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
+        Map<Token, List<NamedEntity>> neIdx = indexCovering(aJCas, Token.class, NamedEntity.class);
+        Map<Token, List<WordSense>> wordSenseIdx = indexCovered(aJCas, Token.class,
                 WordSense.class);
-        Map<Token, Collection<CoreferenceLink>> corefIdx = indexCovering(aJCas, Token.class,
+        Map<Token, List<CoreferenceLink>> corefIdx = indexCovering(aJCas, Token.class,
                 CoreferenceLink.class);
         Map<CoreferenceLink, Integer> corefChainIdx = new HashMap<>();
         
@@ -238,6 +259,9 @@ public class Conll2012Writer
                 int id = row.id;
                 
                 String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
                 
                 String lemma = UNUSED + " ";
                 if (writeLemma && (row.token.getLemma() != null)) {

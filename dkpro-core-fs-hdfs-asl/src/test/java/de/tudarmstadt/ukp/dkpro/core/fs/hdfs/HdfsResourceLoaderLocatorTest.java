@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.fs.hdfs;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -98,7 +98,7 @@ public class HdfsResourceLoaderLocatorTest
         }
         
         // Set up HDFS resource locator
-        ExternalResourceDescription locator = createExternalResourceDescription(
+        ExternalResourceDescription locator = createResourceDescription(
                 HdfsResourceLoaderLocator.class,
                 HdfsResourceLoaderLocator.PARAM_FILESYSTEM, hdfsURI);
         

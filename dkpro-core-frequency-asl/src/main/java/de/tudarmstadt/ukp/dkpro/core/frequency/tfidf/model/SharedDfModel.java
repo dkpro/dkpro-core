@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model;
 
-import static org.apache.uima.fit.factory.ExternalResourceFactory.bindResource;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.bindResourceUsingUrl;
 
 import java.io.File;
 import java.io.ObjectInputStream;
@@ -62,7 +62,7 @@ public class SharedDfModel
             Object... params)
         throws InvalidXMLException, MalformedURLException
     {
-        bindResource(aaed, DfModel.class.getName(), SharedDfModel.class, new File(
+        bindResourceUsingUrl(aaed, DfModel.class.getName(), SharedDfModel.class, new File(
                 pathToResource).toURI().toURL().toString(), params);
     }
 

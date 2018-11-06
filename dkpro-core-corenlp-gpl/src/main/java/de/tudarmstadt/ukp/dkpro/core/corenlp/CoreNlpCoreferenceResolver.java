@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2017
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -38,15 +38,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
+import edu.stanford.nlp.coref.hybrid.HybridCorefProperties;
 import edu.stanford.nlp.dcoref.Constants;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DeterministicCorefAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Deterministic coreference annotator from CoreNLP.
  */
+@Component(OperationType.CO_REFERENCE_ANNOTATOR)
 @ResourceMetaData(name = "CoreNLP Coreference Resolver")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
@@ -197,30 +203,42 @@ public class CoreNlpCoreferenceResolver
             // Cf. edu.stanford.nlp.dcoref.Dictionaries.Dictionaries(Properties)
             // props.getProperty(Constants.DEMONYM_PROP, DefaultPaths.DEFAULT_DCOREF_DEMONYM),
             props.setProperty(Constants.DEMONYM_PROP, base + "demonyms.txt");
+            props.setProperty(HybridCorefProperties.DEMONYM_PROP, base + "demonyms.txt");
             // props.getProperty(Constants.ANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_ANIMATE),
             props.setProperty(Constants.ANIMATE_PROP, base + "animate.unigrams.txt");
+            props.setProperty(HybridCorefProperties.ANIMATE_PROP, base + "animate.unigrams.txt");
             // props.getProperty(Constants.INANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_INANIMATE),
             props.setProperty(Constants.INANIMATE_PROP, base + "inanimate.unigrams.txt");
+            props.setProperty(HybridCorefProperties.INANIMATE_PROP, base + "inanimate.unigrams.txt");
             // props.getProperty(Constants.MALE_PROP),
             props.setProperty(Constants.MALE_PROP, base + "male.unigrams.txt");
+            props.setProperty(HybridCorefProperties.MALE_PROP, base + "male.unigrams.txt");
             // props.getProperty(Constants.NEUTRAL_PROP),
             props.setProperty(Constants.NEUTRAL_PROP, base + "neutral.unigrams.txt");
+            props.setProperty(HybridCorefProperties.NEUTRAL_PROP, base + "neutral.unigrams.txt");
             // props.getProperty(Constants.FEMALE_PROP),
             props.setProperty(Constants.FEMALE_PROP, base + "female.unigrams.txt");
+            props.setProperty(HybridCorefProperties.FEMALE_PROP, base + "female.unigrams.txt");
             // props.getProperty(Constants.PLURAL_PROP),
             props.setProperty(Constants.PLURAL_PROP, base + "plural.unigrams.txt");
+            props.setProperty(HybridCorefProperties.PLURAL_PROP, base + "plural.unigrams.txt");
             // props.getProperty(Constants.SINGULAR_PROP),
             props.setProperty(Constants.SINGULAR_PROP, base + "singular.unigrams.txt");
+            props.setProperty(HybridCorefProperties.SINGULAR_PROP, base + "singular.unigrams.txt");
             // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
             props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
+            props.setProperty(HybridCorefProperties.STATES_PROP, base + "state-abbreviations.txt");
             // props.getProperty(Constants.GENDER_NUMBER_PROP, 
             //     DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
-            props.setProperty(Constants.GENDER_NUMBER_PROP, logicalBase + "gender.map.ser.gz");
+            props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.map.ser.gz");
+            props.setProperty(HybridCorefProperties.GENDER_NUMBER_PROP, base + "gender.data.gz");
             // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
             props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
+            props.setProperty(HybridCorefProperties.COUNTRIES_PROP, base + "countries");
             // props.getProperty(Constants.STATES_PROVINCES_PROP, 
             //     DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
             props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
+            props.setProperty(HybridCorefProperties.STATES_PROVINCES_PROP, base + "statesandprovinces");
     
             // The following properties are only relevant if the "CorefDictionaryMatch" sieve
             // is enabled.
@@ -236,6 +254,8 @@ public class CoreNlpCoreferenceResolver
             //     DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
             props.put(Constants.SIGNATURES_PROP, base + "ne.signatures.txt");
 
+            props.put("coref.md.model",  base + "md-model-dep.ser.gz");
+            
             DeterministicCorefAnnotator annotator = new DeterministicCorefAnnotator(props);
             
             return annotator;
