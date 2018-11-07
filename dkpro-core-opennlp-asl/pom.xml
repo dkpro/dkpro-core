@@ -32,6 +32,13 @@
   <properties>
     <opennlp.version>1.9.0</opennlp.version>
   </properties>
+  <repositories>
+   <repository>
+        <id>central-2323</id>
+        <name>ukp-oss-staging</name>
+        <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-staging-local</url>
+    </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -451,7 +458,7 @@
 	    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	    <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</artifactId>
 	    <version>20181025.1</version>
-	  </dependency> 	               
+	  </dependency> 	              
       <dependency>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
@@ -677,6 +684,7 @@
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-fr-sequoia-perceptron</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-fr-sequoia-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-perceptron</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-perceptron-ixa</usedDependency>
