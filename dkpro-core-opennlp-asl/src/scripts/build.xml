@@ -35,7 +35,7 @@
         <antcall target="separate-jars"/>
     </target>
     
-    <target name="separate-jars" depends="af, da, de, en, es, gd, it, nb, ne, no, nl, pt, sk, sv, ur"/>
+    <target name="separate-jars" depends="af, da, de, en, es, fr, gd, it, is, nb, ne, no, nl, pt, sk, sv, ur"/>
 	
     <target name="af">
             <antcall target="af-tagger-perceptron"/>
