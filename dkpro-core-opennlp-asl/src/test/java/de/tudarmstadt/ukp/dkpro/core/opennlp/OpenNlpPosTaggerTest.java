@@ -146,12 +146,20 @@ public class OpenNlpPosTaggerTest
         throws Exception
     {
         runTest("af", null, "Betalings aan die SAID kan op enigeen van die volgende maniere gemaak word .",
-                new String[] { "NOUN",     "ADP",     "DET",     "X",     "VERB",     "ADP",     "PRON",     "ADP",     "DET",     "ADJ",     "NOUN",     "VERB",     "VERB",    "PUNCT" },
-                new String[] { "POS_NOUN", "POS_ADP", "POS_DET", "POS_X", "POS_VERB", "POS_ADP", "POS_PRON", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_PUNCT"  });
+                new String[] { "NOUN",     "ADP",     "DET",     "X",     "VERB",     "ADP",
+                        "PRON",     "ADP",     "DET",     "ADJ",     "NOUN",     "VERB",     
+                        "VERB",    "PUNCT" },
+                new String[] { "POS_NOUN", "POS_ADP", "POS_DET", "POS_X", "POS_VERB", "POS_ADP",
+                        "POS_PRON", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_VERB", 
+                        "POS_VERB", "POS_PUNCT"  });
     
         runTest("af", "afribooms-perceptron", "Betalings aan die SAID kan op enigeen van die volgende maniere gemaak word .",
-                new String[] { "NOUN",     "ADP",     "DET",     "X",     "VERB",     "ADP",     "PRON",     "ADP",     "DET",     "ADJ",     "NOUN",     "VERB",     "VERB",    "PUNCT" },
-                new String[] { "POS_NOUN", "POS_ADP", "POS_DET", "POS_X", "POS_VERB", "POS_ADP", "POS_PRON", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_PUNCT"  });
+                new String[] { "NOUN",     "ADP",     "DET",     "X",     "VERB",     "ADP",
+                        "PRON",     "ADP",     "DET",     "ADJ",     "NOUN",     "VERB",     
+                        "VERB",    "PUNCT" },
+                new String[] { "POS_NOUN", "POS_ADP", "POS_DET", "POS_X", "POS_VERB", "POS_ADP",
+                        "POS_PRON", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_VERB", 
+                        "POS_VERB", "POS_PUNCT"  });
 
     }
     
@@ -373,7 +381,7 @@ public class OpenNlpPosTaggerTest
     public void testUrdu()
         throws Exception
     {
-       runTest("ur", "cle-perceptron", "ماہانہ فروخت مارچ سے ہر ماہ ریکارڈ قائم کرتی رہی ہے ۔",
+        runTest("ur", "cle-perceptron", "ماہانہ فروخت مارچ سے ہر ماہ ریکارڈ قائم کرتی رہی ہے ۔",
                 new String[] { "JJ",      "NN",       "NNP",      "CM",    "Q",     "NN",       "NN",       "JJ",      "VB",       "AUXA",  "AUXT",  "SM" },
                 new String[] { "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_X", "POS_X", "POS_NOUN", "POS_NOUN", "POS_ADJ", "POS_VERB", "POS_X", "POS_X", "POS_PUNCT"});
     }  
