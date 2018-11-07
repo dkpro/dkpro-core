@@ -145,10 +145,10 @@ public class OpenNlpPosTaggerTest
     public void testAfrikaans()
         throws Exception
     {
-    	runTest("af", null, "Betalings aan die SAID kan op enigeen van die volgende maniere gemaak word .",
+        runTest("af", null, "Betalings aan die SAID kan op enigeen van die volgende maniere gemaak word .",
                 new String[] { "NOUN",     "ADP",     "DET",     "X",     "VERB",     "ADP",     "PRON",     "ADP",     "DET",     "ADJ",     "NOUN",     "VERB",     "VERB",    "PUNCT" },
                 new String[] { "POS_NOUN", "POS_ADP", "POS_DET", "POS_X", "POS_VERB", "POS_ADP", "POS_PRON", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_PUNCT"  });
-    	
+    
         runTest("af", "afribooms-perceptron", "Betalings aan die SAID kan op enigeen van die volgende maniere gemaak word .",
                 new String[] { "NOUN",     "ADP",     "DET",     "X",     "VERB",     "ADP",     "PRON",     "ADP",     "DET",     "ADJ",     "NOUN",     "VERB",     "VERB",    "PUNCT" },
                 new String[] { "POS_NOUN", "POS_ADP", "POS_DET", "POS_X", "POS_VERB", "POS_ADP", "POS_PRON", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_PUNCT"  });
@@ -275,11 +275,11 @@ public class OpenNlpPosTaggerTest
     public void testScottishGaelic()
         throws Exception
     {
-    	runTest("gd", null, "Rinn Mairearad marbhrann do Ailean , mac Lachlainn Bhròlais , a chaochail an 1722 .",
+        runTest("gd", null, "Rinn Mairearad marbhrann do Ailean , mac Lachlainn Bhròlais , a chaochail an 1722 .",
                 new String[] { "V-s",      "Nn-fn",    "Ncsmn",    "Sp",      "Nn-md",    "Fi",        "Ncsmn",    "Nn-mg",    "Nt",      "Fi",        "Sp",      "V-s",      "Sp",      "Mn",      "Fe" },
                 new String[] { "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN","POS_PUNCT", "POS_ADP", "POS_VERB", "POS_ADP", "POS_NUM", "POS_PUNCT" });
-    	
-    	runTest("gd", "arcosg-perceptron", "Rinn Mairearad marbhrann do Ailean , mac Lachlainn Bhròlais , a chaochail an 1722 .",
+    
+        runTest("gd", "arcosg-perceptron", "Rinn Mairearad marbhrann do Ailean , mac Lachlainn Bhròlais , a chaochail an 1722 .",
                 new String[] { "V-s",      "Nn-fn",    "Ncsmn",    "Sp",      "Nn-md",    "Fi",        "Ncsmn",    "Nn-mg",    "Nt",      "Fi",        "Sp",      "V-s",      "Sp",      "Mn",      "Fe" },
                 new String[] { "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN","POS_PUNCT", "POS_ADP", "POS_VERB", "POS_ADP", "POS_NUM", "POS_PUNCT" });
     }
@@ -288,11 +288,11 @@ public class OpenNlpPosTaggerTest
     public void testSlovakMultext1984()
         throws Exception
     {
-    	runTest("sk", null, "Tovar sa vyrábať musí , ale nesmie sa distribuovať .",
+        runTest("sk", null, "Tovar sa vyrábať musí , ale nesmie sa distribuovať .",
                 new String[] { "Ncmsn",      "Px---a--ypn",    "Vmn-----n-----p",    "Voip3s--n-----p",      ",",    "Cs",        "Vmip3s--y-----p",    "Px---a--ypn",    "Vmn-----n-----a", "."},
                 new String[] { "POS_NOUN", "POS_PRON", "POS_VERB", "POS_VERB", "POS_PUNCT", "POS_SCONJ", "POS_VERB", "POS_PRON", "POS_VERB", "POS_PUNCT"});
-    	
-    	runTest("sk", "multext1984-perceptron", "Tovar sa vyrábať musí , ale nesmie sa distribuovať .",
+    
+        runTest("sk", "multext1984-perceptron", "Tovar sa vyrábať musí , ale nesmie sa distribuovať .",
                 new String[] { "Ncmsn",      "Px---a--ypn",    "Vmn-----n-----p",    "Voip3s--n-----p",      ",",    "Cs",        "Vmip3s--y-----p",    "Px---a--ypn",    "Vmn-----n-----a", "."},
                 new String[] { "POS_NOUN", "POS_PRON", "POS_VERB", "POS_VERB", "POS_PUNCT", "POS_SCONJ", "POS_VERB", "POS_PRON", "POS_VERB", "POS_PUNCT"});
     }    
@@ -373,8 +373,8 @@ public class OpenNlpPosTaggerTest
     public void testUrdu()
         throws Exception
     {
-    	runTest("ur", "cle-perceptron", "ماہانہ فروخت مارچ سے ہر ماہ ریکارڈ قائم کرتی رہی ہے ۔",
-				new String[] { "JJ",      "NN",       "NNP",      "CM",    "Q",     "NN",       "NN",       "JJ",      "VB",       "AUXA",  "AUXT",  "SM" },
+       runTest("ur", "cle-perceptron", "ماہانہ فروخت مارچ سے ہر ماہ ریکارڈ قائم کرتی رہی ہے ۔",
+                new String[] { "JJ",      "NN",       "NNP",      "CM",    "Q",     "NN",       "NN",       "JJ",      "VB",       "AUXA",  "AUXT",  "SM" },
                 new String[] { "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_X", "POS_X", "POS_NOUN", "POS_NOUN", "POS_ADJ", "POS_VERB", "POS_X", "POS_X", "POS_PUNCT"});
     }  
 
