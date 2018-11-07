@@ -1,4 +1,4 @@
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_POS
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
 Ap=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ
 Apc=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ
 App=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ

@@ -1,4 +1,4 @@
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_POS
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
 interj=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_INTJ
 inf-merke=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_X
 ukjent=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_X
