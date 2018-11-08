@@ -305,10 +305,10 @@
         <version>20120616.1</version>
       </dependency>
       <dependency>
-		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</artifactId>
-		<version>20181021.1</version>
-	  </dependency>        
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</artifactId>
+        <version>20181021.1</version>
+      </dependency>        
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-da-maxent</artifactId>
@@ -350,10 +350,10 @@
         <version>20181024.1</version>
       </dependency>          
       <dependency>
-		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-gd-arcosg-perceptron</artifactId>
-		<version>20181022.1</version>
-	  </dependency>      
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-gd-arcosg-perceptron</artifactId>
+        <version>20181022.1</version>
+      </dependency>      
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-maxent</artifactId>
@@ -395,10 +395,10 @@
         <version>20181022.1</version>
       </dependency>      
       <dependency>
-		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ne-cle-perceptron</artifactId>
-		<version>20181024.1</version>
-	  </dependency>      
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ne-cle-perceptron</artifactId>
+        <version>20181024.1</version>
+      </dependency>      
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-nl-maxent</artifactId>
@@ -445,15 +445,15 @@
         <version>20181025.1</version>
       </dependency>      
       <dependency>
-	    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-	    <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</artifactId>
-	    <version>20181025.1</version>
-	  </dependency> 	              
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</artifactId>
+        <version>20181025.1</version>
+      </dependency>               
       <dependency>
-		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
-		<version>20181025.1</version>
-	  </dependency>      
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
+        <version>20181025.1</version>
+      </dependency>      
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-da-maxent</artifactId>
@@ -522,10 +522,10 @@
       <id>use-full-resources</id>
       <dependencies>
         <dependency>
-		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</artifactId>
-		  <scope>test</scope>
-	    </dependency>           
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-af-afribooms-perceptron</artifactId>
+          <scope>test</scope>
+       </dependency>           
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
@@ -557,10 +557,10 @@
           <scope>test</scope>
         </dependency>
         <dependency>
-		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-gd-arcosg-perceptron</artifactId>
-		  <scope>test</scope>
-	    </dependency>        
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-gd-arcosg-perceptron</artifactId>
+          <scope>test</scope>
+        </dependency>        
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sv-maxent</artifactId>
@@ -591,10 +591,10 @@
           <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-is-mim1.0-perceptron</artifactId>
         </dependency>        
         <dependency>
-		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ne-cle-perceptron</artifactId>
-		  <scope>test</scope>
-	    </dependency>        
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ne-cle-perceptron</artifactId>
+          <scope>test</scope>
+        </dependency>        
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-maxent</artifactId>
@@ -651,15 +651,15 @@
           <scope>test</scope>
         </dependency>
         <dependency>
-		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
-		  <scope>test</scope>
-	    </dependency> 
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-ur-cle-perceptron</artifactId>
+          <scope>test</scope>
+       </dependency> 
         <dependency>
-		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</artifactId>
-		  <scope>test</scope>
-	    </dependency> 	         
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-no-dtb1.01-perceptron</artifactId>
+          <scope>test</scope>
+      </dependency>          
       </dependencies>
       <build>
         <pluginManagement>
