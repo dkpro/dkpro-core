@@ -143,7 +143,7 @@ public class TreeTaggerPosTaggerTest
     public void testGerman()
         throws Exception
     {
-        String[] tagset = { "$(", "$,", "$.", "ADJ", "ADJA", "ADJD", "ADV", "APPO", "APPR",
+        String[] tagset = { "$(", "$,", "$.", "ADJA", "ADJD", "ADV", "APPO", "APPR",
                 "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS",
                 "NE", "NN", "PAV", "PDAT", "PDS", "PIAT", "PIS", "PPER", "PPOSAT", "PPOSS",
                 "PRELAT", "PRELS", "PRF", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT",
@@ -151,7 +151,7 @@ public class TreeTaggerPosTaggerTest
                 "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
         
         runTest("de", "stts", tagset, "10 Minuten sind das Mikro an und die Bühne frei .",
-                new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne",
+                new String[] { "@card@", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne",
                         "frei", "." },
                 new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON", "ART", "NN",
                         "PTKVZ", "$." },
