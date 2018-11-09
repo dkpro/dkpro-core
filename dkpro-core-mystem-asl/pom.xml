@@ -28,18 +28,30 @@
 		<relativePath>../dkpro-core-asl</relativePath>
 	</parent>
 	<dependencies>
-	 <dependency>
-      <groupId>org.apache.uima</groupId>
-      <artifactId>uimaj-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.uima</groupId>
-      <artifactId>uimafit-core</artifactId>
-    </dependency>
-       <dependency>
-      <groupId>eu.openminted.share.annotations</groupId>
-      <artifactId>omtd-share-annotations-api</artifactId>
-    </dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>eu.openminted.share.annotations</groupId>
+			<artifactId>omtd-share-annotations-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>
+				commons-io
+			</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>
+				commons-lang3
+			</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.dkpro.core</groupId>
 			<artifactId>dkpro-core-mystem-bin</artifactId>
@@ -62,16 +74,16 @@
 				de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl
 			</artifactId>
 		</dependency>
-		 <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-		 <dependency>
-		 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		 	<artifactId>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
 		 		de.tudarmstadt.ukp.dkpro.core.testing-asl
 		 	</artifactId>
-		 </dependency>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
