@@ -80,7 +80,17 @@ public class MyStemStemmer
     {
         super.initialize(aContext);
 
+        catch32BitOperatinSystemUsers();
+
         runtimeProvider = new RuntimeProvider("classpath:/org/dkpro/core/mystem/bin/");
+    }
+
+    private void catch32BitOperatinSystemUsers()
+    {
+        PlatformDetector detector = new PlatformDetector();
+        if (detector.getArch().equals(PlatformDetector.ARCH_X86_32)) {
+            throw new UnsupportedOperationException("Only 64bit operating systems supported");
+        }
     }
 
     @Override
@@ -93,6 +103,7 @@ public class MyStemStemmer
     protected void generateAnnotations(JCas aJCas)
         throws FeaturePathException, AnalysisEngineProcessException
     {
+
         // CAS is necessary to retrieve values
         CAS currCAS = aJCas.getCas();
 
