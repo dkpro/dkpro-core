@@ -64,32 +64,26 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @ResourceMetaData(name = "MyStem Stemmer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("ru")
-@TypeCapability(inputs = { 
-    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
-    outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+		"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
 public class MyStemStemmer extends FeaturePathAnnotatorBase {
 
-    private static final String MESSAGE_DIGEST = MyStemStemmer.class.getName() + "_Messages";
- 
-    private RuntimeProvider runtimeProvider;
+	private static final String MESSAGE_DIGEST = MyStemStemmer.class.getName() + "_Messages";
 
- @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
-    {
-        super.initialize(aContext);
+	private RuntimeProvider runtimeProvider;
 
-        runtimeProvider = new RuntimeProvider(
-                "classpath:/org/dkpro/core/mystem/bin/");
-    }
- 
-    @Override
-    protected Set<String> getDefaultPaths()
-    {
-        return Collections.singleton(Token.class.getName());
-    } 
-    
+	@Override
+	public void initialize(UimaContext aContext) throws ResourceInitializationException {
+		super.initialize(aContext);
+
+		runtimeProvider = new RuntimeProvider("classpath:/org/dkpro/core/mystem/bin/");
+	}
+
+	@Override
+	protected Set<String> getDefaultPaths() {
+		return Collections.singleton(Token.class.getName());
+	}
+
 	@Override
 	protected void generateAnnotations(JCas aJCas) throws FeaturePathException, AnalysisEngineProcessException {
 		// CAS is necessary to retrieve values
@@ -173,90 +167,91 @@ public class MyStemStemmer extends FeaturePathAnnotatorBase {
 			}
 		}
 	}
- 
- private void createStemAnnotation(JCas aJCas, AnnotationFS fs, String stem) throws AnalysisEngineProcessException {
-  
-   // Check for blank text, it makes no sense to add a stem then (and raised an exception)
-        String value = fp.getValue(fs);
-        if (!StringUtils.isBlank(value)) {
-            Stem stemAnnot = new Stem(aJCas, fs.getBegin(), fs.getEnd());
 
-            stemAnnot.setValue(stem);
-            stemAnnot.addToIndexes(aJCas);
+	private void createStemAnnotation(JCas aJCas, AnnotationFS fs, String stem) throws AnalysisEngineProcessException {
 
-            // Try setting the "stem" feature on Tokens.
-            Feature feat = fs.getType().getFeatureByBaseName("stem");
-            if (feat != null && feat.getRange() != null
-                    && aJCas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
-                fs.setFeatureValue(feat, stemAnnot);
-            }
-        }
- }
+		// Check for blank text, it makes no sense to add a stem then (and raised an
+		// exception)
+		String value = fp.getValue(fs);
+		if (!StringUtils.isBlank(value)) {
+			Stem stemAnnot = new Stem(aJCas, fs.getBegin(), fs.getEnd());
 
- private List<String> readStemmerOutput(File outputFile) throws AnalysisEngineProcessException {
-  List<String> readLines;
-  try {
-   readLines = FileUtils.readLines(outputFile, "utf-8");
-  } catch (IOException e) {
-   throw new AnalysisEngineProcessException(e);
-  }
-  return readLines;
- }
+			stemAnnot.setValue(stem);
+			stemAnnot.addToIndexes(aJCas);
 
- private void runProcess(List<String> cmd) throws AnalysisEngineProcessException {
-  try {
-   ProcessBuilder pb = new ProcessBuilder();
-   pb.inheritIO();
-   pb.command(cmd);
-   Process p = pb.start();
-   p.waitFor();
-  } catch (Exception e) {
-   throw new AnalysisEngineProcessException(e);
-  }
- }
+			// Try setting the "stem" feature on Tokens.
+			Feature feat = fs.getType().getFeatureByBaseName("stem");
+			if (feat != null && feat.getRange() != null
+					&& aJCas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
+				fs.setFeatureValue(feat, stemAnnot);
+			}
+		}
+	}
 
- private File prepareOutputFile() throws AnalysisEngineProcessException {
-  try {
-   File file = FileUtil.createTempFile("mystemOutput" + System.currentTimeMillis(), ".txt");
-   file.deleteOnExit();
-   return file;
-  } catch (IOException e) {
-   throw new AnalysisEngineProcessException(e);
-  }
- }
+	private List<String> readStemmerOutput(File outputFile) throws AnalysisEngineProcessException {
+		List<String> readLines;
+		try {
+			readLines = FileUtils.readLines(outputFile, "utf-8");
+		} catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+		return readLines;
+	}
 
- private File prepareInputfile(JCas aJCas) throws AnalysisEngineProcessException {
-  File inputTmp = null;
-  try {
-   inputTmp = FileUtil.createTempFile("mystemInput" + System.currentTimeMillis(), ".txt");
+	private void runProcess(List<String> cmd) throws AnalysisEngineProcessException {
+		try {
+			ProcessBuilder pb = new ProcessBuilder();
+			pb.inheritIO();
+			pb.command(cmd);
+			Process p = pb.start();
+			p.waitFor();
+		} catch (Exception e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+	}
 
-   try (BufferedWriter wrt = new BufferedWriter(new FileWriterWithEncoding(inputTmp, "utf-8"))) {
-    Iterator<Token> iterator = JCasUtil.select(aJCas, Token.class).iterator();
-    while (iterator.hasNext()) {
-     Token next = iterator.next();
-     wrt.write(next.getCoveredText());
-     if(iterator.hasNext()) {
-      wrt.write(" ");
-     }
-    }
-   }
-  } catch (IOException e) {
-   throw new AnalysisEngineProcessException(e);
-  }
+	private File prepareOutputFile() throws AnalysisEngineProcessException {
+		try {
+			File file = FileUtil.createTempFile("mystemOutput" + System.currentTimeMillis(), ".txt");
+			file.deleteOnExit();
+			return file;
+		} catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+	}
 
-  if (inputTmp != null) {
-   inputTmp.deleteOnExit();
-  }
-  return inputTmp;
- }
+	private File prepareInputfile(JCas aJCas) throws AnalysisEngineProcessException {
+		File inputTmp = null;
+		try {
+			inputTmp = FileUtil.createTempFile("mystemInput" + System.currentTimeMillis(), ".txt");
 
- private File getExecutable() throws AnalysisEngineProcessException {
-  File exec=null;
-  try {
-   exec = runtimeProvider.getFile("mystem");
-  } catch (IOException e) {
-   throw new AnalysisEngineProcessException(e);
-  }
-  return exec;
- }
+			try (BufferedWriter wrt = new BufferedWriter(new FileWriterWithEncoding(inputTmp, "utf-8"))) {
+				Iterator<Token> iterator = JCasUtil.select(aJCas, Token.class).iterator();
+				while (iterator.hasNext()) {
+					Token next = iterator.next();
+					wrt.write(next.getCoveredText());
+					if (iterator.hasNext()) {
+						wrt.write(" ");
+					}
+				}
+			}
+		} catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+
+		if (inputTmp != null) {
+			inputTmp.deleteOnExit();
+		}
+		return inputTmp;
+	}
+
+	private File getExecutable() throws AnalysisEngineProcessException {
+		File exec = null;
+		try {
+			exec = runtimeProvider.getFile("mystem");
+		} catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+		return exec;
+	}
 }
