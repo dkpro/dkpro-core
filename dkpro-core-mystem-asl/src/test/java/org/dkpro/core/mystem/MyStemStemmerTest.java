@@ -1,4 +1,4 @@
-package MyStemStemmerTest;
+package org.dkpro.core.mystem;
 /*
  * Licensed to the Technische Universität Darmstadt under one
  * or more contributor license agreements.  See the NOTICE file
@@ -30,15 +30,20 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class MyStemStemmerTest {
+public class MyStemStemmerTest
+{
     @Test
-    public void testRussian() throws Exception {
-        runTest("ru", "Не печатать исходные словоформы, только леммы и граммемы.", 
-                new String[] { "не", "печатать", "исходный", "словоформа", "только", "лемма", "и", "граммема" });
+    public void testRussian() throws Exception
+    {
+        runTest("ru", "Не печатать исходные словоформы, только леммы и граммемы.", new String[] {
+                "не", "печатать", "исходный", "словоформа", "только", "лемма", "и", "граммема" });
     }
 
-    private JCas runTest(String aLanguage, String aText, String[] aStems, Object... aParams) throws Exception {
-        JCas result = TestRunner.runTest(createEngineDescription(MyStemStemmer.class, aParams), aLanguage, aText);
+    private JCas runTest(String aLanguage, String aText, String[] aStems, Object... aParams)
+        throws Exception
+    {
+        JCas result = TestRunner.runTest(createEngineDescription(MyStemStemmer.class, aParams),
+                aLanguage, aText);
         AssertAnnotations.assertStem(aStems, select(result, Stem.class));
 
         return result;
