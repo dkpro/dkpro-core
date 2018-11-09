@@ -24,15 +24,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.FileWriterWithEncoding;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.FSIterator;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.pear.util.FileUtil;
@@ -42,6 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.PlatformDetector;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
@@ -60,6 +70,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
 public class MyStemStemmer extends FeaturePathAnnotatorBase {
 
+	private static final String MESSAGE_DIGEST = MyStemStemmer.class.getName() + "_Messages";
+	
     private RuntimeProvider runtimeProvider;
 
 	@Override
@@ -77,52 +89,131 @@ public class MyStemStemmer extends FeaturePathAnnotatorBase {
     {
         return Collections.singleton(Token.class.getName());
     }	
-	
+    
     @Override
-    protected void generateAnnotations(JCas aJCas) 
-            throws FeaturePathException, AnalysisEngineProcessException {
-    	
-    	PlatformDetector pd = new PlatformDetector();
-        String platform = pd.getPlatformId();
-        getLogger().info("Load binary for platform: [" + platform + "]");
+    protected void generateAnnotations(JCas aJCas)
+        throws FeaturePathException, AnalysisEngineProcessException
+    {
+        // CAS is necessary to retrieve values
+        CAS currCAS = aJCas.getCas();
 
-        File executableFile = getExecutable();
-        
-        File inputFile = prepareInputfile(aJCas);
-        File outputFile = prepareOutputFile();
+        // Try language set in CAS.
+        String lang = aJCas.getDocumentLanguage();
 
-        List<String> cmd = new ArrayList<>();
-        cmd.add(executableFile.getAbsolutePath());
-        cmd.add("-n"); // one word per line output
-        cmd.add(inputFile.getAbsolutePath());
-        cmd.add(outputFile.getAbsolutePath());
-        
-        runProcess(cmd);
-        
-        try {
-			List<String> l = FileUtils.readLines(outputFile, "utf-8");
-			l.forEach(x->System.err.println(x));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        
-        inputFile.delete();
-        outputFile.delete();
-        
-//
-//        writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream(),
-//                getEncoding()));
-//        reader = new BufferedReader(new InputStreamReader(process.getInputStream(),
-//                getEncoding()));
+        if (StringUtils.isBlank(lang)) {
+            throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "no_language_error", null);
+        }
 
+        lang = lang.toLowerCase(Locale.US);
+
+        if (!"ru".equals(lang)) { // Only specified language is supported
+            throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "unsupported_language_error",
+                    new Object[] { lang });
+        }
+
+
+        for (String path : paths) {
+            // Separate Typename and featurepath
+            String[] segments = path.split("/", 2);
+            String typeName = segments[0];
+
+            // Try to get the type from the typesystem of the CAS
+            Type t = CasUtil.getType(currCAS, typeName);
+            if (t == null) {
+                throw new IllegalStateException("Type [" + typeName + "] not found in type system");
+            }
+
+            // get an fpi object and initialize it
+            // initialize the FeaturePathInfo with the corresponding part
+            initializeFeaturePathInfoFrom(fp, segments);
+
+            // get the annotations
+            AnnotationIndex<?> idx = currCAS.getAnnotationIndex(t);
+            FSIterator<?> iterator = idx.iterator();
+
+            List<AnnotationFS> afs = new ArrayList<>();
+            iterator.forEachRemaining(x->afs.add((AnnotationFS) x));
+            
+            // get the stems
+            PlatformDetector pd = new PlatformDetector();
+    		String platform = pd.getPlatformId();
+    		getLogger().info("Load binary for platform: [" + platform + "]");
+
+    		File executableFile = getExecutable();
+
+    		File inputFile = prepareInputfile(aJCas);
+    		File outputFile = prepareOutputFile();
+
+    		List<String> cmd = new ArrayList<>();
+    		cmd.add(executableFile.getAbsolutePath());
+    		cmd.add("-n"); // one word per line output
+    		cmd.add("-l"); // suppress input token form and output only stem
+    		cmd.add(inputFile.getAbsolutePath());
+    		cmd.add(outputFile.getAbsolutePath());
+
+    		runProcess(cmd);
+
+    		List<String> l = readStemmerOutput(outputFile);
+            
+    		if (afs.size() != l.size()) {
+    			throw new AnalysisEngineProcessException(
+    				  new IllegalStateException("Number of [" + t.getName() + "] annotations ["
+    					+ afs.size() + "] does not match with number of stems [" + l.size() + "]"));
+    		}
+    		
+			for (int i = 0; i < l.size(); i++) {
+
+				AnnotationFS fs = afs.get(i);
+				String stem = l.get(i);
+
+				if (this.filterFeaturePath != null) {
+					// check annotation filter condition
+					if (this.filterFeaturePathInfo.match(fs, this.filterCondition)) {
+						createStemAnnotation(aJCas, fs, stem);
+					}
+				} else { // no annotation filter specified
+					createStemAnnotation(aJCas, fs, stem);
+				}
+			}
+	}
     }
+	
+	private void createStemAnnotation(JCas aJCas, AnnotationFS fs, String stem) throws AnalysisEngineProcessException {
+		
+		 // Check for blank text, it makes no sense to add a stem then (and raised an exception)
+        String value = fp.getValue(fs);
+        if (!StringUtils.isBlank(value)) {
+            Stem stemAnnot = new Stem(aJCas, fs.getBegin(), fs.getEnd());
+
+            stemAnnot.setValue(stem);
+            stemAnnot.addToIndexes(aJCas);
+
+            // Try setting the "stem" feature on Tokens.
+            Feature feat = fs.getType().getFeatureByBaseName("stem");
+            if (feat != null && feat.getRange() != null
+                    && aJCas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
+                fs.setFeatureValue(feat, stemAnnot);
+            }
+        }
+	}
+
+	private List<String> readStemmerOutput(File outputFile) throws AnalysisEngineProcessException {
+		List<String> readLines;
+		try {
+			readLines = FileUtils.readLines(outputFile, "utf-8");
+		} catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+		return readLines;
+	}
 
 	private void runProcess(List<String> cmd) throws AnalysisEngineProcessException {
 		try {
 			ProcessBuilder pb = new ProcessBuilder();
 			pb.inheritIO();
 			pb.command(cmd);
-			pb.start();
+			Process p = pb.start();
+			p.waitFor();
 		} catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
 		}
