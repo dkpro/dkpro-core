@@ -244,7 +244,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.html-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
+        <version>1.10.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -269,7 +269,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lcc-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
+        <version>1.10.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -294,7 +294,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-nyt-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
+        <version>1.10.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -484,7 +484,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>org-dkpro-core-lancaster-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
+        <version>1.10.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -519,7 +519,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>org-dkpro-core-udpipe-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
+        <version>1.10.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -644,27 +644,27 @@
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.rdf-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.cogroo-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-kuromoji-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.gate-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
@@ -731,22 +731,22 @@
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>org-dkpro-core-udpipe-asl</artifactId>
-            <version>1.10.0-SNAPSHOT</version>
+            <version>1.10.1-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
