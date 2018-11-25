@@ -34,6 +34,7 @@ import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.TsvSchema.FEAT_
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.TsvSchema.FEAT_REL_TARGET;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
@@ -80,7 +81,13 @@ public class Tsv3XCasDocumentBuilder
         
         // Scan for chains
         for (Type headType : aSchema.getChainHeadTypes()) {
-            for (FeatureStructure chainHead : CasUtil.selectFS(aJCas.getCas(), headType)) {
+            // In UIMAv3, the iteration order of feature structures that are not in a sorted index
+            // is random. For some reason UIMAv2 returned them in creation order. By sorting by the
+            // FS ID, we restore the UIMAv2 situation.
+            List<FeatureStructure> heads = new ArrayList<>(
+                    CasUtil.selectFS(aJCas.getCas(), headType));
+            heads.sort(Comparator.comparing(fs -> aJCas.getLowLevelCas().ll_getFSRef(fs)));
+            for (FeatureStructure chainHead : heads) {
                 List<AnnotationFS> elements = new ArrayList<>();
                 AnnotationFS link = getFeature(chainHead, CHAIN_FIRST_FEAT, AnnotationFS.class);
                 while (link != null) {
