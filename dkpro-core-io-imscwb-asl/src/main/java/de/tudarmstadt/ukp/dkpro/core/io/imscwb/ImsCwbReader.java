@@ -17,6 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -74,6 +75,14 @@ public class ImsCwbReader
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
+
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
@@ -164,8 +173,8 @@ public class ImsCwbReader
         super.initialize(aContext);
         wackyIterator = new TextIterable(getResources(), encoding);
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(mappingPosLocation,
-                posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
+                getLanguage());
 
         documentCount = 0;
         qualifier = 0;

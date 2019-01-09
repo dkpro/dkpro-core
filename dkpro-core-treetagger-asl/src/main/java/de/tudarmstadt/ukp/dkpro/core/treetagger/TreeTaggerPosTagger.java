@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.util.Level.INFO;
 
@@ -50,7 +51,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -123,6 +123,14 @@ public class TreeTaggerPosTagger
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     protected String modelEncoding;
+
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
@@ -233,8 +241,8 @@ public class TreeTaggerPosTagger
             }
         };
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                modelProvider);
     }
 
     @Override

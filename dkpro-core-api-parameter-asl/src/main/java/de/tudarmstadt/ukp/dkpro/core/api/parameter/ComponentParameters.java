@@ -312,6 +312,13 @@ public final class ComponentParameters
     // Not using the type constants here because they are capitalized for use with verbs
     // =============================================================================================
 
+    public static final String DEFAULT_MAPPING_ENABLED = "true";
+    
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = "mappingEnabled";
+    
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */

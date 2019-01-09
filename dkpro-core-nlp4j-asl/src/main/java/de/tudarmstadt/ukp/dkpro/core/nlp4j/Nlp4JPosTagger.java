@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -39,7 +40,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -106,6 +106,14 @@ public class Nlp4JPosTagger
     protected String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
@@ -141,8 +149,8 @@ public class Nlp4JPosTagger
         modelProvider = new Nlp4JPosTaggerModelProvider(this);
         
         // General setup of the mapping provider in initialize()
-        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        mappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                modelProvider);
     }
 
     @Override

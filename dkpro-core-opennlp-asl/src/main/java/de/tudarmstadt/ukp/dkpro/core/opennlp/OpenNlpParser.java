@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -119,6 +120,14 @@ public class OpenNlpParser
     protected String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+    
+    /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
@@ -170,10 +179,10 @@ public class OpenNlpParser
 
         modelProvider = new OpenNlpParserModelProvider();
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
+                posMappingLocation, language, modelProvider);
         
-        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
+        constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, language, modelProvider);
     }
 
