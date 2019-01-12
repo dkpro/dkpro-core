@@ -777,6 +777,7 @@
                   <goal>check</goal>
                 </goals>
                 <configuration>
+                  <consoleOutput>true</consoleOutput>
                   <excludes>
                     <exclude>.activate-run-jcasgen</exclude>
                     <exclude>.gitignore</exclude>
