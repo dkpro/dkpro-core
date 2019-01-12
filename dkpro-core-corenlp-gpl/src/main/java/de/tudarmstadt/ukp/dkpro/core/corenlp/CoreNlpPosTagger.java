@@ -118,6 +118,14 @@ public class CoreNlpPosTagger
     private String modelEncoding;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_POS_MAPPING_LOCATION = 
@@ -176,7 +184,7 @@ public class CoreNlpPosTagger
 
         annotatorProvider = new CoreNlpPosTaggerModelProvider(this);
 
-        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+        mappingProvider = MappingProviderFactory.createPosMappingProvider(this, posMappingLocation,
                 language, annotatorProvider);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);

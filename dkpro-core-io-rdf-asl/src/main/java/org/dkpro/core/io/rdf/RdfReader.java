@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.rdf;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -44,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
@@ -64,6 +65,14 @@ public class RdfReader
     public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
     @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
     private String posTagset;
+
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
@@ -87,8 +96,8 @@ public class RdfReader
     {
         super.initialize(aContext);
         
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                getLanguage());
         
         // Seek first article
         try {

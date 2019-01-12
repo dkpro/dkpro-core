@@ -102,6 +102,13 @@ public class BncReader
     private static final String ATTR_HEADWORD = "hw";
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+    /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_POS_MAPPING_LOCATION = 
@@ -125,8 +132,8 @@ public class BncReader
     {
         super.initialize(aContext);
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                posTagset, getLanguage());
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
+                posMappingLocation, posTagset, getLanguage());
         posMappingProvider.setDefault("pos.tagset", "c5");
     }
 
