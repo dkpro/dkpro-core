@@ -10,7 +10,7 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # right paren
 )=POS_X
 # not, n't
-#*=POS_X
+#*=POS
 # dash
 -=POS_X
 # comma
@@ -185,4 +185,4 @@ NEG=POS_ADV
 NNSG=POS_NOUN
 NR$=POS_NOUN
 
-*=POS_X
+*=POS

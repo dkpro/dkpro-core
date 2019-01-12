@@ -5,7 +5,7 @@
 
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=POS_X
+*=POS
 # punctuation mark, comma
 ,=POS_PUNCT
 -=POS_PUNCT
