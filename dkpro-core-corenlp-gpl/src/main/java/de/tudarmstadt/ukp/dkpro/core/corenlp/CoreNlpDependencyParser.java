@@ -122,6 +122,14 @@ public class CoreNlpDependencyParser
     private String modelEncoding;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
@@ -196,7 +204,7 @@ public class CoreNlpDependencyParser
         
         annotatorProvider = new CoreNlpDependencyParserModelProvider(this);
 
-        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(
+        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(this, 
                 dependencyMappingLocation, language, annotatorProvider);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);

@@ -138,6 +138,14 @@ public class CoreNlpParser
     private String modelEncoding;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+    
+    /**
      * Location of the mapping file for dependency tags to UIMA types.
      */
     public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
@@ -285,13 +293,13 @@ public class CoreNlpParser
         annotatorProvider = new CoreNlpParserModelProvider(this);
 
         constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
-                constituentMappingLocation, language, annotatorProvider);
+                this, constituentMappingLocation, language, annotatorProvider);
         
         dependencyMappingProvider = MappingProviderFactory.createDependencyMappingProvider(
-                dependencyMappingLocation, language, annotatorProvider);
+                this, dependencyMappingLocation, language, annotatorProvider);
         
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(
-                posMappingLocation, language, annotatorProvider);
+                this, posMappingLocation, language, annotatorProvider);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
