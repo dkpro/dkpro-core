@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.io.nyt;
+package org.dkpro.core.io.nitf;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
@@ -23,9 +23,10 @@ import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.io.nitf.NitfReader;
 import org.junit.Test;
 
-public class NYTCollectionReaderTest
+public class NitfReaderTest
 {
     @Test
     public void test() throws Exception
@@ -33,11 +34,11 @@ public class NYTCollectionReaderTest
         final String DATA_PATH = "src/test/resources/data/";
 
         CollectionReader articleReader = CollectionReaderFactory.createReader(
-                NYTCollectionReader.class,
-                NYTCollectionReader.PARAM_SOURCE_LOCATION, DATA_PATH,
-                NYTCollectionReader.PARAM_PATTERNS, "[+]/**/*.xml",
-                NYTCollectionReader.PARAM_LANGUAGE, "en",
-                NYTCollectionReader.PARAM_OFFSET, 0);
+                NitfReader.class,
+                NitfReader.PARAM_SOURCE_LOCATION, DATA_PATH,
+                NitfReader.PARAM_PATTERNS, "[+]/**/*.xml",
+                NitfReader.PARAM_LANGUAGE, "en",
+                NitfReader.PARAM_OFFSET, 0);
 
         AnalysisEngine extractor = AnalysisEngineFactory.createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, "-");

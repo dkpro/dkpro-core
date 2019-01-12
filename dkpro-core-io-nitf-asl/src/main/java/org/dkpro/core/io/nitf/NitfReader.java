@@ -15,9 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.io.nyt;
+package org.dkpro.core.io.nitf;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.StringArray;
-import org.dkpro.core.io.nyt.metadata.NYTArticleMetaData;
+import org.dkpro.core.io.nift.metadata.ArticleMetaData;
 
 import com.nytlabs.corpus.NYTCorpusDocument;
 import com.nytlabs.corpus.NYTCorpusDocumentParser;
@@ -38,7 +39,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Reader for New York Times articles from NITF files.
+ * Reader for the News Industry Text Format (NITF). Was developed primarily to work with the 
+ * New York Times Annotated Corpus.
+ * 
+ * @see <a href="http://www.nitf.org/">NITF</a>
+ * @see <a href="https://catalog.ldc.upenn.edu/LDC2008T19">The New York Times Annotated Corpus</a>
  */
 @ResourceMetaData(name = "NITF Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
@@ -46,8 +51,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @TypeCapability(
         outputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "org.dkpro.core.io.nyt.metadata.NYTArticleMetaData" })
-public class NYTCollectionReader
+                "org.dkpro.core.io.nift.metadata.ArticleMetaData" })
+public class NitfReader
     extends JCasResourceCollectionReader_ImplBase
 {
     /**
@@ -62,7 +67,29 @@ public class NYTCollectionReader
      */
     private int skipped = 0;
 
-    private NYTCorpusDocumentParser nytParser = new NYTCorpusDocumentParser();
+    private NYTCorpusDocumentParser parser = new NYTCorpusDocumentParser();
+
+    @Override
+    public void getNext(JCas aJCas) throws IOException, CollectionException
+    {
+        while (isBelowOffset()) {
+            nextFile();
+            skipped++;
+        }
+
+        Resource xmlFile = nextFile();
+        initCas(aJCas, xmlFile);
+        
+        try (InputStream is = xmlFile.getInputStream()) {
+            NYTCorpusDocument nytDocument = parser
+                    .parseNYTCorpusDocumentFromFile(xmlFile.getInputStream(), false);
+
+            setDocumenText(aJCas, nytDocument.getBody());
+            
+            ArticleMetaData articleMetaData = createNYTArticleMetaData(aJCas, nytDocument);
+            articleMetaData.addToIndexes();
+        }
+    }
 
     private void setDocumenText(JCas aJCas, String documentBody)
     {
@@ -73,25 +100,7 @@ public class NYTCollectionReader
             aJCas.setDocumentText("");
         }
     }
-
-    @Override
-    public void getNext(JCas aJCas) throws IOException, CollectionException
-    {
-
-        while (isBelowOffset()) {
-            nextFile();
-            skipped++;
-        }
-
-        Resource xmlFile = nextFile();
-        initCas(aJCas, xmlFile);
-        NYTCorpusDocument nytDocument = nytParser
-                .parseNYTCorpusDocumentFromFile(xmlFile.getInputStream(), false);
-        setDocumenText(aJCas, nytDocument.getBody());
-        NYTArticleMetaData articleMetaData = createNYTArticleMetaData(aJCas, nytDocument);
-        articleMetaData.addToIndexes();
-    }
-
+    
     private boolean isBelowOffset()
     {
         return skipped < offset && getResourceIterator().hasNext();
@@ -111,9 +120,9 @@ public class NYTCollectionReader
         }
     }
 
-    private NYTArticleMetaData createNYTArticleMetaData(JCas aJCas, NYTCorpusDocument doc)
+    private ArticleMetaData createNYTArticleMetaData(JCas aJCas, NYTCorpusDocument doc)
     {
-        NYTArticleMetaData articleMetaData = new NYTArticleMetaData(aJCas);
+        ArticleMetaData articleMetaData = new ArticleMetaData(aJCas);
         articleMetaData.setGuid(doc.getGuid());
 
         URL alternateUrl = doc.getAlternateURL();
