@@ -503,6 +503,10 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
             if (    
                     FSUtil.isMultiValuedFeature(aFS, feat)
+                    // this can only be true for array types
+                    && feat.getRange().getComponentType() != null 
+                    // Avoid calling getParent on TOP
+                    && !CAS.TYPE_NAME_TOP.equals(feat.getRange().getComponentType().getName())
                     && CAS.TYPE_NAME_TOP.equals(aFS.getCAS().getTypeSystem()
                             .getParent(feat.getRange().getComponentType()).getName())
                     && (feat.getRange().getComponentType().getFeatureByBaseName("target") != null)
