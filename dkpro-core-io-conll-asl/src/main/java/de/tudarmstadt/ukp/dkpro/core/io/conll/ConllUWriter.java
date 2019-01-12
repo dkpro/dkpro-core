@@ -59,7 +59,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
-        inputs = { 
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
