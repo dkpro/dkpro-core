@@ -116,6 +116,14 @@ public class OpenNlpNamedEntityRecognizer
     protected String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+    
+    /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
     public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 

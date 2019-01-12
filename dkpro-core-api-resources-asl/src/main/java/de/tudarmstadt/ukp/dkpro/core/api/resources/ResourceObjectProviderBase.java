@@ -364,7 +364,8 @@ public abstract class ResourceObjectProviderBase<M>
                 
                 if (property != null) {
                     try {
-                        setOverride(property, (String) FieldUtils.readField(field, aObject, true));
+                        Object value = FieldUtils.readField(field, aObject, true);
+                        setOverride(property, value != null ? value.toString() : null);
                     }
                     catch (IllegalAccessException e) {
                         throw new IllegalStateException(e);

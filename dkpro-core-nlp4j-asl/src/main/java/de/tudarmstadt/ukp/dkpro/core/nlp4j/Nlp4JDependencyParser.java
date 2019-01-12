@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createDependencyMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -40,7 +41,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -117,6 +117,14 @@ public class Nlp4JDependencyParser
     private String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_DEPENDENCY_MAPPING_LOCATION =
@@ -143,8 +151,8 @@ public class Nlp4JDependencyParser
         
         modelProvider = new Nlp4JDependencyParserModelProvider(this);
 
-        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(
-                dependencyMappingLocation, language, modelProvider);
+        mappingProvider = createDependencyMappingProvider(this, dependencyMappingLocation, language,
+                modelProvider);
     }
     
     @Override

@@ -108,6 +108,14 @@ public class UDPipePosTagger
     protected String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+    
+    /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
@@ -149,7 +157,7 @@ public class UDPipePosTagger
             }
         };
         
-        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+        mappingProvider = MappingProviderFactory.createPosMappingProvider(this, posMappingLocation,
                 language, modelProvider);
     }
 
