@@ -18,6 +18,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -45,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -117,6 +117,14 @@ public class StanfordPosTagger
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     @ResourceParameter(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
     protected String modelLocation;
+
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
@@ -196,8 +204,8 @@ public class StanfordPosTagger
             }
         };
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                modelProvider);
         posMappingProvider.setDefaultVariantsLocation(
                 "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
     }

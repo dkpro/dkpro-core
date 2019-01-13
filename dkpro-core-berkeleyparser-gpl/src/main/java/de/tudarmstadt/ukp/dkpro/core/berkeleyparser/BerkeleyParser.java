@@ -126,6 +126,14 @@ public class BerkeleyParser
     protected String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+    
+    /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_POS_MAPPING_LOCATION = 
@@ -233,10 +241,10 @@ public class BerkeleyParser
 
         modelProvider = new BerkeleyParserModelProvider();
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
+                posMappingLocation, language, modelProvider);
 
-        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
+        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(this, 
                 constituentMappingLocation, language, modelProvider);
     }
 

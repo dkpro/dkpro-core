@@ -42,9 +42,9 @@ public class PennTreeToJCasConverterTest
         throws UIMAException
     {
         MappingProvider posMappingProvider = MappingProviderFactory.createPosMappingProvider(null,
-                null, (String) null);
+                null, null, (String) null);
         MappingProvider constituentMappingProvider = MappingProviderFactory
-                .createConstituentMappingProvider(null, null, (String) null);
+                .createConstituentMappingProvider(null, null, null, (String) null);
 
         PennTreeToJCasConverter converter = new PennTreeToJCasConverter(posMappingProvider,
                 constituentMappingProvider);

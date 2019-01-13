@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static java.util.Collections.singletonList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -42,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
@@ -93,6 +93,14 @@ public class HepplePosTagger
     public static final String PARAM_RULESET_LOCATION = "rulesetLocation";
     @ConfigurationParameter(name = PARAM_RULESET_LOCATION, mandatory = false)
     protected String rulesetLocation;
+
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
@@ -158,7 +166,7 @@ public class HepplePosTagger
             }
         };
 
-        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+        mappingProvider = createPosMappingProvider(this, posMappingLocation,
                 language, ruleProvider);
     }
 
