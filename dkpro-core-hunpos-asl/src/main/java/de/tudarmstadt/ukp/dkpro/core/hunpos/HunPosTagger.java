@@ -116,6 +116,14 @@ public class HunPosTagger
     protected String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
@@ -169,8 +177,8 @@ public class HunPosTagger
         runtimeProvider = new RuntimeProvider(
                 "classpath:/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/");
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
+                posMappingLocation, language, modelProvider);
     }
 
     @Override

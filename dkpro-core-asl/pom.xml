@@ -248,6 +248,11 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.html-asl</artifactId>
+        <version>1.10.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
@@ -293,7 +298,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-io-nyt-asl</artifactId>
+        <artifactId>dkpro-core-io-nitf-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -567,7 +572,7 @@
     <module>../dkpro-core-io-lxf-asl</module>
     <module>../dkpro-core-io-negra-asl</module>
     <module>../dkpro-core-io-nif-asl</module>
-    <module>../dkpro-core-io-nyt-asl</module>
+    <module>../dkpro-core-io-nitf-asl</module>
     <module>../dkpro-core-io-pdf-asl</module>
     <module>../dkpro-core-io-penntree-asl</module>
     <module>../dkpro-core-io-pubannotation-asl</module>
@@ -772,6 +777,7 @@
                   <goal>check</goal>
                 </goals>
                 <configuration>
+                  <consoleOutput>true</consoleOutput>
                   <excludes>
                     <exclude>.activate-run-jcasgen</exclude>
                     <exclude>.gitignore</exclude>
