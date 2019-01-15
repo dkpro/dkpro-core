@@ -62,4 +62,4 @@ MID=POS_PUNCT
 PAD=POS_PUNCT
 
 # Catch-all rule
-*=POS_X
+*=POS
