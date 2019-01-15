@@ -212,7 +212,7 @@ public class BinaryCasWriter
         
         if (AUTO.equals(filenameExtension)) {
             try {
-                filenameExtension = SerialFormat.valueOf(format).getDefaultFileExtension();
+                filenameExtension = "." + SerialFormat.valueOf(format).getDefaultFileExtension();
             }
             catch (IllegalArgumentException e) {
                 filenameExtension = ".bin";
