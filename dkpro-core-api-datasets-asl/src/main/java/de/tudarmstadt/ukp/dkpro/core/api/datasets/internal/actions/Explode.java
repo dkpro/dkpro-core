@@ -99,11 +99,11 @@ public class Explode
         }
     }
 
-    private void extract7z(ActionDescription aAction, Path aCachedFile, Path aTarget)
+    private void extract7z(ActionDescription aAction, Path aArchive, Path aTarget)
         throws IOException, RarException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        Path base = Paths.get(getBase(aCachedFile.getFileName().toString())).toAbsolutePath();
+        Path base = Paths.get(getBase(aArchive.getFileName().toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -111,7 +111,7 @@ public class Explode
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
 
-        try (SevenZFile archive = new SevenZFile(aCachedFile.toFile())) {
+        try (SevenZFile archive = new SevenZFile(aArchive.toFile())) {
             SevenZArchiveEntry entry = archive.getNextEntry();
             while (entry != null) {
                 String name = stripLeadingFolders(entry.getName(), strip);
@@ -146,11 +146,11 @@ public class Explode
         }
     }
 
-    private void extractRar(ActionDescription aAction, Path aCachedFile, Path aTarget)
+    private void extractRar(ActionDescription aAction, Path aArchive, Path aTarget)
         throws IOException, RarException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        Path base = Paths.get(getBase(aCachedFile.getFileName().toString())).toAbsolutePath();
+        Path base = Paths.get(getBase(aArchive.toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -158,7 +158,7 @@ public class Explode
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
 
-        try (Archive archive = new Archive(new FileVolumeManager(aCachedFile.toFile()))) {
+        try (Archive archive = new Archive(new FileVolumeManager(aArchive.toFile()))) {
             FileHeader fh = archive.nextFileHeader();
             while (fh != null) {
                 String name = stripLeadingFolders(fh.getFileNameString(), strip);
@@ -197,7 +197,7 @@ public class Explode
         throws IOException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        Path base = Paths.get(getBase(aArchive.getFileName().toString())).toAbsolutePath();
+        Path base = Paths.get(getBase(aArchive.toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
