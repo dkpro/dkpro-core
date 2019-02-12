@@ -17,6 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.tuebadz;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createChunkMappingProvider;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.BufferedReader;
@@ -46,7 +48,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
@@ -104,15 +105,6 @@ public class TuebaDZReader
     protected String posTagset;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
-     * mapping automatically.
-     */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-    protected String posMappingLocation;
-
-    /**
      * Read chunk information.
      */
     public static final String PARAM_READ_CHUNK = ComponentParameters.PARAM_READ_CHUNK;
@@ -137,6 +129,23 @@ public class TuebaDZReader
     protected String chunkTagset;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
+
+    /**
      * Load the chunk tag to UIMA type mapping from this location instead of locating the mapping
      * automatically.
      */
@@ -153,11 +162,11 @@ public class TuebaDZReader
     {
         super.initialize(aContext);
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                getLanguage());
 
-        chunkMappingProvider = MappingProviderFactory
-                .createChunkMappingProvider(chunkMappingLocation, chunkTagset, getLanguage());
+        chunkMappingProvider = createChunkMappingProvider(this, chunkMappingLocation, chunkTagset,
+                getLanguage());
     }
 
     @Override

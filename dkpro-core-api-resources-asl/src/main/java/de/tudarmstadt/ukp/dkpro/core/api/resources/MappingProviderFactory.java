@@ -17,6 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+
 public class MappingProviderFactory
 {
     private static final String CONSTITUENT_TAGSET = "constituent.tagset";
@@ -24,16 +26,17 @@ public class MappingProviderFactory
     private static final String CHUNK_TAGSET = "chunk.tagset";
     private static final String POS_TAGSET = "pos.tagset";
 
-    public static MappingProvider createPosMappingProvider(String aMappingLocation,
-            String aLanguage, HasResourceMetadata aSource)
+    public static MappingProvider createPosMappingProvider(Object aContextObject,
+            String aMappingLocation, String aLanguage, HasResourceMetadata aSource)
     {
-        MappingProvider p = createPosMappingProvider(aMappingLocation, null, aLanguage);
+        MappingProvider p = createPosMappingProvider(aContextObject, aMappingLocation, null,
+                aLanguage);
         p.addImport(POS_TAGSET, aSource);
         return p;
     }
     
-    public static MappingProvider createPosMappingProvider(String aMappingLocation, String aTagset,
-            String aLanguage)
+    public static MappingProvider createPosMappingProvider(Object aContextObject,
+            String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
         p.setDefault(MappingProvider.LOCATION,
@@ -45,44 +48,60 @@ public class MappingProviderFactory
         p.setOverride(MappingProvider.LOCATION, aMappingLocation);
         p.setOverride(MappingProvider.LANGUAGE, aLanguage);
         p.setOverride(POS_TAGSET, aTagset);
+        
+        if (aContextObject != null) {
+            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
+                    MappingProvider.MAPPING_ENABLED);
+            p.applyAutoOverrides(aContextObject);
+        }
+        
         return p;
     }
     
-    public static MappingProvider createChunkMappingProvider(String aMappingLocation,
-            String aLanguage, HasResourceMetadata aSource)
+    public static MappingProvider createChunkMappingProvider(Object aContextObject,
+            String aMappingLocation, String aLanguage, HasResourceMetadata aSource)
     {
-        MappingProvider p = createChunkMappingProvider(aMappingLocation, null, aLanguage);
+        MappingProvider p = createChunkMappingProvider(aContextObject, aMappingLocation, null,
+                aLanguage);
         p.addImport(CHUNK_TAGSET, aSource);
         return p;
     }
     
-    public static MappingProvider createChunkMappingProvider(String aMappingLocation,
-            String aTagset, String aLanguage)
+    public static MappingProvider createChunkMappingProvider(Object aContextObject,
+            String aMappingLocation, String aTagset, String aLanguage)
     {
-        MappingProvider chunkMappingProvider = new MappingProvider();
-        chunkMappingProvider = new MappingProvider();
-        chunkMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
+        MappingProvider p = new MappingProvider();
+        p = new MappingProvider();
+        p.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
                 + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
-        chunkMappingProvider.setDefault(MappingProvider.BASE_TYPE, 
+        p.setDefault(MappingProvider.BASE_TYPE, 
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk");
-        chunkMappingProvider.setDefault(CHUNK_TAGSET, "default");
-        chunkMappingProvider.setOverride(MappingProvider.LOCATION, aMappingLocation);
-        chunkMappingProvider.setOverride(MappingProvider.LANGUAGE, aLanguage);
-        chunkMappingProvider.setOverride(CHUNK_TAGSET, aTagset);
-        return chunkMappingProvider;
+        p.setDefault(CHUNK_TAGSET, "default");
+        p.setOverride(MappingProvider.LOCATION, aMappingLocation);
+        p.setOverride(MappingProvider.LANGUAGE, aLanguage);
+        p.setOverride(CHUNK_TAGSET, aTagset);
+        
+        if (aContextObject != null) {
+            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
+                    MappingProvider.MAPPING_ENABLED);
+            p.applyAutoOverrides(aContextObject);
+        }
+        
+        return p;
     }
     
-    public static MappingProvider createConstituentMappingProvider(String aMappingLocation,
-            String aLanguage, HasResourceMetadata aSource)
+    public static MappingProvider createConstituentMappingProvider(Object aContextObject,
+            String aMappingLocation, String aLanguage, HasResourceMetadata aSource)
     {
-        MappingProvider p = createConstituentMappingProvider(aMappingLocation, null, aLanguage);
+        MappingProvider p = createConstituentMappingProvider(aContextObject, aMappingLocation, null,
+                aLanguage);
         p.addImport(CONSTITUENT_TAGSET, aSource);
         p.addTagMappingImport("constituent", aSource);
         return p;
     }
     
-    public static MappingProvider createConstituentMappingProvider(String aMappingLocation,
-            String aTagset, String aLanguage)
+    public static MappingProvider createConstituentMappingProvider(Object aContextObject,
+            String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
         p.setDefault(MappingProvider.LOCATION,
@@ -94,19 +113,27 @@ public class MappingProviderFactory
         p.setOverride(MappingProvider.LOCATION, aMappingLocation);
         p.setOverride(MappingProvider.LANGUAGE, aLanguage);
         p.setOverride(CONSTITUENT_TAGSET, aTagset);
+        
+        if (aContextObject != null) {
+            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
+                    MappingProvider.MAPPING_ENABLED);
+            p.applyAutoOverrides(aContextObject);
+        }
+        
         return p;
     }
 
-    public static MappingProvider createDependencyMappingProvider(String aMappingLocation,
-            String aLanguage, HasResourceMetadata aSource)
+    public static MappingProvider createDependencyMappingProvider(Object aContextObject,
+            String aMappingLocation, String aLanguage, HasResourceMetadata aSource)
     {
-        MappingProvider p = createDependencyMappingProvider(aMappingLocation, null, aLanguage);
+        MappingProvider p = createDependencyMappingProvider(aContextObject, aMappingLocation, null,
+                aLanguage);
         p.addImport(DEPENDENCY_TAGSET, aSource);
         return p;
     }
     
-    public static MappingProvider createDependencyMappingProvider(String aMappingLocation,
-            String aTagset, String aLanguage)
+    public static MappingProvider createDependencyMappingProvider(Object aContextObject,
+            String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
         p.setDefault(MappingProvider.LOCATION,
@@ -118,6 +145,13 @@ public class MappingProviderFactory
         p.setOverride(MappingProvider.LOCATION, aMappingLocation);
         p.setOverride(MappingProvider.LANGUAGE, aLanguage);
         p.setOverride(DEPENDENCY_TAGSET, aTagset);
+        
+        if (aContextObject != null) {
+            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
+                    MappingProvider.MAPPING_ENABLED);
+            p.applyAutoOverrides(aContextObject);
+        }
+        
         return p;
     }
 }

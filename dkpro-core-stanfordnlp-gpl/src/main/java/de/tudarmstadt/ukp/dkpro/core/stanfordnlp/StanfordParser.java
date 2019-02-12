@@ -18,6 +18,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.FINE;
 import static org.apache.uima.util.Level.INFO;
@@ -55,7 +57,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -204,6 +205,14 @@ public class StanfordParser
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
+
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
@@ -358,10 +367,10 @@ public class StanfordParser
 
         modelProvider = new StanfordParserModelProvider();
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
-        
-        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                modelProvider);
+
+        constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, language, modelProvider);
     }
 

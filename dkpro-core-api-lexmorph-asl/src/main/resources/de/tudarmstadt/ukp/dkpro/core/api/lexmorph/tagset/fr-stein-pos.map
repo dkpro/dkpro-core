@@ -7,7 +7,7 @@
 __META_SOURCE_URL__=http://www.ims.uni-stuttgart.de/~schmid/french-tagset.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=POS_X
+*=POS
 # ABR	abreviation
 ABR=POS_X
 # ADJ	adjective

@@ -39,6 +39,12 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 public class MappingProvider extends CasConfigurableProviderBase<Map<String, String>>
 {
+    /**
+     * Flag indicating whether the entire mapping mechanism should be skipped and the default base
+     * type should always be applied.
+     */
+    public static final String MAPPING_ENABLED = "mappingEnabled";
+    
     public static final String BASE_TYPE = "baseType";
 
     private TypeSystem typeSystem;
@@ -64,6 +70,13 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
     {
         typeSystem = aCas.getTypeSystem();
 
+        // If mapping is disabled, then we simply skip the loading of the mapping and pretend we
+        // didn't find a mapping.
+        if ("false".equalsIgnoreCase(getOverride(MAPPING_ENABLED))) {
+            notFound = true;
+            return;
+        }
+        
         // Tag mappings can exist independently from the type mappings because tag mappings
         // are configured in the model metadata
         tagMappings = new HashMap<>();
