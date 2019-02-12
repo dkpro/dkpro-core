@@ -103,7 +103,7 @@ public class Explode
         throws IOException, RarException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        String base = getBase(aCachedFile.getFileName().toString());
+        Path base = Paths.get(getBase(aCachedFile.getFileName().toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -122,7 +122,13 @@ public class Explode
                 }
 
                 if (filter.accept(name)) {
-                    Path out = aTarget.resolve(base).resolve(name);
+                    Path out = aTarget.resolve(base).resolve(name).toAbsolutePath();
+                    if (!out.startsWith(base)) {
+                        throw new IOException(
+                                "Archive tries to generate file outside target folder: [" + name
+                                        + "]");
+                    }
+                    
                     if (entry.isDirectory()) {
                         Files.createDirectories(out);
                     }
@@ -144,7 +150,7 @@ public class Explode
         throws IOException, RarException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        String base = getBase(aCachedFile.getFileName().toString());
+        Path base = Paths.get(getBase(aCachedFile.getFileName().toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -163,7 +169,13 @@ public class Explode
                 }
 
                 if (filter.accept(name)) {
-                    Path out = aTarget.resolve(base).resolve(name);
+                    Path out = aTarget.resolve(base).resolve(name).toAbsolutePath();
+                    if (!out.startsWith(base)) {
+                        throw new IOException(
+                                "Archive tries to generate file outside target folder: [" + name
+                                        + "]");
+                    }
+                    
                     if (fh.isDirectory()) {
                         Files.createDirectories(out);
                     }
@@ -185,7 +197,7 @@ public class Explode
         throws IOException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        String base = getBase(aArchive.getFileName().toString());
+        Path base = Paths.get(getBase(aArchive.getFileName().toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -203,7 +215,12 @@ public class Explode
             }
 
             if (filter.accept(name)) {
-                Path out = aTarget.resolve(base).resolve(name);
+                Path out = aTarget.resolve(base).resolve(name).toAbsolutePath();
+                if (!out.startsWith(base)) {
+                    throw new IOException(
+                            "Archive tries to generate file outside target folder: [" + name + "]");
+                }
+                
                 if (entry.isDirectory()) {
                     Files.createDirectories(out);
                 }
@@ -217,6 +234,10 @@ public class Explode
 
     private String stripLeadingFolders(String aName, int aLevels)
     {
+        if (aName == null) {
+            return null;
+        }
+        
         if (aLevels > 0) {
             Path p = Paths.get(aName);
             if (p.getNameCount() <= aLevels) {
