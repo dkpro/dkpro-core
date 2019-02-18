@@ -50,8 +50,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 public class Lif2DKPro
 {
+    private Map<String, Token> tokenIdx;
+    
     public void convert(Container aContainer, JCas aJCas)
     {
+        tokenIdx = new HashMap<>();
+        
         aJCas.setDocumentLanguage(aContainer.getLanguage());
         aJCas.setDocumentText(aContainer.getText());
 
@@ -60,169 +64,192 @@ public class Lif2DKPro
         // Paragraph
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.PARAGRAPH.equals(a.getAtType()))
-            .forEach(para -> {
-                Paragraph paraAnno = new Paragraph(aJCas, para.getStart().intValue(),
-                        para.getEnd().intValue());
-                paraAnno.addToIndexes();
-            });
+            .forEach(para -> convertParagraph(aJCas, para));
 
         // Sentence
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.SENTENCE.equals(a.getAtType()))
-            .forEach(sent -> {
-                Sentence sentAnno = new Sentence(aJCas, sent.getStart().intValue(),
-                        sent.getEnd().intValue());
-                sentAnno.addToIndexes();
-            });
+            .forEach(sent -> convertSentence(aJCas, sent));
 
-        Map<String, Token> tokenIdx = new HashMap<>();
-        
-        // Token, POS, Lemma
+        // Token, POS, Lemma (builds token index)
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.TOKEN.equals(a.getAtType()))
-            .forEach(token -> {
-                Token tokenAnno = new Token(aJCas, token.getStart().intValue(), token
-                        .getEnd().intValue());
-                String pos = token.getFeature(Features.Token.POS);
-                String lemma = token.getFeature(Features.Token.LEMMA);
-
-                if (isNotEmpty(pos)) {
-                    POS posAnno = new POS(aJCas, tokenAnno.getBegin(), tokenAnno.getEnd());
-                    posAnno.setPosValue(pos != null ? pos.intern() : null);
-                    POSUtils.assignCoarseValue(posAnno);
-                    posAnno.addToIndexes();
-                    tokenAnno.setPos(posAnno);
-                }
-
-                if (isNotEmpty(lemma)) {
-                    Lemma lemmaAnno = new Lemma(aJCas, tokenAnno.getBegin(), tokenAnno.getEnd());
-                    lemmaAnno.setValue(lemma);
-                    lemmaAnno.addToIndexes();
-                    tokenAnno.setLemma(lemmaAnno);
-                }
-
-                tokenAnno.addToIndexes();
-                tokenIdx.put(token.getId(), tokenAnno);
-            });
+            .forEach(token -> convertToken(aJCas, token));
 
         // NamedEntity
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.NE.equals(a.getAtType()))
-            .forEach(ne -> {
-                NamedEntity neAnno = new NamedEntity(aJCas, ne.getStart().intValue(),
-                        ne.getEnd().intValue());
-                neAnno.setValue(ne.getLabel());
-                neAnno.addToIndexes();
-            });
+            .forEach(ne -> convertNamedEntity(aJCas, ne));
         
-        // Dependencies
+        // Dependencies (requires token index)
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.DEPENDENCY.equals(a.getAtType()))
-            .forEach(dep -> {
-                String dependent = dep.getFeature(Features.Dependency.DEPENDENT);
-                String governor = dep.getFeature(Features.Dependency.GOVERNOR);
-                
-                if (isEmpty(governor) || governor.equals(dependent)) {
-                    ROOT depAnno = new ROOT(aJCas);
-                    depAnno.setDependencyType(dep.getLabel());
-                    depAnno.setDependent(tokenIdx.get(dependent));
-                    depAnno.setGovernor(tokenIdx.get(dependent));
-                    depAnno.setBegin(depAnno.getDependent().getBegin());
-                    depAnno.setEnd(depAnno.getDependent().getEnd());
-                    depAnno.addToIndexes();
-                }
-                else {
-                    Dependency depAnno = new Dependency(aJCas);
-                    depAnno.setDependencyType(dep.getLabel());
-                    depAnno.setDependent(tokenIdx.get(dependent));
-                    depAnno.setGovernor(tokenIdx.get(governor));
-                    depAnno.setBegin(depAnno.getDependent().getBegin());
-                    depAnno.setEnd(depAnno.getDependent().getEnd());
-                    depAnno.addToIndexes();
-                }
-            });
+            .forEach(dep -> convertDependency(aJCas, dep));
         
-        // Constituents
+        // Constituents (requires token index)
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.PHRASE_STRUCTURE.equals(a.getAtType()))
-            .forEach(ps -> {
-                String rootId = findRoot(view, ps);
-                // Get the constituent IDs
-                Set<String> constituentIDs;
-                constituentIDs = new HashSet<>(
-                        getSetFeature(ps,Features.PhraseStructure.CONSTITUENTS));
-                
-                List<Annotation> constituents = new ArrayList<>();
-                Map<String, Constituent> constituentIdx = new HashMap<>();
+            .forEach(ps -> convertConstituents(aJCas, view, ps));
+    }
+    
+    private Object convertConstituents(JCas aJCas, View view, Annotation ps)
+    {
+        String rootId = findRoot(view, ps);
+        // Get the constituent IDs
+        Set<String> constituentIDs = new HashSet<>(
+                getSetFeature(ps, Features.PhraseStructure.CONSTITUENTS));
 
-                // Instantiate all the constituents
-                view.getAnnotations().stream()
-                    .filter(a -> constituentIDs.contains(a.getId()))
-                    .forEach(con -> {
-                        if (Discriminators.Uri.CONSTITUENT.equals(con.getAtType())) {
-                            Constituent conAnno;
-                            if (rootId.equals(con.getId())) {
-                                conAnno = new de.tudarmstadt.ukp.dkpro.core.api.syntax.type.
-                                        constituent.ROOT(aJCas);
-                            }
-                            else {
-                                conAnno = new Constituent(aJCas);
-                            }
-                            if (con.getStart() != null) {
-                                conAnno.setBegin(con.getStart().intValue());
-                            }
-                            if (con.getEnd() != null) {
-                                conAnno.setEnd(con.getEnd().intValue());
-                            }
-                            conAnno.setConstituentType(con.getLabel());
-                            constituentIdx.put(con.getId(), conAnno);
-                            constituents.add(con);
-                        }
-                        // If it is not a constituent, it must be a token ID - we already
-                        // have created the tokens and recorded them in the tokenIdx
-                    });
-                
-                // Set parent and children features
-                constituents.forEach(con -> {
-                    // Check if it is a constituent or token
-                    Constituent conAnno = constituentIdx.get(con.getId());
-                    Set<String> childIDs = getSetFeature(con, 
-                            Features.Constituent.CHILDREN);
-                    
-                    List<org.apache.uima.jcas.tcas.Annotation> children = new ArrayList<>();
-                    childIDs.forEach(childID -> {
-                        Constituent conChild = constituentIdx.get(childID);
-                        Token tokenChild = tokenIdx.get(childID);
-                        if (conChild != null && tokenChild == null) {
-                            conChild.setParent(conAnno);
-                            children.add(conChild);
-                        }
-                        else if (conChild == null && tokenChild != null) {
-                            tokenChild.setParent(conAnno);
-                            children.add(tokenChild);
-                        }
-                        else if (conChild == null && tokenChild == null) {
-                            throw new IllegalStateException("ID [" + con.getId()
-                                    + "] not found");
+        List<Annotation> constituents = new ArrayList<>();
+        Map<String, Constituent> constituentIdx = new HashMap<>();
+
+        // Instantiate all the constituents
+        view.getAnnotations().stream().filter(a -> constituentIDs.contains(a.getId()))
+                .forEach(con -> {
+                    if (Discriminators.Uri.CONSTITUENT.equals(con.getAtType())) {
+                        Constituent conAnno;
+                        if (rootId.equals(con.getId())) {
+                            conAnno = new 
+                                    de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT(
+                                    aJCas);
                         }
                         else {
-                            throw new IllegalStateException("ID [" + con.getId()
-                                    + "] is constituent AND token? Impossible!");
+                            conAnno = new Constituent(aJCas);
                         }
-                    });
-                    
-                    conAnno.setChildren(FSCollectionFactory.createFSArray(aJCas, children));
+                        if (con.getStart() != null) {
+                            conAnno.setBegin(con.getStart().intValue());
+                        }
+                        if (con.getEnd() != null) {
+                            conAnno.setEnd(con.getEnd().intValue());
+                        }
+                        conAnno.setConstituentType(con.getLabel());
+                        constituentIdx.put(con.getId(), conAnno);
+                        constituents.add(con);
+                    }
+                    // If it is not a constituent, it must be a token ID - we already
+                    // have created the tokens and recorded them in the tokenIdx
                 });
-                
-                // Percolate offsets - they might not have been set on the constituents!
-                Constituent root = constituentIdx.get(rootId);
-                percolateOffsets(root);
-                
-                // Add to indexes
-                constituentIdx.values().forEach(conAnno -> {
-                    conAnno.addToIndexes();
-                });
+
+        // Set parent and children features
+        constituents.forEach(con -> {
+            // Check if it is a constituent or token
+            Constituent conAnno = constituentIdx.get(con.getId());
+            Set<String> childIDs = getSetFeature(con, Features.Constituent.CHILDREN);
+
+            List<org.apache.uima.jcas.tcas.Annotation> children = new ArrayList<>();
+            childIDs.forEach(childID -> {
+                Constituent conChild = constituentIdx.get(childID);
+                Token tokenChild = tokenIdx.get(childID);
+                if (conChild != null && tokenChild == null) {
+                    conChild.setParent(conAnno);
+                    children.add(conChild);
+                }
+                else if (conChild == null && tokenChild != null) {
+                    tokenChild.setParent(conAnno);
+                    children.add(tokenChild);
+                }
+                else if (conChild == null && tokenChild == null) {
+                    throw new IllegalStateException("ID [" + con.getId() + "] not found");
+                }
+                else {
+                    throw new IllegalStateException(
+                            "ID [" + con.getId() + "] is constituent AND token? Impossible!");
+                }
             });
+
+            conAnno.setChildren(FSCollectionFactory.createFSArray(aJCas, children));
+        });
+
+        // Percolate offsets - they might not have been set on the constituents!
+        Constituent root = constituentIdx.get(rootId);
+        percolateOffsets(root);
+
+        // Add to indexes
+        constituentIdx.values().forEach(conAnno -> {
+            conAnno.addToIndexes();
+        });
+
+        return root;
+    }
+
+    private Paragraph convertParagraph(JCas aTarget, Annotation aParagraph)
+    {
+        Paragraph paragraph = new Paragraph(aTarget, aParagraph.getStart().intValue(),
+                aParagraph.getEnd().intValue());
+        paragraph.addToIndexes();
+        return paragraph;
+    }
+
+    private Sentence convertSentence(JCas aTarget, Annotation aSentence)
+    {
+        Sentence sentence = new Sentence(aTarget, aSentence.getStart().intValue(),
+                aSentence.getEnd().intValue());
+        sentence.addToIndexes();
+        return sentence;
+    }
+    
+    private Token convertToken(JCas aTarget, Annotation aToken)
+    {
+        Token token = new Token(aTarget, aToken.getStart().intValue(), aToken
+                .getEnd().intValue());
+        String pos = aToken.getFeature(Features.Token.POS);
+        String lemma = aToken.getFeature(Features.Token.LEMMA);
+
+        if (isNotEmpty(pos)) {
+            POS posAnno = new POS(aTarget, token.getBegin(), token.getEnd());
+            posAnno.setPosValue(pos != null ? pos.intern() : null);
+            POSUtils.assignCoarseValue(posAnno);
+            posAnno.addToIndexes();
+            token.setPos(posAnno);
+        }
+
+        if (isNotEmpty(lemma)) {
+            Lemma lemmaAnno = new Lemma(aTarget, token.getBegin(), token.getEnd());
+            lemmaAnno.setValue(lemma);
+            lemmaAnno.addToIndexes();
+            token.setLemma(lemmaAnno);
+        }
+
+        token.addToIndexes();
+        tokenIdx.put(token.getId(), token);
+        
+        return token;
+    }
+    
+    private NamedEntity convertNamedEntity(JCas aTarget, Annotation aNamedEntity)
+    {
+        NamedEntity neAnno = new NamedEntity(aTarget, aNamedEntity.getStart().intValue(),
+                aNamedEntity.getEnd().intValue());
+        neAnno.setValue(aNamedEntity.getLabel());
+        neAnno.addToIndexes();
+        return neAnno;
+    }
+    
+    private Dependency convertDependency(JCas aTarget, Annotation aDependency)
+    {
+        String dependent = aDependency.getFeature(Features.Dependency.DEPENDENT);
+        String governor = aDependency.getFeature(Features.Dependency.GOVERNOR);
+
+        Dependency depAnno;
+        if (isEmpty(governor) || governor.equals(dependent)) {
+            depAnno = new ROOT(aTarget);
+            depAnno.setDependencyType(aDependency.getLabel());
+            depAnno.setDependent(tokenIdx.get(dependent));
+            depAnno.setGovernor(tokenIdx.get(dependent));
+            depAnno.setBegin(depAnno.getDependent().getBegin());
+            depAnno.setEnd(depAnno.getDependent().getEnd());
+            depAnno.addToIndexes();
+        }
+        else {
+            depAnno = new Dependency(aTarget);
+            depAnno.setDependencyType(aDependency.getLabel());
+            depAnno.setDependent(tokenIdx.get(dependent));
+            depAnno.setGovernor(tokenIdx.get(governor));
+            depAnno.setBegin(depAnno.getDependent().getBegin());
+            depAnno.setEnd(depAnno.getDependent().getEnd());
+            depAnno.addToIndexes();
+        }
+        
+        return depAnno;
     }
 
     @SuppressWarnings("unchecked")

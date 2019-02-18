@@ -1,0 +1,1785 @@
+{
+  "discriminator" : "http://vocab.lappsgrid.org/ns/media/jsonld#lapps",
+  "payload" : {
+    "@context" : "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+    "metadata" : { },
+    "text" : {
+      "@value" : "Actinically degenerate elastic tissue is the likely antigenic basis of actinic granuloma of the skin and of temporal arteritis.\nStaining technique is paramount for detecting and assessing the severe degeneration that occurs in the elastic tissues of the skin and its arteries in response to prolonged exposure to actinic radiation. With a selective \"controlled\" hematoxylin-and-eosin stain, actinically damaged (\"elastotic\") elastic tissue stains blue, as Unna described, and contrasts with normal and simply hyperplastic elastic tissue, which stains red. \"Special\" elastic stains such as Orcein and Verhoeff do not demonstrate this difference. When resorptive (elastolytic) giant cell reactions develop in relation to actinically degenerate elastic tissue of the skin, the papules that arise tend to form expanding, annular rings. A previously used and appropriate name for these autoimmune lesions in the skin is actinic granuloma because this name highlights the likely actinic origin and pathogenesis of many such lesions. Granulomatous inflammation in connection with actinically degenerate internal elastic lamina appears to be the basis of temporal arteritis. Actinic granulomas may occur in the skin concurrently with temporal arteritis. A recent study of temporal arteritis strongly relates its elastic tissue changes to those of \"accelerated\" atherosclerosis.",
+      "@language" : "x-unspecified"
+    },
+    "views" : [ {
+      "id" : "v1",
+      "metadata" : { },
+      "annotations" : [ {
+        "id" : "tok-0",
+        "start" : 0,
+        "end" : 11,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNP"
+        }
+      }, {
+        "id" : "tok-1",
+        "start" : 12,
+        "end" : 22,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-2",
+        "start" : 23,
+        "end" : 30,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-3",
+        "start" : 31,
+        "end" : 37,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-4",
+        "start" : 38,
+        "end" : 40,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-5",
+        "start" : 41,
+        "end" : 44,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-6",
+        "start" : 45,
+        "end" : 51,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-7",
+        "start" : 52,
+        "end" : 61,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-8",
+        "start" : 62,
+        "end" : 67,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-9",
+        "start" : 68,
+        "end" : 70,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-10",
+        "start" : 71,
+        "end" : 78,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-11",
+        "start" : 79,
+        "end" : 88,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-12",
+        "start" : 89,
+        "end" : 91,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-13",
+        "start" : 92,
+        "end" : 95,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-14",
+        "start" : 96,
+        "end" : 100,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-15",
+        "start" : 101,
+        "end" : 104,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-16",
+        "start" : 105,
+        "end" : 107,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-17",
+        "start" : 108,
+        "end" : 116,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-18",
+        "start" : 117,
+        "end" : 126,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-19",
+        "start" : 126,
+        "end" : 127,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-20",
+        "start" : 128,
+        "end" : 136,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBG"
+        }
+      }, {
+        "id" : "tok-21",
+        "start" : 137,
+        "end" : 146,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-22",
+        "start" : 147,
+        "end" : 149,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-23",
+        "start" : 150,
+        "end" : 159,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-24",
+        "start" : 160,
+        "end" : 163,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-25",
+        "start" : 164,
+        "end" : 173,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBG"
+        }
+      }, {
+        "id" : "tok-26",
+        "start" : 174,
+        "end" : 177,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-27",
+        "start" : 178,
+        "end" : 187,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBG"
+        }
+      }, {
+        "id" : "tok-28",
+        "start" : 188,
+        "end" : 191,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-29",
+        "start" : 192,
+        "end" : 198,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-30",
+        "start" : 199,
+        "end" : 211,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-31",
+        "start" : 212,
+        "end" : 216,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "WDT"
+        }
+      }, {
+        "id" : "tok-32",
+        "start" : 217,
+        "end" : 223,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-33",
+        "start" : 224,
+        "end" : 226,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-34",
+        "start" : 227,
+        "end" : 230,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-35",
+        "start" : 231,
+        "end" : 238,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-36",
+        "start" : 239,
+        "end" : 246,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-37",
+        "start" : 247,
+        "end" : 249,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-38",
+        "start" : 250,
+        "end" : 253,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-39",
+        "start" : 254,
+        "end" : 258,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-40",
+        "start" : 259,
+        "end" : 262,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-41",
+        "start" : 263,
+        "end" : 266,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "PRP$"
+        }
+      }, {
+        "id" : "tok-42",
+        "start" : 267,
+        "end" : 275,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-43",
+        "start" : 276,
+        "end" : 278,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-44",
+        "start" : 279,
+        "end" : 287,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-45",
+        "start" : 288,
+        "end" : 290,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "TO"
+        }
+      }, {
+        "id" : "tok-46",
+        "start" : 291,
+        "end" : 300,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-47",
+        "start" : 301,
+        "end" : 309,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-48",
+        "start" : 310,
+        "end" : 312,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "TO"
+        }
+      }, {
+        "id" : "tok-49",
+        "start" : 313,
+        "end" : 320,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-50",
+        "start" : 321,
+        "end" : 330,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-51",
+        "start" : 330,
+        "end" : 331,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-52",
+        "start" : 332,
+        "end" : 336,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-53",
+        "start" : 337,
+        "end" : 338,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-54",
+        "start" : 339,
+        "end" : 348,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-55",
+        "start" : 349,
+        "end" : 350,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "``"
+        }
+      }, {
+        "id" : "tok-56",
+        "start" : 350,
+        "end" : 360,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBN"
+        }
+      }, {
+        "id" : "tok-57",
+        "start" : 360,
+        "end" : 361,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "''"
+        }
+      }, {
+        "id" : "tok-58",
+        "start" : 362,
+        "end" : 383,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-59",
+        "start" : 384,
+        "end" : 389,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBP"
+        }
+      }, {
+        "id" : "tok-60",
+        "start" : 389,
+        "end" : 390,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : ","
+        }
+      }, {
+        "id" : "tok-61",
+        "start" : 391,
+        "end" : 402,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-62",
+        "start" : 403,
+        "end" : 410,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBN"
+        }
+      }, {
+        "id" : "tok-63",
+        "start" : 411,
+        "end" : 412,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "-LRB-"
+        }
+      }, {
+        "id" : "tok-64",
+        "start" : 412,
+        "end" : 413,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "``"
+        }
+      }, {
+        "id" : "tok-65",
+        "start" : 413,
+        "end" : 422,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-66",
+        "start" : 422,
+        "end" : 423,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "''"
+        }
+      }, {
+        "id" : "tok-67",
+        "start" : 423,
+        "end" : 424,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "-RRB-"
+        }
+      }, {
+        "id" : "tok-68",
+        "start" : 425,
+        "end" : 432,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-69",
+        "start" : 433,
+        "end" : 439,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-70",
+        "start" : 440,
+        "end" : 446,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-71",
+        "start" : 447,
+        "end" : 451,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-72",
+        "start" : 451,
+        "end" : 452,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : ","
+        }
+      }, {
+        "id" : "tok-73",
+        "start" : 453,
+        "end" : 455,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-74",
+        "start" : 456,
+        "end" : 460,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNP"
+        }
+      }, {
+        "id" : "tok-75",
+        "start" : 461,
+        "end" : 470,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBD"
+        }
+      }, {
+        "id" : "tok-76",
+        "start" : 470,
+        "end" : 471,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : ","
+        }
+      }, {
+        "id" : "tok-77",
+        "start" : 472,
+        "end" : 475,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-78",
+        "start" : 476,
+        "end" : 485,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-79",
+        "start" : 486,
+        "end" : 490,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-80",
+        "start" : 491,
+        "end" : 497,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-81",
+        "start" : 498,
+        "end" : 501,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-82",
+        "start" : 502,
+        "end" : 508,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-83",
+        "start" : 509,
+        "end" : 521,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-84",
+        "start" : 522,
+        "end" : 529,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-85",
+        "start" : 530,
+        "end" : 536,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-86",
+        "start" : 536,
+        "end" : 537,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : ","
+        }
+      }, {
+        "id" : "tok-87",
+        "start" : 538,
+        "end" : 543,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "WDT"
+        }
+      }, {
+        "id" : "tok-88",
+        "start" : 544,
+        "end" : 550,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-89",
+        "start" : 551,
+        "end" : 554,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-90",
+        "start" : 554,
+        "end" : 555,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-91",
+        "start" : 556,
+        "end" : 557,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "``"
+        }
+      }, {
+        "id" : "tok-92",
+        "start" : 557,
+        "end" : 564,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-93",
+        "start" : 564,
+        "end" : 565,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "''"
+        }
+      }, {
+        "id" : "tok-94",
+        "start" : 566,
+        "end" : 573,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-95",
+        "start" : 574,
+        "end" : 580,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-96",
+        "start" : 581,
+        "end" : 585,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-97",
+        "start" : 586,
+        "end" : 588,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-98",
+        "start" : 589,
+        "end" : 595,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNP"
+        }
+      }, {
+        "id" : "tok-99",
+        "start" : 596,
+        "end" : 599,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-100",
+        "start" : 600,
+        "end" : 608,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNP"
+        }
+      }, {
+        "id" : "tok-101",
+        "start" : 609,
+        "end" : 611,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBP"
+        }
+      }, {
+        "id" : "tok-102",
+        "start" : 612,
+        "end" : 615,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-103",
+        "start" : 616,
+        "end" : 627,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VB"
+        }
+      }, {
+        "id" : "tok-104",
+        "start" : 628,
+        "end" : 632,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-105",
+        "start" : 633,
+        "end" : 643,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-106",
+        "start" : 643,
+        "end" : 644,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-107",
+        "start" : 645,
+        "end" : 649,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "WRB"
+        }
+      }, {
+        "id" : "tok-108",
+        "start" : 650,
+        "end" : 660,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-109",
+        "start" : 661,
+        "end" : 662,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "-LRB-"
+        }
+      }, {
+        "id" : "tok-110",
+        "start" : 662,
+        "end" : 673,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-111",
+        "start" : 673,
+        "end" : 674,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "-RRB-"
+        }
+      }, {
+        "id" : "tok-112",
+        "start" : 675,
+        "end" : 680,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-113",
+        "start" : 681,
+        "end" : 685,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-114",
+        "start" : 686,
+        "end" : 695,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-115",
+        "start" : 696,
+        "end" : 703,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBP"
+        }
+      }, {
+        "id" : "tok-116",
+        "start" : 704,
+        "end" : 706,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-117",
+        "start" : 707,
+        "end" : 715,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-118",
+        "start" : 716,
+        "end" : 718,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "TO"
+        }
+      }, {
+        "id" : "tok-119",
+        "start" : 719,
+        "end" : 730,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-120",
+        "start" : 731,
+        "end" : 741,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VB"
+        }
+      }, {
+        "id" : "tok-121",
+        "start" : 742,
+        "end" : 749,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-122",
+        "start" : 750,
+        "end" : 756,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-123",
+        "start" : 757,
+        "end" : 759,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-124",
+        "start" : 760,
+        "end" : 763,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-125",
+        "start" : 764,
+        "end" : 768,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-126",
+        "start" : 768,
+        "end" : 769,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : ","
+        }
+      }, {
+        "id" : "tok-127",
+        "start" : 770,
+        "end" : 773,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-128",
+        "start" : 774,
+        "end" : 781,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-129",
+        "start" : 782,
+        "end" : 786,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "WDT"
+        }
+      }, {
+        "id" : "tok-130",
+        "start" : 787,
+        "end" : 792,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBP"
+        }
+      }, {
+        "id" : "tok-131",
+        "start" : 793,
+        "end" : 797,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VB"
+        }
+      }, {
+        "id" : "tok-132",
+        "start" : 798,
+        "end" : 800,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "TO"
+        }
+      }, {
+        "id" : "tok-133",
+        "start" : 801,
+        "end" : 805,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VB"
+        }
+      }, {
+        "id" : "tok-134",
+        "start" : 806,
+        "end" : 815,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBG"
+        }
+      }, {
+        "id" : "tok-135",
+        "start" : 815,
+        "end" : 816,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : ","
+        }
+      }, {
+        "id" : "tok-136",
+        "start" : 817,
+        "end" : 824,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-137",
+        "start" : 825,
+        "end" : 830,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-138",
+        "start" : 830,
+        "end" : 831,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-139",
+        "start" : 832,
+        "end" : 833,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-140",
+        "start" : 834,
+        "end" : 844,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-141",
+        "start" : 845,
+        "end" : 849,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBN"
+        }
+      }, {
+        "id" : "tok-142",
+        "start" : 850,
+        "end" : 853,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-143",
+        "start" : 854,
+        "end" : 865,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-144",
+        "start" : 866,
+        "end" : 870,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-145",
+        "start" : 871,
+        "end" : 874,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-146",
+        "start" : 875,
+        "end" : 880,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-147",
+        "start" : 881,
+        "end" : 891,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-148",
+        "start" : 892,
+        "end" : 899,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-149",
+        "start" : 900,
+        "end" : 902,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-150",
+        "start" : 903,
+        "end" : 906,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-151",
+        "start" : 907,
+        "end" : 911,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-152",
+        "start" : 912,
+        "end" : 914,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-153",
+        "start" : 915,
+        "end" : 922,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-154",
+        "start" : 923,
+        "end" : 932,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-155",
+        "start" : 933,
+        "end" : 940,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-156",
+        "start" : 941,
+        "end" : 945,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-157",
+        "start" : 946,
+        "end" : 950,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-158",
+        "start" : 951,
+        "end" : 961,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-159",
+        "start" : 962,
+        "end" : 965,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-160",
+        "start" : 966,
+        "end" : 972,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-161",
+        "start" : 973,
+        "end" : 980,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-162",
+        "start" : 981,
+        "end" : 987,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-163",
+        "start" : 988,
+        "end" : 991,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "CC"
+        }
+      }, {
+        "id" : "tok-164",
+        "start" : 992,
+        "end" : 1004,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-165",
+        "start" : 1005,
+        "end" : 1007,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-166",
+        "start" : 1008,
+        "end" : 1012,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-167",
+        "start" : 1013,
+        "end" : 1017,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-168",
+        "start" : 1018,
+        "end" : 1025,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-169",
+        "start" : 1025,
+        "end" : 1026,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-170",
+        "start" : 1027,
+        "end" : 1040,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-171",
+        "start" : 1041,
+        "end" : 1053,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-172",
+        "start" : 1054,
+        "end" : 1056,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-173",
+        "start" : 1057,
+        "end" : 1067,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-174",
+        "start" : 1068,
+        "end" : 1072,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-175",
+        "start" : 1073,
+        "end" : 1084,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-176",
+        "start" : 1085,
+        "end" : 1095,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-177",
+        "start" : 1096,
+        "end" : 1104,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-178",
+        "start" : 1105,
+        "end" : 1112,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-179",
+        "start" : 1113,
+        "end" : 1119,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-180",
+        "start" : 1120,
+        "end" : 1127,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-181",
+        "start" : 1128,
+        "end" : 1130,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "TO"
+        }
+      }, {
+        "id" : "tok-182",
+        "start" : 1131,
+        "end" : 1133,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VB"
+        }
+      }, {
+        "id" : "tok-183",
+        "start" : 1134,
+        "end" : 1137,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-184",
+        "start" : 1138,
+        "end" : 1143,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-185",
+        "start" : 1144,
+        "end" : 1146,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-186",
+        "start" : 1147,
+        "end" : 1155,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-187",
+        "start" : 1156,
+        "end" : 1165,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-188",
+        "start" : 1165,
+        "end" : 1166,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-189",
+        "start" : 1167,
+        "end" : 1174,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-190",
+        "start" : 1175,
+        "end" : 1185,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-191",
+        "start" : 1186,
+        "end" : 1189,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "MD"
+        }
+      }, {
+        "id" : "tok-192",
+        "start" : 1190,
+        "end" : 1195,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VB"
+        }
+      }, {
+        "id" : "tok-193",
+        "start" : 1196,
+        "end" : 1198,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-194",
+        "start" : 1199,
+        "end" : 1202,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-195",
+        "start" : 1203,
+        "end" : 1207,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-196",
+        "start" : 1208,
+        "end" : 1220,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-197",
+        "start" : 1221,
+        "end" : 1225,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-198",
+        "start" : 1226,
+        "end" : 1234,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-199",
+        "start" : 1235,
+        "end" : 1244,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-200",
+        "start" : 1244,
+        "end" : 1245,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      }, {
+        "id" : "tok-201",
+        "start" : 1246,
+        "end" : 1247,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-202",
+        "start" : 1248,
+        "end" : 1254,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-203",
+        "start" : 1255,
+        "end" : 1260,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-204",
+        "start" : 1261,
+        "end" : 1263,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-205",
+        "start" : 1264,
+        "end" : 1272,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-206",
+        "start" : 1273,
+        "end" : 1282,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-207",
+        "start" : 1283,
+        "end" : 1291,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "RB"
+        }
+      }, {
+        "id" : "tok-208",
+        "start" : 1292,
+        "end" : 1299,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBZ"
+        }
+      }, {
+        "id" : "tok-209",
+        "start" : 1300,
+        "end" : 1303,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "PRP$"
+        }
+      }, {
+        "id" : "tok-210",
+        "start" : 1304,
+        "end" : 1311,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "JJ"
+        }
+      }, {
+        "id" : "tok-211",
+        "start" : 1312,
+        "end" : 1318,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-212",
+        "start" : 1319,
+        "end" : 1326,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NNS"
+        }
+      }, {
+        "id" : "tok-213",
+        "start" : 1327,
+        "end" : 1329,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "TO"
+        }
+      }, {
+        "id" : "tok-214",
+        "start" : 1330,
+        "end" : 1335,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "DT"
+        }
+      }, {
+        "id" : "tok-215",
+        "start" : 1336,
+        "end" : 1338,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "IN"
+        }
+      }, {
+        "id" : "tok-216",
+        "start" : 1339,
+        "end" : 1340,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "``"
+        }
+      }, {
+        "id" : "tok-217",
+        "start" : 1340,
+        "end" : 1351,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "VBN"
+        }
+      }, {
+        "id" : "tok-218",
+        "start" : 1351,
+        "end" : 1352,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "''"
+        }
+      }, {
+        "id" : "tok-219",
+        "start" : 1353,
+        "end" : 1368,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "NN"
+        }
+      }, {
+        "id" : "tok-220",
+        "start" : 1368,
+        "end" : 1369,
+        "@type" : "http://vocab.lappsgrid.org/Token",
+        "features" : {
+          "pos" : "."
+        }
+      } ]
+    } ]
+  },
+  "parameters" : { }
+}

@@ -27,6 +27,7 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.lappsgrid.serialization.DataContainer;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Container;
 
@@ -72,7 +73,15 @@ public class LifReader
         Container container;
         try (InputStream is = res.getInputStream()) {
             String json = IOUtils.toString(res.getInputStream(), sourceEncoding);
-            container = Serializer.parse(json, Container.class);
+            try {
+                // First try parsing without the wire wrapper.
+                container = Serializer.parse(json, Container.class);
+            }
+            catch (Exception e) {
+                // If that fails, it might be because there is a wire wrapper around the actual
+                // data, so let's try that.
+                container = (Container) Serializer.parse(json, DataContainer.class).getPayload();
+            }
         }
         
         new Lif2DKPro().convert(container, aJCas);

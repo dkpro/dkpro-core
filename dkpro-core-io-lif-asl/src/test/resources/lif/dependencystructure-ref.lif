@@ -6,6 +6,7 @@
     "@language" : "en"
   },
   "views" : [ {
+    "id" : "v1",
     "metadata" : { },
     "annotations" : [ {
       "id" : "sent-0",

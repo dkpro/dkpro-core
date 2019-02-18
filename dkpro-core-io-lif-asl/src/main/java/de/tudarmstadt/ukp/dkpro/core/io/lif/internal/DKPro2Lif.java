@@ -65,69 +65,101 @@ public class DKPro2Lif
 
         // Paragraph
         for (Paragraph p : select(aJCas, Paragraph.class)) {
-            view.newAnnotation(id(PARAGRAPH, p), Discriminators.Uri.PARAGRAPH, p.getBegin(),
-                    p.getEnd());
+            convertParagraph(view, p);
         }
 
         // Sentence
         for (Sentence s : select(aJCas, Sentence.class)) {
-            view.newAnnotation(id(SENTENCE, s), Discriminators.Uri.SENTENCE, s.getBegin(),
-                    s.getEnd());
+            convertSentence(view, s);
         }
 
         // Token, POS, Lemma
         for (Token t : select(aJCas, Token.class)) {
-            Annotation a = view.newAnnotation(id(TOKEN, t), Discriminators.Uri.TOKEN, t.getBegin(),
-                    t.getEnd());
-            if (t.getPos() != null) {
-                a.addFeature(Features.Token.POS, t.getPos().getPosValue());
-            }
-
-            if (t.getLemma() != null) {
-                a.addFeature(Features.Token.LEMMA, t.getLemma().getValue());
-            }
+            convertToken(view, t);
         }
 
         // NamedEntity
-        for (NamedEntity neAnno : select(aJCas, NamedEntity.class)) {
-            Annotation ne = view.newAnnotation(id(NAMED_ENTITY, neAnno), Discriminators.Uri.NE,
-                    neAnno.getBegin(), neAnno.getEnd());
-            ne.setLabel(neAnno.getValue());
+        for (NamedEntity ne : select(aJCas, NamedEntity.class)) {
+            convertNamedEntity(view, ne);
         }
 
-        // Dependency
+        // Dependencies
         for (Sentence s : select(aJCas, Sentence.class)) {
-            Set<String> depRelIds = new TreeSet<>();
-            
-            for (Dependency dep : selectCovered(Dependency.class, s)) {
-                String depRelId = id(DEPENDENCY, dep);
-                // LAPPS dependencies inherit from Relation which has no offsets
-                Annotation depRel = view.newAnnotation(depRelId, Discriminators.Uri.DEPENDENCY);
-                depRel.setLabel(dep.getDependencyType());
-                depRel.addFeature(Features.Dependency.GOVERNOR, id(TOKEN, dep.getGovernor()));
-                depRel.addFeature(Features.Dependency.DEPENDENT, id(TOKEN, dep.getDependent()));
-                depRelIds.add(depRelId);
-            }
-            
-            if (!depRelIds.isEmpty()) {
-                Annotation depStruct = view.newAnnotation(id(DEPENDENCY_STRUCTURE, s),
-                        Discriminators.Uri.DEPENDENCY_STRUCTURE, s.getBegin(), s.getEnd());
-                depStruct.addFeature(Features.DependencyStructure.DEPENDENCIES, depRelIds);
-            }
+            convertDependencies(view, s);
         }
         
         // Constituents
         for (ROOT r : select(aJCas, ROOT.class)) {
-            Set<String> constituents = new LinkedHashSet<>();
-            convertConstituent(view, r, constituents);
-            
-            Annotation phraseStruct = view.newAnnotation(id(PHRASE_STRUCTURE, r),
-                    Discriminators.Uri.PHRASE_STRUCTURE, r.getBegin(), r.getEnd());
-            phraseStruct.addFeature(Features.PhraseStructure.CONSTITUENTS, constituents);
+            convertConstituents(view, r);
         }
         
     }
+    
+    private void convertParagraph(View aTarget, Paragraph aParagraph)
+    {
+        aTarget.newAnnotation(id(PARAGRAPH, aParagraph), Discriminators.Uri.PARAGRAPH,
+                aParagraph.getBegin(), aParagraph.getEnd());
+    }
+    
+    private void convertSentence(View aTarget, Sentence aSentence)
+    {
+        aTarget.newAnnotation(id(SENTENCE, aSentence), Discriminators.Uri.SENTENCE,
+                aSentence.getBegin(), aSentence.getEnd());
+    }    
 
+    private void convertToken(View aTarget, Token aToken)
+    {
+        Annotation a = aTarget.newAnnotation(id(TOKEN, aToken), Discriminators.Uri.TOKEN,
+                aToken.getBegin(), aToken.getEnd());
+        if (aToken.getPos() != null) {
+            a.addFeature(Features.Token.POS, aToken.getPos().getPosValue());
+        }
+
+        if (aToken.getLemma() != null) {
+            a.addFeature(Features.Token.LEMMA, aToken.getLemma().getValue());
+        }
+    }    
+    
+    private void convertNamedEntity(View aTarget, NamedEntity aNamedEntity)
+    {
+        Annotation ne = aTarget.newAnnotation(id(NAMED_ENTITY, aNamedEntity), Discriminators.Uri.NE,
+                aNamedEntity.getBegin(), aNamedEntity.getEnd());
+        ne.setLabel(aNamedEntity.getValue());
+    }
+    
+    private void convertDependencies(View aView, Sentence aSentence)
+    {
+        Set<String> depRelIds = new TreeSet<>();
+
+        for (Dependency dep : selectCovered(Dependency.class, aSentence)) {
+            String depRelId = id(DEPENDENCY, dep);
+            // LAPPS dependencies inherit from Relation which has no offsets
+            Annotation depRel = aView.newAnnotation(depRelId, Discriminators.Uri.DEPENDENCY);
+            depRel.setLabel(dep.getDependencyType());
+            depRel.addFeature(Features.Dependency.GOVERNOR, id(TOKEN, dep.getGovernor()));
+            depRel.addFeature(Features.Dependency.DEPENDENT, id(TOKEN, dep.getDependent()));
+            depRelIds.add(depRelId);
+        }
+
+        if (!depRelIds.isEmpty()) {
+            Annotation depStruct = aView.newAnnotation(id(DEPENDENCY_STRUCTURE, aSentence),
+                    Discriminators.Uri.DEPENDENCY_STRUCTURE, aSentence.getBegin(),
+                    aSentence.getEnd());
+            depStruct.addFeature(Features.DependencyStructure.DEPENDENCIES, depRelIds);
+        }
+    }
+    
+    private void convertConstituents(View aTarget, ROOT aRootConstituent)
+    {
+        Set<String> constituents = new LinkedHashSet<>();
+        convertConstituent(aTarget, aRootConstituent, constituents);
+        
+        Annotation phraseStruct = aTarget.newAnnotation(id(PHRASE_STRUCTURE, aRootConstituent),
+                Discriminators.Uri.PHRASE_STRUCTURE, aRootConstituent.getBegin(),
+                aRootConstituent.getEnd());
+        phraseStruct.addFeature(Features.PhraseStructure.CONSTITUENTS, constituents);
+    }
+    
     private void convertConstituent(View aView, org.apache.uima.jcas.tcas.Annotation aNode,
             Set<String> aConstituents)
     {
