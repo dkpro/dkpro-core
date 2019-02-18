@@ -35,7 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 /**
  * Reads the WebAnno TSV v3.x format.
  */
-@ResourceMetaData(name = "PubAnnotation Reader")
+@ResourceMetaData(name = "WebAnno TSV v3.x Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_WEBANNO_TSV3})
 public class WebannoTsv3XReader
     extends JCasResourceCollectionReader_ImplBase
