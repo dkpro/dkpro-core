@@ -54,7 +54,10 @@ public class PADocument
     
     @JsonInclude(Include.NON_EMPTY)
     private List<PARelation> relations = new ArrayList<>();
-    
+
+    @JsonInclude(Include.NON_EMPTY)
+    private List<PAAttribute> attributes = new ArrayList<>();
+
     @JsonInclude(Include.NON_EMPTY)
     private List<PANamespace> namespaces = new ArrayList<>();
     
@@ -161,6 +164,21 @@ public class PADocument
         modifications = aModifications;
     }
     
+    public List<PAAttribute> getAttributes()
+    {
+        return attributes;
+    }
+
+    public void setAttributes(List<PAAttribute> aAttributes)
+    {
+        attributes = aAttributes;
+    }
+    
+    public void addAttribute(PAAttribute aAttribute)
+    {
+        attributes.add(aAttribute);
+    }
+
     public Optional<PANamespace> getNamespace(String aPrefix)
     {
         return namespaces.stream()

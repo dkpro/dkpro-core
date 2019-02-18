@@ -17,62 +17,54 @@
  */
 package org.dkpro.core.io.pubannotation.internal.model;
 
-// "relations": [
-//   {"id": "R1", "subj": "T1", "pred": "themeOf", "obj": "E1"},
-//   {"id": "R2", "subj": "E1", "pred": "themeOf", "obj": "E2"},
-//   {"id": "R3", "subj": "T2", "pred": "causeOf", "obj": "E2"}
+// "attributes": [
+//   {"id": "T1", "key": "lala", "value": "lolo"},
 // ]
-public class PARelation
-    implements PAIdentifiableObject
+public class PAAttribute
 {
-    private String id;
-    private String subj;
-    private String pred;
-    private String obj;
-
-    public PARelation()
+    private String subject;
+    private String key;
+    private String value;
+    
+    public PAAttribute()
     {
         // Default constructor
     }
 
-    @Override
-    public String getId()
+    public PAAttribute(String aSubject, String aKey, String aValue)
     {
-        return id;
+        subject = aSubject;
+        key = aKey;
+        value = aValue;
     }
 
-    public void setId(String aId)
+    public String getSubject()
     {
-        id = aId;
+        return subject;
     }
 
-    public String getSubj()
+    public void setSubject(String aSubject)
     {
-        return subj;
+        subject = aSubject;
     }
 
-    public void setSubj(String aSubj)
+    public String getKey()
     {
-        subj = aSubj;
+        return key;
     }
 
-    public String getPred()
+    public void setKey(String aKey)
     {
-        return pred;
+        key = aKey;
     }
 
-    public void setPred(String aPred)
+    public String getValue()
     {
-        pred = aPred;
+        return value;
     }
 
-    public String getObj()
+    public void setValue(String aValue)
     {
-        return obj;
-    }
-
-    public void setObj(String aObj)
-    {
-        obj = aObj;
+        value = aValue;
     }
 }

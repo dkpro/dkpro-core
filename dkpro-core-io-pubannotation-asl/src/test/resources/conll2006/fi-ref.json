@@ -1,0 +1,4724 @@
+{
+  "sourceid" : "fi-orig.conll",
+  "text" : "NEUVOSTO EURATOMIN HANKINTAKESKUKSEN PERUSSÄÄNTÖ EUROOPAN ATOMIENERGIAYHTEISÖN NEUVOSTO , joka ottaa huomioon perustamissopimuksen 54 artiklan , ja ottaa huomioon komission ehdotuksen , ON PÄÄTTÄNYT antaa Euratomin hankintakeskuksen perussäännön seuraavasti :\n1 artikla Nimi ja tarkoitus\n",
+  "denotations" : [ {
+    "id" : "42",
+    "span" : {
+      "begin" : 0,
+      "end" : 8
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "88",
+    "span" : {
+      "begin" : 9,
+      "end" : 18
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "134",
+    "span" : {
+      "begin" : 19,
+      "end" : 36
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "180",
+    "span" : {
+      "begin" : 37,
+      "end" : 48
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "226",
+    "span" : {
+      "begin" : 49,
+      "end" : 57
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "272",
+    "span" : {
+      "begin" : 58,
+      "end" : 78
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "318",
+    "span" : {
+      "begin" : 79,
+      "end" : 87
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "364",
+    "span" : {
+      "begin" : 88,
+      "end" : 89
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "410",
+    "span" : {
+      "begin" : 90,
+      "end" : 94
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "456",
+    "span" : {
+      "begin" : 95,
+      "end" : 100
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "502",
+    "span" : {
+      "begin" : 101,
+      "end" : 109
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "548",
+    "span" : {
+      "begin" : 110,
+      "end" : 130
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "594",
+    "span" : {
+      "begin" : 131,
+      "end" : 133
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "640",
+    "span" : {
+      "begin" : 134,
+      "end" : 142
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "686",
+    "span" : {
+      "begin" : 143,
+      "end" : 144
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "732",
+    "span" : {
+      "begin" : 145,
+      "end" : 147
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "778",
+    "span" : {
+      "begin" : 148,
+      "end" : 153
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "824",
+    "span" : {
+      "begin" : 154,
+      "end" : 162
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "870",
+    "span" : {
+      "begin" : 163,
+      "end" : 172
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "916",
+    "span" : {
+      "begin" : 173,
+      "end" : 183
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "962",
+    "span" : {
+      "begin" : 184,
+      "end" : 185
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1008",
+    "span" : {
+      "begin" : 186,
+      "end" : 188
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1054",
+    "span" : {
+      "begin" : 189,
+      "end" : 198
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1100",
+    "span" : {
+      "begin" : 199,
+      "end" : 204
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1146",
+    "span" : {
+      "begin" : 205,
+      "end" : 214
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1192",
+    "span" : {
+      "begin" : 215,
+      "end" : 232
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1238",
+    "span" : {
+      "begin" : 233,
+      "end" : 245
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1284",
+    "span" : {
+      "begin" : 246,
+      "end" : 257
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1330",
+    "span" : {
+      "begin" : 258,
+      "end" : 259
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1597",
+    "span" : {
+      "begin" : 260,
+      "end" : 261
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1643",
+    "span" : {
+      "begin" : 262,
+      "end" : 269
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1689",
+    "span" : {
+      "begin" : 270,
+      "end" : 274
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1735",
+    "span" : {
+      "begin" : 275,
+      "end" : 277
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "1781",
+    "span" : {
+      "begin" : 278,
+      "end" : 287
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
+  }, {
+    "id" : "36",
+    "span" : {
+      "begin" : 0,
+      "end" : 8
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "82",
+    "span" : {
+      "begin" : 9,
+      "end" : 18
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "128",
+    "span" : {
+      "begin" : 19,
+      "end" : 36
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "174",
+    "span" : {
+      "begin" : 37,
+      "end" : 48
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "220",
+    "span" : {
+      "begin" : 49,
+      "end" : 57
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "266",
+    "span" : {
+      "begin" : 58,
+      "end" : 78
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "312",
+    "span" : {
+      "begin" : 79,
+      "end" : 87
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "358",
+    "span" : {
+      "begin" : 88,
+      "end" : 89
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "404",
+    "span" : {
+      "begin" : 90,
+      "end" : 94
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "450",
+    "span" : {
+      "begin" : 95,
+      "end" : 100
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "496",
+    "span" : {
+      "begin" : 101,
+      "end" : 109
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "542",
+    "span" : {
+      "begin" : 110,
+      "end" : 130
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "588",
+    "span" : {
+      "begin" : 131,
+      "end" : 133
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "634",
+    "span" : {
+      "begin" : 134,
+      "end" : 142
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "680",
+    "span" : {
+      "begin" : 143,
+      "end" : 144
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "726",
+    "span" : {
+      "begin" : 145,
+      "end" : 147
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "772",
+    "span" : {
+      "begin" : 148,
+      "end" : 153
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "818",
+    "span" : {
+      "begin" : 154,
+      "end" : 162
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "864",
+    "span" : {
+      "begin" : 163,
+      "end" : 172
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "910",
+    "span" : {
+      "begin" : 173,
+      "end" : 183
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "956",
+    "span" : {
+      "begin" : 184,
+      "end" : 185
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1002",
+    "span" : {
+      "begin" : 186,
+      "end" : 188
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1048",
+    "span" : {
+      "begin" : 189,
+      "end" : 198
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1094",
+    "span" : {
+      "begin" : 199,
+      "end" : 204
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1140",
+    "span" : {
+      "begin" : 205,
+      "end" : 214
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1186",
+    "span" : {
+      "begin" : 215,
+      "end" : 232
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1232",
+    "span" : {
+      "begin" : 233,
+      "end" : 245
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1278",
+    "span" : {
+      "begin" : 246,
+      "end" : 257
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1324",
+    "span" : {
+      "begin" : 258,
+      "end" : 259
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1591",
+    "span" : {
+      "begin" : 260,
+      "end" : 261
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1637",
+    "span" : {
+      "begin" : 262,
+      "end" : 269
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1683",
+    "span" : {
+      "begin" : 270,
+      "end" : 274
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1729",
+    "span" : {
+      "begin" : 275,
+      "end" : 277
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "1775",
+    "span" : {
+      "begin" : 278,
+      "end" : 287
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+  }, {
+    "id" : "31",
+    "span" : {
+      "begin" : 0,
+      "end" : 8
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "77",
+    "span" : {
+      "begin" : 9,
+      "end" : 18
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "123",
+    "span" : {
+      "begin" : 19,
+      "end" : 36
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "169",
+    "span" : {
+      "begin" : 37,
+      "end" : 48
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "215",
+    "span" : {
+      "begin" : 49,
+      "end" : 57
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "261",
+    "span" : {
+      "begin" : 58,
+      "end" : 78
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "307",
+    "span" : {
+      "begin" : 79,
+      "end" : 87
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "353",
+    "span" : {
+      "begin" : 88,
+      "end" : 89
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "399",
+    "span" : {
+      "begin" : 90,
+      "end" : 94
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "445",
+    "span" : {
+      "begin" : 95,
+      "end" : 100
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "491",
+    "span" : {
+      "begin" : 101,
+      "end" : 109
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "537",
+    "span" : {
+      "begin" : 110,
+      "end" : 130
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "583",
+    "span" : {
+      "begin" : 131,
+      "end" : 133
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "629",
+    "span" : {
+      "begin" : 134,
+      "end" : 142
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "675",
+    "span" : {
+      "begin" : 143,
+      "end" : 144
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "721",
+    "span" : {
+      "begin" : 145,
+      "end" : 147
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "767",
+    "span" : {
+      "begin" : 148,
+      "end" : 153
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "813",
+    "span" : {
+      "begin" : 154,
+      "end" : 162
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "859",
+    "span" : {
+      "begin" : 163,
+      "end" : 172
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "905",
+    "span" : {
+      "begin" : 173,
+      "end" : 183
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "951",
+    "span" : {
+      "begin" : 184,
+      "end" : 185
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "997",
+    "span" : {
+      "begin" : 186,
+      "end" : 188
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1043",
+    "span" : {
+      "begin" : 189,
+      "end" : 198
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1089",
+    "span" : {
+      "begin" : 199,
+      "end" : 204
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1135",
+    "span" : {
+      "begin" : 205,
+      "end" : 214
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1181",
+    "span" : {
+      "begin" : 215,
+      "end" : 232
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1227",
+    "span" : {
+      "begin" : 233,
+      "end" : 245
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1273",
+    "span" : {
+      "begin" : 246,
+      "end" : 257
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1319",
+    "span" : {
+      "begin" : 258,
+      "end" : 259
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1586",
+    "span" : {
+      "begin" : 260,
+      "end" : 261
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1632",
+    "span" : {
+      "begin" : 262,
+      "end" : 269
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1678",
+    "span" : {
+      "begin" : 270,
+      "end" : 274
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1724",
+    "span" : {
+      "begin" : 275,
+      "end" : 277
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1770",
+    "span" : {
+      "begin" : 278,
+      "end" : 287
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
+  }, {
+    "id" : "1569",
+    "span" : {
+      "begin" : 0,
+      "end" : 259
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
+  }, {
+    "id" : "1844",
+    "span" : {
+      "begin" : 260,
+      "end" : 287
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
+  }, {
+    "id" : "19",
+    "span" : {
+      "begin" : 0,
+      "end" : 8
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "65",
+    "span" : {
+      "begin" : 9,
+      "end" : 18
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "111",
+    "span" : {
+      "begin" : 19,
+      "end" : 36
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "157",
+    "span" : {
+      "begin" : 37,
+      "end" : 48
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "203",
+    "span" : {
+      "begin" : 49,
+      "end" : 57
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "249",
+    "span" : {
+      "begin" : 58,
+      "end" : 78
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "295",
+    "span" : {
+      "begin" : 79,
+      "end" : 87
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "341",
+    "span" : {
+      "begin" : 88,
+      "end" : 89
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "387",
+    "span" : {
+      "begin" : 90,
+      "end" : 94
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "433",
+    "span" : {
+      "begin" : 95,
+      "end" : 100
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "479",
+    "span" : {
+      "begin" : 101,
+      "end" : 109
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "525",
+    "span" : {
+      "begin" : 110,
+      "end" : 130
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "571",
+    "span" : {
+      "begin" : 131,
+      "end" : 133
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "617",
+    "span" : {
+      "begin" : 134,
+      "end" : 142
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "663",
+    "span" : {
+      "begin" : 143,
+      "end" : 144
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "709",
+    "span" : {
+      "begin" : 145,
+      "end" : 147
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "755",
+    "span" : {
+      "begin" : 148,
+      "end" : 153
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "801",
+    "span" : {
+      "begin" : 154,
+      "end" : 162
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "847",
+    "span" : {
+      "begin" : 163,
+      "end" : 172
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "893",
+    "span" : {
+      "begin" : 173,
+      "end" : 183
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "939",
+    "span" : {
+      "begin" : 184,
+      "end" : 185
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "985",
+    "span" : {
+      "begin" : 186,
+      "end" : 188
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1031",
+    "span" : {
+      "begin" : 189,
+      "end" : 198
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1077",
+    "span" : {
+      "begin" : 199,
+      "end" : 204
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1123",
+    "span" : {
+      "begin" : 205,
+      "end" : 214
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1169",
+    "span" : {
+      "begin" : 215,
+      "end" : 232
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1215",
+    "span" : {
+      "begin" : 233,
+      "end" : 245
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1261",
+    "span" : {
+      "begin" : 246,
+      "end" : 257
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1307",
+    "span" : {
+      "begin" : 258,
+      "end" : 259
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1574",
+    "span" : {
+      "begin" : 260,
+      "end" : 261
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1620",
+    "span" : {
+      "begin" : 262,
+      "end" : 269
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1666",
+    "span" : {
+      "begin" : 270,
+      "end" : 274
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1712",
+    "span" : {
+      "begin" : 275,
+      "end" : 277
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1758",
+    "span" : {
+      "begin" : 278,
+      "end" : 287
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+  }, {
+    "id" : "1353",
+    "span" : {
+      "begin" : 0,
+      "end" : 8
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1361",
+    "span" : {
+      "begin" : 9,
+      "end" : 18
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1369",
+    "span" : {
+      "begin" : 19,
+      "end" : 36
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1377",
+    "span" : {
+      "begin" : 37,
+      "end" : 48
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1385",
+    "span" : {
+      "begin" : 49,
+      "end" : 57
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1393",
+    "span" : {
+      "begin" : 58,
+      "end" : 78
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1409",
+    "span" : {
+      "begin" : 90,
+      "end" : 94
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1417",
+    "span" : {
+      "begin" : 95,
+      "end" : 100
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1425",
+    "span" : {
+      "begin" : 101,
+      "end" : 109
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1433",
+    "span" : {
+      "begin" : 110,
+      "end" : 130
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1441",
+    "span" : {
+      "begin" : 131,
+      "end" : 133
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1449",
+    "span" : {
+      "begin" : 134,
+      "end" : 142
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1457",
+    "span" : {
+      "begin" : 143,
+      "end" : 144
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1465",
+    "span" : {
+      "begin" : 145,
+      "end" : 147
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1473",
+    "span" : {
+      "begin" : 148,
+      "end" : 153
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1481",
+    "span" : {
+      "begin" : 154,
+      "end" : 162
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1489",
+    "span" : {
+      "begin" : 163,
+      "end" : 172
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1497",
+    "span" : {
+      "begin" : 173,
+      "end" : 183
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1505",
+    "span" : {
+      "begin" : 184,
+      "end" : 185
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1513",
+    "span" : {
+      "begin" : 186,
+      "end" : 188
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1521",
+    "span" : {
+      "begin" : 189,
+      "end" : 198
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1529",
+    "span" : {
+      "begin" : 199,
+      "end" : 204
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1537",
+    "span" : {
+      "begin" : 205,
+      "end" : 214
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1545",
+    "span" : {
+      "begin" : 215,
+      "end" : 232
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1553",
+    "span" : {
+      "begin" : 233,
+      "end" : 245
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1561",
+    "span" : {
+      "begin" : 246,
+      "end" : 257
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1804",
+    "span" : {
+      "begin" : 260,
+      "end" : 261
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1812",
+    "span" : {
+      "begin" : 262,
+      "end" : 269
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1828",
+    "span" : {
+      "begin" : 275,
+      "end" : 277
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1836",
+    "span" : {
+      "begin" : 278,
+      "end" : 287
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+  }, {
+    "id" : "1401",
+    "span" : {
+      "begin" : 79,
+      "end" : 87
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT"
+  }, {
+    "id" : "1820",
+    "span" : {
+      "begin" : 270,
+      "end" : 274
+    },
+    "obj" : "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT"
+  } ],
+  "attributes" : [ {
+    "subject" : "42",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "value",
+    "value" : "N Nom Sg"
+  }, {
+    "subject" : "42",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "42",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "value",
+    "value" : "N Prop Gen Sg"
+  }, {
+    "subject" : "88",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "88",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "134",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "134",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "value",
+    "value" : "N Nom Sg"
+  }, {
+    "subject" : "180",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "180",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "value",
+    "value" : "N Prop Gen Sg"
+  }, {
+    "subject" : "226",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "226",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "272",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "272",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "value",
+    "value" : "N Nom Sg"
+  }, {
+    "subject" : "318",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "318",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "value",
+    "value" : "Punct"
+  }, {
+    "subject" : "364",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "364",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "value",
+    "value" : "Pron Rel Nom Sg"
+  }, {
+    "subject" : "410",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "410",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "value",
+    "value" : "V Prs Act Sg3"
+  }, {
+    "subject" : "456",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "456",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "value",
+    "value" : "N Ill Sg"
+  }, {
+    "subject" : "502",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "502",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "548",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "548",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "value",
+    "value" : "Num Digit Nom Sg"
+  }, {
+    "subject" : "594",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "594",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "640",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "640",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "value",
+    "value" : "Punct"
+  }, {
+    "subject" : "686",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "686",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "value",
+    "value" : "CC"
+  }, {
+    "subject" : "732",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "732",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "value",
+    "value" : "V Prs Act Sg3"
+  }, {
+    "subject" : "778",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "778",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "value",
+    "value" : "N Ill Sg"
+  }, {
+    "subject" : "824",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "824",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "870",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "870",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "916",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "916",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "value",
+    "value" : "Punct"
+  }, {
+    "subject" : "962",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "962",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "value",
+    "value" : "V Prs Act Sg3"
+  }, {
+    "subject" : "1008",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1008",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "value",
+    "value" : "PrfPrc Act Pos Nom Sg"
+  }, {
+    "subject" : "1054",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1054",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "value",
+    "value" : "V Inf1 Lat"
+  }, {
+    "subject" : "1100",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1100",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "value",
+    "value" : "N Prop Gen Sg"
+  }, {
+    "subject" : "1146",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1146",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "1192",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1192",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "value",
+    "value" : "N Gen Sg"
+  }, {
+    "subject" : "1238",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1238",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "value",
+    "value" : "Adv Pos Man"
+  }, {
+    "subject" : "1284",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1284",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "value",
+    "value" : "Punct"
+  }, {
+    "subject" : "1330",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1330",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "value",
+    "value" : "Num Digit Nom Sg"
+  }, {
+    "subject" : "1597",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1597",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "value",
+    "value" : "N Nom Sg"
+  }, {
+    "subject" : "1643",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1643",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "value",
+    "value" : "N Nom Sg"
+  }, {
+    "subject" : "1689",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1689",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "value",
+    "value" : "CC"
+  }, {
+    "subject" : "1735",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1735",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "gender",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "number",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "case",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "degree",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "verbForm",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "tense",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "mood",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "voice",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "definiteness",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "value",
+    "value" : "N Nom Sg"
+  }, {
+    "subject" : "1781",
+    "key" : "person",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "aspect",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "animacy",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "negative",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "numType",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "possessive",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "pronType",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "reflex",
+    "value" : null
+  }, {
+    "subject" : "1781",
+    "key" : "transitivity",
+    "value" : null
+  }, {
+    "subject" : "36",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "36",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "82",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "82",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "128",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "128",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "174",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "174",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "220",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "220",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "266",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "266",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "312",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "312",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "358",
+    "key" : "PosValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "358",
+    "key" : "coarseValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "404",
+    "key" : "PosValue",
+    "value" : "Pron"
+  }, {
+    "subject" : "404",
+    "key" : "coarseValue",
+    "value" : "Pron"
+  }, {
+    "subject" : "450",
+    "key" : "PosValue",
+    "value" : "V"
+  }, {
+    "subject" : "450",
+    "key" : "coarseValue",
+    "value" : "V"
+  }, {
+    "subject" : "496",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "496",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "542",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "542",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "588",
+    "key" : "PosValue",
+    "value" : "Num"
+  }, {
+    "subject" : "588",
+    "key" : "coarseValue",
+    "value" : "Num"
+  }, {
+    "subject" : "634",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "634",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "680",
+    "key" : "PosValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "680",
+    "key" : "coarseValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "726",
+    "key" : "PosValue",
+    "value" : "CC"
+  }, {
+    "subject" : "726",
+    "key" : "coarseValue",
+    "value" : "CC"
+  }, {
+    "subject" : "772",
+    "key" : "PosValue",
+    "value" : "V"
+  }, {
+    "subject" : "772",
+    "key" : "coarseValue",
+    "value" : "V"
+  }, {
+    "subject" : "818",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "818",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "864",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "864",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "910",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "910",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "956",
+    "key" : "PosValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "956",
+    "key" : "coarseValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "1002",
+    "key" : "PosValue",
+    "value" : "V"
+  }, {
+    "subject" : "1002",
+    "key" : "coarseValue",
+    "value" : "V"
+  }, {
+    "subject" : "1048",
+    "key" : "PosValue",
+    "value" : "PrfPrc"
+  }, {
+    "subject" : "1048",
+    "key" : "coarseValue",
+    "value" : "PrfPrc"
+  }, {
+    "subject" : "1094",
+    "key" : "PosValue",
+    "value" : "V"
+  }, {
+    "subject" : "1094",
+    "key" : "coarseValue",
+    "value" : "V"
+  }, {
+    "subject" : "1140",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "1140",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "1186",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "1186",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "1232",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "1232",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "1278",
+    "key" : "PosValue",
+    "value" : "Adv"
+  }, {
+    "subject" : "1278",
+    "key" : "coarseValue",
+    "value" : "Adv"
+  }, {
+    "subject" : "1324",
+    "key" : "PosValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "1324",
+    "key" : "coarseValue",
+    "value" : "Punct"
+  }, {
+    "subject" : "1591",
+    "key" : "PosValue",
+    "value" : "Num"
+  }, {
+    "subject" : "1591",
+    "key" : "coarseValue",
+    "value" : "Num"
+  }, {
+    "subject" : "1637",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "1637",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "1683",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "1683",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "1729",
+    "key" : "PosValue",
+    "value" : "CC"
+  }, {
+    "subject" : "1729",
+    "key" : "coarseValue",
+    "value" : "CC"
+  }, {
+    "subject" : "1775",
+    "key" : "PosValue",
+    "value" : "N"
+  }, {
+    "subject" : "1775",
+    "key" : "coarseValue",
+    "value" : "N"
+  }, {
+    "subject" : "31",
+    "key" : "value",
+    "value" : "neuvosto"
+  }, {
+    "subject" : "77",
+    "key" : "value",
+    "value" : "Euratom"
+  }, {
+    "subject" : "123",
+    "key" : "value",
+    "value" : "hankinta#keskus"
+  }, {
+    "subject" : "169",
+    "key" : "value",
+    "value" : "perus#sääntö"
+  }, {
+    "subject" : "215",
+    "key" : "value",
+    "value" : "Eurooppa"
+  }, {
+    "subject" : "261",
+    "key" : "value",
+    "value" : "atomi#energia#yhteisö"
+  }, {
+    "subject" : "307",
+    "key" : "value",
+    "value" : "neuvosto"
+  }, {
+    "subject" : "353",
+    "key" : "value",
+    "value" : ","
+  }, {
+    "subject" : "399",
+    "key" : "value",
+    "value" : "joka"
+  }, {
+    "subject" : "445",
+    "key" : "value",
+    "value" : "ottaa"
+  }, {
+    "subject" : "491",
+    "key" : "value",
+    "value" : "huomio"
+  }, {
+    "subject" : "537",
+    "key" : "value",
+    "value" : "perustamis#sopimus"
+  }, {
+    "subject" : "583",
+    "key" : "value",
+    "value" : "54"
+  }, {
+    "subject" : "629",
+    "key" : "value",
+    "value" : "artikla"
+  }, {
+    "subject" : "675",
+    "key" : "value",
+    "value" : ","
+  }, {
+    "subject" : "721",
+    "key" : "value",
+    "value" : "ja"
+  }, {
+    "subject" : "767",
+    "key" : "value",
+    "value" : "ottaa"
+  }, {
+    "subject" : "813",
+    "key" : "value",
+    "value" : "huomio"
+  }, {
+    "subject" : "859",
+    "key" : "value",
+    "value" : "komissio"
+  }, {
+    "subject" : "905",
+    "key" : "value",
+    "value" : "ehdotus"
+  }, {
+    "subject" : "951",
+    "key" : "value",
+    "value" : ","
+  }, {
+    "subject" : "997",
+    "key" : "value",
+    "value" : "olla"
+  }, {
+    "subject" : "1043",
+    "key" : "value",
+    "value" : "päättää"
+  }, {
+    "subject" : "1089",
+    "key" : "value",
+    "value" : "antaa"
+  }, {
+    "subject" : "1135",
+    "key" : "value",
+    "value" : "Euratom"
+  }, {
+    "subject" : "1181",
+    "key" : "value",
+    "value" : "hankinta#keskus"
+  }, {
+    "subject" : "1227",
+    "key" : "value",
+    "value" : "perus#sääntö"
+  }, {
+    "subject" : "1273",
+    "key" : "value",
+    "value" : "seuraava"
+  }, {
+    "subject" : "1319",
+    "key" : "value",
+    "value" : ":"
+  }, {
+    "subject" : "1586",
+    "key" : "value",
+    "value" : "1"
+  }, {
+    "subject" : "1632",
+    "key" : "value",
+    "value" : "artikla"
+  }, {
+    "subject" : "1678",
+    "key" : "value",
+    "value" : "nimi"
+  }, {
+    "subject" : "1724",
+    "key" : "value",
+    "value" : "ja"
+  }, {
+    "subject" : "1770",
+    "key" : "value",
+    "value" : "tarkoitus"
+  }, {
+    "subject" : "1569",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1844",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "19",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "19",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "65",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "65",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "111",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "111",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "157",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "157",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "203",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "203",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "249",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "249",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "295",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "295",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "341",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "341",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "387",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "387",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "433",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "433",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "479",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "479",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "525",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "525",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "571",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "571",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "617",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "617",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "663",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "663",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "709",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "709",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "755",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "755",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "801",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "801",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "847",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "847",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "893",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "893",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "939",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "939",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "985",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "985",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1031",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1031",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1077",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1077",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1123",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1123",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1169",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1169",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1215",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1215",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1261",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1261",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1307",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1307",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1574",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1574",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1620",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1620",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1666",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1666",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1712",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1712",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1758",
+    "key" : "id",
+    "value" : null
+  }, {
+    "subject" : "1758",
+    "key" : "syntacticFunction",
+    "value" : null
+  }, {
+    "subject" : "1353",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1353",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1361",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1361",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1369",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1369",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1377",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1377",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1385",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1385",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1393",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1393",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1409",
+    "key" : "DependencyType",
+    "value" : "subj"
+  }, {
+    "subject" : "1409",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1417",
+    "key" : "DependencyType",
+    "value" : "mod"
+  }, {
+    "subject" : "1417",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1425",
+    "key" : "DependencyType",
+    "value" : "phrv"
+  }, {
+    "subject" : "1425",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1433",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1433",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1441",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1441",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1449",
+    "key" : "DependencyType",
+    "value" : "obj"
+  }, {
+    "subject" : "1449",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1457",
+    "key" : "DependencyType",
+    "value" : "phrm"
+  }, {
+    "subject" : "1457",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1465",
+    "key" : "DependencyType",
+    "value" : "phrm"
+  }, {
+    "subject" : "1465",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1473",
+    "key" : "DependencyType",
+    "value" : "conjunct"
+  }, {
+    "subject" : "1473",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1481",
+    "key" : "DependencyType",
+    "value" : "phrv"
+  }, {
+    "subject" : "1481",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1489",
+    "key" : "DependencyType",
+    "value" : "subj"
+  }, {
+    "subject" : "1489",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1497",
+    "key" : "DependencyType",
+    "value" : "obj"
+  }, {
+    "subject" : "1497",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1505",
+    "key" : "DependencyType",
+    "value" : "phrm"
+  }, {
+    "subject" : "1505",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1513",
+    "key" : "DependencyType",
+    "value" : "aux"
+  }, {
+    "subject" : "1513",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1521",
+    "key" : "DependencyType",
+    "value" : "conjunct"
+  }, {
+    "subject" : "1521",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1529",
+    "key" : "DependencyType",
+    "value" : "obj"
+  }, {
+    "subject" : "1529",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1537",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1537",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1545",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1545",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1553",
+    "key" : "DependencyType",
+    "value" : "obj"
+  }, {
+    "subject" : "1553",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1561",
+    "key" : "DependencyType",
+    "value" : "advl"
+  }, {
+    "subject" : "1561",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1804",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1804",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1812",
+    "key" : "DependencyType",
+    "value" : "attr"
+  }, {
+    "subject" : "1812",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1828",
+    "key" : "DependencyType",
+    "value" : "phrm"
+  }, {
+    "subject" : "1828",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1836",
+    "key" : "DependencyType",
+    "value" : "conjunct"
+  }, {
+    "subject" : "1836",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1401",
+    "key" : "DependencyType",
+    "value" : "main"
+  }, {
+    "subject" : "1401",
+    "key" : "flavor",
+    "value" : "basic"
+  }, {
+    "subject" : "1820",
+    "key" : "DependencyType",
+    "value" : "main"
+  }, {
+    "subject" : "1820",
+    "key" : "flavor",
+    "value" : "basic"
+  } ]
+}
