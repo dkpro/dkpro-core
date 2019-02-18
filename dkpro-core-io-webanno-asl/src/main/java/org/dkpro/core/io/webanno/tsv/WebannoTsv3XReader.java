@@ -23,15 +23,20 @@ import java.io.LineNumberReader;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.webanno.tsv.internal.tsv3x.Tsv3XDeserializer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * Reads the WebAnno TSV v3.x format.
  */
+@ResourceMetaData(name = "PubAnnotation Reader")
+@MimeTypeCapability({MimeTypes.TEXT_X_WEBANNO_TSV3})
 public class WebannoTsv3XReader
     extends JCasResourceCollectionReader_ImplBase
 {
