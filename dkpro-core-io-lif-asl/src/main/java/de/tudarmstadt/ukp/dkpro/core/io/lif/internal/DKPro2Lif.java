@@ -44,6 +44,8 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
 public class DKPro2Lif
 {
+    private static final String DKPRO_CORE_LIF_CONVERTER = "DKPro Core LIF Converter";
+    
     private static final String PHRASE_STRUCTURE = "phrasestruct";
     private static final String CONSTITUENT = "const";
     private static final String DEPENDENCY_STRUCTURE = "depstruct";
@@ -67,32 +69,40 @@ public class DKPro2Lif
         for (Paragraph p : select(aJCas, Paragraph.class)) {
             convertParagraph(view, p);
         }
+        view.addContains(Discriminators.Uri.PARAGRAPH, DKPRO_CORE_LIF_CONVERTER, "Paragraph");
 
         // Sentence
         for (Sentence s : select(aJCas, Sentence.class)) {
             convertSentence(view, s);
         }
+        view.addContains(Discriminators.Uri.SENTENCE, DKPRO_CORE_LIF_CONVERTER, "Sentence");
 
         // Token, POS, Lemma
         for (Token t : select(aJCas, Token.class)) {
             convertToken(view, t);
         }
+        view.addContains(Discriminators.Uri.TOKEN, DKPRO_CORE_LIF_CONVERTER, "Token");
+        view.addContains(Discriminators.Uri.LEMMA, DKPRO_CORE_LIF_CONVERTER, "Lemma");
+        view.addContains(Discriminators.Uri.POS, DKPRO_CORE_LIF_CONVERTER, "POS");
 
         // NamedEntity
         for (NamedEntity ne : select(aJCas, NamedEntity.class)) {
             convertNamedEntity(view, ne);
         }
+        view.addContains(Discriminators.Uri.NE, DKPRO_CORE_LIF_CONVERTER, "Named entity");
 
         // Dependencies
         for (Sentence s : select(aJCas, Sentence.class)) {
             convertDependencies(view, s);
         }
+        view.addContains(Discriminators.Uri.DEPENDENCY, DKPRO_CORE_LIF_CONVERTER, "Dependencies");
         
         // Constituents
         for (ROOT r : select(aJCas, ROOT.class)) {
             convertConstituents(view, r);
         }
-        
+        view.addContains(Discriminators.Uri.PHRASE_STRUCTURE, DKPRO_CORE_LIF_CONVERTER,
+                "Constituents");
     }
     
     private void convertParagraph(View aTarget, Paragraph aParagraph)

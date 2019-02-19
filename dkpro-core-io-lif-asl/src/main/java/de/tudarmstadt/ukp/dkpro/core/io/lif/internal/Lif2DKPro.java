@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 public class Lif2DKPro
 {
+    private static final String DKPRO_CORE_LIF_CONVERTER = "DKPro Core LIF Converter";
     private Map<String, Token> tokenIdx;
     
     public void convert(Container aContainer, JCas aJCas)
@@ -65,31 +66,38 @@ public class Lif2DKPro
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.PARAGRAPH.equals(a.getAtType()))
             .forEach(para -> convertParagraph(aJCas, para));
+        view.addContains(Discriminators.Uri.PARAGRAPH, DKPRO_CORE_LIF_CONVERTER, "Paragraph");
 
         // Sentence
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.SENTENCE.equals(a.getAtType()))
             .forEach(sent -> convertSentence(aJCas, sent));
+        view.addContains(Discriminators.Uri.SENTENCE, DKPRO_CORE_LIF_CONVERTER, "Sentence");
 
         // Token, POS, Lemma (builds token index)
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.TOKEN.equals(a.getAtType()))
             .forEach(token -> convertToken(aJCas, token));
+        view.addContains(Discriminators.Uri.TOKEN, DKPRO_CORE_LIF_CONVERTER, "Token");
 
         // NamedEntity
         view.getAnnotations().stream()
-            .filter(a -> Discriminators.Uri.NE.equals(a.getAtType()))
+            .filter(a -> isNamedEntity(a.getAtType()))
             .forEach(ne -> convertNamedEntity(aJCas, ne));
+        view.addContains(Discriminators.Uri.NE, DKPRO_CORE_LIF_CONVERTER, "Named entity");
         
         // Dependencies (requires token index)
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.DEPENDENCY.equals(a.getAtType()))
             .forEach(dep -> convertDependency(aJCas, dep));
+        view.addContains(Discriminators.Uri.DEPENDENCY, DKPRO_CORE_LIF_CONVERTER, "Dependencies");
         
         // Constituents (requires token index)
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.PHRASE_STRUCTURE.equals(a.getAtType()))
             .forEach(ps -> convertConstituents(aJCas, view, ps));
+        view.addContains(Discriminators.Uri.PHRASE_STRUCTURE, DKPRO_CORE_LIF_CONVERTER,
+                "Constituents");
     }
     
     private Object convertConstituents(JCas aJCas, View view, Annotation ps)
@@ -210,7 +218,8 @@ public class Lif2DKPro
         }
 
         token.addToIndexes();
-        tokenIdx.put(token.getId(), token);
+        
+        tokenIdx.put(aToken.getId(), token);
         
         return token;
     }
@@ -310,5 +319,13 @@ public class Lif2DKPro
         
         // Return the ID of the root constituent
         return constituents.iterator().next();
+    }
+    
+    private boolean isNamedEntity(String aTypeName)
+    {
+        return Discriminators.Uri.NE.equals(aTypeName) || Discriminators.Uri.DATE.equals(aTypeName)
+                || Discriminators.Uri.LOCATION.equals(aTypeName)
+                || Discriminators.Uri.ORGANIZATION.equals(aTypeName)
+                || Discriminators.Uri.PERSON.equals(aTypeName);
     }
 }

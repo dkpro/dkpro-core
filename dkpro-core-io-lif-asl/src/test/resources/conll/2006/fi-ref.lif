@@ -7,7 +7,42 @@
   },
   "views" : [ {
     "id" : "v1",
-    "metadata" : { },
+    "metadata" : {
+      "contains" : {
+        "http://vocab.lappsgrid.org/Paragraph" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Paragraph"
+        },
+        "http://vocab.lappsgrid.org/Sentence" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Sentence"
+        },
+        "http://vocab.lappsgrid.org/Token" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Token"
+        },
+        "http://vocab.lappsgrid.org/Token#lemma" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Lemma"
+        },
+        "http://vocab.lappsgrid.org/Token#pos" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "POS"
+        },
+        "http://vocab.lappsgrid.org/NamedEntity" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Named entity"
+        },
+        "http://vocab.lappsgrid.org/Dependency" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Dependencies"
+        },
+        "http://vocab.lappsgrid.org/PhraseStructure" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Constituents"
+        }
+      }
+    },
     "annotations" : [ {
       "id" : "sent-0",
       "start" : 0,
