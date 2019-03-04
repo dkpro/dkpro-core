@@ -1,0 +1,130 @@
+<!--
+   Copyright 2018
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
+	</import>
+
+	<!-- 
+    - Output package configuration
+    -->
+	<property name="outputPackage" value="org/dkpro/core/mystem/lib"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="install-executables"/>
+
+	
+	<target name="install-executables">
+		<property name="version.bin" value="20180116.0"/>
+		<mkdir dir="target/download"/>
+
+		<!-- OSX -->
+		<get 
+           src="http://download.cdn.yandex.net/mystem/mystem-3.1-macosx.tar.gz" 
+           dest="target/download/mystem-3.1-macosx.tar.gz" 
+           skipexisting="true"/>
+		<gunzip 
+           src="target/download/mystem-3.1-macosx.tar.gz"
+           dest="target/download/mystem-3.1-macosx.tar"/>
+		<untar 
+           src="target/download/mystem-3.1-macosx.tar"
+           dest="target/model-staging/org/dkpro/core/mystem/bin/osx-x86_64">
+			<patternset>
+				<include name="*"/>
+			</patternset>
+		</untar>
+		<propertyfile
+        file="target/model-staging/org/dkpro/core/mystem/bin/osx-x86_64/manifest.properties">
+			<entry  key="mystem" value="executable"/>
+		</propertyfile>
+
+		<!-- Linux 64 -->
+		<get 
+           src="http://download.cdn.yandex.net/mystem/mystem-3.1-linux-64bit.tar.gz" 
+           dest="target/download/mystem-3.1-linux-64bit.tar.gz" 
+           skipexisting="true"/>
+		<gunzip 
+           src="target/download/mystem-3.1-linux-64bit.tar.gz"
+           dest="target/download/mystem-3.1-linux-64bit.tar"/>
+		<untar 
+           src="target/download/mystem-3.1-linux-64bit.tar"
+           dest="target/model-staging/org/dkpro/core/mystem/bin/linux-x86_64">
+			<patternset>
+				<include name="*" />
+			</patternset>
+		</untar>
+		<propertyfile
+        file="target/model-staging/org/dkpro/core/mystem/bin/linux-x86_64/manifest.properties">
+			<entry  key="mystem" value="executable"/>
+		</propertyfile>
+
+		<!-- Window 64bit -->
+		<get 
+           src="http://download.cdn.yandex.net/mystem/mystem-3.1-win-64bit.zip" 
+           dest="target/download/mystem-3.1-win-64bit.zip" 
+           skipexisting="true"/>
+		<mkdir dir="target/model-staging/org/dkpro/core/mystem/bin/windows-x86_64"/>
+		<unzip src="target/download/mystem-3.1-win-64bit.zip"
+		       dest="target/model-staging/org/dkpro/core/mystem/bin/windows-x86_64">
+		    <patternset>
+		        <include name="*"/>
+		    </patternset>
+		</unzip>
+		<move file="target/model-staging/org/dkpro/core/mystem/bin/windows-x86_64/mystem.exe" 
+			  tofile="target/model-staging/org/dkpro/core/mystem/bin/windows-x86_64/mystem"/>
+		<propertyfile
+             file="target/model-staging/org/dkpro/core/mystem/bin/windows-x86_64/manifest.properties">
+			<entry  key="mystem" value="executable"/>
+		</propertyfile>
+
+		
+		<echo file="target/model-staging/org/dkpro/core/mystem/bin/README">
+				MyStem version 3.1
+		</echo>
+		
+		<jar 
+           destfile="target/dkpro-core-mystem-bin-${version.bin}.jar" 
+           compress="true">
+			<fileset dir="target/model-staging">
+				<include name="META-INF/**/*"/>
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+
+	<generate-pom 
+      groupId="org.dkpro.core"
+      artifactId="dkpro-core-mystem-bin" 
+      version="${version.bin}"/>
+
+	<install-artifact 
+      file="target/dkpro-core-mystem-bin-${version.bin}.jar"
+      groupId="org.dkpro.core"
+      artifactId="dkpro-core-mystem-bin" 
+      version="${version.bin}"/>
+	
+	</target>
+</project>
