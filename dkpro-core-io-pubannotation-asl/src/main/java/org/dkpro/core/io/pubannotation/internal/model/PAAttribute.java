@@ -17,14 +17,21 @@
  */
 package org.dkpro.core.io.pubannotation.internal.model;
 
-// "attributes": [
-//   {"id": "T1", "key": "lala", "value": "lolo"},
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+// "attributions":[
+// {"subj":string:denotation-id, "pred":string:attribute-name,"obj":string:attribute-value}
 // ]
 public class PAAttribute
 {
+    @JsonProperty("subj")
     private String subject;
-    private String key;
-    private String value;
+    
+    @JsonProperty("pred")
+    private String predicate;
+    
+    @JsonProperty("obj")
+    private String object;
     
     public PAAttribute()
     {
@@ -34,8 +41,8 @@ public class PAAttribute
     public PAAttribute(String aSubject, String aKey, String aValue)
     {
         subject = aSubject;
-        key = aKey;
-        value = aValue;
+        predicate = aKey;
+        object = aValue;
     }
 
     public String getSubject()
@@ -48,23 +55,23 @@ public class PAAttribute
         subject = aSubject;
     }
 
-    public String getKey()
+    public String getPredicate()
     {
-        return key;
+        return predicate;
     }
 
-    public void setKey(String aKey)
+    public void setPredicate(String aKey)
     {
-        key = aKey;
+        predicate = aKey;
     }
 
-    public String getValue()
+    public String getObject()
     {
-        return value;
+        return object;
     }
 
-    public void setValue(String aValue)
+    public void setObject(String aValue)
     {
-        value = aValue;
+        object = aValue;
     }
 }
