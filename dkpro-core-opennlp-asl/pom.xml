@@ -30,7 +30,7 @@
   <name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <opennlp.version>1.9.0</opennlp.version>
+    <opennlp.version>1.9.1</opennlp.version>
   </properties>
   <dependencies>
     <dependency>
