@@ -67,5 +67,5 @@ V_COP=POS_VERB
 V_PRS=POS_VERB
 # V_SUB - Subjunctive verb
 V_SUB=POS_VERB
-*=POS_X
+*=POS
 

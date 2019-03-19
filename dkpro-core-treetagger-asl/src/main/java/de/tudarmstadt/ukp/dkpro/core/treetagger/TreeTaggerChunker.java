@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createChunkMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -52,7 +53,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -125,6 +125,14 @@ public class TreeTaggerChunker
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     protected String modelEncoding;
+
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for chunk tags to UIMA types.
@@ -237,8 +245,8 @@ public class TreeTaggerChunker
             }
         };
 
-        mappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
-                language, modelProvider);
+        mappingProvider = createChunkMappingProvider(this, chunkMappingLocation, language,
+                modelProvider);
     }
 
     @Override

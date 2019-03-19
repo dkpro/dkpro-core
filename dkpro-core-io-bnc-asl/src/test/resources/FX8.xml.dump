@@ -609,12 +609,11 @@ Token
       PosValue: "VVI"
       coarseValue: "VERB"
 [to]
-POS_X
+POS
    sofa: _InitialView
    begin: 88
    end: 90
    PosValue: "TO0"
-   coarseValue: "X"
 [to]
 Lemma
    sofa: _InitialView
@@ -631,12 +630,11 @@ Token
       begin: 88
       end: 90
       value: "to"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 88
       end: 90
       PosValue: "TO0"
-      coarseValue: "X"
 [tell]
 POS_VERB
    sofa: _InitialView
@@ -841,12 +839,11 @@ Token
       PosValue: "VVN"
       coarseValue: "VERB"
 [to]
-POS_X
+POS
    sofa: _InitialView
    begin: 120
    end: 122
    PosValue: "TO0"
-   coarseValue: "X"
 [to]
 Lemma
    sofa: _InitialView
@@ -863,12 +860,11 @@ Token
       begin: 120
       end: 122
       value: "to"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 120
       end: 122
       PosValue: "TO0"
-      coarseValue: "X"
 [call]
 POS_VERB
    sofa: _InitialView
@@ -1317,12 +1313,11 @@ Token
       PosValue: "VVD"
       coarseValue: "VERB"
 [herself]
-POS_X
+POS
    sofa: _InitialView
    begin: 194
    end: 201
    PosValue: "PNX"
-   coarseValue: "X"
 [herself]
 Lemma
    sofa: _InitialView
@@ -1339,12 +1334,11 @@ Token
       begin: 194
       end: 201
       value: "herself"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 194
       end: 201
       PosValue: "PNX"
-      coarseValue: "X"
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -1606,12 +1600,11 @@ Token
       PosValue: "VVD"
       coarseValue: "VERB"
 [to]
-POS_X
+POS
    sofa: _InitialView
    begin: 242
    end: 244
    PosValue: "TO0"
-   coarseValue: "X"
 [to]
 Lemma
    sofa: _InitialView
@@ -1628,12 +1621,11 @@ Token
       begin: 242
       end: 244
       value: "to"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 242
       end: 244
       PosValue: "TO0"
-      coarseValue: "X"
 [buy]
 POS_VERB
    sofa: _InitialView
@@ -1693,12 +1685,11 @@ Token
       PosValue: "PNI"
       coarseValue: "PRON"
 [herself]
-POS_X
+POS
    sofa: _InitialView
    begin: 260
    end: 267
    PosValue: "PNX"
-   coarseValue: "X"
 [herself]
 Lemma
    sofa: _InitialView
@@ -1715,12 +1706,11 @@ Token
       begin: 260
       end: 267
       value: "herself"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 260
       end: 267
       PosValue: "PNX"
-      coarseValue: "X"
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -2482,12 +2472,11 @@ Token
       PosValue: "VVB"
       coarseValue: "VERB"
 [to]
-POS_X
+POS
    sofa: _InitialView
    begin: 392
    end: 394
    PosValue: "TO0"
-   coarseValue: "X"
 [to]
 Lemma
    sofa: _InitialView
@@ -2504,12 +2493,11 @@ Token
       begin: 392
       end: 394
       value: "to"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 392
       end: 394
       PosValue: "TO0"
-      coarseValue: "X"
 [go]
 POS_VERB
    sofa: _InitialView
@@ -2848,12 +2836,11 @@ Token
       PosValue: "NN1"
       coarseValue: "NOUN"
 [to]
-POS_X
+POS
    sofa: _InitialView
    begin: 444
    end: 446
    PosValue: "TO0"
-   coarseValue: "X"
 [to]
 Lemma
    sofa: _InitialView
@@ -2870,12 +2857,11 @@ Token
       begin: 444
       end: 446
       value: "to"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 444
       end: 446
       PosValue: "TO0"
-      coarseValue: "X"
 [go]
 POS_VERB
    sofa: _InitialView
@@ -3324,12 +3310,11 @@ Token
       PosValue: "VVG"
       coarseValue: "VERB"
 [na]
-POS_X
+POS
    sofa: _InitialView
    begin: 502
    end: 504
    PosValue: "TO0"
-   coarseValue: "X"
 [na]
 Lemma
    sofa: _InitialView
@@ -3346,12 +3331,11 @@ Token
       begin: 502
       end: 504
       value: "na"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 502
       end: 504
       PosValue: "TO0"
-      coarseValue: "X"
 [get]
 POS_VERB
    sofa: _InitialView
@@ -3411,12 +3395,11 @@ Token
       PosValue: "PRP"
       coarseValue: "ADP"
 [up]
-POS_X
+POS
    sofa: _InitialView
    begin: 512
    end: 514
    PosValue: "AVP"
-   coarseValue: "X"
 [up]
 Lemma
    sofa: _InitialView
@@ -3433,12 +3416,11 @@ Token
       begin: 512
       end: 514
       value: "up"
-   pos: POS_X
+   pos: POS
       sofa: _InitialView
       begin: 512
       end: 514
       PosValue: "AVP"
-      coarseValue: "X"
 [to]
 POS_ADP
    sofa: _InitialView

@@ -5,7 +5,7 @@
 __META_SOURCE_URL__=Source: http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=POS_X
+*=POS
 APn=POS_ADJ
 APp=POS_ADJ
 APs=POS_ADJ

@@ -17,6 +17,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -37,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import eu.openminted.share.annotations.api.DocumentationResource;
@@ -76,15 +78,6 @@ public class PennTreebankCombinedReader
     protected String posTagset;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
-     */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-    protected String posMappingLocation;
-
-    /**
      * Sets whether to create or not to create POS tags. The creation of
      * constituent tags must be turned on for this to work.
      */
@@ -102,6 +95,23 @@ public class PennTreebankCombinedReader
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
     
+    /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
+
     /**
      * Load the constituent tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
@@ -140,10 +150,10 @@ public class PennTreebankCombinedReader
     {
         super.initialize(aContext);
         
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                posTagset, getLanguage());
-        
-        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                getLanguage());
+
+        constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, constituentTagset, getLanguage());
         
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);

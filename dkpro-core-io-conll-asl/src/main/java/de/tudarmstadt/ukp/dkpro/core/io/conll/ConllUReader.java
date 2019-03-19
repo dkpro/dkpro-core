@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.BufferedReader;
@@ -49,7 +50,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
@@ -120,6 +120,14 @@ public class ConllUReader
     protected String posTagset;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+    
+    /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
@@ -173,8 +181,8 @@ public class ConllUReader
     {
         super.initialize(aContext);
         
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                getLanguage());
     }
     
     @Override
@@ -426,7 +434,7 @@ public class ConllUReader
     private static List<String[]> readSentence(BufferedReader aReader)
         throws IOException
     {
-        List<String[]> words = new ArrayList<String[]>();
+        List<String[]> words = new ArrayList<>();
         String line;
         while ((line = aReader.readLine()) != null) {
             if (StringUtils.isBlank(line)) {

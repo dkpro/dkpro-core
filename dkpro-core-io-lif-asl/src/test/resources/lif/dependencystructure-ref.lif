@@ -1,0 +1,100 @@
+{
+  "@context" : "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+  "metadata" : { },
+  "text" : {
+    "@value" : "Sue sees herself",
+    "@language" : "en"
+  },
+  "views" : [ {
+    "id" : "v1",
+    "metadata" : {
+      "contains" : {
+        "http://vocab.lappsgrid.org/Paragraph" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Paragraph"
+        },
+        "http://vocab.lappsgrid.org/Sentence" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Sentence"
+        },
+        "http://vocab.lappsgrid.org/Token" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Token"
+        },
+        "http://vocab.lappsgrid.org/Token#lemma" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Lemma"
+        },
+        "http://vocab.lappsgrid.org/Token#pos" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "POS"
+        },
+        "http://vocab.lappsgrid.org/NamedEntity" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Named entity"
+        },
+        "http://vocab.lappsgrid.org/Dependency" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Dependencies"
+        },
+        "http://vocab.lappsgrid.org/PhraseStructure" : {
+          "producer" : "DKPro Core LIF Converter",
+          "type" : "Constituents"
+        }
+      }
+    },
+    "annotations" : [ {
+      "id" : "sent-0",
+      "start" : 0,
+      "end" : 16,
+      "@type" : "http://vocab.lappsgrid.org/Sentence"
+    }, {
+      "id" : "tok-0",
+      "start" : 0,
+      "end" : 3,
+      "@type" : "http://vocab.lappsgrid.org/Token"
+    }, {
+      "id" : "tok-1",
+      "start" : 4,
+      "end" : 8,
+      "@type" : "http://vocab.lappsgrid.org/Token"
+    }, {
+      "id" : "tok-2",
+      "start" : 9,
+      "end" : 16,
+      "@type" : "http://vocab.lappsgrid.org/Token"
+    }, {
+      "id" : "dep-0",
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "nsubj",
+      "features" : {
+        "governor" : "tok-1",
+        "dependent" : "tok-0"
+      }
+    }, {
+      "id" : "dep-1",
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "ROOT",
+      "features" : {
+        "governor" : "tok-1",
+        "dependent" : "tok-1"
+      }
+    }, {
+      "id" : "dep-2",
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "nobj",
+      "features" : {
+        "governor" : "tok-1",
+        "dependent" : "tok-2"
+      }
+    }, {
+      "id" : "depstruct-0",
+      "start" : 0,
+      "end" : 16,
+      "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
+      "features" : {
+        "dependencies" : [ "dep-0", "dep-1", "dep-2" ]
+      }
+    } ]
+  } ]
+}

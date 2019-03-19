@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_POS;
@@ -82,7 +83,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -186,6 +186,14 @@ public class TeiReader
     private boolean omitIgnorableWhitespace;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_POS_MAPPING_LOCATION = 
@@ -238,8 +246,8 @@ public class TeiReader
             throw new ResourceInitializationException(e);
         }
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(mappingPosLocation,
-                posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
+                getLanguage());
     }
 
     private void nextTeiElement() throws CollectionException, IOException

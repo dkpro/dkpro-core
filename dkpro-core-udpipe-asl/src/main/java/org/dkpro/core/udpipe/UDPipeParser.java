@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.udpipe;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createDependencyMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -44,7 +45,6 @@ import cz.cuni.mff.ufal.udpipe.Model;
 import cz.cuni.mff.ufal.udpipe.ProcessingError;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -110,6 +110,14 @@ public class UDPipeParser
     protected String modelLocation;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Load the dependency to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
@@ -151,8 +159,8 @@ public class UDPipeParser
             }
         };
         
-        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(
-                dependencyMappingLocation, language, modelProvider);
+        mappingProvider = createDependencyMappingProvider(this, dependencyMappingLocation, language,
+                modelProvider);
     }
 
     @Override

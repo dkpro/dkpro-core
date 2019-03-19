@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -63,7 +64,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -113,6 +113,14 @@ public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_POS_MAPPING_LOCATION = 
@@ -154,8 +162,8 @@ public class TigerXmlReader
     {
         super.initialize(aContext);
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(mappingPosLocation,
-                posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
+                getLanguage());
     }
 
     @Override

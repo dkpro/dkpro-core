@@ -6,7 +6,7 @@ __META_SOURCE_URL__=http://www.natcorp.ox.ac.uk/docs/gramtag.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # Default mapping
-*=POS_X
+*=POS
 
 # AJ0	Adjective (general or positive) (e.g. good, old, beautiful)
 AJ0=POS_ADJ

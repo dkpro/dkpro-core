@@ -3,7 +3,7 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 $=POS_NUM
 &=POS_CONJ
-*=POS_X
+*=POS
 ,=POS_PUNCT
 @=tweet.POS_AT
 A=POS_ADJ
