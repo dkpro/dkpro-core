@@ -74,7 +74,7 @@ public class CasFilter_ImplBaseTest
         List<String> output = FileUtils.readLines(tmpFile);
         assertEquals(expectedFirstLine, output.get(0));
         assertEquals(input, output.get(13));
-        assertEquals("Sentence", output.get(15));
+        assertEquals("Sentence:3", output.get(15));
     }
 
     @Test

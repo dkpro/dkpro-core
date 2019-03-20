@@ -2,7 +2,7 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData:1
+DocumentMetaData
    sofa: _InitialView
    begin: 0
    end: 134
@@ -21,793 +21,793 @@ CAS-Text:
 
 
 [Αυτή είναι η πρώτη γραμμή .]
-Paragraph:22
+Paragraph
    sofa: _InitialView
    begin: 0
    end: 27
 [Αυτή είναι η πρώτη γραμμή .]
-Sentence:21
+Sentence
    sofa: _InitialView
    begin: 0
    end: 27
 [Αυτή]
-POS:5
+POS
    sofa: _InitialView
    begin: 0
    end: 4
    PosValue: "PnDmFe03SgNmXx"
 [Αυτή]
-Lemma:4
+Lemma
    sofa: _InitialView
    begin: 0
    end: 4
    value: "αυτός"
 [Αυτή]
-Token:3
+Token
    sofa: _InitialView
    begin: 0
    end: 4
-   lemma: Lemma:4
+   lemma: Lemma
       sofa: _InitialView
       begin: 0
       end: 4
       value: "αυτός"
-   pos: POS:5
+   pos: POS
       sofa: _InitialView
       begin: 0
       end: 4
       PosValue: "PnDmFe03SgNmXx"
 [είναι]
-POS:8
+POS
    sofa: _InitialView
    begin: 5
    end: 10
    PosValue: "VbMnIdPr03SgXxIpPvXx"
 [είναι]
-Lemma:7
+Lemma
    sofa: _InitialView
    begin: 5
    end: 10
    value: "είμαι"
 [είναι]
-Token:6
+Token
    sofa: _InitialView
    begin: 5
    end: 10
-   lemma: Lemma:7
+   lemma: Lemma
       sofa: _InitialView
       begin: 5
       end: 10
       value: "είμαι"
-   pos: POS:8
+   pos: POS
       sofa: _InitialView
       begin: 5
       end: 10
       PosValue: "VbMnIdPr03SgXxIpPvXx"
 [η]
-POS:11
+POS
    sofa: _InitialView
    begin: 11
    end: 12
    PosValue: "AtDfFeSgNm"
 [η]
-Lemma:10
+Lemma
    sofa: _InitialView
    begin: 11
    end: 12
    value: "ο"
 [η]
-Token:9
+Token
    sofa: _InitialView
    begin: 11
    end: 12
-   lemma: Lemma:10
+   lemma: Lemma
       sofa: _InitialView
       begin: 11
       end: 12
       value: "ο"
-   pos: POS:11
+   pos: POS
       sofa: _InitialView
       begin: 11
       end: 12
       PosValue: "AtDfFeSgNm"
 [πρώτη]
-POS:14
+POS
    sofa: _InitialView
    begin: 13
    end: 18
    PosValue: "NmOdFeSgNmAj"
 [πρώτη]
-Lemma:13
+Lemma
    sofa: _InitialView
    begin: 13
    end: 18
    value: "πρώτος"
 [πρώτη]
-Token:12
+Token
    sofa: _InitialView
    begin: 13
    end: 18
-   lemma: Lemma:13
+   lemma: Lemma
       sofa: _InitialView
       begin: 13
       end: 18
       value: "πρώτος"
-   pos: POS:14
+   pos: POS
       sofa: _InitialView
       begin: 13
       end: 18
       PosValue: "NmOdFeSgNmAj"
 [γραμμή]
-POS:17
+POS
    sofa: _InitialView
    begin: 19
    end: 25
    PosValue: "NoCmFeSgNm"
 [γραμμή]
-Lemma:16
+Lemma
    sofa: _InitialView
    begin: 19
    end: 25
    value: "γραμμή"
 [γραμμή]
-Token:15
+Token
    sofa: _InitialView
    begin: 19
    end: 25
-   lemma: Lemma:16
+   lemma: Lemma
       sofa: _InitialView
       begin: 19
       end: 25
       value: "γραμμή"
-   pos: POS:17
+   pos: POS
       sofa: _InitialView
       begin: 19
       end: 25
       PosValue: "NoCmFeSgNm"
 [.]
-POS:20
+POS
    sofa: _InitialView
    begin: 26
    end: 27
    PosValue: "PTERM_P"
 [.]
-Lemma:19
+Lemma
    sofa: _InitialView
    begin: 26
    end: 27
    value: "."
 [.]
-Token:18
+Token
    sofa: _InitialView
    begin: 26
    end: 27
-   lemma: Lemma:19
+   lemma: Lemma
       sofa: _InitialView
       begin: 26
       end: 27
       value: "."
-   pos: POS:20
+   pos: POS
       sofa: _InitialView
       begin: 26
       end: 27
       PosValue: "PTERM_P"
 [Αυτή είναι η πρώτη γραμμή .
 Αυτό είναι μια άλλη γραμμή .]
-Paragraph:61
+Paragraph
    sofa: _InitialView
    begin: 29
    end: 85
 [Αυτή είναι η πρώτη γραμμή .]
-Sentence:41
+Sentence
    sofa: _InitialView
    begin: 29
    end: 56
 [Αυτή]
-POS:25
+POS
    sofa: _InitialView
    begin: 29
    end: 33
    PosValue: "PnDmFe03SgNmXx"
 [Αυτή]
-Lemma:24
+Lemma
    sofa: _InitialView
    begin: 29
    end: 33
    value: "αυτός"
 [Αυτή]
-Token:23
+Token
    sofa: _InitialView
    begin: 29
    end: 33
-   lemma: Lemma:24
+   lemma: Lemma
       sofa: _InitialView
       begin: 29
       end: 33
       value: "αυτός"
-   pos: POS:25
+   pos: POS
       sofa: _InitialView
       begin: 29
       end: 33
       PosValue: "PnDmFe03SgNmXx"
 [είναι]
-POS:28
+POS
    sofa: _InitialView
    begin: 34
    end: 39
    PosValue: "VbMnIdPr03SgXxIpPvXx"
 [είναι]
-Lemma:27
+Lemma
    sofa: _InitialView
    begin: 34
    end: 39
    value: "είμαι"
 [είναι]
-Token:26
+Token
    sofa: _InitialView
    begin: 34
    end: 39
-   lemma: Lemma:27
+   lemma: Lemma
       sofa: _InitialView
       begin: 34
       end: 39
       value: "είμαι"
-   pos: POS:28
+   pos: POS
       sofa: _InitialView
       begin: 34
       end: 39
       PosValue: "VbMnIdPr03SgXxIpPvXx"
 [η]
-POS:31
+POS
    sofa: _InitialView
    begin: 40
    end: 41
    PosValue: "AtDfFeSgNm"
 [η]
-Lemma:30
+Lemma
    sofa: _InitialView
    begin: 40
    end: 41
    value: "ο"
 [η]
-Token:29
+Token
    sofa: _InitialView
    begin: 40
    end: 41
-   lemma: Lemma:30
+   lemma: Lemma
       sofa: _InitialView
       begin: 40
       end: 41
       value: "ο"
-   pos: POS:31
+   pos: POS
       sofa: _InitialView
       begin: 40
       end: 41
       PosValue: "AtDfFeSgNm"
 [πρώτη]
-POS:34
+POS
    sofa: _InitialView
    begin: 42
    end: 47
    PosValue: "NmOdFeSgNmAj"
 [πρώτη]
-Lemma:33
+Lemma
    sofa: _InitialView
    begin: 42
    end: 47
    value: "πρώτος"
 [πρώτη]
-Token:32
+Token
    sofa: _InitialView
    begin: 42
    end: 47
-   lemma: Lemma:33
+   lemma: Lemma
       sofa: _InitialView
       begin: 42
       end: 47
       value: "πρώτος"
-   pos: POS:34
+   pos: POS
       sofa: _InitialView
       begin: 42
       end: 47
       PosValue: "NmOdFeSgNmAj"
 [γραμμή]
-POS:37
+POS
    sofa: _InitialView
    begin: 48
    end: 54
    PosValue: "NoCmFeSgNm"
 [γραμμή]
-Lemma:36
+Lemma
    sofa: _InitialView
    begin: 48
    end: 54
    value: "γραμμή"
 [γραμμή]
-Token:35
+Token
    sofa: _InitialView
    begin: 48
    end: 54
-   lemma: Lemma:36
+   lemma: Lemma
       sofa: _InitialView
       begin: 48
       end: 54
       value: "γραμμή"
-   pos: POS:37
+   pos: POS
       sofa: _InitialView
       begin: 48
       end: 54
       PosValue: "NoCmFeSgNm"
 [.]
-POS:40
+POS
    sofa: _InitialView
    begin: 55
    end: 56
    PosValue: "PTERM_P"
 [.]
-Lemma:39
+Lemma
    sofa: _InitialView
    begin: 55
    end: 56
    value: "."
 [.]
-Token:38
+Token
    sofa: _InitialView
    begin: 55
    end: 56
-   lemma: Lemma:39
+   lemma: Lemma
       sofa: _InitialView
       begin: 55
       end: 56
       value: "."
-   pos: POS:40
+   pos: POS
       sofa: _InitialView
       begin: 55
       end: 56
       PosValue: "PTERM_P"
 [Αυτό είναι μια άλλη γραμμή .]
-Sentence:60
+Sentence
    sofa: _InitialView
    begin: 57
    end: 85
 [Αυτό]
-POS:44
+POS
    sofa: _InitialView
    begin: 57
    end: 61
    PosValue: "PnDmNe03SgNmXx"
 [Αυτό]
-Lemma:43
+Lemma
    sofa: _InitialView
    begin: 57
    end: 61
    value: "αυτός"
 [Αυτό]
-Token:42
+Token
    sofa: _InitialView
    begin: 57
    end: 61
-   lemma: Lemma:43
+   lemma: Lemma
       sofa: _InitialView
       begin: 57
       end: 61
       value: "αυτός"
-   pos: POS:44
+   pos: POS
       sofa: _InitialView
       begin: 57
       end: 61
       PosValue: "PnDmNe03SgNmXx"
 [είναι]
-POS:47
+POS
    sofa: _InitialView
    begin: 62
    end: 67
    PosValue: "VbMnIdPr03SgXxIpPvXx"
 [είναι]
-Lemma:46
+Lemma
    sofa: _InitialView
    begin: 62
    end: 67
    value: "είμαι"
 [είναι]
-Token:45
+Token
    sofa: _InitialView
    begin: 62
    end: 67
-   lemma: Lemma:46
+   lemma: Lemma
       sofa: _InitialView
       begin: 62
       end: 67
       value: "είμαι"
-   pos: POS:47
+   pos: POS
       sofa: _InitialView
       begin: 62
       end: 67
       PosValue: "VbMnIdPr03SgXxIpPvXx"
 [μια]
-POS:50
+POS
    sofa: _InitialView
    begin: 68
    end: 71
    PosValue: "AtIdFeSgNm"
 [μια]
-Lemma:49
+Lemma
    sofa: _InitialView
    begin: 68
    end: 71
    value: "ένας"
 [μια]
-Token:48
+Token
    sofa: _InitialView
    begin: 68
    end: 71
-   lemma: Lemma:49
+   lemma: Lemma
       sofa: _InitialView
       begin: 68
       end: 71
       value: "ένας"
-   pos: POS:50
+   pos: POS
       sofa: _InitialView
       begin: 68
       end: 71
       PosValue: "AtIdFeSgNm"
 [άλλη]
-POS:53
+POS
    sofa: _InitialView
    begin: 72
    end: 76
    PosValue: "PnIdFe03SgNmXx"
 [άλλη]
-Lemma:52
+Lemma
    sofa: _InitialView
    begin: 72
    end: 76
    value: "άλλος"
 [άλλη]
-Token:51
+Token
    sofa: _InitialView
    begin: 72
    end: 76
-   lemma: Lemma:52
+   lemma: Lemma
       sofa: _InitialView
       begin: 72
       end: 76
       value: "άλλος"
-   pos: POS:53
+   pos: POS
       sofa: _InitialView
       begin: 72
       end: 76
       PosValue: "PnIdFe03SgNmXx"
 [γραμμή]
-POS:56
+POS
    sofa: _InitialView
    begin: 77
    end: 83
    PosValue: "NoCmFeSgNm"
 [γραμμή]
-Lemma:55
+Lemma
    sofa: _InitialView
    begin: 77
    end: 83
    value: "γραμμή"
 [γραμμή]
-Token:54
+Token
    sofa: _InitialView
    begin: 77
    end: 83
-   lemma: Lemma:55
+   lemma: Lemma
       sofa: _InitialView
       begin: 77
       end: 83
       value: "γραμμή"
-   pos: POS:56
+   pos: POS
       sofa: _InitialView
       begin: 77
       end: 83
       PosValue: "NoCmFeSgNm"
 [.]
-POS:59
+POS
    sofa: _InitialView
    begin: 84
    end: 85
    PosValue: "PTERM_P"
 [.]
-Lemma:58
+Lemma
    sofa: _InitialView
    begin: 84
    end: 85
    value: "."
 [.]
-Token:57
+Token
    sofa: _InitialView
    begin: 84
    end: 85
-   lemma: Lemma:58
+   lemma: Lemma
       sofa: _InitialView
       begin: 84
       end: 85
       value: "."
-   pos: POS:59
+   pos: POS
       sofa: _InitialView
       begin: 84
       end: 85
       PosValue: "PTERM_P"
 [Γίνε η αλλαγή που θέλεις να δεις στον κόσμο .]
-Paragraph:93
+Paragraph
    sofa: _InitialView
    begin: 87
    end: 132
 [Γίνε η αλλαγή που θέλεις να δεις στον κόσμο .]
-Sentence:92
+Sentence
    sofa: _InitialView
    begin: 87
    end: 132
 [Γίνε]
-POS:64
+POS
    sofa: _InitialView
    begin: 87
    end: 91
    PosValue: "VbMnMpXx02SgXxPePvXx"
 [Γίνε]
-Lemma:63
+Lemma
    sofa: _InitialView
    begin: 87
    end: 91
    value: "γίνομαι"
 [Γίνε]
-Token:62
+Token
    sofa: _InitialView
    begin: 87
    end: 91
-   lemma: Lemma:63
+   lemma: Lemma
       sofa: _InitialView
       begin: 87
       end: 91
       value: "γίνομαι"
-   pos: POS:64
+   pos: POS
       sofa: _InitialView
       begin: 87
       end: 91
       PosValue: "VbMnMpXx02SgXxPePvXx"
 [η]
-POS:67
+POS
    sofa: _InitialView
    begin: 92
    end: 93
    PosValue: "AtDfFeSgNm"
 [η]
-Lemma:66
+Lemma
    sofa: _InitialView
    begin: 92
    end: 93
    value: "ο"
 [η]
-Token:65
+Token
    sofa: _InitialView
    begin: 92
    end: 93
-   lemma: Lemma:66
+   lemma: Lemma
       sofa: _InitialView
       begin: 92
       end: 93
       value: "ο"
-   pos: POS:67
+   pos: POS
       sofa: _InitialView
       begin: 92
       end: 93
       PosValue: "AtDfFeSgNm"
 [αλλαγή]
-POS:70
+POS
    sofa: _InitialView
    begin: 94
    end: 100
    PosValue: "NoCmFeSgNm"
 [αλλαγή]
-Lemma:69
+Lemma
    sofa: _InitialView
    begin: 94
    end: 100
    value: "αλλαγή"
 [αλλαγή]
-Token:68
+Token
    sofa: _InitialView
    begin: 94
    end: 100
-   lemma: Lemma:69
+   lemma: Lemma
       sofa: _InitialView
       begin: 94
       end: 100
       value: "αλλαγή"
-   pos: POS:70
+   pos: POS
       sofa: _InitialView
       begin: 94
       end: 100
       PosValue: "NoCmFeSgNm"
 [που]
-POS:73
+POS
    sofa: _InitialView
    begin: 101
    end: 104
    PosValue: "PnReFe03SgNmXx"
 [που]
-Lemma:72
+Lemma
    sofa: _InitialView
    begin: 101
    end: 104
    value: "που"
 [που]
-Token:71
+Token
    sofa: _InitialView
    begin: 101
    end: 104
-   lemma: Lemma:72
+   lemma: Lemma
       sofa: _InitialView
       begin: 101
       end: 104
       value: "που"
-   pos: POS:73
+   pos: POS
       sofa: _InitialView
       begin: 101
       end: 104
       PosValue: "PnReFe03SgNmXx"
 [θέλεις]
-POS:76
+POS
    sofa: _InitialView
    begin: 105
    end: 111
    PosValue: "VbMnIdPr02SgXxIpAvXx"
 [θέλεις]
-Lemma:75
+Lemma
    sofa: _InitialView
    begin: 105
    end: 111
    value: "θέλω"
 [θέλεις]
-Token:74
+Token
    sofa: _InitialView
    begin: 105
    end: 111
-   lemma: Lemma:75
+   lemma: Lemma
       sofa: _InitialView
       begin: 105
       end: 111
       value: "θέλω"
-   pos: POS:76
+   pos: POS
       sofa: _InitialView
       begin: 105
       end: 111
       PosValue: "VbMnIdPr02SgXxIpAvXx"
 [να]
-POS:79
+POS
    sofa: _InitialView
    begin: 112
    end: 114
    PosValue: "PtSj"
 [να]
-Lemma:78
+Lemma
    sofa: _InitialView
    begin: 112
    end: 114
    value: "να"
 [να]
-Token:77
+Token
    sofa: _InitialView
    begin: 112
    end: 114
-   lemma: Lemma:78
+   lemma: Lemma
       sofa: _InitialView
       begin: 112
       end: 114
       value: "να"
-   pos: POS:79
+   pos: POS
       sofa: _InitialView
       begin: 112
       end: 114
       PosValue: "PtSj"
 [δεις]
-POS:82
+POS
    sofa: _InitialView
    begin: 115
    end: 119
    PosValue: "VbMnIdXx02SgXxPeAvXx"
 [δεις]
-Lemma:81
+Lemma
    sofa: _InitialView
    begin: 115
    end: 119
    value: "βλέπω"
 [δεις]
-Token:80
+Token
    sofa: _InitialView
    begin: 115
    end: 119
-   lemma: Lemma:81
+   lemma: Lemma
       sofa: _InitialView
       begin: 115
       end: 119
       value: "βλέπω"
-   pos: POS:82
+   pos: POS
       sofa: _InitialView
       begin: 115
       end: 119
       PosValue: "VbMnIdXx02SgXxPeAvXx"
 [στον]
-POS:85
+POS
    sofa: _InitialView
    begin: 120
    end: 124
    PosValue: "AsPpPaMaSgAc"
 [στον]
-Lemma:84
+Lemma
    sofa: _InitialView
    begin: 120
    end: 124
    value: "στου"
 [στον]
-Token:83
+Token
    sofa: _InitialView
    begin: 120
    end: 124
-   lemma: Lemma:84
+   lemma: Lemma
       sofa: _InitialView
       begin: 120
       end: 124
       value: "στου"
-   pos: POS:85
+   pos: POS
       sofa: _InitialView
       begin: 120
       end: 124
       PosValue: "AsPpPaMaSgAc"
 [κόσμο]
-POS:88
+POS
    sofa: _InitialView
    begin: 125
    end: 130
    PosValue: "NoCmMaSgAc"
 [κόσμο]
-Lemma:87
+Lemma
    sofa: _InitialView
    begin: 125
    end: 130
    value: "κόσμος"
 [κόσμο]
-Token:86
+Token
    sofa: _InitialView
    begin: 125
    end: 130
-   lemma: Lemma:87
+   lemma: Lemma
       sofa: _InitialView
       begin: 125
       end: 130
       value: "κόσμος"
-   pos: POS:88
+   pos: POS
       sofa: _InitialView
       begin: 125
       end: 130
       PosValue: "NoCmMaSgAc"
 [.]
-POS:91
+POS
    sofa: _InitialView
    begin: 131
    end: 132
    PosValue: "PTERM_P"
 [.]
-Lemma:90
+Lemma
    sofa: _InitialView
    begin: 131
    end: 132
    value: "."
 [.]
-Token:89
+Token
    sofa: _InitialView
    begin: 131
    end: 132
-   lemma: Lemma:90
+   lemma: Lemma
       sofa: _InitialView
       begin: 131
       end: 132
       value: "."
-   pos: POS:91
+   pos: POS
       sofa: _InitialView
       begin: 131
       end: 132

@@ -2,7 +2,7 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData:1
+DocumentMetaData
    sofa: _InitialView
    begin: 0
    end: 130
@@ -20,17 +20,17 @@ CAS-Text:
 
 
 [Αυτή είναι η πρώτη γραμμή.]
-Paragraph:3
+Paragraph
    sofa: _InitialView
    begin: 0
    end: 26
 [Αυτή είναι η πρώτη γραμμή. Αυτό είναι μια άλλη γραμμή.]
-Paragraph:4
+Paragraph
    sofa: _InitialView
    begin: 28
    end: 82
 [Γίνε η αλλαγή που θέλεις να δεις στον κόσμο.]
-Paragraph:5
+Paragraph
    sofa: _InitialView
    begin: 84
    end: 128

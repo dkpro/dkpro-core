@@ -38,7 +38,7 @@
   </organization> 
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <currentYear>2018</currentYear>
+    <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <uima.version>3.0.1</uima.version>
     <uimafit.version>3.0.0-SNAPSHOT</uimafit.version>
@@ -46,8 +46,8 @@
     <omtd.version>3.0.2.7</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>3.2.16.RELEASE</spring.version>
-    <slf4j.version>1.7.25</slf4j.version>
+    <spring.version>4.3.22.RELEASE</spring.version>
+    <slf4j.version>1.7.26</slf4j.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
   </properties>
   <repositories>
