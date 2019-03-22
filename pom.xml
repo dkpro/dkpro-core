@@ -626,6 +626,18 @@
           <configuration>
             <systemPropertyVariables>
               <dkpro.core.testCachePath>${dkpro.core.testCachePath}</dkpro.core.testCachePath>
+              <!-- 
+                UIMAv3 changes the default string serialization of feature structures which we rely
+                on in the CasDumpWriter. To minimize the differences between the DKPro Core UIMAv2
+                and UIMAv3 branches, we force UIMAv3 to use the old serialization. We also do this
+                in the DkproTestContext, in particular since your IDE usually won't pick up the
+                property we set here. But we also set it here because whether or not setting the
+                value in DkproTestContext has an effect depends on the order in which the tests
+                are executed. I.e. if a loading the FeatureStructureImplC class is executed while
+                the property has not been set yet, then it is impossible for a later test to turn
+                it on.
+               -->
+              <uima.v2_pretty_print_format>true</uima.v2_pretty_print_format>
             </systemPropertyVariables>
           </configuration>
         </plugin>

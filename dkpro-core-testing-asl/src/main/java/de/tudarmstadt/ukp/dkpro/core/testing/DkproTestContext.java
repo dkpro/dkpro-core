@@ -51,7 +51,8 @@ public class DkproTestContext extends TestWatcher
         methodName = aDescription.getMethodName();
         System.out.println("\n=== " + methodName + " =====================");
         
-        // V2 FS toString needed for CasDumpWriter
+        // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
+        // file where this property is globally set for all surefire runs
         System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
         
         // Route logging through SLF4J
