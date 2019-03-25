@@ -62,4 +62,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <name>DKPro Core ASL - Jieba</name>
+    <url>https://dkpro.github.io/dkpro-core/</url>
 </project>

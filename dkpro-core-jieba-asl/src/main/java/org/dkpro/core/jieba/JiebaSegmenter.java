@@ -36,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Segmenter for Japanese using <a href="https://github.com/huaban/jieba-analysis">Jieba</a>. 
+ * Segmenter for Japanese using <a href="https://github.com/huaban/jieba-analysis">Jieba</a>.
  */
 @ResourceMetaData(name = "Jieba Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
@@ -47,9 +47,9 @@ public class JiebaSegmenter
     extends SegmenterBase
 {
     private com.huaban.analysis.jieba.JiebaSegmenter jieba;
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
         jieba = new com.huaban.analysis.jieba.JiebaSegmenter();
