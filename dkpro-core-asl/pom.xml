@@ -248,8 +248,13 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-gigaword-asl</artifactId>
+        <version>1.11.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.html-asl</artifactId>
-        <version>1.10.1-SNAPSHOT</version>
+        <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -567,6 +572,7 @@
     <module>../dkpro-core-io-combination-asl</module>
     <module>../dkpro-core-io-conll-asl</module>
     <module>../dkpro-core-io-ditop-asl</module>
+    <module>../dkpro-core-io-gigaword-asl</module>
     <module>../dkpro-core-io-imscwb-asl</module>
     <module>../dkpro-core-io-html-asl</module>
     <module>../dkpro-core-io-json-asl</module>
