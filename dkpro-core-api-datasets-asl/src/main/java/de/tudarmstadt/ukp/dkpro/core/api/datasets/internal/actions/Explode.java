@@ -150,7 +150,7 @@ public class Explode
         throws IOException, RarException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        Path base = Paths.get(getBase(aArchive.toString())).toAbsolutePath();
+        Path base = Paths.get(getBase(aArchive.getFileName().toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -197,7 +197,7 @@ public class Explode
         throws IOException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        Path base = Paths.get(getBase(aArchive.toString())).toAbsolutePath();
+        Path base = Paths.get(getBase(aArchive.getFileName().toString())).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
