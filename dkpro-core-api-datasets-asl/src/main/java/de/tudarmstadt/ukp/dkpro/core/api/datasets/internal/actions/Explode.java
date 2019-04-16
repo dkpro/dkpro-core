@@ -39,6 +39,8 @@ import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.github.junrar.Archive;
 import com.github.junrar.exception.RarException;
@@ -54,6 +56,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.datasets.internal.util.AntFileFilter;
 public class Explode
     extends Action_ImplBase
 {
+    private final Log LOG = LogFactory.getLog(getClass());
+
     @Override
     public void apply(ActionDescription aAction, DatasetDescription aDataset,
             ArtifactDescription aPack, Path aCachedFile)
@@ -99,11 +103,11 @@ public class Explode
         }
     }
 
-    private void extract7z(ActionDescription aAction, Path aCachedFile, Path aTarget)
+    private void extract7z(ActionDescription aAction, Path aArchive, Path aTarget)
         throws IOException, RarException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        String base = getBase(aCachedFile.getFileName().toString());
+        Path base = aTarget.resolve(getPathWithoutFileExtension(aArchive)).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -111,7 +115,10 @@ public class Explode
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
 
-        try (SevenZFile archive = new SevenZFile(aCachedFile.toFile())) {
+        LOG.info("Extracting files of [" + aArchive.getFileName() + "] to [" + aTarget.resolve(base)
+                + "]");
+        
+        try (SevenZFile archive = new SevenZFile(aArchive.toFile())) {
             SevenZArchiveEntry entry = archive.getNextEntry();
             while (entry != null) {
                 String name = stripLeadingFolders(entry.getName(), strip);
@@ -122,7 +129,13 @@ public class Explode
                 }
 
                 if (filter.accept(name)) {
-                    Path out = aTarget.resolve(base).resolve(name);
+                    Path out = base.resolve(name).toAbsolutePath();
+                    if (!out.startsWith(base)) {
+                        throw new IOException(
+                                "Archive tries to generate file outside target folder: [" + name
+                                        + "]");
+                    }
+                    
                     if (entry.isDirectory()) {
                         Files.createDirectories(out);
                     }
@@ -140,11 +153,11 @@ public class Explode
         }
     }
 
-    private void extractRar(ActionDescription aAction, Path aCachedFile, Path aTarget)
+    private void extractRar(ActionDescription aAction, Path aArchive, Path aTarget)
         throws IOException, RarException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        String base = getBase(aCachedFile.getFileName().toString());
+        Path base = aTarget.resolve(getPathWithoutFileExtension(aArchive)).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -152,7 +165,10 @@ public class Explode
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
 
-        try (Archive archive = new Archive(new FileVolumeManager(aCachedFile.toFile()))) {
+        LOG.info("Extracting files of [" + aArchive.getFileName() + "] to [" + aTarget.resolve(base)
+                + "]");
+        
+        try (Archive archive = new Archive(new FileVolumeManager(aArchive.toFile()))) {
             FileHeader fh = archive.nextFileHeader();
             while (fh != null) {
                 String name = stripLeadingFolders(fh.getFileNameString(), strip);
@@ -163,7 +179,13 @@ public class Explode
                 }
 
                 if (filter.accept(name)) {
-                    Path out = aTarget.resolve(base).resolve(name);
+                    Path out = base.resolve(name).toAbsolutePath();
+                    if (!out.startsWith(base)) {
+                        throw new IOException(
+                                "Archive tries to generate file outside target folder: [" + name
+                                        + "]");
+                    }
+                    
                     if (fh.isDirectory()) {
                         Files.createDirectories(out);
                     }
@@ -185,7 +207,7 @@ public class Explode
         throws IOException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        String base = getBase(aArchive.getFileName().toString());
+        Path base = aTarget.resolve(getPathWithoutFileExtension(aArchive)).toAbsolutePath();
 
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
@@ -193,6 +215,9 @@ public class Explode
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
 
+        LOG.info("Extracting files of [" + aArchive.getFileName() + "] to [" + aTarget.resolve(base)
+                + "]");
+        
         ArchiveEntry entry = null;
         while ((entry = aAStream.getNextEntry()) != null) {
             String name = stripLeadingFolders(entry.getName(), strip);
@@ -203,7 +228,12 @@ public class Explode
             }
 
             if (filter.accept(name)) {
-                Path out = aTarget.resolve(base).resolve(name);
+                Path out = base.resolve(name).toAbsolutePath();
+                if (!out.startsWith(base)) {
+                    throw new IOException(
+                            "Archive tries to generate file outside target folder: [" + name + "]");
+                }
+                
                 if (entry.isDirectory()) {
                     Files.createDirectories(out);
                 }
@@ -217,6 +247,10 @@ public class Explode
 
     private String stripLeadingFolders(String aName, int aLevels)
     {
+        if (aName == null) {
+            return null;
+        }
+        
         if (aLevels > 0) {
             Path p = Paths.get(aName);
             if (p.getNameCount() <= aLevels) {
@@ -233,10 +267,16 @@ public class Explode
         }
     }
 
-    public static String getBase(String aFilename)
+    /**
+     * The the name of the archive without any extensions (e.g. in the case of multiple extensions
+     * such as .tar.gz).
+     */
+    public static String getPathWithoutFileExtension(Path aFilename)
     {
+        
+        
         // We always extract archives into a subfolder. Figure out the name of the folder.
-        String base = aFilename;
+        String base = aFilename.getFileName().toString();
         while (base.contains(".")) {
             base = FilenameUtils.removeExtension(base);
         }
