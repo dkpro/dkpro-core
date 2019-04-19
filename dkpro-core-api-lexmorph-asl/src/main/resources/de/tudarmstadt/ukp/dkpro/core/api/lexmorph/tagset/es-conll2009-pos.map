@@ -5,7 +5,7 @@
 __META_SOURCE_URL__=http://clic.ub.edu/corpus/webfm_send/18
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=POS_X
+*=POS
 #Adjective
 a=POS_ADJ
 #Conjuction

@@ -169,7 +169,7 @@ public class HunPosTaggerTest
         runTest("sv", null, "Detta är ett test .",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND",
                         "NN_NEU_SIN_IND_NOM", "DL_MAD" },
-                new String[] { "POS_X", "POS_X", "POS_X", "POS_X", "POS_X" });
+                new String[] { "POS", "POS", "POS", "POS", "POS" });
         
         runTest("sv", "paroletags", "Detta är ett test .",
                 new String[] { "PF@NS0@S", "V@IPAS", "DI@NS@S", "NCNSN@IS", "FE" },
@@ -178,7 +178,7 @@ public class HunPosTaggerTest
         runTest("sv", "suctags", "Detta är ett test .",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND",
                         "NN_NEU_SIN_IND_NOM", "DL_MAD" },
-                new String[] { "POS_X", "POS_X", "POS_X", "POS_X", "POS_X" });
+                new String[] { "POS", "POS", "POS", "POS", "POS" });
         
         // runTest("sv", "suc2x", "Detta är ett test .",
         // new String[] { "PN_NEU_SIN_DEF_SUB@OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND",

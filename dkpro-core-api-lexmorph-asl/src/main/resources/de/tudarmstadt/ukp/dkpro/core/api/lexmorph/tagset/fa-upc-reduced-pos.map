@@ -39,4 +39,4 @@ STPOS=POS_X
 STR=POS_X
 # V - Verb
 V=POS_VERB
-*=POS_X
+*=POS

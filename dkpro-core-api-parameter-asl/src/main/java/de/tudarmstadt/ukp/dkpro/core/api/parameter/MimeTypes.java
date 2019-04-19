@@ -28,7 +28,7 @@ public final class MimeTypes
     public final static String APPLICATION_VND_XMI_XML = "application/vnd.xmi+xml";
     
     
-    // DKPro application types
+    // DKPro Core application types
     public final static String APPLICATION_X_ANCORA_XML = "application/x.org.dkpro.ancora+xml";
     public final static String APPLICATION_X_BNC = "application/x.org.dkpro.bnc+xml";
     public final static String APPLICATION_X_BRAT = "application/x.org.dkpro.brat";
@@ -67,7 +67,7 @@ public final class MimeTypes
     // Non-standard text types
     public final static String TEXT_TCF = "text/tcf+xml";
     
-    // DKPro text types
+    // DKPro Core text types
     public final static String TEXT_X_CONLL_2000 = "text/x.org.dkpro.conll-2000";
     public final static String TEXT_X_CONLL_2002 = "text/x.org.dkpro.conll-2002";
     public final static String TEXT_X_CONLL_2003 = "text/x.org.dkpro.conll-2003";
@@ -84,6 +84,7 @@ public final class MimeTypes
     public final static String TEXT_X_PTB_CHUNKED = "text/x.org.dkpro.ptb-chunked";
     public final static String TEXT_X_PTB_COMBINED = "text/x.org.dkpro.ptb-combined";
     public final static String TEXT_X_REUTERS21578 = "text/x.org.dkpro.reuters21578";
+    public final static String TEXT_X_WEBANNO_TSV3 = "text/x.org.dkpro.webanno-tsv3";
 
     // OpenNLP model types
     public final static String APPLICATION_X_OPENNLP_CHUNK = "application/x.org.dkpro.core.opennlp.chunk";
