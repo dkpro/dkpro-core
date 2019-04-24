@@ -19,4 +19,4 @@
 /**
  * Support for the Tübingen Partially Parsed Corpus of Written German (TüPP-D/Z) XML format.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tuepp;
+package org.dkpro.core.io.tuepp;

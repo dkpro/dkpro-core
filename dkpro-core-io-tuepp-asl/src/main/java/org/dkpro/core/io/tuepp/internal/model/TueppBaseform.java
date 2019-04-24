@@ -15,32 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tuepp.internal.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.dkpro.core.io.tuepp.internal.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 
-public class TueppToken
+public class TueppBaseform
 {
     @XmlAttribute(name = "f")
     public String form;
-
-    @XmlElement(name = "P")
-    public List<TueppPos> posTags = new ArrayList<TueppPos>();
-
-    public TueppPos getPrimaryTag()
-    {
-        TueppPos tag = null;
-
-        for (TueppPos t : posTags) {
-            if (tag == null || tag.rank > t.rank) {
-                tag = t;
-            }
-        }
-
-        return tag;
-    }
 }

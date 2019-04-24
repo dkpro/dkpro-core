@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tuepp;
+package org.dkpro.core.io.tuepp;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -43,6 +43,9 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.io.tuepp.internal.model.TueppBaseform;
+import org.dkpro.core.io.tuepp.internal.model.TueppPos;
+import org.dkpro.core.io.tuepp.internal.model.TueppToken;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
@@ -55,9 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.io.tuepp.internal.model.TueppBaseform;
-import de.tudarmstadt.ukp.dkpro.core.io.tuepp.internal.model.TueppPos;
-import de.tudarmstadt.ukp.dkpro.core.io.tuepp.internal.model.TueppToken;
 
 /**
  * UIMA collection reader for Tübingen Partially Parsed Corpus of Written German (TüPP-D/Z) XML 
