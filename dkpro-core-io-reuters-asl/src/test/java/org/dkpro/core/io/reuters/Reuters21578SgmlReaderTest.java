@@ -15,45 +15,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.reuters;
+package org.dkpro.core.io.reuters;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.io.reuters.Reuters21578SgmlReader;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField;
 
-public class Reuters21578TxtReaderTest
+public class Reuters21578SgmlReaderTest
 {
-    private static final String REUTERS_DIR = "src/test/resources/reuters-txt/";
-    private static final String REUTERS_FILE_PATTERN = "reut2-*.txt";
+    private static final String REUTERS_DIR = "src/test/resources/reuters-sgml/";
+    private static final String FILE_PATTERN = "*.sgm";
 
     @Test
     public void test()
             throws ResourceInitializationException
     {
-        String expectedTitle = "BAHIA COCOA REVIEW";
-        String expectedTextStart = "Showers";
+        int expectedCount = 1000;
         File outputFile = new File("target/output");
         outputFile.deleteOnExit();
 
-        CollectionReaderDescription reader = createReaderDescription(Reuters21578TxtReader.class,
-                Reuters21578TxtReader.PARAM_SOURCE_LOCATION, REUTERS_DIR + REUTERS_FILE_PATTERN);
+        CollectionReaderDescription reader = createReaderDescription(Reuters21578SgmlReader.class,
+                Reuters21578SgmlReader.PARAM_SOURCE_LOCATION, REUTERS_DIR + FILE_PATTERN);
 
-        JCasIterator jcasIter = SimplePipeline.iteratePipeline(reader).iterator();
-        JCas jcas = jcasIter.next();
-        DocumentMetaData metaData = DocumentMetaData.get(jcas);
-        assertEquals(expectedTitle, metaData.getDocumentTitle());
-        assertTrue(jcas.getDocumentText().startsWith(expectedTextStart));
-        assertTrue("Only one of two documents found.", jcasIter.hasNext());
+        int count = 0;
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader)) {
+            count++;
+            assertTrue(select(jcas, MetaDataStringField.class).stream()
+                    .anyMatch(mdsf -> mdsf.getKey().equals("DATE")));
+            assertTrue(jcas.getDocumentText() != null);
+        }
+        assertEquals(expectedCount, count);
     }
 }

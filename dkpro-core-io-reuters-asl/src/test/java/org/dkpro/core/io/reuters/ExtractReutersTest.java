@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.reuters;
+package org.dkpro.core.io.reuters;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -28,6 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.dkpro.core.io.reuters.ExtractReuters;
+import org.dkpro.core.io.reuters.ReutersDocument;
 import org.junit.Assert;
 import org.junit.Test;
 
