@@ -21,4 +21,4 @@
  *
  * @since 1.3.0
  */
-package de.tudarmstadt.ukp.dkpro.core.io.aclanthology;
+package org.dkpro.core.io.aclanthology;
