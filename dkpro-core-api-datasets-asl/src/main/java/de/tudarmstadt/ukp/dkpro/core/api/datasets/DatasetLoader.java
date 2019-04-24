@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Path;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -250,12 +251,20 @@ public class DatasetLoader
                 throw new IllegalStateException("Filename must not contain line break");
             }
 
-            File out = new File(aTarget, name);
+            Path base = aTarget.toPath().toAbsolutePath();
+            Path out = base.resolve(name).toAbsolutePath();
+            
+            if (!out.startsWith(base)) {
+                // Ignore attempts to write outside the base
+                continue;
+            }
+            
             if (entry.isDirectory()) {
-                FileUtils.forceMkdir(out);
+                FileUtils.forceMkdir(out.toFile());
             }
             else {
-                FileUtils.copyInputStreamToFile(new CloseShieldInputStream(aArchiveStream), out);
+                FileUtils.copyInputStreamToFile(new CloseShieldInputStream(aArchiveStream),
+                        out.toFile());
             }
         }
     }

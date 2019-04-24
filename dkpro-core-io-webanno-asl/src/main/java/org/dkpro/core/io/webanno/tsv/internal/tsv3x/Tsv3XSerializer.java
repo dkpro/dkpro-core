@@ -361,7 +361,9 @@ public class Tsv3XSerializer
             }
         }
         else {
-            aOut.print(NULL_COLUMN);
+            // If the slot hosts has no slots, we use this column as a placeholder so we know
+            // the span of the slot host
+            aOut.print(NULL_VALUE);
         }
     }    
     

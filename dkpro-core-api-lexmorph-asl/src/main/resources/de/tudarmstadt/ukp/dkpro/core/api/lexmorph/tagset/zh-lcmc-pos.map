@@ -6,7 +6,7 @@ __META_SOURCE_URL__=http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_t
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # Catch-all rule
-*=POS_X
+*=POS
 
 # a          adjective
 a=POS_ADJ

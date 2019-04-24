@@ -17,6 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.lif;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
@@ -31,9 +33,23 @@ public class LifReaderWriterTest
         throws Exception
     {
         testRoundTrip(
-                LifReader.class, // the reader
-                LifWriter.class,  // the writer
-                "conll/2006/fi-ref.json"); // the input also used as output reference
+                createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class,  // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false),  
+                "conll/2006/fi-ref.lif"); // the input also used as output reference
+    }
+    
+    @Test
+    public void authenticPosLifFileWithWrapper()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class,  // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false,
+                        LifWriter.PARAM_ADD_ENVELOPE, true),  
+                "lif/stanford-pos-ref.lif", // the reference file for the output
+                "lif/stanford-pos.lif"); // the input file for the test
     }
     
     @Test
@@ -41,10 +57,11 @@ public class LifReaderWriterTest
         throws Exception
     {
         testOneWay(
-                LifReader.class, // the reader
-                LifWriter.class,  // the writer
-                "lif/dependencystructure-ref.json", // the reference file for the output
-                "lif/dependencystructure.json"); // the input file for the test
+                createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class,  // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false),  
+                "lif/dependencystructure-ref.lif", // the reference file for the output
+                "lif/dependencystructure.lif"); // the input file for the test
     }
     
     @Test
@@ -52,10 +69,11 @@ public class LifReaderWriterTest
         throws Exception
     {
         testOneWay(
-                LifReader.class, // the reader
-                LifWriter.class,  // the writer
-                "lif/phrasestructure-ref.json", // the reference file for the output
-                "lif/phrasestructure.json"); // the input file for the test
+                createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class,  // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false),  
+                "lif/phrasestructure-ref.lif", // the reference file for the output
+                "lif/phrasestructure.lif"); // the input file for the test
     }
     
     @Rule

@@ -298,7 +298,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-io-nyt-asl</artifactId>
+        <artifactId>dkpro-core-io-nitf-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -447,6 +447,16 @@
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.mystem-asl</artifactId>
+        <version>1.11.0-SNAPSHOT</version>
+      </dependency>      
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
+        <version>1.11.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.nlp4j-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
@@ -572,7 +582,7 @@
     <module>../dkpro-core-io-lxf-asl</module>
     <module>../dkpro-core-io-negra-asl</module>
     <module>../dkpro-core-io-nif-asl</module>
-    <module>../dkpro-core-io-nyt-asl</module>
+    <module>../dkpro-core-io-nitf-asl</module>
     <module>../dkpro-core-io-pdf-asl</module>
     <module>../dkpro-core-io-penntree-asl</module>
     <module>../dkpro-core-io-pubannotation-asl</module>
@@ -616,6 +626,7 @@
     <module>../dkpro-core-mecab-asl</module>
     <module>../dkpro-core-morpha-asl</module>
     <module>../dkpro-core-mstparser-asl</module>
+    <module>../dkpro-core-mystem-asl</module>
     <module>../dkpro-core-ngrams-asl</module>
     <module>../dkpro-core-nlp4j-asl</module>
     <module>../dkpro-core-norvig-asl</module>

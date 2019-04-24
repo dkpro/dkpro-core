@@ -7,7 +7,7 @@
 __META_SOURCE_URL__=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/italian-tagset.txt
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=POS_X
+*=POS
 # ABR	abbreviation
 ABR=POS_X
 # ADJ	adjective

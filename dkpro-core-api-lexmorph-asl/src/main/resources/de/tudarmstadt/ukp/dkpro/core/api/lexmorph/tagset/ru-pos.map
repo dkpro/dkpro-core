@@ -1,5 +1,5 @@
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
-*=POS_X
+*=POS
 A-NUM=POS_ADJ
 A-PRO=POS_PRON
 A=POS_ADJ

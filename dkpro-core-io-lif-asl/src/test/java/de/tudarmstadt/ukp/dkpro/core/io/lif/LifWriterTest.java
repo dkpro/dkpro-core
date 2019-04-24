@@ -17,6 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.lif;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.testing.DkproTestContext;
@@ -32,9 +34,10 @@ public class LifWriterTest
         throws Exception
     {
         testOneWay(
-                Conll2006Reader.class, // the reader
-                LifWriter.class,  // the writer
-                "conll/2006/fi-ref.json", // the reference file for the output
+                createReaderDescription(Conll2006Reader.class), // the reader
+                createEngineDescription(LifWriter.class,  // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false),  
+                "conll/2006/fi-ref.lif", // the reference file for the output
                 "conll/2006/fi-orig.conll"); // the input file for the test
     }
     
