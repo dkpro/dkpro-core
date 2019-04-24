@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.bincas;
+package org.dkpro.core.io.bincas;
 
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.initRandomCas;
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measureReadPerformance;
@@ -69,6 +69,9 @@ import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.CasIOUtils;
+import org.dkpro.core.io.bincas.BinaryCasReader;
+import org.dkpro.core.io.bincas.BinaryCasWriter;
+import org.dkpro.core.io.bincas.SerializedCasWriter;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;

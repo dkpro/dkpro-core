@@ -22,4 +22,4 @@
  * objects over the network or exchange them between the Java and C++ implementation. This module
  * uses internal UIMA API.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.bincas;
+package org.dkpro.core.io.bincas;
