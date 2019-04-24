@@ -18,4 +18,4 @@
 /**
  * Provides Classes for reading/writing TCF data files.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tcf;
+package org.dkpro.core.io.tcf;
