@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.bliki;
+package org.dkpro.core.io.bliki;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.bliki.BlikiWikipediaReader;
 import org.junit.Ignore;
 import org.junit.Test;
 

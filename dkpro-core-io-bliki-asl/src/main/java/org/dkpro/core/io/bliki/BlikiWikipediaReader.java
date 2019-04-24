@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.bliki;
+package org.dkpro.core.io.bliki;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

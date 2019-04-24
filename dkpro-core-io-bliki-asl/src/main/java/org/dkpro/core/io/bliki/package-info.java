@@ -21,4 +21,4 @@
  * Should only used for low volume queries.
  * For big queries use io.jwpl and a offline database. 
  */
-package de.tudarmstadt.ukp.dkpro.core.io.bliki;
+package org.dkpro.core.io.bliki;
