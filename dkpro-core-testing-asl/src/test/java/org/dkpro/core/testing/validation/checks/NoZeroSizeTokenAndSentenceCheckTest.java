@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
+package org.dkpro.core.testing.validation.checks;
 
 import static org.dkpro.core.testing.validation.Message.Level.ERROR;
 import static org.junit.Assert.assertFalse;
