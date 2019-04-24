@@ -15,10 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.html;
+package org.dkpro.core.io.html;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.html.internal.JSoupUtil.appendNormalisedText;
-import static de.tudarmstadt.ukp.dkpro.core.io.html.internal.JSoupUtil.lastCharIsWhitespace;
+import static org.dkpro.core.io.html.internal.JSoupUtil.appendNormalisedText;
+import static org.dkpro.core.io.html.internal.JSoupUtil.lastCharIsWhitespace;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
