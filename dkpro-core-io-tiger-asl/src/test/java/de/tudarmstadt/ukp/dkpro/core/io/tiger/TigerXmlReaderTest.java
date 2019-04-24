@@ -17,7 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -25,6 +24,7 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -32,6 +32,8 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -40,8 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TigerXmlReaderTest
 {

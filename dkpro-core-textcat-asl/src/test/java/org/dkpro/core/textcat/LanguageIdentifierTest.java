@@ -23,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.textcat.LanguageIdentifier;
 import org.junit.Test;
 
 public class LanguageIdentifierTest

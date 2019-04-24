@@ -32,6 +32,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.collection.EntityProcessStatus;
 import org.apache.uima.collection.StatusCallbackListener;
 import org.apache.uima.fit.cpe.CpeBuilder;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,7 +40,6 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ReuseTest
 {

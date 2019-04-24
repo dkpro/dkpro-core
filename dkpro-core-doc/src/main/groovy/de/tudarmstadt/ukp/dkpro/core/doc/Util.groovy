@@ -17,8 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.doc
 
-import java.text.BreakIterator
-
 class Util {
     static def editOnGithub(url)
     {

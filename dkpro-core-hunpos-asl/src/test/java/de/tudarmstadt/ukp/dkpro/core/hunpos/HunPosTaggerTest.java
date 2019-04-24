@@ -31,6 +31,8 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.testing.util.HideOutput;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -39,8 +41,6 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class HunPosTaggerTest
 {

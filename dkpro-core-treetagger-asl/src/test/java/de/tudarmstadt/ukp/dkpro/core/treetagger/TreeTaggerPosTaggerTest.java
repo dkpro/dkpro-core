@@ -41,6 +41,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.testing.util.HideOutput;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -50,9 +53,6 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class TreeTaggerPosTaggerTest
 {

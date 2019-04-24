@@ -24,6 +24,8 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.validation.extras.AllTokensHavePos;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,8 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.validation.extras.AllTokensHavePos;
 
 public class PennTreeToJCasConverterTest
 {

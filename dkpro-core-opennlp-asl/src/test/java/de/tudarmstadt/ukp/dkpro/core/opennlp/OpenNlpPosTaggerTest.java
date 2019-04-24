@@ -17,17 +17,21 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.AssumeResource;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,10 +39,6 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpPosTaggerTest
 {

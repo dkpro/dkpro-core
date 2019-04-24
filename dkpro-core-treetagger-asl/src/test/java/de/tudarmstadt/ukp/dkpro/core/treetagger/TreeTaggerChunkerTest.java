@@ -17,11 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertChunks;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertChunks;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -30,14 +30,14 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class TreeTaggerChunkerTest
 {

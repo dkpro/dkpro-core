@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
+import static org.dkpro.core.testing.validation.Message.Level.ERROR;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -25,12 +25,13 @@ import java.util.List;
 
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.validation.CasValidator;
+import org.dkpro.core.testing.validation.Message;
+import org.dkpro.core.testing.validation.checks.NoZeroSizeTokensAndSentencesCheck;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
-import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 
 public class NoZeroSizeTokenAndSentenceCheckTest
 {

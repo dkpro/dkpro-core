@@ -17,13 +17,13 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertSentence;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.testing.AssertAnnotations.assertConstituents;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
+import static org.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.collection.CollectionReader;

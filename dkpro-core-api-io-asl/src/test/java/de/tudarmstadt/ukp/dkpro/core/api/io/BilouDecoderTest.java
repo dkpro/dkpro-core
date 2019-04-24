@@ -17,8 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertChunks;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertChunks;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -27,6 +27,10 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.languagetool.LanguageToolSegmenter;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.AssumeResource;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,10 +38,6 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class StanfordPosTaggerTest
 {

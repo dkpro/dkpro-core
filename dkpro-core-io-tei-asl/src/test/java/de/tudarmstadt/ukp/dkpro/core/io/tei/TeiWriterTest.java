@@ -26,6 +26,8 @@ import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -34,8 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 public class TeiWriterTest
 {

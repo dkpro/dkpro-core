@@ -28,13 +28,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 /**
  */

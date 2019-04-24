@@ -17,16 +17,14 @@
  */
 package org.dkpro.core.languagetool;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.dkpro.core.languagetool.CjfNormalizer;
 import org.dkpro.core.languagetool.CjfNormalizer.Direction;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class CjfNormalizerTest
 {

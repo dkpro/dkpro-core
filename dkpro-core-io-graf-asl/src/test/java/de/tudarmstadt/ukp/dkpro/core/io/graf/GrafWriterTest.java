@@ -37,8 +37,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.DocumentMetaDataStripper;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.DocumentMetaDataStripper;
 
 public class GrafWriterTest
 {

@@ -34,7 +34,6 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTokenizer;
 
 public class ArktweetTokenizationTest
 {

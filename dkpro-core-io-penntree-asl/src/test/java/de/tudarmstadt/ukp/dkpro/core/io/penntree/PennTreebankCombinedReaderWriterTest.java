@@ -33,13 +33,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.dkpro.core.testing.EOLUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 public class PennTreebankCombinedReaderWriterTest
 {

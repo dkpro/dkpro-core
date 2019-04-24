@@ -17,13 +17,13 @@
  */
 package org.dkpro.core.rftagger;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertMorph;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetParser;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertMorph;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagsetParser;
+import static org.dkpro.core.testing.AssertAnnotations.assertToken;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,15 +32,14 @@ import java.util.Set;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.rftagger.RfTagger;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class RfTaggerTest
 {

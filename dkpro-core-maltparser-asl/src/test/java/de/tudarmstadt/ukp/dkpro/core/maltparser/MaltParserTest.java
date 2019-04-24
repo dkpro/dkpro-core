@@ -17,10 +17,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.maltparser;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertDependencies;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.dkpro.core.testing.AssertAnnotations.assertDependencies;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -39,8 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MaltParserTest
 {

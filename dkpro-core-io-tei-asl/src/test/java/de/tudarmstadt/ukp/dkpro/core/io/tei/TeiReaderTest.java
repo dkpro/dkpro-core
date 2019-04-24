@@ -34,6 +34,7 @@ import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.EOLUtils;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -42,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
-import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 public class TeiReaderTest
 {

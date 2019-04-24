@@ -18,14 +18,14 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPennTree;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.dkpro.core.testing.AssertAnnotations.assertConstituents;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static org.dkpro.core.testing.AssertAnnotations.assertPennTree;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,9 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -41,9 +44,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class BerkeleyParserTest
 {

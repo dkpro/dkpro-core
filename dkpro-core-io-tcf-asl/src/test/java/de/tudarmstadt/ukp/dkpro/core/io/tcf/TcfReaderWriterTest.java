@@ -31,12 +31,12 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.custommonkey.xmlunit.XMLAssert;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.EOLUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpusLayer;

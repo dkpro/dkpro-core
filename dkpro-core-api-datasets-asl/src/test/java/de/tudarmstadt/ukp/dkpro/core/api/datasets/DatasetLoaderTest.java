@@ -23,14 +23,10 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetLoader;
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 @Ignore("Normally we do not run this")
 public class DatasetLoaderTest

@@ -17,10 +17,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
 import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.util.FSUtil.getFeature;
+import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -28,10 +28,9 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class XmiReaderWriterTest
 {

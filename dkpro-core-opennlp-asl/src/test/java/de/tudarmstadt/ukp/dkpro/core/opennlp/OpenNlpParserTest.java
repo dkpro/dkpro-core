@@ -17,26 +17,26 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPennTree;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.dkpro.core.testing.AssertAnnotations.assertConstituents;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static org.dkpro.core.testing.AssertAnnotations.assertPennTree;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssumeResource;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpParserTest
 {

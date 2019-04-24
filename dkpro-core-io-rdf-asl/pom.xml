@@ -83,7 +83,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+      <artifactId>dkpro-core-testing-asl</artifactId>
       <scope>compile</scope> <!-- we currently make use of CasAnalysisUtils here! -->
     </dependency>
     <dependency>

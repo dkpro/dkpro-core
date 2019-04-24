@@ -17,16 +17,16 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.cogroo;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertNamedEntity;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertNamedEntity;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class CogrooNamedEntityRecognizerTest
 {

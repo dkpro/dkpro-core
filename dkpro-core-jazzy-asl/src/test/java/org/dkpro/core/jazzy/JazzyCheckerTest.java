@@ -30,8 +30,6 @@ import org.apache.uima.fit.factory.ExternalResourceFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
-import org.dkpro.core.jazzy.CorrectionsContextualizer;
-import org.dkpro.core.jazzy.JazzyChecker;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;

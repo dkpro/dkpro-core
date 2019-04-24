@@ -22,10 +22,9 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.util.List;
 
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class FinderTest
 {

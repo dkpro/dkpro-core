@@ -25,12 +25,11 @@ import java.io.File;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.store.FSDirectory;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class LuceneIndexerTest
 {

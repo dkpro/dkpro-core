@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.graf;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import java.io.File;
 
@@ -26,7 +26,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.DkproTestContext;
 
 public class GrafReaderWriterTest
 {

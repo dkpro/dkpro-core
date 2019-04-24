@@ -17,11 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertChunks;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertSentence;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertChunks;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;

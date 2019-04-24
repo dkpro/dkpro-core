@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.asCopyableString;
+import static org.dkpro.core.testing.AssertAnnotations.asCopyableString;
 import static org.junit.Assert.assertFalse;
 
 import java.util.Arrays;

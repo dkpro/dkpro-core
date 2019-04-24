@@ -33,6 +33,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.After;
 import org.junit.Assume;
 import org.junit.Before;
@@ -41,7 +42,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class HdfsResourceLoaderLocatorTest
 {

@@ -17,8 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.jazzy.JazzyChecker;

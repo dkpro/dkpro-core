@@ -18,13 +18,13 @@
 
 package org.dkpro.core.tokit;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertSentence;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
+import static org.dkpro.core.testing.AssertAnnotations.assertToken;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -32,7 +32,6 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.tokit.RegexSegmenter;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;

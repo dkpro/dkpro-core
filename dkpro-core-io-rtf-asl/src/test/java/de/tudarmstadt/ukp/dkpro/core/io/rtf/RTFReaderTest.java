@@ -31,9 +31,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.testing.EOLUtils;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 /**
  * Test cases for {@link RTFReader}.

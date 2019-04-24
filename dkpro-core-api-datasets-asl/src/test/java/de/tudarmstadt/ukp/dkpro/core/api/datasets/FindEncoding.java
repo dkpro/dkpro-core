@@ -23,14 +23,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 @Ignore("Normally we do not run this")
 public class FindEncoding

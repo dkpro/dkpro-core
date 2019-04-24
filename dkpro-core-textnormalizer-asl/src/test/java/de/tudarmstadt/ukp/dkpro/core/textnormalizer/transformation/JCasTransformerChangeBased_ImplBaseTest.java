@@ -18,8 +18,8 @@
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;

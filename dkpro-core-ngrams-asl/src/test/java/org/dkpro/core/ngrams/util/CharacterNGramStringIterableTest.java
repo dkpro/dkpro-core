@@ -19,7 +19,6 @@ package org.dkpro.core.ngrams.util;
 
 import static org.junit.Assert.assertEquals;
 
-import org.dkpro.core.ngrams.util.CharacterNGramStringIterable;
 import org.junit.Test;
 
 public class CharacterNGramStringIterableTest

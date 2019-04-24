@@ -28,7 +28,6 @@ import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.dkpro.core.tokit.AnnotationByLengthFilter;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;

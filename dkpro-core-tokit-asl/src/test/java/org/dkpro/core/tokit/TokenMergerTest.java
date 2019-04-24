@@ -44,7 +44,7 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.tokit.TokenMerger;
+import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.TokenMerger.LemmaMode;
 import org.junit.Rule;
 import org.junit.Test;
@@ -58,7 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TokenMergerTest
 {

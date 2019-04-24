@@ -18,20 +18,20 @@
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.TestRunner;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class TokenCaseTransformerTest
 {

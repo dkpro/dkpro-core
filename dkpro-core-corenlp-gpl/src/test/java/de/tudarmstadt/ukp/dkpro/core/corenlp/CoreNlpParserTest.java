@@ -18,17 +18,17 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertDependencies;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPennTree;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertSyntacticFunction;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.dkpro.core.testing.AssertAnnotations.assertConstituents;
+import static org.dkpro.core.testing.AssertAnnotations.assertDependencies;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static org.dkpro.core.testing.AssertAnnotations.assertPennTree;
+import static org.dkpro.core.testing.AssertAnnotations.assertSyntacticFunction;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -37,6 +37,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssumeResource;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,9 +52,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import edu.stanford.nlp.ling.StringLabel;
 import edu.stanford.nlp.trees.Tree;
 

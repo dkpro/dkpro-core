@@ -24,7 +24,6 @@ import static org.junit.Assert.fail;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.tokit.ParagraphSplitter;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;

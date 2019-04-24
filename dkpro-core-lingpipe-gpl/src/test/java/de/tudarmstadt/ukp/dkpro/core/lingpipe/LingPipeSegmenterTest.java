@@ -21,11 +21,10 @@ package de.tudarmstadt.ukp.dkpro.core.lingpipe;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.harness.SegmenterHarness;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public class LingPipeSegmenterTest
 {

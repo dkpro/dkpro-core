@@ -25,6 +25,7 @@ import static org.junit.Assert.fail;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -34,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ImsCwbReaderTest
 {

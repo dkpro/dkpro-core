@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -34,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class FrequencyBasedTest
 {

@@ -17,15 +17,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay2;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay2;
 
 import java.io.File;
 
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ImsCwbReaderWriterTest
 {

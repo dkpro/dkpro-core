@@ -17,10 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.doc
 
-import static groovy.io.FileType.FILES
-
-import org.dkpro.meta.core.maven.ContextHolder;
-
 class PomSanityCheck {
     public void run() {
         ContextHolder.log.info("Running POM sanity check ${ContextHolder.basedir}...")

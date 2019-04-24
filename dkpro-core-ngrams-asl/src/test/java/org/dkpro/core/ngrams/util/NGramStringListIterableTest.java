@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.dkpro.core.ngrams.util.NGramStringListIterable;
 import org.junit.Test;
 
 public class NGramStringListIterableTest

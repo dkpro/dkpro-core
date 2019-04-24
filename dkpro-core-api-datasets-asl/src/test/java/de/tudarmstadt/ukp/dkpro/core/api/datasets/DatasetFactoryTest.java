@@ -25,14 +25,10 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class DatasetFactoryTest
 {

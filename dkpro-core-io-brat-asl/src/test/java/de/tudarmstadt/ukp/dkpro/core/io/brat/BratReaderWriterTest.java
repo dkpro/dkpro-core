@@ -17,19 +17,19 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.brat;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!

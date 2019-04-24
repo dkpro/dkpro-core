@@ -23,14 +23,13 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.tokit.LineBasedSentenceSegmenter;
+import org.dkpro.core.testing.AssertAnnotations;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 public class LineBasedSentenceSegmenterTest
 {
