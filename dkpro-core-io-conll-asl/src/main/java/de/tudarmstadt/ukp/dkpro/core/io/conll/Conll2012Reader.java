@@ -45,6 +45,8 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
+import org.dkpro.core.io.penntree.PennTreeUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
@@ -64,8 +66,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
-import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
-import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

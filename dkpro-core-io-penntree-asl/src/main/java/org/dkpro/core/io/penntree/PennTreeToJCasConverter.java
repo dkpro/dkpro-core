@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.penntree;
+package org.dkpro.core.io.penntree;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.trim;
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.unescapeToken;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.uima.fit.util.FSCollectionFactory.createFSArray;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.io.penntree.PennTreeUtils.trim;
+import static org.dkpro.core.io.penntree.PennTreeUtils.unescapeToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;

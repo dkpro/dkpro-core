@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package de.tudarmstadt.ukp.dkpro.core.io.penntree;
+package org.dkpro.core.io.penntree;
 
 import java.util.Collection;
 
@@ -24,6 +24,9 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.penntree.PennTreeNode;
+import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
+import org.dkpro.core.io.penntree.PennTreeUtils;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.validation.extras.AllTokensHavePos;
 import org.junit.Assert;

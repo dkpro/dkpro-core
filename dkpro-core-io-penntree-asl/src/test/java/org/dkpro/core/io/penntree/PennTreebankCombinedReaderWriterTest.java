@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.penntree;
+package org.dkpro.core.io.penntree;
 
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -33,6 +33,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.dkpro.core.io.penntree.PennTreebankCombinedReader;
+import org.dkpro.core.io.penntree.PennTreebankCombinedWriter;
 import org.dkpro.core.testing.EOLUtils;
 import org.junit.Before;
 import org.junit.Ignore;

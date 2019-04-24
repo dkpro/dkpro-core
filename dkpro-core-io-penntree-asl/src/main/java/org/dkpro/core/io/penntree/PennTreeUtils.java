@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.penntree;
+package org.dkpro.core.io.penntree;
 
 import static java.util.Collections.singletonList;
 import static org.apache.uima.fit.util.FSCollectionFactory.create;

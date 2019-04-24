@@ -25,14 +25,14 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.penntree.PennTreeNode;
+import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
+import org.dkpro.core.io.penntree.PennTreeUtils;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
-import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
-import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 
 public class StanfordDependencyConverterTest
 {

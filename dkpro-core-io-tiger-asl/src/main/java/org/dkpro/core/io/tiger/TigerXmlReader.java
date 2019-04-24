@@ -56,6 +56,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.io.penntree.PennTreeNode;
+import org.dkpro.core.io.penntree.PennTreeUtils;
 import org.dkpro.core.io.tiger.internal.IllegalAnnotationStructureException;
 import org.dkpro.core.io.tiger.internal.model.AnnotationDecl;
 import org.dkpro.core.io.tiger.internal.model.Meta;
@@ -88,8 +90,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
-import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
-import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

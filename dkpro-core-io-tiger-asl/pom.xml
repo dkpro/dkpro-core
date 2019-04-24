@@ -80,7 +80,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</artifactId>
+      <artifactId>dkpro-core-io-penntree-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>

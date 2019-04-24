@@ -15,19 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.penntree;
+package org.dkpro.core.io.penntree;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.convertPennTree;
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.parsePennTree;
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.selectDfs;
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toPennTree;
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toPrettyPennTree;
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toText;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.dkpro.core.io.penntree.PennTreeUtils.convertPennTree;
+import static org.dkpro.core.io.penntree.PennTreeUtils.parsePennTree;
+import static org.dkpro.core.io.penntree.PennTreeUtils.selectDfs;
+import static org.dkpro.core.io.penntree.PennTreeUtils.toPennTree;
+import static org.dkpro.core.io.penntree.PennTreeUtils.toPrettyPennTree;
+import static org.dkpro.core.io.penntree.PennTreeUtils.toText;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.penntree.PennTreeNode;
+import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
+import org.dkpro.core.io.penntree.PennTreeUtils;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
