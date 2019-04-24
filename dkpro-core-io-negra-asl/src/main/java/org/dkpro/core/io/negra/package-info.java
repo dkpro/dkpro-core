@@ -22,4 +22,4 @@
  *
  * @since 1.2.0
  */
-package de.tudarmstadt.ukp.dkpro.core.io.negra;
+package org.dkpro.core.io.negra;

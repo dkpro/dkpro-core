@@ -15,11 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.negra;
+package org.dkpro.core.io.negra;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
+import org.dkpro.core.io.negra.NegraExportReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;

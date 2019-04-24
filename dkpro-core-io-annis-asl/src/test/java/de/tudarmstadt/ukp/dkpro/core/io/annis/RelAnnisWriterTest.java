@@ -28,11 +28,10 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.io.negra.NegraExportReader;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
-import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 
 public class RelAnnisWriterTest
 {
