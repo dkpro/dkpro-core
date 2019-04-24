@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.pdf;
+package org.dkpro.core.io.pdf;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
@@ -31,15 +31,15 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.io.pdf.internal.Pdf2CasConverter;
+import org.dkpro.core.io.pdf.internal.SubstitutionTrieParser;
+import org.dkpro.core.io.pdf.internal.Trie;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
-import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.Pdf2CasConverter;
-import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.SubstitutionTrieParser;
-import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.Trie;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
