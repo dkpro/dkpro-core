@@ -15,12 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
+package org.dkpro.core.io.imscwb;
 
 import static org.dkpro.core.testing.IOTestRunner.testOneWay2;
 
 import java.io.File;
 
+import org.dkpro.core.io.imscwb.ImsCwbReader;
+import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;

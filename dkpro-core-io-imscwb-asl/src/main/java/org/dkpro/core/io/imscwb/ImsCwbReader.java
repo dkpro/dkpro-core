@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
+package org.dkpro.core.io.imscwb;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -38,6 +38,9 @@ import org.apache.uima.internal.util.XMLUtils;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.core.io.imscwb.util.CorpusSentence;
+import org.dkpro.core.io.imscwb.util.CorpusText;
+import org.dkpro.core.io.imscwb.util.TextIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -48,9 +51,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusSentence;
-import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusText;
-import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
