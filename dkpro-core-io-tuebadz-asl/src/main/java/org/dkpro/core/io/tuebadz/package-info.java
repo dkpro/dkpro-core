@@ -18,4 +18,4 @@
 /**
  * Provides classes for the conversion of specific TüBA-D/Z file formats.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tuebadz;
+package org.dkpro.core.io.tuebadz;

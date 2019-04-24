@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tuebadz;
+package org.dkpro.core.io.tuebadz;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createChunkMappingProvider;
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
