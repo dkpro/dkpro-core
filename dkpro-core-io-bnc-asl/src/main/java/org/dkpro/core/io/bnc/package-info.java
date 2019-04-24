@@ -19,4 +19,4 @@
 /**
  * Support for <a href="http://www.natcorp.ox.ac.uk/docs/URG/">British National Corpus XML Edition</a>.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.bnc;
+package org.dkpro.core.io.bnc;

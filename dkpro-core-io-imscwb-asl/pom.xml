@@ -78,7 +78,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</artifactId>
+      <artifactId>dkpro-core-io-bnc-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.bnc;
+package org.dkpro.core.io.bnc;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
