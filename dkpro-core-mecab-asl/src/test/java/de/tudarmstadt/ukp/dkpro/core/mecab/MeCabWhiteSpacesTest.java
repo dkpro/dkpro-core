@@ -34,11 +34,11 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.text.TextReader;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
 
 /**

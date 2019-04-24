@@ -27,6 +27,7 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Rule;
@@ -34,7 +35,6 @@ import org.junit.Test;
 
 import cc.mallet.topics.ParallelTopicModel;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
 public class MalletLdaTopicModelTrainerTest
 {

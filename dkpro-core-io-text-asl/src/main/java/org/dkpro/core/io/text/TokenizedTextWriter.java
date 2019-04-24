@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.text;
+package org.dkpro.core.io.text;
 
 import java.io.File;
 import java.io.IOException;

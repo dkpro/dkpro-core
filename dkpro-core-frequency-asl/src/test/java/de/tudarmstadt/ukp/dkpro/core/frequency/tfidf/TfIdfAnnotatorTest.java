@@ -33,6 +33,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Before;
 import org.junit.Rule;
@@ -45,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeIdf;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeTf;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
 public class TfIdfAnnotatorTest
 {

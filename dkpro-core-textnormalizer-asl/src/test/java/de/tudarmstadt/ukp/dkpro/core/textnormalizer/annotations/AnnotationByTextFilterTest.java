@@ -27,12 +27,12 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.io.text.StringReader;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
 
 public class AnnotationByTextFilterTest
 {
