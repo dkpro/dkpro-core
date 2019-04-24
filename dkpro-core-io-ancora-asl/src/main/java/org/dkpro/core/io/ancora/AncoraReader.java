@@ -15,16 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.ancora;
+package org.dkpro.core.io.ancora;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEMMA;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POS;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WORD;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.TAG_SENTENCE;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEMMA;
+import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POS;
+import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WORD;
+import static org.dkpro.core.io.ancora.internal.AncoraConstants.TAG_SENTENCE;
 
 import java.io.IOException;
 import java.io.InputStream;
