@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.xmi;
+package org.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 

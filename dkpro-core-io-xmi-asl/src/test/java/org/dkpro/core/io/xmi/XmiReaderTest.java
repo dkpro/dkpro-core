@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.xmi;
+package org.dkpro.core.io.xmi;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,6 +29,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.xmi.XmiReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;

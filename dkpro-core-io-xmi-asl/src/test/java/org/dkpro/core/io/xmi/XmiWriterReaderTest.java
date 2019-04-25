@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.xmi;
+package org.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
@@ -32,6 +32,8 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.util.CasCreationUtils;
 import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.io.xmi.XmiReader;
+import org.dkpro.core.io.xmi.XmiWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;

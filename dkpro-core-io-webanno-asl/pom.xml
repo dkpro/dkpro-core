@@ -85,7 +85,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
+      <artifactId>dkpro-core-io-xmi-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
