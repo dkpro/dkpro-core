@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.ditop;
+package org.dkpro.core.io.ditop;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.util.JCasUtil.select;
