@@ -15,10 +15,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
+package org.dkpro.core.io.gate.internal;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
 import static gate.creole.ANNIEConstants.LOCATION_ANNOTATION_TYPE;
 import static gate.creole.ANNIEConstants.ORGANIZATION_ANNOTATION_TYPE;
 import static gate.creole.ANNIEConstants.PERSON_ANNOTATION_TYPE;
@@ -28,6 +26,8 @@ import static gate.creole.ANNIEConstants.TOKEN_CATEGORY_FEATURE_NAME;
 import static gate.creole.ANNIEConstants.TOKEN_LENGTH_FEATURE_NAME;
 import static gate.creole.ANNIEConstants.TOKEN_STRING_FEATURE_NAME;
 import static org.apache.uima.fit.util.JCasUtil.selectAll;
+import static org.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
+import static org.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;

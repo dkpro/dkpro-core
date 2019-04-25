@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
+package org.dkpro.core.io.gate.internal;
 
 public final class GateAnnieConstants
 {

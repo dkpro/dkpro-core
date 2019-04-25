@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
+package org.dkpro.core.io.gate.internal;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
 import static gate.creole.ANNIEConstants.SENTENCE_ANNOTATION_TYPE;
 import static gate.creole.ANNIEConstants.TOKEN_ANNOTATION_TYPE;
 import static gate.creole.ANNIEConstants.TOKEN_CATEGORY_FEATURE_NAME;
+import static org.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
+import static org.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
 
 import org.apache.uima.jcas.JCas;
 
