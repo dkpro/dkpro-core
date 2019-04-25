@@ -19,4 +19,4 @@
 /**
  * Support for JDBC-capable SQL databases.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.jdbc;
+package org.dkpro.core.io.jdbc;

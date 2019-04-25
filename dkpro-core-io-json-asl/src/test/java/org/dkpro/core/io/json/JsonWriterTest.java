@@ -15,11 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.json;
+package org.dkpro.core.io.json;
 
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.io.conll.Conll2000Reader;
+import org.dkpro.core.io.json.JsonWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
