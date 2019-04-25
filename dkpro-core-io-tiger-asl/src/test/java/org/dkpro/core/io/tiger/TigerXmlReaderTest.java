@@ -32,6 +32,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.conll.Conll2012Writer;
 import org.dkpro.core.io.tiger.TigerXmlReader;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.DkproTestContext;
@@ -42,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
 
 public class TigerXmlReaderTest
 {

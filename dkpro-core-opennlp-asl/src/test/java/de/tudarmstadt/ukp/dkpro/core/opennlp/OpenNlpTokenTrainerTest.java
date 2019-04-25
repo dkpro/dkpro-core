@@ -33,6 +33,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.conll.ConllUReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
 import org.junit.Rule;
@@ -45,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.ConllUReader;
 
 public class OpenNlpTokenTrainerTest
 {

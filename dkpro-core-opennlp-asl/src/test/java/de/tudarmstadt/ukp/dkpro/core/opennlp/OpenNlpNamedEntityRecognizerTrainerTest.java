@@ -30,6 +30,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.io.conll.Conll2002Reader;
+import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,8 +44,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import opennlp.tools.ml.maxent.GISTrainer;
 
 public class OpenNlpNamedEntityRecognizerTrainerTest

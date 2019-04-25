@@ -22,11 +22,10 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.io.ancora.AncoraReader;
+import org.dkpro.core.io.conll.Conll2006Writer;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer;
 
 public class AncoraReaderTest
 {

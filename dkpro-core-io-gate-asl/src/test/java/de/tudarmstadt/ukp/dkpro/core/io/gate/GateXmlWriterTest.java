@@ -21,12 +21,11 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
+import org.dkpro.core.io.conll.Conll2000Reader;
+import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
 
 public class GateXmlWriterTest
 {

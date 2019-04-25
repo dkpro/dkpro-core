@@ -29,6 +29,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.io.conll.Conll2006Reader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader;
 
 public class OpenNlpPosTaggerTrainerTest
 {

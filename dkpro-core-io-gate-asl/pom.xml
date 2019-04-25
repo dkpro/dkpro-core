@@ -92,7 +92,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
+      <artifactId>dkpro-core-io-conll-asl</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

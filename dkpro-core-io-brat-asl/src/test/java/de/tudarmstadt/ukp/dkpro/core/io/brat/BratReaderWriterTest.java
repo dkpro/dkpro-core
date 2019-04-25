@@ -23,13 +23,12 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
+import org.dkpro.core.io.conll.Conll2009Reader;
+import org.dkpro.core.io.conll.Conll2012Reader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader;
 
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
