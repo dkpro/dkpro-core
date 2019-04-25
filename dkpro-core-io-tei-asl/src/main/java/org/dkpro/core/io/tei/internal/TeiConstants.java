@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tei.internal;
+package org.dkpro.core.io.tei.internal;
 
 import javax.xml.namespace.QName;
 

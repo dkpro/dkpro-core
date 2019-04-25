@@ -19,4 +19,4 @@
 /**
  * Support for <a href="http://www.tei-c.org/">TEI XML</a>.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tei;
+package org.dkpro.core.io.tei;

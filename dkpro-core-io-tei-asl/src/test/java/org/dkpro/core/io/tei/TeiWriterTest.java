@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tei;
+package org.dkpro.core.io.tei;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -26,6 +26,7 @@ import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.dkpro.core.io.tei.TeiWriter;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.dumper.CasDumpWriter;

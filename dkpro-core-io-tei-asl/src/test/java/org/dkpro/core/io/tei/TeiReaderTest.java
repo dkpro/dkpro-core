@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tei;
+package org.dkpro.core.io.tei;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -35,6 +35,7 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.imscwb.ImsCwbWriter;
+import org.dkpro.core.io.tei.TeiReader;
 import org.dkpro.core.io.text.TextWriter;
 import org.dkpro.core.testing.EOLUtils;
 import org.junit.Test;

@@ -95,7 +95,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
+      <artifactId>dkpro-core-io-tei-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

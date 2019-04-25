@@ -15,26 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tei;
+package org.dkpro.core.io.tei;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_BODY;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_FILE_DESC;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_HEADER;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TEI;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TEXT;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TITLE;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TITLE_STMT;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_CHARACTER;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_PARAGRAPH;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_PHRASE;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_RS;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_SUNIT;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
-import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TEI_NS;
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
+import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
+import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
+import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_BODY;
+import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_FILE_DESC;
+import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_HEADER;
+import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TEI;
+import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TEXT;
+import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TITLE;
+import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TITLE_STMT;
+import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_CHARACTER;
+import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_PARAGRAPH;
+import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_PHRASE;
+import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_RS;
+import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_SUNIT;
+import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
+import static org.dkpro.core.io.tei.internal.TeiConstants.TEI_NS;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
