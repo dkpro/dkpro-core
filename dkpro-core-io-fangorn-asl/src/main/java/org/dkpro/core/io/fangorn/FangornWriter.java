@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.fangorn;
+package org.dkpro.core.io.fangorn;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 

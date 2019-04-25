@@ -747,7 +747,7 @@
         <dependencies>
           <dependency>
             <groupId>org.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
+            <artifactId>dkpro-core-io-fangorn-asl</artifactId>
             <version>1.11.0-SNAPSHOT</version>
           </dependency>
           <dependency>
