@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.annis;
+package org.dkpro.core.io.annis;
 
 import static org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL;
 import static org.apache.commons.io.FileUtils.readFileToString;
@@ -28,6 +28,7 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.io.annis.RelAnnisWriter;
 import org.dkpro.core.io.negra.NegraExportReader;
 import org.junit.Rule;
 import org.junit.Test;

@@ -19,4 +19,4 @@
 /**
  * Support for <a href="http://www.sfb632.uni-potsdam.de/d1/annis/">ANNIS 2</a> format.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.annis;
+package org.dkpro.core.io.annis;
