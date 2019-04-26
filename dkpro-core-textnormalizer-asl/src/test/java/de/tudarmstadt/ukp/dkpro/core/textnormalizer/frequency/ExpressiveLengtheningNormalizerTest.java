@@ -22,10 +22,9 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternal
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 
 public class ExpressiveLengtheningNormalizerTest
 {

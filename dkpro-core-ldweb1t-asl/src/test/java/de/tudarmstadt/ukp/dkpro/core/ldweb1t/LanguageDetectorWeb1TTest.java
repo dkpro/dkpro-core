@@ -29,10 +29,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
+import org.dkpro.core.frequency.resources.Web1TInMemoryFrequencyCountResource;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.frequency.resources.Web1TInMemoryFrequencyCountResource;
 
 public class LanguageDetectorWeb1TTest
 {

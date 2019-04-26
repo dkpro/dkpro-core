@@ -22,10 +22,9 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 
+import org.dkpro.core.frequency.Web1TFileAccessProvider;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 
 public class TestCreatedIndex
 {

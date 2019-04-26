@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.ldweb1t;
 
-import static de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase.BOS;
+import static org.dkpro.core.frequency.Web1TProviderBase.BOS;
 
 import java.util.ArrayList;
 import java.util.HashMap;

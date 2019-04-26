@@ -15,29 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
+package org.dkpro.core.frequency;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.dkpro.core.frequency.Web1TFileAccessProvider;
+import org.dkpro.core.frequency.BerkeleyLmProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-
-public class JWeb1TFrequencyProviderTest
+public class BerkeleyLmProviderTest
 {
 
+    @Ignore
     @Test
-    public void testFrequencyProvider()
-        throws IOException
-    {
-        FrequencyCountProvider provider = new Web1TFileAccessProvider("de", new File(
-                "src/test/resources/jweb1t"), 1, 1);
+    public void berkeleyLMTest() throws Exception {
+        BerkeleyLmProvider lm  = new BerkeleyLmProvider(
+                "src/test/resources/test.ser",
+                "en"
+        );
 
-        assertEquals(1, provider.getFrequency("süß"));
-        assertEquals(1, provider.getFrequency("Kresse"));
+        assertEquals(50, lm.getFrequency("of the ("));
+        assertEquals(0.011155508, lm.getProbability("is"),     0.0000001);
+        assertEquals(-4.49582195, lm.getLogProbability("is"),  0.0000001);
     }
 }

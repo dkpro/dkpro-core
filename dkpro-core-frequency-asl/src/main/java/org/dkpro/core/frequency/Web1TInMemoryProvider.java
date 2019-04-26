@@ -15,29 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
+package org.dkpro.core.frequency;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
 import java.io.IOException;
 
-import org.dkpro.core.frequency.Web1TFileAccessProvider;
-import org.junit.Test;
+import com.googlecode.jweb1t.JWeb1TSearcherInMemory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-
-public class JWeb1TFrequencyProviderTest
+public class Web1TInMemoryProvider
+    extends Web1TProviderBase
 {
-
-    @Test
-    public void testFrequencyProvider()
+    
+    public Web1TInMemoryProvider(String language, String ngramLocation, int maxNgramLevel)
         throws IOException
     {
-        FrequencyCountProvider provider = new Web1TFileAccessProvider("de", new File(
-                "src/test/resources/jweb1t"), 1, 1);
-
-        assertEquals(1, provider.getFrequency("süß"));
-        assertEquals(1, provider.getFrequency("Kresse"));
+        searcher = new JWeb1TSearcherInMemory(ngramLocation, maxNgramLevel);
+        basePath = ngramLocation;
+        this.language = language;
     }
 }
