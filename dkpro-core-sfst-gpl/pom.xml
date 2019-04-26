@@ -28,7 +28,7 @@
     <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
+  <artifactId>dkpro-core-sfst-gpl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core GPL - SFST</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
