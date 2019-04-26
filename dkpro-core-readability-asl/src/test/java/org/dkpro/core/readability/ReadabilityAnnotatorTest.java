@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.readability;
+package org.dkpro.core.readability;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -31,10 +31,11 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.readability.ReadabilityAnnotator;
+import org.dkpro.core.readability.measure.ReadabilityMeasures.Measures;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.readability.measure.ReadabilityMeasures.Measures;
 import de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore;
 
 public class ReadabilityAnnotatorTest

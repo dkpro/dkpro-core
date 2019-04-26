@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.readability.measure;
+package org.dkpro.core.readability.measure;
 
 import java.util.Arrays;
 import java.util.HashSet;

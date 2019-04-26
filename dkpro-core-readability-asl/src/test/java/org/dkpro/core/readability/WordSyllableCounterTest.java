@@ -15,13 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.readability;
+package org.dkpro.core.readability;
 
 import static org.junit.Assert.assertEquals;
 
+import org.dkpro.core.readability.measure.WordSyllableCounter;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.readability.measure.WordSyllableCounter;
 
 public class WordSyllableCounterTest
 {

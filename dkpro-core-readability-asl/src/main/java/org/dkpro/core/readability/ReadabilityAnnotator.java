@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.readability;
+package org.dkpro.core.readability;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +28,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.readability.measure.ReadabilityMeasures;
+import org.dkpro.core.readability.measure.ReadabilityMeasures.Measures;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.readability.measure.ReadabilityMeasures;
-import de.tudarmstadt.ukp.dkpro.core.readability.measure.ReadabilityMeasures.Measures;
 import de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
