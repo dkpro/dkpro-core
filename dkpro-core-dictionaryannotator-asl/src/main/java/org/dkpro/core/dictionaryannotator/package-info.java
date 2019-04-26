@@ -17,6 +17,8 @@
  */
 
 /**
- * Interface that provides access to semantic tags from various resources (UBY, key-value maps ...)
+ * Annotate words and multi-words using a dictionary.
+ *
+ * @since 1.1.0
  */
-package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
+package org.dkpro.core.dictionaryannotator;

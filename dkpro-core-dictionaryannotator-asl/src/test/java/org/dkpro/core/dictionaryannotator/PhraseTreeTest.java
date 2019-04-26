@@ -15,13 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator;
+package org.dkpro.core.dictionaryannotator;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import org.dkpro.core.dictionaryannotator.PhraseTree;
 import org.junit.Before;
 import org.junit.Test;
 

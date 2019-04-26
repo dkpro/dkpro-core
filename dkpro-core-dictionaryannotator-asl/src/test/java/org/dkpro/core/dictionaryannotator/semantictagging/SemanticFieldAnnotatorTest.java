@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
+package org.dkpro.core.dictionaryannotator.semantictagging;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -28,6 +28,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.dictionaryannotator.semantictagging.SemanticFieldAnnotator;
+import org.dkpro.core.dictionaryannotator.semantictagging.SemanticTagResource;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.junit.Test;
 
