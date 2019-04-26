@@ -22,4 +22,4 @@
  *
  * @since 1.5.0
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tgrep;
+package org.dkpro.core.io.tgrep;

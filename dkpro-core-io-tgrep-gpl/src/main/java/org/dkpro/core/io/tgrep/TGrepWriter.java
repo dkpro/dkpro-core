@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.tgrep;
+package org.dkpro.core.io.tgrep;
 
 import java.io.File;
 import java.io.FileOutputStream;
