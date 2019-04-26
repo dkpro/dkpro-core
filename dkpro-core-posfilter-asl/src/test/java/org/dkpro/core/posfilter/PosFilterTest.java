@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.posfilter;
+package org.dkpro.core.posfilter;
 
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -34,6 +34,7 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.conll.Conll2006Reader;
+import org.dkpro.core.posfilter.PosFilter;
 import org.dkpro.core.snowball.SnowballStemmer;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.junit.Before;

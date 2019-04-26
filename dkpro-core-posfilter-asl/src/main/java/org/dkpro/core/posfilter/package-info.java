@@ -22,4 +22,4 @@
  *
  * @since 1.1.0
  */
-package de.tudarmstadt.ukp.dkpro.core.posfilter;
+package org.dkpro.core.posfilter;
