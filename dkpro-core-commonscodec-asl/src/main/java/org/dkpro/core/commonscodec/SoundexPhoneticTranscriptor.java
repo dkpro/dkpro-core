@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package de.tudarmstadt.ukp.dkpro.core.commonscodec;
+package org.dkpro.core.commonscodec;
 
 import org.apache.commons.codec.language.Soundex;
 import org.apache.uima.fit.descriptor.LanguageCapability;

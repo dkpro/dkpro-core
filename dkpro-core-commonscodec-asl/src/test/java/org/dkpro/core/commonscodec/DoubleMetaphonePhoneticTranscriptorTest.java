@@ -15,11 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package de.tudarmstadt.ukp.dkpro.core.commonscodec;
+package org.dkpro.core.commonscodec;
 
-import static de.tudarmstadt.ukp.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 
+import org.dkpro.core.commonscodec.DoubleMetaphonePhoneticTranscriptor;
 import org.junit.Test;
 
 public class DoubleMetaphonePhoneticTranscriptorTest

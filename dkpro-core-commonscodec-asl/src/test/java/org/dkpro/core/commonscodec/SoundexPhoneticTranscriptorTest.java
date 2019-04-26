@@ -15,23 +15,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package de.tudarmstadt.ukp.dkpro.core.commonscodec;
+package org.dkpro.core.commonscodec;
 
-import static de.tudarmstadt.ukp.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 
+import org.dkpro.core.commonscodec.SoundexPhoneticTranscriptor;
 import org.junit.Test;
 
-public class ColognePhoneticTranscriptorTest
+public class SoundexPhoneticTranscriptorTest
 {
 
     @Test
-    public void colognePhoneticTest() throws Exception {
+    public void soundexTest() throws Exception {
 
         runTest(
-                createEngineDescription(ColognePhoneticTranscriptor.class),
-                "Man sagt die Ente ist das Ende vom Mann .",
-                "66", "842", "2", "062", "082", "28", "062", "36", "66", ""
+                createEngineDescription(SoundexPhoneticTranscriptor.class),
+                "The knight entered the store in the night .",
+                "T000", "K523", "E536", "T000", "S360", "I500", "T000", "N230", ""
         );
     }
 }

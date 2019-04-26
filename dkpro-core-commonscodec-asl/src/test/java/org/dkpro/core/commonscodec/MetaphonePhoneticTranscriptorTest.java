@@ -15,23 +15,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package de.tudarmstadt.ukp.dkpro.core.commonscodec;
+package org.dkpro.core.commonscodec;
 
-import static de.tudarmstadt.ukp.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 
+import org.dkpro.core.commonscodec.MetaphonePhoneticTranscriptor;
 import org.junit.Test;
 
-public class SoundexPhoneticTranscriptorTest
+public class MetaphonePhoneticTranscriptorTest
 {
 
     @Test
-    public void soundexTest() throws Exception {
+    public void metaphoneTest() throws Exception {
 
         runTest(
-                createEngineDescription(SoundexPhoneticTranscriptor.class),
+                createEngineDescription(MetaphonePhoneticTranscriptor.class),
                 "The knight entered the store in the night .",
-                "T000", "K523", "E536", "T000", "S360", "I500", "T000", "N230", ""
+                "0", "NT", "ENTR", "0", "STR", "IN", "0", "NT", "."
         );
     }
 }

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package de.tudarmstadt.ukp.dkpro.core.commonscodec;
+package org.dkpro.core.commonscodec;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.junit.Assert.assertEquals;
