@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.norvig;
+package org.dkpro.core.norvig;
 
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toUpperCase;

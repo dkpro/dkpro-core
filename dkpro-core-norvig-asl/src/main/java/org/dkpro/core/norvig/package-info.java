@@ -21,4 +21,4 @@
  *
  * @since 1.1.0
  */
-package de.tudarmstadt.ukp.dkpro.core.norvig;
+package org.dkpro.core.norvig;
