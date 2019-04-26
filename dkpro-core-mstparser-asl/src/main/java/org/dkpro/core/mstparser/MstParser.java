@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mstparser;
+package org.dkpro.core.mstparser;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createDependencyMappingProvider;
 import static java.util.Arrays.asList;
