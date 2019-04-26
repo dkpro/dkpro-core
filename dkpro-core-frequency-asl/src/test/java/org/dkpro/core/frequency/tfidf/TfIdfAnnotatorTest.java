@@ -33,8 +33,6 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.frequency.tfidf.TfIdfAnnotator;
-import org.dkpro.core.frequency.tfidf.TfIdfWriter;
 import org.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeIdf;
 import org.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeTf;
 import org.dkpro.core.io.text.TextReader;

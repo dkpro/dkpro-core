@@ -19,8 +19,6 @@ package org.dkpro.core.frequency;
 
 import static org.junit.Assert.assertEquals;
 
-import org.dkpro.core.frequency.Web1TInMemoryProvider;
-import org.dkpro.core.frequency.Web1TProviderBase;
 import org.junit.Test;
 
 public class Web1TInMemoryFrequencyProviderTest

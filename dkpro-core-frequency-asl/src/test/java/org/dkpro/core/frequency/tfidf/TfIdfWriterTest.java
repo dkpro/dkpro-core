@@ -29,8 +29,6 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.frequency.tfidf.TfIdfAnnotator;
-import org.dkpro.core.frequency.tfidf.TfIdfWriter;
 import org.dkpro.core.frequency.tfidf.model.DfModel;
 import org.dkpro.core.frequency.tfidf.util.TfidfUtils;
 import org.dkpro.core.io.text.TextReader;

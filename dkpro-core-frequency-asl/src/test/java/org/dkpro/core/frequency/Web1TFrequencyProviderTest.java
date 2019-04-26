@@ -22,8 +22,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.util.Iterator;
 
-import org.dkpro.core.frequency.Web1TFileAccessProvider;
-import org.dkpro.core.frequency.Web1TProviderBase;
 import org.junit.Test;
 
 public class Web1TFrequencyProviderTest

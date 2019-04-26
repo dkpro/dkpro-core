@@ -19,7 +19,6 @@ package org.dkpro.core.frequency;
 
 import static org.junit.Assert.assertEquals;
 
-import org.dkpro.core.frequency.BerkeleyLmProvider;
 import org.junit.Ignore;
 import org.junit.Test;
 
