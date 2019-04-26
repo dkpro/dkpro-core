@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.solr.util;
+package org.dkpro.core.io.solr.util;
 
 import org.apache.commons.collections4.map.SingletonMap;
 import org.apache.solr.common.SolrInputDocument;

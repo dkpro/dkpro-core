@@ -15,15 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.solr;
+package org.dkpro.core.io.solr;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.solr.util.SolrUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.io.solr.util.SolrUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

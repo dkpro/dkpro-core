@@ -28,7 +28,7 @@
     <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.io.solr-asl</artifactId>
+  <artifactId>dkpro-core-io-solr-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IO - Solr (v${solr-solrj.version}) (ASL)</name>
   <description>Consumer for writing documents to a Solr server</description>
