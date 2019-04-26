@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
+package org.dkpro.core.mallet.lda.io;
 
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
@@ -34,10 +34,10 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
 /**

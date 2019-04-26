@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
+package org.dkpro.core.mallet.lda.io;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -33,13 +33,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
+import org.dkpro.core.mallet.lda.MalletLdaUtil;
+import org.dkpro.core.mallet.lda.io.MalletLdaTopicProportionsWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaUtil;
 
 /**
  *

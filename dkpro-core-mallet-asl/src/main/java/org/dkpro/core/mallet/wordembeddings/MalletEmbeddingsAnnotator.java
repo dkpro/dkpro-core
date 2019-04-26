@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
+package org.dkpro.core.mallet.wordembeddings;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,9 +36,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.embeddings.Vectorizer;
 import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
 import org.dkpro.core.api.embeddings.text.TextFormatVectorizer;
+import org.dkpro.core.mallet.MalletModelTrainer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import eu.openminted.share.annotations.api.DocumentationResource;
 

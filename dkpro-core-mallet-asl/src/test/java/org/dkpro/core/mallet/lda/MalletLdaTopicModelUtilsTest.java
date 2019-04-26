@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
+package org.dkpro.core.mallet.lda;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import org.dkpro.core.mallet.lda.MalletLdaTopicModelUtils;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;

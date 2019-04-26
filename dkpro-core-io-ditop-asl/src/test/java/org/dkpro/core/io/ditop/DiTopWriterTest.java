@@ -33,12 +33,11 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.ditop.DiTopWriter;
 import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
+import org.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Before;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
 
 public class DiTopWriterTest
 {

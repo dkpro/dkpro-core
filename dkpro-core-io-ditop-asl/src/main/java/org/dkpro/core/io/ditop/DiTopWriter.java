@@ -60,7 +60,7 @@ import eu.openminted.share.annotations.api.Parameters;
 /**
  * This annotator (consumer) writes output files as required by
  * <a href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
- * {@link de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same
+ * {@link org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same
  * model.
  */
 @ResourceMetaData(name = "DiTop Writer")

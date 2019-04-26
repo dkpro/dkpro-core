@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
+package org.dkpro.core.mallet.lda;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,10 +23,10 @@ import java.io.IOException;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.dkpro.core.mallet.MalletModelTrainer;
 
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Instance;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;

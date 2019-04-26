@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
+package org.dkpro.core.mallet.lda;
 
 import java.io.File;
 import java.io.IOException;

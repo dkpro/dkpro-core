@@ -37,6 +37,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.embeddings.VectorizerUtils;
 import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.mallet.wordembeddings.MalletEmbeddingsAnnotator;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Before;
 import org.junit.Test;

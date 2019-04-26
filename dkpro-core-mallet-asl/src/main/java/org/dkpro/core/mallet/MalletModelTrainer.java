@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mallet;
+package org.dkpro.core.mallet;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -25,6 +25,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
+import org.dkpro.core.mallet.wordembeddings.MalletEmbeddingsTrainer;
 
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.types.Instance;
@@ -36,8 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGene
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.MalletEmbeddingsTrainer;
 
 /**
  * This abstract class defines parameters and methods that are common for Mallet model estimators.
