@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.fs.hdfs;
+package org.dkpro.core.fs.hdfs;
 
 import java.net.URI;
 import java.net.URISyntaxException;

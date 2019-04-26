@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.fs.hdfs;
+package org.dkpro.core.fs.hdfs;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
@@ -33,6 +33,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
+import org.dkpro.core.fs.hdfs.HdfsResourceLoaderLocator;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.After;

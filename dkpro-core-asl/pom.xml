@@ -188,7 +188,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.fs.hdfs-asl</artifactId>
+        <artifactId>dkpro-core-fs-hdfs-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>

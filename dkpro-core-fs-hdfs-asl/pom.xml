@@ -25,7 +25,7 @@
     <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.fs.hdfs-asl</artifactId>
+  <artifactId>dkpro-core-fs-hdfs-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - FS - HDFS (v ${hadoop.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
