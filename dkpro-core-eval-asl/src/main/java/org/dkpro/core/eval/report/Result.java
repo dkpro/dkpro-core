@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.eval.report;
+package org.dkpro.core.eval.report;
 
 public class Result
 {

@@ -31,6 +31,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.eval.EvalUtil;
+import org.dkpro.core.eval.model.Span;
+import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import org.dkpro.core.io.conll.Conll2002Writer;
@@ -43,9 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
-import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
-import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 
 public class StanfordNamedEntityRecognizerTrainerTest
 {

@@ -30,6 +30,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.eval.EvalUtil;
+import org.dkpro.core.eval.model.Span;
+import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2006Reader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
@@ -39,9 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
-import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
-import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 
 public class StanfordPosTaggerTrainerTest
 {

@@ -101,7 +101,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.eval-asl</artifactId>
+      <artifactId>dkpro-core-eval-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

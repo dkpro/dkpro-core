@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.eval;
+package org.dkpro.core.eval;
 
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -36,12 +36,12 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.eval.measure.FMeasure;
+import org.dkpro.core.eval.model.Span;
+import org.dkpro.core.eval.report.Result;
 import org.yaml.snakeyaml.Yaml;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.eval.measure.FMeasure;
-import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
-import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 
 public class EvalUtil
 {
