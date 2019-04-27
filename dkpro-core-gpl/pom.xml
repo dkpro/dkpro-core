@@ -65,7 +65,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-gpl</artifactId>
+        <artifactId>dkpro-core-lingpipe-gpl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>

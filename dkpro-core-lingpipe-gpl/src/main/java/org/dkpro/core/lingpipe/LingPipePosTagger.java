@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.lingpipe;
+package org.dkpro.core.lingpipe;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static java.util.Arrays.asList;
@@ -149,6 +149,12 @@ public class LingPipePosTagger
         super.initialize(aContext);
 
         modelProvider = new ModelProviderBase<HmmDecoder>(this, "lingpipe", "tagger") {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/lingpipe/lib/tagger-${language}-${variant}.properties");
+            }
+            
             @Override
             protected HmmDecoder produceResource(InputStream aStream)
                 throws Exception

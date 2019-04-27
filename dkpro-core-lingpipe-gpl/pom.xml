@@ -28,7 +28,7 @@
     <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-gpl</artifactId>
+  <artifactId>dkpro-core-lingpipe-gpl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core GPL - LingPipe (v ${lingpipe.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>

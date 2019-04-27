@@ -16,8 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.lingpipe;
+package org.dkpro.core.lingpipe;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createNerMappingProvider;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
@@ -138,6 +139,12 @@ public class LingPipeNamedEntityRecognizer
 
         modelProvider = new ModelProviderBase<Chunker>(this, "lingpipe", "ner")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/lingpipe/lib/ner-${language}-${variant}.properties");
+            }
+            
             @Override
             protected Chunker produceResource(InputStream aStream)
                 throws Exception
@@ -206,15 +213,7 @@ public class LingPipeNamedEntityRecognizer
             }
         };
 
-        mappingProvider = new MappingProvider();
-        mappingProvider.setDefaultVariantsLocation(
-                "de/tudarmstadt/ukp/dkpro/core/lingpipe/lib/ner-default-variants.map");
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/lingpipe/lib/ner-${language}-${variant}.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-        mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        mappingProvider.setOverride(MappingProvider.VARIANT, variant);
+        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant);
     }
 
     @Override
