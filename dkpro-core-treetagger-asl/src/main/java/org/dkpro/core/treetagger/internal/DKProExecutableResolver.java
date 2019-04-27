@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.treetagger.internal;
+package org.dkpro.core.treetagger.internal;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.getUrlAsExecutable;
 import static java.io.File.separator;

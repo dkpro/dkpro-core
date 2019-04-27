@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.treetagger;
+package org.dkpro.core.treetagger;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -32,6 +32,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
+import org.dkpro.core.treetagger.TreeTaggerChunker;
+import org.dkpro.core.treetagger.TreeTaggerPosTagger;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
