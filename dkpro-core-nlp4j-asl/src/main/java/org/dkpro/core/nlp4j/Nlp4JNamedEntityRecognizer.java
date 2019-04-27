@@ -15,9 +15,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.nlp4j;
+package org.dkpro.core.nlp4j;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -36,19 +35,20 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.nlp4j.internal.EmoryNlp2Uima;
+import org.dkpro.core.nlp4j.internal.EmoryNlpUtils;
+import org.dkpro.core.nlp4j.internal.OnlineComponentTagsetDescriptionProvider;
+import org.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlp2Uima;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlpUtils;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.OnlineComponentTagsetDescriptionProvider;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 import edu.emory.mathcs.nlp.common.util.NLPUtils;
-import edu.emory.mathcs.nlp.component.pos.POSState;
+import edu.emory.mathcs.nlp.component.ner.NERState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 import eu.openminted.share.annotations.api.Component;
@@ -56,20 +56,29 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Part-of-Speech annotator using Emory NLP4J. Requires {@link Sentence}s to be annotated before.
+ * Emory NLP4J name finder wrapper.
  */
-@Component(OperationType.PART_OF_SPEECH_TAGGER)
-@ResourceMetaData(name = "NLP4J POS-Tagger")
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "NLP4J Named Entity Recognizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-        inputs = { 
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
-        outputs = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
-public class Nlp4JPosTagger
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
+public class Nlp4JNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
 {
+    /**
+     * Log the tag set(s) when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
+
     /**
      * Use this language instead of the document language to resolve the model.
      */
@@ -78,7 +87,8 @@ public class Nlp4JPosTagger
     protected String language;
 
     /**
-     * Override the default variant used to locate the model.
+     * Variant of a model the model. Used to address a specific model if here are multiple models
+     * for one language.
      */
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
@@ -99,35 +109,19 @@ public class Nlp4JPosTagger
     protected String modelArtifactUri;
     
     /**
-     * Load the model from this location instead of locating the model automatically.
+     * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
 
     /**
-     * Enable/disable type mapping.
+     * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
-    protected boolean mappingEnabled;
-
-    /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
-     */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-    protected String posMappingLocation;
-
-    /**
-     * Log the tag set(s) when a model is loaded.
-     */
-    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
-    protected boolean printTagSet;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
+    protected String mappingLocation;
 
     /**
      * Process anyway, even if the model relies on features that are not supported by this
@@ -137,7 +131,7 @@ public class Nlp4JPosTagger
     @ConfigurationParameter(name = PARAM_IGNORE_MISSING_FEATURES, mandatory = true, defaultValue = "false")
     protected boolean ignoreMissingFeatures;
 
-    private Nlp4JPosTaggerModelProvider modelProvider;
+    private Nlp4JNamedEntityRecognizerModelProvider modelProvider;
     private MappingProvider mappingProvider;
 
     @Override
@@ -146,11 +140,10 @@ public class Nlp4JPosTagger
     {
         super.initialize(aContext);
 
-        modelProvider = new Nlp4JPosTaggerModelProvider(this);
+        modelProvider = new Nlp4JNamedEntityRecognizerModelProvider(this);
         
-        // General setup of the mapping provider in initialize()
-        mappingProvider = createPosMappingProvider(this, posMappingLocation, language,
-                modelProvider);
+        mappingProvider = MappingProviderFactory.createNerMappingProvider(this, mappingLocation,
+                language, variant);
     }
 
     @Override
@@ -158,12 +151,7 @@ public class Nlp4JPosTagger
         throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-
-        // Document-specific configuration of model and mapping provider in process()
         modelProvider.configure(cas);
-        
-        // Mind the mapping provider must be configured after the model provider as it uses the
-        // model metadata
         mappingProvider.configure(cas);
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
@@ -173,20 +161,23 @@ public class Nlp4JPosTagger
             // Process the sentences - new results will be stored in the existing NLPNodes
             modelProvider.getResource().process(nodes);
             
-            EmoryNlp2Uima.convertPos(cas, tokens, nodes, mappingProvider);
+            EmoryNlp2Uima.convertNamedEntities(cas, tokens, nodes, mappingProvider);
         }
     }
     
-    private class Nlp4JPosTaggerModelProvider
-        extends ModelProviderBase<OnlineComponent<NLPNode, POSState<NLPNode>>>
+    private class Nlp4JNamedEntityRecognizerModelProvider
+        extends ModelProviderBase<OnlineComponent<NLPNode, NERState<NLPNode>>>
     {
-        public Nlp4JPosTaggerModelProvider(Object aOwner)
+        public Nlp4JNamedEntityRecognizerModelProvider(Object aOwner)
         {
-            super(aOwner, "nlp4j", "tagger");
+            super(aOwner, "nlp4j", "ner");
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/nlp4j/lib/ner-${language}-${variant}.properties");
         }
-        
+
         @Override
-        protected OnlineComponent<NLPNode, POSState<NLPNode>> produceResource(InputStream aStream)
+        protected OnlineComponent<NLPNode, NERState<NLPNode>> produceResource(InputStream aStream)
             throws Exception
         {
             String language = getAggregatedProperties().getProperty(LANGUAGE);
@@ -195,18 +186,18 @@ public class Nlp4JPosTagger
                 throw new IllegalArgumentException(new Throwable(
                         "Emory NLP4J supports only English"));
             }
-            
+
             EmoryNlpUtils.initGlobalLexica();
 
             // Load the POS tagger model from the location the model provider offers
-            OnlineComponent<NLPNode, POSState<NLPNode>> component = (OnlineComponent) 
-                    NLPUtils.getComponent(aStream);
+            OnlineComponent<NLPNode, NERState<NLPNode>> component = (OnlineComponent) NLPUtils
+                    .getComponent(aStream);
 
             // Extract tagset information from the model
-            OnlineComponentTagsetDescriptionProvider<NLPNode, POSState<NLPNode>> tsdp = 
-                    new OnlineComponentTagsetDescriptionProvider<>(
-                            getResourceMetaData().getProperty("pos.tagset"), POS.class, component);
-            addTagset(tsdp);
+            OnlineComponentTagsetDescriptionProvider<NLPNode, NERState<NLPNode>> tsdp = 
+                    new OnlineComponentTagsetDescriptionProvider<NLPNode, NERState<NLPNode>>(
+                            getResourceMetaData().getProperty("ner.tagset"), POS.class, component);
+            // addTagset(tsdp);
 
             if (printTagSet) {
                 getContext().getLogger().log(INFO, tsdp.toString());
@@ -215,19 +206,18 @@ public class Nlp4JPosTagger
             Set<String> features = EmoryNlpUtils.extractFeatures(component);
             getLogger().info("Model uses these features: " + features);
 
-            
-            Set<String> unsupportedFeatures = EmoryNlpUtils.extractUnsupportedFeatures(component);
+            Set<String> unsupportedFeatures = EmoryNlpUtils.extractUnsupportedFeatures(component,
+                    "named_entity_tag");
             if (!unsupportedFeatures.isEmpty()) {
                 String message = "Model these uses unsupported features: " + unsupportedFeatures;
                 if (ignoreMissingFeatures) {
-                    getLogger().warn(message); 
+                    getLogger().warn(message);
                 }
                 else {
                     throw new IOException(message);
                 }
             }
 
-            // Create a new POS tagger instance from the loaded model
             return component;
         }
     };

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.nlp4j;
+package org.dkpro.core.nlp4j;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createDependencyMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -38,6 +38,10 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.nlp4j.internal.EmoryNlp2Uima;
+import org.dkpro.core.nlp4j.internal.EmoryNlpUtils;
+import org.dkpro.core.nlp4j.internal.OnlineComponentTagsetDescriptionProvider;
+import org.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -45,10 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlp2Uima;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlpUtils;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.OnlineComponentTagsetDescriptionProvider;
-import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 import edu.emory.mathcs.nlp.common.util.NLPUtils;
 import edu.emory.mathcs.nlp.component.dep.DEPState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
@@ -181,7 +181,12 @@ public class Nlp4JDependencyParser
         public Nlp4JDependencyParserModelProvider(Object aObject)
         {
             super(aObject, "nlp4j", "parser");
+            
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/nlp4j/lib/parser-${language}-${variant}.properties");
         }
+        
         @Override
         protected OnlineComponent<NLPNode, DEPState<NLPNode>> produceResource(InputStream aStream)
             throws Exception

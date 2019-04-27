@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.nlp4j.internal;
+package org.dkpro.core.nlp4j.internal;
 
 import static java.util.Arrays.asList;
 
