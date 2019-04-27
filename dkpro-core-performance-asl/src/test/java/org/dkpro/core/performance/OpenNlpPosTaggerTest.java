@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.performance;
+package org.dkpro.core.performance;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -24,6 +24,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.tei.TeiReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
+import org.dkpro.core.performance.Stopwatch;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Ignore;
 import org.junit.Test;

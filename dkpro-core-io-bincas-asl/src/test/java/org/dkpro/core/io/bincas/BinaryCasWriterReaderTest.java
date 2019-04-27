@@ -17,10 +17,6 @@
  */
 package org.dkpro.core.io.bincas;
 
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.initRandomCas;
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measureReadPerformance;
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measureWritePerformance;
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.repeat;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
 import static org.apache.uima.cas.SerialFormat.COMPRESSED_FILTERED;
@@ -33,6 +29,10 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.FSUtil.getFeature;
+import static org.dkpro.core.performance.PerformanceTestUtil.initRandomCas;
+import static org.dkpro.core.performance.PerformanceTestUtil.measureReadPerformance;
+import static org.dkpro.core.performance.PerformanceTestUtil.measureWritePerformance;
+import static org.dkpro.core.performance.PerformanceTestUtil.repeat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
