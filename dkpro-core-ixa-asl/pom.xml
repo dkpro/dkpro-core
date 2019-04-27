@@ -112,7 +112,7 @@
     -->
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+      <artifactId>dkpro-core-opennlp-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
@@ -143,7 +143,7 @@
     <dependencies>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+        <artifactId>dkpro-core-opennlp-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>

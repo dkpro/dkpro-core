@@ -24,10 +24,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.io.negra.NegraExportReader;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 @Ignore("This is to convert the actual corpus!")
 public class TuebadzToImsCwbPipeline

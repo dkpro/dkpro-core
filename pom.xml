@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>20</version>
+    <version>22</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
@@ -581,6 +581,7 @@
           </execution>
         </executions>
         <configuration>
+          <validateXml>false</validateXml>
           <descriptorLocation>withClasses</descriptorLocation>
           <uimaTypeMappings>
             <uimaTypeMapping>META-INF/eu.openminted.share/uimaTypeMapping.map</uimaTypeMapping>
@@ -600,6 +601,28 @@
             </resourceCopyright>
           </properties>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+          </dependency>
+          <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+          </dependency>
+          <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+          </dependency>
+          <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
     <pluginManagement>

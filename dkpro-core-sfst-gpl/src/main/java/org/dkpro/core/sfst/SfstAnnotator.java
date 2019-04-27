@@ -18,6 +18,7 @@
  */
 package org.dkpro.core.sfst;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -222,6 +223,8 @@ public class SfstAnnotator
                 return new String(bos.toByteArray(), aEncoding);
             }
         };
+        modelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/sfst");
+
 
         featuresParser = new MorphologicalFeaturesParser(this, modelProvider);
         

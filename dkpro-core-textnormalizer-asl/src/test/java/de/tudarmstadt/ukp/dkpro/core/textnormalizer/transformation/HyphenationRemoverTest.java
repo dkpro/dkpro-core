@@ -31,12 +31,11 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.io.text.TokenizedTextWriter;
+import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 
 public class HyphenationRemoverTest
 {

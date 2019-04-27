@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.posfilter.PosMapper;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
@@ -35,7 +36,6 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 public class PosMapperTest
 {

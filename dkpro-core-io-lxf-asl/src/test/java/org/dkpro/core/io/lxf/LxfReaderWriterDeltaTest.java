@@ -25,11 +25,10 @@ import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 public class LxfReaderWriterDeltaTest
 {

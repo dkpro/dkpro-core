@@ -23,11 +23,10 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.tei.TeiReader;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 public class OpenNlpPosTaggerTest
 {

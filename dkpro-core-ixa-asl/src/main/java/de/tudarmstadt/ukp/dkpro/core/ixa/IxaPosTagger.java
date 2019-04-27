@@ -18,8 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.ixa;
 
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
 
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;

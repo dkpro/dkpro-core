@@ -34,6 +34,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.fangorn.FangornWriter;
+import org.dkpro.core.opennlp.OpenNlpParser;
+import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.junit.Test;
 
 import au.edu.unimelb.csse.queryParser.QueryBuilder;
@@ -43,8 +45,6 @@ import au.edu.unimelb.csse.search.complete.AllResults;
 import au.edu.unimelb.csse.search.complete.Result;
 import au.edu.unimelb.csse.search.join.TermJoinType;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 
 public class FangornWriterTest
 {

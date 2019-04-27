@@ -33,6 +33,7 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
@@ -43,7 +44,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 public class BerkeleyParserTest
 {

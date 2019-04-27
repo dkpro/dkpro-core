@@ -28,13 +28,13 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.custommonkey.xmlunit.XMLAssert;
 import org.dkpro.core.io.tiger.TigerXmlWriter;
+import org.dkpro.core.opennlp.OpenNlpParser;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 
 public class TigerXmlWriterTest
 {

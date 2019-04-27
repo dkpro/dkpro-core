@@ -28,15 +28,14 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.dkpro.core.io.tei.TeiWriter;
 import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
+import org.dkpro.core.opennlp.OpenNlpParser;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
+import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 
 public class TeiWriterTest
 {
