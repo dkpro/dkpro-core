@@ -18,7 +18,6 @@
  */
 package org.dkpro.core.sfst;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -175,6 +174,12 @@ public class SfstAnnotator
         // Currently available for Turkish and German.
         modelProvider = new ModelProviderBase<File>(this, "sfst", "morph")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/morph-${language}-${variant}.properties");
+            }
+            
             @Override
             protected File produceResource(URL aUrl)
                 throws IOException
@@ -223,8 +228,6 @@ public class SfstAnnotator
                 return new String(bos.toByteArray(), aEncoding);
             }
         };
-        modelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/sfst");
-
 
         featuresParser = new MorphologicalFeaturesParser(this, modelProvider);
         

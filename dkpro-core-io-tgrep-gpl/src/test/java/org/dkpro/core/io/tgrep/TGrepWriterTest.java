@@ -30,6 +30,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.tgrep.TGrepWriter;
+import org.dkpro.core.stanfordnlp.StanfordParser;
+import org.dkpro.core.stanfordnlp.StanfordSegmenter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -37,8 +39,6 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 
 /**
  * 

@@ -17,7 +17,12 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import static de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_MAPPING_ENABLED;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider.BASE_TYPE;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider.MAPPING_ENABLED;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LANGUAGE;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.VARIANT;
 
 public class MappingProviderFactory
 {
@@ -39,19 +44,17 @@ public class MappingProviderFactory
             String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
-        p.setDefault(MappingProvider.LOCATION,
-                "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/"
-                        + "${language}-${pos.tagset}-pos.map");
-        p.setDefault(MappingProvider.BASE_TYPE,
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS");
+        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/"
+                + "${language}-${pos.tagset}-pos.map");
+        p.setDefault(BASE_TYPE, "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS");
         p.setDefault(POS_TAGSET, "default");
-        p.setOverride(MappingProvider.LOCATION, aMappingLocation);
-        p.setOverride(MappingProvider.LANGUAGE, aLanguage);
+        p.setOverride(LOCATION, aMappingLocation);
+        p.setOverride(LANGUAGE, aLanguage);
         p.setOverride(POS_TAGSET, aTagset);
         
         if (aContextObject != null) {
-            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
-                    MappingProvider.MAPPING_ENABLED);
+            p.setContextObject(aContextObject);
+            p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
         
@@ -72,18 +75,17 @@ public class MappingProviderFactory
     {
         MappingProvider p = new MappingProvider();
         p = new MappingProvider();
-        p.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
+        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/"
                 + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
-        p.setDefault(MappingProvider.BASE_TYPE, 
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk");
+        p.setDefault(BASE_TYPE, "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk");
         p.setDefault(CHUNK_TAGSET, "default");
-        p.setOverride(MappingProvider.LOCATION, aMappingLocation);
-        p.setOverride(MappingProvider.LANGUAGE, aLanguage);
+        p.setOverride(LOCATION, aMappingLocation);
+        p.setOverride(LANGUAGE, aLanguage);
         p.setOverride(CHUNK_TAGSET, aTagset);
-        
+
         if (aContextObject != null) {
-            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
-                    MappingProvider.MAPPING_ENABLED);
+            p.setContextObject(aContextObject);
+            p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
         
@@ -104,19 +106,17 @@ public class MappingProviderFactory
             String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
-        p.setDefault(MappingProvider.LOCATION,
-                "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/"
-                        + "${language}-${constituent.tagset}-constituency.map");
+        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/"
+                + "${language}-${constituent.tagset}-constituency.map");
         p.setDefault(MappingProvider.BASE_TYPE,
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
         p.setDefault(CONSTITUENT_TAGSET, "default");
-        p.setOverride(MappingProvider.LOCATION, aMappingLocation);
-        p.setOverride(MappingProvider.LANGUAGE, aLanguage);
+        p.setOverride(LOCATION, aMappingLocation);
+        p.setOverride(LANGUAGE, aLanguage);
         p.setOverride(CONSTITUENT_TAGSET, aTagset);
-        
+
         if (aContextObject != null) {
-            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
-                    MappingProvider.MAPPING_ENABLED);
+            p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
         
@@ -136,22 +136,52 @@ public class MappingProviderFactory
             String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
-        p.setDefault(MappingProvider.LOCATION,
-                "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/"
+        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/"
                 + "${language}-${dependency.tagset}-dependency.map");
-        p.setDefault(MappingProvider.BASE_TYPE,
+        p.setDefault(BASE_TYPE,
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency");
         p.setDefault(DEPENDENCY_TAGSET, "default");
-        p.setOverride(MappingProvider.LOCATION, aMappingLocation);
-        p.setOverride(MappingProvider.LANGUAGE, aLanguage);
+        p.setOverride(LOCATION, aMappingLocation);
+        p.setOverride(LANGUAGE, aLanguage);
         p.setOverride(DEPENDENCY_TAGSET, aTagset);
-        
+
         if (aContextObject != null) {
-            p.addAutoOverride(ComponentParameters.PARAM_MAPPING_ENABLED,
-                    MappingProvider.MAPPING_ENABLED);
+            p.setContextObject(aContextObject);
+            p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
         
+        return p;
+    }
+
+    public static MappingProvider createNerMappingProvider(Object aContextObject,
+            String aMappingLocation, String aLanguage, String aVariant, HasResourceMetadata aSource)
+    {
+        MappingProvider p = createNerMappingProvider(aContextObject, aMappingLocation, aLanguage,
+                aVariant);
+        
+        p.addTagMappingImport("ner", aSource);
+        
+        return p;
+    }
+
+    public static MappingProvider createNerMappingProvider(Object aContextObject, 
+            String aMappingLocation, String aLanguage, String aVariant)
+    {
+        MappingProvider p = new MappingProvider();
+        p.setDefaultVariantsLocation("${package}/lib/ner-default-variants.map");
+        p.setDefault(LOCATION, "classpath:/${package}/lib/ner-${language}-${variant}.map");
+        p.setDefault(BASE_TYPE, "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity");
+        p.setOverride(LOCATION, aMappingLocation);
+        p.setOverride(LANGUAGE, aLanguage);
+        p.setOverride(VARIANT, aVariant);
+
+        if (aContextObject != null) {
+            p.setContextObject(aContextObject);
+            p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
+            p.applyAutoOverrides(aContextObject);
+        }
+
         return p;
     }
 }

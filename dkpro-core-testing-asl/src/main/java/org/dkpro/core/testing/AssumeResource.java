@@ -35,14 +35,44 @@ public class AssumeResource
         String pack = aClass.getPackage().getName().replace('.', '/');
         assumeResource(aClass, pack, aTool, aLanguage, aVariant);
     }
-    
+
     public static void assumeResource(Class<?> aClass, String aPackage, String aTool,
+            String aLanguage, String aVariant)
+                throws IOException
+    {
+        boolean exists = resourceAvailable(aClass, aPackage, aTool, aLanguage, aVariant);
+        
+        if (!exists && aPackage.startsWith("org/dkpro/core")) {
+            // Try the legacy packages
+            String pack = aPackage.replace("org/dkpro/core", "de/tudarmstadt/ukp/dkpro/core");
+            exists = resourceAvailable(aClass, pack, aTool, aLanguage, aVariant);
+        }
+        
+        if (!exists) {
+            // The English default model should always be included in the default test dependencies,
+            // so issue a special warning here
+            if (aVariant == null && "en".equals(aLanguage)) {
+                System.out.println("[" + aClass.getSimpleName() + "] default model not available: ["
+                        + aLanguage + "] [" + aVariant + "]!");
+            }
+            else {
+                System.out.println("[" + aClass.getSimpleName() + "] model not available: ["
+                        + aLanguage + "] [" + aVariant + "] - skipping");
+            }
+        }
+        
+        assumeTrue("[" + aClass.getSimpleName() + "] model not available: [" + aLanguage + "] ["
+                + aVariant + "]", exists);
+    }
+
+    private static boolean resourceAvailable(Class<?> aClass, String aPackage, String aTool,
             String aLanguage, String aVariant)
                 throws IOException
     {
         String variant = aVariant;
 
-        // Handle default variants
+        // Handle default variants - variants map files are always expected to be found relative
+        // to the class which needs them
         if (variant == null) {
             String pack = aClass.getPackage().getName().replace('.', '/');
             String defModelsLoc = pack + "/lib/" + aTool + "-default-variants.map";
@@ -54,6 +84,8 @@ public class AssumeResource
         }
 
         // Check if the model exists by checking for it's DKPro Core metadata file
+        // Due do changes in the DKPro Core package and groupId names, the models may be in a
+        // different package than the component which uses them
         boolean exists;
         try {
             String propLoc = "classpath:/" + aPackage + "/lib/" + aTool + "-" + aLanguage + "-"
@@ -65,20 +97,6 @@ public class AssumeResource
             exists = false;
         }
 
-        if (!exists) {
-            // The English default model should always be included in the default test dependencies,
-            // so issue a special warning here
-            if (aVariant == null && "en".equals(aLanguage)) {
-                System.out.println("[" + aClass.getSimpleName() + "] default model not available: ["
-                        + aLanguage + "] [" + variant + "]!");
-            }
-            else {
-                System.out.println("[" + aClass.getSimpleName() + "] model not available: ["
-                        + aLanguage + "] [" + variant + "] - skipping");
-            }
-        }
-        
-        assumeTrue("[" + aClass.getSimpleName() + "] model not available: [" + aLanguage + "] ["
-                + aVariant + "]", exists);
+        return exists;
     }
 }
