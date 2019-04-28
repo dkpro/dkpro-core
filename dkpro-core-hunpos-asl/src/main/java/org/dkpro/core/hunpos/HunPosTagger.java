@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.hunpos;
+package org.dkpro.core.hunpos;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -154,11 +154,12 @@ public class HunPosTagger
             {
                 setContextObject(HunPosTagger.this);
 
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID, "${groupId}.hunpos-model-tagger-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/hunpos/lib/"
                         + "tagger-${language}-${variant}.model");
                 setDefault(VARIANT, "default");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/hunpos/lib/tagger-default-variants.map");
+                setDefaultVariantsLocation("${package}/lib/tagger-default-variants.map");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
