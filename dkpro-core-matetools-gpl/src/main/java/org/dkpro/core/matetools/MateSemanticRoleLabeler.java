@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.matetools;
+package org.dkpro.core.matetools;
 
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -142,6 +142,12 @@ public class MateSemanticRoleLabeler
 
         modelProvider = new ModelProviderBase<SemanticRoleLabeler>(this, "matetools", "srl")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/matetools/lib/srl-${language}-${variant}.properties");
+            }
+            
             @Override
             protected SemanticRoleLabeler produceResource(URL aUrl)
                 throws IOException

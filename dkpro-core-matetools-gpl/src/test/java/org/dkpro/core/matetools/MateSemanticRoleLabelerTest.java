@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.matetools;
+package org.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -24,6 +24,11 @@ import static org.dkpro.core.testing.AssertAnnotations.assertSemPred;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.matetools.MateLemmatizer;
+import org.dkpro.core.matetools.MateMorphTagger;
+import org.dkpro.core.matetools.MateParser;
+import org.dkpro.core.matetools.MatePosTagger;
+import org.dkpro.core.matetools.MateSemanticRoleLabeler;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
