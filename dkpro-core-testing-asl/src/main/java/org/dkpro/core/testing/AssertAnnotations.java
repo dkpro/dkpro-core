@@ -694,16 +694,13 @@ public class AssertAnnotations
                     + "core/api/lexmorph/tagset/${language}-${tagset}-pos.map";
         }
         else if (aLayer == Dependency.class) {
-            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
-                    + "core/api/syntax/tagset/${language}-${tagset}-dependency.map";
+            pattern = "classpath:/org/dkpro/core/api/syntax/tagset/${language}-${tagset}-dependency.map";
         }
         else if (aLayer == Constituent.class) {
-            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
-                    + "core/api/syntax/tagset/${language}-${tagset}-constituency.map";
+            pattern = "classpath:/org/dkpro/core/api/syntax/tagset/${language}-${tagset}-constituency.map";
         }
         else if (aLayer == Chunk.class) {
-            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
-                    + "core/api/syntax/tagset/${language}-${tagset}-chunk.map";
+            pattern = "classpath:/org/dkpro/core/api/syntax/tagset/${language}-${tagset}-chunk.map";
         }
         else {
             throw new IllegalArgumentException("Unsupported layer: " + aLayer.getName());

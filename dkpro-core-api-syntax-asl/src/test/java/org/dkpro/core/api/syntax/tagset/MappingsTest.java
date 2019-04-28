@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.syntax.tagset;
+package org.dkpro.core.api.syntax.tagset;
 
 import static org.junit.Assert.assertFalse;
 
@@ -35,7 +35,7 @@ public class MappingsTest
     public void testMappings() throws Exception
     {
         Collection<File> files = FileUtils.listFiles(
-                new File("src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset"),
+                new File("src/main/resources/org/dkpro/core/api/syntax/tagset"),
                 new WildcardFileFilter("*.map"),
                 TrueFileFilter.TRUE);
         

@@ -25,7 +25,6 @@
     <version>1.11.0-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
-  <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-build</artifactId>
   <name>DKPro Core - Build resources</name>
   <url>https://dkpro.github.io/dkpro-core/</url>

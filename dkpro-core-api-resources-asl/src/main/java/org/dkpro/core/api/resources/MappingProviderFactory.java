@@ -75,8 +75,8 @@ public class MappingProviderFactory
     {
         MappingProvider p = new MappingProvider();
         p = new MappingProvider();
-        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/"
-                + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
+        p.setDefault(LOCATION,
+                "classpath:/org/dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
         p.setDefault(BASE_TYPE, "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk");
         p.setDefault(CHUNK_TAGSET, "default");
         p.setOverride(LOCATION, aMappingLocation);
@@ -106,7 +106,7 @@ public class MappingProviderFactory
             String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
-        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/"
+        p.setDefault(LOCATION, "classpath:/org/dkpro/core/api/syntax/tagset/"
                 + "${language}-${constituent.tagset}-constituency.map");
         p.setDefault(MappingProvider.BASE_TYPE,
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
@@ -136,7 +136,7 @@ public class MappingProviderFactory
             String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
-        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/"
+        p.setDefault(LOCATION, "classpath:/org/dkpro/core/api/syntax/tagset/"
                 + "${language}-${dependency.tagset}-dependency.map");
         p.setDefault(BASE_TYPE,
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency");
