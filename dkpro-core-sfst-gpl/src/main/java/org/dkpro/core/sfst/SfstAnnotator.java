@@ -43,6 +43,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.metadata.SingletonTagset;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.LittleEndianDataInputStream;
 import org.dkpro.core.api.resources.ModelProviderBase;
@@ -51,7 +52,6 @@ import org.dkpro.core.api.resources.RuntimeProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;

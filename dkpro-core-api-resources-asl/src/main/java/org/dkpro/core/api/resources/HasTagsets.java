@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.resources;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
+import org.dkpro.core.api.metadata.Tagset;
 
 /**
  * Interface for objects that provide tagsets.

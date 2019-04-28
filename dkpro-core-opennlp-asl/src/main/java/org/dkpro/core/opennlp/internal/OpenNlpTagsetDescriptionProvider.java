@@ -23,7 +23,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
+import org.dkpro.core.api.metadata.TagsetBase;
+
 import opennlp.tools.ml.model.MaxentModel;
 
 public class OpenNlpTagsetDescriptionProvider

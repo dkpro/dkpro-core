@@ -26,8 +26,8 @@ import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.dkpro.core.api.metadata.TagsetBase;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
 import opennlp.tools.ml.model.AbstractModel;
 import opennlp.tools.ml.model.SequenceClassificationModel;
 

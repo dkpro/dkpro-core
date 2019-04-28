@@ -23,7 +23,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
+import org.dkpro.core.api.metadata.TagsetBase;
+
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.AbstractNLPNode;
 import edu.emory.mathcs.nlp.component.template.state.NLPState;

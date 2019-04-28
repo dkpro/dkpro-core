@@ -24,7 +24,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
+import org.dkpro.core.api.metadata.TagsetBase;
+
 import opennlp.tools.ml.model.MaxentModel;
 import opennlp.tools.ml.model.SequenceClassificationModel;
 import opennlp.tools.parser.ParserModel;
