@@ -16,8 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.corenlp;
+package org.dkpro.core.corenlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createNerMappingProvider;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
@@ -37,13 +38,12 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.NERClassifierCombiner;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
@@ -219,15 +219,7 @@ public class CoreNlpNamedEntityRecognizer
         
         annotatorProvider = new CoreNlpNamedEntityRecognizerModelProvider(this);
 
-        mappingProvider = new MappingProvider();
-        mappingProvider
-                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/corenlp/lib/ner-default-variants.map");
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/corenlp/lib/ner-${language}-${variant}.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-        mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        mappingProvider.setOverride(MappingProvider.VARIANT, variant);
+        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
@@ -264,7 +256,7 @@ public class CoreNlpNamedEntityRecognizer
         public CoreNlpNamedEntityRecognizerModelProvider(Object aObject)
         {
             super(aObject, "stanfordnlp", "ner");
-            // setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
             setDefault(LOCATION,
                     "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-${language}-${variant}.properties");
         }

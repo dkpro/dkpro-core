@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.corenlp;
+package org.dkpro.core.corenlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -24,6 +24,12 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.corenlp.CoreNlpCoreferenceResolver;
+import org.dkpro.core.corenlp.CoreNlpLemmatizer;
+import org.dkpro.core.corenlp.CoreNlpNamedEntityRecognizer;
+import org.dkpro.core.corenlp.CoreNlpParser;
+import org.dkpro.core.corenlp.CoreNlpPosTagger;
+import org.dkpro.core.corenlp.CoreNlpSegmenter;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;

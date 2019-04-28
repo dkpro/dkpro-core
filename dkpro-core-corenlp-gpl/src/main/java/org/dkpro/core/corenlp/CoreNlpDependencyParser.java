@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.corenlp;
+package org.dkpro.core.corenlp;
 
 import static org.apache.uima.util.Level.INFO;
 
@@ -35,6 +35,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
@@ -44,8 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.parser.nndep.DependencyParser;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DependencyParseAnnotator;
@@ -242,6 +242,10 @@ public class CoreNlpDependencyParser
         public CoreNlpDependencyParserModelProvider(Object aObject)
         {
             super(aObject, "corenlp", "depparser");
+            
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/corenlp/lib/depparser-${language}-${variant}.properties");
         }
         
         @Override

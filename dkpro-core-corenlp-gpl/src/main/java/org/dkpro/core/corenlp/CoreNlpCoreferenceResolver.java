@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.corenlp;
+package org.dkpro.core.corenlp;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,11 +33,11 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.coref.hybrid.HybridCorefProperties;
 import edu.stanford.nlp.dcoref.Constants;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -170,9 +170,10 @@ public class CoreNlpCoreferenceResolver
         public CoreNlpPosTaggerModelProvider(Object aObject)
         {
             super(aObject, "stanfordnlp", "coref");
-            setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
             setDefault(ARTIFACT_ID, "${groupId}.stanfordnlp-model-coref-${language}-${variant}");
-            setDefault(LOCATION, "classpath:/${package}/lib/coref/${language}/${variant}/countries");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/coref/${language}/${variant}/countries");
             setDefault(VARIANT, "default");
         }
         

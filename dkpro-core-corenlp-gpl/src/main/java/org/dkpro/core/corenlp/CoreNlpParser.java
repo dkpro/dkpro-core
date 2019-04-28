@@ -16,8 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.corenlp;
+package org.dkpro.core.corenlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createDependencyMappingProvider;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.uima.util.Level.INFO;
 import static org.apache.uima.util.Level.WARNING;
 
@@ -36,18 +39,17 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.parser.common.ParserGrammar;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.Lexicon;
@@ -292,14 +294,14 @@ public class CoreNlpParser
         
         annotatorProvider = new CoreNlpParserModelProvider(this);
 
-        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
-                this, constituentMappingLocation, language, annotatorProvider);
-        
-        dependencyMappingProvider = MappingProviderFactory.createDependencyMappingProvider(
-                this, dependencyMappingLocation, language, annotatorProvider);
-        
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(
-                this, posMappingLocation, language, annotatorProvider);
+        constituentMappingProvider = createConstituentMappingProvider(this,
+                constituentMappingLocation, language, annotatorProvider);
+
+        dependencyMappingProvider = createDependencyMappingProvider(this, dependencyMappingLocation,
+                language, annotatorProvider);
+
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                annotatorProvider);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
@@ -365,6 +367,7 @@ public class CoreNlpParser
         {
             super(aObject, "stanfordnlp", "parser");
             // setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
             setDefault(LOCATION,
                     "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-${language}-${variant}.properties");
         }
