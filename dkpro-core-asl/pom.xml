@@ -23,7 +23,7 @@
     <version>1.11.0-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+  <artifactId>dkpro-core-asl</artifactId>
   <packaging>pom</packaging>
   <name>DKPro Core ASL</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
