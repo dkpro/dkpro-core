@@ -19,4 +19,4 @@
 /**
  * Types for annotating spelling or grammar problems.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.anomaly;
+package org.dkpro.core.api.anomaly;
