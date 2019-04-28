@@ -111,7 +111,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.datasets-asl</artifactId>
+      <artifactId>dkpro-core-api-datasets-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

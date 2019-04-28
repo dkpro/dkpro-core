@@ -33,6 +33,9 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.datasets.Dataset;
+import org.dkpro.core.api.datasets.DatasetFactory;
+import org.dkpro.core.api.datasets.Split;
 import org.dkpro.core.eval.EvalUtil;
 import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
@@ -45,9 +48,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class OpenNlpSentenceTrainerTest
