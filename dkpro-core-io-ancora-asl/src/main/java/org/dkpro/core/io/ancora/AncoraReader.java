@@ -48,6 +48,7 @@ import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
@@ -58,7 +59,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;

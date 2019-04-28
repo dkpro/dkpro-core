@@ -48,13 +48,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.metadata.SingletonTagset;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.CasConfigurableProviderBase;
 import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.api.resources.ModelProviderBase;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

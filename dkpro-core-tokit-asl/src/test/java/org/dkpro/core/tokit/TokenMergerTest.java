@@ -44,12 +44,12 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.TokenMerger.LemmaMode;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PRON;

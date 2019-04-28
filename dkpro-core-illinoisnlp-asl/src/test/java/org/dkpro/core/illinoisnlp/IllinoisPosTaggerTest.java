@@ -25,7 +25,6 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.illinoisnlp.IllinoisPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;

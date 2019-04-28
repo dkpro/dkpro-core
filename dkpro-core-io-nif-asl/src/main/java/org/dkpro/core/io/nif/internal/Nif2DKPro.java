@@ -31,9 +31,9 @@ import org.apache.jena.vocabulary.RDF;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.resources.MappingProvider;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;

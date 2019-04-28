@@ -32,10 +32,10 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.illinoisnlp.internal.ConvertToIllinois;
 import org.dkpro.core.illinoisnlp.internal.ConvertToUima;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.illinois.cs.cogcomp.annotation.Annotator;

@@ -22,8 +22,6 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.illinoisnlp.IllinoisLemmatizer;
-import org.dkpro.core.illinoisnlp.IllinoisPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;

@@ -40,6 +40,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.metadata.SingletonTagset;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -50,7 +51,6 @@ import com.aliasi.hmm.HiddenMarkovModel;
 import com.aliasi.hmm.HmmDecoder;
 import com.aliasi.tag.Tagging;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

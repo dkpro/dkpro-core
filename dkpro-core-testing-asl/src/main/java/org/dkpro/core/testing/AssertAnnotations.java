@@ -56,6 +56,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasCopier;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
+import org.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.api.resources.MappingUtils;
@@ -65,8 +67,6 @@ import org.dkpro.core.testing.validation.checks.Check;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;

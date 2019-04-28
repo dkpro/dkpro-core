@@ -23,8 +23,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.segmentation.SegmenterBase;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import edu.illinois.cs.cogcomp.core.datastructures.IntPair;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.IllinoisTokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer;

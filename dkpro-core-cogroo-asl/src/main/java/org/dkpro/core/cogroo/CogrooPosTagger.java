@@ -46,13 +46,13 @@ import org.cogroo.text.Document;
 import org.cogroo.text.impl.DocumentImpl;
 import org.cogroo.text.impl.SentenceImpl;
 import org.cogroo.text.impl.TokenImpl;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.CasConfigurableProviderBase;
 import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.api.resources.MappingProviderFactory;
 import org.dkpro.core.api.resources.ModelProviderBase;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

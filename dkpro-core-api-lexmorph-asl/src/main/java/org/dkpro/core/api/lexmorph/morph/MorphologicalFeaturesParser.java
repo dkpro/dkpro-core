@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph;
+package org.dkpro.core.api.lexmorph.morph;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +28,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.CasConfigurableProviderBase;
 import org.dkpro.core.api.resources.HasResourceMetadata;
@@ -35,7 +36,6 @@ import org.dkpro.core.api.resources.MappingUtils;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 
 public class MorphologicalFeaturesParser

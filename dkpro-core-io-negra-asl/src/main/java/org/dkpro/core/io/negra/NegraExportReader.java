@@ -53,6 +53,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
@@ -60,7 +61,6 @@ import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.io.penntree.PennTreeNode;
 import org.dkpro.core.io.penntree.PennTreeUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;

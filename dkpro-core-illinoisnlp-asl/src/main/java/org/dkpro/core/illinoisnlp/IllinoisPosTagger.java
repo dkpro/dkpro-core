@@ -36,14 +36,14 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.metadata.SingletonTagset;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.illinoisnlp.internal.ConvertToIllinois;
 import org.dkpro.core.illinoisnlp.internal.ConvertToUima;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.illinois.cs.cogcomp.annotation.Annotator;
