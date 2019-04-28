@@ -36,6 +36,8 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
 
 import au.edu.unimelb.csse.ParseException;
 import au.edu.unimelb.csse.analyser.Node;
@@ -43,8 +45,6 @@ import au.edu.unimelb.csse.analyser.NodeTreebankAnalyser;
 import au.edu.unimelb.csse.analyser.OverflowException;
 import au.edu.unimelb.csse.analyser.String2NodesParser;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.Parameters;

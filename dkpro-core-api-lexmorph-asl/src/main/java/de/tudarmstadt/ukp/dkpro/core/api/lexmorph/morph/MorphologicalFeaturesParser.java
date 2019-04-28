@@ -28,6 +28,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.CasConfigurableProviderBase;
 import org.dkpro.core.api.resources.HasResourceMetadata;
 import org.dkpro.core.api.resources.MappingUtils;
@@ -36,7 +37,6 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 public class MorphologicalFeaturesParser
     extends CasConfigurableProviderBase<List<AnalysisMapping>>

@@ -35,10 +35,10 @@ import org.cogroo.analyzer.ComponentFactory;
 import org.cogroo.checker.CheckDocument;
 import org.cogroo.checker.GrammarChecker;
 import org.cogroo.entities.Mistake;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.ModelProviderBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;

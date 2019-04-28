@@ -32,11 +32,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
+import org.dkpro.core.api.parameter.MimeTypes;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

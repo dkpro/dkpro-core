@@ -51,8 +51,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Logger;
 import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.dkpro.core.api.featurepath.FeaturePathInfo;
+import org.dkpro.core.api.parameter.ComponentParameters;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

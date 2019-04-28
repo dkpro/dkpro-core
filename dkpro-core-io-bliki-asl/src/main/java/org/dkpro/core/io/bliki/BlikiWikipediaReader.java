@@ -31,6 +31,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.sweble.wikitext.engine.CompiledPage;
 import org.sweble.wikitext.engine.Compiler;
 import org.sweble.wikitext.engine.PageId;
@@ -39,7 +40,6 @@ import org.sweble.wikitext.engine.utils.SimpleWikiConfiguration;
 
 import de.fau.cs.osr.ptk.common.AstVisitor;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.api.sweble.PlainTextConverter;

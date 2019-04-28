@@ -35,6 +35,8 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import org.dkpro.core.io.brat.internal.model.BratConfiguration;
 import org.dkpro.core.io.brat.internal.model.RelationParam;
@@ -44,8 +46,6 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

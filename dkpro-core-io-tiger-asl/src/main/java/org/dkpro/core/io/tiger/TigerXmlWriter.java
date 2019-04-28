@@ -44,6 +44,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.tiger.internal.model.TigerEdge;
 import org.dkpro.core.io.tiger.internal.model.TigerGraph;
 import org.dkpro.core.io.tiger.internal.model.TigerNode;
@@ -52,8 +54,6 @@ import org.dkpro.core.io.tiger.internal.model.TigerSentence;
 import org.dkpro.core.io.tiger.internal.model.TigerTerminal;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;

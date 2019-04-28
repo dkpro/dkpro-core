@@ -30,8 +30,8 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.parameter.ComponentParameters;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.constants.OperationType;
 

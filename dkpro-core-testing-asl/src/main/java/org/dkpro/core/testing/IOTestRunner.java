@@ -41,11 +41,10 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.dkpro.core.testing.validation.CasValidator;
 import org.dkpro.core.testing.validation.Message;
-
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 public class IOTestRunner
 {

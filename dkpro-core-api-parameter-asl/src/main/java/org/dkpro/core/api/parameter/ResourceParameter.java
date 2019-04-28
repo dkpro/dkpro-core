@@ -15,16 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.parameter;
+package org.dkpro.core.api.parameter;
 
-public final class Messages
-{
-    public static final String BUNDLE = Messages.class.getName();
-    
-    public static final String ERR_UNSUPPORTED_LANGUAGE = "err_unsupported_language";
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    private Messages()
-    {
-        // No instances of this class
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface ResourceParameter {
+    /**
+     * The MIME types supported by this component.
+     *
+     * @return the supported MIME types
+     */
+    String[] value() default {};
 }

@@ -32,6 +32,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 
 import de.dfki.lt.tools.tokenizer.FileTools;
@@ -41,7 +42,6 @@ import de.dfki.lt.tools.tokenizer.output.Outputter;
 import de.dfki.lt.tools.tokenizer.output.Paragraph;
 import de.dfki.lt.tools.tokenizer.output.TextUnit;
 import de.dfki.lt.tools.tokenizer.output.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * JTok segmenter.

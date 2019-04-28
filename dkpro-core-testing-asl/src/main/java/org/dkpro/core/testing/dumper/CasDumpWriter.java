@@ -48,9 +48,8 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.CasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.springframework.util.DigestUtils;
-
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * Dumps CAS content to a text file. This is useful when setting up test cases which contain a

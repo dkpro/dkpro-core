@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.CasConfigurableProviderBase;
 import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.api.resources.ResourceUtils;
@@ -32,7 +33,6 @@ import org.dkpro.core.frequency.Web1TFileAccessProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * External resource wrapper for the Web1T frequency count provider.

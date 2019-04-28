@@ -33,6 +33,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.stanfordnlp.StanfordParser.DependenciesMode;
 import org.dkpro.core.stanfordnlp.internal.RootKey;
 import org.dkpro.core.stanfordnlp.internal.TokenKey;
@@ -41,7 +42,6 @@ import org.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import org.dkpro.core.stanfordnlp.util.TreeUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;

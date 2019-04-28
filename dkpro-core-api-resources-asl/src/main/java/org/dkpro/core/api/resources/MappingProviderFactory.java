@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.resources;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_MAPPING_ENABLED;
+import static org.dkpro.core.api.parameter.ComponentParameters.PARAM_MAPPING_ENABLED;
 import static org.dkpro.core.api.resources.MappingProvider.BASE_TYPE;
 import static org.dkpro.core.api.resources.MappingProvider.MAPPING_ENABLED;
 import static org.dkpro.core.api.resources.ResourceObjectProviderBase.LANGUAGE;

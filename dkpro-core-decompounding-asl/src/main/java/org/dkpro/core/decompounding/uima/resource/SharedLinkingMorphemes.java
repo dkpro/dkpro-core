@@ -25,11 +25,10 @@ import org.apache.uima.fit.component.Resource_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.CasConfigurableProviderBase;
 import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.decompounding.dictionary.LinkingMorphemes;
-
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 public class SharedLinkingMorphemes
     extends Resource_ImplBase

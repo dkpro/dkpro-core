@@ -32,6 +32,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.ModelProviderBase;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -39,7 +40,6 @@ import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;

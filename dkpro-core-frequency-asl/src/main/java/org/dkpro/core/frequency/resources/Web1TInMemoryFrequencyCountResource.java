@@ -22,11 +22,11 @@ import java.util.Map;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.frequency.Web1TInMemoryProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * External resource wrapper for the Web1T in memory frequency count provider.

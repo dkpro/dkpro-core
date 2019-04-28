@@ -32,13 +32,13 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.parameter.ComponentParameters;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.AggregateTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 public class ModelProviderBase<M>
     extends CasConfigurableStreamProviderBase<M>

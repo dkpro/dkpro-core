@@ -42,9 +42,9 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import org.dkpro.core.api.featurepath.FeaturePathException;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.tartarus.snowball.SnowballProgram;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;

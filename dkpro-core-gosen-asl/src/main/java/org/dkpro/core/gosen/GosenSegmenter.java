@@ -26,9 +26,9 @@ import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.parameter.Messages;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import net.java.sen.SenFactory;
 import net.java.sen.StringTagger;

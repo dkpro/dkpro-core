@@ -21,13 +21,12 @@ import static org.dkpro.core.testing.IOTestRunner.testOneWay2;
 
 import java.io.File;
 
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.io.imscwb.ImsCwbReader;
 import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 public class ImsCwbReaderWriterTest
 {

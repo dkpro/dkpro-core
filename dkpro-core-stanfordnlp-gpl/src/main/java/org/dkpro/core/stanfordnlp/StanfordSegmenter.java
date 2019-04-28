@@ -36,9 +36,9 @@ import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.parameter.Messages;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.international.arabic.process.ArabicTokenizer;
 import edu.stanford.nlp.international.french.process.FrenchTokenizer;

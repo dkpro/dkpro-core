@@ -42,9 +42,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import org.dkpro.core.api.featurepath.FeaturePathException;
+import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.ResourceUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
