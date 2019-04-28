@@ -725,7 +725,7 @@
         <!-- IO modules -->
         <module>../dkpro-core-io-fangorn-asl</module>
         <!-- Processing modules -->
-        <module>../dkpro-core-lbj-asl</module>
+        <module>../dkpro-core-illinoisnlp-asl</module>
       </modules>
       <dependencyManagement>
         <dependencies>
@@ -736,7 +736,7 @@
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
+            <artifactId>dkpro-core-illinoisnlp-asl</artifactId>
             <version>1.11.0-SNAPSHOT</version>
           </dependency>
           <dependency>

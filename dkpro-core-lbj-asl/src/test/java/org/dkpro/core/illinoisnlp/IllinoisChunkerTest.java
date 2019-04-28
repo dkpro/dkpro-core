@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.lbj;
+package org.dkpro.core.illinoisnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -27,6 +27,9 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.illinoisnlp.IllinoisChunker;
+import org.dkpro.core.illinoisnlp.IllinoisPosTagger;
+import org.dkpro.core.illinoisnlp.IllinoisSegmenter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
