@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package de.tudarmstadt.ukp.dkpro.core.api.transform;
+package org.dkpro.core.api.transform;
 
 import static org.apache.uima.fit.util.CasUtil.getType;
 import static org.apache.uima.fit.util.CasUtil.selectFS;

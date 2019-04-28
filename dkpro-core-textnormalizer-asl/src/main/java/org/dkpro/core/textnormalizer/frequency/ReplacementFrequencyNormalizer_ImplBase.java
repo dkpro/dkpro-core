@@ -28,10 +28,10 @@ import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
 
 /**
  * This base class is for all normalizers that need a frequency provider and replace based on a

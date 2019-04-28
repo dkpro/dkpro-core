@@ -23,9 +23,8 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
 
 public class JCasTransformerChangeBased_ImplBaseTest
 {

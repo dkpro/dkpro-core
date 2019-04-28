@@ -32,6 +32,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.transform.JCasTransformer_ImplBase;
 import org.dkpro.core.io.text.StringReader;
 import org.dkpro.core.textnormalizer.util.JCasHolder;
 import org.junit.Test;
@@ -39,7 +40,6 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformer_ImplBase;
 
 public class JCasTransformer_ImplBaseTest
 {

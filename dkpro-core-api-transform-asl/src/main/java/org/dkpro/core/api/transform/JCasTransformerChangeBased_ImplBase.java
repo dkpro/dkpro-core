@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package de.tudarmstadt.ukp.dkpro.core.api.transform;
+package org.dkpro.core.api.transform;
 
 import static org.apache.uima.fit.util.CasUtil.getType;
 import static org.apache.uima.fit.util.CasUtil.selectFS;
@@ -35,10 +35,9 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.CasCopier;
-
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
+import org.dkpro.core.api.transform.alignment.AlignedString;
+import org.dkpro.core.api.transform.alignment.ImmutableInterval;
+import org.dkpro.core.api.transform.alignment.Interval;
 
 /**
  * Base-class for normalizers that do insert/delete/replace operations. Please mind that these

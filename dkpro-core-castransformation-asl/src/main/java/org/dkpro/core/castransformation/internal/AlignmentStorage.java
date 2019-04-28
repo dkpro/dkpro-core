@@ -23,10 +23,9 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.apache.uima.cas.CAS;
+import org.dkpro.core.api.transform.alignment.AlignedString;
 import org.dkpro.core.castransformation.ApplyChangesAnnotator;
 import org.dkpro.core.castransformation.Backmapper;
-
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 
 /**
  * Use to smuggle the alignment state from the {@link ApplyChangesAnnotator} to the

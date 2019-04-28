@@ -25,10 +25,10 @@ import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.api.transform.alignment.AlignedString;
 import org.dkpro.core.castransformation.ApplyChangesAnnotator;
 import org.dkpro.core.castransformation.Backmapper;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 
 /**

@@ -38,12 +38,12 @@ import org.apache.uima.internal.util.PositiveIntSet_impl;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.CasCopier;
+import org.dkpro.core.api.transform.alignment.AlignedString;
+import org.dkpro.core.api.transform.alignment.ImmutableInterval;
+import org.dkpro.core.api.transform.alignment.Interval;
 import org.dkpro.core.castransformation.internal.AlignmentFactory;
 import org.dkpro.core.castransformation.internal.AlignmentStorage;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

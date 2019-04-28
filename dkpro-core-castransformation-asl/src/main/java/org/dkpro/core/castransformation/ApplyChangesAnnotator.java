@@ -23,11 +23,11 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.transform.alignment.AlignedString;
 import org.dkpro.core.castransformation.internal.AlignmentFactory;
 import org.dkpro.core.castransformation.internal.AlignmentStorage;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import eu.openminted.share.annotations.api.DocumentationResource;
 

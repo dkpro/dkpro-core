@@ -16,10 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.transform.alignment;
+package org.dkpro.core.api.transform.alignment;
 
 import static org.junit.Assert.assertEquals;
 
+import org.dkpro.core.api.transform.alignment.AlignedString;
+import org.dkpro.core.api.transform.alignment.ImmutableInterval;
+import org.dkpro.core.api.transform.alignment.Interval;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
