@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
+package org.dkpro.core.berkeleyparser;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -33,6 +33,7 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.berkeleyparser.BerkeleyParser;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.DkproTestContext;

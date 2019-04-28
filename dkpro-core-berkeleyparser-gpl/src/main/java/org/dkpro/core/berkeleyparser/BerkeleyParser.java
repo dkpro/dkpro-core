@@ -16,9 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
+package org.dkpro.core.berkeleyparser;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -54,7 +55,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -241,10 +241,10 @@ public class BerkeleyParser
 
         modelProvider = new BerkeleyParserModelProvider();
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
-                posMappingLocation, language, modelProvider);
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                modelProvider);
 
-        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(this, 
+        constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, language, modelProvider);
     }
 
@@ -378,8 +378,11 @@ public class BerkeleyParser
         {
             setContextObject(BerkeleyParser.this);
 
-            setDefault(ARTIFACT_ID, "${groupId}.berkeleyparser-model-parser-${language}-${variant}");
-            setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.bin");
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+            setDefault(ARTIFACT_ID,
+                    "${groupId}.berkeleyparser-model-parser-${language}-${variant}");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/berkeleyparser/lib/parser-${language}-${variant}.bin");
             setDefaultVariantsLocation("${package}/lib/parser-default-variants.map");
 
             setOverride(LOCATION, modelLocation);
@@ -391,9 +394,8 @@ public class BerkeleyParser
         protected CoarseToFineMaxRuleParser produceResource(URL aUrl)
             throws IOException
         {
-            ObjectInputStream is = null;
-            try {
-                is = new ObjectInputStream(new GZIPInputStream(aUrl.openStream()));
+            try (ObjectInputStream is = new ObjectInputStream(
+                    new GZIPInputStream(aUrl.openStream()))) {
                 ParserData pData = (ParserData) is.readObject();
 
                 Grammar grammar = pData.getGrammar();
@@ -437,9 +439,6 @@ public class BerkeleyParser
             }
             catch (ClassNotFoundException e) {
                 throw new IOException(e);
-            }
-            finally {
-                closeQuietly(is);
             }
         }
     };
