@@ -168,7 +168,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-asl</artifactId>
+        <artifactId>dkpro-core-flextag-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>

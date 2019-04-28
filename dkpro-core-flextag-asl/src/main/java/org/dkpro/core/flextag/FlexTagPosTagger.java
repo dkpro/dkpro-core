@@ -15,7 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.flextag;
+package org.dkpro.core.flextag;
+
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -123,8 +124,9 @@ public class FlexTagPosTagger
         super.initialize(context);
 
         initModelProvider();
-        mappingProvider = MappingProviderFactory.createPosMappingProvider(this, posMappingLocation,
-                language, modelProvider);
+        
+        mappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                modelProvider);
 
         flexTagEngine = AnalysisEngineFactory.createEngine(TcAnnotator.class,
                 TcAnnotator.PARAM_TC_MODEL_LOCATION, modelProvider.getResource(),
@@ -193,9 +195,10 @@ public class FlexTagPosTagger
             {
                 setContextObject(FlexTagPosTagger.this);
 
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID, "${groupId}.flextag-model-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/flextag/lib/tagger-${language}-${variant}.properties");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
