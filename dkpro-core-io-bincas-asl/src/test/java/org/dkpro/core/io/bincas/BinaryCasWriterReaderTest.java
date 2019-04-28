@@ -69,6 +69,7 @@ import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.CasIOUtils;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.resources.CompressionMethod;
 import org.dkpro.core.io.bincas.BinaryCasReader;
 import org.dkpro.core.io.bincas.BinaryCasWriter;
@@ -80,7 +81,6 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class BinaryCasWriterReaderTest

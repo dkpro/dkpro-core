@@ -38,6 +38,7 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
@@ -45,7 +46,6 @@ import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.io.rdf.internal.Rdf2Uima;
 import org.dkpro.core.io.rdf.internal.RdfCas;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

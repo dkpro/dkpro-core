@@ -29,13 +29,13 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.StringArray;
+import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.nift.metadata.ArticleMetaData;
 
 import com.nytlabs.corpus.NYTCorpusDocument;
 import com.nytlabs.corpus.NYTCorpusDocumentParser;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

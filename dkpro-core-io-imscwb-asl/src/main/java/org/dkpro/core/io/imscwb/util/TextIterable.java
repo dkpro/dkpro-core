@@ -29,9 +29,8 @@ import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
 import org.dkpro.core.api.resources.CompressionUtils;
-
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
 
 public class TextIterable
     implements Iterable<CorpusText>, Iterator<CorpusText>

@@ -23,10 +23,10 @@ import static org.junit.Assert.assertEquals;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.io.aclanthology.AclAnthologyReader;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class AclArcReaderTest

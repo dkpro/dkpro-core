@@ -48,11 +48,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasIOUtils;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

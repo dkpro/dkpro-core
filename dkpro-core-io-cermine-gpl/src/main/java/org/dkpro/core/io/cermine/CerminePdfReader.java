@@ -31,12 +31,12 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 import org.jdom.Element;
 import org.jdom.Text;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;

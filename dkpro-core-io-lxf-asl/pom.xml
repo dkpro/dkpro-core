@@ -54,7 +54,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
+      <artifactId>dkpro-core-api-io-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>

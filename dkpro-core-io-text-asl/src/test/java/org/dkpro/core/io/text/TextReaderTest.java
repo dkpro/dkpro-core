@@ -30,12 +30,12 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.io.text.TextReader;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class TextReaderTest

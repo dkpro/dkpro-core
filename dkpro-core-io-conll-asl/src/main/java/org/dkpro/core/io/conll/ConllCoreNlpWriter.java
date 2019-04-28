@@ -36,12 +36,12 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.dkpro.core.api.io.sequencecodec.AdjacentLabelCodec;
+import org.dkpro.core.api.io.sequencecodec.SequenceItem;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencecodec.AdjacentLabelCodec;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencecodec.SequenceItem;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;

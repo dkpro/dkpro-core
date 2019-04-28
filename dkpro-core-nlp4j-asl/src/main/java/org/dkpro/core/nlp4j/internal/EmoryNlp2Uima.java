@@ -23,9 +23,9 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.BilouDecoder;
 import org.dkpro.core.api.resources.MappingProvider;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.BilouDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;

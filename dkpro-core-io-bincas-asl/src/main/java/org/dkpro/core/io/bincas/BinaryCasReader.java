@@ -51,10 +51,10 @@ import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.CasIOUtils;
 import org.apache.uima.util.CasLoadMode;
 import org.apache.uima.util.TypeSystemUtil;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.Parameters;

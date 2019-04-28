@@ -25,12 +25,12 @@ import static org.junit.Assert.fail;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.io.imscwb.ImsCwbReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;

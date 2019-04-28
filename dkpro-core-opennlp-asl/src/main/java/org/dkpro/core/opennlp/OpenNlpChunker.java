@@ -35,6 +35,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.IobDecoder;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.parameter.ResourceParameter;
@@ -44,7 +45,6 @@ import org.dkpro.core.api.resources.MappingProviderFactory;
 import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.opennlp.internal.OpenNlpChunkerTagsetDescriptionProvider;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.IobDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

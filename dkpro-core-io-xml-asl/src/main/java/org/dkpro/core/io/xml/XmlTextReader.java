@@ -34,12 +34,12 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Logger;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

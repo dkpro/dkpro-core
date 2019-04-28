@@ -17,9 +17,9 @@
  */
 package org.dkpro.core.performance;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.tei.TeiReader;

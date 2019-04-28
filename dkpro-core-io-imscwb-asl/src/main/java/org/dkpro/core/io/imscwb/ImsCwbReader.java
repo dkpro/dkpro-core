@@ -38,6 +38,7 @@ import org.apache.uima.internal.util.XMLUtils;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.MappingProvider;
@@ -45,7 +46,6 @@ import org.dkpro.core.io.imscwb.util.CorpusSentence;
 import org.dkpro.core.io.imscwb.util.CorpusText;
 import org.dkpro.core.io.imscwb.util.TextIterable;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;

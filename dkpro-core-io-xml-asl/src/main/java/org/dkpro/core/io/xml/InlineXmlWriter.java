@@ -40,10 +40,10 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasToInlineXml;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.ResourceUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
