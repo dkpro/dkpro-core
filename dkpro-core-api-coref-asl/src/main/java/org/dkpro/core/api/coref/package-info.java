@@ -19,4 +19,4 @@
 /**
  * Types for coreference annotations.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.coref;
+package org.dkpro.core.api.coref;
