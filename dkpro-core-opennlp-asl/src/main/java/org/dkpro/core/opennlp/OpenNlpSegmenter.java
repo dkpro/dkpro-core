@@ -106,8 +106,8 @@ public class OpenNlpSegmenter
                 setDefault(ARTIFACT_ID,
                         "de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
 
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-                        "sentence-${language}-${variant}.properties");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/sentence-${language}-${variant}.properties");
                 setDefault(VARIANT, "maxent");
 
                 setOverride(LOCATION, segmentationModelLocation);
@@ -123,7 +123,6 @@ public class OpenNlpSegmenter
                 return new SentenceDetectorME(model);
             }
         };
-        sentenceModelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/opennlp");
 
         tokenModelProvider = new CasConfigurableStreamProviderBase<TokenizerME>() {
             {
@@ -133,8 +132,8 @@ public class OpenNlpSegmenter
                 setDefault(ARTIFACT_ID,
                         "de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
 
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-                        "token-${language}-${variant}.properties");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/token-${language}-${variant}.properties");
                 setDefault(VARIANT, "maxent");
 
                 setOverride(LOCATION, tokenizationModelLocation);

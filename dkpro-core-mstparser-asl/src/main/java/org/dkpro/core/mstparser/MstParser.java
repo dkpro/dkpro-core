@@ -186,6 +186,12 @@ public class MstParser
         // the modelProvider reads in the model and produces a parser
         modelProvider = new ModelProviderBase<DependencyParser>(this, "mstparser", "parser")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/mstparser/lib/parser-${language}-${variant}.properties");
+            }
+            
             @Override
             protected DependencyParser produceResource(URL aUrl)
                 throws IOException

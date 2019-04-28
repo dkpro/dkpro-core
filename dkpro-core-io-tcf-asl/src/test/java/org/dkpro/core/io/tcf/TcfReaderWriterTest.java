@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
@@ -34,7 +33,6 @@ import org.custommonkey.xmlunit.XMLAssert;
 import org.dkpro.core.io.tcf.TcfReader;
 import org.dkpro.core.io.tcf.TcfWriter;
 import org.dkpro.core.testing.DkproTestContext;
-import org.dkpro.core.testing.EOLUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.xml.sax.InputSource;
@@ -136,13 +134,9 @@ public class TcfReaderWriterTest
 
         runPipeline(reader, writer);
 
-        String reference = FileUtils.readFileToString(
-                new File("src/test/resources/wlfxb.xml"), "UTF-8");
-        String actual = FileUtils.readFileToString(
-                new File("target/test-output/roundtrip/wlfxb.xml"), "UTF-8");
-        reference = EOLUtils.normalizeLineEndings(reference);
-        actual = EOLUtils.normalizeLineEndings(actual);
-        assertEquals(reference, actual);
+        XMLAssert.assertXMLEqual(
+                new InputSource("src/test/resources/wlfxb.xml"),
+                new InputSource("target/test-output/roundtrip/wlfxb.xml"));
     }
 
     @Rule

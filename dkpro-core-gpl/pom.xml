@@ -132,7 +132,6 @@
             <exclude>src/test/resources/**/*</exclude>
             <exclude>.license-header.txt</exclude>
             <exclude>src/main/java/edu/stanford/nlp/parser/lexparser/**/*</exclude>
-            <exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.java</exclude>
           </excludes>
           <mapping>
             <java>SLASHSTAR_STYLE</java>

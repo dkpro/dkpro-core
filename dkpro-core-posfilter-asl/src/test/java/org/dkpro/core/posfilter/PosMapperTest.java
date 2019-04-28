@@ -39,7 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 public class PosMapperTest
 {
-    private final File testBase = new File("src/test/resources/de/tudarmstadt/ukp/dkpro/core/posfilter");
+    private final File testBase = new File("src/test/resources/org/dkpro/core/posfilter");
     private final String testDocument1 = "This sentence consists of fourtynine characters .";
 
     @Test

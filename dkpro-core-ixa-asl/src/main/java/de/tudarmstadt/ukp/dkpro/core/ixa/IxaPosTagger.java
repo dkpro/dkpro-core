@@ -17,7 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.ixa;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
+
+import org.apache.uima.UimaContext;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 
 import eu.openminted.share.annotations.api.Component;
@@ -38,4 +42,13 @@ public class IxaPosTagger
     // derive from the OpenNlpPosTagger in side this module. This has the effect that through
     // the module dependencies, we have the required IXA JARs on the classpath. It also has
     // the effect that the package for the models changes from ...opennlp.lib to ...ixa.lib.
+    
+    @Override
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+        
+        modelProvider.setDefault(LOCATION,
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/ixa/lib/tagger-${language}-${variant}.properties");
+    }
 }

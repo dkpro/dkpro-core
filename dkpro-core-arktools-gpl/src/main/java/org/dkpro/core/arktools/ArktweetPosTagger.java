@@ -175,9 +175,10 @@ public class ArktweetPosTagger
             {
                 setContextObject(ArktweetPosTagger.this);
 
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID, "${groupId}.arktools-model-tagger-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/arktools/lib/tagger-${language}-${variant}.properties");
                 setDefault(VARIANT, "default");
 
                 setOverride(LOCATION, modelLocation);

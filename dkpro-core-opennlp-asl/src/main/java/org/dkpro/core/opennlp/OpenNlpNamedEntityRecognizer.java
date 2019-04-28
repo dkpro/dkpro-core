@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createNerMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
@@ -150,7 +150,7 @@ public class OpenNlpNamedEntityRecognizer
                 setDefault(ARTIFACT_ID,
                         "de.tudarmstadt.ukp.dkpro.core.opennlp-model-ner-${language}-${variant}");
 
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/ner-default-variants.map");
+                setDefaultVariantsLocation("${package}/lib/ner-default-variants.map");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/"
                         + "ner-${language}-${variant}.bin");
 
@@ -178,17 +178,8 @@ public class OpenNlpNamedEntityRecognizer
                 return new NameFinderME(model);
             }
         };
-        modelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/opennlp");
 
-        mappingProvider = new MappingProvider();
-        mappingProvider
-                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/ner-default-variants.map");
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/opennlp/lib/ner-${language}-${variant}.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-        mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        mappingProvider.setOverride(MappingProvider.VARIANT, variant);
+        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant);
     }
 
     @Override

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.maltparser;
+package org.dkpro.core.maltparser;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -191,6 +191,9 @@ public class MaltParser
             private MaltParserService parser;
 
             {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/maltparser/lib/parser-${language}-${variant}.properties");
                 setDefault(VARIANT, "linear");
             }
 

@@ -94,6 +94,7 @@ public class LanguageToolLemmatizer
         super.initialize(aContext);
         
         mappingProvider = new MappingProvider();
+        mappingProvider.setContextObject(this);
         mappingProvider.setDefault(MappingProvider.VARIANT, "default");
         mappingProvider.setDefaultVariantsLocation("${package}/lib/language-tagset.map");
         mappingProvider.setDefault(MappingProvider.LOCATION, 

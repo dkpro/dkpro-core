@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -118,6 +117,12 @@ public class OpenNlpLemmatizer
 
         modelProvider = new ModelProviderBase<LemmatizerME>(this, "lemma")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/lemma-${language}-${variant}.properties");
+            }
+            
             @Override
             protected LemmatizerME produceResource(InputStream aStream)
                 throws Exception
@@ -129,7 +134,6 @@ public class OpenNlpLemmatizer
                 return new LemmatizerME(model);
             }
         };
-        modelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/opennlp");
     }
 
     @Override

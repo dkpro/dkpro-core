@@ -125,9 +125,9 @@ public class StanfordNamedEntityRecognizerTrainerTest
         // Recall      0.632405
         
         // 
-        assertEquals(0.493260, results.getFscore(), 0.0001);
-        assertEquals(0.621921, results.getPrecision(), 0.0001);
-        assertEquals(0.408708, results.getRecall(), 0.0001);
+        assertEquals(0.493260, results.getFscore(), 0.01);
+        assertEquals(0.621921, results.getPrecision(), 0.01);
+        assertEquals(0.408708, results.getRecall(), 0.01);
     }
 
     @Before

@@ -21,4 +21,4 @@
  *
  * @since 1.4.0
  */
-package de.tudarmstadt.ukp.dkpro.core.maltparser;
+package org.dkpro.core.maltparser;

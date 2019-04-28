@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
@@ -145,7 +144,7 @@ public class OpenNlpPosTagger
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
-    private CasConfigurableProviderBase<POSTaggerME> modelProvider;
+    protected CasConfigurableProviderBase<POSTaggerME> modelProvider;
     private MappingProvider mappingProvider;
     private Charset encoding;
 
@@ -165,6 +164,12 @@ public class OpenNlpPosTagger
         // PARAM_VARIANT, and PARAM_MODEL_LOCATION.
         modelProvider = new ModelProviderBase<POSTaggerME>(this, "tagger")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-${language}-${variant}.properties");
+            }
+            
             @Override
             protected POSTaggerME produceResource(InputStream aStream)
                 throws Exception
@@ -193,7 +198,6 @@ public class OpenNlpPosTagger
             }
         };
 // end::model-provider-decl[]
-        modelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/opennlp");
 
 // tag::mapping-provider-decl[]
         // General setup of the mapping provider in initialize()

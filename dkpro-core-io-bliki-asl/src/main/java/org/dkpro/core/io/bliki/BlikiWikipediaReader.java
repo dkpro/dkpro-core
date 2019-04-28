@@ -17,11 +17,8 @@
  */
 package org.dkpro.core.io.bliki;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-
-import javax.xml.bind.JAXBException;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CASRuntimeException;
@@ -108,10 +105,7 @@ public class BlikiWikipediaReader
         try {
             config = new SimpleWikiConfiguration(WikiConstants.SWEBLE_CONFIG);
         }
-        catch (FileNotFoundException e) {
-            throw new ResourceInitializationException(e);
-        }
-        catch (JAXBException e) {
+        catch (Exception e) {
             throw new ResourceInitializationException(e);
         }
         compiler = new Compiler(config);

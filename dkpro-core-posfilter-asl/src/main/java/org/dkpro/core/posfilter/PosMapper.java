@@ -17,13 +17,15 @@
  */
 package org.dkpro.core.posfilter;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider.BASE_TYPE;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Properties;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -82,22 +84,18 @@ public class PosMapper
         super.initialize(aContext);
 
         posMap = new Properties();
-        Reader reader = null;
-        try {
-            reader = new FileReader(mappingFile);
+        try (Reader reader = new FileReader(mappingFile)) {
             posMap.load(reader);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-        finally {
-            IOUtils.closeQuietly(reader);
-        }
 
         if (dkproMappingLocation != null) {
             mappingProvider = new MappingProvider();
-            mappingProvider.setDefault(MappingProvider.LOCATION, dkproMappingLocation);
-            mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+            mappingProvider.setContextObject(this);
+            mappingProvider.setDefault(LOCATION, dkproMappingLocation);
+            mappingProvider.setDefault(BASE_TYPE, POS.class.getName());
             mappingProvider.setDefault("pos.tagset", "default");
             // mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
             // mappingProvider.addImport("pos.tagset", modelProvider);

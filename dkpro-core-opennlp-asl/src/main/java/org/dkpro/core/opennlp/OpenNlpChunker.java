@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -143,6 +142,12 @@ public class OpenNlpChunker
         super.initialize(aContext);
 
         modelProvider = new ModelProviderBase<Chunker>(this, "opennlp", "chunker") {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/chunker-${language}-${variant}.properties");
+            }
+            
             @Override
             protected Chunker produceResource(InputStream aStream)
                 throws Exception
@@ -160,7 +165,6 @@ public class OpenNlpChunker
                 return new ChunkerME(model);
             }
         };
-        modelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/opennlp");
 
         mappingProvider = MappingProviderFactory.createChunkMappingProvider(this,
                 chunkMappingLocation, language, modelProvider);

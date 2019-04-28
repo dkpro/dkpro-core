@@ -18,7 +18,6 @@
 package org.dkpro.core.opennlp;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -179,7 +178,6 @@ public class OpenNlpParser
         super.initialize(aContext);
 
         modelProvider = new OpenNlpParserModelProvider();
-        modelProvider.setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/opennlp");
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
                 posMappingLocation, language, modelProvider);
@@ -320,8 +318,10 @@ public class OpenNlpParser
         {
             setContextObject(OpenNlpParser.this);
 
+            setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
             setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-parser-${language}-${variant}");
-            setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.bin");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/parser-${language}-${variant}.properties");
             setDefault(VARIANT, "chunking");
 
             setOverride(LOCATION, modelLocation);
