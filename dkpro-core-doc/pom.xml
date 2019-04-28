@@ -26,7 +26,7 @@
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <packaging>jar</packaging>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.doc-asl</artifactId>
+  <artifactId>dkpro-core-doc-asl</artifactId>
   <name>DKPro Core ASL - Documentation</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
@@ -101,7 +101,7 @@
                 import org.dkpro.meta.core.maven.ContextHolder;
                 
                 ContextHolder.setBinding(binding);
-                de.tudarmstadt.ukp.dkpro.core.doc.DocumentationBuilder.main();
+                org.dkpro.core.doc.DocumentationBuilder.main();
                 ]]>
               </source>
             </configuration>
@@ -118,7 +118,7 @@
                 import org.dkpro.meta.core.maven.ContextHolder;
                 
                 ContextHolder.setBinding(binding);
-                de.tudarmstadt.ukp.dkpro.core.doc.PomSanityCheck.main();
+                org.dkpro.core.doc.PomSanityCheck.main();
                 ]]>
               </source>
             </configuration>
