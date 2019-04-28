@@ -28,6 +28,7 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.resources.ResourceObjectProviderBase;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.dkpro.core.testing.AssertAnnotations;
@@ -39,7 +40,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class OpenNlpPosTaggerTest

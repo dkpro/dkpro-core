@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.flextag;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,15 +36,15 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.api.resources.ModelProviderBase;
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.tc.api.type.TextClassificationOutcome;
 import org.dkpro.tc.ml.uima.TcAnnotator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;

@@ -17,10 +17,10 @@
  */
 package org.dkpro.core.io.negra;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -53,6 +53,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.core.api.resources.CompressionUtils;
+import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.io.penntree.PennTreeNode;
 import org.dkpro.core.io.penntree.PennTreeUtils;
 
@@ -61,8 +63,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

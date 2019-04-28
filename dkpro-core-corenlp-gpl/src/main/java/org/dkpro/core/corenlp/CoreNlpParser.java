@@ -18,11 +18,11 @@
  */
 package org.dkpro.core.corenlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createDependencyMappingProvider;
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.uima.util.Level.INFO;
 import static org.apache.uima.util.Level.WARNING;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createDependencyMappingProvider;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,15 +39,15 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.CasConfigurableProviderBase;
+import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.corenlp.internal.CoreNlp2DKPro;
 import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import edu.stanford.nlp.parser.common.ParserGrammar;

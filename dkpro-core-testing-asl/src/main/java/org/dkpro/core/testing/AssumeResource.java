@@ -22,9 +22,8 @@ import static org.junit.Assume.assumeTrue;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class AssumeResource
 {

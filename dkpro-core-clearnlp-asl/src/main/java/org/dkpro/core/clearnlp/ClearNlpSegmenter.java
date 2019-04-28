@@ -30,6 +30,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.CasConfigurableProviderBase;
+import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 
 import com.clearnlp.segmentation.AbstractSegmenter;
@@ -37,8 +39,6 @@ import com.clearnlp.segmentation.EnglishSegmenter;
 import com.clearnlp.tokenization.EnglishTokenizer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

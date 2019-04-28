@@ -30,10 +30,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import edu.emory.mathcs.nlp.common.collection.tree.PrefixTree;
 import edu.emory.mathcs.nlp.common.util.IOUtils;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;

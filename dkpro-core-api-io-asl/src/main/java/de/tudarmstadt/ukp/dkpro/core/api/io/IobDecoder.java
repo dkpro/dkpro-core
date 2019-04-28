@@ -23,8 +23,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.api.resources.MappingProvider;
 
 /**
  * Creates Chunk annotations from IOB encoded data. For example, the sequence (B-NP I-NP) will be

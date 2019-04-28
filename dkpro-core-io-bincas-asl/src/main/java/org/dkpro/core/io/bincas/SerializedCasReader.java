@@ -32,9 +32,9 @@ import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.dkpro.core.api.resources.CompressionUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

@@ -17,11 +17,11 @@
  */
 package org.dkpro.core.stopwordremover;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.CasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.getView;
 import static org.apache.uima.util.Level.FINE;
+import static org.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 
 import java.io.IOException;
 import java.io.InputStream;

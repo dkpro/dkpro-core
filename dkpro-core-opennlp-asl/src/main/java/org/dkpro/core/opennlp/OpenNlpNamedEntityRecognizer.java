@@ -17,11 +17,11 @@
  */
 package org.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createNerMappingProvider;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createNerMappingProvider;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -39,15 +39,15 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.CasConfigurableProviderBase;
+import org.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
+import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.opennlp.internal.OpenNlpSequenceTagsetDescriptionProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;

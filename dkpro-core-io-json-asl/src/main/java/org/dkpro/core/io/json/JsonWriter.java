@@ -35,11 +35,11 @@ import org.apache.uima.json.JsonCasSerializer;
 import org.apache.uima.json.JsonCasSerializer.JsonContextFormat;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.TypeSystemUtil;
+import org.dkpro.core.api.resources.CompressionUtils;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

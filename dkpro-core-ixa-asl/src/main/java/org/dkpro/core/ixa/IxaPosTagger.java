@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.ixa;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
+import static org.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.fit.descriptor.ResourceMetaData;

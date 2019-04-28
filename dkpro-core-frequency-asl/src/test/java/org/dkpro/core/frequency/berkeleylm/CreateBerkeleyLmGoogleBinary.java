@@ -19,7 +19,8 @@ package org.dkpro.core.frequency.berkeleylm;
 
 import java.io.IOException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
+import org.dkpro.core.api.resources.DkproContext;
+
 import edu.berkeley.nlp.lm.NgramLanguageModel;
 import edu.berkeley.nlp.lm.io.LmReaders;
 import edu.berkeley.nlp.lm.util.Logger;

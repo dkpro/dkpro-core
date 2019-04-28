@@ -18,12 +18,12 @@
  */
 package org.dkpro.core.stanfordnlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.FINE;
 import static org.apache.uima.util.Level.INFO;
 import static org.apache.uima.util.Level.WARNING;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -51,6 +51,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
+import org.dkpro.core.api.resources.CasConfigurableProviderBase;
+import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import org.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import org.dkpro.core.stanfordnlp.util.TreeWithTokens;
@@ -58,9 +61,6 @@ import org.dkpro.core.stanfordnlp.util.TreeWithTokens;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;

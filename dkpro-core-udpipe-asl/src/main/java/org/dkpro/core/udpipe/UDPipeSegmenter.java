@@ -28,6 +28,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.ModelProviderBase;
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 import org.dkpro.core.udpipe.internal.UDPipeUtils;
 
@@ -36,8 +38,6 @@ import cz.cuni.mff.ufal.udpipe.Model;
 import cz.cuni.mff.ufal.udpipe.Word;
 import cz.cuni.mff.ufal.udpipe.Words;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

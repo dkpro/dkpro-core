@@ -24,10 +24,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.German98Dictionary;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class German98DictionaryTest
 {

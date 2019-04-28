@@ -25,12 +25,12 @@ import java.io.PrintWriter;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.mallet.MalletModelTrainer;
 
 import cc.mallet.topics.WordEmbeddings;
 import cc.mallet.types.Alphabet;
 import cc.mallet.types.InstanceList;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

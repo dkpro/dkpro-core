@@ -17,9 +17,9 @@
  */
 package org.dkpro.core.treetagger.internal;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.getUrlAsExecutable;
 import static java.io.File.separator;
 import static org.annolab.tt4j.Util.getSearchPaths;
+import static org.dkpro.core.api.resources.ResourceUtils.getUrlAsExecutable;
 
 import java.io.File;
 import java.io.IOException;

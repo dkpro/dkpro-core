@@ -18,11 +18,11 @@
  */
 package org.dkpro.core.lingpipe;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory.createNerMappingProvider;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createNerMappingProvider;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -42,6 +42,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.api.resources.ModelProviderBase;
 
 import com.aliasi.chunk.AbstractCharLmRescoringChunker;
 import com.aliasi.chunk.Chunk;
@@ -57,8 +59,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.constants.OperationType;

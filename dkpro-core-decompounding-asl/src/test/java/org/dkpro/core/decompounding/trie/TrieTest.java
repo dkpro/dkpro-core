@@ -23,11 +23,10 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.German98Dictionary;
 import org.dkpro.core.decompounding.trie.TrieStructure;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class TrieTest
 {

@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.opennlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE;
 
 import java.io.InputStream;
 
@@ -30,13 +30,13 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.CasConfigurableProviderBase;
+import org.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import opennlp.tools.sentdetect.SentenceDetectorME;

@@ -26,14 +26,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.Dictionary;
 import org.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import org.dkpro.core.decompounding.dictionary.SimpleDictionary;
 import org.dkpro.core.decompounding.splitter.DecompoundedWord;
 import org.dkpro.core.decompounding.splitter.LeftToRightSplitterAlgorithm;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class LeftToRightSplitAlgorithmTest
 {

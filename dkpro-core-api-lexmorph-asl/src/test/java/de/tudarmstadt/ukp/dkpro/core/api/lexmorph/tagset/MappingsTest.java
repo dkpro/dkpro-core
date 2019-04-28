@@ -27,6 +27,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.ArrayUtils;
+import org.dkpro.core.api.resources.MappingProvider;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -47,7 +48,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SCONJ;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SYM;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_X;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 
 public class MappingsTest
 {

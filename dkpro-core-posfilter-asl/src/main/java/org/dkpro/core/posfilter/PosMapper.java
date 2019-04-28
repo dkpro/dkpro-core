@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.posfilter;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider.BASE_TYPE;
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
+import static org.dkpro.core.api.resources.MappingProvider.BASE_TYPE;
+import static org.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
 
 import java.io.File;
 import java.io.FileReader;
@@ -37,10 +37,10 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.resources.MappingProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**

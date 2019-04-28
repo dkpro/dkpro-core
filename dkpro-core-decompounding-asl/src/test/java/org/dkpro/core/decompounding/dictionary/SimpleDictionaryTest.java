@@ -25,12 +25,11 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 import java.io.IOException;
 
+import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.SimpleDictionary;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class SimpleDictionaryTest
 {
