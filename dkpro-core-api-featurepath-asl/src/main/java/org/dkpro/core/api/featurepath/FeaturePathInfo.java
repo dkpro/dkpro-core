@@ -23,7 +23,7 @@
  * - Replaced exceptions with FeaturePathExceptions.
  */
 
-package de.tudarmstadt.ukp.dkpro.core.api.featurepath;
+package org.dkpro.core.api.featurepath;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;

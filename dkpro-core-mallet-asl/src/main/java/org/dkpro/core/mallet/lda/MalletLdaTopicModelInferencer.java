@@ -35,6 +35,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
 import org.apache.uima.jcas.cas.IntegerArray;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.dkpro.core.mallet.MalletModelTrainer;
 
 import cc.mallet.pipe.Pipe;
@@ -43,7 +44,6 @@ import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.topics.TopicInferencer;
 import cc.mallet.types.Instance;
 import cc.mallet.types.TokenSequence;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;

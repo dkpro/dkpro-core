@@ -29,10 +29,10 @@ import java.util.List;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

@@ -27,10 +27,10 @@ import java.util.List;
 import org.apache.uima.UIMAException;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;

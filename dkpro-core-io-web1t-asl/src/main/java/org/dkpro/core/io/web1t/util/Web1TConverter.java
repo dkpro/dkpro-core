@@ -42,12 +42,12 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.featurepath.FeaturePathException;
+import org.dkpro.core.api.featurepath.FeaturePathInfo;
 import org.dkpro.core.ngrams.util.NGramStringIterable;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 

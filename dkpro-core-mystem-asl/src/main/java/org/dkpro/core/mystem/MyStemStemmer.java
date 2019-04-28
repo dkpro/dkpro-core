@@ -46,11 +46,11 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.pear.util.FileUtil;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
+import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.dkpro.core.api.resources.PlatformDetector;
 import org.dkpro.core.api.resources.RuntimeProvider;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;

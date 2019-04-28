@@ -32,9 +32,9 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Level;
+import org.dkpro.core.api.featurepath.FeaturePathException;
+import org.dkpro.core.api.featurepath.FeaturePathFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADP;

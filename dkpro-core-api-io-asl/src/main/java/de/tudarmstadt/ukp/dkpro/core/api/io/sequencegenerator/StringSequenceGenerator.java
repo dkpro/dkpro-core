@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.featurepath.FeaturePathException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 

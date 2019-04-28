@@ -30,9 +30,9 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.api.featurepath.FeaturePathException;
+import org.dkpro.core.api.featurepath.FeaturePathFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;

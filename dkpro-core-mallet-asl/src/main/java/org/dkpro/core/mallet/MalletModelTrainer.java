@@ -25,6 +25,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
 import org.dkpro.core.mallet.wordembeddings.MalletEmbeddingsTrainer;
 
@@ -32,7 +33,6 @@ import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 import cc.mallet.types.TokenSequence;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;

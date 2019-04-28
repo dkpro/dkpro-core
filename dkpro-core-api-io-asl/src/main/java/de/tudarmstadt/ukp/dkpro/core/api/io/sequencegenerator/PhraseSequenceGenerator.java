@@ -35,10 +35,10 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.featurepath.FeaturePathException;
+import org.dkpro.core.api.featurepath.FeaturePathFactory;
+import org.dkpro.core.api.featurepath.FeaturePathUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.io.TextUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;

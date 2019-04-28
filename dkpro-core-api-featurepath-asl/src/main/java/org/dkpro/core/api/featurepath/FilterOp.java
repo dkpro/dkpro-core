@@ -18,7 +18,7 @@
  *
  * Copied from the Apache UIMA Sandbox Dictionary Annotator.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.featurepath;
+package org.dkpro.core.api.featurepath;
 
 /**
  * Filter operators
