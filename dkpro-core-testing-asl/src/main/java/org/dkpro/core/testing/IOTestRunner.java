@@ -48,8 +48,8 @@ import org.dkpro.core.testing.validation.Message;
 
 public class IOTestRunner
 {
-    private static final String RESOURCE_COLLECTION_READER_BASE = "de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase";
-    private static final String JCAS_FILE_WRITER_IMPL_BASE = "de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase";
+    private static final String RESOURCE_COLLECTION_READER_BASE = "org.dkpro.core.api.io.ResourceCollectionReaderBase";
+    private static final String JCAS_FILE_WRITER_IMPL_BASE = "org.dkpro.core.api.io.JCasFileWriter_ImplBase";
         
     public static void testRoundTrip(Class<? extends CollectionReader> aReader,
             Class<? extends AnalysisComponent> aWriter, String aFile)
