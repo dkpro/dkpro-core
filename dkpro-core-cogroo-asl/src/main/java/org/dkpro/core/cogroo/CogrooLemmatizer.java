@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.cogroo;
+package org.dkpro.core.cogroo;
 
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.cogroo;
+package org.dkpro.core.cogroo;
 
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -32,7 +32,6 @@ import java.util.Properties;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
@@ -47,12 +46,9 @@ import org.cogroo.text.impl.DocumentImpl;
 import org.cogroo.text.impl.SentenceImpl;
 import org.cogroo.text.impl.TokenImpl;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -61,17 +57,21 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * POS-tagger using CoGrOO.
+ * Morphological analyzer using CoGrOO.
  */
-@Component(OperationType.PART_OF_SPEECH_TAGGER)
-@ResourceMetaData(name = "CoGrOO POS-Tagger")
+@Component(OperationType.MORPHOLOGICAL_TAGGER)
+@ResourceMetaData(name = "CoGrOO Morphological Analyzer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("pt")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
-public class CogrooPosTagger
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures" })
+            
+public class CogrooFeaturizer
     extends JCasAnnotator_ImplBase
 {
     /**
@@ -81,25 +81,7 @@ public class CogrooPosTagger
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     protected String language;
 
-    /**
-     * Enable/disable type mapping.
-     */
-    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
-    protected boolean mappingEnabled;
-
-    /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
-     */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-    protected String posMappingLocation;
-
     private CasConfigurableProviderBase<Analyzer> modelProvider;
-    private MappingProvider mappingProvider;
 
     @Override
     public void initialize(UimaContext aContext)
@@ -109,7 +91,7 @@ public class CogrooPosTagger
 
         modelProvider = new ModelProviderBase<Analyzer>() {
             {
-                setContextObject(CogrooPosTagger.this);
+                setContextObject(CogrooFeaturizer.this);
 
                 setDefault(LOCATION, NOT_REQUIRED);
                 setOverride(LANGUAGE, language);
@@ -127,14 +109,12 @@ public class CogrooPosTagger
                     throw new IOException("The language code '" + language
                             + "' is not supported by LanguageTool.");
                 }
-
+                
                 ComponentFactory factory = ComponentFactory.create(new Locale("pt", "BR"));
-                return factory.createPOSTagger();
+                
+                return factory.createFeaturizer();
             }
         };
-
-        mappingProvider = MappingProviderFactory.createPosMappingProvider(this, posMappingLocation,
-                "bosque", language);
     }
 
     @Override
@@ -143,11 +123,10 @@ public class CogrooPosTagger
     {
         CAS cas = aJCas.getCas();
         modelProvider.configure(cas);
-        mappingProvider.configure(cas);
 
         // This is actually quite some overhead, because internally Cogroo is just using a
-        // Morphlogik dictionary which simply takes a token and pos tag and returnes a list of
-        // lemmata. It would be much more efficient to use the dictionary directly.
+        // OpenNLP classifier which simply takes a token and pos tag and returnes a list of
+        // features. It would be much more efficient to use the classifier directly.
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             // We set up one CoGrOO document for each sentence. That makes it easier to maintain
@@ -157,7 +136,7 @@ public class CogrooPosTagger
             // Construct the document
             Document doc = new DocumentImpl();
             doc.setText(aJCas.getDocumentText());
-
+            
             // Extract the sentence and its tokens
             org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(),
                     sentence.getEnd(), doc);
@@ -166,33 +145,26 @@ public class CogrooPosTagger
             for (Token dTok : dTokens) {
                 TokenImpl cTok = new TokenImpl(dTok.getBegin() - sentence.getBegin(),
                         dTok.getEnd() - sentence.getBegin(), dTok.getText());
+                cTok.setPOSTag(dTok.getPos().getPosValue());
                 cTokens.add(cTok);
             }
             cSent.setTokens(cTokens);
             doc.setSentences(asList(cSent));
-
+            
             // Process
             modelProvider.getResource().analyze(doc);
 
             assert cSent.getTokens().size() == dTokens.size();
-
+            
             // Convert from CoGrOO to UIMA model
             Iterator<Token> dTokIt = dTokens.iterator();
             for (org.cogroo.text.Token cTok : cSent.getTokens()) {
-                // CoGrOO allows storing multiple lemmas per token. DKPro Core only allows one lemma
-                // per token. We just take the first one here. If we would run the grammar
-                // checking based on the DKPro Core lemmata, we might miss certain errors for this
-                // reason.
                 Token dTok = dTokIt.next();
-
-                Type posTag = mappingProvider.getTagType(cTok.getPOSTag());
-                POS posAnno = (POS) cas.createAnnotation(posTag, cSent.getStart() + cTok.getStart(),
-                        cSent.getStart() + cTok.getEnd());
-                String tag = cTok.getPOSTag();
-                posAnno.setPosValue(tag != null ? tag.intern() : null);
-                POSUtils.assignCoarseValue(posAnno);
-                posAnno.addToIndexes();
-                dTok.setPos(posAnno);
+                MorphologicalFeatures m = new MorphologicalFeatures(aJCas, cSent.getStart()
+                        + cTok.getStart(), cSent.getStart() + cTok.getEnd());
+                m.setValue(cTok.getFeatures());
+                m.addToIndexes();
+                dTok.setMorph(m);
             }
         }
     }

@@ -15,16 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.cogroo;
+package org.dkpro.core.cogroo;
 
-import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -41,12 +39,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.cogroo.analyzer.Analyzer;
 import org.cogroo.analyzer.ComponentFactory;
+import org.cogroo.config.Analyzers;
 import org.cogroo.text.Document;
 import org.cogroo.text.impl.DocumentImpl;
 import org.cogroo.text.impl.SentenceImpl;
 import org.cogroo.text.impl.TokenImpl;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
@@ -57,21 +56,19 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Morphological analyzer using CoGrOO.
+ * Tokenizer and sentence splitter using CoGrOO.
  */
-@Component(OperationType.MORPHOLOGICAL_TAGGER)
-@ResourceMetaData(name = "CoGrOO Morphological Analyzer")
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "CoGrOO Named Entity Recognizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("pt")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
         outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures" })
-            
-public class CogrooFeaturizer
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
+public class CogrooNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
 {
     /**
@@ -91,7 +88,7 @@ public class CogrooFeaturizer
 
         modelProvider = new ModelProviderBase<Analyzer>() {
             {
-                setContextObject(CogrooFeaturizer.this);
+                setContextObject(CogrooNamedEntityRecognizer.this);
 
                 setDefault(LOCATION, NOT_REQUIRED);
                 setOverride(LANGUAGE, language);
@@ -105,14 +102,7 @@ public class CogrooFeaturizer
 
                 String language = props.getProperty(LANGUAGE);
 
-                if (!"pt".equals(language)) {
-                    throw new IOException("The language code '" + language
-                            + "' is not supported by LanguageTool.");
-                }
-                
-                ComponentFactory factory = ComponentFactory.create(new Locale("pt", "BR"));
-                
-                return factory.createFeaturizer();
+                return ComponentFactory.create(Locale.forLanguageTag(language)).createNameFinder();
             }
         };
     }
@@ -124,47 +114,39 @@ public class CogrooFeaturizer
         CAS cas = aJCas.getCas();
         modelProvider.configure(cas);
 
-        // This is actually quite some overhead, because internally Cogroo is just using a
-        // OpenNLP classifier which simply takes a token and pos tag and returnes a list of
-        // features. It would be much more efficient to use the classifier directly.
-
+        // This is actually quite some overhead, because internally Cogroo is just using the
+        // OpenNLP namefinder which simply takes a string array and returns and arrays of spans...
+        // It would be much more efficient to use the model directly.
+        
+        // Convert from UIMA to Cogroo model
+        Document doc = new DocumentImpl();
+        doc.setText(aJCas.getDocumentText());
+        List<org.cogroo.text.Sentence> sentences = new ArrayList<org.cogroo.text.Sentence>();
         for (Sentence sentence : select(aJCas, Sentence.class)) {
-            // We set up one CoGrOO document for each sentence. That makes it easier to maintain
-            // a list of tokens of the sentence, which we later need to attached the lemmata to the
-            // tokens.
-
-            // Construct the document
-            Document doc = new DocumentImpl();
-            doc.setText(aJCas.getDocumentText());
-            
-            // Extract the sentence and its tokens
-            org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(),
-                    sentence.getEnd(), doc);
-            List<org.cogroo.text.Token> cTokens = new ArrayList<org.cogroo.text.Token>();
-            List<Token> dTokens = selectCovered(Token.class, sentence);
-            for (Token dTok : dTokens) {
-                TokenImpl cTok = new TokenImpl(dTok.getBegin() - sentence.getBegin(),
-                        dTok.getEnd() - sentence.getBegin(), dTok.getText());
-                cTok.setPOSTag(dTok.getPos().getPosValue());
-                cTokens.add(cTok);
+            org.cogroo.text.Sentence s = new SentenceImpl(sentence.getBegin(), sentence.getEnd(),
+                    doc);
+            List<org.cogroo.text.Token> tokens = new ArrayList<org.cogroo.text.Token>();
+            for (Token token : selectCovered(Token.class, sentence)) {
+                tokens.add(new TokenImpl(token.getBegin() - sentence.getBegin(),
+                        token.getEnd() - sentence.getBegin(), token.getCoveredText()));
             }
-            cSent.setTokens(cTokens);
-            doc.setSentences(asList(cSent));
-            
-            // Process
-            modelProvider.getResource().analyze(doc);
-
-            assert cSent.getTokens().size() == dTokens.size();
-            
-            // Convert from CoGrOO to UIMA model
-            Iterator<Token> dTokIt = dTokens.iterator();
-            for (org.cogroo.text.Token cTok : cSent.getTokens()) {
-                Token dTok = dTokIt.next();
-                MorphologicalFeatures m = new MorphologicalFeatures(aJCas, cSent.getStart()
-                        + cTok.getStart(), cSent.getStart() + cTok.getEnd());
-                m.setValue(cTok.getFeatures());
-                m.addToIndexes();
-                dTok.setMorph(m);
+            s.setTokens(tokens);
+            sentences.add(s);
+        }
+        doc.setSentences(sentences);
+        
+        // Process
+        modelProvider.getResource().analyze(doc);
+        
+        // Convert from Cogroo to UIMA model
+        for (org.cogroo.text.Sentence s : doc.getSentences()) {
+            for (org.cogroo.text.Token t : s.getTokens()) {
+                if ("P".equals(t.getAdditionalContext(Analyzers.NAME_FINDER))) {
+                    NamedEntity ne = new NamedEntity(aJCas, s.getStart() + t.getStart(),
+                            s.getStart() + t.getEnd());
+                    ne.setValue("P");
+                    ne.addToIndexes();
+                }
             }
         }
     }
