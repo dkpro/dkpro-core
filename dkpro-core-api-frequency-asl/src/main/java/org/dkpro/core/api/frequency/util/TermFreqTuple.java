@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
+package org.dkpro.core.api.frequency.util;
 
 public class TermFreqTuple<T>
     implements Comparable<TermFreqTuple<T>>

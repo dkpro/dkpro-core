@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
+package org.dkpro.core.api.frequency.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 
+import org.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import org.junit.Test;
 
 public class ConditionalFrequencyDistributionTest

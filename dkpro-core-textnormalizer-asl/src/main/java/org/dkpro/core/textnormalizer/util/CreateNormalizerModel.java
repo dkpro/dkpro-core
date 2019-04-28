@@ -21,13 +21,12 @@ import java.io.File;
 import java.util.Iterator;
 
 import org.apache.commons.lang3.StringUtils;
+import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+import org.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
+import org.dkpro.core.api.frequency.util.FrequencyDistribution;
 import org.dkpro.core.api.resources.DkproContext;
 import org.dkpro.core.frequency.Web1TFileAccessProvider;
 import org.dkpro.core.io.web1t.util.Web1TConverter;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 
 public class CreateNormalizerModel
 {

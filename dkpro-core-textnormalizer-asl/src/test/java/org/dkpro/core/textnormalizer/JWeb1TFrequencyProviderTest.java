@@ -22,10 +22,9 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
+import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import org.dkpro.core.frequency.Web1TFileAccessProvider;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 
 public class JWeb1TFrequencyProviderTest
 {

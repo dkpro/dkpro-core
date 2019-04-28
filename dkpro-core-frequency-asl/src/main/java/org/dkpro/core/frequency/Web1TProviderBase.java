@@ -20,10 +20,10 @@ package org.dkpro.core.frequency;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
+
 import com.googlecode.jweb1t.JWeb1TIterator;
 import com.googlecode.jweb1t.Searcher;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
 
 public abstract class Web1TProviderBase
     extends FrequencyCountProviderBase

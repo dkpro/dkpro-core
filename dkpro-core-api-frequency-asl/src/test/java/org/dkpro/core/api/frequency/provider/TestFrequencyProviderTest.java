@@ -15,10 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.provider;
+package org.dkpro.core.api.frequency.provider;
 
 import static org.junit.Assert.assertEquals;
 
+import org.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
+import org.dkpro.core.api.frequency.provider.TestFrequencyCountProvider;
 import org.junit.Test;
 
 public class TestFrequencyProviderTest

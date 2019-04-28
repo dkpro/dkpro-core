@@ -33,6 +33,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.frequency.util.FrequencyDistribution;
 import org.dkpro.core.api.resources.MappingProvider;
 import org.languagetool.AnalyzedSentence;
 import org.languagetool.AnalyzedToken;
@@ -40,7 +41,6 @@ import org.languagetool.AnalyzedTokenReadings;
 import org.languagetool.Language;
 import org.languagetool.Languages;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;

@@ -21,4 +21,4 @@
  *
  * @since 1.2.0
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency;
+package org.dkpro.core.api.frequency;

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
+package org.dkpro.core.api.frequency.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -25,6 +25,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import org.dkpro.core.api.frequency.util.FrequencyDistribution;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;

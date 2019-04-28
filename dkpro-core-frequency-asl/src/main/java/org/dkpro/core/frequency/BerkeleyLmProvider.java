@@ -20,7 +20,8 @@ package org.dkpro.core.frequency;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+
 import edu.berkeley.nlp.lm.NgramLanguageModel;
 import edu.berkeley.nlp.lm.io.LmReaders;
 

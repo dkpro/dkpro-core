@@ -15,11 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.provider;
+package org.dkpro.core.api.frequency.provider;
 
 import java.io.IOException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
+import org.dkpro.core.api.frequency.util.FrequencyUtils;
 
 public abstract class FrequencyCountProviderBase
     implements FrequencyCountProvider

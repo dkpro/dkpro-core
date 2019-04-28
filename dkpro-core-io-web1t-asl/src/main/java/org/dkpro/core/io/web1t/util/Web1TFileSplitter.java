@@ -37,8 +37,7 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import org.dkpro.core.api.frequency.util.FrequencyDistribution;
 
 public class Web1TFileSplitter
 {

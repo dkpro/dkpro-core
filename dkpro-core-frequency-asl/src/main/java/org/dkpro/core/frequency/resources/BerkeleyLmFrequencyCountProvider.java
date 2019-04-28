@@ -22,10 +22,9 @@ import java.util.Map;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
+import org.dkpro.core.api.frequency.FrequencyCountResourceBase;
+import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import org.dkpro.core.frequency.BerkeleyLmProvider;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 
 /**
  * External resource wrapper for the Berkeley LM frequency count provider.

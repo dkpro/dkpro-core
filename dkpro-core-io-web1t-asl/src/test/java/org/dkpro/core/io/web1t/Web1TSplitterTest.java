@@ -29,12 +29,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
+import org.dkpro.core.api.frequency.util.FrequencyDistribution;
 import org.dkpro.core.io.web1t.util.Web1TFileSplitter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 
 public class Web1TSplitterTest
 {

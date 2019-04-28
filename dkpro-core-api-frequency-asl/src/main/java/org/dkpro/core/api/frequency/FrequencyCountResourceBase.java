@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency;
+package org.dkpro.core.api.frequency;
 
 import static org.apache.uima.util.Level.SEVERE;
 
@@ -24,8 +24,7 @@ import java.util.Iterator;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 
 public abstract class FrequencyCountResourceBase
     extends Resource_ImplBase

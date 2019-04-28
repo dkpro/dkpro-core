@@ -30,10 +30,10 @@ import org.apache.uima.fit.factory.ExternalResourceFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
+import org.dkpro.core.api.frequency.TestFrequencyCountResource;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.TestFrequencyCountResource;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 

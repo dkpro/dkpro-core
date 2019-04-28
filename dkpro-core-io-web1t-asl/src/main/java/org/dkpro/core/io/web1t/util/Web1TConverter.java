@@ -44,12 +44,11 @@ import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.dkpro.core.api.featurepath.FeaturePathInfo;
+import org.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
+import org.dkpro.core.api.frequency.util.FrequencyDistribution;
 import org.dkpro.core.ngrams.util.NGramStringIterable;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 
 public class Web1TConverter
 {

@@ -15,16 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.frequency;
+package org.dkpro.core.api.frequency;
 
 import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.TestFrequencyCountProvider;
+import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+import org.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
+import org.dkpro.core.api.frequency.provider.TestFrequencyCountProvider;
 
 /**
  * External resource wrapper for a test frequency count provider to be used in unit test.

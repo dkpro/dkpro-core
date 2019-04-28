@@ -27,9 +27,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.frequency.FrequencyCountResourceBase;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 
 public class BerkeleyLmFrequencyCountProviderTest
 {
