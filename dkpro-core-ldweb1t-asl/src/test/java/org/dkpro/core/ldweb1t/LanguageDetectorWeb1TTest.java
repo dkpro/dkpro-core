@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.ldweb1t;
+package org.dkpro.core.ldweb1t;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
@@ -30,6 +30,7 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.dkpro.core.frequency.resources.Web1TInMemoryFrequencyCountResource;
+import org.dkpro.core.ldweb1t.LanguageDetectorWeb1T;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
 
