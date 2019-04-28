@@ -438,7 +438,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-asl</artifactId>
+        <artifactId>dkpro-core-mecab-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>

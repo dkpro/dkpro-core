@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mecab;
+package org.dkpro.core.mecab;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -35,6 +35,7 @@ import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.mecab.MeCabTagger;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
