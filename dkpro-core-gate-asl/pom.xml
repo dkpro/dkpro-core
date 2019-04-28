@@ -43,7 +43,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+      <artifactId>dkpro-core-api-lexmorph-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>

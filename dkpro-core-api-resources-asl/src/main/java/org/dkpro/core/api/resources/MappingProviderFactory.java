@@ -44,8 +44,7 @@ public class MappingProviderFactory
             String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
-        p.setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/"
-                + "${language}-${pos.tagset}-pos.map");
+        p.setDefault(LOCATION, "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
         p.setDefault(BASE_TYPE, "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS");
         p.setDefault(POS_TAGSET, "default");
         p.setOverride(LOCATION, aMappingLocation);

@@ -98,7 +98,7 @@ public class LanguageToolLemmatizer
         mappingProvider.setDefault(MappingProvider.VARIANT, "default");
         mappingProvider.setDefaultVariantsLocation("${package}/lib/language-tagset.map");
         mappingProvider.setDefault(MappingProvider.LOCATION, 
-                "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${variant}.map");
+                "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${variant}.map");
     }
     
     @Override

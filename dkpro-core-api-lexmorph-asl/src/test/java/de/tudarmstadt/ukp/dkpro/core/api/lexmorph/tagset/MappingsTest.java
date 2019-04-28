@@ -60,7 +60,7 @@ public class MappingsTest
     public void testMappings() throws Exception
     {
         Collection<File> files = FileUtils.listFiles(
-                new File("src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset"),
+                new File("src/main/resources/org/dkpro/core/api/lexmorph/tagset"),
                 new WildcardFileFilter("*-pos.map"),
                 TrueFileFilter.TRUE);
         

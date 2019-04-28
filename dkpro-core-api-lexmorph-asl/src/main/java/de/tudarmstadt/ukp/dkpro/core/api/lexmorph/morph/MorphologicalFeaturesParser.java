@@ -52,8 +52,8 @@ public class MorphologicalFeaturesParser
     private boolean notFound = false;
 
     {
-        setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/"
-                + "${language}-${morph.tagset}-morph.map");
+        setDefault(LOCATION,
+                "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
     }
 
     public MorphologicalFeaturesParser()

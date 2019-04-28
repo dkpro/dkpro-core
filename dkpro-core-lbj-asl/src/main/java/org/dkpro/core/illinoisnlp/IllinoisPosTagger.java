@@ -103,7 +103,7 @@ public class IllinoisPosTagger
     public static final String PARAM_POS_MAPPING_LOCATION = 
             ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, 
-            defaultValue = "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
+            defaultValue = "classpath:/org/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
     private String posMappingLocation;
 
     private ModelProviderBase<Annotator> modelProvider;
