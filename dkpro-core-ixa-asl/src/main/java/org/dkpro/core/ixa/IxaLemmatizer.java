@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.ixa;
+package org.dkpro.core.ixa;
 
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -34,6 +34,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.ixa.internal.IxaLemmatizerTagsetDescriptionProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -42,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.ixa.internal.IxaLemmatizerTagsetDescriptionProvider;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
@@ -117,6 +117,12 @@ public class IxaLemmatizer
 
         modelProvider = new ModelProviderBase<LemmatizerME>(this, "lemmatizer")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/ixa/lib/lemmatizer-${language}-${variant}.properties");
+            }
+            
             @Override
             protected LemmatizerME produceResource(InputStream aStream)
                 throws Exception
