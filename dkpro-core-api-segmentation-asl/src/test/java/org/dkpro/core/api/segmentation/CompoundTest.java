@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
+package org.dkpro.core.api.segmentation;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -32,7 +32,10 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSplitLevel;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 
 public class CompoundTest
 {

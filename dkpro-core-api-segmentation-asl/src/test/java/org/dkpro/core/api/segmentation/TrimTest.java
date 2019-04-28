@@ -15,13 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
+package org.dkpro.core.api.segmentation;
 
 import static org.junit.Assert.assertArrayEquals;
 
+import org.dkpro.core.api.segmentation.SegmenterBase;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 public class TrimTest
 {

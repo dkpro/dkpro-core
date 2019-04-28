@@ -24,6 +24,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.segmentation.SegmenterBase;
 
 import com.aliasi.sentences.IndoEuropeanSentenceModel;
 import com.aliasi.sentences.SentenceModel;
@@ -31,7 +32,6 @@ import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.Tokenization;
 import com.aliasi.tokenizer.TokenizerFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

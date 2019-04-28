@@ -36,7 +36,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+      <artifactId>dkpro-core-api-segmentation-asl</artifactId>
     </dependency>
   </dependencies>
   <build>
@@ -67,7 +67,7 @@
                 - Maven doesn't detect the parameters module to be used because we
                 - only use the XML type descriptors from it, not any actual Java code.
               -->
-              <usedDependency>org.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-api-segmentation-asl</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>

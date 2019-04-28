@@ -22,8 +22,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import org.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
  * Annotates each line in the source text as a sentence. This segmenter is not capable of creating

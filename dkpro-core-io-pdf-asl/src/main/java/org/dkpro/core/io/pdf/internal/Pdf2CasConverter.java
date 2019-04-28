@@ -28,8 +28,7 @@ import org.apache.pdfbox.text.TextPosition;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import org.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
  * Converts a PDF to a CAS. Uses a substitution table.
