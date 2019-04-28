@@ -15,10 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.phonetics.util;
+package org.dkpro.core.api.phonetics.util;
 
 import static org.junit.Assert.assertEquals;
 
+import org.dkpro.core.api.phonetics.util.SoundUtils;
 import org.junit.Test;
 
 public class SoundUtilsTest

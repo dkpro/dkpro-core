@@ -44,7 +44,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</artifactId>
+      <artifactId>dkpro-core-api-phonetics-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
