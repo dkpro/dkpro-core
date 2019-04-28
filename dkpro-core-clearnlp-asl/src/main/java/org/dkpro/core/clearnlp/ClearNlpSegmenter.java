@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.clearnlp;
+package org.dkpro.core.clearnlp;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -92,6 +92,12 @@ public class ClearNlpSegmenter
 
         modelProvider = new ModelProviderBase<AbstractSegmenter>(this, "segmenter")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/segmenter-${language}-${variant}.properties");
+            }
+            
             @Override
             protected AbstractSegmenter produceResource(InputStream aStream)
                 throws Exception

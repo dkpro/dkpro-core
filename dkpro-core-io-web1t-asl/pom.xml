@@ -125,7 +125,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
+      <artifactId>dkpro-core-clearnlp-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -143,7 +143,7 @@
     <dependencies>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
+        <artifactId>dkpro-core-clearnlp-asl</artifactId>
         <version>1.11.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>

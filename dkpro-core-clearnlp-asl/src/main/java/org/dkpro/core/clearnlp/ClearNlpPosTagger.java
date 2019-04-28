@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.clearnlp;
+package org.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -171,9 +171,10 @@ public class ClearNlpPosTagger
             {
                 setContextObject(ClearNlpPosTagger.this);
 
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-dictionary-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/dictionary-${language}-${variant}.properties");
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/dictionary-${language}-${variant}.properties");
                 setDefaultVariantsLocation("${package}/lib/dictionary-default-variants.map");
                 setDefault(VARIANT, "default");
                 
@@ -198,7 +199,10 @@ public class ClearNlpPosTagger
         posTaggingModelProvider = new ModelProviderBase<AbstractPOSTagger>(this, "clearnlp", "tagger")
         {
             {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(VARIANT, "ontonotes");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/tagger-${language}-${variant}.properties");
             }
 
             @Override
@@ -211,7 +215,6 @@ public class ClearNlpPosTagger
                 GZIPInputStream gis = null;
 
                 try {
-
                     gis = new GZIPInputStream(aStream);
                     bis = new BufferedInputStream(gis);
                     ois = new ObjectInputStream(bis);

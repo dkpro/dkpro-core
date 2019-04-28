@@ -29,6 +29,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.clearnlp.ClearNlpLemmatizer;
 import org.dkpro.core.frequency.Web1TFileAccessProvider;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
@@ -38,7 +39,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.clearnlp.ClearNlpLemmatizer;
 
 public class Web1TWriterTest
 {

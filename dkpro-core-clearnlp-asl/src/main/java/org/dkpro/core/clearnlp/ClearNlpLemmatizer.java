@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.clearnlp;
+package org.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -111,6 +111,12 @@ public class ClearNlpLemmatizer
 
         modelProvider = new ModelProviderBase<AbstractComponent>(this, "clearnlp", "lemma")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/lemma-${language}-${variant}.properties");
+            }
+            
             @Override
             protected AbstractComponent produceResource(InputStream aStream)
                 throws Exception

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.clearnlp;
+package org.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -169,9 +169,10 @@ public class ClearNlpSemanticRoleLabeler
             {
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-pred-${language}-${variant}");
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
-                        + "pred-${language}-${variant}.properties");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/pred-${language}-${variant}.properties");
                 setDefault(VARIANT, "ontonotes");
 
                 setOverride(LOCATION, predModelLocation);

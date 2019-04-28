@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.clearnlp;
+package org.dkpro.core.clearnlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -135,6 +135,12 @@ public class ClearNlpParser
         
         parserProvider = new ModelProviderBase<AbstractDEPParser>(this, "clearnlp", "parser")
         {
+            {
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/parser-${language}-${variant}.properties");
+            }
+            
             @Override
             protected AbstractDEPParser produceResource(URL aUrl)
                 throws IOException
