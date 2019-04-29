@@ -61,7 +61,7 @@ public class ResourceUtilsTest
         throws Exception
     {
         File file = ResourceUtils
-                .getClasspathAsFolder("classpath:/de/tudarmstadt/ukp/dkpro/core/api", true);
+                .getClasspathAsFolder("classpath:/org/dkpro/core/api", true);
 
         List<Path> paths = new ArrayList<Path>();
         for (File f : FileUtils.listFiles(file, null, true)) {

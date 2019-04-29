@@ -67,7 +67,7 @@ public class DatasetFactoryTest
         }
     }
 
-    //@Ignore("Used at times for offline testing / development")
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testShared()
         throws Exception

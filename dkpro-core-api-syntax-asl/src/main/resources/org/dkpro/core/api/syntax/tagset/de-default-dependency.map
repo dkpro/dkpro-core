@@ -1,2 +1,2 @@
-__META_REDIRECT__=classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/de-tiger-dependency.map
+__META_REDIRECT__=classpath:/org/dkpro/core/api/syntax/tagset/de-tiger-dependency.map
 __META_OVERRIDE__.chunk.tagset=negra

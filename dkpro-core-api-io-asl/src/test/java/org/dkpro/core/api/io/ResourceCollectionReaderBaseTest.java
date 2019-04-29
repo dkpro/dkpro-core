@@ -20,6 +20,8 @@ package org.dkpro.core.api.io;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
+import static org.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -56,7 +58,7 @@ public class ResourceCollectionReaderBaseTest
     {
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "classpath*:/de/tudarmstadt/ukp/", ResourceCollectionReaderBase.PARAM_PATTERNS,
+                "classpath*:/org/", ResourceCollectionReaderBase.PARAM_PATTERNS,
                 new String[] { "[+]**/FileSetCollectionReaderBase.class",
                         "[-]**/ResourceCollectionReaderBase.class" });
 
@@ -153,7 +155,7 @@ public class ResourceCollectionReaderBaseTest
     {
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/de/tudarmstadt/ukp/",
+                "file:src/main/java/org/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                         "[+]**/FileSetCollectionReaderBase.java",
                         "[-]**/ResourceCollectionReaderBase.java" });
@@ -167,7 +169,7 @@ public class ResourceCollectionReaderBaseTest
     {
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/de/tudarmstadt/ukp/",
+                "file:src/main/java/org/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                         "**/FileSetCollectionReaderBase.java",
                         "[-]**/ResourceCollectionReaderBase.java" });
@@ -181,7 +183,7 @@ public class ResourceCollectionReaderBaseTest
     {
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/de/tudarmstadt/ukp/**/FileSetCollectionReaderBase.java");
+                "file:src/main/java/org/**/FileSetCollectionReaderBase.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -192,7 +194,7 @@ public class ResourceCollectionReaderBaseTest
     {
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+                "file:src/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -203,7 +205,7 @@ public class ResourceCollectionReaderBaseTest
     {
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "s*/main/java/de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+                "s*/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -213,8 +215,8 @@ public class ResourceCollectionReaderBaseTest
         throws Exception
     {
         CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:s*/main/java/de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+                PARAM_SOURCE_LOCATION,
+                "file:s*/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -224,8 +226,7 @@ public class ResourceCollectionReaderBaseTest
         throws Exception
     {
         CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                "src/main/java/de/tudarmstadt/ukp/**/FileSetCollectionReaderBase.java");
+                PARAM_PATTERNS, "src/main/java/org/**/FileSetCollectionReaderBase.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -235,10 +236,8 @@ public class ResourceCollectionReaderBaseTest
         throws Exception
     {
         CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/de/tudarmstadt/ukp/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[?]**/FileSetCollectionReaderBase.java" });
+                PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
+                PARAM_PATTERNS, new String[] { "[?]**/FileSetCollectionReaderBase.java" });
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -251,7 +250,7 @@ public class ResourceCollectionReaderBaseTest
                 ResourceLoaderLocator.class);
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/de/tudarmstadt/ukp/",
+                "file:src/main/java/org/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                         "[+]**/FileSetCollectionReaderBase.java",
                         "[-]**/ResourceCollectionReaderBase.java" },

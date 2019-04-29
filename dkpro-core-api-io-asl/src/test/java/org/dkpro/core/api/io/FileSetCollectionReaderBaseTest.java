@@ -41,7 +41,7 @@ public class FileSetCollectionReaderBaseTest
     {
         CollectionReader reader = createReader(DummyReader.class,
                 createTypeSystemDescription(), FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "src/main/java/de/tudarmstadt/ukp/", FileSetCollectionReaderBase.PARAM_PATTERNS,
+                "src/main/java/org/", FileSetCollectionReaderBase.PARAM_PATTERNS,
                 new String[] { "[+]**/*.java" });
 
         checkBaseUri(reader);
@@ -56,7 +56,7 @@ public class FileSetCollectionReaderBaseTest
 
             DocumentMetaData meta = DocumentMetaData.get(cas);
             String baseUri = meta.getDocumentBaseUri();
-            assertTrue(baseUri.endsWith("src/main/java/de/tudarmstadt/ukp/"));
+            assertTrue(baseUri.endsWith("src/main/java/org/"));
 
             cas.reset();
         }
