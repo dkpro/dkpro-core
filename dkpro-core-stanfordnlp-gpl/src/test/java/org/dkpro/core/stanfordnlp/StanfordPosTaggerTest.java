@@ -100,10 +100,6 @@ public class StanfordPosTaggerTest
                 new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
                 new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
-        runTest("de", "dewac", "Das ist ein Test .",
-                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
-
         runTest("de", "fast-caseless", "das ist ein test .",
                 new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
                 new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
@@ -279,8 +275,8 @@ public class StanfordPosTaggerTest
         AssumeResource.assumeResource(StanfordPosTagger.class, "tagger", language, variant);
         
         AnalysisEngine engine = createEngine(StanfordPosTagger.class,
-                StanfordPosTagger.PARAM_VARIANT, variant, StanfordPosTagger.PARAM_PRINT_TAGSET,
-                true);
+                StanfordPosTagger.PARAM_VARIANT, variant, 
+                StanfordPosTagger.PARAM_PRINT_TAGSET, true);
         JCas aJCas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
