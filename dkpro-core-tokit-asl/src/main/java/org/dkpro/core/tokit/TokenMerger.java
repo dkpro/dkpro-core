@@ -19,6 +19,9 @@
 package org.dkpro.core.tokit;
 
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.api.resources.MappingProvider.BASE_TYPE;
+import static org.dkpro.core.api.resources.ResourceObjectProviderBase.LANGUAGE;
+import static org.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,7 +45,6 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.MappingProvider;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -145,12 +147,12 @@ public class TokenMerger
         super.initialize(aContext);
 
         mappingProvider = new MappingProvider();
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+        mappingProvider.setDefault(LOCATION,
+                "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
+        mappingProvider.setDefault(BASE_TYPE, POS.class.getName());
         mappingProvider.setDefault("pos.tagset", "default");
-        mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        mappingProvider.setOverride(LOCATION, posMappingLocation);
+        mappingProvider.setOverride(LANGUAGE, language);
     }
 
     @Override

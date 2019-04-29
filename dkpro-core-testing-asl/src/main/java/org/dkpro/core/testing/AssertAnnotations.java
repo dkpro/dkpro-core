@@ -690,8 +690,7 @@ public class AssertAnnotations
     {
         String pattern;
         if (aLayer == POS.class) {
-            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
-                    + "core/api/lexmorph/tagset/${language}-${tagset}-pos.map";
+            pattern = "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${tagset}-pos.map";
         }
         else if (aLayer == Dependency.class) {
             pattern = "classpath:/org/dkpro/core/api/syntax/tagset/${language}-${tagset}-dependency.map";
@@ -797,8 +796,7 @@ public class AssertAnnotations
         String pattern;
         
         if (aLayer == MorphologicalFeatures.class) {
-            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
-                    + "core/api/lexmorph/tagset/${language}-${tagset}-morph.map";
+            pattern = "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${tagset}-morph.map";
         }
         else {
             throw new IllegalArgumentException("Unsupported layer: " + aLayer.getName());
