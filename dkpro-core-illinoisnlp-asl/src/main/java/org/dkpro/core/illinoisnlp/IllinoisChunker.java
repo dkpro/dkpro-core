@@ -99,7 +99,7 @@ public class IllinoisChunker
      */
     public static final String PARAM_CHUNK_MAPPING_LOCATION = 
             ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false, defaultValue = "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/en-conll2000-chunk.map")
+    @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false, defaultValue = "classpath:/org/dkpro/core/api/syntax/tagset/en-conll2000-chunk.map")
     protected String chunkMappingLocation;
 
     private ModelProviderBase<Annotator> modelProvider;
