@@ -901,8 +901,8 @@
       - 2013-02-28 | 2013-05-07 | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build
       - 2013-05-07 | 2013-11-18 | 9c015219f8a5c696f03ee43b72e913b0
       - 2013-11-18 | 2015-01-14 | cbc0833fd6cb8c1ec1ea4cae4d40b25a
-          - 2015-01-14 | 2016-04-30 | 2a0a3740cc9a838949219caf0d64544c
-          - 2016-04-30 | now        | 16cf3578fafd8c39b5b9df0077297025
+      - 2015-01-14 | 2016-04-30 | 2a0a3740cc9a838949219caf0d64544c
+      - 2016-04-30 | now        | 16cf3578fafd8c39b5b9df0077297025
       -->
     <install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz"
       platform="linux-x86_64" file="tree-tagger" md5="16cf3578fafd8c39b5b9df0077297025"/>
@@ -928,7 +928,7 @@
     <!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-19 | 2012-04-25 | 72a5489fe197b0173ea476e2224a6ad6
       - 2012-04-25 | 2015-03-25 | c88d7fe1aa63bebaccfa019c222f54ea : buffer flush after 10 lines with -prob
-          - 2015-03-25 | now        | e78a1b710d738f9e29d4756ccac4fc3a
+      - 2015-03-25 | now        | e78a1b710d738f9e29d4756ccac4fc3a
       -->
     <install-executable-file-zip url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.zip"
       platform="windows-x86_32" file="tree-tagger.exe" md5="e78a1b710d738f9e29d4756ccac4fc3a"/>

@@ -27,10 +27,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TextFormatVectorizerUtilsTest
 {

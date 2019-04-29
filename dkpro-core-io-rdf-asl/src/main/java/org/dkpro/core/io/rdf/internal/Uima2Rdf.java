@@ -34,9 +34,9 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.validation.CasAnalysisUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasAnalysisUtils;
 
 public class Uima2Rdf
 {
