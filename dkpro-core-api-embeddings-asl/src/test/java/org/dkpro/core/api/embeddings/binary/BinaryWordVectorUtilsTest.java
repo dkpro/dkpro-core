@@ -29,11 +29,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.dkpro.core.api.embeddings.VectorizerUtils;
+import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class BinaryWordVectorUtilsTest
 {

@@ -21,7 +21,6 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.io.webanno.tsv.WebannoTsv3XWriter;
 
 public class WebAnnoTsv3XWriterTest
     extends WebAnnoTsv3WriterTestBase
