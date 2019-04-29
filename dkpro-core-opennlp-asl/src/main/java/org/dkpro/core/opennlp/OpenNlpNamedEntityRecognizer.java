@@ -179,7 +179,8 @@ public class OpenNlpNamedEntityRecognizer
             }
         };
 
-        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant);
+        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant,
+                modelProvider);
     }
 
     @Override

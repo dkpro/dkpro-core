@@ -213,7 +213,8 @@ public class LingPipeNamedEntityRecognizer
             }
         };
 
-        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant);
+        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant,
+                modelProvider);
     }
 
     @Override

@@ -166,7 +166,8 @@ public class StanfordNamedEntityRecognizer
 
         modelProvider = new StanfordNlpNamedEntityRecognizerModelProvider(this);
 
-        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant);
+        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant,
+                modelProvider);
     }
 
     @Override

@@ -219,7 +219,8 @@ public class CoreNlpNamedEntityRecognizer
         
         annotatorProvider = new CoreNlpNamedEntityRecognizerModelProvider(this);
 
-        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant);
+        mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant,
+                annotatorProvider);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
     }

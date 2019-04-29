@@ -143,7 +143,7 @@ public class Nlp4JNamedEntityRecognizer
         modelProvider = new Nlp4JNamedEntityRecognizerModelProvider(this);
         
         mappingProvider = MappingProviderFactory.createNerMappingProvider(this, mappingLocation,
-                language, variant);
+                language, variant, modelProvider);
     }
 
     @Override
