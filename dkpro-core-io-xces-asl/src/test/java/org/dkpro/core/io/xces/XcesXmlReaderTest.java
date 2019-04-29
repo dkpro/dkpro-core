@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.io.xces;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.junit.Test;
 

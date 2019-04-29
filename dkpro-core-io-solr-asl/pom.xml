@@ -23,12 +23,12 @@
     <solr-solrj.version>6.3.0</solr-solrj.version>
   </properties>
   <parent>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+    <groupId>org.dkpro.core</groupId>
+    <artifactId>dkpro-core-asl</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.io.solr-asl</artifactId>
+  <artifactId>dkpro-core-io-solr-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IO - Solr (v${solr-solrj.version}) (ASL)</name>
   <description>Consumer for writing documents to a Solr server</description>
@@ -52,12 +52,12 @@
       <version>${solr-solrj.version}</version>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-metadata-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-parameter-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
@@ -69,8 +69,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-io-text-asl</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
