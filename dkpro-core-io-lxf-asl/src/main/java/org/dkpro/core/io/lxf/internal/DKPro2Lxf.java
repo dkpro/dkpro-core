@@ -102,14 +102,14 @@ public class DKPro2Lxf
      *            the original LXF. If this is non-null, then delta-mode is enabled.
      * @param aTarget
      *            the target LXF.
-     * @param tooName
+     * @param aToolName
      *            the name of the tool generating the new annotation
      * @param ids
      *            The ids of the tool responsible for generation of the annotation Layer. The key is
      *            the annotation layer. The value is the tool that generates the annotation.
      */
     public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget,
-            Map<String, String> ids, String toolName)
+            Map<String, String> ids, String aToolName)
     {
         if (aSource == null) {
             aTarget.setMedia(new LxfText(aJCas.getDocumentText()));
@@ -204,7 +204,7 @@ public class DKPro2Lxf
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
                     LxfNode lemmaNode = newMorphNode ? morphNode : null; 
                     if (lemmaNode == null) {
-                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolName,
+                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, aToolName,
                                 toolNodeIndex.nextIndex(toolid), 0);
                         aTarget.addNode(lemmaNode);
                         aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(),
