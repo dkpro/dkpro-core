@@ -1,0 +1,139 @@
+# Parole (reduced)
+#
+# Parole Reduced Tagset
+
+__META_SOURCE_URL__=http://www.lsi.upc.edu/~nlp/SVMTool/parole.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# AO	Adjective, Ordinal
+AO=POS_ADJ
+# AQ	Adjective, Qualificator
+AQ=POS_ADJ
+# CC	Conjunction, Coordinate
+CC=POS_CONJ
+# CS	Conjunction, Subordinative
+CS=POS_CONJ
+# DA	Determiner, Article
+DA=POS_DET
+# DD	Determiner, Demonstrative
+DD=POS_DET
+# DE	Determiner, Exclamatory
+DE=POS_DET
+# DI	Determiner, Indefinite
+DI=POS_DET
+# DN	Determiner, Numeral
+DN=POS_DET
+# DP	Determiner, Possessive
+DP=POS_DET
+# DT	Determiner, Interrogative
+DT=POS_DET
+# Faa	Punctuation, ¡
+Faa=POS_PUNCT
+# Fat	Punctuation, !
+Fat=POS_PUNCT
+# Fc	Punctuation, , 
+Fc=POS_PUNCT
+# Fd	Punctuation, :
+Fd=POS_PUNCT
+# Fe	Punctuation, "
+Fe=POS_PUNCT
+# Fg	Punctuation, -
+Fg=POS_PUNCT
+# Fh	Punctuation, /
+Fh=POS_PUNCT
+# Fia	Punctuation, ¿
+Fia=POS_PUNCT
+# Fit	Punctuation, ?
+Fit=POS_PUNCT
+# Fp	Punctuation, .
+Fp=POS_PUNCT
+# Fpa	Punctuation, (
+Fpa=POS_PUNCT
+# Fpt	Punctuation, )
+Fpt=POS_PUNCT
+# Fs	Punctuation, ...
+Fs=POS_PUNCT
+# Fx	Punctuation, ;
+Fx=POS_PUNCT
+# Fz	Punctuation, other than those
+Fz=POS_PUNCT
+# I	Interjection
+I=POS_X
+# NC	Noun, Common
+NC=POS_NOUN
+# NP	Noun, Proper
+NP=POS_PROPN
+# P0	Pronoun, Clitic
+P0=POS_PRON
+# PD	Pronoun, Demonstrative#
+PD=POS_PRON
+# PE	Pronoun, Exclamatory
+PE=POS_PRON
+# PI	Pronoun, Indefinite
+PI=POS_PRON
+# PN	Pronoun, Numeral
+PN=POS_PRON
+# PP	Pronoun, Personal
+PP=POS_PRON
+# PR	Pronoun, Relative
+PR=POS_PRON
+# PT	Pronoun, Interrogative
+PT=POS_PRON
+# PX	Pronoun, Possessive
+PX=POS_PRON
+# RG	Adverb, General
+RG=POS_ADV
+# RN	Adverb, Negative
+RN=POS_ADV
+# SP	Adposition, Preposition
+SP=POS_ADP
+# VAG	Verb, Auxiliar, Gerund
+VAG=POS_VERB
+# VAI	Verb, Auxiliar, Indicative
+VAI=POS_VERB
+# VAM	Verb, Auxiliar, Imperative
+VAM=POS_VERB
+# VAN	Verb, Auxiliar, Infinitive
+VAN=POS_VERB
+# VAP	Verb, Auxiliar, Participle
+VAP=POS_VERB
+# VAS	Verb, Auxiliar, Subjunctive
+VAS=POS_VERB
+# VMG	Verb, Main, Gerund
+VMG=POS_VERB
+# VMI	Verb, Main, Indicative
+VMI=POS_VERB
+# VMM	Verb, Main, Imperative
+VMM=POS_VERB
+# VMN	Verb, Main, Infinitive
+VMN=POS_VERB
+# VMP	Verb, Main, Participle
+VMP=POS_VERB
+# VMS	Verb, Main, Subjunctive
+VMS=POS_VERB
+# VSG	Verb, Semi-Auxiliar, Gerund
+VSG=POS_VERB
+# VSI	Verb, Semi-Auxiliar, Indicative
+VSI=POS_VERB
+# VSM	Verb, Semi-Auxiliar, Imperative
+VSM=POS_VERB
+# VSN	Verb, Semi-Auxiliar, Infinitive
+VSN=POS_VERB
+# VSP	Verb, Semi-Auxiliar, Participle
+VSP=POS_VERB
+# VSS	Verb, Semi-Auxiliar, Subjunctive
+VSS=POS_VERB
+# W	Date Times
+W=POS_X
+# X	Unknown
+X=POS_X
+# Y	Abbreviation
+Y=POS_X
+# Z	Figures
+Z=POS_NUM
+# Zm	Currency
+Zm=POS_NUM
+# Zp	Percentage
+Zp=POS_NUM
+
+*=POS

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -25,6 +25,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class XcesBody
 {     
-    @XmlElement(name="p",type=XcesPara.class)
+    @XmlElement(name = "p", type = XcesPara.class)
     public List<XcesPara> p;      
 }

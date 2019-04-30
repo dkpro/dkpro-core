@@ -203,7 +203,7 @@
     <target name="download-binaries" depends="-check-download-binaries" unless="download-binaries.DONE">
         <mkdir dir="target/download/binaries"/>
         <get 
-            src="https://github.com/ufal/udpipe/releases/download/v1.0.0/udpipe-1.0.0-bin.zip"
+            src="https://github.com/ufal/udpipe/releases/download/v1.1.0/udpipe-1.1.0-bin.zip"
             dest="target/download/binaries/udpipe-bin.zip" skipexisting="true"/>
         <unzip src="target/download/binaries/udpipe-bin.zip" dest="target/download/binaries">
             <patternset>
@@ -227,7 +227,7 @@
         <touch file="target/download/models/DONE"/>
     </target>
 
-	<fileset id="metaFiles" dir="target/download/binaries//udpipe-1.0.0-bin">
+	<fileset id="metaFiles" dir="target/download/binaries/udpipe-1.1.0-bin">
 	    <include name="AUTHORS" />
 	    <include name="CHANGES" />
 	    <include name="LICENSE" />
@@ -235,7 +235,7 @@
 	</fileset>
 	
     <target name="install-executables" depends="download-binaries">
-        <property name="version.bin" value="20160527.0"/>
+        <property name="version.bin" value="20170425.0"/>
 
         <mkdir dir="target/download"/>
 
@@ -250,7 +250,7 @@
             <entry  key="udpipe_java.dll" value="library"/>
         </propertyfile>
     	<copy 
-    	   file="target/download/binaries/udpipe-1.0.0-bin/bin-win32/java/udpipe_java.dll"
+    	   file="target/download/binaries/udpipe-1.1.0-bin/bin-win32/java/udpipe_java.dll"
     	   todir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_32"/>
 
         <!-- Windows 64 bit -->
@@ -260,7 +260,7 @@
             <entry  key="udpipe_java.dll" value="library"/>
         </propertyfile>
         <copy 
-           file="target/download/binaries/udpipe-1.0.0-bin/bin-win64/java/udpipe_java.dll"
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-win64/java/udpipe_java.dll"
            todir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_64"/>
 
         <!-- LINUX 32 bit -->
@@ -270,7 +270,7 @@
             <entry  key="libudpipe_java.so" value="library"/>
         </propertyfile>
         <copy 
-           file="target/download/binaries/udpipe-1.0.0-bin/bin-linux32/java/libudpipe_java.so"
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-linux32/java/libudpipe_java.so"
            todir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_32"/>
 
         <!-- LINUX 64 bit -->
@@ -280,7 +280,7 @@
             <entry  key="libudpipe_java.so" value="library"/>
         </propertyfile>
         <copy 
-           file="target/download/binaries/udpipe-1.0.0-bin/bin-linux64/java/libudpipe_java.so"
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-linux64/java/libudpipe_java.so"
            todir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_64"/>
 
         <!-- OSX 64 bit -->
@@ -290,7 +290,7 @@
             <entry  key="libudpipe_java.dylib" value="library"/>
         </propertyfile>
         <copy 
-           file="target/download/binaries/udpipe-1.0.0-bin/bin-osx/java/libudpipe_java.dylib"
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-osx/java/libudpipe_java.dylib"
            todir="target/model-staging/org/dkpro/core/udpipe/bin/osx-x86_64"/>
     	
         <jar 

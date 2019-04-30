@@ -1,2 +1,0 @@
-__META_REDIRECT__=classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/en-stanford341-dependency.map
-__META_OVERRIDE__.chunk.tagset=stanford341

@@ -1,0 +1,4 @@
+PER=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person
+LOC=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
+ORG=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization
+*=de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity

@@ -1,0 +1,71 @@
+# Uppsala Persian Dependency Treebank
+
+__META_SOURCE_URL__=http://stp.lingfil.uu.se/~mojgan/Manual.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# ADJ_CMPR - Comparative adjective
+ADJ_CMPR=POS_ADJ
+# ADJ_INO - Participle adjective
+ADJ_INO=POS_ADJ
+# ADJ - Adjective
+ADJ=POS_ADJ
+# ADJ_SUP - Superlative adjective
+ADJ_SUP=POS_ADJ
+# ADJ_VOC - Vocative adjective
+ADJ_VOC=POS_ADJ
+# ADV_COMP - Adverb of comparison
+ADV_COMP=POS_ADV
+# ADV_I - Adverb of interrogation
+ADV_I=POS_ADV
+# ADV_LOC - Adverb of location
+ADV_LOC=POS_ADV
+# ADV_NEG - Adverb of negation
+ADV_NEG=POS_ADV
+# ADV - Adverb
+ADV=POS_ADV
+# ADV_TIME - Adverb of time
+ADV_TIME=POS_ADV
+# CLITIC - Accusative marker
+CLITIC=POS_X
+# CON - Conjunction
+CON=POS_CONJ
+# DELM - Delimiter
+DELM=POS_PUNCT
+# DET - Determiner
+DET=POS_DET
+# FW - Foreign Word
+FW=POS_X
+# INT - Interjection
+INT=POS_INTJ
+# SYM - Symbol
+SYM=POS_SYM
+# N_PL - Plural noun
+N_PL=POS_NOUN
+# N_SING - Singular noun
+N_SING=POS_NOUN
+# N_VOC - Vocative noun
+N_VOC=POS_NOUN
+# NUM - Numeral
+NUM=POS_NUM
+# P - Preposition
+P=POS_ADP
+# PREV - Preverbal particle
+PREV=POS_X
+# PRO - Pronoun
+PRO=POS_PRON
+# V_AUX - Auxiliary verb
+V_AUX=POS_AUX
+# V_IMP - Imperative verb
+V_IMP=POS_VERB
+# V_PA - Past tense verb
+V_PA=POS_VERB
+# V_PP - Past participle verb
+V_PP=POS_VERB
+# V_COP - Verb copula
+V_COP=POS_VERB
+# V_PRS - Present tense verb
+V_PRS=POS_VERB
+# V_SUB - Subjunctive verb
+V_SUB=POS_VERB
+*=POS
+

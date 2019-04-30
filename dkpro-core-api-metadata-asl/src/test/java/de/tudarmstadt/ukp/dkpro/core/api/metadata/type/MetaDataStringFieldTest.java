@@ -1,5 +1,5 @@
 /*
- * Copyright 2015
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -19,7 +19,8 @@
 package de.tudarmstadt.ukp.dkpro.core.api.metadata.type;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
@@ -30,7 +31,6 @@ import org.junit.Test;
 
 public class MetaDataStringFieldTest
 {
-
     @Test
     public void testSimple()
         throws UIMAException

@@ -1,0 +1,18 @@
+# Dutch Part-of-Speech Tags from IXA Alpino model
+
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+*=POS
+Adj=POS_ADJ
+Adv=POS_ADV
+Art=POS_DET
+Conj=POS_CONJ
+Int=POS_INTJ
+MWU=POS_X
+Misc=POS_X
+N=POS_NOUN
+Num=POS_NUM
+Prep=POS_ADP
+Pron=POS_PRON
+Punc=POS_PUNCT
+V=POS_VERB

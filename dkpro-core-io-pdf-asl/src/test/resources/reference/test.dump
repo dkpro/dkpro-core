@@ -20,18 +20,16 @@ Dies ist ein Test.
 Word with Umlauts (äöü) may require the substitution table.
 
 [This is a test.
-Dies ist ein Test.
-]
+Dies ist ein Test.]
 Paragraph
    sofa: _InitialView
    begin: 0
-   end: 35
-[Überschrift
-]
+   end: 34
+[Überschrift]
 Heading
    sofa: _InitialView
    begin: 36
-   end: 48
+   end: 47
 [Word with Umlauts (äöü) may require the substitution table.]
 Paragraph
    sofa: _InitialView

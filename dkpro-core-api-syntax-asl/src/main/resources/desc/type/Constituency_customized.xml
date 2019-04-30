@@ -12,7 +12,7 @@
       <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN</name>
       <description>This type is no longer used and no JCas wrapper is generated for it because on Windows, it conflicts with the reserved device name for printers.
 
-@Deprecated Use PARN instead</description>
+@deprecated Use PARN instead</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</supertypeName>
     </typeDescription>
   </types>

@@ -1,0 +1,72 @@
+# MElt
+#
+# Follows Benoit Crabbé and Marie Candito. 2008
+#
+# Benoit Crabbé and Marie Candito. 2008. Expériences d’analyse syntaxique statistique du français.
+# In Proc. of TALN’08, pages 45–54, Senlis, France.
+# http://hal.inria.fr/docs/00/52/57/69/PDF/crabbecandi-taln2008-final.pdf
+# Mapped according to universal_pos_tags.1.03 (http://code.google.com/p/universal-pos-tags/)
+
+__META_SOURCE_URL__=http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# ADJ 	   adjective
+ADJ=POS_ADJ
+# ADJWH	   interrogative adjective
+ADJWH=POS_ADJ
+# ADV	   adverb
+ADV=POS_ADV
+# ADVWH	   interrogative adverb
+ADVWH=POS_ADV
+# CC	   coordination conjunction
+CC=POS_CONJ
+# CLO	   object clitic pronoun
+CLO=POS_PRON
+# CLR	   reflexive clitic pronoun
+CLR=POS_PRON
+# CLS	   subject clitic pronoun
+CLS=POS_PRON
+# CS	   subordination conjunction
+CS=POS_CONJ
+# DET	   determiner
+DET=POS_DET
+# DETWH	   interrogative determiner
+DETWH=POS_DET
+# ET	   foreign word
+ET=POS_X
+# I	       interjection
+I=POS_INTJ
+# NC	   common noun
+NC=POS_NOUN
+# NPP	   proper noun
+NPP=POS_PROPN
+# P	       preposition
+P=POS_ADP
+# P+D	   preposition+determiner amalgam
+P+D=POS_ADP
+# P+PRO	   prepositon+pronoun amalgam
+P+PRO=POS_ADP
+# PONCT	   punctuation mark
+PONCT=POS_PUNCT
+# PREF	   prefix
+PREF=POS_PART
+# PRO	   full pronoun
+PRO=POS_PRON
+# PROREL   relative pronoun
+PROREL=POS_PRON
+# PROWH	   interrogative pronoun
+PROWH=POS_PRON
+# V	       indicative or conditional verb form
+V=POS_VERB
+# VIMP	   imperative verb form
+VIMP=POS_VERB
+# VINF	   infinitive verb form
+VINF=POS_VERB
+# VPP	   past participle
+VPP=POS_VERB
+# VPR	   present participle
+VPR=POS_VERB
+# VS	   subjunctive verb form
+VS=POS_VERB
+
+*=POS

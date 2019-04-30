@@ -1,5 +1,5 @@
 /*
- * Copyright 2016
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -31,23 +31,34 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.xces.models.XcesBody;
 import org.dkpro.core.io.xces.models.XcesPara;
 import org.dkpro.core.io.xces.models.XcesSentence;
 import org.dkpro.core.io.xces.models.XcesToken;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import javanet.staxutils.IndentingXMLEventWriter;
 
+/**
+ * Writer for the XCES XML format.
+ */
+@ResourceMetaData(name = "XCES XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -55,23 +66,37 @@ import javanet.staxutils.IndentingXMLEventWriter;
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
+@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES})
 public class XcesXmlWriter
     extends JCasFileWriter_ImplBase
 {
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
-    private String filenameSuffix;
+    /**
+     * Use this filename extension.
+     */
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
+    private String filenameExtension;
+
+    /**
+     * Character encoding of the output data.
+     */
+    public static final String PARAM_TARGET_ENCODING = "targetEncoding";
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
         OutputStream docOS = null;
+        XMLEventWriter xmlEventWriter = null;
         try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
+            docOS = getOutputStream(aJCas, filenameExtension);
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
-            XMLEventWriter xmlEventWriter = new IndentingXMLEventWriter(
-                    xmlOutputFactory.createXMLEventWriter(docOS));
+            xmlEventWriter = new IndentingXMLEventWriter(
+                    xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
             JAXBContext context = JAXBContext.newInstance(XcesBody.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
@@ -102,9 +127,17 @@ public class XcesXmlWriter
             throw new AnalysisEngineProcessException(e);
         }
         finally {
+            if (xmlEventWriter != null) {
+                try {
+                    xmlEventWriter.close();
+                }
+                catch (XMLStreamException e) {
+                    getLogger().warn("Error closing the XML event writer", e);
+                }
+            }
+            
             closeQuietly(docOS);
         }
-
     }
 
     private XcesBody convertToXcesPara(Collection<Paragraph> paras)

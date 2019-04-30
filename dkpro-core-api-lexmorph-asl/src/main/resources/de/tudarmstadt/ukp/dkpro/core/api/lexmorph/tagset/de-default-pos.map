@@ -1,2 +1,0 @@
-__META_REDIRECT__=classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-stts-pos.map
-__META_OVERRIDE__.pos.tagset=stts

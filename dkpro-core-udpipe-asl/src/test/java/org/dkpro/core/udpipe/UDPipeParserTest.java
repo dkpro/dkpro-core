@@ -23,14 +23,14 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.AssumeResource;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class UDPipeParserTest
 {
@@ -54,7 +54,6 @@ public class UDPipeParserTest
         // AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
-    @Test
     public void testEnglish()
         throws Exception
     {

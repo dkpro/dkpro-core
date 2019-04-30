@@ -1,0 +1,78 @@
+# Chinese Treebank
+#
+# Chinese Treebank tagset
+# Mapped according to universal-pos-tags 1.03 zh-ctb6.map 
+
+__META_SOURCE_URL__=http://www.cs.brandeis.edu/~clp/ctb/posguide.3rd.ch.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# AD - adverb
+AD=POS_ADJ
+# AS - aspect marker
+AS=POS_PART
+# BA - XX in ba-construction
+BA=POS_X
+# CC - coordinating conjunction
+CC=POS_CONJ
+# CD - cardinal number
+CD=POS_NUM
+# CS - subordinating conjunction
+CS=POS_CONJ
+# DEC - XX in a relative clause
+DEC=POS_PART
+# DEG - associative XX
+DEG=POS_PART
+# DER - XX in V-de const. and V-de-R
+DER=POS_PART
+# DEV - XX bevore VP
+DEV=POS_PART
+# DT - determiner
+DT=POS_DET
+# ETC - for words XX, XX XX
+ETC=POS_PART
+# FW - foreign words
+FW=POS_X
+# IJ - interjection
+IJ=POS_INTJ
+# JJ - other noun-modifier
+JJ=POS_ADJ
+# LB - X in long bei-const
+LB=POS_X
+# LC - localizer
+LC=POS_PART
+# M - measure word
+M=POS_NUM
+# MSP - other particle
+MSP=POS_PART
+# NN - common noun
+NN=POS_NOUN
+# NR - proper noun
+NR=POS_PROPN
+# NT - temporal noun
+NT=POS_NOUN
+# OD - ordinal number
+OD=POS_NUM
+# ON - onomatopoeia
+ON=POS_X
+# P - preposition excl. XX and XX
+P=POS_ADP
+# PN - pronoun
+PN=POS_PRON
+# PU - punctuation
+PU=POS_PUNCT
+# SB - XX in short bei-const
+SB=POS_X
+# SP - sentence final particle
+SP=POS_PART
+# VA - predicative adjective
+VA=POS_VERB
+# VC - XX
+VC=POS_VERB
+# VE - XX as the main verb
+VE=POS_VERB
+# VV - other verb
+VV=POS_VERB
+# X
+X=POS_X
+
+*=POS

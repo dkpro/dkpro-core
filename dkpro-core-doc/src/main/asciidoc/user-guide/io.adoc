@@ -16,7 +16,7 @@
 
 [[sect_io]]
 
-== I/O
+= I/O
 
 This section gives an overview on the I/O components. The components are organized into one
 module per file type. These modules contain typically one reader and/or writer
@@ -28,7 +28,7 @@ Most readers and writers do not support all features of the respective formats.
 Additionally, readers and writers may only support a specific variant of a format.
 
 
-=== Reading data
+== Reading data
 
 DKPro Core aims to provide a consistent API for reading and writing annotated data.
 Most of our readers are resource readers (RR) or file writers (FW) and support a common
@@ -88,7 +88,7 @@ PARAM_PATTERNS, new String[] {"*.txt", "[-]broken*.txt"}
 PARAM_SOURCE_LOCATION, "classpath*:texts/*.txt"
 ----
 
-=== Writing data
+== Writing data
 
 .File writer parameters
 [options="header"]
@@ -130,7 +130,7 @@ PARAM_SOURCE_LOCATION, "classpath*:texts/*.txt"
 | false
 |====
 
-=== Working with ZIP archives
+== Working with ZIP archives
 
 Most formats can be read from and written to ZIP archives.
 

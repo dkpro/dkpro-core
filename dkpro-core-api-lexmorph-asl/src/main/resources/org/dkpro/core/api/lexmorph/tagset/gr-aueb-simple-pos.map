@@ -1,0 +1,15 @@
+# AUEB (simple)
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+noun=POS_NOUN
+article=POS_DET
+verb=POS_VERB
+pronoun=POS_PRON
+punctuation=POS_PUNCT
+adjective=POS_ADJ
+other=POS_X
+conjunction=POS_CONJ
+adverb=POS_ADV
+numeral=POS_NUM
+particle=POS_X
+preposition=POS_ADP

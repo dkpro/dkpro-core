@@ -31,10 +31,11 @@ import org.apache.jena.vocabulary.RDF;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
+import org.dkpro.core.api.resources.MappingProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
@@ -156,9 +157,8 @@ public class Nif2DKPro
                 Type posTag = posMappingProvider.getTagType(tag);
                 POS uimaPos = (POS) aJCas.getCas().createAnnotation(posTag, uimaToken.getBegin(),
                         uimaToken.getEnd());
-                uimaPos.setPosValue(tag.intern());
-                uimaPos.setCoarseValue(uimaPos.getClass().equals(POS.class) ? null
-                        : uimaPos.getType().getShortName().intern());
+                uimaPos.setPosValue(tag != null ? tag.intern() : null);
+                POSUtils.assignCoarseValue(uimaPos);
                 uimaPos.addToIndexes();
                 uimaToken.setPos(uimaPos);
             }
@@ -229,5 +229,5 @@ public class Nif2DKPro
         assert aUima.getEnd() >= 0 && aUima.getEnd() <= docLength;
         
         return true;
-   }
+    }
 }

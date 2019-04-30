@@ -1,0 +1,5 @@
+# Just a dummy file to test the mapping.
+DET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_DET
+MADE_UP_POS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_X
+N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN
+V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB

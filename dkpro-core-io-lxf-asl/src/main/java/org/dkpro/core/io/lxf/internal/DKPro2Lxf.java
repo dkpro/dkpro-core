@@ -54,7 +54,7 @@ public class DKPro2Lxf
 
     public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget)
     {
-        convert(aJCas, aSource, aTarget, createIdMap("dkpro", aSource));
+        convert(aJCas, aSource, aTarget, createIdMap("dkpro", aSource), "dkpro");
     }
 
     /**
@@ -74,7 +74,7 @@ public class DKPro2Lxf
         Map<String, String> ids = new HashMap<>();
         if (aSource != null) {
             for (LxfNode n : aSource.getNodes()) {
-                ids.put(n.getAnnotationClass(), n.getOrigin());
+                ids.put(n.getType(), n.getOrigin());
             }
         }
         if (!ids.containsKey(LAYER_DEPENDENCY))
@@ -97,12 +97,14 @@ public class DKPro2Lxf
      *            the original LXF. If this is non-null, then delta-mode is enabled.
      * @param aTarget
      *            the target LXF.
+     * @param tooName
+     *            the name of the tool generating the new annotation
      * @param ids
      *            The ids of the tool responsible for generation of the annotation Layer. The key is
      *            the annotation layer. The value is the tool that generates the annotation.
      */
     public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget,
-            Map<String, String> ids)
+            Map<String, String> ids, String toolName)
     {
         if (aSource == null) {
             aTarget.setMedia(new LxfText(aJCas.getDocumentText()));
@@ -196,18 +198,16 @@ public class DKPro2Lxf
                 // Convert lemma if exists
                 Lemma lemma = token.getLemma();
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
-                    // If we have created a sharable morphNode, reuse it here, otherwise create a
-                    // new node
                     LxfNode lemmaNode = newMorphNode ? morphNode : null; 
                     if (lemmaNode == null) {
-                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
+                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolName,
                                 toolNodeIndex.nextIndex(toolid), 0);
                         aTarget.addNode(lemmaNode);
                         aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(),
                                 toolEdgeIndex.nextIndex(toolid), 0, lemmaNode, tokenNode));
                         //idxMorph.put(token, lemmaNode);
                     }
-                    lemmaNode.setFeature(FEAT_LEMMA, token.getPos().getPosValue());
+                    lemmaNode.setFeature(FEAT_LEMMA, token.getLemma().getValue());
                 }
 
             }

@@ -17,19 +17,20 @@
  */
 package org.dkpro.core.lancaster;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.util.JCasUtil.select;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 
 public class LancasterStemmerTest
 {
@@ -40,11 +41,11 @@ public class LancasterStemmerTest
         runTest("en", "computers Computers deliberately", 
                 new String[] {"comput", "comput", "delib"} );
         
-        runTest("en", "We need a very complicated example sentence , which " +
-                "contains as many constituents and dependencies as possible .",
-                new String[] { "we", "need", "a", "very", "comply", "exampl", "sent", "",
-                "which", "contain", "as", "many", "constitu", "and", "depend", "as", "poss",
-                "" });
+        runTest("en",
+                "We need a very complicated example sentence , which "
+                        + "contains as many constituents and dependencies as possible .",
+                new String[] { "we", "need", "a", "very", "comply", "exampl", "sent", "", "which",
+                        "contain", "as", "many", "constitu", "and", "depend", "as", "poss", "" });
     }
 
     @Test

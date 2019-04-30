@@ -7,7 +7,7 @@
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate</name>
-      <description>One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates). The SemanticPredicate annotation can be attached to predicates in a sentences.
+      <description>One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates). The SemanticPredicate annotation can be attached to predicates in a sentence.
 Semantic predicates express events or situations and take semantic arguments
 expressing the participants in these events ore situations. All forms of main verbs
 can be annotated with a SemanticPredicate. However, there are also many nouns and
@@ -93,9 +93,9 @@ typically not food).</description>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred</name>
       <description>One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates). 
-The SemPred annotation can be attached to predicates in a sentences.
+The SemPred annotation can be attached to predicates in a sentence.
 Semantic predicates express events or situations and take semantic arguments
-expressing the participants in these events ore situations. All forms of main verbs
+expressing the participants in these events or situations. All forms of main verbs
 can be annotated with a SemPred. However, there are also many nouns and
 adjectives that take arguments and can thus be annotated with a SemanticPredicate,
 e.g. event nouns, such as "suggestion" (with arguments what and by whom), or

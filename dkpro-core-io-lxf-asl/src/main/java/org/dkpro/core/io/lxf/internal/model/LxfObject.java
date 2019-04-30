@@ -17,17 +17,19 @@
  */
 package org.dkpro.core.io.lxf.internal.model;
 
-import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.*;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.ENTITY_EDGE;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.ENTITY_NODE;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.ENTITY_REGION;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
-@JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "type")
-@JsonSubTypes({ @JsonSubTypes.Type(value = LxfEdge.class, name = TYPE_EDGE),
-        @JsonSubTypes.Type(value = LxfNode.class, name = TYPE_NODE),
-        @JsonSubTypes.Type(value = LxfRegion.class, name = TYPE_REGION) })
+@JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "entity")
+@JsonSubTypes({ @JsonSubTypes.Type(value = LxfEdge.class, name = ENTITY_EDGE),
+        @JsonSubTypes.Type(value = LxfNode.class, name = ENTITY_NODE),
+        @JsonSubTypes.Type(value = LxfRegion.class, name = ENTITY_REGION) })
 public class LxfObject
 {
     private String origin;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * <p>
@@ -17,12 +17,12 @@
  */
 package org.dkpro.core.api.embeddings.text;
 
-import org.dkpro.core.api.embeddings.Vectorizer;
-import org.dkpro.core.api.embeddings.VectorizerUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+
+import org.dkpro.core.api.embeddings.Vectorizer;
+import org.dkpro.core.api.embeddings.VectorizerUtils;
 
 /**
  * A {@link Vectorizer} backed by a {@code Map<String, float[]}.

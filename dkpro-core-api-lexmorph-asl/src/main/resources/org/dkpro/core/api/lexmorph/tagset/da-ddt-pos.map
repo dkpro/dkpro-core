@@ -1,0 +1,70 @@
+# Danish Dependency Treebank 
+
+__META_SOURCE_URL__=http://www.buch-kromann.dk/matthias/treebank/theory.html\
+    [Kromann, 2004. "Danish Dependency Treebank - Annotation guide: Theory"]
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# A     adjectives
+A=POS_ADJ
+# AN    normal adjective
+AN=POS_ADJ
+# AC    cardinals
+AC=POS_NUM
+# AO    ordinals
+AO=POS_NUM
+# C     conjunction
+C=POS_CONJ
+# CC    coordinating conjunction
+CC=POS_CONJ
+# CS    subordinating conjunction
+CS=POS_SCONJ
+# I     interjection
+I=POS_INTJ
+# N     noun
+N=POS_NOUN
+# NP    proper noun
+N=POS_PROPN
+# NC    common noun
+NC=POS_NOUN
+# P     pronoun
+P=POS_PRON
+# PP    personal pronoun
+PP=POS_PRON
+# PD    demonstrative pronoun
+PD=POS_PRON
+# PI    indefinite pronoun
+PI=POS_PRON
+# PT    interrogative/relative pronoun
+PT=POS_PRON
+# PC    reciprocal pronoun
+PC=POS_PRON
+# PO    possessive pronoun
+PO=POS_PRON
+# RG    adverb
+RG=POS_ADV
+# SP    preposition
+SP=POS_ADP
+# U     unique
+U=POS_X
+# V     verb
+V=POS_VERB
+# VA    main verb
+VA=POS_VERB
+# VE    medial verb
+VE=POS_VERB
+# X     extra-linguistic units
+X=POS_X
+# XA    abbreviation
+XA=POS_X
+# XF    foreign word
+XF=POS_X
+# XP    punctuation
+XP=POS_PUNCT
+# XR    formulae
+XR=POS_X
+# XS    symbol
+XS=POS_SYM
+# XX    other
+XX=POS_X
+# Catch-all
+*=POS
