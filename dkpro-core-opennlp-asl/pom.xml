@@ -20,17 +20,17 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <artifactId>dkpro-core-asl</artifactId>
+    <groupId>org.dkpro.core</groupId>
     <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+  <artifactId>dkpro-core-opennlp-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <opennlp.version>1.9.0</opennlp.version>
+    <opennlp.version>1.9.1</opennlp.version>
   </properties>
   <dependencies>
     <dependency>
@@ -54,36 +54,36 @@
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-resources-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-metadata-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-io-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-lexmorph-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-syntax-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-segmentation-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-ner-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-parameter-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
@@ -95,23 +95,23 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-testing-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.eval-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-eval-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-io-conll-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.datasets-asl</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-datasets-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
