@@ -23,19 +23,29 @@ import java.io.PrintWriter;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.webanno.tsv.internal.tsv3x.Tsv3XCasDocumentBuilder;
 import org.dkpro.core.io.webanno.tsv.internal.tsv3x.Tsv3XCasSchemaAnalyzer;
 import org.dkpro.core.io.webanno.tsv.internal.tsv3x.Tsv3XSerializer;
 import org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.TsvDocument;
 import org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.TsvSchema;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-
 /**
  * Writes the WebAnno TSV v3.x format.
  */
+@ResourceMetaData(name = "WebAnno TSV v3.x Writer")
+@MimeTypeCapability({MimeTypes.TEXT_X_WEBANNO_TSV3})
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
 public class WebannoTsv3XWriter
     extends JCasFileWriter_ImplBase
 {

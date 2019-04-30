@@ -300,13 +300,15 @@ public class Tsv3XCasDocumentBuilder
                 for (AnnotationFS aFS : annotationsForColumn) {
                     FeatureStructure[] links = getFeature(aFS, col.uimaFeature,
                             FeatureStructure[].class);
-                    for (FeatureStructure link : links) {
-                        AnnotationFS targetFS = getFeature(link, TsvSchema.FEAT_SLOT_TARGET,
-                                AnnotationFS.class);
-                        if (targetFS == null) {
-                            throw new IllegalStateException("Slot link has no target: " + link);
+                    if (links != null) {
+                        for (FeatureStructure link : links) {
+                            AnnotationFS targetFS = getFeature(link, TsvSchema.FEAT_SLOT_TARGET,
+                                    AnnotationFS.class);
+                            if (targetFS == null) {
+                                throw new IllegalStateException("Slot link has no target: " + link);
+                            }
+                            aUnit.getDocument().addDisambiguationId(targetFS);
                         }
-                        aUnit.getDocument().addDisambiguationId(targetFS);
                     }
                 }
             }

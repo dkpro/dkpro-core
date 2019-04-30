@@ -19,8 +19,9 @@ package org.dkpro.core.udpipe.internal;
 
 import java.io.IOException;
 
+import org.dkpro.core.api.resources.RuntimeProvider;
+
 import cz.cuni.mff.ufal.udpipe.udpipe_java;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 
 public class UDPipeUtils
 {

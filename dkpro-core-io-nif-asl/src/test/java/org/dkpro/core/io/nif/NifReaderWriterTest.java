@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.nif;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -32,9 +32,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.dkpro.core.testing.TestOptions;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.TestOptions;
 
 public class NifReaderWriterTest
 {

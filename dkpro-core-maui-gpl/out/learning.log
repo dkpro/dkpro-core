@@ -1,0 +1,59 @@
+11:41:19,391 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/POS.xml
+11:41:19,398 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/Morpheme.xml
+11:41:19,405 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,412 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/POS.xml
+11:41:19,413 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/Morpheme.xml
+11:41:19,413 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits_customized.xml
+11:41:19,419 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,420 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,554 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/POS.xml
+11:41:19,560 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/Morpheme.xml
+11:41:19,564 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,570 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/POS.xml
+11:41:19,570 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/Morpheme.xml
+11:41:19,571 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits_customized.xml
+11:41:19,577 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,577 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,668 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/POS.xml
+11:41:19,672 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/Morpheme.xml
+11:41:19,677 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,681 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/POS.xml
+11:41:19,682 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-lexmorph-asl/1.11.0-SNAPSHOT/dkpro-core-api-lexmorph-asl-1.11.0-SNAPSHOT.jar!/desc/type/Morpheme.xml
+11:41:19,683 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits_customized.xml
+11:41:19,687 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,688 INFO  [Import_impl] Import by name: jar:file:/Users/bluefire/.m2/repository-ukp/org/dkpro/core/dkpro-core-api-segmentation-asl/1.11.0-SNAPSHOT/dkpro-core-api-segmentation-asl-1.11.0-SNAPSHOT.jar!/desc/type/LexicalUnits.xml
+11:41:19,733 INFO  [ConfigurationManager_impl] Parameter "sourceEncoding" in context / = "UTF-8" 
+11:41:19,734 INFO  [ConfigurationManager_impl] Parameter "sourceLocation" in context / = "src/test/resources/text/*.txt" 
+11:41:19,734 INFO  [ConfigurationManager_impl] Parameter "useDefaultExcludes" in context / = "true" 
+11:41:19,734 INFO  [ConfigurationManager_impl] Parameter "includeHidden" in context / = "false" 
+11:41:19,735 INFO  [ConfigurationManager_impl] Parameter "language" in context / = "en" 
+11:41:19,735 INFO  [ConfigurationManager_impl] Parameter "logFreq" in context / = "1" 
+11:41:19,768 INFO  [TextReader] Scanning [file:/Users/bluefire/git/dkpro-core/dkpro-core-maui-gpl/src/test/resources/text/]
+11:41:19,771 INFO  [TextReader] Found [0] resources to be read
+11:41:19,932 INFO  [AggregateAnalysisEngine_impl] AnalysisEngine [null] initialization begin
+11:41:19,950 INFO  [ASB_impl] ASB initialization begin
+11:41:19,950 INFO  [ASB_impl] ASB initialization successful
+11:41:19,954 INFO  [ConfigurationManager_impl] Parameter "modelVariant" in context /org.dkpro.core.maui.MauiKeywordAnnotator-0/ = "socialscience_thesoz" 
+11:41:19,956 INFO  [ConfigurationManager_impl] Parameter "vocabularyEncoding" in context /org.dkpro.core.maui.MauiKeywordAnnotator-0/ = "UTF-8" 
+11:41:19,957 INFO  [ConfigurationManager_impl] Parameter "scoreThreshold" in context /org.dkpro.core.maui.MauiKeywordAnnotator-0/ = "0,5" 
+11:41:19,957 INFO  [ConfigurationManager_impl] Parameter "maxTopics" in context /org.dkpro.core.maui.MauiKeywordAnnotator-0/ = "10" 
+11:41:19,967 INFO  [PrimitiveAnalysisEngine_impl] AnalysisEngine [Maui Keyword Annotator] initialization begin
+11:41:19,987 INFO  [PrimitiveAnalysisEngine_impl] AnalysisEngine [Maui Keyword Annotator] initialization successful
+11:41:19,988 INFO  [ConfigurationManager_impl] Parameter "prettyPrint" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "true" 
+11:41:19,988 INFO  [ConfigurationManager_impl] Parameter "filenameExtension" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = ".xmi" 
+11:41:19,988 INFO  [ConfigurationManager_impl] Parameter "targetLocation" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "target/test-output/MauiKeywordAnnotatorTest-testVocabThesoz" 
+11:41:19,988 INFO  [ConfigurationManager_impl] Parameter "singularTarget" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "false" 
+11:41:19,989 INFO  [ConfigurationManager_impl] Parameter "compression" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "NONE" 
+11:41:19,989 INFO  [ConfigurationManager_impl] Parameter "stripExtension" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "false" 
+11:41:19,989 INFO  [ConfigurationManager_impl] Parameter "useDocumentId" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "false" 
+11:41:19,989 INFO  [ConfigurationManager_impl] Parameter "escapeDocumentId" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "true" 
+11:41:19,990 INFO  [ConfigurationManager_impl] Parameter "overwrite" in context /org.dkpro.core.io.xmi.XmiWriter-1/ = "true" 
+11:41:19,994 INFO  [PrimitiveAnalysisEngine_impl] AnalysisEngine [UIMA XMI CAS Writer] initialization begin
+11:41:20,001 INFO  [PrimitiveAnalysisEngine_impl] AnalysisEngine [UIMA XMI CAS Writer] initialization successful
+11:41:20,003 INFO  [ConfigurationManager_impl] Parameter "ActionAfterCasMultiplier" in context /_FlowController/ = "dropIfNewCasProduced" 
+11:41:20,004 INFO  [FlowControllerContainer] FlowController [Fixed Flow Controller] initialization begin
+11:41:20,004 INFO  [FlowControllerContainer] FlowController [Fixed Flow Controller] initialization successful
+11:41:20,007 INFO  [AggregateAnalysisEngine_impl] AnalysisEngine [null] initialization successful
+11:41:20,125 INFO  [PrimitiveAnalysisEngine_impl] AnalysisEngine [Maui Keyword Annotator] destroyed.
+11:41:20,125 INFO  [PrimitiveAnalysisEngine_impl] AnalysisEngine [UIMA XMI CAS Writer] destroyed.
+11:41:20,126 INFO  [AggregateAnalysisEngine_impl] AnalysisEngine [null] destroyed.
