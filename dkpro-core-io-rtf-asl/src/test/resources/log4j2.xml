@@ -1,8 +1,16 @@
-log4j.rootLogger=WARN,development
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="ConsoleAppender" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %level{length=5} %logger{1} - %msg%n" />
+    </Console>
+  </Appenders>
 
-log4j.appender.development=org.apache.log4j.ConsoleAppender
-log4j.appender.development.layout=org.apache.log4j.PatternLayout
-log4j.appender.development.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %5p [%t] (%C{1}) - %m%n
-
-log4j.logger.de.tudarmstadt.ukp = DEBUG
-log4j.logger.de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase = INFO
+  <Loggers>
+    <Logger name="org.dkpro.core" level="DEBUG"/>
+    <Logger name="org.dkpro.core.api.resources.ResourceObjectProviderBase" level="INFO"/>
+    <Root level="WARN">
+      <AppenderRef ref="ConsoleAppender" />
+    </Root>
+  </Loggers>
+</Configuration>
