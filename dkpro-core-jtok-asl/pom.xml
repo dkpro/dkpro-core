@@ -45,6 +45,13 @@
       <groupId>de.dfki.lt.jtok</groupId>
       <artifactId>jtok-core</artifactId>
       <version>${jtok.version}</version>
+      <exclusions>
+        <!-- Libraries should not depend on a specific logging backend -->
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
