@@ -1,7 +1,7 @@
-package de.tudarmstadt.ukp.dkpro.core.io.gigaword.internal;
+package de.tudarmstadt.ukp.dkpro.core.io.gigaword;
 
 import com.google.common.collect.AbstractIterator;
-import de.tudarmstadt.ukp.dkpro.core.io.gigaword.AnnotatedGigawordReader;
+import de.tudarmstadt.ukp.dkpro.core.io.gigaword.internal.Article;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
-import java.util.zip.GZIPInputStream;
 
 /**
  * The LDC distributes annotated Gigaword as a moderate number of gzipped files, each of which has many documents
@@ -25,16 +24,12 @@ public class AnnotatedGigawordDocuments implements Iterable<Article> {
         this.articleList = aArticleList;
     }
     
-    public static AnnotatedGigawordDocuments fromAnnotatedGigwordGZippedFile(Path p) throws Exception {
-        // Initialize Streams
-        try (InputStream fileInputStream = new FileInputStream(p.toString());
-             GZIPInputStream gzipInputStream = new GZIPInputStream(fileInputStream)) {
-            
+    public static AnnotatedGigawordDocuments fromAnnotatedGigawordFile(Path p) throws Exception {
+        try (InputStream fileInputStream = new FileInputStream(p.toString())) {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             AnnotatedGigawordReader parser = new AnnotatedGigawordReader();
-            saxParser.parse(gzipInputStream, parser);
-
+            saxParser.parse(fileInputStream, parser);
             return new AnnotatedGigawordDocuments(parser.getArticleList());
         }
     }
