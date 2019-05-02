@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.webanno.tsv;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * This is just a dummy class with some constants that is used to enable copying the
