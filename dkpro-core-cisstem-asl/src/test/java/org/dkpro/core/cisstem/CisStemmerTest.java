@@ -21,12 +21,11 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.cisstem.CisStemmer;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class CisStemmerTest {
 

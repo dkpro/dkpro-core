@@ -26,15 +26,15 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.pubannotation.internal.DKPro2PubAnnotation;
 import org.dkpro.core.io.pubannotation.internal.model.PADocument;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * Writer for the PubAnnotation format.
