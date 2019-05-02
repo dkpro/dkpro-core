@@ -30,7 +30,7 @@
   </parent>
   <artifactId>dkpro-core-stanfordnlp-gpl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) (GPL)</name>
+  <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) - Classic API (GPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <corenlp.version>3.9.1</corenlp.version>
