@@ -18,10 +18,9 @@
 
 package org.dkpro.core.decompounding.splitter;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -145,8 +144,9 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s1 = DecompoundedWord.createFromString("Aktion(s)+plan");
         DecompoundedWord s2 = DecompoundedWord.createFromString("Aktionsplan");
-        assertThat(s1.isCompound(), is(true));
-        assertThat(s2.isCompound(), is(false));
+        
+        assertThat(s1.isCompound()).isTrue();
+        assertThat(s2.isCompound()).isFalse();
     }
 
     @Test
@@ -154,7 +154,8 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s1 = DecompoundedWord.createFromString("Aktion(s)+plan");
         DecompoundedWord s2 = DecompoundedWord.createFromString("unter+flur+konvektor(en)");
-        assertThat(s1.hasLastFragmentMorpheme(), is(false));
-        assertThat(s2.hasLastFragmentMorpheme(), is(true));
+        
+        assertThat(s1.hasLastFragmentMorpheme()).isFalse();
+        assertThat(s2.hasLastFragmentMorpheme()).isTrue();
     }
 }
