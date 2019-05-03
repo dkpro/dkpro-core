@@ -27,7 +27,7 @@
   </parent>
   <artifactId>dkpro-core-icu-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - ICU</name>
+  <name>DKPro Core ASL - ICU (v ${icu4j.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <dependencies>
     <dependency>
