@@ -18,9 +18,8 @@
 
 package org.dkpro.core.decompounding.splitter;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,6 +90,7 @@ public class LeftToRightSplitAlgorithmTest
                 morphemes);
 
         List<DecompoundedWord> result = algo.split("alarmreaktionen").getAllSplits();
+        
         // Super+mann+anzug, Supermann+anzug
         assertEquals(3, result.size());
         assertEquals("alarmreaktionen", result.get(0).toString());
@@ -115,6 +115,6 @@ public class LeftToRightSplitAlgorithmTest
 
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
 
-        assertThat(result.size(),is(1));
+        assertThat(result).hasSize(1);
     }
 }

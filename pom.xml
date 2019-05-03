@@ -247,7 +247,7 @@
       <dependency>
         <groupId>org.yaml</groupId>
         <artifactId>snakeyaml</artifactId>
-        <version>1.19</version>
+        <version>1.24</version>
       </dependency>
       <dependency>
         <groupId>xerces</groupId>
@@ -317,12 +317,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-collections4</artifactId>
-        <version>4.1</version>
+        <version>4.3</version>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.11</version>
+        <version>1.12</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -337,7 +337,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.8</version>
+        <version>3.9</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -350,14 +350,9 @@
         <version>1.8</version>
       </dependency>
       <dependency>
-        <groupId>com.github.haifengl</groupId>
-        <artifactId>smile-nlp</artifactId>
-        <version>1.3.1</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant</artifactId>
-        <version>1.10.2</version>
+        <version>1.10.5</version>
       </dependency>
       <dependency>
         <groupId>jaxen</groupId>
@@ -439,14 +434,9 @@
         <version>1.6</version>
       </dependency>
       <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-core</artifactId>
-        <version>1.3</version>
-      </dependency>
-      <dependency>
         <groupId>it.unimi.dsi</groupId>
         <artifactId>fastutil</artifactId>
-        <version>7.0.13</version>
+        <version>8.2.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ivy</groupId>
