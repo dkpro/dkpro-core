@@ -18,9 +18,8 @@
 
 package org.dkpro.core.decompounding.splitter;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,8 +28,6 @@ import java.util.List;
 import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import org.dkpro.core.decompounding.dictionary.SimpleDictionary;
-import org.dkpro.core.decompounding.splitter.DataDrivenSplitterAlgorithm;
-import org.dkpro.core.decompounding.splitter.DecompoundedWord;
 import org.junit.Test;
 
 public class DataDrivenAlgorithmTest
@@ -64,6 +61,7 @@ public class DataDrivenAlgorithmTest
         LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
         DataDrivenSplitterAlgorithm splitter = new DataDrivenSplitterAlgorithm(dict, morphemes);
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-        assertThat(result.size(), is(1));
+
+        assertThat(result).hasSize(1);
     }
 }
