@@ -79,13 +79,16 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(
         outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense" })
 public class Conll2012Reader
     extends JCasResourceCollectionReader_ImplBase
 {
