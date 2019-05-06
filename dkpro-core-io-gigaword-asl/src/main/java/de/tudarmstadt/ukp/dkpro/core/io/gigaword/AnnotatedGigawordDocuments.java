@@ -1,20 +1,21 @@
 package de.tudarmstadt.ukp.dkpro.core.io.gigaword;
 
-import com.google.common.collect.AbstractIterator;
-import de.tudarmstadt.ukp.dkpro.core.io.gigaword.internal.Article;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.InputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import com.google.common.collect.AbstractIterator;
+import de.tudarmstadt.ukp.dkpro.core.io.gigaword.internal.Article;
 
 /**
- * The LDC distributes annotated Gigaword as a moderate number of gzipped files, each of which has many documents
- * concatenated together. This class lets you iterate over the documents stored in such a file. This class was
- * authored by the UKP Lab of Technische Universität Darmstadt and is included here for their convenience.
+ * The LDC distributes annotated Gigaword as a moderate number of gzipped files,
+ * each of which has many documents concatenated together. This class lets you iterate
+ * over the documents stored in such a file. This class was authored by the UKP Lab of
+ * Technische Universität Darmstadt and is included here for their convenience.
  */
 
 public class AnnotatedGigawordDocuments implements Iterable<Article> {

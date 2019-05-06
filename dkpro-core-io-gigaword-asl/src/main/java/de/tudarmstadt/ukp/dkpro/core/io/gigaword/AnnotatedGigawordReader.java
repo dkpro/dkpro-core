@@ -3,10 +3,11 @@ package de.tudarmstadt.ukp.dkpro.core.io.gigaword;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.tudarmstadt.ukp.dkpro.core.io.gigaword.internal.Article;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import de.tudarmstadt.ukp.dkpro.core.io.gigaword.internal.Article;
 
 /**
  * Parse the annotated Gigaword corpus
