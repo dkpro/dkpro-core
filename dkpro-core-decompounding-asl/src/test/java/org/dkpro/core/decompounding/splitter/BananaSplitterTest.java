@@ -17,9 +17,8 @@
  **/
 package org.dkpro.core.decompounding.splitter;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +40,7 @@ public class BananaSplitterTest
         splitter.setDictionary(new SimpleDictionary("Garage", "einfahrt"));
 
         List<DecompoundedWord> result = splitter.split("Garageneinfahrt").getAllSplits();
+        
         assertEquals(2, result.size());
         assertEquals("Garageneinfahrt", result.get(0).toString());
         assertEquals("garage(n)+einfahrt", result.get(1).toString());
@@ -55,7 +55,9 @@ public class BananaSplitterTest
         Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         BananaSplitterAlgorithm splitter = new BananaSplitterAlgorithm();
         splitter.setDictionary(dict);
+        
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-        assertThat(result.size(), is(1));
+        
+        assertThat(result).hasSize(1);
     }
 }

@@ -18,9 +18,8 @@
 package org.dkpro.core.api.resources;
 
 import static java.util.Arrays.asList;
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -103,13 +102,13 @@ public class ResourceUtilsTest
         URL url = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
                 + "FileSetCollectionReaderBase.class");
         File file = ResourceUtils.getUrlAsExecutable(url, false);
-        assertThat(file.getName().endsWith("temp"), is(true));
+        
+        assertThat(file.getName()).endsWith("temp");
 
         URL url2 = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
                 + "ResourceCollectionReaderBase.class");
         file = ResourceUtils.getUrlAsExecutable(url2, true);
-        assertThat(file.getName().endsWith("temp"), is(true));
-
+        
+        assertThat(file.getName()).endsWith("temp");
     }
-
 }
