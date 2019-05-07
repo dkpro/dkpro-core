@@ -1,2 +1,0 @@
-__META_REDIRECT__=classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/en-conll2000-chunk.map
-__META_OVERRIDE__.chunk.tagset=conll2000

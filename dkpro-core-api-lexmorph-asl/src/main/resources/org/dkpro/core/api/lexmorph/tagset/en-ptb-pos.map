@@ -1,0 +1,128 @@
+# Penn Treebank Tagset
+#
+# Source (PTB 1): http://faculty.washington.edu/dillon/GramResources/penntable.html
+# Source (PTB 2): http://www.clips.ua.ac.be/pages/mbsp-tags
+# Source: http://repository.upenn.edu/cis_reports/570/
+
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# punctuation mark, comma
+,=POS_PUNCT
+# punctuation mark, sentence closer
+.=POS_PUNCT
+# dollar
+$=POS_PUNCT
+# dash
+-=POS_PUNCT
+# semi-colon
+;=POS_PUNCT
+# question mark
+?=POS_PUNCT
+# exclamation mark
+\!=POS_PUNCT
+# opening quotes
+``=POS_PUNCT
+# closing quotes
+''=POS_PUNCT
+# punctuation mark, colon
+\:=POS_PUNCT
+# contextual separator, left paren
+-LRB-=POS_PUNCT
+# contextual separator, left paren
+(=POS_PUNCT
+# contextual separator, right paren
+-RRB-=POS_PUNCT
+# contextual separator, right paren
+)=POS_PUNCT
+\#=POS_PUNCT
+# sentence end marker
+SENT=POS_PUNCT
+# 1.	CC	Coordinating conjunction
+CC=POS_CONJ
+# 2.	CD	Cardinal number
+CD=POS_NUM
+# 3.	DT	Determiner
+DT=POS_DET
+# 4.	EX	Existential there
+EX=POS_DET
+# 5.	FW	Foreign word
+FW=POS_X
+# 6.	IN	Preposition or subordinating conjunction
+IN=POS_ADP
+# 7.	JJ	Adjective
+JJ=POS_ADJ
+# 8.	JJR	Adjective, comparative
+JJR=POS_ADJ
+# 9.	JJS	Adjective, superlative
+JJS=POS_ADJ
+# 10.	LS	List item marker
+LS=POS_X
+# 11.	MD	Modal
+MD=POS_VERB
+# 12.	NN	Noun, singular or mass
+NN=POS_NOUN
+# 13.	NNS	Noun, plural
+NNS=POS_NOUN
+# 14.	NP	Proper noun, singular (PTB 1)
+NP=POS_PROPN
+# 14.	NP	Proper noun, singular (PTB 2)
+NNP=POS_PROPN
+# 15.	NPS	Proper noun, plural (PTB 1)
+NPS=POS_PROPN
+# 15.	NPS	Proper noun, plural (PTB 2)
+NNPS=POS_PROPN
+# 16.	PDT	Predeterminer
+PDT=POS_DET
+# 17.	POS	Possessive ending
+POS=POS_X
+# 18.	PP	Personal pronoun
+PP=POS_PRON
+PRP=POS_PRON
+# 19.	PP$	Possessive pronoun
+PP$=POS_PRON
+PRP$=POS_PRON
+# 20.	RB	Adverb
+RB=POS_ADV
+# 21.	RBR	Adverb, comparative	
+RBR=POS_ADV
+# 22.	RBS	Adverb, superlative
+RBS=POS_ADV
+# 23.	RP	Particle
+RP=POS_ADP
+# 24.	SYM	Symbol
+SYM=POS_SYM
+# 25.	TO	to
+TO=POS_ADP
+# 26.	UH	Interjection
+UH=POS_INTJ
+# 27.	VB	Verb, base form
+VB=POS_VERB
+# 28.	VBD	Verb, past tense
+VBD=POS_VERB
+# 29.	VBG	Verb, gerund or present participle
+VBG=POS_VERB
+# 30.	VBN	Verb, past participle
+VBN=POS_VERB
+# 31.	VBP	Verb, non-3rd person singular present
+VBP=POS_VERB
+# 32.	VBZ	Verb, 3rd person singular present
+VBZ=POS_VERB
+# 33.	WDT	Wh-determiner
+WDT=POS_DET
+# 34.	WP	Wh-pronoun
+WP=POS_PRON
+# 35.	WP$	Possessive wh-pronoun
+WP$=POS_PRON
+# 36.	WRB	Wh-adverb
+WRB=POS_ADV
+
+# Additional tags in ClearNLP models
+#
+# Source: http://clear.colorado.edu/compsem/documents/treebank_guidelines.pdf
+#
+# HYPH - unbound hyphen (Warner et al., 2004)
+# AFX - unbound affix (Warner et al., 2004)
+# GW - mistranscription (Taylor, 1996)
+# XX - uninterpretable material (Mott et al., 2009)
+
+*=POS

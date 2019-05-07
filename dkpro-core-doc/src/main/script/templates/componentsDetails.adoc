@@ -1,11 +1,27 @@
 <% 
-import de.tudarmstadt.ukp.dkpro.core.doc.Util;
+// Copyright 2018
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import org.dkpro.core.doc.Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
 
 engines
-    .sort { it.key }
+    .sort { it.value.spec?.metaData?.name ?: it.key }
     .groupBy {it.value.role }
-    .sort { it.key != 'Other' ? it.key : 'Z' }
+    .sort { it.key != 'Other' ? (it.value.spec?.metaData?.name ?: it.key) : 'Z' }
     .each { group -> 
 %>
 === ${group.key}
@@ -33,10 +49,11 @@ include::{include-dir}sectionIntro${fileSuffix}.adoc[]
 <% group.value.each { 
 def engine = it.value; %>
 [[engine-${ it.key }]]
-==== ${it.key}
+==== ${it.value.spec?.metaData?.name ?: it.key}
 
 ****
 [horizontal, role="small"]
+Short name::       ${engine.name}
 Category::         ${engine.role}
 Group{nbsp}ID::    ${engine.groupId}
 Artifact{nbsp}ID:: ${engine.artifactId}

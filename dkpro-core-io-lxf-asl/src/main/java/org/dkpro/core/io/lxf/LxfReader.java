@@ -24,18 +24,25 @@ import java.io.InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.lxf.internal.Lxf2DKPro;
 import org.dkpro.core.io.lxf.internal.model.LxfGraph;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
+/**
+ * Reader for the CLARINO LAP LXF format.
+ */
+@ResourceMetaData(name = "CLARINO LAP LXF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})
 @TypeCapability(
         outputs = { 
@@ -75,5 +82,5 @@ public class LxfReader
         
         // Allow to get information about everything added beyond this point
         aCAS.getCasImpl().createMarker();
-     }
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -28,6 +28,7 @@ public class XcesSentence
     @XmlID 
     @XmlAttribute
     public String id;
-    @XmlElement(name="t")
+
+    @XmlElement(name = "t")
     public List<XcesToken> xcesTokens;
 }

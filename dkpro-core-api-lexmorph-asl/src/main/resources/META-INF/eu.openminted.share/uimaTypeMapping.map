@@ -1,0 +1,67 @@
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures=http://w3id.org/meta-share/omtd-share/MorphologicalFeature
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS = http://w3id.org/meta-share/omtd-share/PartOfSpeech
+
+# Elevated types
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADP
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADV
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_AUX
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_CONJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_DET
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_INTJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NUM
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PART
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PRON
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PROPN
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNCT
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SCONJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SYM
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_X
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_AT
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_DM
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_EMO
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_HASH
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_INT
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_NNV
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_NPV
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.POS_URL
+
+# Deprecated elevated types
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.AUX
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.INTJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NUM
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PART
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PROPN
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNCT
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SCONJ
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SYM
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.X
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.AT
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.DM
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.EMO
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.HASH
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.INT
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.NNV
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.NPV
+# de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.URL

@@ -1,0 +1,53 @@
+groupId: org.dkpro.core.datasets.gum
+datasetId: gum-dep
+version: 2.3.2
+language: en
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: Georgetown University Multilayer Corpus
+url: https://corpling.uis.georgetown.edu/gum/
+attribution: |
+  Zeldes, Amir (2016) "The GUM Corpus: Creating Multilayer Resources in the Classroom". 
+  Language Resources and Evaluation. For Gum annotation team, see 
+  https://corpling.uis.georgetown.edu/gum/
+description: |
+  This dataset contains release versions of the Georgetown University Multilayer Corpus (GUM), a 
+  corpus of English texts from four text types (interviews, news, travel guides, instructional
+  texts). The corpus is created as part of the course LING-367 (Computational Corpus Linguistics) at
+  Georgetown University. For more details see: http://corpling.uis.georgetown.edu/gum.
+  
+  The dep layer gives a dependency syntax analysis according to the Stanford Dependencies manual.
+  This layer was intially produced using the Stanford Parser and then manually corrected using the
+  Arborator collaborative syntax annotation software. For the annotation project we used
+  non-collapsed dependencies, and dependencies for punctuation tokens have been removed.
+  
+  (This description has been sourced from the dataset website).
+  
+licenses:
+  - name: CC-BY 2.5
+    url: http://creativecommons.org/licenses/by/2.5/
+    comment: "Wikinews texts (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
+  - name: CC-BY-SA 3.0
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+    comment: "WikiVoyage texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
+  - name: CC-BY-NC-SA 3.0
+    url: http://creativecommons.org/licenses/by-nc-sa/3.0/
+    comment: "WikiHow texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons)"
+  - name: CC-BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+    comment: "Annotations (Source: https://corpling.uis.georgetown.edu/gum/)"
+
+artifacts:
+  gum.zip:
+    url: "https://github.com/amir-zeldes/gum/archive/V2.3.2.zip"
+    sha1: 471c3a35c2a0e9aee4bbff9a9cf05441fce3ef21
+    actions:
+      - action: explode
+        configuration: { includes: ["dep/*", "LICENSE.txt", "README.md"], strip: 1 }
+
+roles:
+  licenses:
+    - gum/LICENSE.txt
+  data:
+    - "**/dep/*.conll10"

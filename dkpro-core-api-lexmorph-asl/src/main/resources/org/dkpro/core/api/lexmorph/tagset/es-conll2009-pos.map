@@ -1,0 +1,32 @@
+# Ancora (CoNLL 2009)
+#
+# Ancora part-of-speech tags
+
+__META_SOURCE_URL__=http://clic.ub.edu/corpus/webfm_send/18
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+*=POS
+#Adjective
+a=POS_ADJ
+#Conjuction
+c=POS_CONJ
+#Determiner
+d=POS_DET
+#Punctuation
+f=POS_PUNCT
+#Interjection
+i=POS_INTJ
+#Noun
+n=POS_NOUN
+#Pronoun
+p=POS_PRON
+#Adverb
+r=POS_ADV
+#Preposition
+s=POS_ADP
+#Verb
+v=POS_VERB
+#Date
+w=POS_X
+#Number
+z=POS_NUM

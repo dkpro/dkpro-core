@@ -22,14 +22,14 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.testing.AssertAnnotations;
+import org.dkpro.core.testing.AssumeResource;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestRunner;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class UDPipePosTaggerTest
 {
@@ -42,8 +42,9 @@ public class UDPipePosTaggerTest
                 "Magnus Carlsen trengte bare de fire partiene med lynsjakk for å slå utfordreren Sergej Karjakin.",
                 new String[] { "PROPN", "PROPN", "VERB", "ADV", "DET", "NUM", "NOUN", "ADP", "NOUN",
                         "ADP", "PART", "VERB", "NOUN", "PROPN", "PROPN" },
-                new String[] { "PROPN", "PROPN", "VERB", "ADV", "DET", "NUM", "NOUN", "ADP", "NOUN",
-                        "ADP", "PART", "VERB", "NOUN", "PROPN", "PROPN" });
+                new String[] { "POS_PROPN", "POS_PROPN", "POS_VERB", "POS_ADV", "POS_DET",
+                        "POS_NUM", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP", "POS_PART",
+                        "POS_VERB", "POS_NOUN", "POS_PROPN", "POS_PROPN" });
     }
     
     @Test
@@ -52,15 +53,15 @@ public class UDPipePosTaggerTest
     {
         runTest("en", null, "This is a test .",
                 new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "DET",  "VERB",   "DET", "NOUN",   "PUNCT" });
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net .",
                 new String[] { "DT",  "JJ",     "NN",  "." },
-                new String[] { "DET", "ADJ",    "NOUN",  "PUNCT" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
         
     private JCas runTest(String language, String aVariant, String testDocument, String[] tags,

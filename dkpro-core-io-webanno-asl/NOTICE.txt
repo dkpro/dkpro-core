@@ -1,0 +1,5 @@
+The code in this module has been ported from WebAnno in order to provide the ability to work
+with TSV3 files outside of WebAnno.
+
+Copyright by Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
+Technische Universität Darmstadt

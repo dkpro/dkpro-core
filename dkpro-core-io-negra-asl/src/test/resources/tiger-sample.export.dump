@@ -31,7 +31,7 @@ ROOT
    constituentType: "ROOT"
    children: FSArray
 [``]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 0
    end: 2
@@ -59,7 +59,7 @@ Token
       begin: 0
       end: 2
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 0
       end: 2
@@ -101,7 +101,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [Ross]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 3
    end: 7
@@ -143,14 +143,14 @@ Token
       begin: 3
       end: 7
       value: "Ross"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 3
       end: 7
       PosValue: "NE"
       coarseValue: "PROPN"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 8
    end: 13
@@ -192,14 +192,14 @@ Token
       begin: 8
       end: 13
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 8
       end: 13
       PosValue: "NE"
       coarseValue: "PROPN"
 [wäre]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 14
    end: 18
@@ -234,14 +234,14 @@ Token
       begin: 14
       end: 18
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 14
       end: 18
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [vielleicht]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 19
    end: 29
@@ -276,7 +276,7 @@ Token
       begin: 19
       end: 29
       value: "vielleicht"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 19
       end: 29
@@ -304,7 +304,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 30
    end: 33
@@ -346,14 +346,14 @@ Token
       begin: 30
       end: 33
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 30
       end: 33
       PosValue: "ART"
       coarseValue: "DET"
 [prächtiger]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 34
    end: 44
@@ -395,14 +395,14 @@ Token
       begin: 34
       end: 44
       value: "prächtig"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 34
       end: 44
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Diktator]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 45
    end: 53
@@ -444,14 +444,14 @@ Token
       begin: 45
       end: 53
       value: "Diktator"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 45
       end: 53
       PosValue: "NN"
       coarseValue: "NOUN"
 ['']
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 54
    end: 56
@@ -479,7 +479,7 @@ Token
       begin: 54
       end: 56
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 54
       end: 56
@@ -518,7 +518,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Konzernchefs]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 57
    end: 69
@@ -553,14 +553,14 @@ Token
       begin: 57
       end: 69
       value: "Konzernchef"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 57
       end: 69
       PosValue: "NN"
       coarseValue: "NOUN"
 [lehnen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 70
    end: 76
@@ -595,7 +595,7 @@ Token
       begin: 70
       end: 76
       value: "lehnen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 70
       end: 76
@@ -623,7 +623,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [den]
-DET
+POS_DET
    sofa: _InitialView
    begin: 77
    end: 80
@@ -665,14 +665,14 @@ Token
       begin: 77
       end: 80
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 77
       end: 80
       PosValue: "ART"
       coarseValue: "DET"
 [Milliardär]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 81
    end: 91
@@ -714,7 +714,7 @@ Token
       begin: 81
       end: 91
       value: "Milliardär"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 81
       end: 91
@@ -742,7 +742,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [als]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 92
    end: 95
@@ -784,14 +784,14 @@ Token
       begin: 92
       end: 95
       value: "als"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 92
       end: 95
       PosValue: "APPR"
       coarseValue: "ADP"
 [US-Präsidenten]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 96
    end: 110
@@ -833,14 +833,14 @@ Token
       begin: 96
       end: 110
       value: "US-Präsident"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 96
       end: 110
       PosValue: "NN"
       coarseValue: "NOUN"
 [ab]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 111
    end: 113
@@ -875,14 +875,14 @@ Token
       begin: 111
       end: 113
       value: "ab"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 111
       end: 113
       PosValue: "PTKVZ"
       coarseValue: "VERB"
 [/]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 114
    end: 115
@@ -910,7 +910,7 @@ Token
       begin: 114
       end: 115
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 114
       end: 115
@@ -949,7 +949,7 @@ ROOT
    constituentType: "ROOT"
    children: FSArray
 [Texaner]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 116
    end: 123
@@ -984,14 +984,14 @@ Token
       begin: 116
       end: 123
       value: "Texaner"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 116
       end: 123
       PosValue: "NN"
       coarseValue: "NOUN"
 [gibt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 124
    end: 128
@@ -1026,7 +1026,7 @@ Token
       begin: 124
       end: 128
       value: "geben"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 124
       end: 128
@@ -1082,7 +1082,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [nur]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 129
    end: 132
@@ -1131,14 +1131,14 @@ Token
       begin: 129
       end: 132
       value: "nur"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 129
       end: 132
       PosValue: "ADV"
       coarseValue: "ADV"
 [vage]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 133
    end: 137
@@ -1187,14 +1187,14 @@ Token
       begin: 133
       end: 137
       value: "vage"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 133
       end: 137
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Auskunft]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 138
    end: 146
@@ -1236,7 +1236,7 @@ Token
       begin: 138
       end: 146
       value: "Auskunft"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 138
       end: 146
@@ -1271,7 +1271,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [über]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 147
    end: 151
@@ -1320,14 +1320,14 @@ Token
       begin: 147
       end: 151
       value: "über"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 147
       end: 151
       PosValue: "APPR"
       coarseValue: "ADP"
 [seine]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 152
    end: 157
@@ -1376,14 +1376,14 @@ Token
       begin: 152
       end: 157
       value: "sein"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 152
       end: 157
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [Wirtschaftspolitik]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 158
    end: 176
@@ -1432,7 +1432,7 @@ Token
       begin: 158
       end: 176
       value: "Wirtschaftspolitik"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 158
       end: 176
@@ -1492,7 +1492,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [Der]
-DET
+POS_DET
    sofa: _InitialView
    begin: 177
    end: 180
@@ -1534,14 +1534,14 @@ Token
       begin: 177
       end: 180
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 177
       end: 180
       PosValue: "ART"
       coarseValue: "DET"
 [texanische]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 181
    end: 191
@@ -1583,14 +1583,14 @@ Token
       begin: 181
       end: 191
       value: "texanisch"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 181
       end: 191
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Milliardär]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 192
    end: 202
@@ -1632,7 +1632,7 @@ Token
       begin: 192
       end: 202
       value: "Milliardär"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 192
       end: 202
@@ -1667,7 +1667,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [Ross]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 203
    end: 207
@@ -1716,14 +1716,14 @@ Token
       begin: 203
       end: 207
       value: "Ross"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 203
       end: 207
       PosValue: "NE"
       coarseValue: "PROPN"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 208
    end: 213
@@ -1772,14 +1772,14 @@ Token
       begin: 208
       end: 213
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 208
       end: 213
       PosValue: "NE"
       coarseValue: "PROPN"
 [hat]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 214
    end: 217
@@ -1814,7 +1814,7 @@ Token
       begin: 214
       end: 217
       value: "haben"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 214
       end: 217
@@ -1870,7 +1870,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [das]
-DET
+POS_DET
    sofa: _InitialView
    begin: 218
    end: 221
@@ -1919,14 +1919,14 @@ Token
       begin: 218
       end: 221
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 218
       end: 221
       PosValue: "ART"
       coarseValue: "DET"
 [politische]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 222
    end: 232
@@ -1975,14 +1975,14 @@ Token
       begin: 222
       end: 232
       value: "politisch"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 222
       end: 232
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Establishment]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 233
    end: 246
@@ -2031,7 +2031,7 @@ Token
       begin: 233
       end: 246
       value: "Establishment"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 233
       end: 246
@@ -2073,7 +2073,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [in]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 247
    end: 249
@@ -2129,14 +2129,14 @@ Token
       begin: 247
       end: 249
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 247
       end: 249
       PosValue: "APPR"
       coarseValue: "ADP"
 [Washington]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 250
    end: 260
@@ -2192,14 +2192,14 @@ Token
       begin: 250
       end: 260
       value: "Washington"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 250
       end: 260
       PosValue: "NE"
       coarseValue: "PROPN"
 [aufgeschreckt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 261
    end: 274
@@ -2241,14 +2241,14 @@ Token
       begin: 261
       end: 274
       value: "aufschrecken"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 261
       end: 274
       PosValue: "VVPP"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 275
    end: 276
@@ -2276,7 +2276,7 @@ Token
       begin: 275
       end: 276
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 275
       end: 276
@@ -2336,7 +2336,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [Nach]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 277
    end: 281
@@ -2378,14 +2378,14 @@ Token
       begin: 277
       end: 281
       value: "nach"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 277
       end: 281
       PosValue: "APPR"
       coarseValue: "ADP"
 [Meinungsumfragen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 282
    end: 298
@@ -2427,14 +2427,14 @@ Token
       begin: 282
       end: 298
       value: "Meinungsumfrage"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 282
       end: 298
       PosValue: "NN"
       coarseValue: "NOUN"
 [liegt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 299
    end: 304
@@ -2469,7 +2469,7 @@ Token
       begin: 299
       end: 304
       value: "liegen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 299
       end: 304
@@ -2497,7 +2497,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [der]
-DET
+POS_DET
    sofa: _InitialView
    begin: 305
    end: 308
@@ -2539,14 +2539,14 @@ Token
       begin: 305
       end: 308
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 305
       end: 308
       PosValue: "ART"
       coarseValue: "DET"
 [parteilose]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 309
    end: 319
@@ -2588,14 +2588,14 @@ Token
       begin: 309
       end: 319
       value: "parteilos"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 309
       end: 319
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Self-mademan]
-X
+POS_X
    sofa: _InitialView
    begin: 320
    end: 332
@@ -2637,14 +2637,14 @@ Token
       begin: 320
       end: 332
       value: "--"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 320
       end: 332
       PosValue: "FM"
       coarseValue: "X"
 [gut]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 333
    end: 336
@@ -2679,7 +2679,7 @@ Token
       begin: 333
       end: 336
       value: "gut"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 333
       end: 336
@@ -2707,7 +2707,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [im]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 337
    end: 339
@@ -2749,14 +2749,14 @@ Token
       begin: 337
       end: 339
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 337
       end: 339
       PosValue: "APPRART"
       coarseValue: "ADP"
 [Rennen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 340
    end: 346
@@ -2798,7 +2798,7 @@ Token
       begin: 340
       end: 346
       value: "Rennen"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 340
       end: 346
@@ -2833,7 +2833,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OP"
 [um]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 347
    end: 349
@@ -2882,14 +2882,14 @@ Token
       begin: 347
       end: 349
       value: "um"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 347
       end: 349
       PosValue: "APPR"
       coarseValue: "ADP"
 [den]
-DET
+POS_DET
    sofa: _InitialView
    begin: 350
    end: 353
@@ -2938,14 +2938,14 @@ Token
       begin: 350
       end: 353
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 350
       end: 353
       PosValue: "ART"
       coarseValue: "DET"
 [Chefsessel]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 354
    end: 364
@@ -2994,7 +2994,7 @@ Token
       begin: 354
       end: 364
       value: "Chefsessel"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 354
       end: 364
@@ -3036,7 +3036,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [im]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 365
    end: 367
@@ -3092,7 +3092,7 @@ Token
       begin: 365
       end: 367
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 365
       end: 367
@@ -3190,7 +3190,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [Weißen]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 368
    end: 374
@@ -3260,14 +3260,14 @@ Token
       begin: 368
       end: 374
       value: "weiß"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 368
       end: 374
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Haus]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 375
    end: 379
@@ -3337,7 +3337,7 @@ Token
       begin: 375
       end: 379
       value: "Haus"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 375
       end: 379
@@ -3372,7 +3372,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [mit]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 380
    end: 383
@@ -3421,7 +3421,7 @@ Token
       begin: 380
       end: 383
       value: "mit"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 380
       end: 383
@@ -3505,7 +3505,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 384
    end: 387
@@ -3568,14 +3568,14 @@ Token
       begin: 384
       end: 387
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 384
       end: 387
       PosValue: "ART"
       coarseValue: "DET"
 [amtierenden]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 388
    end: 399
@@ -3638,14 +3638,14 @@ Token
       begin: 388
       end: 399
       value: "amtierend"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 388
       end: 399
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Präsidenten]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 400
    end: 411
@@ -3708,7 +3708,7 @@ Token
       begin: 400
       end: 411
       value: "Präsident"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 400
       end: 411
@@ -3764,7 +3764,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [George]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 412
    end: 418
@@ -3834,14 +3834,14 @@ Token
       begin: 412
       end: 418
       value: "George"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 412
       end: 418
       PosValue: "NE"
       coarseValue: "PROPN"
 [Bush]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 419
    end: 423
@@ -3911,14 +3911,14 @@ Token
       begin: 419
       end: 423
       value: "Bush"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 419
       end: 423
       PosValue: "NE"
       coarseValue: "PROPN"
 [und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 424
    end: 427
@@ -3974,7 +3974,7 @@ Token
       begin: 424
       end: 427
       value: "und"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 424
       end: 427
@@ -4023,7 +4023,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 428
    end: 431
@@ -4086,14 +4086,14 @@ Token
       begin: 428
       end: 431
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 428
       end: 431
       PosValue: "ART"
       coarseValue: "DET"
 [Demokraten]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 432
    end: 442
@@ -4156,7 +4156,7 @@ Token
       begin: 432
       end: 442
       value: "Demokrat"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 432
       end: 442
@@ -4212,7 +4212,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [Bill]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 443
    end: 447
@@ -4282,14 +4282,14 @@ Token
       begin: 443
       end: 447
       value: "Bill"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 443
       end: 447
       PosValue: "NE"
       coarseValue: "PROPN"
 [Clinton]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 448
    end: 455
@@ -4359,14 +4359,14 @@ Token
       begin: 448
       end: 455
       value: "Clinton"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 448
       end: 455
       PosValue: "NE"
       coarseValue: "PROPN"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 456
    end: 457
@@ -4394,7 +4394,7 @@ Token
       begin: 456
       end: 457
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 456
       end: 457
@@ -4517,7 +4517,7 @@ Constituent
    children: FSArray
    syntacticFunction: "RE"
 [Daß]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 458
    end: 461
@@ -4573,14 +4573,14 @@ Token
       begin: 458
       end: 461
       value: "daß"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 458
       end: 461
       PosValue: "KOUS"
       coarseValue: "CONJ"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 462
    end: 467
@@ -4636,7 +4636,7 @@ Token
       begin: 462
       end: 467
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 462
       end: 467
@@ -4734,7 +4734,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 468
    end: 471
@@ -4804,14 +4804,14 @@ Token
       begin: 468
       end: 471
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 468
       end: 471
       PosValue: "ART"
       coarseValue: "DET"
 [Unternehmen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 472
    end: 483
@@ -4881,14 +4881,14 @@ Token
       begin: 472
       end: 483
       value: "Unternehmen"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 472
       end: 483
       PosValue: "NN"
       coarseValue: "NOUN"
 [erfolgreich]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 484
    end: 495
@@ -4951,14 +4951,14 @@ Token
       begin: 484
       end: 495
       value: "erfolgreich"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 484
       end: 495
       PosValue: "ADJD"
       coarseValue: "ADJ"
 [leiten]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 496
    end: 502
@@ -5021,14 +5021,14 @@ Token
       begin: 496
       end: 502
       value: "leiten"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 496
       end: 502
       PosValue: "VVINF"
       coarseValue: "VERB"
 [kann]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 503
    end: 507
@@ -5084,14 +5084,14 @@ Token
       begin: 503
       end: 507
       value: "können"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 503
       end: 507
       PosValue: "VMFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 508
    end: 509
@@ -5119,14 +5119,14 @@ Token
       begin: 508
       end: 509
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 508
       end: 509
       PosValue: "$,"
       coarseValue: "PUNCT"
 [davon]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 510
    end: 515
@@ -5175,14 +5175,14 @@ Token
       begin: 510
       end: 515
       value: "davon"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 510
       end: 515
       PosValue: "PROAV"
       coarseValue: "ADV"
 [sind]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 516
    end: 520
@@ -5217,7 +5217,7 @@ Token
       begin: 516
       end: 520
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 516
       end: 520
@@ -5245,7 +5245,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [selbst]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 521
    end: 527
@@ -5287,14 +5287,14 @@ Token
       begin: 521
       end: 527
       value: "selbst"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 521
       end: 527
       PosValue: "ADV"
       coarseValue: "ADV"
 [seine]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 528
    end: 533
@@ -5336,14 +5336,14 @@ Token
       begin: 528
       end: 533
       value: "sein"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 528
       end: 533
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [Kritiker]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 534
    end: 542
@@ -5385,14 +5385,14 @@ Token
       begin: 534
       end: 542
       value: "Kritiker"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 534
       end: 542
       PosValue: "NN"
       coarseValue: "NOUN"
 [überzeugt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 543
    end: 552
@@ -5434,14 +5434,14 @@ Token
       begin: 543
       end: 552
       value: "überzeugen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 543
       end: 552
       PosValue: "VVPP"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 553
    end: 554
@@ -5469,7 +5469,7 @@ Token
       begin: 553
       end: 554
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 553
       end: 554
@@ -5529,7 +5529,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [Ob]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 555
    end: 557
@@ -5571,7 +5571,7 @@ Token
       begin: 555
       end: 557
       value: "ob"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 555
       end: 557
@@ -5606,7 +5606,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [diese]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 558
    end: 563
@@ -5655,14 +5655,14 @@ Token
       begin: 558
       end: 563
       value: "dieser"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 558
       end: 563
       PosValue: "PDAT"
       coarseValue: "PRON"
 [Fähigkeiten]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 564
    end: 575
@@ -5711,14 +5711,14 @@ Token
       begin: 564
       end: 575
       value: "Fähigkeit"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 564
       end: 575
       PosValue: "NN"
       coarseValue: "NOUN"
 [aber]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 576
    end: 580
@@ -5760,14 +5760,14 @@ Token
       begin: 576
       end: 580
       value: "aber"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 576
       end: 580
       PosValue: "ADV"
       coarseValue: "ADV"
 [ausreichen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 581
    end: 591
@@ -5809,14 +5809,14 @@ Token
       begin: 581
       end: 591
       value: "ausreichen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 581
       end: 591
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 592
    end: 593
@@ -5844,7 +5844,7 @@ Token
       begin: 592
       end: 593
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 592
       end: 593
@@ -5879,7 +5879,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [um]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 594
    end: 596
@@ -5928,7 +5928,7 @@ Token
       begin: 594
       end: 596
       value: "um"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 594
       end: 596
@@ -5970,7 +5970,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [die]
-DET
+POS_DET
    sofa: _InitialView
    begin: 597
    end: 600
@@ -6026,14 +6026,14 @@ Token
       begin: 597
       end: 600
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 597
       end: 600
       PosValue: "ART"
       coarseValue: "DET"
 [größte]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 601
    end: 607
@@ -6089,14 +6089,14 @@ Token
       begin: 601
       end: 607
       value: "groß"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 601
       end: 607
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Volkswirtschaft]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 608
    end: 623
@@ -6152,7 +6152,7 @@ Token
       begin: 608
       end: 623
       value: "Volkswirtschaft"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 608
       end: 623
@@ -6201,7 +6201,7 @@ Constituent
    children: FSArray
    syntacticFunction: "AG"
 [der]
-DET
+POS_DET
    sofa: _InitialView
    begin: 624
    end: 627
@@ -6264,14 +6264,14 @@ Token
       begin: 624
       end: 627
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 624
       end: 627
       PosValue: "ART"
       coarseValue: "DET"
 [Welt]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 628
    end: 632
@@ -6334,7 +6334,7 @@ Token
       begin: 628
       end: 632
       value: "Welt"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 628
       end: 632
@@ -6376,7 +6376,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [aus]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 633
    end: 636
@@ -6432,14 +6432,14 @@ Token
       begin: 633
       end: 636
       value: "aus"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 633
       end: 636
       PosValue: "APPR"
       coarseValue: "ADP"
 [ihrer]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 637
    end: 642
@@ -6495,14 +6495,14 @@ Token
       begin: 637
       end: 642
       value: "ihr"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 637
       end: 642
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [Krise]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 643
    end: 648
@@ -6558,7 +6558,7 @@ Token
       begin: 643
       end: 648
       value: "Krise"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 643
       end: 648
@@ -6600,7 +6600,7 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [zu]
-X
+POS_X
    sofa: _InitialView
    begin: 649
    end: 651
@@ -6656,14 +6656,14 @@ Token
       begin: 649
       end: 651
       value: "zu"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 649
       end: 651
       PosValue: "PTKZU"
       coarseValue: "X"
 [führen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 652
    end: 658
@@ -6719,14 +6719,14 @@ Token
       begin: 652
       end: 658
       value: "führen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 652
       end: 658
       PosValue: "VVINF"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 659
    end: 660
@@ -6754,14 +6754,14 @@ Token
       begin: 659
       end: 660
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 659
       end: 660
       PosValue: "$,"
       coarseValue: "PUNCT"
 [bezweifeln]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 661
    end: 671
@@ -6796,7 +6796,7 @@ Token
       begin: 661
       end: 671
       value: "bezweifeln"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 661
       end: 671
@@ -6824,7 +6824,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [viele]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 672
    end: 677
@@ -6866,14 +6866,14 @@ Token
       begin: 672
       end: 677
       value: "vieler"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 672
       end: 677
       PosValue: "PIAT"
       coarseValue: "PRON"
 [Ökonomen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 678
    end: 686
@@ -6915,14 +6915,14 @@ Token
       begin: 678
       end: 686
       value: "Ökonom"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 678
       end: 686
       PosValue: "NN"
       coarseValue: "NOUN"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 687
    end: 688
@@ -6950,7 +6950,7 @@ Token
       begin: 687
       end: 688
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 687
       end: 688
@@ -6989,7 +6989,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 689
    end: 692
@@ -7024,7 +7024,7 @@ Token
       begin: 689
       end: 692
       value: "und"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 689
       end: 692
@@ -7052,7 +7052,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [auch]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 693
    end: 697
@@ -7094,14 +7094,14 @@ Token
       begin: 693
       end: 697
       value: "auch"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 693
       end: 697
       PosValue: "ADV"
       coarseValue: "ADV"
 [die]
-DET
+POS_DET
    sofa: _InitialView
    begin: 698
    end: 701
@@ -7143,14 +7143,14 @@ Token
       begin: 698
       end: 701
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 698
       end: 701
       PosValue: "ART"
       coarseValue: "DET"
 [Konzernchefs]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 702
    end: 714
@@ -7192,7 +7192,7 @@ Token
       begin: 702
       end: 714
       value: "Konzernchef"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 702
       end: 714
@@ -7227,7 +7227,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [in]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 715
    end: 717
@@ -7276,14 +7276,14 @@ Token
       begin: 715
       end: 717
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 715
       end: 717
       PosValue: "APPR"
       coarseValue: "ADP"
 [den]
-DET
+POS_DET
    sofa: _InitialView
    begin: 718
    end: 721
@@ -7332,14 +7332,14 @@ Token
       begin: 718
       end: 721
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 718
       end: 721
       PosValue: "ART"
       coarseValue: "DET"
 [USA]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 722
    end: 725
@@ -7388,14 +7388,14 @@ Token
       begin: 722
       end: 725
       value: "USA"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 722
       end: 725
       PosValue: "NE"
       coarseValue: "PROPN"
 [halten]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 726
    end: 732
@@ -7430,7 +7430,7 @@ Token
       begin: 726
       end: 732
       value: "halten"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 726
       end: 732
@@ -7458,7 +7458,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [nicht]
-X
+POS_X
    sofa: _InitialView
    begin: 733
    end: 738
@@ -7500,14 +7500,14 @@ Token
       begin: 733
       end: 738
       value: "nicht"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 733
       end: 738
       PosValue: "PTKNEG"
       coarseValue: "X"
 [viel]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 739
    end: 743
@@ -7549,7 +7549,7 @@ Token
       begin: 739
       end: 743
       value: "viel"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 739
       end: 743
@@ -7577,7 +7577,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OP"
 [von]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 744
    end: 747
@@ -7619,14 +7619,14 @@ Token
       begin: 744
       end: 747
       value: "von"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 744
       end: 747
       PosValue: "APPR"
       coarseValue: "ADP"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 748
    end: 751
@@ -7668,14 +7668,14 @@ Token
       begin: 748
       end: 751
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 748
       end: 751
       PosValue: "ART"
       coarseValue: "DET"
 [62jährigen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 752
    end: 762
@@ -7717,14 +7717,14 @@ Token
       begin: 752
       end: 762
       value: "62jährige"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 752
       end: 762
       PosValue: "NN"
       coarseValue: "NOUN"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 763
    end: 764
@@ -7752,7 +7752,7 @@ Token
       begin: 763
       end: 764
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 763
       end: 764
@@ -7812,7 +7812,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [Zwar]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 765
    end: 769
@@ -7854,14 +7854,14 @@ Token
       begin: 765
       end: 769
       value: "zwar"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 765
       end: 769
       PosValue: "ADV"
       coarseValue: "ADV"
 [können]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 770
    end: 776
@@ -7903,7 +7903,7 @@ Token
       begin: 770
       end: 776
       value: "können"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 770
       end: 776
@@ -7938,7 +7938,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [sich]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 777
    end: 781
@@ -7987,7 +7987,7 @@ Token
       begin: 777
       end: 781
       value: "sich"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 777
       end: 781
@@ -8022,7 +8022,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [die]
-DET
+POS_DET
    sofa: _InitialView
    begin: 782
    end: 785
@@ -8071,14 +8071,14 @@ Token
       begin: 782
       end: 785
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 782
       end: 785
       PosValue: "ART"
       coarseValue: "DET"
 [meisten]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 786
    end: 793
@@ -8127,14 +8127,14 @@ Token
       begin: 786
       end: 793
       value: "meister"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 786
       end: 793
       PosValue: "PIAT"
       coarseValue: "PRON"
 [Topmanager]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 794
    end: 804
@@ -8183,14 +8183,14 @@ Token
       begin: 794
       end: 804
       value: "Topmanager"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 794
       end: 804
       PosValue: "NN"
       coarseValue: "NOUN"
 [durchaus]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 805
    end: 813
@@ -8232,7 +8232,7 @@ Token
       begin: 805
       end: 813
       value: "durchaus"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 805
       end: 813
@@ -8274,7 +8274,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [einen]
-DET
+POS_DET
    sofa: _InitialView
    begin: 814
    end: 819
@@ -8330,14 +8330,14 @@ Token
       begin: 814
       end: 819
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 814
       end: 819
       PosValue: "ART"
       coarseValue: "DET"
 [Unternehmer]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 820
    end: 831
@@ -8393,7 +8393,7 @@ Token
       begin: 820
       end: 831
       value: "Unternehmer"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 820
       end: 831
@@ -8435,7 +8435,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [als]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 832
    end: 835
@@ -8491,14 +8491,14 @@ Token
       begin: 832
       end: 835
       value: "als"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 832
       end: 835
       PosValue: "APPR"
       coarseValue: "ADP"
 [Präsidenten]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 836
    end: 847
@@ -8554,14 +8554,14 @@ Token
       begin: 836
       end: 847
       value: "Präsident"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 836
       end: 847
       PosValue: "NN"
       coarseValue: "NOUN"
 [vorstellen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 848
    end: 858
@@ -8610,14 +8610,14 @@ Token
       begin: 848
       end: 858
       value: "vorstellen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 848
       end: 858
       PosValue: "VVINF"
       coarseValue: "VERB"
 [-]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 859
    end: 860
@@ -8645,7 +8645,7 @@ Token
       begin: 859
       end: 860
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 859
       end: 860
@@ -8673,7 +8673,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [nur]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 861
    end: 864
@@ -8715,14 +8715,14 @@ Token
       begin: 861
       end: 864
       value: "nur"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 861
       end: 864
       PosValue: "ADV"
       coarseValue: "ADV"
 [nicht]
-X
+POS_X
    sofa: _InitialView
    begin: 865
    end: 870
@@ -8764,7 +8764,7 @@ Token
       begin: 865
       end: 870
       value: "nicht"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 865
       end: 870
@@ -8834,7 +8834,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [ausgerechnet]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 871
    end: 883
@@ -8890,14 +8890,14 @@ Token
       begin: 871
       end: 883
       value: "ausgerechnet"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 871
       end: 883
       PosValue: "ADV"
       coarseValue: "ADV"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 884
    end: 889
@@ -8953,14 +8953,14 @@ Token
       begin: 884
       end: 889
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 884
       end: 889
       PosValue: "NE"
       coarseValue: "PROPN"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 890
    end: 891
@@ -8988,7 +8988,7 @@ Token
       begin: 890
       end: 891
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 890
       end: 891
@@ -9048,7 +9048,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [Nach]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 892
    end: 896
@@ -9090,14 +9090,14 @@ Token
       begin: 892
       end: 896
       value: "nach"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 892
       end: 896
       PosValue: "APPR"
       coarseValue: "ADP"
 [einer]
-DET
+POS_DET
    sofa: _InitialView
    begin: 897
    end: 902
@@ -9139,14 +9139,14 @@ Token
       begin: 897
       end: 902
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 897
       end: 902
       PosValue: "ART"
       coarseValue: "DET"
 [Umfrage]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 903
    end: 910
@@ -9188,7 +9188,7 @@ Token
       begin: 903
       end: 910
       value: "Umfrage"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 903
       end: 910
@@ -9223,7 +9223,7 @@ Constituent
    children: FSArray
    syntacticFunction: "AG"
 [des]
-DET
+POS_DET
    sofa: _InitialView
    begin: 911
    end: 914
@@ -9272,14 +9272,14 @@ Token
       begin: 911
       end: 914
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 911
       end: 914
       PosValue: "ART"
       coarseValue: "DET"
 [Wirtschaftsmagazins]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 915
    end: 934
@@ -9328,14 +9328,14 @@ Token
       begin: 915
       end: 934
       value: "Wirtschaftsmagazin"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 915
       end: 934
       PosValue: "NN"
       coarseValue: "NOUN"
 [Fortune]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 935
    end: 942
@@ -9384,7 +9384,7 @@ Token
       begin: 935
       end: 942
       value: "Fortune"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 935
       end: 942
@@ -9419,7 +9419,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [unter]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 943
    end: 948
@@ -9468,14 +9468,14 @@ Token
       begin: 943
       end: 948
       value: "unter"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 943
       end: 948
       PosValue: "APPR"
       coarseValue: "ADP"
 [den]
-DET
+POS_DET
    sofa: _InitialView
    begin: 949
    end: 952
@@ -9524,14 +9524,14 @@ Token
       begin: 949
       end: 952
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 949
       end: 952
       PosValue: "ART"
       coarseValue: "DET"
 [Bossen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 953
    end: 959
@@ -9580,7 +9580,7 @@ Token
       begin: 953
       end: 959
       value: "Boß"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 953
       end: 959
@@ -9622,7 +9622,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PG"
 [von]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 960
    end: 963
@@ -9678,14 +9678,14 @@ Token
       begin: 960
       end: 963
       value: "von"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 960
       end: 963
       PosValue: "APPR"
       coarseValue: "ADP"
 [500]
-NUM
+POS_NUM
    sofa: _InitialView
    begin: 964
    end: 967
@@ -9741,14 +9741,14 @@ Token
       begin: 964
       end: 967
       value: "500"
-   pos: NUM
+   pos: POS_NUM
       sofa: _InitialView
       begin: 964
       end: 967
       PosValue: "CARD"
       coarseValue: "NUM"
 [Großunternehmen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 968
    end: 983
@@ -9804,14 +9804,14 @@ Token
       begin: 968
       end: 983
       value: "Großunternehmen"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 968
       end: 983
       PosValue: "NN"
       coarseValue: "NOUN"
 [wünschten]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 984
    end: 993
@@ -9846,7 +9846,7 @@ Token
       begin: 984
       end: 993
       value: "wünschen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 984
       end: 993
@@ -9874,7 +9874,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [im]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 994
    end: 996
@@ -9916,14 +9916,14 @@ Token
       begin: 994
       end: 996
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 994
       end: 996
       PosValue: "APPRART"
       coarseValue: "ADP"
 [Mai]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 997
    end: 1000
@@ -9965,7 +9965,7 @@ Token
       begin: 997
       end: 1000
       value: "Mai"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 997
       end: 1000
@@ -10021,7 +10021,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [nur]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1001
    end: 1004
@@ -10070,14 +10070,14 @@ Token
       begin: 1001
       end: 1004
       value: "nur"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1001
       end: 1004
       PosValue: "ADV"
       coarseValue: "ADV"
 [elf]
-NUM
+POS_NUM
    sofa: _InitialView
    begin: 1005
    end: 1008
@@ -10126,14 +10126,14 @@ Token
       begin: 1005
       end: 1008
       value: "elf"
-   pos: NUM
+   pos: POS_NUM
       sofa: _InitialView
       begin: 1005
       end: 1008
       PosValue: "CARD"
       coarseValue: "NUM"
 [Prozent]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1009
    end: 1016
@@ -10175,14 +10175,14 @@ Token
       begin: 1009
       end: 1016
       value: "Prozent"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1009
       end: 1016
       PosValue: "NN"
       coarseValue: "NOUN"
 [``]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1017
    end: 1019
@@ -10210,14 +10210,14 @@ Token
       begin: 1017
       end: 1019
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1017
       end: 1019
       PosValue: "$("
       coarseValue: "PUNCT"
 [Ross]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1020
    end: 1024
@@ -10252,7 +10252,7 @@ Token
       begin: 1020
       end: 1024
       value: "Ross"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1020
       end: 1024
@@ -10280,7 +10280,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [for]
-X
+POS_X
    sofa: _InitialView
    begin: 1025
    end: 1028
@@ -10322,14 +10322,14 @@ Token
       begin: 1025
       end: 1028
       value: "--"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 1025
       end: 1028
       PosValue: "FM"
       coarseValue: "X"
 [President]
-X
+POS_X
    sofa: _InitialView
    begin: 1029
    end: 1038
@@ -10371,14 +10371,14 @@ Token
       begin: 1029
       end: 1038
       value: "--"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 1029
       end: 1038
       PosValue: "FM"
       coarseValue: "X"
 ['']
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1039
    end: 1041
@@ -10406,14 +10406,14 @@ Token
       begin: 1039
       end: 1041
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1039
       end: 1041
       PosValue: "$("
       coarseValue: "PUNCT"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1042
    end: 1043
@@ -10441,7 +10441,7 @@ Token
       begin: 1042
       end: 1043
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1042
       end: 1043
@@ -10497,7 +10497,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [während]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1044
    end: 1051
@@ -10546,7 +10546,7 @@ Token
       begin: 1044
       end: 1051
       value: "während"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1044
       end: 1051
@@ -10588,7 +10588,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [78]
-NUM
+POS_NUM
    sofa: _InitialView
    begin: 1052
    end: 1054
@@ -10644,14 +10644,14 @@ Token
       begin: 1052
       end: 1054
       value: "78"
-   pos: NUM
+   pos: POS_NUM
       sofa: _InitialView
       begin: 1052
       end: 1054
       PosValue: "CARD"
       coarseValue: "NUM"
 [Prozent]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1055
    end: 1062
@@ -10707,14 +10707,14 @@ Token
       begin: 1055
       end: 1062
       value: "Prozent"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1055
       end: 1062
       PosValue: "NN"
       coarseValue: "NOUN"
 [sich]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1063
    end: 1067
@@ -10763,7 +10763,7 @@ Token
       begin: 1063
       end: 1067
       value: "sich"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1063
       end: 1067
@@ -10805,7 +10805,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [für]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1068
    end: 1071
@@ -10861,14 +10861,14 @@ Token
       begin: 1068
       end: 1071
       value: "für"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1068
       end: 1071
       PosValue: "APPR"
       coarseValue: "ADP"
 [Bush]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1072
    end: 1076
@@ -10924,14 +10924,14 @@ Token
       begin: 1072
       end: 1076
       value: "Bush"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1072
       end: 1076
       PosValue: "NE"
       coarseValue: "PROPN"
 [und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1077
    end: 1080
@@ -10973,7 +10973,7 @@ Token
       begin: 1077
       end: 1080
       value: "und"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1077
       end: 1080
@@ -11043,7 +11043,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [vier]
-NUM
+POS_NUM
    sofa: _InitialView
    begin: 1081
    end: 1085
@@ -11099,14 +11099,14 @@ Token
       begin: 1081
       end: 1085
       value: "vier"
-   pos: NUM
+   pos: POS_NUM
       sofa: _InitialView
       begin: 1081
       end: 1085
       PosValue: "CARD"
       coarseValue: "NUM"
 [Prozent]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1086
    end: 1093
@@ -11162,7 +11162,7 @@ Token
       begin: 1086
       end: 1093
       value: "Prozent"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1086
       end: 1093
@@ -11204,7 +11204,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [für]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1094
    end: 1097
@@ -11260,14 +11260,14 @@ Token
       begin: 1094
       end: 1097
       value: "für"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1094
       end: 1097
       PosValue: "APPR"
       coarseValue: "ADP"
 [Clinton]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1098
    end: 1105
@@ -11323,14 +11323,14 @@ Token
       begin: 1098
       end: 1105
       value: "Clinton"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1098
       end: 1105
       PosValue: "NE"
       coarseValue: "PROPN"
 [aussprachen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1106
    end: 1117
@@ -11379,14 +11379,14 @@ Token
       begin: 1106
       end: 1117
       value: "aussprechen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1106
       end: 1117
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1118
    end: 1119
@@ -11414,7 +11414,7 @@ Token
       begin: 1118
       end: 1119
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1118
       end: 1119
@@ -11453,7 +11453,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Allerdings]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1120
    end: 1130
@@ -11488,14 +11488,14 @@ Token
       begin: 1120
       end: 1130
       value: "allerdings"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1120
       end: 1130
       PosValue: "ADV"
       coarseValue: "ADV"
 [glaubt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1131
    end: 1137
@@ -11530,7 +11530,7 @@ Token
       begin: 1131
       end: 1137
       value: "glauben"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1131
       end: 1137
@@ -11558,7 +11558,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [fast]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1138
    end: 1142
@@ -11600,14 +11600,14 @@ Token
       begin: 1138
       end: 1142
       value: "fast"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1138
       end: 1142
       PosValue: "ADV"
       coarseValue: "ADV"
 [die]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1143
    end: 1146
@@ -11649,14 +11649,14 @@ Token
       begin: 1143
       end: 1146
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1143
       end: 1146
       PosValue: "ART"
       coarseValue: "DET"
 [Hälfte]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1147
    end: 1153
@@ -11698,7 +11698,7 @@ Token
       begin: 1147
       end: 1153
       value: "Hälfte"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1147
       end: 1153
@@ -11733,7 +11733,7 @@ Constituent
    children: FSArray
    syntacticFunction: "AG"
 [der]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1154
    end: 1157
@@ -11782,14 +11782,14 @@ Token
       begin: 1154
       end: 1157
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1154
       end: 1157
       PosValue: "ART"
       coarseValue: "DET"
 [Chief]
-X
+POS_X
    sofa: _InitialView
    begin: 1158
    end: 1163
@@ -11838,14 +11838,14 @@ Token
       begin: 1158
       end: 1163
       value: "--"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 1158
       end: 1163
       PosValue: "FM"
       coarseValue: "X"
 [Executives]
-X
+POS_X
    sofa: _InitialView
    begin: 1164
    end: 1174
@@ -11894,14 +11894,14 @@ Token
       begin: 1164
       end: 1174
       value: "--"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 1164
       end: 1174
       PosValue: "FM"
       coarseValue: "X"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1175
    end: 1176
@@ -11929,7 +11929,7 @@ Token
       begin: 1175
       end: 1176
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1175
       end: 1176
@@ -11957,7 +11957,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [daß]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1177
    end: 1180
@@ -11999,14 +11999,14 @@ Token
       begin: 1177
       end: 1180
       value: "daß"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1177
       end: 1180
       PosValue: "KOUS"
       coarseValue: "CONJ"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1181
    end: 1186
@@ -12048,14 +12048,14 @@ Token
       begin: 1181
       end: 1186
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1181
       end: 1186
       PosValue: "NE"
       coarseValue: "PROPN"
 [durchaus]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1187
    end: 1195
@@ -12097,7 +12097,7 @@ Token
       begin: 1187
       end: 1195
       value: "durchaus"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1187
       end: 1195
@@ -12132,7 +12132,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [Chancen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1196
    end: 1203
@@ -12181,14 +12181,14 @@ Token
       begin: 1196
       end: 1203
       value: "Chance"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1196
       end: 1203
       PosValue: "NN"
       coarseValue: "NOUN"
 [habe]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1204
    end: 1208
@@ -12230,14 +12230,14 @@ Token
       begin: 1204
       end: 1208
       value: "haben"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1204
       end: 1208
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1209
    end: 1210
@@ -12265,7 +12265,7 @@ Token
       begin: 1209
       end: 1210
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1209
       end: 1210
@@ -12349,7 +12349,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [die]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1211
    end: 1214
@@ -12412,14 +12412,14 @@ Token
       begin: 1211
       end: 1214
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1211
       end: 1214
       PosValue: "ART"
       coarseValue: "DET"
 [Wahl]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1215
    end: 1219
@@ -12482,7 +12482,7 @@ Token
       begin: 1215
       end: 1219
       value: "Wahl"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1215
       end: 1219
@@ -12538,7 +12538,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [im]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1220
    end: 1222
@@ -12608,14 +12608,14 @@ Token
       begin: 1220
       end: 1222
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1220
       end: 1222
       PosValue: "APPRART"
       coarseValue: "ADP"
 [November]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1223
    end: 1231
@@ -12685,7 +12685,7 @@ Token
       begin: 1223
       end: 1231
       value: "November"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1223
       end: 1231
@@ -12734,7 +12734,7 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [zu]
-X
+POS_X
    sofa: _InitialView
    begin: 1232
    end: 1234
@@ -12797,14 +12797,14 @@ Token
       begin: 1232
       end: 1234
       value: "zu"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 1232
       end: 1234
       PosValue: "PTKZU"
       coarseValue: "X"
 [gewinnen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1235
    end: 1243
@@ -12867,14 +12867,14 @@ Token
       begin: 1235
       end: 1243
       value: "gewinnen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1235
       end: 1243
       PosValue: "VVINF"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1244
    end: 1245
@@ -12902,7 +12902,7 @@ Token
       begin: 1244
       end: 1245
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1244
       end: 1245
@@ -12937,7 +12937,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [wenn]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1246
    end: 1250
@@ -12986,14 +12986,14 @@ Token
       begin: 1246
       end: 1250
       value: "wenn"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1246
       end: 1250
       PosValue: "KOUS"
       coarseValue: "CONJ"
 [er]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1251
    end: 1253
@@ -13042,14 +13042,14 @@ Token
       begin: 1251
       end: 1253
       value: "er"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1251
       end: 1253
       PosValue: "PPER"
       coarseValue: "PRON"
 [denn]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1254
    end: 1258
@@ -13098,14 +13098,14 @@ Token
       begin: 1254
       end: 1258
       value: "denn"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1254
       end: 1258
       PosValue: "ADV"
       coarseValue: "ADV"
 [kandidiert]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1259
    end: 1269
@@ -13154,14 +13154,14 @@ Token
       begin: 1259
       end: 1269
       value: "kandidieren"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1259
       end: 1269
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1270
    end: 1271
@@ -13189,7 +13189,7 @@ Token
       begin: 1270
       end: 1271
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1270
       end: 1271
@@ -13249,7 +13249,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [Als]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1272
    end: 1275
@@ -13291,14 +13291,14 @@ Token
       begin: 1272
       end: 1275
       value: "als"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1272
       end: 1275
       PosValue: "APPR"
       coarseValue: "ADP"
 [größte]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1276
    end: 1282
@@ -13340,14 +13340,14 @@ Token
       begin: 1276
       end: 1282
       value: "groß"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1276
       end: 1282
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Schwäche]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1283
    end: 1291
@@ -13389,7 +13389,7 @@ Token
       begin: 1283
       end: 1291
       value: "Schwäche"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1283
       end: 1291
@@ -13424,7 +13424,7 @@ Constituent
    children: FSArray
    syntacticFunction: "AG"
 [des]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1292
    end: 1295
@@ -13473,14 +13473,14 @@ Token
       begin: 1292
       end: 1295
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1292
       end: 1295
       PosValue: "ART"
       coarseValue: "DET"
 [Texaners]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1296
    end: 1304
@@ -13529,14 +13529,14 @@ Token
       begin: 1296
       end: 1304
       value: "Texaner"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1296
       end: 1304
       PosValue: "NN"
       coarseValue: "NOUN"
 [nennen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1305
    end: 1311
@@ -13571,7 +13571,7 @@ Token
       begin: 1305
       end: 1311
       value: "nennen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1305
       end: 1311
@@ -13599,7 +13599,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [die]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1312
    end: 1315
@@ -13641,14 +13641,14 @@ Token
       begin: 1312
       end: 1315
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1312
       end: 1315
       PosValue: "ART"
       coarseValue: "DET"
 [Befragten]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1316
    end: 1325
@@ -13690,7 +13690,7 @@ Token
       begin: 1316
       end: 1325
       value: "befragter"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1316
       end: 1325
@@ -13718,7 +13718,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [seinen]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1326
    end: 1332
@@ -13760,14 +13760,14 @@ Token
       begin: 1326
       end: 1332
       value: "sein"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1326
       end: 1332
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [Mangel]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1333
    end: 1339
@@ -13809,7 +13809,7 @@ Token
       begin: 1333
       end: 1339
       value: "Mangel"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1333
       end: 1339
@@ -13844,7 +13844,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OP"
 [an]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1340
    end: 1342
@@ -13893,14 +13893,14 @@ Token
       begin: 1340
       end: 1342
       value: "an"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1340
       end: 1342
       PosValue: "APPR"
       coarseValue: "ADP"
 [Erfahrung]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1343
    end: 1352
@@ -13949,7 +13949,7 @@ Token
       begin: 1343
       end: 1352
       value: "Erfahrung"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1343
       end: 1352
@@ -13991,7 +13991,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [auf]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1353
    end: 1356
@@ -14047,14 +14047,14 @@ Token
       begin: 1353
       end: 1356
       value: "auf"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1353
       end: 1356
       PosValue: "APPR"
       coarseValue: "ADP"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1357
    end: 1360
@@ -14110,14 +14110,14 @@ Token
       begin: 1357
       end: 1360
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1357
       end: 1360
       PosValue: "ART"
       coarseValue: "DET"
 [politischen]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1361
    end: 1372
@@ -14173,14 +14173,14 @@ Token
       begin: 1361
       end: 1372
       value: "politisch"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1361
       end: 1372
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Parkett]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1373
    end: 1380
@@ -14236,14 +14236,14 @@ Token
       begin: 1373
       end: 1380
       value: "Parkett"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1373
       end: 1380
       PosValue: "NN"
       coarseValue: "NOUN"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1381
    end: 1382
@@ -14271,7 +14271,7 @@ Token
       begin: 1381
       end: 1382
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1381
       end: 1382
@@ -14310,7 +14310,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Viele]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1383
    end: 1388
@@ -14345,14 +14345,14 @@ Token
       begin: 1383
       end: 1388
       value: "viele"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1383
       end: 1388
       PosValue: "PIS"
       coarseValue: "PRON"
 [meinen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1389
    end: 1395
@@ -14387,14 +14387,14 @@ Token
       begin: 1389
       end: 1395
       value: "meinen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1389
       end: 1395
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1396
    end: 1397
@@ -14422,7 +14422,7 @@ Token
       begin: 1396
       end: 1397
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1396
       end: 1397
@@ -14450,7 +14450,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [daß]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1398
    end: 1401
@@ -14492,14 +14492,14 @@ Token
       begin: 1398
       end: 1401
       value: "daß"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1398
       end: 1401
       PosValue: "KOUS"
       coarseValue: "CONJ"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1402
    end: 1407
@@ -14541,7 +14541,7 @@ Token
       begin: 1402
       end: 1407
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1402
       end: 1407
@@ -14611,7 +14611,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [mit]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1408
    end: 1411
@@ -14667,14 +14667,14 @@ Token
       begin: 1408
       end: 1411
       value: "mit"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1408
       end: 1411
       PosValue: "APPR"
       coarseValue: "ADP"
 [seinem]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1412
    end: 1418
@@ -14730,14 +14730,14 @@ Token
       begin: 1412
       end: 1418
       value: "sein"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1412
       end: 1418
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [Befehlston]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1419
    end: 1429
@@ -14793,7 +14793,7 @@ Token
       begin: 1419
       end: 1429
       value: "Befehlston"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1419
       end: 1429
@@ -14835,7 +14835,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [auf]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1430
    end: 1433
@@ -14891,14 +14891,14 @@ Token
       begin: 1430
       end: 1433
       value: "auf"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1430
       end: 1433
       PosValue: "APPR"
       coarseValue: "ADP"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1434
    end: 1437
@@ -14954,14 +14954,14 @@ Token
       begin: 1434
       end: 1437
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1434
       end: 1437
       PosValue: "ART"
       coarseValue: "DET"
 [Capitol]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1438
    end: 1445
@@ -15017,7 +15017,7 @@ Token
       begin: 1438
       end: 1445
       value: "Capitol"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1438
       end: 1445
@@ -15059,7 +15059,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [gegen]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1446
    end: 1451
@@ -15115,14 +15115,14 @@ Token
       begin: 1446
       end: 1451
       value: "gegen"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1446
       end: 1451
       PosValue: "APPR"
       coarseValue: "ADP"
 [eine]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1452
    end: 1456
@@ -15178,14 +15178,14 @@ Token
       begin: 1452
       end: 1456
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1452
       end: 1456
       PosValue: "ART"
       coarseValue: "DET"
 [Wand]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1457
    end: 1461
@@ -15241,14 +15241,14 @@ Token
       begin: 1457
       end: 1461
       value: "Wand"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1457
       end: 1461
       PosValue: "NN"
       coarseValue: "NOUN"
 [laufen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1462
    end: 1468
@@ -15297,14 +15297,14 @@ Token
       begin: 1462
       end: 1468
       value: "laufen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1462
       end: 1468
       PosValue: "VVINF"
       coarseValue: "VERB"
 [würde]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1469
    end: 1474
@@ -15346,14 +15346,14 @@ Token
       begin: 1469
       end: 1474
       value: "werden"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1469
       end: 1474
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1475
    end: 1476
@@ -15381,7 +15381,7 @@ Token
       begin: 1475
       end: 1476
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1475
       end: 1476
@@ -15420,7 +15420,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [So]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1477
    end: 1479
@@ -15455,14 +15455,14 @@ Token
       begin: 1477
       end: 1479
       value: "so"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1477
       end: 1479
       PosValue: "ADV"
       coarseValue: "ADV"
 [erklärt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1480
    end: 1487
@@ -15497,7 +15497,7 @@ Token
       begin: 1480
       end: 1487
       value: "erklären"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1480
       end: 1487
@@ -15525,7 +15525,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [etwa]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1488
    end: 1492
@@ -15567,7 +15567,7 @@ Token
       begin: 1488
       end: 1492
       value: "etwa"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1488
       end: 1492
@@ -15602,7 +15602,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [Edward]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1493
    end: 1499
@@ -15651,14 +15651,14 @@ Token
       begin: 1493
       end: 1499
       value: "Edward"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1493
       end: 1499
       PosValue: "NE"
       coarseValue: "PROPN"
 [Brandon]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1500
    end: 1507
@@ -15707,7 +15707,7 @@ Token
       begin: 1500
       end: 1507
       value: "Brandon"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1500
       end: 1507
@@ -15742,7 +15742,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [von]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1508
    end: 1511
@@ -15791,14 +15791,14 @@ Token
       begin: 1508
       end: 1511
       value: "von"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1508
       end: 1511
       PosValue: "APPR"
       coarseValue: "ADP"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1512
    end: 1515
@@ -15847,14 +15847,14 @@ Token
       begin: 1512
       end: 1515
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1512
       end: 1515
       PosValue: "ART"
       coarseValue: "DET"
 [Unternehmen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1516
    end: 1527
@@ -15903,7 +15903,7 @@ Token
       begin: 1516
       end: 1527
       value: "Unternehmen"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1516
       end: 1527
@@ -15945,7 +15945,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [National]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1528
    end: 1536
@@ -16001,14 +16001,14 @@ Token
       begin: 1528
       end: 1536
       value: "National"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1528
       end: 1536
       PosValue: "NE"
       coarseValue: "PROPN"
 [City]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1537
    end: 1541
@@ -16064,7 +16064,7 @@ Token
       begin: 1537
       end: 1541
       value: "City"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1537
       end: 1541
@@ -16106,7 +16106,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [in]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1542
    end: 1544
@@ -16162,14 +16162,14 @@ Token
       begin: 1542
       end: 1544
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1542
       end: 1544
       PosValue: "APPR"
       coarseValue: "ADP"
 [Ohio]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1545
    end: 1549
@@ -16225,14 +16225,14 @@ Token
       begin: 1545
       end: 1549
       value: "Ohio"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1545
       end: 1549
       PosValue: "NE"
       coarseValue: "PROPN"
 [:]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1550
    end: 1551
@@ -16260,7 +16260,7 @@ Token
       begin: 1550
       end: 1551
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1550
       end: 1551
@@ -16285,7 +16285,7 @@ ROOT
    constituentType: "ROOT"
    children: FSArray
 [``]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1552
    end: 1554
@@ -16313,7 +16313,7 @@ Token
       begin: 1552
       end: 1554
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1552
       end: 1554
@@ -16334,7 +16334,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Ich]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1555
    end: 1558
@@ -16369,14 +16369,14 @@ Token
       begin: 1555
       end: 1558
       value: "ich"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1555
       end: 1558
       PosValue: "PPER"
       coarseValue: "PRON"
 [glaube]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1559
    end: 1565
@@ -16411,14 +16411,14 @@ Token
       begin: 1559
       end: 1565
       value: "glauben"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1559
       end: 1565
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [kaum]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1566
    end: 1570
@@ -16453,14 +16453,14 @@ Token
       begin: 1566
       end: 1570
       value: "kaum"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1566
       end: 1570
       PosValue: "ADV"
       coarseValue: "ADV"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1571
    end: 1572
@@ -16488,7 +16488,7 @@ Token
       begin: 1571
       end: 1572
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1571
       end: 1572
@@ -16516,7 +16516,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [daß]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1573
    end: 1576
@@ -16558,7 +16558,7 @@ Token
       begin: 1573
       end: 1576
       value: "daß"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1573
       end: 1576
@@ -16628,7 +16628,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [mit]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1577
    end: 1580
@@ -16684,14 +16684,14 @@ Token
       begin: 1577
       end: 1580
       value: "mit"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1577
       end: 1580
       PosValue: "APPR"
       coarseValue: "ADP"
 [seinem]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1581
    end: 1587
@@ -16747,14 +16747,14 @@ Token
       begin: 1581
       end: 1587
       value: "sein"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1581
       end: 1587
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1588
    end: 1589
@@ -16782,7 +16782,7 @@ Token
       begin: 1588
       end: 1589
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1588
       end: 1589
@@ -16831,7 +16831,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [naja]
-X
+POS_X
    sofa: _InitialView
    begin: 1590
    end: 1594
@@ -16894,14 +16894,14 @@ Token
       begin: 1590
       end: 1594
       value: "naja"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 1590
       end: 1594
       PosValue: "ITJ"
       coarseValue: "X"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1595
    end: 1596
@@ -16929,14 +16929,14 @@ Token
       begin: 1595
       end: 1596
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1595
       end: 1596
       PosValue: "$,"
       coarseValue: "PUNCT"
 [etwas]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1597
    end: 1602
@@ -16999,14 +16999,14 @@ Token
       begin: 1597
       end: 1602
       value: "etwas"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1597
       end: 1602
       PosValue: "ADV"
       coarseValue: "ADV"
 [undiplomatischen]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1603
    end: 1619
@@ -17069,14 +17069,14 @@ Token
       begin: 1603
       end: 1619
       value: "undiplomatisch"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1603
       end: 1619
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Stil]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1620
    end: 1624
@@ -17132,7 +17132,7 @@ Token
       begin: 1620
       end: 1624
       value: "Stil"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1620
       end: 1624
@@ -17181,7 +17181,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MNR"
 [im]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1625
    end: 1627
@@ -17244,7 +17244,7 @@ Token
       begin: 1625
       end: 1627
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1625
       end: 1627
@@ -17356,7 +17356,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [Weißen]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1628
    end: 1634
@@ -17433,14 +17433,14 @@ Token
       begin: 1628
       end: 1634
       value: "weiß"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1628
       end: 1634
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Haus]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1635
    end: 1639
@@ -17517,7 +17517,7 @@ Token
       begin: 1635
       end: 1639
       value: "Haus"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1635
       end: 1639
@@ -17559,7 +17559,7 @@ Constituent
    children: FSArray
    syntacticFunction: "DA"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1640
    end: 1643
@@ -17615,14 +17615,14 @@ Token
       begin: 1640
       end: 1643
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1640
       end: 1643
       PosValue: "ART"
       coarseValue: "DET"
 [Land]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1644
    end: 1648
@@ -17678,7 +17678,7 @@ Token
       begin: 1644
       end: 1648
       value: "Land"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1644
       end: 1648
@@ -17713,7 +17713,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1649
    end: 1652
@@ -17762,14 +17762,14 @@ Token
       begin: 1649
       end: 1652
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1649
       end: 1652
       PosValue: "ART"
       coarseValue: "DET"
 [Gefallen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1653
    end: 1661
@@ -17818,14 +17818,14 @@ Token
       begin: 1653
       end: 1661
       value: "Gefallen"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1653
       end: 1661
       PosValue: "NN"
       coarseValue: "NOUN"
 [getan]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1662
    end: 1667
@@ -17874,14 +17874,14 @@ Token
       begin: 1662
       end: 1667
       value: "tun"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1662
       end: 1667
       PosValue: "VVPP"
       coarseValue: "VERB"
 [wäre]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1668
    end: 1672
@@ -17923,14 +17923,14 @@ Token
       begin: 1668
       end: 1672
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1668
       end: 1672
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1673
    end: 1674
@@ -17958,7 +17958,7 @@ Token
       begin: 1673
       end: 1674
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1673
       end: 1674
@@ -18018,7 +18018,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [Er]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1675
    end: 1677
@@ -18060,14 +18060,14 @@ Token
       begin: 1675
       end: 1677
       value: "er"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1675
       end: 1677
       PosValue: "PPER"
       coarseValue: "PRON"
 [wäre]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1678
    end: 1682
@@ -18109,14 +18109,14 @@ Token
       begin: 1678
       end: 1682
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1678
       end: 1682
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [vielleicht]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1683
    end: 1693
@@ -18158,7 +18158,7 @@ Token
       begin: 1683
       end: 1693
       value: "vielleicht"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1683
       end: 1693
@@ -18193,7 +18193,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1694
    end: 1697
@@ -18242,14 +18242,14 @@ Token
       begin: 1694
       end: 1697
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1694
       end: 1697
       PosValue: "ART"
       coarseValue: "DET"
 [prächtiger]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1698
    end: 1708
@@ -18298,14 +18298,14 @@ Token
       begin: 1698
       end: 1708
       value: "prächtig"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1698
       end: 1708
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Diktator]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1709
    end: 1717
@@ -18354,14 +18354,14 @@ Token
       begin: 1709
       end: 1717
       value: "Diktator"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1709
       end: 1717
       PosValue: "NN"
       coarseValue: "NOUN"
 [-]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1718
    end: 1719
@@ -18389,14 +18389,14 @@ Token
       begin: 1718
       end: 1719
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1718
       end: 1719
       PosValue: "$("
       coarseValue: "PUNCT"
 [aber]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1720
    end: 1724
@@ -18431,7 +18431,7 @@ Token
       begin: 1720
       end: 1724
       value: "aber"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1720
       end: 1724
@@ -18459,7 +18459,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [das]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1725
    end: 1728
@@ -18501,14 +18501,14 @@ Token
       begin: 1725
       end: 1728
       value: "der"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1725
       end: 1728
       PosValue: "PDS"
       coarseValue: "PRON"
 [ist]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1729
    end: 1732
@@ -18550,14 +18550,14 @@ Token
       begin: 1729
       end: 1732
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1729
       end: 1732
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [nicht]
-X
+POS_X
    sofa: _InitialView
    begin: 1733
    end: 1738
@@ -18599,7 +18599,7 @@ Token
       begin: 1733
       end: 1738
       value: "nicht"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 1733
       end: 1738
@@ -18634,7 +18634,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [unser]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1739
    end: 1744
@@ -18683,14 +18683,14 @@ Token
       begin: 1739
       end: 1744
       value: "unser"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1739
       end: 1744
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [System]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1745
    end: 1751
@@ -18739,14 +18739,14 @@ Token
       begin: 1745
       end: 1751
       value: "System"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1745
       end: 1751
       PosValue: "NN"
       coarseValue: "NOUN"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1752
    end: 1753
@@ -18774,14 +18774,14 @@ Token
       begin: 1752
       end: 1753
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1752
       end: 1753
       PosValue: "$."
       coarseValue: "PUNCT"
 ['']
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1754
    end: 1756
@@ -18809,7 +18809,7 @@ Token
       begin: 1754
       end: 1756
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1754
       end: 1756
@@ -18848,7 +18848,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1757
    end: 1760
@@ -18883,7 +18883,7 @@ Token
       begin: 1757
       end: 1760
       value: "und"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1757
       end: 1760
@@ -18911,7 +18911,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1761
    end: 1764
@@ -18953,14 +18953,14 @@ Token
       begin: 1761
       end: 1764
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1761
       end: 1764
       PosValue: "ART"
       coarseValue: "DET"
 [anderer]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1765
    end: 1772
@@ -19002,14 +19002,14 @@ Token
       begin: 1765
       end: 1772
       value: "anderer"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1765
       end: 1772
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Manager]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1773
    end: 1780
@@ -19051,14 +19051,14 @@ Token
       begin: 1773
       end: 1780
       value: "Manager"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1773
       end: 1780
       PosValue: "NN"
       coarseValue: "NOUN"
 [vermutet]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1781
    end: 1789
@@ -19093,14 +19093,14 @@ Token
       begin: 1781
       end: 1789
       value: "vermuten"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1781
       end: 1789
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1790
    end: 1791
@@ -19128,7 +19128,7 @@ Token
       begin: 1790
       end: 1791
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1790
       end: 1791
@@ -19156,7 +19156,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [daß]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1792
    end: 1795
@@ -19198,7 +19198,7 @@ Token
       begin: 1792
       end: 1795
       value: "daß"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1792
       end: 1795
@@ -19233,7 +19233,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [sich]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1796
    end: 1800
@@ -19282,14 +19282,14 @@ Token
       begin: 1796
       end: 1800
       value: "sich"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1796
       end: 1800
       PosValue: "PRF"
       coarseValue: "PRON"
 [``]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1801
    end: 1803
@@ -19317,7 +19317,7 @@ Token
       begin: 1801
       end: 1803
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1801
       end: 1803
@@ -19352,7 +19352,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1804
    end: 1807
@@ -19401,14 +19401,14 @@ Token
       begin: 1804
       end: 1807
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1804
       end: 1807
       PosValue: "ART"
       coarseValue: "DET"
 [Dogmatiker]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1808
    end: 1818
@@ -19457,7 +19457,7 @@ Token
       begin: 1808
       end: 1818
       value: "Dogmatiker"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1808
       end: 1818
@@ -19499,7 +19499,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CC"
 [wie]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 1819
    end: 1822
@@ -19555,14 +19555,14 @@ Token
       begin: 1819
       end: 1822
       value: "wie"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 1819
       end: 1822
       PosValue: "KOKOM"
       coarseValue: "CONJ"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1823
    end: 1828
@@ -19618,7 +19618,7 @@ Token
       begin: 1823
       end: 1828
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1823
       end: 1828
@@ -19660,7 +19660,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [in]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1829
    end: 1831
@@ -19716,14 +19716,14 @@ Token
       begin: 1829
       end: 1831
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1829
       end: 1831
       PosValue: "APPR"
       coarseValue: "ADP"
 [Washington]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 1832
    end: 1842
@@ -19779,14 +19779,14 @@ Token
       begin: 1832
       end: 1842
       value: "Washington"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 1832
       end: 1842
       PosValue: "NE"
       coarseValue: "PROPN"
 [schwer]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1843
    end: 1849
@@ -19835,14 +19835,14 @@ Token
       begin: 1843
       end: 1849
       value: "schwer"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1843
       end: 1849
       PosValue: "ADJD"
       coarseValue: "ADJ"
 [tun]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1850
    end: 1853
@@ -19891,14 +19891,14 @@ Token
       begin: 1850
       end: 1853
       value: "tun"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1850
       end: 1853
       PosValue: "VVINF"
       coarseValue: "VERB"
 [würde]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1854
    end: 1859
@@ -19940,14 +19940,14 @@ Token
       begin: 1854
       end: 1859
       value: "werden"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1854
       end: 1859
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1860
    end: 1861
@@ -19975,7 +19975,7 @@ Token
       begin: 1860
       end: 1861
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1860
       end: 1861
@@ -20017,7 +20017,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [es]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1862
    end: 1864
@@ -20073,14 +20073,14 @@ Token
       begin: 1862
       end: 1864
       value: "es"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1862
       end: 1864
       PosValue: "PPER"
       coarseValue: "PRON"
 [sei]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1865
    end: 1868
@@ -20136,14 +20136,14 @@ Token
       begin: 1865
       end: 1868
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1865
       end: 1868
       PosValue: "VAFIN"
       coarseValue: "VERB"
 [denn]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1869
    end: 1873
@@ -20199,7 +20199,7 @@ Token
       begin: 1869
       end: 1873
       value: "denn"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1869
       end: 1873
@@ -20248,7 +20248,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [er]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1874
    end: 1876
@@ -20311,14 +20311,14 @@ Token
       begin: 1874
       end: 1876
       value: "er"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1874
       end: 1876
       PosValue: "PPER"
       coarseValue: "PRON"
 [schafft]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1877
    end: 1884
@@ -20381,7 +20381,7 @@ Token
       begin: 1877
       end: 1884
       value: "schaffen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1877
       end: 1884
@@ -20437,7 +20437,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [den]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1885
    end: 1888
@@ -20507,14 +20507,14 @@ Token
       begin: 1885
       end: 1888
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1885
       end: 1888
       PosValue: "ART"
       coarseValue: "DET"
 [Kongreß]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1889
    end: 1896
@@ -20584,14 +20584,14 @@ Token
       begin: 1889
       end: 1896
       value: "Kongreß"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1889
       end: 1896
       PosValue: "NN"
       coarseValue: "NOUN"
 [ab]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1897
    end: 1899
@@ -20654,14 +20654,14 @@ Token
       begin: 1897
       end: 1899
       value: "ab"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1897
       end: 1899
       PosValue: "PTKVZ"
       coarseValue: "VERB"
 ['']
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1900
    end: 1902
@@ -20689,14 +20689,14 @@ Token
       begin: 1900
       end: 1902
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1900
       end: 1902
       PosValue: "$("
       coarseValue: "PUNCT"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1903
    end: 1904
@@ -20724,7 +20724,7 @@ Token
       begin: 1903
       end: 1904
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1903
       end: 1904
@@ -20784,7 +20784,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [Ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 1905
    end: 1908
@@ -20826,14 +20826,14 @@ Token
       begin: 1905
       end: 1908
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 1905
       end: 1908
       PosValue: "ART"
       coarseValue: "DET"
 [ehemaliger]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 1909
    end: 1919
@@ -20875,14 +20875,14 @@ Token
       begin: 1909
       end: 1919
       value: "ehemalig"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 1909
       end: 1919
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Geschäftsführer]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1920
    end: 1935
@@ -20924,14 +20924,14 @@ Token
       begin: 1920
       end: 1935
       value: "Geschäftsführer"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1920
       end: 1935
       PosValue: "NN"
       coarseValue: "NOUN"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1936
    end: 1937
@@ -20959,7 +20959,7 @@ Token
       begin: 1936
       end: 1937
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1936
       end: 1937
@@ -20994,7 +20994,7 @@ Constituent
    children: FSArray
    syntacticFunction: "RC"
 [der]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 1938
    end: 1941
@@ -21043,14 +21043,14 @@ Token
       begin: 1938
       end: 1941
       value: "der"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 1938
       end: 1941
       PosValue: "PRELS"
       coarseValue: "PRON"
 [heute]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 1942
    end: 1947
@@ -21099,7 +21099,7 @@ Token
       begin: 1942
       end: 1947
       value: "heute"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 1942
       end: 1947
@@ -21141,7 +21141,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [in]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1948
    end: 1950
@@ -21197,14 +21197,14 @@ Token
       begin: 1948
       end: 1950
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1948
       end: 1950
       PosValue: "APPR"
       coarseValue: "ADP"
 [fünf]
-NUM
+POS_NUM
    sofa: _InitialView
    begin: 1951
    end: 1955
@@ -21260,14 +21260,14 @@ Token
       begin: 1951
       end: 1955
       value: "fünf"
-   pos: NUM
+   pos: POS_NUM
       sofa: _InitialView
       begin: 1951
       end: 1955
       PosValue: "CARD"
       coarseValue: "NUM"
 [Konzernen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1956
    end: 1965
@@ -21323,7 +21323,7 @@ Token
       begin: 1956
       end: 1965
       value: "Konzern"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1956
       end: 1965
@@ -21365,7 +21365,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [im]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 1966
    end: 1968
@@ -21421,14 +21421,14 @@ Token
       begin: 1966
       end: 1968
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 1966
       end: 1968
       PosValue: "APPRART"
       coarseValue: "ADP"
 [Aufsichtsgremium]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 1969
    end: 1985
@@ -21484,14 +21484,14 @@ Token
       begin: 1969
       end: 1985
       value: "Aufsichtsgremium"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 1969
       end: 1985
       PosValue: "NN"
       coarseValue: "NOUN"
 [sitzt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1986
    end: 1991
@@ -21540,14 +21540,14 @@ Token
       begin: 1986
       end: 1991
       value: "sitzen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1986
       end: 1991
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1992
    end: 1993
@@ -21575,14 +21575,14 @@ Token
       begin: 1992
       end: 1993
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1992
       end: 1993
       PosValue: "$,"
       coarseValue: "PUNCT"
 [``]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 1994
    end: 1996
@@ -21610,14 +21610,14 @@ Token
       begin: 1994
       end: 1996
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 1994
       end: 1996
       PosValue: "$("
       coarseValue: "PUNCT"
 [kennt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 1997
    end: 2002
@@ -21652,7 +21652,7 @@ Token
       begin: 1997
       end: 2002
       value: "kennen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 1997
       end: 2002
@@ -21680,7 +21680,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [niemanden]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2003
    end: 2012
@@ -21722,14 +21722,14 @@ Token
       begin: 2003
       end: 2012
       value: "niemand"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2003
       end: 2012
       PosValue: "PIS"
       coarseValue: "PRON"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2013
    end: 2014
@@ -21757,7 +21757,7 @@ Token
       begin: 2013
       end: 2014
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2013
       end: 2014
@@ -21792,7 +21792,7 @@ Constituent
    children: FSArray
    syntacticFunction: "RC"
 [der]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2015
    end: 2018
@@ -21841,14 +21841,14 @@ Token
       begin: 2015
       end: 2018
       value: "der"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2015
       end: 2018
       PosValue: "PRELS"
       coarseValue: "PRON"
 [nicht]
-X
+POS_X
    sofa: _InitialView
    begin: 2019
    end: 2024
@@ -21897,14 +21897,14 @@ Token
       begin: 2019
       end: 2024
       value: "nicht"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 2019
       end: 2024
       PosValue: "PTKNEG"
       coarseValue: "X"
 [glaubt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2025
    end: 2031
@@ -21953,14 +21953,14 @@ Token
       begin: 2025
       end: 2031
       value: "glauben"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2025
       end: 2031
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2032
    end: 2033
@@ -21988,7 +21988,7 @@ Token
       begin: 2032
       end: 2033
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2032
       end: 2033
@@ -22030,7 +22030,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [daß]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 2034
    end: 2037
@@ -22086,14 +22086,14 @@ Token
       begin: 2034
       end: 2037
       value: "daß"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 2034
       end: 2037
       PosValue: "KOUS"
       coarseValue: "CONJ"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 2038
    end: 2043
@@ -22149,7 +22149,7 @@ Token
       begin: 2038
       end: 2043
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 2038
       end: 2043
@@ -22198,7 +22198,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [als]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 2044
    end: 2047
@@ -22261,14 +22261,14 @@ Token
       begin: 2044
       end: 2047
       value: "als"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 2044
       end: 2047
       PosValue: "APPR"
       coarseValue: "ADP"
 [Präsident]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2048
    end: 2057
@@ -22331,7 +22331,7 @@ Token
       begin: 2048
       end: 2057
       value: "Präsident"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2048
       end: 2057
@@ -22380,7 +22380,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [eine]
-DET
+POS_DET
    sofa: _InitialView
    begin: 2058
    end: 2062
@@ -22443,14 +22443,14 @@ Token
       begin: 2058
       end: 2062
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 2058
       end: 2062
       PosValue: "ART"
       coarseValue: "DET"
 [absolute]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 2063
    end: 2071
@@ -22513,14 +22513,14 @@ Token
       begin: 2063
       end: 2071
       value: "absolut"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 2063
       end: 2071
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Katastrophe]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2072
    end: 2083
@@ -22583,14 +22583,14 @@ Token
       begin: 2072
       end: 2083
       value: "Katastrophe"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2072
       end: 2083
       PosValue: "NN"
       coarseValue: "NOUN"
 [wäre]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2084
    end: 2088
@@ -22646,14 +22646,14 @@ Token
       begin: 2084
       end: 2088
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2084
       end: 2088
       PosValue: "VAFIN"
       coarseValue: "VERB"
 ['']
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2089
    end: 2091
@@ -22681,14 +22681,14 @@ Token
       begin: 2089
       end: 2091
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2089
       end: 2091
       PosValue: "$("
       coarseValue: "PUNCT"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2092
    end: 2093
@@ -22716,7 +22716,7 @@ Token
       begin: 2092
       end: 2093
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2092
       end: 2093
@@ -22755,7 +22755,7 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Allerdings]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 2094
    end: 2104
@@ -22790,14 +22790,14 @@ Token
       begin: 2094
       end: 2104
       value: "allerdings"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 2094
       end: 2104
       PosValue: "ADV"
       coarseValue: "ADV"
 [gibt]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2105
    end: 2109
@@ -22832,14 +22832,14 @@ Token
       begin: 2105
       end: 2109
       value: "geben"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2105
       end: 2109
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [es]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2110
    end: 2112
@@ -22874,7 +22874,7 @@ Token
       begin: 2110
       end: 2112
       value: "es"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2110
       end: 2112
@@ -22902,7 +22902,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [dem]
-DET
+POS_DET
    sofa: _InitialView
    begin: 2113
    end: 2116
@@ -22944,14 +22944,14 @@ Token
       begin: 2113
       end: 2116
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 2113
       end: 2116
       PosValue: "ART"
       coarseValue: "DET"
 [Magazin]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2117
    end: 2124
@@ -22993,14 +22993,14 @@ Token
       begin: 2117
       end: 2124
       value: "Magazin"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2117
       end: 2124
       PosValue: "NN"
       coarseValue: "NOUN"
 [zufolge]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 2125
    end: 2132
@@ -23042,7 +23042,7 @@ Token
       begin: 2125
       end: 2132
       value: "zufolge"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 2125
       end: 2132
@@ -23070,7 +23070,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [in]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 2133
    end: 2135
@@ -23112,7 +23112,7 @@ Token
       begin: 2133
       end: 2135
       value: "in"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 2133
       end: 2135
@@ -23147,7 +23147,7 @@ Constituent
    children: FSArray
    syntacticFunction: "NK"
 [kleinen]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 2136
    end: 2143
@@ -23196,14 +23196,14 @@ Token
       begin: 2136
       end: 2143
       value: "klein"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 2136
       end: 2143
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 2144
    end: 2147
@@ -23252,14 +23252,14 @@ Token
       begin: 2144
       end: 2147
       value: "und"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 2144
       end: 2147
       PosValue: "KON"
       coarseValue: "CONJ"
 [mittleren]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 2148
    end: 2157
@@ -23308,14 +23308,14 @@ Token
       begin: 2148
       end: 2157
       value: "mittlerer"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 2148
       end: 2157
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Firmen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2158
    end: 2164
@@ -23357,7 +23357,7 @@ Token
       begin: 2158
       end: 2164
       value: "Firma"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2158
       end: 2164
@@ -23385,7 +23385,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [viele]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2165
    end: 2170
@@ -23427,14 +23427,14 @@ Token
       begin: 2165
       end: 2170
       value: "vieler"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2165
       end: 2170
       PosValue: "PIAT"
       coarseValue: "PRON"
 [Unternehmer]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2171
    end: 2182
@@ -23476,14 +23476,14 @@ Token
       begin: 2171
       end: 2182
       value: "Unternehmer"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2171
       end: 2182
       PosValue: "NN"
       coarseValue: "NOUN"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2183
    end: 2184
@@ -23511,7 +23511,7 @@ Token
       begin: 2183
       end: 2184
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2183
       end: 2184
@@ -23581,7 +23581,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [die]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2185
    end: 2188
@@ -23637,14 +23637,14 @@ Token
       begin: 2185
       end: 2188
       value: "der"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2185
       end: 2188
       PosValue: "PRELS"
       coarseValue: "PRON"
 [meinen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2189
    end: 2195
@@ -23700,14 +23700,14 @@ Token
       begin: 2189
       end: 2195
       value: "meinen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2189
       end: 2195
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2196
    end: 2197
@@ -23735,7 +23735,7 @@ Token
       begin: 2196
       end: 2197
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2196
       end: 2197
@@ -23784,7 +23784,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 2198
    end: 2203
@@ -23847,14 +23847,14 @@ Token
       begin: 2198
       end: 2203
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 2198
       end: 2203
       PosValue: "NE"
       coarseValue: "PROPN"
 [sei]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2204
    end: 2207
@@ -23917,7 +23917,7 @@ Token
       begin: 2204
       end: 2207
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2204
       end: 2207
@@ -23973,7 +23973,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [einer]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2208
    end: 2213
@@ -24043,7 +24043,7 @@ Token
       begin: 2208
       end: 2213
       value: "einer"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2208
       end: 2213
@@ -24106,7 +24106,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PG"
 [von]
-ADP
+POS_ADP
    sofa: _InitialView
    begin: 2214
    end: 2217
@@ -24183,14 +24183,14 @@ Token
       begin: 2214
       end: 2217
       value: "von"
-   pos: ADP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 2214
       end: 2217
       PosValue: "APPR"
       coarseValue: "ADP"
 [ihnen]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2218
    end: 2223
@@ -24267,14 +24267,14 @@ Token
       begin: 2218
       end: 2223
       value: "ihnen"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2218
       end: 2223
       PosValue: "PPER"
       coarseValue: "PRON"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2224
    end: 2225
@@ -24302,14 +24302,14 @@ Token
       begin: 2224
       end: 2225
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2224
       end: 2225
       PosValue: "$,"
       coarseValue: "PUNCT"
 [und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 2226
    end: 2229
@@ -24358,7 +24358,7 @@ Token
       begin: 2226
       end: 2229
       value: "und"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 2226
       end: 2229
@@ -24400,7 +24400,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [die]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2230
    end: 2233
@@ -24456,7 +24456,7 @@ Token
       begin: 2230
       end: 2233
       value: "der"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2230
       end: 2233
@@ -24505,7 +24505,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [den]
-DET
+POS_DET
    sofa: _InitialView
    begin: 2234
    end: 2237
@@ -24568,14 +24568,14 @@ Token
       begin: 2234
       end: 2237
       value: "der"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 2234
       end: 2237
       PosValue: "ART"
       coarseValue: "DET"
 [Texaner]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2238
    end: 2245
@@ -24638,14 +24638,14 @@ Token
       begin: 2238
       end: 2245
       value: "Texaner"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2238
       end: 2245
       PosValue: "NN"
       coarseValue: "NOUN"
 [unterstützen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2246
    end: 2258
@@ -24701,14 +24701,14 @@ Token
       begin: 2246
       end: 2258
       value: "unterstützen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2246
       end: 2258
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2259
    end: 2260
@@ -24736,7 +24736,7 @@ Token
       begin: 2259
       end: 2260
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2259
       end: 2260
@@ -24796,7 +24796,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [Zwei]
-NUM
+POS_NUM
    sofa: _InitialView
    begin: 2261
    end: 2265
@@ -24838,14 +24838,14 @@ Token
       begin: 2261
       end: 2265
       value: "zwei"
-   pos: NUM
+   pos: POS_NUM
       sofa: _InitialView
       begin: 2261
       end: 2265
       PosValue: "CARD"
       coarseValue: "NUM"
 [Themen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2266
    end: 2272
@@ -24887,14 +24887,14 @@ Token
       begin: 2266
       end: 2272
       value: "Thema"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2266
       end: 2272
       PosValue: "NN"
       coarseValue: "NOUN"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2273
    end: 2274
@@ -24922,7 +24922,7 @@ Token
       begin: 2273
       end: 2274
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2273
       end: 2274
@@ -24957,7 +24957,7 @@ Constituent
    children: FSArray
    syntacticFunction: "RC"
 [die]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2275
    end: 2278
@@ -25006,14 +25006,14 @@ Token
       begin: 2275
       end: 2278
       value: "der"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2275
       end: 2278
       PosValue: "PRELS"
       coarseValue: "PRON"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 2279
    end: 2284
@@ -25062,7 +25062,7 @@ Token
       begin: 2279
       end: 2284
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 2279
       end: 2284
@@ -25104,7 +25104,7 @@ Constituent
    children: FSArray
    syntacticFunction: "MO"
 [immer]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 2285
    end: 2290
@@ -25160,14 +25160,14 @@ Token
       begin: 2285
       end: 2290
       value: "immer"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 2285
       end: 2290
       PosValue: "ADV"
       coarseValue: "ADV"
 [wieder]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 2291
    end: 2297
@@ -25223,14 +25223,14 @@ Token
       begin: 2291
       end: 2297
       value: "wieder"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 2291
       end: 2297
       PosValue: "ADV"
       coarseValue: "ADV"
 [anspricht]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2298
    end: 2307
@@ -25279,14 +25279,14 @@ Token
       begin: 2298
       end: 2307
       value: "ansprechen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2298
       end: 2307
       PosValue: "VVFIN"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2308
    end: 2309
@@ -25314,7 +25314,7 @@ Token
       begin: 2308
       end: 2309
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2308
       end: 2309
@@ -25349,7 +25349,7 @@ Constituent
    children: FSArray
    syntacticFunction: "APP"
 [Rezession]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2310
    end: 2319
@@ -25398,14 +25398,14 @@ Token
       begin: 2310
       end: 2319
       value: "Rezession"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2310
       end: 2319
       PosValue: "NN"
       coarseValue: "NOUN"
 [und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 2320
    end: 2323
@@ -25454,14 +25454,14 @@ Token
       begin: 2320
       end: 2323
       value: "und"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 2320
       end: 2323
       PosValue: "KON"
       coarseValue: "CONJ"
 [Bürokratie]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 2324
    end: 2334
@@ -25510,14 +25510,14 @@ Token
       begin: 2324
       end: 2334
       value: "Bürokratie"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 2324
       end: 2334
       PosValue: "NN"
       coarseValue: "NOUN"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2335
    end: 2336
@@ -25545,14 +25545,14 @@ Token
       begin: 2335
       end: 2336
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2335
       end: 2336
       PosValue: "$,"
       coarseValue: "PUNCT"
 [machen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2337
    end: 2343
@@ -25587,7 +25587,7 @@ Token
       begin: 2337
       end: 2343
       value: "machen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2337
       end: 2343
@@ -25615,7 +25615,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OC"
 [ihnen]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 2344
    end: 2349
@@ -25657,14 +25657,14 @@ Token
       begin: 2344
       end: 2349
       value: "ihnen"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 2344
       end: 2349
       PosValue: "PPER"
       coarseValue: "PRON"
 [besonders]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 2350
    end: 2359
@@ -25706,7 +25706,7 @@ Token
       begin: 2350
       end: 2359
       value: "besonders"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 2350
       end: 2359
@@ -25741,7 +25741,7 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [zu]
-X
+POS_X
    sofa: _InitialView
    begin: 2360
    end: 2362
@@ -25790,14 +25790,14 @@ Token
       begin: 2360
       end: 2362
       value: "zu"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 2360
       end: 2362
       PosValue: "PTKZU"
       coarseValue: "X"
 [schaffen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 2363
    end: 2371
@@ -25846,14 +25846,14 @@ Token
       begin: 2363
       end: 2371
       value: "schaffen"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 2363
       end: 2371
       PosValue: "VVINF"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 2372
    end: 2373
@@ -25881,7 +25881,7 @@ Token
       begin: 2372
       end: 2373
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 2372
       end: 2373

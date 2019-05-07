@@ -26,20 +26,27 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.lxf.internal.DKPro2Lxf;
 import org.dkpro.core.io.lxf.internal.model.LxfGraph;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
+/**
+ * Writer for the CLARINO LAP LXF format.
+ */
+@ResourceMetaData(name = "CLARINO LAP LXF Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})
 @TypeCapability(
         inputs = { 
@@ -53,13 +60,17 @@ public class LxfWriter
     extends JCasFileWriter_ImplBase
 {
     /**
-     * Specify the suffix of output files. Default value <code>.lxf</code>. If the suffix is not
-     * needed, provide an empty string as value.
+     * Use this filename extension.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".lxf")
     private String filenameSuffix;
 
+    /**
+     * Write only the changes to the annotations. This works only in conjunction with the 
+     * {@link LxfReader}.
+     */
     public static final String PARAM_DELTA = "delta";
     @ConfigurationParameter(name = PARAM_DELTA, mandatory = true, defaultValue = "false")
     private boolean delta;
@@ -85,7 +96,8 @@ public class LxfWriter
         
         if (delta) {
             DocumentMetaData dmd = DocumentMetaData.get(aJCas);
-            try (InputStream is = new BufferedInputStream(new URL(dmd.getDocumentUri()).openStream())) {
+            try (InputStream is = new BufferedInputStream(
+                    new URL(dmd.getDocumentUri()).openStream())) {
                 LxfGraph reference = mapper.readValue(is, LxfGraph.class);
                 DKPro2Lxf.convert(aJCas, reference, lxf);
             }

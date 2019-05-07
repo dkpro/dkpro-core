@@ -24,6 +24,10 @@ include::{include-dir}introduction.adoc[]
 
 <<<
 
+include::{include-dir}setup.adoc[]
+
+<<<
+
 include::{include-dir}analytics.adoc[]
 
 <<<

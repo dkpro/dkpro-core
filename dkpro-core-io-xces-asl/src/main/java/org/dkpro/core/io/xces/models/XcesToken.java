@@ -1,5 +1,5 @@
 /*
- * Copyright 2016
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -22,14 +22,16 @@ import javax.xml.bind.annotation.XmlID;
 
 public class XcesToken
 {
-    @XmlID 
+    @XmlID
     @XmlAttribute
     public String id;
-    @XmlAttribute(name="word")
-    public String word;
-    @XmlAttribute(name="tag")
-    public String tag;
-    @XmlAttribute(name="lemma")
-    public String lemma;
 
+    @XmlAttribute(name = "word")
+    public String word;
+    
+    @XmlAttribute(name = "tag")
+    public String tag;
+    
+    @XmlAttribute(name = "lemma")
+    public String lemma;
 }

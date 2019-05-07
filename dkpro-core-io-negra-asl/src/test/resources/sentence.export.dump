@@ -66,7 +66,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [Sie]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 0
    end: 3
@@ -97,14 +97,14 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 0
       end: 3
       PosValue: "PPER"
       coarseValue: "PRON"
 [gehen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 4
    end: 9
@@ -135,7 +135,7 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 4
       end: 9
@@ -205,7 +205,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [gewagte]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 10
    end: 17
@@ -250,14 +250,14 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 10
       end: 17
       PosValue: "ADJA"
       coarseValue: "ADJ"
 [Verbindungen]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 18
    end: 30
@@ -302,14 +302,14 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 18
       end: 30
       PosValue: "NN"
       coarseValue: "NOUN"
 [und]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 31
    end: 34
@@ -347,14 +347,14 @@ Token
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OA"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 31
       end: 34
       PosValue: "KON"
       coarseValue: "CONJ"
 [Risiken]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 35
    end: 42
@@ -392,14 +392,14 @@ Token
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OA"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 35
       end: 42
       PosValue: "NN"
       coarseValue: "NOUN"
 [ein]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 43
    end: 46
@@ -430,14 +430,14 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 43
       end: 46
       PosValue: "PTKVZ"
       coarseValue: "VERB"
 [,]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 47
    end: 48
@@ -454,7 +454,7 @@ Token
       end: 91
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 47
       end: 48
@@ -482,7 +482,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [versuchen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 49
    end: 58
@@ -513,7 +513,7 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 49
       end: 58
@@ -583,7 +583,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [ihre]
-PRON
+POS_PRON
    sofa: _InitialView
    begin: 59
    end: 63
@@ -628,14 +628,14 @@ Token
          syntacticFunction: "OC"
       children: FSArray
       syntacticFunction: "OA"
-   pos: PRON
+   pos: POS_PRON
       sofa: _InitialView
       begin: 59
       end: 63
       PosValue: "PPOSAT"
       coarseValue: "PRON"
 [Möglichkeiten]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 64
    end: 77
@@ -680,14 +680,14 @@ Token
          syntacticFunction: "OC"
       children: FSArray
       syntacticFunction: "OA"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 64
       end: 77
       PosValue: "NN"
       coarseValue: "NOUN"
 [auszureizen]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 78
    end: 89
@@ -725,14 +725,14 @@ Token
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OC"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 78
       end: 89
       PosValue: "VVIZU"
       coarseValue: "VERB"
 [.]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 90
    end: 91
@@ -749,7 +749,7 @@ Token
       end: 91
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 90
       end: 91

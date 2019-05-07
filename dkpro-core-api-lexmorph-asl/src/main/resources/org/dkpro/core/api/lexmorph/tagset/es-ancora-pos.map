@@ -1,0 +1,150 @@
+# Ancora
+#
+# Spanish Part-of-Speech Tags from the Ancora Corpus
+# 
+
+# This list was extracted from the Spanish model used by the Stanford CoreNLP 3.4.1 tagger
+# and matched against the official Ancora documentation. It may be incomplete with regards to the
+# tags actually used in the corpus.
+
+__META_SOURCE_URL__=http://nlp.stanford.edu/software/spanish-faq.shtml#tagset
+__META_SOURCE_URL__.1=http://clic.ub.edu/corpus/webfm_send/18
+__META_SOURCE_URL__.2=http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# adjective
+ac0000=POS_ADJ
+ao0000=POS_ADJ
+ap0000=POS_ADJ
+aq0000=POS_ADJ
+aqs000=POS_ADJ
+aq0000=POS_ADJ
+# conjunction
+cc=POS_CONJ
+cs=POS_CONJ
+# determiner
+d00000=POS_DET
+da0000=POS_DET
+dd0000=POS_DET
+de0000=POS_DET
+di0000=POS_DET
+dn0000=POS_DET
+do0000=POS_DET
+dp0000=POS_DET
+dt0000=POS_DET
+# punctuation
+f0=POS_PUNCT
+faa=POS_PUNCT
+fat=POS_PUNCT
+fc=POS_PUNCT
+fca=POS_PUNCT
+fct=POS_PUNCT
+fd=POS_PUNCT
+fe=POS_PUNCT
+fg=POS_PUNCT
+fh=POS_PUNCT
+fi=POS_PUNCT
+fia=POS_PUNCT
+fit=POS_PUNCT
+fp=POS_PUNCT
+fpa=POS_PUNCT
+fpt=POS_PUNCT
+fra=POS_PUNCT
+frc=POS_PUNCT
+fs=POS_PUNCT
+fsa=POS_PUNCT
+ft=POS_PUNCT
+fx=POS_PUNCT
+fz=POS_PUNCT
+# interjection
+i=POS_INTJ
+# common noun
+nc00000=POS_NOUN
+nc0a000=POS_NOUN
+nc0c000=POS_NOUN
+nc0n000=POS_NOUN
+nc0p000=POS_NOUN
+nc0s000=POS_NOUN
+# proper noun
+np00000=POS_PROPN
+# pronoun
+p0000000=POS_PRON
+pd000000=POS_PRON
+pe000000=POS_PRON
+pi000000=POS_PRON
+pn000000=POS_PRON
+po000000=POS_PRON
+pp000000=POS_PRON
+pr000000=POS_PRON
+pt000000=POS_PRON
+px000000=POS_PRON
+# adverb
+rg=POS_ADV
+rn=POS_ADV
+# preposition
+sc000=POS_ADP
+se000=POS_ADP
+sp000=POS_ADP
+# verb
+va00000=POS_VERB
+vag0000=POS_VERB
+vaic000=POS_VERB
+vaif000=POS_VERB
+vaii000=POS_VERB
+vaip000=POS_VERB
+vais000=POS_VERB
+vam0000=POS_VERB
+van0000=POS_VERB
+vap0000=POS_VERB
+vasi000=POS_VERB
+vasp000=POS_VERB
+vass000=POS_VERB
+vm00000=POS_VERB
+vm0p000=POS_VERB
+vmg0000=POS_VERB
+vmi0000=POS_VERB
+vmi2000=POS_VERB
+vmic000=POS_VERB
+vmif000=POS_VERB
+vmii000=POS_VERB
+vmim000=POS_VERB
+vmip000=POS_VERB
+vmis000=POS_VERB
+vmm0000=POS_VERB
+vmmp000=POS_VERB
+vmms000=POS_VERB
+vmn0000=POS_VERB
+vmp0000=POS_VERB
+vms0000=POS_VERB
+vmsf000=POS_VERB
+vmsi000=POS_VERB
+vmsp000=POS_VERB
+vq00000=POS_VERB
+vs00000=POS_VERB
+vsg0000=POS_VERB
+vsic000=POS_VERB
+vsif000=POS_VERB
+vsii000=POS_VERB
+vsip000=POS_VERB
+vsis000=POS_VERB
+vsm0000=POS_VERB
+vsmp000=POS_VERB
+vsn0000=POS_VERB
+vsp0000=POS_VERB
+vssf000=POS_VERB
+vssi000=POS_VERB
+vssp000=POS_VERB
+vsss000=POS_VERB
+# date
+w=POS_X
+# number
+z0=POS_NUM
+zd=POS_NUM
+# number - currency
+zm=POS_NUM
+zp=POS_NUM
+zu=POS_NUM
+
+
+
+*=POS

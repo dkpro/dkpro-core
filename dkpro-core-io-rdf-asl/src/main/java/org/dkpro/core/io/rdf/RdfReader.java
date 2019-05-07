@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.rdf;
 
+import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -33,21 +35,24 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.api.resources.CompressionUtils;
+import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.io.rdf.internal.Rdf2Uima;
 import org.dkpro.core.io.rdf.internal.RdfCas;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a CAS serialized as RDF.
  */
+@ResourceMetaData(name = "UIMA CAS RDF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_RDF})
 public class RdfReader
     extends JCasResourceCollectionReader_ImplBase
@@ -62,10 +67,19 @@ public class RdfReader
     private String posTagset;
 
     /**
+     * Enable/disable type mapping.
+     */
+    public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
+            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    protected boolean mappingEnabled;
+
+    /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
     
@@ -82,8 +96,8 @@ public class RdfReader
     {
         super.initialize(aContext);
         
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                getLanguage());
         
         // Seek first article
         try {
@@ -98,10 +112,10 @@ public class RdfReader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-        try{
+        try {
             posMappingProvider.configure(aJCas.getCas());
         }
-        catch(AnalysisEngineProcessException e){
+        catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
         }
         
@@ -117,7 +131,7 @@ public class RdfReader
         
         // inFileCount++;
         step();
-     }
+    }
     
     private void closeAll()
     {

@@ -1,7 +1,7 @@
 {
     "edges": [
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n1@1"
@@ -14,10 +14,10 @@
                 "tokenizer",
                 "tokenizer-n1@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n2@1"
@@ -30,10 +30,10 @@
                 "tokenizer",
                 "tokenizer-n1@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n3@1"
@@ -46,10 +46,10 @@
                 "tokenizer",
                 "tokenizer-n1@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n4@1"
@@ -62,10 +62,10 @@
                 "tokenizer",
                 "tokenizer-n1@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n5@1"
@@ -78,10 +78,10 @@
                 "tokenizer",
                 "tokenizer-n1@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n6@1"
@@ -94,10 +94,10 @@
                 "tokenizer",
                 "tokenizer-n2@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n7@1"
@@ -110,10 +110,10 @@
                 "tokenizer",
                 "tokenizer-n2@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n8@1"
@@ -126,10 +126,10 @@
                 "tokenizer",
                 "tokenizer-n2@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n9@1"
@@ -142,10 +142,10 @@
                 "tokenizer",
                 "tokenizer-n2@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n10@1"
@@ -158,10 +158,10 @@
                 "tokenizer",
                 "tokenizer-n2@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         },
         {
-            "annotation_class": "linkage_token_sentence",
+            "entity": "edge",
             "from": [
                 "repp",
                 "repp-n11@1"
@@ -174,16 +174,16 @@
                 "tokenizer",
                 "tokenizer-n2@1"
             ],
-            "type": "edge"
+            "type": "linkage_token_sentence"
         }
     ],
     "media": "This is a test. And here is another one.\n",
     "nodes": [
         {
-            "annotation_class": "sentence",
             "annotations": {
                 "label": "This is a test."
             },
+            "entity": "node",
             "id": "tokenizer-n1@1",
             "index": 0,
             "links": [
@@ -196,13 +196,13 @@
             ],
             "origin": "tokenizer",
             "rank": 0,
-            "type": "node"
+            "type": "sentence"
         },
         {
-            "annotation_class": "sentence",
             "annotations": {
                 "label": "And here is another one."
             },
+            "entity": "node",
             "id": "tokenizer-n2@1",
             "index": 1,
             "links": [
@@ -215,13 +215,13 @@
             ],
             "origin": "tokenizer",
             "rank": 0,
-            "type": "node"
+            "type": "sentence"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "This"
             },
+            "entity": "node",
             "id": "repp-n1@1",
             "index": 0,
             "links": [
@@ -234,13 +234,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "is"
             },
+            "entity": "node",
             "id": "repp-n2@1",
             "index": 1,
             "links": [
@@ -253,13 +253,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "a"
             },
+            "entity": "node",
             "id": "repp-n3@1",
             "index": 2,
             "links": [
@@ -272,13 +272,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "test"
             },
+            "entity": "node",
             "id": "repp-n4@1",
             "index": 3,
             "links": [
@@ -291,13 +291,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "."
             },
+            "entity": "node",
             "id": "repp-n5@1",
             "index": 4,
             "links": [
@@ -310,13 +310,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "And"
             },
+            "entity": "node",
             "id": "repp-n6@1",
             "index": 5,
             "links": [
@@ -329,13 +329,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "here"
             },
+            "entity": "node",
             "id": "repp-n7@1",
             "index": 6,
             "links": [
@@ -348,13 +348,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "is"
             },
+            "entity": "node",
             "id": "repp-n8@1",
             "index": 7,
             "links": [
@@ -367,13 +367,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "another"
             },
+            "entity": "node",
             "id": "repp-n9@1",
             "index": 8,
             "links": [
@@ -386,13 +386,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "one"
             },
+            "entity": "node",
             "id": "repp-n10@1",
             "index": 9,
             "links": [
@@ -405,13 +405,13 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         },
         {
-            "annotation_class": "token",
             "annotations": {
                 "label": "."
             },
+            "entity": "node",
             "id": "repp-n11@1",
             "index": 10,
             "links": [
@@ -424,7 +424,7 @@
             ],
             "origin": "repp",
             "rank": 0,
-            "type": "node"
+            "type": "token"
         }
     ],
     "regions": [
@@ -433,130 +433,130 @@
                 0,
                 15
             ],
+            "entity": "region",
             "id": "tokenizer-r1@1",
             "index": 0,
-            "origin": "tokenizer",
-            "type": "region"
+            "origin": "tokenizer"
         },
         {
             "anchors": [
                 16,
                 40
             ],
+            "entity": "region",
             "id": "tokenizer-r2@1",
             "index": 1,
-            "origin": "tokenizer",
-            "type": "region"
+            "origin": "tokenizer"
         },
         {
             "anchors": [
                 0,
                 4
             ],
+            "entity": "region",
             "id": "repp-r1@1",
             "index": 0,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 5,
                 7
             ],
+            "entity": "region",
             "id": "repp-r2@1",
             "index": 1,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 8,
                 9
             ],
+            "entity": "region",
             "id": "repp-r3@1",
             "index": 2,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 10,
                 14
             ],
+            "entity": "region",
             "id": "repp-r4@1",
             "index": 3,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 14,
                 15
             ],
+            "entity": "region",
             "id": "repp-r5@1",
             "index": 4,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 16,
                 19
             ],
+            "entity": "region",
             "id": "repp-r6@1",
             "index": 5,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 20,
                 24
             ],
+            "entity": "region",
             "id": "repp-r7@1",
             "index": 6,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 25,
                 27
             ],
+            "entity": "region",
             "id": "repp-r8@1",
             "index": 7,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 28,
                 35
             ],
+            "entity": "region",
             "id": "repp-r9@1",
             "index": 8,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 36,
                 39
             ],
+            "entity": "region",
             "id": "repp-r10@1",
             "index": 9,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         },
         {
             "anchors": [
                 39,
                 40
             ],
+            "entity": "region",
             "id": "repp-r11@1",
             "index": 10,
-            "origin": "repp",
-            "type": "region"
+            "origin": "repp"
         }
     ]
 }

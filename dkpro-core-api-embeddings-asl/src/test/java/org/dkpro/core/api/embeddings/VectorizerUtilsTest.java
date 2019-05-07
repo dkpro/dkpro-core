@@ -1,5 +1,5 @@
 /*
- * Copyright 2016
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * <p>
@@ -17,14 +17,14 @@
  */
 package org.dkpro.core.api.embeddings;
 
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertTrue;
+import org.dkpro.core.testing.DkproTestContext;
+import org.junit.Rule;
+import org.junit.Test;
 
 public class VectorizerUtilsTest
 {
@@ -40,5 +40,4 @@ public class VectorizerUtilsTest
         assertTrue("Random vector for unknown words should always be the same.",
                 Arrays.equals(unk1, unk2));
     }
-
 }

@@ -1,0 +1,29 @@
+# Czech Academic Corpus 1.0
+
+__META_SOURCE_URL__=http://ufal.mff.cuni.cz/rest/CAC/doc-cac10/cac-guide/eng/html/chapter12.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# A   Adjective
+A=POS_ADJ
+# C   Numeral
+C=POS_NUM
+# D   Adverb
+D=POS_ADV
+# I   Interjection
+I=POS_INTJ
+# J   Conjunction
+J=POS_CONJ
+# N   Noun
+N=POS_NOUN
+# P   Pronoun
+P=POS_PRON
+# V   Verb
+V=POS_VERB
+# R   Preposition
+R=POS_ADP
+# T   Particle
+T=POS_PART
+# X   Unknown, Not Determined, Unclassifiable
+X=POS_X
+# Z   Punctuation (also used for the Sentence Boundary token)
+Z=POS_PUNCT

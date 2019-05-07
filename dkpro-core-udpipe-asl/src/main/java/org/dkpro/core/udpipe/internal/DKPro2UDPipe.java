@@ -28,16 +28,22 @@ public class DKPro2UDPipe
     public static void convert(Collection<Token> tokens, Sentence sentence)
     {
         for (Token t : tokens) {
-            Word w = sentence.addWord(t.getCoveredText());
+            Word w = sentence.addWord(t.getText());
             if (t.getPos() != null) {
                 w.setXpostag(t.getPosValue());
-                w.setUpostag(t.getPos().getCoarseValue());
+                if (t.getPos().getCoarseValue() == null
+                        || t.getPos().getCoarseValue().trim().length() == 0) {
+                    w.setUpostag(t.getPos().getPosValue());
+                }
+                else {
+                    w.setUpostag(t.getPos().getCoarseValue());
+                }
             }
-            
+
             if (t.getLemma() != null) {
                 w.setLemma(t.getLemmaValue());
             }
-            
+
             if (t.getMorph() != null) {
                 w.setFeats(t.getMorph().getValue());
             }

@@ -54,7 +54,7 @@ public class DKPro2Lxf
 
     public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget)
     {
-        convert(aJCas, aSource, aTarget, createIdMap("dkpro", aSource));
+        convert(aJCas, aSource, aTarget, createIdMap("dkpro", aSource), "dkpro");
     }
 
     /**
@@ -63,28 +63,31 @@ public class DKPro2Lxf
      * the layer was present in the source than the tool from the source will be used for the layer.
      * Otherwise the toolName will be used.
      * 
-     * @param toolName
+     * @param aToolName
      *            - Tool name for new layers
      * @param aSource
      *            - original lxf for DKPro
-     * @return
      */
-    public static Map<String, String> createIdMap(String toolName, LxfGraph aSource)
+    public static Map<String, String> createIdMap(String aToolName, LxfGraph aSource)
     {
         Map<String, String> ids = new HashMap<>();
         if (aSource != null) {
             for (LxfNode n : aSource.getNodes()) {
-                ids.put(n.getAnnotationClass(), n.getOrigin());
+                ids.put(n.getType(), n.getOrigin());
             }
         }
-        if (!ids.containsKey(LAYER_DEPENDENCY))
-            ids.put(LAYER_DEPENDENCY, toolName);
-        if (!ids.containsKey(LAYER_MORPHOLOGY))
-            ids.put(LAYER_MORPHOLOGY, toolName);
-        if (!ids.containsKey(LAYER_SENTENCE))
-            ids.put(LAYER_SENTENCE, toolName);
-        if (!ids.containsKey(LAYER_TOKEN))
-            ids.put(LAYER_TOKEN, toolName);
+        if (!ids.containsKey(LAYER_DEPENDENCY)) {
+            ids.put(LAYER_DEPENDENCY, aToolName);
+        }
+        if (!ids.containsKey(LAYER_MORPHOLOGY)) {
+            ids.put(LAYER_MORPHOLOGY, aToolName);
+        }
+        if (!ids.containsKey(LAYER_SENTENCE)) {
+            ids.put(LAYER_SENTENCE, aToolName);
+        }
+        if (!ids.containsKey(LAYER_TOKEN)) {
+            ids.put(LAYER_TOKEN, aToolName);
+        }
         return ids;
     }
 
@@ -97,20 +100,22 @@ public class DKPro2Lxf
      *            the original LXF. If this is non-null, then delta-mode is enabled.
      * @param aTarget
      *            the target LXF.
-     * @param ids
+     * @param aToolName
+     *            the name of the tool generating the new annotation
+     * @param aIds
      *            The ids of the tool responsible for generation of the annotation Layer. The key is
      *            the annotation layer. The value is the tool that generates the annotation.
      */
     public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget,
-            Map<String, String> ids)
+            Map<String, String> aIds, String aToolName)
     {
         if (aSource == null) {
             aTarget.setMedia(new LxfText(aJCas.getDocumentText()));
         }
 
-        ToolGeneratorIndex toolEdgeIndex = new ToolGeneratorIndex(ids.values());
-        ToolGeneratorIndex toolNodeIndex = new ToolGeneratorIndex(ids.values());
-        ToolGeneratorIndex toolRegionIndex = new ToolGeneratorIndex(ids.values());
+        ToolGeneratorIndex toolEdgeIndex = new ToolGeneratorIndex(aIds.values());
+        ToolGeneratorIndex toolNodeIndex = new ToolGeneratorIndex(aIds.values());
+        ToolGeneratorIndex toolRegionIndex = new ToolGeneratorIndex(aIds.values());
         NodeIterator iter = new NodeIterator(aSource);
 
         Map<Sentence, Collection<Token>> idxSentTok = indexCovered(aJCas, Sentence.class,
@@ -122,7 +127,7 @@ public class DKPro2Lxf
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             LxfNode sentenceNode;
 
-            String toolid = ids.get(LAYER_SENTENCE);
+            String toolid = aIds.get(LAYER_SENTENCE);
 
             if (aSource == null || needsExport(aJCas, sentence)) {
                 // Sentence region
@@ -146,7 +151,7 @@ public class DKPro2Lxf
             for (Token token : tokens) {
                 // Convert or obtain token node
                 LxfNode tokenNode;
-                toolid = ids.get(LAYER_TOKEN);
+                toolid = aIds.get(LAYER_TOKEN);
 
                 if (aSource == null || needsExport(aJCas, token)) {
                     LxfRegion tokenRegion = new LxfRegion(toolid, toolRegionIndex.nextIndex(toolid),
@@ -166,7 +171,7 @@ public class DKPro2Lxf
                     tokenNode = iter.next(toolid, LAYER_TOKEN);
                 }
 
-                toolid = ids.get(LAYER_MORPHOLOGY);
+                toolid = aIds.get(LAYER_MORPHOLOGY);
 
                 // Convert POS if exists - if we create a node, pass it on to the lemma conversion
                 // as well
@@ -196,31 +201,30 @@ public class DKPro2Lxf
                 // Convert lemma if exists
                 Lemma lemma = token.getLemma();
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
-                    // If we have created a sharable morphNode, reuse it here, otherwise create a
-                    // new node
                     LxfNode lemmaNode = newMorphNode ? morphNode : null; 
                     if (lemmaNode == null) {
-                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
+                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, aToolName,
                                 toolNodeIndex.nextIndex(toolid), 0);
                         aTarget.addNode(lemmaNode);
                         aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(),
                                 toolEdgeIndex.nextIndex(toolid), 0, lemmaNode, tokenNode));
                         //idxMorph.put(token, lemmaNode);
                     }
-                    lemmaNode.setFeature(FEAT_LEMMA, token.getPos().getPosValue());
+                    lemmaNode.setFeature(FEAT_LEMMA, token.getLemma().getValue());
                 }
 
             }
 
-            toolid = ids.get(LAYER_DEPENDENCY);
+            toolid = aIds.get(LAYER_DEPENDENCY);
 
             // Dependencies
             Collection<Dependency> deps = idxSentDep.get(sentence);
 
             for (Dependency dep : deps) {
 
-                if (aSource != null && !needsExport(aJCas, dep))
+                if (aSource != null && !needsExport(aJCas, dep)) {
                     continue;
+                }
 
                 LxfNode depNode = new LxfNode(LAYER_DEPENDENCY, toolid,
                         toolNodeIndex.nextIndex(toolid), 0);
