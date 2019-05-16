@@ -29,11 +29,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -60,6 +63,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import java.util.Optional;
 
 /**
  * Reads a file in the CoNLL-U format.
@@ -157,6 +161,14 @@ public class ConllUReader
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean readDependency;
 
+    /**
+     * Read paragraph information. If no paragraph information is provided in the file, or if set
+     * to false, then output one sentence per line, separated by an empty line.
+     */
+    public static final String PARAM_READ_PARAGRAPH = ComponentParameters.PARAM_READ_PARAGRAPH;
+    @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, mandatory = true, defaultValue = "true")
+    private boolean readParagraph;
+
     private static final String UNUSED = "_";
 
     private static final int ID = 0;
@@ -171,6 +183,8 @@ public class ConllUReader
     private static final int MISC = 9;
     
     public static final String META_SEND_ID = "sent_id";
+    public static final String META_DOCUMENT_ID = "newdoc id";
+    public static final String META_PARAGRAPH_ID = "newpar id";
     public static final String META_TEXT = "text";
 
     private MappingProvider posMappingProvider;
@@ -217,10 +231,21 @@ public class ConllUReader
         
         JCasBuilder doc = new JCasBuilder(aJCas);
 
+        Paragraph p = null;
+        int lastSentenceEndPosition = 0;
+        boolean shouldAddSpace = false;
+        Optional<Boolean> documentContainsParagraphInformation = Optional.empty();
+
         while (true) {
             // Read sentence comments (if any)
             Map<String, String> comments = readSentenceComments(aReader);
             
+            if (!documentContainsParagraphInformation.isPresent()) {
+                documentContainsParagraphInformation = Optional.of(
+                        comments.keySet().contains(META_PARAGRAPH_ID));
+            }
+
+
             // Read sentence
             List<String[]> words = readSentence(aReader);
             if (words == null) {
@@ -231,7 +256,25 @@ public class ConllUReader
             if (words.isEmpty()) {
                  // Ignore empty sentences. This can happen when there are multiple end-of-sentence
                  // markers following each other.
-                continue; 
+                continue;
+            }
+            if (comments.keySet().contains(META_DOCUMENT_ID)) {
+                AnnotationIndex<DocumentMetaData> index = aJCas.getAnnotationIndex(DocumentMetaData.class);
+                DocumentMetaData m = index.iterator().get();
+                m.setDocumentId(comments.get(META_DOCUMENT_ID));
+            }
+
+
+            if (!readParagraph || !documentContainsParagraphInformation.get()) {
+                if (doc.getPosition() > 0) {
+                    doc.add("\n");
+                    shouldAddSpace = false;
+                }
+            } else if (readParagraph) {
+                if (p != null && comments.keySet().contains(META_PARAGRAPH_ID)) {
+                    doc.add("\n\n");
+                    shouldAddSpace = false;
+                }
             }
 
             int sentenceBegin = doc.getPosition();
@@ -253,14 +296,20 @@ public class ConllUReader
                     surfaceString = word[FORM];
                     continue;
                 }
-                
+//                the following must be placed after check for dashes in ID in order not to insert
+//                unnecessary spaces
+                if (shouldAddSpace) {
+                    if (doc.getPosition() == sentenceBegin) {
+                        sentenceBegin++;
+                    }
+                    doc.add(" ");
+                }
+
                 // Read token
                 int tokenIdx = Integer.valueOf(word[ID]);
                 Token token = doc.add(word[FORM], Token.class);
                 tokens.put(tokenIdx, token);
-                if (!StringUtils.contains(word[MISC], "SpaceAfter=No") && wordIterator.hasNext()) {
-                    doc.add(" ");
-                }
+                shouldAddSpace = !StringUtils.contains(word[MISC], "SpaceAfter=No");
 
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {
@@ -367,10 +416,23 @@ public class ConllUReader
             sentence.setId(comments.get(META_SEND_ID));
             sentence.addToIndexes();
 
-            // Once sentence per line.
-            doc.add("\n");
-        }
 
+            if (comments.keySet().contains(META_PARAGRAPH_ID)) {
+                final String paragraphID = comments.get(META_PARAGRAPH_ID);
+                if (p != null) {
+                    // do nothing
+                    p.setEnd(lastSentenceEndPosition);
+                    p.addToIndexes();
+                }
+                p = new Paragraph(aJCas, sentenceBegin, sentenceEnd);
+                p.setId(paragraphID);
+            }
+            lastSentenceEndPosition = sentenceEnd;
+        }
+        if (p != null) {
+            p.setEnd(lastSentenceEndPosition);
+            p.addToIndexes();
+        }
         doc.close();
     }
     

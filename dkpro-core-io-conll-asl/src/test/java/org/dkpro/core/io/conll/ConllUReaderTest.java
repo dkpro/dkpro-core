@@ -23,16 +23,25 @@ import static org.dkpro.core.testing.AssertAnnotations.assertMorph;
 import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.DkproTestContext;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ConllUReaderTest
 {
@@ -73,6 +82,66 @@ public class ConllUReaderTest
         assertSentence(sentences, select(jcas, Sentence.class));
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertMorph(morphologicalFeeatures, select(jcas, MorphologicalFeatures.class));
+    }
+
+    @Test
+    public void testDocumentID()
+            throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(
+                ConllUReader.class,
+                ConllUReader.PARAM_LANGUAGE, "en",
+                ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
+                ConllUReader.PARAM_PATTERNS, "conllu-paragraph_and_document_boundaries.conll");
+
+        JCas jcas = new JCasIterable(reader).iterator().next();
+
+        AnnotationIndex<DocumentMetaData> index = jcas.getAnnotationIndex(DocumentMetaData.class);
+        DocumentMetaData m = index.iterator().get();
+        final String actualDocumentID = m.getDocumentId();
+        final String expectedDocumentID = "mf920901-001";
+
+        Assert.assertEquals("Document ID mismatch", expectedDocumentID, actualDocumentID);
+    }
+
+    @Test
+    public void testParagraphs()
+            throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(
+                ConllUReader.class,
+                ConllUReader.PARAM_LANGUAGE, "en",
+                ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
+                ConllUReader.PARAM_PATTERNS, "conllu-multiple_paragraphs.conll");
+
+        JCas jcas = new JCasIterable(reader).iterator().next();
+
+        AnnotationIndex<Paragraph> index = jcas.getAnnotationIndex(Paragraph.class);
+
+        List<String> paragraphIDs = new LinkedList<>();
+        Iterator<Paragraph> iterator = index.iterator();
+        while(iterator.hasNext()) {
+            Paragraph p = iterator.next();
+            paragraphIDs.add(p.getId());
+        }
+        List<String> expectedParagraphIDs = new ArrayList<String>(){{
+            add("mf920901-001-p1");
+            add("mf920901-001-p2");
+        }};
+        Assert.assertEquals(expectedParagraphIDs, paragraphIDs);
+
+        final String expectedTextContent = "Slovenská ústava: pro i proti Slovenská ústava: pro i"
+                + " proti\n"
+                + "\n"
+                + "Slovenská ústava: pro i proti";
+        final String actualTextContent = jcas.getDocumentText();
+        Assert.assertEquals(expectedTextContent, actualTextContent);
+
+        String[] sentences = {
+                "Slovenská ústava: pro i proti",
+                "Slovenská ústava: pro i proti",
+                "Slovenská ústava: pro i proti" };
+        assertSentence(sentences, select(jcas, Sentence.class));
     }
 
     @Rule
