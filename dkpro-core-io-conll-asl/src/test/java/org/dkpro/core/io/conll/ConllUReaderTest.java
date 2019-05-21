@@ -25,6 +25,10 @@ import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggingEvent;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
@@ -40,8 +44,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ConllUReaderTest
 {
@@ -105,6 +110,45 @@ public class ConllUReaderTest
     }
 
     @Test
+    public void testMultipleDocumentIDs()
+            throws Exception
+    {
+        final TestAppender appender = new TestAppender();
+        final Logger logger = Logger.getRootLogger();
+        logger.addAppender(appender);
+        try {
+            CollectionReaderDescription reader = createReaderDescription(
+                    ConllUReader.class,
+                    ConllUReader.PARAM_LANGUAGE, "en",
+                    ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
+                    ConllUReader.PARAM_PATTERNS, "conllu-multiple_document_IDs.conll");
+
+            JCas jcas = new JCasIterable(reader).iterator().next();
+
+            AnnotationIndex<DocumentMetaData> index = jcas.getAnnotationIndex(DocumentMetaData.class);
+            DocumentMetaData m = index.iterator().get();
+            final String actualDocumentID = m.getDocumentId();
+            final String expectedDocumentID = "mf920901-001;mf920901-002";
+
+            Assert.assertEquals("Document ID mismatch", expectedDocumentID, actualDocumentID);
+        }
+        finally {
+            logger.removeAppender(appender);
+        }
+        final List<LoggingEvent> log = appender.getLog();
+        final LoggingEvent firstLogEntry = log.get(0);
+        Assert.assertEquals(Level.WARN, firstLogEntry.getLevel());
+        Assert.assertEquals("org.dkpro.core.io.conll.ConllUReader",
+                firstLogEntry.getLoggerName());
+
+        final String patternString = "File\\s[\\w:/%-\\.]+\\scontains\\smultiple\\sdocument\\sIDs:\\s"
+                + "\\[mf920901-001,\\smf920901-002]";
+        Pattern pattern = Pattern.compile(patternString);
+        Matcher matcher = pattern.matcher(firstLogEntry.getMessage().toString());
+        Assert.assertTrue(matcher.matches());
+    }
+
+    @Test
     public void testParagraphs()
             throws Exception
     {
@@ -118,7 +162,7 @@ public class ConllUReaderTest
 
         AnnotationIndex<Paragraph> index = jcas.getAnnotationIndex(Paragraph.class);
 
-        List<String> paragraphIDs = new LinkedList<>();
+        List<String> paragraphIDs = new ArrayList<>();
         Iterator<Paragraph> iterator = index.iterator();
         while(iterator.hasNext()) {
             Paragraph p = iterator.next();
@@ -146,4 +190,28 @@ public class ConllUReaderTest
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
+
+    class TestAppender extends AppenderSkeleton {
+        private final List<LoggingEvent> log = new ArrayList<>();
+
+        @Override
+        public boolean requiresLayout() {
+            return false;
+        }
+
+        @Override
+        protected void append(final LoggingEvent loggingEvent) {
+            if (loggingEvent.getLevel().equals(Level.WARN)) {
+                log.add(loggingEvent);
+            }
+        }
+
+        @Override
+        public void close() {
+        }
+
+        public List<LoggingEvent> getLog() {
+            return new ArrayList<LoggingEvent>(log);
+        }
+    }
 }

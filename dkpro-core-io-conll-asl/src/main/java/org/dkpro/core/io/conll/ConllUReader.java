@@ -259,9 +259,7 @@ public class ConllUReader
                 continue;
             }
             if (comments.keySet().contains(META_DOCUMENT_ID)) {
-                AnnotationIndex<DocumentMetaData> index = aJCas.getAnnotationIndex(DocumentMetaData.class);
-                DocumentMetaData m = index.iterator().get();
-                m.setDocumentId(comments.get(META_DOCUMENT_ID));
+                documentIDValues.add(comments.get(META_DOCUMENT_ID));
             }
 
 
@@ -432,6 +430,17 @@ public class ConllUReader
         if (p != null) {
             p.setEnd(lastSentenceEndPosition);
             p.addToIndexes();
+        }
+        if (documentIDValues.size() > 0) {
+            DocumentMetaData m = DocumentMetaData.get(aJCas);
+            String documentID = String.join(";", documentIDValues);
+            if (documentIDValues.size() > 1) {
+                final String fileUri = m.getDocumentUri();
+                getLogger().warn(String.format("File %s contains multiple document IDs: %s",
+                        fileUri, documentIDValues));
+
+            }
+            m.setDocumentId(documentID);
         }
         doc.close();
     }
