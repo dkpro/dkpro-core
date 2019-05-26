@@ -235,7 +235,7 @@ public class ConllUReader
         int lastSentenceEndPosition = 0;
         boolean shouldAddSpace = false;
         Optional<Boolean> documentContainsParagraphInformation = Optional.empty();
-
+        List<String> documentIDValues = new ArrayList<>();
         while (true) {
             // Read sentence comments (if any)
             Map<String, String> comments = readSentenceComments(aReader);
