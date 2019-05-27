@@ -142,6 +142,7 @@ public abstract class ResourceObjectProviderBase<M>
      * resolved when {@link #configure()} is called. (optional)
      */
     public static final String GROUP_ID = "groupId";
+    public static final String COMPONENT_GROUP_ID = "componentGroupId";
 
     /**
      * The artifact ID of the Maven artifact containing a resource. Variables in the location are
@@ -212,6 +213,7 @@ public abstract class ResourceObjectProviderBase<M>
     protected void init()
     {
         setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+        setDefault(COMPONENT_GROUP_ID, "org.dkpro.core");
         setDefault(ARTIFACT_URI,
                 "mvn:${" + GROUP_ID + "}:${" + ARTIFACT_ID + "}:${" + VERSION + "}");
     }
@@ -374,7 +376,7 @@ public abstract class ResourceObjectProviderBase<M>
         }
     }
     
-    protected List<URL> getPomUrlsForClass(String aModelGroup, String aModelArtifact,
+    protected List<URL> getPomUrlsForClass(String aComponentGroupId, String aModelArtifactId,
             Class<?> aClass)
         throws IOException
     {
@@ -418,7 +420,7 @@ public abstract class ResourceObjectProviderBase<M>
             Matcher matcher = pattern.matcher(base);
             if (matcher.matches()) {
                 String artifactIdAndVersion = matcher.group("ID");
-                String pomPattern = base + "META-INF/maven/" + aModelGroup + "/"
+                String pomPattern = base + "META-INF/maven/" + aComponentGroupId + "/"
                         + artifactIdAndVersion + "/pom.xml";
                 lookupPatterns.add(pomPattern);
                 ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -434,9 +436,9 @@ public abstract class ResourceObjectProviderBase<M>
         // models from the StanfordNLP module).
         if (urls.isEmpty()) {
             // This is the default strategy supposed to look in the JAR
-            String moduleArtifactId = aModelArtifact.split("-")[0];
-            String pomPattern = base + "META-INF/maven/" + aModelGroup + "/" + moduleArtifactId +
-                    "*/pom.xml";
+            String moduleArtifactId = aModelArtifactId.split("-")[0];
+            String pomPattern = base + "META-INF/maven/" + aComponentGroupId + "/"
+                    + moduleArtifactId + "*/pom.xml";
             lookupPatterns.add(pomPattern);
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(pomPattern);
@@ -468,11 +470,11 @@ public abstract class ResourceObjectProviderBase<M>
      *             the POM, or if no context object was set.
      * @return the version of the required model.
      */
-    protected String getModelVersionFromMavenPom(String aModelGroup, String aModelArtifact,
-            Class<?> aClass)
+    protected String getModelVersionFromMavenPom(String aComponentGroupId, String aModelGroupId,
+            String aModelArtifactId, Class<?> aClass)
         throws IOException
     {
-        List<URL> urls = getPomUrlsForClass(aModelGroup, aModelArtifact, contextClass);
+        List<URL> urls = getPomUrlsForClass(aComponentGroupId, aModelArtifactId, contextClass);
 
         for (URL pomUrl : urls) {
             // Parse the POM
@@ -492,8 +494,8 @@ public abstract class ResourceObjectProviderBase<M>
                 List<Dependency> deps = model.getDependencyManagement().getDependencies();
                 for (Dependency dep : deps) {
                     if (
-                            StringUtils.equals(dep.getGroupId(), aModelGroup) && 
-                            StringUtils.equals(dep.getArtifactId(), aModelArtifact)
+                            StringUtils.equals(dep.getGroupId(), aModelGroupId) && 
+                            StringUtils.equals(dep.getArtifactId(), aModelArtifactId)
                     ) {
                         return dep.getVersion();
                     }
@@ -790,12 +792,22 @@ public abstract class ResourceObjectProviderBase<M>
                 resolved.getProperty(ARTIFACT_URI, "").contains("${" + VERSION + "}") && 
                 isNull(resolved.getProperty(VERSION))
         ) {
-            String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
+            String modelGroupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
+            String componentGroupId;
+            
+            if (aProps.getProperty(COMPONENT_GROUP_ID) != null) {
+                componentGroupId = pph.replacePlaceholders(aProps.getProperty(COMPONENT_GROUP_ID),
+                        resolved);
+            }
+            else {
+                componentGroupId = modelGroupId;
+            }
+            
             String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), resolved);
             try {
                 // If the version is to be auto-detected, then we must have a groupId and artifactId
-                resolved.put(VERSION,
-                        getModelVersionFromMavenPom(groupId, artifactId, contextClass));
+                resolved.put(VERSION, getModelVersionFromMavenPom(componentGroupId, modelGroupId,
+                        artifactId, contextClass));
             }
             catch (Throwable e) {
                 log.error("Unable to obtain version from POM", e);
