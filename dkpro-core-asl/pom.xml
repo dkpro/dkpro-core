@@ -620,6 +620,7 @@
     <module>../dkpro-core-ixa-asl</module>
     <module>../dkpro-core-jazzy-asl</module>
     <module>../dkpro-core-jtok-asl</module>
+    <module>../dkpro-core-jieba-asl</module>
     <module>../dkpro-core-languagetool-asl</module>
     <module>../dkpro-core-langdetect-asl</module>
     <module>../dkpro-core-ldweb1t-asl</module>

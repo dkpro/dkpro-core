@@ -33,7 +33,7 @@
   <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) - Classic API (GPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <corenlp.version>3.9.1</corenlp.version>
+    <corenlp.version>3.9.2</corenlp.version>
   </properties>
   <dependencies>
     <dependency>
@@ -189,7 +189,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</artifactId>
-        <version>20180227.1</version>
+        <version>20181005.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -369,17 +369,17 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</artifactId>
-        <version>20140616.1</version>
+        <version>20181002.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</artifactId>
-        <version>20140616.1</version>
+        <version>20181002.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-caseless-left3words-distsim</artifactId>
-        <version>20140827.0</version>
+        <version>20181002.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

@@ -1,11 +1,11 @@
 <!--
-  Copyright 2010
-  Ubiquitous Knowledge Processing (UKP) Lab
-  Technische Universität Darmstadt
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
+  Licensed to the Technische Universität Darmstadt under one
+  or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership. The Technische Universität Darmstadt
+  licenses this file to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.
 
   http://www.apache.org/licenses/LICENSE-2.0
 
@@ -20,16 +20,23 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>dkpro-core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
-    <version>2.0.0-SNAPSHOT</version>
+    <artifactId>dkpro-core-asl</artifactId>
+    <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <artifactId>dkpro-core-api-segmentation-asl</artifactId>
-  <packaging>jar</packaging>
-  <name>DKPro Core ASL - Lexical Units API</name>
+  <artifactId>dkpro-core-jieba-asl</artifactId>
+  <name>DKPro Core ASL - Jieba (v ${jieba.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+  <properties>
+    <jieba.version>1.0.2</jieba.version>
+  </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.huaban</groupId>
+      <artifactId>jieba-analysis</artifactId>
+      <version>${jieba.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.uima</groupId>
       <artifactId>uimaj-core</artifactId>
@@ -40,11 +47,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>dkpro-core-api-lexmorph-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.dkpro.core</groupId>
-      <artifactId>dkpro-core-api-parameter-asl</artifactId>
+      <artifactId>dkpro-core-api-segmentation-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
@@ -56,27 +59,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-testing-asl</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <resources>
-      <resource>
-        <filtering>false</filtering>
-        <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>desc/type/**/*</exclude>
-        </excludes>
-      </resource>
-      <resource>
-        <filtering>true</filtering>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>desc/type/**/*</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
 </project>
