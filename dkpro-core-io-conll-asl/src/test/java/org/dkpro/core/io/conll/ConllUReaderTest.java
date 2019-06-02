@@ -23,8 +23,12 @@ import static org.dkpro.core.testing.AssertAnnotations.assertMorph;
 import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -40,13 +44,9 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ConllUReaderTest
 {
@@ -125,7 +125,8 @@ public class ConllUReaderTest
 
             JCas jcas = new JCasIterable(reader).iterator().next();
 
-            AnnotationIndex<DocumentMetaData> index = jcas.getAnnotationIndex(DocumentMetaData.class);
+            AnnotationIndex<DocumentMetaData> index = jcas
+                    .getAnnotationIndex(DocumentMetaData.class);
             DocumentMetaData m = index.iterator().get();
             final String actualDocumentID = m.getDocumentId();
             final String expectedDocumentID = "mf920901-001;mf920901-002";
@@ -164,14 +165,17 @@ public class ConllUReaderTest
 
         List<String> paragraphIDs = new ArrayList<>();
         Iterator<Paragraph> iterator = index.iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Paragraph p = iterator.next();
             paragraphIDs.add(p.getId());
         }
-        List<String> expectedParagraphIDs = new ArrayList<String>(){{
-            add("mf920901-001-p1");
-            add("mf920901-001-p2");
-        }};
+        List<String> expectedParagraphIDs = new ArrayList<String>()
+        {
+            {
+                add("mf920901-001-p1");
+                add("mf920901-001-p2");
+            }
+        };
         Assert.assertEquals(expectedParagraphIDs, paragraphIDs);
 
         final String expectedTextContent = "Slovenská ústava: pro i proti Slovenská ústava: pro i"
