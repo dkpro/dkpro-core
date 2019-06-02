@@ -43,15 +43,15 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
+import org.dkpro.core.api.metadata.SingletonTagset;
+import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.resources.LittleEndianDataInputStream;
+import org.dkpro.core.api.resources.ModelProviderBase;
+import org.dkpro.core.api.resources.ResourceUtils;
+import org.dkpro.core.api.resources.RuntimeProvider;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.LittleEndianDataInputStream;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -77,20 +77,16 @@ public class SfstAnnotator
     
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
     /**
      * Write lemma information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
     /**
@@ -121,23 +117,25 @@ public class SfstAnnotator
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
-     /**
+    /**
      * Specifies the model encoding.
      */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
-    
+
     public static final String PARAM_MODE = "mode";
-    @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue="FIRST")
+    @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue = "FIRST")
     private Mode mode;
-    
-    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+
+    public static final String PARAM_MORPH_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
-    
+
     /**
-     * Whether to lookup the first word of a sentence in lowercase, useful if the employed model does not handle lowercasing.
+     * Whether to lookup the first word of a sentence in lowercase, useful if the employed model
+     * does not handle lowercasing.
      */
     public static final String PARAM_LOWERCASE_FIRST_WORD = "lowercaseFirstWord";
     @ConfigurationParameter(name = PARAM_LOWERCASE_FIRST_WORD, mandatory = false, defaultValue = "false")
@@ -223,8 +221,9 @@ public class SfstAnnotator
         featuresParser.configure(cas);
 
         if (lowercaseFirstWord) {
-        	// locale for lowercasing
-            locale = new Locale(PARAM_LANGUAGE != null ? PARAM_LANGUAGE : cas.getDocumentLanguage());
+            // locale for lowercasing
+            locale = new Locale(
+                    PARAM_LANGUAGE != null ? PARAM_LANGUAGE : cas.getDocumentLanguage());
         }
         
         String modelEncoding = (String) modelProvider.getResourceMetaData().get("model.encoding");
@@ -273,11 +272,11 @@ public class SfstAnnotator
                     out.printf("%s%n", token.getCoveredText());
                     // treat first token differently if parameter is set
                     if (first && lowercaseFirstWord) {
-                    	String lcToken = token.getCoveredText().toLowerCase(locale);
-                    	if (!lcToken.equals(token.getCoveredText())) {
-                    		out.printf("%s%n", token.getCoveredText().toLowerCase(locale));
-                    	}
-                    	first = false;
+                        String lcToken = token.getCoveredText().toLowerCase(locale);
+                        if (!lcToken.equals(token.getCoveredText())) {
+                            out.printf("%s%n", token.getCoveredText().toLowerCase(locale));
+                        }
+                        first = false;
                     }
                     out.printf("%s%n", FLUSH_TOKEN);
                 }
@@ -300,13 +299,13 @@ public class SfstAnnotator
                         }
                         
                         if (lastIn.startsWith("no result for")) {
-                        	// if we're treating sentence-initial tokens specially,
+                            // if we're treating sentence-initial tokens specially,
                             // don't create an empty analysis just yet
-                        	if (first && lowercaseFirstWord) {
-                        		first = false;
-                        		continue analysisLoop;
-                        	}
-                        	
+                            if (first && lowercaseFirstWord) {
+                                first = false;
+                                continue analysisLoop;
+                            }
+
                             // No analysis for this token
                             MorphologicalFeatures morph = new MorphologicalFeatures(aJCas,
                                     token.getBegin(), token.getEnd());
