@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -569,7 +570,14 @@ public class TcfWriter
         
         getLogger().debug("Layer [" + TextCorpusLayerTag.REFERENCES.getXmlName() + "]: created");
 
-        for (CoreferenceChain chain : select(aJCas, CoreferenceChain.class)) {
+        // Sort by begin to provide a more-or-less stable order for the unit tests
+        List<CoreferenceChain> chains = select(aJCas, CoreferenceChain.class)
+                .stream()
+                .filter(chain -> chain.getFirst() != null)
+                .sorted((a, b) -> a.getFirst().getBegin() - b.getFirst().getBegin())
+                .collect(Collectors.toList());
+        
+        for (CoreferenceChain chain : chains) {
             CoreferenceLink prevLink = null;
             Reference prevRef = null;
             List<Reference> refs = new ArrayList<>();
