@@ -313,6 +313,11 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-perseus-asl</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-pubannotation-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
@@ -439,11 +444,6 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-mecab-asl</artifactId>
-        <version>2.0.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-ngrams-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -584,6 +584,7 @@
     <module>../dkpro-core-io-nitf-asl</module>
     <module>../dkpro-core-io-pdf-asl</module>
     <module>../dkpro-core-io-penntree-asl</module>
+    <module>../dkpro-core-io-perseus-asl</module>
     <module>../dkpro-core-io-pubannotation-asl</module>
     <module>../dkpro-core-io-reuters-asl</module>
     <module>../dkpro-core-io-rtf-asl</module>
