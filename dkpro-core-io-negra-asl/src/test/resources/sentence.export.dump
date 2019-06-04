@@ -103,6 +103,7 @@ Token
       end: 3
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [gehen]
 POS_VERB
    sofa: _InitialView
@@ -141,6 +142,7 @@ Token
       end: 9
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [gewagte Verbindungen und Risiken]
 Constituent
    sofa: _InitialView
@@ -256,6 +258,7 @@ Token
       end: 17
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Verbindungen]
 POS_NOUN
    sofa: _InitialView
@@ -308,6 +311,7 @@ Token
       end: 30
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [und]
 POS_CONJ
    sofa: _InitialView
@@ -353,6 +357,7 @@ Token
       end: 34
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [Risiken]
 POS_NOUN
    sofa: _InitialView
@@ -398,6 +403,7 @@ Token
       end: 42
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [ein]
 POS_VERB
    sofa: _InitialView
@@ -436,6 +442,7 @@ Token
       end: 46
       PosValue: "PTKVZ"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -460,6 +467,7 @@ Token
       end: 48
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [versuchen ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -519,6 +527,7 @@ Token
       end: 58
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -634,6 +643,7 @@ Token
       end: 63
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [Möglichkeiten]
 POS_NOUN
    sofa: _InitialView
@@ -686,6 +696,7 @@ Token
       end: 77
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [auszureizen]
 POS_VERB
    sofa: _InitialView
@@ -731,6 +742,7 @@ Token
       end: 89
       PosValue: "VVIZU"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -755,6 +767,7 @@ Token
       end: 91
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

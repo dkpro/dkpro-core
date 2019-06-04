@@ -19,8 +19,7 @@ package org.dkpro.core.decompounding.uima.annotator;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -160,14 +159,15 @@ public class CompoundAnnotatorTest
         ae.typeSystemInit(cas.getTypeSystem());
         ae.process(cas);
 
-        String[] compounds = new String[] {"Aktionsplan", "Doppelprozessormaschine"};
-        String[] linkingMorphemes = new String[] {"s"};
-
         // Check if splits and morphemes are equal
-        assertThat(getAnnotation(cas.getJCas(), Compound.class), is(compounds));
-        assertThat(getAnnotation(cas.getJCas(), Split.class), is(splits));
-        assertThat(getAnnotation(cas.getJCas(), CompoundPart.class), is(compoundsParts));
-        assertThat(getAnnotation(cas.getJCas(), LinkingMorpheme.class), is(linkingMorphemes));
+        assertThat(getAnnotation(cas.getJCas(), Compound.class))
+                .containsExactly("Aktionsplan", "Doppelprozessormaschine");
+        assertThat(getAnnotation(cas.getJCas(), Split.class))
+                .containsExactly(splits);
+        assertThat(getAnnotation(cas.getJCas(), CompoundPart.class))
+                .containsExactly(compoundsParts);
+        assertThat(getAnnotation(cas.getJCas(), LinkingMorpheme.class))
+                .containsExactly("s");
     }
 
     protected <T extends Annotation> String[] getAnnotation(JCas aCas, Class<T> aClass)
@@ -194,5 +194,4 @@ public class CompoundAnnotatorTest
 
         index.delete();
     }
-
 }

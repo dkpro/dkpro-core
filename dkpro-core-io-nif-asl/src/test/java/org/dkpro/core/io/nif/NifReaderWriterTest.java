@@ -45,6 +45,7 @@ public class NifReaderWriterTest
     {
         convert("src/test/resources/nif/brown/a01.ttl", "src/test/resources/nif/brown/a01-cooked.ttl");
         convert("src/test/resources/nif/kore50/kore50.ttl", "src/test/resources/nif/kore50/kore50-cooked.ttl");
+        convert("src/test/resources/nif/freme/freme.ttl", "src/test/resources/nif/freme/freme-cooked.ttl");
     }
     
     @Test
@@ -72,6 +73,17 @@ public class NifReaderWriterTest
                 NifReader.class, // the reader
                 NifWriter.class, // the writer
                 "nif/kore50/ref.ttl", "nif/kore50/kore50-cooked.ttl",
+                new TestOptions().resultAssertor(this::assertModelEquals));
+    }
+    
+    @Test
+    public void testFreme()
+        throws Exception
+    {
+        testOneWay(
+                NifReader.class, // the reader
+                NifWriter.class, // the writer
+                "nif/freme/ref.ttl", "nif/freme/freme-cooked.ttl",
                 new TestOptions().resultAssertor(this::assertModelEquals));
     }
     

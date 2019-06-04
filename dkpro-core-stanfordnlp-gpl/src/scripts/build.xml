@@ -27,20 +27,20 @@
     - Upstream versions - meta data versions are maintained per model below 
     -->  
   <!-- http://nlp.stanford.edu/software/lex-parser.shtml -->
-  <property name="parser.version.real" value="3.9.1"/>
-  <property name="parser.date" value="2018-02-27"/>
+  <property name="parser.version.real" value="3.9.2"/>
+  <property name="parser.date" value="20181017"/>
   
   <!-- http://nlp.stanford.edu/software/corenlp.shtml -->
-  <property name="core.version.real" value="3.9.1"/>
-  <property name="core.version" value="20180227"/>
-  <property name="core.date" value="2018-02-27"/>
+  <property name="core.version.real" value="3.9.2"/>
+  <property name="core.version" value="20181005"/>
+  <property name="core.date" value="2018-10-05"/>
 
-  <property name="core.arabic.date" value="2018-02-27"/>
-  <property name="core.chinese.date" value="2018-02-27"/>
-  <property name="core.english.date" value="2018-02-27"/>
-  <property name="core.french.date" value="2018-02-27"/>
-  <property name="core.german.date" value="2018-02-27"/>
-  <property name="core.spanish.date" value="2018-02-27"/>
+  <property name="core.arabic.date" value="2018-10-05"/>
+  <property name="core.chinese.date" value="2018-10-05"/>
+  <property name="core.english.date" value="2018-10-05"/>
+  <property name="core.french.date" value="2018-10-05"/>
+  <property name="core.german.date" value="2018-10-05"/>
+  <property name="core.spanish.date" value="2018-10-05"/>
   
   <!-- 
     - Output package configuration
@@ -64,6 +64,9 @@
   <target name="newmodels">
     <property name="install-artifact-mode" value="remote"/>
     
+    <antcall target="tagger-en-bidirectional-distsim"/>
+    <antcall target="tagger-en-left3words-distsim"/>
+    <antcall target="tagger-en-caseless-left3words-distsim"/>
     <antcall target="coref-en-default"/>
   </target>
   
@@ -483,10 +486,10 @@
 
     <install-stub-and-upstream-file 
         file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/english-bidirectional/english-bidirectional-distsim.tagger" 
-        md5="a56c39cc598cea170fc6902652552e25"
+        md5="fa2cbb839d97329a78ea47b3895339cc"
         groupId="de.tudarmstadt.ukp.dkpro.core" 
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20140616" 
+        upstreamVersion="20181002" 
         metaDataVersion="1"
         tool="tagger" 
         language="en" 
@@ -510,10 +513,10 @@
             
       <install-stub-and-upstream-file 
         file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/english-left3words/english-left3words-distsim.tagger" 
-        md5="38a80a1c6b0fb99bb233b470989135e0"
+        md5="5309d92af51bcbdf71d2c160c644a79c"
         groupId="de.tudarmstadt.ukp.dkpro.core" 
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20140616" 
+        upstreamVersion="20181002" 
         metaDataVersion="1"
         tool="tagger" 
         language="en" 
@@ -537,10 +540,10 @@
             
     <install-stub-and-upstream-file
       file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/english-caseless-left3words-distsim.tagger"
-      md5="26444b971e910cff226be355f39b687f"
+      md5="7b2bdb109c60237948ecfa7fca507dfe"
       groupId="de.tudarmstadt.ukp.dkpro.core"
       artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-      upstreamVersion="20140827"
+      upstreamVersion="20181002"
       metaDataVersion="0"
       tool="tagger"
       language="en"

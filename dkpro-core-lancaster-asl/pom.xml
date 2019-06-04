@@ -27,9 +27,12 @@
   </parent>
   <artifactId>dkpro-core-lancaster-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - Lancaster</name>
+  <name>DKPro Core ASL - Lancaster (v ${smile.version}) (ASL</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>http://haifengl.github.io/smile</description>
+  <properties>
+    <smile.version>1.3.1</smile.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -46,6 +49,7 @@
     <dependency>
       <groupId>com.github.haifengl</groupId>
       <artifactId>smile-nlp</artifactId>
+      <version>${smile.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>

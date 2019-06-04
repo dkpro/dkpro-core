@@ -18,8 +18,9 @@
 
 package org.dkpro.core.decompounding.splitter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.dkpro.core.decompounding.splitter.Fragment;
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -72,6 +73,7 @@ public class FragmentTest
     public void testCreateFromString()
     {
         Fragment fragm = Fragment.createFromString("(");
-        Assert.assertThat(fragm.getWord(), CoreMatchers.is("("));
+    
+        assertThat(fragm.getWord()).isEqualTo("(");
     }
 }

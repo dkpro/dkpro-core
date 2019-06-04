@@ -17,6 +17,12 @@
  */
 package org.dkpro.core.io.brat;
 
+import static org.apache.uima.cas.CAS.TYPE_NAME_BYTE;
+import static org.apache.uima.cas.CAS.TYPE_NAME_DOUBLE;
+import static org.apache.uima.cas.CAS.TYPE_NAME_FLOAT;
+import static org.apache.uima.cas.CAS.TYPE_NAME_INTEGER;
+import static org.apache.uima.cas.CAS.TYPE_NAME_LONG;
+import static org.apache.uima.cas.CAS.TYPE_NAME_SHORT;
 import static org.apache.uima.fit.util.JCasUtil.selectAll;
 
 import java.util.ArrayList;
@@ -517,9 +523,40 @@ public class DKPro2Brat
     private void writePrimitiveAttribute(BratAnnotation aAnno, FeatureStructure aFS, Feature feat)
     {
         String featureValue = aFS.getFeatureValueAsString(feat);
+        String rangeType = feat.getRange().getName();
         
         // Do not write attributes with null values unless this is explicitly enabled
-        if (featureValue == null && !writeNullAttributes) {
+        if (
+                !writeNullAttributes
+                &&
+                (
+                    // null value
+                    featureValue == null 
+                    || 
+                    (
+                        // zero value for integer values
+                        "0".equals(featureValue)
+                        &&
+                        (
+                            TYPE_NAME_BYTE.equals(rangeType) ||
+                            TYPE_NAME_SHORT.equals(rangeType) ||
+                            TYPE_NAME_INTEGER.equals(rangeType) ||
+                            TYPE_NAME_LONG.equals(rangeType)
+                        )
+                    )
+                    // zero value for float values
+                    ||
+                    (
+                        TYPE_NAME_DOUBLE.equals(rangeType) && 
+                        aFS.getDoubleValue(feat) == 0.0d
+                    )
+                    ||
+                    (
+                        TYPE_NAME_FLOAT.equals(rangeType) && 
+                        aFS.getFloatValue(feat) == 0.0f
+                    )
+                )
+        ) {
             return;
         }
         

@@ -121,6 +121,7 @@
             <currentYear>${currentYear}</currentYear>
           </properties>
           <excludes>
+            <exclude>.checkstyle</exclude>
             <exclude>release.properties</exclude>
             <exclude>CHANGES</exclude>
             <exclude>CHANGES.txt</exclude>

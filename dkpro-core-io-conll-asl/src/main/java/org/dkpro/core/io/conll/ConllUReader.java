@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
@@ -50,7 +51,9 @@ import org.dkpro.core.api.resources.MappingProvider;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -157,6 +160,14 @@ public class ConllUReader
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean readDependency;
 
+    /**
+     * Read paragraph information. If no paragraph information is provided in the file, or if set
+     * to false, then output one sentence per line, separated by an empty line.
+     */
+    public static final String PARAM_READ_PARAGRAPH = ComponentParameters.PARAM_READ_PARAGRAPH;
+    @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, mandatory = true, defaultValue = "true")
+    private boolean readParagraph;
+
     private static final String UNUSED = "_";
 
     private static final int ID = 0;
@@ -171,6 +182,8 @@ public class ConllUReader
     private static final int MISC = 9;
     
     public static final String META_SEND_ID = "sent_id";
+    public static final String META_DOCUMENT_ID = "newdoc id";
+    public static final String META_PARAGRAPH_ID = "newpar id";
     public static final String META_TEXT = "text";
 
     private MappingProvider posMappingProvider;
@@ -217,10 +230,21 @@ public class ConllUReader
         
         JCasBuilder doc = new JCasBuilder(aJCas);
 
+        Paragraph p = null;
+        int lastSentenceEndPosition = 0;
+        boolean shouldAddSpace = false;
+        Optional<Boolean> documentContainsParagraphInformation = Optional.empty();
+        List<String> documentIDValues = new ArrayList<>();
         while (true) {
             // Read sentence comments (if any)
             Map<String, String> comments = readSentenceComments(aReader);
             
+            if (!documentContainsParagraphInformation.isPresent()) {
+                documentContainsParagraphInformation = Optional.of(
+                        comments.keySet().contains(META_PARAGRAPH_ID));
+            }
+
+
             // Read sentence
             List<String[]> words = readSentence(aReader);
             if (words == null) {
@@ -231,7 +255,23 @@ public class ConllUReader
             if (words.isEmpty()) {
                  // Ignore empty sentences. This can happen when there are multiple end-of-sentence
                  // markers following each other.
-                continue; 
+                continue;
+            }
+            if (comments.keySet().contains(META_DOCUMENT_ID)) {
+                documentIDValues.add(comments.get(META_DOCUMENT_ID));
+            }
+
+
+            if (!readParagraph || !documentContainsParagraphInformation.get()) {
+                if (doc.getPosition() > 0) {
+                    doc.add("\n");
+                    shouldAddSpace = false;
+                }
+            } else if (readParagraph) {
+                if (p != null && comments.keySet().contains(META_PARAGRAPH_ID)) {
+                    doc.add("\n\n");
+                    shouldAddSpace = false;
+                }
             }
 
             int sentenceBegin = doc.getPosition();
@@ -253,14 +293,20 @@ public class ConllUReader
                     surfaceString = word[FORM];
                     continue;
                 }
-                
+//                the following must be placed after check for dashes in ID in order not to insert
+//                unnecessary spaces
+                if (shouldAddSpace) {
+                    if (doc.getPosition() == sentenceBegin) {
+                        sentenceBegin++;
+                    }
+                    doc.add(" ");
+                }
+
                 // Read token
                 int tokenIdx = Integer.valueOf(word[ID]);
                 Token token = doc.add(word[FORM], Token.class);
                 tokens.put(tokenIdx, token);
-                if (!StringUtils.contains(word[MISC], "SpaceAfter=No") && wordIterator.hasNext()) {
-                    doc.add(" ");
-                }
+                shouldAddSpace = !StringUtils.contains(word[MISC], "SpaceAfter=No");
 
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {
@@ -367,10 +413,34 @@ public class ConllUReader
             sentence.setId(comments.get(META_SEND_ID));
             sentence.addToIndexes();
 
-            // Once sentence per line.
-            doc.add("\n");
-        }
 
+            if (comments.keySet().contains(META_PARAGRAPH_ID)) {
+                final String paragraphID = comments.get(META_PARAGRAPH_ID);
+                if (p != null) {
+                    // do nothing
+                    p.setEnd(lastSentenceEndPosition);
+                    p.addToIndexes();
+                }
+                p = new Paragraph(aJCas, sentenceBegin, sentenceEnd);
+                p.setId(paragraphID);
+            }
+            lastSentenceEndPosition = sentenceEnd;
+        }
+        if (p != null) {
+            p.setEnd(lastSentenceEndPosition);
+            p.addToIndexes();
+        }
+        if (documentIDValues.size() > 0) {
+            DocumentMetaData m = DocumentMetaData.get(aJCas);
+            String documentID = String.join(";", documentIDValues);
+            if (documentIDValues.size() > 1) {
+                final String fileUri = m.getDocumentUri();
+                getLogger().warn(String.format("File %s contains multiple document IDs: %s",
+                        fileUri, documentIDValues));
+
+            }
+            m.setDocumentId(documentID);
+        }
         doc.close();
     }
     

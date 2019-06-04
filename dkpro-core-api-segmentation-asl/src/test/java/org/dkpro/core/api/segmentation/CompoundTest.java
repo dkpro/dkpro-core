@@ -17,8 +17,11 @@
  */
 package org.dkpro.core.api.segmentation;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSplitLevel.ALL;
+import static de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSplitLevel.HIGHEST;
+import static de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSplitLevel.LOWEST;
+import static de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSplitLevel.NONE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +36,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSplitLevel;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 
 public class CompoundTest
 {
-
     private Compound compound;
 
     @Before
@@ -66,62 +67,39 @@ public class CompoundTest
         compound.setSplits(FSCollectionFactory.createFSArray(jcas, splits));
         compound.addToIndexes();
         jcasBuilder.close();
-
     }
 
     @Test
     public void testAll() throws UIMAException
     {
-
-        final String[] splitsList = new String[] { "getränk", "automat", "auto", "mat" };
-        assertThat(coveredTextArrayFromAnnotations(
-                compound.getSplitsWithoutMorpheme(CompoundSplitLevel.ALL)), is(splitsList));
-
+        assertThat(compound.getSplitsWithoutMorpheme(ALL))
+                .extracting(Annotation::getCoveredText)
+                .containsExactly("getränk", "automat", "auto", "mat");
     }
 
     @Test
     public void testLowest() throws UIMAException
     {
-
-        final String[] splitsList = new String[] { "getränk", "auto", "mat" };
-        assertThat(
-                coveredTextArrayFromAnnotations(
-                        compound.getSplitsWithoutMorpheme(CompoundSplitLevel.LOWEST)),
-                is(splitsList));
+        assertThat(compound.getSplitsWithoutMorpheme(LOWEST))
+                .extracting(Annotation::getCoveredText)
+                .containsExactly("getränk", "auto", "mat");
 
     }
 
     @Test
     public void testHighest() throws UIMAException
     {
-
-        final String[] splitsList = new String[] { "getränk", "automat" };
-        assertThat(
-                coveredTextArrayFromAnnotations(
-                        compound.getSplitsWithoutMorpheme(CompoundSplitLevel.HIGHEST)),
-                is(splitsList));
+        assertThat(compound.getSplitsWithoutMorpheme(HIGHEST))
+                .extracting(Annotation::getCoveredText)
+                .containsExactly("getränk", "automat");
 
     }
 
     @Test
     public void testNone() throws UIMAException
     {
-
-        final String[] splitsList = new String[] {};
-        assertThat(
-                coveredTextArrayFromAnnotations(
-                        compound.getSplitsWithoutMorpheme(CompoundSplitLevel.NONE)),
-                is(splitsList));
-
+        assertThat(compound.getSplitsWithoutMorpheme(NONE))
+                .extracting(Annotation::getCoveredText)
+                .isEmpty();
     }
-
-    public <T extends Annotation> String[] coveredTextArrayFromAnnotations(final T[] annotations)
-    {
-        final List<String> list = new ArrayList<String>();
-        for (T annotation : annotations) {
-            list.add(annotation.getCoveredText());
-        }
-        return list.toArray(new String[list.size()]);
-    }
-
 }

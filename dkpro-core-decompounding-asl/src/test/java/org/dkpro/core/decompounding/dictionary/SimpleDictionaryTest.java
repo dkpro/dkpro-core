@@ -18,16 +18,15 @@
 
 package org.dkpro.core.decompounding.dictionary;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.SimpleDictionary;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,18 +46,17 @@ public class SimpleDictionaryTest
     @Test
     public void testContains()
     {
-        Assert.assertEquals(72508, dict.getAll().size());
+        assertEquals(72508, dict.getAll().size());
 
-        Assert.assertTrue(dict.contains("worauf"));
-        Assert.assertTrue(dict.contains("woraufhin"));
-        Assert.assertTrue(dict.contains("woraus"));
+        assertTrue(dict.contains("worauf"));
+        assertTrue(dict.contains("woraufhin"));
+        assertTrue(dict.contains("woraus"));
     }
 
     @Test
     public void testDictionary()
     {
-        assertThat(dict.getAll().size(), not(0));
-        assertThat(dict.contains("zu"), is(true));
+        assertThat(dict.getAll()).isNotEmpty();
+        assertThat(dict.contains("zu")).isTrue();
     }
-
 }

@@ -78,13 +78,14 @@ public class CoreNlpCoreferenceResolverTest
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
         String[][] ref = {
-                { "'Let's go" },
-                { "'Let's" },
+                { "'" },
+                { "Let's go" },
+                { "Let's" },
                 { "I" },
                 { "the Don'", "he" } };
 
         String[] pennTree = { 
-                "(ROOT (FRAG (NP (NP ('' ') (NNP Let) (POS 's)) (NN go)) (. !)))", 
+                "(ROOT (S (S (NP (POS ')) (NP (NP (NNP Let) (POS 's)) (NN go))) (. !)))", 
                 "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP (DT the) "
                 + "(NX (NNP Don) (POS ')))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
         };

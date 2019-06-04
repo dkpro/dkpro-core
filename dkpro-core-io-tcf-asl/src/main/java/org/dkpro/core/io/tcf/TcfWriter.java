@@ -60,12 +60,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamedWithReplaceableLayers;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
+import eu.clarin.weblicht.wlfxb.tc.api.CorrectionOperation;
 import eu.clarin.weblicht.wlfxb.tc.api.DependencyParsingLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.LemmasLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.NamedEntitiesLayer;
+import eu.clarin.weblicht.wlfxb.tc.api.OrthographyLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTagsLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Reference;
 import eu.clarin.weblicht.wlfxb.tc.api.ReferencesLayer;
@@ -93,7 +96,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
             "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
             "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+            "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
 public class TcfWriter
     extends JCasFileWriter_ImplBase
 {
@@ -260,12 +264,15 @@ public class TcfWriter
                 TextCorpusLayerTag.SENTENCES);
         
         // If we have annotations for these layers in the CAS, we rewrite those layers. 
-        List<TextCorpusLayerTag> layersToReplace = new ArrayList<TextCorpusLayerTag>();
+        List<TextCorpusLayerTag> layersToReplace = new ArrayList<>();
         if (exists(aJCas, POS.class) || !preserveIfEmpty) {
             layersToReplace.add(TextCorpusLayerTag.POSTAGS);
         }
         if (exists(aJCas, Lemma.class) || !preserveIfEmpty) {
             layersToReplace.add(TextCorpusLayerTag.LEMMAS);
+        }
+        if (exists(aJCas, SofaChangeAnnotation.class) || !preserveIfEmpty) {
+            layersToReplace.add(TextCorpusLayerTag.ORTHOGRAPHY);
         }
         if (exists(aJCas, NamedEntity.class) || !preserveIfEmpty) {
             layersToReplace.add(TextCorpusLayerTag.NAMED_ENTITIES);
@@ -303,6 +310,7 @@ public class TcfWriter
         writeSentence(aJCas, aTextCorpus, tokensBeginPositionMap);
         writePosTags(aJCas, aTextCorpus, tokensBeginPositionMap);
         writeLemmas(aJCas, aTextCorpus, tokensBeginPositionMap);
+        writeOrthograph(aJCas, aTextCorpus);
         writeDependency(aJCas, aTextCorpus, tokensBeginPositionMap);
         writeNamedEntity(aJCas, aTextCorpus, tokensBeginPositionMap);
         writeCoreference(aJCas, aTextCorpus, tokensBeginPositionMap);
@@ -325,8 +333,8 @@ public class TcfWriter
         }
         
         
-        Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> tokensBeginPositionMap = 
-                new HashMap<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token>();
+        Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> tokensBeginPositionMap =
+                new HashMap<>();
 
         int j = 0;
         for (Token token : select(aJCas, Token.class)) {
@@ -408,6 +416,38 @@ public class TcfWriter
         
     }
     
+    private void writeOrthograph(JCas aJCas, TextCorpus aTextCorpus) {
+        if (!JCasUtil.exists(aJCas, SofaChangeAnnotation.class)) {
+            // Do nothing if there are no SofaChangeAnnotation layer
+            // (Which is equivalent to Orthography layer in TCF) in the CAS
+            getLogger().debug("Layer [" + TextCorpusLayerTag.ORTHOGRAPHY.getXmlName() + "]: empty");
+            return;
+        }
+
+        // Tokens layer must already exist
+        TokensLayer tokensLayer = aTextCorpus.getTokensLayer();
+
+        // create orthographyLayer annotation layer
+        OrthographyLayer orthographyLayer = aTextCorpus.createOrthographyLayer();
+
+        getLogger().debug("Layer [" + TextCorpusLayerTag.ORTHOGRAPHY.getXmlName() + "]: created");
+
+        int j = 0;
+        for (Token token : select(aJCas, Token.class)) {
+            List<SofaChangeAnnotation> scas = selectCovered(aJCas, SofaChangeAnnotation.class,
+                    token.getBegin(), token.getEnd());
+            if (scas.size() > 0 && orthographyLayer != null) {
+                SofaChangeAnnotation change = scas.get(0);
+                
+                orthographyLayer.addCorrection(scas.get(0).getValue(), tokensLayer.getToken(j),
+                        Optional.ofNullable(change.getOperation()).map(CorrectionOperation::valueOf)
+                                .orElse(null));
+            }
+            j++;
+        }
+
+    }
+    
     private void writeSentence(JCas aJCas, TextCorpus aTextCorpus,
             Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> aTokensBeginPositionMap)
     {
@@ -466,6 +506,7 @@ public class TcfWriter
                         .createDependency(d.getDependencyType(),
                                 aTokensBeginPositionMap.get(d.getDependent().getBegin()),
                                 aTokensBeginPositionMap.get(d.getGovernor().getBegin()));
+
                 deps.add(dependency);
             }
             if (deps.size() > 0) {
@@ -531,7 +572,7 @@ public class TcfWriter
         for (CoreferenceChain chain : select(aJCas, CoreferenceChain.class)) {
             CoreferenceLink prevLink = null;
             Reference prevRef = null;
-            List<Reference> refs = new ArrayList<Reference>();
+            List<Reference> refs = new ArrayList<>();
             for (CoreferenceLink link : chain.links()) {
                 // Get covered tokens
                 List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<>();

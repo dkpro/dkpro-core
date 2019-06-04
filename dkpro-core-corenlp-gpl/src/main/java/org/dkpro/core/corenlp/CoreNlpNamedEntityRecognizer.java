@@ -195,17 +195,6 @@ public class CoreNlpNamedEntityRecognizer
     // on, off, auto
     private boolean useSUTime = false; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
 
-//    /**
-//     * Whether to read the default regular expression gazetteer.
-//     * 
-//     * @see edu.stanford.nlp.pipeline.DefaultPaths#DEFAULT_NER_GAZETTE_MAPPING
-//     */
-//    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
-//    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue = "false")
-    // Commented out since the default gazetter is currently only in the original Stanford model
-    // JARs
-    private boolean augmentRegexNER = false; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;
-
     private boolean verbose = false;
     
     private ModelProviderBase<NERCombinerAnnotator> annotatorProvider;
@@ -318,7 +307,7 @@ public class CoreNlpNamedEntityRecognizer
             }
 
             NERClassifierCombiner combiner = new NERClassifierCombiner(applyNumericClassifiers,
-                    useSUTime, augmentRegexNER, classifier);
+                    useSUTime, classifier);
             
             NERCombinerAnnotator annotator = new NERCombinerAnnotator(combiner, verbose,
                     numThreads, maxTime, maxSentenceLength, false, false);
