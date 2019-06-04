@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.lancaster;
+package org.dkpro.core.smile;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -32,7 +32,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 
-public class LancasterStemmerTest
+public class SmileLancasterStemmerTest
 {
     @Test
     public void testEnglish()
@@ -63,7 +63,7 @@ public class LancasterStemmerTest
     {
         runTest("en", "proceed",
                 new String[] {"procee"}, // using default rules the expected would be process
-                LancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt"
+                SmileLancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt"
         );
     }
 
@@ -73,7 +73,7 @@ public class LancasterStemmerTest
     {
         runTest("en", "proceed",
                 new String[] {"procee"}, // using default rules the expected would be process
-                LancasterStemmer.PARAM_MODEL_LOCATION, "file:src/test/resources/Lancaster_test_rules.txt"
+                SmileLancasterStemmer.PARAM_MODEL_LOCATION, "file:src/test/resources/Lancaster_test_rules.txt"
         );
     }
 
@@ -83,8 +83,8 @@ public class LancasterStemmerTest
     {
         runTest("dl", "proceed",
                 new String[] {"procee"}, // using default rules the expected would be process
-                LancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt",
-                LancasterStemmer.PARAM_LANGUAGE, "dl"
+                SmileLancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt",
+                SmileLancasterStemmer.PARAM_LANGUAGE, "dl"
         );
     }
 
@@ -105,10 +105,10 @@ public class LancasterStemmerTest
         
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(OpenNlpPosTagger.class),
-                createEngineDescription(LancasterStemmer.class,
-                        LancasterStemmer.PARAM_FILTER_FEATUREPATH, "pos/PosValue",
-                        LancasterStemmer.PARAM_FILTER_CONDITION_OPERATOR, "EQUALS",
-                        LancasterStemmer.PARAM_FILTER_CONDITION_VALUE, "JJ"));
+                createEngineDescription(SmileLancasterStemmer.class,
+                        SmileLancasterStemmer.PARAM_FILTER_FEATUREPATH, "pos/PosValue",
+                        SmileLancasterStemmer.PARAM_FILTER_CONDITION_OPERATOR, "EQUALS",
+                        SmileLancasterStemmer.PARAM_FILTER_CONDITION_VALUE, "JJ"));
         
         JCas result = TestRunner.runTest(aggregate, "en", "Babies educational sleep .s");
 
@@ -119,8 +119,8 @@ public class LancasterStemmerTest
     private JCas runTest(String aLanguage, String aText, String[] aStems, Object... aParams)
         throws Exception
     {
-        JCas result = TestRunner.runTest(createEngineDescription(LancasterStemmer.class, aParams),
-                aLanguage, aText);
+        JCas result = TestRunner.runTest(
+                createEngineDescription(SmileLancasterStemmer.class, aParams), aLanguage, aText);
 
         AssertAnnotations.assertStem(aStems, select(result, Stem.class));
         
