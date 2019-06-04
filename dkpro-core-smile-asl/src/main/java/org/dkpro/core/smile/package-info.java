@@ -21,4 +21,4 @@
  *
  * @since 1.9.0
  */
-package org.dkpro.core.lancaster;
+package org.dkpro.core.smile;

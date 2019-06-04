@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.lancaster;
+package org.dkpro.core.smile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -61,10 +61,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
-public class LancasterStemmer
+public class SmileLancasterStemmer
     extends FeaturePathAnnotatorBase
 {
-    private static final String MESSAGE_DIGEST = LancasterStemmer.class.getName() + "_Messages";
+    private static final String MESSAGE_DIGEST = SmileLancasterStemmer.class.getName() + "_Messages";
 
     /**
      * True if the stemmer will strip prefix such as kilo, micro, milli, intra, ultra, mega, nano,
