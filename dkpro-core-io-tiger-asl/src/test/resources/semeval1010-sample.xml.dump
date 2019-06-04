@@ -88,6 +88,7 @@ Token
       PosValue: "VB"
       coarseValue: "VERB"
    id: "s115_0"
+   order: 0
 [for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -155,6 +156,7 @@ Token
       PosValue: "IN"
       coarseValue: "ADP"
    id: "s115_1"
+   order: 0
 [this one excursion ,]
 SemArg
    sofa: _InitialView
@@ -239,6 +241,7 @@ Token
       PosValue: "DT"
       coarseValue: "DET"
    id: "s115_2"
+   order: 0
 [one]
 POS_NUM
    sofa: _InitialView
@@ -293,6 +296,7 @@ Token
       PosValue: "CD"
       coarseValue: "NUM"
    id: "s115_3"
+   order: 0
 [excursion]
 POS_NOUN
    sofa: _InitialView
@@ -347,6 +351,7 @@ Token
       PosValue: "NN"
       coarseValue: "NOUN"
    id: "s115_4"
+   order: 0
 [excursion]
 SemPred
    sofa: _InitialView
@@ -413,6 +418,7 @@ Token
       end: 29
       PosValue: "PUNC,"
    id: "s115_5"
+   order: 0
 [he]
 POS_PRON
    sofa: _InitialView
@@ -449,6 +455,7 @@ Token
       PosValue: "PRP"
       coarseValue: "PRON"
    id: "s115_6"
+   order: 0
 [he]
 SemArg
    sofa: _InitialView
@@ -541,6 +548,7 @@ Token
       PosValue: "VBD"
       coarseValue: "VERB"
    id: "s115_7"
+   order: 0
 [his days]
 Constituent
    sofa: _InitialView
@@ -608,6 +616,7 @@ Token
       PosValue: "PRP$"
       coarseValue: "PRON"
    id: "s115_8"
+   order: 0
 [his]
 SemArg
    sofa: _InitialView
@@ -668,6 +677,7 @@ Token
       PosValue: "NNS"
       coarseValue: "NOUN"
    id: "s115_9"
+   order: 0
 [days]
 SemArg
    sofa: _InitialView
@@ -778,6 +788,7 @@ Token
       PosValue: "IN"
       coarseValue: "ADP"
    id: "s115_10"
+   order: 0
 [long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -912,6 +923,7 @@ Token
       PosValue: "JJ"
       coarseValue: "ADJ"
    id: "s115_11"
+   order: 0
 [long]
 SemPred
    sofa: _InitialView
@@ -985,6 +997,7 @@ Token
       PosValue: "CC"
       coarseValue: "CONJ"
    id: "s115_12"
+   order: 0
 [often solitary]
 SemArg
    sofa: _InitialView
@@ -1105,6 +1118,7 @@ Token
       PosValue: "RB"
       coarseValue: "ADV"
    id: "s115_13"
+   order: 0
 [solitary]
 POS_ADJ
    sofa: _InitialView
@@ -1177,6 +1191,7 @@ Token
       PosValue: "JJ"
       coarseValue: "ADJ"
    id: "s115_14"
+   order: 0
 [walks]
 POS_VERB
    sofa: _InitialView
@@ -1237,6 +1252,7 @@ Token
       PosValue: "VBZ"
       coarseValue: "VERB"
    id: "s115_15"
+   order: 0
 [walks]
 SemArg
    sofa: _InitialView
@@ -1307,6 +1323,7 @@ Token
       end: 82
       PosValue: "PUNC,"
    id: "s115_16"
+   order: 0
 [or]
 POS_CONJ
    sofa: _InitialView
@@ -1355,6 +1372,7 @@ Token
       PosValue: "CC"
       coarseValue: "CONJ"
    id: "s115_17"
+   order: 0
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1434,6 +1452,7 @@ Token
       PosValue: "IN"
       coarseValue: "ADP"
    id: "s115_18"
+   order: 0
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1525,6 +1544,7 @@ Token
       PosValue: "VBG"
       coarseValue: "VERB"
    id: "s115_19"
+   order: 0
 [chatting]
 SemPred
    sofa: _InitialView
@@ -1640,6 +1660,7 @@ Token
       PosValue: "IN"
       coarseValue: "ADP"
    id: "s115_20"
+   order: 0
 [a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1810,6 +1831,7 @@ Token
       PosValue: "DT"
       coarseValue: "DET"
    id: "s115_21"
+   order: 0
 [number]
 POS_NOUN
    sofa: _InitialView
@@ -1888,6 +1910,7 @@ Token
       PosValue: "NN"
       coarseValue: "NOUN"
    id: "s115_22"
+   order: 0
 [number]
 SemArg
    sofa: _InitialView
@@ -2032,6 +2055,7 @@ Token
       PosValue: "IN"
       coarseValue: "ADP"
    id: "s115_23"
+   order: 0
 [village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2238,6 +2262,7 @@ Token
       PosValue: "NN"
       coarseValue: "NOUN"
    id: "s115_24"
+   order: 0
 [gossips]
 POS_NOUN
    sofa: _InitialView
@@ -2328,6 +2353,7 @@ Token
       PosValue: "NNS"
       coarseValue: "NOUN"
    id: "s115_25"
+   order: 0
 [whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2552,6 +2578,7 @@ Token
       PosValue: "WP$"
       coarseValue: "PRON"
    id: "s115_26"
+   order: 0
 [acquaintance]
 POS_NOUN
    sofa: _InitialView
@@ -2648,6 +2675,7 @@ Token
       PosValue: "NN"
       coarseValue: "NOUN"
    id: "s115_27"
+   order: 0
 [he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2811,6 +2839,7 @@ Token
       PosValue: "PRP"
       coarseValue: "PRON"
    id: "s115_28"
+   order: 0
 [he]
 SemArg
    sofa: _InitialView
@@ -2998,6 +3027,7 @@ Token
       PosValue: "VBD"
       coarseValue: "VERB"
    id: "s115_29"
+   order: 0
 [cultivated .]
 Constituent
    sofa: _InitialView
@@ -3185,6 +3215,7 @@ Token
       PosValue: "VBN"
       coarseValue: "VERB"
    id: "s115_30"
+   order: 0
 [cultivated]
 SemArg
    sofa: _InitialView
@@ -3296,6 +3327,7 @@ Token
       end: 169
       PosValue: "PUNC."
    id: "s115_31"
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

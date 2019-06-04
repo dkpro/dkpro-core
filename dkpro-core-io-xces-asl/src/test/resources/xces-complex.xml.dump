@@ -57,6 +57,7 @@ Token
       begin: 0
       end: 4
       PosValue: "PnDmFe03SgNmXx"
+   order: 0
 [είναι]
 POS
    sofa: _InitialView
@@ -84,6 +85,7 @@ Token
       begin: 5
       end: 10
       PosValue: "VbMnIdPr03SgXxIpPvXx"
+   order: 0
 [η]
 POS
    sofa: _InitialView
@@ -111,6 +113,7 @@ Token
       begin: 11
       end: 12
       PosValue: "AtDfFeSgNm"
+   order: 0
 [πρώτη]
 POS
    sofa: _InitialView
@@ -138,6 +141,7 @@ Token
       begin: 13
       end: 18
       PosValue: "NmOdFeSgNmAj"
+   order: 0
 [γραμμή]
 POS
    sofa: _InitialView
@@ -165,6 +169,7 @@ Token
       begin: 19
       end: 25
       PosValue: "NoCmFeSgNm"
+   order: 0
 [.]
 POS
    sofa: _InitialView
@@ -192,6 +197,7 @@ Token
       begin: 26
       end: 27
       PosValue: "PTERM_P"
+   order: 0
 [Αυτή είναι η πρώτη γραμμή .
 Αυτό είναι μια άλλη γραμμή .]
 Paragraph
@@ -230,6 +236,7 @@ Token
       begin: 29
       end: 33
       PosValue: "PnDmFe03SgNmXx"
+   order: 0
 [είναι]
 POS
    sofa: _InitialView
@@ -257,6 +264,7 @@ Token
       begin: 34
       end: 39
       PosValue: "VbMnIdPr03SgXxIpPvXx"
+   order: 0
 [η]
 POS
    sofa: _InitialView
@@ -284,6 +292,7 @@ Token
       begin: 40
       end: 41
       PosValue: "AtDfFeSgNm"
+   order: 0
 [πρώτη]
 POS
    sofa: _InitialView
@@ -311,6 +320,7 @@ Token
       begin: 42
       end: 47
       PosValue: "NmOdFeSgNmAj"
+   order: 0
 [γραμμή]
 POS
    sofa: _InitialView
@@ -338,6 +348,7 @@ Token
       begin: 48
       end: 54
       PosValue: "NoCmFeSgNm"
+   order: 0
 [.]
 POS
    sofa: _InitialView
@@ -365,6 +376,7 @@ Token
       begin: 55
       end: 56
       PosValue: "PTERM_P"
+   order: 0
 [Αυτό είναι μια άλλη γραμμή .]
 Sentence
    sofa: _InitialView
@@ -397,6 +409,7 @@ Token
       begin: 57
       end: 61
       PosValue: "PnDmNe03SgNmXx"
+   order: 0
 [είναι]
 POS
    sofa: _InitialView
@@ -424,6 +437,7 @@ Token
       begin: 62
       end: 67
       PosValue: "VbMnIdPr03SgXxIpPvXx"
+   order: 0
 [μια]
 POS
    sofa: _InitialView
@@ -451,6 +465,7 @@ Token
       begin: 68
       end: 71
       PosValue: "AtIdFeSgNm"
+   order: 0
 [άλλη]
 POS
    sofa: _InitialView
@@ -478,6 +493,7 @@ Token
       begin: 72
       end: 76
       PosValue: "PnIdFe03SgNmXx"
+   order: 0
 [γραμμή]
 POS
    sofa: _InitialView
@@ -505,6 +521,7 @@ Token
       begin: 77
       end: 83
       PosValue: "NoCmFeSgNm"
+   order: 0
 [.]
 POS
    sofa: _InitialView
@@ -532,6 +549,7 @@ Token
       begin: 84
       end: 85
       PosValue: "PTERM_P"
+   order: 0
 [Γίνε η αλλαγή που θέλεις να δεις στον κόσμο .]
 Paragraph
    sofa: _InitialView
@@ -569,6 +587,7 @@ Token
       begin: 87
       end: 91
       PosValue: "VbMnMpXx02SgXxPePvXx"
+   order: 0
 [η]
 POS
    sofa: _InitialView
@@ -596,6 +615,7 @@ Token
       begin: 92
       end: 93
       PosValue: "AtDfFeSgNm"
+   order: 0
 [αλλαγή]
 POS
    sofa: _InitialView
@@ -623,6 +643,7 @@ Token
       begin: 94
       end: 100
       PosValue: "NoCmFeSgNm"
+   order: 0
 [που]
 POS
    sofa: _InitialView
@@ -650,6 +671,7 @@ Token
       begin: 101
       end: 104
       PosValue: "PnReFe03SgNmXx"
+   order: 0
 [θέλεις]
 POS
    sofa: _InitialView
@@ -677,6 +699,7 @@ Token
       begin: 105
       end: 111
       PosValue: "VbMnIdPr02SgXxIpAvXx"
+   order: 0
 [να]
 POS
    sofa: _InitialView
@@ -704,6 +727,7 @@ Token
       begin: 112
       end: 114
       PosValue: "PtSj"
+   order: 0
 [δεις]
 POS
    sofa: _InitialView
@@ -731,6 +755,7 @@ Token
       begin: 115
       end: 119
       PosValue: "VbMnIdXx02SgXxPeAvXx"
+   order: 0
 [στον]
 POS
    sofa: _InitialView
@@ -758,6 +783,7 @@ Token
       begin: 120
       end: 124
       PosValue: "AsPpPaMaSgAc"
+   order: 0
 [κόσμο]
 POS
    sofa: _InitialView
@@ -785,6 +811,7 @@ Token
       begin: 125
       end: 130
       PosValue: "NoCmMaSgAc"
+   order: 0
 [.]
 POS
    sofa: _InitialView
@@ -812,6 +839,7 @@ Token
       begin: 131
       end: 132
       PosValue: "PTERM_P"
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

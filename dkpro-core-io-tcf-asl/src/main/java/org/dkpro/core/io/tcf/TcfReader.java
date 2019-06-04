@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import org.apache.uima.collection.CollectionException;
@@ -48,9 +49,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamed;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
+import eu.clarin.weblicht.wlfxb.tc.api.CorrectionOperation;
 import eu.clarin.weblicht.wlfxb.tc.api.DependencyParse;
 import eu.clarin.weblicht.wlfxb.tc.api.DependencyParsingLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Reference;
@@ -77,7 +80,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
         "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+        "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
 public class TcfReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -115,6 +119,8 @@ public class TcfReader
             convertPos(aJCas, aCorpusData, tokens);
 
             convertLemma(aJCas, aCorpusData, tokens);
+
+            convertOrthoGraphy(aJCas, aCorpusData, tokens);
 
             convertSentences(aJCas, aCorpusData, tokens);
 
@@ -164,7 +170,7 @@ public class TcfReader
     {
         if (aCorpusData.getTokensLayer() == null) {
             // No layer to read from.
-            return new HashMap<String, Token>();
+            return new HashMap<>();
         }
 
         String text = aJCas.getDocumentText();
@@ -172,7 +178,7 @@ public class TcfReader
         Token outToken;
         int tokenBeginPosition = 0;
         int tokenEndPosition;
-        Map<String, Token> tokens = new HashMap<String, Token>();
+        Map<String, Token> tokens = new HashMap<>();
 
         for (int i = 0; i < aCorpusData.getTokensLayer().size(); i++) {
 
@@ -235,6 +241,29 @@ public class TcfReader
             aTokens.get(lemmaTokens[0].getID()).setLemma(outLemma);
         }
 
+    }
+
+    private void convertOrthoGraphy(JCas aJCas, TextCorpus aCorpusData, Map<String, Token> aTokens)
+    {
+        if (aCorpusData.getOrthographyLayer() == null) {
+            return;
+        }
+        
+        for (int i = 0; i < aCorpusData.getOrthographyLayer().size(); i++) {
+            eu.clarin.weblicht.wlfxb.tc.api.Token[] orthoTokens = aCorpusData.getOrthographyLayer()
+                    .getTokens(aCorpusData.getOrthographyLayer().getCorrection(i));
+            String value = aCorpusData.getOrthographyLayer().getCorrection(i).getString();
+            String operation = Optional
+                    .ofNullable(aCorpusData.getOrthographyLayer().getCorrection(i).getOperation())
+                    .map(CorrectionOperation::name).orElse(null);
+
+            SofaChangeAnnotation ortho = new SofaChangeAnnotation(aJCas);
+            ortho.setBegin(aTokens.get(orthoTokens[0].getID()).getBegin());
+            ortho.setEnd(aTokens.get(orthoTokens[0].getID()).getEnd());
+            ortho.setValue(value);
+            ortho.setOperation(operation);
+            ortho.addToIndexes();
+        }
     }
 
     private void convertSentences(JCas aJCas, TextCorpus aCorpusData,
@@ -431,7 +460,7 @@ public class TcfReader
             StringBuilder sbTokens = new StringBuilder();
             for (eu.clarin.weblicht.wlfxb.tc.api.Token token : aCorpusData.getReferencesLayer()
                     .getTokens(reference)) {
-                sbTokens.append(token.getID() + " ");
+                sbTokens.append(token.getID()).append(" ");
             }
 
             String[] referenceTokens = sbTokens.toString().split(" ");
@@ -448,7 +477,6 @@ public class TcfReader
             }
             link.addToIndexes();
             aReferencesMap.put(link.getAddress(), link);
-
         }
     }
 
@@ -464,8 +492,8 @@ public class TcfReader
     private int[] getOffsets(eu.clarin.weblicht.wlfxb.tc.api.Token[] aSpanTokens,
             Map<String, Token> aAllTokens)
     {
-        List<Integer> beginPositions = new ArrayList<Integer>();
-        List<Integer> endPositions = new ArrayList<Integer>();
+        List<Integer> beginPositions = new ArrayList<>();
+        List<Integer> endPositions = new ArrayList<>();
         for (eu.clarin.weblicht.wlfxb.tc.api.Token token : aSpanTokens) {
             beginPositions.add(aAllTokens.get(token.getID()).getBegin());
             endPositions.add(aAllTokens.get(token.getID()).getEnd());
@@ -484,8 +512,8 @@ public class TcfReader
      */
     private int[] getOffsets(String[] aSpanTokens, Map<String, Token> aAllTokens)
     {
-        List<Integer> beginPositions = new ArrayList<Integer>();
-        List<Integer> endPositions = new ArrayList<Integer>();
+        List<Integer> beginPositions = new ArrayList<>();
+        List<Integer> endPositions = new ArrayList<>();
         for (String token : aSpanTokens) {
             beginPositions.add(aAllTokens.get(token).getBegin());
             endPositions.add(aAllTokens.get(token).getEnd());
