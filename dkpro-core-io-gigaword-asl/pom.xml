@@ -56,10 +56,6 @@
       <artifactId>dkpro-core-api-io-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.dkpro.core</groupId>
-      <artifactId>dkpro-core-api-parameter-asl</artifactId>
-    </dependency>
-    <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
       <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
