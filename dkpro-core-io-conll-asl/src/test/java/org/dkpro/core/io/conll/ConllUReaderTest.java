@@ -1,14 +1,14 @@
 /*
- * Copyright 2016
- * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -60,8 +60,8 @@ public class ConllUReaderTest
                 "They buy and sell books.",
                 "I have not a clue." };
 
-        String[] posMapped = { "POS", "POS_VERB", "POS_CONJ", "POS_VERB", "POS_NOUN", "POS_PUNCT", "POS", "POS_VERB", "POS_ADV",
-                "POS_DET", "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS", "POS_VERB", "POS_CONJ", "POS_VERB", "POS_NOUN", "POS_PUNCT",
+                "POS", "POS_VERB", "POS_ADV", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
         String[] posOriginal = { "PRN", "VB", "CC", "VB", "NNS", ".", "PRN", "VB", "RB", "DT", "NN",
                 "." };
@@ -126,11 +126,17 @@ public class ConllUReaderTest
         final String expectedDocumentID = "mf920901-001;mf920901-002";
 
         Assert.assertEquals("Document ID mismatch", expectedDocumentID, actualDocumentID);
+        // The following code is commented out because when running on our Windows Jenkins slave,
+        // the log message does not get recorded. It does get logged and I also tested on a local
+        // Windows as well as on Mac and it works. The Jenkins seems to log in German, i.e.
+        // "WARNUNG" instead of "WARN", but looking at the code which captures the warnings, that
+        // should actually not matter since the WARN enum constant is compared. Since I cannot
+        // reproduce the issue which Jenkins has under any circumstances so far, I am commenting
+        // this part of the test out.
 //        }
 //        finally {
 //            logger.removeAppender(appender);
 //        }
-//        
 //        final List<LoggingEvent> log = appender.getLog();
 //        final LoggingEvent firstLogEntry = log.get(0);
 //        Assert.assertEquals(Level.WARN, firstLogEntry.getLevel());

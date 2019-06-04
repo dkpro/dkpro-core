@@ -65,6 +65,7 @@ Token
       end: 2
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -149,6 +150,7 @@ Token
       end: 7
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -198,6 +200,7 @@ Token
       end: 13
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [wäre]
 POS_VERB
    sofa: _InitialView
@@ -240,6 +243,7 @@ Token
       end: 18
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [vielleicht]
 POS_ADV
    sofa: _InitialView
@@ -282,6 +286,7 @@ Token
       end: 29
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -352,6 +357,7 @@ Token
       end: 33
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [prächtiger]
 POS_ADJ
    sofa: _InitialView
@@ -401,6 +407,7 @@ Token
       end: 44
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Diktator]
 POS_NOUN
    sofa: _InitialView
@@ -450,6 +457,7 @@ Token
       end: 53
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 ['']
 POS_PUNCT
    sofa: _InitialView
@@ -485,6 +493,7 @@ Token
       end: 56
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [Konzernchefs lehnen den Milliardär als US-Präsidenten ab /]
 Sentence
    sofa: _InitialView
@@ -559,6 +568,7 @@ Token
       end: 69
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [lehnen]
 POS_VERB
    sofa: _InitialView
@@ -601,6 +611,7 @@ Token
       end: 76
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [den Milliardär]
 Constituent
    sofa: _InitialView
@@ -671,6 +682,7 @@ Token
       end: 80
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Milliardär]
 POS_NOUN
    sofa: _InitialView
@@ -720,6 +732,7 @@ Token
       end: 91
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [als US-Präsidenten]
 Constituent
    sofa: _InitialView
@@ -790,6 +803,7 @@ Token
       end: 95
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [US-Präsidenten]
 POS_NOUN
    sofa: _InitialView
@@ -839,6 +853,7 @@ Token
       end: 110
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [ab]
 POS_VERB
    sofa: _InitialView
@@ -881,6 +896,7 @@ Token
       end: 113
       PosValue: "PTKVZ"
       coarseValue: "VERB"
+   order: 0
 [/]
 POS_PUNCT
    sofa: _InitialView
@@ -916,6 +932,7 @@ Token
       end: 115
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [Texaner gibt nur vage Auskunft über seine Wirtschaftspolitik]
 Sentence
    sofa: _InitialView
@@ -990,6 +1007,7 @@ Token
       end: 123
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [gibt]
 POS_VERB
    sofa: _InitialView
@@ -1032,6 +1050,7 @@ Token
       end: 128
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [nur vage Auskunft über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1137,6 +1156,7 @@ Token
       end: 132
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [vage]
 POS_ADJ
    sofa: _InitialView
@@ -1193,6 +1213,7 @@ Token
       end: 137
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Auskunft]
 POS_NOUN
    sofa: _InitialView
@@ -1242,6 +1263,7 @@ Token
       end: 146
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1326,6 +1348,7 @@ Token
       end: 151
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [seine]
 POS_PRON
    sofa: _InitialView
@@ -1382,6 +1405,7 @@ Token
       end: 157
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [Wirtschaftspolitik]
 POS_NOUN
    sofa: _InitialView
@@ -1438,6 +1462,7 @@ Token
       end: 176
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [Der texanische Milliardär Ross Perot hat das politische Establishment in Washington aufgeschreckt .]
 Sentence
    sofa: _InitialView
@@ -1540,6 +1565,7 @@ Token
       end: 180
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [texanische]
 POS_ADJ
    sofa: _InitialView
@@ -1589,6 +1615,7 @@ Token
       end: 191
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Milliardär]
 POS_NOUN
    sofa: _InitialView
@@ -1638,6 +1665,7 @@ Token
       end: 202
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [Ross Perot]
 Constituent
    sofa: _InitialView
@@ -1722,6 +1750,7 @@ Token
       end: 207
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -1778,6 +1807,7 @@ Token
       end: 213
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [hat]
 POS_VERB
    sofa: _InitialView
@@ -1820,6 +1850,7 @@ Token
       end: 217
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [das politische Establishment in Washington aufgeschreckt]
 Constituent
    sofa: _InitialView
@@ -1925,6 +1956,7 @@ Token
       end: 221
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [politische]
 POS_ADJ
    sofa: _InitialView
@@ -1981,6 +2013,7 @@ Token
       end: 232
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Establishment]
 POS_NOUN
    sofa: _InitialView
@@ -2037,6 +2070,7 @@ Token
       end: 246
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -2135,6 +2169,7 @@ Token
       end: 249
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Washington]
 POS_PROPN
    sofa: _InitialView
@@ -2198,6 +2233,7 @@ Token
       end: 260
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [aufgeschreckt]
 POS_VERB
    sofa: _InitialView
@@ -2247,6 +2283,7 @@ Token
       end: 274
       PosValue: "VVPP"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -2282,6 +2319,7 @@ Token
       end: 276
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Nach Meinungsumfragen liegt der parteilose Self-mademan gut im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton .]
 Sentence
    sofa: _InitialView
@@ -2384,6 +2422,7 @@ Token
       end: 281
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Meinungsumfragen]
 POS_NOUN
    sofa: _InitialView
@@ -2433,6 +2472,7 @@ Token
       end: 298
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [liegt]
 POS_VERB
    sofa: _InitialView
@@ -2475,6 +2515,7 @@ Token
       end: 304
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [der parteilose Self-mademan]
 Constituent
    sofa: _InitialView
@@ -2545,6 +2586,7 @@ Token
       end: 308
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [parteilose]
 POS_ADJ
    sofa: _InitialView
@@ -2594,6 +2636,7 @@ Token
       end: 319
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Self-mademan]
 POS_X
    sofa: _InitialView
@@ -2643,6 +2686,7 @@ Token
       end: 332
       PosValue: "FM"
       coarseValue: "X"
+   order: 0
 [gut]
 POS_ADJ
    sofa: _InitialView
@@ -2685,6 +2729,7 @@ Token
       end: 336
       PosValue: "ADJD"
       coarseValue: "ADJ"
+   order: 0
 [im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -2755,6 +2800,7 @@ Token
       end: 339
       PosValue: "APPRART"
       coarseValue: "ADP"
+   order: 0
 [Rennen]
 POS_NOUN
    sofa: _InitialView
@@ -2804,6 +2850,7 @@ Token
       end: 346
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [um den Chefsessel im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -2888,6 +2935,7 @@ Token
       end: 349
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [den]
 POS_DET
    sofa: _InitialView
@@ -2944,6 +2992,7 @@ Token
       end: 353
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Chefsessel]
 POS_NOUN
    sofa: _InitialView
@@ -3000,6 +3049,7 @@ Token
       end: 364
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3098,6 +3148,7 @@ Token
       end: 367
       PosValue: "APPRART"
       coarseValue: "ADP"
+   order: 0
 [Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3266,6 +3317,7 @@ Token
       end: 374
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Haus]
 POS_NOUN
    sofa: _InitialView
@@ -3343,6 +3395,7 @@ Token
       end: 379
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -3427,6 +3480,7 @@ Token
       end: 383
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -3574,6 +3628,7 @@ Token
       end: 387
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [amtierenden]
 POS_ADJ
    sofa: _InitialView
@@ -3644,6 +3699,7 @@ Token
       end: 399
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Präsidenten]
 POS_NOUN
    sofa: _InitialView
@@ -3714,6 +3770,7 @@ Token
       end: 411
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [George Bush]
 Constituent
    sofa: _InitialView
@@ -3840,6 +3897,7 @@ Token
       end: 418
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [Bush]
 POS_PROPN
    sofa: _InitialView
@@ -3917,6 +3975,7 @@ Token
       end: 423
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [und]
 POS_CONJ
    sofa: _InitialView
@@ -3980,6 +4039,7 @@ Token
       end: 427
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -4092,6 +4152,7 @@ Token
       end: 431
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Demokraten]
 POS_NOUN
    sofa: _InitialView
@@ -4162,6 +4223,7 @@ Token
       end: 442
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -4288,6 +4350,7 @@ Token
       end: 447
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [Clinton]
 POS_PROPN
    sofa: _InitialView
@@ -4365,6 +4428,7 @@ Token
       end: 455
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -4400,6 +4464,7 @@ Token
       end: 457
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Daß Perot ein Unternehmen erfolgreich leiten kann , davon sind selbst seine Kritiker überzeugt .]
 Sentence
    sofa: _InitialView
@@ -4579,6 +4644,7 @@ Token
       end: 461
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -4642,6 +4708,7 @@ Token
       end: 467
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [ein Unternehmen erfolgreich leiten]
 Constituent
    sofa: _InitialView
@@ -4810,6 +4877,7 @@ Token
       end: 471
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Unternehmen]
 POS_NOUN
    sofa: _InitialView
@@ -4887,6 +4955,7 @@ Token
       end: 483
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [erfolgreich]
 POS_ADJ
    sofa: _InitialView
@@ -4957,6 +5026,7 @@ Token
       end: 495
       PosValue: "ADJD"
       coarseValue: "ADJ"
+   order: 0
 [leiten]
 POS_VERB
    sofa: _InitialView
@@ -5027,6 +5097,7 @@ Token
       end: 502
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [kann]
 POS_VERB
    sofa: _InitialView
@@ -5090,6 +5161,7 @@ Token
       end: 507
       PosValue: "VMFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -5125,6 +5197,7 @@ Token
       end: 509
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [davon]
 POS_ADV
    sofa: _InitialView
@@ -5181,6 +5254,7 @@ Token
       end: 515
       PosValue: "PROAV"
       coarseValue: "ADV"
+   order: 0
 [sind]
 POS_VERB
    sofa: _InitialView
@@ -5223,6 +5297,7 @@ Token
       end: 520
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [selbst seine Kritiker]
 Constituent
    sofa: _InitialView
@@ -5293,6 +5368,7 @@ Token
       end: 527
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [seine]
 POS_PRON
    sofa: _InitialView
@@ -5342,6 +5418,7 @@ Token
       end: 533
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [Kritiker]
 POS_NOUN
    sofa: _InitialView
@@ -5391,6 +5468,7 @@ Token
       end: 542
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [überzeugt]
 POS_VERB
    sofa: _InitialView
@@ -5440,6 +5518,7 @@ Token
       end: 552
       PosValue: "VVPP"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -5475,6 +5554,7 @@ Token
       end: 554
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Ob diese Fähigkeiten aber ausreichen , um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen , bezweifeln viele Ökonomen .]
 Sentence
    sofa: _InitialView
@@ -5577,6 +5657,7 @@ Token
       end: 557
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [diese Fähigkeiten]
 Constituent
    sofa: _InitialView
@@ -5661,6 +5742,7 @@ Token
       end: 563
       PosValue: "PDAT"
       coarseValue: "PRON"
+   order: 0
 [Fähigkeiten]
 POS_NOUN
    sofa: _InitialView
@@ -5717,6 +5799,7 @@ Token
       end: 575
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [aber]
 POS_ADV
    sofa: _InitialView
@@ -5766,6 +5849,7 @@ Token
       end: 580
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [ausreichen]
 POS_VERB
    sofa: _InitialView
@@ -5815,6 +5899,7 @@ Token
       end: 591
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -5850,6 +5935,7 @@ Token
       end: 593
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen]
 Constituent
    sofa: _InitialView
@@ -5934,6 +6020,7 @@ Token
       end: 596
       PosValue: "KOUI"
       coarseValue: "CONJ"
+   order: 0
 [die größte Volkswirtschaft der Welt]
 Constituent
    sofa: _InitialView
@@ -6032,6 +6119,7 @@ Token
       end: 600
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [größte]
 POS_ADJ
    sofa: _InitialView
@@ -6095,6 +6183,7 @@ Token
       end: 607
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Volkswirtschaft]
 POS_NOUN
    sofa: _InitialView
@@ -6158,6 +6247,7 @@ Token
       end: 623
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [der Welt]
 Constituent
    sofa: _InitialView
@@ -6270,6 +6360,7 @@ Token
       end: 627
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Welt]
 POS_NOUN
    sofa: _InitialView
@@ -6340,6 +6431,7 @@ Token
       end: 632
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [aus ihrer Krise]
 Constituent
    sofa: _InitialView
@@ -6438,6 +6530,7 @@ Token
       end: 636
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [ihrer]
 POS_PRON
    sofa: _InitialView
@@ -6501,6 +6594,7 @@ Token
       end: 642
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [Krise]
 POS_NOUN
    sofa: _InitialView
@@ -6564,6 +6658,7 @@ Token
       end: 648
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [zu führen]
 Constituent
    sofa: _InitialView
@@ -6662,6 +6757,7 @@ Token
       end: 651
       PosValue: "PTKZU"
       coarseValue: "X"
+   order: 0
 [führen]
 POS_VERB
    sofa: _InitialView
@@ -6725,6 +6821,7 @@ Token
       end: 658
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -6760,6 +6857,7 @@ Token
       end: 660
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [bezweifeln]
 POS_VERB
    sofa: _InitialView
@@ -6802,6 +6900,7 @@ Token
       end: 671
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [viele Ökonomen]
 Constituent
    sofa: _InitialView
@@ -6872,6 +6971,7 @@ Token
       end: 677
       PosValue: "PIAT"
       coarseValue: "PRON"
+   order: 0
 [Ökonomen]
 POS_NOUN
    sofa: _InitialView
@@ -6921,6 +7021,7 @@ Token
       end: 686
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -6956,6 +7057,7 @@ Token
       end: 688
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Und auch die Konzernchefs in den USA halten nicht viel von dem 62jährigen .]
 Sentence
    sofa: _InitialView
@@ -7030,6 +7132,7 @@ Token
       end: 692
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [auch die Konzernchefs in den USA]
 Constituent
    sofa: _InitialView
@@ -7100,6 +7203,7 @@ Token
       end: 697
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [die]
 POS_DET
    sofa: _InitialView
@@ -7149,6 +7253,7 @@ Token
       end: 701
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Konzernchefs]
 POS_NOUN
    sofa: _InitialView
@@ -7198,6 +7303,7 @@ Token
       end: 714
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [in den USA]
 Constituent
    sofa: _InitialView
@@ -7282,6 +7388,7 @@ Token
       end: 717
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [den]
 POS_DET
    sofa: _InitialView
@@ -7338,6 +7445,7 @@ Token
       end: 721
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [USA]
 POS_PROPN
    sofa: _InitialView
@@ -7394,6 +7502,7 @@ Token
       end: 725
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [halten]
 POS_VERB
    sofa: _InitialView
@@ -7436,6 +7545,7 @@ Token
       end: 732
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [nicht viel]
 Constituent
    sofa: _InitialView
@@ -7506,6 +7616,7 @@ Token
       end: 738
       PosValue: "PTKNEG"
       coarseValue: "X"
+   order: 0
 [viel]
 POS_PRON
    sofa: _InitialView
@@ -7555,6 +7666,7 @@ Token
       end: 743
       PosValue: "PIS"
       coarseValue: "PRON"
+   order: 0
 [von dem 62jährigen]
 Constituent
    sofa: _InitialView
@@ -7625,6 +7737,7 @@ Token
       end: 747
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [dem]
 POS_DET
    sofa: _InitialView
@@ -7674,6 +7787,7 @@ Token
       end: 751
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [62jährigen]
 POS_NOUN
    sofa: _InitialView
@@ -7723,6 +7837,7 @@ Token
       end: 762
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -7758,6 +7873,7 @@ Token
       end: 764
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Zwar können sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen - nur nicht ausgerechnet Perot .]
 Sentence
    sofa: _InitialView
@@ -7860,6 +7976,7 @@ Token
       end: 769
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [können]
 POS_VERB
    sofa: _InitialView
@@ -7909,6 +8026,7 @@ Token
       end: 776
       PosValue: "VMFIN"
       coarseValue: "VERB"
+   order: 0
 [sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen]
 Constituent
    sofa: _InitialView
@@ -7993,6 +8111,7 @@ Token
       end: 781
       PosValue: "PRF"
       coarseValue: "PRON"
+   order: 0
 [die meisten Topmanager]
 Constituent
    sofa: _InitialView
@@ -8077,6 +8196,7 @@ Token
       end: 785
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [meisten]
 POS_PRON
    sofa: _InitialView
@@ -8133,6 +8253,7 @@ Token
       end: 793
       PosValue: "PIAT"
       coarseValue: "PRON"
+   order: 0
 [Topmanager]
 POS_NOUN
    sofa: _InitialView
@@ -8189,6 +8310,7 @@ Token
       end: 804
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [durchaus]
 POS_ADV
    sofa: _InitialView
@@ -8238,6 +8360,7 @@ Token
       end: 813
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [einen Unternehmer]
 Constituent
    sofa: _InitialView
@@ -8336,6 +8459,7 @@ Token
       end: 819
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Unternehmer]
 POS_NOUN
    sofa: _InitialView
@@ -8399,6 +8523,7 @@ Token
       end: 831
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [als Präsidenten]
 Constituent
    sofa: _InitialView
@@ -8497,6 +8622,7 @@ Token
       end: 835
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Präsidenten]
 POS_NOUN
    sofa: _InitialView
@@ -8560,6 +8686,7 @@ Token
       end: 847
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [vorstellen]
 POS_VERB
    sofa: _InitialView
@@ -8616,6 +8743,7 @@ Token
       end: 858
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [-]
 POS_PUNCT
    sofa: _InitialView
@@ -8651,6 +8779,7 @@ Token
       end: 860
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [nur nicht ausgerechnet Perot]
 Constituent
    sofa: _InitialView
@@ -8721,6 +8850,7 @@ Token
       end: 864
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [nicht]
 POS_X
    sofa: _InitialView
@@ -8770,6 +8900,7 @@ Token
       end: 870
       PosValue: "PTKNEG"
       coarseValue: "X"
+   order: 0
 [ausgerechnet Perot]
 Constituent
    sofa: _InitialView
@@ -8896,6 +9027,7 @@ Token
       end: 883
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -8959,6 +9091,7 @@ Token
       end: 889
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -8994,6 +9127,7 @@ Token
       end: 891
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Nach einer Umfrage des Wirtschaftsmagazins Fortune unter den Bossen von 500 Großunternehmen wünschten im Mai nur elf Prozent `` Ross for President '' , während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen .]
 Sentence
    sofa: _InitialView
@@ -9096,6 +9230,7 @@ Token
       end: 896
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [einer]
 POS_DET
    sofa: _InitialView
@@ -9145,6 +9280,7 @@ Token
       end: 902
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Umfrage]
 POS_NOUN
    sofa: _InitialView
@@ -9194,6 +9330,7 @@ Token
       end: 910
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [des Wirtschaftsmagazins Fortune]
 Constituent
    sofa: _InitialView
@@ -9278,6 +9415,7 @@ Token
       end: 914
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Wirtschaftsmagazins]
 POS_NOUN
    sofa: _InitialView
@@ -9334,6 +9472,7 @@ Token
       end: 934
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [Fortune]
 POS_PROPN
    sofa: _InitialView
@@ -9390,6 +9529,7 @@ Token
       end: 942
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [unter den Bossen von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -9474,6 +9614,7 @@ Token
       end: 948
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [den]
 POS_DET
    sofa: _InitialView
@@ -9530,6 +9671,7 @@ Token
       end: 952
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Bossen]
 POS_NOUN
    sofa: _InitialView
@@ -9586,6 +9728,7 @@ Token
       end: 959
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -9684,6 +9827,7 @@ Token
       end: 963
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [500]
 POS_NUM
    sofa: _InitialView
@@ -9747,6 +9891,7 @@ Token
       end: 967
       PosValue: "CARD"
       coarseValue: "NUM"
+   order: 0
 [Großunternehmen]
 POS_NOUN
    sofa: _InitialView
@@ -9810,6 +9955,7 @@ Token
       end: 983
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [wünschten]
 POS_VERB
    sofa: _InitialView
@@ -9852,6 +9998,7 @@ Token
       end: 993
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [im Mai]
 Constituent
    sofa: _InitialView
@@ -9922,6 +10069,7 @@ Token
       end: 996
       PosValue: "APPRART"
       coarseValue: "ADP"
+   order: 0
 [Mai]
 POS_NOUN
    sofa: _InitialView
@@ -9971,6 +10119,7 @@ Token
       end: 1000
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [nur elf Prozent]
 Constituent
    sofa: _InitialView
@@ -10076,6 +10225,7 @@ Token
       end: 1004
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [elf]
 POS_NUM
    sofa: _InitialView
@@ -10132,6 +10282,7 @@ Token
       end: 1008
       PosValue: "CARD"
       coarseValue: "NUM"
+   order: 0
 [Prozent]
 POS_NOUN
    sofa: _InitialView
@@ -10181,6 +10332,7 @@ Token
       end: 1016
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [``]
 POS_PUNCT
    sofa: _InitialView
@@ -10216,6 +10368,7 @@ Token
       end: 1019
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [Ross]
 POS_PROPN
    sofa: _InitialView
@@ -10258,6 +10411,7 @@ Token
       end: 1024
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [for President]
 Constituent
    sofa: _InitialView
@@ -10328,6 +10482,7 @@ Token
       end: 1028
       PosValue: "FM"
       coarseValue: "X"
+   order: 0
 [President]
 POS_X
    sofa: _InitialView
@@ -10377,6 +10532,7 @@ Token
       end: 1038
       PosValue: "FM"
       coarseValue: "X"
+   order: 0
 ['']
 POS_PUNCT
    sofa: _InitialView
@@ -10412,6 +10568,7 @@ Token
       end: 1041
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -10447,6 +10604,7 @@ Token
       end: 1043
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen]
 Constituent
    sofa: _InitialView
@@ -10552,6 +10710,7 @@ Token
       end: 1051
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [78 Prozent]
 Constituent
    sofa: _InitialView
@@ -10650,6 +10809,7 @@ Token
       end: 1054
       PosValue: "CARD"
       coarseValue: "NUM"
+   order: 0
 [Prozent]
 POS_NOUN
    sofa: _InitialView
@@ -10713,6 +10873,7 @@ Token
       end: 1062
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [sich]
 POS_PRON
    sofa: _InitialView
@@ -10769,6 +10930,7 @@ Token
       end: 1067
       PosValue: "PRF"
       coarseValue: "PRON"
+   order: 0
 [für Bush]
 Constituent
    sofa: _InitialView
@@ -10867,6 +11029,7 @@ Token
       end: 1071
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Bush]
 POS_PROPN
    sofa: _InitialView
@@ -10930,6 +11093,7 @@ Token
       end: 1076
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [und]
 POS_CONJ
    sofa: _InitialView
@@ -10979,6 +11143,7 @@ Token
       end: 1080
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [vier Prozent für Clinton aussprachen]
 Constituent
    sofa: _InitialView
@@ -11105,6 +11270,7 @@ Token
       end: 1085
       PosValue: "CARD"
       coarseValue: "NUM"
+   order: 0
 [Prozent]
 POS_NOUN
    sofa: _InitialView
@@ -11168,6 +11334,7 @@ Token
       end: 1093
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [für Clinton]
 Constituent
    sofa: _InitialView
@@ -11266,6 +11433,7 @@ Token
       end: 1097
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Clinton]
 POS_PROPN
    sofa: _InitialView
@@ -11329,6 +11497,7 @@ Token
       end: 1105
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [aussprachen]
 POS_VERB
    sofa: _InitialView
@@ -11385,6 +11554,7 @@ Token
       end: 1117
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -11420,6 +11590,7 @@ Token
       end: 1119
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Allerdings glaubt fast die Hälfte der Chief Executives , daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert .]
 Sentence
    sofa: _InitialView
@@ -11494,6 +11665,7 @@ Token
       end: 1130
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [glaubt]
 POS_VERB
    sofa: _InitialView
@@ -11536,6 +11708,7 @@ Token
       end: 1137
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [fast die Hälfte der Chief Executives]
 Constituent
    sofa: _InitialView
@@ -11606,6 +11779,7 @@ Token
       end: 1142
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [die]
 POS_DET
    sofa: _InitialView
@@ -11655,6 +11829,7 @@ Token
       end: 1146
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Hälfte]
 POS_NOUN
    sofa: _InitialView
@@ -11704,6 +11879,7 @@ Token
       end: 1153
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [der Chief Executives]
 Constituent
    sofa: _InitialView
@@ -11788,6 +11964,7 @@ Token
       end: 1157
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Chief]
 POS_X
    sofa: _InitialView
@@ -11844,6 +12021,7 @@ Token
       end: 1163
       PosValue: "FM"
       coarseValue: "X"
+   order: 0
 [Executives]
 POS_X
    sofa: _InitialView
@@ -11900,6 +12078,7 @@ Token
       end: 1174
       PosValue: "FM"
       coarseValue: "X"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -11935,6 +12114,7 @@ Token
       end: 1176
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert]
 Constituent
    sofa: _InitialView
@@ -12005,6 +12185,7 @@ Token
       end: 1180
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -12054,6 +12235,7 @@ Token
       end: 1186
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [durchaus]
 POS_ADV
    sofa: _InitialView
@@ -12103,6 +12285,7 @@ Token
       end: 1195
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [Chancen habe , die Wahl im November zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12187,6 +12370,7 @@ Token
       end: 1203
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [habe]
 POS_VERB
    sofa: _InitialView
@@ -12236,6 +12420,7 @@ Token
       end: 1208
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -12271,6 +12456,7 @@ Token
       end: 1210
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [die Wahl im November zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12418,6 +12604,7 @@ Token
       end: 1214
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Wahl]
 POS_NOUN
    sofa: _InitialView
@@ -12488,6 +12675,7 @@ Token
       end: 1219
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [im November]
 Constituent
    sofa: _InitialView
@@ -12614,6 +12802,7 @@ Token
       end: 1222
       PosValue: "APPRART"
       coarseValue: "ADP"
+   order: 0
 [November]
 POS_NOUN
    sofa: _InitialView
@@ -12691,6 +12880,7 @@ Token
       end: 1231
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12803,6 +12993,7 @@ Token
       end: 1234
       PosValue: "PTKZU"
       coarseValue: "X"
+   order: 0
 [gewinnen]
 POS_VERB
    sofa: _InitialView
@@ -12873,6 +13064,7 @@ Token
       end: 1243
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -12908,6 +13100,7 @@ Token
       end: 1245
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [wenn er denn kandidiert]
 Constituent
    sofa: _InitialView
@@ -12992,6 +13185,7 @@ Token
       end: 1250
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [er]
 POS_PRON
    sofa: _InitialView
@@ -13048,6 +13242,7 @@ Token
       end: 1253
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [denn]
 POS_ADV
    sofa: _InitialView
@@ -13104,6 +13299,7 @@ Token
       end: 1258
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [kandidiert]
 POS_VERB
    sofa: _InitialView
@@ -13160,6 +13356,7 @@ Token
       end: 1269
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -13195,6 +13392,7 @@ Token
       end: 1271
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Als größte Schwäche des Texaners nennen die Befragten seinen Mangel an Erfahrung auf dem politischen Parkett .]
 Sentence
    sofa: _InitialView
@@ -13297,6 +13495,7 @@ Token
       end: 1275
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [größte]
 POS_ADJ
    sofa: _InitialView
@@ -13346,6 +13545,7 @@ Token
       end: 1282
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Schwäche]
 POS_NOUN
    sofa: _InitialView
@@ -13395,6 +13595,7 @@ Token
       end: 1291
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [des Texaners]
 Constituent
    sofa: _InitialView
@@ -13479,6 +13680,7 @@ Token
       end: 1295
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Texaners]
 POS_NOUN
    sofa: _InitialView
@@ -13535,6 +13737,7 @@ Token
       end: 1304
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [nennen]
 POS_VERB
    sofa: _InitialView
@@ -13577,6 +13780,7 @@ Token
       end: 1311
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [die Befragten]
 Constituent
    sofa: _InitialView
@@ -13647,6 +13851,7 @@ Token
       end: 1315
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Befragten]
 POS_NOUN
    sofa: _InitialView
@@ -13696,6 +13901,7 @@ Token
       end: 1325
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [seinen Mangel an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -13766,6 +13972,7 @@ Token
       end: 1332
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [Mangel]
 POS_NOUN
    sofa: _InitialView
@@ -13815,6 +14022,7 @@ Token
       end: 1339
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -13899,6 +14107,7 @@ Token
       end: 1342
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Erfahrung]
 POS_NOUN
    sofa: _InitialView
@@ -13955,6 +14164,7 @@ Token
       end: 1352
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -14053,6 +14263,7 @@ Token
       end: 1356
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [dem]
 POS_DET
    sofa: _InitialView
@@ -14116,6 +14327,7 @@ Token
       end: 1360
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [politischen]
 POS_ADJ
    sofa: _InitialView
@@ -14179,6 +14391,7 @@ Token
       end: 1372
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Parkett]
 POS_NOUN
    sofa: _InitialView
@@ -14242,6 +14455,7 @@ Token
       end: 1380
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -14277,6 +14491,7 @@ Token
       end: 1382
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Viele meinen , daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde .]
 Sentence
    sofa: _InitialView
@@ -14351,6 +14566,7 @@ Token
       end: 1388
       PosValue: "PIS"
       coarseValue: "PRON"
+   order: 0
 [meinen]
 POS_VERB
    sofa: _InitialView
@@ -14393,6 +14609,7 @@ Token
       end: 1395
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -14428,6 +14645,7 @@ Token
       end: 1397
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde]
 Constituent
    sofa: _InitialView
@@ -14498,6 +14716,7 @@ Token
       end: 1401
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -14547,6 +14766,7 @@ Token
       end: 1407
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [mit seinem Befehlston auf dem Capitol gegen eine Wand laufen]
 Constituent
    sofa: _InitialView
@@ -14673,6 +14893,7 @@ Token
       end: 1411
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [seinem]
 POS_PRON
    sofa: _InitialView
@@ -14736,6 +14957,7 @@ Token
       end: 1418
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [Befehlston]
 POS_NOUN
    sofa: _InitialView
@@ -14799,6 +15021,7 @@ Token
       end: 1429
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [auf dem Capitol]
 Constituent
    sofa: _InitialView
@@ -14897,6 +15120,7 @@ Token
       end: 1433
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [dem]
 POS_DET
    sofa: _InitialView
@@ -14960,6 +15184,7 @@ Token
       end: 1437
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Capitol]
 POS_PROPN
    sofa: _InitialView
@@ -15023,6 +15248,7 @@ Token
       end: 1445
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [gegen eine Wand]
 Constituent
    sofa: _InitialView
@@ -15121,6 +15347,7 @@ Token
       end: 1451
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [eine]
 POS_DET
    sofa: _InitialView
@@ -15184,6 +15411,7 @@ Token
       end: 1456
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Wand]
 POS_NOUN
    sofa: _InitialView
@@ -15247,6 +15475,7 @@ Token
       end: 1461
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [laufen]
 POS_VERB
    sofa: _InitialView
@@ -15303,6 +15532,7 @@ Token
       end: 1468
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [würde]
 POS_VERB
    sofa: _InitialView
@@ -15352,6 +15582,7 @@ Token
       end: 1474
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -15387,6 +15618,7 @@ Token
       end: 1476
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [So erklärt etwa Edward Brandon von dem Unternehmen National City in Ohio :]
 Sentence
    sofa: _InitialView
@@ -15461,6 +15693,7 @@ Token
       end: 1479
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [erklärt]
 POS_VERB
    sofa: _InitialView
@@ -15503,6 +15736,7 @@ Token
       end: 1487
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [etwa Edward Brandon von dem Unternehmen National City in Ohio]
 Constituent
    sofa: _InitialView
@@ -15573,6 +15807,7 @@ Token
       end: 1492
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [Edward Brandon]
 Constituent
    sofa: _InitialView
@@ -15657,6 +15892,7 @@ Token
       end: 1499
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [Brandon]
 POS_PROPN
    sofa: _InitialView
@@ -15713,6 +15949,7 @@ Token
       end: 1507
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [von dem Unternehmen National City in Ohio]
 Constituent
    sofa: _InitialView
@@ -15797,6 +16034,7 @@ Token
       end: 1511
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [dem]
 POS_DET
    sofa: _InitialView
@@ -15853,6 +16091,7 @@ Token
       end: 1515
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Unternehmen]
 POS_NOUN
    sofa: _InitialView
@@ -15909,6 +16148,7 @@ Token
       end: 1527
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [National City]
 Constituent
    sofa: _InitialView
@@ -16007,6 +16247,7 @@ Token
       end: 1536
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [City]
 POS_PROPN
    sofa: _InitialView
@@ -16070,6 +16311,7 @@ Token
       end: 1541
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [in Ohio]
 Constituent
    sofa: _InitialView
@@ -16168,6 +16410,7 @@ Token
       end: 1544
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Ohio]
 POS_PROPN
    sofa: _InitialView
@@ -16231,6 +16474,7 @@ Token
       end: 1549
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [:]
 POS_PUNCT
    sofa: _InitialView
@@ -16266,6 +16510,7 @@ Token
       end: 1551
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [`` Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre .]
 Sentence
    sofa: _InitialView
@@ -16319,6 +16564,7 @@ Token
       end: 1554
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre]
 Constituent
    sofa: _InitialView
@@ -16375,6 +16621,7 @@ Token
       end: 1558
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [glaube]
 POS_VERB
    sofa: _InitialView
@@ -16417,6 +16664,7 @@ Token
       end: 1565
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [kaum]
 POS_ADV
    sofa: _InitialView
@@ -16459,6 +16707,7 @@ Token
       end: 1570
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -16494,6 +16743,7 @@ Token
       end: 1572
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre]
 Constituent
    sofa: _InitialView
@@ -16564,6 +16814,7 @@ Token
       end: 1576
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan]
 Constituent
    sofa: _InitialView
@@ -16690,6 +16941,7 @@ Token
       end: 1580
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [seinem]
 POS_PRON
    sofa: _InitialView
@@ -16753,6 +17005,7 @@ Token
       end: 1587
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -16788,6 +17041,7 @@ Token
       end: 1589
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [naja , etwas undiplomatischen]
 Constituent
    sofa: _InitialView
@@ -16900,6 +17154,7 @@ Token
       end: 1594
       PosValue: "ITJ"
       coarseValue: "X"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -16935,6 +17190,7 @@ Token
       end: 1596
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [etwas]
 POS_ADV
    sofa: _InitialView
@@ -17005,6 +17261,7 @@ Token
       end: 1602
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [undiplomatischen]
 POS_ADJ
    sofa: _InitialView
@@ -17075,6 +17332,7 @@ Token
       end: 1619
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Stil]
 POS_NOUN
    sofa: _InitialView
@@ -17138,6 +17396,7 @@ Token
       end: 1624
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -17250,6 +17509,7 @@ Token
       end: 1627
       PosValue: "APPRART"
       coarseValue: "ADP"
+   order: 0
 [Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -17439,6 +17699,7 @@ Token
       end: 1634
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Haus]
 POS_NOUN
    sofa: _InitialView
@@ -17523,6 +17784,7 @@ Token
       end: 1639
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [dem Land]
 Constituent
    sofa: _InitialView
@@ -17621,6 +17883,7 @@ Token
       end: 1643
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Land]
 POS_NOUN
    sofa: _InitialView
@@ -17684,6 +17947,7 @@ Token
       end: 1648
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [ein Gefallen]
 Constituent
    sofa: _InitialView
@@ -17768,6 +18032,7 @@ Token
       end: 1652
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Gefallen]
 POS_NOUN
    sofa: _InitialView
@@ -17824,6 +18089,7 @@ Token
       end: 1661
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [getan]
 POS_VERB
    sofa: _InitialView
@@ -17880,6 +18146,7 @@ Token
       end: 1667
       PosValue: "VVPP"
       coarseValue: "VERB"
+   order: 0
 [wäre]
 POS_VERB
    sofa: _InitialView
@@ -17929,6 +18196,7 @@ Token
       end: 1672
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -17964,6 +18232,7 @@ Token
       end: 1674
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Er wäre vielleicht ein prächtiger Diktator - aber das ist nicht unser System . '']
 Sentence
    sofa: _InitialView
@@ -18066,6 +18335,7 @@ Token
       end: 1677
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [wäre]
 POS_VERB
    sofa: _InitialView
@@ -18115,6 +18385,7 @@ Token
       end: 1682
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [vielleicht]
 POS_ADV
    sofa: _InitialView
@@ -18164,6 +18435,7 @@ Token
       end: 1693
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -18248,6 +18520,7 @@ Token
       end: 1697
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [prächtiger]
 POS_ADJ
    sofa: _InitialView
@@ -18304,6 +18577,7 @@ Token
       end: 1708
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Diktator]
 POS_NOUN
    sofa: _InitialView
@@ -18360,6 +18634,7 @@ Token
       end: 1717
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [-]
 POS_PUNCT
    sofa: _InitialView
@@ -18395,6 +18670,7 @@ Token
       end: 1719
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [aber]
 POS_CONJ
    sofa: _InitialView
@@ -18437,6 +18713,7 @@ Token
       end: 1724
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [das ist nicht unser System]
 Constituent
    sofa: _InitialView
@@ -18507,6 +18784,7 @@ Token
       end: 1728
       PosValue: "PDS"
       coarseValue: "PRON"
+   order: 0
 [ist]
 POS_VERB
    sofa: _InitialView
@@ -18556,6 +18834,7 @@ Token
       end: 1732
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [nicht]
 POS_X
    sofa: _InitialView
@@ -18605,6 +18884,7 @@ Token
       end: 1738
       PosValue: "PTKNEG"
       coarseValue: "X"
+   order: 0
 [unser System]
 Constituent
    sofa: _InitialView
@@ -18689,6 +18969,7 @@ Token
       end: 1744
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [System]
 POS_NOUN
    sofa: _InitialView
@@ -18745,6 +19026,7 @@ Token
       end: 1751
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -18780,6 +19062,7 @@ Token
       end: 1753
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 ['']
 POS_PUNCT
    sofa: _InitialView
@@ -18815,6 +19098,7 @@ Token
       end: 1756
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [Und ein anderer Manager vermutet , daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab '' .]
 Sentence
    sofa: _InitialView
@@ -18889,6 +19173,7 @@ Token
       end: 1760
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [ein anderer Manager]
 Constituent
    sofa: _InitialView
@@ -18959,6 +19244,7 @@ Token
       end: 1764
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [anderer]
 POS_ADJ
    sofa: _InitialView
@@ -19008,6 +19294,7 @@ Token
       end: 1772
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Manager]
 POS_NOUN
    sofa: _InitialView
@@ -19057,6 +19344,7 @@ Token
       end: 1780
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [vermutet]
 POS_VERB
    sofa: _InitialView
@@ -19099,6 +19387,7 @@ Token
       end: 1789
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -19134,6 +19423,7 @@ Token
       end: 1791
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -19204,6 +19494,7 @@ Token
       end: 1795
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -19288,6 +19579,7 @@ Token
       end: 1800
       PosValue: "PRF"
       coarseValue: "PRON"
+   order: 0
 [``]
 POS_PUNCT
    sofa: _InitialView
@@ -19323,6 +19615,7 @@ Token
       end: 1803
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [ein Dogmatiker wie Perot]
 Constituent
    sofa: _InitialView
@@ -19407,6 +19700,7 @@ Token
       end: 1807
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Dogmatiker]
 POS_NOUN
    sofa: _InitialView
@@ -19463,6 +19757,7 @@ Token
       end: 1818
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [wie Perot]
 Constituent
    sofa: _InitialView
@@ -19561,6 +19856,7 @@ Token
       end: 1822
       PosValue: "KOKOM"
       coarseValue: "CONJ"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -19624,6 +19920,7 @@ Token
       end: 1828
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -19722,6 +20019,7 @@ Token
       end: 1831
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Washington]
 POS_PROPN
    sofa: _InitialView
@@ -19785,6 +20083,7 @@ Token
       end: 1842
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [schwer]
 POS_ADJ
    sofa: _InitialView
@@ -19841,6 +20140,7 @@ Token
       end: 1849
       PosValue: "ADJD"
       coarseValue: "ADJ"
+   order: 0
 [tun]
 POS_VERB
    sofa: _InitialView
@@ -19897,6 +20197,7 @@ Token
       end: 1853
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [würde]
 POS_VERB
    sofa: _InitialView
@@ -19946,6 +20247,7 @@ Token
       end: 1859
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -19981,6 +20283,7 @@ Token
       end: 1861
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -20079,6 +20382,7 @@ Token
       end: 1864
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [sei]
 POS_VERB
    sofa: _InitialView
@@ -20142,6 +20446,7 @@ Token
       end: 1868
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [denn]
 POS_ADV
    sofa: _InitialView
@@ -20205,6 +20510,7 @@ Token
       end: 1873
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -20317,6 +20623,7 @@ Token
       end: 1876
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [schafft]
 POS_VERB
    sofa: _InitialView
@@ -20387,6 +20694,7 @@ Token
       end: 1884
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [den Kongreß]
 Constituent
    sofa: _InitialView
@@ -20513,6 +20821,7 @@ Token
       end: 1888
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Kongreß]
 POS_NOUN
    sofa: _InitialView
@@ -20590,6 +20899,7 @@ Token
       end: 1896
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [ab]
 POS_VERB
    sofa: _InitialView
@@ -20660,6 +20970,7 @@ Token
       end: 1899
       PosValue: "PTKVZ"
       coarseValue: "VERB"
+   order: 0
 ['']
 POS_PUNCT
    sofa: _InitialView
@@ -20695,6 +21006,7 @@ Token
       end: 1902
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -20730,6 +21042,7 @@ Token
       end: 1904
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Ein ehemaliger Geschäftsführer , der heute in fünf Konzernen im Aufsichtsgremium sitzt , `` kennt niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre '' .]
 Sentence
    sofa: _InitialView
@@ -20832,6 +21145,7 @@ Token
       end: 1908
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [ehemaliger]
 POS_ADJ
    sofa: _InitialView
@@ -20881,6 +21195,7 @@ Token
       end: 1919
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Geschäftsführer]
 POS_NOUN
    sofa: _InitialView
@@ -20930,6 +21245,7 @@ Token
       end: 1935
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -20965,6 +21281,7 @@ Token
       end: 1937
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [der heute in fünf Konzernen im Aufsichtsgremium sitzt]
 Constituent
    sofa: _InitialView
@@ -21049,6 +21366,7 @@ Token
       end: 1941
       PosValue: "PRELS"
       coarseValue: "PRON"
+   order: 0
 [heute]
 POS_ADV
    sofa: _InitialView
@@ -21105,6 +21423,7 @@ Token
       end: 1947
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [in fünf Konzernen]
 Constituent
    sofa: _InitialView
@@ -21203,6 +21522,7 @@ Token
       end: 1950
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [fünf]
 POS_NUM
    sofa: _InitialView
@@ -21266,6 +21586,7 @@ Token
       end: 1955
       PosValue: "CARD"
       coarseValue: "NUM"
+   order: 0
 [Konzernen]
 POS_NOUN
    sofa: _InitialView
@@ -21329,6 +21650,7 @@ Token
       end: 1965
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [im Aufsichtsgremium]
 Constituent
    sofa: _InitialView
@@ -21427,6 +21749,7 @@ Token
       end: 1968
       PosValue: "APPRART"
       coarseValue: "ADP"
+   order: 0
 [Aufsichtsgremium]
 POS_NOUN
    sofa: _InitialView
@@ -21490,6 +21813,7 @@ Token
       end: 1985
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [sitzt]
 POS_VERB
    sofa: _InitialView
@@ -21546,6 +21870,7 @@ Token
       end: 1991
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -21581,6 +21906,7 @@ Token
       end: 1993
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [``]
 POS_PUNCT
    sofa: _InitialView
@@ -21616,6 +21942,7 @@ Token
       end: 1996
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [kennt]
 POS_VERB
    sofa: _InitialView
@@ -21658,6 +21985,7 @@ Token
       end: 2002
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -21728,6 +22056,7 @@ Token
       end: 2012
       PosValue: "PIS"
       coarseValue: "PRON"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -21763,6 +22092,7 @@ Token
       end: 2014
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -21847,6 +22177,7 @@ Token
       end: 2018
       PosValue: "PRELS"
       coarseValue: "PRON"
+   order: 0
 [nicht]
 POS_X
    sofa: _InitialView
@@ -21903,6 +22234,7 @@ Token
       end: 2024
       PosValue: "PTKNEG"
       coarseValue: "X"
+   order: 0
 [glaubt]
 POS_VERB
    sofa: _InitialView
@@ -21959,6 +22291,7 @@ Token
       end: 2031
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -21994,6 +22327,7 @@ Token
       end: 2033
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -22092,6 +22426,7 @@ Token
       end: 2037
       PosValue: "KOUS"
       coarseValue: "CONJ"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -22155,6 +22490,7 @@ Token
       end: 2043
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [als Präsident]
 Constituent
    sofa: _InitialView
@@ -22267,6 +22603,7 @@ Token
       end: 2047
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Präsident]
 POS_NOUN
    sofa: _InitialView
@@ -22337,6 +22674,7 @@ Token
       end: 2057
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [eine absolute Katastrophe]
 Constituent
    sofa: _InitialView
@@ -22449,6 +22787,7 @@ Token
       end: 2062
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [absolute]
 POS_ADJ
    sofa: _InitialView
@@ -22519,6 +22858,7 @@ Token
       end: 2071
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Katastrophe]
 POS_NOUN
    sofa: _InitialView
@@ -22589,6 +22929,7 @@ Token
       end: 2083
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [wäre]
 POS_VERB
    sofa: _InitialView
@@ -22652,6 +22993,7 @@ Token
       end: 2088
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 ['']
 POS_PUNCT
    sofa: _InitialView
@@ -22687,6 +23029,7 @@ Token
       end: 2091
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -22722,6 +23065,7 @@ Token
       end: 2093
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Allerdings gibt es dem Magazin zufolge in kleinen und mittleren Firmen viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen .]
 Sentence
    sofa: _InitialView
@@ -22796,6 +23140,7 @@ Token
       end: 2104
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [gibt]
 POS_VERB
    sofa: _InitialView
@@ -22838,6 +23183,7 @@ Token
       end: 2109
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [es]
 POS_PRON
    sofa: _InitialView
@@ -22880,6 +23226,7 @@ Token
       end: 2112
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [dem Magazin zufolge]
 Constituent
    sofa: _InitialView
@@ -22950,6 +23297,7 @@ Token
       end: 2116
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Magazin]
 POS_NOUN
    sofa: _InitialView
@@ -22999,6 +23347,7 @@ Token
       end: 2124
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [zufolge]
 POS_ADP
    sofa: _InitialView
@@ -23048,6 +23397,7 @@ Token
       end: 2132
       PosValue: "APPO"
       coarseValue: "ADP"
+   order: 0
 [in kleinen und mittleren Firmen]
 Constituent
    sofa: _InitialView
@@ -23118,6 +23468,7 @@ Token
       end: 2135
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [kleinen und mittleren]
 Constituent
    sofa: _InitialView
@@ -23202,6 +23553,7 @@ Token
       end: 2143
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [und]
 POS_CONJ
    sofa: _InitialView
@@ -23258,6 +23610,7 @@ Token
       end: 2147
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [mittleren]
 POS_ADJ
    sofa: _InitialView
@@ -23314,6 +23667,7 @@ Token
       end: 2157
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   order: 0
 [Firmen]
 POS_NOUN
    sofa: _InitialView
@@ -23363,6 +23717,7 @@ Token
       end: 2164
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -23433,6 +23788,7 @@ Token
       end: 2170
       PosValue: "PIAT"
       coarseValue: "PRON"
+   order: 0
 [Unternehmer]
 POS_NOUN
    sofa: _InitialView
@@ -23482,6 +23838,7 @@ Token
       end: 2182
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -23517,6 +23874,7 @@ Token
       end: 2184
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -23643,6 +24001,7 @@ Token
       end: 2188
       PosValue: "PRELS"
       coarseValue: "PRON"
+   order: 0
 [meinen]
 POS_VERB
    sofa: _InitialView
@@ -23706,6 +24065,7 @@ Token
       end: 2195
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -23741,6 +24101,7 @@ Token
       end: 2197
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [Perot sei einer von ihnen]
 Constituent
    sofa: _InitialView
@@ -23853,6 +24214,7 @@ Token
       end: 2203
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [sei]
 POS_VERB
    sofa: _InitialView
@@ -23923,6 +24285,7 @@ Token
       end: 2207
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   order: 0
 [einer von ihnen]
 Constituent
    sofa: _InitialView
@@ -24049,6 +24412,7 @@ Token
       end: 2213
       PosValue: "PIS"
       coarseValue: "PRON"
+   order: 0
 [von ihnen]
 Constituent
    sofa: _InitialView
@@ -24189,6 +24553,7 @@ Token
       end: 2217
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [ihnen]
 POS_PRON
    sofa: _InitialView
@@ -24273,6 +24638,7 @@ Token
       end: 2223
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -24308,6 +24674,7 @@ Token
       end: 2225
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [und]
 POS_CONJ
    sofa: _InitialView
@@ -24364,6 +24731,7 @@ Token
       end: 2229
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -24462,6 +24830,7 @@ Token
       end: 2233
       PosValue: "PRELS"
       coarseValue: "PRON"
+   order: 0
 [den Texaner]
 Constituent
    sofa: _InitialView
@@ -24574,6 +24943,7 @@ Token
       end: 2237
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Texaner]
 POS_NOUN
    sofa: _InitialView
@@ -24644,6 +25014,7 @@ Token
       end: 2245
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [unterstützen]
 POS_VERB
    sofa: _InitialView
@@ -24707,6 +25078,7 @@ Token
       end: 2258
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -24742,6 +25114,7 @@ Token
       end: 2260
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [Zwei Themen , die Perot immer wieder anspricht , Rezession und Bürokratie , machen ihnen besonders zu schaffen .]
 Sentence
    sofa: _InitialView
@@ -24844,6 +25217,7 @@ Token
       end: 2265
       PosValue: "CARD"
       coarseValue: "NUM"
+   order: 0
 [Themen]
 POS_NOUN
    sofa: _InitialView
@@ -24893,6 +25267,7 @@ Token
       end: 2272
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -24928,6 +25303,7 @@ Token
       end: 2274
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [die Perot immer wieder anspricht]
 Constituent
    sofa: _InitialView
@@ -25012,6 +25388,7 @@ Token
       end: 2278
       PosValue: "PRELS"
       coarseValue: "PRON"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -25068,6 +25445,7 @@ Token
       end: 2284
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [immer wieder]
 Constituent
    sofa: _InitialView
@@ -25166,6 +25544,7 @@ Token
       end: 2290
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [wieder]
 POS_ADV
    sofa: _InitialView
@@ -25229,6 +25608,7 @@ Token
       end: 2297
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [anspricht]
 POS_VERB
    sofa: _InitialView
@@ -25285,6 +25665,7 @@ Token
       end: 2307
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -25320,6 +25701,7 @@ Token
       end: 2309
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [Rezession und Bürokratie]
 Constituent
    sofa: _InitialView
@@ -25404,6 +25786,7 @@ Token
       end: 2319
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [und]
 POS_CONJ
    sofa: _InitialView
@@ -25460,6 +25843,7 @@ Token
       end: 2323
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [Bürokratie]
 POS_NOUN
    sofa: _InitialView
@@ -25516,6 +25900,7 @@ Token
       end: 2334
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [,]
 POS_PUNCT
    sofa: _InitialView
@@ -25551,6 +25936,7 @@ Token
       end: 2336
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [machen]
 POS_VERB
    sofa: _InitialView
@@ -25593,6 +25979,7 @@ Token
       end: 2343
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [ihnen besonders zu schaffen]
 Constituent
    sofa: _InitialView
@@ -25663,6 +26050,7 @@ Token
       end: 2349
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [besonders]
 POS_ADV
    sofa: _InitialView
@@ -25712,6 +26100,7 @@ Token
       end: 2359
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [zu schaffen]
 Constituent
    sofa: _InitialView
@@ -25796,6 +26185,7 @@ Token
       end: 2362
       PosValue: "PTKZU"
       coarseValue: "X"
+   order: 0
 [schaffen]
 POS_VERB
    sofa: _InitialView
@@ -25852,6 +26242,7 @@ Token
       end: 2371
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [.]
 POS_PUNCT
    sofa: _InitialView
@@ -25887,6 +26278,7 @@ Token
       end: 2373
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

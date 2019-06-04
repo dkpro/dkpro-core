@@ -69,6 +69,7 @@ Token
       PosValue: "$("
       coarseValue: "PUNCT"
    id: "s1_1"
+   order: 0
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -151,6 +152,7 @@ Token
       PosValue: "NE"
       coarseValue: "PROPN"
    id: "s1_2"
+   order: 0
 [Perot]
 POS_PROPN
    sofa: _InitialView
@@ -200,6 +202,7 @@ Token
       PosValue: "NE"
       coarseValue: "PROPN"
    id: "s1_3"
+   order: 0
 [wäre]
 POS_VERB
    sofa: _InitialView
@@ -242,6 +245,7 @@ Token
       PosValue: "VAFIN"
       coarseValue: "VERB"
    id: "s1_4"
+   order: 0
 [vielleicht]
 POS_ADV
    sofa: _InitialView
@@ -284,6 +288,7 @@ Token
       PosValue: "ADV"
       coarseValue: "ADV"
    id: "s1_5"
+   order: 0
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -353,6 +358,7 @@ Token
       PosValue: "ART"
       coarseValue: "DET"
    id: "s1_6"
+   order: 0
 [prächtiger]
 POS_ADJ
    sofa: _InitialView
@@ -402,6 +408,7 @@ Token
       PosValue: "ADJA"
       coarseValue: "ADJ"
    id: "s1_7"
+   order: 0
 [Diktator]
 POS_NOUN
    sofa: _InitialView
@@ -451,6 +458,7 @@ Token
       PosValue: "NN"
       coarseValue: "NOUN"
    id: "s1_8"
+   order: 0
 ['']
 POS_PUNCT
    sofa: _InitialView
@@ -487,6 +495,7 @@ Token
       PosValue: "$("
       coarseValue: "PUNCT"
    id: "s1_9"
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
