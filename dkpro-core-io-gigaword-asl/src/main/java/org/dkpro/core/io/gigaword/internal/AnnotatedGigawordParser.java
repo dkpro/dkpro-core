@@ -1,38 +1,39 @@
 /*
- * Copyright 2019
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.gigaword;
+package org.dkpro.core.io.gigaword.internal;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import de.tudarmstadt.ukp.dkpro.core.io.gigaword.internal.Article;
-
 /**
- * Parse the annotated Gigaword corpus
+ * Read text from the Annotated Gigaword Corpus. This reader does <b>not</b> read any of the
+ * annotations yet.
  */
-public class AnnotatedGigawordReader extends DefaultHandler
+public class AnnotatedGigawordParser extends DefaultHandler
 {
+    private final Resource resource;
     
-    private List<Article> articleList = new ArrayList<>();
+    private List<AnnotatedGigawordArticle> articleList = new ArrayList<>();
     
     // flags for parsing articles
     private boolean inDocument = false;
@@ -47,6 +48,12 @@ public class AnnotatedGigawordReader extends DefaultHandler
     private String currentWord = "";
     private int currentOffsetBegin = 0;
     
+    public AnnotatedGigawordParser(Resource aResource)
+    {
+        super();
+        resource = aResource;
+    }
+
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes)
     {
@@ -76,7 +83,8 @@ public class AnnotatedGigawordReader extends DefaultHandler
         }
         else if (inDocument && qName.equals("sentences")) {
             inSentences = false;
-            articleList.add(new Article(currentDocId, docText.toString()));
+            articleList
+                    .add(new AnnotatedGigawordArticle(resource, currentDocId, docText.toString()));
             docText = new StringBuilder();
         }
         else if (inSentences && qName.equals("token")) {
@@ -105,7 +113,7 @@ public class AnnotatedGigawordReader extends DefaultHandler
         
     }
     
-    public List<Article> getArticleList() {
+    public List<AnnotatedGigawordArticle> getArticleList() {
         return articleList;
     }
 }
