@@ -18,42 +18,51 @@
  */
 package org.dkpro.core.maui;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.io.xmi.XmiWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField;
+
 public class MauiKeywordAnnotatorTest
 {
     @Test
-    public void testVocabThesoz() throws Exception
+    public void test() throws Exception
     {
-        File ouputFolder = testContext.getTestOutputFolder();
-        
-        CollectionReaderDescription reader = createReaderDescription(
+        CollectionReader reader = createReader(
                 TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/*.txt",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts/input.txt",
                 TextReader.PARAM_LANGUAGE, "en");
 
-        AnalysisEngineDescription annotator = createEngineDescription(
+        AnalysisEngine annotator = createEngine(
                 MauiKeywordAnnotator.class,
-                MauiKeywordAnnotator.PARAM_VARIANT, "socialscience_thesoz");
+                MauiKeywordAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/fao30.model.gz");
         
-        AnalysisEngineDescription writer = createEngineDescription(
-                XmiWriter.class,
-                XmiWriter.PARAM_TARGET_LOCATION, ouputFolder,
-                XmiWriter.PARAM_OVERWRITE, true);
+        JCas jcas = JCasFactory.createJCas();
         
-        runPipeline(reader, annotator, writer);
+        reader.getNext(jcas.getCas());
+        annotator.process(jcas);
+        
+        List<String> keywords = select(jcas, MetaDataStringField.class).stream()
+                .filter(m -> "http://purl.org/dc/terms/subject".equals(m.getKey()))
+                .map(MetaDataStringField::getValue)
+                .sorted()
+                .collect(Collectors.toList());
+        
+        assertThat(keywords).containsExactly("standards");
     }    
     
     @Rule
