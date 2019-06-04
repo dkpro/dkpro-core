@@ -1,0 +1,32 @@
+@prefix dbc:   <http://dbpedia.org/resource/Category:> .
+@prefix dbpedia-fr: <http://fr.dbpedia.org/resource/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dbpedia-es: <http://es.dbpedia.org/resource/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dbpedia-de: <http://de.dbpedia.org/resource/> .
+@prefix dbpedia-ru: <http://ru.dbpedia.org/resource/> .
+@prefix freme-onto: <http://freme-project.eu/ns#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dbpedia-nl: <http://nl.dbpedia.org/resource/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dbpedia-it: <http://it.dbpedia.org/resource/> .
+
+<http://freme-project.eu/#char=0,140>
+        a               nif:RFC5147String , nif:Context , nif:String ;
+        nif:beginIndex  "0"^^xsd:int ;
+        nif:endIndex    "140"^^xsd:int ;
+        nif:isString    "This meant the Aos Sí (pronounced ees shee), the 'spirits' or 'fairies', could more easily come into our world and were particularly active." .
+
+<http://freme-project.eu/#char=15,21>
+        a                     nif:RFC5147String , nif:String , nif:Word , nif:Phrase ;
+        nif:anchorOf          "Aos Sí" ;
+        nif:beginIndex        "15"^^xsd:int ;
+        nif:endIndex          "21"^^xsd:int ;
+        nif:referenceContext  <http://freme-project.eu/#char=0,140> ;
+        itsrdf:taClassRef     owl:Thing ;
+        itsrdf:taConfidence   "0.4859081423223223"^^xsd:double ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Aos_S%25C3%25AD> .
