@@ -24,31 +24,37 @@ Token
    sofa: _InitialView
    begin: 0
    end: 8
+   order: 0
 [seiner]
 Token
    sofa: _InitialView
    begin: 9
    end: 15
+   order: 0
 [Initiative]
 Token
    sofa: _InitialView
    begin: 16
    end: 26
+   order: 0
 [fand]
 Token
    sofa: _InitialView
    begin: 27
    end: 31
+   order: 0
 [2001/2002]
 Token
    sofa: _InitialView
    begin: 32
    end: 41
+   order: 0
 [in]
 Token
    sofa: _InitialView
    begin: 42
    end: 44
+   order: 0
 [Stuttgart]
 NamedEntity
    sofa: _InitialView
@@ -60,11 +66,13 @@ Token
    sofa: _InitialView
    begin: 45
    end: 54
+   order: 0
 [,]
 Token
    sofa: _InitialView
    begin: 55
    end: 56
+   order: 0
 [Braunschweig]
 NamedEntity
    sofa: _InitialView
@@ -76,11 +84,13 @@ Token
    sofa: _InitialView
    begin: 57
    end: 69
+   order: 0
 [und]
 Token
    sofa: _InitialView
    begin: 70
    end: 73
+   order: 0
 [Bonn]
 NamedEntity
    sofa: _InitialView
@@ -92,31 +102,37 @@ Token
    sofa: _InitialView
    begin: 74
    end: 78
+   order: 0
 [eine]
 Token
    sofa: _InitialView
    begin: 79
    end: 83
+   order: 0
 [große]
 Token
    sofa: _InitialView
    begin: 84
    end: 89
+   order: 0
 [und]
 Token
    sofa: _InitialView
    begin: 90
    end: 93
+   order: 0
 [publizistisch]
 Token
    sofa: _InitialView
    begin: 94
    end: 107
+   order: 0
 [vielbeachtete]
 Token
    sofa: _InitialView
    begin: 108
    end: 121
+   order: 0
 [Troia-Ausstellung]
 NamedEntity
    sofa: _InitialView
@@ -128,21 +144,25 @@ Token
    sofa: _InitialView
    begin: 122
    end: 139
+   order: 0
 [statt]
 Token
    sofa: _InitialView
    begin: 140
    end: 145
+   order: 0
 [,]
 Token
    sofa: _InitialView
    begin: 146
    end: 147
+   order: 0
 [„]
 Token
    sofa: _InitialView
    begin: 148
    end: 149
+   order: 0
 [Troia - Traum und Wirklichkeit]
 NamedEntity
    sofa: _InitialView
@@ -154,36 +174,43 @@ Token
    sofa: _InitialView
    begin: 150
    end: 155
+   order: 0
 [-]
 Token
    sofa: _InitialView
    begin: 156
    end: 157
+   order: 0
 [Traum]
 Token
    sofa: _InitialView
    begin: 158
    end: 163
+   order: 0
 [und]
 Token
    sofa: _InitialView
    begin: 164
    end: 167
+   order: 0
 [Wirklichkeit]
 Token
    sofa: _InitialView
    begin: 168
    end: 180
+   order: 0
 [“]
 Token
    sofa: _InitialView
    begin: 181
    end: 182
+   order: 0
 [.]
 Token
    sofa: _InitialView
    begin: 183
    end: 184
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
