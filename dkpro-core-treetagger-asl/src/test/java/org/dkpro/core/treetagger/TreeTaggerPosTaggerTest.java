@@ -70,7 +70,7 @@ public class TreeTaggerPosTaggerTest
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
                 System.getProperty("treetagger.home") != null);
 
-        URL aUrl = new URL("http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english.par.gz");
+        URL aUrl = new URL("https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english.par.gz");
         File targetFile = File.createTempFile("model", ".bin");
         
         try (InputStream input = new CompressorStreamFactory()

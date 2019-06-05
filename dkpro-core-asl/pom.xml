@@ -15,7 +15,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.dkpro.core</groupId>
@@ -248,6 +250,11 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-gigaword-asl</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-html-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
@@ -450,7 +457,7 @@
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-mystem-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-ngrams-asl</artifactId>
@@ -572,6 +579,7 @@
     <module>../dkpro-core-io-combination-asl</module>
     <module>../dkpro-core-io-conll-asl</module>
     <module>../dkpro-core-io-ditop-asl</module>
+    <module>../dkpro-core-io-gigaword-asl</module>
     <module>../dkpro-core-io-imscwb-asl</module>
     <module>../dkpro-core-io-html-asl</module>
     <module>../dkpro-core-io-json-asl</module>
@@ -669,7 +677,7 @@
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
-            <artifactId>dkpro-core-io-rtf-asl</artifactId>
+            <artifactId>dkpro-core-io-rdf-asl</artifactId>
             <version>2.0.0-SNAPSHOT</version>
           </dependency>
           <dependency>

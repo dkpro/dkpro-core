@@ -1,0 +1,1667 @@
+﻿<FILE id="Test">
+<DOC id="Test1" type="multi" >
+<HEADLINE>
+( (NP (NP (NN Today)) (PP (IN In) (NP (NN History))) (: -) (NP (NNP April) (CD 1))))
+</HEADLINE>
+<TEXT>
+( (S (NP (NN Today)) (VP (VBZ is) (NP (NP (NP (NNP Sunday)) (, ,) (NP (NNP April) (CD 1))) (, ,) (NP (NP (DT the) (JJ 91st) (NN day)) (PP (IN of) (NP (CD 2001)))))) (. .)))
+( (S (NP (EX There)) (VP (VBP are) (NP (NP (CD 274) (NNS days)) (VP (VBN left) (PP (IN in) (NP (DT the) (NN year)))))) (. .)))
+( (S (NP (DT This)) (VP (VBZ is) (NP (NP (NNP April) (NNP Fool) (POS 's)) (NN Day))) (. .)))
+</TEXT>
+<sentences>
+  <sentence id="1">
+    <tokens>
+      <token id="1">
+        <word>Today</word>
+        <lemma>today</lemma>
+        <CharacterOffsetBegin>0</CharacterOffsetBegin>
+        <CharacterOffsetEnd>5</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>is</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>6</CharacterOffsetBegin>
+        <CharacterOffsetEnd>8</CharacterOffsetEnd>
+        <POS>VBZ</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>Sunday</word>
+        <lemma>Sunday</lemma>
+        <CharacterOffsetBegin>9</CharacterOffsetBegin>
+        <CharacterOffsetEnd>15</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>,</word>
+        <lemma>,</lemma>
+        <CharacterOffsetBegin>16</CharacterOffsetBegin>
+        <CharacterOffsetEnd>17</CharacterOffsetEnd>
+        <POS>,</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>April</word>
+        <lemma>April</lemma>
+        <CharacterOffsetBegin>18</CharacterOffsetBegin>
+        <CharacterOffsetEnd>23</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="6">
+        <word>1</word>
+        <lemma>1</lemma>
+        <CharacterOffsetBegin>24</CharacterOffsetBegin>
+        <CharacterOffsetEnd>25</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="7">
+        <word>,</word>
+        <lemma>,</lemma>
+        <CharacterOffsetBegin>26</CharacterOffsetBegin>
+        <CharacterOffsetEnd>27</CharacterOffsetEnd>
+        <POS>,</POS>
+        <NER>O</NER>
+      </token>
+      <token id="8">
+        <word>the</word>
+        <lemma>the</lemma>
+        <CharacterOffsetBegin>28</CharacterOffsetBegin>
+        <CharacterOffsetEnd>31</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="9">
+        <word>91st</word>
+        <lemma>91st</lemma>
+        <CharacterOffsetBegin>32</CharacterOffsetBegin>
+        <CharacterOffsetEnd>36</CharacterOffsetEnd>
+        <POS>JJ</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="10">
+        <word>day</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>37</CharacterOffsetBegin>
+        <CharacterOffsetEnd>40</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="11">
+        <word>of</word>
+        <lemma>of</lemma>
+        <CharacterOffsetBegin>41</CharacterOffsetBegin>
+        <CharacterOffsetEnd>43</CharacterOffsetEnd>
+        <POS>IN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="12">
+        <word>2001</word>
+        <lemma>2001</lemma>
+        <CharacterOffsetBegin>44</CharacterOffsetBegin>
+        <CharacterOffsetEnd>48</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="13">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>49</CharacterOffsetBegin>
+        <CharacterOffsetEnd>50</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (NN Today)) (VP (VBZ is) (NP (NP (NP (NNP Sunday)) (, ,) (NP (NNP April) (CD 1))) (, ,) (NP (NP (DT the) (JJ 91st) (NN day)) (PP (IN of) (NP (CD 2001)))))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep">
+          <governor>10</governor>
+          <dependent>11</dependent>
+        </dep>
+        <dep type="pobj">
+          <governor>11</governor>
+          <dependent>12</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep_of">
+          <governor>10</governor>
+          <dependent>12</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep_of">
+          <governor>10</governor>
+          <dependent>12</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+  <sentence id="2">
+    <tokens>
+      <token id="1">
+        <word>There</word>
+        <lemma>there</lemma>
+        <CharacterOffsetBegin>51</CharacterOffsetBegin>
+        <CharacterOffsetEnd>56</CharacterOffsetEnd>
+        <POS>EX</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>are</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>57</CharacterOffsetBegin>
+        <CharacterOffsetEnd>60</CharacterOffsetEnd>
+        <POS>VBP</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>274</word>
+        <lemma>274</lemma>
+        <CharacterOffsetBegin>61</CharacterOffsetBegin>
+        <CharacterOffsetEnd>64</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>NUMBER</NER>
+        <NormalizedNER>274.0</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>days</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>65</CharacterOffsetBegin>
+        <CharacterOffsetEnd>69</CharacterOffsetEnd>
+        <POS>NNS</POS>
+        <NER>NUMBER</NER>
+        <NormalizedNER>274.0</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>left</word>
+        <lemma>leave</lemma>
+        <CharacterOffsetBegin>70</CharacterOffsetBegin>
+        <CharacterOffsetEnd>74</CharacterOffsetEnd>
+        <POS>VBN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="6">
+        <word>in</word>
+        <lemma>in</lemma>
+        <CharacterOffsetBegin>75</CharacterOffsetBegin>
+        <CharacterOffsetEnd>77</CharacterOffsetEnd>
+        <POS>IN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="7">
+        <word>the</word>
+        <lemma>the</lemma>
+        <CharacterOffsetBegin>78</CharacterOffsetBegin>
+        <CharacterOffsetEnd>81</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="8">
+        <word>year</word>
+        <lemma>year</lemma>
+        <CharacterOffsetBegin>82</CharacterOffsetBegin>
+        <CharacterOffsetEnd>86</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="9">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>87</CharacterOffsetBegin>
+        <CharacterOffsetEnd>88</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (EX There)) (VP (VBP are) (NP (NP (CD 274) (NNS days)) (VP (VBN left) (PP (IN in) (NP (DT the) (NN year)))))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="prep">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="pobj">
+          <governor>6</governor>
+          <dependent>8</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="prep_in">
+          <governor>5</governor>
+          <dependent>8</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="prep_in">
+          <governor>5</governor>
+          <dependent>8</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+  <sentence id="3">
+    <tokens>
+      <token id="1">
+        <word>This</word>
+        <lemma>this</lemma>
+        <CharacterOffsetBegin>89</CharacterOffsetBegin>
+        <CharacterOffsetEnd>93</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>is</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>94</CharacterOffsetBegin>
+        <CharacterOffsetEnd>96</CharacterOffsetEnd>
+        <POS>VBZ</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>April</word>
+        <lemma>April</lemma>
+        <CharacterOffsetBegin>97</CharacterOffsetBegin>
+        <CharacterOffsetEnd>102</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>Fool</word>
+        <lemma>Fool</lemma>
+        <CharacterOffsetBegin>103</CharacterOffsetBegin>
+        <CharacterOffsetEnd>107</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>'s</word>
+        <lemma>'s</lemma>
+        <CharacterOffsetBegin>108</CharacterOffsetBegin>
+        <CharacterOffsetEnd>110</CharacterOffsetEnd>
+        <POS>POS</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="6">
+        <word>Day</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>111</CharacterOffsetBegin>
+        <CharacterOffsetEnd>114</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="7">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>115</CharacterOffsetBegin>
+        <CharacterOffsetEnd>116</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (NP (NNP April) (NNP Fool) (POS 's)) (NN Day))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="possessive">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+</sentences>
+</DOC>
+<DOC id="Test2" type="multi" >
+<HEADLINE>
+( (NP (NP (NN Today)) (PP (IN In) (NP (NN History))) (: -) (NP (NNP April) (CD 2))))
+</HEADLINE>
+<TEXT>
+( (S (NP (NN Today)) (VP (VBZ is) (NP (NP (NP (NNP Monday)) (, ,) (NP (NNP April) (CD 2))) (, ,) (NP (NP (DT the) (JJ 92nd) (NN day)) (PP (IN of) (NP (CD 2001)))))) (. .)))
+( (S (NP (EX There)) (VP (VBP are) (NP (NP (CD 273) (NNS days)) (VP (VBN left) (PP (IN in) (NP (DT the) (NN year)))))) (. .)))
+( (S (NP (DT This)) (VP (VBZ is) (NP (NP (NNP April) (NNP Tool) (POS 's)) (NN Day))) (. .)))
+</TEXT>
+<sentences>
+  <sentence id="1">
+    <tokens>
+      <token id="1">
+        <word>Today</word>
+        <lemma>today</lemma>
+        <CharacterOffsetBegin>0</CharacterOffsetBegin>
+        <CharacterOffsetEnd>5</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>is</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>6</CharacterOffsetBegin>
+        <CharacterOffsetEnd>8</CharacterOffsetEnd>
+        <POS>VBZ</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>Monday</word>
+        <lemma>Monday</lemma>
+        <CharacterOffsetBegin>9</CharacterOffsetBegin>
+        <CharacterOffsetEnd>15</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>,</word>
+        <lemma>,</lemma>
+        <CharacterOffsetBegin>16</CharacterOffsetBegin>
+        <CharacterOffsetEnd>17</CharacterOffsetEnd>
+        <POS>,</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>April</word>
+        <lemma>April</lemma>
+        <CharacterOffsetBegin>18</CharacterOffsetBegin>
+        <CharacterOffsetEnd>23</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="6">
+        <word>2</word>
+        <lemma>2</lemma>
+        <CharacterOffsetBegin>24</CharacterOffsetBegin>
+        <CharacterOffsetEnd>25</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="7">
+        <word>,</word>
+        <lemma>,</lemma>
+        <CharacterOffsetBegin>26</CharacterOffsetBegin>
+        <CharacterOffsetEnd>27</CharacterOffsetEnd>
+        <POS>,</POS>
+        <NER>O</NER>
+      </token>
+      <token id="8">
+        <word>the</word>
+        <lemma>the</lemma>
+        <CharacterOffsetBegin>28</CharacterOffsetBegin>
+        <CharacterOffsetEnd>31</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="9">
+        <word>92nd</word>
+        <lemma>92nd</lemma>
+        <CharacterOffsetBegin>32</CharacterOffsetBegin>
+        <CharacterOffsetEnd>36</CharacterOffsetEnd>
+        <POS>JJ</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="10">
+        <word>day</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>37</CharacterOffsetBegin>
+        <CharacterOffsetEnd>40</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="11">
+        <word>of</word>
+        <lemma>of</lemma>
+        <CharacterOffsetBegin>41</CharacterOffsetBegin>
+        <CharacterOffsetEnd>43</CharacterOffsetEnd>
+        <POS>IN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="12">
+        <word>2001</word>
+        <lemma>2001</lemma>
+        <CharacterOffsetBegin>44</CharacterOffsetBegin>
+        <CharacterOffsetEnd>48</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="13">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>49</CharacterOffsetBegin>
+        <CharacterOffsetEnd>50</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (NN Today)) (VP (VBZ is) (NP (NP (NP (NNP Monday)) (, ,) (NP (NNP April) (CD 2))) (, ,) (NP (NP (DT the) (JJ 92nd) (NN day)) (PP (IN of) (NP (CD 2001)))))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep">
+          <governor>10</governor>
+          <dependent>11</dependent>
+        </dep>
+        <dep type="pobj">
+          <governor>11</governor>
+          <dependent>12</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep_of">
+          <governor>10</governor>
+          <dependent>12</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep_of">
+          <governor>10</governor>
+          <dependent>12</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+  <sentence id="2">
+    <tokens>
+      <token id="1">
+        <word>There</word>
+        <lemma>there</lemma>
+        <CharacterOffsetBegin>51</CharacterOffsetBegin>
+        <CharacterOffsetEnd>56</CharacterOffsetEnd>
+        <POS>EX</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>are</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>57</CharacterOffsetBegin>
+        <CharacterOffsetEnd>60</CharacterOffsetEnd>
+        <POS>VBP</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>273</word>
+        <lemma>273</lemma>
+        <CharacterOffsetBegin>61</CharacterOffsetBegin>
+        <CharacterOffsetEnd>64</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>NUMBER</NER>
+        <NormalizedNER>273.0</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>days</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>65</CharacterOffsetBegin>
+        <CharacterOffsetEnd>69</CharacterOffsetEnd>
+        <POS>NNS</POS>
+        <NER>NUMBER</NER>
+        <NormalizedNER>274.0</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>left</word>
+        <lemma>leave</lemma>
+        <CharacterOffsetBegin>70</CharacterOffsetBegin>
+        <CharacterOffsetEnd>74</CharacterOffsetEnd>
+        <POS>VBN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="6">
+        <word>in</word>
+        <lemma>in</lemma>
+        <CharacterOffsetBegin>75</CharacterOffsetBegin>
+        <CharacterOffsetEnd>77</CharacterOffsetEnd>
+        <POS>IN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="7">
+        <word>the</word>
+        <lemma>the</lemma>
+        <CharacterOffsetBegin>78</CharacterOffsetBegin>
+        <CharacterOffsetEnd>81</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="8">
+        <word>year</word>
+        <lemma>year</lemma>
+        <CharacterOffsetBegin>82</CharacterOffsetBegin>
+        <CharacterOffsetEnd>86</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="9">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>87</CharacterOffsetBegin>
+        <CharacterOffsetEnd>88</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (EX There)) (VP (VBP are) (NP (NP (CD 273) (NNS days)) (VP (VBN left) (PP (IN in) (NP (DT the) (NN year)))))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="prep">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="pobj">
+          <governor>6</governor>
+          <dependent>8</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="prep_in">
+          <governor>5</governor>
+          <dependent>8</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="prep_in">
+          <governor>5</governor>
+          <dependent>8</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+  <sentence id="3">
+    <tokens>
+      <token id="1">
+        <word>This</word>
+        <lemma>this</lemma>
+        <CharacterOffsetBegin>89</CharacterOffsetBegin>
+        <CharacterOffsetEnd>93</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>is</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>94</CharacterOffsetBegin>
+        <CharacterOffsetEnd>96</CharacterOffsetEnd>
+        <POS>VBZ</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>April</word>
+        <lemma>April</lemma>
+        <CharacterOffsetBegin>97</CharacterOffsetBegin>
+        <CharacterOffsetEnd>102</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>Tool</word>
+        <lemma>Tool</lemma>
+        <CharacterOffsetBegin>103</CharacterOffsetBegin>
+        <CharacterOffsetEnd>107</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>'s</word>
+        <lemma>'s</lemma>
+        <CharacterOffsetBegin>108</CharacterOffsetBegin>
+        <CharacterOffsetEnd>110</CharacterOffsetEnd>
+        <POS>POS</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="6">
+        <word>Day</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>111</CharacterOffsetBegin>
+        <CharacterOffsetEnd>114</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="7">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>115</CharacterOffsetBegin>
+        <CharacterOffsetEnd>116</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (NP (NNP April) (NNP Tool) (POS 's)) (NN Day))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="possessive">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+</sentences>
+</DOC>
+<DOC id="Test3" type="multi" >
+<HEADLINE>
+( (NP (NP (NN Today)) (PP (IN In) (NP (NN History))) (: -) (NP (NNP April) (CD 3))))
+</HEADLINE>
+<TEXT>
+( (S (NP (NN Today)) (VP (VBZ is) (NP (NP (NP (NNP Tuesday)) (, ,) (NP (NNP April) (CD 3))) (, ,) (NP (NP (DT the) (JJ 93rd) (NN day)) (PP (IN of) (NP (CD 2001)))))) (. .)))
+( (S (NP (EX There)) (VP (VBP are) (NP (NP (CD 272) (NNS days)) (VP (VBN left) (PP (IN in) (NP (DT the) (NN year)))))) (. .)))
+( (S (NP (DT This)) (VP (VBZ is) (NP (NP (NNP April) (NNP Pool) (POS 's)) (NN Day))) (. .)))
+</TEXT>
+<sentences>
+  <sentence id="1">
+    <tokens>
+      <token id="1">
+        <word>Today</word>
+        <lemma>today</lemma>
+        <CharacterOffsetBegin>0</CharacterOffsetBegin>
+        <CharacterOffsetEnd>5</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>is</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>6</CharacterOffsetBegin>
+        <CharacterOffsetEnd>8</CharacterOffsetEnd>
+        <POS>VBZ</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>Tuesday</word>
+        <lemma>Tuesday</lemma>
+        <CharacterOffsetBegin>9</CharacterOffsetBegin>
+        <CharacterOffsetEnd>15</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>,</word>
+        <lemma>,</lemma>
+        <CharacterOffsetBegin>16</CharacterOffsetBegin>
+        <CharacterOffsetEnd>17</CharacterOffsetEnd>
+        <POS>,</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>April</word>
+        <lemma>April</lemma>
+        <CharacterOffsetBegin>18</CharacterOffsetBegin>
+        <CharacterOffsetEnd>23</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="6">
+        <word>3</word>
+        <lemma>3</lemma>
+        <CharacterOffsetBegin>24</CharacterOffsetBegin>
+        <CharacterOffsetEnd>25</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****0401</NormalizedNER>
+      </token>
+      <token id="7">
+        <word>,</word>
+        <lemma>,</lemma>
+        <CharacterOffsetBegin>26</CharacterOffsetBegin>
+        <CharacterOffsetEnd>27</CharacterOffsetEnd>
+        <POS>,</POS>
+        <NER>O</NER>
+      </token>
+      <token id="8">
+        <word>the</word>
+        <lemma>the</lemma>
+        <CharacterOffsetBegin>28</CharacterOffsetBegin>
+        <CharacterOffsetEnd>31</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="9">
+        <word>93rd</word>
+        <lemma>93rd</lemma>
+        <CharacterOffsetBegin>32</CharacterOffsetBegin>
+        <CharacterOffsetEnd>36</CharacterOffsetEnd>
+        <POS>JJ</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="10">
+        <word>day</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>37</CharacterOffsetBegin>
+        <CharacterOffsetEnd>40</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="11">
+        <word>of</word>
+        <lemma>of</lemma>
+        <CharacterOffsetBegin>41</CharacterOffsetBegin>
+        <CharacterOffsetEnd>43</CharacterOffsetEnd>
+        <POS>IN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="12">
+        <word>2001</word>
+        <lemma>2001</lemma>
+        <CharacterOffsetBegin>44</CharacterOffsetBegin>
+        <CharacterOffsetEnd>48</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>2001</NormalizedNER>
+      </token>
+      <token id="13">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>49</CharacterOffsetBegin>
+        <CharacterOffsetEnd>50</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (NN Today)) (VP (VBZ is) (NP (NP (NP (NNP Tuesday)) (, ,) (NP (NNP April) (CD 3))) (, ,) (NP (NP (DT the) (JJ 93rd) (NN day)) (PP (IN of) (NP (CD 2001)))))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep">
+          <governor>10</governor>
+          <dependent>11</dependent>
+        </dep>
+        <dep type="pobj">
+          <governor>11</governor>
+          <dependent>12</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep_of">
+          <governor>10</governor>
+          <dependent>12</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="nsubj">
+          <governor>3</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>3</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="num">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>10</governor>
+          <dependent>8</dependent>
+        </dep>
+        <dep type="amod">
+          <governor>10</governor>
+          <dependent>9</dependent>
+        </dep>
+        <dep type="appos">
+          <governor>3</governor>
+          <dependent>10</dependent>
+        </dep>
+        <dep type="prep_of">
+          <governor>10</governor>
+          <dependent>12</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+  <sentence id="2">
+    <tokens>
+      <token id="1">
+        <word>There</word>
+        <lemma>there</lemma>
+        <CharacterOffsetBegin>51</CharacterOffsetBegin>
+        <CharacterOffsetEnd>56</CharacterOffsetEnd>
+        <POS>EX</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>are</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>57</CharacterOffsetBegin>
+        <CharacterOffsetEnd>60</CharacterOffsetEnd>
+        <POS>VBP</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>272</word>
+        <lemma>272</lemma>
+        <CharacterOffsetBegin>61</CharacterOffsetBegin>
+        <CharacterOffsetEnd>64</CharacterOffsetEnd>
+        <POS>CD</POS>
+        <NER>NUMBER</NER>
+        <NormalizedNER>272.0</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>days</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>65</CharacterOffsetBegin>
+        <CharacterOffsetEnd>69</CharacterOffsetEnd>
+        <POS>NNS</POS>
+        <NER>NUMBER</NER>
+        <NormalizedNER>274.0</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>left</word>
+        <lemma>leave</lemma>
+        <CharacterOffsetBegin>70</CharacterOffsetBegin>
+        <CharacterOffsetEnd>74</CharacterOffsetEnd>
+        <POS>VBN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="6">
+        <word>in</word>
+        <lemma>in</lemma>
+        <CharacterOffsetBegin>75</CharacterOffsetBegin>
+        <CharacterOffsetEnd>77</CharacterOffsetEnd>
+        <POS>IN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="7">
+        <word>the</word>
+        <lemma>the</lemma>
+        <CharacterOffsetBegin>78</CharacterOffsetBegin>
+        <CharacterOffsetEnd>81</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="8">
+        <word>year</word>
+        <lemma>year</lemma>
+        <CharacterOffsetBegin>82</CharacterOffsetBegin>
+        <CharacterOffsetEnd>86</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>O</NER>
+      </token>
+      <token id="9">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>87</CharacterOffsetBegin>
+        <CharacterOffsetEnd>88</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (EX There)) (VP (VBP are) (NP (NP (CD 272) (NNS days)) (VP (VBN left) (PP (IN in) (NP (DT the) (NN year)))))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="prep">
+          <governor>5</governor>
+          <dependent>6</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="pobj">
+          <governor>6</governor>
+          <dependent>8</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="prep_in">
+          <governor>5</governor>
+          <dependent>8</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="expl">
+          <governor>2</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="num">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="nsubj">
+          <governor>2</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="partmod">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="det">
+          <governor>8</governor>
+          <dependent>7</dependent>
+        </dep>
+        <dep type="prep_in">
+          <governor>5</governor>
+          <dependent>8</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+  <sentence id="3">
+    <tokens>
+      <token id="1">
+        <word>This</word>
+        <lemma>this</lemma>
+        <CharacterOffsetBegin>89</CharacterOffsetBegin>
+        <CharacterOffsetEnd>93</CharacterOffsetEnd>
+        <POS>DT</POS>
+        <NER>O</NER>
+      </token>
+      <token id="2">
+        <word>is</word>
+        <lemma>be</lemma>
+        <CharacterOffsetBegin>94</CharacterOffsetBegin>
+        <CharacterOffsetEnd>96</CharacterOffsetEnd>
+        <POS>VBZ</POS>
+        <NER>O</NER>
+      </token>
+      <token id="3">
+        <word>April</word>
+        <lemma>April</lemma>
+        <CharacterOffsetBegin>97</CharacterOffsetBegin>
+        <CharacterOffsetEnd>102</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="4">
+        <word>Pool</word>
+        <lemma>Pool</lemma>
+        <CharacterOffsetBegin>103</CharacterOffsetBegin>
+        <CharacterOffsetEnd>107</CharacterOffsetEnd>
+        <POS>NNP</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="5">
+        <word>'s</word>
+        <lemma>'s</lemma>
+        <CharacterOffsetBegin>108</CharacterOffsetBegin>
+        <CharacterOffsetEnd>110</CharacterOffsetEnd>
+        <POS>POS</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="6">
+        <word>Day</word>
+        <lemma>day</lemma>
+        <CharacterOffsetBegin>111</CharacterOffsetBegin>
+        <CharacterOffsetEnd>114</CharacterOffsetEnd>
+        <POS>NN</POS>
+        <NER>DATE</NER>
+        <NormalizedNER>****04</NormalizedNER>
+      </token>
+      <token id="7">
+        <word>.</word>
+        <lemma>.</lemma>
+        <CharacterOffsetBegin>115</CharacterOffsetBegin>
+        <CharacterOffsetEnd>116</CharacterOffsetEnd>
+        <POS>.</POS>
+        <NER>O</NER>
+      </token>
+    </tokens>
+    <parse>(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (NP (NNP April) (NNP Pool) (POS 's)) (NN Day))) (. .)))</parse>
+      <basic-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="possessive">
+          <governor>4</governor>
+          <dependent>5</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </basic-dependencies>
+      <collapsed-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </collapsed-dependencies>
+      <collapsed-ccprocessed-dependencies>
+        <dep type="nsubj">
+          <governor>6</governor>
+          <dependent>1</dependent>
+        </dep>
+        <dep type="cop">
+          <governor>6</governor>
+          <dependent>2</dependent>
+        </dep>
+        <dep type="nn">
+          <governor>4</governor>
+          <dependent>3</dependent>
+        </dep>
+        <dep type="poss">
+          <governor>6</governor>
+          <dependent>4</dependent>
+        </dep>
+        <dep type="root">
+          <governor>0</governor>
+          <dependent>6</dependent>
+        </dep>
+      </collapsed-ccprocessed-dependencies>
+  </sentence>
+</sentences>
+</DOC>
+</FILE>
