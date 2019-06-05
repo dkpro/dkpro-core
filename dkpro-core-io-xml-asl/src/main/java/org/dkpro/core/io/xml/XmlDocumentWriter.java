@@ -44,7 +44,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  * 
  * @see XmlDocumentReader
  */
-@ResourceMetaData(name = "Inline XML Writer")
+@ResourceMetaData(name = "XML Document Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(

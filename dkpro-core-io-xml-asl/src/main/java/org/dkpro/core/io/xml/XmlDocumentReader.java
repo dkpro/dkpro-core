@@ -47,7 +47,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  * @see XmlDocumentWriter
  */
 @Component(value = OperationType.READER)
-@ResourceMetaData(name = "XML Reader (Simple)")
+@ResourceMetaData(name = "XML Document Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @Parameters(
         exclude = { 
