@@ -64,7 +64,7 @@ public class Cas2SaxEvents
         AttributesImpl attributes = new AttributesImpl();
         
         if (aElement.getAttributes() != null) {
-            for (FeatureStructure attrFS : aElement.getAttributes()) {
+            for (FeatureStructure attrFS : (Iterable<FeatureStructure>) aElement.getAttributes()) {
                 XmlAttribute attr = (XmlAttribute) attrFS;
                 attributes.addAttribute(defaultString(attr.getUri()),
                         defaultString(attr.getLocalName()), defaultString(attr.getQName()),
@@ -80,7 +80,7 @@ public class Cas2SaxEvents
         handler.startElement(uri, localName, qName, attributes);
         
         if (aElement.getChildren() != null) {
-            for (FeatureStructure child : aElement.getChildren()) {
+            for (FeatureStructure child : (Iterable<FeatureStructure>) aElement.getChildren()) {
                 if (child instanceof XmlElement) {
                     process((XmlElement) child);
                 }
