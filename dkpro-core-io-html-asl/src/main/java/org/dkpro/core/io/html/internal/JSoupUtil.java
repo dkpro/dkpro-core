@@ -22,7 +22,8 @@
  */
 package org.dkpro.core.io.html.internal;
 
-import org.jsoup.helper.StringUtil;
+import static org.jsoup.helper.StringUtil.appendNormalisedWhitespace;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
@@ -35,34 +36,37 @@ public final class JSoupUtil
     /*
      * org.jsoup.nodes.TextNode.lastCharIsWhitespace(StringBuilder)
      */
-    public static boolean lastCharIsWhitespace(StringBuilder sb) {
+    public static boolean lastCharIsWhitespace(CharSequence sb)
+    {
         return sb.length() != 0 && sb.charAt(sb.length() - 1) == ' ';
     }
-    
+
     /*
      * org.jsoup.nodes.Element.appendNormalisedText(StringBuilder, TextNode)
      */
-    public static void appendNormalisedText(StringBuilder accum, TextNode textNode) {
+    public static void appendNormalisedText(StringBuilder accum, TextNode textNode)
+    {
         String text = textNode.getWholeText();
 
         if (preserveWhitespace(textNode.parentNode())) {
             accum.append(text);
         }
         else {
-            StringUtil.appendNormalisedWhitespace(accum, text, lastCharIsWhitespace(accum));
+            appendNormalisedWhitespace(accum, text, lastCharIsWhitespace(accum));
         }
     }
-    
+
     /*
      * org.jsoup.nodes.Element.preserveWhitespace(Node)
      */
-    public static boolean preserveWhitespace(Node node) {
+    public static boolean preserveWhitespace(Node node)
+    {
         // looks only at this element and one level up, to prevent recursion & needless stack
         // searches
         if (node != null && node instanceof Element) {
             Element element = (Element) node;
-            return element.tag().preserveWhitespace() ||
-                element.parent() != null && element.parent().tag().preserveWhitespace();
+            return element.tag().preserveWhitespace()
+                    || element.parent() != null && element.parent().tag().preserveWhitespace();
         }
         return false;
     }

@@ -205,9 +205,6 @@ public class PerseusReader
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
             }
-            else {
-                System.out.println();
-            }
 
             token.addToIndexes();
             
