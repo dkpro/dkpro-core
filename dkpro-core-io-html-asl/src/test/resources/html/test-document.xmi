@@ -2,23 +2,23 @@
     <cas:NULL xmi:id="0"/>
     <type3:DocumentMetaData xmi:id="1" sofa="12" begin="0" end="73" language="en" documentTitle="test.html" documentId="test.html" isLastSegment="false"/>
     <type9:XmlElement xmi:id="24" sofa="12" begin="0" end="73" children="34 44" qName="html"/>
-    <type9:XmlElement xmi:id="44" sofa="12" begin="0" end="73" parent="24" children="54 59 83 88 112 117 141 146" qName="body"/>
+    <type9:XmlElement xmi:id="44" sofa="12" begin="0" end="73" parent="24" children="54 61 87 94 120 127 153 160" qName="body"/>
     <type9:XmlElement xmi:id="34" sofa="12" begin="0" end="0" parent="24" qName="head"/>
-    <type9:XmlElement xmi:id="59" sofa="12" begin="1" end="8" parent="44" children="69" qName="h1"/>
-    <type9:XmlElement xmi:id="88" sofa="12" begin="9" end="39" parent="44" children="98" qName="p"/>
-    <type9:XmlElement xmi:id="117" sofa="12" begin="40" end="71" parent="44" children="127" qName="p"/>
-    <type9:XmlTextNode xmi:id="54" sofa="12" begin="0" end="1" parent="44"/>
-    <type9:XmlTextNode xmi:id="69" sofa="12" begin="1" end="8" parent="59"/>
-    <type9:XmlTextNode xmi:id="83" sofa="12" begin="8" end="9" parent="44"/>
-    <type9:XmlTextNode xmi:id="98" sofa="12" begin="9" end="39" parent="88"/>
-    <type9:XmlTextNode xmi:id="112" sofa="12" begin="39" end="40" parent="44"/>
-    <type9:XmlTextNode xmi:id="127" sofa="12" begin="40" end="71" parent="117"/>
-    <type9:XmlTextNode xmi:id="141" sofa="12" begin="71" end="72" parent="44"/>
-    <type9:XmlTextNode xmi:id="146" sofa="12" begin="72" end="73" parent="44"/>
-    <type5:Heading xmi:id="77" sofa="12" begin="1" end="8" divType="h1"/>
-    <type5:Paragraph xmi:id="106" sofa="12" begin="10" end="38" divType="p"/>
-    <type5:Paragraph xmi:id="135" sofa="12" begin="41" end="70" divType="p"/>
+    <type9:XmlElement xmi:id="61" sofa="12" begin="1" end="8" parent="44" children="71" qName="h1"/>
+    <type9:XmlElement xmi:id="94" sofa="12" begin="9" end="39" parent="44" children="104" qName="p"/>
+    <type9:XmlElement xmi:id="127" sofa="12" begin="40" end="71" parent="44" children="137" qName="p"/>
+    <type9:XmlTextNode xmi:id="54" sofa="12" begin="0" end="1" parent="44" captured="true"/>
+    <type9:XmlTextNode xmi:id="71" sofa="12" begin="1" end="8" parent="61" captured="true"/>
+    <type9:XmlTextNode xmi:id="87" sofa="12" begin="8" end="9" parent="44" captured="true"/>
+    <type9:XmlTextNode xmi:id="104" sofa="12" begin="9" end="39" parent="94" captured="true"/>
+    <type9:XmlTextNode xmi:id="120" sofa="12" begin="39" end="40" parent="44" captured="true"/>
+    <type9:XmlTextNode xmi:id="137" sofa="12" begin="40" end="71" parent="127" captured="true"/>
+    <type9:XmlTextNode xmi:id="153" sofa="12" begin="71" end="72" parent="44" captured="true"/>
+    <type9:XmlTextNode xmi:id="160" sofa="12" begin="72" end="73" parent="44" captured="true"/>
+    <type5:Heading xmi:id="81" sofa="12" begin="1" end="8" divType="h1"/>
+    <type5:Paragraph xmi:id="114" sofa="12" begin="10" end="38" divType="p"/>
+    <type5:Paragraph xmi:id="147" sofa="12" begin="41" end="70" divType="p"/>
     <type9:XmlDocument xmi:id="19" sofa="12" begin="0" end="73" root="24"/>
     <cas:Sofa xmi:id="12" sofaNum="1" sofaID="_InitialView" mimeType="text" sofaString=" Heading  This is the first paragraph.   This is the second paragraph.   "/>
-    <cas:View sofa="12" members="1 24 44 34 59 88 117 54 69 83 98 112 127 141 146 77 106 135 19"/>
+    <cas:View sofa="12" members="1 24 44 34 61 94 127 54 71 87 104 120 137 153 160 81 114 147 19"/>
 </xmi:XMI>
