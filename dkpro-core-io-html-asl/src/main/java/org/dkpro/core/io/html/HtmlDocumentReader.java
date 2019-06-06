@@ -1,14 +1,14 @@
 /*
- * Copyright 2012
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,8 +24,6 @@ import static org.dkpro.core.io.html.internal.TrimUtils.trim;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,13 +41,17 @@ import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
+import org.dkpro.core.api.xml.CasXmlHandler;
+import org.dkpro.core.api.xml.type.XmlElement;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.NodeTraversor;
 import org.jsoup.select.NodeVisitor;
+import org.xml.sax.helpers.AttributesImpl;
 
 import com.ibm.icu.text.CharsetDetector;
 
@@ -69,8 +71,13 @@ import eu.openminted.share.annotations.api.DocumentationResource;
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
-public class HtmlReader
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+            "org.dkpro.core.api.xml.type.XmlAttribute",
+            "org.dkpro.core.api.xml.type.XmlDocument", 
+            "org.dkpro.core.api.xml.type.XmlElement", 
+            "org.dkpro.core.api.xml.type.XmlNode",
+            "org.dkpro.core.api.xml.type.XmlTextNode" })
+public class HtmlDocumentReader
     extends JCasResourceCollectionReader_ImplBase
 {
     /**
@@ -129,66 +136,94 @@ public class HtmlReader
         
         Document doc = Jsoup.parse(html);
         
-        StringBuilder builder = new StringBuilder();
-        Deque<Event> events = new ArrayDeque<>();
+        CasXmlHandler handler = new CasXmlHandler(aJCas);
         
         NodeTraversor traversor = new NodeTraversor(new NodeVisitor()
         {
             @Override
             public void head(Node node, int depth)
             {
-                if (node instanceof TextNode) {
-                    TextNode textNode = (TextNode) node;
-                    appendNormalisedText(builder, textNode);
-                }
-                else if (node instanceof Element) {
-                    Element element = (Element) node;
-                    if (builder.length() > 0
-                            && (element.isBlock() || element.nodeName().equals("br"))
-                            && !lastCharIsWhitespace(builder)) {
-                        builder.append(" ");
+                try {
+                    if (node instanceof Document) {
+                        handler.startDocument();
+                        handler.captureText(false);
                     }
-                    
-                    // Build a stack of the open elements, recording their start offsets
-                    // and whether we created annotations for them or not.
-                    events.push(new Event(node, builder.length()));
+                    else if (node instanceof TextNode) {
+                        TextNode textNode = (TextNode) node;
+                        StringBuilder buffer = new StringBuilder();
+                        appendNormalisedText(buffer, textNode);
+                        char[] text = buffer.toString().toCharArray();
+                        handler.characters(text, 0, text.length);
+                    }
+                    else if (node instanceof Element) {
+                        Element element = (Element) node;
+                        if (
+                                handler.getText().length() > 0 && 
+                                (element.isBlock() || element.nodeName().equals("br")) && 
+                                !lastCharIsWhitespace(handler.getText())
+                        ) {
+                            char[] text = " ".toCharArray();
+                            handler.characters(text, 0, text.length);
+                        }
+                        
+                        AttributesImpl attributes = new AttributesImpl();
+                        
+                        if (element.attributes() != null) {
+                            for (Attribute attr : element.attributes()) {
+                                attributes.addAttribute("", "", attr.getKey(), "CDATA",
+                                        attr.getValue());
+                            }
+                        }
+                        
+                        if ("body".equals(element.tagName())) {
+                            handler.captureText(true);
+                        }
+                        
+                        handler.startElement("", "", element.tagName(), attributes);
+                    }
+                }
+                catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
 
             @Override
             public void tail(Node node, int depth)
             {
-                if (node instanceof TextNode) {
-                    // Nothing to do
-                }
-                else if (node instanceof Element) {
-                    Event event = events.pop();
-                    Integer type = mappings.get(node.nodeName());     
-                    if (type != null) {
-                        int[] span = { event.begin, builder.length() };
-                        trim(builder, span);
-                        Div div = (Div) cas.createAnnotation(aJCas.getCasType(type), span[0],
-                                span[1]);
-                        div.setDivType(node.nodeName());
-                        div.addToIndexes();
+                try {
+                    if (node instanceof Document) {
+                        handler.endDocument();
                     }
+                    else if (node instanceof Element) {
+                        Element element = (Element) node;
+
+                        // Fetch the current element
+                        XmlElement elementFS = handler.getCurrentElement();
+
+                        // Close the current element so that it gets its end offset
+                        handler.endElement("", "", element.tagName());
+
+                        if ("body".equals(element.tagName())) {
+                            handler.captureText(false);
+                        }
+                        
+                        Integer type = mappings.get(node.nodeName());
+                        if (type != null) {
+                            int[] span = { elementFS.getBegin(), elementFS.getEnd() };
+                            trim(handler.getText(), span);
+                            Div div = (Div) cas.createAnnotation(aJCas.getCasType(type), span[0],
+                                    span[1]);
+                            div.setDivType(node.nodeName());
+                            div.addToIndexes();
+                        }
+                    }
+                }
+                catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
         
         traversor.traverse(doc);
-        
-        aJCas.setDocumentText(builder.toString());
-    }
-
-    private static class Event
-    {
-        int begin;
-        
-        public Event(Node aNode, int aBegin)
-        {
-            super();
-            begin = aBegin;
-        }
     }
 }
