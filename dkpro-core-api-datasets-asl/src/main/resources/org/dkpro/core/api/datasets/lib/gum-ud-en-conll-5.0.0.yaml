@@ -27,16 +27,22 @@ description: |
 licenses:
   - name: CC-BY 2.5
     url: http://creativecommons.org/licenses/by/2.5/
-    comment: "Wikinews texts (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
+    comment: "Wikinews/interviews texts (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
   - name: CC-BY-SA 3.0
     url: https://creativecommons.org/licenses/by-sa/3.0/
-    comment: "WikiVoyage texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
+    comment: |
+      WikiVoyage texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use);
+      Wikipedia biographies (Source: https://en.wikipedia.org/wiki/Wikipedia:Copyrights)
   - name: CC-BY-NC-SA 3.0
     url: http://creativecommons.org/licenses/by-nc-sa/3.0/
-    comment: "WikiHow texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons)"
+    comment: |
+      WikiHow texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons);
+      Fiction texts (Source: http://smallbeerpress.com/creative-commons/)
   - name: CC-BY 4.0
     url: https://creativecommons.org/licenses/by/4.0/
-    comment: "Annotations (Source: https://corpling.uis.georgetown.edu/gum/)"
+    comment: |
+      Annotations (Source: https://corpling.uis.georgetown.edu/gum/);
+      Academic texts (various sources, see LICENSE.txt file)
 
 artifacts:
   gum.zip:
