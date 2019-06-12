@@ -33,7 +33,7 @@ import org.junit.Test;
 
 public class DatasetFactoryTest
 {
-    //@Ignore("Used at times for offline testing / development")
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testOne()
         throws Exception
@@ -43,12 +43,12 @@ public class DatasetFactoryTest
         
         DatasetFactory df = new DatasetFactory(cache);
         {
-            Dataset ds = df.load("brown-en-teixml");
+            Dataset ds = df.load("gum-ud-en-conll-5.0.0");
             assertDatasetOk(ds);
         }
     }
     
-    //@Ignore("Used at times for offline testing / development")
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testLoadAll()
         throws Exception

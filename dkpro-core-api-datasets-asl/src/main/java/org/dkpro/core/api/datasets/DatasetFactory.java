@@ -226,9 +226,17 @@ public class DatasetFactory
     private Path resolve(DatasetDescription aDataset, ArtifactDescription aArtifact)
     {
         if (aArtifact.isShared()) {
-            // Shared artifacts stored in a folder named by their SHA1
-            return cacheRoot.resolve("shared").resolve(aArtifact.getSha1())
-                    .resolve(aArtifact.getName());
+            // Shared artifacts stored in a folder named by their hash
+            // Prefere SHA1 for the time being to avoid users having to re-download too much as
+            // we slowly switch over to SHA512
+            if (aArtifact.getSha1() != null) {
+                return cacheRoot.resolve("shared").resolve(aArtifact.getSha1())
+                        .resolve(aArtifact.getName());
+            }
+            else {
+                return cacheRoot.resolve("shared").resolve(aArtifact.getSha512())
+                        .resolve(aArtifact.getName());
+            }
         }
         else {
             // Unshared artifacts are stored in the dataset folder
