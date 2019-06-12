@@ -29,6 +29,7 @@ artifacts:
   data.tgz:
     url: "https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-1827/ud-treebanks-v1.4.tgz?sequence=4&isAllowed=y"
     sha1: 1c41c28b000935ffa6c63b9ff17c48e892c56597
+    sha512: b41e297dc6befb8e7dfe1fe3281e796e4ee2fceff87187f1a7db2f75eb232705605e4ee2c282345db28b4f7970ac767fa6c572f1b5486c263ea94a814d360b38
     shared: true
     actions:
       - action: explode

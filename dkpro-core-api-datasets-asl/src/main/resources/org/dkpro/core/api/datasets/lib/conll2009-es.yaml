@@ -30,6 +30,7 @@ artifacts:
   data.zip:
     url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Spanish-traindevB.zip"
     sha1: ef36c3369bd05966609b4b13d6bf78884c23ece1
+    sha512: 2b20574c36c684bd2e406f6356298f9f853366e8627866d60e87e7d95c8d87f2b159df2dffc8ac6a632bd833ce36b0898dd7cde8e375a314ce5e7a546bcdb594
     actions:
       - action: explode
         configuration: { strip: 1, excludes: [ "documentation", "documentation/**/*" ] }

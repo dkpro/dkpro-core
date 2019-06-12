@@ -24,10 +24,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import org.dkpro.core.api.datasets.Dataset;
-import org.dkpro.core.api.datasets.DatasetFactory;
-import org.dkpro.core.api.datasets.Split;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -35,30 +33,27 @@ import org.junit.Test;
 
 public class DatasetFactoryTest
 {
-    @Ignore("Used at times for offline testing / development")
+    //@Ignore("Used at times for offline testing / development")
     @Test
     public void testOne()
         throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
+        //Path cache = testContext.getTestOutputFolder().toPath();
+        Path cache = Paths.get("target/test-output/testLoadAll");
         
         DatasetFactory df = new DatasetFactory(cache);
         {
-            Dataset ds = df.load("wasr-en-xl-1.00");
+            Dataset ds = df.load("brown-en-teixml");
             assertDatasetOk(ds);
         }
-//        {
-//            Dataset ds = df.load("ndt-nb-1.01");
-//            assertDatasetOk(ds);
-//        }
     }
     
-    @Ignore("Used at times for offline testing / development")
+    //@Ignore("Used at times for offline testing / development")
     @Test
     public void testLoadAll()
         throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
+        Path cache = Paths.get("target/test-output/testLoadAll");
         
         DatasetFactory df = new DatasetFactory(cache);
         for (String id : df.listIds()) {

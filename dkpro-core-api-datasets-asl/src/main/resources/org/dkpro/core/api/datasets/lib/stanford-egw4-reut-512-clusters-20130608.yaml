@@ -19,6 +19,7 @@ artifacts:
   egw4-reut.512.clusters:
     url: https://nlp.stanford.edu/software/egw4-reut.512.clusters
     sha1: 3f1352641a46e985c07d0023c0ada7e5be97e527
+    sha512: 9feeb7de9dc49a278a7ec6c8fd02e582d0c154077ee656ae00eaa293a5366d6e74c2724223c38b9030eb30305ce3dd07ac4767f890814c4fa41f71c8c3b8c7f2
 
 roles:
   data:

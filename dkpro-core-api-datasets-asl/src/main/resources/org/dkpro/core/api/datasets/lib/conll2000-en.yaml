@@ -34,6 +34,8 @@ artifacts:
   train.txt.gz:
     url: "https://www.clips.uantwerpen.be/conll2000/chunking/train.txt.gz"
     sha1: 9f31cf936554cebf558d07cce923dca0b7f31864
+    sha512: 02a9be73f1bdd3d654ec2337cb64b358f0f6df0428b5da167aa95462d4fe06f4834ddd2dbad8cd2dd6eeb06d759379ae94f7dd2790e06f7d334afad902ec233c
   test.txt.gz:
     url: "https://www.clips.uantwerpen.be/conll2000/chunking/test.txt.gz"
     sha1: dc57527f1f60eeafad03da51235185141152f849
+    sha512: 2668c8e4025cfc8067d78c5a6ef08ffa8d66883a351faeb995314a7832801b96c5997cac2117c6a34b0ed58c38073f00091b629e11a2341945c2e835a7410b5c
