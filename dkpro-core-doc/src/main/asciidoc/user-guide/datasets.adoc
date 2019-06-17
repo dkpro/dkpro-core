@@ -87,7 +87,7 @@ artifacts:: A list of artifacts that make of the dataset. The relevant artifacts
             be limited to the data files themselves, but could also include license texts or
             readme files if they are not part of a dataset archive. If a dataset is not distributed
             as an archive but rather as a set of files, each of the files should be listed here.
-            To describe an artifact, the **name**, **url**, and **sha1** checksum are required.
+            To describe an artifact, the **name**, **url**, and **sha512** checksum are required.
             The name of the artifact should correspond to the filename part of the URL from which
             the artifact is downloaded. However, sometimes it is convenient to use a simpler name,
             e.g. `data.zip`. However, the extension should always be preserved. This is particularly
@@ -95,6 +95,9 @@ artifacts:: A list of artifacts that make of the dataset. The relevant artifacts
             [sect_datasets_actions] section below. +
             If an artifact contains multiple datasets, it can be **shared** to avoid downloading and
             caching it redundantly. See [sect_datasets_sharing] below. +
+            It is possible to set the **verificationMode** to **TEXT** in order to normalize whitespace
+            before calculating the checksum. This is recommended for license files or documentation but
+            not for actual data files (even if they are in a text format such as a CoNLL variant).+
 +
 .Example artifacts section
 [source,yaml,indent=0]
@@ -102,7 +105,7 @@ artifacts:: A list of artifacts that make of the dataset. The relevant artifacts
 artifacts:
   gum.zip:
     url: "https://github.com/amir-zeldes/gum/archive/V2.2.0.zip"
-    sha1: b17e276998ced83153be605d8157afacf1f10fdc
+    sha1: c9606ba69ec1152267b8...(snip)...
     actions:
       - action: explode
         configuration: { includes: ["dep/*", "LICENSE.txt", "README.md"], strip: 1 }

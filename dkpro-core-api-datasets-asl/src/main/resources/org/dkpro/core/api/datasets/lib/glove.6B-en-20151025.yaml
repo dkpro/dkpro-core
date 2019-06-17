@@ -22,16 +22,17 @@ licenses:
     url: http://www.opendatacommons.org/licenses/pddl/1.0/
 
 artifacts:
-  glove.6B.zip:
-    url: "https://nlp.stanford.edu/data/glove.6B.zip"
+  data.zip:
+    url: "http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip"
     sha1: b64e54f1877d2f735bdd000c1d7d771e25c7dfdc
+    sha512: 8a600c0df42436554d034d23d6d82f51b7c2e4ab8a3e3554b403bac951c9c600a2ef5612d89b2ed59ce8aecaed3c4c1d53a4e9e2a696999b95e64af267a8752e
     actions:
       - action: explode
 
 roles:
   data:
-    - glove.6B.50d.txt
-    - glove.6B.100d.txt
-    - glove.6B.200d.txt
-    - glove.6B.300d.txt
+    - data/glove.6B.50d.txt
+    - data/glove.6B.100d.txt
+    - data/glove.6B.200d.txt
+    - data/glove.6B.300d.txt
  

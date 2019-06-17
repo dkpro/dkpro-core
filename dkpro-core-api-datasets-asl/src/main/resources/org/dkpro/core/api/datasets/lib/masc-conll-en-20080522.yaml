@@ -21,6 +21,7 @@ artifacts:
   data.zip:
     url: "http://www.anc.org/MASC/download/masc-conll.zip"
     sha1: d9f53a05c659204a3223e901c450fe8ffa5fa9fa
+    sha512: 67d9e67f8003153e9782a151d9c5ea8646d0c8604de13ae54c90416ed682171f6dfc745dc2a5ff1677e7f0517c94c6067cb6372a0b86fddb6e410b89d9af28cc
     actions:
       - action: explode
         configuration: { strip: 1 }

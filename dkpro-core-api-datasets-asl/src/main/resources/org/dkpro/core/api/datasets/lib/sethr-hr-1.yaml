@@ -20,9 +20,12 @@ artifacts:
   LICENSE.txt:
     url: http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
     sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    verificationMode: TEXT
   setimes.hr.v1.conllx.gz:
     url: http://nlp.ffzg.hr/data/corpora/setimes.hr.v1.conllx.gz
     sha1: 0faebfe55136692f83dcddd4cf659a8b59655d62
+    sha512: 81f4389172e6d340d7a8cf6581c86bc6213927ac4f25d0dd104e32c6ffb414f08ce2c3e6cdbde0bf6233acd7c3e8b9d475862d89dad762ba84d82d80b80d574f
 
 roles:
   licenses:

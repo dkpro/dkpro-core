@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.api.datasets;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.unmodifiableList;
 
 import java.io.File;
@@ -47,6 +48,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.NullOutputStream;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dkpro.core.api.datasets.internal.ActionDescriptionImpl;
@@ -64,9 +66,15 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 public class DatasetFactory
 {
+    public static final String PROP_DATASET_VERIFICATION_POLICY = "dkpro.dataset.verification.policy";
+    
+    private static final DatasetValidationPolicy defaultVerificationPolicy = DatasetValidationPolicy
+            .valueOf(System.getProperty(PROP_DATASET_VERIFICATION_POLICY,
+                    DatasetValidationPolicy.STRICT.name()));
+    
     private Map<String, DatasetDescriptionImpl> datasets;
     
-    private Map<String, Class<? extends Action_ImplBase>> actionRegistry;
+    private final Map<String, Class<? extends Action_ImplBase>> actionRegistry;
 
     private final Log LOG = LogFactory.getLog(getClass());
 
@@ -112,7 +120,7 @@ public class DatasetFactory
     public Dataset load(String aId)
         throws IOException
     {
-        return load(aId, DatasetValidationPolicy.STRICT);
+        return load(aId, defaultVerificationPolicy);
     }
     
     public Dataset load(String aId, DatasetValidationPolicy aPolicy)
@@ -197,6 +205,7 @@ public class DatasetFactory
                 // Inject artifact names into artifacts
                 for (Entry<String, ArtifactDescription> e : ds.getArtifacts().entrySet()) {
                     ((ArtifactDescriptionImpl) e.getValue()).setName(e.getKey());
+                    ((ArtifactDescriptionImpl) e.getValue()).setDataset(ds);
                 }
                 
                 sets.put(ds.getId(), ds);
@@ -217,9 +226,17 @@ public class DatasetFactory
     private Path resolve(DatasetDescription aDataset, ArtifactDescription aArtifact)
     {
         if (aArtifact.isShared()) {
-            // Shared artifacts stored in a folder named by their SHA1
-            return cacheRoot.resolve("shared").resolve(aArtifact.getSha1())
-                    .resolve(aArtifact.getName());
+            // Shared artifacts stored in a folder named by their hash
+            // Prefere SHA1 for the time being to avoid users having to re-download too much as
+            // we slowly switch over to SHA512
+            if (aArtifact.getSha1() != null) {
+                return cacheRoot.resolve("shared").resolve(aArtifact.getSha1())
+                        .resolve(aArtifact.getName());
+            }
+            else {
+                return cacheRoot.resolve("shared").resolve(aArtifact.getSha512())
+                        .resolve(aArtifact.getName());
+            }
         }
         else {
             // Unshared artifacts are stored in the dataset folder
@@ -244,16 +261,11 @@ public class DatasetFactory
                 continue;
             }
             
-            if (artifact.getSha1() != null) {
-                String actual = getDigest(cachedFile, "SHA1");
-                if (!artifact.getSha1().equals(actual)) {
-                    LOG.info("Local SHA1 hash mismatch on [" + cachedFile + "] - expected ["
-                            + artifact.getSha1() + "] - actual [" + actual + "]");
+            if (artifact.getUrl() != null) {
+                boolean verificationOk = checkDigest(cachedFile, artifact);
+                if (!verificationOk) {
                     reload = true;
                     break packageValidationLoop;
-                }
-                else {
-                    LOG.info("Local SHA1 hash verified on [" + cachedFile + "] - [" + actual + "]");
                 }
             }
         }
@@ -272,30 +284,32 @@ public class DatasetFactory
         for (ArtifactDescription artifact : artifacts) {
             Path cachedFile = resolve(aDataset, artifact);
             
-            if (Files.exists(cachedFile)) {
-                continue;
-            }
-
             if (artifact.getText() != null) {
+                // Check if file on disk corresponds to text stored in artifact description
+                if (Files.exists(cachedFile)) {
+                    String text = FileUtils.readFileToString(cachedFile.toFile(), UTF_8);
+                    text = StringUtils.normalizeSpace(text);
+                    if (StringUtils.normalizeSpace(artifact.getText()).equals(text)) {
+                        continue;
+                    }
+                }
+                
                 Files.createDirectories(cachedFile.getParent());
                 
                 LOG.info("Creating [" + cachedFile + "]");
                 try (Writer out = Files.newBufferedWriter(cachedFile, StandardCharsets.UTF_8)) {
                     out.write(artifact.getText());
                 }
+                continue;
             }
             
             if (artifact.getUrl() != null) {
+                if (Files.exists(cachedFile)) {
+                    continue;
+                }
+                
                 Files.createDirectories(cachedFile.getParent());
                 
-                MessageDigest sha1;
-                try {
-                    sha1 = MessageDigest.getInstance("SHA1");
-                }
-                catch (NoSuchAlgorithmException e) {
-                    throw new IOException(e);
-                }
-    
                 URL source = new URL(artifact.getUrl());
     
                 LOG.info("Fetching [" + cachedFile + "]");
@@ -304,29 +318,25 @@ public class DatasetFactory
                 connection.setRequestProperty("User-Agent", "Java");
                 
                 try (InputStream is = connection.getInputStream()) {
-                    DigestInputStream sha1Filter = new DigestInputStream(is, sha1);
-                    Files.copy(sha1Filter, cachedFile);
+                    Files.copy(is, cachedFile);
+                }
     
-                    if (artifact.getSha1() != null) {
-                        String sha1Hex = new String(
-                                Hex.encodeHex(sha1Filter.getMessageDigest().digest()));
-                        if (!artifact.getSha1().equals(sha1Hex)) {
-                            String message = "SHA1 mismatch. Expected [" + artifact.getSha1()
-                                    + "] but got [" + sha1Hex + "].";
-                            switch (aPolicy) {
-                            case STRICT:
-                                LOG.error(message + " STRICT policy in effect. Bailing out.");
-                                throw new IOException(message);
-                            case CONTINUE:
-                                LOG.warn(message + " CONTINUE policy in effect. Ignoring mismatch.");
-                                break;
-                            case DESPERATE:
-                                LOG.warn(message + " DESPERATE policy in effect. Ignoring mismatch.");
-                                break;
-                            default:
-                                throw new IllegalArgumentException("Unknown policy: " + aPolicy);
-                            }
-                        }
+                boolean verificationOk = checkDigest(cachedFile, artifact);
+                if (!verificationOk) {
+                    switch (aPolicy) {
+                    case STRICT:
+                        throw new IOException("Checksum verification failed on [" + cachedFile
+                                + "] STRICT policy in effect. Bailing out.");
+                    case CONTINUE:
+                        LOG.warn("Checksum verification failed on [" + cachedFile
+                                + "] CONTINUE policy in effect. Ignoring mismatch.");
+                        break;
+                    case DESPERATE:
+                        LOG.warn("Checksum verification failed on [" + cachedFile
+                                + "] DESPERATE policy in effect. Ignoring mismatch.");
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown policy: " + aPolicy);
                     }
                 }
             }
@@ -355,10 +365,7 @@ public class DatasetFactory
                             impl.apply(action, aDataset, artifact, cachedFile);
                         }
                     }
-                    catch (IllegalStateException e) {
-                        throw e;
-                    }
-                    catch (IOException e) {
+                    catch (IllegalStateException | IOException e) {
                         throw e;
                     }
                     catch (Exception e) {
@@ -369,20 +376,78 @@ public class DatasetFactory
             Files.createFile(postActionCompleteMarker);
         }
     }
-    
-    private String getDigest(Path aFile, String aDigest) throws IOException
+
+    private InputStream getDigestInputStream(Path aFile, ArtifactDescription aArtifact)
+        throws IOException
     {
-        MessageDigest digest;
+        switch (aArtifact.getVerificationMode()) {
+        case BINARY:
+            return Files.newInputStream(aFile);
+        case TEXT:
+            String text = FileUtils.readFileToString(aFile.toFile(), UTF_8);
+            text = StringUtils.normalizeSpace(text);
+            return IOUtils.toInputStream(text, UTF_8);
+        default:
+            throw new IllegalArgumentException(
+                    "Unknown verification mode [" + aArtifact.getVerificationMode() + "]");
+        }
+    }
+    
+    private boolean checkDigest(Path aFile, ArtifactDescription aArtifact) throws IOException
+    {
+        MessageDigest sha1;
+        MessageDigest sha512;
         try {
-            digest = MessageDigest.getInstance(aDigest);
+            sha1 = MessageDigest.getInstance("SHA-1");
+            sha512 = MessageDigest.getInstance("SHA-512");
         }
         catch (NoSuchAlgorithmException e) {
             throw new IOException(e);
         }
-        try (InputStream is = Files.newInputStream(aFile)) {
-            DigestInputStream digestFilter = new DigestInputStream(is, digest);
-            IOUtils.copy(digestFilter, new NullOutputStream());
-            return new String(Hex.encodeHex(digestFilter.getMessageDigest().digest()));
+        
+        try (InputStream is = getDigestInputStream(aFile, aArtifact)) {
+            DigestInputStream sha1Filter = new DigestInputStream(is, sha1);
+            DigestInputStream sha512Filter = new DigestInputStream(sha1Filter, sha512);
+            IOUtils.copy(sha512Filter, new NullOutputStream());
+            String sha1Hash = new String(Hex.encodeHex(sha1Filter.getMessageDigest().digest()));
+            String sha512Hash = new String(Hex.encodeHex(sha512Filter.getMessageDigest().digest()));
+            
+            if (aArtifact.getSha1() != null) {
+                if (!sha1Hash.equals(aArtifact.getSha1())) {
+                    LOG.info("Local SHA1 hash mismatch for artifact [" + aArtifact.getName()
+                            + "] in dataset [" + aArtifact.getDataset().getId() + "] - expected ["
+                            + aArtifact.getSha1() + "] - actual [" + sha1Hash + "] (mode: "
+                            + aArtifact.getVerificationMode() + ")");
+                    return false;
+                }
+                else if (aArtifact.getSha512() == null) {
+                    LOG.info("Local SHA1 hash verified for artifact [" + aArtifact.getName()
+                            + "] in dataset [" + aArtifact.getDataset().getId() + "] (mode: "
+                            + aArtifact.getVerificationMode() + ")");
+                }
+            }
+
+            if (aArtifact.getSha512() != null) {
+                if (!sha512Hash.equals(aArtifact.getSha512())) {
+                    LOG.info("Local SHA512 hash mismatch for artifact [" + aArtifact.getName()
+                            + "] in dataset [" + aArtifact.getDataset().getId() + "] - expected ["
+                            + aArtifact.getSha512() + "] - actual [" + sha512Hash + "] (mode: "
+                            + aArtifact.getVerificationMode() + ")");
+                    return false;
+                }
+                else {
+                    LOG.info("Local SHA512 hash verified for artifact [" + aArtifact.getName()
+                            + "] in dataset [" + aArtifact.getDataset().getId() + "] (mode: "
+                            + aArtifact.getVerificationMode() + ")");
+                }
+            }
+            else {
+                LOG.info("No SHA512 hash for artifact [" + aArtifact.getName() + "] in dataset ["
+                        + aArtifact.getDataset().getId() + "] - it is recommended to add it: ["
+                        + sha512Hash + "]");
+            }
+
+            return true;
         }
     }
 }
