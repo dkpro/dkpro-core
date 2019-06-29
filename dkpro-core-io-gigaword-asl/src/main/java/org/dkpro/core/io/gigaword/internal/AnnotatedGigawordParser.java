@@ -17,13 +17,14 @@
  */
 package org.dkpro.core.io.gigaword.internal;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
+import org.apache.uima.jcas.JCas;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Read text from the Annotated Gigaword Corpus. This reader does <b>not</b> read any of the
@@ -31,27 +32,32 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class AnnotatedGigawordParser extends DefaultHandler
 {
-    private final Resource resource;
-    
-    private List<AnnotatedGigawordArticle> articleList = new ArrayList<>();
+    private JCas jcas;
     
     // flags for parsing articles
     private boolean inDocument = false;
     private boolean inSentences = false;
     private boolean inToken = false;
     private boolean inWord = false;
+    private boolean inLemma = false;
     private boolean inOffsetBegin = false;
+    private boolean inNER = false;
     
     // variables for reconstructing articles
-    private StringBuilder docText = new StringBuilder();
+    private StringBuilder currentDocText = new StringBuilder();
     private String currentDocId = "";
+    private Token currentToken;
     private String currentWord = "";
     private int currentOffsetBegin = 0;
     
-    public AnnotatedGigawordParser(Resource aResource)
+    public void setJCas(final JCas aJCas)
     {
-        super();
-        resource = aResource;
+        jcas = aJCas;
+    }
+    
+    protected JCas getJCas()
+    {
+        return jcas;
     }
 
     @Override
@@ -70,8 +76,14 @@ public class AnnotatedGigawordParser extends DefaultHandler
         else if (inToken && qName.equals("word")) {
             inWord = true;
         }
+        else if (inToken && qName.equals("lemma")) {
+            inLemma = true;
+        }
         else if (inToken && qName.equals("CharacterOffsetBegin")) {
             inOffsetBegin = true;
+        }
+        else if (inToken && qName.equals("NER")) {
+            inNER = true;
         }
     }
     
@@ -83,37 +95,55 @@ public class AnnotatedGigawordParser extends DefaultHandler
         }
         else if (inDocument && qName.equals("sentences")) {
             inSentences = false;
-            articleList
-                    .add(new AnnotatedGigawordArticle(resource, currentDocId, docText.toString()));
-            docText = new StringBuilder();
+            jcas.setDocumentText(currentDocText.toString());
+            currentDocText = new StringBuilder();
         }
         else if (inSentences && qName.equals("token")) {
             inToken = false;
-            while (docText.length() < currentOffsetBegin) {
-                docText.append(" ");
+            while (currentDocText.length() < currentOffsetBegin) {
+                currentDocText.append(" ");
             }
-            docText.append(currentWord);
+            currentDocText.append(currentWord);
+            currentToken.addToIndexes();
         }
         else if (inToken && qName.equals("word")) {
             inWord = false;
         }
+        else if (inToken && qName.equals("lemma")) {
+            inLemma = false;
+        }
         else if (inToken && qName.equals("CharacterOffsetBegin")) {
             inOffsetBegin = false;
+        }
+        else if (inToken && qName.equals("NER")) {
+            inNER = false;
         }
     }
     
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         if (inWord) {
+            currentToken = new Token(getJCas(), start, length);
             currentWord = new String(ch, start, length);
+        }
+        if (inLemma) {
+            String lemma = new String(ch, start, length);
+            Lemma l = new Lemma(getJCas(), currentToken.getBegin(), currentToken.getEnd());
+            l.setValue(lemma);
+            l.addToIndexes();
+            currentToken.setLemma(l);
         }
         if (inOffsetBegin) {
             currentOffsetBegin = Integer.parseInt(new String(ch, start, length).trim());
         }
-        
+        if (inNER) {
+            String namedEntity = new String(ch, start, length);
+            NamedEntity ne = new NamedEntity(jcas);
+            ne.setBegin(start);
+            ne.setEnd(start + length);
+            ne.setValue(namedEntity);
+            ne.addToIndexes();
+        }
     }
     
-    public List<AnnotatedGigawordArticle> getArticleList() {
-        return articleList;
-    }
 }

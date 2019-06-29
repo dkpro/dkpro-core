@@ -17,13 +17,16 @@
  */
 package org.dkpro.core.io.gigaword;
 
-import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
@@ -31,9 +34,10 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.MimeTypes;
-import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.io.gigaword.internal.AnnotatedGigawordArticle;
-import org.dkpro.core.io.gigaword.internal.AnnotatedGigawordDocuments;
+import org.dkpro.core.io.gigaword.internal.AnnotatedGigawordExtractor;
+import org.dkpro.core.io.gigaword.internal.AnnotatedGigawordParser;
+import org.xml.sax.SAXException;
 
 import com.google.common.collect.AbstractIterator;
 
@@ -72,8 +76,20 @@ public class AnnotatedGigawordReader
 
         DocumentMetaData dmd = DocumentMetaData.get(aJCas);
         dmd.setDocumentId(article.getId());
-        
-        aJCas.setDocumentText(article.getText());
+        try
+        {
+            AnnotatedGigawordParser parser = new AnnotatedGigawordParser();
+            parser.setJCas(aJCas.getJCas());
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            saxParser.parse(new ByteArrayInputStream(article.getText().getBytes()), parser);
+        }
+        catch (CASException e) {
+            throw new CollectionException(e);
+        }
+        catch (SAXException | ParserConfigurationException e) {
+            throw new IOException(e);
+        }
     }
     
     @Override
@@ -95,12 +111,8 @@ public class AnnotatedGigawordReader
                         && AnnotatedGigawordReader.super.hasNext()
                 ) {
                     Resource res = nextFile();
-                    try (InputStream is = new BufferedInputStream(CompressionUtils
-                            .getInputStream(res.getLocation(), res.getInputStream()))) {
-                        currentFileIterator = AnnotatedGigawordDocuments
-                                .fromAnnotatedGigawordFile(res).iterator();
-
-                    }
+                    currentFileIterator = new AnnotatedGigawordExtractor(res).getArticleList()
+                            .iterator();
                 }
             }
             catch (Exception e) {
