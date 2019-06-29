@@ -45,7 +45,6 @@ public class AnnotatedGigawordParser extends DefaultHandler
     
     // variables for reconstructing articles
     private StringBuilder currentDocText = new StringBuilder();
-    private String currentDocId = "";
     private Token currentToken;
     private String currentWord = "";
     private int currentOffsetBegin = 0;
@@ -65,7 +64,6 @@ public class AnnotatedGigawordParser extends DefaultHandler
     {
         if (qName.equals("DOC")) {
             inDocument = true;
-            currentDocId = attributes.getValue("id");
         }
         else if (inDocument && qName.equals("sentences")) {
             inSentences = true;
