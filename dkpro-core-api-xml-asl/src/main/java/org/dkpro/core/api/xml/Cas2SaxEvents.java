@@ -95,7 +95,15 @@ public class Cas2SaxEvents
 
     private void process(XmlTextNode aChild) throws SAXException
     {
-        char[] text = aChild.getCoveredText().toCharArray();
+        char[] text;
+        
+        if (aChild.getCaptured()) {
+            text = aChild.getCoveredText().toCharArray();
+        }
+        else {
+            text = aChild.getText().toCharArray();
+        }
+        
         handler.characters(text, 0, text.length);
     }
 }

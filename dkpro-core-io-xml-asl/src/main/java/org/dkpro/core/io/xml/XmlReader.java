@@ -54,7 +54,15 @@ import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Reader for XML files.
+ * Very basic reader to load texts from a XML file. 
+ * <p>
+ * The XML file is expected to contain one or more elements under its root note and each of these
+ * is treated as a separate document. Each of these child elements may contain further children
+ * containing text which may or may not be included into the CAS document text, depending on
+ * {@link #PARAM_INCLUDE_TAG} and {@link #PARAM_EXCLUDE_TAG}.
+ * <p>
+ * If you are looking for a more generic XML reader which imports the structure of an XML file into
+ * a CAS, please look at {@link XmlDocumentReader}.
  */
 @Component(value = OperationType.READER)
 @ResourceMetaData(name = "XML Reader")
@@ -218,14 +226,10 @@ public class XmlReader
                 xmlReader = null;
                 currentParsedFile++;
             }
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-            throw new CollectionException(e);
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        catch (Exception e) {
             throw new CollectionException(e);
         }
-
     }
 
     @Override
