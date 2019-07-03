@@ -17,12 +17,12 @@
  */
 package org.dkpro.core.io.tei;
 
+import static java.util.Collections.emptyList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.io.tei.TeiReader;
-import org.dkpro.core.io.tei.TeiWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,10 +30,23 @@ import org.junit.Test;
 public class TeiReaderWriterTest
 {
     @Test
-    public void test()
+    public void testWithoutTrim()
         throws Exception
     {
-        testRoundTrip(TeiReader.class, TeiWriter.class, "reference/example1.xml");
+        testRoundTrip(
+                createReaderDescription(TeiReader.class,
+                        TeiReader.PARAM_ELEMENTS_TO_TRIM, emptyList()), 
+                createEngineDescription(TeiWriter.class), 
+                "reference/example1.xml");
+    }
+    
+    @Test
+    public void testWithTrimming()
+        throws Exception
+    {
+        testOneWay(TeiReader.class, TeiWriter.class, 
+                "reference/example1_out.xml", 
+                "reference/example1.xml");
     }
 
     @Test

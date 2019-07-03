@@ -105,7 +105,7 @@ public class TeiReaderTest
                 TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
                 TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
-        String firstSentence = "The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced `` no evidence '' that any irregularities took place . ";
+        String firstSentence = "The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced `` no evidence '' that any irregularities took place .";
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
