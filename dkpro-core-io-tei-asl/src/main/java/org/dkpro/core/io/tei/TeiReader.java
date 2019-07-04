@@ -95,10 +95,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the TEI XML.
- * <p>
- * The reader supports the following XML elements and attributes:
- * </p>
  * <table>
+ * <caption>Supported TEI XML elements and attributes</caption>
  * <tr>
  * <th>Element</th>
  * <th>Description</th>
