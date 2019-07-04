@@ -2,21 +2,23 @@
   status: unstable
   doclinks:
   - title: "User Guide and Reference"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/user-guide.html"
   - title: "Developer Guide"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/2/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/developer-guide.html"
   - title: "Component Reference"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/3/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/component-reference.html"
   - title: "Typesystem Reference"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/4/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/typesystem-reference.html"
   - title: "Model Reference"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/5/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/model-reference.html"
   - title: "Format Reference"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/6/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/format-reference.html"
   - title: "Dataset Reference"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/8/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/dataset-reference.html"
   - title: "Tagset Mapping Reference"
-    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/7/"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/tagset-reference.html"
+  - title: "Language Reference"
+    url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/language-reference.html"
 
 - version: 1.10.0
   date: 2018-09-10
