@@ -29,8 +29,9 @@ licenses:
 
 artifacts:
   data.tar.gz:
-    url: http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05_1.1.tar.gz
+    url: https://cl.lingfil.uu.se/~nivre/research/Talbanken05_1.1.tar.gz
     sha1: bc836ab364ba37522e2989481104bad2eb96a92e
+    sha512: 4a93609c6c674edd01f1254d4879f6c908865b48f640c1b813ac537a8a4e160f11fc75857f18d72d88de9b70d3cf8dd831acc97489b0f7c0c1d8c9058209b25c
     shared: true
     actions:
       - action: explode

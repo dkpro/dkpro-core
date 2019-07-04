@@ -31,6 +31,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
@@ -75,7 +76,7 @@ public class Explode
         if (targetFile.toString().toLowerCase(Locale.ENGLISH).endsWith(".rar")) {
             extractRar(aAction, targetFile, dsi.getOwner().resolve(dsi));
         }
-        if (targetFile.toString().toLowerCase(Locale.ENGLISH).endsWith(".7z")) {
+        else if (targetFile.toString().toLowerCase(Locale.ENGLISH).endsWith(".7z")) {
             // 7z does not support streaming in Apache Commons Compress
             extract7z(aAction, targetFile, dsi.getOwner().resolve(dsi));
         }
@@ -98,6 +99,9 @@ public class Explode
                 ArchiveInputStream archive = new ArchiveStreamFactory()
                         .createArchiveInputStream(uncompressed);
                 extract(aAction, targetFile, archive, dsi.getOwner().resolve(dsi));
+            }
+            catch (ArchiveException e) {
+                throw new ArchiveException("Unable to extract files from [" + targetFile + "]", e);
             }
         }
     }

@@ -32,9 +32,12 @@ artifacts:
   LICENSE.txt:
     url: http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode.txt
     sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    verificationMode: TEXT
   data.tar.gz:
-    url: http://ahclab.naist.jp/resource/tedtreebank/naist-ntt-ted-treebank-v1.tar.gz
+    url: https://ahcweb01.naist.jp/resource/tedtreebank/naist-ntt-ted-treebank-v1.tar.gz
     sha1: 89c6495bd64c4b3e699b4c478b47a0c827ea46ea
+    sha512: a433d0dd1de9a04280f0115491e8d5414e6f5303fb271441cdd59f440eb5dd5c0f8cbbfd130f68dceb24323538ce2b3e0d8f0f77c61054338bf5816a7fd08b4b
     actions:
       - action: explode
         configuration: { strip: 1, includes: [ "README.md", "en-dep/*.dep" ] } 

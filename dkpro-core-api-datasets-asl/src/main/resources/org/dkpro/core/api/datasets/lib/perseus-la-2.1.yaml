@@ -23,9 +23,12 @@ artifacts:
   LICENSE.txt:
     url: http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
     sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    verificationMode: TEXT
   perseus.zip:
     url: "https://github.com/PerseusDL/treebank_data/archive/f56a35f65ef15ac454f6fbd2cfc6ea97bf2ca9b8.zip"
     sha1: 140eee6d2e3e83745f95d3d5274d9e965d898980
+    sha512: b8fe14202b5dbe6d7c7b387f38a80036d62d3ecc860fa0fc1ee698ed10a8121b144c2c36b09b45fd6b4fb17a025f88e4669be66524b8a5b550c57032f789ceb4
     shared: true
     actions:
       - action: explode

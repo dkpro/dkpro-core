@@ -23,8 +23,9 @@ description: |
   
 artifacts:
   data.tgz:
-    url: "http://www.cnts.ua.ac.be/conll2002/ner.tgz"
+    url: "https://web.archive.org/web/20170307123302if_/http://www.cnts.ua.ac.be/conll2002/ner.tgz"
     sha1: 686ef8fed3125a1d8aefe1351ff0e619fe9c34cb
+    sha512: 61a7423b1fb2bd3dac0f85b37e56a04b26d0aa8443d707191c93a9ea83da9990edab4eb71e689bd223bb38504208a17b750cbec94e436362c9f7c524da8b8e64
     shared: true
     actions:
     - action: explode

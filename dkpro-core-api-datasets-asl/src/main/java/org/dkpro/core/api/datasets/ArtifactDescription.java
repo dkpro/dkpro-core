@@ -22,6 +22,11 @@ import java.util.List;
 public interface ArtifactDescription
 {
     /**
+     * @return the dataset to which this artifact belongs.
+     */
+    DatasetDescription  getDataset();
+    
+    /**
      * @return artifact name/ID
      */
     String getName();
@@ -43,6 +48,16 @@ public interface ArtifactDescription
      * @return SHA1 hash of the artifact.
      */
     String getSha1();
+    
+    /**
+     * @return SHA512 hash of the artifact.
+     */
+    String getSha512();
+    
+    /**
+     * @return the verification mode.
+     */
+    VerificationMode getVerificationMode();
 
     /**
      * Whether this artifact is shared between multiple datasets. If this flag is enabled, the

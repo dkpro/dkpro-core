@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.tei;
 
+import static java.lang.Character.isWhitespace;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -42,6 +43,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
@@ -93,6 +95,70 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the TEI XML.
+ * <table>
+ * <caption>Supported TEI XML elements and attributes</caption>
+ * <tr>
+ * <th>Element</th>
+ * <th>Description</th>
+ * <th>DKPro Core type</th>
+ * <th>Attribute mappings</th>
+ * </tr>
+ * <tr>
+ * <td><tt>TEI</tt></td>
+ * <td>document boundary</td>
+ * <td>{@link #getNext} returns one TEI document at a time</td>
+ * </tr>
+ * <tr>
+ * <td><tt>title</tt></td>
+ * <td>document title</td>
+ * <td>DocumentMetaData</td>
+ * </tr>
+ * <tr>
+ * <td><tt>s</tt></td>
+ * <td>s-unit</td>
+ * <td>Sentence</td>
+ * </tr>
+ * <tr>
+ * <td><tt>u</tt></td>
+ * <td>utterance</td>
+ * <td>Sentence</td>
+ * <tr>
+ * <td><tt>p</tt></td>
+ * <td>paragraph</td>
+ * <td>Paragraph</td>
+ * </tr>
+ * <tr>
+ * <td><tt>rs</tt></td>
+ * <td>referencing string</td>
+ * <td>NamedEntity</td>
+ * <td><tt>type</tt> -&gt; value</td>
+ * </tr>
+ * <tr>
+ * <td><tt>phr</tt></td>
+ * <td>phrase</td>
+ * <td>Constituent</td>
+ * <td><tt>type</tt> -&gt; constituentType, <tt>function</tt> -&gt; syntacticFunction</td>
+ * </tr>
+ * <tr>
+ * <td><tt>w</tt></td>
+ * <td>word</td>
+ * <td>Token</td>
+ * <td>(<tt>pos</tt>, <tt>type</tt>) -&gt; POS.PosValue (<tt>pos</tt> preferred over <tt>type</tt>)
+ * </td>
+ * </tr>
+ * <tr>
+ * <td><tt>mw</tt></td>
+ * <td>multi-word</td>
+ * <td>Token</td>
+ * <td>same as for <tt>w</tt></td>
+ * </tr>
+ * <tr>
+ * <td><tt>c</tt></td>
+ * <td>character</td>
+ * <td>Token</td>
+ * <td>same as for <tt>w</tt></td>
+ * </tr>
+ * </table>
  */
 @ResourceMetaData(name = "TEI XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
@@ -216,7 +282,16 @@ public class TeiReader
     public static final String PARAM_UTTERANCES_AS_SENTENCES = "utterancesAsSentences";
     @ConfigurationParameter(name = PARAM_UTTERANCES_AS_SENTENCES, mandatory = true, defaultValue = "false")
     private boolean utterancesAsSentences;
-
+    
+    /**
+     * Trim the given elements (remote leading and trailing whitespace). DKPro Core usually expects
+     * annotations to start and end at a non-whitespace character.
+     */
+    public static final String PARAM_ELEMENTS_TO_TRIM = "elementsToTrim";
+    @ConfigurationParameter(name = PARAM_ELEMENTS_TO_TRIM, mandatory = true, defaultValue = { 
+            TAG_SUNIT, TAG_U, TAG_PARAGRAPH, TAG_RS, TAG_WORD, TAG_CHARACTER, TAG_MULTIWORD})
+    private Set<String> elementsToTrim;
+    
     private Iterator<Element> teiElementIterator;
     private Element currentTeiElement;
     private Resource currentResource;
@@ -463,13 +538,11 @@ public class TeiReader
             else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
                 if (constituents.isEmpty()) {
                     ROOT root = new ROOT(getJCas());
-                    root.setBegin(getBuffer().length());
                     root.setConstituentType("ROOT");
                     constituents.push(new ConstituentWrapper(root));
                 }
                 
                 Constituent constituent = new Constituent(getJCas());
-                constituent.setBegin(getBuffer().length());
                 constituent.setConstituentType(aAttributes.getValue(ATTR_TYPE));
                 constituent.setSyntacticFunction(aAttributes.getValue(ATTR_FUNCTION));
                 constituents.push(new ConstituentWrapper(constituent));
@@ -511,24 +584,37 @@ public class TeiReader
             else if (inTextElement && (TAG_SUNIT.equals(aName) ||
                 (utterancesAsSentences && TAG_U.equals(aName)))) {
                 if (readSentence) {
-                    new Sentence(getJCas(), sentenceStart, getBuffer().length()).addToIndexes();
+                    Sentence s = new Sentence(getJCas(), sentenceStart, getBuffer().length());
+                    if (elementsToTrim.contains(aName)) {
+                        trim(s);
+                    }
+                    s.addToIndexes();
                 }
                 sentenceStart = -1;
             }
             else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
                 if (readParagraph) {
-                    new Paragraph(getJCas(), paragraphStart, getBuffer().length()).addToIndexes();
+                    Paragraph para = new Paragraph(getJCas(), paragraphStart, getBuffer().length());
+                    if (elementsToTrim.contains(aName)) {
+                        trim(para);
+                    }
+                    para.addToIndexes();
                 }
                 paragraphStart = -1;
             }
             else if (readNamedEntity && inTextElement && TAG_RS.equals(aName)) {
                 NamedEntity ne = namedEntities.pop();
                 ne.setEnd(getBuffer().length());
+                if (elementsToTrim.contains(aName)) {
+                    trim(ne);
+                }
                 ne.addToIndexes();
             }
             else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
                 ConstituentWrapper wrapper = constituents.pop();
-                wrapper.constituent.setEnd(getBuffer().length());
+                wrapper.constituent.setBegin(wrapper.children.get(0).getBegin());
+                wrapper.constituent
+                        .setEnd(wrapper.children.get(wrapper.children.size() - 1).getEnd());
                 if (!constituents.isEmpty()) {
                     ConstituentWrapper parent = constituents.peek();
                     wrapper.constituent.setParent(parent.constituent);
@@ -541,7 +627,9 @@ public class TeiReader
                 // Close off the ROOT
                 if (constituents.peek().constituent instanceof ROOT) {
                     ConstituentWrapper rootWrapper = constituents.pop();
-                    rootWrapper.constituent.setEnd(getBuffer().length());
+                    rootWrapper.constituent.setBegin(wrapper.children.get(0).getBegin());
+                    rootWrapper.constituent
+                            .setEnd(wrapper.children.get(wrapper.children.size() - 1).getEnd());
                     rootWrapper.constituent.setChildren(FSCollectionFactory.createFSArray(
                             getJCas(), rootWrapper.children));
                     rootWrapper.constituent.addToIndexes();
@@ -552,8 +640,11 @@ public class TeiReader
                             .equals(aName))) {
                 if (isNotBlank(getBuffer().substring(tokenStart, getBuffer().length()))) {
                     Token token = new Token(getJCas(), tokenStart, getBuffer().length());
-                    trim(token);
-
+                    
+                    if (elementsToTrim.contains(aName)) {
+                        trim(token);
+                    }
+                        
                     if (posTag != null && readPOS) {
                         Type posTagType = posMappingProvider.getTagType(posTag);
                         POS pos = (POS) getJCas().getCas().createAnnotation(posTagType,
@@ -608,15 +699,18 @@ public class TeiReader
 
         private void trim(Annotation aAnnotation)
         {
-            StringBuilder buffer = getBuffer();
+            StringBuilder buf = getBuffer();
             int s = aAnnotation.getBegin();
             int e = aAnnotation.getEnd();
-            while (Character.isWhitespace(buffer.charAt(s))) {
+            while (s < e && isWhitespace(buf.charAt(s))) {
                 s++;
             }
-            while ((e > s + 1) && Character.isWhitespace(buffer.charAt(e - 1))) {
+            while ((e > s + 1) && isWhitespace(buf.charAt(e - 1))) {
                 e--;
             }
+            
+            assert s <= e;
+            
             aAnnotation.setBegin(s);
             aAnnotation.setEnd(e);
         }

@@ -24,6 +24,7 @@ artifacts:
   data.zip:
     url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Japanese-traindevA.zip"
     sha1: 8c96a1eda2527a9ba1bf37dd4125cc6af11e7dd4
+    sha512: 135eb63b727e0a8b77da72af32bf5f5ec84a2bda3d7e44866a2e5091d7d23b7e723fd5540d839b3e0a3e60bd16696d1ecb2a66ddcdc020447ec8220420c4971b
     actions:
       - action: explode
         configuration: { strip: 1 }

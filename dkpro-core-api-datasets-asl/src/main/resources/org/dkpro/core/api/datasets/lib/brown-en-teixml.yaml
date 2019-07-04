@@ -38,6 +38,7 @@ artifacts:
   brown.zip:
     url: "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/brown_tei.zip"
     sha1: 1e4eadeb358f6f7e6ac9b3677a82f4353bbe91ed
+    sha512: f3dcc36bcab63d481e4d833c8946f10163f732166114c8fdd63932fff9fba3c236593a082ebcdf96f74aea6d33e424b7be4c645fd0f5ee5090f0335544c02c47
     actions:
       - action: explode
         configuration: { excludes: "Corpus.xml", strip: 1 }
