@@ -106,26 +106,31 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  * <tr>
  * <td><tt>TEI</tt></td>
  * <td>document boundary</td>
- * <td>{@link #getNext} returns one TEI document at a time</td>
+ * <td><code>getNext(...)</code> returns one TEI document at a time</td>
+ * <td></td>
  * </tr>
  * <tr>
  * <td><tt>title</tt></td>
  * <td>document title</td>
  * <td>DocumentMetaData</td>
+ * <td></td>
  * </tr>
  * <tr>
  * <td><tt>s</tt></td>
  * <td>s-unit</td>
  * <td>Sentence</td>
+ * <td></td>
  * </tr>
  * <tr>
  * <td><tt>u</tt></td>
  * <td>utterance</td>
  * <td>Sentence</td>
+ * <td></td>
  * <tr>
  * <td><tt>p</tt></td>
  * <td>paragraph</td>
  * <td>Paragraph</td>
+ * <td></td>
  * </tr>
  * <tr>
  * <td><tt>rs</tt></td>
