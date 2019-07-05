@@ -86,7 +86,7 @@ public class SnowballStemmer
      * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
      * are lower-cased before being passed to the stemmer.
      *
-     * <table border="1" cellspacing="0">
+     * <table border="1">
      * <caption>Examples</caption>
      * <tr><th></th><th>false (default)</th><th>true</th></tr>
      * <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
