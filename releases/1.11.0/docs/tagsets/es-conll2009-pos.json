@@ -1,0 +1,55 @@
+{
+    "name": "Ancora (CoNLL 2009)",
+    "description": "Ancora part-of-speech tags\n\nReferences:\n* http://clic.ub.edu/corpus/webfm_send/18\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "a",
+            "tag_description": "Adjective"
+        },
+        {
+            "tag_name": "c",
+            "tag_description": "Conjuction"
+        },
+        {
+            "tag_name": "d",
+            "tag_description": "Determiner"
+        },
+        {
+            "tag_name": "f",
+            "tag_description": "Punctuation"
+        },
+        {
+            "tag_name": "i",
+            "tag_description": "Interjection"
+        },
+        {
+            "tag_name": "n",
+            "tag_description": "Noun"
+        },
+        {
+            "tag_name": "p",
+            "tag_description": "Pronoun"
+        },
+        {
+            "tag_name": "r",
+            "tag_description": "Adverb"
+        },
+        {
+            "tag_name": "s",
+            "tag_description": "Preposition"
+        },
+        {
+            "tag_name": "v",
+            "tag_description": "Verb"
+        },
+        {
+            "tag_name": "w",
+            "tag_description": "Date"
+        },
+        {
+            "tag_name": "z",
+            "tag_description": "Number"
+        }
+    ]
+}
