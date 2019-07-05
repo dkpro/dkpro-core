@@ -148,8 +148,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  * <td><code>w</code></td>
  * <td>word</td>
  * <td>Token</td>
- * <td>(<code>pos</code>, <code>type</code>) -&gt; POS.PosValue (<code>pos</code> preferred over <code>type</code>)
- * </td>
+ * <td>(<code>pos</code>, <code>type</code>) -&gt; POS.PosValue (<code>pos</code> preferred over 
+ *   <code>type</code>)</td>
  * </tr>
  * <tr>
  * <td><code>mw</code></td>
