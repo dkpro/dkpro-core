@@ -95,7 +95,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the TEI XML.
- * <table>
+ * <table border="1">
  * <caption>Supported TEI XML elements and attributes</caption>
  * <tr>
  * <th>Element</th>
@@ -104,64 +104,64 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  * <th>Attribute mappings</th>
  * </tr>
  * <tr>
- * <td><tt>TEI</tt></td>
+ * <td><code>TEI</code></td>
  * <td>document boundary</td>
  * <td><code>getNext(...)</code> returns one TEI document at a time</td>
  * <td></td>
  * </tr>
  * <tr>
- * <td><tt>title</tt></td>
+ * <td><code>title</code></td>
  * <td>document title</td>
  * <td>DocumentMetaData</td>
  * <td></td>
  * </tr>
  * <tr>
- * <td><tt>s</tt></td>
+ * <td><code>s</code></td>
  * <td>s-unit</td>
  * <td>Sentence</td>
  * <td></td>
  * </tr>
  * <tr>
- * <td><tt>u</tt></td>
+ * <td><code>u</code></td>
  * <td>utterance</td>
  * <td>Sentence</td>
  * <td></td>
  * <tr>
- * <td><tt>p</tt></td>
+ * <td><code>p</code></td>
  * <td>paragraph</td>
  * <td>Paragraph</td>
  * <td></td>
  * </tr>
  * <tr>
- * <td><tt>rs</tt></td>
+ * <td><code>rs</code></td>
  * <td>referencing string</td>
  * <td>NamedEntity</td>
- * <td><tt>type</tt> -&gt; value</td>
+ * <td><code>type</code> -&gt; value</td>
  * </tr>
  * <tr>
- * <td><tt>phr</tt></td>
+ * <td><code>phr</code></td>
  * <td>phrase</td>
  * <td>Constituent</td>
- * <td><tt>type</tt> -&gt; constituentType, <tt>function</tt> -&gt; syntacticFunction</td>
+ * <td><code>type</code> -&gt; constituentType, <code>function</code> -&gt; syntacticFunction</td>
  * </tr>
  * <tr>
- * <td><tt>w</tt></td>
+ * <td><code>w</code></td>
  * <td>word</td>
  * <td>Token</td>
- * <td>(<tt>pos</tt>, <tt>type</tt>) -&gt; POS.PosValue (<tt>pos</tt> preferred over <tt>type</tt>)
+ * <td>(<code>pos</code>, <code>type</code>) -&gt; POS.PosValue (<code>pos</code> preferred over <code>type</code>)
  * </td>
  * </tr>
  * <tr>
- * <td><tt>mw</tt></td>
+ * <td><code>mw</code></td>
  * <td>multi-word</td>
  * <td>Token</td>
- * <td>same as for <tt>w</tt></td>
+ * <td>same as for <code>w</code></td>
  * </tr>
  * <tr>
- * <td><tt>c</tt></td>
+ * <td><code>c</code></td>
  * <td>character</td>
  * <td>Token</td>
- * <td>same as for <tt>w</tt></td>
+ * <td>same as for <code>w</code></td>
  * </tr>
  * </table>
  */
