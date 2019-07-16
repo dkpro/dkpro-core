@@ -31,6 +31,7 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.output.CloseShieldOutputStream;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
@@ -307,6 +308,8 @@ public abstract class JCasFileWriter_ImplBase
                 }
             }
 
+            relativeDocumentPath = StringEscapeUtils.escapeHtml4(relativeDocumentPath);
+            
             return relativeDocumentPath;
         }
     }
