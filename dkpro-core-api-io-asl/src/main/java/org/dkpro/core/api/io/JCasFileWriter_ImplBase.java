@@ -106,12 +106,13 @@ public abstract class JCasFileWriter_ImplBase
     private boolean useDocumentId;
 
     /**
-     * URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+     * URL-encode the file name to avoid illegal characters (e.g. \, :, etc.)
      */
-    public static final String PARAM_ESCAPE_DOCUMENT_ID = "escapeDocumentId";
-    @ConfigurationParameter(name = PARAM_ESCAPE_DOCUMENT_ID, mandatory = true, defaultValue = "true")
-    private boolean escapeDocumentId;
-
+    public static final String PARAM_ESCAPE_FILENAME = "escapeFilename";
+    @ConfigurationParameter(name = PARAM_ESCAPE_FILENAME, mandatory = false, defaultValue = "false")
+    private boolean escapeFilename;
+    
+    
     /**
      * Allow overwriting target files (ignored when writing to ZIP archives).
      */
@@ -260,6 +261,7 @@ public abstract class JCasFileWriter_ImplBase
         DocumentMetaData meta = DocumentMetaData.get(aJCas);
         String baseUri = meta.getDocumentBaseUri();
         String docUri = meta.getDocumentUri();
+        String relativeDocumentPath = null;
 
         if (!useDocumentId && (StringUtils.isNotEmpty(baseUri))) {
             // In some cases, the baseUri may not end with a slash - if so, we add one
@@ -267,7 +269,6 @@ public abstract class JCasFileWriter_ImplBase
                 baseUri += '/';
             }
 
-            String relativeDocumentPath;
             if ((docUri == null) || !docUri.startsWith(baseUri)) {
                 throw new IllegalStateException("Base URI [" + baseUri
                         + "] is not a prefix of document URI [" + docUri + "]");
@@ -281,18 +282,8 @@ public abstract class JCasFileWriter_ImplBase
             while (relativeDocumentPath.startsWith("/")) {
                 relativeDocumentPath = relativeDocumentPath.substring(1);
             }
-
-            try {
-				relativeDocumentPath = URLDecoder.decode(relativeDocumentPath, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-                // UTF-8 must be supported on all Java platforms per specification. This should
-                // not happen.
-                throw new IllegalStateException(e);
-			}
-            return relativeDocumentPath;
         }
         else {
-            String relativeDocumentPath;
             if (meta.getDocumentId() == null) {
                 throw new IllegalStateException(
                         "Neither base URI/document URI nor document ID set");
@@ -303,28 +294,22 @@ public abstract class JCasFileWriter_ImplBase
             if (stripExtension) {
                 relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
             }
-
-            if (escapeDocumentId) {
-                try {
-                    relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
-                }
-                catch (UnsupportedEncodingException e) {
-                    // UTF-8 must be supported on all Java platforms per specification. This should
-                    // not happen.
-                    throw new IllegalStateException(e);
-                }
-            }
-
-            try {
-				relativeDocumentPath = URLDecoder.decode(relativeDocumentPath, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-                // UTF-8 must be supported on all Java platforms per specification. This should
-                // not happen.
-                throw new IllegalStateException(e);
-			}
-            
-            return relativeDocumentPath;
         }
+        
+        try {
+            if (escapeFilename) {
+                relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
+            } else {
+                relativeDocumentPath = URLDecoder.decode(relativeDocumentPath, "UTF-8");
+            }
+        } catch (UnsupportedEncodingException e) {
+            // UTF-8 must be supported on all Java platforms per specification. This should
+            // not happen.
+            throw new IllegalStateException(e);
+        }
+
+        
+        return relativeDocumentPath;
     }
 
     public static class NamedOutputStream
