@@ -25,13 +25,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.output.CloseShieldOutputStream;
-import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
@@ -282,6 +282,13 @@ public abstract class JCasFileWriter_ImplBase
                 relativeDocumentPath = relativeDocumentPath.substring(1);
             }
 
+            try {
+				relativeDocumentPath = URLDecoder.decode(relativeDocumentPath, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+                // UTF-8 must be supported on all Java platforms per specification. This should
+                // not happen.
+                throw new IllegalStateException(e);
+			}
             return relativeDocumentPath;
         }
         else {
@@ -308,7 +315,13 @@ public abstract class JCasFileWriter_ImplBase
                 }
             }
 
-            relativeDocumentPath = StringEscapeUtils.escapeHtml4(relativeDocumentPath);
+            try {
+				relativeDocumentPath = URLDecoder.decode(relativeDocumentPath, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+                // UTF-8 must be supported on all Java platforms per specification. This should
+                // not happen.
+                throw new IllegalStateException(e);
+			}
             
             return relativeDocumentPath;
         }

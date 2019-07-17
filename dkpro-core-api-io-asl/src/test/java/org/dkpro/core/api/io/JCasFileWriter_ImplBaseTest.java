@@ -35,10 +35,14 @@ import java.util.zip.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.admin.CASFactory;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.junit.Assert;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class JCasFileWriter_ImplBaseTest
 {
@@ -96,6 +100,17 @@ public class JCasFileWriter_ImplBaseTest
         assertEquals(expected, FileUtils.readFileToString(target, "UTF-8"));
     }
 
+    @Test
+    public void test__getRelativePath__FileNameContainsURLEscapedSpaces() throws Exception {
+    	JCas cas = JCasFactory.createJCas();
+        DocumentMetaData meta = DocumentMetaData.create(cas);
+        meta.setDocumentBaseUri("file:/");
+        meta.setDocumentUri("file:/hello%20world");   
+        DummyWriter writer = new DummyWriter();
+        String gotPath = writer.getRelativePath(cas);
+        Assert.assertEquals("", "hello world", gotPath);
+    }
+    
     private List<String> listContents(String aFile)
         throws IOException
     {
