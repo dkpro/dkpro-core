@@ -20,6 +20,7 @@ package org.dkpro.core.api.io;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -35,11 +36,9 @@ import java.util.zip.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.admin.CASFactory;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import org.junit.Assert;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -101,14 +100,39 @@ public class JCasFileWriter_ImplBaseTest
     }
 
     @Test
-    public void test__getRelativePath__FileNameContainsURLEscapedSpaces() throws Exception {
-    	JCas cas = JCasFactory.createJCas();
+    public void test__getRelativePath__FileNameContainsURLEscapedSpaces() throws Exception
+    {
+        JCas cas = JCasFactory.createJCas();
+        
         DocumentMetaData meta = DocumentMetaData.create(cas);
         meta.setDocumentBaseUri("file:/");
-        meta.setDocumentUri("file:/hello%20world");   
+        meta.setDocumentUri("file:/hello%20world");
+        meta.setDocumentId("some id");
+        
         DummyWriter writer = new DummyWriter();
-        String gotPath = writer.getRelativePath(cas);
-        Assert.assertEquals("", "hello world", gotPath);
+
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("hello world");
+
+        writer.setUseDocumentId(false);
+        writer.setEscapeFilename(false);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("hello world");
+
+        writer.setUseDocumentId(true);
+        writer.setEscapeFilename(false);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("some id");
+        
+        writer.setUseDocumentId(false);
+        writer.setEscapeFilename(true);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("hello%20world");
+
+        writer.setUseDocumentId(true);
+        writer.setEscapeFilename(true);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("some+id");
     }
     
     private List<String> listContents(String aFile)
