@@ -233,6 +233,10 @@ public class StanfordNamedEntityRecognizerTrainer
     @Override
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException {
+    	if (tempData == null) {
+    		throw new RuntimeException("Trainer did not receive any training data.");
+    	}
+    	
         IOUtils.closeQuietly(out);
 
         // Load user-provided configuration

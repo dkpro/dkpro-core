@@ -25,6 +25,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -41,6 +43,7 @@ import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import org.dkpro.core.io.conll.Conll2002Writer;
 import org.dkpro.core.testing.DkproTestContext;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -129,6 +132,42 @@ public class StanfordNamedEntityRecognizerTrainerTest
         assertEquals(0.621921, results.getPrecision(), 0.01);
         assertEquals(0.408708, results.getRecall(), 0.01);
     }
+
+    @Test
+    public void test__EmptyDataset__ShouldRaiseExceptionWithHelpfulMessage()
+        throws Exception
+    {
+        Path emptyDir = Files.createTempDirectory("empty_dir");
+        File targetFolder = testContext.getTestOutputFolder();
+
+        File model = new File(targetFolder, "ner-model.ser.gz");
+
+        File properties = new File("ner/train-english.props");
+
+        CollectionReaderDescription trainReader = createReaderDescription(Conll2002Reader.class,
+                Conll2002Reader.PARAM_SOURCE_LOCATION, emptyDir.toAbsolutePath().toString(),
+                Conll2002Reader.PARAM_PATTERNS, "*.txt",
+                Conll2002Reader.PARAM_LANGUAGE, "en",
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
+                Conll2002Reader.PARAM_HAS_HEADER, true, 
+                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
+
+        AnalysisEngineDescription trainer = createEngineDescription(
+                StanfordNamedEntityRecognizerTrainer.class,
+                StanfordNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION, model,
+                StanfordNamedEntityRecognizerTrainer.PARAM_PROPERTIES_LOCATION, properties,
+                StanfordNamedEntityRecognizerTrainer.PARAM_LABEL_SET, "noprefix",
+                StanfordNamedEntityRecognizerTrainer.PARAM_RETAIN_CLASS, true);
+
+        try {
+        	SimplePipeline.runPipeline(trainReader, trainer);
+        	Assert.fail("Feeding an empty collection of documents to the trainer should have raised an exception");
+        } catch (RuntimeException e) {
+        	Assert.assertEquals("The raised exception did not have the right message", 
+        			"Trainer did not receive any training data.", e.getMessage());
+        }
+    }    
 
     @Before
     public void setup()
