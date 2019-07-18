@@ -129,7 +129,7 @@ public class StanfordNamedEntityRecognizerTrainer
 
     private File tempData;
     private PrintWriter out;
-
+    
     @Override
     public void initialize(UimaContext aContext)
             throws ResourceInitializationException {
@@ -233,6 +233,10 @@ public class StanfordNamedEntityRecognizerTrainer
     @Override
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException {
+    	if (tempData == null) {
+    		throw new RuntimeException("No training data was received by the trainer");
+    	}
+    	
         IOUtils.closeQuietly(out);
 
         // Load user-provided configuration
