@@ -21,6 +21,7 @@ package org.dkpro.core.stanfordnlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -30,6 +31,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -43,7 +45,6 @@ import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import org.dkpro.core.io.conll.Conll2002Writer;
 import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -160,13 +161,11 @@ public class StanfordNamedEntityRecognizerTrainerTest
                 StanfordNamedEntityRecognizerTrainer.PARAM_LABEL_SET, "noprefix",
                 StanfordNamedEntityRecognizerTrainer.PARAM_RETAIN_CLASS, true);
 
-        try {
-        	SimplePipeline.runPipeline(trainReader, trainer);
-        	Assert.fail("Feeding an empty collection of documents to the trainer should have raised an exception");
-        } catch (RuntimeException e) {
-        	Assert.assertEquals("The raised exception did not have the right message", 
-        			"Trainer did not receive any training data.", e.getMessage());
-        }
+        assertThatExceptionOfType(AnalysisEngineProcessException.class)
+                .isThrownBy(() -> SimplePipeline.runPipeline(trainReader, trainer))
+                .withCauseInstanceOf(IllegalStateException.class)
+                .matches(e -> e.getCause().getMessage().equals(
+                        "Trainer did not receive any training data."));
     }    
 
     @Before
