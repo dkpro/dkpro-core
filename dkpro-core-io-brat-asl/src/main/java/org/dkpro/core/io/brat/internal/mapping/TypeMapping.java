@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.brat.internal.mapping;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,17 +37,24 @@ public class TypeMapping
 
     private final Pattern bratTypePattern;
     private final String uimaType;
+    private final Map<String, String> defaultFeatureValues;
     
     private Matcher matcher;
-    
+
     @JsonCreator
     public TypeMapping(
             @JsonProperty(value = "from", required = true) String aPattern, 
-            @JsonProperty(value = "to", required = true) String aReplacement)
+            @JsonProperty(value = "to", required = true) String aReplacement,
+            @JsonProperty(value = "defaultFeatureValues") Map<String, String> aDefaults)
     {
-        super();
         bratTypePattern = Pattern.compile("^" + aPattern.trim() + "$");
         uimaType = aReplacement.trim();
+        defaultFeatureValues = aDefaults != null ? aDefaults : Collections.emptyMap();
+    }
+
+    public TypeMapping(String aPattern, String aReplacement)
+    {
+        this(aPattern, aReplacement, Collections.emptyMap());
     }
     
     public boolean matches(String aType)
@@ -57,6 +66,11 @@ public class TypeMapping
     public String apply()
     {
         return matcher.replaceFirst(uimaType);
+    }
+    
+    public Map<String, String> getDefaultFeatureValues()
+    {
+        return defaultFeatureValues;
     }
 
     public static TypeMapping parse(String aValue)

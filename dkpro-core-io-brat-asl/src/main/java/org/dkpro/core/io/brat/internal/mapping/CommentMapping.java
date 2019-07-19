@@ -34,17 +34,32 @@ public class CommentMapping
 
     private final String type;
     private final String feature;
+    private final Pattern pattern;
+    private final String replacement;
+    
+    private Matcher matcher;
+    private String value;
     
     @JsonCreator
     public CommentMapping(
             @JsonProperty("type") String aType, 
-            @JsonProperty("feature")String aFeature)
+            @JsonProperty("feature") String aFeature,
+            @JsonProperty("match") String aMatch,
+            @JsonProperty("replace") String aReplace)
     {
-        super();
         type = aType;
         feature = aFeature;
+        pattern = Pattern.compile(aMatch != null ? aMatch : ".*");
+        replacement = aReplace;
     }
-    
+
+    public CommentMapping(
+            @JsonProperty("type") String aType, 
+            @JsonProperty("feature")String aFeature)
+    {
+        this(aType, aFeature, null, null);
+    }
+
     public String getType()
     {
         return type;
@@ -53,6 +68,18 @@ public class CommentMapping
     public String getFeature()
     {
         return feature;
+    }
+    
+    public boolean matches(String aValue)
+    {
+        value = aValue;
+        matcher = pattern.matcher(aValue);
+        return matcher.matches();
+    }
+    
+    public String apply()
+    {
+        return replacement != null ? matcher.replaceFirst(replacement) : value;
     }
 
     public static CommentMapping parse(String aValue)

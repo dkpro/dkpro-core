@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
@@ -36,16 +35,9 @@ public class TypeMappings
     private final Map<String, String> uima2BratMappingCache;
 
     @JsonCreator
-    public TypeMappings(Map<String, String> aMappings)
+    public TypeMappings(List<TypeMapping> aMappings)
     {
-        parsedMappings = new ArrayList<>();
-
-        if (aMappings != null) {
-            for (Entry<String, String> e : aMappings.entrySet()) {
-                parsedMappings.add(new TypeMapping(e.getKey(), e.getValue()));
-            }
-        }
-        
+        parsedMappings = aMappings;
         brat2UimaMappingCache = new HashMap<>();
         uima2BratMappingCache = new HashMap<>();
     }
@@ -74,6 +66,14 @@ public class TypeMappings
             }
         }
         return type;
+    }
+    
+    public TypeMapping getMappingByBratType(String aBratType)
+    {
+        return parsedMappings.stream()
+                .filter(mapping -> mapping.matches(aBratType))
+                .findFirst()
+                .orElse(null);
     }
     
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)

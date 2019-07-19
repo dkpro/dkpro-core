@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.io.brat;
 
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 import java.io.BufferedInputStream;
@@ -59,6 +58,7 @@ import org.dkpro.core.io.brat.internal.mapping.CommentMapping;
 import org.dkpro.core.io.brat.internal.mapping.Mapping;
 import org.dkpro.core.io.brat.internal.mapping.RelationMapping;
 import org.dkpro.core.io.brat.internal.mapping.SpanMapping;
+import org.dkpro.core.io.brat.internal.mapping.TypeMapping;
 import org.dkpro.core.io.brat.internal.mapping.TypeMappings;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
@@ -290,17 +290,21 @@ public class BratReader
             FeatureStructure anno = idMap.get(n.getTarget());
             
             Type type = anno.getType();
-            CommentMapping map = mapping.getCommentMapping(type.getName());
+            Collection<CommentMapping> mappings = mapping.getCommentMapping(type.getName());
 
-            if (map == null) {
-                warnings.add("No notes mapping defined for note type [" + n.getType()
+            if (mappings.isEmpty()) {
+                warnings.add("No comment mappings defined for note type [" + n.getType()
                         + "] on annotation type [" + type.getName() + "]");
                 continue;
             }
             
-            BratAttribute noteAttr = new BratAttribute(-1, map.getFeature(), n.getTarget(),
-                    n.getNote());
-            fillAttributes(anno, asList(noteAttr));
+            List<BratAttribute> attrs = new ArrayList<>();
+            for (CommentMapping m : mappings) {
+                if (m.matches(n.getNote())) {
+                    attrs.add(new BratAttribute(-1, m.getFeature(), n.getTarget(), m.apply()));
+                }
+            }
+            fillAttributes(anno, attrs);
         }
     }
 
@@ -318,9 +322,15 @@ public class BratReader
     private void create(CAS aCAS, Type aType, BratTextAnnotation aAnno)
     {
         SpanMapping param = mapping.getSpanMapping(aType.getName());
+        TypeMapping tmap = mapping.getTextTypeMapppings().getMappingByBratType(aAnno.getType());
+
         for (Offsets offset: aAnno.getOffsets()) {
             AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(),
                     offset.getEnd());
+            
+            if (tmap != null) {
+                fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
+            }
             
             if (param != null) {
                 fillDefaultAttributes(anno, param.getDefaultFeatureValues());
@@ -340,11 +350,17 @@ public class BratReader
     private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
     {
         SpanMapping param = mapping.getSpanMapping(aType.getName());
+        TypeMapping tmap = mapping.getTextTypeMapppings().getMappingByBratType(aAnno.getType());
+        
         for (Offsets offset: aAnno.getTriggerAnnotation().getOffsets()) {
             AnnotationFS anno = aCAS.createAnnotation(aType,
                     offset.getBegin(),
                     offset.getEnd());
 
+            if (tmap != null) {
+                fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
+            }
+            
             if (param != null) {
                 fillDefaultAttributes(anno, param.getDefaultFeatureValues());
             }
@@ -366,6 +382,7 @@ public class BratReader
     private void create(CAS aCAS, Type aType, BratRelationAnnotation aAnno)
     {
         RelationMapping param = mapping.getRelationMapping(aType.getName());
+        TypeMapping tmap = mapping.getRelationTypeMapppings().getMappingByBratType(aAnno.getType());
         
         AnnotationFS arg1 = idMap.get(aAnno.getArg1Target());
         AnnotationFS arg2 = idMap.get(aAnno.getArg2Target());
@@ -385,6 +402,10 @@ public class BratReader
         }
         else if (param.getFlags2().contains(RelationMapping.FLAG_ANCHOR)) {
             anchor = arg2;
+        }
+
+        if (tmap != null) {
+            fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
         }
         
         if (param != null) {

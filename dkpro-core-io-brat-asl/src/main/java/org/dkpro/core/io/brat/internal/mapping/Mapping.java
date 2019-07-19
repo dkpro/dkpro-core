@@ -21,8 +21,12 @@ import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,7 +36,7 @@ public class Mapping
     private final TypeMappings relationTypeMapppings;
     private final Map<String, SpanMapping> textAnnotations;
     private final Map<String, RelationMapping> relations;
-    private final Map<String, CommentMapping> comments;
+    private final MultiValuedMap<String, CommentMapping> comments;
     
     public Mapping(
             @JsonProperty(value = "textTypeMapppings", required = false) 
@@ -51,8 +55,11 @@ public class Mapping
                 .collect(toMap(SpanMapping::getType, identity())) : emptyMap();
         relations = aRelations != null ? aRelations.stream()
                 .collect(toMap(RelationMapping::getType, identity())) : emptyMap();
-        comments = aComments != null ? aComments.stream()
-                .collect(toMap(CommentMapping::getType, identity())) : emptyMap();
+                
+        comments = new ArrayListValuedHashMap<>();
+        if (aComments != null) {
+            aComments.forEach(mapping -> comments.put(mapping.getType(), mapping));
+        }
     }
 
     public TypeMappings getTextTypeMapppings()
@@ -75,7 +82,7 @@ public class Mapping
         return relations.get(aType);
     }
 
-    public CommentMapping getCommentMapping(String aType)
+    public Collection<CommentMapping> getCommentMapping(String aType)
     {
         return comments.get(aType);
     }
