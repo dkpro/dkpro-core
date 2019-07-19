@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.stopwordremover;
+package org.dkpro.core.tokit;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.CasUtil.select;
@@ -52,6 +52,7 @@ import org.apache.uima.util.Logger;
 import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.dkpro.core.api.featurepath.FeaturePathInfo;
 import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.tokit.internal.StopWordSet;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord;

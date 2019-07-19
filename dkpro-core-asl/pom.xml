@@ -515,11 +515,6 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-stopwordremover-asl</artifactId>
-        <version>2.0.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-testing-asl</artifactId>
         <version>2.0.0-SNAPSHOT</version>
       </dependency>
@@ -655,7 +650,6 @@
     <module>../dkpro-core-rftagger-asl</module>
     <module>../dkpro-core-snowball-asl</module>
     <module>../dkpro-core-smile-asl</module>
-    <module>../dkpro-core-stopwordremover-asl</module>
     <module>../dkpro-core-testing-asl</module>
     <module>../dkpro-core-textcat-asl</module>
     <module>../dkpro-core-tokit-asl</module>
