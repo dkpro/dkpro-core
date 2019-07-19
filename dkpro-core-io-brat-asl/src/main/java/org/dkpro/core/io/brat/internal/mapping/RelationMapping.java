@@ -15,12 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.io.brat.internal.model;
+package org.dkpro.core.io.brat.internal.mapping;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RelationParam
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class RelationMapping
 {
     public static final String FLAG_ANCHOR = "A";
     
@@ -43,18 +48,38 @@ public class RelationParam
     private final String arg2;
     private final String flags2;
     private final String subcat;
+    private final Map<String, String> defaultFeatureValues;
     
-    public RelationParam(String aType, String aArg1, String aFlags1, String aArg2, String aFlags2,
-            String aSubCat)
+    @JsonCreator
+    public RelationMapping(
+            @JsonProperty(value = "type", required = true) String aType, 
+            @JsonProperty(value = "arg1", required = true) String aArg1,
+            @JsonProperty(value = "flags1") String aFlags1, 
+            @JsonProperty(value = "arg2", required = true) String aArg2, 
+            @JsonProperty(value = "flags2") String aFlags2,
+            @JsonProperty(value = "subCatFeature") String aSubCat,
+            @JsonProperty(value = "defaultFeatureValues") Map<String, String> aDefaults)
     {
-        super();
         type = aType;
         arg1 = aArg1;
         flags1 = aFlags1;
         arg2 = aArg2;
         flags2 = aFlags2;
         subcat = aSubCat;
+        defaultFeatureValues = aDefaults != null ? aDefaults : Collections.emptyMap();
     }
+    
+    public RelationMapping(
+            @JsonProperty(value = "type", required = true) String aType, 
+            @JsonProperty(value = "arg1", required = true) String aArg1,
+            @JsonProperty(value = "flags1") String aFlags1, 
+            @JsonProperty(value = "arg2", required = true) String aArg2, 
+            @JsonProperty(value = "flags2") String aFlags2,
+            @JsonProperty(value = "subCatFeature") String aSubCat)
+    {
+        this(aType, aArg1, aFlags1, aArg2, aFlags2, aSubCat, Collections.emptyMap());
+    }
+
     
     public String getType()
     {
@@ -85,8 +110,13 @@ public class RelationParam
     {
         return subcat;
     }
+    
+    public Map<String, String> getDefaultFeatureValues()
+    {
+        return defaultFeatureValues;
+    }
 
-    public static RelationParam parse(String aValue)
+    public static RelationMapping parse(String aValue)
     {
         Matcher m = PATTERN.matcher(aValue);
         
@@ -94,7 +124,7 @@ public class RelationParam
             throw new IllegalArgumentException("Illegal relation parameter format [" + aValue + "]");
         }
 
-        return new RelationParam(m.group(TYPE), m.group(ARG1), m.group(FLAGS1), m.group(ARG2),
+        return new RelationMapping(m.group(TYPE), m.group(ARG1), m.group(FLAGS1), m.group(ARG2),
                 m.group(FLAGS2), m.group(SUBCAT));
     }
 }

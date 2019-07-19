@@ -87,7 +87,7 @@ public class BratNoteAnnotation
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal text annotation format ["+aLine+"]");
+            throw new IllegalArgumentException("Illegal text annotation format [" + aLine + "]");
         }
 
         return new BratNoteAnnotation(m.group(ID), m.group(TYPE), m.group(TARGET), m.group(NOTE));

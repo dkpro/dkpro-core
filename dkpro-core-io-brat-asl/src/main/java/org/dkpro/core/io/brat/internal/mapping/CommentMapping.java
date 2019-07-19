@@ -15,15 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.io.brat.internal.model;
+package org.dkpro.core.io.brat.internal.mapping;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NoteMappingParam
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class CommentMapping
 {
-    public static final String FLAG_ANCHOR = "A";
-    
     private static final Pattern PATTERN = Pattern.compile(
             "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-.]+)" +
             "[:](?<FEAT>[a-zA-Z][a-zA-Z0-9]+)");
@@ -34,7 +35,10 @@ public class NoteMappingParam
     private final String type;
     private final String feature;
     
-    public NoteMappingParam(String aType, String aFeature)
+    @JsonCreator
+    public CommentMapping(
+            @JsonProperty("type") String aType, 
+            @JsonProperty("feature")String aFeature)
     {
         super();
         type = aType;
@@ -51,7 +55,7 @@ public class NoteMappingParam
         return feature;
     }
 
-    public static NoteMappingParam parse(String aValue)
+    public static CommentMapping parse(String aValue)
     {
         Matcher m = PATTERN.matcher(aValue);
         
@@ -59,7 +63,6 @@ public class NoteMappingParam
             throw new IllegalArgumentException("Illegal note mapping parameter format [" + aValue + "]");
         }
 
-        return new NoteMappingParam(m.group(TYPE), m.group(FEAT));
+        return new CommentMapping(m.group(TYPE), m.group(FEAT));
     }
-
 }

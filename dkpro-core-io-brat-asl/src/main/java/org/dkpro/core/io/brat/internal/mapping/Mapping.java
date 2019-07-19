@@ -1,0 +1,82 @@
+/*
+ * Copyright 2019
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.dkpro.core.io.brat.internal.mapping;
+
+import static java.util.Collections.emptyMap;
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
+
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Mapping
+{
+    private final TypeMappings textTypeMapppings;
+    private final TypeMappings relationTypeMapppings;
+    private final Map<String, SpanMapping> textAnnotations;
+    private final Map<String, RelationMapping> relations;
+    private final Map<String, CommentMapping> comments;
+    
+    public Mapping(
+            @JsonProperty(value = "textTypeMapppings", required = false) 
+            TypeMappings aTextTypeMapppings, 
+            @JsonProperty(value = "relationTypeMapppings", required = false) 
+            TypeMappings aRelationTypeMapppings, 
+            @JsonProperty(value = "spans", required = false) 
+            List<SpanMapping> aTextAnnotations,
+            @JsonProperty(value = "relations", required = false) List<RelationMapping> aRelations, 
+            @JsonProperty(value = "comments", required = false) List<CommentMapping> aComments)
+    {
+        textTypeMapppings = aTextTypeMapppings;
+        relationTypeMapppings = aRelationTypeMapppings;
+        
+        textAnnotations = aTextAnnotations != null ? aTextAnnotations.stream()
+                .collect(toMap(SpanMapping::getType, identity())) : emptyMap();
+        relations = aRelations != null ? aRelations.stream()
+                .collect(toMap(RelationMapping::getType, identity())) : emptyMap();
+        comments = aComments != null ? aComments.stream()
+                .collect(toMap(CommentMapping::getType, identity())) : emptyMap();
+    }
+
+    public TypeMappings getTextTypeMapppings()
+    {
+        return textTypeMapppings;
+    }
+
+    public TypeMappings getRelationTypeMapppings()
+    {
+        return relationTypeMapppings;
+    }
+
+    public SpanMapping getSpanMapping(String aType)
+    {
+        return textAnnotations.get(aType);
+    }
+
+    public RelationMapping getRelationMapping(String aType)
+    {
+        return relations.get(aType);
+    }
+
+    public CommentMapping getCommentMapping(String aType)
+    {
+        return comments.get(aType);
+    }
+}

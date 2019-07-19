@@ -38,10 +38,10 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.io.brat.internal.mapping.RelationMapping;
+import org.dkpro.core.io.brat.internal.mapping.TypeMappings;
 import org.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import org.dkpro.core.io.brat.internal.model.BratConfiguration;
-import org.dkpro.core.io.brat.internal.model.RelationParam;
-import org.dkpro.core.io.brat.internal.model.TypeMapping;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -203,9 +203,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
         converter.setExcludeTypes(excludeTypes);
         converter.setSpanTypes(spanTypes);
         converter.setRelationTypes(
-                relationTypes.stream().map(RelationParam::parse).collect(Collectors.toList()));
+                relationTypes.stream().map(RelationMapping::parse).collect(Collectors.toList()));
         if (enableTypeMappings) {
-            converter.setTypeMapping(new TypeMapping(typeMappings));
+            converter.setTypeMapping(new TypeMappings(typeMappings));
         }
     }
     

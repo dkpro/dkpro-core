@@ -153,7 +153,7 @@ public class BratReaderWriterTest
     }
 
     @Test
-    public void test1()
+    public void test1legacy()
         throws Exception
     {
         testOneWay(
@@ -175,6 +175,63 @@ public class BratReaderWriterTest
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref.ann", 
                 "brat/document1.ann");
+    }
+    
+    @Test
+    public void test1mapping()
+        throws Exception
+    {
+        String mapping = String.join("\n",
+                "{",
+                "  'textTypeMapppings': {",
+                "    'Country': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
+                "    'Organization': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
+                "    'MERGE-ORG': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+                "  },",
+                "  'relationTypeMapppings': {",
+                "    'Origin': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
+                "  },",
+                "  'spans': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
+                "      'defaultFeatureValues': {",
+                "        'value': 'LOC'",
+                "      }",
+                "    }",
+                "  ],",
+                "  'relations': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'arg1': 'source',",
+                "      'arg2': 'target',",
+                "      'flags2': 'A',",
+                "      'subCatFeature': 'value'",
+                "    }",
+                "  ],",
+                "  'comments': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
+                "      'feature': 'value'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'feature': 'comment'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
+                "      'feature': 'comment'",
+                "    }",
+                "  ]",
+                "}");
+        
+        testOneWay(
+                createReaderDescription(BratReader.class,
+                        BratReader.PARAM_MAPPING, mapping), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                "brat/document1-ref-mapping.ann", 
+                "brat/document1.ann");    
     }
 
     @Test
