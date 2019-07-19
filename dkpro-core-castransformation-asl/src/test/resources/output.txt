@@ -31,31 +31,37 @@ Token
    sofa: _InitialView
    begin: 27
    end: 33
+   order: 0
 [humba]
 Token
    sofa: _InitialView
    begin: 34
    end: 39
+   order: 0
 [doopi]
 Token
    sofa: _InitialView
    begin: 40
    end: 45
+   order: 0
 [jamba]
 Token
    sofa: _InitialView
    begin: 46
    end: 51
+   order: 0
 [Too]
 Token
    sofa: _InitialView
    begin: 52
    end: 55
+   order: 0
 [.]
 Token
    sofa: _InitialView
    begin: 55
    end: 56
+   order: 0
 [Mekoman jalla hembembel!]
 Sentence
    sofa: _InitialView
@@ -66,21 +72,25 @@ Token
    sofa: _InitialView
    begin: 57
    end: 64
+   order: 0
 [jalla]
 Token
    sofa: _InitialView
    begin: 65
    end: 70
+   order: 0
 [hembembel]
 Token
    sofa: _InitialView
    begin: 71
    end: 80
+   order: 0
 [!]
 Token
    sofa: _InitialView
    begin: 80
    end: 81
+   order: 0
 [Labumbu jakka
 lembi nabi.]
 Sentence
@@ -92,26 +102,31 @@ Token
    sofa: _InitialView
    begin: 82
    end: 89
+   order: 0
 [jakka]
 Token
    sofa: _InitialView
    begin: 90
    end: 95
+   order: 0
 [lembi]
 Token
    sofa: _InitialView
    begin: 96
    end: 101
+   order: 0
 [nabi]
 Token
    sofa: _InitialView
    begin: 102
    end: 106
+   order: 0
 [.]
 Token
    sofa: _InitialView
    begin: 106
    end: 107
+   order: 0
 [Humba jumbaba tumba Jalla Jamba.]
 Sentence
    sofa: _InitialView
@@ -122,31 +137,37 @@ Token
    sofa: _InitialView
    begin: 108
    end: 113
+   order: 0
 [jumbaba]
 Token
    sofa: _InitialView
    begin: 114
    end: 121
+   order: 0
 [tumba]
 Token
    sofa: _InitialView
    begin: 122
    end: 127
+   order: 0
 [Jalla]
 Token
    sofa: _InitialView
    begin: 128
    end: 133
+   order: 0
 [Jamba]
 Token
    sofa: _InitialView
    begin: 134
    end: 139
+   order: 0
 [.]
 Token
    sofa: _InitialView
    begin: 139
    end: 140
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 -------- View TargetView begin ----------------------------------
@@ -174,31 +195,37 @@ Token
    sofa: TargetView
    begin: 1
    end: 7
+   order: 0
 [humba]
 Token
    sofa: TargetView
    begin: 8
    end: 13
+   order: 0
 [doopi]
 Token
    sofa: TargetView
    begin: 14
    end: 19
+   order: 0
 [jamba]
 Token
    sofa: TargetView
    begin: 20
    end: 25
+   order: 0
 [Too]
 Token
    sofa: TargetView
    begin: 26
    end: 29
+   order: 0
 [.]
 Token
    sofa: TargetView
    begin: 29
    end: 30
+   order: 0
 [Mekoman jalla hembembel!]
 Sentence
    sofa: TargetView
@@ -209,21 +236,25 @@ Token
    sofa: TargetView
    begin: 31
    end: 38
+   order: 0
 [jalla]
 Token
    sofa: TargetView
    begin: 39
    end: 44
+   order: 0
 [hembembel]
 Token
    sofa: TargetView
    begin: 45
    end: 54
+   order: 0
 [!]
 Token
    sofa: TargetView
    begin: 54
    end: 55
+   order: 0
 [Labumbu jakka
 lembi nabi.]
 Sentence
@@ -235,26 +266,31 @@ Token
    sofa: TargetView
    begin: 56
    end: 63
+   order: 0
 [jakka]
 Token
    sofa: TargetView
    begin: 64
    end: 69
+   order: 0
 [lembi]
 Token
    sofa: TargetView
    begin: 70
    end: 75
+   order: 0
 [nabi]
 Token
    sofa: TargetView
    begin: 76
    end: 80
+   order: 0
 [.]
 Token
    sofa: TargetView
    begin: 80
    end: 81
+   order: 0
 [Humba jumbaba tumba Jalla Jamba.]
 Sentence
    sofa: TargetView
@@ -265,31 +301,37 @@ Token
    sofa: TargetView
    begin: 82
    end: 87
+   order: 0
 [jumbaba]
 Token
    sofa: TargetView
    begin: 88
    end: 95
+   order: 0
 [tumba]
 Token
    sofa: TargetView
    begin: 96
    end: 101
+   order: 0
 [Jalla]
 Token
    sofa: TargetView
    begin: 102
    end: 107
+   order: 0
 [Jamba]
 Token
    sofa: TargetView
    begin: 108
    end: 113
+   order: 0
 [.]
 Token
    sofa: TargetView
    begin: 113
    end: 114
+   order: 0
 -------- View TargetView end ----------------------------------
 
 ======== CAS 0 end ==================================

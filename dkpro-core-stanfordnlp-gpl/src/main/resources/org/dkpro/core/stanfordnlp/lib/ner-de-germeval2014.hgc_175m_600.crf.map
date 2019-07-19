@@ -1,0 +1,5 @@
+PERSON=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person
+LOCATION=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
+ORGANIZATION=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization
+#MISC
+*=de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity

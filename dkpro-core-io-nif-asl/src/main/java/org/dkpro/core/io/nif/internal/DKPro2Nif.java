@@ -22,11 +22,11 @@ import static org.apache.jena.datatypes.xsd.XSDDatatype.XSDstring;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.riot.system.IRIResolver;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -188,13 +188,12 @@ public class DKPro2Nif
         // not have the concept of a NE category.
         for (NamedEntity uimaNamedEntity : select(aJCas, NamedEntity.class)) {
             String neClass = uimaNamedEntity.getValue();
-            String neIdentifier = uimaNamedEntity.getValue();
+            String neIdentifier = uimaNamedEntity.getIdentifier();
             
-            boolean neClassIsUri = StringUtils.startsWith(neClass, "http://");
-            boolean neIdentifierIsUri = StringUtils.startsWith(neIdentifier, "http://");
+            // checkIRI returns true if there are violations, so we need to negate it
+            boolean neClassIsUri = neClass != null && !IRIResolver.checkIRI(neClass);
+            boolean neIdentifierIsUri = neIdentifier != null && !IRIResolver.checkIRI(neIdentifier);
             
-            // The crudest form of checking for a URI, but since "http://" appears to be the default
-            // prefix in the semantic web, let's just stick with it for the moment.
             if (!neClassIsUri && !neIdentifierIsUri) {
                 continue;
             }
@@ -214,7 +213,7 @@ public class DKPro2Nif
             }
             
             if (neIdentifierIsUri) {
-                nifNamedEntity.addProperty(pTaClassRef, m.createResource(neIdentifier));
+                nifNamedEntity.addProperty(pTaIdentRef, m.createResource(neIdentifier));
             }
         }
     }

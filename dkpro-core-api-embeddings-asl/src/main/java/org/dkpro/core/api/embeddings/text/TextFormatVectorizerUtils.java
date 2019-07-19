@@ -30,10 +30,9 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils;
+import org.dkpro.core.api.resources.CompressionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * Helper Methods for reading word embeddings from text format file and converting into binary

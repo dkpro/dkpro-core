@@ -1,0 +1,44 @@
+groupId: org.dkpro.core.datasets.wasr
+datasetId: wasr-l-en
+version: 1.00
+language: en
+mediaType: text/x.org.dkpro.conll-2009
+encoding: UTF-8
+
+name: English Word Sense and Semantic Role Datasets (WaSR)
+url: https://www.informatik.tu-darmstadt.de/ukp/research_6/data/semantic_role_resources/knowledge_based_semantic_role_labeling/index.en.jsp
+attribution: |
+  Silvana Hartmann, Judith Eckle-Kohler, and Iryna Gurevych. Generating Training Data for Semantic
+  Role Labeling based on Label Transfer from Linked Lexical Resources. In: Transactions of the
+  Association for Computational Linguistics, vol. 4, no. 1, p. (to appear), 2016.
+  (link:https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2016/717-cameraready.pdf[PDF])
+description: |
+  German Frame and Role Annotations.
+   
+  (This description has been sourced from the README file included with the corpus).
+  
+licenses:
+  - name: CC-BY-NC-ND 3.0
+    url: https://creativecommons.org/licenses/by-nc-nd/3.0/
+
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    verificationMode: TEXT
+  data.tar.bz2:
+    url: "https://fileserver.ukp.informatik.tu-darmstadt.de/UKP_Webpage/DATA/WaSR-de_v1.tar.bz2"
+    sha1: b706711ae6fffc94409f80b635595bd45d8c2ece
+    sha512: ff2bc3becad49146873dc54644f299d1362f106258e0ed939e1c14058b02429372aa39d4027bf040845af6db20073c80a0813452cf103ffd0adf3d55eaea1704
+    actions:
+    - action: explode
+      configuration: { strip: 1 }
+    - action: explode
+      configuration: { file: "data/WaSR-de_all.tar.bz2" } 
+
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - "WaSR-de_all/WaSR-de_all.tsv"

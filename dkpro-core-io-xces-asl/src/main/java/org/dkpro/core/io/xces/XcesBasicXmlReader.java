@@ -35,23 +35,29 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.io.xces.models.XcesBodyBasic;
 import org.dkpro.core.io.xces.models.XcesParaBasic;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
+/**
+ * Reader for the basic XCES XML format.
+ */
+@ResourceMetaData(name = "XCES Basic XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
 @MimeTypeCapability({MimeTypes.APPLICATION_X_XCES_BASIC})
 public class XcesBasicXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
-
     @Override
     public void getNext(JCas aJCas)
         throws IOException, CollectionException

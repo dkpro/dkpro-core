@@ -1,0 +1,36 @@
+groupId: org.dkpro.core.datasets.coptictb
+datasetId: coptictb
+version: 1.0
+# There is no ISO 639-1 language code for Coptic. Have to use ISO 639-3
+language: cop
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: Coptic Treebank
+url: http://copticscriptorium.org
+attribution: Amir Zeldes
+description: |
+  The Coptic Treebank from the Coptic SCRIPTORIUM corpora (http://copticscriptorium.org/).
+
+licenses:
+  - name: CC-BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+
+artifacts:
+  LICENSE.txt:
+    url: "https://github.com/CopticScriptorium/corpora/raw/3506b54ce769639c382145161da4f99fd3d6156b/coptic-treebank/LICENSE.txt"
+    sha1: 3015e20629818d25c34527d59808e716fd0d8ced
+    sha512: 6660c7fa3b570110e5ae641b169ecea50582e7ebc4214d111cdd46b783937e3d1165b92a38ef6faca2172813781b27f372117665af9097fe9c658a66ccbe87c8
+    verificationMode: TEXT
+  coptic.treebank.conll10:
+    url: "https://github.com/CopticScriptorium/corpora/raw/3506b54ce769639c382145161da4f99fd3d6156b/coptic-treebank/coptic.treebank.conll10"
+    sha1: 8c363df27408cb14cb42f3869916c1575fe1625a
+    sha512: da1c89705b7ceb1922fd3c91720f57e4b9326401e60ae6bbae3a17fd6ebf884ede61cf92fdd4d150cb6c9a36fe414fad39a49e196b9880c354ee900a817988c7
+
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - coptic.treebank.conll10
+
+

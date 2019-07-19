@@ -1,0 +1,44 @@
+groupId: org.dkpro.core.datasets.talkbanken05
+datasetId: talkbanken05-dps
+version: 1.1
+language: sv
+mediaType: application/x.org.dkpro.tiger+xml
+encoding: ISO-8859-1
+
+name: Talbanken05 DPS
+url: http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html
+attribution: |
+  Joakim Nivre, Jens Nilsson and Johan Hall (2006) Talbanken05: A Swedish Treebank with Phrase
+  Structure and Dependency Annotation. In Proceedings of the fifth international conference on
+  Language Resources and Evaluation (LREC2006), May 24-26, 2006, Genoa, Italy.
+  (link:http://stp.lingfil.uu.se/%7Enivre/docs/talbanken05.pdf[pdf])
+
+description: |
+  Talbanken05 is a modernized version of Talbanken76, a Swedish treebank of roughly 300,000 words,
+  constructed at Lund University in the 1970s. The treebank comes with no guarantee but is freely
+  available for research and educational purposes as long as proper credit is given for the work
+  done to produce the material (both in Lund and in Växjö).
+  
+  DPS: Deepened phrase structure annotation (TIGER-XML encoding in ISO-8859-1)
+   
+  (This description has been sourced from the corpus website).
+  
+licenses:
+  - name: Talbanken05 License
+    url: http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html
+
+artifacts:
+  data.tar.gz:
+    url: https://cl.lingfil.uu.se/~nivre/research/Talbanken05_1.1.tar.gz
+    sha1: bc836ab364ba37522e2989481104bad2eb96a92e
+    sha512: 4a93609c6c674edd01f1254d4879f6c908865b48f640c1b813ac537a8a4e160f11fc75857f18d72d88de9b70d3cf8dd831acc97489b0f7c0c1d8c9058209b25c
+    shared: true
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: [ "README", "DPS/*.tiger.xml" ] }
+
+roles:
+  licenses:
+    - README
+  data:
+    - "data/DPS/*.tiger.xml"

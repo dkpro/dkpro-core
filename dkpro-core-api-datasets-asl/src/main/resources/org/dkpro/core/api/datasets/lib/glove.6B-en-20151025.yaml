@@ -1,0 +1,38 @@
+groupId: org.dkpro.core.datasets.gum
+datasetId: glove.6B
+version: 20151025
+language: en
+# mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: GloVe pre-trained vectors - Wikipedia 2014 + Gigaword 5
+url: https://nlp.stanford.edu/projects/glove/
+attribution: |
+  Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for 
+  Word Representation.
+description: |
+  GloVe is an unsupervised learning algorithm for obtaining vector representations for words. 
+  Training is performed on aggregated global word-word co-occurrence statistics from a corpus, and
+  the resulting representations showcase interesting linear substructures of the word vector space.
+  
+  (This description has been sourced from the dataset website).
+  
+licenses:
+  - name: Open Data Commons Public Domain Dedication and License (PDDL)
+    url: http://www.opendatacommons.org/licenses/pddl/1.0/
+
+artifacts:
+  data.zip:
+    url: "http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip"
+    sha1: b64e54f1877d2f735bdd000c1d7d771e25c7dfdc
+    sha512: 8a600c0df42436554d034d23d6d82f51b7c2e4ab8a3e3554b403bac951c9c600a2ef5612d89b2ed59ce8aecaed3c4c1d53a4e9e2a696999b95e64af267a8752e
+    actions:
+      - action: explode
+
+roles:
+  data:
+    - data/glove.6B.50d.txt
+    - data/glove.6B.100d.txt
+    - data/glove.6B.200d.txt
+    - data/glove.6B.300d.txt
+ 

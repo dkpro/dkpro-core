@@ -1,0 +1,41 @@
+groupId: org.dkpro.core.datasets.sequoia
+datasetId: sequoia-surf
+version: 7.0
+language: fr
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: Deep Sequoia (Surface)
+url: https://deep-sequoia.inria.fr
+attribution: |
+  Marie Candito, Guy Perrier, Bruno Guillaume, Corentin Ribeyre, Karën Fort, Djamé Seddah and Éric
+  de la Clergerie. (2014) Deep Syntax Annotation of the Sequoia French Treebank. Proc. of LREC 2014,
+  Reykjavic, Iceland.
+description: |
+  Deep-sequoia is a corpus of French sentences annotated with both surface and deep syntactic 
+  dependency structures.
+
+  (This description has been sourced from the dataset website).
+
+licenses:
+  - name: LGPL-LR
+    url: http://deep-sequoia.inria.fr/lgpl-lr/
+
+artifacts:
+  LICENSE.txt:
+    text: |
+      The corpus is freely available under the free licence LGPL-LR 
+      (Lesser General Public License For Linguistic Resources)
+       cf. http://deep-sequoia.inria.fr/lgpl-lr/
+  sequoia.tgz:
+    url: "http://talc2.loria.fr/deep-sequoia/sequoia-7.0.tgz"
+    sha1: 9f53475f809ef1032a92adedf262226da1615051
+    sha512: d6a90a7404caaf4c25ca48098b76fa2abcdbe88c45d1954548d76362b16d988cbbc4025e7cd7810fc7fec2141be8dda11ebc29eca15708d0e1e3e149ccc4d951
+    actions:
+      - action: explode
+
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - sequoia/sequoia-7.0/sequoia.surf.conll

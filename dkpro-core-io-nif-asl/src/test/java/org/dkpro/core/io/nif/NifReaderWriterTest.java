@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.nif;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -32,9 +32,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.dkpro.core.testing.TestOptions;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.TestOptions;
 
 public class NifReaderWriterTest
 {
@@ -46,6 +45,7 @@ public class NifReaderWriterTest
     {
         convert("src/test/resources/nif/brown/a01.ttl", "src/test/resources/nif/brown/a01-cooked.ttl");
         convert("src/test/resources/nif/kore50/kore50.ttl", "src/test/resources/nif/kore50/kore50-cooked.ttl");
+        convert("src/test/resources/nif/freme/freme.ttl", "src/test/resources/nif/freme/freme-cooked.ttl");
     }
     
     @Test
@@ -73,6 +73,17 @@ public class NifReaderWriterTest
                 NifReader.class, // the reader
                 NifWriter.class, // the writer
                 "nif/kore50/ref.ttl", "nif/kore50/kore50-cooked.ttl",
+                new TestOptions().resultAssertor(this::assertModelEquals));
+    }
+    
+    @Test
+    public void testFreme()
+        throws Exception
+    {
+        testOneWay(
+                NifReader.class, // the reader
+                NifWriter.class, // the writer
+                "nif/freme/ref.ttl", "nif/freme/freme-cooked.ttl",
                 new TestOptions().resultAssertor(this::assertModelEquals));
     }
     

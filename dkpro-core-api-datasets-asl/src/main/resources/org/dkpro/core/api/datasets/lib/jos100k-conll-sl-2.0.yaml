@@ -1,0 +1,46 @@
+groupId: org.dkpro.core.datasets.jos
+datasetId: jos100k-conll
+version: 2.0
+language: sl
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: JOS - jos100k
+url: http://nl.ijs.si/jos/jos100k-en.html
+attribution: |
+  Tomaž Erjavec, Darja Fišer, Simon Krek, Nina Ledinek: The JOS Linguistically Tagged Corpus of
+  Slovene. Proceedings of the Seventh International Conference on Language Resources and Evaluation
+  (LREC'10), Malta, 2010.
+  (link:http://www.lrec-conf.org/proceedings/lrec2010/summaries/139.html[PDF])
+description: |
+  The jos100k corpus contains 100,000 words of sampled paragraphs from the FidaPLUS corpus. It is 
+  meant to serve as a reference annotated corpus of Slovene: its manually-validated annotations
+  cover three level of linguistic description.
+   
+  (This description has been sourced from the corpus website).
+
+licenses:
+  - name: CC-BY-NC 3.0
+    url: http://creativecommons.org/licenses/by-nc/3.0/
+    
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-nc/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    verificationMode: TEXT
+  data.zip:
+    url: http://nl.ijs.si/jos/download/jos100kv2_0.zip
+    sha1: 9f330ffd102cc5d5734fdaecbbf67751c84a1339
+    sha512: 3358d37ef31ee7ac6b5dbd846de6a2c56396cb4856efa00d7731011a603894720a3d922a108d14c62dd504b5b4909d5ce0e0d7699f350c7007a3e08409ee4ce2
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: [ "00README.txt", "jos100kv2_0-sl.conll" ] }
+      
+roles:
+  licenses:
+    - LICENSE.txt
+    - data/00README.txt
+  data:
+    - data/jos100kv2_0-sl.conll
+    

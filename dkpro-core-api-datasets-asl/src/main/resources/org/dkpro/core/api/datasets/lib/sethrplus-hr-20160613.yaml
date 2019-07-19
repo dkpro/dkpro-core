@@ -1,0 +1,54 @@
+groupId: org.dkpro.core.datasets.sethr
+datasetId: sethrplus
+version: 20160613
+language: hr
+mediaType: text/x.org.dkpro.conll-u
+encoding: UTF-8
+
+name: SETimes.HR+ Croatian dependency treebank
+url: https://github.com/ffnlp/sethr
+attribution: |
+  Agić and Ljubešić (2014)
+  (link:http://www.lrec-conf.org/proceedings/lrec2014/pdf/690_Paper.pdf[PDF])
+  (link:http://aclweb.org/anthology/L/L14/L14-1542.bib[bib])
+description: |
+  The treebank is a result of an effort in providing free-culture language resources for Croatian by
+  the NLP group at FF Zagreb.
+   
+  (This description has been sourced from the corpus website).
+  
+licenses:
+  - name: CC-BY 4.0
+    url: http://creativecommons.org/licenses/by/4.0/
+    comment: SETimes.HR dataset (set.hr.conll)
+  - name: CC-BY-NC-SA 4.0
+    url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    comment: web.hr.conll and news.hr.conll datasets
+
+artifacts:
+  LICENSE-CC-BY.txt:
+    url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
+    sha1: 9c5bee7a22ab39ad6c19ab29ea9e94ac5874f9c6
+    sha512: 222cf997169925ee3a09a26798d04332673693c578c24cb2d0cc550785a8b87849b161dccd9c48d2e4f3fa15290b6a10ac5262945f9c8cc6bdbd362d37416300
+    verificationMode: TEXT
+  LICENSE-CC-BY-NC-SA.txt:
+    url: "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt"
+    sha1: 54cc324681563e5ede8088f020f0b21e35d37fb9
+    sha512: 84b09f6057afa41c8e495697b67da30d6be0d00f04c4d7c244012f8003088d29f43f474905be1c9262d14f6e199130bbad64371818e32f60aa0311faa271e1ca
+    verificationMode: TEXT
+  data.zip:
+    url: https://github.com/ffnlp/sethr/archive/c50697a81ee588b70328952dd56175da4c298c7c.zip
+    sha1: a52d13cfa91589c0d93fe0a90333a4f0e997b7cf
+    sha512: 394e06eee8a804fa7bfed2d0ccca152cbe1bf13478459c19212c3fd0bf33ed68ee292bf2528154581110c4fe49a2824661298e4caa19fe8e6b3ba6128427e40f
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: [ "LICENSE.md", "README.md", "*.hr*.conll" ] }
+
+roles:
+  licenses:
+    - LICENSE-CC-BY.txt
+    - LICENSE-CC-BY-NC-SA.txt
+  training:
+    - "data/*.hr.conll"
+  testing:
+    - "data/*.hr.test.conll"

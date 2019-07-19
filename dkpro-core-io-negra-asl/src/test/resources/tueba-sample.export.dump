@@ -229,6 +229,7 @@ Token
       end: 5
       PosValue: "PPOSAT"
       coarseValue: "PRON"
+   order: 0
 [Position]
 POS_NOUN
    sofa: _InitialView
@@ -288,6 +289,7 @@ Token
       end: 14
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [bei der Prüfgesellschaft]
 Constituent
    sofa: _InitialView
@@ -389,6 +391,7 @@ Token
       end: 18
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [der Prüfgesellschaft]
 Constituent
    sofa: _InitialView
@@ -504,6 +507,7 @@ Token
       end: 22
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [Prüfgesellschaft]
 POS_NOUN
    sofa: _InitialView
@@ -570,6 +574,7 @@ Token
       end: 39
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [mußte]
 POS_VERB
    sofa: _InitialView
@@ -622,6 +627,7 @@ Token
       end: 45
       PosValue: "VMFIN"
       coarseValue: "VERB"
+   order: 0
 [mußte]
 Constituent
    sofa: _InitialView
@@ -765,6 +771,7 @@ Token
       end: 48
       PosValue: "PPER"
       coarseValue: "PRON"
+   order: 0
 [er]
 Constituent
    sofa: _InitialView
@@ -852,6 +859,7 @@ Token
       end: 55
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [damals]
 Constituent
    sofa: _InitialView
@@ -939,6 +947,7 @@ Token
       end: 67
       PosValue: "VVINF"
       coarseValue: "VERB"
+   order: 0
 [niederlegen]
 Constituent
    sofa: _InitialView
@@ -1026,6 +1035,7 @@ Token
       end: 69
       PosValue: "$,"
       coarseValue: "PUNCT"
+   order: 0
 [den AWO-Posten nicht]
 Constituent
    sofa: _InitialView
@@ -1162,6 +1172,7 @@ Token
       end: 73
       PosValue: "ART"
       coarseValue: "DET"
+   order: 0
 [AWO-Posten]
 POS_NOUN
    sofa: _InitialView
@@ -1214,6 +1225,7 @@ Token
       end: 84
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [nicht]
 POS_X
    sofa: _InitialView
@@ -1266,6 +1278,7 @@ Token
       end: 90
       PosValue: "PTKNEG"
       coarseValue: "X"
+   order: 0
 [nicht]
 Constituent
    sofa: _InitialView
@@ -1353,6 +1366,7 @@ Token
       end: 92
       PosValue: "$."
       coarseValue: "PUNCT"
+   order: 0
 [K. W.]
 Sentence
    sofa: _InitialView
@@ -1444,6 +1458,7 @@ Token
       end: 95
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [W.]
 POS_PROPN
    sofa: _InitialView
@@ -1482,6 +1497,7 @@ Token
       end: 98
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
@@ -1599,6 +1615,7 @@ Token
       end: 3
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [SPD]
 Constituent
    sofa: _InitialView
@@ -1651,6 +1668,7 @@ Token
       end: 5
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [CDU]
 POS_PROPN
    sofa: _InitialView
@@ -1696,6 +1714,7 @@ Token
       end: 9
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [CDU]
 Constituent
    sofa: _InitialView
@@ -1748,6 +1767,7 @@ Token
       end: 11
       PosValue: "$("
       coarseValue: "PUNCT"
+   order: 0
 [AfB]
 POS_PROPN
    sofa: _InitialView
@@ -1793,6 +1813,7 @@ Token
       end: 15
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [AfB]
 Constituent
    sofa: _InitialView
@@ -1880,6 +1901,7 @@ Token
       end: 19
       PosValue: "APPR"
       coarseValue: "ADP"
+   order: 0
 [Daewoo-Millionen]
 POS_NOUN
    sofa: _InitialView
@@ -1925,6 +1947,7 @@ Token
       end: 36
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [Daewoo-Millionen]
 Constituent
    sofa: _InitialView
@@ -2023,6 +2046,7 @@ Token
       end: 41
       PosValue: "KON"
       coarseValue: "CONJ"
+   order: 0
 [Aber]
 Constituent
    sofa: _InitialView
@@ -2145,6 +2169,7 @@ Token
       end: 54
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [Bremerhavens]
 Constituent
    sofa: _InitialView
@@ -2225,6 +2250,7 @@ Token
       end: 58
       PosValue: "NE"
       coarseValue: "PROPN"
+   order: 0
 [fordert]
 POS_VERB
    sofa: _InitialView
@@ -2270,6 +2296,7 @@ Token
       end: 66
       PosValue: "VVFIN"
       coarseValue: "VERB"
+   order: 0
 [fordert]
 Constituent
    sofa: _InitialView
@@ -2385,6 +2412,7 @@ Token
       end: 72
       PosValue: "ADV"
       coarseValue: "ADV"
+   order: 0
 [jetzt]
 Constituent
    sofa: _InitialView
@@ -2458,6 +2486,7 @@ Token
       end: 94
       PosValue: "NN"
       coarseValue: "NOUN"
+   order: 0
 [Untersuchungsausschuß]
 Constituent
    sofa: _InitialView

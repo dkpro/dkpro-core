@@ -1,0 +1,68 @@
+groupId: org.dkpro.core.datasets.wasr
+datasetId: wasr-xl-en
+version: 1.00
+language: en
+mediaType: text/x.org.dkpro.conll-2009
+encoding: UTF-8
+
+name: English Word Sense and Semantic Role Datasets (WaSR)
+url: https://www.informatik.tu-darmstadt.de/ukp/research_6/data/semantic_role_resources/knowledge_based_semantic_role_labeling/index.en.jsp
+attribution: |
+  Silvana Hartmann, Judith Eckle-Kohler, and Iryna Gurevych. Generating Training Data for Semantic
+  Role Labeling based on Label Transfer from Linked Lexical Resources. In: Transactions of the
+  Association for Computational Linguistics, vol. 4, no. 1, p. (to appear), 2016.
+  (link:https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2016/717-cameraready.pdf[PDF])
+description: |
+  English Frame and Role Annotations.
+   
+  (This description has been sourced from the README file included with the corpus).
+
+licenses:
+  - name: CC-BY-NC-ND 3.0
+    url: https://creativecommons.org/licenses/by-nc-nd/3.0/
+
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    verificationMode: TEXT
+  part1.tar.bz2:
+    url: "https://fileserver.ukp.informatik.tu-darmstadt.de/UKP_Webpage/DATA/WaSR-en_v1_part1.tar.bz2"
+    sha1: ef7ccf5cb23da63003bdb19d99b15b0ea2821e55
+    sha512: bc6ba46503596aae4005b32934b23be9bf12399222cb13569f77af3ce262bd84f9a3e86c8b74897a17493969361464a6ff9cd22620f37322241e24741415b480
+    shared: true
+    actions:
+    - action: explode
+      configuration: { strip: 1, includes: [ "README", "WaSR_XL_part1_3.7z" ] }
+    - action: explode
+      configuration: { file: "part1/WaSR_XL_part1_3.7z" } 
+  part2.tar.bz2:
+    url: "https://fileserver.ukp.informatik.tu-darmstadt.de/UKP_Webpage/DATA/WaSR-en_v1_part2.tar.bz2"
+    sha1: 0a9c98cbf1fe02841edf52e963444a7e38986577
+    sha512: 4df84de5414322dad68ef23bca5e75336ff09c22c059a2f82320e8c5aca51fd93bb9b5f12d78f1127f0a518650d03898e504bd05209c1cf7da8b8403f1aa13d0
+    shared: true
+    actions:
+    - action: explode
+      configuration: { strip: 1 }
+    - action: explode
+      configuration: { file: "part2/WaSR_XL_part2_3.7z" } 
+  part3.tar.bz2:
+    url: "https://fileserver.ukp.informatik.tu-darmstadt.de/UKP_Webpage/DATA/WaSR-en_v1_part3.tar.bz2"
+    sha1: 9c0cc79ecab9140f82683d39ed6acb51b148f9f7
+    sha512: f5c229a13e02fd602f0fadf68c1a6d70ccfa9f29db1ee79a485ab0707a6ee70ed4a5e5b78bbe30e9890565e94a83fecb1b716ed9e5d8635fe0b6428a13c1c33f
+    shared: true
+    actions:
+    - action: explode
+      configuration: { strip: 1 }
+    - action: explode
+      configuration: { file: "part3/WaSR_XL_part3_3.7z" } 
+    
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - "WaSR_XL_part1_3/WaSR_XL_part1_3.tsv"    
+    - "WaSR_XL_part2_3/WaSR_XL_part2_3.tsv"    
+    - "WaSR_XL_part3_3/WaSR_XL_part3_3.tsv"    
+    

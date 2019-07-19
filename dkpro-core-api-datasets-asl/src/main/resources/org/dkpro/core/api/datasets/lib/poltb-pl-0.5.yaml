@@ -1,0 +1,35 @@
+groupId: org.dkpro.core.datasets.poltb
+datasetId: poltb
+version: 0.5
+language: pl
+mediaType: application/x.org.dkpro.tiger+xml
+encoding: UTF-8
+
+name: Polish Constituency Treebank
+url: http://zil.ipipan.waw.pl/Składnica
+description: |
+  The Polish constituency treebank (Składnica frazowa), version 0.5. Trees in the Tiger XML format
+  containing only parse trees selected by dendrologists (one interpretation per sentence).
+   
+  (This description has been sourced from the corpus website).
+  
+licenses:
+  - name: GPL 3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+
+artifacts:
+  LICENSE.txt:
+    url: https://www.gnu.org/licenses/gpl-3.0.txt
+    sha1: 8b0cb355ed76e07cc7c876fec58341c2940cfee7
+    sha512: b311f68b1c2dbf8f079f381d9854c185e1f6b64cb375ca96a5f67e25cb375d9f106875523e6ef7adbd8f1156ec572eb9f4ae8f04e6da6e6de35dd7938db354df
+    verificationMode: TEXT
+  poltb-0.5-tiger.xml.gz:
+    url: "http://zil.ipipan.waw.pl/Składnica?action=AttachFile&do=get&target=Składnica-frazowa-0.5-TigerXML.xml.gz"
+    sha1: c8977d436d218b726d657224305bced178071dcf
+    sha512: 3da399b090dde90297a66cda7c5a6334bfee8bf16c9b6fb6d2af135f049ddbc57ca19cae4e382d26deba308c82f4bb970dc4a59e202a798665a6cbb49a23ee5d
+
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - poltb-0.5-tiger.xml.gz

@@ -1,0 +1,127 @@
+# MedPost
+
+__META_SOURCE_URL__=http://www.ncbi.nlm.nih.gov/staff/lsmith/papers/smith04a.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# CC coordinating conjunction 
+CC=POS_CONJ
+# CS subordinating conjunction 
+CS=POS_SCONJ
+# CSN comparative conjunction (than) 
+CSN=POS_CONJ
+# CST complementizer (that) 
+CST=POS_CONJ
+# DB predeterminer 
+DB=POS_DET
+# DD determiner 
+DD=POS_DET
+# EX existential there 
+EX=POS_DET
+# GE genitive marker ’s 
+GE=POS_X
+# II preposition 
+II=POS_ADP
+# JJ adjective 
+JJ=POS_ADJ
+# JJR comparative adjective 
+JJR=POS_ADJ
+# JJT superlative adjective 
+JJT=POS_ADJ
+# MC number or numeric 
+MC=POS_NUM
+# NN noun 
+NN=POS_NOUN
+# NNP proper noun 
+NNP=POS_PROPN
+# NNS plural noun 
+NNS=POS_NOUN
+# PN pronoun 
+PN=POS_PRON
+# PND determiner as pronoun 
+PND=POS_PRON
+# PNG genitive pronoun 
+PNG=POS_PRON
+# PNR relative pronoun 
+PNR=POS_PRON
+# RR adverb 
+RR=POS_ADV
+# RRR comparative adverb 
+RRR=POS_ADV
+# RRT superlative adverb 
+RRT=POS_ADV
+# SYM symbol 
+SYM=POS_SYM
+# TO infinitive marker to 
+TO=POS_ADP
+# VM modal 
+VM=POS_VERB
+# VBB base be, am, are 
+VBB=POS_VERB
+# VBD past was, were 
+VBD=POS_VERB
+# VBG participle being 
+VBG=POS_VERB
+# VBI infinitive be 
+VBI=POS_VERB
+# VBN participle been 
+VBN=POS_VERB
+# VBZ 3rd pers. sing. is 
+VBZ=POS_VERB
+# VDB base do 
+VDB=POS_VERB
+# VDD past did 
+VDD=POS_VERB
+# VDG participle doing 
+VDG=POS_VERB
+# VDI infinite do 
+VDI=POS_VERB
+# VDN participle done 
+VDN=POS_VERB
+# VDZ participle done 
+VDZ=POS_VERB
+# VHB participle done 
+VHB=POS_VERB
+# VHD past had 
+VHD=POS_VERB
+# VHG participle having 
+VHG=POS_VERB
+# VHI infinitive have 
+VHI=POS_VERB
+# VHN participle had 
+VHN=POS_VERB
+# VHZ 3rd pers. sing. has 
+VHZ=POS_VERB
+# VVB base form lexical verb  
+VVB=POS_VERB
+# VVD past tense 
+VVD=POS_VERB
+# VVG present part. 
+VVG=POS_VERB
+# VVI infinitive lexical verb  
+VVI=POS_VERB
+# VVN past part. 
+VVN=POS_VERB
+# VVZ 3rd pers. sing. 
+VVZ=POS_VERB
+# VVNJ prenominal past part.  
+VVNJ=POS_VERB
+# VVGJ prenominal present part.  
+VVGJ=POS_VERB
+# VVGN nominal gerund 
+VVGN=POS_VERB
+# ( left parenthesis 
+(=POS_X
+# ) right parenthesis 
+)=POS_X
+# , comma 
+,=POS_PUNCT
+# . end-of-sentence period 
+.=POS_PUNCT
+# : dashes, colons 
+\:=POS_PUNCT
+# “ left quote 
+``=POS_PUNCT
+# ” right quote 
+''=POS_PUNCT
+
+*=POS

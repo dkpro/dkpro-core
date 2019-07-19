@@ -1,0 +1,42 @@
+groupId: org.dkpro.core.datasets.aqmar
+datasetId: aqmar
+version: 1.0
+language: ar
+mediaType: text/x.org.dkpro.conll-2000
+encoding: UTF-8
+
+name: AQMAR Arabic Wikipedia Named Entity Corpus
+url: http://www.cs.cmu.edu/~ark/ArabicNER/
+description: |
+  73,853 tokens in 28 Arabic Wikipedia articles hand-annotated for named entities.
+  
+  (This description has been partially copied from the corpus website).
+
+attribution: | 
+  By Behrang Mohit, Nathan Schneider, Rishav Bhowmick, Kemal Oflazer, and Noah Smith as part of the
+  AQMAR project.
+
+licenses:
+  - name: CC-BY-SA 3.0
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+
+artifacts:
+  LICENSE.txt:
+    url: http://www.cs.cmu.edu/~ark/ArabicNER/corpus/LICENSE
+    sha1: 54977f4065ec070057e99b4b446273e5c8f071d2
+    sha512: 10ebe8ff7e3e41c65ff1ce412c6af0dc5bde5eedd1847440e82d50629f102ed7f8d1af24e551ea5c7b2bb846f186edeeda5d0bc853774e41cdb70b78a5158180
+    verificationMode: TEXT
+  data.zip:
+    url: "http://www.cs.cmu.edu/~ark/ArabicNER/AQMAR_Arabic_NER_corpus-1.0.zip"
+    sha1: 4fa2c37d7673bb456c6e382566a091545531d85f
+    sha512: 3936cbc9a0e8f07090cab1cac27b348352bafccf427a47d5257b6975e0231b27c7e62c8d86d22a0c533310bdcbebd7cbc1ae91c727265727bc1ca0dd540a6b4c
+    actions:
+      - action: explode
+        configuration: { includes: "*.txt" }
+
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - "data/*.txt"
+    

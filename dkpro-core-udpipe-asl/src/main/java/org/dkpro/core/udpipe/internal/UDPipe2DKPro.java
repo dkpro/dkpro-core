@@ -24,13 +24,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.lexmorph.pos.POSUtils;
+import org.dkpro.core.api.resources.MappingProvider;
 
 import cz.cuni.mff.ufal.udpipe.Sentence;
 import cz.cuni.mff.ufal.udpipe.Word;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -40,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 public class UDPipe2DKPro
 {
     public static void convertPosLemmaMorph(Sentence sentence, Collection<Token> tokens, JCas aJCas,
-            MappingProvider mappingProvider, boolean internTags)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         
@@ -61,12 +61,12 @@ public class UDPipe2DKPro
             Type posTag = mappingProvider.getTagType(xtag);
             POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
             // To save memory, we typically intern() tag strings
-            posAnno.setPosValue(internTags ? xtag.intern() : xtag);
+            posAnno.setPosValue(xtag != null ? xtag.intern() : null);
             if (utag == null) {
                 POSUtils.assignCoarseValue(posAnno);
             }
             else {
-                posAnno.setCoarseValue(internTags ? utag.intern() : utag);
+                posAnno.setCoarseValue(utag != null ? utag.intern() : null);
             }
             posAnno.addToIndexes();
             
@@ -93,7 +93,7 @@ public class UDPipe2DKPro
     }
     
     public static void convertParse(Sentence sentence, List<Token> tokens, JCas aJCas,
-            MappingProvider mappingProvider, boolean internTags)
+            MappingProvider mappingProvider)
     {
         for (int i = 1; i < sentence.getWords().size(); i++) {
             Word w = sentence.getWords().get(i);

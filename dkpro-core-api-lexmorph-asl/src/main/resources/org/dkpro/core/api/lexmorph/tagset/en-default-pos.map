@@ -1,0 +1,2 @@
+__META_REDIRECT__=classpath:/org/dkpro/core/api/lexmorph/tagset/en-ptb-pos.map
+__META_OVERRIDE__.pos.tagset=ptb

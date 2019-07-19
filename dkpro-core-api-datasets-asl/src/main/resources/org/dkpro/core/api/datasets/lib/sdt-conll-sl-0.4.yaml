@@ -1,0 +1,46 @@
+groupId: org.dkpro.core.datasets.sdt
+datasetId: sdt-conll
+version: 0.4
+language: sl
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: Slovene Dependency Treebank 0.4
+url: http://nl.ijs.si/sdt/
+attribution: |
+  Sašo Džeroski, Tomaž Erjavec, Nina Ledinek, Petr Pajas, Zdenek Žabokrtský, Andreja Žele: 
+  Towards a Slovene Dependency Treebank. In Proceedings of Fifth International Conference on
+  Language Resources and Evaluation, LREC'06, 24-26 May 2006. Genoa.
+  (link:http://nl.ijs.si/sdt/bib/SDT-LREC06.pdf[PDF])
+description: |
+  This is the preliminary release of the Slovene Dependency Treebank,
+  SDT V0.4 which contains the Prague Dependency Treebank-like annotation
+  of the first part of Slovene translation of Orwell's "1984", taken
+  from the MULTEXT-East parallel corpus, V3.0, c.f.
+  http://ufal.mff.cuni.cz/pdt/
+  http://nl.ijs.si/ME/V3/
+  http://nl.ijs.si/ME/V3/doc/index.html#mtev3-doc-div2-id2305296
+   
+  (This description has been sourced from the corpus website).
+
+licenses:
+  - name: SDT License
+    url: http://nl.ijs.si/sdt/data/SDT-2006-05-17/00README.txt
+
+artifacts:
+  README.txt:
+    url: http://nl.ijs.si/sdt/data/SDT-2006-05-17/00README.txt
+    sha1: 9d047377eb96aa896461544cd1117b11b812809f
+    sha512: 2c11bf1b3c5960394dff57330b31020a51dae18bb0d91a7eac65ecfb4f6bb5eccb241b34036089bc58954b2f3752c9f0eab8672e8109b059c77a1c376679956b
+    verificationMode: TEXT
+  sdt-conll.tbl:
+    url: http://nl.ijs.si/sdt/data/SDT-2006-05-17/CONLL/sdt-conll.tbl
+    sha1: 16cfa8a20ebf8ed0e4f13c0119c7aa76a2498b1f
+    sha512: 83359227235370ab16fe830d437bf4ca710d2b9a1e2885a8d0d44ec935aab2c187956a4ad0c5323eb7989c06c5f7326c843b1694a6de148de5c25cc8b0bd3958
+      
+roles:
+  licenses:
+    - README.txt
+  data:
+    - sdt-conll.tbl
+    

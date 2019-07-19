@@ -1,0 +1,41 @@
+groupId: org.dkpro.core.datasets.finntb
+datasetId: finntb
+version: 3.1
+language: nfi
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: FinnTreeBank
+url: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/
+description: |
+  The FinnTreeBank project is creating a treebank and a parsebank for Finnish. This work is licensed
+  under a Creative Commons Attribution 3.0.
+
+  The first and second version of the treebank is annotated by hand and based on 17.000 model
+  senctences in the Large Grammar of Finnish VISK - Iso Suomen Kielioppi. Brief samples of text
+  from other sources, e.g. news items and literature, are also available in the second version. A
+  parsebank for Finnish based on the Europarl and the JRC-Aquis will be available in June 2012.
+
+  (This description has been sourced from the dataset website).
+
+licenses:
+  - name: CC-BY 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    verificationMode: TEXT
+  ftb3.1.conllx.gz:
+    url: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/ftb3.1.conllx.gz
+    sha1: 7c58064bf9995980cea08e84035c0414adc54f06
+    sha512: 62a4661d032e155b6f203493498cf761b952bb902de4907c61b5d0d704c74b9a31ee3db553402ccb45f225209e15d475dcecaf8613579fd940d2f89762548c89
+
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - ftb3.1.conllx.gz
+    

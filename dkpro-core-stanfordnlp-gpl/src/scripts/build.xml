@@ -25,27 +25,22 @@
   
   <!-- 
     - Upstream versions - meta data versions are maintained per model below 
-    -->
-  <!-- http://nlp.stanford.edu/software/tagger.shtml -->
-  <property name="tagger.version.real" value="3.8.0"/>
-  <property name="tagger.date" value="2017-06-09"/>
-  
+    -->  
   <!-- http://nlp.stanford.edu/software/lex-parser.shtml -->
-  <property name="parser.version.real" value="3.8.0"/>
-  <property name="parser.date" value="2017-06-09"/>
-  <property name="core.srparser.date" value="2014-10-23"/>
+  <property name="parser.version.real" value="3.9.2"/>
+  <property name="parser.date" value="20181017"/>
   
   <!-- http://nlp.stanford.edu/software/corenlp.shtml -->
-  <property name="core.version.real" value="3.8.0"/>
-  <property name="core.version" value="20170609"/>
-  <property name="core.date" value="2017-06-09"/>
+  <property name="core.version.real" value="3.9.2"/>
+  <property name="core.version" value="20181005"/>
+  <property name="core.date" value="2018-10-05"/>
 
-  <property name="core.arabic.date" value="2017-06-09"/>
-  <property name="core.chinese.date" value="2017-06-09"/>
-  <property name="core.english.date" value="2017-06-09"/>
-  <property name="core.french.date" value="2017-06-09"/>
-  <property name="core.german.date" value="2017-06-09"/>
-  <property name="core.spanish.date" value="2017-06-09"/>
+  <property name="core.arabic.date" value="2018-10-05"/>
+  <property name="core.chinese.date" value="2018-10-05"/>
+  <property name="core.english.date" value="2018-10-05"/>
+  <property name="core.french.date" value="2018-10-05"/>
+  <property name="core.german.date" value="2018-10-05"/>
+  <property name="core.spanish.date" value="2018-10-05"/>
   
   <!-- 
     - Output package configuration
@@ -69,22 +64,9 @@
   <target name="newmodels">
     <property name="install-artifact-mode" value="remote"/>
     
-    <!--
-    <antcall target="tagger-de-ud"/>
-
-    <antcall target="ner-de-hgc_175m_600.crf"/>
-
-    <antcall target="ner-en-all.3class.distsim.crf"/>
-    <antcall target="ner-en-all.3class.caseless.distsim.crf"/>
-    <antcall target="ner-en-nowiki.3class.caseless.distsim.crf"/>
-    <antcall target="tagger-es-default"/>
-    <antcall target="tagger-es-distsim"/>
-    <antcall target="ner-es-ancora.distsim.s512.crf"/>
-    <antcall target="parser-es-pcfg"/>
-    <antcall target="parser-es-sr"/>
-    <antcall target="parser-es-sr-beam"/>
-    -->
-    
+    <antcall target="tagger-en-bidirectional-distsim"/>
+    <antcall target="tagger-en-left3words-distsim"/>
+    <antcall target="tagger-en-caseless-left3words-distsim"/>
     <antcall target="coref-en-default"/>
   </target>
   
@@ -94,27 +76,34 @@
       - We cannot use the one from the stanford-parser:models artifact, because the packages
       - collide with the corenlp:models.
       -->
-    <antcall target="tagger-ar-accurate"/>
+    <antcall target="tagger-ar-default"/>
     <antcall target="parser-ar-factored"/>
     <antcall target="parser-ar-sr"/>
   </target>
   
-  <target name="tagger-ar-accurate" depends="download-tagger">  
+  <target name="tagger-ar-default" depends="download-ar">
+      <mkdir dir="target/download/tmp"/>
+      <unzip src="target/download/ar/ar-models.zip" dest="target/download/tmp">
+        <patternset>
+          <include name="edu/stanford/nlp/models/pos-tagger/arabic/arabic.tagger*"/>      
+        </patternset>
+      </unzip>
     <install-stub-and-upstream-file 
-        file="target/download/tagger/arabic.tagger"
-        md5="f6c1a9a591e5a8210549feefb1cc8e1e"
+        file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/arabic/arabic.tagger"
+        md5="bc8520298da1ca08ee307029ba15133e"
         groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20131112"
+        upstreamVersion="20180103"
         metaDataVersion="1"
         tool="tagger"
         language="ar"
-        variant="accurate"
+        variant="default"
         extension="tagger">    
       <metadata>
         <entry key="pos.tagset" value="atb"/>
       </metadata>
     </install-stub-and-upstream-file>
+    <delete dir="target/download/tmp"/>
   </target>
   
   <target name="parser-ar-factored" depends="download-ar">  
@@ -143,13 +132,19 @@
     <delete dir="target/download/tmp"/>
   </target>
 
-  <target name="parser-ar-sr" depends="download-parser">  
+  <target name="parser-ar-sr" depends="download-ar">  
+    <mkdir dir="target/download/tmp"/>
+    <unzip src="target/download/ar/ar-models.zip" dest="target/download/tmp">
+      <patternset>
+        <include name="edu/stanford/nlp/models/srparser/arabicSR.ser.gz"/>      
+      </patternset>
+    </unzip>
     <install-stub-and-upstream-file 
-        file="target/download/parser/arabicSR.ser.gz" 
-        md5="7bf3eeb2ddd5dda934a88157f94b1c0a"
+        file="target/download/tmp/edu/stanford/nlp/models/srparser/arabicSR.ser.gz" 
+        md5="9801cb03f75d80fb1c89f96db4170a56"
         groupId="de.tudarmstadt.ukp.dkpro.core" 
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20141031"
+        upstreamVersion="20180227"
         metaDataVersion="1"
         tool="parser" 
         language="ar" 
@@ -160,6 +155,7 @@
           <entry key="constituent.tagset" value="atb"/>
       </metadata>
     </install-stub-and-upstream-file>
+    <delete dir="target/download/tmp"/>
   </target>
   
   <!--
@@ -199,44 +195,17 @@
       - to repackage them. If upstream at some point provides smaller JARs (best per-model)
       - then we should reconsider referring to them directly instead of re-packaging.
       -->
-    <!-- NOT IN 3.7.0 antcall target="tagger-de-dewac"/ -->
     <antcall target="tagger-de-ud"/>
     <antcall target="tagger-de-hgc"/>
     <antcall target="tagger-de-fast"/>
     <antcall target="tagger-de-fast-caseless"/>
     <antcall target="ner-de-nemgp"/>
-    <antcall target="ner-de-hgc_175m_600.crf"/>
-    <!-- NOT IN 3.7.0 antcall target="ner-de-dewac_175m_600.crf"/ -->
+    <antcall target="ner-de-germeval2014.hgc_175m_600.crf"/>
     <antcall target="parser-de-pcfg"/>
     <antcall target="parser-de-factored"/>
     <antcall target="parser-de-sr"/>
   </target>
   
-  <target name="tagger-de-dewac" depends="download-de">
-    <mkdir dir="target/download/tmp"/>
-    <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
-      <patternset>
-        <include name="edu/stanford/nlp/models/pos-tagger/german/german-dewac.tagger"/>      
-      </patternset>
-    </unzip>
-    <install-stub-and-upstream-file 
-        file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/german/german-dewac.tagger" 
-        md5="a209ddb12142338762a7cb848733a916"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
-        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20140827"
-        metaDataVersion="1"
-        tool="tagger" 
-        language="de" 
-        variant="dewac" 
-        extension="tagger">    
-      <metadata>
-        <entry key="pos.tagset" value="stts"/>
-      </metadata>
-    </install-stub-and-upstream-file>
-    <delete dir="target/download/tmp"/>
-  </target>
-    
   <target name="tagger-de-ud" depends="download-de">
     <mkdir dir="target/download/tmp"/>
     <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
@@ -343,7 +312,7 @@
         - 2014-10-24 | now        | 0feec395d8db89909360a4a3e172b96a
         -->
       <get 
-          src="http://www.thomas-zastrow.de/nlp/nemgp_stanford_01.gz" 
+          src="https://www.thomas-zastrow.de/nlp/nemgp_stanford_01.gz" 
           dest="target/download/nemgp_stanford_01.ser.gz" 
           skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -371,46 +340,25 @@
       </install-stub-and-upstream-file>
   </target>
         
-  <target name="ner-de-hgc_175m_600.crf" depends="download-de">
-        <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
-            <patternset>
-                <include name="edu/stanford/nlp/models/ner/german.conll.hgc_175m_600.*"/>      
-            </patternset>
-        </unzip>
+  <target name="ner-de-germeval2014.hgc_175m_600.crf" depends="download-de">
+    <mkdir dir="target/download/tmp"/>
+    <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
+      <patternset>
+        <include name="edu/stanford/nlp/models/ner/german.conll.germeval2014.hgc_175m_600.crf.*"/>      
+      </patternset>
+    </unzip>
     <install-stub-and-upstream-file 
-      file="target/download/tmp/edu/stanford/nlp/models/ner/german.conll.hgc_175m_600.crf.ser.gz" 
-      md5="596e40c6b5a38a322ae9d66a73396c00"
+      file="target/download/tmp/edu/stanford/nlp/models/ner/german.conll.germeval2014.hgc_175m_600.crf.ser.gz" 
+      md5="6071e39c77d6956498ae64557c24e82a"
       groupId="de.tudarmstadt.ukp.dkpro.core" 
       artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-        upstreamVersion="20161213"
-        metaDataVersion="1"
+      upstreamVersion="20180227"
+      metaDataVersion="1"
       tool="ner" 
       language="de" 
-      variant="hgc_175m_600.crf" 
+      variant="germeval2014.hgc_175m_600.crf" 
       extension="ser.gz"/>    
-        <delete dir="target/download/tmp"/>
-  </target>
-    
-  <target name="ner-de-dewac_175m_600.crf" depends="download-de">
-        <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
-            <patternset>
-                <include name="edu/stanford/nlp/models/ner/german.dewac_175m_600.*"/>      
-            </patternset>
-        </unzip>
-    <install-stub-and-upstream-file 
-            file="target/download/tmp/edu/stanford/nlp/models/ner/german.dewac_175m_600.crf.ser.gz" 
-      md5="7cfbf0f0464bee2105e9db193fe69097"
-      groupId="de.tudarmstadt.ukp.dkpro.core" 
-      artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-        upstreamVersion="20150130"
-        metaDataVersion="1"
-        tool="ner" 
-      language="de" 
-      variant="dewac_175m_600.crf" 
-      extension="ser.gz"/>  
-        <delete dir="target/download/tmp"/>
+    <delete dir="target/download/tmp"/>
   </target>
     
   <target name="parser-de-pcfg" depends="download-de">
@@ -505,16 +453,16 @@
     <antcall target="tagger-en-twitter"/>
     <antcall target="tagger-en-twitter-fast"/>
     <antcall target="ner-en-muc.7class.distsim.crf"/>
-        <antcall target="ner-en-muc.7class.nodistsim.crf"/>
+    <antcall target="ner-en-muc.7class.nodistsim.crf"/>
     <antcall target="ner-en-muc.7class.caseless.distsim.crf"/>
     <antcall target="ner-en-conll.4class.distsim.crf"/>
-        <antcall target="ner-en-conll.4class.nodistsim.crf"/>
+    <antcall target="ner-en-conll.4class.nodistsim.crf"/>
     <antcall target="ner-en-conll.4class.caseless.distsim.crf"/>
     <antcall target="ner-en-all.3class.distsim.crf"/>
-        <antcall target="ner-en-all.3class.nodistsim.crf"/>
+    <antcall target="ner-en-all.3class.nodistsim.crf"/>
     <antcall target="ner-en-all.3class.caseless.distsim.crf"/>
     <antcall target="ner-en-nowiki.3class.caseless.distsim.crf"/>
-        <antcall target="ner-en-nowiki.3class.nodistsim.crf"/>
+    <antcall target="ner-en-nowiki.3class.nodistsim.crf"/>
     <antcall target="ner-en-freme-wikiner"/>
     <antcall target="parser-en-pcfg"/>
     <antcall target="parser-en-pcfg.caseless"/>
@@ -538,10 +486,10 @@
 
     <install-stub-and-upstream-file 
         file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/english-bidirectional/english-bidirectional-distsim.tagger" 
-        md5="a56c39cc598cea170fc6902652552e25"
+        md5="fa2cbb839d97329a78ea47b3895339cc"
         groupId="de.tudarmstadt.ukp.dkpro.core" 
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20140616" 
+        upstreamVersion="20181002" 
         metaDataVersion="1"
         tool="tagger" 
         language="en" 
@@ -565,10 +513,10 @@
             
       <install-stub-and-upstream-file 
         file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/english-left3words/english-left3words-distsim.tagger" 
-        md5="38a80a1c6b0fb99bb233b470989135e0"
+        md5="5309d92af51bcbdf71d2c160c644a79c"
         groupId="de.tudarmstadt.ukp.dkpro.core" 
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20140616" 
+        upstreamVersion="20181002" 
         metaDataVersion="1"
         tool="tagger" 
         language="en" 
@@ -592,10 +540,10 @@
             
     <install-stub-and-upstream-file
       file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/english-caseless-left3words-distsim.tagger"
-      md5="26444b971e910cff226be355f39b687f"
+      md5="7b2bdb109c60237948ecfa7fca507dfe"
       groupId="de.tudarmstadt.ukp.dkpro.core"
       artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-      upstreamVersion="20140827"
+      upstreamVersion="20181002"
       metaDataVersion="0"
       tool="tagger"
       language="en"
@@ -1377,21 +1325,21 @@
     
   <target name="coref-en-default" depends="download-core">
     <install-stub-and-upstream-folder 
-      folder="target/download/core/coref-en"
-      groupId="de.tudarmstadt.ukp.dkpro.core" 
-      artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+        folder="target/download/core/coref-en"
+        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
         upstreamVersion="${core.version}"
         metaDataVersion="1"
-      tool="coref"
-      language="en"
-      variant="default"/>
+        tool="coref"
+        language="en"
+        variant="default"/>
   </target>
   
   <target name="es">
     <antcall target="tagger-es-default"/>
     <antcall target="tagger-es-distsim"/>
     <antcall target="ner-es-ancora.distsim.s512.crf"/>
-        <antcall target="ner-es-freme-wikiner"/>
+    <antcall target="ner-es-freme-wikiner"/>
     <antcall target="parser-es-pcfg"/>
     <antcall target="parser-es-sr"/>
     <antcall target="parser-es-sr-beam"/>
@@ -1918,7 +1866,6 @@
 
   <target name="zh">
     <antcall target="tagger-zh-distsim"/>
-    <antcall target="tagger-zh-nodistsim"/>
     <antcall target="parser-zh-factored"/>
     <antcall target="parser-zh-pcfg"/>
     <antcall target="parser-zh-xinhua-factored"/>
@@ -1950,29 +1897,6 @@
     </install-stub-and-upstream-file>
         
         <delete dir="target/download/tmp"/>
-  </target>
-
-  <target name="tagger-zh-nodistsim" depends="download-tagger">
-    <!-- 
-      - Non-english models are not contained in the CoreNLP models (yet) 
-      - We cannot use the one from the stanford-parser:models artifact, because the packages
-      - collide with the corenlp:models.
-      -->
-      <install-stub-and-upstream-file 
-        file="target/download/tagger/chinese-nodistsim.tagger" 
-        md5="dc7cee311eaeeb8ff799f0d6574416f5"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
-        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-        upstreamVersion="20140616"
-        metaDataVersion="1"
-        tool="tagger" 
-        language="zh" 
-        variant="nodistsim" 
-        extension="tagger" >    
-      <metadata>
-          <entry key="pos.tagset" value="ctb"/>
-      </metadata>
-    </install-stub-and-upstream-file>
   </target>
 
   <target name="parser-zh-pcfg" depends="download-zh">
@@ -2142,21 +2066,21 @@
 
   <target name="download-core" depends="-check-download-core" unless="download-core.DONE">
     <mkdir dir="target/download/core"/>
-      <get 
-        src="http://nlp.stanford.edu/software/stanford-corenlp-full-${core.date}.zip"
-        dest="target/download/core/core-nlp.zip"
-        skipexisting="true"/>
-      <unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
-        <patternset>
-          <include name="**/stanford-corenlp-*-models.jar"/>    
-      </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-          <firstmatchmapper>
-          <globmapper from="*" to="stanford-corenlp-models.jar"/>
-        </firstmatchmapper>
-        </chainedmapper>
-      </unzip>
+    <get 
+      src="http://nlp.stanford.edu/software/stanford-corenlp-full-${core.date}.zip"
+      dest="target/download/core/core-nlp.zip"
+      skipexisting="true"/>
+    <unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
+      <patternset>
+        <include name="**/stanford-corenlp-*-models.jar"/>    
+    </patternset>
+      <chainedmapper>
+        <mapper type="flatten"/>
+        <firstmatchmapper>
+        <globmapper from="*" to="stanford-corenlp-models.jar"/>
+      </firstmatchmapper>
+      </chainedmapper>
+    </unzip>
     <unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core">
         <patternset>
           <include name="**/*.ser.gz"/>    
@@ -2167,14 +2091,15 @@
         </chainedmapper>
     </unzip>
     <unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core/coref-en">
-        <patternset>
-          <include name="**/dcoref/*"/>    
+      <patternset>
+        <include name="**/dcoref/*"/>
+        <include name="**/models/coref/**/*"/>
       </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-        </chainedmapper>
+      <chainedmapper>
+        <mapper type="flatten"/>
+      </chainedmapper>
     </unzip>
-      <delete file="target/download/core/stanford-corenlp-models.jar"/>
+    <delete file="target/download/core/stanford-corenlp-models.jar"/>
     <touch file="target/download/core/DONE"/>
   </target>
   
@@ -2207,181 +2132,157 @@
   <target name="download-parser" depends="-check-download-parser" unless="download-parser.DONE">
     <mkdir dir="target/download/parser"/>
     
-      <get 
-        src="http://nlp.stanford.edu/software/stanford-parser-full-${parser.date}.zip"
-        dest="target/download/parser/parser.zip" 
-        skipexisting="true"/>
-      <unzip src="target/download/parser/parser.zip" dest="target/download/parser">
-        <patternset>
-          <include name="**/grammar/**/*.ser.gz"/>    
+    <get 
+      src="http://nlp.stanford.edu/software/stanford-parser-full-${parser.date}.zip"
+      dest="target/download/parser/parser.zip" 
+      skipexisting="true"/>
+    <unzip src="target/download/parser/parser.zip" dest="target/download/parser">
+      <patternset>
+        <include name="**/grammar/**/*.ser.gz"/>    
       </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-        </chainedmapper>
-      </unzip>
+      <chainedmapper>
+        <mapper type="flatten"/>
+      </chainedmapper>
+    </unzip>
 
-      <unzip src="target/download/parser/parser.zip" dest="target/download/parser">
-        <patternset>
-          <include name="**/stanford-parser-*-models.jar"/>
+    <unzip src="target/download/parser/parser.zip" dest="target/download/parser">
+      <patternset>
+        <include name="**/stanford-parser-*-models.jar"/>
       </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-          <firstmatchmapper>
-          <globmapper from="*" to="stanford-parser-models.jar"/>
-        </firstmatchmapper>
-        </chainedmapper>
-      </unzip>
+      <chainedmapper>
+        <mapper type="flatten"/>
+        <firstmatchmapper>
+        <globmapper from="*" to="stanford-parser-models.jar"/>
+      </firstmatchmapper>
+      </chainedmapper>
+    </unzip>
 
     <unzip src="target/download/parser/stanford-parser-models.jar" dest="target/download/parser">
-        <patternset>
-          <include name="**/*.ser.gz"/>    
-          <include name="**/*.parser*"/>
+      <patternset>
+        <include name="**/*.ser.gz"/>    
+        <include name="**/*.parser*"/>
       </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-        </chainedmapper>
+      <chainedmapper>
+        <mapper type="flatten"/>
+      </chainedmapper>
     </unzip>
-      <delete file="stanford-parser-models.jar"/>
+    <delete file="stanford-parser-models.jar"/>
     
-      <get 
+    <get 
         src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-${core.chinese.date}-models.jar" 
         dest="target/download/parser/stanford-chinese-corenlp-models.jar" 
         skipexisting="true"/>
     <unzip src="target/download/parser/stanford-chinese-corenlp-models.jar" dest="target/download/parser">
-        <patternset>
-          <include name="**/*.ser.gz"/>    
-          <include name="**/*.parser*"/>    
+      <patternset>
+        <include name="**/*.ser.gz"/>    
+        <include name="**/*.parser*"/>    
       </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-        </chainedmapper>
+      <chainedmapper>
+        <mapper type="flatten"/>
+      </chainedmapper>
     </unzip>
 
-      <get 
-        src="http://nlp.stanford.edu/software/stanford-srparser-${core.srparser.date}-models.jar" 
-        dest="target/download/parser/stanford-srparser-models.jar" 
-        skipexisting="true"/>
+    <get 
+      src="http://nlp.stanford.edu/software/stanford-srparser-${core.srparser.date}-models.jar" 
+      dest="target/download/parser/stanford-srparser-models.jar" 
+      skipexisting="true"/>
     <unzip src="target/download/parser/stanford-srparser-models.jar" dest="target/download/parser">
-        <patternset>
-          <include name="**/*.ser.gz"/>    
-          <include name="**/*.parser*"/>    
+      <patternset>
+        <include name="**/*.ser.gz"/>    
+        <include name="**/*.parser*"/>    
       </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-        </chainedmapper>
+      <chainedmapper>
+        <mapper type="flatten"/>
+      </chainedmapper>
     </unzip>
 
     <touch file="target/download/parser/DONE"/>
   </target>
   
-   <target name="-check-download-twitie">
-        <available property="download-twitie.DONE" file="target/download/twitie/DONE"/>
-    </target>
+  <target name="-check-download-twitie">
+    <available property="download-twitie.DONE" file="target/download/twitie/DONE"/>
+  </target>
 
-    <target name="download-twitie" depends="-check-download-twitie" unless="download-twitie.DONE">
-        <mkdir dir="target/download/twitie"/>
+  <target name="download-twitie" depends="-check-download-twitie" unless="download-twitie.DONE">
+    <mkdir dir="target/download/twitie"/>
         
-        <get 
-            src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/twitie-tagger.zip" 
-            dest="target/download/twitie/twitie-tagger.zip" 
-            skipexisting="true"/>
-        <touch file="target/download/twitie/DONE"/>
-    </target>
-
-  <target name="-check-download-tagger">
-    <available property="download-tagger.DONE" file="target/download/tagger/DONE"/>
-  </target>
-
-  <target name="download-tagger" depends="-check-download-tagger" unless="download-tagger.DONE">
-    <mkdir dir="target/download/tagger"/>
-      <get 
-        src="http://nlp.stanford.edu/software/stanford-postagger-full-${tagger.date}.zip"
-        dest="target/download/tagger/postagger.zip" 
+    <get 
+        src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/twitie-tagger.zip" 
+        dest="target/download/twitie/twitie-tagger.zip" 
         skipexisting="true"/>
-    <unzip src="target/download/tagger/postagger.zip" dest="target/download/tagger">
-        <patternset>
-          <include name="**/models//*.tagger*"/>    
-      </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-        </chainedmapper>
-      </unzip>
-    <touch file="target/download/tagger/DONE"/>
+      <touch file="target/download/twitie/DONE"/>
   </target>
-
-  
   
   <!-- 
     - ============================================================================================
     - MODELS
     - ============================================================================================
     -->
-    <target name="-check-download-ar">
-        <available property="download-ar.DONE" file="target/download/ar/DONE"/>
-    </target>
+  <target name="-check-download-ar">
+    <available property="download-ar.DONE" file="target/download/ar/DONE"/>
+  </target>
 
-    <target name="download-ar" depends="-check-download-ar" unless="download-ar.DONE">
-        <mkdir dir="target/download/ar"/>
-        <get src="http://nlp.stanford.edu/software/stanford-arabic-corenlp-${core.arabic.date}-models.jar" 
-            dest="target/download/ar/ar-models.zip" skipexisting="true"/>
-        <touch file="target/download/ar/DONE"/>
-    </target>
+  <target name="download-ar" depends="-check-download-ar" unless="download-ar.DONE">
+    <mkdir dir="target/download/ar"/>
+    <get src="http://nlp.stanford.edu/software/stanford-arabic-corenlp-${core.arabic.date}-models.jar" 
+        dest="target/download/ar/ar-models.zip" skipexisting="true"/>
+    <touch file="target/download/ar/DONE"/>
+  </target>
+
+  <target name="-check-download-en">
+    <available property="download-en.DONE" file="target/download/en/DONE"/>
+  </target>
+
+  <target name="download-en" depends="-check-download-en" unless="download-en.DONE">
+    <mkdir dir="target/download/en"/>
+    <get src="http://nlp.stanford.edu/software/stanford-english-corenlp-${core.english.date}-models.jar" 
+        dest="target/download/en/en-models.zip" skipexisting="true"/>
+    <touch file="target/download/en/DONE"/>
+  </target>
+
+  <target name="-check-download-de">
+    <available property="download-de.DONE" file="target/download/de/DONE"/>
+  </target>
+
+  <target name="download-de" depends="-check-download-de" unless="download-de.DONE">
+    <mkdir dir="target/download/de"/>
+    <get src="http://nlp.stanford.edu/software/stanford-german-corenlp-${core.german.date}-models.jar"
+        dest="target/download/de/de-models.zip" skipexisting="true"/>
+    <touch file="target/download/de/DONE"/>
+  </target>
+
+  <target name="-check-download-fr">
+    <available property="download-fr.DONE" file="target/download/fr/DONE"/>
+  </target>
+
+  <target name="download-fr" depends="-check-download-fr" unless="download-fr.DONE">
+    <mkdir dir="target/download/fr"/>
+    <get src="http://nlp.stanford.edu/software/stanford-french-corenlp-${core.french.date}-models.jar" 
+        dest="target/download/fr/fr-models.zip" skipexisting="true"/>
+    <touch file="target/download/fr/DONE"/>
+  </target>
   
-    <target name="-check-download-en">
-        <available property="download-en.DONE" file="target/download/en/DONE"/>
-    </target>
+  <target name="-check-download-es">
+    <available property="download-es.DONE" file="target/download/es/DONE"/>
+  </target>
 
-    <target name="download-en" depends="-check-download-en" unless="download-en.DONE">
-        <mkdir dir="target/download/en"/>
-        <get src="http://nlp.stanford.edu/software/stanford-english-corenlp-${core.english.date}-models.jar" 
-            dest="target/download/en/en-models.zip" skipexisting="true"/>
-        <touch file="target/download/en/DONE"/>
-    </target>
-
-    <target name="-check-download-de">
-        <available property="download-de.DONE" file="target/download/de/DONE"/>
-    </target>
-
-    <target name="download-de" depends="-check-download-de" unless="download-de.DONE">
-        <mkdir dir="target/download/de"/>
-      <get src="http://nlp.stanford.edu/software/stanford-german-corenlp-${core.german.date}-models.jar"
-            dest="target/download/de/de-models.zip" skipexisting="true"/>
-        <touch file="target/download/de/DONE"/>
-    </target>
-
-    <target name="-check-download-fr">
-        <available property="download-fr.DONE" file="target/download/fr/DONE"/>
-    </target>
-
-    <target name="download-fr" depends="-check-download-fr" unless="download-fr.DONE">
-        <mkdir dir="target/download/fr"/>
-        <get src="http://nlp.stanford.edu/software/stanford-french-corenlp-${core.french.date}-models.jar" 
-            dest="target/download/fr/fr-models.zip" skipexisting="true"/>
-        <touch file="target/download/fr/DONE"/>
-    </target>
-    
-    <target name="-check-download-es">
-        <available property="download-es.DONE" file="target/download/es/DONE"/>
-    </target>
-
-    <target name="download-es" depends="-check-download-es" unless="download-es.DONE">
-        <mkdir dir="target/download/es"/>
-      <get src="http://nlp.stanford.edu/software/stanford-spanish-corenlp-${core.spanish.date}-models.jar"
-            dest="target/download/es/es-models.zip" skipexisting="true"/>
-        <touch file="target/download/es/DONE"/>
-    </target>
-    
-    <target name="-check-download-zh">
-        <available property="download-zh.DONE" file="target/download/zh/DONE"/>
-    </target>
-
-    <target name="download-zh" depends="-check-download-zh" unless="download-zh.DONE">
-        <mkdir dir="target/download/zh"/>
-        <get src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-${core.chinese.date}-models.jar" 
-            dest="target/download/zh/zh-models.zip" skipexisting="true"/>
-        <touch file="target/download/zh/DONE"/>
-    </target>
+  <target name="download-es" depends="-check-download-es" unless="download-es.DONE">
+    <mkdir dir="target/download/es"/>
+    <get src="http://nlp.stanford.edu/software/stanford-spanish-corenlp-${core.spanish.date}-models.jar"
+        dest="target/download/es/es-models.zip" skipexisting="true"/>
+    <touch file="target/download/es/DONE"/>
+  </target>
   
+  <target name="-check-download-zh">
+    <available property="download-zh.DONE" file="target/download/zh/DONE"/>
+  </target>
+
+  <target name="download-zh" depends="-check-download-zh" unless="download-zh.DONE">
+    <mkdir dir="target/download/zh"/>
+    <get src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-${core.chinese.date}-models.jar" 
+        dest="target/download/zh/zh-models.zip" skipexisting="true"/>
+    <touch file="target/download/zh/DONE"/>
+  </target>
   
   <target name="jar-notice">
     <echo>================================</echo>
