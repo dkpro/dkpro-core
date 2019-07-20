@@ -201,14 +201,8 @@ public class StanfordNamedEntityRecognizerTrainer
         }
     }
 
-<<<<<<< HEAD
     private Map<Sentence, List<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
         Map<Sentence, List<NamedEntity>> idx = indexCovered(aJCas, Sentence.class,
-=======
-    private Map<Sentence, Collection<NamedEntity>> getNamedEntityIndex(JCas aJCas)
-    {
-        Map<Sentence, Collection<NamedEntity>> idx = indexCovered(aJCas, Sentence.class,
->>>>>>> 1.12.x
                 NamedEntity.class);
 
         if (acceptedTagsRegex != null) {
