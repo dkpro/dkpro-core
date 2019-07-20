@@ -21,13 +21,17 @@ package org.dkpro.core.stanfordnlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -129,6 +133,40 @@ public class StanfordNamedEntityRecognizerTrainerTest
         assertEquals(0.621921, results.getPrecision(), 0.01);
         assertEquals(0.408708, results.getRecall(), 0.01);
     }
+
+    @Test
+    public void test__EmptyDataset__ShouldRaiseExceptionWithHelpfulMessage()
+        throws Exception
+    {
+        Path emptyDir = Files.createTempDirectory("empty_dir");
+        File targetFolder = testContext.getTestOutputFolder();
+
+        File model = new File(targetFolder, "ner-model.ser.gz");
+
+        File properties = new File("ner/train-english.props");
+
+        CollectionReaderDescription trainReader = createReaderDescription(Conll2002Reader.class,
+                Conll2002Reader.PARAM_SOURCE_LOCATION, emptyDir.toAbsolutePath().toString(),
+                Conll2002Reader.PARAM_PATTERNS, "*.txt",
+                Conll2002Reader.PARAM_LANGUAGE, "en",
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
+                Conll2002Reader.PARAM_HAS_HEADER, true, 
+                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
+
+        AnalysisEngineDescription trainer = createEngineDescription(
+                StanfordNamedEntityRecognizerTrainer.class,
+                StanfordNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION, model,
+                StanfordNamedEntityRecognizerTrainer.PARAM_PROPERTIES_LOCATION, properties,
+                StanfordNamedEntityRecognizerTrainer.PARAM_LABEL_SET, "noprefix",
+                StanfordNamedEntityRecognizerTrainer.PARAM_RETAIN_CLASS, true);
+
+        assertThatExceptionOfType(AnalysisEngineProcessException.class)
+                .isThrownBy(() -> SimplePipeline.runPipeline(trainReader, trainer))
+                .withCauseInstanceOf(IllegalStateException.class)
+                .matches(e -> e.getCause().getMessage().equals(
+                        "Trainer did not receive any training data."));
+    }    
 
     @Before
     public void setup()
