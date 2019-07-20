@@ -28,6 +28,7 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
+import org.dkpro.core.io.brat.internal.model.BratNoteAnnotation;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -48,7 +49,7 @@ public class BratAnnotationDocument
             String line = lines.next();
             switch (line.charAt(0)) {
             case '#':
-                // Comments currently not supported
+                doc.addAnnotation(BratNoteAnnotation.parse(line));
                 break;
             case 'T':
                 doc.addAnnotation(BratTextAnnotation.parse(line));
