@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -105,12 +106,12 @@ public abstract class JCasFileWriter_ImplBase
     private boolean useDocumentId;
 
     /**
-     * URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+     * URL-encode the file name to avoid illegal characters (e.g. \, :, etc.)
      */
-    public static final String PARAM_ESCAPE_DOCUMENT_ID = "escapeDocumentId";
-    @ConfigurationParameter(name = PARAM_ESCAPE_DOCUMENT_ID, mandatory = true, defaultValue = "true")
-    private boolean escapeDocumentId;
-
+    public static final String PARAM_ESCAPE_FILENAME = "escapeFilename";
+    @ConfigurationParameter(name = PARAM_ESCAPE_FILENAME, mandatory = true, defaultValue = "false")
+    private boolean escapeFilename;
+    
     /**
      * Allow overwriting target files (ignored when writing to ZIP archives).
      */
@@ -137,6 +138,18 @@ public abstract class JCasFileWriter_ImplBase
     protected boolean isUseDocumentId()
     {
         return useDocumentId;
+    }
+    
+    // This is just used for testing
+    /* default scope*/ void setUseDocumentId(boolean aUseDocumentId)
+    {
+        useDocumentId = aUseDocumentId;
+    }
+    
+    // This is just used for testing
+    /* default scope*/ void setEscapeFilename(boolean aEscapeFilename)
+    {
+        escapeFilename = aEscapeFilename;
     }
 
     @Override
@@ -266,12 +279,11 @@ public abstract class JCasFileWriter_ImplBase
                 baseUri += '/';
             }
 
-            String relativeDocumentPath;
             if ((docUri == null) || !docUri.startsWith(baseUri)) {
                 throw new IllegalStateException("Base URI [" + baseUri
                         + "] is not a prefix of document URI [" + docUri + "]");
             }
-            relativeDocumentPath = docUri.substring(baseUri.length());
+            String relativeDocumentPath = docUri.substring(baseUri.length());
             if (stripExtension) {
                 relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
             }
@@ -280,23 +292,33 @@ public abstract class JCasFileWriter_ImplBase
             while (relativeDocumentPath.startsWith("/")) {
                 relativeDocumentPath = relativeDocumentPath.substring(1);
             }
-
+            
+            if (!escapeFilename) {
+                try {
+                    relativeDocumentPath = URLDecoder.decode(relativeDocumentPath, "UTF-8");
+                }
+                catch (UnsupportedEncodingException e) {
+                    // UTF-8 must be supported on all Java platforms per specification. This should
+                    // not happen.
+                    throw new IllegalStateException(e);
+                }
+            }
+            
             return relativeDocumentPath;
         }
         else {
-            String relativeDocumentPath;
             if (meta.getDocumentId() == null) {
                 throw new IllegalStateException(
                         "Neither base URI/document URI nor document ID set");
             }
 
-            relativeDocumentPath = meta.getDocumentId();
+            String relativeDocumentPath = meta.getDocumentId();
 
             if (stripExtension) {
                 relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
             }
-
-            if (escapeDocumentId) {
+            
+            if (escapeFilename) {
                 try {
                     relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
                 }
@@ -306,7 +328,7 @@ public abstract class JCasFileWriter_ImplBase
                     throw new IllegalStateException(e);
                 }
             }
-
+            
             return relativeDocumentPath;
         }
     }

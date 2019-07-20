@@ -20,6 +20,7 @@ package org.dkpro.core.api.io;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -39,6 +40,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class JCasFileWriter_ImplBaseTest
 {
@@ -96,6 +99,42 @@ public class JCasFileWriter_ImplBaseTest
         assertEquals(expected, FileUtils.readFileToString(target, "UTF-8"));
     }
 
+    @Test
+    public void test__getRelativePath__FileNameContainsURLEscapedSpaces() throws Exception
+    {
+        JCas cas = JCasFactory.createJCas();
+        
+        DocumentMetaData meta = DocumentMetaData.create(cas);
+        meta.setDocumentBaseUri("file:/");
+        meta.setDocumentUri("file:/hello%20world");
+        meta.setDocumentId("some id");
+        
+        DummyWriter writer = new DummyWriter();
+
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("hello world");
+
+        writer.setUseDocumentId(false);
+        writer.setEscapeFilename(false);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("hello world");
+
+        writer.setUseDocumentId(true);
+        writer.setEscapeFilename(false);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("some id");
+        
+        writer.setUseDocumentId(false);
+        writer.setEscapeFilename(true);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("hello%20world");
+
+        writer.setUseDocumentId(true);
+        writer.setEscapeFilename(true);
+        assertThat(writer.getRelativePath(cas))
+                .isEqualTo("some+id");
+    }
+    
     private List<String> listContents(String aFile)
         throws IOException
     {
