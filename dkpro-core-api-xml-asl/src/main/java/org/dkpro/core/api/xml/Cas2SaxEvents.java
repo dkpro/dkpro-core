@@ -20,11 +20,11 @@ package org.dkpro.core.api.xml;
 import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
+import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.xml.type.XmlAttribute;
 import org.dkpro.core.api.xml.type.XmlDocument;
 import org.dkpro.core.api.xml.type.XmlElement;
-import org.dkpro.core.api.xml.type.XmlNode;
 import org.dkpro.core.api.xml.type.XmlTextNode;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
@@ -64,7 +64,8 @@ public class Cas2SaxEvents
         AttributesImpl attributes = new AttributesImpl();
         
         if (aElement.getAttributes() != null) {
-            for (XmlAttribute attr : aElement.getAttributes()) {
+            for (FeatureStructure attrFS : (Iterable<FeatureStructure>) aElement.getAttributes()) {
+                XmlAttribute attr = (XmlAttribute) attrFS;
                 attributes.addAttribute(defaultString(attr.getUri()),
                         defaultString(attr.getLocalName()), defaultString(attr.getQName()),
                         defaultString(attr.getValueType(), "CDATA"),
@@ -79,7 +80,7 @@ public class Cas2SaxEvents
         handler.startElement(uri, localName, qName, attributes);
         
         if (aElement.getChildren() != null) {
-            for (XmlNode child : aElement.getChildren()) {
+            for (FeatureStructure child : (Iterable<FeatureStructure>) aElement.getChildren()) {
                 if (child instanceof XmlElement) {
                     process((XmlElement) child);
                 }
