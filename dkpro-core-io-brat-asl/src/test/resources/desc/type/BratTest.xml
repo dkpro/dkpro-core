@@ -25,6 +25,16 @@
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
+        <featureDescription>
+          <name>comment</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>flavour</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
   <typeDescription>
@@ -38,7 +48,12 @@
           <rangeTypeName>uima.cas.FSArray</rangeTypeName>
         <elementType>uima.tcas.Annotation</elementType>
         </featureDescription>
-        </features>
+        <featureDescription>
+          <name>comment</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
     </typeDescription>
   </types>
 </typeSystemDescription>

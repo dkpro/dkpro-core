@@ -50,6 +50,8 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.brat.internal.mapping.RelationMapping;
+import org.dkpro.core.io.brat.internal.mapping.TypeMappings;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import org.dkpro.core.io.brat.internal.model.BratAttributeDecl;
@@ -63,8 +65,6 @@ import org.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
 import org.dkpro.core.io.brat.internal.model.Offsets;
-import org.dkpro.core.io.brat.internal.model.RelationParam;
-import org.dkpro.core.io.brat.internal.model.TypeMapping;
 
 public class DKPro2Brat
 {
@@ -88,8 +88,8 @@ public class DKPro2Brat
     private Set<String> excludeTypes = Collections
             .singleton("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence");
     private Set<String> spanTypes = new HashSet<>();
-    private Map<String, RelationParam> parsedRelationTypes = new HashMap<>();
-    private TypeMapping typeMapping;
+    private Map<String, RelationMapping> parsedRelationTypes = new HashMap<>();
+    private TypeMappings typeMapping;
     
     private boolean writeRelationAttributes;
     private boolean writeNullAttributes;
@@ -153,12 +153,12 @@ public class DKPro2Brat
         excludeTypes = aExcludeTypes;
     }
     
-    public Map<String, RelationParam> getRelationTypes()
+    public Map<String, RelationMapping> getRelationTypes()
     {
         return parsedRelationTypes;
     }
 
-    public void setRelationTypes(Collection<RelationParam> aRelationTypes)
+    public void setRelationTypes(Collection<RelationMapping> aRelationTypes)
     {
         aRelationTypes.stream().forEachOrdered(p -> parsedRelationTypes.put(p.getType(), p));
     }
@@ -173,12 +173,12 @@ public class DKPro2Brat
         spanTypes = aSpanTypes;
     }
 
-    public TypeMapping getTypeMapping()
+    public TypeMappings getTypeMapping()
     {
         return typeMapping;
     }
 
-    public void setTypeMapping(TypeMapping aTypeMapping)
+    public void setTypeMapping(TypeMappings aTypeMapping)
     {
         typeMapping = aTypeMapping;
     }
@@ -331,7 +331,7 @@ public class DKPro2Brat
     
     private void writeRelationAnnotation(BratAnnotationDocument aDoc, FeatureStructure aFS)
     {
-        RelationParam rel = parsedRelationTypes.get(aFS.getType().getName());
+        RelationMapping rel = parsedRelationTypes.get(aFS.getType().getName());
         
         FeatureStructure arg1 = aFS.getFeatureValue(aFS.getType().getFeatureByBaseName(
                 rel.getArg1()));
@@ -385,7 +385,7 @@ public class DKPro2Brat
             }
             
             // No need to write link endpoints again, they are already on the relation annotation
-            RelationParam relParam = parsedRelationTypes.get(aFS.getType().getName());
+            RelationMapping relParam = parsedRelationTypes.get(aFS.getType().getName());
             if (relParam != null) {
                 if (relParam.getArg1().equals(feat.getShortName())
                         || relParam.getArg2().equals(feat.getShortName())) {
