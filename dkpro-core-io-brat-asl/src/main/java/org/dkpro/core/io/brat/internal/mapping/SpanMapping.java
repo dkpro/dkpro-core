@@ -15,12 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.io.brat.internal.model;
+package org.dkpro.core.io.brat.internal.mapping;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextAnnotationParam
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class SpanMapping
 {
     public static final String FLAG_ANCHOR = "A";
     
@@ -33,14 +38,26 @@ public class TextAnnotationParam
 
     private final String type;
     private final String subcat;
+    private final Map<String, String> defaultFeatureValues;
     
-    public TextAnnotationParam(String aType, String aSubCat)
+    @JsonCreator
+    public SpanMapping(
+            @JsonProperty(value = "type", required = true) String aType, 
+            @JsonProperty(value = "subCatFeature") String aSubCat,
+            @JsonProperty(value = "defaultFeatureValues") Map<String, String> aDefaults)
     {
-        super();
         type = aType;
         subcat = aSubCat;
+        defaultFeatureValues = aDefaults != null ? aDefaults : Collections.emptyMap();
     }
-    
+
+    public SpanMapping(
+            @JsonProperty(value = "type", required = true) String aType, 
+            @JsonProperty(value = "subCatFeature") String aSubCat)
+    {
+        this(aType, aSubCat, Collections.emptyMap());
+    }
+
     public String getType()
     {
         return type;
@@ -50,8 +67,13 @@ public class TextAnnotationParam
     {
         return subcat;
     }
+    
+    public Map<String, String> getDefaultFeatureValues()
+    {
+        return defaultFeatureValues;
+    }
 
-    public static TextAnnotationParam parse(String aValue)
+    public static SpanMapping parse(String aValue)
     {
         Matcher m = PATTERN.matcher(aValue);
         
@@ -60,6 +82,6 @@ public class TextAnnotationParam
                     "Illegal text annotation parameter format [" + aValue + "]");
         }
 
-        return new TextAnnotationParam(m.group(TYPE), m.group(SUBCAT));
+        return new SpanMapping(m.group(TYPE), m.group(SUBCAT));
     }
 }

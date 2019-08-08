@@ -28,6 +28,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -73,7 +74,7 @@ public class BreakIteratorSegmenter
             }
             else {
                 int[] span = new int[] { last, cur };
-                trim(aJCas.getDocumentText(), span);
+                TrimUtils.trim(aJCas.getDocumentText(), span);
                 processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]),
                         span[0]);
             }

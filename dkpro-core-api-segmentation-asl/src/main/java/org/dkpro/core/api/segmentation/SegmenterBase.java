@@ -31,9 +31,9 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.dkpro.core.api.parameter.ComponentParameters;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm;
@@ -204,7 +204,7 @@ public abstract class SegmenterBase
     protected Sentence createSentence(final JCas aJCas, final int aBegin, final int aEnd)
     {
         int[] span = new int[] { aBegin, aEnd };
-        trim(aJCas.getDocumentText(), span);
+        TrimUtils.trim(aJCas.getDocumentText(), span);
         if (!isEmpty(span[0], span[1]) && isWriteSentence()) {
             Sentence seg = new Sentence(aJCas, span[0], span[1]);
             seg.addToIndexes(aJCas);
@@ -234,7 +234,7 @@ public abstract class SegmenterBase
             final int aEnd)
     {
         int[] span = new int[] { aBegin, aEnd };
-        trim(aJCas.getDocumentText(), span);
+        TrimUtils.trim(aJCas.getDocumentText(), span);
         if (!isEmpty(span[0], span[1]) && isWriteToken()) {
             Token seg = new Token(aJCas, span[0], span[1]);
             if (aForm != null && writeForm) {
@@ -251,95 +251,9 @@ public abstract class SegmenterBase
     protected abstract void process(JCas aJCas, String text, int zoneBegin)
         throws AnalysisEngineProcessException;
 
-    /**
-     * Trim the offsets of the given annotation to remove leading/trailing whitespace.
-     * <p>
-     * <b>Note:</b> use this method only if the document text of the CAS has already been set!
-     * <p>
-     * <b>Note:</b> best use this method before adding the annotation to the indexes.
-     * 
-     * @param aAnnotation
-     *            the annotation to trim. Offsets are updated.
-     */
-    public static void trim(Annotation aAnnotation)
-    {
-        trim(aAnnotation.getCAS().getDocumentText(), aAnnotation);
-    }
-
-    /**
-     * Trim the offsets of the given annotation to remove leading/trailing whitespace.
-     * <p>
-     * <b>Note:</b> use this method if the document text of the CAS has not been set yet but you
-     * have it available in a buffer.
-     * <p>
-     * <b>Note:</b> best use this method before adding the annotation to the indexes.
-     * 
-     * @param aText
-     *            the document text (available so far).
-     * @param aAnnotation
-     *            the annotation to trim. Offsets are updated.
-     */
-    public static void trim(CharSequence aText, Annotation aAnnotation)
-    {
-        int[] offsets = { aAnnotation.getBegin(), aAnnotation.getEnd() };
-        trim(aText, offsets);
-        aAnnotation.setBegin(offsets[0]);
-        aAnnotation.setEnd(offsets[1]);
-    }
-
-    /**
-     * Remove trailing or leading whitespace from the annotation.
-     * 
-     * @param aText
-     *            the text.
-     * @param aSpan
-     *            the offsets.
-     */
-    public static void trim(CharSequence aText, int[] aSpan)
-    {
-        int begin = aSpan[0];
-        int end = aSpan[1] - 1;
-
-        // Remove whitespace at end
-        while ((end > 0) && trimChar(aText.charAt(end))) {
-            end--;
-        }
-        end++;
-
-        // Remove whitespace at start
-        while ((begin < end) && trimChar(aText.charAt(begin))) {
-            begin++;
-        }
-
-        aSpan[0] = begin;
-        aSpan[1] = end;
-    }
-
     public boolean isEmpty(int aBegin, int aEnd)
     {
         return aBegin >= aEnd;
-    }
-
-    public static boolean trimChar(final char aChar)
-    {
-        switch (aChar) {
-        case '\n':
-            return true; // Line break
-        case '\r':
-            return true; // Carriage return
-        case '\t':
-            return true; // Tab
-        case '\u200E':
-            return true; // LEFT-TO-RIGHT MARK
-        case '\u200F':
-            return true; // RIGHT-TO-LEFT MARK
-        case '\u2028':
-            return true; // LINE SEPARATOR
-        case '\u2029':
-            return true; // PARAGRAPH SEPARATOR
-        default:
-            return Character.isWhitespace(aChar);
-        }
     }
 
     public String getLanguage(JCas aJCas)

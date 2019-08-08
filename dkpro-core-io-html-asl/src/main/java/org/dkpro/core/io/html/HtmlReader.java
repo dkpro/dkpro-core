@@ -17,9 +17,9 @@
  */
 package org.dkpro.core.io.html;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils.trim;
 import static org.dkpro.core.io.html.internal.JSoupUtil.appendNormalisedText;
 import static org.dkpro.core.io.html.internal.JSoupUtil.lastCharIsWhitespace;
-import static org.dkpro.core.io.html.internal.TrimUtils.trim;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

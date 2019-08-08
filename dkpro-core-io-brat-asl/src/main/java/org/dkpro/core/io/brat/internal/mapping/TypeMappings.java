@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.io.brat.internal.model;
+package org.dkpro.core.io.brat.internal.mapping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,20 +24,31 @@ import java.util.Map;
 
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
+import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 
-public class TypeMapping
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+public class TypeMappings
 {
-    private final List<MappingParam> parsedMappings;
+    private final List<TypeMapping> parsedMappings;
     private final Map<String, Type> brat2UimaMappingCache;
     private final Map<String, String> uima2BratMappingCache;
 
-    public TypeMapping(String... aMappings)
+    @JsonCreator
+    public TypeMappings(List<TypeMapping> aMappings)
+    {
+        parsedMappings = aMappings;
+        brat2UimaMappingCache = new HashMap<>();
+        uima2BratMappingCache = new HashMap<>();
+    }
+
+    public TypeMappings(String... aMappings)
     {
         parsedMappings = new ArrayList<>();
 
         if (aMappings != null) {
             for (String m : aMappings) {
-                parsedMappings.add(MappingParam.parse(m));
+                parsedMappings.add(TypeMapping.parse(m));
             }
         }
 
@@ -48,13 +59,21 @@ public class TypeMapping
     private String apply(String aType)
     {
         String type = aType;
-        for (MappingParam m : parsedMappings) {
+        for (TypeMapping m : parsedMappings) {
             if (m.matches(aType)) {
                 type = m.apply();
                 break;
             }
         }
         return type;
+    }
+    
+    public TypeMapping getMappingByBratType(String aBratType)
+    {
+        return parsedMappings.stream()
+                .filter(mapping -> mapping.matches(aBratType))
+                .findFirst()
+                .orElse(null);
     }
     
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)
@@ -92,7 +111,7 @@ public class TypeMapping
         if (bratType == null) {
             String uimaType = aType.getName();
             
-            for (MappingParam m : parsedMappings) {
+            for (TypeMapping m : parsedMappings) {
                 if (m.matches(aType.getName())) {
                     uimaType = m.apply();
                     break;
