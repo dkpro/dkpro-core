@@ -28,7 +28,8 @@ import org.apache.pdfbox.text.TextPosition;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
-import org.dkpro.core.api.segmentation.SegmenterBase;
+
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 
 /**
  * Converts a PDF to a CAS. Uses a substitution table.
@@ -184,7 +185,7 @@ public class Pdf2CasConverter
 
         // Trim leading/trailing whitespace
         int[] offsets = {begin, end};
-        SegmenterBase.trim(text, offsets);
+        TrimUtils.trim(text, offsets);
 
         // Add annotation
         switch (aStyle) {
