@@ -90,6 +90,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>xmlunit</groupId>
+      <artifactId>xmlunit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-testing-asl</artifactId>
       <scope>test</scope>

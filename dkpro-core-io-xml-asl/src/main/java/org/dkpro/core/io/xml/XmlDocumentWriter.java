@@ -17,9 +17,12 @@
  */
 package org.dkpro.core.io.xml;
 
+import static javax.xml.transform.OutputKeys.INDENT;
+import static javax.xml.transform.OutputKeys.METHOD;
+import static javax.xml.transform.OutputKeys.OMIT_XML_DECLARATION;
+
 import java.io.OutputStream;
 
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
@@ -74,6 +77,20 @@ public class XmlDocumentWriter
     @ConfigurationParameter(name = PARAM_OMIT_XML_DECLARATION, mandatory = true, defaultValue = "true")
     private boolean omitXmlDeclaration;
 
+    /**
+     * Output method.
+     */
+    public static final String PARAM_OUTPUT_METHOD = "outputMethod";
+    @ConfigurationParameter(name = PARAM_OUTPUT_METHOD, mandatory = true, defaultValue = "xml")
+    private String outputMethod;
+
+    /**
+     * Indent output .
+     */
+    public static final String PARAM_INDENT = "indent";
+    @ConfigurationParameter(name = PARAM_INDENT, mandatory = true, defaultValue = "false")
+    private boolean indent;
+
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
@@ -82,8 +99,10 @@ public class XmlDocumentWriter
             tf.setFeature("http://javax.xml.XMLConstants/feature/secure-processing", true);
             TransformerHandler th = tf.newTransformerHandler();
             if (omitXmlDeclaration) {
-                th.getTransformer().setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+                th.getTransformer().setOutputProperty(OMIT_XML_DECLARATION, "yes");
             }
+            th.getTransformer().setOutputProperty(METHOD, outputMethod);
+            th.getTransformer().setOutputProperty(INDENT, indent ? "yes" : "no");
             th.setResult(new StreamResult(docOS));
             
             Cas2SaxEvents serializer = new Cas2SaxEvents(th);
