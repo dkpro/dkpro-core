@@ -777,6 +777,7 @@
                 <configuration>
                   <consoleOutput>true</consoleOutput>
                   <excludes>
+                    <exclude>.factorypath</exclude>
                     <exclude>.activate-run-jcasgen</exclude>
                     <exclude>.gitignore</exclude>
                     <exclude>.checkstyle</exclude>

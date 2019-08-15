@@ -18,3 +18,4 @@ libudpipe_java.dylib
 .DS_Store
 .checkstyle
 learning.log
+.factorypath
