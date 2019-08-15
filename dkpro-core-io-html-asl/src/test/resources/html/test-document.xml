@@ -1,10 +1,10 @@
-<html>
-<head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body> 
-<h1>Heading</h1> 
-<p> This is the first paragraph. </p> 
-<p> This is the second paragraph. </p>  
-</body>
-</html>
+<html><head/><body>
+    <h1>Heading</h1>
+    <p>
+      This is the first paragraph.
+    </p>
+    <p>
+      This is the second paragraph.
+    </p>
+  
+</body></html>

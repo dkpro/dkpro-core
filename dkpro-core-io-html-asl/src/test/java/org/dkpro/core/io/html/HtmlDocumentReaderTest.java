@@ -24,14 +24,21 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.custommonkey.xmlunit.XMLAssert;
 import org.dkpro.core.io.xmi.XmiWriter;
 import org.dkpro.core.io.xml.XmlDocumentWriter;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestOptions;
 import org.junit.Rule;
 import org.junit.Test;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
@@ -68,10 +75,12 @@ public class HtmlDocumentReaderTest
     {
         testOneWay(
                 createReaderDescription(HtmlDocumentReader.class,
-                        HtmlDocumentReader.PARAM_LANGUAGE, "en"),
+                        HtmlDocumentReader.PARAM_LANGUAGE, "en",
+                        HtmlDocumentReader.PARAM_NORMALIZE_WHITESPACE, false),
                 createEngineDescription(XmlDocumentWriter.class),
                 "html/test-document.xml", 
-                "html/test.html");
+                "html/test.html",
+                new TestOptions().resultAssertor(this::assertXmlEquals));
     }
     
     @Test
@@ -122,6 +131,17 @@ public class HtmlDocumentReaderTest
                 "html/test-with-head.html");
     }
 
+    private void assertXmlEquals(File expected, File actual)
+    {
+        try {
+            XMLAssert.assertXMLEqual(
+                    new InputSource(expected.getPath()),
+                    new InputSource(actual.getPath()));
+        }
+        catch (SAXException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

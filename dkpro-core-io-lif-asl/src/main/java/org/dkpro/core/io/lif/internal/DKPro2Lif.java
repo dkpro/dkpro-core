@@ -134,7 +134,7 @@ public class DKPro2Lif
     {
         Annotation ne = aTarget.newAnnotation(id(NAMED_ENTITY, aNamedEntity), Discriminators.Uri.NE,
                 aNamedEntity.getBegin(), aNamedEntity.getEnd());
-        ne.setLabel(aNamedEntity.getValue());
+        ne.addFeature("category", aNamedEntity.getValue());
     }
     
     private void convertDependencies(View aView, Sentence aSentence)
