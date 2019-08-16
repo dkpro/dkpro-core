@@ -40,7 +40,7 @@
   <properties>
     <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <uima.version>3.0.2</uima.version>
+    <uima.version>3.1.0</uima.version>
     <uimafit.version>3.0.0</uimafit.version>
     <uimafit.plugin.version>3.0.0</uimafit.plugin.version>
     <omtd.version>3.0.2.7</omtd.version>
