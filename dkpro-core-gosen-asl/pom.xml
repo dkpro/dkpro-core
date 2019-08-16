@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-asl</artifactId>
-    <version>1.11.1</version>
+    <version>1.11.2-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-gosen-asl</artifactId>

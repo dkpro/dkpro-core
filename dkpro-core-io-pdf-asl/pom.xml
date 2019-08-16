@@ -20,7 +20,7 @@
   <parent>
     <artifactId>dkpro-core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
-    <version>1.11.1</version>
+    <version>1.11.2-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-io-pdf-asl</artifactId>

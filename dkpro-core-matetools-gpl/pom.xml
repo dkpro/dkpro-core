@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-gpl</artifactId>
-    <version>1.11.1</version>
+    <version>1.11.2-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
   <artifactId>dkpro-core-matetools-gpl</artifactId>
@@ -141,7 +141,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-hunpos-asl</artifactId>
-        <version>1.11.1</version>
+        <version>1.11.2-SNAPSHOT</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
