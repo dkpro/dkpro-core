@@ -1,0 +1,247 @@
+{
+    "name": "MedPost",
+    "description": "No description.\n\nReferences:\n* http://www.ncbi.nlm.nih.gov/staff/lsmith/papers/smith04a.pdf\n",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "''",
+            "tag_description": "\u201d right quote"
+        },
+        {
+            "tag_name": "(",
+            "tag_description": "( left parenthesis"
+        },
+        {
+            "tag_name": ")",
+            "tag_description": ") right parenthesis"
+        },
+        {
+            "tag_name": ",",
+            "tag_description": ", comma"
+        },
+        {
+            "tag_name": ".",
+            "tag_description": ". end-of-sentence period"
+        },
+        {
+            "tag_name": ":",
+            "tag_description": ": dashes, colons"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "coordinating conjunction"
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "subordinating conjunction"
+        },
+        {
+            "tag_name": "CSN",
+            "tag_description": "comparative conjunction (than)"
+        },
+        {
+            "tag_name": "CST",
+            "tag_description": "complementizer (that)"
+        },
+        {
+            "tag_name": "DB",
+            "tag_description": "predeterminer"
+        },
+        {
+            "tag_name": "DD",
+            "tag_description": "determiner"
+        },
+        {
+            "tag_name": "EX",
+            "tag_description": "existential there"
+        },
+        {
+            "tag_name": "GE",
+            "tag_description": "genitive marker \u2019s"
+        },
+        {
+            "tag_name": "II",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "JJR",
+            "tag_description": "comparative adjective"
+        },
+        {
+            "tag_name": "JJT",
+            "tag_description": "superlative adjective"
+        },
+        {
+            "tag_name": "MC",
+            "tag_description": "number or numeric"
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "noun"
+        },
+        {
+            "tag_name": "NNP",
+            "tag_description": "proper noun"
+        },
+        {
+            "tag_name": "NNS",
+            "tag_description": "plural noun"
+        },
+        {
+            "tag_name": "PN",
+            "tag_description": "pronoun"
+        },
+        {
+            "tag_name": "PND",
+            "tag_description": "determiner as pronoun"
+        },
+        {
+            "tag_name": "PNG",
+            "tag_description": "genitive pronoun"
+        },
+        {
+            "tag_name": "PNR",
+            "tag_description": "relative pronoun"
+        },
+        {
+            "tag_name": "RR",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "RRR",
+            "tag_description": "comparative adverb"
+        },
+        {
+            "tag_name": "RRT",
+            "tag_description": "superlative adverb"
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "symbol"
+        },
+        {
+            "tag_name": "TO",
+            "tag_description": "infinitive marker to"
+        },
+        {
+            "tag_name": "VBB",
+            "tag_description": "base be, am, are"
+        },
+        {
+            "tag_name": "VBD",
+            "tag_description": "past was, were"
+        },
+        {
+            "tag_name": "VBG",
+            "tag_description": "participle being"
+        },
+        {
+            "tag_name": "VBI",
+            "tag_description": "infinitive be"
+        },
+        {
+            "tag_name": "VBN",
+            "tag_description": "participle been"
+        },
+        {
+            "tag_name": "VBZ",
+            "tag_description": "3rd pers. sing. is"
+        },
+        {
+            "tag_name": "VDB",
+            "tag_description": "base do"
+        },
+        {
+            "tag_name": "VDD",
+            "tag_description": "past did"
+        },
+        {
+            "tag_name": "VDG",
+            "tag_description": "participle doing"
+        },
+        {
+            "tag_name": "VDI",
+            "tag_description": "infinite do"
+        },
+        {
+            "tag_name": "VDN",
+            "tag_description": "participle done"
+        },
+        {
+            "tag_name": "VDZ",
+            "tag_description": "participle done"
+        },
+        {
+            "tag_name": "VHB",
+            "tag_description": "participle done"
+        },
+        {
+            "tag_name": "VHD",
+            "tag_description": "past had"
+        },
+        {
+            "tag_name": "VHG",
+            "tag_description": "participle having"
+        },
+        {
+            "tag_name": "VHI",
+            "tag_description": "infinitive have"
+        },
+        {
+            "tag_name": "VHN",
+            "tag_description": "participle had"
+        },
+        {
+            "tag_name": "VHZ",
+            "tag_description": "3rd pers. sing. has"
+        },
+        {
+            "tag_name": "VM",
+            "tag_description": "modal"
+        },
+        {
+            "tag_name": "VVB",
+            "tag_description": "base form lexical verb"
+        },
+        {
+            "tag_name": "VVD",
+            "tag_description": "past tense"
+        },
+        {
+            "tag_name": "VVG",
+            "tag_description": "present part."
+        },
+        {
+            "tag_name": "VVGJ",
+            "tag_description": "prenominal present part."
+        },
+        {
+            "tag_name": "VVGN",
+            "tag_description": "nominal gerund"
+        },
+        {
+            "tag_name": "VVI",
+            "tag_description": "infinitive lexical verb"
+        },
+        {
+            "tag_name": "VVN",
+            "tag_description": "past part."
+        },
+        {
+            "tag_name": "VVNJ",
+            "tag_description": "prenominal past part."
+        },
+        {
+            "tag_name": "VVZ",
+            "tag_description": "3rd pers. sing."
+        },
+        {
+            "tag_name": "``",
+            "tag_description": "\u201c left quote"
+        }
+    ]
+}

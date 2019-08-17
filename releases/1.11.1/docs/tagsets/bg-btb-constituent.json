@@ -1,0 +1,139 @@
+{
+    "name": "BulTreeBank",
+    "description": "BulTreeBank syntactic tagset\n\nReferences:\n* http://www.bultreebank.org/TechRep/BTB-TR05.pdf\n",
+    "language": "bg",
+    "tags": [
+        {
+            "tag_name": "A",
+            "tag_description": "Adjective Lexical Element"
+        },
+        {
+            "tag_name": "APA",
+            "tag_description": "Head-Adjunct Adjective Phrase"
+        },
+        {
+            "tag_name": "APC",
+            "tag_description": "Head-Complement Adjective Phrase"
+        },
+        {
+            "tag_name": "Adv",
+            "tag_description": "Adverb Lexical Element"
+        },
+        {
+            "tag_name": "AdvPA",
+            "tag_description": "Head-Adjunct Adverb Phrase"
+        },
+        {
+            "tag_name": "AdvPC",
+            "tag_description": "Head-Complement Adverb Phrase"
+        },
+        {
+            "tag_name": "C",
+            "tag_description": "Conjunction Lexical Element"
+        },
+        {
+            "tag_name": "CL",
+            "tag_description": "Clauses: Saturated Verb Phrase"
+        },
+        {
+            "tag_name": "CLCHE",
+            "tag_description": "clause introduced by verbal form 'che'"
+        },
+        {
+            "tag_name": "CLDA",
+            "tag_description": "clause introduced by verbal form 'da'"
+        },
+        {
+            "tag_name": "CLQ",
+            "tag_description": "clause introduced by an interrogative pronound or partilce"
+        },
+        {
+            "tag_name": "CLR",
+            "tag_description": "clause introduced by an relative pronound and surrounded by commas"
+        },
+        {
+            "tag_name": "CLZADA",
+            "tag_description": "clause introduced by verbal form 'za da'"
+        },
+        {
+            "tag_name": "CoordP",
+            "tag_description": "Coordination Phrase"
+        },
+        {
+            "tag_name": "Gerund",
+            "tag_description": "Gerund Lexical Element"
+        },
+        {
+            "tag_name": "H",
+            "tag_description": "Family Name or Adjective, Derived from Family Names, Lexical Element"
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "Interjection Lexical Element"
+        },
+        {
+            "tag_name": "M",
+            "tag_description": "Numeral Lexical Element"
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "Noun Lexical Element"
+        },
+        {
+            "tag_name": "NPA",
+            "tag_description": "Head-Adjunct Noun Phrase"
+        },
+        {
+            "tag_name": "NPC",
+            "tag_description": "Head-Complement Noun Phrase"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "Prepositional Phrase"
+        },
+        {
+            "tag_name": "Participle",
+            "tag_description": "Participle Lexical Element"
+        },
+        {
+            "tag_name": "Prep",
+            "tag_description": "Preposition Lexical Element"
+        },
+        {
+            "tag_name": "Pron",
+            "tag_description": "Pronoun Lexical Element"
+        },
+        {
+            "tag_name": "ROOT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S",
+            "tag_description": "Sentence Level Clause"
+        },
+        {
+            "tag_name": "T",
+            "tag_description": "Particle Lexical Element"
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "Verb Phrase"
+        },
+        {
+            "tag_name": "VPA",
+            "tag_description": "Verb Phrase (adjunct)"
+        },
+        {
+            "tag_name": "VPC",
+            "tag_description": "Verb Phrase (subject)"
+        },
+        {
+            "tag_name": "VPF",
+            "tag_description": "Verb Phrase (filler)"
+        },
+        {
+            "tag_name": "VPS",
+            "tag_description": "Verb Phrase (subject)"
+        }
+    ]
+}
