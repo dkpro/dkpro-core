@@ -20,6 +20,34 @@
   - title: "Language Reference"
     url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/org.dkpro.core$dkpro-core-doc-asl/doclinks/1/language-reference.html"
 
+- version: 2.0.0
+  date: 2019-06-09
+  status: stable
+  groupId: org.dkpro.core
+  artifactId: dkpro-core-asl
+  tag: rel/dkpro-core-2.0.0
+  doclinks:
+  - title: "User Guide and Reference"
+    url: "docs/user-guide.html"
+  - title: "Developer Guide"
+    url: "docs/developer-guide.html"
+  - title: "Component Reference"
+    url: "docs/component-reference.html"
+  - title: "Dataset Reference"
+    url: "docs/dataset-reference.html"
+  - title: "Typesystem Reference"
+    url: "docs/typesystem-reference.html"
+  - title: "Model Reference"
+    url: "docs/model-reference.html"
+  - title: "Format Reference"
+    url: "docs/format-reference.html"
+  - title: "Tagset Reference"
+    url: "docs/tagset-reference.html"
+  - title: "Language Reference"
+    url: "docs/language-reference.html"
+  - title: "API Documentation"
+    url: "apidocs"
+
 - version: 1.11.1
   date: 2019-08-16
   status: stable

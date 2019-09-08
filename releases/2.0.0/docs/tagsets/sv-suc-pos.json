@@ -1,0 +1,99 @@
+{
+    "name": "SUC 2.0",
+    "description": "Stockholm Umea\u030a Corpus POS Tags\n\nalso used by the Swedish Treebank\n\nReferences:\n* http://spraakbanken.gu.se/parole/Docs/SUC2.0-manual.pdf\n* http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html\n",
+    "language": "sv",
+    "tags": [
+        {
+            "tag_name": "AB",
+            "tag_description": "Adverb"
+        },
+        {
+            "tag_name": "DT",
+            "tag_description": "Determiner"
+        },
+        {
+            "tag_name": "HA",
+            "tag_description": "WH-adverb"
+        },
+        {
+            "tag_name": "HD",
+            "tag_description": "WH-determiner"
+        },
+        {
+            "tag_name": "HP",
+            "tag_description": "WH-pronoun"
+        },
+        {
+            "tag_name": "HS",
+            "tag_description": "WH-possessive"
+        },
+        {
+            "tag_name": "IN",
+            "tag_description": "Interjection"
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "Adjective"
+        },
+        {
+            "tag_name": "KN",
+            "tag_description": "Coordinating conjunction"
+        },
+        {
+            "tag_name": "MAD",
+            "tag_description": "Major delimiter"
+        },
+        {
+            "tag_name": "MID",
+            "tag_description": "Minor delimiter"
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "Noun"
+        },
+        {
+            "tag_name": "PAD",
+            "tag_description": "Pairwise delimiter"
+        },
+        {
+            "tag_name": "PC",
+            "tag_description": "Participle"
+        },
+        {
+            "tag_name": "PL",
+            "tag_description": "Particle"
+        },
+        {
+            "tag_name": "PM",
+            "tag_description": "Proper Noun"
+        },
+        {
+            "tag_name": "PN",
+            "tag_description": "Pronoun"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "Preposition"
+        },
+        {
+            "tag_name": "PS",
+            "tag_description": "Possessive pronoun"
+        },
+        {
+            "tag_name": "RG",
+            "tag_description": "Cardinal number"
+        },
+        {
+            "tag_name": "RO",
+            "tag_description": "Ordinal number"
+        },
+        {
+            "tag_name": "SN",
+            "tag_description": "Subordinating conjunction"
+        },
+        {
+            "tag_name": "VB",
+            "tag_description": "Verb"
+        }
+    ]
+}
