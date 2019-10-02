@@ -236,15 +236,23 @@ public class IOTestRunner
             setParameter(aWriter, ComponentParameters.PARAM_TARGET_LOCATION, output);
         }
 
-        AnalysisEngineDescription metadataStripper = createEngineDescription(
-                DocumentMetaDataStripper.class);
+        List<AnalysisEngineDescription> processors = new ArrayList<>();
+        
+        if (!aOptions.keepDocumentMetadata) {
+            processors.add(createEngineDescription(DocumentMetaDataStripper.class));
+        }
 
-        AnalysisEngineDescription validator = createEngineDescription(
-                Validator.class);
+        processors.add(createEngineDescription(Validator.class));
+        
+        if (aOptions.processor != null) {
+            processors.add(aOptions.processor);
+        }
+
+        processors.add(aWriter);
 
         Validator.options = aOptions != null ? aOptions : new TestOptions();
         
-        runPipeline(aReader, validator, metadataStripper, aWriter);
+        runPipeline(aReader, processors.toArray(new AnalysisEngineDescription[] {}));
 
         AssertAnnotations.assertValid(Validator.messages);
         
