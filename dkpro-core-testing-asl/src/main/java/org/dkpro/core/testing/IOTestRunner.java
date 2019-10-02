@@ -238,13 +238,13 @@ public class IOTestRunner
 
         List<AnalysisEngineDescription> processors = new ArrayList<>();
         
-        if (!aOptions.keepDocumentMetadata) {
+        if (aOptions != null && !aOptions.keepDocumentMetadata) {
             processors.add(createEngineDescription(DocumentMetaDataStripper.class));
         }
 
         processors.add(createEngineDescription(Validator.class));
         
-        if (aOptions.processor != null) {
+        if (aOptions != null && aOptions.processor != null) {
             processors.add(aOptions.processor);
         }
 
