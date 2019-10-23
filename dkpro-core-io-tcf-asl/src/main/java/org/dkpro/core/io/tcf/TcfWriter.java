@@ -112,6 +112,13 @@ public class TcfWriter
     @ConfigurationParameter(name = PARAM_MERGE, mandatory = true, defaultValue = "true")
     private boolean merge;
 
+    /**
+     * TCF version.
+     */
+    public static final String PARAM_TCF_VERSION = "tcfVersion";
+    @ConfigurationParameter(name = PARAM_TCF_VERSION, mandatory = true, defaultValue = "0.4")
+    private String tcfVersion;
+
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
@@ -224,6 +231,7 @@ public class TcfWriter
 
         // write the annotated data object into the output stream
         WLData wldata = new WLData(textCorpus);
+        wldata.setVersion(tcfVersion);
         WLDObjector.write(wldata, aOs);
     }
 
