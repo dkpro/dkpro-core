@@ -238,7 +238,8 @@ public class IOTestRunner
 
         List<AnalysisEngineDescription> processors = new ArrayList<>();
         
-        if (aOptions != null && !aOptions.keepDocumentMetadata) {
+        // By default, we strip the document metadata if no options are specified
+        if (aOptions == null || !aOptions.keepDocumentMetadata) {
             processors.add(createEngineDescription(DocumentMetaDataStripper.class));
         }
 
