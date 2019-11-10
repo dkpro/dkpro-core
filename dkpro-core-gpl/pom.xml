@@ -94,7 +94,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-cermine-gpl</artifactId>
-        <version>1.11.1-SNAPSHOT</version>
+        <version>1.11.2-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -179,7 +179,7 @@
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-io-cermine-gpl</artifactId>
-            <version>1.11.1-SNAPSHOT</version>
+            <version>1.11.2-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
