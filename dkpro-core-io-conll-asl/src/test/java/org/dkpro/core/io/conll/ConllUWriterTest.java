@@ -56,8 +56,8 @@ public class ConllUWriterTest
         writer.process(jcas);
 
         String reference = readFileToString(
-                new File("src/test/resources/conll/u_v2/conllu-linebreaks.conll"), "UTF-8").trim();
-        String actual = readFileToString(new File(target, "output.conll"), "UTF-8").trim();
+                new File("src/test/resources/conll/u_v2/conllu-linebreaks.conllu"), "UTF-8").trim();
+        String actual = readFileToString(new File(target, "output.conllu"), "UTF-8").trim();
 
         assertThat(actual).isEqualToNormalizingNewlines(reference);
     }
