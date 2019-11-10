@@ -42,7 +42,7 @@
     <uimafit.version>3.0.0</uimafit.version>
     <uimafit.plugin.version>3.0.0</uimafit.plugin.version>
     <omtd.version>3.0.2.7</omtd.version>
-    <lucene.version>4.4.0</lucene.version>
+    <lucene.version>8.3.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>4.3.22.RELEASE</spring.version>
     <slf4j.version>1.7.26</slf4j.version>
