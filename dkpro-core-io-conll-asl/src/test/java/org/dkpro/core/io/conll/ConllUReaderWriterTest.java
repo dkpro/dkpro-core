@@ -37,7 +37,7 @@ public class ConllUReaderWriterTest
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
                         ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false),
-                "conll/u/conllu-en-orig.conll");
+                "conll/u/conllu-en-orig.conllu");
     }
 
     @Ignore("This unfortunately doesn't work yet.")
@@ -45,14 +45,14 @@ public class ConllUReaderWriterTest
     public void roundTripV2EmptyNodes()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-empty_nodes.conll");
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-empty_nodes.conllu");
     }
 
     @Test
     public void roundTripV2MorphologicalAnnotation()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-morphological_annotation.conll");
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-morphological_annotation.conllu");
     }
 
     @Ignore("This unfortunately doesn't work yet.")
@@ -64,7 +64,7 @@ public class ConllUReaderWriterTest
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
                         ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
-                "conll/u_v2/conllu-paragraph_and_document_boundaries.conll");
+                "conll/u_v2/conllu-paragraph_and_document_boundaries.conllu");
     }
 
     @Test
@@ -75,14 +75,14 @@ public class ConllUReaderWriterTest
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
                         ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
-                "conll/u_v2/conllu-sentence_bounaries_and_comments.conll");
+                "conll/u_v2/conllu-sentence_bounaries_and_comments.conllu");
     }
 
     @Test
     public void roundTripV2SyntacticAnnotation()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-syntactic_annotation.conll");
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-syntactic_annotation.conllu");
     }
 
     @Ignore("This unfortunately doesn't work yet.")
@@ -94,14 +94,14 @@ public class ConllUReaderWriterTest
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
                         ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
-                "conll/u_v2/conllu-untokenized_text.conll");
+                "conll/u_v2/conllu-untokenized_text.conllu");
     }
 
     @Test
     public void roundTripV2WordsAndTokens()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-words_and_tokens.conll");
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-words_and_tokens.conllu");
     }
 
     @Test
@@ -112,8 +112,8 @@ public class ConllUReaderWriterTest
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
                         ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false),
-                "conll/u/conllu-en-ref.conll",
-                "conll/u/conllu-en-orig2.conll");
+                "conll/u/conllu-en-ref.conllu",
+                "conll/u/conllu-en-orig2.conllu");
     }
 
     @Rule
