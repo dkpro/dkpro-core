@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.io.tei;
 
-import static java.lang.Character.isWhitespace;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -85,6 +84,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -591,7 +591,7 @@ public class TeiReader
                 if (readSentence) {
                     Sentence s = new Sentence(getJCas(), sentenceStart, getBuffer().length());
                     if (elementsToTrim.contains(aName)) {
-                        trim(s);
+                        TrimUtils.trim(getBuffer(), s);
                     }
                     s.addToIndexes();
                 }
@@ -601,7 +601,7 @@ public class TeiReader
                 if (readParagraph) {
                     Paragraph para = new Paragraph(getJCas(), paragraphStart, getBuffer().length());
                     if (elementsToTrim.contains(aName)) {
-                        trim(para);
+                        TrimUtils.trim(getBuffer(), para);
                     }
                     para.addToIndexes();
                 }
@@ -611,7 +611,7 @@ public class TeiReader
                 NamedEntity ne = namedEntities.pop();
                 ne.setEnd(getBuffer().length());
                 if (elementsToTrim.contains(aName)) {
-                    trim(ne);
+                    TrimUtils.trim(getBuffer(), ne);
                 }
                 ne.addToIndexes();
             }
@@ -647,7 +647,7 @@ public class TeiReader
                     Token token = new Token(getJCas(), tokenStart, getBuffer().length());
                     
                     if (elementsToTrim.contains(aName)) {
-                        trim(token);
+                        TrimUtils.trim(getBuffer(), token);
                     }
                         
                     if (posTag != null && readPOS) {
@@ -700,24 +700,6 @@ public class TeiReader
             if (captureText && !omitIgnorableWhitespace) {
                 buffer.append(aCh, aStart, aLength);
             }
-        }
-
-        private void trim(Annotation aAnnotation)
-        {
-            StringBuilder buf = getBuffer();
-            int s = aAnnotation.getBegin();
-            int e = aAnnotation.getEnd();
-            while (s < e && isWhitespace(buf.charAt(s))) {
-                s++;
-            }
-            while ((e > s + 1) && isWhitespace(buf.charAt(e - 1))) {
-                e--;
-            }
-            
-            assert s <= e;
-            
-            aAnnotation.setBegin(s);
-            aAnnotation.setEnd(e);
         }
     }
     

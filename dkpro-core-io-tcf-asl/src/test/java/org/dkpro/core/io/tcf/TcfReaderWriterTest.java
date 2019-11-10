@@ -19,29 +19,24 @@ package org.dkpro.core.io.tcf;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.IOException;
 
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.CasDumpWriter;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.jcas.JCas;
 import org.custommonkey.xmlunit.XMLAssert;
-import org.dkpro.core.io.tcf.TcfReader;
-import org.dkpro.core.io.tcf.TcfWriter;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.TestOptions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
-import eu.clarin.weblicht.wlfxb.io.WLDObjector;
-import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
-import eu.clarin.weblicht.wlfxb.tc.api.TextCorpusLayer;
-import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
-import eu.clarin.weblicht.wlfxb.xb.WLData;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 public class TcfReaderWriterTest
 {
@@ -49,96 +44,69 @@ public class TcfReaderWriterTest
     public void test1()
             throws Exception
     {
-        testOneWay("tcf-after.xml", "tcf-after-expected.xml");
+        testOneWay(
+                createReaderDescription(TcfReader.class),
+                createEngineDescription(TcfWriter.class,
+                        TcfWriter.PARAM_MERGE, false,
+                        TcfWriter.PARAM_FILENAME_EXTENSION, ".xml"),
+                "tcf-after-expected.xml", 
+                "tcf-after.xml",
+                new TestOptions().keepDocumentMetadata().resultAssertor(this::assertXmlEquals));
     }
 
     @Test
     public void testWithCmdMetadata()
             throws Exception
     {
-        testOneWay("tcf04-karin-wl.xml", "tcf04-karin-wl_expected.xml");
-    }
-
-    public void testOneWay(String aInputFile, String aExpectedFile)
-        throws Exception
-    {
-        CollectionReaderDescription reader = createReaderDescription(TcfReader.class, 
-                TcfReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                TcfReader.PARAM_PATTERNS, aInputFile);
-
-        AnalysisEngineDescription writer = createEngineDescription(
-                TcfWriter.class,
-                TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/oneway",
-                TcfWriter.PARAM_OVERWRITE, true,
-                TcfWriter.PARAM_FILENAME_EXTENSION, ".xml",
-                TcfWriter.PARAM_STRIP_EXTENSION, true);
-
-        AnalysisEngineDescription dumper = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/oneway/dump.txt");
-
-        runPipeline(reader, writer, dumper);
-
-        InputStream isReference = new FileInputStream(new File("src/test/resources/"
-                + aExpectedFile));
-
-        InputStream isActual = new FileInputStream(new File("target/test-output/oneway/"
-                + aInputFile));
-
-        WLData wLDataReference = WLDObjector.read(isReference);
-        TextCorpusStored aCorpusDataReference = wLDataReference.getTextCorpus();
-
-        WLData wLDataActual = WLDObjector.read(isActual);
-        TextCorpusStored aCorpusDataActual = wLDataActual.getTextCorpus();
-
-        // check if layers maintained
-        assertEquals(aCorpusDataReference.getLayers().size(), aCorpusDataActual.getLayers().size());
-
-        // Check if every layers have the same number of annotations
-        for (TextCorpusLayer layer : aCorpusDataReference.getLayers()) {
-            assertEquals(
-                    "Layer size mismatch in [" + layer.getClass().getName() + "]",
-                    layer.size(), 
-                    getLayer(aCorpusDataActual, layer.getClass()).size());
-        }
-
-        XMLAssert.assertXMLEqual(
-                new InputSource("src/test/resources/" + aExpectedFile),
-                new InputSource(new File("target/test-output/oneway/" + aInputFile).getPath()));
-    }
-
-    private static TextCorpusLayer getLayer(TextCorpus aCorpus,
-            Class<? extends TextCorpusLayer> aLayerType)
-    {
-        for (TextCorpusLayer layer : aCorpus.getLayers()) {
-            if (layer.getClass().equals(aLayerType)) {
-                return layer;
-            }
-        }
-        throw new IllegalArgumentException("No layer of type [" + aLayerType.getName() + "]");
+        testOneWay(
+                createReaderDescription(TcfReader.class),
+                createEngineDescription(TcfWriter.class,
+                        TcfWriter.PARAM_FILENAME_EXTENSION, ".xml"),
+                "tcf04-karin-wl_expected.xml", 
+                "tcf04-karin-wl.xml",
+                new TestOptions()
+                        .keepDocumentMetadata()
+                        .resultAssertor(this::assertXmlEquals)
+                        // To spot-check if replaced layers enter into the output, we reverse the
+                        // POS tags.
+                        .processor(createEngineDescription(PosReplacer.class)));
     }
     
     @Test
     public void testRoundtrip()
         throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TcfReader.class, 
-                TcfReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                TcfReader.PARAM_PATTERNS, "wlfxb.xml");
+        testRoundTrip(
+                createReaderDescription(TcfReader.class),
+                createEngineDescription(TcfWriter.class,
+                        TcfWriter.PARAM_MERGE, false,
+                        TcfWriter.PARAM_FILENAME_EXTENSION, ".xml"),
+                "wlfxb_expected.xml",
+                new TestOptions().keepDocumentMetadata().resultAssertor(this::assertXmlEquals));
+    }
+    
+    public static class PosReplacer extends JCasAnnotator_ImplBase {
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                TcfWriter.class,
-                TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/roundtrip",
-                TcfWriter.PARAM_OVERWRITE, true,
-                TcfWriter.PARAM_FILENAME_EXTENSION, ".xml",
-                TcfWriter.PARAM_STRIP_EXTENSION, true);
-
-        runPipeline(reader, writer);
-
-        XMLAssert.assertXMLEqual(
-                new InputSource("src/test/resources/wlfxb.xml"),
-                new InputSource("target/test-output/roundtrip/wlfxb.xml"));
+        @Override
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
+        {
+            aJCas.select(POS.class).forEach(pos -> pos
+                    .setPosValue(new StringBuilder(pos.getPosValue()).reverse().toString()));
+        }
     }
 
+    private void assertXmlEquals(File expected, File actual)
+    {
+        try {
+            XMLAssert.assertXMLEqual(
+                    new InputSource(expected.getPath()),
+                    new InputSource(actual.getPath()));
+        }
+        catch (SAXException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

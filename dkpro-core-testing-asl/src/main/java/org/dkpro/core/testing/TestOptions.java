@@ -22,12 +22,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.testing.validation.checks.Check;
 
 public class TestOptions
 {
     Set<Class<? extends Check>> skippedChecks = new HashSet<>();
     BiConsumer<File, File> resultAssertor;
+    boolean keepDocumentMetadata = false;
+    AnalysisEngineDescription processor;
     
     public TestOptions skipCheck(Class<? extends Check> aCheck)
     {
@@ -38,6 +41,18 @@ public class TestOptions
     public TestOptions resultAssertor(BiConsumer<File, File> aResultComparator)
     {
         resultAssertor = aResultComparator;
+        return this;
+    }
+    
+    public TestOptions keepDocumentMetadata()
+    {
+        keepDocumentMetadata = true;
+        return this;
+    }
+    
+    public TestOptions processor(AnalysisEngineDescription aProcessor)
+    {
+        processor = aProcessor;
         return this;
     }
 }

@@ -17,10 +17,16 @@
  */
 package org.dkpro.core.io.tcf;
 
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.LEMMAS;
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.NAMED_ENTITIES;
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.ORTHOGRAPHY;
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.PARSING_DEPENDENCY;
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.POSTAGS;
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.REFERENCES;
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.SENTENCES;
+import static eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag.TOKENS;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.exists;
-import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,11 +35,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,39 +45,23 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.io.tcf.internal.DKPro2Tcf;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
-import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamedWithReplaceableLayers;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
-import eu.clarin.weblicht.wlfxb.tc.api.CorrectionOperation;
-import eu.clarin.weblicht.wlfxb.tc.api.DependencyParsingLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.LemmasLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.NamedEntitiesLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.OrthographyLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.PosTagsLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.Reference;
-import eu.clarin.weblicht.wlfxb.tc.api.ReferencesLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.SentencesLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
-import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
@@ -102,8 +88,6 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class TcfWriter
     extends JCasFileWriter_ImplBase
 {
-    private static final String REL_TYPE_EXPLETIVE = "expletive";
-    
     /**
      * Specify the suffix of output files. Default value <code>.tcf</code>. If the suffix is not
      * needed, provide an empty string as value.
@@ -127,6 +111,13 @@ public class TcfWriter
     public static final String PARAM_MERGE = "merge";
     @ConfigurationParameter(name = PARAM_MERGE, mandatory = true, defaultValue = "true")
     private boolean merge;
+
+    /**
+     * TCF version.
+     */
+    public static final String PARAM_TCF_VERSION = "tcfVersion";
+    @ConfigurationParameter(name = PARAM_TCF_VERSION, mandatory = true, defaultValue = "0.4")
+    private String tcfVersion;
 
     @Override
     public void initialize(UimaContext aContext)
@@ -236,10 +227,11 @@ public class TcfWriter
         // create text annotation layer and add the string of the text into the layer
         textCorpus.createTextLayer().addText(aJCas.getDocumentText());
 
-        write(aJCas, textCorpus);
+        new DKPro2Tcf().convert(aJCas, textCorpus);
 
         // write the annotated data object into the output stream
         WLData wldata = new WLData(textCorpus);
+        wldata.setVersion(tcfVersion);
         WLDObjector.write(wldata, aOs);
     }
 
@@ -258,358 +250,37 @@ public class TcfWriter
     public void casToTcfWriter(InputStream aIs, JCas aJCas, OutputStream aOs)
         throws WLFormatException
     {
-        // If these layers are present in the TCF file, we use them from there, otherwise
-        // we generate them
-        EnumSet<TextCorpusLayerTag> layersToRead = EnumSet.of(
-                TextCorpusLayerTag.TOKENS,
-                TextCorpusLayerTag.SENTENCES);
-        
         // If we have annotations for these layers in the CAS, we rewrite those layers. 
-        List<TextCorpusLayerTag> layersToReplace = new ArrayList<>();
+        List<TextCorpusLayerTag> layersToReplaceList = new ArrayList<>();
         if (exists(aJCas, POS.class) || !preserveIfEmpty) {
-            layersToReplace.add(TextCorpusLayerTag.POSTAGS);
+            layersToReplaceList.add(POSTAGS);
         }
         if (exists(aJCas, Lemma.class) || !preserveIfEmpty) {
-            layersToReplace.add(TextCorpusLayerTag.LEMMAS);
+            layersToReplaceList.add(LEMMAS);
         }
         if (exists(aJCas, SofaChangeAnnotation.class) || !preserveIfEmpty) {
-            layersToReplace.add(TextCorpusLayerTag.ORTHOGRAPHY);
+            layersToReplaceList.add(ORTHOGRAPHY);
         }
         if (exists(aJCas, NamedEntity.class) || !preserveIfEmpty) {
-            layersToReplace.add(TextCorpusLayerTag.NAMED_ENTITIES);
+            layersToReplaceList.add(NAMED_ENTITIES);
         }
         if (exists(aJCas, Dependency.class) || !preserveIfEmpty) {
-            layersToReplace.add(TextCorpusLayerTag.PARSING_DEPENDENCY);
+            layersToReplaceList.add(PARSING_DEPENDENCY);
         }
         if (exists(aJCas, CoreferenceChain.class) || !preserveIfEmpty) {
-            layersToReplace.add(TextCorpusLayerTag.REFERENCES);
+            layersToReplaceList.add(REFERENCES);
         }
+        
+        EnumSet<TextCorpusLayerTag> layersToReplaceSet = EnumSet.copyOf(layersToReplaceList);
                 
-        TextCorpusStreamedWithReplaceableLayers textCorpus = null;
-        try {
-            textCorpus = new TextCorpusStreamedWithReplaceableLayers(
-                aIs, layersToRead, EnumSet.copyOf(layersToReplace), aOs);
+        // If these layers are present in the TCF file, we use them from there, otherwise
+        // we generate them
+        EnumSet<TextCorpusLayerTag> layersToReadSet = EnumSet.of(TOKENS, SENTENCES);
         
-            write(aJCas, textCorpus);
-        }
-        finally {
-            if (textCorpus != null) {
-                try {
-                    textCorpus.close();
-                }
-                catch (IOException e) {
-                    // Ignore exception while closing
-                }
-            }
-        }
-    }
-
-    private void write(JCas aJCas, TextCorpus aTextCorpus)
-    {
-        Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> tokensBeginPositionMap;
-        tokensBeginPositionMap = writeTokens(aJCas, aTextCorpus);
-        writeSentence(aJCas, aTextCorpus, tokensBeginPositionMap);
-        writePosTags(aJCas, aTextCorpus, tokensBeginPositionMap);
-        writeLemmas(aJCas, aTextCorpus, tokensBeginPositionMap);
-        writeOrthograph(aJCas, aTextCorpus);
-        writeDependency(aJCas, aTextCorpus, tokensBeginPositionMap);
-        writeNamedEntity(aJCas, aTextCorpus, tokensBeginPositionMap);
-        writeCoreference(aJCas, aTextCorpus, tokensBeginPositionMap);
-    }
-
-    private Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> writeTokens(JCas aJCas,
-            TextCorpus aTextCorpus)
-    {
-        boolean tokensLayerCreated = false;
-        
-        // Create tokens layer if it does not exist
-        TokensLayer tokensLayer = aTextCorpus.getTokensLayer();
-        if (tokensLayer == null) {
-            tokensLayer = aTextCorpus.createTokensLayer();
-            tokensLayerCreated = true;
-            getLogger().debug("Layer [" + TextCorpusLayerTag.TOKENS.getXmlName() + "]: created");
-        }
-        else {
-            getLogger().debug("Layer [" + TextCorpusLayerTag.TOKENS.getXmlName() + "]: found");
-        }
-        
-        
-        Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> tokensBeginPositionMap =
-                new HashMap<>();
-
-        int j = 0;
-        for (Token token : select(aJCas, Token.class)) {
-            if (tokensLayerCreated) {
-                tokensLayer.addToken(token.getCoveredText());
-            }
-
-            tokensBeginPositionMap.put(token.getBegin(), tokensLayer.getToken(j));
-            j++;
-        }
-        
-        return tokensBeginPositionMap;
-    }
-
-    private void writePosTags(JCas aJCas, TextCorpus aTextCorpus,
-            Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> aTokensBeginPositionMap)
-    {
-        if (!JCasUtil.exists(aJCas, POS.class)) {
-            // Do nothing if there are no part-of-speech tags in the CAS
-            getLogger().debug("Layer [" + TextCorpusLayerTag.POSTAGS.getXmlName() + "]: empty");
-            return;
-        }
-
-        // Tokens layer must already exist
-        TokensLayer tokensLayer = aTextCorpus.getTokensLayer();
-        
-        // create POS tag annotation layer
-        String posTagSet = "STTS";
-        for (TagsetDescription tagSet : select(aJCas, TagsetDescription.class)) {
-            if (tagSet.getLayer().equals(POS.class.getName())) {
-                posTagSet = tagSet.getName();
-                break;
-            }
-        }
-        
-        PosTagsLayer posLayer = aTextCorpus.createPosTagsLayer(posTagSet);
-        
-        getLogger().debug("Layer [" + TextCorpusLayerTag.POSTAGS.getXmlName() + "]: created");
-        
-        int j = 0;
-        for (Token coveredToken : select(aJCas, Token.class)) {
-            POS pos = coveredToken.getPos();
-
-            if (pos != null && posLayer != null ) {
-                String posValue = coveredToken.getPos().getPosValue();
-                posLayer.addTag(posValue, tokensLayer.getToken(j));
-            }
-
-            j++;
-        }
-    }
-    
-    private void writeLemmas(JCas aJCas, TextCorpus aTextCorpus,
-            Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> aTokensBeginPositionMap)
-    {
-        if (!JCasUtil.exists(aJCas, Lemma.class)) {
-            // Do nothing if there are no lemmas in the CAS
-            getLogger().debug("Layer [" + TextCorpusLayerTag.LEMMAS.getXmlName() + "]: empty");
-            return;
-        }
-        
-        // Tokens layer must already exist
-        TokensLayer tokensLayer = aTextCorpus.getTokensLayer();
-        
-        // create lemma annotation layer
-        LemmasLayer lemmasLayer = aTextCorpus.createLemmasLayer();
-
-        getLogger().debug("Layer [" + TextCorpusLayerTag.LEMMAS.getXmlName() + "]: created");
-
-        int j = 0;
-        for (Token coveredToken : select(aJCas, Token.class)) {
-            Lemma lemma = coveredToken.getLemma();
-            if (lemma != null && lemmasLayer != null) {
-                String lemmaValue = coveredToken.getLemma().getValue();
-                lemmasLayer.addLemma(lemmaValue, tokensLayer.getToken(j));
-            }
-            j++;
-        }
-        
-    }
-    
-    private void writeOrthograph(JCas aJCas, TextCorpus aTextCorpus) {
-        if (!JCasUtil.exists(aJCas, SofaChangeAnnotation.class)) {
-            // Do nothing if there are no SofaChangeAnnotation layer
-            // (Which is equivalent to Orthography layer in TCF) in the CAS
-            getLogger().debug("Layer [" + TextCorpusLayerTag.ORTHOGRAPHY.getXmlName() + "]: empty");
-            return;
-        }
-
-        // Tokens layer must already exist
-        TokensLayer tokensLayer = aTextCorpus.getTokensLayer();
-
-        // create orthographyLayer annotation layer
-        OrthographyLayer orthographyLayer = aTextCorpus.createOrthographyLayer();
-
-        getLogger().debug("Layer [" + TextCorpusLayerTag.ORTHOGRAPHY.getXmlName() + "]: created");
-
-        int j = 0;
-        for (Token token : select(aJCas, Token.class)) {
-            List<SofaChangeAnnotation> scas = selectCovered(aJCas, SofaChangeAnnotation.class,
-                    token.getBegin(), token.getEnd());
-            if (scas.size() > 0 && orthographyLayer != null) {
-                SofaChangeAnnotation change = scas.get(0);
-                
-                orthographyLayer.addCorrection(scas.get(0).getValue(), tokensLayer.getToken(j),
-                        Optional.ofNullable(change.getOperation()).map(CorrectionOperation::valueOf)
-                                .orElse(null));
-            }
-            j++;
-        }
-
-    }
-    
-    private void writeSentence(JCas aJCas, TextCorpus aTextCorpus,
-            Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> aTokensBeginPositionMap)
-    {
-        // if not TCF file, add sentence layer (Sentence is required for BRAT)
-        SentencesLayer sentencesLayer = aTextCorpus.getSentencesLayer();
-        if (sentencesLayer != null) {
-            getLogger().debug("Layer [" + TextCorpusLayerTag.SENTENCES.getXmlName() + "]: found");
-            return;
-        }
-
-        sentencesLayer = aTextCorpus.createSentencesLayer();
-
-        getLogger().debug("Layer [" + TextCorpusLayerTag.SENTENCES.getXmlName() + "]: created");
-
-        for (Sentence sentence : select(aJCas, Sentence.class)) {
-            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<>();
-            for (Token token : selectCovered(Token.class, sentence)) {
-                tokens.add(aTokensBeginPositionMap.get(token.getBegin()));
-            }
-            sentencesLayer.addSentence(tokens);
-        }
-    }
-
-    private void writeDependency(JCas aJCas, TextCorpus aTextCorpus,
-            Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> aTokensBeginPositionMap)
-    {
-        if (!JCasUtil.exists(aJCas, Dependency.class)) {
-            // Do nothing if there are no dependencies in the CAS
-            getLogger().debug("Layer [" + TextCorpusLayerTag.PARSING_DEPENDENCY.getXmlName() + "]: empty");
-            return;
-        }
-
-        DependencyParsingLayer dependencyParsingLayer = null;
-        String tagSetName = "tiger";
-        for (TagsetDescription tagSet : select(aJCas, TagsetDescription.class)) {
-            if (tagSet.getLayer().equals(Dependency.class.getName())) {
-                tagSetName = tagSet.getName();
-                break;
-            }
-        }
-        
-        Optional<Dependency> hasNonBasic = select(aJCas, Dependency.class).stream()
-            .filter(dep -> dep.getFlavor() != null && 
-                    !DependencyFlavor.BASIC.equals(dep.getFlavor()))
-            .findAny();
-        
-        dependencyParsingLayer = aTextCorpus.createDependencyParsingLayer(tagSetName,
-                hasNonBasic.isPresent(), true);
-
-        getLogger().debug("Layer [" + TextCorpusLayerTag.PARSING_DEPENDENCY.getXmlName() + "]: created");
-        
-        for (Sentence s : select(aJCas, Sentence.class)) {
-            List<eu.clarin.weblicht.wlfxb.tc.api.Dependency> deps = new ArrayList<>();
-            for (Dependency d : selectCovered(Dependency.class, s)) {
-                eu.clarin.weblicht.wlfxb.tc.api.Dependency dependency = dependencyParsingLayer
-                        .createDependency(d.getDependencyType(),
-                                aTokensBeginPositionMap.get(d.getDependent().getBegin()),
-                                aTokensBeginPositionMap.get(d.getGovernor().getBegin()));
-
-                deps.add(dependency);
-            }
-            if (deps.size() > 0) {
-                dependencyParsingLayer.addParse(deps);
-            }
-        }
-    }
-
-    private void writeNamedEntity(JCas aJCas, TextCorpus aTextCorpus,
-            Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> aTokensBeginPositionMap)
-    {
-        if (!JCasUtil.exists(aJCas, NamedEntity.class)) {
-            // Do nothing if there are no named entities in the CAS
-            getLogger().debug("Layer [" + TextCorpusLayerTag.NAMED_ENTITIES.getXmlName() + "]: empty");
-            return;
-        }
-        
-        String tagSetName = "BART";
-        for (TagsetDescription tagSet : select(aJCas, TagsetDescription.class)) {
-            if (tagSet.getLayer().equals(NamedEntity.class.getName())) {
-                tagSetName = tagSet.getName();
-                break;
-            }
-        }
-
-        NamedEntitiesLayer namedEntitiesLayer = aTextCorpus.createNamedEntitiesLayer(tagSetName);
-
-        getLogger().debug("Layer [" + TextCorpusLayerTag.NAMED_ENTITIES.getXmlName() + "]: created");
-        
-        for (NamedEntity namedEntity : select(aJCas, NamedEntity.class)) {
-            List<Token> tokensInCas = selectCovered(aJCas, Token.class, namedEntity.getBegin(),
-                    namedEntity.getEnd());
-            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokensInTcf = new ArrayList<>();
-            for (Token token : tokensInCas) {
-                tokensInTcf.add(aTokensBeginPositionMap.get(token.getBegin()));
-            }
-            namedEntitiesLayer.addEntity(namedEntity.getValue(), tokensInTcf);
-        }
-    }
-
-    private void writeCoreference(JCas aJCas, TextCorpus aTextCorpus,
-            Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> aTokensBeginPositionMap)
-    {
-        if (!JCasUtil.exists(aJCas, CoreferenceChain.class)) {
-            // Do nothing if there are no coreference chains in the CAS
-            getLogger().debug("Layer [" + TextCorpusLayerTag.REFERENCES.getXmlName() + "]: empty");
-            return;
-        }
-        
-        String tagSetName = "TueBaDz";
-        for (TagsetDescription tagSet : select(aJCas, TagsetDescription.class)) {
-            if (tagSet.getLayer().equals(CoreferenceLink.class.getName())) {
-                tagSetName = tagSet.getName();
-                break;
-            }
-        }
-        
-        ReferencesLayer coreferencesLayer = aTextCorpus.createReferencesLayer(null, tagSetName,
-                null);
-        
-        getLogger().debug("Layer [" + TextCorpusLayerTag.REFERENCES.getXmlName() + "]: created");
-
-        // Sort by begin to provide a more-or-less stable order for the unit tests
-        List<CoreferenceChain> chains = select(aJCas, CoreferenceChain.class)
-                .stream()
-                .filter(chain -> chain.getFirst() != null)
-                .sorted((a, b) -> a.getFirst().getBegin() - b.getFirst().getBegin())
-                .collect(Collectors.toList());
-        
-        for (CoreferenceChain chain : chains) {
-            CoreferenceLink prevLink = null;
-            Reference prevRef = null;
-            List<Reference> refs = new ArrayList<>();
-            for (CoreferenceLink link : chain.links()) {
-                // Get covered tokens
-                List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<>();
-                for (Token token : selectCovered(Token.class, link)) {
-                    tokens.add(aTokensBeginPositionMap.get(token.getBegin()));
-                }
-                
-                // Create current reference
-                Reference ref = coreferencesLayer.createReference(link.getReferenceType(), tokens,
-                        null);
-
-                // Special handling for expletive relations
-                if (REL_TYPE_EXPLETIVE.equals(link.getReferenceRelation())) {
-                    coreferencesLayer.addRelation(ref, REL_TYPE_EXPLETIVE);
-                    // if the relation is expletive, then there must not be a next element in the
-                    // chain, so we bail out here.
-                    continue; 
-                }
-                
-                // Create relation between previous and current reference
-                if (prevLink != null) {
-                    coreferencesLayer.addRelation(prevRef, prevLink.getReferenceRelation(), ref);
-                }
-                
-                prevLink = link;
-                prevRef = ref;
-                refs.add(ref);
-            }
-            coreferencesLayer.addReferent(refs);
+        try (TextCorpusStreamedWithReplaceableLayers textCorpus = 
+                new TextCorpusStreamedWithReplaceableLayers(aIs, layersToReadSet, 
+                        layersToReplaceSet, aOs)) {
+            new DKPro2Tcf().convert(aJCas, textCorpus);
         }
     }
 }
