@@ -87,6 +87,11 @@ public class XmiWriter
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xmi")
     private String filenameSuffix;
 
+    /**
+     * Defines the XML version used for serializing the data. The default is XML {@code "1.0"}. 
+     * However, XML 1.0 does not support certain Unicode characters. To support a wider range of 
+     * characters, you can switch this parameter to {@code "1.1"}.
+     */
     public static final String PARAM_VERSION = "version";
     @ConfigurationParameter(name = PARAM_VERSION, mandatory = true, defaultValue = "1.0")
     private String version;
