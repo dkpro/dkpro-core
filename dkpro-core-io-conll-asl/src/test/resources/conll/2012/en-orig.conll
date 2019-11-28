@@ -31,7 +31,7 @@ en-orig.conll   0   9       fair    NN         *))))      fair   -   -          
 en-orig.conll   0  10          .     .           *))         .   -   -          -         *          *  -
 
 en-orig.conll   0   0       They   PRP (TOP(S(S(NP*)      they   -   -          -         *        (A0)                     *                      *  (8)
-en-orig.conll   0   1        had   VBD         (VP*       have have.03   -          -         *        (V*)                   (V*)                   (V*) -
+en-orig.conll   0   1        had   VBD         (VP*       have have.03   -          -         *        (V*)                     *                      *  -
 en-orig.conll   0   2          a    DT         (NP*          a   -   -          -         *          *                      *                      *  (9
 en-orig.conll   0   3       ride    NN            *)      ride   -   -          -         *        (A1)                     *                      *  9)
 en-orig.conll   0   4         on    IN         (PP*         on   -   -          -         *          *                      *                      *  -
@@ -42,7 +42,7 @@ en-orig.conll   0   8   together    RB     (ADVP*)))  together   -   -          
 en-orig.conll   0   9        and    CC            *        and   -   -          -         *          *                      *                      *  -
 en-orig.conll   0  10       when   WRB (S(SBAR(WHADVP*)      when   -   -          -         *          *              (R-AM-TMP)                     *  -
 en-orig.conll   0  11         he   PRP       (S(NP*)        he   -   -          -         *          *                    (A0)                     *  (1)
-en-orig.conll   0  12     looked   VBD         (VP*       look look.01   -          -         *        (V*)                   (V*)               (AM-TMP) -
+en-orig.conll   0  12     looked   VBD         (VP*       look look.01   -          -         *          *                    (V*)               (AM-TMP) -
 en-orig.conll   0  13       into    IN         (PP*       into   -   -          -         *          *                      *                      *  -
 en-orig.conll   0  14       Mary   NNP      (NP(NP*       mary   -   -          -   (PERSON)         *                      *                      *  (11|(4
 en-orig.conll   0  15         's   POS            *)         '   -   -          -         *          *                      *                      *  4)
@@ -51,7 +51,7 @@ en-orig.conll   0  17       eyes   NNS        *)))))       eye   -   -          
 en-orig.conll   0  18          ,     ,            *          ,   -   -          -         *          *                      *                      *  -
 en-orig.conll   0  19       John   NNP         (NP*)      john   -   -          -   (PERSON)         *                      *                    (A1) (1)
 en-orig.conll   0  20 immediately    RB       (ADVP*) immediately   -   -          -         *          *                      *                (AM-TMP) -
-en-orig.conll   0  21       fell   VBD         (VP*       fall fall.01   -          -         *        (V*)                   (V*)                   (V*) -
+en-orig.conll   0  21       fell   VBD         (VP*       fall fall.01   -          -         *          *                      *                    (V*) -
 en-orig.conll   0  22         in    IN         (PP*         in   -   -          -         *          *                      *                      *  -
 en-orig.conll   0  23       love    NN      (NP*))))      love   -   -          -         *          *                      *                      *  -
 en-orig.conll   0  24          .     .           *))         .   -   -          -         *          *                      *                      *  -

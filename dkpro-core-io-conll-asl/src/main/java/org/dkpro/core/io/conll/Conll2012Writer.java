@@ -303,16 +303,19 @@ public class Conll2012Writer
                         pred = row.pred.getCategory();
                     }
                     
+                    // Get which args column the current predicate is destined for. Every args
+                    // column only gets a single predicate.
+                    int predForCol = preds.indexOf(row.pred);
+                    
+                    int argsCol = 0;
                     for (SemArgLink link : row.args) {
-                        
                         if (apreds.length() > 0) {
                             apreds.append("             ");
                         }
                         
                         String value;
                         if (link == null) {
-                            if (row.pred != null && row.pred.getBegin() == row.token.getBegin()
-                                    && row.pred.getEnd() == row.token.getEnd()) {
+                            if (row.pred != null && argsCol == predForCol) {
                                 value = "(V*)";
                             }
                             else {
@@ -324,6 +327,8 @@ public class Conll2012Writer
                                     link.getRole());
                         }
                         apreds.append(String.format("%10s", value));
+                        
+                        argsCol++;
                     }
                 }
                 
