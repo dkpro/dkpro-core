@@ -26,12 +26,15 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -185,8 +188,19 @@ public class Conll2012Writer
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
             
-            List<SemPred> preds = selectCovered(SemPred.class, sentence);
-
+            // Collect the predicates for this sentence in text order
+            List<SemPred> preds = new ArrayList<>();
+            for (Entry<Token, List<SemPred>> e : predIdx.entrySet()) {
+                if (!e.getValue().isEmpty() && tokens.contains(e.getKey())) {
+                    // If there are multiple semantic predicates for the current token, then 
+                    // we keep only the first
+                    preds.add(e.getValue().get(0));
+                }
+            }
+            preds.sort(Comparator
+                    .comparing(SemPred::getBegin)
+                    .thenComparing(SemPred::getEnd, Comparator.reverseOrder()));
+            
             String[] parseFragments = null;
             List<ROOT> root = selectCovered(ROOT.class, sentence);
             if (root.size() == 1) {
@@ -314,18 +328,22 @@ public class Conll2012Writer
                         }
                         
                         String value;
-                        if (link == null) {
-                            if (row.pred != null && argsCol == predForCol) {
-                                value = "(V*)";
-                            }
-                            else {
-                                value = ALT_UNUSED + ' ';
-                            }
+                        // If this is the column for the predicate marker,then we write that - 
+                        // ignoring any arguments that might be at the same position
+                        if (row.pred != null && argsCol == predForCol) {
+                            value = "(V*)";
                         }
-                        else {
+                        // ... otherwise - if there is an argument at this position, then write that
+                        else if (link != null) {
                             value = encodeMultiTokenAnnotation(row.token, link.getTarget(),
                                     link.getRole());
                         }
+                        // ... and if there is neither the predicate marker nor the argument, then
+                        // mark as unused
+                        else {
+                            value = ALT_UNUSED + ' ';
+                        }
+                        
                         apreds.append(String.format("%10s", value));
                         
                         argsCol++;
