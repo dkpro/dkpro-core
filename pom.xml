@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>22</version>
+    <version>23</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
@@ -35,7 +35,7 @@
   </organization> 
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <currentYear>2018</currentYear>
+    <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <uima.version>2.10.3</uima.version>
     <uimafit.version>2.4.0</uimafit.version>
