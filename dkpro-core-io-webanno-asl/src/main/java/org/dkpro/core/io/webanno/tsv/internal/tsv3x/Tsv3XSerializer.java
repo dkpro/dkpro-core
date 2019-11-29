@@ -45,7 +45,6 @@ import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.TsvSchema.FEAT_
 
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
