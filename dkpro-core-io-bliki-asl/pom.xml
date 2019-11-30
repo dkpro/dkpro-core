@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-asl</artifactId>
-    <version>1.12.0</version>
+    <version>1.12.1-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-io-bliki-asl</artifactId>
