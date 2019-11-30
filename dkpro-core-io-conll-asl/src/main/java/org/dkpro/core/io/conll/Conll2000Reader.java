@@ -42,12 +42,12 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.IobDecoder;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -70,7 +70,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"})
 public class Conll2000Reader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     private static final int FORM = 0;
     private static final int POSTAG = 1;
@@ -141,7 +141,7 @@ public class Conll2000Reader
             ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
-    
+
     private MappingProvider posMappingProvider;
     private MappingProvider chunkMappingProvider;
 
@@ -213,22 +213,24 @@ public class Conll2000Reader
             int i = 0;
             for (String[] word : words) {
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
+                Token token = doc.add(trim(word[FORM]), Token.class);
                 sentenceEnd = token.getEnd();
                 doc.add(" ");
                 
                 if (posEnabled) {
-                    Type posTag = posMappingProvider.getTagType(word[POSTAG]);
+                    String posTagValue = cleanTag(word[POSTAG]);
+                    
+                    Type posTag = posMappingProvider.getTagType(posTagValue);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG] != null ? word[POSTAG].intern() : null);
+                    pos.setPosValue(posTagValue);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
                 
                 tokens.add(token);
-                chunkTags[i] = word[IOB];
+                chunkTags[i] = trim(word[IOB]);
                 i++;
             }
             
