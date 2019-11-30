@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core</artifactId>
-    <version>1.12.0-SNAPSHOT</version>
+    <version>1.12.0</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>dkpro-core-build</artifactId>
