@@ -59,6 +59,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -1752,6 +1753,96 @@ public abstract class WebAnnoTsv3WriterTestBase
         writeAndAssertEquals(jcas);
     }
     
+    
+    /*
+     * This is something that cannot be done through the editor UI but can happen when working with
+     * externally created data.
+     */
+    @Test
+    public void testZeroWidthAnnotationBetweenTokenIsMovedToEndOfPreviousToken() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        
+        DocumentMetaData.create(jcas).setDocumentId("doc");
+        jcas.setDocumentText("one  two");
+        new Token(jcas, 0, 3).addToIndexes();
+        new Token(jcas, 5, 8).addToIndexes();
+        new Sentence(jcas, 0, 8).addToIndexes();
+        
+        // NE is after the end of the last token and should be moved to the end of the last token
+        // otherwise it could not be represented in the TSV3 format.
+        new NamedEntity(jcas, 4, 4).addToIndexes();
+        
+        writeAndAssertEquals(jcas);
+    }
+
+    /*
+     * This is something that cannot be done through the editor UI but can happen when working with
+     * externally created data.
+     */
+    @Test
+    public void testZeroWidthAnnotationBeyondLastTokenIsMovedToEndOfLastToken() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        
+        DocumentMetaData.create(jcas).setDocumentId("doc");
+        jcas.setDocumentText("one two  ");
+        new Token(jcas, 0, 3).addToIndexes();
+        new Token(jcas, 4, 7).addToIndexes();
+        new Sentence(jcas, 0, 7).addToIndexes();
+        
+        // NE is after the end of the last token and should be moved to the end of the last token
+        // otherwise it could not be represented in the TSV3 format.
+        new NamedEntity(jcas, 8, 8).addToIndexes();
+        
+        writeAndAssertEquals(jcas);
+    }
+
+    /*
+     * This is something that cannot be done through the editor UI but can happen when working with
+     * externally created data.
+     */
+    @Test
+    public void testZeroWidthAnnotationBeforeFirstTokenIsMovedToBeginOfFirstToken() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        
+        DocumentMetaData.create(jcas).setDocumentId("doc");
+        jcas.setDocumentText("  one two");
+        new Token(jcas, 2, 5).addToIndexes();
+        new Token(jcas, 6, 9).addToIndexes();
+        new Sentence(jcas, 2, 9).addToIndexes();
+        
+        // NE is after the end of the last token and should be moved to the end of the last token
+        // otherwise it could not be represented in the TSV3 format.
+        new NamedEntity(jcas, 1, 1).addToIndexes();
+        
+        writeAndAssertEquals(jcas);
+    }
+    
+    @Test
+    public void testElevatedType() throws Exception {
+        JCas jcas = JCasFactory.createJCas();
+        
+        DocumentMetaData.create(jcas).setDocumentId("doc");
+        jcas.setDocumentText("John");
+        
+        // Add an elevated type which is not a direct subtype of Annotation. This type not be picked
+        // up by the schema analyzer but should still be serialized as the POS type which is in fact
+        // picked up.
+        POS_NOUN pos = new POS_NOUN(jcas, 0, 4);
+        pos.setPosValue("NN");
+        pos.setCoarseValue("NOUN");
+        pos.addToIndexes();
+        
+        Token t = new Token(jcas, 0, 4);
+        t.setPos(pos);
+        t.addToIndexes();
+        new Sentence(jcas, 0, 4).addToIndexes();
+                
+        writeAndAssertEquals(jcas);
+    }
+
     private void writeAndAssertEquals(JCas aJCas, Object... aParams)
         throws IOException, ResourceInitializationException, AnalysisEngineProcessException
     {
