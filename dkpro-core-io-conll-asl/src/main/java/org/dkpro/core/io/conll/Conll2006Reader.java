@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.conll;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor.BASIC;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -41,11 +42,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -53,7 +54,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -75,7 +75,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class Conll2006Reader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Character encoding of the input data.
@@ -228,8 +228,8 @@ public class Conll2006Reader
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
-                tokens.put(Integer.valueOf(word[ID]), token);
+                Token token = doc.add(trim(word[FORM]), Token.class);
+                tokens.put(Integer.valueOf(trim(word[ID])), token);
                 if (wordIterator.hasNext()) {
                     doc.add(" ");
                 }
@@ -237,24 +237,25 @@ public class Conll2006Reader
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(word[LEMMA]);
+                    lemma.setValue(trim(word[LEMMA]));
                     lemma.addToIndexes();
                     token.setLemma(lemma);
                 }
 
                 // Read part-of-speech tag
                 POS pos = null;
-                String tag = useCPosAsPos ? word[CPOSTAG] : word[POSTAG];
+                String cPosTag = cleanTag(word[CPOSTAG]);
+                String tag = useCPosAsPos ? cPosTag : cleanTag(word[POSTAG]);
                 if (!UNUSED.equals(tag) && readPos) {
                     Type posTag = posMappingProvider.getTagType(tag);
                     pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(tag != null ? tag.intern() : null);
+                    pos.setPosValue(tag);
                 }
 
                 // Read coarse part-of-speech tag
-                if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
-                    pos.setCoarseValue(word[CPOSTAG] != null ? word[CPOSTAG].intern() : null);
+                if (!UNUSED.equals(cPosTag) && readCPos && pos != null) {
+                    pos.setCoarseValue(cPosTag);
                 }
                 
                 if (pos != null) {
@@ -263,10 +264,11 @@ public class Conll2006Reader
                 }
                 
                 // Read morphological features
-                if (!UNUSED.equals(word[FEATS]) && readMorph) {
+                String featsValue = cleanTag(word[FEATS]);
+                if (!UNUSED.equals(featsValue) && readMorph) {
                     MorphologicalFeatures morphtag = new MorphologicalFeatures(aJCas,
                             token.getBegin(), token.getEnd());
-                    morphtag.setValue(word[FEATS]);
+                    morphtag.setValue(featsValue);
                     morphtag.addToIndexes();
                     token.setMorph(morphtag);
                 }
@@ -277,29 +279,30 @@ public class Conll2006Reader
             // Read dependencies
             if (readDependency) {
                 for (String[] word : words) {
-                    if (!UNUSED.equals(word[DEPREL])) {
-                        int depId = Integer.valueOf(word[ID]);
-                        int govId = Integer.valueOf(word[HEAD]);
+                    String depRel = cleanTag(word[DEPREL]);
+                    if (!UNUSED.equals(depRel)) {
+                        int depId = Integer.valueOf(trim(word[ID]));
+                        int govId = Integer.valueOf(trim(word[HEAD]));
                         
                         // Model the root as a loop onto itself
                         if (govId == 0) {
                             Dependency rel = new ROOT(aJCas);
                             rel.setGovernor(tokens.get(depId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                         else {
                             Dependency rel = new Dependency(aJCas);
                             rel.setGovernor(tokens.get(govId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                     }

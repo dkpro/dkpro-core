@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.conll;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor.BASIC;
+import static de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor.ENHANCED;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -43,11 +45,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -57,9 +59,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -82,7 +81,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ConllUReader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Character encoding of the input data.
@@ -286,11 +285,15 @@ public class ConllUReader
             Iterator<String[]> wordIterator = words.iterator();
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
-                if (word[ID].contains("-")) {
-                    String[] fragments = word[ID].split("-");
-                    surfaceBegin = Integer.valueOf(fragments[0]);
-                    surfaceEnd = Integer.valueOf(fragments[1]);
-                    surfaceString = word[FORM];
+                
+                String idValue = trim(word[ID]);
+                String formValue = trim(word[FORM]);
+                
+                if (idValue.contains("-")) {
+                    String[] fragments = idValue.split("-");
+                    surfaceBegin = Integer.valueOf(trim(fragments[0]));
+                    surfaceEnd = Integer.valueOf(trim(fragments[1]));
+                    surfaceString = formValue;
                     continue;
                 }
 //                the following must be placed after check for dashes in ID in order not to insert
@@ -303,35 +306,37 @@ public class ConllUReader
                 }
 
                 // Read token
-                int tokenIdx = Integer.valueOf(word[ID]);
-                Token token = doc.add(word[FORM], Token.class);
+                int tokenIdx = Integer.valueOf(idValue);
+                Token token = doc.add(formValue, Token.class);
                 tokens.put(tokenIdx, token);
                 shouldAddSpace = !StringUtils.contains(word[MISC], "SpaceAfter=No");
 
                 // Read lemma
-                if (!UNUSED.equals(word[LEMMA]) && readLemma) {
+                String lemmaValue = trim(word[LEMMA]);
+                if (!UNUSED.equals(lemmaValue) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(word[LEMMA]);
+                    lemma.setValue(lemmaValue);
                     lemma.addToIndexes();
                     token.setLemma(lemma);
                 }
 
                 // Read part-of-speech tag
                 POS pos = null;
-                String tag = useCPosAsPos ? word[CPOSTAG] : word[POSTAG];
+                String cPosTag = cleanTag(word[CPOSTAG]);
+                String tag = useCPosAsPos ? cPosTag : cleanTag(word[POSTAG]);
                 if (!UNUSED.equals(tag) && readPos) {
                     Type posTag = posMappingProvider.getTagType(tag);
                     pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(tag != null ? tag.intern() : null);
+                    pos.setPosValue(tag);
                 }
 
                 // Read coarse part-of-speech tag
-                if (!UNUSED.equals(word[CPOSTAG]) && readCPos) {
+                if (!UNUSED.equals(cPosTag) && readCPos) {
                     if (pos == null) {
                         pos = new POS(aJCas, token.getBegin(), token.getEnd());
                     }
-                    pos.setCoarseValue(word[CPOSTAG].intern());
+                    pos.setCoarseValue(cPosTag);
                 }
                 
                 if (pos != null) {
@@ -340,10 +345,11 @@ public class ConllUReader
                 }
 
                 // Read morphological features
-                if (!UNUSED.equals(word[FEATS]) && readMorph) {
+                String featsValue = cleanTag(word[FEATS]);
+                if (!UNUSED.equals(featsValue) && readMorph) {
                     MorphologicalFeatures morphtag = new MorphologicalFeatures(aJCas,
                             token.getBegin(), token.getEnd());
-                    morphtag.setValue(word[FEATS]);
+                    morphtag.setValue(featsValue);
                     morphtag.addToIndexes();
                     token.setMorph(morphtag);
                     
@@ -351,12 +357,12 @@ public class ConllUReader
                     // MorphologicalFeatures type is based on the definition from the UD project,
                     // we can do this rather straightforwardly.
                     Type morphType = morphtag.getType();
-                    String[] items = word[FEATS].split("\\|");
+                    String[] items = featsValue.split("\\|");
                     for (String item : items) {
                         String[] keyValue = item.split("=");
-                        StringBuilder key = new StringBuilder(keyValue[0]);
+                        StringBuilder key = new StringBuilder(trim(keyValue[0]));
                         key.setCharAt(0, Character.toLowerCase(key.charAt(0)));
-                        String value = keyValue[1];
+                        String value = trim(keyValue[1]);
                         
                         Feature feat = morphType.getFeatureByBaseName(key.toString());
                         if (feat != null) {
@@ -383,25 +389,28 @@ public class ConllUReader
             // Dependencies
             if (readDependency) {
                 for (String[] word : words) {
-                    if (!UNUSED.equals(word[DEPREL])) {
-                        int depId = Integer.valueOf(word[ID]);
-                        int govId = Integer.valueOf(word[HEAD]);
+                    String depRelValue = cleanTag(word[DEPREL]);
+                    
+                    if (!UNUSED.equals(depRelValue)) {
+                        int depId = Integer.valueOf(trim(word[ID]));
+                        int govId = Integer.valueOf(trim(word[HEAD]));
     
                         // Model the root as a loop onto itself
-                        makeDependency(aJCas, govId, depId, word[DEPREL], DependencyFlavor.BASIC,
-                                tokens, word);
+                        makeDependency(aJCas, govId, depId, depRelValue, BASIC, tokens,
+                                word);
                     }
                     
-                    if (!UNUSED.equals(word[DEPS])) {
+                    String depsValue = trim(word[DEPS]);
+                    if (!UNUSED.equals(depsValue)) {
                         // list items separated by vertical bar
-                        String[] items = word[DEPS].split("\\|");
+                        String[] items = depsValue.split("\\|");
                         for (String item : items) {
                             String[] sItem = item.split(":");
                             
-                            int depId = Integer.valueOf(word[ID]);
-                            int govId = Integer.valueOf(sItem[0]);
+                            int depId = Integer.valueOf(trim(word[ID]));
+                            int govId = Integer.valueOf(trim(sItem[0]));
 
-                            makeDependency(aJCas, govId, depId, sItem[1], DependencyFlavor.ENHANCED,
+                            makeDependency(aJCas, govId, depId, cleanTag(sItem[1]), ENHANCED,
                                     tokens, word);
                         }
                     }
@@ -442,31 +451,6 @@ public class ConllUReader
             m.setDocumentId(documentID);
         }
         doc.close();
-    }
-    
-    private Dependency makeDependency(JCas aJCas, int govId, int depId, String label, String flavor,
-            Int2ObjectMap<Token> tokens, String[] word)
-    {
-        Dependency rel;
-
-        if (govId == 0) {
-            rel = new ROOT(aJCas);
-            rel.setGovernor(tokens.get(depId));
-            rel.setDependent(tokens.get(depId));
-        }
-        else {
-            rel = new Dependency(aJCas);
-            rel.setGovernor(tokens.get(govId));
-            rel.setDependent(tokens.get(depId));
-        }
-
-        rel.setDependencyType(label);
-        rel.setFlavor(flavor);
-        rel.setBegin(rel.getDependent().getBegin());
-        rel.setEnd(rel.getDependent().getEnd());
-        rel.addToIndexes();
-
-        return rel;
     }
 
     private Map<String, String> readSentenceComments(BufferedReader aReader)

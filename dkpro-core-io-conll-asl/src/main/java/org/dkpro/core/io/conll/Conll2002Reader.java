@@ -41,11 +41,11 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.IobDecoder;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -121,7 +121,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
 public class Conll2002Reader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Column Separators
@@ -317,14 +317,14 @@ public class Conll2002Reader
                 String[] word = wordIterator.next();
                 
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
+                Token token = doc.add(trim(word[FORM]), Token.class);
                 sentenceEnd = token.getEnd();
                 if (wordIterator.hasNext()) {
                     doc.add(" ");
                 }
                 
                 tokens.add(token);
-                namedEntityTags[i] = word[IOB];
+                namedEntityTags[i] = cleanTag(word[IOB]);
                 i++;
             }
             
