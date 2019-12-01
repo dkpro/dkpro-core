@@ -504,7 +504,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>org-dkpro-core-lancaster-asl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -539,7 +539,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>org-dkpro-core-udpipe-asl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -669,22 +669,22 @@
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-io-annis-asl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-io-rdf-asl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-cogroo-asl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-kuromoji-asl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
@@ -740,17 +740,17 @@
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-io-fangorn-asl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-illinoisnlp-asl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>org-dkpro-core-udpipe-asl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
