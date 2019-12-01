@@ -432,6 +432,7 @@ public class ConllUReader
                 }
                 p = new Paragraph(aJCas, sentenceBegin, sentenceEnd);
                 p.setId(paragraphID);
+                p.setDivType("p"); // `p` for paragraph - using the HTML tag here
             }
             lastSentenceEndPosition = sentenceEnd;
         }
