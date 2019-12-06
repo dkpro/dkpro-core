@@ -56,7 +56,8 @@ The brat format supports different types of annotations which start with differe
 .Attributes
 Additionally, attributes (`A`) can be attached to annotations. Note that DKPro Core supports
 attributes on relations, but the brat tool itself can only deal with attributes on text annotations
-and events.
+and events. The `BratReader` will try to store the values of attributes in correspondingly named
+features on the target UIMA types.
 
 .Reading the brat format
 The DKPro Core `BratReader` tries its best to map a given brat file into the UIMA type system of the
@@ -70,6 +71,7 @@ takes actual JSON, not the path to a JSON file.
 The mapping file consists of five sections: *text type mapping*, *relation type mapping*, *span mapping*, *relation mapping* and *comment mapping*.
 
 .Mappings JSON file: high-level structure
+[source,json]
 ----
 {
   'textTypeMapppings': [ ... ],
@@ -86,11 +88,16 @@ The *type mappings* (span and relation) indicates how to find the UIMA type for 
 * `from`: this field is a regular expression which matches the annotation name used by brat. Note that dashes (`-`) in the brat name must be replaced by dots (`.`) or escaped dots (`\.`) to match here! It is also possible to match multiple brat annotations at once using regular expressions such as `(PER|LOC)` or `.*-LOC`.
 * `to`: this is the UIMA type to map to.
 
+The order of the mappings matter - brat annotations are matched to them in the order they are
+defined in the mappings file. This allows e.g. to put a *catch-all* mapping at the end with 
+`'from': '.*'` which would match all brat annotations not matched by a previous mapping. 
+
 .Mapping text annotations
 For the purpose of mapping, brat event (`E`) and text (`T`) annotations are both considered
 *text type annotations*.
 
 .Example: Mapping brat text-type annotations to UIMA types
+[source,json]
 ----
 {
   'textTypeMapppings': [
@@ -115,6 +122,7 @@ brat annotation name in a feature indicated by `subCatFeature`. The example belo
 the brat annotation into the `value` feature of the `NamedEntity` type.
 
 .Example: Span mappings
+[source,json]
 ----
 {
   'spans': [
@@ -131,10 +139,28 @@ the brat annotation into the `value` feature of the `NamedEntity` type.
 }
 ----
 
+.Mapping events
+Event annotations (`E`) from brat are basically treated like text annotations (`T`). However, events
+can have multiple arguments in brat and these arguments point to other annotations. The `BratReader`
+will try to store these argument values in the target UIMA type in corresponding feature values.
+
+For example if the brat file contains an event annotation as shown below, the target UIMA type for 
+the brat `pred` annotation should have a feature `subject` and a feature `object` which would be able
+to accept the type of annotation to which the brat `entity` annotation is mapped.
+
+[source,brat]
+----
+T1 pred 5 10	likes
+T2 entity 0 4	John
+T3 entity 11 16	pizza
+E1 pred:T1 subject:T2 object:T3
+----
+
 .Mapping relations
 Relation annotations can be mapped in the same way.
 
 .Example: Mapping brat relation annotations to UIMA types
+[source,json]
 ----
 {
   'relationTypeMapppings': [
@@ -157,6 +183,7 @@ first or second argument are used as the offsets of the created UIMA annotation.
 `subCatFeature` and `defaultFeatureValues` already mentioned for the span mappings are supported.
 
 .Example: Mapping brat relation annotations to UIMA types
+[source,json]
 ----
 {
   'relations': [
@@ -175,7 +202,6 @@ first or second argument are used as the offsets of the created UIMA annotation.
   ...
 }
 ----
-
 
 .Mapping brat comments to UIMA
 The *comment* field of annotations is the only free text field in brat (all others have a
@@ -197,6 +223,7 @@ value to the `value` feature if the comment is `PER`, `LOC`, `ORG` or `MISC`. Ho
 the value field is a URL, then the comment is mapped into the `identifier` feature.
 
 .Example: Mapping brat relation annotations to UIMA types
+[source,json]
 ----
 {
   'comments': [
@@ -225,6 +252,7 @@ of the DKPro Core `Dependency` type to `basic`. This can be done by adding a
 
 
 .Example: Default feature values
+[source,json]
 ----
 {
   'relationTypeMapppings': [
@@ -246,6 +274,7 @@ concatenation of multiple tags which should be split up into multiple features a
 level:
 
 .Example: Multiple default feature values 
+[source,json]
 ----
 {
   'textTypeMapppings': [
