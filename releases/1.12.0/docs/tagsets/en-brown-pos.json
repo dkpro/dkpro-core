@@ -1,0 +1,371 @@
+{
+    "name": "Brown",
+    "description": "No description.\n\nReferences:\n* http://clu.uni.no/icame/brown/bcm.html#bc6\n",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "(",
+            "tag_description": "left paren"
+        },
+        {
+            "tag_name": ")",
+            "tag_description": "right paren"
+        },
+        {
+            "tag_name": ",",
+            "tag_description": "comma"
+        },
+        {
+            "tag_name": "-",
+            "tag_description": "dash"
+        },
+        {
+            "tag_name": ".",
+            "tag_description": "sentence closer (. ; ? !)"
+        },
+        {
+            "tag_name": ":",
+            "tag_description": "colon"
+        },
+        {
+            "tag_name": "ABL",
+            "tag_description": "pre-qualifier (quite, rather)"
+        },
+        {
+            "tag_name": "ABN",
+            "tag_description": "pre-quantifier (half, all)"
+        },
+        {
+            "tag_name": "ABX",
+            "tag_description": "pre-quantifier (both)"
+        },
+        {
+            "tag_name": "AP",
+            "tag_description": "post-determiner (many, several, next)"
+        },
+        {
+            "tag_name": "AT",
+            "tag_description": "article (a, the, no)"
+        },
+        {
+            "tag_name": "BE",
+            "tag_description": "be"
+        },
+        {
+            "tag_name": "BED",
+            "tag_description": "were"
+        },
+        {
+            "tag_name": "BEDZ",
+            "tag_description": "was"
+        },
+        {
+            "tag_name": "BEG",
+            "tag_description": "being"
+        },
+        {
+            "tag_name": "BEM",
+            "tag_description": "am"
+        },
+        {
+            "tag_name": "BEN",
+            "tag_description": "been"
+        },
+        {
+            "tag_name": "BER",
+            "tag_description": "are, art"
+        },
+        {
+            "tag_name": "BEZ",
+            "tag_description": "is"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "coordinating conjunction (and, or)"
+        },
+        {
+            "tag_name": "CD",
+            "tag_description": "cardinal numeral (one, two, 2, etc.)"
+        },
+        {
+            "tag_name": "CD$",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "subordinating conjunction (if, although)"
+        },
+        {
+            "tag_name": "DO",
+            "tag_description": "do"
+        },
+        {
+            "tag_name": "DOD",
+            "tag_description": "did"
+        },
+        {
+            "tag_name": "DOZ",
+            "tag_description": "does"
+        },
+        {
+            "tag_name": "DT",
+            "tag_description": "singular determiner (this, that)"
+        },
+        {
+            "tag_name": "DTI",
+            "tag_description": "singular or plural determiner/quantifier (some, any)"
+        },
+        {
+            "tag_name": "DTS",
+            "tag_description": "plural determiner (these, those)"
+        },
+        {
+            "tag_name": "DTX",
+            "tag_description": "determiner/double conjunction (either)"
+        },
+        {
+            "tag_name": "EX",
+            "tag_description": "existentil there"
+        },
+        {
+            "tag_name": "FW",
+            "tag_description": "foreign word (hyphenated before regular tag)"
+        },
+        {
+            "tag_name": "HL",
+            "tag_description": "word occurring in headline (hyphenated after regular tag)"
+        },
+        {
+            "tag_name": "HV",
+            "tag_description": "have"
+        },
+        {
+            "tag_name": "HVD",
+            "tag_description": "had (past tense)"
+        },
+        {
+            "tag_name": "HVG",
+            "tag_description": "having"
+        },
+        {
+            "tag_name": "HVN",
+            "tag_description": "had (past participle)"
+        },
+        {
+            "tag_name": "HVZ",
+            "tag_description": "has"
+        },
+        {
+            "tag_name": "IN",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "JJR",
+            "tag_description": "comparative adjective"
+        },
+        {
+            "tag_name": "JJS",
+            "tag_description": "semantically superlative adjective (chief, top)"
+        },
+        {
+            "tag_name": "JJT",
+            "tag_description": "morphologically superlative adjective (biggest)"
+        },
+        {
+            "tag_name": "MD",
+            "tag_description": "modal auxiliary (can, should, will)"
+        },
+        {
+            "tag_name": "NC",
+            "tag_description": "cited word (hyphenated after regular tag)"
+        },
+        {
+            "tag_name": "NEG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "singular or mass noun"
+        },
+        {
+            "tag_name": "NN$",
+            "tag_description": "possessive singular noun"
+        },
+        {
+            "tag_name": "NNS",
+            "tag_description": "plural noun"
+        },
+        {
+            "tag_name": "NNS$",
+            "tag_description": "possessive plural noun"
+        },
+        {
+            "tag_name": "NNSG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "proper noun or part of name phrase"
+        },
+        {
+            "tag_name": "NP$",
+            "tag_description": "possessive proper noun"
+        },
+        {
+            "tag_name": "NPS",
+            "tag_description": "plural proper noun"
+        },
+        {
+            "tag_name": "NPS$",
+            "tag_description": "possessive plural proper noun"
+        },
+        {
+            "tag_name": "NR",
+            "tag_description": "adverbial noun (home, today, west)"
+        },
+        {
+            "tag_name": "NR$",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NRS",
+            "tag_description": "plural adverbial noun"
+        },
+        {
+            "tag_name": "OD",
+            "tag_description": "ordinal numeral (first, 2nd)"
+        },
+        {
+            "tag_name": "PN",
+            "tag_description": "nominal pronoun (everybody, nothing)"
+        },
+        {
+            "tag_name": "PN$",
+            "tag_description": "possessive nominal pronoun"
+        },
+        {
+            "tag_name": "PP$",
+            "tag_description": "possessive personal pronoun (my, our)"
+        },
+        {
+            "tag_name": "PP$$",
+            "tag_description": "second (nominal) possessive pronoun (mine, ours)"
+        },
+        {
+            "tag_name": "PPL",
+            "tag_description": "singular reflexive/intensive personal pronoun (myself)"
+        },
+        {
+            "tag_name": "PPLS",
+            "tag_description": "plural reflexive/intensive personal pronoun (ourselves)"
+        },
+        {
+            "tag_name": "PPO",
+            "tag_description": "objective personal pronoun (me, him, it, them)"
+        },
+        {
+            "tag_name": "PPS",
+            "tag_description": "3rd. singular nominative pronoun (he, she, it, one)"
+        },
+        {
+            "tag_name": "PPSS",
+            "tag_description": "other nominative personal pronoun (I, we, they, you)"
+        },
+        {
+            "tag_name": "QL",
+            "tag_description": "qualifier (very, fairly)"
+        },
+        {
+            "tag_name": "QLP",
+            "tag_description": "post-qualifier (enough, indeed)"
+        },
+        {
+            "tag_name": "RB",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "RB$",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RBR",
+            "tag_description": "comparative adverb"
+        },
+        {
+            "tag_name": "RBT",
+            "tag_description": "superlative adverb"
+        },
+        {
+            "tag_name": "RN",
+            "tag_description": "nominal adverb (here then, indoors)"
+        },
+        {
+            "tag_name": "RP",
+            "tag_description": "adverb/particle (about, off, up)"
+        },
+        {
+            "tag_name": "TL",
+            "tag_description": "word occurring in title (hyphenated after regular tag)"
+        },
+        {
+            "tag_name": "TO",
+            "tag_description": "infinitive marker to"
+        },
+        {
+            "tag_name": "UH",
+            "tag_description": "interjection, exclamation"
+        },
+        {
+            "tag_name": "VB",
+            "tag_description": "verb, base form"
+        },
+        {
+            "tag_name": "VBD",
+            "tag_description": "verb, past tense"
+        },
+        {
+            "tag_name": "VBG",
+            "tag_description": "verb, present participle/gerund"
+        },
+        {
+            "tag_name": "VBN",
+            "tag_description": "verb, past participle"
+        },
+        {
+            "tag_name": "VBZ",
+            "tag_description": "verb, 3rd. singular present"
+        },
+        {
+            "tag_name": "WDT",
+            "tag_description": "wh- determiner (what, which)"
+        },
+        {
+            "tag_name": "WP$",
+            "tag_description": "possessive wh- pronoun (whose)"
+        },
+        {
+            "tag_name": "WPO",
+            "tag_description": "objective wh- pronoun (whom, which, that)"
+        },
+        {
+            "tag_name": "WPS",
+            "tag_description": "nominative wh- pronoun (who, which, that)"
+        },
+        {
+            "tag_name": "WQL",
+            "tag_description": "wh- qualifier (how)"
+        },
+        {
+            "tag_name": "WRB",
+            "tag_description": "wh- adverb (how, where, when)"
+        },
+        {
+            "tag_name": "pct",
+            "tag_description": "regular Brown corpus tagset (http://clu.uni.no/icame/brown/bcm.html#bc6)"
+        }
+    ]
+}
