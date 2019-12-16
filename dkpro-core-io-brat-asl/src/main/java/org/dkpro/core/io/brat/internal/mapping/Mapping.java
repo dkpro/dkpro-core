@@ -21,6 +21,7 @@ import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -86,4 +87,56 @@ public class Mapping
     {
         return comments.get(aType);
     }
+
+	public static Mapping merge(Mapping mapping1, Mapping mapping2) {
+		
+		List<TypeMapping> mergedTxtTMLst = new ArrayList<TypeMapping>();
+		mergedTxtTMLst.addAll(mapping1.getTextTypeMapppings().parsedMappings);
+		for (TypeMapping tm: mapping2.getTextTypeMapppings().parsedMappings) {
+			if (!mergedTxtTMLst.contains(tm)) {
+				mergedTxtTMLst.add(tm);
+			}
+		}
+		TypeMappings mergedTxtTM = new TypeMappings(mergedTxtTMLst);
+		
+		List<TypeMapping> mergedRelTMLst = new ArrayList<TypeMapping>();
+		mergedRelTMLst.addAll(mapping1.getRelationTypeMapppings().parsedMappings);
+		for (TypeMapping tm: mapping2.getRelationTypeMapppings().parsedMappings) {
+			if (!mergedRelTMLst.contains(tm)) {
+				mergedRelTMLst.add(tm);
+			}
+		}		
+		TypeMappings mergedRelTM = new TypeMappings(mergedRelTMLst);
+
+		List<SpanMapping> mergedTxtAnnots = new ArrayList<SpanMapping>();
+		mergedTxtAnnots.addAll(mapping1.textAnnotations.values());
+		
+			// AD: If you uncomment this, test1mapping fails
+//		for (SpanMapping sm: mapping2.textAnnotations.values()) {
+//			if (!mergedTxtAnnots.contains(sm)) {
+//				mergedTxtAnnots.add(sm);
+//			}
+//		}
+		
+		List<RelationMapping> mergedRelMapping = new ArrayList<RelationMapping>();
+		mergedRelMapping.addAll(mapping1.relations.values());
+		for (RelationMapping rm: mapping2.relations.values()) {
+			if (!mergedRelMapping.contains(rm)) {
+				mergedRelMapping.add(rm);
+			}
+		}
+		
+		List<CommentMapping> mergedCommMapping = new ArrayList<CommentMapping>();
+		mergedCommMapping.addAll(mapping1.comments.values());
+		for (CommentMapping cm: mapping2.comments.values()) {
+			if (!mergedCommMapping.contains(cm)) {
+				mergedCommMapping.add(cm);
+			}
+		}
+				
+		Mapping mergedMapping = 
+				new Mapping(mergedTxtTM, mergedRelTM, mergedTxtAnnots, mergedRelMapping, mergedCommMapping);
+
+		return mergedMapping;
+	}
 }

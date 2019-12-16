@@ -74,6 +74,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -166,6 +167,7 @@ public class BratReader
     private String mappingJson;
     
     private Mapping mapping;
+    private static Mapping defaultMapping = null;    
     
     private Map<String, AnnotationFS> idMap;
     
@@ -177,16 +179,14 @@ public class BratReader
     {
         super.initialize(aContext);
         
+    	try {
+			mapping = getDefaultMapping();
+		} catch (IOException e) {
+			throw new ResourceInitializationException(e);
+		}        
+        
         if (mappingJson != null) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.setDefaultSetterInfo(JsonSetter.Value.forContentNulls(Nulls.AS_EMPTY));
-            mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-            try {
-                mapping = mapper.readValue(mappingJson, Mapping.class);
-            }
-            catch (IOException e) {
-                throw new ResourceInitializationException(e);
-            }
+        	mapping = Mapping.merge(json2Mapping(mappingJson), mapping);
         }
         else {
             Map<String, RelationMapping> parsedRelationTypes = new HashMap<>();
@@ -213,7 +213,31 @@ public class BratReader
         warnings = new LinkedHashSet<String>();
     }
     
-    @Override
+    private ObjectMapper mapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setDefaultSetterInfo(JsonSetter.Value.forContentNulls(Nulls.AS_EMPTY));
+        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);        
+
+        return mapper;
+    }
+    
+	private Mapping json2Mapping(String mappingJson2) throws ResourceInitializationException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setDefaultSetterInfo(JsonSetter.Value.forContentNulls(Nulls.AS_EMPTY));
+        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);        
+    	Mapping deserialized = null;
+        try {
+            deserialized = mapper.readValue(mappingJson, Mapping.class);
+        } catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+        
+        return deserialized;
+	}
+
+	@Override
     public void close()
         throws IOException
     {
@@ -566,4 +590,57 @@ public class BratReader
         }
         return f;
     }    
+    
+    
+    //////////////////////////////////////////
+    // Start of Improvements to BratReader
+    // -- Alain Désilets
+    //////////////////////////////////////////
+    
+	private Mapping getDefaultMapping() throws ResourceInitializationException, IOException {
+		if (defaultMapping == null) {
+			
+			// AD: Couldn't get this to work.
+			//   Serializing/deserializing Mapping object seems to 
+			//   be very brittle
+//			String json = ResourceGetter.readResourceFileToString("org/dkpro/core/io/brat/defaultMapping.json");
+//			defaultMapping = json2Mapping(json);
+			
+			List<TypeMapping> textMappingLst = new ArrayList<TypeMapping>();
+			{
+				
+				textMappingLst.add(new TypeMapping("CARDINAL","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Cardinal"));
+				textMappingLst.add(new TypeMapping("Country","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"));
+				textMappingLst.add(new TypeMapping("DATE","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Date"));
+				textMappingLst.add(new TypeMapping("ORDINAL","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Ordinal"));
+				textMappingLst.add(new TypeMapping("LOC","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"));
+				textMappingLst.add(new TypeMapping("MERGE-ORG","de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"));
+				textMappingLst.add(new TypeMapping("ORG","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization"));
+				textMappingLst.add(new TypeMapping("Organization","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization"));
+				textMappingLst.add(new TypeMapping("PER","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person"));
+				textMappingLst.add(new TypeMapping("TIME","de.tudarmstadt.ukp.dkpro.core.api.ner.type.Time"));
+			}
+			TypeMappings textMappings = new TypeMappings(textMappingLst);
+			
+			
+			List<TypeMapping> relMappingLst = new ArrayList<TypeMapping>();{
+				relMappingLst.add(new TypeMapping("Origin", "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation"));
+			}
+            TypeMappings relationMappings = new TypeMappings(relMappingLst); 
+
+            List<SpanMapping> spans = new ArrayList<SpanMapping>();
+            {
+            	String spanJson = "{'type':'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location', 'defaultFeatureValues': {'value': 'LOC'}}";
+            	SpanMapping aSpan = mapper().readValue(spanJson, SpanMapping.class);
+            	spans.add(aSpan);
+            }
+            
+            List<RelationMapping> relations = new ArrayList<RelationMapping>();
+            List<CommentMapping> comments = new ArrayList<CommentMapping>();
+			
+            defaultMapping = new Mapping(textMappings, relationMappings, spans, relations, comments);
+		}
+		
+		return defaultMapping;
+	}    
 }

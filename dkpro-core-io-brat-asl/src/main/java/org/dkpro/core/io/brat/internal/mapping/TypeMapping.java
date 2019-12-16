@@ -35,9 +35,9 @@ public class TypeMapping
     private static final String BRAT = "BRAT";
     private static final String UIMA = "UIMA";
 
-    private final Pattern bratTypePattern;
-    private final String uimaType;
-    private final Map<String, String> defaultFeatureValues;
+    public final Pattern bratTypePattern;
+    public final String uimaType;
+    public final Map<String, String> defaultFeatureValues;
     
     private Matcher matcher;
 
@@ -50,6 +50,10 @@ public class TypeMapping
         bratTypePattern = Pattern.compile("^" + aPattern.trim() + "$");
         uimaType = aReplacement.trim();
         defaultFeatureValues = aDefaults != null ? aDefaults : Collections.emptyMap();
+    }
+
+    public TypeMapping() {
+    	this(null, null, Collections.emptyMap());
     }
 
     public TypeMapping(String aPattern, String aReplacement)

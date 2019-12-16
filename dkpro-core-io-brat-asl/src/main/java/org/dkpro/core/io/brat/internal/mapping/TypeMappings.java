@@ -30,26 +30,35 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class TypeMappings
 {
-    private final List<TypeMapping> parsedMappings;
-    private final Map<String, Type> brat2UimaMappingCache;
-    private final Map<String, String> uima2BratMappingCache;
+    public List<TypeMapping> parsedMappings;
+    private Map<String, Type> brat2UimaMappingCache;
+    private Map<String, String> uima2BratMappingCache;
 
     @JsonCreator
-    public TypeMappings(List<TypeMapping> aMappings)
+    public TypeMappings(List<TypeMapping> typeMappingList)
     {
-        parsedMappings = aMappings;
-        brat2UimaMappingCache = new HashMap<>();
-        uima2BratMappingCache = new HashMap<>();
+    	initTypeMappings(typeMappingList);
     }
 
     public TypeMappings(String... aMappings)
     {
-        parsedMappings = new ArrayList<>();
-
+    	List<TypeMapping> typeMappingList = new ArrayList<TypeMapping>();
         if (aMappings != null) {
             for (String m : aMappings) {
-                parsedMappings.add(TypeMapping.parse(m));
+            	typeMappingList.add(TypeMapping.parse(m));
             }
+        }
+        
+        initTypeMappings(typeMappingList);
+    }
+    
+    private void initTypeMappings(List<TypeMapping> typeMappingList) {
+        parsedMappings = new ArrayList<>();
+
+        if (typeMappingList != null) {
+        	for(TypeMapping aMapping: typeMappingList) {
+        		parsedMappings.add(aMapping);
+        	}
         }
 
         brat2UimaMappingCache = new HashMap<>();
@@ -125,4 +134,7 @@ public class TypeMappings
         
         return bratType;
     }
+
+	public void append(TypeMappings additionalMappings) {
+	}
 }
