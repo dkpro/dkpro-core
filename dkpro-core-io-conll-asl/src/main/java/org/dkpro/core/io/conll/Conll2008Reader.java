@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.conll;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor.BASIC;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -42,12 +43,12 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -57,7 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -84,7 +84,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
                 "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
                 "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg" })
 public class Conll2008Reader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Character encoding of the input data.
@@ -226,34 +226,37 @@ public class Conll2008Reader
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
-                tokens.put(Integer.valueOf(word[ID]), token);
+                Token token = doc.add(trim(word[FORM]), Token.class);
+                tokens.put(Integer.valueOf(trim(word[ID])), token);
                 if (wordIterator.hasNext()) {
                     doc.add(" ");
                 }
 
                 // Read lemma
-                if (!UNUSED.equals(word[LEMMA]) && readLemma) {
+                String lemmaValue = trim(word[LEMMA]);
+                if (!UNUSED.equals(lemmaValue) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(word[LEMMA]);
+                    lemma.setValue(lemmaValue);
                     lemma.addToIndexes();
                     token.setLemma(lemma);
                 }
 
                 // Read part-of-speech tag
-                if (!UNUSED.equals(word[GPOS]) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(word[GPOS]);
+                String gPosValue = cleanTag(word[GPOS]);
+                if (!UNUSED.equals(gPosValue) && readPos) {
+                    Type posTag = posMappingProvider.getTagType(gPosValue);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[GPOS] != null ? word[GPOS].intern() : null);
+                    pos.setPosValue(gPosValue);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
 
-                if (!UNUSED.equals(word[PRED]) && readSemanticPredicate) {
+                String predValue = trim(word[PRED]); 
+                if (!UNUSED.equals(predValue) && readSemanticPredicate) {
                     SemPred pred = new SemPred(aJCas, token.getBegin(), token.getEnd());
-                    pred.setCategory(word[PRED]);
+                    pred.setCategory(predValue);
                     pred.addToIndexes();
                     preds.add(pred);
                 }
@@ -264,29 +267,30 @@ public class Conll2008Reader
             // Dependencies
             if (readDependency) {
                 for (String[] word : words) {
+                    String depRel = cleanTag(word[DEPREL]);
                     if (!UNUSED.equals(word[DEPREL])) {
-                        int depId = Integer.valueOf(word[ID]);
-                        int govId = Integer.valueOf(word[HEAD]);
+                        int depId = Integer.valueOf(trim(word[ID]));
+                        int govId = Integer.valueOf(trim(word[HEAD]));
     
                         // Model the root as a loop onto itself
                         if (govId == 0) {
                             Dependency rel = new ROOT(aJCas);
                             rel.setGovernor(tokens.get(depId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                         else {
                             Dependency rel = new Dependency(aJCas);
                             rel.setGovernor(tokens.get(govId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                     }
@@ -299,13 +303,14 @@ public class Conll2008Reader
                 for (int p = 0; p < preds.size(); p++) {
                     List<SemArgLink> args = new ArrayList<>();
                     for (String[] word : words) {
-                        if (!UNUSED.equals(word[APRED + p])) {
-                            Token token = tokens.get(Integer.valueOf(word[ID]));
+                        String aPredValue = trim(word[APRED + p]);
+                        if (!UNUSED.equals(aPredValue)) {
+                            Token token = tokens.get(Integer.valueOf(trim(word[ID])));
                             SemArg arg = new SemArg(aJCas, token.getBegin(), token.getEnd());
                             arg.addToIndexes();
                             
                             SemArgLink link = new SemArgLink(aJCas);
-                            link.setRole(word[APRED + p]);
+                            link.setRole(aPredValue);
                             link.setTarget(arg);
                             args.add(link);
                         }

@@ -1,0 +1,30 @@
+{
+  "@context": "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+  "text": {
+    "@value": "Jill sleeps."
+  },
+  "views": [
+    {
+      "id": "v1",
+      "metadata": {
+        "contains": {
+          "http://vocab.lappsgrid.org/NamedEntity": {
+            "producer": "edu.brandeis.cs.lappsgrid.stanford.corenlp.NamedEntityRecognizer:2.0.3",
+            "namedEntityCategorySet": "ner:stanford"
+          }
+        }
+      },
+      "annotations": [
+        {
+          "@type": "http://vocab.lappsgrid.org/NamedEntity",
+          "id": "c0",
+          "start": 0,
+          "end": 4,
+          "features": {
+            "category": "person"
+          }
+        }
+      ]
+    }
+  ]
+}

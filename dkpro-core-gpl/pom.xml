@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2007-2018    
+    Copyright 2007-2019    
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core</artifactId>
-    <version>1.12.0-SNAPSHOT</version>
+    <version>1.12.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>dkpro-core-gpl</artifactId>
@@ -42,59 +42,59 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-asl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-arktools-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-berkeleyparser-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-corenlp-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-lingpipe-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tgrep-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-matetools-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-maui-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-sfst-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-stanfordnlp-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-cermine-gpl</artifactId>
-        <version>1.12.0-SNAPSHOT</version>
+        <version>1.12.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -179,7 +179,7 @@
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-io-cermine-gpl</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.1-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </dependencyManagement>

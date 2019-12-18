@@ -17,9 +17,9 @@
  */
 package org.dkpro.core.io.html;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils.trim;
 import static org.dkpro.core.io.html.internal.JSoupUtil.appendNormalisedText;
 import static org.dkpro.core.io.html.internal.JSoupUtil.lastCharIsWhitespace;
-import static org.dkpro.core.io.html.internal.TrimUtils.trim;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -94,6 +94,13 @@ public class HtmlDocumentReader
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
+    
+    /**
+     * Normalize whitespace.
+     */
+    public static final String PARAM_NORMALIZE_WHITESPACE = "normalizeWhitespace";
+    @ConfigurationParameter(name = PARAM_NORMALIZE_WHITESPACE, mandatory = true, defaultValue = "true")
+    private boolean normalizeWhitespace;
 
     private Map<String, Integer> mappings = new HashMap<>();
     
@@ -151,7 +158,12 @@ public class HtmlDocumentReader
                     else if (node instanceof TextNode) {
                         TextNode textNode = (TextNode) node;
                         StringBuilder buffer = new StringBuilder();
-                        appendNormalisedText(buffer, textNode);
+                        if (normalizeWhitespace) {
+                            appendNormalisedText(buffer, textNode);
+                        }
+                        else {
+                            buffer.append(textNode.getWholeText());
+                        }
                         char[] text = buffer.toString().toCharArray();
                         handler.characters(text, 0, text.length);
                     }

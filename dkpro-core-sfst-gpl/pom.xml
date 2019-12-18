@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2007-2018    
+    Copyright 2007-2019    
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-gpl</artifactId>
-    <version>1.12.0-SNAPSHOT</version>
+    <version>1.12.1-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
   <artifactId>dkpro-core-sfst-gpl</artifactId>
