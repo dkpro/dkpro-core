@@ -115,7 +115,7 @@ public class BratReaderWriterTest
         File bratOrigDir = new File("src/test/resources/brat/");
         File annFileRef = new File(bratOrigDir, "document1.ann");
         File tempDir = copyBratFilesToTempLocation(bratOrigDir, "document1");
-        File annFile = new File(stripProtocol(new File(tempDir, "document1.ann")));
+        File annFile = new File(tempDir, "document1.ann");
         
         testReadWrite(
                 createReader(BratReader.class,
@@ -128,80 +128,80 @@ public class BratReaderWriterTest
                 annFileRef, annFile);    
     }
      
-//    @Test
-//    public void test__SingleDocument__PassTxtFile()
-//        throws Exception
-//    {
-//        String mapping = String.join("\n",
-//                "{",
-//                "  'textTypeMapppings': [",
-//                "    {",
-//                "      'from': 'Country',",
-//                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
-//                "    },",
-//                "    {",
-//                "      'from': 'Organization',",
-//                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
-//                "    },",
-//                "    {",
-//                "      'from': 'MERGE-ORG',",
-//                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
-//                "    }",
-//                "  ],",
-//                "  'relationTypeMapppings': [",
-//                "    {",
-//                "      'from': 'Origin',",
-//                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
-//                "    }",
-//                "  ],",
-//                "  'spans': [",
-//                "    {",
-//                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
-//                "      'defaultFeatureValues': {",
-//                "        'value': 'LOC'",
-//                "      }",
-//                "    }",
-//                "  ],",
-//                "  'relations': [",
-//                "    {",
-//                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-//                "      'arg1': 'source',",
-//                "      'arg2': 'target',",
-//                "      'flags2': 'A',",
-//                "      'subCatFeature': 'value'",
-//                "    }",
-//                "  ],",
-//                "  'comments': [",
-//                "    {",
-//                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
-//                "      'feature': 'value'",
-//                "    },",
-//                "    {",
-//                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-//                "      'feature': 'comment'",
-//                "    },",
-//                "    {",
-//                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
-//                "      'feature': 'comment'",
-//                "    }",
-//                "  ]",
-//                "}");
-//        
-//        File bratOrigDir = new File("src/test/resources/brat/");
-//        File txtFileRef = new File(bratOrigDir, "document1.txt");
-//        File tempDir = copyBratFilesToTempLocation(bratOrigDir, "document1");
-//        File txtFile = new File(stripProtocol(new File(tempDir, "document1.txt")));
-//        
-//        testReadWrite(
-//                createReader(BratReader.class,
-//                        BratReader.PARAM_SOURCE_LOCATION, txtFile,
-//                        BratReader.PARAM_MAPPING, mapping), 
-//                createEngine(BratWriter.class,
-//                        BratReader.PARAM_SOURCE_LOCATION, txtFile,
-//                        BratWriter.PARAM_RELATION_TYPES, asList(
-//                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
-//                txtFileRef, txtFile);    
-//    }
+    @Test @Ignore
+    public void test__SingleDocument__PassTxtFile()
+        throws Exception
+    {
+        String mapping = String.join("\n",
+                "{",
+                "  'textTypeMapppings': [",
+                "    {",
+                "      'from': 'Country',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
+                "    },",
+                "    {",
+                "      'from': 'Organization',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
+                "    },",
+                "    {",
+                "      'from': 'MERGE-ORG',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+                "    }",
+                "  ],",
+                "  'relationTypeMapppings': [",
+                "    {",
+                "      'from': 'Origin',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
+                "    }",
+                "  ],",
+                "  'spans': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
+                "      'defaultFeatureValues': {",
+                "        'value': 'LOC'",
+                "      }",
+                "    }",
+                "  ],",
+                "  'relations': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'arg1': 'source',",
+                "      'arg2': 'target',",
+                "      'flags2': 'A',",
+                "      'subCatFeature': 'value'",
+                "    }",
+                "  ],",
+                "  'comments': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
+                "      'feature': 'value'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'feature': 'comment'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
+                "      'feature': 'comment'",
+                "    }",
+                "  ]",
+                "}");
+        
+        File bratOrigDir = new File("src/test/resources/brat/");
+        File txtFileRef = new File(bratOrigDir, "document1.txt");
+        File tempDir = copyBratFilesToTempLocation(bratOrigDir, "document1");
+        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document1.txt")));
+        
+        testReadWrite(
+                createReader(BratReader.class,
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
+                        BratReader.PARAM_MAPPING, mapping), 
+                createEngine(BratWriter.class,
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                txtFileRef, txtFile);    
+    }
         
     @Test
     public void testConll2009()
@@ -506,11 +506,6 @@ public class BratReaderWriterTest
         
         return tempDir.toFile();
     }
-    
-    private String stripProtocol(File file) {
-        String stripped = file.toString().replaceAll("^file:", "");
-        return stripped;
-    }    
     
     private void assertFilesHaveSameContent(File expFile, File actualFile) throws IOException {
         String expContent = FileUtils.readFileToString(expFile, "UTF-8");

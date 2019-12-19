@@ -20,6 +20,7 @@ package org.dkpro.core.io.brat;
 import static java.util.stream.Collectors.toList;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -566,4 +567,24 @@ public class BratReader
         }
         return f;
     }    
+    
+    //////////////////////////////////////////
+    // Start of Improvements to BratReader
+    // -- Alain Désilets
+    //////////////////////////////////////////
+    
+    public static String stripProtocol(File file) {
+        String stripped = file.toString().replaceAll("^file:", "");
+        return stripped;
+    }    
+    
+    @Override 
+    protected String getSourceLocation()
+    {
+        String location = super.getSourceLocation();
+        return location;
+    }
+    
+    
+    
 }
