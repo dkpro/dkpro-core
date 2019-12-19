@@ -572,19 +572,39 @@ public class BratReader
     // Start of Improvements to BratReader
     // -- Alain Désilets
     //////////////////////////////////////////
+
+    public static String stripProtocol(String file) {
+        String stripped = file.replaceAll("^file:", "");
+        return stripped;
+    }    
     
     public static String stripProtocol(File file) {
-        String stripped = file.toString().replaceAll("^file:", "");
-        return stripped;
+        return stripProtocol(file.toString());
     }    
     
     @Override 
     protected String getSourceLocation()
     {
         String location = super.getSourceLocation();
+        
+        if (isSingleLocation()) {
+            location = annFileFor(location);
+        } else {
+            location = new File(location,"*.ann").toString();
+        }
+        
         return location;
     }
     
+    private static String annFileFor(String bratFile) {
+        String annFile = bratFile.replaceAll("\\.txt$", ".ann");
+        return annFile;
+    }
+    
+    private static String txtFileFor(String bratFile) {
+        String annFile = bratFile.replaceAll("\\.ann$", ".txt");
+        return annFile;
+    }
     
     
 }

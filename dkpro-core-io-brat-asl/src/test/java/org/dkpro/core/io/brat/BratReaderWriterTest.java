@@ -128,8 +128,8 @@ public class BratReaderWriterTest
                 annFileRef, annFile);    
     }
      
-    @Test @Ignore
-    public void test__SingleDocument__PassTxtFile()
+    @Test
+    public void test__SingleDocument__ProvideTxtFile()
         throws Exception
     {
         String mapping = String.join("\n",
