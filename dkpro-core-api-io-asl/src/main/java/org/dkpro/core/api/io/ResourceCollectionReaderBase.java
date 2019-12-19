@@ -358,7 +358,7 @@ public abstract class ResourceCollectionReaderBase
         return sourceLocation;
     }
     
-    protected boolean isSingleLocation()
+    public boolean isSingleLocation()
     {
         return patterns == null;
     }
