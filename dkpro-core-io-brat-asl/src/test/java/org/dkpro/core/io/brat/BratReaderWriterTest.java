@@ -114,7 +114,7 @@ public class BratReaderWriterTest
         
         File bratOrigDir = new File("src/test/resources/brat/");
         File annFileRef = new File(bratOrigDir, "document1.ann");
-        File tempDir = copyBratFilesToTempLocation(bratOrigDir, "document1");
+        File tempDir = copyBratFilesToTempLocation(bratOrigDir);
         File annFile = new File(tempDir, "document1.ann");
         
         testReadWrite(
@@ -189,7 +189,7 @@ public class BratReaderWriterTest
         
         File bratOrigDir = new File("src/test/resources/brat/");
         File txtFileRef = new File(bratOrigDir, "document1.txt");
-        File tempDir = copyBratFilesToTempLocation(bratOrigDir, "document1");
+        File tempDir = copyBratFilesToTempLocation(bratOrigDir);
         File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document1.txt")));
         
         testReadWrite(
@@ -202,6 +202,81 @@ public class BratReaderWriterTest
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 txtFileRef, txtFile);    
     }
+    
+    @Test
+    public void test__BratDirectory()
+        throws Exception
+    {
+        String mapping = String.join("\n",
+                "{",
+                "  'textTypeMapppings': [",
+                "    {",
+                "      'from': 'Country',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
+                "    },",
+                "    {",
+                "      'from': 'Organization',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
+                "    },",
+                "    {",
+                "      'from': 'MERGE-ORG',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+                "    }",
+                "  ],",
+                "  'relationTypeMapppings': [",
+                "    {",
+                "      'from': 'Origin',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
+                "    }",
+                "  ],",
+                "  'spans': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
+                "      'defaultFeatureValues': {",
+                "        'value': 'LOC'",
+                "      }",
+                "    }",
+                "  ],",
+                "  'relations': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'arg1': 'source',",
+                "      'arg2': 'target',",
+                "      'flags2': 'A',",
+                "      'subCatFeature': 'value'",
+                "    }",
+                "  ],",
+                "  'comments': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
+                "      'feature': 'value'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'feature': 'comment'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
+                "      'feature': 'comment'",
+                "    }",
+                "  ]",
+                "}");
+        
+        File bratOrigDir = new File("src/test/resources/brat");
+        File annFileRef = new File(bratOrigDir, "document1.ann");
+        File tempDir = copyBratFilesToTempLocation(bratOrigDir);
+        File annFile = new File(tempDir, "document1.ann");
+        
+        testReadWrite(
+                createReader(BratReader.class,
+                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString(),
+                        BratReader.PARAM_MAPPING, mapping), 
+                createEngine(BratWriter.class,
+                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString(),
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                annFileRef, annFile);    
+    }    
         
     @Test
     public void testConll2009()
@@ -498,10 +573,10 @@ public class BratReaderWriterTest
         }        
     }    
     
-    private File copyBratFilesToTempLocation(File bratDir, 
-            String bratFilesRoot) throws IOException {                
-        File annFile = new File(bratDir, bratFilesRoot + ".ann");    
-        Path tempDir = Files.createTempDirectory("dkpro", new FileAttribute[0]);
+    private File copyBratFilesToTempLocation(File bratDir) 
+                    throws IOException { 
+        Path tempDir = null;        
+        tempDir = Files.createTempDirectory("dkpro", new FileAttribute[0]);
         FileCopy.copyFolder(bratDir, tempDir.toFile());
         
         return tempDir.toFile();

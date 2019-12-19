@@ -593,6 +593,8 @@ public class BratReader
             location = new File(location,"*.ann").toString();
         }
         
+        location = stripProtocol(location);
+        
         return location;
     }
     
