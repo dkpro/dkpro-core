@@ -520,14 +520,13 @@ public class BratReaderWriterTest
         boolean isSingleFile = ((BratReader)reader).sourceLocationIsSingleFile();
         int expNumRead = 1;
         if (isSingleFile) {
-            assertFilesHaveSameContent(expAnnFile, gotAnnFile);
         }  else {
             String pattern = new File(gotAnnFile, "*.ann").toString();
             expNumRead = FileGlob.listFiles(pattern).length;
         }
         assertEquals("Number of documents read was not as expected", 
                 expNumRead, JCasCollector.readJCases.size());
-
+        assertFilesHaveSameContent(expAnnFile, gotAnnFile);
     }    
     
     private File copyBratFilesToTempLocation(File bratDir) 
@@ -544,11 +543,19 @@ public class BratReaderWriterTest
         return tempDir.toFile();
     }
     
-    private void assertFilesHaveSameContent(File expFile, File actualFile) throws IOException {
-        String expContent = FileUtils.readFileToString(expFile, "UTF-8");
-        String actualContent = FileUtils.readFileToString(actualFile, "UTF-8");
-        expContent = EOLUtils.normalizeLineEndings(expContent);
-        actualContent = EOLUtils.normalizeLineEndings(actualContent);
-        assertEquals(expContent.trim(), actualContent.trim());
+    private void assertFilesHaveSameContent(File expFileOrDir, File actualFileOrDir) throws IOException {
+        if (!actualFileOrDir.isDirectory()) {
+            String expContent = FileUtils.readFileToString(expFileOrDir, "UTF-8");
+            String actualContent = FileUtils.readFileToString(actualFileOrDir, "UTF-8");
+            expContent = EOLUtils.normalizeLineEndings(expContent);
+            actualContent = EOLUtils.normalizeLineEndings(actualContent);
+            assertEquals(expContent.trim(), actualContent.trim());            
+        } else {
+            String pattern = new File(actualFileOrDir, "*.*").toString();
+            for (File anActualFile: FileGlob.listFiles(pattern)) {
+                File anExpFile = new File(expFileOrDir, anActualFile.getName());
+                assertFilesHaveSameContent(anExpFile, anActualFile);
+            }
+        }
     }
 }
