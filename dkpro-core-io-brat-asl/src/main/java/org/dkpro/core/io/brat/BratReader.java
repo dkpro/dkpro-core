@@ -73,6 +73,7 @@ import org.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import org.dkpro.core.io.brat.internal.model.Offsets;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParser;
@@ -169,6 +170,7 @@ public class BratReader
     public static final String PARAM_MAPPING = "mapping";
     @ConfigurationParameter(name = PARAM_MAPPING, mandatory = false)
     private String mappingJson;
+    private Mapping defaultMapping = null;
     
     private Mapping mapping;
     
@@ -184,6 +186,7 @@ public class BratReader
         ensureAnnFilesExist();
         super.initialize(aContext);
         
+        Mapping defMapping = getDefaultMapping();
         
         if (mappingJson != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -702,9 +705,52 @@ public class BratReader
                     patterns = augmPatterns;
                 }
             }
-            
         }
-        
     }
-    
+        
+    private Mapping getDefaultMapping() {
+        if (defaultMapping == null) {
+            List<TypeMapping> txtTypeMappingLst = new ArrayList<TypeMapping>();
+            TypeMappings txtTypeMappings = new TypeMappings(txtTypeMappingLst);
+            {
+                /// Add mappings for NER types
+                String[] nerTypeNames = new String[] {
+                        "Animal", "Cardinal", "ContactInfo", "Date", "Disease", "Event",
+                        "Fac", "Game", "Gpe", "Language", "Law", "Location", "Money", 
+                        "NamedEntity", "Nationality", "Norp", "Ordinal", "Organization",
+                        "OrgDesc", "Percent", "PerDesc", "Person", "Plant", "Product",
+                        "ProductDesc", "Quantity", "Substance", "Time", "WorkOfArt"
+                };
+                for (String typeName: nerTypeNames) {
+                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.ner.type."+typeName;
+                    txtTypeMappingLst.add(new TypeMapping(aType, typeName));
+                }
+            }
+            {
+                // Add mappings for Segmentation types
+                String[] segTypeNames = new String[] {
+                        "CompoundPart", "Div", "Document", "Heading", "Lemma", "LexicalPhrase",
+                        "LinkingMorpheme", "NGram", "Paragraph", "Sentence", "Split", "Stem", 
+                        "StopWord", "SurfaceForm", "Token"
+                };
+                for (String typeName: segTypeNames) {
+                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type."+typeName;
+                    txtTypeMappingLst.add(new TypeMapping(aType, typeName));
+                }
+            }
+            
+            List<TypeMapping> relTypeMappingLst = new ArrayList<TypeMapping>();
+            TypeMappings relTypeMappings = new TypeMappings(relTypeMappingLst);
+            
+            List<SpanMapping> txtAnnotsLst = new ArrayList<SpanMapping>();
+                        
+            List<RelationMapping> relMapLst = new ArrayList<RelationMapping>();
+
+            List<CommentMapping> commMapLst = new ArrayList<CommentMapping>();
+            
+            defaultMapping = new Mapping(txtTypeMappings, relTypeMappings, txtAnnotsLst, 
+                    relMapLst, commMapLst);
+        }
+        return defaultMapping;
+    }
 }
