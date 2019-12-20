@@ -72,6 +72,7 @@ import org.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import org.dkpro.core.io.brat.internal.model.Offsets;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParser;
@@ -91,6 +92,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class BratReader
     extends JCasResourceCollectionReader_ImplBase
 {
+    public enum SourceLocationType {SINGLE_FILE, SINGLE_DIR, GLOB_PATTERN}
+    
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
@@ -178,8 +181,9 @@ public class BratReader
         throws ResourceInitializationException
     {
         possiblyAddAnnFilePattern();
-
+        ensureAnnFilesExist();
         super.initialize(aContext);
+        
         
         if (mappingJson != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -215,37 +219,7 @@ public class BratReader
         }
         
         warnings = new LinkedHashSet<String>();
-    }
-    
-    private void possiblyAddAnnFilePattern() {
-//        if (! getSourceLocation().matches(".*\\.[A-Za-z0-9]+$")) {
-          if (!sourceLocationIsSingleFile()) {
-            // sourceLocation is not a single file. Make sure 
-            // the file patterns includes *.ann
-            //
-            if (patterns == null) {
-                patterns = new String[] { "*.ann" };
-            } else {
-                boolean alreadyHasAnnPattern = false;
-                for (String patt: patterns) {
-                    if (patt.equals("*.ann")) {
-                        alreadyHasAnnPattern = true;
-                        break;
-                    }
-                }
-                if (!alreadyHasAnnPattern) {
-                    String[] augmPatterns = new String[patterns.length+1];
-                    for (int ii = 0; ii < patterns.length; ii++) {
-                        augmPatterns[ii] = patterns[ii];
-                    }
-                    augmPatterns[patterns.length] = "*.ann";
-                    patterns = augmPatterns;
-                }
-            }
-            
-        }
-        
-    }
+    }    
 
     @Override
     public void close()
@@ -631,22 +605,33 @@ public class BratReader
         return location;
     }
     
-    public boolean sourceLocationIsSingleFile() {
-        Boolean isSingle = null;
+    @JsonIgnore
+    public SourceLocationType getSourceLocationType() {
+        SourceLocationType type = null;
+        
         String location = getSourceLocation();
         if (location.contains("*")) {
-            isSingle = false;
+            type = SourceLocationType.GLOB_PATTERN;
         }
-        if (isSingle == null && location.matches(".*\\.[a-zA-Z0-9]+$")) {
-            isSingle = true;
+        if (type == null && location.matches(".*\\.[a-zA-Z0-9]+$")) {
+            type = SourceLocationType.SINGLE_FILE;
+        }
+        if (type == null) {
+            type = SourceLocationType.SINGLE_DIR;
         }
         
-        if (isSingle == null) {
-            isSingle = false;
-        }
-            
-        return isSingle.booleanValue();
+        
+        return type;
     }
+    
+    public boolean sourceLocationIsSingleFile() {
+        return getSourceLocationType() == SourceLocationType.SINGLE_FILE;
+    }
+    
+    
+    private static String annFileFor(File bratFile) {
+        return annFileFor(bratFile.toString());
+    }    
     
     private static String annFileFor(String bratFile) {
         String annFile = bratFile.replaceAll("\\.txt$", ".ann");
@@ -658,5 +643,68 @@ public class BratReader
         return annFile;
     }
     
+    private void ensureAnnFilesExist() throws ResourceInitializationException {
+        File[] txtFiles = FileGlob.listFiles(getTxtFilesGlobPattern()); 
+        for (File aTxtFile: txtFiles) {
+            File annFile = new File(annFileFor(aTxtFile));
+            if (!annFile.exists()) {
+                // Create an empty .ann file
+                try {
+                    annFile.createNewFile();
+                } catch (IOException e) {
+                    throw new ResourceInitializationException(e);
+                }
+            }
+        }
+    }
+
+    private String getTxtFilesGlobPattern() {
+        String pattern = null;
+        String sourceLocation = getSourceLocation();
+        SourceLocationType locType = getSourceLocationType();
+        if (locType == SourceLocationType.SINGLE_FILE) {
+            pattern = txtFileFor(sourceLocation);            
+        } else if (locType == SourceLocationType.SINGLE_DIR) {
+            pattern = new File(sourceLocation, "*.txt").toString();
+        } else {
+            pattern = txtFileFor(sourceLocation);
+        }
+        
+        return pattern;
+    }
+
+    private boolean sourceLocationIsSingleDirectory() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    private void possiblyAddAnnFilePattern() {
+          if (!sourceLocationIsSingleFile()) {
+            // sourceLocation is not a single file. Make sure 
+            // the file patterns includes *.ann
+            //
+            if (patterns == null) {
+                patterns = new String[] { "*.ann" };
+            } else {
+                boolean alreadyHasAnnPattern = false;
+                for (String patt: patterns) {
+                    if (patt.equals("*.ann")) {
+                        alreadyHasAnnPattern = true;
+                        break;
+                    }
+                }
+                if (!alreadyHasAnnPattern) {
+                    String[] augmPatterns = new String[patterns.length+1];
+                    for (int ii = 0; ii < patterns.length; ii++) {
+                        augmPatterns[ii] = patterns[ii];
+                    }
+                    augmPatterns[patterns.length] = "*.ann";
+                    patterns = augmPatterns;
+                }
+            }
+            
+        }
+        
+    }
     
 }

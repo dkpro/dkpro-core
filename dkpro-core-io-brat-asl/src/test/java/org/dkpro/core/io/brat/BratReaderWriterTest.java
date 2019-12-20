@@ -213,6 +213,156 @@ public class BratReaderWriterTest
                         BratWriter.PARAM_RELATION_TYPES, asList(
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 annFileRef, annFile);    
+    } 
+    
+    @Test
+    public void test__SingleTxtFileWithoutAnAnnFile() throws Exception {
+        String mapping = String.join("\n",
+                "{",
+                "  'textTypeMapppings': [",
+                "    {",
+                "      'from': 'Country',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
+                "    },",
+                "    {",
+                "      'from': 'Organization',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
+                "    },",
+                "    {",
+                "      'from': 'MERGE-ORG',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+                "    }",
+                "  ],",
+                "  'relationTypeMapppings': [",
+                "    {",
+                "      'from': 'Origin',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
+                "    }",
+                "  ],",
+                "  'spans': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
+                "      'defaultFeatureValues': {",
+                "        'value': 'LOC'",
+                "      }",
+                "    }",
+                "  ],",
+                "  'relations': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'arg1': 'source',",
+                "      'arg2': 'target',",
+                "      'flags2': 'A',",
+                "      'subCatFeature': 'value'",
+                "    }",
+                "  ],",
+                "  'comments': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
+                "      'feature': 'value'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'feature': 'comment'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
+                "      'feature': 'comment'",
+                "    }",
+                "  ]",
+                "}");
+        
+        File bratOrigDir = new File("src/test/resources/brat/");
+        File txtFileRef = new File(bratOrigDir, "document1.txt");
+        boolean deleteAnnFiles = true;
+        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
+        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document1.txt")));
+        
+        boolean expectEmptyAnnFiles = true;
+        testReadWrite(
+                createReader(BratReader.class,
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
+                        BratReader.PARAM_MAPPING, mapping), 
+                createEngine(BratWriter.class,
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                txtFileRef, txtFile, expectEmptyAnnFiles);         
+    }
+    
+    @Test
+    public void test__SingleDirWithoutAnnFiles() throws Exception {
+        String mapping = String.join("\n",
+                "{",
+                "  'textTypeMapppings': [",
+                "    {",
+                "      'from': 'Country',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
+                "    },",
+                "    {",
+                "      'from': 'Organization',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
+                "    },",
+                "    {",
+                "      'from': 'MERGE-ORG',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+                "    }",
+                "  ],",
+                "  'relationTypeMapppings': [",
+                "    {",
+                "      'from': 'Origin',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
+                "    }",
+                "  ],",
+                "  'spans': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
+                "      'defaultFeatureValues': {",
+                "        'value': 'LOC'",
+                "      }",
+                "    }",
+                "  ],",
+                "  'relations': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'arg1': 'source',",
+                "      'arg2': 'target',",
+                "      'flags2': 'A',",
+                "      'subCatFeature': 'value'",
+                "    }",
+                "  ],",
+                "  'comments': [",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
+                "      'feature': 'value'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+                "      'feature': 'comment'",
+                "    },",
+                "    {",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
+                "      'feature': 'comment'",
+                "    }",
+                "  ]",
+                "}");
+        
+        File bratOrigDir = new File("src/test/resources/brat/");
+        File txtFileRef = bratOrigDir;
+        boolean deleteAnnFiles = true;
+        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
+        File txtFile = tempDir;
+        
+        boolean expectEmptyAnnFiles = true;        
+        testReadWrite(
+                createReader(BratReader.class,
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
+                        BratReader.PARAM_MAPPING, mapping), 
+                createEngine(BratWriter.class,
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                txtFileRef, txtFile, expectEmptyAnnFiles);         
     }    
         
     @Test
@@ -511,6 +661,18 @@ public class BratReaderWriterTest
     private void testReadWrite(CollectionReader reader,
             AnalysisEngine writer, File expAnnFile, File gotAnnFile) 
                     throws UIMAException, IOException {
+        testReadWrite(reader, writer, expAnnFile, gotAnnFile, null);
+    }
+    
+    
+    private void testReadWrite(CollectionReader reader,
+            AnalysisEngine writer, File expAnnFile, File gotAnnFile,
+            Boolean expectEmptyAnnFiles) 
+                    throws UIMAException, IOException {
+        
+        if (expectEmptyAnnFiles == null) {
+            expectEmptyAnnFiles = false;
+        }
         
         JCasCollector.readJCases = new ArrayList<JCas>();
         AnalysisEngine collector = createEngine(JCasCollector.class); 
@@ -526,11 +688,20 @@ public class BratReaderWriterTest
         }
         assertEquals("Number of documents read was not as expected", 
                 expNumRead, JCasCollector.readJCases.size());
-        assertFilesHaveSameContent(expAnnFile, gotAnnFile);
+        assertFilesHaveSameContent(expAnnFile, gotAnnFile, expectEmptyAnnFiles);
     }    
     
     private File copyBratFilesToTempLocation(File bratDir) 
+            throws IOException { 
+        return copyBratFilesToTempLocation(bratDir, null);
+    }
+
+   private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles) 
                     throws IOException { 
+        
+        if (deleteAnnFiles == null) {
+            deleteAnnFiles = false;
+        }
         
         Path tempDir = null;        
         tempDir = Files.createTempDirectory("dkpro", new FileAttribute[0]);
@@ -540,12 +711,26 @@ public class BratReaderWriterTest
         String pattern = new File(tempDir.toFile(), "*-ref*").toString();
         FileGlob.deleteFiles(pattern);
         
+        if (deleteAnnFiles) {
+            pattern = new File(tempDir.toFile(), "*.ann").toString();
+            FileGlob.deleteFiles(pattern);
+        }
+        
         return tempDir.toFile();
     }
     
-    private void assertFilesHaveSameContent(File expFileOrDir, File actualFileOrDir) throws IOException {
+    private void assertFilesHaveSameContent(File expFileOrDir, File actualFileOrDir,
+                    Boolean expectEmptyAnnFiles) throws IOException {
+        
+        if (expectEmptyAnnFiles == null) {
+            expectEmptyAnnFiles = false;
+        }
+        
         if (!actualFileOrDir.isDirectory()) {
-            String expContent = FileUtils.readFileToString(expFileOrDir, "UTF-8");
+            String expContent = "";
+            if (! expectEmptyAnnFiles || expFileOrDir.toString().endsWith(".txt")) {
+                expContent = FileUtils.readFileToString(expFileOrDir, "UTF-8");
+            }
             String actualContent = FileUtils.readFileToString(actualFileOrDir, "UTF-8");
             expContent = EOLUtils.normalizeLineEndings(expContent);
             actualContent = EOLUtils.normalizeLineEndings(actualContent);
@@ -554,7 +739,7 @@ public class BratReaderWriterTest
             String pattern = new File(actualFileOrDir, "*.*").toString();
             for (File anActualFile: FileGlob.listFiles(pattern)) {
                 File anExpFile = new File(expFileOrDir, anActualFile.getName());
-                assertFilesHaveSameContent(anExpFile, anActualFile);
+                assertFilesHaveSameContent(anExpFile, anActualFile, expectEmptyAnnFiles);
             }
         }
     }
