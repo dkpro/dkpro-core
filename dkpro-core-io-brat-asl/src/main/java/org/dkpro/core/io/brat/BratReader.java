@@ -187,13 +187,14 @@ public class BratReader
         super.initialize(aContext);
         
         Mapping defMapping = getDefaultMapping();
-        
+        Mapping customMapping = null;
+
         if (mappingJson != null) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.setDefaultSetterInfo(JsonSetter.Value.forContentNulls(Nulls.AS_EMPTY));
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             try {
-                mapping = mapper.readValue(mappingJson, Mapping.class);
+                customMapping = mapper.readValue(mappingJson, Mapping.class);
             }
             catch (IOException e) {
                 throw new ResourceInitializationException(e);
@@ -215,11 +216,13 @@ public class BratReader
             TypeMappings textAnnotationTypeMapping = new TypeMappings(textAnnotationTypeMappings);
             TypeMappings relationTypeMapping = new TypeMappings(relationTypeMappings);
             
-            mapping = new Mapping(textAnnotationTypeMapping, relationTypeMapping, 
+            customMapping = new Mapping(textAnnotationTypeMapping, relationTypeMapping, 
                     textAnnotationTypes.stream().map(SpanMapping::parse).collect(toList()),
                     relationTypes.stream().map(RelationMapping::parse).collect(Collectors.toList()),
                     noteMappings.stream().map(CommentMapping::parse).collect(toList()));
         }
+        
+        mapping = Mapping.merge(customMapping, defaultMapping);
         
         warnings = new LinkedHashSet<String>();
     }    
