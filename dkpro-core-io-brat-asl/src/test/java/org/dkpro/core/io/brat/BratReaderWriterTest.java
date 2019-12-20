@@ -31,13 +31,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileAttribute;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.io.brat.BratReader;
 import org.dkpro.core.io.brat.BratWriter;
@@ -49,84 +54,12 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.json.ReaderBasedJsonParser;
+
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
 public class BratReaderWriterTest
 {
-    @Test
-    public void test__SingleDocument__OutsideOfJavaPath()
-        throws Exception
-    {
-        String mapping = String.join("\n",
-                "{",
-                "  'textTypeMapppings': [",
-                "    {",
-                "      'from': 'Country',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
-                "    },",
-                "    {",
-                "      'from': 'Organization',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
-                "    },",
-                "    {",
-                "      'from': 'MERGE-ORG',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
-                "    }",
-                "  ],",
-                "  'relationTypeMapppings': [",
-                "    {",
-                "      'from': 'Origin',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
-                "    }",
-                "  ],",
-                "  'spans': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
-                "      'defaultFeatureValues': {",
-                "        'value': 'LOC'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'relations': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'arg1': 'source',",
-                "      'arg2': 'target',",
-                "      'flags2': 'A',",
-                "      'subCatFeature': 'value'",
-                "    }",
-                "  ],",
-                "  'comments': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
-                "      'feature': 'value'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'feature': 'comment'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
-                "      'feature': 'comment'",
-                "    }",
-                "  ]",
-                "}");
-        
-        File bratOrigDir = new File("src/test/resources/brat/");
-        File annFileRef = new File(bratOrigDir, "document1.ann");
-        File tempDir = copyBratFilesToTempLocation(bratOrigDir);
-        File annFile = new File(tempDir, "document1.ann");
-        
-        testReadWrite(
-                createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, annFile,
-                        BratReader.PARAM_MAPPING, mapping), 
-                createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, annFile,
-                        BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
-                annFileRef, annFile);    
-    }
      
     @Test
     public void test__SingleDocument__ProvideTxtFile()
@@ -221,7 +154,12 @@ public class BratReaderWriterTest
                 "    {",
                 "      'from': 'MERGE-ORG',",
                 "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+                "    },",            
+                "    {",
+                "      'from': 'Token',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token'",
                 "    }",
+                
                 "  ],",
                 "  'relationTypeMapppings': [",
                 "    {",
@@ -258,15 +196,14 @@ public class BratReaderWriterTest
                 "    {",
                 "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
                 "      'feature': 'comment'",
-                "    }",
+                "    }",                
                 "  ]",
                 "}");
         
         File bratOrigDir = new File("src/test/resources/brat");
-        File annFileRef = new File(bratOrigDir, "document1.ann");
+        File annFileRef = bratOrigDir;
         File tempDir = copyBratFilesToTempLocation(bratOrigDir);
-        File annFile = new File(tempDir, "document1.ann");
-        
+        File annFile = tempDir;
         testReadWrite(
                 createReader(BratReader.class,
                         BratReader.PARAM_SOURCE_LOCATION, tempDir.toString(),
@@ -561,23 +498,48 @@ public class BratReaderWriterTest
     //  testReadWrite().
     ////////////////////////////////////////////////////////////
     
+    public static class JCasCollector extends JCasAnnotator_ImplBase {
+
+        public static List<JCas> readJCases = new ArrayList<JCas>();
+        
+        @Override
+        public void process(JCas aJCas) throws AnalysisEngineProcessException {
+            readJCases.add(aJCas);
+        }
+    }
+    
     private void testReadWrite(CollectionReader reader,
             AnalysisEngine writer, File expAnnFile, File gotAnnFile) 
                     throws UIMAException, IOException {
         
-        SimplePipeline.runPipeline(reader, new AnalysisEngine[] {writer});
+        JCasCollector.readJCases = new ArrayList<JCas>();
+        AnalysisEngine collector = createEngine(JCasCollector.class); 
+                
+        SimplePipeline.runPipeline(reader, new AnalysisEngine[] {collector, writer});
         
-        boolean isSingleLocation = ((JCasResourceCollectionReader_ImplBase)reader).isSingleLocation();
-        if (isSingleLocation) {
+        boolean isSingleFile = ((BratReader)reader).sourceLocationIsSingleFile();
+        int expNumRead = 1;
+        if (isSingleFile) {
             assertFilesHaveSameContent(expAnnFile, gotAnnFile);
-        }        
+        }  else {
+            String pattern = new File(gotAnnFile, "*.ann").toString();
+            expNumRead = FileGlob.listFiles(pattern).length;
+        }
+        assertEquals("Number of documents read was not as expected", 
+                expNumRead, JCasCollector.readJCases.size());
+
     }    
     
     private File copyBratFilesToTempLocation(File bratDir) 
                     throws IOException { 
+        
         Path tempDir = null;        
         tempDir = Files.createTempDirectory("dkpro", new FileAttribute[0]);
         FileCopy.copyFolder(bratDir, tempDir.toFile());
+        
+        // Delete the -ref files from the inputs dir
+        String pattern = new File(tempDir.toFile(), "*-ref*").toString();
+        FileGlob.deleteFiles(pattern);
         
         return tempDir.toFile();
     }

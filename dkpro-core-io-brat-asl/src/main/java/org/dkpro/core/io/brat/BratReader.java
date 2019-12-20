@@ -38,6 +38,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.maven.model.PatternSet;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
@@ -176,6 +177,8 @@ public class BratReader
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
+        possiblyAddAnnFilePattern();
+
         super.initialize(aContext);
         
         if (mappingJson != null) {
@@ -214,6 +217,36 @@ public class BratReader
         warnings = new LinkedHashSet<String>();
     }
     
+    private void possiblyAddAnnFilePattern() {
+//        if (! getSourceLocation().matches(".*\\.[A-Za-z0-9]+$")) {
+          if (!sourceLocationIsSingleFile()) {
+            // sourceLocation is not a single file. Make sure 
+            // the file patterns includes *.ann
+            //
+            if (patterns == null) {
+                patterns = new String[] { "*.ann" };
+            } else {
+                boolean alreadyHasAnnPattern = false;
+                for (String patt: patterns) {
+                    if (patt.equals("*.ann")) {
+                        alreadyHasAnnPattern = true;
+                        break;
+                    }
+                }
+                if (!alreadyHasAnnPattern) {
+                    String[] augmPatterns = new String[patterns.length+1];
+                    for (int ii = 0; ii < patterns.length; ii++) {
+                        augmPatterns[ii] = patterns[ii];
+                    }
+                    augmPatterns[patterns.length] = "*.ann";
+                    patterns = augmPatterns;
+                }
+            }
+            
+        }
+        
+    }
+
     @Override
     public void close()
         throws IOException
@@ -589,13 +622,30 @@ public class BratReader
         
         if (isSingleLocation()) {
             location = annFileFor(location);
-        } else {
-            location = new File(location,"*.ann").toString();
+//        } else {
+//            location = new File(location,"*.ann").toString();
         }
         
-        location = stripProtocol(location);
+//        location = stripProtocol(location);
         
         return location;
+    }
+    
+    public boolean sourceLocationIsSingleFile() {
+        Boolean isSingle = null;
+        String location = getSourceLocation();
+        if (location.contains("*")) {
+            isSingle = false;
+        }
+        if (isSingle == null && location.matches(".*\\.[a-zA-Z0-9]+$")) {
+            isSingle = true;
+        }
+        
+        if (isSingle == null) {
+            isSingle = false;
+        }
+            
+        return isSingle.booleanValue();
     }
     
     private static String annFileFor(String bratFile) {

@@ -114,7 +114,7 @@ public abstract class ResourceCollectionReaderBase
      */
     public static final String PARAM_PATTERNS = ComponentParameters.PARAM_PATTERNS;
     @ConfigurationParameter(name = PARAM_PATTERNS, mandatory = false)
-    private String[] patterns;
+    protected String[] patterns;
 
     /**
      * Use the default excludes.
@@ -171,7 +171,7 @@ public abstract class ResourceCollectionReaderBase
             throw new IllegalArgumentException(
                     "Either a source location, pattern, or both must be specified.");
         }
-        
+                
         // if an ExternalResourceLocator providing a custom ResourcePatternResolver
         // has been specified, use it, by default use PathMatchingResourcePatternresolver
         
