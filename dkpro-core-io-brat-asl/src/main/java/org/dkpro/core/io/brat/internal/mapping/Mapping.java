@@ -86,4 +86,9 @@ public class Mapping
     {
         return comments.get(aType);
     }
+
+    public static Mapping merge(Mapping customMapping, Mapping defaultMapping) {
+        // For now, we return the custom  mapping
+        return customMapping;
+    }
 }

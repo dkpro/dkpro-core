@@ -222,8 +222,7 @@ public class BratReader
                     noteMappings.stream().map(CommentMapping::parse).collect(toList()));
         }
         
-//        mapping = Mapping.merge(customMapping, defaultMapping);
-        
+        mapping = Mapping.merge(customMapping, defaultMapping);
         warnings = new LinkedHashSet<String>();
     }    
 
