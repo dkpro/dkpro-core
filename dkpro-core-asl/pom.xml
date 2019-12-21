@@ -223,6 +223,11 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-bioc-asl</artifactId>
+        <version>2.1.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-bliki-asl</artifactId>
         <version>2.1.1-SNAPSHOT</version>
       </dependency>
@@ -572,6 +577,7 @@
     <module>../dkpro-core-io-aclanthology-asl</module>
     <module>../dkpro-core-io-ancora-asl</module>
     <module>../dkpro-core-io-bincas-asl</module>
+    <module>../dkpro-core-io-bioc-asl</module>
     <module>../dkpro-core-io-bliki-asl</module>
     <module>../dkpro-core-io-bnc-asl</module>
     <module>../dkpro-core-io-brat-asl</module>

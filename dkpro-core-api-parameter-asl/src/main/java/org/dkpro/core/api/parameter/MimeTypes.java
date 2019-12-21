@@ -30,6 +30,7 @@ public final class MimeTypes
     
     // DKPro Core application types
     public final static String APPLICATION_X_ANCORA_XML = "application/x.org.dkpro.ancora+xml";
+    public final static String APPLICATION_X_BIOC = "application/x.org.dkpro.bnc+xml";
     public final static String APPLICATION_X_BNC = "application/x.org.dkpro.bnc+xml";
     public final static String APPLICATION_X_BRAT = "application/x.org.dkpro.brat";
     public final static String APPLICATION_X_DITOP = "application/x.org.dkpro.ditop";
