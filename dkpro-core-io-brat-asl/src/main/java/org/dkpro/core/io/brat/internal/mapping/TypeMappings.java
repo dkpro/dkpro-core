@@ -27,6 +27,7 @@ import org.apache.uima.cas.TypeSystem;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TypeMappings
 {
@@ -68,6 +69,11 @@ public class TypeMappings
         return type;
     }
     
+    @JsonIgnore
+    public List<TypeMapping> getParsedMappings() { 
+        return parsedMappings; 
+    }    
+    
     public TypeMapping getMappingByBratType(String aBratType)
     {
         return parsedMappings.stream()
@@ -78,6 +84,7 @@ public class TypeMappings
     
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)
     {
+        System.out.println("-- getUimaType: aAnno.getType()="+aAnno.getType());
         Type t = brat2UimaMappingCache.get(aAnno.getType());
         
         if (t == null) {
@@ -100,6 +107,8 @@ public class TypeMappings
             throw new IllegalStateException("Unable to find appropriate UIMA type for brat type ["
                     + aAnno.getType() + "]");
         }
+
+        System.out.println("-- getUimaType: returning t="+t);
 
         return t;
     }

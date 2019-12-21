@@ -223,6 +223,7 @@ public class BratReader
         }
         
         mapping = Mapping.merge(customMapping, defaultMapping);
+        
         warnings = new LinkedHashSet<String>();
     }    
 

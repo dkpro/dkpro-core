@@ -21,6 +21,7 @@ import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,8 @@ import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Mapping
 {
@@ -88,7 +91,75 @@ public class Mapping
     }
 
     public static Mapping merge(Mapping customMapping, Mapping defaultMapping) {
-        // For now, we return the custom  mapping
-        return customMapping;
+        // Set this to true to just return the customMapping
+        // Set to false to return merge (currently does not work)
+        //
+        boolean justCustomMapping = true;
+        
+        // Merge the text type mappings
+        List<TypeMapping> textTypeMapppingsLst = new ArrayList<TypeMapping>();
+        textTypeMapppingsLst.addAll(customMapping.getTextTypeMapppings().getParsedMappings());
+        if (!justCustomMapping) {
+            textTypeMapppingsLst.addAll(defaultMapping.getTextTypeMapppings().getParsedMappings());
+        }
+        
+        TypeMappings textTypeMapppings = new TypeMappings(textTypeMapppingsLst);
+        
+        // Merge the relation type mappings
+        List<TypeMapping> relTypeMapppingsLst = new ArrayList<TypeMapping>();
+        relTypeMapppingsLst.addAll(customMapping.getRelationTypeMapppings().getParsedMappings());
+        if (!justCustomMapping) {
+            relTypeMapppingsLst.addAll(defaultMapping.getRelationTypeMapppings().getParsedMappings());
+        }
+        TypeMappings relTypeMapppings = new TypeMappings(relTypeMapppingsLst);
+        
+        // Start with empty mappings for Span, Relations and Comments.
+        List<SpanMapping> spans = new ArrayList<SpanMapping>();
+        List<RelationMapping> relations = new ArrayList<RelationMapping>();
+        List<CommentMapping> comments = new ArrayList<CommentMapping>();
+        
+        Mapping merged = new Mapping(textTypeMapppings, relTypeMapppings, spans, relations, comments);
+        
+        // Add the Text Annotations from both Mapping
+        for (String type: customMapping.textAnnotations.keySet()) {
+            merged.textAnnotations.put(type, customMapping.textAnnotations.get(type));
+        }
+        if (!justCustomMapping) {
+            for (String type: defaultMapping.textAnnotations.keySet()) {
+                if (! merged.textAnnotations.containsKey(type)) {
+                    merged.textAnnotations.put(type, customMapping.textAnnotations.get(type));
+                }
+            }
+        }
+            
+        // Add the Relations from both Mapping
+        for (String type: customMapping.relations.keySet()) {
+            merged.relations.put(type, customMapping.relations.get(type));
+        }
+        if (!justCustomMapping) {
+            for (String type: defaultMapping.relations.keySet()) {
+                if (! merged.relations.containsKey(type)) {
+                    merged.relations.put(type, customMapping.relations.get(type));
+                }
+            }
+        }
+        
+        // Add the Comments from both Mapping
+        for (String type: customMapping.comments.keySet()) {
+            Collection<CommentMapping> commentsThisType = customMapping.comments.get(type);
+            for (CommentMapping comment: commentsThisType) {
+                merged.comments.put(type, comment);
+            }
+        }
+        if (!justCustomMapping) {
+            for (String type: defaultMapping.comments.keySet()) {
+                Collection<CommentMapping> commentsThisType = defaultMapping.comments.get(type);
+                for (CommentMapping comment: commentsThisType) {
+                    merged.comments.put(type, comment);
+                }
+            }
+        }
+
+        return merged;
     }
 }
