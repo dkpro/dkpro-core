@@ -1,0 +1,63 @@
+// Copyright 2019
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+link:http://bioc.sourceforge.net[BioC] is a simple format to share text data and annotations popular in the BioNLP community.
+
+The support for BioC in DKPro Core is still quite limited. There is a reader and a writer component already, but much of the information is captured by the reader and written by the writer. So it can be used to read text from BioC files, but most annotations are being ignored.
+
+.What works
+* The reader can read BioC files containing one or more documents. For every document, a CAS is produced. 
+* The reader imports passages as `Div` annotation, sentences as `Sentence` annotations and BioC annotations of the type `token` as `Token` annotations. 
+* When reading, the IDs of tokens, sentences and passages are stored to the `id` feature of the respective DKPro Core annotations. The are preserved when writing the data back to files.
+* `text` can be read either from the passage, the sentence or the token level - the first one of these which is encountered is used.
+* The writer writes one BioC file per CAS (i.e. writing multiple documents to a single collection file is not supported).
+* When writing, if there are no sentence annotations, then the `text` is written at the passage level.
+
+.What does not work
+* Most `infon` elements are completely ignored (except `type`).
+* Relations are not supported at all yet.
+* The reader does not capture most collection-level metadata except. The `source` datum is captured and stored as the `collectionId` in the CASes' `DocumentMetaData` annotation and it is also used by the writer.
+
+ 
+.Example BioC (excerpt from `sentence.xml` file included in the BioC Java 1.0.1 package)
+[source,xml]
+----
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE collection SYSTEM "BioC.dtd">
+<collection>
+  <source>PubMed</source>
+  <date>20120606</date>
+  <key>sentence.key</key>
+  <document>
+    <id>21951408</id>
+    <passage>
+      <infon key="type">title</infon>
+      <offset>0</offset>
+      <sentence>
+        <offset>0</offset>
+        <text>Constraint-induced movement therapy for the upper paretic limb in acute or sub-acute stroke: a systematic review.</text>
+      </sentence>
+    </passage>
+    <passage>
+      <infon key="type">abstract</infon>
+      <offset>114</offset>
+      <sentence>
+        <offset>114</offset>
+        <text>Constraint-induced movement therapy is a commonly used intervention to improve upper limb function after stroke.</text>
+      </sentence>
+    </passage>
+  </document>
+</collection>
+----

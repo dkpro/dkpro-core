@@ -19,7 +19,7 @@ package org.dkpro.core.io.bioc;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.io.bioc.BioCReader;
 import org.dkpro.core.io.bioc.BioCWriter;
@@ -31,9 +31,10 @@ public class BioCReaderWriterTest
     @Test
     public void testEverything() throws Exception
     {
-        testRoundTrip(
+        testOneWay(
                 createReaderDescription(BioCReader.class), 
                 createEngineDescription(BioCWriter.class),
+                "xml/everything-formatted-ref.xml",
                 "xml/everything-formatted.xml", 
                 new TestOptions().keepDocumentMetadata());
     }
@@ -41,9 +42,10 @@ public class BioCReaderWriterTest
     @Test
     public void testPMC() throws Exception
     {
-        testRoundTrip(
+        testOneWay(
                 createReaderDescription(BioCReader.class), 
                 createEngineDescription(BioCWriter.class),
+                "pmc/PMC1790863-ref.xml", 
                 "pmc/PMC1790863.xml", 
                 new TestOptions().keepDocumentMetadata());
     }
@@ -51,9 +53,10 @@ public class BioCReaderWriterTest
     @Test
     public void testSimplifiedSentences() throws Exception
     {
-        testRoundTrip(
+        testOneWay(
                 createReaderDescription(BioCReader.class), 
                 createEngineDescription(BioCWriter.class),
+                "xml/PMID-8557975-simplified-sentences-tokens-ref.xml", 
                 "xml/PMID-8557975-simplified-sentences-tokens.xml", 
                 new TestOptions().keepDocumentMetadata());
     }
