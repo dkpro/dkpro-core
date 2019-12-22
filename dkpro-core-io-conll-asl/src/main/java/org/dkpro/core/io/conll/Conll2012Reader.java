@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -45,12 +46,12 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import org.dkpro.core.io.penntree.PennTreeUtils;
 
@@ -90,7 +91,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
                 "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
                 "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense" })
 public class Conll2012Reader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Character encoding of the input data.
@@ -309,52 +310,59 @@ public class Conll2012Reader
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
-                tokenById.put(Integer.valueOf(word[ID]), token);
+                Token token = doc.add(trim(word[FORM]), Token.class);
+                tokenById.put(Integer.valueOf(trim(word[ID])), token);
                 if (wordIterator.hasNext()) {
                     doc.add(" ");
                 }
 
                 // Read lemma
-                if (!UNUSED.equals(word[LEMMA]) && readLemma) {
+                String lemmaValue = trim(word[LEMMA]);
+                if (!UNUSED.equals(lemmaValue) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(word[LEMMA]);
+                    lemma.setValue(lemmaValue);
                     lemma.addToIndexes();
                     token.setLemma(lemma);
                 }
 
                 // Read part-of-speech tag
-                if (!UNUSED.equals(word[POS]) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(word[POS]);
+                String posValue = cleanTag(word[POS]);
+                if (!UNUSED.equals(posValue) && readPos) {
+                    Type posTag = posMappingProvider.getTagType(posValue);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POS] != null ? word[POS].intern() : null);
+                    pos.setPosValue(posValue);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
 
-                if (!UNUSED.equals(word[PRED]) && readSemanticPredicate) {
+                String predValue = trim(word[PRED]); 
+                if (!UNUSED.equals(predValue) && readSemanticPredicate) {
                     SemPred pred = new SemPred(aJCas, token.getBegin(), token.getEnd());
-                    pred.setCategory(word[PRED]);
+                    pred.setCategory(predValue);
                     pred.addToIndexes();
                     preds.add(pred);
                 }
 
-                if (!UNUSED.equals(word[PARSE]) && readConstituent) {
-                    String fixed = word[PARSE].replace("*",
-                            "(" + word[POS] + " " + word[FORM] + ")");
+                String constituentFragmentValue = trim(word[PARSE]);
+                if (!UNUSED.equals(constituentFragmentValue) && readConstituent) {
+                    String fixed = constituentFragmentValue.replace("*",
+                            "(" + posValue + " " + trim(word[FORM]) + ")");
                     parse.append(fixed);
                 }
                 
-                if (!UNUSED.equals(word[WORD_SENSE]) && readWordSense) {
+                String wordSenseValue = trim(word[WORD_SENSE]);
+                if (!UNUSED.equals(wordSenseValue) && readWordSense) {
                     WordSense wordSense = new WordSense(aJCas, token.getBegin(), token.getEnd());
-                    wordSense.setValue(word[WORD_SENSE]);
+                    wordSense.setValue(wordSenseValue);
                     wordSense.addToIndexes();
                 }
 
-                if (!UNUSED.equals(word[word.length - 1]) && readCoreference) {
-                    String[] chainFragments = word[word.length - 1].split("\\|");
+                String coreferenceValue = trim(word[word.length - 1]);
+                if (!UNUSED.equals(coreferenceValue) && readCoreference) {
+                    String[] chainFragments = Arrays.stream(coreferenceValue.split("\\|"))
+                            .map(this::trim).toArray(String[]::new);
                     for (String chainFragment : chainFragments) {
                         boolean beginning = chainFragment.startsWith("(");
                         boolean ending = chainFragment.endsWith(")");
@@ -396,7 +404,7 @@ public class Conll2012Reader
                 int currentNeBegin = -1;
                 String currentNeType = null;
                 for (int i = 0; i < words.size(); i++) {
-                    String ne = words.get(i)[NAMED_ENTITIES];
+                    String ne = trim(words.get(i)[NAMED_ENTITIES]);
                     boolean beginning = ne.startsWith("(");
                     boolean ending = ne.endsWith(")");
     
@@ -404,7 +412,7 @@ public class Conll2012Reader
                     if (beginning) {
                         // The NE is beginning with "(" and either ending with "(" or "*", so we
                         // trim the first and last character
-                        currentNeType = ne.substring(1, ne.length() - 1);
+                        currentNeType = cleanTag(ne.substring(1, ne.length() - 1));
                         currentNeBegin = i;
                     }
                     
@@ -437,7 +445,7 @@ public class Conll2012Reader
                     int currentArgBegin = -1;
                     String currentArgType = null;
                     for (int i = 0; i < words.size(); i++) {
-                        String ne = words.get(i)[APRED + p];
+                        String ne = trim(words.get(i)[APRED + p]);
                         boolean beginning = ne.startsWith("(");
                         boolean ending = ne.endsWith(")");
 
@@ -445,7 +453,7 @@ public class Conll2012Reader
                         if (beginning) {
                             // The arg is beginning with "(" and either ending with "(" or "*", so
                             // we trim the first and last character
-                            currentArgType = ne.substring(1, ne.length() - 1);
+                            currentArgType = cleanTag(ne.substring(1, ne.length() - 1));
                             currentArgBegin = i;
                         }
                         

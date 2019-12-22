@@ -51,48 +51,60 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 public class Lif2DKPro
 {
     private Map<String, Token> tokenIdx;
+    private Container container;
     
     public void convert(Container aContainer, JCas aJCas)
     {
         tokenIdx = new HashMap<>();
-        
+        container = aContainer;
+
         aJCas.setDocumentLanguage(aContainer.getLanguage());
         aJCas.setDocumentText(aContainer.getText());
 
-        View view = aContainer.getView(0);
-
         // Paragraph
-        view.getAnnotations().stream()
+        getView(Discriminators.Uri.PARAGRAPH).getAnnotations().stream()
             .filter(a -> Discriminators.Uri.PARAGRAPH.equals(a.getAtType()))
             .forEach(para -> convertParagraph(aJCas, para));
 
         // Sentence
-        view.getAnnotations().stream()
+        getView(Discriminators.Uri.SENTENCE).getAnnotations().stream()
             .filter(a -> Discriminators.Uri.SENTENCE.equals(a.getAtType()))
             .forEach(sent -> convertSentence(aJCas, sent));
 
         // Token, POS, Lemma (builds token index)
-        view.getAnnotations().stream()
+        getView(Discriminators.Uri.TOKEN).getAnnotations().stream()
             .filter(a -> Discriminators.Uri.TOKEN.equals(a.getAtType()))
             .forEach(token -> convertToken(aJCas, token));
 
         // NamedEntity
-        view.getAnnotations().stream()
+        getView(Discriminators.Uri.NE).getAnnotations().stream()
             .filter(a -> isNamedEntity(a.getAtType()))
             .forEach(ne -> convertNamedEntity(aJCas, ne));
         
         // Dependencies (requires token index)
-        view.getAnnotations().stream()
+        getView(Discriminators.Uri.DEPENDENCY).getAnnotations().stream()
             .filter(a -> Discriminators.Uri.DEPENDENCY.equals(a.getAtType()))
             .forEach(dep -> convertDependency(aJCas, dep));
         
         // Constituents (requires token index)
-        view.getAnnotations().stream()
+        getView(Discriminators.Uri.PHRASE_STRUCTURE).getAnnotations().stream()
             .filter(a -> Discriminators.Uri.PHRASE_STRUCTURE.equals(a.getAtType()))
-            .forEach(ps -> convertConstituents(aJCas, view, ps));
+            .forEach(ps -> convertConstituents(aJCas, getView(Discriminators.Uri.CONSTITUENT), ps));
+    }
+
+    private View getView(String aType)
+    {
+        // Returns the last view which contains aType. If no view is found,
+        // then just return the first view.
+        List<View> views = container.findViewsThatContain(aType);
+        if (!views.isEmpty()) {
+            return views.get(views.size() - 1);
+        } else {
+            return container.getView(0);
+        }
     }
     
-    private Object convertConstituents(JCas aJCas, View view, Annotation ps)
+    private void convertConstituents(JCas aJCas, View view, Annotation ps)
     {
         String rootId = findRoot(view, ps);
         // Get the constituent IDs
@@ -167,8 +179,6 @@ public class Lif2DKPro
         constituentIdx.values().forEach(conAnno -> {
             conAnno.addToIndexes();
         });
-
-        return root;
     }
 
     private Paragraph convertParagraph(JCas aTarget, Annotation aParagraph)
@@ -220,7 +230,7 @@ public class Lif2DKPro
     {
         NamedEntity neAnno = new NamedEntity(aTarget, aNamedEntity.getStart().intValue(),
                 aNamedEntity.getEnd().intValue());
-        neAnno.setValue(aNamedEntity.getLabel());
+        neAnno.setValue(aNamedEntity.getFeature("category"));
         neAnno.addToIndexes();
         return neAnno;
     }
@@ -315,7 +325,8 @@ public class Lif2DKPro
     
     private boolean isNamedEntity(String aTypeName)
     {
-        return Discriminators.Uri.NE.equals(aTypeName) || Discriminators.Uri.DATE.equals(aTypeName)
+        return Discriminators.Uri.NE.equals(aTypeName)
+                || Discriminators.Uri.DATE.equals(aTypeName)
                 || Discriminators.Uri.LOCATION.equals(aTypeName)
                 || Discriminators.Uri.ORGANIZATION.equals(aTypeName)
                 || Discriminators.Uri.PERSON.equals(aTypeName);
