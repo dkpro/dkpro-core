@@ -29,5 +29,6 @@ public class ITS
     public static final String NS_ITS = "http://www.w3.org/2005/11/its/rdf#";
 
     public static final String PROP_TA_IDENT_REF = NS_ITS + "taIdentRef";
+    
     public static final String PROP_TA_CLASS_REF = NS_ITS + "taClassRef";
 }

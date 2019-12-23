@@ -50,6 +50,7 @@ public class DKPro2Nif
         final Resource tTitle = m.createResource(NIF.TYPE_TITLE);
         final Resource tParagraph = m.createResource(NIF.TYPE_PARAGRAPH);
         final Resource tEntityOccurrence = m.createResource(NIF.TYPE_ENTITY_OCCURRENCE);
+        final Resource tOffsetBasedString = m.createResource(NIF.TYPE_OFFSET_BASED_STRING);
         
         final Property pReferenceContext = m.createProperty(NIF.PROP_REFERENCE_CONTEXT);
         final Property pIsString = m.createProperty(NIF.PROP_IS_STRING);
@@ -79,6 +80,7 @@ public class DKPro2Nif
             String uri = String.format("%s#offset_%d_%d", docuri, 0,
                     aJCas.getDocumentText().length());
             context = m.createIndividual(uri, tContext);
+            context.addRDFType(tOffsetBasedString);
             context.addLiteral(pIsString, 
                     m.createTypedLiteral(aJCas.getDocumentText(), XSDstring));
             context.addLiteral(pBeginIndex, 
@@ -92,6 +94,7 @@ public class DKPro2Nif
             String headingUri = String.format("%s#offset_%d_%d", docuri, uimaHeading.getBegin(),
                     uimaHeading.getEnd());
             Individual nifTitle = m.createIndividual(headingUri, tTitle);
+            nifTitle.addRDFType(tOffsetBasedString);
             nifTitle.addProperty(pReferenceContext, context);
             nifTitle.addLiteral(pAnchorOf, uimaHeading.getCoveredText());
             nifTitle.addLiteral(pBeginIndex, 
@@ -105,6 +108,7 @@ public class DKPro2Nif
             String paragraphUri = String.format("%s#offset_%d_%d", docuri, uimaParagraph.getBegin(),
                     uimaParagraph.getEnd());
             Individual nifParagraph = m.createIndividual(paragraphUri, tParagraph);
+            nifParagraph.addRDFType(tOffsetBasedString);
             nifParagraph.addProperty(pReferenceContext, context);
             nifParagraph.addLiteral(pAnchorOf, uimaParagraph.getCoveredText());
             nifParagraph.addLiteral(pBeginIndex, 
@@ -119,6 +123,7 @@ public class DKPro2Nif
             String sentenceUri = String.format("%s#offset_%d_%d", docuri, uimaSentence.getBegin(),
                     uimaSentence.getEnd());
             Individual nifSentence = m.createIndividual(sentenceUri, tSentence);
+            nifSentence.addRDFType(tOffsetBasedString);
             nifSentence.addProperty(pReferenceContext, context);
             nifSentence.addLiteral(pAnchorOf, uimaSentence.getCoveredText());
             nifSentence.addLiteral(pBeginIndex, 
@@ -139,6 +144,7 @@ public class DKPro2Nif
                 String wordUri = String.format("%s#offset_%d_%d", docuri, uimaToken.getBegin(),
                         uimaToken.getEnd());
                 Individual nifWord = m.createIndividual(wordUri, tWord);
+                nifWord.addRDFType(tOffsetBasedString);
                 nifWord.addProperty(pReferenceContext, context);
                 nifWord.addLiteral(pAnchorOf, uimaToken.getText());
                 nifWord.addLiteral(pBeginIndex, 
@@ -201,6 +207,7 @@ public class DKPro2Nif
             String neUri = String.format("%s#offset_%d_%d", docuri, uimaNamedEntity.getBegin(),
                     uimaNamedEntity.getEnd());
             Individual nifNamedEntity = m.createIndividual(neUri, tEntityOccurrence);
+            nifNamedEntity.addRDFType(tOffsetBasedString);
             nifNamedEntity.addProperty(pReferenceContext, context);
             nifNamedEntity.addLiteral(pAnchorOf, uimaNamedEntity.getCoveredText());
             nifNamedEntity.addLiteral(pBeginIndex, 

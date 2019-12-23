@@ -68,6 +68,7 @@ public class Nif2DKPro
         final Property pLemma = m.createProperty(NIF.PROP_LEMMA);
         final Property pStem = m.createProperty(NIF.PROP_STEM);
         final Property pPosTag = m.createProperty(NIF.PROP_POS_TAG);
+        final Property pTaMsClassRef = m.createProperty(NIF.PROP_TA_MS_CLASS_REF);
         final Property pTaIdentRef = m.createProperty(ITS.PROP_TA_IDENT_REF);
         final Property pTaClassRef = m.createProperty(ITS.PROP_TA_CLASS_REF);
 
@@ -183,27 +184,42 @@ public class Nif2DKPro
         //
         // [1] http://nif.readthedocs.io/en/2.1-rc/prov-and-conf.html
         // [2] https://datahub.io/dataset/kore-50-nif-ner-corpus
-        Set<Resource> nifNamedEntities1 = m
+        Set<Resource> nifNamedEntitiesTaIdentRef = m
                 .listResourcesWithProperty(pTaIdentRef)
                 .filterKeep(res -> res.getProperty(
                         pReferenceContext).getResource().equals(aContext.getSubject()))
                 .toSet();
-        Set<Resource> nifNamedEntities2 = m
-                .listResourcesWithProperty(pTaIdentRef)
+        Set<Resource> nifNamedEntitiesTaClassRef = m
+                .listResourcesWithProperty(pTaClassRef)
+                .filterKeep(res -> res.getProperty(
+                        pReferenceContext).getResource().equals(aContext.getSubject()))
+                .toSet();
+        Set<Resource> nifNamedEntitiesTaMsClassRef = m
+                .listResourcesWithProperty(pTaMsClassRef)
                 .filterKeep(res -> res.getProperty(
                         pReferenceContext).getResource().equals(aContext.getSubject()))
                 .toSet();
         Set<Resource> nifNamedEntities = new HashSet<Resource>();
-        nifNamedEntities.addAll(nifNamedEntities1);
-        nifNamedEntities.addAll(nifNamedEntities2);
+        nifNamedEntities.addAll(nifNamedEntitiesTaIdentRef);
+        nifNamedEntities.addAll(nifNamedEntitiesTaClassRef);
+        nifNamedEntities.addAll(nifNamedEntitiesTaMsClassRef);
         for (Resource nifNamedEntity : nifNamedEntities) {
             int begin = nifNamedEntity.getProperty(pBeginIndex).getInt();
             int end = nifNamedEntity.getProperty(pEndIndex).getInt();
             NamedEntity uimaNamedEntity = new NamedEntity(aJCas, begin, end);
-            if (nifNamedEntity.hasProperty(pTaClassRef)) {
+            
+            // If there is a most-specific class, then we use that
+            if (nifNamedEntity.hasProperty(pTaMsClassRef)) {
+                uimaNamedEntity
+                        .setValue(nifNamedEntity.getProperty(pTaMsClassRef).getResource().getURI());
+            }
+            // ... else, we use some class
+            else if (nifNamedEntity.hasProperty(pTaClassRef)) {
                 uimaNamedEntity
                         .setValue(nifNamedEntity.getProperty(pTaClassRef).getResource().getURI());
             }
+            
+            // If the entity is linked, then we keep the identifier 
             if (nifNamedEntity.hasProperty(pTaIdentRef)) {
                 uimaNamedEntity.setIdentifier(
                         nifNamedEntity.getProperty(pTaIdentRef).getResource().getURI());
