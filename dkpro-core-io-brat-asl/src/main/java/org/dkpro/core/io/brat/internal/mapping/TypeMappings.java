@@ -84,7 +84,6 @@ public class TypeMappings
     
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)
     {
-        System.out.println("-- getUimaType: aAnno.getType()=" + aAnno.getType());
         Type t = brat2UimaMappingCache.get(aAnno.getType());
         
         if (t == null) {
@@ -107,8 +106,6 @@ public class TypeMappings
             throw new IllegalStateException("Unable to find appropriate UIMA type for brat type ["
                     + aAnno.getType() + "]");
         }
-
-        System.out.println("-- getUimaType: returning t=" + t);
 
         return t;
     }

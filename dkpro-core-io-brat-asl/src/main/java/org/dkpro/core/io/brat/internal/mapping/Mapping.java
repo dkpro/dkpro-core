@@ -1,5 +1,4 @@
 /*
- * Copyright 2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -23,11 +22,14 @@ import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.apache.uima.cas.Type;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -92,7 +94,7 @@ public class Mapping
         // Set this to true to just return the customMapping
         // Set to false to return merge (currently does not work)
         //
-        boolean justCustomMapping = true;
+        boolean justCustomMapping = false;
         
         // Merge the text type mappings
         List<TypeMapping> textTypeMapppingsLst = new ArrayList<TypeMapping>();
@@ -160,6 +162,9 @@ public class Mapping
             }
         }
 
+        Set<String> fieldsToIgnore = new HashSet<String>();
+        fieldsToIgnore.add("(?!(uimaType|normalizedPattern)");
+        
         return merged;
     }
 }

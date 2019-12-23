@@ -715,6 +715,21 @@ public class BratReader
         
     private Mapping getDefaultMapping() {
         if (defaultMapping == null) {
+            // AD: Here, I manually added mappings for types that
+            //   I use in my project. Need to extend it to 
+            //   all the dkpro-core packages that extend the
+            //   UIMA type system.
+            //
+            //
+            //   Better yet, use the reflections library to find all
+            //   the classes in each of the packages:
+            //
+            //     https://stackoverflow.com/questions/520328/can-you-find-all-classes-in-a-package-using-reflection
+            //
+            //   That way, we only need to list the packages, not all the 
+            //   classes.
+            //
+            
             List<TypeMapping> txtTypeMappingLst = new ArrayList<TypeMapping>();
             TypeMappings txtTypeMappings = new TypeMappings(txtTypeMappingLst);
             {
@@ -728,7 +743,7 @@ public class BratReader
                 };
                 for (String typeName: nerTypeNames) {
                     String aType = "de.tudarmstadt.ukp.dkpro.core.api.ner.type." + typeName;
-                    txtTypeMappingLst.add(new TypeMapping(aType, typeName));
+                    txtTypeMappingLst.add(new TypeMapping(typeName, aType));
                 }
             }
             {
@@ -736,12 +751,12 @@ public class BratReader
                 String[] segTypeNames = new String[] {
                         "CompoundPart", "Div", "Document", "Heading", "Lemma", "LexicalPhrase",
                         "LinkingMorpheme", "NGram", "Paragraph", "Sentence", "Split", "Stem", 
-                        "StopWord", "SurfaceForm", "Token"
+                        "StopWord", "SurfaceForm", 
+                        "Token"
                 };
                 for (String typeName: segTypeNames) {
-                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type."
-                            + typeName;
-                    txtTypeMappingLst.add(new TypeMapping(aType, typeName));
+                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type." + typeName;
+                    txtTypeMappingLst.add(new TypeMapping(typeName, aType));
                 }
             }
             
