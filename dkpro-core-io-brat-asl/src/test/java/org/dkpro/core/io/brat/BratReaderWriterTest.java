@@ -59,289 +59,57 @@ public class BratReaderWriterTest
     public void test__SingleDocument__ProvideTxtFile()
         throws Exception
     {
-        String mapping = String.join("\n",
-                "{",
-                "  'textTypeMapppings': [",
-                "    {",
-                "      'from': 'Country',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
-                "    },",
-                "    {",
-                "      'from': 'Organization',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
-                "    },",
-                "    {",
-                "      'from': 'MERGE-ORG',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
-                "    }",
-                "  ],",
-                "  'relationTypeMapppings': [",
-                "    {",
-                "      'from': 'Origin',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
-                "    }",
-                "  ],",
-                "  'spans': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
-                "      'defaultFeatureValues': {",
-                "        'value': 'LOC'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'relations': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'arg1': 'source',",
-                "      'arg2': 'target',",
-                "      'flags2': 'A',",
-                "      'subCatFeature': 'value'",
-                "    }",
-                "  ],",
-                "  'comments': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
-                "      'feature': 'value'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'feature': 'comment'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
-                "      'feature': 'comment'",
-                "    }",
-                "  ]",
-                "}");
-        
+
         File bratOrigDir = new File("src/test/resources/brat/");
-        File txtFileRef = new File(bratOrigDir, "document1.txt");
+        File txtFileRef = new File(bratOrigDir, "document0a.txt");
         File tempDir = copyBratFilesToTempLocation(bratOrigDir);
-        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document1.txt")));
+        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document0a.txt")));
         
         testReadWrite(
                 createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
-                        BratReader.PARAM_MAPPING, mapping), 
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
                 createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
-                        BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
                 txtFileRef, txtFile);    
     }
     
     @Test
-    public void test__BratDirectory()
+    public void test__BratDirectory__ContainingOnlyAnnotationsForStandardDKProUimaTypes()
         throws Exception
-    {
-        String mapping = String.join("\n",
-                "{",
-                "  'textTypeMapppings': [",
-                "    {",
-                "      'from': 'Country',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
-                "    },",
-                "    {",
-                "      'from': 'Organization',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
-                "    },",
-                "    {",
-                "      'from': 'MERGE-ORG',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
-                "    },",            
-                "    {",
-                "      'from': 'Token',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token'",
-                "    }",
-                
-                "  ],",
-                "  'relationTypeMapppings': [",
-                "    {",
-                "      'from': 'Origin',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
-                "    }",
-                "  ],",
-                "  'spans': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
-                "      'defaultFeatureValues': {",
-                "        'value': 'LOC'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'relations': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'arg1': 'source',",
-                "      'arg2': 'target',",
-                "      'flags2': 'A',",
-                "      'subCatFeature': 'value'",
-                "    }",
-                "  ],",
-                "  'comments': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
-                "      'feature': 'value'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'feature': 'comment'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
-                "      'feature': 'comment'",
-                "    }",                
-                "  ]",
-                "}");
-        
-        File bratOrigDir = new File("src/test/resources/brat");
+    {        
+        File bratOrigDir = new File("src/test/resources/brat-only-std-types");
         File annFileRef = bratOrigDir;
         File tempDir = copyBratFilesToTempLocation(bratOrigDir);
         File annFile = tempDir;
         testReadWrite(
                 createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString(),
-                        BratReader.PARAM_MAPPING, mapping), 
+                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString()),
                 createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString(),
-                        BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString()),
                 annFileRef, annFile);    
     } 
     
     @Test
-    public void test__SingleTxtFileWithoutAnAnnFile() throws Exception {
-        String mapping = String.join("\n",
-                "{",
-                "  'textTypeMapppings': [",
-                "    {",
-                "      'from': 'Country',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
-                "    },",
-                "    {",
-                "      'from': 'Organization',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
-                "    },",
-                "    {",
-                "      'from': 'MERGE-ORG',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
-                "    }",
-                "  ],",
-                "  'relationTypeMapppings': [",
-                "    {",
-                "      'from': 'Origin',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
-                "    }",
-                "  ],",
-                "  'spans': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
-                "      'defaultFeatureValues': {",
-                "        'value': 'LOC'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'relations': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'arg1': 'source',",
-                "      'arg2': 'target',",
-                "      'flags2': 'A',",
-                "      'subCatFeature': 'value'",
-                "    }",
-                "  ],",
-                "  'comments': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
-                "      'feature': 'value'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'feature': 'comment'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
-                "      'feature': 'comment'",
-                "    }",
-                "  ]",
-                "}");
+    public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
         
         File bratOrigDir = new File("src/test/resources/brat/");
-        File txtFileRef = new File(bratOrigDir, "document1.txt");
+        File txtFileRef = new File(bratOrigDir, "document0a.txt");
         boolean deleteAnnFiles = true;
         File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
-        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document1.txt")));
+        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document0a.txt")));
         
         boolean expectEmptyAnnFiles = true;
         testReadWrite(
                 createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
-                        BratReader.PARAM_MAPPING, mapping), 
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
                 createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
-                        BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
                 txtFileRef, txtFile, expectEmptyAnnFiles);         
     }
     
     @Test
-    public void test__SingleDirWithoutAnnFiles() throws Exception {
-        String mapping = String.join("\n",
-                "{",
-                "  'textTypeMapppings': [",
-                "    {",
-                "      'from': 'Country',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
-                "    },",
-                "    {",
-                "      'from': 'Organization',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'",
-                "    },",
-                "    {",
-                "      'from': 'MERGE-ORG',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
-                "    }",
-                "  ],",
-                "  'relationTypeMapppings': [",
-                "    {",
-                "      'from': 'Origin',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
-                "    }",
-                "  ],",
-                "  'spans': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
-                "      'defaultFeatureValues': {",
-                "        'value': 'LOC'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'relations': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'arg1': 'source',",
-                "      'arg2': 'target',",
-                "      'flags2': 'A',",
-                "      'subCatFeature': 'value'",
-                "    }",
-                "  ],",
-                "  'comments': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
-                "      'feature': 'value'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
-                "      'feature': 'comment'",
-                "    },",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
-                "      'feature': 'comment'",
-                "    }",
-                "  ]",
-                "}");
-        
-        File bratOrigDir = new File("src/test/resources/brat/");
+    public void test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception {
+        File bratOrigDir = new File("src/test/resources/brat-only-std-types/");
         File txtFileRef = bratOrigDir;
         boolean deleteAnnFiles = true;
         File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
@@ -350,12 +118,9 @@ public class BratReaderWriterTest
         boolean expectEmptyAnnFiles = true;        
         testReadWrite(
                 createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
-                        BratReader.PARAM_MAPPING, mapping), 
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
                 createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString(),
-                        BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
                 txtFileRef, txtFile, expectEmptyAnnFiles);         
     }    
         
