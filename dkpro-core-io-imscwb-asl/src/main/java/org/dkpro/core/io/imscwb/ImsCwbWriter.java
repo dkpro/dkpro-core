@@ -29,7 +29,6 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -40,12 +39,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.CloseShieldOutputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
@@ -53,6 +52,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 
@@ -63,14 +63,17 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.Parameters;
 
 /**
- * This Consumer outputs the content of all CASes into the IMS workbench format.
- *
+ * Writes in the IMS Open Corpus Workbench verticalized XML format.
+ * <p>
  * This writer produces a text file which needs to be converted to the binary IMS CWB index files
  * using the command line tools that come with the CWB.
- *
+ * <p>
  * It is possible to set the parameter {@link #PARAM_CQP_HOME} to directly create output in the
  * native binary CQP format via the original CWB command line tools.
- *
+ * <p>
+ * When not configured to write directly to a CQP process, then the writer will produce one file per
+ * CAS. In order to write all data to the same file, use
+ * {@link JCasFileWriter_ImplBase#PARAM_SINGULAR_TARGET}.
  */
 @ResourceMetaData(name = "IMS CWB Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
@@ -86,7 +89,7 @@ import eu.openminted.share.annotations.api.Parameters;
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class ImsCwbWriter
-    extends JCasAnnotator_ImplBase
+    extends JCasFileWriter_ImplBase
 {
     public static final String E_SENTENCE = "s";
     public static final String E_TEXT = "text";
@@ -100,12 +103,14 @@ public class ImsCwbWriter
     public static final String ATTR_URI = "uri";
 
     /**
-     * Location to which the output is written.
+     * Specify the suffix of output files. Default value <code>.vrt</code>. If the suffix is not
+     * needed, provide an empty string as value.
      */
-    public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
-    @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
-    private File outputFile;
-
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".vrt")
+    private String filenameSuffix;
+    
     /**
      * Character encoding of the output data.
      */
@@ -218,7 +223,6 @@ public class ImsCwbWriter
 
     private static final String LS = "\n";
     private static final String TAB = "\t";
-    private Writer bw;
     private int currentId;
 
     private Process childProcess;
@@ -230,23 +234,6 @@ public class ImsCwbWriter
         throws ResourceInitializationException
     {
         super.initialize(context);
-
-        try {
-            File parentFile = outputFile.getParentFile();
-            if (parentFile != null) {
-                forceMkdir(parentFile);
-            }
-        }
-        catch (IOException e) {
-            throw new ResourceInitializationException(e);
-        }
-
-        try {
-            bw = getWriter();
-        }
-        catch (IOException e) {
-            throw new ResourceInitializationException(e);
-        }
 
         currentId = 0;
     }
@@ -275,65 +262,67 @@ public class ImsCwbWriter
             }
         }
 
-        try {
+        try (BufferedWriter out = new BufferedWriter(
+                new OutputStreamWriter(getOutputStream(jcas, filenameSuffix)))) {
             if (writeTextTag) {
-                startElement(E_TEXT, ATTR_ID, documentId);
+                startElement(out, E_TEXT, ATTR_ID, documentId);
             }
             if (writeDocumentTag) {
-                startElement(E_DOCUMENT, ATTR_URI, documentUri);
+                startElement(out, E_DOCUMENT, ATTR_URI, documentUri);
             }
             for (Sentence sentence : select(jcas, Sentence.class)) {
                 attendChildProceess();
-                startElement(sentenceTag);
+                startElement(out, sentenceTag);
                 for (Token token : selectCovered(jcas, Token.class, sentence)) {
                     // write token
-                    bw.write(escapeXml(token.getCoveredText()));
+                    out.write(escapeXml(token.getCoveredText()));
 
                     // write pos tag
                     if (writePOS) {
-                        field(defaultString(token.getPosValue(), "-"));
+                        field(out, defaultString(token.getPosValue(), "-"));
                     }
 
                     // write coarse grained pos tag
                     if (writeCPOS) {
-                        field(token.getPos() != null ? defaultString(token.getPos().getCoarseValue(), "-") : "-");
+                        field(out,
+                                token.getPos() != null
+                                        ? defaultString(token.getPos().getCoarseValue(), "-")
+                                        : "-");
                     }
 
                     // write lemma
                     if (writeLemma) {
-                        field(defaultString(token.getLemmaValue(), "-"));
+                        field(out, defaultString(token.getLemmaValue(), "-"));
                     }
 
                     // write doc-id
                     if (writeDocId) {
-                        field(documentId);
+                        field(out, documentId);
                     }
 
                     // write offsets
                     if (writeOffsets) {
-                        field(String.valueOf(token.getBegin()));
-                        field(String.valueOf(token.getEnd()));
+                        field(out, String.valueOf(token.getBegin()));
+                        field(out, String.valueOf(token.getEnd()));
                     }
 
                     // write additional tags
                     if (additionalFeatures != null) {
-                        // try {
                         for (String featurePath : additionalFeatures) {
                             String val = getCoveredAnnotationFeatureValue(featurePath, token);
-                            field(val);
+                            field(out, val);
                         }
-                        // }
                     }
 
-                    bw.write(LS);
+                    out.write(LS);
                 }
-                endElement(sentenceTag);
+                endElement(out, sentenceTag);
             }
             if (writeDocumentTag) {
-                endElement(E_DOCUMENT);
+                endElement(out, E_DOCUMENT);
             }
             if (writeTextTag) {
-                endElement(E_TEXT);
+                endElement(out, E_TEXT);
             }
 
             currentId++;
@@ -343,138 +332,146 @@ public class ImsCwbWriter
         }
     }
 
-    private void startElement(String aElement, String... aAttributes)
+    private void startElement(Writer aOut, String aElement, String... aAttributes)
         throws IOException
     {
-        bw.write('<');
-        bw.write(aElement);
+        aOut.write('<');
+        aOut.write(aElement);
         if (aAttributes != null && aAttributes.length > 0) {
-            bw.write(" ");
+            aOut.write(" ");
             for (int i = 0; i < aAttributes.length; i += 2) {
-                bw.write(aAttributes[i]);
-                bw.write("=\"");
-                bw.write(escapeXml(aAttributes[i + 1]));
-                bw.write('"');
+                aOut.write(aAttributes[i]);
+                aOut.write("=\"");
+                aOut.write(escapeXml(aAttributes[i + 1]));
+                aOut.write('"');
             }
         }
-        bw.write('>');
-        bw.write(LS);
+        aOut.write('>');
+        aOut.write(LS);
     }
 
-    private void endElement(String aElement)
+    private void endElement(Writer aOut, String aElement)
         throws IOException
     {
-        bw.write("</");
-        bw.write(aElement);
-        bw.write('>');
-        bw.write(LS);
+        aOut.write("</");
+        aOut.write(aElement);
+        aOut.write('>');
+        aOut.write(LS);
 
     }
 
-    private void field(String aValue)
+    private void field(Writer aOut, String aValue)
         throws IOException
     {
-        bw.write(TAB);
-        bw.write(escapeXml(aValue));
+        aOut.write(TAB);
+        aOut.write(escapeXml(aValue));
     }
 
-    private Writer getWriter()
-        throws IOException
+    @Override
+    protected NamedOutputStream getOutputStream(JCas aJCas, String aExtension) throws IOException
     {
+        // Write directly to CQP if asked to
         if (cqpHome != null) {
-            dataDirectory = new File(outputFile, "data");
-            registryDirectory = new File(outputFile, "registry");
-            forceMkdir(dataDirectory);
-            forceMkdir(registryDirectory);
-
-            List<String> cmd = new ArrayList<String>();
-            cmd.add(new File(cqpHome, "cwb-encode").getAbsolutePath());
-
-            cmd.add("-c");
-            cmd.add(getCwbCharset(encoding));
-            // -x XML-aware (replace XML entities and ignore <!.. and <?..)
-            cmd.add("-x");
-            // -s skip empty lines in input data (recommended)
-            cmd.add("-s");
-            // -B strip leading/trailing blanks from (input lines & token annotations)
-            cmd.add("-B");
-            // -d <dir> directory for data files created by ./cwb-encode
-            cmd.add("-d");
-            cmd.add(dataDirectory.getPath());
-            // -R <rf> create registry entry (named <rf>) listing all encoded attributes
-            cmd.add("-R");
-            cmd.add(new File(registryDirectory, corpusName).getPath());
-
-            // -P <att> declare additional p-attribute <att>
-            if (writePOS) {
-                cmd.add("-P");
-                cmd.add(ATTR_POS);
+            // If CQP is not running yet, start it.
+            if (childProcess == null) {
+                startCqpProcess();
             }
+            return new NamedOutputStream(null,
+                    new CloseShieldOutputStream(childProcess.getOutputStream()));
+        }
+        
+        return super.getOutputStream(aJCas, aExtension);
+    }
+    
+    private void startCqpProcess() throws IOException
+    {
+        dataDirectory = new File(getTargetLocation(), "data");
+        registryDirectory = new File(getTargetLocation(), "registry");
+        forceMkdir(dataDirectory);
+        forceMkdir(registryDirectory);
 
-            if (writeCPOS) {
-                cmd.add("-P");
-                cmd.add(ATTR_CPOS);
-            }
+        List<String> cmd = new ArrayList<String>();
+        cmd.add(new File(cqpHome, "cwb-encode").getAbsolutePath());
 
-            if (writeLemma) {
-                cmd.add("-P");
-                cmd.add(ATTR_LEMMA);
-            }
+        cmd.add("-c");
+        cmd.add(getCwbCharset(encoding));
+        // -x XML-aware (replace XML entities and ignore <!.. and <?..)
+        cmd.add("-x");
+        // -s skip empty lines in input data (recommended)
+        cmd.add("-s");
+        // -B strip leading/trailing blanks from (input lines & token annotations)
+        cmd.add("-B");
+        // -d <dir> directory for data files created by ./cwb-encode
+        cmd.add("-d");
+        cmd.add(dataDirectory.getPath());
+        // -R <rf> create registry entry (named <rf>) listing all encoded attributes
+        cmd.add("-R");
+        cmd.add(new File(registryDirectory, corpusName).getPath());
 
-            if (writeDocId) {
-                cmd.add("-P");
-                cmd.add(ATTR_URI);
-            }
+        // -P <att> declare additional p-attribute <att>
+        if (writePOS) {
+            cmd.add("-P");
+            cmd.add(ATTR_POS);
+        }
 
-            if (writeOffsets) {
-                cmd.add("-P");
-                cmd.add(ATTR_BEGIN);
-                cmd.add("-P");
-                cmd.add(ATTR_END);
-            }
+        if (writeCPOS) {
+            cmd.add("-P");
+            cmd.add(ATTR_CPOS);
+        }
 
-            if (additionalFeatures != null) {
-                for (String featurePath : additionalFeatures) {
-                    String[] segments = featurePath.split("/", 2);
-                    if (segments.length != 2) {
-                        throw new IllegalArgumentException("Given feature path is malformed: ["
-                                + featurePath + "] (exactly one \"/\" (slash) must exist).");
-                    }
-                    String typeName = segments[0];
-                    String featureName = segments.length > 1 ? segments[1] : "";
-                    String name = (substringAfterLast(typeName, ".") + "_" + featureName)
-                            .toLowerCase();
-                    cmd.add("-P");
-                    cmd.add(name);
+        if (writeLemma) {
+            cmd.add("-P");
+            cmd.add(ATTR_LEMMA);
+        }
+
+        if (writeDocId) {
+            cmd.add("-P");
+            cmd.add(ATTR_URI);
+        }
+
+        if (writeOffsets) {
+            cmd.add("-P");
+            cmd.add(ATTR_BEGIN);
+            cmd.add("-P");
+            cmd.add(ATTR_END);
+        }
+
+        if (additionalFeatures != null) {
+            for (String featurePath : additionalFeatures) {
+                String[] segments = featurePath.split("/", 2);
+                if (segments.length != 2) {
+                    throw new IllegalArgumentException("Given feature path is malformed: ["
+                            + featurePath + "] (exactly one \"/\" (slash) must exist).");
                 }
+                String typeName = segments[0];
+                String featureName = segments.length > 1 ? segments[1] : "";
+                String name = (substringAfterLast(typeName, ".") + "_" + featureName)
+                        .toLowerCase();
+                cmd.add("-P");
+                cmd.add(name);
             }
-
-            if (writeDocumentTag) {
-                cmd.add("-S");
-                cmd.add(E_DOCUMENT + ":0+" + ATTR_URI);
-            }
-
-            if (writeTextTag) {
-                cmd.add("-S");
-                cmd.add(E_TEXT + ":0+" + ATTR_ID);
-            }
-
-            {
-                cmd.add("-S");
-                cmd.add(sentenceTag + ":0");
-            }
-
-            getLogger().info("Spawning cwb-encode: " + join(cmd, " "));
-
-            final ProcessBuilder pb = new ProcessBuilder();
-            pb.command(cmd);
-            childProcess = pb.start();
-            return new OutputStreamWriter(childProcess.getOutputStream(), encoding);
         }
-        else {
-            return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
-                    encoding));
+
+        if (writeDocumentTag) {
+            cmd.add("-S");
+            cmd.add(E_DOCUMENT + ":0+" + ATTR_URI);
         }
+
+        if (writeTextTag) {
+            cmd.add("-S");
+            cmd.add(E_TEXT + ":0+" + ATTR_ID);
+        }
+
+        {
+            cmd.add("-S");
+            cmd.add(sentenceTag + ":0");
+        }
+
+        getLogger().info("Spawning cwb-encode: " + join(cmd, " "));
+
+        final ProcessBuilder pb = new ProcessBuilder();
+        pb.command(cmd);
+        childProcess = pb.start();
     }
 
     private void attendChildProceess()
@@ -504,8 +501,9 @@ public class ImsCwbWriter
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
-        IOUtils.closeQuietly(bw);
         if (childProcess != null) {
+            IOUtils.closeQuietly(childProcess.getOutputStream());
+            
             try {
                 childProcess.waitFor();
                 attendChildProceess();

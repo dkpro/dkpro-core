@@ -17,13 +17,13 @@
  */
 package org.dkpro.core.io.imscwb;
 
-import static org.dkpro.core.testing.IOTestRunner.testOneWay2;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import java.io.File;
 
-import org.dkpro.core.api.parameter.ComponentParameters;
-import org.dkpro.core.io.imscwb.ImsCwbReader;
-import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,23 +34,32 @@ public class ImsCwbReaderWriterTest
     public void testTuebadz()
         throws Exception
     {
-        testOneWay2(ImsCwbReader.class, ImsCwbWriter.class, "tuebadz/corpus-sample-ref.txt",
-                "corpus-sample-ref.txt", "tuebadz/corpus-sample-ref.txt",
-                ComponentParameters.PARAM_TARGET_LOCATION,
-                        new File(testContext.getTestOutputFolder(), "corpus-sample-ref.txt"),
-                ImsCwbReader.PARAM_LANGUAGE, "de",
-                ImsCwbReader.PARAM_POS_TAG_SET, "stts");
+        testRoundTrip(
+                createReaderDescription(ImsCwbReader.class,
+                        ImsCwbReader.PARAM_LANGUAGE, "de",
+                        ImsCwbReader.PARAM_POS_TAG_SET, "stts"), 
+                createEngineDescription(ImsCwbWriter.class,
+                        ImsCwbWriter.PARAM_TARGET_LOCATION,
+                            new File(testContext.getTestOutputFolder(), "corpus-sample-ref.txt"),
+                        ImsCwbWriter.PARAM_SINGULAR_TARGET, true), 
+                "tuebadz/corpus-sample-ref.txt");
     }
 
     @Test
     public void testWacky()
         throws Exception
     {
-        testOneWay2(ImsCwbReader.class, ImsCwbWriter.class, "wacky/test-ref.txt",
-                "test.txt", "wacky/test.txt",
-                ComponentParameters.PARAM_TARGET_LOCATION, 
-                        new File(testContext.getTestOutputFolder(), "test.txt"),
-                ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1");
+        testOneWay(
+                createReaderDescription(ImsCwbReader.class,
+                        ImsCwbReader.PARAM_LANGUAGE, "de",
+                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",
+                        ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1"), 
+                createEngineDescription(ImsCwbWriter.class,
+                        ImsCwbWriter.PARAM_TARGET_LOCATION,
+                            new File(testContext.getTestOutputFolder(), "test.txt"),
+                        ImsCwbWriter.PARAM_SINGULAR_TARGET, true),
+                "wacky/test-ref.txt",
+                "wacky/test.txt");
     }
 
     @Rule
