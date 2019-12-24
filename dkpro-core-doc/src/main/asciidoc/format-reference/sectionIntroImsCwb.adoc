@@ -14,11 +14,51 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-The IMS Open Corpus Workbench is a linguistic search engine. It uses a tab-separated format
+The "verticalized XML" format used by the link:http://cwb.sourceforge.net[IMS Open Corpus Workbench], a linguistic search engine. It uses a tab-separated format
 with limited markup (e.g. for sentences, documents, but not recursive structures like
-parse-trees). If a local installation of the corpus workbench is available, it can be used
+parse-trees). In principle, it is a generic format - i.e. there can be arbitrary columns, pseudo-XML elements and attributes. However, support is limited to a specific set of columns that must appear exactly in a specific order: *token text*, *part-of-speech tag*, *lemma*. Also only specific pseudo-XML elements and attributes are supported: `text` (including an `id` attribute), `s`.
+
+If a local installation of the corpus workbench is available, it can be used
 by this module to immediately generate the corpus workbench index format. Search is not
 supported by this module.
+
+.Example
+[source,text]
+----
+<text id="http://www.epguides.de/nikita.htm">
+<s>
+Nikita	NE	Nikita
+(	$(	(
+La	FM	La
+Femme	NN	Femme
+Nikita	NE	Nikita
+)	$(	)
+Dieser	PDS	dies
+Episodenführer	NN	Episodenführer
+wurde	VAFIN	werden
+von	APPR	von
+September	NN	September
+1998	CARD	1998
+bis	APPR	bis
+Mai	NN	Mai
+1999	CARD	1999
+von	APPR	von
+Konstantin	NE	Konstantin
+C.W.	NE	C.W.
+Volkmann	NE	Volkmann
+geschrieben	VVPP	schreiben
+und	KON	und
+im	APPRART	im
+Mai	NN	Mai
+2000	CARD	2000
+von	APPR	von
+Stefan	NE	Stefan
+Börzel	NN	Börzel
+übernommen	VVPP	übernehmen
+.	$.	.
+</s>
+</text>
+----
 
 .See also
 * link:http://cwb.sourceforge.net[IMS Open Corpus Workbench]

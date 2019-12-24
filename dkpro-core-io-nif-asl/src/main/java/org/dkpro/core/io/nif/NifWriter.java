@@ -81,7 +81,8 @@ public class NifWriter
         DKPro2Nif.convert(aJCas, model);
         
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
-            RDFDataMgr.write(docOS, model, RDFLanguages.fileExtToLang(filenameSuffix));
+            RDFDataMgr.write(docOS, model.getBaseModel(),
+                    RDFLanguages.fileExtToLang(filenameSuffix));
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
