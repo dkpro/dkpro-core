@@ -84,7 +84,7 @@ public class TypeMappings
     
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)
     {
-        System.out.println("-- getUimaType: aAnno.getType()="+aAnno.getType());
+        System.out.println("-- getUimaType: aAnno.getType()=" + aAnno.getType());
         Type t = brat2UimaMappingCache.get(aAnno.getType());
         
         if (t == null) {
@@ -108,7 +108,7 @@ public class TypeMappings
                     + aAnno.getType() + "]");
         }
 
-        System.out.println("-- getUimaType: returning t="+t);
+        System.out.println("-- getUimaType: returning t=" + t);
 
         return t;
     }

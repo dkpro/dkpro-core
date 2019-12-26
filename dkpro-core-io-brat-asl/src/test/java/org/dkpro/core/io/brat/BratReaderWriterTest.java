@@ -40,12 +40,8 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import org.dkpro.core.io.brat.BratReader;
-import org.dkpro.core.io.brat.BratWriter;
 import org.dkpro.core.io.conll.Conll2009Reader;
 import org.dkpro.core.io.conll.Conll2012Reader;
 import org.dkpro.core.testing.DkproTestContext;
@@ -53,8 +49,6 @@ import org.dkpro.core.testing.EOLUtils;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import com.fasterxml.jackson.core.json.ReaderBasedJsonParser;
 
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
@@ -696,8 +690,9 @@ public class BratReaderWriterTest
         return copyBratFilesToTempLocation(bratDir, null);
     }
 
-   private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles) 
-                    throws IOException { 
+    private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles)
+        throws IOException
+    {
         
         if (deleteAnnFiles == null) {
             deleteAnnFiles = false;
@@ -720,8 +715,9 @@ public class BratReaderWriterTest
     }
     
     private void assertFilesHaveSameContent(File expFileOrDir, File actualFileOrDir,
-                    Boolean expectEmptyAnnFiles) throws IOException {
-        
+            Boolean expectEmptyAnnFiles)
+        throws IOException
+    {
         if (expectEmptyAnnFiles == null) {
             expectEmptyAnnFiles = false;
         }

@@ -30,8 +30,6 @@ import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Mapping
 {
@@ -109,7 +107,8 @@ public class Mapping
         List<TypeMapping> relTypeMapppingsLst = new ArrayList<TypeMapping>();
         relTypeMapppingsLst.addAll(customMapping.getRelationTypeMapppings().getParsedMappings());
         if (!justCustomMapping) {
-            relTypeMapppingsLst.addAll(defaultMapping.getRelationTypeMapppings().getParsedMappings());
+            relTypeMapppingsLst
+                    .addAll(defaultMapping.getRelationTypeMapppings().getParsedMappings());
         }
         TypeMappings relTypeMapppings = new TypeMappings(relTypeMapppingsLst);
         
@@ -118,7 +117,8 @@ public class Mapping
         List<RelationMapping> relations = new ArrayList<RelationMapping>();
         List<CommentMapping> comments = new ArrayList<CommentMapping>();
         
-        Mapping merged = new Mapping(textTypeMapppings, relTypeMapppings, spans, relations, comments);
+        Mapping merged = new Mapping(textTypeMapppings, relTypeMapppings, spans, relations,
+                comments);
         
         // Add the Text Annotations from both Mapping
         for (String type: customMapping.textAnnotations.keySet()) {

@@ -38,7 +38,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.maven.model.PatternSet;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
@@ -73,7 +72,6 @@ import org.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import org.dkpro.core.io.brat.internal.model.Offsets;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParser;
@@ -93,7 +91,10 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class BratReader
     extends JCasResourceCollectionReader_ImplBase
 {
-    public enum SourceLocationType {SINGLE_FILE, SINGLE_DIR, GLOB_PATTERN}
+    public enum SourceLocationType
+    {
+        SINGLE_FILE, SINGLE_DIR, GLOB_PATTERN
+    }
     
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
@@ -684,8 +685,9 @@ public class BratReader
         return false;
     }
 
-    private void possiblyAddAnnFilePattern() {
-          if (!sourceLocationIsSingleFile()) {
+    private void possiblyAddAnnFilePattern()
+    {
+        if (!sourceLocationIsSingleFile()) {
             // sourceLocation is not a single file. Make sure 
             // the file patterns includes *.ann
             //
@@ -700,7 +702,7 @@ public class BratReader
                     }
                 }
                 if (!alreadyHasAnnPattern) {
-                    String[] augmPatterns = new String[patterns.length+1];
+                    String[] augmPatterns = new String[patterns.length + 1];
                     for (int ii = 0; ii < patterns.length; ii++) {
                         augmPatterns[ii] = patterns[ii];
                     }
@@ -725,7 +727,7 @@ public class BratReader
                         "ProductDesc", "Quantity", "Substance", "Time", "WorkOfArt"
                 };
                 for (String typeName: nerTypeNames) {
-                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.ner.type."+typeName;
+                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.ner.type." + typeName;
                     txtTypeMappingLst.add(new TypeMapping(aType, typeName));
                 }
             }
@@ -737,7 +739,8 @@ public class BratReader
                         "StopWord", "SurfaceForm", "Token"
                 };
                 for (String typeName: segTypeNames) {
-                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type."+typeName;
+                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type."
+                            + typeName;
                     txtTypeMappingLst.add(new TypeMapping(aType, typeName));
                 }
             }

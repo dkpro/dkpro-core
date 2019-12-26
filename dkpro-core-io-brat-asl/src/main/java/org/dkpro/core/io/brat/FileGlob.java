@@ -19,8 +19,8 @@ package org.dkpro.core.io.brat;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -80,6 +80,7 @@ public class FileGlob {
             return FileVisitResult.CONTINUE;
         }
         
+        @Override
         public FileVisitResult visitFileFailed(Path file, IOException io)
         {   
             return FileVisitResult.SKIP_SUBTREE;
@@ -128,7 +129,9 @@ public class FileGlob {
         Set<File> matchingFilesLst = new HashSet<File>();
         for (String aPattern: patterns) {
             File[] filesThisPattern = listFiles(aPattern);
-            for (File aFile: filesThisPattern) matchingFilesLst.add(aFile);
+            for (File aFile: filesThisPattern) {
+                matchingFilesLst.add(aFile);
+            }
         }
         
         File[] matchingFilesArr = matchingFilesLst.toArray(new File[matchingFilesLst.size()]);
@@ -154,7 +157,9 @@ public class FileGlob {
         String pattern = args[0];
         System.out.println("Files matching: " + pattern);
         File[] files = FileGlob.listFiles(pattern);
-        if (files.length == 0) System.out.println("No match found");
+        if (files.length == 0) {
+            System.out.println("No match found");
+        }
         for (File aFile: files) {
             System.out.println(aFile.getAbsolutePath());
         }
