@@ -17,13 +17,13 @@
  */
 package org.dkpro.core.io.imscwb;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.dkpro.core.testing.IOTestRunner.testOneWay;
-import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Files.contentOf;
 
 import java.io.File;
 
+import org.dkpro.core.testing.CollectionReaderAssert;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,35 +31,54 @@ import org.junit.Test;
 public class ImsCwbReaderWriterTest
 {
     @Test
-    public void testTuebadz()
+    public void thatRoundTripWithTuebaDzWorks()
         throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ImsCwbReader.class,
-                        ImsCwbReader.PARAM_LANGUAGE, "de",
-                        ImsCwbReader.PARAM_POS_TAG_SET, "stts"), 
-                createEngineDescription(ImsCwbWriter.class,
-                        ImsCwbWriter.PARAM_TARGET_LOCATION,
-                            new File(testContext.getTestOutputFolder(), "corpus-sample-ref.txt"),
-                        ImsCwbWriter.PARAM_SINGULAR_TARGET, true), 
-                "tuebadz/corpus-sample-ref.txt");
+        CollectionReaderAssert.assertThat(
+                        ImsCwbReader.class,
+                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/tuebadz/corpus-sample-ref.txt",
+                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",
+                        ImsCwbReader.PARAM_LANGUAGE, "de")
+                .usingWriter(
+                        ImsCwbWriter.class)
+                .writingToSingular("${TARGET}/corpus-sample-ref.txt")
+                .asString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
 
     @Test
-    public void testWacky()
+    public void thatRoundTripWithMultipleInputsWorks()
         throws Exception
     {
-        testOneWay(
-                createReaderDescription(ImsCwbReader.class,
-                        ImsCwbReader.PARAM_LANGUAGE, "de",
+        CollectionReaderAssert.assertThat(
+                        ImsCwbReader.class,
+                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/multiple/*.vrt")
+                .usingWriter(
+                        ImsCwbWriter.class)
+                .asFiles()
+                .allSatisfy(file -> assertThat(contentOf(file, UTF_8)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/multiple", file.getName()), UTF_8)));
+    }
+
+    @Test
+    public void thatOneWayWithWackyWorks() throws Exception
+    {
+        CollectionReaderAssert.assertThat(
+                        ImsCwbReader.class,
+                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/wacky/test.txt",
                         ImsCwbReader.PARAM_POS_TAG_SET, "stts",
-                        ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1"), 
-                createEngineDescription(ImsCwbWriter.class,
-                        ImsCwbWriter.PARAM_TARGET_LOCATION,
-                            new File(testContext.getTestOutputFolder(), "test.txt"),
-                        ImsCwbWriter.PARAM_SINGULAR_TARGET, true),
-                "wacky/test-ref.txt",
-                "wacky/test.txt");
+                        ImsCwbReader.PARAM_LANGUAGE, "de",
+                        ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1")
+                .usingWriter(
+                        ImsCwbWriter.class)
+                .writingToSingular("${TARGET}/test.txt")
+                .asString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/wacky/test-ref.txt"), UTF_8));
     }
 
     @Rule
