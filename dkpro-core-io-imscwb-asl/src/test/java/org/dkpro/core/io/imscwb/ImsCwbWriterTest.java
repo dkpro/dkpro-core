@@ -30,7 +30,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.dkpro.core.io.negra.NegraExportReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.snowball.SnowballStemmer;
-import org.dkpro.core.testing.CollectionReaderAssert;
+import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -42,7 +42,7 @@ public class ImsCwbWriterTest
     public void thatWritingTuebaDzSampleWorks()
         throws Exception
     {
-        CollectionReaderAssert.assertThat(
+        ReaderAssert.assertThat(
                         NegraExportReader.class,
                         NegraExportReader.PARAM_SOURCE_LOCATION, 
                                 "src/test/resources/tuebadz/corpus-sample.export",
@@ -63,7 +63,7 @@ public class ImsCwbWriterTest
     public void thatWritingTuebaDzSampleWithAdditionalFeaturesWorks()
         throws Exception
     {
-        CollectionReaderAssert.assertThat(
+        ReaderAssert.assertThat(
                         NegraExportReader.class,
                         NegraExportReader.PARAM_SOURCE_LOCATION, 
                                 "src/test/resources/tuebadz/corpus-sample.export",

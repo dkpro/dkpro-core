@@ -23,7 +23,7 @@ import static org.assertj.core.util.Files.contentOf;
 
 import java.io.File;
 
-import org.dkpro.core.testing.CollectionReaderAssert;
+import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class ImsCwbReaderWriterTest
     public void thatRoundTripWithTuebaDzWorks()
         throws Exception
     {
-        CollectionReaderAssert.assertThat(
+        ReaderAssert.assertThat(
                         ImsCwbReader.class,
                         ImsCwbReader.PARAM_SOURCE_LOCATION, 
                                 "src/test/resources/tuebadz/corpus-sample-ref.txt",
@@ -52,7 +52,7 @@ public class ImsCwbReaderWriterTest
     public void thatRoundTripWithMultipleInputsWorks()
         throws Exception
     {
-        CollectionReaderAssert.assertThat(
+        ReaderAssert.assertThat(
                         ImsCwbReader.class,
                         ImsCwbReader.PARAM_SOURCE_LOCATION, 
                                 "src/test/resources/multiple/*.vrt")
@@ -66,7 +66,7 @@ public class ImsCwbReaderWriterTest
     @Test
     public void thatOneWayWithWackyWorks() throws Exception
     {
-        CollectionReaderAssert.assertThat(
+        ReaderAssert.assertThat(
                         ImsCwbReader.class,
                         ImsCwbReader.PARAM_SOURCE_LOCATION, 
                                 "src/test/resources/wacky/test.txt",

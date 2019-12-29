@@ -293,5 +293,13 @@ public class IOTestRunner
             options.skippedChecks.forEach(check -> validator.removeCheck(check));
             messages = validator.analyze(aJCas);
         }
+        
+        @Override
+        public void collectionProcessComplete() throws AnalysisEngineProcessException
+        {
+            super.collectionProcessComplete();
+            
+            AssertAnnotations.assertValid(Validator.messages);
+        }
     }
 }
