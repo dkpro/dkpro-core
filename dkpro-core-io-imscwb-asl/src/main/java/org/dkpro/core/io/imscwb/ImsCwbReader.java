@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.imscwb;
 
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_ENCODING;
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_MAPPING_ENABLED;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.IOException;
@@ -73,7 +75,8 @@ public class ImsCwbReader
      * Character encoding of the output.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = DEFAULT_ENCODING)
     private String encoding;
 
     /**
@@ -81,7 +84,7 @@ public class ImsCwbReader
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
     @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+            DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**

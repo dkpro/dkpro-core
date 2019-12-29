@@ -17,27 +17,27 @@
  */
 package org.dkpro.core.io.tei;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.assertj.core.util.Files.contentOf;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
-import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.io.tei.TeiReader;
 import org.dkpro.core.io.text.TextWriter;
-import org.dkpro.core.testing.EOLUtils;
+import org.dkpro.core.testing.CollectionReaderAssert;
+import org.dkpro.core.testing.DkproTestContext;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -128,59 +128,42 @@ public class TeiReaderTest
     }
 
     @Test
-    public void brownReaderTest2()
+    public void thatBrownCorpusTeiCanBeReadFromClasspath()
         throws Exception
     {
-        File referenceFile = new File("src/test/resources/brown_ims.txt");
-        File outputFile = new File("target/test-output/brown_ims.txt");
-
-        CollectionReaderDescription reader = createReaderDescription(
-                TeiReader.class,
-                TeiReader.PARAM_LANGUAGE, "en",
-                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
-
-        AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-                ImsCwbWriter.PARAM_WRITE_CPOS, true,
-                ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence");
-
-        SimplePipeline.runPipeline(reader, writer);
-
-        String reference = FileUtils.readFileToString(referenceFile, "UTF-8");
-        String output = FileUtils.readFileToString(outputFile, "UTF-8");
-        reference = EOLUtils.normalizeLineEndings(reference);
-        output = EOLUtils.normalizeLineEndings(output);
-        assertEquals(reference, output);
+        CollectionReaderAssert.assertThat(
+                        TeiReader.class,
+                        TeiReader.PARAM_LANGUAGE, "en",
+                        TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+                        TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" })
+                .usingWriter(
+                        ImsCwbWriter.class,
+                        ImsCwbWriter.PARAM_WRITE_CPOS, true,
+                        ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence")
+                .writingToSingular("${TARGET}/brown.vrt")
+                .asString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/brown_tei/brown-ref.vrt"), UTF_8));
     }
 
     @Test
-    public void brownReaderTest3()
+    public void thatBrownCorpusTeiCanBeReadFromGZippedFile()
         throws Exception
     {
-        File referenceFile = new File("src/test/resources/brown_ims.gz.txt");
-        File outputFile = new File("target/test-output/brown_ims.gz.txt");
-
-        CollectionReaderDescription reader = createReaderDescription(
-                TeiReader.class,
-                TeiReader.PARAM_LANGUAGE, "en",
-                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei_gzip/",
-                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
-
-        AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-                ImsCwbWriter.PARAM_WRITE_CPOS, true,
-                ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence");
-
-        SimplePipeline.runPipeline(reader, writer);
-
-        String reference = FileUtils.readFileToString(referenceFile, "UTF-8");
-        String output = FileUtils.readFileToString(outputFile, "UTF-8");
-        reference = EOLUtils.normalizeLineEndings(reference);
-        output = EOLUtils.normalizeLineEndings(output);
-        assertEquals(reference, output);
+        CollectionReaderAssert.assertThat(
+                        TeiReader.class,
+                        TeiReader.PARAM_LANGUAGE, "en",
+                        TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei_gzip/",
+                        TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" })
+                .usingWriter(
+                        ImsCwbWriter.class,
+                        ImsCwbWriter.PARAM_WRITE_CPOS, true,
+                        ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence")
+                .writingToSingular("${TARGET}/brown.vrt")
+                .asString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/brown_tei_gzip/brown-ref.vrt"), UTF_8));
     }
-    
 
     @Test
     public void brownReaderTest_noSentences()
@@ -257,4 +240,7 @@ public class TeiReaderTest
             // System.out.println(jcas.getDocumentText());
         }
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

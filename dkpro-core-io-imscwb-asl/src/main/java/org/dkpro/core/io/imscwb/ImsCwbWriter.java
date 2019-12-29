@@ -26,6 +26,7 @@ import static org.apache.commons.lang3.StringUtils.join;
 import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_ENCODING;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -115,7 +116,8 @@ public class ImsCwbWriter
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = DEFAULT_ENCODING)
     private String encoding;
 
     /**
@@ -263,7 +265,7 @@ public class ImsCwbWriter
         }
 
         try (BufferedWriter out = new BufferedWriter(
-                new OutputStreamWriter(getOutputStream(jcas, filenameSuffix)))) {
+                new OutputStreamWriter(getOutputStream(jcas, filenameSuffix), encoding))) {
             if (writeTextTag) {
                 startElement(out, E_TEXT, ATTR_ID, documentId);
             }
