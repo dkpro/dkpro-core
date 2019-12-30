@@ -17,13 +17,13 @@
  */
 package org.dkpro.core.io.imscwb;
 
-import static org.dkpro.core.testing.IOTestRunner.testOneWay2;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Files.contentOf;
 
 import java.io.File;
 
-import org.dkpro.core.api.parameter.ComponentParameters;
-import org.dkpro.core.io.imscwb.ImsCwbReader;
-import org.dkpro.core.io.imscwb.ImsCwbWriter;
+import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,26 +31,54 @@ import org.junit.Test;
 public class ImsCwbReaderWriterTest
 {
     @Test
-    public void testTuebadz()
+    public void thatRoundTripWithTuebaDzWorks()
         throws Exception
     {
-        testOneWay2(ImsCwbReader.class, ImsCwbWriter.class, "tuebadz/corpus-sample-ref.txt",
-                "corpus-sample-ref.txt", "tuebadz/corpus-sample-ref.txt",
-                ComponentParameters.PARAM_TARGET_LOCATION,
-                        new File(testContext.getTestOutputFolder(), "corpus-sample-ref.txt"),
-                ImsCwbReader.PARAM_LANGUAGE, "de",
-                ImsCwbReader.PARAM_POS_TAG_SET, "stts");
+        ReaderAssert.assertThat(
+                        ImsCwbReader.class,
+                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/tuebadz/corpus-sample-ref.txt",
+                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",
+                        ImsCwbReader.PARAM_LANGUAGE, "de")
+                .usingWriter(
+                        ImsCwbWriter.class)
+                .writingToSingular("${TARGET}/corpus-sample-ref.txt")
+                .asString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
 
     @Test
-    public void testWacky()
+    public void thatRoundTripWithMultipleInputsWorks()
         throws Exception
     {
-        testOneWay2(ImsCwbReader.class, ImsCwbWriter.class, "wacky/test-ref.txt",
-                "test.txt", "wacky/test.txt",
-                ComponentParameters.PARAM_TARGET_LOCATION, 
-                        new File(testContext.getTestOutputFolder(), "test.txt"),
-                ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1");
+        ReaderAssert.assertThat(
+                        ImsCwbReader.class,
+                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/multiple/*.vrt")
+                .usingWriter(
+                        ImsCwbWriter.class)
+                .asFiles()
+                .allSatisfy(file -> assertThat(contentOf(file, UTF_8)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/multiple", file.getName()), UTF_8)));
+    }
+
+    @Test
+    public void thatOneWayWithWackyWorks() throws Exception
+    {
+        ReaderAssert.assertThat(
+                        ImsCwbReader.class,
+                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/wacky/test.txt",
+                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",
+                        ImsCwbReader.PARAM_LANGUAGE, "de",
+                        ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1")
+                .usingWriter(
+                        ImsCwbWriter.class)
+                .writingToSingular("${TARGET}/test.txt")
+                .asString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/wacky/test-ref.txt"), UTF_8));
     }
 
     @Rule
