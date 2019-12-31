@@ -30,8 +30,8 @@ import org.apache.uima.collection.CollectionReader;
 import org.dkpro.core.io.negra.NegraExportReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.snowball.SnowballStemmer;
-import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,7 +54,7 @@ public class ImsCwbWriterTest
                         ImsCwbWriter.class,
                         ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8")
                 .writingToSingular("${TARGET}/corpus-sample.vrt")
-                .asString()
+                .outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
@@ -79,7 +79,7 @@ public class ImsCwbWriterTest
                         ImsCwbWriter.PARAM_WRITE_CPOS, true,
                         ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { 
                                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem/value" })
-                .asString()
+                .outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/tuebadz/corpus-sample-addfeat-ref.txt"),
                         UTF_8));

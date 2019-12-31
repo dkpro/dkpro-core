@@ -119,7 +119,7 @@ public class TeiReaderTest
                 ImsCwbWriter.PARAM_WRITE_CPOS, true,
                 ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence")
             .writingToSingular("${TARGET}/brown.vrt")
-            .asString()
+            .outputAsString()
             .isEqualToNormalizingNewlines(contentOf(
                     new File("src/test/resources/brown_tei/brown-ref.vrt"), UTF_8));
     }
@@ -138,7 +138,7 @@ public class TeiReaderTest
                 ImsCwbWriter.PARAM_WRITE_CPOS, true,
                 ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence")
             .writingToSingular("${TARGET}/brown.vrt")
-            .asString()
+            .outputAsString()
             .isEqualToNormalizingNewlines(contentOf(
                 new File("src/test/resources/brown_tei_gzip/brown-ref.vrt"), UTF_8));
     }

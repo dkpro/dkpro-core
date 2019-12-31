@@ -23,8 +23,8 @@ import static org.assertj.core.util.Files.contentOf;
 
 import java.io.File;
 
-import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public class ImsCwbReaderWriterTest
                 .usingWriter(
                         ImsCwbWriter.class)
                 .writingToSingular("${TARGET}/corpus-sample-ref.txt")
-                .asString()
+                .outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
@@ -58,6 +58,7 @@ public class ImsCwbReaderWriterTest
                                 "src/test/resources/multiple/*.vrt")
                 .usingWriter(
                         ImsCwbWriter.class)
+                .keepOriginalExtension()
                 .asFiles()
                 .allSatisfy(file -> assertThat(contentOf(file, UTF_8)).isEqualToNormalizingNewlines(
                         contentOf(new File("src/test/resources/multiple", file.getName()), UTF_8)));
@@ -76,7 +77,7 @@ public class ImsCwbReaderWriterTest
                 .usingWriter(
                         ImsCwbWriter.class)
                 .writingToSingular("${TARGET}/test.txt")
-                .asString()
+                .outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/wacky/test-ref.txt"), UTF_8));
     }

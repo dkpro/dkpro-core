@@ -17,11 +17,13 @@
  */
 package org.dkpro.core.io.conll;
 
-import static org.dkpro.core.testing.IOTestRunner.testOneWay;
-import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.contentOf;
+
+import java.io.File;
 
 import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Ignore;
+import org.dkpro.core.testing.ReaderAssert;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -29,19 +31,17 @@ import org.junit.Test;
 //Do not remove these tags!
 public class Conll2006ReaderWriterTest
 {
-    // Deleted the test file here because it was malformed *and* we had no provenance info.
-    // However, leaving the test in right now and ignoring it because it is used in the
-    // documentation.
-    @Ignore()
     @Test
     public void roundTrip()
         throws Exception
     {
 // tag::testRoundTrip[]
-        testRoundTrip(
-                Conll2006Reader.class, // the reader
-                Conll2006Writer.class,  // the writer
-                "conll/2006/fk003_2006_08_ZH1.conll"); // the input also used as output reference
+        ReaderAssert.assertThat(Conll2006Reader.class)                 // the reader
+            .readingFrom("src/test/resources/conll/2006/fi-ref.conll") // the test input file
+            .usingWriter(Conll2006Writer.class)                        // the writer
+            .outputAsString()                                          // access writer output
+            .isEqualToNormalizingNewlines(                             // compare to input file
+                contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
 // end::testRoundTrip[]
     }
 
@@ -50,11 +50,14 @@ public class Conll2006ReaderWriterTest
         throws Exception
     {
 // tag::testOneWay[]
-        testOneWay(
-                Conll2006Reader.class, // the reader
-                Conll2006Writer.class,  // the writer
-                "conll/2006/fi-ref.conll", // the reference file for the output
-                "conll/2006/fi-orig.conll"); // the input file for the test
+        ReaderAssert.assertThat(Conll2006Reader.class,                  // the reader
+                Conll2006Reader.PARAM_SOURCE_ENCODING, "UTF-8")         // reader parameter
+            .readingFrom("src/test/resources/conll/2006/fi-orig.conll") // the test input file
+            .usingWriter(Conll2006Writer.class,                         // the writer
+                Conll2006Writer.PARAM_TARGET_ENCODING, "UTF-8")         // writer parameter
+            .outputAsString("fi-orig.conll")                            // access writer output
+            .isEqualToNormalizingNewlines(                              // compare to input file
+                contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
 // end::testOneWay[]
     }
 

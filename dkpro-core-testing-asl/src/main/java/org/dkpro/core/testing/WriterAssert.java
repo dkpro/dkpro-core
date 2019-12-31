@@ -30,6 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_component.AnalysisComponent;
@@ -58,11 +59,13 @@ public class WriterAssert
 
     // See JCasFileWriter_ImplBase
     private static final String PARAM_SINGULAR_TARGET = "singularTarget";
+    private static final String PARAM_STRIP_EXTENSION = "stripExtension";
     
     private JCasIterable jcasIterable;
     
     private Object requestedTargetLocation;
     private boolean singularTargetAnnounced = false;
+    private boolean stripExtension = true;
 
     public WriterAssert(AnalysisEngineDescription aWriter)
     {
@@ -91,6 +94,20 @@ public class WriterAssert
     public WriterAssert consuming(JCasIterable aJCasIterable)
     {
         jcasIterable = aJCasIterable;
+        
+        return this;
+    }
+    
+    /**
+     * By default, the original extension is stripped from the original file name and the writer's
+     * extension is then added. By calling this method, the original extension is retained and 
+     * in addition the writer's extension is added.
+     * 
+     * @return the assert for chaining.
+     */
+    public WriterAssert keepOriginalExtension()
+    {
+        stripExtension = false;
         
         return this;
     }
@@ -283,6 +300,11 @@ public class WriterAssert
     
     protected void configureWriter()
     {
+        // By default, we strip the original extension when writing to avoid extension accumulation
+        if (stripExtension && canParameterBeSet(actual, PARAM_STRIP_EXTENSION)) {
+            setParameter(actual, PARAM_STRIP_EXTENSION, true);
+        }
+        
         // If the target location is specified in the writer descriptor only, replace any variable
         // in it if possible
         if (canParameterBeSet(actual, PARAM_TARGET_LOCATION)) {
@@ -302,8 +324,22 @@ public class WriterAssert
      * 
      * @return the output written to the target location as a string. 
      */
-    @Override
-    public StringAssert asString()
+    public StringAssert outputAsString()
+    {
+        return outputAsString(null);
+    }
+    
+    /**
+     * Gets the output written to the target location as a string.
+     * <p>
+     * This method triggers the execution of the text pipeline.
+     * 
+     * @param aPathSuffix
+     *            a path/filename suffix which uniquely identifies the requested output file.
+     * 
+     * @return the output written to the target location as a string.
+     */
+    public StringAssert outputAsString(String aPathSuffix)
     {
         run();
         
@@ -313,10 +349,35 @@ public class WriterAssert
             failWithMessage("Not output found at target location [%s].", requestedTargetLocation);
         }
 
+        if (aPathSuffix != null) {
+            files = files.stream()
+                    .filter(file -> file.getPath().endsWith(aPathSuffix))
+                    .collect(Collectors.toList());
+        }
+        
+        if (files.isEmpty()) {
+            if (aPathSuffix != null) {
+                failWithMessage("Not output file ending in [%s] found at target location [%s].",
+                        aPathSuffix, requestedTargetLocation);
+            }
+            else {
+                failWithMessage("Not output file found at target location [%s].",
+                        requestedTargetLocation);
+            }
+        }
+
         if (files.size() > 1) {
-            failWithMessage(
-                    "Expected single output file at target location [%s] but found multiple: %s.",
-                    requestedTargetLocation, files);
+            if (aPathSuffix != null) {
+                failWithMessage(
+                        "Expected single output file ending in [%s] at target location [%s] but "
+                                + "found multiple: %s.",
+                        aPathSuffix, requestedTargetLocation, files);
+            }
+            else {
+                failWithMessage(
+                        "Expected single output file at target location [%s] but found multiple: %s.",
+                        requestedTargetLocation, files);
+            }
         }
 
         return new StringAssert(Files.contentOf(files.get(0), StandardCharsets.UTF_8));

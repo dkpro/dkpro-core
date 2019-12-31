@@ -17,37 +17,36 @@
  */
 package org.dkpro.core.io.brat;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.io.brat.BratReader;
-import org.dkpro.core.io.brat.BratWriter;
+import java.io.File;
+
 import org.dkpro.core.io.conll.Conll2009Reader;
 import org.dkpro.core.io.conll.Conll2012Reader;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-//NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
-//Do not remove these tags!
 public class BratReaderWriterTest
 {
     @Test
     public void testConll2009()
         throws Exception
     {
-// tag::testOneWay[]
         testOneWay(
                 createReaderDescription(Conll2009Reader.class), // the reader
                 createEngineDescription(BratWriter.class, // the writer
                         BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
                 "conll/2009/en-ref.ann", // the reference file for the output
                 "conll/2009/en-orig.conll"); // the input file for the test
-// end::testOneWay[]
     }
 
     @Test
@@ -273,14 +272,17 @@ public class BratReaderWriterTest
     public void testBratWithDiscontinuousFragmentNear() 
         throws Exception
     {
-        testRoundTrip(createReaderDescription(BratReader.class,
+        ReaderAssert.assertThat(BratReader.class,
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
                 asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                         "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
-                createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
-                        true),
-                "brat/document0c.ann");
+                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"))
+            .readingFrom("src/test/resources/brat/document0c.ann")
+            .usingWriter(BratWriter.class, 
+                    BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+            .outputAsString("document0c.ann")
+            .isEqualToNormalizingNewlines(
+                    contentOf(new File("src/test/resources/brat/document0c.ann"), UTF_8));        
     }
     
     @Test

@@ -92,31 +92,39 @@ of annotation supported by DKPro Core, e.g.:
 
 == Testing I/O componets
 
-The IOTestRunner class offers convenient methods to test I/O components:
+The `ReaderAssert` and `WriterAssert` classes can be used to text I/O components. They allow building
+AssertJ-style unit tests with DKPro Core reader and writer components.
 
-* `testRoundTrip` can be used to test converting a format to CAS, converting it back and comparing
-  it to the original
-* `testOneWay` instead is useful to read data and compare it to a reference file in a different
-  format (e.g. CasDumpWriter format). It can also be used if there a full round-trip is not possible
-  because some information is lost or cannot be exported exactly as ingested from the original file.
+One of the simplest tests is a *round-trip test* where an input file is read using a reader for a 
+particular format, then written out again using a writer for the same format. 
 
-The input file and reference file path given to these methods is always considered relative to
-`src/test/resources`.
-
-.Example using `testRoundTrip` with extra parameters (Conll2006ReaderWriterTest)
+.Example of a round-trip test
 [source,java,indent=0]
 ----
 include::{source-dir}dkpro-core-io-conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testRoundTrip]
 ----
 
-.Example using `testOneWay` with extra parameters (Conll2006ReaderWriterTest)
+The reader is set up to reader the test input file. Instead of setting `PARAM_SOURCE_LOCATION`, it is
+also possible to set the input location using `readingFrom()`. The writer automatically makes use of
+a test output  folder provided by a `DkproTestContext` - therefore a target location does not need to
+be configured explicitly. 
+
+Assuming the writer produces only a single output file, this file can be accessed for
+assertions using `outputAsString()`. If multiple output files are created, an argument can be passed
+to that method, e.g. `outputAsString("output.txt")`. This will look for a at the target location whose
+name ends in `output.txt`. If there is none or more than one matching file, the test will fail.
+
+If the original input file is in a different format or cannot be fully reproduced by the writer,
+then it is easy to set up a *one way test*, simply by changing the final comparison. The following
+example also shows how to specify additional parameters on the reader or writer.
+
+.Example of a one-way test
 [source,java,indent=0]
 ----
 include::{source-dir}dkpro-core-io-conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testOneWay]
 ----
 
-.Example using `testRoundTrip` with extra parameters (BratReaderWriterTest)
-[source,java,indent=0]]
-----
-include::{source-dir}dkpro-core-io-brat-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/brat/BratReaderWriterTest.java[tags=testOneWay]
-----
+In order to test the ability of readers to read multiple files, the `asJCasList()` method can be used.
+While pipelines typically re-use a single CAS which is repeatedly reset and refilled, this method
+generates a list of separate CAS instances which can be individually validated after the test. To
+access elements of the list use `element(n)`.
