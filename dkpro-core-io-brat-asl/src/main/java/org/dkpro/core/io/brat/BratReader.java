@@ -751,7 +751,8 @@ public class BratReader
                         "Token"
                 };
                 for (String typeName: segTypeNames) {
-                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type." + typeName;
+                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type."
+                            + typeName;
                     txtTypeMappingLst.add(new TypeMapping(typeName, aType));
                 }
             }

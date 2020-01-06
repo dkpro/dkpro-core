@@ -17,11 +17,14 @@
  */
 package org.dkpro.core.io.brat;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 import static org.junit.Assert.assertEquals;
@@ -44,22 +47,16 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import org.dkpro.core.io.brat.BratReader;
-import org.dkpro.core.io.brat.BratWriter;
 import org.dkpro.core.io.conll.Conll2009Reader;
 import org.dkpro.core.io.conll.Conll2012Reader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
+import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.assertions.AssertFile;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-//NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
-//Do not remove these tags!
 public class BratReaderWriterTest
 {
      
@@ -101,8 +98,9 @@ public class BratReaderWriterTest
     } 
     
     @Test
-    public void OLD_TO_DELETE__test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
-        
+    public void OLD_TO_DELETE__test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles()
+        throws Exception
+    {
         File bratOrigDir = new File("src/test/resources/brat/");
         File txtFileRef = new File(bratOrigDir, "document0a.txt");
         boolean deleteAnnFiles = true;
@@ -136,7 +134,8 @@ public class BratReaderWriterTest
 //                txtFileRef, txtFile, expectEmptyAnnFiles);  
         
         boolean deleteAnnFiles = true;
-        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"), deleteAnnFiles);
+        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"),
+                deleteAnnFiles);
         File tempInputTxtFile = new File(tempInputsDir, "document0a.txt");                
         
         Map<String,Object> readerParams = new HashMap<String,Object>();
@@ -152,34 +151,55 @@ public class BratReaderWriterTest
     }    
     
     @Test
-    public void test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception {
-        File bratOrigDir = new File("src/test/resources/brat-only-std-types/");
-        File txtFileRef = bratOrigDir;
-        boolean deleteAnnFiles = true;
-        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
-        File txtFile = tempDir;
+    public void test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception
+    {
+        ReaderAssert
+                .assertThat(BratReader.class)
+                .readingFrom("src/test/resources/text-only")
+                .usingWriter(BratWriter.class)
+                .asFiles()
+                .allSatisfy(file -> {
+                    // The ".ann" files have been freshly generated and are empty
+                    if (file.getName().endsWith(".ann")) {
+                        assertThat(contentOf(file)).isEmpty();
+                    }
+                    // The ".text" files should match the originals
+                    if (file.getName().endsWith(".txt")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/text-only", 
+                                        file.getName())));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
+                        "document0b.ann", "document0b.txt", "document0c.ann", "document0c.txt",
+                        "document0d.ann", "document0d.txt", "visual.conf");
         
-        boolean expectEmptyAnnFiles = true;        
-        testReadWrite(
-                createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-                createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-                txtFileRef, txtFile, expectEmptyAnnFiles);         
-    }    
+//        File bratOrigDir = new File("src/test/resources/brat-only-std-types/");
+//        File txtFileRef = bratOrigDir;
+//        boolean deleteAnnFiles = true;
+//        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
+//        File txtFile = tempDir;
+//
+//        boolean expectEmptyAnnFiles = true;
+//        testReadWrite(
+//                createReader(BratReader.class, BratReader.PARAM_SOURCE_LOCATION,
+//                        txtFile.toString()),
+//                createEngine(BratWriter.class, BratReader.PARAM_SOURCE_LOCATION,
+//                        txtFile.toString()),
+//                txtFileRef, txtFile, expectEmptyAnnFiles);
+    }
         
     @Test
     public void testConll2009()
         throws Exception
     {
-// tag::testOneWay[]
         testOneWay(
                 createReaderDescription(Conll2009Reader.class), // the reader
                 createEngineDescription(BratWriter.class, // the writer
                         BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
                 "conll/2009/en-ref.ann", // the reference file for the output
                 "conll/2009/en-orig.conll"); // the input file for the test
-// end::testOneWay[]
     }
 
     @Test
@@ -405,14 +425,17 @@ public class BratReaderWriterTest
     public void testBratWithDiscontinuousFragmentNear() 
         throws Exception
     {
-        testRoundTrip(createReaderDescription(BratReader.class,
+        ReaderAssert.assertThat(BratReader.class,
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
                 asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                         "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
-                createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
-                        true),
-                "brat/document0c.ann");
+                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"))
+            .readingFrom("src/test/resources/brat/document0c.ann")
+            .usingWriter(BratWriter.class, 
+                    BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+            .outputAsString("document0c.ann")
+            .isEqualToNormalizingNewlines(
+                    contentOf(new File("src/test/resources/brat/document0c.ann"), UTF_8));        
     }
     
     @Test
@@ -499,9 +522,9 @@ public class BratReaderWriterTest
         return copyBratFilesToTestInputsDir(bratDir, null);
     }
 
-   private File copyBratFilesToTestInputsDir(File bratDir, Boolean deleteAnnFiles) 
-                    throws IOException {
-       
+    private File copyBratFilesToTestInputsDir(File bratDir, Boolean deleteAnnFiles)
+        throws IOException
+    {
         File testContextDir = testContext.getTestOutputFolder();
 
         if (deleteAnnFiles == null) {
@@ -569,8 +592,10 @@ public class BratReaderWriterTest
         
     }
 
-    private void assertSingleBratFileOK(Map<String, Object> readerParams, Map<String, Object> writerParams) 
-                 throws Exception {
+    private void assertSingleBratFileOK(Map<String, Object> readerParams,
+            Map<String, Object> writerParams)
+        throws Exception
+    {
         File sourceLocation = (File) readerParams.get(BratReader.PARAM_SOURCE_LOCATION);
         File targetLocation = (File) writerParams.get(BratWriter.PARAM_TARGET_LOCATION);
         
@@ -578,8 +603,8 @@ public class BratReaderWriterTest
         File sourceAnn = new File(sourceLocation.toString().replaceAll("\\.txt$", ".ann"));
         
         String sourceFileName = sourceTxt.getName().replaceAll("\\.txt$", "");
-        File targetTxt = new File(targetLocation, sourceFileName+".txt"); 
-        File targetAnn = new File(targetLocation, sourceFileName+".ann");
+        File targetTxt = new File(targetLocation, sourceFileName + ".txt");
+        File targetAnn = new File(targetLocation, sourceFileName + ".ann");
         
         AssertFile.assertFilesHaveSameContent("Outputed .txt file not same as input one", 
                 sourceTxt, targetTxt);
@@ -588,8 +613,9 @@ public class BratReaderWriterTest
         
     }
 
-    private Object[] paramsMap2Arr(Map<String, Object> paramsMap) {
-        Object[] paramsArr = new Object[2*paramsMap.keySet().size()];
+    private Object[] paramsMap2Arr(Map<String, Object> paramsMap)
+    {
+        Object[] paramsArr = new Object[2 * paramsMap.keySet().size()];
         int pos = 0;
         for (String paramName: paramsMap.keySet()) {
             paramsArr[pos] = paramName;
@@ -600,14 +626,14 @@ public class BratReaderWriterTest
         return paramsArr;
     }
 
-    private File copyBratFilesToTempLocation(File bratDir) 
-            throws IOException { 
+    private File copyBratFilesToTempLocation(File bratDir) throws IOException
+    {
         return copyBratFilesToTempLocation(bratDir, null);
     }
 
-   private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles) 
-                    throws IOException { 
-        
+    private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles)
+        throws IOException
+    {
         if (deleteAnnFiles == null) {
             deleteAnnFiles = false;
         }
@@ -628,13 +654,15 @@ public class BratReaderWriterTest
         return tempDir.toFile();
     }
    
-   public File getBratOutputsDir() {
-       File testContextDir = testContext.getTestOutputFolder(false);
-       return new File(testContextDir, "outputs");
-   }
+    public File getBratOutputsDir()
+    {
+        File testContextDir = testContext.getTestOutputFolder(false);
+        return new File(testContextDir, "outputs");
+    }
 
-   public File getBratInputsDir() {
-       File testContextDir = testContext.getTestOutputFolder(false);
-       return new File(testContextDir, "inputs");
-   }
+    public File getBratInputsDir()
+    {
+        File testContextDir = testContext.getTestOutputFolder(false);
+        return new File(testContextDir, "inputs");
+    }
 }
