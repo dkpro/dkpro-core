@@ -32,7 +32,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileAttribute;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
@@ -42,10 +44,16 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import org.dkpro.core.io.brat.BratReader;
+import org.dkpro.core.io.brat.BratWriter;
 import org.dkpro.core.io.conll.Conll2009Reader;
 import org.dkpro.core.io.conll.Conll2012Reader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
+import org.dkpro.core.testing.assertions.AssertFile;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,19 +67,22 @@ public class BratReaderWriterTest
     public void test__SingleDocument__ProvideTxtFile()
         throws Exception
     {
-
-        File bratOrigDir = new File("src/test/resources/brat/");
-        File txtFileRef = new File(bratOrigDir, "document0a.txt");
-        File tempDir = copyBratFilesToTempLocation(bratOrigDir);
-        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document0a.txt")));
+        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"));
+        File tempInputTxtFile = new File(tempInputsDir, "document0a.txt");                
         
-        testReadWrite(
-                createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-                createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-                txtFileRef, txtFile);    
+        Map<String,Object> readerParams = new HashMap<String,Object>();
+        {
+            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputTxtFile);
+        }
+        Map<String,Object> writerParams = new HashMap<String,Object>();
+        {
+            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getBratOutputsDir());
+            writerParams.put(BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
+        };
+        
+        testOneWaySimple(readerParams, writerParams);
     }
+
     
     @Test
     public void test__BratDirectory__ContainingOnlyAnnotationsForStandardDKProUimaTypes()
@@ -90,7 +101,7 @@ public class BratReaderWriterTest
     } 
     
     @Test
-    public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
+    public void OLD_TO_DELETE__test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
         
         File bratOrigDir = new File("src/test/resources/brat/");
         File txtFileRef = new File(bratOrigDir, "document0a.txt");
@@ -106,6 +117,39 @@ public class BratReaderWriterTest
                         BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
                 txtFileRef, txtFile, expectEmptyAnnFiles);         
     }
+    
+    @Test
+    public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
+        
+//        File bratOrigDir = new File("src/test/resources/brat/");
+//        File txtFileRef = new File(bratOrigDir, "document0a.txt");
+//        boolean deleteAnnFiles = true;
+//        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
+//        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document0a.txt")));
+//        
+//        boolean expectEmptyAnnFiles = true;
+//        testReadWrite(
+//                createReader(BratReader.class,
+//                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
+//                createEngine(BratWriter.class,
+//                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
+//                txtFileRef, txtFile, expectEmptyAnnFiles);  
+        
+        boolean deleteAnnFiles = true;
+        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"), deleteAnnFiles);
+        File tempInputTxtFile = new File(tempInputsDir, "document0a.txt");                
+        
+        Map<String,Object> readerParams = new HashMap<String,Object>();
+        {
+            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputTxtFile);
+        }
+        Map<String,Object> writerParams = new HashMap<String,Object>();
+        {
+            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getBratOutputsDir());
+        };
+        
+        testOneWaySimple(readerParams, writerParams);
+    }    
     
     @Test
     public void test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception {
@@ -450,33 +494,33 @@ public class BratReaderWriterTest
         assertFilesHaveSameContent(expAnnFile, gotAnnFile, expectEmptyAnnFiles);
     }    
     
-    private File copyBratFilesToTempLocation(File bratDir) 
+    private File copyBratFilesToTestInputsDir(File bratDir) 
             throws IOException { 
-        return copyBratFilesToTempLocation(bratDir, null);
+        return copyBratFilesToTestInputsDir(bratDir, null);
     }
 
-    private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles)
-        throws IOException
-    {
-        
+   private File copyBratFilesToTestInputsDir(File bratDir, Boolean deleteAnnFiles) 
+                    throws IOException {
+       
+        File testContextDir = testContext.getTestOutputFolder();
+
         if (deleteAnnFiles == null) {
             deleteAnnFiles = false;
         }
-        
-        Path tempDir = null;        
-        tempDir = Files.createTempDirectory("dkpro", new FileAttribute[0]);
-        FileCopy.copyFolder(bratDir, tempDir.toFile());
-        
+
+        File testInputsDir = new File(testContextDir, "brat-inputs");
+        FileCopy.copyFolder(bratDir, testInputsDir);
+
         // Delete the -ref files from the inputs dir
-        String pattern = new File(tempDir.toFile(), "*-ref*").toString();
+        String pattern = new File(testInputsDir, "*-ref*").toString();
         FileGlob.deleteFiles(pattern);
-        
+
         if (deleteAnnFiles) {
-            pattern = new File(tempDir.toFile(), "*.ann").toString();
+            pattern = new File(testInputsDir, "*.ann").toString();
             FileGlob.deleteFiles(pattern);
         }
-        
-        return tempDir.toFile();
+
+        return testInputsDir;
     }
     
     private void assertFilesHaveSameContent(File expFileOrDir, File actualFileOrDir,
@@ -504,4 +548,93 @@ public class BratReaderWriterTest
             }
         }
     }
+    
+    private void testOneWaySimple(Map<String,Object> readerParams, Map<String,Object> writerParams) 
+                 throws Exception {
+        
+        Object[] readerParamsArray = paramsMap2Arr(readerParams);
+        Object[] writerParamsArray = paramsMap2Arr(writerParams);
+        
+        CollectionReader reader = createReader(BratReader.class, readerParamsArray);
+        AnalysisEngine writer = createEngine(BratWriter.class, writerParamsArray);
+
+        SimplePipeline.runPipeline(reader, new AnalysisEngine[] {writer});
+        
+        boolean isSingleFile = ((BratReader)reader).sourceLocationIsSingleFile();
+        if (isSingleFile) {
+            assertSingleBratFileOK(readerParams, writerParams);
+        }  else {
+//            isSingleFile = FileGlob.listFiles(pattern).length;
+        }
+        
+    }
+
+    private void assertSingleBratFileOK(Map<String, Object> readerParams, Map<String, Object> writerParams) 
+                 throws Exception {
+        File sourceLocation = (File) readerParams.get(BratReader.PARAM_SOURCE_LOCATION);
+        File targetLocation = (File) writerParams.get(BratWriter.PARAM_TARGET_LOCATION);
+        
+        File sourceTxt = new File(sourceLocation.toString().replaceAll("\\.ann$", ".txt"));
+        File sourceAnn = new File(sourceLocation.toString().replaceAll("\\.txt$", ".ann"));
+        
+        String sourceFileName = sourceTxt.getName().replaceAll("\\.txt$", "");
+        File targetTxt = new File(targetLocation, sourceFileName+".txt"); 
+        File targetAnn = new File(targetLocation, sourceFileName+".ann");
+        
+        AssertFile.assertFilesHaveSameContent("Outputed .txt file not same as input one", 
+                sourceTxt, targetTxt);
+        AssertFile.assertFilesHaveSameContent("Outputed .ann file not same as input one", 
+                sourceAnn, targetAnn);
+        
+    }
+
+    private Object[] paramsMap2Arr(Map<String, Object> paramsMap) {
+        Object[] paramsArr = new Object[2*paramsMap.keySet().size()];
+        int pos = 0;
+        for (String paramName: paramsMap.keySet()) {
+            paramsArr[pos] = paramName;
+            paramsArr[pos + 1] = paramsMap.get(paramName);
+            pos += 2;
+        }
+        
+        return paramsArr;
+    }
+
+    private File copyBratFilesToTempLocation(File bratDir) 
+            throws IOException { 
+        return copyBratFilesToTempLocation(bratDir, null);
+    }
+
+   private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles) 
+                    throws IOException { 
+        
+        if (deleteAnnFiles == null) {
+            deleteAnnFiles = false;
+        }
+        
+        Path tempDir = null;        
+        tempDir = Files.createTempDirectory("dkpro", new FileAttribute[0]);
+        FileCopy.copyFolder(bratDir, tempDir.toFile());
+        
+        // Delete the -ref files from the inputs dir
+        String pattern = new File(tempDir.toFile(), "*-ref*").toString();
+        FileGlob.deleteFiles(pattern);
+        
+        if (deleteAnnFiles) {
+            pattern = new File(tempDir.toFile(), "*.ann").toString();
+            FileGlob.deleteFiles(pattern);
+        }
+        
+        return tempDir.toFile();
+    }
+   
+   public File getBratOutputsDir() {
+       File testContextDir = testContext.getTestOutputFolder(false);
+       return new File(testContextDir, "outputs");
+   }
+
+   public File getBratInputsDir() {
+       File testContextDir = testContext.getTestOutputFolder(false);
+       return new File(testContextDir, "inputs");
+   }
 }

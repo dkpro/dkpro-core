@@ -87,10 +87,18 @@ public class DkproTestContext extends TestWatcher
         return folder;
     }
 
-    public File getTestOutputFolder()
+    public File getTestOutputFolder() {
+        return getTestOutputFolder(null);
+    }
+
+    
+    public File getTestOutputFolder(Boolean deleteIfExists)
     {
+        if (deleteIfExists == null) {
+            deleteIfExists = true;
+        }
         File folder = new File("target/test-output/" + getTestOutputFolderName());
-        if (folder.exists()) {
+        if (folder.exists() && deleteIfExists) {
             FileUtils.deleteQuietly(folder);
         }
         folder.mkdirs();

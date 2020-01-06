@@ -93,7 +93,8 @@ public class FileGlob {
         
     }
     
-    public static File[] listFiles(String pattern)  {        
+    public static File[] listFiles(String pattern)  { 
+        pattern = new File(pattern).getAbsolutePath();
         Path startDir = Paths.get(getStartingDir(pattern));
 
         File[] files = new File[0];
@@ -139,6 +140,8 @@ public class FileGlob {
     }
     
     public static void deleteFiles(String pattern) {
+        pattern = new File(pattern).getAbsolutePath();
+        
         Path startDir = Paths.get(getStartingDir(pattern));
 
         File[] files = new File[0];
@@ -174,9 +177,6 @@ public class FileGlob {
             }
         }
         
-        if (!pattern.matches("^([a-zA-Z]:(\\|/|\\\\)|[\\/]|\\.).*$")) {
-            startingDir = "./" + startingDir; 
-        }
         return startingDir;
     }
 

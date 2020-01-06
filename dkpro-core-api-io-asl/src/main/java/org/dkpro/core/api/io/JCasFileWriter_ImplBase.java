@@ -96,7 +96,7 @@ public abstract class JCasFileWriter_ImplBase
      */
     public static final String PARAM_STRIP_EXTENSION = "stripExtension";
     @ConfigurationParameter(name = PARAM_STRIP_EXTENSION, mandatory = true, defaultValue = "false")
-    private boolean stripExtension;
+    protected boolean stripExtension;
 
     /**
      * Use the document ID as file name even if a relative path information is present.
@@ -175,11 +175,12 @@ public abstract class JCasFileWriter_ImplBase
             return getOutputStream((String) null, aExtension);
         }
         else {
-            return getOutputStream(getRelativePath(aJCas), aExtension);
+            String relPath = getRelativePath(aJCas);
+            return getOutputStream(relPath, aExtension);
         }
     }
 
-    protected String getTargetLocation()
+    public String getTargetLocation()
     {
         return targetLocation;
     }

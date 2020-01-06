@@ -597,17 +597,13 @@ public class BratReader
     }    
     
     @Override 
-    protected String getSourceLocation()
+    public String getSourceLocation()
     {
         String location = super.getSourceLocation();
         
         if (isSingleLocation()) {
             location = annFileFor(location);
-//        } else {
-//            location = new File(location,"*.ann").toString();
         }
-        
-//        location = stripProtocol(location);
         
         return location;
     }

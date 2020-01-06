@@ -194,6 +194,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
 //            parsedEventTypes.put(p.getType(), p);
 //        }
 
+        stripExtension = true;
         conf = new BratConfiguration();
         converter = new DKPro2Brat(conf);
         converter.setWriteNullAttributes(writeNullAttributes);
