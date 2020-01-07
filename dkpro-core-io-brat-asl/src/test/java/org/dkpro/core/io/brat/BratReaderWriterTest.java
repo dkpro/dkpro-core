@@ -47,6 +47,8 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.io.brat.BratReader;
+import org.dkpro.core.io.brat.BratWriter;
 import org.dkpro.core.io.conll.Conll2009Reader;
 import org.dkpro.core.io.conll.Conll2012Reader;
 import org.dkpro.core.testing.DkproTestContext;
@@ -73,66 +75,35 @@ public class BratReaderWriterTest
         }
         Map<String,Object> writerParams = new HashMap<String,Object>();
         {
-            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getBratOutputsDir());
+            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
+            writerParams.put(BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
+        };
+        
+        testOneWaySimple(readerParams, writerParams);
+    }
+    
+    @Test
+    public void test__SingleDocument__ProvideAnnFile()
+        throws Exception
+    {
+        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"));
+        File tempInputAnnFile = new File(tempInputsDir, "document0a.ann");                
+        
+        Map<String,Object> readerParams = new HashMap<String,Object>();
+        {
+            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputAnnFile);
+        }
+        Map<String,Object> writerParams = new HashMap<String,Object>();
+        {
+            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
             writerParams.put(BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
         };
         
         testOneWaySimple(readerParams, writerParams);
     }
 
-    
-    @Test
-    public void test__BratDirectory__ContainingOnlyAnnotationsForStandardDKProUimaTypes()
-        throws Exception
-    {        
-        File bratOrigDir = new File("src/test/resources/brat-only-std-types");
-        File annFileRef = bratOrigDir;
-        File tempDir = copyBratFilesToTempLocation(bratOrigDir);
-        File annFile = tempDir;
-        testReadWrite(
-                createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString()),
-                createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, tempDir.toString()),
-                annFileRef, annFile);    
-    } 
-    
-    @Test
-    public void OLD_TO_DELETE__test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles()
-        throws Exception
-    {
-        File bratOrigDir = new File("src/test/resources/brat/");
-        File txtFileRef = new File(bratOrigDir, "document0a.txt");
-        boolean deleteAnnFiles = true;
-        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
-        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document0a.txt")));
-        
-        boolean expectEmptyAnnFiles = true;
-        testReadWrite(
-                createReader(BratReader.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-                createEngine(BratWriter.class,
-                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-                txtFileRef, txtFile, expectEmptyAnnFiles);         
-    }
-    
     @Test
     public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
-        
-//        File bratOrigDir = new File("src/test/resources/brat/");
-//        File txtFileRef = new File(bratOrigDir, "document0a.txt");
-//        boolean deleteAnnFiles = true;
-//        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
-//        File txtFile = new File(BratReader.stripProtocol(new File(tempDir, "document0a.txt")));
-//        
-//        boolean expectEmptyAnnFiles = true;
-//        testReadWrite(
-//                createReader(BratReader.class,
-//                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-//                createEngine(BratWriter.class,
-//                        BratReader.PARAM_SOURCE_LOCATION, txtFile.toString()),
-//                txtFileRef, txtFile, expectEmptyAnnFiles);  
-        
         boolean deleteAnnFiles = true;
         File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"),
                 deleteAnnFiles);
@@ -144,14 +115,14 @@ public class BratReaderWriterTest
         }
         Map<String,Object> writerParams = new HashMap<String,Object>();
         {
-            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getBratOutputsDir());
+            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
         };
         
         testOneWaySimple(readerParams, writerParams);
     }    
-    
+        
     @Test
-    public void test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception
+    public void RICHARD__test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception
     {
         ReaderAssert
                 .assertThat(BratReader.class)
@@ -174,22 +145,24 @@ public class BratReaderWriterTest
                 .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
                         "document0b.ann", "document0b.txt", "document0c.ann", "document0c.txt",
                         "document0d.ann", "document0d.txt", "visual.conf");
-        
-//        File bratOrigDir = new File("src/test/resources/brat-only-std-types/");
-//        File txtFileRef = bratOrigDir;
-//        boolean deleteAnnFiles = true;
-//        File tempDir = copyBratFilesToTempLocation(bratOrigDir, deleteAnnFiles);
-//        File txtFile = tempDir;
-//
-//        boolean expectEmptyAnnFiles = true;
-//        testReadWrite(
-//                createReader(BratReader.class, BratReader.PARAM_SOURCE_LOCATION,
-//                        txtFile.toString()),
-//                createEngine(BratWriter.class, BratReader.PARAM_SOURCE_LOCATION,
-//                        txtFile.toString()),
-//                txtFileRef, txtFile, expectEmptyAnnFiles);
     }
+
+    public void ALAIN__test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception {
+        boolean deleteAnnFiles = true;
+        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat"), deleteAnnFiles);
         
+        Map<String,Object> readerParams = new HashMap<String,Object>();
+        {
+            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputsDir);
+        }
+        Map<String,Object> writerParams = new HashMap<String,Object>();
+        {
+            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
+        };
+        
+        testOneWaySimple(readerParams, writerParams);
+    }    
+
     @Test
     public void testConll2009()
         throws Exception
@@ -531,8 +504,8 @@ public class BratReaderWriterTest
             deleteAnnFiles = false;
         }
 
-        File testInputsDir = new File(testContextDir, "brat-inputs");
-        FileCopy.copyFolder(bratDir, testInputsDir);
+        File testInputsDir = getTestBratInputsDir();
+        FileCopy.copyFolder(bratDir, getTestBratInputsDir());
 
         // Delete the -ref files from the inputs dir
         String pattern = new File(testInputsDir, "*-ref*").toString();
@@ -654,15 +627,13 @@ public class BratReaderWriterTest
         return tempDir.toFile();
     }
    
-    public File getBratOutputsDir()
-    {
-        File testContextDir = testContext.getTestOutputFolder(false);
-        return new File(testContextDir, "outputs");
-    }
+   public File getTestBratOutputsDir() {
+       File testContextDir = testContext.getTestOutputFolder(false);
+       return new File(testContextDir, "brat-outputs");
+   }
 
-    public File getBratInputsDir()
-    {
-        File testContextDir = testContext.getTestOutputFolder(false);
-        return new File(testContextDir, "inputs");
-    }
+   public File getTestBratInputsDir() {
+       File testContextDir = testContext.getTestOutputFolder(false);
+       return new File(testContextDir, "brat-inputs");
+   }
 }

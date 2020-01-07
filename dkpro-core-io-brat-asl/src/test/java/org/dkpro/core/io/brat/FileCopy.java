@@ -2,23 +2,30 @@ package org.dkpro.core.io.brat;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.channels.FileLockInterruptionException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
 
 public class FileCopy {
 
-	public static void copyFolder(File srcFolder, File destFolder) {
+	public static void copyFolder(File srcFolder, File destFolder) throws NoSuchFileException {
 		copyFolder(srcFolder.toPath(), destFolder.toPath());
 	}
 	
 	
-	public static void copyFolder(Path srcFolder, Path destFolder) {
+	public static void copyFolder(Path srcFolder, Path destFolder) throws NoSuchFileException {
+	    final Path srcFolderAbs = srcFolder.toAbsolutePath();
+	    if (!srcFolder.toFile().exists()) {
+	        throw new NoSuchFileException(srcFolder.toString());
+	    }
+	    
 		try {
-	        Files.walk( srcFolder ).forEach( s -> {
+	        Files.walk( srcFolderAbs ).forEach( s -> {
 	            try {
-	                Path d = destFolder.resolve( srcFolder.relativize(s) );
+	                Path d = destFolder.resolve( srcFolderAbs.relativize(s) );
 	                if( Files.isDirectory( s ) ) {
 	                    if( !Files.exists( d ) )
 	                        Files.createDirectory( d );

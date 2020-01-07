@@ -16,6 +16,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
@@ -164,7 +165,11 @@ public class ResourceGetter {
 			tempLocation = copyFileSystemResourceToTempFile(resPath);
 		}
 		
-		FileCopy.copyFolder(tempLocation.toPath(), targDir);	
+		try {
+            FileCopy.copyFolder(tempLocation.toPath(), targDir);
+        } catch (NoSuchFileException e) {
+            throw new ResourceGetterException(e);
+        }	
 	}
 	
 	
