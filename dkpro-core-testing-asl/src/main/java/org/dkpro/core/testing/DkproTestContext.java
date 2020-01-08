@@ -90,11 +90,7 @@ public class DkproTestContext extends TestWatcher
         return folder;
     }
     
-    public File getTestWorkspace() throws IOException {
-        return getTestWorkspaceRoot(null);
-    }
-    
-    public File getTestWorkspaceRoot(Boolean deleteIfExists) throws IOException
+    private File getTestWorkspaceRoot(Boolean deleteIfExists) throws IOException
     {
         if (deleteIfExists == null) {
             deleteIfExists = false;
@@ -107,12 +103,13 @@ public class DkproTestContext extends TestWatcher
         return folder;
     }    
 
-    public File getTestWorkspaceSubdir(File subdirRelpath, Boolean deleteIfExists) throws IOException {
+    public File getTestWorkspaceFolder(File subdirRelpath, Boolean deleteIfExists) throws IOException {
         if (deleteIfExists == null) {
             deleteIfExists = false;
         }
         
-        File subdir = getTestWorkspaceFile(subdirRelpath, deleteIfExists);
+        File root = getTestWorkspaceRoot(deleteIfExists);
+        File subdir = new File(root, subdirRelpath.toString());
         if (!subdir.exists()) {
             subdir.mkdirs();
         }
@@ -120,28 +117,13 @@ public class DkproTestContext extends TestWatcher
         return subdir;
     }
     
-    public File getTestWorkspaceFile(File relPath, Boolean deleteIfExists) throws IOException {
-        if (deleteIfExists == null) {
-            deleteIfExists = true;
-        }
-        
-        File root = getTestWorkspaceRoot(deleteIfExists);
-        File file = new File(root, relPath.toString());
-        
-        if (file.exists() && deleteIfExists) {
-            FileUtils.deleteQuietly(file);
-        }
-        
-        return file;
-    }
-
     public File getTestInputFolder() throws IOException {
         return getTestInputFolder(null);
     }
     
     public File getTestInputFolder(Boolean deleteIfExists) throws IOException
     {
-        File inputFolder = getTestWorkspaceSubdir(new File("input"), deleteIfExists);
+        File inputFolder = getTestWorkspaceFolder(new File("input"), deleteIfExists);
         return inputFolder;
     }
     
@@ -151,7 +133,7 @@ public class DkproTestContext extends TestWatcher
     
     public File getTestOutputFolder(Boolean deleteIfExists) throws IOException
     {
-        File outputFolder = getTestWorkspaceSubdir(new File("output"), deleteIfExists);
+        File outputFolder = getTestWorkspaceFolder(new File("output"), deleteIfExists);
         return outputFolder;
     }
 
