@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.dkpro.core.io.brat;
+package org.dkpro.core.api.resources;
 
 import java.io.File;
 import java.io.IOException;

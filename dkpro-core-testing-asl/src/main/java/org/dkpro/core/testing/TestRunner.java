@@ -155,7 +155,7 @@ public class TestRunner
         
         DkproTestContext context = DkproTestContext.get();
         if  (context != null) {
-            File folder = new File("target/test-output/" + context.getTestOutputFolderName());
+            File folder = new File("target/test-output/" + context.getTestWorkspaceFolderName());
             if (!folder.exists()) {
                 FileUtils.deleteQuietly(folder);
             }

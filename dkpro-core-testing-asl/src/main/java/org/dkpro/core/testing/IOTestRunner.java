@@ -134,7 +134,7 @@ public class IOTestRunner
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
                 + "-" + FilenameUtils.getBaseName(aFile);
         if (DkproTestContext.get() != null) {
-            outputFolder = DkproTestContext.get().getTestOutputFolderName();
+            outputFolder = DkproTestContext.get().getTestWorkspaceFolderName();
         }
         File output = new File("target/test-output/" + outputFolder + "/dump.txt");
 
@@ -232,7 +232,7 @@ public class IOTestRunner
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
                 + "-" + FilenameUtils.getBaseName(aInputFile);
         if (DkproTestContext.get() != null) {
-            outputFolder = DkproTestContext.get().getTestOutputFolderName();
+            outputFolder = DkproTestContext.get().getTestWorkspaceFolderName();
         }
         
         File reference = new File("src/test/resources/" + aExpectedFile);

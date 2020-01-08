@@ -55,6 +55,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.api.resources.FileGlob;
 import org.dkpro.core.io.brat.internal.mapping.CommentMapping;
 import org.dkpro.core.io.brat.internal.mapping.Mapping;
 import org.dkpro.core.io.brat.internal.mapping.RelationMapping;

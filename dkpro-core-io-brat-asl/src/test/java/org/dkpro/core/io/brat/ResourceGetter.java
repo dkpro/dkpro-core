@@ -32,6 +32,7 @@ import java.nio.file.attribute.FileAttribute;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.dkpro.core.api.resources.FileCopy;
 
 /*
  * A class for accessing resource files and directories.

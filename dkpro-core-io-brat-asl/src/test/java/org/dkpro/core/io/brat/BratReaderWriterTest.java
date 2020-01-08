@@ -47,6 +47,8 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.resources.FileCopy;
+import org.dkpro.core.api.resources.FileGlob;
 import org.dkpro.core.io.brat.BratReader;
 import org.dkpro.core.io.brat.BratWriter;
 import org.dkpro.core.io.conll.Conll2009Reader;
@@ -63,7 +65,7 @@ public class BratReaderWriterTest
 {
      
     @Test
-    public void test__SingleDocument__ProvideTxtFile()
+    public void ALAIN__test__SingleDocument__ProvideTxtFile()
         throws Exception
     {
         File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"));
@@ -82,6 +84,28 @@ public class BratReaderWriterTest
         testOneWaySimple(readerParams, writerParams);
     }
     
+    @Test
+    public void RICHARD__test__SingleDocument__ProvideTxtFile()
+        throws Exception
+    {
+        ReaderAssert
+        .assertThat(BratReader.class)
+        .readingFrom("src/test/resources/brat/document0a.txt")
+        .usingWriter(BratWriter.class,
+                BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+        .asFiles()
+        .allSatisfy(file -> {
+            if (!file.getName().endsWith(".conf")) {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/brat", 
+                                file.getName())));
+            }
+        })
+        .extracting(File::getName)
+        .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
+                "visual.conf");
+    }
+
     @Test
     public void test__SingleDocument__ProvideAnnFile()
         throws Exception
@@ -147,22 +171,31 @@ public class BratReaderWriterTest
                         "document0d.ann", "document0d.txt", "visual.conf");
     }
 
-    public void ALAIN__test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception {
-        boolean deleteAnnFiles = true;
-        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat"), deleteAnnFiles);
-        
-        Map<String,Object> readerParams = new HashMap<String,Object>();
-        {
-            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputsDir);
-        }
-        Map<String,Object> writerParams = new HashMap<String,Object>();
-        {
-            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
-        };
-        
-        testOneWaySimple(readerParams, writerParams);
-    }    
-
+    @Test
+    public void RICHARD__test__SingleAnnFile() throws Exception
+    {
+        ReaderAssert
+                .assertThat(BratReader.class)
+                .readingFrom("src/test/resources/text-only/document0a.ann")
+                .usingWriter(BratWriter.class)
+                .asFiles()
+                .allSatisfy(file -> {
+                    // The ".ann" files have been freshly generated and are empty
+                    if (file.getName().endsWith(".ann")) {
+                        assertThat(contentOf(file)).isEmpty();
+                    }
+                    // The ".text" files should match the originals
+                    if (file.getName().endsWith(".txt")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/text-only", 
+                                        file.getName())));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
+                        "visual.conf");
+    }
+    
     @Test
     public void testConll2009()
         throws Exception
@@ -274,8 +307,8 @@ public class BratReaderWriterTest
                 createReaderDescription(BratReader.class), 
                 createEngineDescription(BratWriter.class,
                         BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false), 
-                "brat/document0b.ann");
-    }
+                "with-long-names/document0a.ann");
+    }    
 
     @Test
     public void test1legacy()
@@ -498,14 +531,15 @@ public class BratReaderWriterTest
     private File copyBratFilesToTestInputsDir(File bratDir, Boolean deleteAnnFiles)
         throws IOException
     {
-        File testContextDir = testContext.getTestOutputFolder();
+//        File testWorkspace = testContext.getTestWorkspace();
 
         if (deleteAnnFiles == null) {
             deleteAnnFiles = false;
         }
 
-        File testInputsDir = getTestBratInputsDir();
-        FileCopy.copyFolder(bratDir, getTestBratInputsDir());
+//        File testInputsDir = getTestBratInputsDir();
+        File testInputsDir = DkproTestContext.get().getTestInputFolder(true);
+        FileCopy.copyFolder(bratDir, testInputsDir);
 
         // Delete the -ref files from the inputs dir
         String pattern = new File(testInputsDir, "*-ref*").toString();
@@ -627,13 +661,11 @@ public class BratReaderWriterTest
         return tempDir.toFile();
     }
    
-   public File getTestBratOutputsDir() {
-       File testContextDir = testContext.getTestOutputFolder(false);
-       return new File(testContextDir, "brat-outputs");
+   public File getTestBratOutputsDir() throws IOException {
+       return DkproTestContext.get().getTestOutputFolder();
    }
 
-   public File getTestBratInputsDir() {
-       File testContextDir = testContext.getTestOutputFolder(false);
-       return new File(testContextDir, "brat-inputs");
+   public File getTestBratInputsDir() throws IOException {
+       return DkproTestContext.get().getTestInputFolder();
    }
 }

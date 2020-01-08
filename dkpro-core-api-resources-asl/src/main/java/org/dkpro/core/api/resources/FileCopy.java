@@ -1,4 +1,4 @@
-package org.dkpro.core.io.brat;
+package org.dkpro.core.api.resources;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +18,7 @@ public class FileCopy {
 	
 	public static void copyFolder(Path srcFolder, Path destFolder) throws NoSuchFileException {
 	    final Path srcFolderAbs = srcFolder.toAbsolutePath();
+	    Path destFolderAbs = destFolder.toAbsolutePath();
 	    if (!srcFolder.toFile().exists()) {
 	        throw new NoSuchFileException(srcFolder.toString());
 	    }
@@ -31,7 +32,7 @@ public class FileCopy {
 	                        Files.createDirectory( d );
 	                    return;
 	                }
-	                Files.copy( s, d );// use flag to override existing
+	                Files.copy( s, d );
 	            } catch( Exception e ) {
 	                e.printStackTrace();
 	            }

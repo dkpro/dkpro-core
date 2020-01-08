@@ -27,6 +27,12 @@ import static org.dkpro.core.api.parameter.ComponentParameters.PARAM_SOURCE_LOCA
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,6 +54,8 @@ import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.ListAssert;
 import org.assertj.core.internal.Failures;
 import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.api.resources.FileCopy;
+import org.dkpro.core.api.resources.FileGlob;
 import org.dkpro.core.testing.IOTestRunner.Validator;
 import org.dkpro.core.testing.validation.checks.Check;
 import org.slf4j.Logger;
@@ -67,6 +75,8 @@ public class ReaderAssert
     private boolean stripDocumentMetadata = true;
     private boolean validate = true;
     private TestOptions validationOptions = new TestOptions();
+    
+    private DkproTestContext testContext = new DkproTestContext();
 
     public ReaderAssert(CollectionReaderDescription aReader)
     {
@@ -113,8 +123,9 @@ public class ReaderAssert
     {
         return _readingFrom(aLocation);
     }
+    
 
-    protected ReaderAssert _readingFrom(Object aLocation)
+    protected ReaderAssert _readingFrom(Object aLocation) 
     {
         isNotNull();
         
@@ -124,6 +135,8 @@ public class ReaderAssert
         }
 
         requestedSourceLocation = aLocation;
+        
+        copySourceLocationFilesToTestInputsDir();
         
         if (!canParameterBeSet(actual, PARAM_SOURCE_LOCATION)) {
             failWithMessage("Parameter [%s] cannot be set on reader [%s]",
@@ -138,10 +151,66 @@ public class ReaderAssert
                     readerParameters.get(PARAM_SOURCE_LOCATION)));
         }
         
-        setParameter(actual, PARAM_SOURCE_LOCATION, requestedSourceLocation);
+//        setParameter(actual, PARAM_SOURCE_LOCATION, requestedSourceLocation);
+
+        File paramSourceLocation = null;
+        try {
+            paramSourceLocation = DkproTestContext.get().getTestInputFolder();
+        } catch (IOException e) {
+            failWithMessage("Could not get the test inputs folder"+e.getMessage());
+        }                
+        File requestedSourceLocationFile = new File(requestedSourceLocation.toString());
+        if (!requestedSourceLocationFile.isDirectory() &&
+            !requestedSourceLocationFile.toString().contains("*")) {
+            // Requested source location is a single document
+            paramSourceLocation = new File(paramSourceLocation, 
+                                           requestedSourceLocationFile.getName());
+        }
+        setParameter(actual, PARAM_SOURCE_LOCATION, paramSourceLocation);
+      
+        return this;
+    }
+    
+    private void copySourceLocationFilesToTestInputsDir() 
+    {     
+        Path inputsDir = null;
+        try {
+            inputsDir = DkproTestContext.get().getTestInputFolder(true).toPath();
+            File sourceLocation = new File(requestedSourceLocation.toString());
+            File sourceLocationDir = sourceLocation;
+            if (!sourceLocation.isDirectory()) {
+                sourceLocationDir = sourceLocation.getParentFile();
+            }
+            FileCopy.copyFolder(sourceLocationDir, inputsDir.toFile());
+        } catch (IOException e) {
+            failWithMessage("Unable to copy files from "+requestedSourceLocation+" to test inputs directory.\n"+e.getMessage());
+        }
+        
+        // Delete the -ref files from the inputs dir
+        String pattern = new File(inputsDir.toFile(), "*-ref*").toString();
+        FileGlob.deleteFiles(pattern);
+    }
+    
+    
+//    public File getTestBratOutputsDir() {
+//        File testContextDir = DkproTestContext.get().getTestOutputFolder(false);
+//        return new File(testContextDir, "brat-outputs");
+//    }
+//
+//    public File getTestBratInputsDir() {
+//        File testContextDir = DkproTestContext.get().getTestOutputFolder(false);
+//        return new File(testContextDir, "brat-inputs");
+//    }
+    
+
+    public ReaderAssert deleteSourceLocationFiles(String pattern) {
+        if (requestedSourceLocation != null) {
+            failWithMessage("Source location has not yet been set");
+        }
         
         return this;
     }
+    
 
     public ReaderAssert usingEngines(AnalysisEngineDescription... aEngines)
     {
@@ -223,7 +292,7 @@ public class ReaderAssert
             // Can we get one from the DKPro Core test context?
             if (DkproTestContext.get() == null) {
                 String contextOutputFolderName = "target/test-output/"
-                        + DkproTestContext.get().getTestOutputFolderName();
+                        + DkproTestContext.get().getTestWorkspaceFolderName();
                 readingFrom(contextOutputFolderName);
                 return contextOutputFolderName;
             }

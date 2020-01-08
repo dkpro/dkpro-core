@@ -26,6 +26,7 @@ import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParam
 import static org.dkpro.core.api.parameter.ComponentParameters.PARAM_TARGET_LOCATION;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
@@ -214,10 +215,18 @@ public class WriterAssert
                                     VAR_TARGET, DkproTestContext.class.getSimpleName()));
                 }
                 
-                File contextOutputFolder = new File("target/test-output/"
-                        + DkproTestContext.get().getTestOutputFolderName());
-                if (contextOutputFolder.exists()) {
-                    FileUtils.deleteQuietly(contextOutputFolder);
+//                File contextOutputFolder = new File("target/test-output/"
+//                        + DkproTestContext.get().getTestWorkspaceFolderName());                
+//                if (contextOutputFolder.exists()) {
+//                    FileUtils.deleteQuietly(contextOutputFolder);
+//                }
+
+                File contextOutputFolder;
+                try {
+                    contextOutputFolder = DkproTestContext.get().getTestOutputFolder();
+                } catch (IOException e) {
+                    throw Failures.instance()
+                        .failure("Cannot get test output folder\n"+e.getMessage());
                 }
                 
                 return (T) replaceOnce(location, VAR_TARGET, contextOutputFolder.getPath());

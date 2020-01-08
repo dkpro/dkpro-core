@@ -21,6 +21,9 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.rules.TestWatcher;
@@ -69,7 +72,7 @@ public class DkproTestContext extends TestWatcher
         return methodName;
     }
     
-    public String getTestOutputFolderName()
+    public String getTestWorkspaceFolderName()
     {
         return getClassName() + "-" + getMethodName();
     }
@@ -86,23 +89,70 @@ public class DkproTestContext extends TestWatcher
         folder.mkdirs();
         return folder;
     }
-
-    public File getTestOutputFolder() {
-        return getTestOutputFolder(null);
-    }
-
     
-    public File getTestOutputFolder(Boolean deleteIfExists)
+    public File getTestWorkspace() throws IOException {
+        return getTestWorkspaceRoot(null);
+    }
+    
+    public File getTestWorkspaceRoot(Boolean deleteIfExists) throws IOException
     {
         if (deleteIfExists == null) {
-            deleteIfExists = true;
+            deleteIfExists = false;
         }
-        File folder = new File("target/test-output/" + getTestOutputFolderName());
+        File folder = new File("target/test-workspaces/" + getTestWorkspaceFolderName());
         if (folder.exists() && deleteIfExists) {
             FileUtils.deleteQuietly(folder);
         }
         folder.mkdirs();
         return folder;
+    }    
+
+    public File getTestWorkspaceSubdir(File subdirRelpath, Boolean deleteIfExists) throws IOException {
+        if (deleteIfExists == null) {
+            deleteIfExists = false;
+        }
+        
+        File subdir = getTestWorkspaceFile(subdirRelpath, deleteIfExists);
+        if (!subdir.exists()) {
+            subdir.mkdirs();
+        }
+        
+        return subdir;
+    }
+    
+    public File getTestWorkspaceFile(File relPath, Boolean deleteIfExists) throws IOException {
+        if (deleteIfExists == null) {
+            deleteIfExists = true;
+        }
+        
+        File root = getTestWorkspaceRoot(deleteIfExists);
+        File file = new File(root, relPath.toString());
+        
+        if (file.exists() && deleteIfExists) {
+            FileUtils.deleteQuietly(file);
+        }
+        
+        return file;
+    }
+
+    public File getTestInputFolder() throws IOException {
+        return getTestInputFolder(null);
+    }
+    
+    public File getTestInputFolder(Boolean deleteIfExists) throws IOException
+    {
+        File inputFolder = getTestWorkspaceSubdir(new File("input"), deleteIfExists);
+        return inputFolder;
+    }
+    
+    public File getTestOutputFolder() throws IOException {
+        return getTestOutputFolder(null);
+    }
+    
+    public File getTestOutputFolder(Boolean deleteIfExists) throws IOException
+    {
+        File outputFolder = getTestWorkspaceSubdir(new File("output"), deleteIfExists);
+        return outputFolder;
     }
 
     @Override
