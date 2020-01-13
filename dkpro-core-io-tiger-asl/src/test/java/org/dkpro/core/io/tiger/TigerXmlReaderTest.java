@@ -24,8 +24,13 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+import java.io.IOException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
@@ -36,6 +41,9 @@ import org.dkpro.core.io.conll.Conll2012Writer;
 import org.dkpro.core.io.tiger.TigerXmlReader;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
+import org.dkpro.core.testing.WriterAssert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -46,6 +54,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 public class TigerXmlReaderTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }    
+    
     @Test
     public void test()
         throws Exception
@@ -83,25 +96,42 @@ public class TigerXmlReaderTest
     @Test
     public void tigerSampleTest()
         throws Exception
-    {
-        testOneWay(
-                createReaderDescription(TigerXmlReader.class,
-                        TigerXmlReader.PARAM_LANGUAGE, "de",
-                        TigerXmlReader.PARAM_READ_PENN_TREE, true),
-                "tiger-sample.xml.dump",
-                "tiger-sample.xml");
+    {       
+        ReaderAssert
+        .assertThat(TigerXmlReader.class,
+                TigerXmlReader.PARAM_LANGUAGE, "de",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true)
+        .readingFrom("src/test/resources/tiger-sample.xml")
+        .usingWriter(WriterAssert.simpleJCasDumper(new File("tiger-sample.xml")))
+        .asFiles()
+        .allSatisfy(file -> {
+            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                    contentOf(new File("src/test/resources/", 
+                              file.getName()+".dump")));
+        })
+        .extracting(File::getName)
+        .containsExactlyInAnyOrder("tiger-sample.xml");
+        
     }
 
     @Test
     public void semevalSampleTest()
         throws Exception
     {
-        testOneWay(
-                createReaderDescription(TigerXmlReader.class,
-                        TigerXmlReader.PARAM_LANGUAGE, "en",
-                        TigerXmlReader.PARAM_READ_PENN_TREE, true),
-                "semeval1010-sample.xml.dump",
-                "semeval1010-en-sample.xml");
+        ReaderAssert
+        .assertThat(TigerXmlReader.class,
+              TigerXmlReader.PARAM_LANGUAGE, "en",
+              TigerXmlReader.PARAM_READ_PENN_TREE, true)
+        .readingFrom("src/test/resources/semeval1010-en-sample.xml")
+        .usingWriter(WriterAssert.simpleJCasDumper(new File("semeval1010-en-sample.xml")))
+        .asFiles()
+        .allSatisfy(file -> {
+            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                    contentOf(new File("src/test/resources/", 
+                              file.getName()+".dump")));
+        })
+        .extracting(File::getName)
+        .containsExactlyInAnyOrder("semeval1010-en-sample.xml");
     }
 
     @Test

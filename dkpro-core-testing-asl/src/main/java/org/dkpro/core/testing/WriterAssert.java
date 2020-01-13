@@ -48,6 +48,7 @@ import org.assertj.core.api.StringAssert;
 import org.assertj.core.internal.Failures;
 import org.assertj.core.util.Files;
 import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -288,7 +289,7 @@ public class WriterAssert
             if (isSingularTarget()) {
                 return Arrays.asList(fileLocation);
             }
-            
+            fileLocation.getAbsoluteFile().listFiles();
             return Arrays.asList(fileLocation.listFiles());
         }
 
@@ -298,13 +299,28 @@ public class WriterAssert
     
     protected boolean isSingularTarget()
     {
+        Boolean isSingular = null;
         Map<String, Object> writerParameters = getParameterSettings(actual);
         
         if (Boolean.TRUE.equals(writerParameters.get(PARAM_SINGULAR_TARGET))) {
-            return true;
+            isSingular = true;
         }
         
-        return singularTargetAnnounced;
+        if (isSingular == null) {
+            File targetLocation = new File((String) writerParameters.get(PARAM_TARGET_LOCATION));
+            if (targetLocation.exists()) {
+                isSingular = true;
+                if (targetLocation.isDirectory()) {
+                    isSingular = false;
+                }
+            }
+        }
+        
+        if (isSingular ==null) {
+            isSingular = singularTargetAnnounced;
+        }
+        
+        return isSingular;
     }
     
     protected void configureWriter()
@@ -457,5 +473,15 @@ public class WriterAssert
         finally {
             LifeCycleUtil.destroy(writer);
         }
+    }
+    
+    public static AnalysisEngineDescription simpleJCasDumper(File targetLocation) throws ResourceInitializationException, IOException {
+        
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class, 
+                CasDumpWriter.PARAM_TARGET_LOCATION, DkproTestContext.get().getTestOutputFile(targetLocation),
+                CasDumpWriter.PARAM_SORT, true);
+        
+        return writer;
     }
 }

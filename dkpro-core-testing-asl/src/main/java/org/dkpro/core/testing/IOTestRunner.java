@@ -240,13 +240,17 @@ public class IOTestRunner
         
         File reference = new File("src/test/resources/" + aExpectedFile);
         File input = new File("src/test/resources/" + aInputFile);
-        File output = DkproTestContext.get().getTestWorkspace(false);
+      File output = DkproTestContext.get().getTestWorkspace(false);
 
         setParameter(aReader, ComponentParameters.PARAM_SOURCE_LOCATION, input);
 
         if (canParameterBeSet(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION)) {
             setParameter(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION, true);
         }
+
+//        if (canParameterBeSet(aWriter, "overwrite")) {
+//            setParameter(aWriter, "overwrite", true);
+//        }
 
         if (!getParameterSettings(aWriter).containsKey(ComponentParameters.PARAM_TARGET_LOCATION)) {
             setParameter(aWriter, ComponentParameters.PARAM_TARGET_LOCATION, output);

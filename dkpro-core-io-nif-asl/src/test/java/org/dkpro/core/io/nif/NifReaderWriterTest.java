@@ -17,12 +17,15 @@
  */
 package org.dkpro.core.io.nif;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
@@ -32,11 +35,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.TestOptions;
+import org.junit.Before;
 import org.junit.Test;
 
 public class NifReaderWriterTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }    
+
     // This is not a test method - just a development utility to convert the Python-like TTL
     // example files into the format that is used by Apache Jena.
     // @Test
@@ -55,12 +66,18 @@ public class NifReaderWriterTest
         // Hm, does not seem to work
         // ARQ.getContext().set(RIOT.multilineLiterals, true);
         
-        testOneWay(
-                NifReader.class, // the reader
-                NifWriter.class, // the writer
-                "nif/brown/a01-cooked-ref.ttl", 
-                "nif/brown/a01-cooked.ttl",
-                new TestOptions().resultAssertor(this::assertModelEquals));
+        ReaderAssert
+        .assertThat(NifReader.class)
+        .readingFrom("src/test/resources/nif/brown/a01-cooked.ttl")
+        .usingWriter(NifWriter.class)
+        .asFiles()
+        .allSatisfy(file -> {
+            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                    contentOf(new File("src/test/resources/", 
+                              file.getName().replaceAll("\\.ttl", "-ref.ttl"))));
+        })
+        .extracting(File::getName)
+        .containsExactlyInAnyOrder("a01-cooked.ttl");
     }
     
     @Test

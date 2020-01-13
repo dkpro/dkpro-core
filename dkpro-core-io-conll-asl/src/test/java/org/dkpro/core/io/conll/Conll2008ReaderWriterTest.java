@@ -17,14 +17,26 @@
  */
 package org.dkpro.core.io.conll;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class Conll2008ReaderWriterTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }
+    
     @Test
     public void test()
         throws Exception
