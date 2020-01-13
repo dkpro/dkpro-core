@@ -57,6 +57,7 @@ import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.FileCopy;
 import org.dkpro.core.api.resources.FileGlob;
 import org.dkpro.core.testing.IOTestRunner.Validator;
+import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.dkpro.core.testing.validation.checks.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,7 +108,7 @@ public class ReaderAssert
       */
     public ReaderAssert readingFrom(File aLocation)
     {
-        return _readingFrom(aLocation);
+        return _readingFrom(aLocation, null);
     }
 
     /**
@@ -119,15 +120,24 @@ public class ReaderAssert
      *            a location.
      * @return the assert for chaining.
      */
+    
+    public ReaderAssert readingFrom(String aLocation, Boolean removeRefFiles)
+    {
+        return _readingFrom(aLocation, null);
+    }
+        
     public ReaderAssert readingFrom(String aLocation)
     {
-        return _readingFrom(aLocation);
+        return readingFrom(aLocation, null);
     }
     
-
-    protected ReaderAssert _readingFrom(Object aLocation) 
+    protected ReaderAssert _readingFrom(Object aLocation, Boolean removeRefFiles) 
     {
         isNotNull();
+        
+        if (removeRefFiles == null) {
+            removeRefFiles = false;
+        }
         
         if (requestedSourceLocation != null) {
             failWithMessage("Source location has already been set to [%s]",
@@ -136,7 +146,7 @@ public class ReaderAssert
 
         requestedSourceLocation = aLocation;
         
-        copySourceLocationFilesToTestInputsDir();
+        copySourceLocationFilesToTestInputsDir(removeRefFiles);
         
         if (!canParameterBeSet(actual, PARAM_SOURCE_LOCATION)) {
             failWithMessage("Parameter [%s] cannot be set on reader [%s]",
@@ -171,11 +181,11 @@ public class ReaderAssert
         return this;
     }
     
-    private void copySourceLocationFilesToTestInputsDir() 
+    private void copySourceLocationFilesToTestInputsDir(Boolean removeRefFiles) 
     {     
         Path inputsDir = null;
         try {
-            inputsDir = DkproTestContext.get().getTestInputFolder(true).toPath();
+            inputsDir = DkproTestContext.get().getTestInputFolder().toPath();
             File sourceLocation = new File(requestedSourceLocation.toString());
             File sourceLocationDir = sourceLocation;
             if (!sourceLocation.isDirectory()) {
@@ -187,21 +197,11 @@ public class ReaderAssert
         }
         
         // Delete the -ref files from the inputs dir
-        String pattern = new File(inputsDir.toFile(), "*-ref*").toString();
-        FileGlob.deleteFiles(pattern);
+        if (removeRefFiles) {
+            String pattern = new File(inputsDir.toFile(), "*-ref*").toString();
+            FileGlob.deleteFiles(pattern);
+        }
     }
-    
-    
-//    public File getTestBratOutputsDir() {
-//        File testContextDir = DkproTestContext.get().getTestOutputFolder(false);
-//        return new File(testContextDir, "brat-outputs");
-//    }
-//
-//    public File getTestBratInputsDir() {
-//        File testContextDir = DkproTestContext.get().getTestOutputFolder(false);
-//        return new File(testContextDir, "brat-inputs");
-//    }
-    
 
     public ReaderAssert deleteSourceLocationFiles(String pattern) {
         if (requestedSourceLocation != null) {
@@ -211,7 +211,6 @@ public class ReaderAssert
         return this;
     }
     
-
     public ReaderAssert usingEngines(AnalysisEngineDescription... aEngines)
     {
         isNotNull();
@@ -225,13 +224,15 @@ public class ReaderAssert
             Object... aConfigurationData)
         throws ResourceInitializationException
     {
-        return usingWriter(createEngineDescription(aComponentClass, aConfigurationData));
+
+        AnalysisEngineDescription engDescr = createEngineDescription(aComponentClass, aConfigurationData);
+        return usingWriter(engDescr);
     }
         
     public WriterAssert usingWriter(AnalysisEngineDescription aWriter)
     {
         isNotNull();
-        
+                        
         try {
             return WriterAssert.assertThat(aWriter).consuming(toJCasIterable());
         }

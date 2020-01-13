@@ -57,35 +57,20 @@ import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
 import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.assertions.AssertFile;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class BratReaderWriterTest
 {
-     
-    @Test
-    public void ALAIN__test__SingleDocument__ProvideTxtFile()
-        throws Exception
-    {
-        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"));
-        File tempInputTxtFile = new File(tempInputsDir, "document0a.txt");                
-        
-        Map<String,Object> readerParams = new HashMap<String,Object>();
-        {
-            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputTxtFile);
-        }
-        Map<String,Object> writerParams = new HashMap<String,Object>();
-        {
-            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
-            writerParams.put(BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
-        };
-        
-        testOneWaySimple(readerParams, writerParams);
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
     }
     
     @Test
-    public void RICHARD__test__SingleDocument__ProvideTxtFile()
+    public void test__SingleTxtFile()
         throws Exception
     {
         ReaderAssert
@@ -107,26 +92,6 @@ public class BratReaderWriterTest
     }
 
     @Test
-    public void test__SingleDocument__ProvideAnnFile()
-        throws Exception
-    {
-        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"));
-        File tempInputAnnFile = new File(tempInputsDir, "document0a.ann");                
-        
-        Map<String,Object> readerParams = new HashMap<String,Object>();
-        {
-            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputAnnFile);
-        }
-        Map<String,Object> writerParams = new HashMap<String,Object>();
-        {
-            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
-            writerParams.put(BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
-        };
-        
-        testOneWaySimple(readerParams, writerParams);
-    }
-
-    @Test
     public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
         boolean deleteAnnFiles = true;
         File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"),
@@ -144,9 +109,34 @@ public class BratReaderWriterTest
         
         testOneWaySimple(readerParams, writerParams);
     }    
+    
+    @Test
+    public void test__SingleAnnFile() throws Exception
+    {
+        ReaderAssert
+                .assertThat(BratReader.class)
+                .readingFrom("src/test/resources/text-only/document0a.ann")
+                .usingWriter(BratWriter.class)
+                .asFiles()
+                .allSatisfy(file -> {
+                    // The ".ann" files have been freshly generated and are empty
+                    if (file.getName().endsWith(".ann")) {
+                        assertThat(contentOf(file)).isEmpty();
+                    }
+                    // The ".text" files should match the originals
+                    if (file.getName().endsWith(".txt")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/text-only", 
+                                        file.getName())));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
+                        "visual.conf");
+    }    
         
     @Test
-    public void RICHARD__test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception
+    public void test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception
     {
         ReaderAssert
                 .assertThat(BratReader.class)
@@ -171,30 +161,6 @@ public class BratReaderWriterTest
                         "document0d.ann", "document0d.txt", "visual.conf");
     }
 
-    @Test
-    public void RICHARD__test__SingleAnnFile() throws Exception
-    {
-        ReaderAssert
-                .assertThat(BratReader.class)
-                .readingFrom("src/test/resources/text-only/document0a.ann")
-                .usingWriter(BratWriter.class)
-                .asFiles()
-                .allSatisfy(file -> {
-                    // The ".ann" files have been freshly generated and are empty
-                    if (file.getName().endsWith(".ann")) {
-                        assertThat(contentOf(file)).isEmpty();
-                    }
-                    // The ".text" files should match the originals
-                    if (file.getName().endsWith(".txt")) {
-                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                                contentOf(new File("src/test/resources/text-only", 
-                                        file.getName())));
-                    }
-                })
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
-                        "visual.conf");
-    }
     
     @Test
     public void testConll2009()
@@ -538,7 +504,7 @@ public class BratReaderWriterTest
         }
 
 //        File testInputsDir = getTestBratInputsDir();
-        File testInputsDir = DkproTestContext.get().getTestInputFolder(true);
+        File testInputsDir = DkproTestContext.get().getTestInputFolder();
         FileCopy.copyFolder(bratDir, testInputsDir);
 
         // Delete the -ref files from the inputs dir
