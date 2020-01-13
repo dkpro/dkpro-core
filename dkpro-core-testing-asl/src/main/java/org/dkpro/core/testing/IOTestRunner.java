@@ -64,7 +64,10 @@ public class IOTestRunner
     {
         ReaderAssert.assertThat(aReader)
                 .readingFrom("src/test/resources/" + aFile)
-                .usingWriter(aWriter)
+                .usingWriter(aWriter,
+                        // Need 'overwrite' if we are going to both
+                        // read and write to the same file
+                        "overwrite", true)
                 .outputAsString(FilenameUtils.getName(aFile))
                 .satisfies(output -> assertThat(output.trim()).isEqualToNormalizingNewlines(
                         contentOf(new File("src/test/resources/" + aFile), UTF_8).trim()));
@@ -237,16 +240,12 @@ public class IOTestRunner
         
         File reference = new File("src/test/resources/" + aExpectedFile);
         File input = new File("src/test/resources/" + aInputFile);
-        File output = new File("target/test-output/" + outputFolder);
+        File output = DkproTestContext.get().getTestWorkspace(false);
 
         setParameter(aReader, ComponentParameters.PARAM_SOURCE_LOCATION, input);
 
         if (canParameterBeSet(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION)) {
             setParameter(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION, true);
-        }
-
-        if (canParameterBeSet(aWriter, "overwrite")) {
-            setParameter(aWriter, "overwrite", true);
         }
 
         if (!getParameterSettings(aWriter).containsKey(ComponentParameters.PARAM_TARGET_LOCATION)) {
