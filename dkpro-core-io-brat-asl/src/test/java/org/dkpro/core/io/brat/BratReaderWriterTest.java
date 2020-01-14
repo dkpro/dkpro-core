@@ -134,9 +134,32 @@ public class BratReaderWriterTest
                 .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
                         "visual.conf");
     }    
-        
+    
     @Test
-    public void test__SingleDirWithoutAnnFiles__AssumesEmptyAnnFiles() throws Exception
+    public void test__SingleDir__ThatDoesContainAnnFiles__AssumesEmptyAnnFiles() throws Exception
+    {
+        
+        ReaderAssert
+                .assertThat(BratReader.class)
+                .readingFrom("src/test/resources/brat-basic", true)
+                .usingWriter(BratWriter.class,
+//                        TODO: THIS SHOULD BE THE DEFAULT!!!
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+                .asFiles()
+                .allSatisfy(file -> {
+                    if (!file.getName().endsWith(".conf")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/brat-basic", 
+                                        file.getName())));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt", "visual.conf");
+    }
+    
+    
+    @Test
+    public void test__SingleDir__ThatDoesNotContainsAnnFiles__AssumesEmptyAnnFiles() throws Exception
     {
         ReaderAssert
                 .assertThat(BratReader.class)
@@ -160,7 +183,6 @@ public class BratReaderWriterTest
                         "document0b.ann", "document0b.txt", "document0c.ann", "document0c.txt",
                         "document0d.ann", "document0d.txt", "visual.conf");
     }
-
     
     @Test
     public void testConll2009()

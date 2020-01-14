@@ -123,7 +123,7 @@ public class ReaderAssert
     
     public ReaderAssert readingFrom(String aLocation, Boolean removeRefFiles)
     {
-        return _readingFrom(aLocation, null);
+        return _readingFrom(aLocation, removeRefFiles);
     }
         
     public ReaderAssert readingFrom(String aLocation)
