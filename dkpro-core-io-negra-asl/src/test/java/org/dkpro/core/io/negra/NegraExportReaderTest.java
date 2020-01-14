@@ -59,7 +59,7 @@ public class NegraExportReaderTest
         .allSatisfy(file -> {
             assertThat(contentOf(file)).isEqualToNormalizingNewlines(
                     contentOf(new File("src/test/resources/", 
-                            file.getName()+".dump")));
+                            file.getName() + ".dump")));
         })
         .extracting(File::getName)
         .containsExactlyInAnyOrder("sentence.export");
@@ -80,7 +80,7 @@ public class NegraExportReaderTest
         .allSatisfy(file -> {
             assertThat(contentOf(file)).isEqualToNormalizingNewlines(
                     contentOf(new File("src/test/resources/", 
-                            file.getName()+".dump")));
+                            file.getName() + ".dump")));
         })
         .extracting(File::getName)
         .containsExactlyInAnyOrder("tiger-sample.export");        
