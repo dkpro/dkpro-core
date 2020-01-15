@@ -251,14 +251,13 @@ public class BratReaderWriterTest
                 .assertThat(BratReader.class)
                 .readingFrom("src/test/resources/brat-unknown-labels/hurricane.ann")
                 .usingWriter(BratWriter.class,
-                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true,
-                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
                 .asFiles()
                 .allSatisfy(file -> {
                     if (!file.getName().endsWith(".conf")) {
                         assertThat(contentOf(file)).isEqualToNormalizingNewlines(
                                 contentOf(new File("src/test/resources/brat-unknown-labels/", 
-                                        file.getName())));
+                                        file.getName().replaceAll("\\.ann", "-ref.ann"))));
                     }
                 })
                 .extracting(File::getName)

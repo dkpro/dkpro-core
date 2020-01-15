@@ -35,8 +35,8 @@ public class TypeMapping
     private static final String BRAT = "BRAT";
     private static final String UIMA = "UIMA";
 
-    private final Pattern bratTypePattern;
-    private final String uimaType;
+    public final Pattern bratTypePattern;
+    public final String uimaType;
     private final Map<String, String> defaultFeatureValues;
     
     private Matcher matcher;

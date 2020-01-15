@@ -187,13 +187,6 @@ public class BratWriter extends JCasFileWriter_ImplBase
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-//        parsedEventTypes = new HashMap<>();
-//        for (String rel : eventTypes) {
-//            EventParam p = EventParam.parse(rel);
-//            parsedEventTypes.put(p.getType(), p);
-//        }
-
         stripExtension = true;
         conf = new BratConfiguration();
         converter = new DKPro2Brat(conf);

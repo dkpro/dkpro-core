@@ -226,8 +226,6 @@ public class BratReader
         
         mapping = Mapping.merge(customMapping, defaultMapping);
         
-        mapping = appendCatchallMapping(mapping);
-        
         warnings = new LinkedHashSet<String>();
     }    
 
@@ -775,19 +773,4 @@ public class BratReader
         }
         return defaultMapping;
     }
-    
-    private Mapping appendCatchallMapping(Mapping origMapping) {
-        Mapping augmentedMapping = origMapping;
-        
-//        List<TypeMapping> catchallLst = new ArrayList<TypeMapping>();
-//        catchallLst.add(new TypeMapping("^*$", "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"));
-//        TypeMappings catchallTM = new TypeMappings(catchallLst);
-//        
-//        Mapping catchallMapping = new Mapping(catchallTM);
-//        
-//        augmentedMapping = Mapping.merge(origMapping, catchallMapping);
-        
-        return augmentedMapping;
-    }
-    
 }
