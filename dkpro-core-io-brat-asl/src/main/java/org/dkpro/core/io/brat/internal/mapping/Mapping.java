@@ -101,15 +101,13 @@ public class Mapping
     }
 
     public static Mapping merge(Mapping customMapping, Mapping defaultMapping) {
-        // Set this to true to just return the customMapping
-        // Set to false to return merge (currently does not work)
-        //
-        boolean justCustomMapping = false;
         
         // Merge the text type mappings
         List<TypeMapping> textTypeMapppingsLst = new ArrayList<TypeMapping>();
-        textTypeMapppingsLst.addAll(customMapping.getTextTypeMapppings().getParsedMappings());
-        if (!justCustomMapping) {
+        if (customMapping.getTextTypeMapppings() != null) {
+            textTypeMapppingsLst.addAll(customMapping.getTextTypeMapppings().getParsedMappings());
+        }
+        if (defaultMapping.getTextTypeMapppings() != null) {
             textTypeMapppingsLst.addAll(defaultMapping.getTextTypeMapppings().getParsedMappings());
         }
         
@@ -117,10 +115,8 @@ public class Mapping
         
         // Merge the relation type mappings
         List<TypeMapping> relTypeMapppingsLst = new ArrayList<TypeMapping>();
-        relTypeMapppingsLst.addAll(customMapping.getRelationTypeMapppings().getParsedMappings());
-        if (!justCustomMapping) {
-            relTypeMapppingsLst
-                    .addAll(defaultMapping.getRelationTypeMapppings().getParsedMappings());
+        if (customMapping.getRelationTypeMapppings() != null) {
+            relTypeMapppingsLst.addAll(customMapping.getRelationTypeMapppings().getParsedMappings());
         }
         TypeMappings relTypeMapppings = new TypeMappings(relTypeMapppingsLst);
         
@@ -136,11 +132,9 @@ public class Mapping
         for (String type: customMapping.textAnnotations.keySet()) {
             merged.textAnnotations.put(type, customMapping.textAnnotations.get(type));
         }
-        if (!justCustomMapping) {
-            for (String type: defaultMapping.textAnnotations.keySet()) {
-                if (! merged.textAnnotations.containsKey(type)) {
-                    merged.textAnnotations.put(type, customMapping.textAnnotations.get(type));
-                }
+        for (String type: defaultMapping.textAnnotations.keySet()) {
+            if (! merged.textAnnotations.containsKey(type)) {
+                merged.textAnnotations.put(type, customMapping.textAnnotations.get(type));
             }
         }
             
@@ -148,11 +142,9 @@ public class Mapping
         for (String type: customMapping.relations.keySet()) {
             merged.relations.put(type, customMapping.relations.get(type));
         }
-        if (!justCustomMapping) {
-            for (String type: defaultMapping.relations.keySet()) {
-                if (! merged.relations.containsKey(type)) {
-                    merged.relations.put(type, customMapping.relations.get(type));
-                }
+        for (String type: defaultMapping.relations.keySet()) {
+            if (! merged.relations.containsKey(type)) {
+                merged.relations.put(type, customMapping.relations.get(type));
             }
         }
         
@@ -163,12 +155,10 @@ public class Mapping
                 merged.comments.put(type, comment);
             }
         }
-        if (!justCustomMapping) {
-            for (String type: defaultMapping.comments.keySet()) {
-                Collection<CommentMapping> commentsThisType = defaultMapping.comments.get(type);
-                for (CommentMapping comment: commentsThisType) {
-                    merged.comments.put(type, comment);
-                }
+        for (String type: defaultMapping.comments.keySet()) {
+            Collection<CommentMapping> commentsThisType = defaultMapping.comments.get(type);
+            for (CommentMapping comment: commentsThisType) {
+                merged.comments.put(type, comment);
             }
         }
 
