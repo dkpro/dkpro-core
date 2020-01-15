@@ -345,6 +345,15 @@ public class BratReader
             AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(),
                     offset.getEnd());
             
+            // For a "generic" BratAnnot annotation, we must
+            // set its 'label' feature to the Brat label that was 
+            // read from the .ann file
+            //
+            if (aType.getName().equals(BratAnnot.class.getName())) {
+                Feature labelFeature = aType.getFeatureByBaseName("label");
+                anno.setStringValue(labelFeature, aAnno.getType());
+            }
+            
             if (tmap != null) {
                 fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
             }

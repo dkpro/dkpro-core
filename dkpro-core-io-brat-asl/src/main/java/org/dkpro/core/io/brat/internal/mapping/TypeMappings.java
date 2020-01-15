@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.io.brat.BratAnnot;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -36,10 +37,13 @@ public class TypeMappings
     private final Map<String, Type> brat2UimaMappingCache;
     private final Map<String, String> uima2BratMappingCache;
     
-    // Use this Uima type for unknown brat labels
-    // If set to null, then fail upon finding an unknown brat label
+    // If true, raise exception upon encountering an unknown 
+    // brat label.
     //
-    private String defaultUimaType = "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity";
+    // If false, then generate a 
+    // "de.tudarmstadt.ukp.dkpro.core.io.brat.BratLabel" annotation
+    //
+    public boolean failUponUnknownBratLabel = false;
 
     @JsonCreator
     public TypeMappings(List<TypeMapping> aMappings)
@@ -65,12 +69,9 @@ public class TypeMappings
     
     private String apply(String aType)
     {
-        System.out.println("--** TypeMappings.apply: looking for UIMA type for aType="+aType);
         String type = aType;
         for (TypeMapping m : parsedMappings) {
-            System.out.println("--** TypeMappings.apply: looking at m="+m.bratTypePattern+"-->"+m.uimaType);
             if (m.matches(aType)) {
-                System.out.println("--** TypeMappings.apply: m matches!!!");
                 type = m.apply();
                 break;
             }
@@ -112,8 +113,11 @@ public class TypeMappings
             brat2UimaMappingCache.put(aAnno.getType(), t);
         }
 
-        if (t == null && defaultUimaType != null) {
-            t = aTs.getType(defaultUimaType);
+        // If all else failed, see if we are allowed to
+        // emit a "generic" BratAnnot instance
+        //
+        if (t == null && !failUponUnknownBratLabel) {
+            t = aTs.getType(BratAnnot.class.getName());;
         }
         
         if (t == null) {

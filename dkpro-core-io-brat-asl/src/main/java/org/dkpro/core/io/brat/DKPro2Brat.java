@@ -307,7 +307,7 @@ public class DKPro2Brat
     {
         String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
         String type = getBratType(aFS.getType());
-        BratTextAnnotation anno = splitNewline(aFS);
+        BratTextAnnotation anno = splitNewline(aFS);        
 
         nextTextAnnotationId++;
 
@@ -391,6 +391,14 @@ public class DKPro2Brat
                         || relParam.getArg2().equals(feat.getShortName())) {
                     continue;
                 }
+            }
+            
+            // TODO-AD: This is probably the wrong way to go about it, but I 
+            //    have NO IDEA how else to prevent the BratWriter from writing
+            //    the 'label' attribute.
+            //
+            if (feat.getName().equals("org.dkpro.core.io.brat.BratAnnot:label")) {
+              continue;  
             }
             
             if (feat.getRange().isPrimitive()) {
@@ -613,7 +621,14 @@ public class DKPro2Brat
         }
         // replaces any group of newline by one space
         String[] texts = new String[] { aFS.getCoveredText().replaceAll("\\R+", " ") };
-        return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), offsets,
+        
+        String bratLabel = getBratType(aFS.getType());
+        if (aFS.getType().getName().equals("org.dkpro.core.io.brat.BratAnnot")) {
+            Feature labelFeat = aFS.getType().getFeatureByBaseName("label");
+            bratLabel = aFS.getStringValue(labelFeat);
+        }
+
+        return new BratTextAnnotation(nextTextAnnotationId, bratLabel, offsets,
                 texts);
     }
     

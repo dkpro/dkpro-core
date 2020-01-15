@@ -244,7 +244,7 @@ public class BratReaderWriterTest
                 .containsExactlyInAnyOrder("annotation.conf", "merger.txt", "merger.ann", "visual.conf");
     }    
 
-    @Test @Ignore
+    @Test
     public void test__SingleAnnFileContainingUnknownLabels() throws Exception
     {
         ReaderAssert
@@ -261,7 +261,7 @@ public class BratReaderWriterTest
                     }
                 })
                 .extracting(File::getName)
-                .containsExactlyInAnyOrder("annotation.conf", "merger.txt", "merger.ann", "visual.conf");
+                .containsExactlyInAnyOrder("annotation.conf", "hurricane.txt", "hurricane.ann", "visual.conf");
     }    
 
     @Test
