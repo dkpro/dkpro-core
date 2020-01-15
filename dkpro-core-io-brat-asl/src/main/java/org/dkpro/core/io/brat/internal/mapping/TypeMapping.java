@@ -43,11 +43,11 @@ public class TypeMapping
 
     @JsonCreator
     public TypeMapping(
-            @JsonProperty(value = "from", required = true) String aPattern, 
+            @JsonProperty(value = "from", required = true) String bratLabelPattern, 
             @JsonProperty(value = "to", required = true) String aReplacement,
             @JsonProperty(value = "defaultFeatureValues") Map<String, String> aDefaults)
     {
-        bratTypePattern = Pattern.compile("^" + aPattern.trim() + "$");
+        bratTypePattern = Pattern.compile("^" + bratLabelPattern.trim() + "$");
         uimaType = aReplacement.trim();
         defaultFeatureValues = aDefaults != null ? aDefaults : Collections.emptyMap();
     }

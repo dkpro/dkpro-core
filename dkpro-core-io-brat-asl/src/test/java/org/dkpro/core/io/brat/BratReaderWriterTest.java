@@ -244,6 +244,27 @@ public class BratReaderWriterTest
                 .containsExactlyInAnyOrder("annotation.conf", "merger.txt", "merger.ann", "visual.conf");
     }    
 
+    @Test @Ignore
+    public void test__SingleAnnFileContainingUnknownLabels() throws Exception
+    {
+        ReaderAssert
+                .assertThat(BratReader.class)
+                .readingFrom("src/test/resources/brat-unknown-labels/hurricane.ann")
+                .usingWriter(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true,
+                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
+                .asFiles()
+                .allSatisfy(file -> {
+                    if (!file.getName().endsWith(".conf")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/brat-unknown-labels/", 
+                                        file.getName())));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", "merger.txt", "merger.ann", "visual.conf");
+    }    
+
     @Test
     public void testConll2009()
         throws Exception
