@@ -45,6 +45,7 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.FileCopy;
@@ -64,6 +65,47 @@ import org.junit.Test;
 
 public class BratReaderWriterTest
 {
+    private static final String customMappings = String.join("\n",
+            "{",
+            "  'textTypeMapppings': [",
+            "    {",
+            "      'from': 'MergeOrg',",
+            "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+            "    }",
+            "  ],",
+            "  'relationTypeMapppings': [",
+            "    {",
+            "      'from': 'Origin',",
+            "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
+            "    }",
+            "  ],",
+            "  'relations': [",
+            "    {",
+            "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+            "      'arg1': 'source',",
+            "      'arg2': 'target',",
+            "      'flags2': 'A',",
+            "      'subCatFeature': 'value'",
+            "    }",
+            "  ],",
+            "  'comments': [",
+            "    {",
+            "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
+            "      'feature': 'comment'",
+            "    },",
+            "    {",
+            "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg',",
+            "      'feature': 'comment'",
+            "    }",
+            "  ]",
+            "}");
+    
+    private static final String[] writerCustomMappings = new String[] {
+            "de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg -> MergeOrg",
+            "de.tudarmstadt.ukp.dkpro.core.io.brat.type.(\\w+) -> $1"
+        };
+
+    
     @Before
     public void setUp() throws IOException {
         DkproTestContext.get().initializeTestWorkspace();
@@ -115,18 +157,14 @@ public class BratReaderWriterTest
     {
         ReaderAssert
                 .assertThat(BratReader.class)
-                .readingFrom("src/test/resources/text-only/document0a.ann")
-                .usingWriter(BratWriter.class)
+                .readingFrom("src/test/resources/brat-basic/document0a.ann", true)
+                .usingWriter(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
                 .asFiles()
                 .allSatisfy(file -> {
-                    // The ".ann" files have been freshly generated and are empty
-                    if (file.getName().endsWith(".ann")) {
-                        assertThat(contentOf(file)).isEmpty();
-                    }
-                    // The ".text" files should match the originals
-                    if (file.getName().endsWith(".txt")) {
+                    if (!file.getName().endsWith(".conf")) {
                         assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                                contentOf(new File("src/test/resources/text-only", 
+                                contentOf(new File("src/test/resources/brat-basic", 
                                         file.getName())));
                     }
                 })
@@ -184,6 +222,28 @@ public class BratReaderWriterTest
                         "document0d.ann", "document0d.txt", "visual.conf");
     }
     
+    @Test
+    public void test__SingleAnnFileContainingCustomTypes() throws Exception
+    {
+        ReaderAssert
+                .assertThat(BratReader.class,
+                        BratReader.PARAM_MAPPING, customMappings)
+                .readingFrom("src/test/resources/brat-custom-types/merger.ann")
+                .usingWriter(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true,
+                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
+                .asFiles()
+                .allSatisfy(file -> {
+                    if (!file.getName().endsWith(".conf")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/brat-custom-types/", 
+                                        file.getName())));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", "merger.txt", "merger.ann", "visual.conf");
+    }    
+
     @Test
     public void testConll2009()
         throws Exception

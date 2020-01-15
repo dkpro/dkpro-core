@@ -1,0 +1,4 @@
+T1	MergeOrg 0 4	Acme
+T2	MergeOrg 38 42	Ajax
+E1	MergeOrg:T1
+E2	MergeOrg:T2
