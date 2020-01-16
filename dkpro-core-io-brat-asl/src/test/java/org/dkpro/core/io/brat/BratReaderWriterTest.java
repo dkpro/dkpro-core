@@ -45,7 +45,6 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.FileCopy;
@@ -69,7 +68,15 @@ public class BratReaderWriterTest
             "{",
             "  'textTypeMapppings': [",
             "    {",
+            "      'from': 'Country',",
+            "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'",
+            "    },",
+            "    {",
             "      'from': 'MergeOrg',",
+            "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
+            "    },",
+            "    {",
+            "      'from': 'MERGE-ORG',",
             "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'",
             "    }",
             "  ],",
@@ -101,7 +108,9 @@ public class BratReaderWriterTest
             "}");
     
     private static final String[] writerCustomMappings = new String[] {
-            "de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg -> MergeOrg",
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> Country",
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.(\\w+) -> $1",
+            "de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg -> MERGE-ORG",
             "de.tudarmstadt.ukp.dkpro.core.io.brat.type.(\\w+) -> $1"
         };
 
@@ -243,8 +252,43 @@ public class BratReaderWriterTest
                 .extracting(File::getName)
                 .containsExactlyInAnyOrder("annotation.conf", "merger.txt", "merger.ann", "visual.conf");
     }    
-
+    
     @Test
+    public void test__SingleAnnFileWithCustomMapping() throws Exception
+    {
+        ReaderAssert
+                .assertThat(BratReader.class,
+                        BratReader.PARAM_MAPPING, customMappings)
+                .readingFrom("src/test/resources/brat/document2.ann", true)
+                .usingWriter(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true,
+                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
+                .asFiles()
+                .allSatisfy(file -> {
+                    if (!file.getName().endsWith(".conf")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/brat", 
+                                        file.getName().replaceAll("\\.ann", ".ann"))));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", "document2.ann", "document2.txt",
+                        "visual.conf");
+    }    
+    
+
+    // TODO: At the moment, if an .ann file contains an brat 
+    //   label that is not mapped, an exception will be raised.
+    //   Ideally, the BratReader would create some "generic" annotation 
+    //   called say, UnmappedBratAnnot, wich would take note of 
+    //   all the attributes read from the .ann file. The BratWriter 
+    //   would also be able to re-write the annotation to a .ann file
+    //   in such a way that the original information is preserved.
+    //
+    //   This new feature is on the ice for now because it turns out
+    //   to be very hard to implement
+    //
+    @Test(expected=AssertionError.class)
     public void test__SingleAnnFileContainingUnknownLabels() throws Exception
     {
         ReaderAssert

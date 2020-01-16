@@ -92,7 +92,7 @@ public class BinaryCasWriterReaderTest
     private File testFolder;
     
     @Before
-    public void setup() 
+    public void setup() throws IOException 
     {
         testFolder = testContext.getTestOutputFolder();
     }

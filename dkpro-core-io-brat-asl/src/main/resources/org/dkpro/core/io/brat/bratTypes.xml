@@ -6,7 +6,7 @@
     <vendor/>
   <types>
     <typeDescription>
-      <name>org.dkpro.core.io.brat.BratAnnot</name>
+      <name>org.dkpro.core.io.brat.BratTag</name>
       <description>Generic type to be used when encountering unknown Brat labels</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>

@@ -25,7 +25,6 @@ import java.util.Map;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.dkpro.core.io.brat.BratAnnot;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -111,13 +110,6 @@ public class TypeMappings
             }
             
             brat2UimaMappingCache.put(aAnno.getType(), t);
-        }
-
-        // If all else failed, see if we are allowed to
-        // emit a "generic" BratAnnot instance
-        //
-        if (t == null && !failUponUnknownBratLabel) {
-            t = aTs.getType(BratAnnot.class.getName());;
         }
         
         if (t == null) {
