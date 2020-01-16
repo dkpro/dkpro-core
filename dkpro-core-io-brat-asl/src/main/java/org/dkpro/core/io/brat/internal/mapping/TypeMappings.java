@@ -22,8 +22,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 
@@ -32,6 +34,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TypeMappings
 {
+    public static final String TYPE_FOR_UNKNOWN_LABELS = "org.dkpro.core.io.brat.BratTag";
+    
     private final List<TypeMapping> parsedMappings;
     private final Map<String, Type> brat2UimaMappingCache;
     private final Map<String, String> uima2BratMappingCache;
@@ -112,8 +116,22 @@ public class TypeMappings
             brat2UimaMappingCache.put(aAnno.getType(), t);
         }
         
+        if (t == null && !failUponUnknownBratLabel) {
+            // Represent this unknown brat annotation as a generic
+            // BratTag.
+            //
+            t = aTs.getType(TYPE_FOR_UNKNOWN_LABELS);            
+            if (aAnno.getAttributes().size() > 0) {
+                throw new IllegalStateException("Encountered annotation with unknown brat label '"
+                        + aAnno.getType() + "'.\nThis annotation also has some attributes, which means "
+                        + "it cannot be represented as a generic, attribute-less "
+                        + t.getName() + " because the annotation has some attributes.");
+
+            }
+        }
+        
         if (t == null) {
-            throw new IllegalStateException("Unable to find appropriate UIMA type for brat type ["
+            throw new IllegalStateException("Unable to find appropriate UIMA type for brat label ["
                     + aAnno.getType() + "]");
         }
 
@@ -140,5 +158,15 @@ public class TypeMappings
         }
         
         return bratType;
+    }
+
+    public static boolean isGenericBratTag(FeatureStructure aFS) {
+        Type aType = aFS.getType();
+        return isGenericBratTag(aType);
+    }
+
+    public static boolean isGenericBratTag(Type aType) {
+        boolean isGeneric = aType.getName().equals(TYPE_FOR_UNKNOWN_LABELS);
+        return isGeneric;
     }
 }

@@ -253,6 +253,7 @@ public class BratReaderWriterTest
                 .containsExactlyInAnyOrder("annotation.conf", "merger.txt", "merger.ann", "visual.conf");
     }    
     
+
     @Test
     public void test__SingleAnnFileWithCustomMapping() throws Exception
     {
@@ -277,19 +278,8 @@ public class BratReaderWriterTest
     }    
     
 
-    // TODO: At the moment, if an .ann file contains an brat 
-    //   label that is not mapped, an exception will be raised.
-    //   Ideally, the BratReader would create some "generic" annotation 
-    //   called say, UnmappedBratAnnot, wich would take note of 
-    //   all the attributes read from the .ann file. The BratWriter 
-    //   would also be able to re-write the annotation to a .ann file
-    //   in such a way that the original information is preserved.
-    //
-    //   This new feature is on the ice for now because it turns out
-    //   to be very hard to implement
-    //
-    @Test(expected=AssertionError.class)
-    public void test__SingleAnnFileContainingUnknownLabels() throws Exception
+    @Test
+    public void test__AnnotationOfUnknownType__andAnnotationHasNoAttributes() throws Exception
     {
         ReaderAssert
                 .assertThat(BratReader.class)
@@ -301,11 +291,49 @@ public class BratReaderWriterTest
                     if (!file.getName().endsWith(".conf")) {
                         assertThat(contentOf(file)).isEqualToNormalizingNewlines(
                                 contentOf(new File("src/test/resources/brat-unknown-labels/", 
-                                        file.getName().replaceAll("\\.ann", "-ref.ann"))));
+                                        file.getName())));
                     }
                 })
                 .extracting(File::getName)
                 .containsExactlyInAnyOrder("annotation.conf", "hurricane.txt", "hurricane.ann", "visual.conf");
+    }    
+
+    // TODO-AD: At the moment, if an .ann file contains an annotation 
+    //   whose brat label that is not mapped, AND the annotation has 
+    //   some attributes, then an exception will be raised.
+    //
+    //   The reason is that there does not seem to be an easy way to 
+    //   store the annotation's attributes into a generic BratTag, at 
+    //   least not in a way that will allow the BratWriter to write the 
+    //   annotation back in the exact way it was read.
+    //
+    //   Note that if the annotation has no attributes, then no exception
+    //   is raised, and the system is able to capture that annotation and 
+    //   write it back the way it was read.
+    //
+    @Test(expected=IllegalStateException.class)
+    public void test__AnnotationOfUnknownType__andAnnotationHasSomeAttributes() throws Throwable
+    {
+        try {
+            ReaderAssert
+                    .assertThat(BratReader.class)
+                    .readingFrom("src/test/resources/brat-unknown-labels/cars.ann")
+                    .usingWriter(BratWriter.class,
+                            BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+                    .asFiles()
+                    .allSatisfy(file -> {
+                        if (!file.getName().endsWith(".conf")) {
+                            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                    contentOf(new File("src/test/resources/brat-unknown-labels/", 
+                                            file.getName())));
+                        }
+                    })
+                    .extracting(File::getName)
+                    .containsExactlyInAnyOrder("annotation.conf", "hurricane.txt", "hurricane.ann", "visual.conf");
+        } catch (AssertionError e) {
+            Throwable cause = e.getCause();
+            throw cause;
+        }
     }    
 
     @Test

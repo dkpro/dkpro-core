@@ -313,7 +313,12 @@ public class DKPro2Brat
 
         conf.addEntityDecl(superType, type);
         
-        conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
+        String shortName = aFS.getType().getShortName();
+        if (TypeMappings.isGenericBratTag(aFS)) {
+            Feature labelFeat = aFS.getType().getFeatureByBaseName("label");
+            shortName = aFS.getFeatureValueAsString(labelFeat);
+        }
+        conf.addLabelDecl(anno.getType(), shortName, aFS.getType()
                 .getShortName().substring(0, 1));
 
         if (!conf.hasDrawingDecl(anno.getType())) {
@@ -372,6 +377,20 @@ public class DKPro2Brat
 
     private void writeAttributes(BratAnnotation aAnno, FeatureStructure aFS)
     {
+    // TODO-AD: This is probably the wrong way to go about it, but I 
+    //    have NO IDEA how else to prevent the BratWriter from writing
+    //    the 'label' attribute for BratTag class.
+    //
+        if (TypeMappings.isGenericBratTag(aFS)) {
+            // For generic brat tag are only meant for representing
+            // attribute-less unknown brat labels.
+            //
+            // So assume that any attribute that the BratTag has are 
+            // purely internal and should not be printed to the .ann file
+            //
+            return;
+        }
+        
         for (Feature feat : aFS.getType().getFeatures()) {
             // Skip Sofa feature
             if (isInternalFeature(feat)) {
@@ -391,14 +410,6 @@ public class DKPro2Brat
                         || relParam.getArg2().equals(feat.getShortName())) {
                     continue;
                 }
-            }
-            
-            // TODO-AD: This is probably the wrong way to go about it, but I 
-            //    have NO IDEA how else to prevent the BratWriter from writing
-            //    the 'label' attribute.
-            //
-            if (feat.getName().equals("org.dkpro.core.io.brat.BratAnnot:label")) {
-              continue;  
             }
             
             if (feat.getRange().isPrimitive()) {
@@ -623,7 +634,7 @@ public class DKPro2Brat
         String[] texts = new String[] { aFS.getCoveredText().replaceAll("\\R+", " ") };
         
         String bratLabel = getBratType(aFS.getType());
-        if (aFS.getType().getName().equals("org.dkpro.core.io.brat.BratAnnot")) {
+        if (TypeMappings.isGenericBratTag(aFS)) {
             Feature labelFeat = aFS.getType().getFeatureByBaseName("label");
             bratLabel = aFS.getStringValue(labelFeat);
         }
