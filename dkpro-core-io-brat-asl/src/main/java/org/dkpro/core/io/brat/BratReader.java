@@ -507,7 +507,7 @@ public class BratReader
                 aAnno.setFeatureValueFromString(feat, attr.getValues()[0]);
             }
             else {
-                throw new IllegalStateException("Multi-valued attributes currently not supported");
+                throw new IllegalStateException("Multi-valued attributes currently not supported.\nAnnotation was:\n"+aAnno.toString());
             }
         }
     }

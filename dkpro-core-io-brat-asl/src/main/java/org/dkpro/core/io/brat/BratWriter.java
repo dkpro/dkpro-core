@@ -133,7 +133,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
      * Enable type mappings.
      */
     public static final String PARAM_ENABLE_TYPE_MAPPINGS = "enableTypeMappings";
-    @ConfigurationParameter(name = PARAM_ENABLE_TYPE_MAPPINGS, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_ENABLE_TYPE_MAPPINGS, mandatory = true, defaultValue = "true")
     private boolean enableTypeMappings;
     
     /**

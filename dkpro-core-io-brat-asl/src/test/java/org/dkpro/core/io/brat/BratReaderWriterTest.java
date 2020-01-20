@@ -47,6 +47,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.resources.FileCopy;
 import org.dkpro.core.api.resources.FileGlob;
 import org.dkpro.core.io.brat.BratReader;
@@ -127,8 +128,7 @@ public class BratReaderWriterTest
         ReaderAssert
         .assertThat(BratReader.class)
         .readingFrom("src/test/resources/brat/document0a.txt")
-        .usingWriter(BratWriter.class,
-                BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+        .usingWriter(BratWriter.class)
         .asFiles()
         .allSatisfy(file -> {
             if (!file.getName().endsWith(".conf")) {
@@ -167,8 +167,7 @@ public class BratReaderWriterTest
         ReaderAssert
                 .assertThat(BratReader.class)
                 .readingFrom("src/test/resources/brat-basic/document0a.ann", true)
-                .usingWriter(BratWriter.class,
-                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+                .usingWriter(BratWriter.class)
                 .asFiles()
                 .allSatisfy(file -> {
                     if (!file.getName().endsWith(".conf")) {
@@ -189,9 +188,7 @@ public class BratReaderWriterTest
         ReaderAssert
                 .assertThat(BratReader.class)
                 .readingFrom("src/test/resources/brat-basic", true)
-                .usingWriter(BratWriter.class,
-//                        TODO: THIS SHOULD BE THE DEFAULT!!!
-                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+                .usingWriter(BratWriter.class)
                 .asFiles()
                 .allSatisfy(file -> {
                     if (!file.getName().endsWith(".conf")) {
@@ -239,7 +236,6 @@ public class BratReaderWriterTest
                         BratReader.PARAM_MAPPING, customMappings)
                 .readingFrom("src/test/resources/brat-custom-types/merger.ann")
                 .usingWriter(BratWriter.class,
-                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true,
                         BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
                 .asFiles()
                 .allSatisfy(file -> {
@@ -262,7 +258,6 @@ public class BratReaderWriterTest
                         BratReader.PARAM_MAPPING, customMappings)
                 .readingFrom("src/test/resources/brat/document2.ann", true)
                 .usingWriter(BratWriter.class,
-                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true,
                         BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
                 .asFiles()
                 .allSatisfy(file -> {
@@ -284,8 +279,7 @@ public class BratReaderWriterTest
         ReaderAssert
                 .assertThat(BratReader.class)
                 .readingFrom("src/test/resources/brat-unknown-labels/hurricane.ann")
-                .usingWriter(BratWriter.class,
-                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+                .usingWriter(BratWriter.class)
                 .asFiles()
                 .allSatisfy(file -> {
                     if (!file.getName().endsWith(".conf")) {
@@ -318,8 +312,7 @@ public class BratReaderWriterTest
             ReaderAssert
                     .assertThat(BratReader.class)
                     .readingFrom("src/test/resources/brat-unknown-labels/cars.ann")
-                    .usingWriter(BratWriter.class,
-                            BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+                    .usingWriter(BratWriter.class)
                     .asFiles()
                     .allSatisfy(file -> {
                         if (!file.getName().endsWith(".conf")) {
@@ -334,7 +327,7 @@ public class BratReaderWriterTest
             Throwable cause = e.getCause();
             throw cause;
         }
-    }    
+    }        
 
     @Test
     public void testConll2009()
@@ -343,10 +336,32 @@ public class BratReaderWriterTest
         testOneWay(
                 createReaderDescription(Conll2009Reader.class), // the reader
                 createEngineDescription(BratWriter.class, // the writer
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
                 "conll/2009/en-ref.ann", // the reference file for the output
                 "conll/2009/en-orig.conll"); // the input file for the test
     }
+    
+    @Test
+    public void test__ReaderCanAlwaysRecognizeFullyQualifiedClassName() throws ResourceInitializationException {
+        ReaderAssert
+        .assertThat(BratReader.class)
+        .readingFrom("src/test/resources/brat-no-mappings/merger-no-mapping.ann", true)
+        .usingWriter(BratWriter.class)
+        .asFiles()
+        .allSatisfy(file -> {
+            if (!file.getName().endsWith(".conf")) {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/brat-no-mappings", 
+                                file.getName().replaceAll("\\.ann", ".withMappings.ann"))));
+            }
+        })
+        .extracting(File::getName)
+        .containsExactlyInAnyOrder("annotation.conf", "merger-no-mapping.ann", "merger-no-mapping.txt",
+                "visual.conf");
+        
+    }    
+    
 
     @Test
     public void testConll2009_2()
@@ -354,7 +369,8 @@ public class BratReaderWriterTest
     {
         testRoundTrip(
                 createReaderDescription(BratReader.class), 
-                createEngineDescription(BratWriter.class, 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
                 "conll/2009/en-ref.ann");
     }
@@ -365,8 +381,10 @@ public class BratReaderWriterTest
     {
         testOneWay(
                 createReaderDescription(Conll2012Reader.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
                 createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         BratWriter.PARAM_FILENAME_EXTENSION, ".html"), 
                 "conll/2012/en-ref.html",
                 "conll/2012/en-orig.conll");
@@ -380,6 +398,7 @@ public class BratReaderWriterTest
                 createReaderDescription(Conll2012Reader.class,
                         Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
                 createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         BratWriter.PARAM_FILENAME_EXTENSION, ".json"), 
                 "conll/2012/en-ref.json",
                 "conll/2012/en-orig.conll");
@@ -391,8 +410,10 @@ public class BratReaderWriterTest
     {
         testOneWay(
                 createReaderDescription(Conll2012Reader.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
-                createEngineDescription(BratWriter.class), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false), 
                 "conll/2012/en-ref.ann",
                 "conll/2012/en-orig.conll");
     }
@@ -419,7 +440,8 @@ public class BratReaderWriterTest
                         Conll2012Reader.PARAM_READ_SEMANTIC_PREDICATE, false,
                         Conll2012Reader.PARAM_READ_COREFERENCE, false, 
                         Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
-                createEngineDescription(BratWriter.class), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false), 
                 "conll/2012/en-ref-min.ann",
                 "conll/2012/en-orig.conll");
     }
@@ -434,8 +456,7 @@ public class BratReaderWriterTest
                                 "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                                 "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
                                 "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
-                createEngineDescription(BratWriter.class,
-                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true), 
+                createEngineDescription(BratWriter.class), 
                 "brat/document0a.ann");
     }
 
@@ -469,6 +490,7 @@ public class BratReaderWriterTest
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:comment",
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg:comment")), 
                 createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         BratWriter.PARAM_RELATION_TYPES, asList(
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref.ann", 
@@ -538,6 +560,7 @@ public class BratReaderWriterTest
                 createReaderDescription(BratReader.class,
                         BratReader.PARAM_MAPPING, mapping), 
                 createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,                        
                         BratWriter.PARAM_RELATION_TYPES, asList(
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref-mapping.ann", 
@@ -561,6 +584,7 @@ public class BratReaderWriterTest
                         BratReader.PARAM_RELATION_TYPES, asList(
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,
                         BratWriter.PARAM_RELATION_TYPES, asList(
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref-sub.ann", 
@@ -577,8 +601,7 @@ public class BratReaderWriterTest
                         "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
                         "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"))
             .readingFrom("src/test/resources/brat/document0c.ann")
-            .usingWriter(BratWriter.class, 
-                    BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
+            .usingWriter(BratWriter.class)
             .outputAsString("document0c.ann")
             .isEqualToNormalizingNewlines(
                     contentOf(new File("src/test/resources/brat/document0c.ann"), UTF_8));        
