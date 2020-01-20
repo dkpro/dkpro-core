@@ -174,6 +174,18 @@ public class BratReader
     private String mappingJson;
     private Mapping defaultMapping = null;
     
+    // TODO-AD: I had to set this in the dkpro-core/pom.xml file:
+    //
+    //      <failOnMissingMetaData>false</failOnMissingMetaData>
+    //
+    //   Otherwise, the parameter below caused a "Component meta data missing"
+    //   error. Not sure why, but this issue should eventually be
+    //   resolved.
+    //    
+    public static final String PARAM_CHECK_CONFLICTING_MAPPINGS = "checkConflictingMappings";
+    @ConfigurationParameter(name = PARAM_CHECK_CONFLICTING_MAPPINGS, mandatory = false, defaultValue = "true")
+    private Boolean checkConflictingMappings = null;    
+    
     private Mapping mapping;
     
     private Map<String, AnnotationFS> idMap;
@@ -224,7 +236,7 @@ public class BratReader
                     noteMappings.stream().map(CommentMapping::parse).collect(toList()));
         }
         
-        mapping = Mapping.merge(customMapping, defaultMapping);
+        mapping = Mapping.merge(customMapping, defaultMapping, checkConflictingMappings);
         
         warnings = new LinkedHashSet<String>();
     }    

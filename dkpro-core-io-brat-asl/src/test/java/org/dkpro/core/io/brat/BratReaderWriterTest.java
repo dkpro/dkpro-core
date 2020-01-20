@@ -65,7 +65,7 @@ import org.junit.Test;
 
 public class BratReaderWriterTest
 {
-    private static final String customMappings = String.join("\n",
+    private static final String customReaderMappings = String.join("\n",
             "{",
             "  'textTypeMapppings': [",
             "    {",
@@ -233,7 +233,7 @@ public class BratReaderWriterTest
     {
         ReaderAssert
                 .assertThat(BratReader.class,
-                        BratReader.PARAM_MAPPING, customMappings)
+                        BratReader.PARAM_MAPPING, customReaderMappings)
                 .readingFrom("src/test/resources/brat-custom-types/merger.ann")
                 .usingWriter(BratWriter.class,
                         BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
@@ -255,7 +255,7 @@ public class BratReaderWriterTest
     {
         ReaderAssert
                 .assertThat(BratReader.class,
-                        BratReader.PARAM_MAPPING, customMappings)
+                        BratReader.PARAM_MAPPING, customReaderMappings)
                 .readingFrom("src/test/resources/brat/document2.ann", true)
                 .usingWriter(BratWriter.class,
                         BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
@@ -358,10 +358,48 @@ public class BratReaderWriterTest
         })
         .extracting(File::getName)
         .containsExactlyInAnyOrder("annotation.conf", "merger-no-mapping.ann", "merger-no-mapping.txt",
-                "visual.conf");
-        
+                "visual.conf");        
     }    
     
+    @Test(expected=Exception.class)
+    public void test__ConflictingReaderMappings__RaisesException() throws Throwable {
+        
+        String customMappings = String.join("\n",
+                "{",
+                "  'textTypeMapppings': [",
+                "    {",
+                "      'from': 'Location',",
+                "      'to': 'com.acme.Location'",
+                "    }",
+                "  ],",
+                "  'relationTypeMapppings': [",
+                "    {",
+                "      'from': 'Origin',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
+                "    }",
+                "  ]",
+                "}");
+        
+        try {
+            ReaderAssert
+            .assertThat(BratReader.class,
+                    BratReader.PARAM_MAPPING, customMappings)
+            .readingFrom("src/test/resources/brat-basic/document0a.ann")
+            .usingWriter(BratWriter.class)
+            .asFiles(); 
+        } catch (AssertionError e) {
+            throw e.getCause();
+        }
+    }
+    
+    @Test(expected=Exception.class) @Ignore
+    public void test__ConflictingWriterMappings__RaisesException() throws ResourceInitializationException {
+        ReaderAssert
+        .assertThat(BratReader.class)
+        .readingFrom("src/test/resources/brat-basic/document0a.ann")
+        .usingWriter(BratWriter.class)
+        .asFiles();        
+    }
 
     @Test
     public void testConll2009_2()
@@ -573,6 +611,7 @@ public class BratReaderWriterTest
     {
         testOneWay(
                 createReaderDescription(BratReader.class,
+                        BratReader.PARAM_CHECK_CONFLICTING_MAPPINGS, false,
                         BratReader.PARAM_TEXT_ANNOTATION_TYPES, 
                                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:value",
                         BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, asList(

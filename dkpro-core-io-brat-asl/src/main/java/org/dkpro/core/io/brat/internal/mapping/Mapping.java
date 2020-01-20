@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +102,13 @@ public class Mapping
     }
 
     public static Mapping merge(Mapping customMapping, Mapping defaultMapping) {
+        return merge(customMapping, defaultMapping, null);
+    }
+        
+    public static Mapping merge(Mapping customMapping, Mapping defaultMapping, Boolean checkConflictingMappings) {
+        if (checkConflictingMappings == null) {
+            checkConflictingMappings = true;
+        }
         
         // Merge the text type mappings
         List<TypeMapping> textTypeMapppingsLst = new ArrayList<TypeMapping>();
@@ -165,6 +173,14 @@ public class Mapping
         Set<String> fieldsToIgnore = new HashSet<String>();
         fieldsToIgnore.add("(?!(uimaType|normalizedPattern)");
         
+        if (checkConflictingMappings) {
+            merged.checkForConflictingMappings();
+        }
+        
         return merged;
     }
+
+    private void checkForConflictingMappings() {
+        getTextTypeMapppings().checkForConflictingMappings();
+    }        
 }

@@ -19,8 +19,10 @@ package org.dkpro.core.io.brat.internal.mapping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
@@ -168,5 +170,37 @@ public class TypeMappings
     public static boolean isGenericBratTag(Type aType) {
         boolean isGeneric = aType.getName().equals(TYPE_FOR_UNKNOWN_LABELS);
         return isGeneric;
+    }
+
+    public void checkForConflictingMappings() {
+        Map<String,Set<String>> index = new HashMap<String,Set<String>>();
+        for (TypeMapping aTextMapping: getParsedMappings()) {
+            String type = aTextMapping.uimaType;
+            String bratLabel = aTextMapping.bratTypePattern.toString();
+            if (!bratLabel.matches("^.*$\\d+.*")) {
+                Set<String> typesThisLabel = index.get(bratLabel);
+                if (typesThisLabel == null) {
+                    typesThisLabel = new HashSet<String>();
+                    index.put(bratLabel, typesThisLabel);
+                }
+                typesThisLabel.add(type);
+            }
+        }
+        
+        String errMess = null;
+        for (String aLabel: index.keySet()) {
+            Set<String> typesThisLabel = index.get(aLabel);
+            if (typesThisLabel.size() > 1) {
+                if (errMess == null) { 
+                    errMess = "Conflicting mappings found for some Brat labels\n"; 
+                }
+                errMess +=  "'"+aLabel+"' mapped to:\n    " 
+                           + String.join("\n    ", typesThisLabel);
+            }
+        }
+        
+        if (errMess != null) {
+            throw new IllegalStateException(errMess);
+        }
     }
 }
