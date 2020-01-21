@@ -30,7 +30,6 @@ import org.dkpro.core.io.imscwb.ImsCwbReader;
 import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
-import org.dkpro.core.testing.assertions.AssertFile;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

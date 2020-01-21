@@ -39,7 +39,6 @@ import org.dkpro.core.io.html.HtmlReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.WriterAssert;
-import org.dkpro.core.testing.assertions.AssertFile;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.junit.Before;
 import org.junit.Rule;

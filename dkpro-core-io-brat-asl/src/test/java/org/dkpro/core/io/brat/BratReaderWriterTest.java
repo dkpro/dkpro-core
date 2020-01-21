@@ -57,7 +57,6 @@ import org.dkpro.core.io.conll.Conll2012Reader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
 import org.dkpro.core.testing.ReaderAssert;
-import org.dkpro.core.testing.assertions.AssertFile;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
