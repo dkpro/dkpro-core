@@ -141,6 +141,8 @@ public class BratWriter extends JCasFileWriter_ImplBase
      */
     public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
     @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
+            // TODO-AD: Put same mappings as for the default BratReader mappings
+            //
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.(\\w+) -> $1",
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.(\\w+) -> $1",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.(\\w+) -> $1",

@@ -172,7 +172,6 @@ public class BratReader
     public static final String PARAM_MAPPING = "mapping";
     @ConfigurationParameter(name = PARAM_MAPPING, mandatory = false)
     private String mappingJson;
-    private Mapping defaultMapping = null;
     
     // TODO-AD: I had to set this in the dkpro-core/pom.xml file:
     //
@@ -200,7 +199,7 @@ public class BratReader
         ensureAnnFilesExist();
         super.initialize(aContext);
         
-        Mapping defMapping = getDefaultMapping();
+        Mapping defMapping = DefaultMappings.getDefaultMapping_Brat2UIMA();
         Mapping customMapping = null;
 
         if (mappingJson != null) {
@@ -236,7 +235,7 @@ public class BratReader
                     noteMappings.stream().map(CommentMapping::parse).collect(toList()));
         }
         
-        mapping = Mapping.merge(customMapping, defaultMapping, checkConflictingMappings);
+        mapping = Mapping.merge(customMapping, defMapping, checkConflictingMappings);
         
         warnings = new LinkedHashSet<String>();
     }    
@@ -730,68 +729,5 @@ public class BratReader
                 }
             }
         }
-    }
-        
-    private Mapping getDefaultMapping() {
-        if (defaultMapping == null) {
-            // AD: Here, I manually added mappings for types that
-            //   I use in my project. Need to extend it to 
-            //   all the dkpro-core packages that extend the
-            //   UIMA type system.
-            //
-            //
-            //   Better yet, use the reflections library to find all
-            //   the classes in each of the packages:
-            //
-            //     https://stackoverflow.com/questions/520328/can-you-find-all-classes-in-a-package-using-reflection
-            //
-            //   That way, we only need to list the packages, not all the 
-            //   classes.
-            //
-            
-            List<TypeMapping> txtTypeMappingLst = new ArrayList<TypeMapping>();
-            TypeMappings txtTypeMappings = new TypeMappings(txtTypeMappingLst);
-            {
-                /// Add mappings for NER types
-                String[] nerTypeNames = new String[] {
-                        "Animal", "Cardinal", "ContactInfo", "Date", "Disease", "Event",
-                        "Fac", "Game", "Gpe", "Language", "Law", "Location", "Money", 
-                        "NamedEntity", "Nationality", "Norp", "Ordinal", "Organization",
-                        "OrgDesc", "Percent", "PerDesc", "Person", "Plant", "Product",
-                        "ProductDesc", "Quantity", "Substance", "Time", "WorkOfArt"
-                };
-                for (String typeName: nerTypeNames) {
-                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.ner.type." + typeName;
-                    txtTypeMappingLst.add(new TypeMapping(typeName, aType));
-                }
-            }
-            {
-                // Add mappings for Segmentation types
-                String[] segTypeNames = new String[] {
-                        "CompoundPart", "Div", "Document", "Heading", "Lemma", "LexicalPhrase",
-                        "LinkingMorpheme", "NGram", "Paragraph", "Sentence", "Split", "Stem", 
-                        "StopWord", "SurfaceForm", 
-                        "Token"
-                };
-                for (String typeName: segTypeNames) {
-                    String aType = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type."
-                            + typeName;
-                    txtTypeMappingLst.add(new TypeMapping(typeName, aType));
-                }
-            }
-            
-            List<TypeMapping> relTypeMappingLst = new ArrayList<TypeMapping>();
-            TypeMappings relTypeMappings = new TypeMappings(relTypeMappingLst);
-            
-            List<SpanMapping> txtAnnotsLst = new ArrayList<SpanMapping>();
-                        
-            List<RelationMapping> relMapLst = new ArrayList<RelationMapping>();
-
-            List<CommentMapping> commMapLst = new ArrayList<CommentMapping>();
-            
-            defaultMapping = new Mapping(txtTypeMappings, relTypeMappings, txtAnnotsLst, 
-                    relMapLst, commMapLst);
-        }
-        return defaultMapping;
     }
 }
