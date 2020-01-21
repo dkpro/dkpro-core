@@ -141,23 +141,30 @@ public class BratReaderWriterTest
     }
 
     @Test
-    public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception {
-        boolean deleteAnnFiles = true;
-        File tempInputsDir = copyBratFilesToTestInputsDir(new File("src/test/resources/brat/"),
-                deleteAnnFiles);
-        File tempInputTxtFile = new File(tempInputsDir, "document0a.txt");                
-        
-        Map<String,Object> readerParams = new HashMap<String,Object>();
+    public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception
         {
-            readerParams.put(BratReader.PARAM_SOURCE_LOCATION, tempInputTxtFile);
+            ReaderAssert
+                    .assertThat(BratReader.class)
+                    .readingFrom("src/test/resources/text-only/document0a.txt")
+                    .usingWriter(BratWriter.class)
+                    .asFiles()
+                    .allSatisfy(file -> {
+                        // The ".ann" files have been freshly generated and are empty
+                        if (file.getName().endsWith(".ann")) {
+                            assertThat(contentOf(file)).isEmpty();
+                        }
+                        // The ".text" files should match the originals
+                        if (file.getName().endsWith(".txt")) {
+                            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                    contentOf(new File("src/test/resources/text-only", 
+                                            file.getName())));
+                        }
+                    })
+                    .extracting(File::getName)
+                    .containsExactlyInAnyOrder("annotation.conf", 
+                            "document0a.ann", "document0a.txt",
+                            "visual.conf");
         }
-        Map<String,Object> writerParams = new HashMap<String,Object>();
-        {
-            writerParams.put(BratWriter.PARAM_TARGET_LOCATION, getTestBratOutputsDir());
-        };
-        
-        testOneWaySimple(readerParams, writerParams);
-    }    
     
     @Test
     public void test__SingleAnnFile() throws Exception
@@ -675,207 +682,11 @@ public class BratReaderWriterTest
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
     
-    ////////////////////////////////////////////////////////////
-    // Alain Desilets
-    //
-    //  To test my improvements, I could not use testOneWay
-    //  and testRoundtrip.
-    //
-    //  The reason is that these methods do WAY too much and in
-    //  particular, they "patch" the reader description to avoid
-    //  problems caused by the very situations I am trying to 
-    //  deal with. In other words, if I use testOneWay to test 
-    //  a situation like "forgetting to add *.ann at the end of
-    //  a directory", the test will succeed because testOneWay() 
-    //  adds *.ann if not present.
-    //
-    //  So I created a simpler runner for tests called 
-    //  testReadWrite().
-    ////////////////////////////////////////////////////////////
-    
-    public static class JCasCollector extends JCasAnnotator_ImplBase {
-
-        public static List<JCas> readJCases = new ArrayList<JCas>();
-        
-        @Override
-        public void process(JCas aJCas) throws AnalysisEngineProcessException {
-            readJCases.add(aJCas);
-        }
-    }
-    
-    private void testReadWrite(CollectionReader reader,
-            AnalysisEngine writer, File expAnnFile, File gotAnnFile) 
-                    throws UIMAException, IOException {
-        testReadWrite(reader, writer, expAnnFile, gotAnnFile, null);
-    }
-    
-    
-    private void testReadWrite(CollectionReader reader,
-            AnalysisEngine writer, File expAnnFile, File gotAnnFile,
-            Boolean expectEmptyAnnFiles) 
-                    throws UIMAException, IOException {
-        
-        if (expectEmptyAnnFiles == null) {
-            expectEmptyAnnFiles = false;
-        }
-        
-        JCasCollector.readJCases = new ArrayList<JCas>();
-        AnalysisEngine collector = createEngine(JCasCollector.class); 
-                
-        SimplePipeline.runPipeline(reader, new AnalysisEngine[] {collector, writer});
-        
-        boolean isSingleFile = ((BratReader)reader).sourceLocationIsSingleFile();
-        int expNumRead = 1;
-        if (isSingleFile) {
-        }  else {
-            String pattern = new File(gotAnnFile, "*.ann").toString();
-            expNumRead = FileGlob.listFiles(pattern).length;
-        }
-        assertEquals("Number of documents read was not as expected", 
-                expNumRead, JCasCollector.readJCases.size());
-        assertFilesHaveSameContent(expAnnFile, gotAnnFile, expectEmptyAnnFiles);
-    }    
-    
-    private File copyBratFilesToTestInputsDir(File bratDir) 
-            throws IOException { 
-        return copyBratFilesToTestInputsDir(bratDir, null);
+    public File getTestBratOutputsDir() throws IOException {
+        return DkproTestContext.get().getTestOutputFolder();
     }
 
-    private File copyBratFilesToTestInputsDir(File bratDir, Boolean deleteAnnFiles)
-        throws IOException
-    {
-        if (deleteAnnFiles == null) {
-            deleteAnnFiles = false;
-        }
-
-        File testInputsDir = DkproTestContext.get().getTestInputFolder();
-        FileCopy.copyFolder(bratDir, testInputsDir);
-
-        // Delete the -ref files from the inputs dir
-        String pattern = new File(testInputsDir, "*-ref*").toString();
-        FileGlob.deleteFiles(pattern);
-
-        if (deleteAnnFiles) {
-            pattern = new File(testInputsDir, "*.ann").toString();
-            FileGlob.deleteFiles(pattern);
-        }
-
-        return testInputsDir;
+    public File getTestBratInputsDir() throws IOException {
+        return DkproTestContext.get().getTestInputFolder();
     }
-    
-    private void assertFilesHaveSameContent(File expFileOrDir, File actualFileOrDir,
-            Boolean expectEmptyAnnFiles)
-        throws IOException
-    {
-        if (expectEmptyAnnFiles == null) {
-            expectEmptyAnnFiles = false;
-        }
-        
-        if (!actualFileOrDir.isDirectory()) {
-            String expContent = "";
-            if (! expectEmptyAnnFiles || expFileOrDir.toString().endsWith(".txt")) {
-                expContent = FileUtils.readFileToString(expFileOrDir, "UTF-8");
-            }
-            String actualContent = FileUtils.readFileToString(actualFileOrDir, "UTF-8");
-            expContent = EOLUtils.normalizeLineEndings(expContent);
-            actualContent = EOLUtils.normalizeLineEndings(actualContent);
-            assertEquals(expContent.trim(), actualContent.trim());            
-        } else {
-            String pattern = new File(actualFileOrDir, "*.*").toString();
-            for (File anActualFile: FileGlob.listFiles(pattern)) {
-                File anExpFile = new File(expFileOrDir, anActualFile.getName());
-                assertFilesHaveSameContent(anExpFile, anActualFile, expectEmptyAnnFiles);
-            }
-        }
-    }
-    
-    private void testOneWaySimple(Map<String,Object> readerParams, Map<String,Object> writerParams) 
-                 throws Exception {
-        
-        Object[] readerParamsArray = paramsMap2Arr(readerParams);
-        Object[] writerParamsArray = paramsMap2Arr(writerParams);
-        
-        CollectionReader reader = createReader(BratReader.class, readerParamsArray);
-        AnalysisEngine writer = createEngine(BratWriter.class, writerParamsArray);
-
-        SimplePipeline.runPipeline(reader, new AnalysisEngine[] {writer});
-        
-        boolean isSingleFile = ((BratReader)reader).sourceLocationIsSingleFile();
-        if (isSingleFile) {
-            assertSingleBratFileOK(readerParams, writerParams);
-        }  else {
-//            isSingleFile = FileGlob.listFiles(pattern).length;
-        }
-        
-    }
-
-    private void assertSingleBratFileOK(Map<String, Object> readerParams,
-            Map<String, Object> writerParams)
-        throws Exception
-    {
-        File sourceLocation = (File) readerParams.get(BratReader.PARAM_SOURCE_LOCATION);
-        File targetLocation = (File) writerParams.get(BratWriter.PARAM_TARGET_LOCATION);
-        
-        File sourceTxt = new File(sourceLocation.toString().replaceAll("\\.ann$", ".txt"));
-        File sourceAnn = new File(sourceLocation.toString().replaceAll("\\.txt$", ".ann"));
-        
-        String sourceFileName = sourceTxt.getName().replaceAll("\\.txt$", "");
-        File targetTxt = new File(targetLocation, sourceFileName + ".txt");
-        File targetAnn = new File(targetLocation, sourceFileName + ".ann");
-        
-        AssertFile.assertFilesHaveSameContent("Outputed .txt file not same as input one", 
-                sourceTxt, targetTxt);
-        AssertFile.assertFilesHaveSameContent("Outputed .ann file not same as input one", 
-                sourceAnn, targetAnn);
-        
-    }
-
-    private Object[] paramsMap2Arr(Map<String, Object> paramsMap)
-    {
-        Object[] paramsArr = new Object[2 * paramsMap.keySet().size()];
-        int pos = 0;
-        for (String paramName: paramsMap.keySet()) {
-            paramsArr[pos] = paramName;
-            paramsArr[pos + 1] = paramsMap.get(paramName);
-            pos += 2;
-        }
-        
-        return paramsArr;
-    }
-
-    private File copyBratFilesToTempLocation(File bratDir) throws IOException
-    {
-        return copyBratFilesToTempLocation(bratDir, null);
-    }
-
-    private File copyBratFilesToTempLocation(File bratDir, Boolean deleteAnnFiles)
-        throws IOException
-    {
-        if (deleteAnnFiles == null) {
-            deleteAnnFiles = false;
-        }
-        
-        Path tempDir = null;        
-        tempDir = Files.createTempDirectory("dkpro", new FileAttribute[0]);
-        FileCopy.copyFolder(bratDir, tempDir.toFile());
-        
-        // Delete the -ref files from the inputs dir
-        String pattern = new File(tempDir.toFile(), "*-ref*").toString();
-        FileGlob.deleteFiles(pattern);
-        
-        if (deleteAnnFiles) {
-            pattern = new File(tempDir.toFile(), "*.ann").toString();
-            FileGlob.deleteFiles(pattern);
-        }
-        
-        return tempDir.toFile();
-    }
-   
-   public File getTestBratOutputsDir() throws IOException {
-       return DkproTestContext.get().getTestOutputFolder();
-   }
-
-   public File getTestBratInputsDir() throws IOException {
-       return DkproTestContext.get().getTestInputFolder();
-   }
 }
