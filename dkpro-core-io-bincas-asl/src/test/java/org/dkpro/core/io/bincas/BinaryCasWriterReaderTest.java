@@ -94,6 +94,7 @@ public class BinaryCasWriterReaderTest
     @Before
     public void setup() throws IOException 
     {
+        DkproTestContext.get().initializeTestWorkspace();
         testFolder = testContext.getTestOutputFolder();
     }
     
