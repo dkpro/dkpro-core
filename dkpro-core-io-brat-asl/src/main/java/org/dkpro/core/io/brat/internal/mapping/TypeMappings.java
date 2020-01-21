@@ -173,29 +173,29 @@ public class TypeMappings
     }
 
     public void checkForConflictingMappings() {
-        Map<String,Set<String>> index = new HashMap<String,Set<String>>();
+        Map<String,Set<String>> pattIndex = new HashMap<String,Set<String>>();
         for (TypeMapping aTextMapping: getParsedMappings()) {
-            String type = aTextMapping.uimaType;
-            String bratLabel = aTextMapping.bratTypePattern.toString();
-            if (!bratLabel.matches("^.*$\\d+.*")) {
-                Set<String> typesThisLabel = index.get(bratLabel);
-                if (typesThisLabel == null) {
-                    typesThisLabel = new HashSet<String>();
-                    index.put(bratLabel, typesThisLabel);
+            String subst = aTextMapping.substitution;
+            String patt = aTextMapping.pattern.toString();
+            if (!subst.matches("^.*$\\d+.*")) {
+                Set<String> substThisPatt = pattIndex.get(patt);
+                if (substThisPatt == null) {
+                    substThisPatt = new HashSet<String>();
+                    pattIndex.put(patt, substThisPatt);
                 }
-                typesThisLabel.add(type);
+                substThisPatt.add(subst);
             }
         }
         
         String errMess = null;
-        for (String aLabel: index.keySet()) {
-            Set<String> typesThisLabel = index.get(aLabel);
-            if (typesThisLabel.size() > 1) {
+        for (String patt: pattIndex.keySet()) {
+            Set<String> substThisPatt = pattIndex.get(patt);
+            if (substThisPatt.size() > 1) {
                 if (errMess == null) { 
-                    errMess = "Conflicting mappings found for some Brat labels\n"; 
+                    errMess = "Conflicting mappings found for some patterns\n"; 
                 }
-                errMess +=  "'"+aLabel+"' mapped to:\n    " 
-                           + String.join("\n    ", typesThisLabel);
+                errMess +=  "'"+patt+"' mapped to:\n    " 
+                           + String.join("\n    ", substThisPatt);
             }
         }
         

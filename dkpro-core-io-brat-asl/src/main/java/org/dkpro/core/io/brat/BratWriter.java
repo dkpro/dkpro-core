@@ -201,6 +201,10 @@ public class BratWriter extends JCasFileWriter_ImplBase
         if (enableTypeMappings) {
             converter.setTypeMapping(new TypeMappings(typeMappings));
         }
+        
+        if (converter.getTypeMapping() != null) {
+            converter.getTypeMapping().checkForConflictingMappings();
+        }
     }
     
     @Override

@@ -361,7 +361,7 @@ public class BratReaderWriterTest
                 "visual.conf");        
     }    
     
-    @Test(expected=Exception.class)
+    @Test(expected=IllegalStateException.class)
     public void test__ConflictingReaderMappings__RaisesException() throws Throwable {
         
         String customMappings = String.join("\n",
@@ -392,13 +392,23 @@ public class BratReaderWriterTest
         }
     }
     
-    @Test(expected=Exception.class) @Ignore
-    public void test__ConflictingWriterMappings__RaisesException() throws ResourceInitializationException {
-        ReaderAssert
-        .assertThat(BratReader.class)
-        .readingFrom("src/test/resources/brat-basic/document0a.ann")
-        .usingWriter(BratWriter.class)
-        .asFiles();        
+    @Test(expected=ResourceInitializationException.class)
+    public void test__ConflictingWriterMappings__RaisesException() throws Throwable {
+        String[] mappings = new String[] {
+                  "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> City",
+                  "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> Country"                  
+        };  
+        try {
+            ReaderAssert
+            .assertThat(BratReader.class)
+            .readingFrom("src/test/resources/brat-basic/document0a.ann")
+            .usingWriter(BratWriter.class,
+                    BratWriter.PARAM_TYPE_MAPPINGS, mappings)
+            .asFiles();
+        } catch (AssertionError e) {
+            throw e.getCause();
+        }
+            
     }
 
     @Test
