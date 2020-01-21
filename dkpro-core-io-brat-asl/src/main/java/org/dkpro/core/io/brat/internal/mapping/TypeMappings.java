@@ -203,4 +203,32 @@ public class TypeMappings
             throw new IllegalStateException(errMess);
         }
     }
+
+    public static TypeMappings merge(TypeMappings customMapping, TypeMappings defaultMapping) {
+        return merge(customMapping, defaultMapping, null);
+    }
+
+    public static TypeMappings merge(TypeMappings customMapping, TypeMappings defaultMapping,
+            Boolean checkConflicts) {
+        
+        if (checkConflicts == null) {
+            checkConflicts = true;
+        }
+        
+        List<TypeMapping> mappingLst = new ArrayList<TypeMapping>();
+        if (customMapping != null) {
+            mappingLst.addAll(customMapping.getParsedMappings());
+        }
+        if (defaultMapping != null) {
+            mappingLst.addAll(defaultMapping.getParsedMappings());
+        }
+        
+        TypeMappings merged = new TypeMappings(mappingLst);
+        
+        if (checkConflicts) {
+            merged.checkForConflictingMappings();
+        }
+        
+        return merged;
+    }
 }

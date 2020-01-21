@@ -110,9 +110,7 @@ public class BratReaderWriterTest
     
     private static final String[] writerCustomMappings = new String[] {
             "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> Country",
-            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.(\\w+) -> $1",
             "de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg -> MERGE-ORG",
-            "de.tudarmstadt.ukp.dkpro.core.io.brat.type.(\\w+) -> $1"
         };
 
     
@@ -236,7 +234,8 @@ public class BratReaderWriterTest
                         BratReader.PARAM_MAPPING, customReaderMappings)
                 .readingFrom("src/test/resources/brat-custom-types/merger.ann")
                 .usingWriter(BratWriter.class,
-                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
+                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings,
+                        BratWriter.PARAM_CHECK_CONFLICTING_MAPPINGS, false)
                 .asFiles()
                 .allSatisfy(file -> {
                     if (!file.getName().endsWith(".conf")) {
@@ -258,7 +257,8 @@ public class BratReaderWriterTest
                         BratReader.PARAM_MAPPING, customReaderMappings)
                 .readingFrom("src/test/resources/brat/document2.ann", true)
                 .usingWriter(BratWriter.class,
-                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings)
+                        BratWriter.PARAM_TYPE_MAPPINGS, writerCustomMappings,
+                        BratWriter.PARAM_CHECK_CONFLICTING_MAPPINGS, false)
                 .asFiles()
                 .allSatisfy(file -> {
                     if (!file.getName().endsWith(".conf")) {
@@ -634,6 +634,7 @@ public class BratReaderWriterTest
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 createEngineDescription(BratWriter.class,
                         BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false,
+                        BratWriter.PARAM_CHECK_CONFLICTING_MAPPINGS, false,
                         BratWriter.PARAM_RELATION_TYPES, asList(
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref-sub.ann", 
@@ -743,13 +744,10 @@ public class BratReaderWriterTest
     private File copyBratFilesToTestInputsDir(File bratDir, Boolean deleteAnnFiles)
         throws IOException
     {
-//        File testWorkspace = testContext.getTestWorkspace();
-
         if (deleteAnnFiles == null) {
             deleteAnnFiles = false;
         }
 
-//        File testInputsDir = getTestBratInputsDir();
         File testInputsDir = DkproTestContext.get().getTestInputFolder();
         FileCopy.copyFolder(bratDir, testInputsDir);
 

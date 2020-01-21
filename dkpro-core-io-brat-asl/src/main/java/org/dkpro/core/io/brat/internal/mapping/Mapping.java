@@ -110,23 +110,15 @@ public class Mapping
             checkConflictingMappings = true;
         }
         
-        // Merge the text type mappings
-        List<TypeMapping> textTypeMapppingsLst = new ArrayList<TypeMapping>();
-        if (customMapping.getTextTypeMapppings() != null) {
-            textTypeMapppingsLst.addAll(customMapping.getTextTypeMapppings().getParsedMappings());
-        }
-        if (defaultMapping.getTextTypeMapppings() != null) {
-            textTypeMapppingsLst.addAll(defaultMapping.getTextTypeMapppings().getParsedMappings());
-        }
+        TypeMappings textTypeMapppings 
+                        = TypeMappings.merge(customMapping.getTextTypeMapppings(), 
+                                             defaultMapping.getTextTypeMapppings(),
+                                             checkConflictingMappings);
         
-        TypeMappings textTypeMapppings = new TypeMappings(textTypeMapppingsLst);
-        
-        // Merge the relation type mappings
-        List<TypeMapping> relTypeMapppingsLst = new ArrayList<TypeMapping>();
-        if (customMapping.getRelationTypeMapppings() != null) {
-            relTypeMapppingsLst.addAll(customMapping.getRelationTypeMapppings().getParsedMappings());
-        }
-        TypeMappings relTypeMapppings = new TypeMappings(relTypeMapppingsLst);
+        TypeMappings relTypeMapppings 
+                        = TypeMappings.merge(customMapping.getRelationTypeMapppings(), 
+                                             defaultMapping.getRelationTypeMapppings(),
+                                             checkConflictingMappings);
         
         // Start with empty mappings for Span, Relations and Comments.
         List<SpanMapping> spans = new ArrayList<SpanMapping>();

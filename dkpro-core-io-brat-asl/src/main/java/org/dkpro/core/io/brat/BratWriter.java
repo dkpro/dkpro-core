@@ -38,6 +38,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.io.brat.internal.mapping.Mapping;
 import org.dkpro.core.io.brat.internal.mapping.RelationMapping;
 import org.dkpro.core.io.brat.internal.mapping.TypeMappings;
 import org.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
@@ -150,6 +151,11 @@ public class BratWriter extends JCasFileWriter_ImplBase
     })
     private String[] typeMappings;
     
+    public static final String PARAM_CHECK_CONFLICTING_MAPPINGS = "checkConflictingMappings";
+    @ConfigurationParameter(name = PARAM_CHECK_CONFLICTING_MAPPINGS, mandatory = false, defaultValue = "true")
+    private Boolean checkConflictingMappings = null;    
+    
+    
     /**
      * The brat web application can currently not handle attributes on relations, thus they are
      * disabled by default. Here they can be enabled again.
@@ -201,12 +207,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
         converter.setRelationTypes(
                 relationTypes.stream().map(RelationMapping::parse).collect(Collectors.toList()));
         if (enableTypeMappings) {
-            converter.setTypeMapping(new TypeMappings(typeMappings));
-        }
-        
-        if (converter.getTypeMapping() != null) {
-            converter.getTypeMapping().checkForConflictingMappings();
-        }
+            TypeMappings defMappings = DefaultMappings.getDefaultMapping_UIMA2Brat()
+                                            .getTextTypeMapppings();
+            TypeMappings mergedMappings = 
+                            TypeMappings.merge(new TypeMappings(typeMappings), defMappings, 
+                                               checkConflictingMappings);
+//            converter.setTypeMapping(new TypeMappings(typeMappings));
+            converter.setTypeMapping(mergedMappings);
+        }        
     }
     
     @Override
