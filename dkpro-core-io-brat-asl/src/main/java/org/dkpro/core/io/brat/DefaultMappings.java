@@ -17,21 +17,16 @@ public class DefaultMappings {
     
     public  static Mapping getDefaultMapping_Brat2UIMA() {
         if (defaultMapping_Brat2UIMA == null) {
-            // AD: Here, I manually added mappings for types that
-            //   I use in my project. Need to extend it to 
-            //   all the dkpro-core packages that extend the
-            //   UIMA type system.
             //
-            //
-            //   Better yet, use the reflections library to find all
-            //   the classes in each of the packages:
+            //   TODO: Instead of explictly listing all the types in the dkpro-core 
+            //     UIMA type system, we could maybe use reflection to find all
+            //     the classes in each of the dkpro-core type packages:
             //
             //     https://stackoverflow.com/questions/520328/can-you-find-all-classes-in-a-package-using-reflection
             //
             //   That way, we only need to list the packages, not all the 
             //   classes.
-            //
-            
+            //            
             List<TypeMapping> txtTypeMappingLst = new ArrayList<TypeMapping>();
             TypeMappings txtTypeMappings = new TypeMappings(txtTypeMappingLst);
             {
@@ -80,14 +75,10 @@ public class DefaultMappings {
 
     public static Mapping getDefaultMapping_UIMA2Brat() {
         if (defaultMapping_UIMA2Brat == null) {
-            // TODO-AD: Here, I manually added mappings for types that
-            //   I use in my project. Need to extend it to 
-            //   all the dkpro-core packages that extend the
-            //   UIMA type system.
             //
-            //
-            //   Better yet, use the reflections library to find all
-            //   the classes in each of the packages:
+            //   TODO: Instead of explictly listing all the types in the dkpro-core 
+            //     UIMA type system, we could maybe use reflection to find all
+            //     the classes in each of the dkpro-core type packages:
             //
             //     https://stackoverflow.com/questions/520328/can-you-find-all-classes-in-a-package-using-reflection
             //
