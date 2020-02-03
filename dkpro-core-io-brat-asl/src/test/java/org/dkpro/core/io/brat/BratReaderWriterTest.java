@@ -186,7 +186,7 @@ public class BratReaderWriterTest
     }    
     
     @Test
-    public void test__SingleDir__ThatDoesContainAnnFiles__AssumesEmptyAnnFiles() throws Exception
+    public void test__SingleDir() throws Exception
     {
         
         ReaderAssert
