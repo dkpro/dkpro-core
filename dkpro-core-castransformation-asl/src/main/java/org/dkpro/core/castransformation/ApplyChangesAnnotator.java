@@ -20,6 +20,7 @@ package org.dkpro.core.castransformation;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -52,7 +53,21 @@ public class ApplyChangesAnnotator
 {
     public static final String VIEW_SOURCE = "source";
     public static final String VIEW_TARGET = "target";
-
+    
+    /**
+     * The source view to be read. Defaults to <code>"source"</code>.
+     */
+    public static final String PARAM_VIEW_SOURCE = "viewSource";
+    @ConfigurationParameter(name = PARAM_VIEW_SOURCE, defaultValue = VIEW_SOURCE)
+    private String viewSource;
+    
+    /**
+     * The target view to create. Defaults to <code>"target"</code>.
+     */
+    public static final String PARAM_VIEW_TARGET = "viewTarget";
+    @ConfigurationParameter(name = PARAM_VIEW_TARGET, defaultValue = VIEW_TARGET)
+    private String viewTarget;
+    
     public static final String OP_INSERT = "insert";
     public static final String OP_REPLACE = "replace";
     public static final String OP_DELETE = "delete";
@@ -62,8 +77,8 @@ public class ApplyChangesAnnotator
         throws AnalysisEngineProcessException
     {
         try {
-            JCas sourceView = aJCas.getView(VIEW_SOURCE);
-            JCas targetView = aJCas.createView(VIEW_TARGET);
+            JCas sourceView = aJCas.getView(viewSource);
+            JCas targetView = aJCas.createView(viewTarget);
             DocumentMetaData.copy(sourceView, targetView);
             applyChanges(sourceView, targetView);
         }
