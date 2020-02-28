@@ -17,17 +17,13 @@
  */
 package org.dkpro.core.io.conll;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.contentOf;
-import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.FilenameUtils;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;

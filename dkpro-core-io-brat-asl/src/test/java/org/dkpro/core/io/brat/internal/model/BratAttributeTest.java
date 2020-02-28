@@ -19,7 +19,6 @@ package org.dkpro.core.io.brat.internal.model;
 
 import static org.junit.Assert.assertEquals;
 
-import org.dkpro.core.io.brat.internal.model.BratAttribute;
 import org.junit.Test;
 
 public class BratAttributeTest

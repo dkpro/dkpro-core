@@ -17,15 +17,12 @@
  */
 package org.dkpro.core.io.bnc;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.contentOf;
-import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.dkpro.core.io.bnc.BncReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.WriterAssert;
@@ -44,18 +41,18 @@ public class BncReaderTest
     public void test() throws Exception
     {   
         ReaderAssert
-        .assertThat(BncReader.class,
-              BncReader.PARAM_LANGUAGE, "en")
-        .readingFrom("src/test/resources/FX8.xml")
-        .usingWriter(WriterAssert.simpleJCasDumper(new File("FX8.xml")))
-        .asFiles()
-        .allSatisfy(file -> {
-            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                    contentOf(new File("src/test/resources/", 
-                            file.getName()+".dump")));
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("FX8.xml");
+            .assertThat(BncReader.class,
+                  BncReader.PARAM_LANGUAGE, "en")
+            .readingFrom("src/test/resources/FX8.xml")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("FX8.xml")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", 
+                                file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("FX8.xml");
     }
     
     @Rule

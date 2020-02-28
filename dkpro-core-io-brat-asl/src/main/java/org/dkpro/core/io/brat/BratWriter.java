@@ -38,7 +38,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
-import org.dkpro.core.io.brat.internal.mapping.Mapping;
 import org.dkpro.core.io.brat.internal.mapping.RelationMapping;
 import org.dkpro.core.io.brat.internal.mapping.TypeMappings;
 import org.dkpro.core.io.brat.internal.model.BratAnnotationDocument;

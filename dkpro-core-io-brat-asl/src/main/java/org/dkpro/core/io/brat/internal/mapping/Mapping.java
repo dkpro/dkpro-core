@@ -22,7 +22,6 @@ import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ import java.util.Set;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
-import org.apache.uima.cas.Type;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -60,8 +58,10 @@ public class Mapping
                 aRelations, aComments);
     }
 
-    private void initializeMapping(TypeMappings aTextTypeMapppings, TypeMappings aRelationTypeMapppings,
-            List<SpanMapping> aTextAnnotations, List<RelationMapping> aRelations, List<CommentMapping> aComments) {
+    private void initializeMapping(TypeMappings aTextTypeMapppings,
+            TypeMappings aRelationTypeMapppings, List<SpanMapping> aTextAnnotations,
+            List<RelationMapping> aRelations, List<CommentMapping> aComments)
+    {
         textTypeMapppings = aTextTypeMapppings;
         relationTypeMapppings = aRelationTypeMapppings;
         

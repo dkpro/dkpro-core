@@ -27,8 +27,6 @@ import java.util.Set;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
-import org.apache.uima.cas.text.AnnotationFS;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
