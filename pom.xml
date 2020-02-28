@@ -52,14 +52,14 @@
   <repositories>
     <repository>
       <id>ukp-oss-model-releases</id>
-      <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
+      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
     </repository>
     <repository>
       <id>jcenter</id>
-      <url>http://jcenter.bintray.com</url>
+      <url>https://jcenter.bintray.com</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
@@ -798,7 +798,7 @@
                 <dependency>
                   <groupId>com.puppycrawl.tools</groupId>
                   <artifactId>checkstyle</artifactId>
-                  <version>8.26</version>
+                  <version>8.29</version>
                 </dependency>
               </dependencies>
               <configuration>
