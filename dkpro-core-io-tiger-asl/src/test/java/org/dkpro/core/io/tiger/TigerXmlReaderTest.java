@@ -98,19 +98,18 @@ public class TigerXmlReaderTest
         throws Exception
     {       
         ReaderAssert
-        .assertThat(TigerXmlReader.class,
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true)
-        .readingFrom("src/test/resources/tiger-sample.xml")
-        .usingWriter(WriterAssert.simpleJCasDumper(new File("tiger-sample.xml")))
-        .asFiles()
-        .allSatisfy(file -> {
-            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                    contentOf(new File("src/test/resources/", 
-                              file.getName()+".dump")));
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("tiger-sample.xml");
+            .assertThat(TigerXmlReader.class,
+                    TigerXmlReader.PARAM_LANGUAGE, "de",
+                    TigerXmlReader.PARAM_READ_PENN_TREE, true)
+            .readingFrom("src/test/resources/tiger-sample.xml")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("tiger-sample.xml")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("tiger-sample.xml");
         
     }
 
@@ -119,19 +118,18 @@ public class TigerXmlReaderTest
         throws Exception
     {
         ReaderAssert
-        .assertThat(TigerXmlReader.class,
-              TigerXmlReader.PARAM_LANGUAGE, "en",
-              TigerXmlReader.PARAM_READ_PENN_TREE, true)
-        .readingFrom("src/test/resources/semeval1010-en-sample.xml")
-        .usingWriter(WriterAssert.simpleJCasDumper(new File("semeval1010-en-sample.xml")))
-        .asFiles()
-        .allSatisfy(file -> {
-            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                    contentOf(new File("src/test/resources/", 
-                              file.getName()+".dump")));
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("semeval1010-en-sample.xml");
+            .assertThat(TigerXmlReader.class,
+                  TigerXmlReader.PARAM_LANGUAGE, "en",
+                  TigerXmlReader.PARAM_READ_PENN_TREE, true)
+            .readingFrom("src/test/resources/semeval1010-en-sample.xml")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("semeval1010-en-sample.xml")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("semeval1010-en-sample.xml");
     }
 
     @Test

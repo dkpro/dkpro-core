@@ -22,8 +22,6 @@ import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.attribute.FileAttribute;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.rules.TestWatcher;

@@ -105,7 +105,9 @@ public class Mapping
         return merge(customMapping, defaultMapping, null);
     }
         
-    public static Mapping merge(Mapping customMapping, Mapping defaultMapping, Boolean checkConflictingMappings) {
+    public static Mapping merge(Mapping customMapping, Mapping defaultMapping,
+            Boolean checkConflictingMappings)
+    {
         if (checkConflictingMappings == null) {
             checkConflictingMappings = true;
         }

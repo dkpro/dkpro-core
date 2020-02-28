@@ -28,11 +28,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +53,6 @@ import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.resources.FileCopy;
 import org.dkpro.core.api.resources.FileGlob;
 import org.dkpro.core.testing.IOTestRunner.Validator;
-import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.dkpro.core.testing.validation.checks.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,7 +162,7 @@ public class ReaderAssert
         try {
             paramSourceLocation = DkproTestContext.get().getTestInputFolder();
         } catch (IOException e) {
-            failWithMessage("Could not get the test inputs folder"+e.getMessage());
+            failWithMessage("Could not get the test inputs folder" + e.getMessage());
         }                
         File requestedSourceLocationFile = new File(requestedSourceLocation.toString());
         if (!requestedSourceLocationFile.isDirectory() &&
@@ -193,7 +188,8 @@ public class ReaderAssert
             }
             FileCopy.copyFolder(sourceLocationDir, inputsDir.toFile());
         } catch (IOException e) {
-            failWithMessage("Unable to copy files from "+requestedSourceLocation+" to test inputs directory.\n"+e.getMessage());
+            failWithMessage("Unable to copy files from " + requestedSourceLocation
+                    + " to test inputs directory.\n" + e.getMessage());
         }
         
         // Delete the -ref files from the inputs dir
@@ -225,7 +221,8 @@ public class ReaderAssert
         throws ResourceInitializationException
     {
 
-        AnalysisEngineDescription engDescr = createEngineDescription(aComponentClass, aConfigurationData);
+        AnalysisEngineDescription engDescr = createEngineDescription(aComponentClass,
+                aConfigurationData);
         return usingWriter(engDescr);
     }
         

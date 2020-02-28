@@ -49,20 +49,20 @@ public class NegraExportReaderTest
         throws Exception
     {
         ReaderAssert
-        .assertThat(NegraExportReader.class,
-              NegraExportReader.PARAM_LANGUAGE, "de",
-              NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
-              NegraExportReader.PARAM_READ_PENN_TREE, true)
-        .readingFrom("src/test/resources/sentence.export")
-        .usingWriter(WriterAssert.simpleJCasDumper(new File("sentence.export")))
-        .asFiles()
-        .allSatisfy(file -> {
-            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                    contentOf(new File("src/test/resources/", 
-                            file.getName() + ".dump")));
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("sentence.export");
+            .assertThat(NegraExportReader.class,
+                  NegraExportReader.PARAM_LANGUAGE, "de",
+                  NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
+                  NegraExportReader.PARAM_READ_PENN_TREE, true)
+            .readingFrom("src/test/resources/sentence.export")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("sentence.export")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", 
+                                file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("sentence.export");
     }
 
     @Test
@@ -70,20 +70,20 @@ public class NegraExportReaderTest
         throws Exception
     {
         ReaderAssert
-        .assertThat(NegraExportReader.class,
-              NegraExportReader.PARAM_LANGUAGE, "de",
-              NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-              NegraExportReader.PARAM_READ_PENN_TREE, true)
-        .readingFrom("src/test/resources/tiger-sample.export")
-        .usingWriter(WriterAssert.simpleJCasDumper(new File("tiger-sample.export")))
-        .asFiles()
-        .allSatisfy(file -> {
-            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                    contentOf(new File("src/test/resources/", 
-                            file.getName() + ".dump")));
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("tiger-sample.export");        
+            .assertThat(NegraExportReader.class,
+                  NegraExportReader.PARAM_LANGUAGE, "de",
+                  NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
+                  NegraExportReader.PARAM_READ_PENN_TREE, true)
+            .readingFrom("src/test/resources/tiger-sample.export")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("tiger-sample.export")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", 
+                                file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("tiger-sample.export");
     }
 
     @Test
@@ -91,41 +91,41 @@ public class NegraExportReaderTest
         throws Exception
     {
         ReaderAssert
-        .assertThat(NegraExportReader.class,
-              NegraExportReader.PARAM_LANGUAGE, "de",
-              NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
-              NegraExportReader.PARAM_READ_PENN_TREE, true)
-        .readingFrom("src/test/resources/tueba-sample.export")
-        .usingWriter(WriterAssert.simpleJCasDumper(new File("tueba-sample.export")))
-        .asFiles()
-        .allSatisfy(file -> {
-            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                    contentOf(new File("src/test/resources/", 
-                            file.getName()+".dump")));
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("tueba-sample.export");        
+            .assertThat(NegraExportReader.class,
+                  NegraExportReader.PARAM_LANGUAGE, "de",
+                  NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
+                  NegraExportReader.PARAM_READ_PENN_TREE, true)
+            .readingFrom("src/test/resources/tueba-sample.export")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("tueba-sample.export")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", 
+                                file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("tueba-sample.export");
     }
 
     @Test
     public void testFormat4WithCoref()
         throws Exception
     {
-                ReaderAssert
-                .assertThat(NegraExportReader.class,
-                      NegraExportReader.PARAM_LANGUAGE, "de",
-                      NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
-                      NegraExportReader.PARAM_READ_PENN_TREE, true)
-                .readingFrom("src/test/resources/format4-with-coref-sample.export")
-                .usingWriter(WriterAssert.simpleJCasDumper(new File("format4-with-coref-sample.export")))
-                .asFiles()
-                .allSatisfy(file -> {
-                    assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                            contentOf(new File("src/test/resources/", 
-                                    file.getName()+".dump")));
-                })
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("format4-with-coref-sample.export");        
+        ReaderAssert
+            .assertThat(NegraExportReader.class,
+                  NegraExportReader.PARAM_LANGUAGE, "de",
+                  NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
+                  NegraExportReader.PARAM_READ_PENN_TREE, true)
+            .readingFrom("src/test/resources/format4-with-coref-sample.export")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("format4-with-coref-sample.export")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", 
+                                file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("format4-with-coref-sample.export");
     }
 
     @Rule

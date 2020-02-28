@@ -240,7 +240,7 @@ public class IOTestRunner
         
         File reference = new File("src/test/resources/" + aExpectedFile);
         File input = new File("src/test/resources/" + aInputFile);
-      File output = DkproTestContext.get().getTestWorkspace(false);
+        File output = DkproTestContext.get().getTestWorkspace(false);
 
         setParameter(aReader, ComponentParameters.PARAM_SOURCE_LOCATION, input);
 

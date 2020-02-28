@@ -100,47 +100,47 @@ public class BratReaderWriterTest
         throws Exception
     {
         ReaderAssert
-        .assertThat(BratReader.class)
-        .readingFrom("src/test/resources/brat/document0a.txt")
-        .usingWriter(BratWriter.class)
-        .asFiles()
-        .allSatisfy(file -> {
-            if (!file.getName().endsWith(".conf")) {
-                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                        contentOf(new File("src/test/resources/brat", 
-                                file.getName())));
-            }
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
-                "visual.conf");
+            .assertThat(BratReader.class)
+            .readingFrom("src/test/resources/brat/document0a.txt")
+            .usingWriter(BratWriter.class)
+            .asFiles()
+            .allSatisfy(file -> {
+                if (!file.getName().endsWith(".conf")) {
+                    assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                            contentOf(new File("src/test/resources/brat", 
+                                    file.getName())));
+                }
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("annotation.conf", "document0a.ann", "document0a.txt",
+                    "visual.conf");
     }
 
     @Test
     public void test__SingleTxtFileWithoutAnAnnFile__AssumesEmptyAnnFiles() throws Exception
-        {
-            ReaderAssert
-                    .assertThat(BratReader.class)
-                    .readingFrom("src/test/resources/text-only/document0a.txt")
-                    .usingWriter(BratWriter.class)
-                    .asFiles()
-                    .allSatisfy(file -> {
-                        // The ".ann" files have been freshly generated and are empty
-                        if (file.getName().endsWith(".ann")) {
-                            assertThat(contentOf(file)).isEmpty();
-                        }
-                        // The ".text" files should match the originals
-                        if (file.getName().endsWith(".txt")) {
-                            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                                    contentOf(new File("src/test/resources/text-only", 
-                                            file.getName())));
-                        }
-                    })
-                    .extracting(File::getName)
-                    .containsExactlyInAnyOrder("annotation.conf", 
-                            "document0a.ann", "document0a.txt",
-                            "visual.conf");
-        }
+    {
+        ReaderAssert
+                .assertThat(BratReader.class)
+                .readingFrom("src/test/resources/text-only/document0a.txt")
+                .usingWriter(BratWriter.class)
+                .asFiles()
+                .allSatisfy(file -> {
+                    // The ".ann" files have been freshly generated and are empty
+                    if (file.getName().endsWith(".ann")) {
+                        assertThat(contentOf(file)).isEmpty();
+                    }
+                    // The ".text" files should match the originals
+                    if (file.getName().endsWith(".txt")) {
+                        assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                                contentOf(new File("src/test/resources/text-only", 
+                                        file.getName())));
+                    }
+                })
+                .extracting(File::getName)
+                .containsExactlyInAnyOrder("annotation.conf", 
+                        "document0a.ann", "document0a.txt",
+                        "visual.conf");
+    }
     
     @Test
     public void test__SingleAnnFile() throws Exception
@@ -184,7 +184,8 @@ public class BratReaderWriterTest
     
     
     @Test
-    public void test__SingleDir__ThatDoesNotContainsAnnFiles__AssumesEmptyAnnFiles() throws Exception
+    public void test__SingleDir__ThatDoesNotContainsAnnFiles__AssumesEmptyAnnFiles()
+        throws Exception
     {
         ReaderAssert
                 .assertThat(BratReader.class)
@@ -288,7 +289,7 @@ public class BratReaderWriterTest
     //   is raised, and the system is able to capture that annotation and 
     //   write it back the way it was read.
     //
-    @Test(expected=IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void test__AnnotationOfUnknownType__andAnnotationHasSomeAttributes() throws Throwable
     {
         try {
@@ -326,25 +327,27 @@ public class BratReaderWriterTest
     }
     
     @Test
-    public void test__ReaderCanAlwaysRecognizeFullyQualifiedClassName() throws ResourceInitializationException {
+    public void test__ReaderCanAlwaysRecognizeFullyQualifiedClassName()
+        throws ResourceInitializationException
+    {
         ReaderAssert
-        .assertThat(BratReader.class)
-        .readingFrom("src/test/resources/brat-no-mappings/merger-no-mapping.ann", true)
-        .usingWriter(BratWriter.class)
-        .asFiles()
-        .allSatisfy(file -> {
-            if (!file.getName().endsWith(".conf")) {
-                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                        contentOf(new File("src/test/resources/brat-no-mappings", 
-                                file.getName().replaceAll("\\.ann", ".withMappings.ann"))));
-            }
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("annotation.conf", "merger-no-mapping.ann", "merger-no-mapping.txt",
-                "visual.conf");        
+            .assertThat(BratReader.class)
+            .readingFrom("src/test/resources/brat-no-mappings/merger-no-mapping.ann", true)
+            .usingWriter(BratWriter.class)
+            .asFiles()
+            .allSatisfy(file -> {
+                if (!file.getName().endsWith(".conf")) {
+                    assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                            contentOf(new File("src/test/resources/brat-no-mappings", 
+                                    file.getName().replaceAll("\\.ann", ".withMappings.ann"))));
+                }
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("annotation.conf", "merger-no-mapping.ann", "merger-no-mapping.txt",
+                    "visual.conf");        
     }    
     
-    @Test(expected=IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void test__ConflictingReaderMappings__RaisesException() throws Throwable {
         
         String customMappings = String.join("\n",
@@ -365,29 +368,29 @@ public class BratReaderWriterTest
         
         try {
             ReaderAssert
-            .assertThat(BratReader.class,
-                    BratReader.PARAM_MAPPING, customMappings)
-            .readingFrom("src/test/resources/brat-basic/document0a.ann")
-            .usingWriter(BratWriter.class)
-            .asFiles(); 
+                .assertThat(BratReader.class,
+                        BratReader.PARAM_MAPPING, customMappings)
+                .readingFrom("src/test/resources/brat-basic/document0a.ann")
+                .usingWriter(BratWriter.class)
+                .asFiles(); 
         } catch (AssertionError e) {
             throw e.getCause();
         }
     }
     
-    @Test(expected=ResourceInitializationException.class)
+    @Test(expected = ResourceInitializationException.class)
     public void test__ConflictingWriterMappings__RaisesException() throws Throwable {
         String[] mappings = new String[] {
-                  "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> City",
-                  "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> Country"                  
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> City",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location -> Country"
         };  
         try {
             ReaderAssert
-            .assertThat(BratReader.class)
-            .readingFrom("src/test/resources/brat-basic/document0a.ann")
-            .usingWriter(BratWriter.class,
-                    BratWriter.PARAM_TYPE_MAPPINGS, mappings)
-            .asFiles();
+                .assertThat(BratReader.class)
+                .readingFrom("src/test/resources/brat-basic/document0a.ann")
+                .usingWriter(BratWriter.class,
+                        BratWriter.PARAM_TYPE_MAPPINGS, mappings)
+                .asFiles();
         } catch (AssertionError e) {
             throw e.getCause();
         }

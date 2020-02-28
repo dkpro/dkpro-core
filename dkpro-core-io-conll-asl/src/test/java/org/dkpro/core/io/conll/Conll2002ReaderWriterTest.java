@@ -52,26 +52,26 @@ public class Conll2002ReaderWriterTest
         throws Exception
     {
         ReaderAssert
-        .assertThat(Conll2002Reader.class,
-                Conll2002Reader.PARAM_LANGUAGE, "de", 
-                Conll2002Reader.PARAM_HAS_HEADER, true, 
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true)
-        .readingFrom("src/test/resources/conll/2002/germeval2014_test.conll")
-        .usingWriter(CasDumpWriter.class, 
-                CasDumpWriter.PARAM_TARGET_LOCATION, DkproTestContext.get().getTestOutputFile(new File("germeval2014_test.conll.out")),
-                CasDumpWriter.PARAM_SORT, true)
-        .asFiles()
-        .allSatisfy(file -> {
-            if (file.getName().endsWith(".conll")) {
-                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                        contentOf(new File("src/test/resources/conll/2002/", 
-                                file.getName()+".out")));
-            }
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("germeval2014_test.conll.out");
+            .assertThat(Conll2002Reader.class,
+                    Conll2002Reader.PARAM_LANGUAGE, "de", 
+                    Conll2002Reader.PARAM_HAS_HEADER, true, 
+                    Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
+                    Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
+                    Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true)
+            .readingFrom("src/test/resources/conll/2002/germeval2014_test.conll")
+            .usingWriter(CasDumpWriter.class, 
+                    CasDumpWriter.PARAM_TARGET_LOCATION, DkproTestContext.get().getTestOutputFile(new File("germeval2014_test.conll.out")),
+                    CasDumpWriter.PARAM_SORT, true)
+            .asFiles()
+            .allSatisfy(file -> {
+                if (file.getName().endsWith(".conll")) {
+                    assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                            contentOf(new File("src/test/resources/conll/2002/", 
+                                    file.getName() + ".out")));
+                }
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("germeval2014_test.conll.out");
     }
 
     @Rule

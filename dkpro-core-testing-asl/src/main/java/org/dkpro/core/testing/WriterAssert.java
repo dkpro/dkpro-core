@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -227,7 +226,7 @@ public class WriterAssert
                     contextOutputFolder = DkproTestContext.get().getTestOutputFolder();
                 } catch (IOException e) {
                     throw Failures.instance()
-                        .failure("Cannot get test output folder\n"+e.getMessage());
+                            .failure("Cannot get test output folder\n" + e.getMessage());
                 }
                 
                 return (T) replaceOnce(location, VAR_TARGET, contextOutputFolder.getPath());
@@ -316,7 +315,7 @@ public class WriterAssert
             }
         }
         
-        if (isSingular ==null) {
+        if (isSingular == null) {
             isSingular = singularTargetAnnounced;
         }
         
@@ -475,11 +474,14 @@ public class WriterAssert
         }
     }
     
-    public static AnalysisEngineDescription simpleJCasDumper(File targetLocation) throws ResourceInitializationException, IOException {
+    public static AnalysisEngineDescription simpleJCasDumper(File targetLocation)
+        throws ResourceInitializationException, IOException
+    {
         
         AnalysisEngineDescription writer = createEngineDescription(
                 CasDumpWriter.class, 
-                CasDumpWriter.PARAM_TARGET_LOCATION, DkproTestContext.get().getTestOutputFile(targetLocation),
+                CasDumpWriter.PARAM_TARGET_LOCATION, 
+                        DkproTestContext.get().getTestOutputFile(targetLocation),
                 CasDumpWriter.PARAM_SORT, true);
         
         return writer;

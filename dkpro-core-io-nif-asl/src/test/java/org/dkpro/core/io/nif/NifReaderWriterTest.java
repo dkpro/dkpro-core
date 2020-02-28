@@ -67,17 +67,17 @@ public class NifReaderWriterTest
         // ARQ.getContext().set(RIOT.multilineLiterals, true);
         
         ReaderAssert
-        .assertThat(NifReader.class)
-        .readingFrom("src/test/resources/nif/brown/a01-cooked.ttl")
-        .usingWriter(NifWriter.class)
-        .asFiles()
-        .allSatisfy(file -> {
-            assertThat(contentOf(file)).isEqualToNormalizingNewlines(
-                    contentOf(new File("src/test/resources/", 
-                              file.getName().replaceAll("\\.ttl", "-ref.ttl"))));
-        })
-        .extracting(File::getName)
-        .containsExactlyInAnyOrder("a01-cooked.ttl");
+            .assertThat(NifReader.class)
+            .readingFrom("src/test/resources/nif/brown/a01-cooked.ttl")
+            .usingWriter(NifWriter.class)
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/", 
+                                  file.getName().replaceAll("\\.ttl", "-ref.ttl"))));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("a01-cooked.ttl");
     }
     
     @Test

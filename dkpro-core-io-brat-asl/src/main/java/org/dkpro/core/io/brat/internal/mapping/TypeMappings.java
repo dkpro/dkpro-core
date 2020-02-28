@@ -192,8 +192,7 @@ public class TypeMappings
                 if (errMess == null) { 
                     errMess = "Conflicting mappings found for some patterns\n"; 
                 }
-                errMess +=  "'"+patt+"' mapped to:\n    " 
-                           + String.join("\n    ", substThisPatt);
+                errMess += "'" + patt + "' mapped to:\n    " + String.join("\n    ", substThisPatt);
             }
         }
         
