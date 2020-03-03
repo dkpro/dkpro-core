@@ -147,6 +147,8 @@
 		<antcall target="de-tagger-perceptron"/>
 		<antcall target="de-chunker-default"/>
         <antcall target="de-ner-nemgp"/>
+		<!-- added antcall by piush aggarwal on 02.03.2020 -->
+		<antcall target="de-chunker-tiger"/>
 	</target>
 	
 	<target name="de-sentence-maxent">
@@ -267,6 +269,33 @@
                 <entry key="DC.creator" value="Thomas Zastrow"/>
                 <entry key="DC.identifier" value="http://www.thomas-zastrow.de/nlp/nemgp_opennlp_01.bin"/>
                 <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/deed.de"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+	
+    <target name="de-chunker-tiger">
+        <!-- FILE: de-chunker-opennlp.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2020-03-02 | now        | f32c6396b409130c87feefcfbe830ecf | added by Piush Aggarwal
+          -->
+        <get 
+            src="http://www.ltl.uni-due.de/content/6-software/de-chunker-opennlp.bin" 
+            dest="target/download/de-chunker-opennlp.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/de-chunker-opennlp.bin" 
+            md5="f32c6396b409130c87feefcfbe830ecf"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20200302"
+            metaDataVersion="1"
+            tool="chunker" 
+            language="de" 
+            variant="tiger" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="de-chunker-opennlp.bin"/>
+                <entry key="DC.creator" value="LTL, University of Duisburg-Essen"/>
+                <entry key="DC.identifier" value="http://www.ltl.uni-due.de/content/6-software/de-chunker-opennlp.bin"/>
             </metadata>
         </install-stub-and-upstream-file>
     </target>
@@ -655,9 +684,64 @@
 
 	<target name="en-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
 		<mkdir dir="target/download"/>
-		<!-- FILE: en-pos-perceptron-c0-b3-dev.bin - - - - - - - - - - - - - - - - - - - - - - - - -
+		<!-- added following code snippet by piush aggarwal on 02.03.2020
+		-->
+		<get 
+    		src="http://ixa2.si.ehu.es/ixa-pipes/models/morph-models-1.5.0.tar.gz" 
+    		dest="target/download/morph-models-1.5.0.tar.gz" 
+    		skipexisting="true"/>
+		<!-- FILE: en-pos-perceptron-autodict01-conll09.bin - - - - - - - - - - - - - - - - - - - - - - - - -
+				  - 2020-01-23 | now        | 10c30f699cab41806490967c36b0a4ea
+				  -->
+
+		<gunzip src="target/download/morph-models-1.5.0.tar.gz" 
+					dest="target/download" />
+		
+		<untar 
+			src="target/download/morph-models-1.5.0.tar" 
+			dest="target/download">
+			<patternset>
+    			<include name="*/en/en-pos-perceptron-autodict01-conll09.bin" />		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten" />
+    		</chainedmapper>
+    	</untar>
+    	<install-stub-and-upstream-file 
+    		file="target/download/en-pos-perceptron-autodict01-conll09.bin" 
+    		md5="10c30f699cab41806490967c36b0a4ea"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20131115"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="en" 
+    		variant="perceptron-ixa" 
+    		extension="bin">
+			<metadata>
+				<entry key="DC.title" value="en-pos-perceptron-autodict01-conll09.bin"/>
+				<entry key="DC.creator" value="Rodrigo Agerri"/>
+				<entry key="CD.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/morph-models-1.5.0.tar.gz#*/en/en-pos-perceptron-autodict01-conll09.bin"/>
+
+	    		<entry key="pos.tagset" value="ptb"/>
+				<!--
+			      - Contains 78 tags because it includes multitags such as "IN|RB" or "RB|IN", looks
+		          - otherwise like PTB tagset. We tell OpenNlpPosTagger to keep only the first
+		          - tag.
+				  -->
+				<entry key="pos.tagset.tagSplitPattern" value="\|"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+
+
+		<!-- ends writing code-snippet by piush aggarwal on 02.03.2020
+				-->
+		
+		<!-- ignore comment started by piush aggarwal on 02.03.2020
+						
+		<!- FILE: en-pos-perceptron-c0-b3-dev.bin - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2013-11-15 | now        | bf0545ff008f211bb282ce08f6977872
-		  -->
+		  ->
     	<install-stub-and-upstream-file 
     		file="target/download/ixa-pos-resources/en-pos-perceptron-c0-b3-dev.bin" 
     		md5="bf0545ff008f211bb282ce08f6977872"
@@ -672,16 +756,18 @@
 			<metadata>
 				<entry key="DC.title" value="en-pos-perceptron-c0-b3-dev.bin"/>
 				<entry key="DC.creator" value="Rodrigo Agerri"/>
+				
 				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#en-pos-perceptron-c0-b3-dev.bin"/>
 	    		<entry key="pos.tagset" value="ptb"/>
-				<!--
+				<!-
 			      - Contains 78 tags because it includes multitags such as "IN|RB" or "RB|IN", looks
 		          - otherwise like PTB tagset. We tell OpenNlpPosTagger to keep only the first
 		          - tag.
-				  -->
+				  ->
 				<entry key="pos.tagset.tagSplitPattern" value="\|"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+		-->
 	</target>
 
     <target name="en-parser-chunking-ixa" depends="download-ixa-parser-resources">
@@ -716,7 +802,9 @@
 		<antcall target="es-ner-organization"/>
 		<antcall target="es-ner-person"/>
 		<antcall target="es-tagger-maxent"/>
+		<!-- commented by piush aggarwal on 28.01.2020 because of no availability of model
 		<antcall target="es-tagger-maxent-ixa"/>
+		-->
 		<antcall target="es-tagger-maxent-universal"/>
 		<antcall target="es-tagger-perceptron"/>
 		<antcall target="es-tagger-perceptron-ixa"/>
@@ -913,11 +1001,17 @@
     		extension="bin">
 		</install-stub-and-upstream-file>
 	</target>
-
+	
+	
+	
+	
+	<!-- commented by piush aggarwal on 28.01.2020 because of non-availbility of model -->
+	
+	<!--
 	<target name="es-tagger-maxent-ixa" depends="download-ixa-pos-resources">
-		<!-- FILE: es-pos-maxent-700-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		<!- FILE: es-pos-maxent-700-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-04-25 | now        | 6893840d709c581e378750b53f24531b
-		  -->
+		  ->
     	<install-stub-and-upstream-file 
     		file="target/download/ixa-pos-resources/es-pos-maxent-700-c0-b3.bin" 
     		md5="6893840d709c581e378750b53f24531b"
@@ -937,14 +1031,42 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
+	-->
+	
+	
 
 	<target name="es-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
 		<!-- FILE: es-pos-perceptron-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2013-11-15 | now        | 148d7ff4c56c89624e6050fe608f6d8a
 		  -->
+		<!-- added by piush aggarwal
+		-->
+		<get 
+    		src="http://ixa2.si.ehu.es/ixa-pipes/models/morph-models-1.5.0.tar.gz" 
+    		dest="target/download/morph-models-1.5.0.tar.gz" 
+    		skipexisting="true"/>
+		<!-- FILE: en-pos-perceptron-autodict01-conll09.bin - - - - - - - - - - - - - - - - - - - - - - - - -
+				  - 2020-01-23 | now        | 10c30f699cab41806490967c36b0a4ea
+				  -->
+
+		<gunzip src="target/download/morph-models-1.5.0.tar.gz" 
+					dest="target/download" />
+		
+		<untar 
+			src="target/download/morph-models-1.5.0.tar" 
+			dest="target/download">
+			<patternset>
+    			<include name="*/es/es-pos-perceptron-autodict01-ancora-2.0.bin" />		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten" />
+    		</chainedmapper>
+    	</untar>
+		
+		
     	<install-stub-and-upstream-file 
-    		file="target/download/ixa-pos-resources/es-pos-perceptron-c0-b3.bin" 
-    		md5="148d7ff4c56c89624e6050fe608f6d8a"
+    		file="target/download/es-pos-perceptron-autodict01-ancora-2.0.bin" 
+    		md5="e0a64cfbda9c33834fe45e7f1dc36c1d"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		upstreamVersion="20131115"
@@ -954,14 +1076,22 @@
     		variant="perceptron-ixa" 
     		extension="bin">
 			<metadata>
-				<entry key="DC.title" value="es-pos-perceptron-c0-b3.bin"/>
+				<entry key="DC.title" value="es-pos-perceptron-autodict01-ancora-2.0.bin"/>
 				<entry key="DC.creator" value="Rodrigo Agerri"/>
-				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#es-pos-perceptron-c0-b3.bin"/>
+				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/morph-models-1.5.0.tar.gz#es-pos-perceptron-autodict01-ancora-2.0.bin"/>
 	    		<entry key="pos.tagset" value="ancora-ixa"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
 	
+	
+	
+	
+	
+	
+	
+	
+
     <target name="es-parser-chunking-ixa" depends="download-ixa-parser-resources">
         <!-- FILE: es-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           - 2014-04-26 | now        | 42589e408c5ed89beaf8107662bc751c
