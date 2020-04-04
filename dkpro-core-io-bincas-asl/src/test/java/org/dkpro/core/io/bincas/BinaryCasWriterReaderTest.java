@@ -19,7 +19,11 @@ package org.dkpro.core.io.bincas;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
+import static org.apache.uima.cas.SerialFormat.BINARY_TSI;
 import static org.apache.uima.cas.SerialFormat.COMPRESSED_FILTERED;
+import static org.apache.uima.cas.SerialFormat.COMPRESSED_FILTERED_TSI;
+import static org.apache.uima.cas.SerialFormat.COMPRESSED_TSI;
+import static org.apache.uima.cas.SerialFormat.SERIALIZED_TSI;
 import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
 import static org.apache.uima.cas.impl.Serialization.serializeCASComplete;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -71,9 +75,6 @@ import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.CasIOUtils;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.resources.CompressionMethod;
-import org.dkpro.core.io.bincas.BinaryCasReader;
-import org.dkpro.core.io.bincas.BinaryCasWriter;
-import org.dkpro.core.io.bincas.SerializedCasWriter;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
@@ -670,7 +671,7 @@ public class BinaryCasWriterReaderTest
         // Set up configurations
         Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<>();
         configs.put(
-                "Format S - no compression",
+                "Format S - no external compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_OVERWRITE, true,
@@ -678,7 +679,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
-                "Format S+ - no compression",
+                "Format S+ - no external compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_OVERWRITE, true,
@@ -686,7 +687,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
-                "Format 0 - no compression",
+                "Format 0 - no external compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_OVERWRITE, true,
@@ -694,7 +695,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
-                "Format 4 - no compression",
+                "Format 4 - no external compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_OVERWRITE, true,
@@ -702,7 +703,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
-                "Format 6 - no compression",
+                "Format 6 - no external compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_OVERWRITE, true,
@@ -710,11 +711,47 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
-                "Format 6+ - no compression",
+                "Format 6+ - no external compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "6+", 
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
+        configs.put(
+                "Format BINARY_TSI - no external compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
+                    BinaryCasWriter.PARAM_FORMAT, BINARY_TSI, 
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
+        configs.put(
+                "Format SERIALIZED_TSI - no external compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
+                    BinaryCasWriter.PARAM_FORMAT, SERIALIZED_TSI, 
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
+        configs.put(
+                "Format COMPRESSED_TSI - no external compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
+                    BinaryCasWriter.PARAM_FORMAT, COMPRESSED_TSI, 
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
+        configs.put(
+                "Format COMPRESSED_FILTERED_TSI - no external compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
+                    BinaryCasWriter.PARAM_FORMAT, COMPRESSED_FILTERED_TSI, 
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
 //        configs.put(
