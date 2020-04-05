@@ -132,7 +132,7 @@ public class OpenNlpPosTaggerBulkTest
                     new String[] { "pron-det", "v-fin", "artm", "nm", "." },
                     new String[] { "POS", "POS", "POS", "POS", "POS" } } };
     
-    @Parameters(name = "{index}: {0}-{1} {2}: [{4}]")
+    @Parameters
     public static Collection<Object[]> data() {
         return asList(DATA);
     }
