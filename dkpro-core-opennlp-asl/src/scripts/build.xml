@@ -17,7 +17,7 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.6.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
 	</import>
 
 	<!-- 
@@ -146,7 +146,7 @@
 		<antcall target="de-tagger-maxent"/>
 		<antcall target="de-tagger-perceptron"/>
 		<antcall target="de-chunker-default"/>
-        <antcall target="de-ner-nemgp"/>
+		<antcall target="de-ner-nemgp"/>
 	</target>
 	
 	<target name="de-sentence-maxent">
@@ -299,7 +299,7 @@
 
 	<target name="en">
 		<antcall target="en-chunker-default"/>
-        <antcall target="en-chunker-perceptron-ixa"/>
+		<antcall target="en-chunker-perceptron-ixa"/>
 		<antcall target="en-ner-date"/>
 		<antcall target="en-ner-location"/>
 		<antcall target="en-ner-money"/>
@@ -308,11 +308,10 @@
 		<antcall target="en-ner-person"/>
 		<antcall target="en-ner-time"/>
 		<antcall target="en-parser-chunking"/>
-        <antcall target="en-parser-chunking-ixa"/>
+		<antcall target="en-parser-chunking-ixa"/>
 		<antcall target="en-sentence-maxent"/>
 		<antcall target="en-tagger-maxent"/>
 		<antcall target="en-tagger-perceptron"/>
-		<antcall target="en-tagger-perceptron-ixa"/>
 		<antcall target="en-token-maxent"/>
 	</target>
 
@@ -387,7 +386,7 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-
+    
 	<target name="en-tagger-perceptron">
 		<mkdir dir="target/download"/>
 		<!-- FILE: models-1.5/en-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
@@ -653,37 +652,6 @@
 		</install-stub-and-upstream-file>
 	</target>
 
-	<target name="en-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
-		<mkdir dir="target/download"/>
-		<!-- FILE: en-pos-perceptron-c0-b3-dev.bin - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-11-15 | now        | bf0545ff008f211bb282ce08f6977872
-		  -->
-    	<install-stub-and-upstream-file 
-    		file="target/download/ixa-pos-resources/en-pos-perceptron-c0-b3-dev.bin" 
-    		md5="bf0545ff008f211bb282ce08f6977872"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20131115"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="en" 
-    		variant="perceptron-ixa" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="en-pos-perceptron-c0-b3-dev.bin"/>
-				<entry key="DC.creator" value="Rodrigo Agerri"/>
-				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#en-pos-perceptron-c0-b3-dev.bin"/>
-	    		<entry key="pos.tagset" value="ptb"/>
-				<!--
-			      - Contains 78 tags because it includes multitags such as "IN|RB" or "RB|IN", looks
-		          - otherwise like PTB tagset. We tell OpenNlpPosTagger to keep only the first
-		          - tag.
-				  -->
-				<entry key="pos.tagset.tagSplitPattern" value="\|"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-
     <target name="en-parser-chunking-ixa" depends="download-ixa-parser-resources">
         <!-- FILE: en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           - 2014-04-26 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
@@ -716,12 +684,10 @@
 		<antcall target="es-ner-organization"/>
 		<antcall target="es-ner-person"/>
 		<antcall target="es-tagger-maxent"/>
-		<antcall target="es-tagger-maxent-ixa"/>
 		<antcall target="es-tagger-maxent-universal"/>
 		<antcall target="es-tagger-perceptron"/>
-		<antcall target="es-tagger-perceptron-ixa"/>
 		<antcall target="es-tagger-perceptron-universal"/>
-        <antcall target="es-parser-chunking-ixa"/>
+		<antcall target="es-parser-chunking-ixa"/>
 	</target>
 
 	<target name="es-tagger-maxent">
@@ -914,54 +880,6 @@
 		</install-stub-and-upstream-file>
 	</target>
 
-	<target name="es-tagger-maxent-ixa" depends="download-ixa-pos-resources">
-		<!-- FILE: es-pos-maxent-700-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2014-04-25 | now        | 6893840d709c581e378750b53f24531b
-		  -->
-    	<install-stub-and-upstream-file 
-    		file="target/download/ixa-pos-resources/es-pos-maxent-700-c0-b3.bin" 
-    		md5="6893840d709c581e378750b53f24531b"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20140425"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="maxent-ixa" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="es-pos-maxent-700-c0-b3.bin"/>
-				<entry key="DC.creator" value="Rodrigo Agerri"/>
-				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#es-pos-maxent-700-c0-b3.bin"/>
-	    		<entry key="pos.tagset" value="ancora-ixa"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-
-	<target name="es-tagger-perceptron-ixa" depends="download-ixa-pos-resources">
-		<!-- FILE: es-pos-perceptron-c0-b3.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-11-15 | now        | 148d7ff4c56c89624e6050fe608f6d8a
-		  -->
-    	<install-stub-and-upstream-file 
-    		file="target/download/ixa-pos-resources/es-pos-perceptron-c0-b3.bin" 
-    		md5="148d7ff4c56c89624e6050fe608f6d8a"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20131115"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="perceptron-ixa" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="es-pos-perceptron-c0-b3.bin"/>
-				<entry key="DC.creator" value="Rodrigo Agerri"/>
-				<entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz#es-pos-perceptron-c0-b3.bin"/>
-	    		<entry key="pos.tagset" value="ancora-ixa"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-	</target>
-	
     <target name="es-parser-chunking-ixa" depends="download-ixa-parser-resources">
         <!-- FILE: es-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           - 2014-04-26 | now        | 42589e408c5ed89beaf8107662bc751c
@@ -1010,7 +928,7 @@
             </metadata>
         </install-stub-and-upstream-file>
     </target>
-    
+
 	<target name="it">
 		<antcall target="it-sentence-maxent"/>
 		<antcall target="it-tagger-maxent"/>
@@ -1651,32 +1569,6 @@
 	    		<entry key="pos.tagset" value="talbanken05"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-	</target>
-	
-	<target name="-check-download-ixa-pos-resources">
-		<available 
-			property="download-ixa-pos-resources.DONE" 
-			file="target/download/ixa-pos-resources/DONE"/>
-	</target>
-
-	<target name="download-ixa-pos-resources" depends="-check-download-ixa-pos-resources" unless="download-ixa-pos-resources.DONE">
-		<mkdir dir="target/download/ixa-pos-resources"/>
-    	<get 
-    		src="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz" 
-    		dest="target/download/ixa-pos-resources/pos-resources.tgz" 
-    		skipexisting="true"/>
-		<untar 
-			src="target/download/ixa-pos-resources/pos-resources.tgz" 
-			dest="target/download/ixa-pos-resources"
-            compression="gzip">
-    		<patternset>
-    			<include name="**/*.bin"/>		
-			</patternset>
-    		<chainedmapper>
-	    		<mapper type="flatten"/>
-    		</chainedmapper>
-    	</untar>
-		<touch file="target/download/ixa-pos-resources/DONE"/>
 	</target>
 	
     <target name="-check-download-ixa-parser-resources">
