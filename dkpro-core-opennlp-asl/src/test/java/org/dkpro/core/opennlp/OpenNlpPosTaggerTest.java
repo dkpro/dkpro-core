@@ -29,13 +29,10 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.ResourceObjectProviderBase;
-import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -141,145 +138,6 @@ public class OpenNlpPosTaggerTest
                 System.getProperties().remove(ResourceObjectProviderBase.PROP_REPO_OFFLINE);
             }
         }
-    }
-    @Test
-    public void testEnglish()
-        throws Exception
-    {
-        runTest("en", null, "This is a test .",
-                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "POS_DET",  "POS_VERB",   "POS_DET", "POS_NOUN",   "POS_PUNCT" });
-
-        runTest("en", null, "A neural net .",
-                new String[] { "DT",  "JJ",     "NN",  "." },
-                new String[] { "POS_DET", "POS_ADJ",    "POS_NOUN",  "POS_PUNCT" });
-
-        runTest("en", null, "John is purchasing oranges .",
-                new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
-        
-        // This is WRONG tagging. "jumps" is tagged as "NNS"
-        runTest("en", "maxent", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },
-                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
-                        "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
-    }
-    
-    @Test
-    public void testEnglishExtra()
-        throws Exception
-    {
-        runTest("en", "perceptron", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },
-                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
-                        "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
-
-        runTest("en", "perceptron-ixa", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },
-                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
-                        "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
-    }
-
-    @Test
-    public void testGerman()
-        throws Exception
-    {
-        runTest("de", null, "Das ist ein Test .",
-                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
-
-        runTest("de", "maxent", "Das ist ein Test .",
-                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
-
-        runTest("de", "perceptron", "Das ist ein Test .",
-                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
-    }
-
-    @Test
-    public void testItalian()
-        throws Exception
-    {
-        runTest("it", null, "Questo è un test .",
-                new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
-                new String[] { "POS_PRON", "POS_VERB",    "POS_DET", "POS_NOUN", "POS_PUNCT" });
-        
-        runTest("it", "perceptron", "Questo è un test .",
-                new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
-                new String[] { "POS_PRON", "POS_VERB",    "POS_DET", "POS_NOUN", "POS_PUNCT" });
-    }
-
-    @Ignore("We don't have these models integrated yet")
-    @Test
-    public void testPortuguese()
-        throws Exception
-    {
-        String[] bosqueTags = new String[] { "?", "adj", "adv", "art", "conj-c", "conj-s", "ec",
-                "in", "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp",
-                "punc", "v-fin", "v-ger", "v-inf", "v-pcp", "vp" };
-        
-        JCas jcas = runTest("pt", null, "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PRON", "V", "ART", "NN", "PUNC" });
-
-        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
-                
-        jcas = runTest("pt", "maxent", "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PRON", "V", "ART", "NN", "PUNC" });
-
-        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
-        
-        jcas = runTest("pt", "perceptron", "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PRON", "V", "ART", "NN", "PUNC" });
-
-        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
-        
-        jcas = runTest("pt", "mm-maxent", "Este é um teste .",
-                new String[] { "PROSUB", "V",   "ART", "N",   "." },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
-
-        // AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
-        
-        jcas = runTest("pt", "mm-perceptron", "Este é um teste .",
-                new String[] { "PROSUB", "V",   "ART", "N",   "." },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
-        
-        // AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
-        
-        jcas = runTest("pt", "cogroo", "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "artm", "nm", "." },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
-        
-        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
-    }
-    
-    @Test
-    public void testSpanish()
-        throws Exception
-    {
-        runTest("es", "maxent", "Esta es una prueba .",
-                new String[] { "PD", "VSI", "DI",  "NC", "Fp"   },
-                new String[] { "POS_PRON", "POS_VERB",   "POS_DET", "POS_NOUN", "POS_PUNCT" });
-
-        runTest("es", "maxent-ixa", "Esta es una prueba .", 
-                new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp"}, 
-                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
-
-        runTest("es", "perceptron-ixa", "Esta es una prueba .",
-                new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp"}, 
-                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
-    }
-
-    @Test
-    public void testSwedish()
-        throws Exception
-    {
-        runTest("sv", "maxent", "Detta är ett test .",
-                new String[] { "PO",  "AV",  "EN",  "NN",  "IP"    },
-                new String[] { "POS", "POS", "POS", "POS", "POS" });
     }
 
     private JCas runTest(String language, String variant, String testDocument, String[] tags,
