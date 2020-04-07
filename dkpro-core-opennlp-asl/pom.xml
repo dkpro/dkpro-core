@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <opennlp.version>1.9.1</opennlp.version>
+    <opennlp.version>1.9.2</opennlp.version>
   </properties>
   <dependencies>
     <dependency>
@@ -50,6 +50,14 @@
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-featurepath-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
