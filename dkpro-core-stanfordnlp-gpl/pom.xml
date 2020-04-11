@@ -53,7 +53,7 @@
     <dependency>
       <groupId>com.googlecode.efficient-java-matrix-library</groupId>
       <artifactId>ejml</artifactId>
-      <version>0.23</version>
+      <version>0.25</version>
     </dependency>
     <dependency>
       <groupId>edu.stanford.nlp</groupId>
@@ -267,7 +267,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-ar-sr</artifactId>
-        <version>20141031.1</version>
+        <version>20180227.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -397,7 +397,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-left3words-distsim</artifactId>
-        <version>20131112.1</version>
+        <version>20140616.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

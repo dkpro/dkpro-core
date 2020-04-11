@@ -195,7 +195,7 @@ public class DatasetFactory
         // Load the YAML descriptions
         Map<String, DatasetDescriptionImpl> sets = new LinkedHashMap<>();
         for (Resource res : resources) {
-            LOG.debug("Loading [" + res + "]");
+            LOG.trace("Loading [" + res + "]");
             try (InputStream is = res.getInputStream()) {
                 String id = FilenameUtils.getBaseName(res.getFilename());
                 DatasetDescriptionImpl ds = yaml.loadAs(is, DatasetDescriptionImpl.class);
@@ -211,6 +211,9 @@ public class DatasetFactory
                 sets.put(ds.getId(), ds);
             }
         }
+        
+        LOG.debug("Loaded [" + sets.size() + "] dataset description");
+
         
         return sets;
     }

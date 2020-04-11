@@ -1,0 +1,75 @@
+<ruleset comparisonMethod="maven"
+         xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0 http://mojo.codehaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
+  <ignoreVersions>
+    <ignoreVersion type="regex">.*-alpha[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-beta[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*\.rc[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-M[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-b[0-9]+</ignoreVersion>
+    <ignoreVersion type="regex">.*-b[0-9]+\.[0-9]+</ignoreVersion>
+    <ignoreVersion type="regex">.*-atlassian.*</ignoreVersion>
+  </ignoreVersions>
+  <rules>
+    <rule groupId="commons-collections" artifactId="commons-collections" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <rule groupId="dom4j" artifactId="dom4j" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion>20040902.021138</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <!-- PIN: Spring 4.x -->
+    <rule groupId="org.springframework" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">^5.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <!-- PIN: Xerces 2.9.1 -->
+    <rule groupId="xerces" artifactId="xercesImpl" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!-- PIN: stax2-api 3.x -->
+    <rule groupId="org.codehaus.woodstox" artifactId="stax2-api" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">^4.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!-- PIN: Lucene 4.4.x -->
+    <rule groupId="org.apache.lucene" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[4-9].*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <!-- PIN: Berkeleyparser r32 -->
+    <rule groupId="edu.berkeley.nlp" artifactId="berkeleyparser" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!-- Ignore old versions: jtok -->
+    <rule groupId="de.dfki.lt.jtok" artifactId="jtok-core" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">2\.[0-9]{2}</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <!-- Bad models? -->
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.matetools-model-*" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion>20140113.0</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+  </rules>
+</ruleset>

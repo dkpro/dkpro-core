@@ -31,7 +31,7 @@
   <name>DKPro Core GPL - LingPipe (v ${lingpipe.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <lingpipe.version>4.1.0</lingpipe.version>
+    <lingpipe.version>4.1.2-JL1.0</lingpipe.version>
   </properties>
   <dependencies>
     <dependency>

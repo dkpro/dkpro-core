@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - MaltParser (v ${maltparser.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <maltparser.version>1.9.1</maltparser.version>
+    <maltparser.version>1.9.2</maltparser.version>
   </properties>
   <dependencies>
     <dependency>

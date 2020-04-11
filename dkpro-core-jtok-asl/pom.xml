@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - JTok (v ${jtok.version}) (LGPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <jtok.version>2.1.18</jtok.version>
+    <jtok.version>2.1.19</jtok.version>
   </properties>
   <dependencies>
     <dependency>

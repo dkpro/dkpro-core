@@ -47,7 +47,7 @@
     <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-pos</artifactId>
-      <version>1.5.1</version>
+      <version>1.5.3</version>
     </dependency>
     <!--
       <dependency>
