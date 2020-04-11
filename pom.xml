@@ -38,13 +38,13 @@
   <properties>
     <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <uima.version>3.1.0</uima.version>
-    <uimafit.version>3.0.0</uimafit.version>
-    <uimafit.plugin.version>3.0.0</uimafit.plugin.version>
+    <uima.version>3.1.1</uima.version>
+    <uimafit.version>3.1.0-SNAPSHOT</uimafit.version>
+    <uimafit.plugin.version>3.1.0-SNAPSHOT</uimafit.plugin.version>
     <omtd.version>3.0.2.7</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>4.3.22.RELEASE</spring.version>
+    <spring.version>4.3.26.RELEASE</spring.version>
     <slf4j.version>1.7.26</slf4j.version>
     <log4j.version>2.7</log4j.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
@@ -81,7 +81,7 @@
     <repository>
       <id>apache.snapshots</id>
       <name>Apache Snapshot Repository</name>
-      <url>http://repository.apache.org/snapshots</url>
+      <url>https://repository.apache.org/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -93,7 +93,7 @@
     <!--
     <repository>
       <id>ukp-oss-snapshots</id>
-      <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
+      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -133,7 +133,7 @@
     <pluginRepository>
       <id>apache.snapshots</id>
       <name>Apache Snapshot Repository</name>
-      <url>http://repository.apache.org/snapshots</url>
+      <url>https://repository.apache.org/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -805,13 +805,11 @@
     </profile>
     <profile>
       <id>checkstyle</id>
-      <!--  
       <activation>
         <file>
           <exists>src</exists>
         </file>
       </activation>
-      -->
       <build>
         <plugins>
           <plugin>
@@ -824,7 +822,7 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-checkstyle-plugin</artifactId>
-              <version>3.1.0</version>
+              <version>3.1.1</version>
               <inherited>true</inherited>
               <dependencies>
                 <dependency>
@@ -835,7 +833,7 @@
                 <dependency>
                   <groupId>com.puppycrawl.tools</groupId>
                   <artifactId>checkstyle</artifactId>
-                  <version>8.29</version>
+                  <version>8.31</version>
                 </dependency>
               </dependencies>
               <configuration>

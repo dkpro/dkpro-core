@@ -31,8 +31,8 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.assertj.core.api.ListAssert;
 import org.dkpro.core.io.imscwb.ImsCwbWriter;
-import org.dkpro.core.testing.ReaderAssert;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
 import org.junit.Rule;
 import org.junit.Test;
 
