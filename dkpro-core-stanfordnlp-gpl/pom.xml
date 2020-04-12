@@ -53,7 +53,8 @@
     <dependency>
       <groupId>com.googlecode.efficient-java-matrix-library</groupId>
       <artifactId>ejml</artifactId>
-      <version>0.25</version>
+      <!-- CAUTION: Upgrade to newer version breaks deserialization of coref models -->
+      <version>0.23</version>
     </dependency>
     <dependency>
       <groupId>edu.stanford.nlp</groupId>

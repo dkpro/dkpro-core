@@ -58,6 +58,17 @@
       </ignoreVersions>
     </rule>
 
+    <!-- 
+      - PIN: Berkeleyparser 0.232 
+      - 
+      - Upgrading to newer version breaks deserialization of StanfordNLP coref models.
+      -->
+    <rule groupId="com.googlecode.efficient-java-matrix-library" artifactId="ejml" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
     <!-- Ignore old versions: jtok -->
     <rule groupId="de.dfki.lt.jtok" artifactId="jtok-core" comparisonMethod="maven"> 
       <ignoreVersions>
