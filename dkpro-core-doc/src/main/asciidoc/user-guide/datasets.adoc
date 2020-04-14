@@ -98,6 +98,11 @@ artifacts:: A list of artifacts that make of the dataset. The relevant artifacts
             It is possible to set the **verificationMode** to **TEXT** in order to normalize whitespace
             before calculating the checksum. This is recommended for license files or documentation but
             not for actual data files (even if they are in a text format such as a CoNLL variant).+
+            An artifact can be marked as optional by setting **optional** to **true**. This is useful
+            when referencing secondary artifacts such as licenses or documentation from sources other than
+            the main dataset files. E.g. if the sources for the secondary artifacts are not available, then
+            failing to download the optional artifacts will not fail the materialization of the entire
+            dataset.+
 +
 .Example artifacts section
 [source,yaml,indent=0]

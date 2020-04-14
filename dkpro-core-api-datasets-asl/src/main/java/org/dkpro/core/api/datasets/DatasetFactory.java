@@ -19,12 +19,13 @@ package org.dkpro.core.api.datasets;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.unmodifiableList;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.commons.io.IOUtils.toInputStream;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -58,7 +59,9 @@ import org.dkpro.core.api.datasets.internal.LicenseDescriptionImpl;
 import org.dkpro.core.api.datasets.internal.LoadedDataset;
 import org.dkpro.core.api.datasets.internal.actions.Action_ImplBase;
 import org.dkpro.core.api.datasets.internal.actions.Explode;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
@@ -76,9 +79,11 @@ public class DatasetFactory
     
     private final Map<String, Class<? extends Action_ImplBase>> actionRegistry;
 
-    private final Log LOG = LogFactory.getLog(getClass());
+    private final Log log = LogFactory.getLog(getClass());
 
     private Path cacheRoot;
+    
+    private ClassLoader classLoader;
     
     {
         actionRegistry = new HashMap<>();
@@ -90,14 +95,20 @@ public class DatasetFactory
         // Nothing to do
     }
 
-    public DatasetFactory(Path aCacheRoot)
-    {
-        cacheRoot = aCacheRoot;
-    }
-
     public DatasetFactory(File aCacheRoot)
     {
         this(aCacheRoot.toPath());
+    }
+
+    public DatasetFactory(Path aCacheRoot)
+    {
+        this(aCacheRoot, null);
+    }
+
+    public DatasetFactory(Path aCacheRoot, ClassLoader aClassLoader)
+    {
+        cacheRoot = aCacheRoot;
+        classLoader = aClassLoader;
     }
 
     public Path getCacheRoot()
@@ -195,7 +206,7 @@ public class DatasetFactory
         // Load the YAML descriptions
         Map<String, DatasetDescriptionImpl> sets = new LinkedHashMap<>();
         for (Resource res : resources) {
-            LOG.debug("Loading [" + res + "]");
+            log.debug("Loading [" + res + "]");
             try (InputStream is = res.getInputStream()) {
                 String id = FilenameUtils.getBaseName(res.getFilename());
                 DatasetDescriptionImpl ds = yaml.loadAs(is, DatasetDescriptionImpl.class);
@@ -273,70 +284,34 @@ public class DatasetFactory
         // If any of the packages are outdated, clear the cache and download again
         if (reload) {
             if (!DatasetValidationPolicy.DESPERATE.equals(aPolicy)) {
-                LOG.info("Clearing local cache for [" + root + "]");
+                log.info("Clearing local cache for [" + root + "]");
                 FileUtils.deleteQuietly(root.toFile());
             }
             else {
-                LOG.info("DESPERATE policy in effect. Not clearing local cache for [" + root + "]");
+                log.info("DESPERATE policy in effect. Not clearing local cache for [" + root + "]");
             }
         }
         
         for (ArtifactDescription artifact : artifacts) {
-            Path cachedFile = resolve(aDataset, artifact);
-            
             if (artifact.getText() != null) {
-                // Check if file on disk corresponds to text stored in artifact description
-                if (Files.exists(cachedFile)) {
-                    String text = FileUtils.readFileToString(cachedFile.toFile(), UTF_8);
-                    text = StringUtils.normalizeSpace(text);
-                    if (StringUtils.normalizeSpace(artifact.getText()).equals(text)) {
-                        continue;
-                    }
-                }
-                
-                Files.createDirectories(cachedFile.getParent());
-                
-                LOG.info("Creating [" + cachedFile + "]");
-                try (Writer out = Files.newBufferedWriter(cachedFile, StandardCharsets.UTF_8)) {
-                    out.write(artifact.getText());
-                }
-                continue;
+                materializeEmbeddedText(artifact);
             }
-            
-            if (artifact.getUrl() != null) {
-                if (Files.exists(cachedFile)) {
-                    continue;
+            else if (artifact.getUrl() != null) {
+                try {
+                    materializeRemoteFileArtifact(artifact, aPolicy);
                 }
-                
-                Files.createDirectories(cachedFile.getParent());
-                
-                URL source = new URL(artifact.getUrl());
-    
-                LOG.info("Fetching [" + cachedFile + "]");
-                
-                URLConnection connection = source.openConnection();
-                connection.setRequestProperty("User-Agent", "Java");
-                
-                try (InputStream is = connection.getInputStream()) {
-                    Files.copy(is, cachedFile);
-                }
-    
-                boolean verificationOk = checkDigest(cachedFile, artifact);
-                if (!verificationOk) {
-                    switch (aPolicy) {
-                    case STRICT:
-                        throw new IOException("Checksum verification failed on [" + cachedFile
-                                + "] STRICT policy in effect. Bailing out.");
-                    case CONTINUE:
-                        LOG.warn("Checksum verification failed on [" + cachedFile
-                                + "] CONTINUE policy in effect. Ignoring mismatch.");
-                        break;
-                    case DESPERATE:
-                        LOG.warn("Checksum verification failed on [" + cachedFile
-                                + "] DESPERATE policy in effect. Ignoring mismatch.");
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Unknown policy: " + aPolicy);
+                catch (Exception e) {
+                    if (artifact.isOptional()) {
+                        if (log.isDebugEnabled()) {
+                            log.warn("Skipping optional artifact [" + artifact.getName() + "]", e);
+                        }
+                        else {
+                            log.warn("Skipping optional artifact [" + artifact.getName() + "]: "
+                                    + e.getMessage());
+                        }
+                    }
+                    else {
+                        throw e;
                     }
                 }
             }
@@ -352,7 +327,7 @@ public class DatasetFactory
                 if (actions != null && !actions.isEmpty()) {
                     try {
                         for (ActionDescription action : actions) {
-                            LOG.info("Post-download action [" + action.getAction() + "]");
+                            log.info("Post-download action [" + action.getAction() + "]");
                             Class<? extends Action_ImplBase> implClass = actionRegistry
                                     .get(action.getAction());
                             
@@ -376,6 +351,75 @@ public class DatasetFactory
             Files.createFile(postActionCompleteMarker);
         }
     }
+    
+    private void materializeRemoteFileArtifact(ArtifactDescription artifact,
+            DatasetValidationPolicy aPolicy)
+        throws IOException
+    {
+        Path cachedFile = resolve(artifact.getDataset(), artifact);
+        
+        if (Files.exists(cachedFile)) {
+            return;
+        }
+        
+        Files.createDirectories(cachedFile.getParent());
+        
+        ResourceLoader resourceLoader = new DefaultResourceLoader(classLoader);
+        Resource res = resourceLoader.getResource(artifact.getUrl());
+
+        if (log.isDebugEnabled()) {
+            log.debug("Fetching [" + cachedFile + "] from [" + artifact.getUrl() + "]");
+        }
+        else {
+            log.info("Fetching [" + cachedFile + "]");
+        }
+        
+        URLConnection connection = res.getURL().openConnection();
+        connection.setRequestProperty("User-Agent", "Java");
+        
+        try (InputStream is = connection.getInputStream()) {
+            Files.copy(is, cachedFile);
+        }
+
+        boolean verificationOk = checkDigest(cachedFile, artifact);
+        if (!verificationOk) {
+            switch (aPolicy) {
+            case STRICT:
+                throw new IOException("Checksum verification failed on [" + cachedFile
+                        + "] STRICT policy in effect. Bailing out.");
+            case CONTINUE:
+                log.warn("Checksum verification failed on [" + cachedFile
+                        + "] CONTINUE policy in effect. Ignoring mismatch.");
+                break;
+            case DESPERATE:
+                log.warn("Checksum verification failed on [" + cachedFile
+                        + "] DESPERATE policy in effect. Ignoring mismatch.");
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown policy: " + aPolicy);
+            }
+        }
+    }
+    
+    private void materializeEmbeddedText(ArtifactDescription artifact) throws IOException
+    {
+        Path cachedFile = resolve(artifact.getDataset(), artifact);
+        
+        // Check if file on disk corresponds to text stored in artifact description
+        if (Files.exists(cachedFile)) {
+            String text = normalizeText(readFileToString(cachedFile.toFile(), UTF_8));
+            if (normalizeText(artifact.getText()).equals(text)) {
+                return;
+            }
+        }
+        
+        Files.createDirectories(cachedFile.getParent());
+        
+        log.info("Creating [" + cachedFile + "]");
+        try (Writer out = Files.newBufferedWriter(cachedFile, StandardCharsets.UTF_8)) {
+            out.write(artifact.getText());
+        }
+    }
 
     private InputStream getDigestInputStream(Path aFile, ArtifactDescription aArtifact)
         throws IOException
@@ -384,13 +428,18 @@ public class DatasetFactory
         case BINARY:
             return Files.newInputStream(aFile);
         case TEXT:
-            String text = FileUtils.readFileToString(aFile.toFile(), UTF_8);
-            text = StringUtils.normalizeSpace(text);
-            return IOUtils.toInputStream(text, UTF_8);
+            return toInputStream(normalizeText(readFileToString(aFile.toFile(), UTF_8)), UTF_8);
         default:
             throw new IllegalArgumentException(
                     "Unknown verification mode [" + aArtifact.getVerificationMode() + "]");
         }
+    }
+    
+    private String normalizeText(String aText)
+    {
+        String text = StringUtils.normalizeSpace(aText);
+        text.replace("\r\n", "\n");
+        return text;
     }
     
     private boolean checkDigest(Path aFile, ArtifactDescription aArtifact) throws IOException
@@ -414,14 +463,14 @@ public class DatasetFactory
             
             if (aArtifact.getSha1() != null) {
                 if (!sha1Hash.equals(aArtifact.getSha1())) {
-                    LOG.info("Local SHA1 hash mismatch for artifact [" + aArtifact.getName()
+                    log.info("Local SHA1 hash mismatch for artifact [" + aArtifact.getName()
                             + "] in dataset [" + aArtifact.getDataset().getId() + "] - expected ["
                             + aArtifact.getSha1() + "] - actual [" + sha1Hash + "] (mode: "
                             + aArtifact.getVerificationMode() + ")");
                     return false;
                 }
                 else if (aArtifact.getSha512() == null) {
-                    LOG.info("Local SHA1 hash verified for artifact [" + aArtifact.getName()
+                    log.info("Local SHA1 hash verified for artifact [" + aArtifact.getName()
                             + "] in dataset [" + aArtifact.getDataset().getId() + "] (mode: "
                             + aArtifact.getVerificationMode() + ")");
                 }
@@ -429,20 +478,20 @@ public class DatasetFactory
 
             if (aArtifact.getSha512() != null) {
                 if (!sha512Hash.equals(aArtifact.getSha512())) {
-                    LOG.info("Local SHA512 hash mismatch for artifact [" + aArtifact.getName()
+                    log.info("Local SHA512 hash mismatch for artifact [" + aArtifact.getName()
                             + "] in dataset [" + aArtifact.getDataset().getId() + "] - expected ["
                             + aArtifact.getSha512() + "] - actual [" + sha512Hash + "] (mode: "
                             + aArtifact.getVerificationMode() + ")");
                     return false;
                 }
                 else {
-                    LOG.info("Local SHA512 hash verified for artifact [" + aArtifact.getName()
+                    log.info("Local SHA512 hash verified for artifact [" + aArtifact.getName()
                             + "] in dataset [" + aArtifact.getDataset().getId() + "] (mode: "
                             + aArtifact.getVerificationMode() + ")");
                 }
             }
             else {
-                LOG.info("No SHA512 hash for artifact [" + aArtifact.getName() + "] in dataset ["
+                log.info("No SHA512 hash for artifact [" + aArtifact.getName() + "] in dataset ["
                         + aArtifact.getDataset().getId() + "] - it is recommended to add it: ["
                         + sha512Hash + "]");
             }
