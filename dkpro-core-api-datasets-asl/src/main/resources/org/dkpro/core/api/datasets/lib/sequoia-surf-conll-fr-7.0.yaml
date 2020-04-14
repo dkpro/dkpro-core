@@ -28,7 +28,7 @@ artifacts:
       (Lesser General Public License For Linguistic Resources)
        cf. http://deep-sequoia.inria.fr/lgpl-lr/
   sequoia.tgz:
-    url: "http://talc2.loria.fr/deep-sequoia/sequoia-7.0.tgz"
+    url: "http://deep-sequoia.inria.fr/download/sequoia-7.0.tgz"
     sha1: 9f53475f809ef1032a92adedf262226da1615051
     sha512: d6a90a7404caaf4c25ca48098b76fa2abcdbe88c45d1954548d76362b16d988cbbc4025e7cd7810fc7fec2141be8dda11ebc29eca15708d0e1e3e149ccc4d951
     actions:

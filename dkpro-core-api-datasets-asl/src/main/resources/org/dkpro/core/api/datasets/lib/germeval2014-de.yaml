@@ -29,7 +29,7 @@ licenses:
 
 artifacts:
   LICENSE.txt:
-    url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
+    url: "classpath:/org/dkpro/core/api/datasets/lib/common-licenses/CC-BY-4.0.txt"
     sha1: 9c5bee7a22ab39ad6c19ab29ea9e94ac5874f9c6
     sha512: 222cf997169925ee3a09a26798d04332673693c578c24cb2d0cc550785a8b87849b161dccd9c48d2e4f3fa15290b6a10ac5262945f9c8cc6bdbd362d37416300
     verificationMode: TEXT

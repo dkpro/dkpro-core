@@ -22,12 +22,12 @@ licenses:
 
 artifacts:
   LICENSE_NDT.txt:
-    url: http://www.nb.no/sbfil/dok/LICENSE_NDT.txt
-    sha1: e907dbafba91ad8ed2a3412dc4e84df3c0a6ee58
-    sha512: 5e0565dfadf1865fcf7e14a13a8d555812e5178c8e6b5639c2e2e508eac5066782a545e18adadaac0515fa6a3350c1492354373cd0b1e64a5498ab49d6237726
+    url: https://www.nb.no/sbfil/dok/LICENSE_NDT.txt
+    sha1: ae02a3ca7e000d6cc98f07d3a8aa017f38900499
+    sha512: bcd16abbb9b8604640488871432092825cd535bcf2561ada5f3807014e0d5433cdff8fd6f913d39d723497490bdb8da4329ad3da59beb2ba0634898965535942
     verificationMode: TEXT
   20140328_NDT_1-01.tar.gz:
-    url: http://www.nb.no/sbfil/tekst/20140328_NDT_1-01.tar.gz
+    url: https://www.nb.no/sbfil/tekst/20140328_NDT_1-01.tar.gz
     sha1: 97935c225f98119aa94d53f37aa64762cba332f3
     sha512: ace37828398cb00677adf38ba2f4046a4bf21934c4abc326ba027251d599c595871a6488b6692b3ac968a0967bc9d727ef9aab71ef34abee87e805abb43bc2ab
     shared: true

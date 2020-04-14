@@ -23,9 +23,9 @@ licenses:
 
 artifacts:
   LICENSE.txt:
-    url: http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
-    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    url: classpath:/org/dkpro/core/api/datasets/lib/common-licenses/CC-BY-NC-SA-3.0.txt
+    sha1: 90490d92475de1dc68502b6cdb317187c4336b36
+    sha512: ee6b27c709b76d32255ea3c1dd110b6238f5a6360d18cb59d8e7ce433cf22046fc9e13acf055682eacf832fc308e2fb3f842bf4a41ff5debf6e2c69775173cdb
     verificationMode: TEXT
   part1.tar.bz2:
     url: "https://fileserver.ukp.informatik.tu-darmstadt.de/UKP_Webpage/DATA/WaSR-en_v1_part1.tar.bz2"

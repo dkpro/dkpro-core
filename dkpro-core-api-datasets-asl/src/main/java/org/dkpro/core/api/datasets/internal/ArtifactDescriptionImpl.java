@@ -37,6 +37,7 @@ public class ArtifactDescriptionImpl
     private String sha512;
     private VerificationMode verificationMode = BINARY;
     private boolean shared;
+    private boolean optional;
     private List<ActionDescription> actions;
 
     @Override
@@ -136,5 +137,16 @@ public class ArtifactDescriptionImpl
     public void setShared(boolean aShared)
     {
         shared = aShared;
+    }
+
+    @Override
+    public boolean isOptional()
+    {
+        return optional;
+    }
+
+    public void setOptional(boolean aOptional)
+    {
+        optional = aOptional;
     }
 }
