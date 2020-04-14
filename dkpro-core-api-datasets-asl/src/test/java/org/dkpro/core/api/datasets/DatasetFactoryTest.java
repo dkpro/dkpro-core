@@ -33,7 +33,7 @@ import org.junit.Test;
 
 public class DatasetFactoryTest
 {
-    //@Ignore("Used at times for offline testing / development")
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testOne()
         throws Exception
@@ -48,7 +48,7 @@ public class DatasetFactoryTest
         }
     }
     
-    //@Ignore("Used at times for offline testing / development")
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testLoadAll()
         throws Exception
