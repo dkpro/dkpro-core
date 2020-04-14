@@ -19,10 +19,9 @@ package org.dkpro.core.api.datasets;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.unmodifiableList;
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.commons.io.IOUtils.toInputStream;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
@@ -50,8 +49,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dkpro.core.api.datasets.internal.ActionDescriptionImpl;
 import org.dkpro.core.api.datasets.internal.ArtifactDescriptionImpl;
 import org.dkpro.core.api.datasets.internal.DatasetDescriptionImpl;
@@ -59,6 +56,8 @@ import org.dkpro.core.api.datasets.internal.LicenseDescriptionImpl;
 import org.dkpro.core.api.datasets.internal.LoadedDataset;
 import org.dkpro.core.api.datasets.internal.actions.Action_ImplBase;
 import org.dkpro.core.api.datasets.internal.actions.Explode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -79,7 +78,7 @@ public class DatasetFactory
     
     private final Map<String, Class<? extends Action_ImplBase>> actionRegistry;
 
-    private final Log log = LogFactory.getLog(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private Path cacheRoot;
     
@@ -206,7 +205,7 @@ public class DatasetFactory
         // Load the YAML descriptions
         Map<String, DatasetDescriptionImpl> sets = new LinkedHashMap<>();
         for (Resource res : resources) {
-            log.debug("Loading [" + res + "]");
+            log.debug("Loading [{}]", res);
             try (InputStream is = res.getInputStream()) {
                 String id = FilenameUtils.getBaseName(res.getFilename());
                 DatasetDescriptionImpl ds = yaml.loadAs(is, DatasetDescriptionImpl.class);
@@ -223,7 +222,7 @@ public class DatasetFactory
             }
         }
         
-        log.debug("Loaded [" + sets.size() + "] dataset description");
+        log.debug("Loaded [{}] dataset description", sets.size());
 
         
         return sets;
@@ -287,11 +286,11 @@ public class DatasetFactory
         // If any of the packages are outdated, clear the cache and download again
         if (reload) {
             if (!DatasetValidationPolicy.DESPERATE.equals(aPolicy)) {
-                log.info("Clearing local cache for [" + root + "]");
+                log.info("Clearing local cache for [{}]", root);
                 FileUtils.deleteQuietly(root.toFile());
             }
             else {
-                log.info("DESPERATE policy in effect. Not clearing local cache for [" + root + "]");
+                log.info("DESPERATE policy in effect. Not clearing local cache for [{}]", root);
             }
         }
         
@@ -306,11 +305,12 @@ public class DatasetFactory
                 catch (Exception e) {
                     if (artifact.isOptional()) {
                         if (log.isDebugEnabled()) {
-                            log.warn("Skipping optional artifact [" + artifact.getName() + "]", e);
+                            log.warn("Skipping optional artifact [{}]",
+                                    artifact.getName(), e);
                         }
                         else {
-                            log.warn("Skipping optional artifact [" + artifact.getName() + "]: "
-                                    + e.getMessage());
+                            log.warn("Skipping optional artifact [{}]: {}",
+                                    artifact.getName(), e.getMessage());
                         }
                     }
                     else {
@@ -330,7 +330,7 @@ public class DatasetFactory
                 if (actions != null && !actions.isEmpty()) {
                     try {
                         for (ActionDescription action : actions) {
-                            log.info("Post-download action [" + action.getAction() + "]");
+                            log.info("Post-download action [{}]", action.getAction());
                             Class<? extends Action_ImplBase> implClass = actionRegistry
                                     .get(action.getAction());
                             
@@ -369,12 +369,15 @@ public class DatasetFactory
         
         ResourceLoader resourceLoader = new DefaultResourceLoader(classLoader);
         Resource res = resourceLoader.getResource(artifact.getUrl());
+        if (!res.exists()) {
+            throw new FileNotFoundException("Resource not found at [" + artifact.getUrl() + "]");
+        }
 
         if (log.isDebugEnabled()) {
-            log.debug("Fetching [" + cachedFile + "] from [" + artifact.getUrl() + "]");
+            log.debug("Fetching [{}] from [{}]", cachedFile, artifact.getUrl());
         }
         else {
-            log.info("Fetching [" + cachedFile + "]");
+            log.info("Fetching [{}]", cachedFile);
         }
         
         URLConnection connection = res.getURL().openConnection();
@@ -391,12 +394,14 @@ public class DatasetFactory
                 throw new IOException("Checksum verification failed on [" + cachedFile
                         + "] STRICT policy in effect. Bailing out.");
             case CONTINUE:
-                log.warn("Checksum verification failed on [" + cachedFile
-                        + "] CONTINUE policy in effect. Ignoring mismatch.");
+                log.warn(
+                        "Checksum verification failed on [{}] CONTINUE policy in effect. Ignoring mismatch.",
+                        cachedFile);
                 break;
             case DESPERATE:
-                log.warn("Checksum verification failed on [" + cachedFile
-                        + "] DESPERATE policy in effect. Ignoring mismatch.");
+                log.warn(
+                        "Checksum verification failed on [{}] DESPERATE policy in effect. Ignoring mismatch.",
+                        cachedFile);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown policy: " + aPolicy);
@@ -410,15 +415,16 @@ public class DatasetFactory
         
         // Check if file on disk corresponds to text stored in artifact description
         if (Files.exists(cachedFile)) {
-            String text = normalizeText(readFileToString(cachedFile.toFile(), UTF_8));
-            if (normalizeText(artifact.getText()).equals(text)) {
+            String text = FileUtils.readFileToString(cachedFile.toFile(), UTF_8);
+            text = StringUtils.normalizeSpace(text);
+            if (StringUtils.normalizeSpace(artifact.getText()).equals(text)) {
                 return;
             }
         }
         
         Files.createDirectories(cachedFile.getParent());
         
-        log.info("Creating [" + cachedFile + "]");
+        log.info("Creating [{}]", cachedFile);
         try (Writer out = Files.newBufferedWriter(cachedFile, StandardCharsets.UTF_8)) {
             out.write(artifact.getText());
         }
@@ -431,18 +437,13 @@ public class DatasetFactory
         case BINARY:
             return Files.newInputStream(aFile);
         case TEXT:
-            return toInputStream(normalizeText(readFileToString(aFile.toFile(), UTF_8)), UTF_8);
+            String text = FileUtils.readFileToString(aFile.toFile(), UTF_8);
+            text = StringUtils.normalizeSpace(text);
+            return IOUtils.toInputStream(text, UTF_8);
         default:
             throw new IllegalArgumentException(
                     "Unknown verification mode [" + aArtifact.getVerificationMode() + "]");
         }
-    }
-    
-    private String normalizeText(String aText)
-    {
-        String text = StringUtils.normalizeSpace(aText);
-        text.replace("\r\n", "\n");
-        return text;
     }
     
     private boolean checkDigest(Path aFile, ArtifactDescription aArtifact) throws IOException
@@ -466,37 +467,39 @@ public class DatasetFactory
             
             if (aArtifact.getSha1() != null) {
                 if (!sha1Hash.equals(aArtifact.getSha1())) {
-                    log.info("Local SHA1 hash mismatch for artifact [" + aArtifact.getName()
-                            + "] in dataset [" + aArtifact.getDataset().getId() + "] - expected ["
-                            + aArtifact.getSha1() + "] - actual [" + sha1Hash + "] (mode: "
-                            + aArtifact.getVerificationMode() + ")");
+                    log.info(
+                            "Local SHA1 hash mismatch for artifact [{}] in dataset [{}] - expected [{}] - actual [{}] (mode: {})",
+                            aArtifact.getName(), aArtifact.getDataset().getId(),
+                            aArtifact.getSha1(), sha1Hash, aArtifact.getVerificationMode());
                     return false;
                 }
                 else if (aArtifact.getSha512() == null) {
-                    log.info("Local SHA1 hash verified for artifact [" + aArtifact.getName()
-                            + "] in dataset [" + aArtifact.getDataset().getId() + "] (mode: "
-                            + aArtifact.getVerificationMode() + ")");
+                    log.info(
+                            "Local SHA1 hash verified for artifact [{}] in dataset [{}] (mode: {})",
+                            aArtifact.getName(), aArtifact.getDataset().getId(),
+                            aArtifact.getVerificationMode());
                 }
             }
 
             if (aArtifact.getSha512() != null) {
                 if (!sha512Hash.equals(aArtifact.getSha512())) {
-                    log.info("Local SHA512 hash mismatch for artifact [" + aArtifact.getName()
-                            + "] in dataset [" + aArtifact.getDataset().getId() + "] - expected ["
-                            + aArtifact.getSha512() + "] - actual [" + sha512Hash + "] (mode: "
-                            + aArtifact.getVerificationMode() + ")");
+                    log.info(
+                            "Local SHA512 hash mismatch for artifact [{}] in dataset [{}] - expected [{}] - actual [{}] (mode: {})",
+                            aArtifact.getName(), aArtifact.getDataset().getId(),
+                            aArtifact.getSha512(), sha512Hash, aArtifact.getVerificationMode());
                     return false;
                 }
                 else {
-                    log.info("Local SHA512 hash verified for artifact [" + aArtifact.getName()
-                            + "] in dataset [" + aArtifact.getDataset().getId() + "] (mode: "
-                            + aArtifact.getVerificationMode() + ")");
+                    log.info(
+                            "Local SHA512 hash verified for artifact [{}] in dataset [{}] (mode: {})",
+                            aArtifact.getName(), aArtifact.getDataset().getId(),
+                            aArtifact.getVerificationMode());
                 }
             }
             else {
-                log.info("No SHA512 hash for artifact [" + aArtifact.getName() + "] in dataset ["
-                        + aArtifact.getDataset().getId() + "] - it is recommended to add it: ["
-                        + sha512Hash + "]");
+                log.info(
+                        "No SHA512 hash for artifact [{}] in dataset [{}] - it is recommended to add it: [{}]",
+                        aArtifact.getName(), aArtifact.getDataset().getId(), sha512Hash);
             }
 
             return true;
