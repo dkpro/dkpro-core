@@ -20,7 +20,7 @@ licenses:
 
 artifacts:
   LICENSE.txt:
-    url: https://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
+    url: classpath:/org/dkpro/core/api/datasets/lib/common-licenses/CC-BY-SA-3.0.txt
     sha1: fb6f31be27fed5efbcd4c2e1e64c50de470364b1
     sha512: ba59a7187a93fd7e0d4bcbf4f18076a341f8d4091d0ebc5d2b6f3ee7e8e3c79cd6c485640880def013e9116cba55c7ddc08890ff9859d0403f075393df45ea9f
     verificationMode: TEXT

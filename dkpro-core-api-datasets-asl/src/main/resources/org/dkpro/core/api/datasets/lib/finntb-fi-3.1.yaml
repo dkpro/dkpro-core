@@ -24,9 +24,9 @@ licenses:
 
 artifacts:
   LICENSE.txt:
-    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
-    sha512: cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    url: classpath:/org/dkpro/core/api/datasets/lib/common-licenses/CC-BY-3.0.txt
+    sha1: aaf1a43d7cf20483321212f54bff33132a070ec0
+    sha512: e9362e13775f8bd2442f357e459a2eac94d989f39ffbd8972e13d3ed52857515dc5dfe8baaa7f2432efea952931b320ff9d87431e00a9b519663ad4acba6afd7
     verificationMode: TEXT
   ftb3.1.conllx.gz:
     url: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/ftb3.1.conllx.gz

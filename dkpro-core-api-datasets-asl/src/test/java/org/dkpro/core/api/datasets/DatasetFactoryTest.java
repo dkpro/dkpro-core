@@ -33,22 +33,22 @@ import org.junit.Test;
 
 public class DatasetFactoryTest
 {
-    @Ignore("Used at times for offline testing / development")
+    //@Ignore("Used at times for offline testing / development")
     @Test
     public void testOne()
         throws Exception
     {
         //Path cache = testContext.getTestOutputFolder().toPath();
-        Path cache = Paths.get("target/test-output/testLoadAll");
+        Path cache = Paths.get("target/test-output/testLoadOne");
         
         DatasetFactory df = new DatasetFactory(cache);
         {
-            Dataset ds = df.load("gum-ud-en-conll-5.0.0");
+            Dataset ds = df.load("updt-fa-1.3");
             assertDatasetOk(ds);
         }
     }
     
-    @Ignore("Used at times for offline testing / development")
+    //@Ignore("Used at times for offline testing / development")
     @Test
     public void testLoadAll()
         throws Exception
