@@ -20,7 +20,7 @@
   <parent>
     <artifactId>dkpro-core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
-    <version>2.1.1-SNAPSHOT</version>
+    <version>2.2.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-jtok-asl</artifactId>
@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - JTok (v ${jtok.version}) (LGPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <jtok.version>2.1.18</jtok.version>
+    <jtok.version>2.1.19</jtok.version>
   </properties>
   <dependencies>
     <dependency>

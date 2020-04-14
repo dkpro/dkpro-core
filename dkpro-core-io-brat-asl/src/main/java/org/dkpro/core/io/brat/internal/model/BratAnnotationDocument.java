@@ -28,7 +28,6 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
-import org.dkpro.core.io.brat.internal.model.BratNoteAnnotation;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 

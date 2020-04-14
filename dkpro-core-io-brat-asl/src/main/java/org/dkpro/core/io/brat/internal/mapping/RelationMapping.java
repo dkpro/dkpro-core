@@ -50,6 +50,15 @@ public class RelationMapping
     private final String subcat;
     private final Map<String, String> defaultFeatureValues;
     
+    /**
+     * Jackson requires this constructor - even if it is private - do not use!
+     */
+    @SuppressWarnings("unused")
+    private RelationMapping()
+    {
+        this(null, null, null, null, null, null);
+    }
+    
     @JsonCreator
     public RelationMapping(
             @JsonProperty(value = "type", required = true) String aType, 

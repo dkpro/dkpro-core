@@ -569,7 +569,7 @@ public abstract class ResourceObjectProviderBase<M>
                 resourceUrl = null;
                 initialResourceUrl = null;
                 if (modelLocationChanged) {
-                    log.info("Producing resource from thin air");
+                    log.debug("Producing resource from thin air");
                     loadResource(props);
                 }
             }
@@ -605,14 +605,14 @@ public abstract class ResourceObjectProviderBase<M>
                     if (resourceUrl == null) {
                         initialResourceUrl = null;
                         if (modelLocationChanged) {
-                            log.info("Producing resource from thin air");
+                            log.debug("Producing resource from thin air");
                             loadResource(props);
                         }
                     } 
                     else {
                         loadMetadata();
                         if (initialResourceUrl.equals(resourceUrl)) {
-                            log.info("Producing resource from " + resourceUrl);
+                            log.info("Producing resource from [" + resourceUrl + "]");
                         }
                         else {
                             log.info("Producing resource from [" + resourceUrl + "] redirected from ["
@@ -761,7 +761,7 @@ public abstract class ResourceObjectProviderBase<M>
             sw.start();
             resource = produceResource(resourceUrl);
             sw.stop();
-            log.info("Producing resource took " + sw.getTime() + "ms");
+            log.trace("Producing resource took " + sw.getTime() + "ms");
 
             // If cache is enabled, update the cache
             if (sharable) {

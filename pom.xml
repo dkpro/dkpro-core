@@ -20,11 +20,11 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>23</version>
+    <version>24-SNAPSHOT</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
-  <version>2.1.1-SNAPSHOT</version>
+  <version>2.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>DKPro Core</name>
   <!-- The description tag must be present for antrun to work!! -->
@@ -38,18 +38,19 @@
   <properties>
     <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <uima.version>3.1.0</uima.version>
-    <uimafit.version>3.0.0</uimafit.version>
-    <uimafit.plugin.version>3.0.0</uimafit.plugin.version>
+    <uima.version>3.1.1</uima.version>
+    <uimafit.version>3.1.0-SNAPSHOT</uimafit.version>
+    <uimafit.plugin.version>3.1.0-SNAPSHOT</uimafit.plugin.version>
     <omtd.version>3.0.2.7</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>4.3.22.RELEASE</spring.version>
-    <slf4j.version>1.7.26</slf4j.version>
-    <log4j.version>2.7</log4j.version>
+    <spring.version>4.3.26.RELEASE</spring.version>
+    <slf4j.version>1.7.30</slf4j.version>
+    <log4j.version>2.13.1</log4j.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
     <activation.version>1.2.0</activation.version>
-    <icu4j.version>64.2</icu4j.version>
+    <icu4j.version>66.1</icu4j.version>
+    <snakeyaml.version>1.26</snakeyaml.version>
   </properties>
   <repositories>
     <repository>
@@ -81,7 +82,7 @@
     <repository>
       <id>apache.snapshots</id>
       <name>Apache Snapshot Repository</name>
-      <url>http://repository.apache.org/snapshots</url>
+      <url>https://repository.apache.org/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -93,7 +94,7 @@
     <!--
     <repository>
       <id>ukp-oss-snapshots</id>
-      <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
+      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -133,7 +134,7 @@
     <pluginRepository>
       <id>apache.snapshots</id>
       <name>Apache Snapshot Repository</name>
-      <url>http://repository.apache.org/snapshots</url>
+      <url>https://repository.apache.org/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -198,12 +199,12 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <version>4.13</version>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.9.1</version>
+        <version>3.15.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.uima</groupId>
@@ -243,7 +244,7 @@
       <dependency>
         <groupId>org.yaml</groupId>
         <artifactId>snakeyaml</artifactId>
-        <version>1.24</version>
+        <version>${snakeyaml.version}</version>
       </dependency>
       <dependency>
         <groupId>xerces</groupId>
@@ -313,12 +314,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-collections4</artifactId>
-        <version>4.3</version>
+        <version>4.4</version>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.12</version>
+        <version>1.14</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -333,12 +334,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.9</version>
+        <version>3.10</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.19</version>
+        <version>1.20</version>
       </dependency>
       <dependency>
         <groupId>org.tukaani</groupId>
@@ -348,7 +349,7 @@
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant</artifactId>
-        <version>1.10.5</version>
+        <version>1.10.7</version>
       </dependency>
       <dependency>
         <groupId>jaxen</groupId>
@@ -445,6 +446,11 @@
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jul-to-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
         <version>1.2</version>
@@ -457,12 +463,12 @@
       <dependency>
         <groupId>it.unimi.dsi</groupId>
         <artifactId>fastutil</artifactId>
-        <version>8.2.2</version>
+        <version>8.3.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ivy</groupId>
         <artifactId>ivy</artifactId>
-        <version>2.4.0</version>
+        <version>2.5.0</version>
       </dependency>
       <dependency>
         <groupId>eu.openminted.share.annotations</groupId>
@@ -492,17 +498,17 @@
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.9.10</version>
+        <version>2.10.3</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.9.10</version>
+        <version>2.10.3</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.9.10.3</version>
+        <version>2.10.3</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -715,6 +721,21 @@
             </systemPropertyVariables>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.7</version>
+          <configuration>
+            <rulesUri>file:${session.executionRootDirectory}/dkpro-core-build/src/main/resources/dkpro-core/version-rules.xml</rulesUri>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.dkpro.core</groupId>
+              <artifactId>dkpro-core-build</artifactId>
+              <version>${project.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -805,13 +826,11 @@
     </profile>
     <profile>
       <id>checkstyle</id>
-      <!--  
       <activation>
         <file>
           <exists>src</exists>
         </file>
       </activation>
-      -->
       <build>
         <plugins>
           <plugin>
@@ -824,7 +843,7 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-checkstyle-plugin</artifactId>
-              <version>3.1.0</version>
+              <version>3.1.1</version>
               <inherited>true</inherited>
               <dependencies>
                 <dependency>
@@ -835,7 +854,7 @@
                 <dependency>
                   <groupId>com.puppycrawl.tools</groupId>
                   <artifactId>checkstyle</artifactId>
-                  <version>8.29</version>
+                  <version>8.31</version>
                 </dependency>
               </dependencies>
               <configuration>
