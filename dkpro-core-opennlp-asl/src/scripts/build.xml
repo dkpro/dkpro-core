@@ -37,6 +37,11 @@
 
 	<target name="separate-jars" depends="da, de, en, es, it, nb, nl, pt, sv"/>
 
+	<target name="new-models">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="de-chunker-tiger"/>
+	</target>
+	
 	<target name="da">
 		<antcall target="da-sentence-maxent"/>
 		<antcall target="da-token-maxent"/>
@@ -152,7 +157,6 @@
 	
 	<target name="de-sentence-maxent">
 		<mkdir dir="target/download"/>
-
 		<!-- FILE: models-1.5/de-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-06-16 | now        | 1e8a9b9ce05d91abbd1d1d9f4192fdeb
 		  -->
@@ -174,6 +178,7 @@
 	</target>
 	
 	<target name="de-token-maxent">
+			<mkdir dir="target/download"/>
 		<!-- FILE: models-1.5/de-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-06-16 | now        | c74d9064dadb542abf89151d60d0377f
 		  -->
@@ -195,6 +200,7 @@
 	</target>
 	
 	<target name="de-tagger-maxent">
+			<mkdir dir="target/download"/>
 		<!-- FILE: models-1.5/de-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-06-16 | now        | c55c14eeb598885170678293745aea15
 		  -->
@@ -220,6 +226,7 @@
 	</target>
 	
 	<target name="de-tagger-perceptron">
+			<mkdir dir="target/download"/>
 		<!-- FILE: models-1.5/de-pos-perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-06-16 | now        | 568ca555cbe29b5e0e6ba24cc7da573a
 		  -->
@@ -245,6 +252,7 @@
 	</target>
 	
     <target name="de-ner-nemgp">
+    		<mkdir dir="target/download"/>
         <!-- FILE: nemgp_opennlp_01.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           - 2014-10-24 | now        | 699fa598f94cee6d5ff3074b0a6cfdda
           -->
@@ -273,11 +281,12 @@
     </target>
 	
     <target name="de-chunker-tiger">
+    		<mkdir dir="target/download"/>
         <!-- FILE: de-chunker-opennlp.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          - 2020-03-02 | now        | f32c6396b409130c87feefcfbe830ecf | added by Piush Aggarwal
+          - 2020-03-02 | now        | f32c6396b409130c87feefcfbe830ecf
           -->
         <get 
-            src="http://www.ltl.uni-due.de/content/6-software/de-chunker-opennlp.bin" 
+            src="https://www.ltl.uni-due.de/content/6-software/de-chunker-opennlp.bin" 
             dest="target/download/de-chunker-opennlp.bin" 
             skipexisting="true"/>
         <install-stub-and-upstream-file 
@@ -295,6 +304,8 @@
                 <entry key="DC.title" value="de-chunker-opennlp.bin"/>
                 <entry key="DC.creator" value="LTL, University of Duisburg-Essen"/>
                 <entry key="DC.identifier" value="http://www.ltl.uni-due.de/content/6-software/de-chunker-opennlp.bin"/>
+      	    		<entry key="pos.tagset" value="stts"/>
+      	    		<entry key="chunk.tagset" value="tiger"/>
             </metadata>
         </install-stub-and-upstream-file>
     </target>

@@ -2,7 +2,7 @@
 #
 # TIGER Corpus Release 1 (July 2003) grammatical functions - Kantennamen
 
-__META_SOURCE_URL__=http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf
+__META_SOURCE_URL__=https://www.ims.uni-stuttgart.de/documents/ressourcen/korpora/tiger-corpus/annotation/tiger_scheme-syntax.pdf
 
 # AC Adpositional Case marker - Adposition od. Kasusmarkierung
 AC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency

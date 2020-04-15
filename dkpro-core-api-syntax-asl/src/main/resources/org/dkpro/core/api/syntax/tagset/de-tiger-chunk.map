@@ -1,0 +1,16 @@
+# TIGER
+#
+# TIGER chunk categories
+
+__META_SOURCE_URL__=https://www.ims.uni-stuttgart.de/documents/ressourcen/korpora/tiger-corpus/annotation/tiger_introduction.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.
+
+# NP	  noun chunk (non-recursive noun phrase)
+NP=NC
+# PP	  prepositional chunk (usually embeds a noun chunk
+PP=PC
+# VP	  verb complex
+VP=VC
+# Catch-all
+*=O
+

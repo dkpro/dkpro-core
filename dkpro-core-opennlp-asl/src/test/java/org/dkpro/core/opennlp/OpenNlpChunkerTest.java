@@ -27,9 +27,6 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.opennlp.OpenNlpChunker;
-import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.dkpro.core.testing.AssumeResource;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -95,7 +92,36 @@ public class OpenNlpChunkerTest
         assertChunks(chunks, select(jcas, Chunk.class));
         assertTagset(Chunk.class, "conll2000", chunkTags, jcas);
         assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
-    }    
+    }
+    
+    @Test
+    public void testGermanTiger()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "tiger", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
+
+        String[] chunks = { 
+                "[  0,  3]NC(NP) (Wir)",
+                "[  4, 12]VC(VP) (brauchen)",
+                "[ 13, 16]NC(NP) (ein)",
+                "[ 36, 44]NC(NP) (Beispiel)",
+                "[ 47, 54]NC(NP) (welches)",
+                "[ 55, 64]VC(VP) (möglichst)",
+                "[ 65, 70]NC(NP) (viele)",
+                "[ 71, 84]NC(NP) (Konstituenten)",
+                "[ 89,100]NC(NP) (Dependenzen)",
+                "[101,111]VC(VP) (beinhaltet)" };
+
+        String[] chunkTags = { "NP", "PP", "VP" };
+
+        String[] unmappedChunk = {};
+
+        assertChunks(chunks, select(jcas, Chunk.class));
+        assertTagset(Chunk.class, "tiger", chunkTags, jcas);
+        assertTagsetMapping(Chunk.class, "tiger", unmappedChunk, jcas);
+    }
+    
     @Ignore("We don't have these models integrated yet")
     @Test
     public void testPortuguese()
