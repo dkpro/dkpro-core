@@ -31,7 +31,6 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.hunpos.HunPosTagger;
-import org.dkpro.core.maltparser.MaltParser;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
@@ -731,6 +730,9 @@ public class MaltParserTest
         else if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
             Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
                     System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+            Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
+                    System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
+                    !System.getProperty("os.version").matches("10\\.([0-9]|1[0-4]).*"));
             engines.add(createEngineDescription(HunPosTagger.class));
         }
         else {
