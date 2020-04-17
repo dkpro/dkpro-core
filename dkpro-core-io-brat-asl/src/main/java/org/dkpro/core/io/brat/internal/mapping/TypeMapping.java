@@ -35,20 +35,20 @@ public class TypeMapping
     private static final String BRAT = "BRAT";
     private static final String UIMA = "UIMA";
 
-    private final Pattern bratTypePattern;
-    private final String uimaType;
+    public final Pattern pattern;
+    public final String substitution;
     private final Map<String, String> defaultFeatureValues;
     
     private Matcher matcher;
 
     @JsonCreator
     public TypeMapping(
-            @JsonProperty(value = "from", required = true) String aPattern, 
+            @JsonProperty(value = "from", required = true) String regex, 
             @JsonProperty(value = "to", required = true) String aReplacement,
             @JsonProperty(value = "defaultFeatureValues") Map<String, String> aDefaults)
     {
-        bratTypePattern = Pattern.compile("^" + aPattern.trim() + "$");
-        uimaType = aReplacement.trim();
+        pattern = Pattern.compile("^" + regex.trim() + "$");
+        substitution = aReplacement.trim();
         defaultFeatureValues = aDefaults != null ? aDefaults : Collections.emptyMap();
     }
 
@@ -59,13 +59,13 @@ public class TypeMapping
     
     public boolean matches(String aType)
     {
-        matcher = bratTypePattern.matcher(aType);
+        matcher = pattern.matcher(aType);
         return matcher.matches();
     }
     
     public String apply()
     {
-        return matcher.replaceFirst(uimaType);
+        return matcher.replaceFirst(substitution);
     }
     
     public Map<String, String> getDefaultFeatureValues()

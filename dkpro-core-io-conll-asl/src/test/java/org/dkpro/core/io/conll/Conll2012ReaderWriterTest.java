@@ -21,12 +21,20 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
+import java.io.IOException;
+
 import org.dkpro.core.testing.DkproTestContext;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class Conll2012ReaderWriterTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }
+    
     @Test
     public void test()
         throws Exception

@@ -26,13 +26,13 @@ import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParam
 import static org.dkpro.core.api.parameter.ComponentParameters.PARAM_TARGET_LOCATION;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -47,6 +47,7 @@ import org.assertj.core.api.StringAssert;
 import org.assertj.core.internal.Failures;
 import org.assertj.core.util.Files;
 import org.dkpro.core.api.parameter.ComponentParameters;
+import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -214,10 +215,18 @@ public class WriterAssert
                                     VAR_TARGET, DkproTestContext.class.getSimpleName()));
                 }
                 
-                File contextOutputFolder = new File("target/test-output/"
-                        + DkproTestContext.get().getTestOutputFolderName());
-                if (contextOutputFolder.exists()) {
-                    FileUtils.deleteQuietly(contextOutputFolder);
+//                File contextOutputFolder = new File("target/test-output/"
+//                        + DkproTestContext.get().getTestWorkspaceFolderName());                
+//                if (contextOutputFolder.exists()) {
+//                    FileUtils.deleteQuietly(contextOutputFolder);
+//                }
+
+                File contextOutputFolder;
+                try {
+                    contextOutputFolder = DkproTestContext.get().getTestOutputFolder();
+                } catch (IOException e) {
+                    throw Failures.instance()
+                            .failure("Cannot get test output folder\n" + e.getMessage());
                 }
                 
                 return (T) replaceOnce(location, VAR_TARGET, contextOutputFolder.getPath());
@@ -279,7 +288,7 @@ public class WriterAssert
             if (isSingularTarget()) {
                 return Arrays.asList(fileLocation);
             }
-            
+            fileLocation.getAbsoluteFile().listFiles();
             return Arrays.asList(fileLocation.listFiles());
         }
 
@@ -289,13 +298,28 @@ public class WriterAssert
     
     protected boolean isSingularTarget()
     {
+        Boolean isSingular = null;
         Map<String, Object> writerParameters = getParameterSettings(actual);
         
         if (Boolean.TRUE.equals(writerParameters.get(PARAM_SINGULAR_TARGET))) {
-            return true;
+            isSingular = true;
         }
         
-        return singularTargetAnnounced;
+        if (isSingular == null) {
+            File targetLocation = new File((String) writerParameters.get(PARAM_TARGET_LOCATION));
+            if (targetLocation.exists()) {
+                isSingular = true;
+                if (targetLocation.isDirectory()) {
+                    isSingular = false;
+                }
+            }
+        }
+        
+        if (isSingular == null) {
+            isSingular = singularTargetAnnounced;
+        }
+        
+        return isSingular;
     }
     
     protected void configureWriter()
@@ -448,5 +472,18 @@ public class WriterAssert
         finally {
             LifeCycleUtil.destroy(writer);
         }
+    }
+    
+    public static AnalysisEngineDescription simpleJCasDumper(File targetLocation)
+        throws ResourceInitializationException, IOException
+    {
+        
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class, 
+                CasDumpWriter.PARAM_TARGET_LOCATION, 
+                        DkproTestContext.get().getTestOutputFile(targetLocation),
+                CasDumpWriter.PARAM_SORT, true);
+        
+        return writer;
     }
 }

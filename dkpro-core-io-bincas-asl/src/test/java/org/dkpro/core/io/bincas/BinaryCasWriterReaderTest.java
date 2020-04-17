@@ -93,8 +93,9 @@ public class BinaryCasWriterReaderTest
     private File testFolder;
     
     @Before
-    public void setup() 
+    public void setup() throws IOException 
     {
+        DkproTestContext.get().initializeTestWorkspace();
         testFolder = testContext.getTestOutputFolder();
     }
     
@@ -363,11 +364,11 @@ public class BinaryCasWriterReaderTest
         assertEquals("out.bin", getFeature(dmd, "documentTitle", String.class));
         assertEquals("out.bin", getFeature(dmd, "documentId", String.class));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
-                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/out.bin"));
+                .endsWith("test-workspaces/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/output/out.bin"));
         assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
-                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
+                .endsWith("test-workspaces/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/output/"));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
-                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
+                .endsWith("test-workspaces/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/output/"));
         assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
     
@@ -401,11 +402,11 @@ public class BinaryCasWriterReaderTest
         assertEquals("out.bin", getFeature(dmd, "documentTitle", String.class));
         assertEquals("out.bin", getFeature(dmd, "documentId", String.class));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
-                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/out.bin"));
+                .endsWith("test-workspaces/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/output/out.bin"));
         assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
-                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
+                .endsWith("test-workspaces/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/output/"));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
-                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
+                .endsWith("test-workspaces/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/output/"));
         assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
 

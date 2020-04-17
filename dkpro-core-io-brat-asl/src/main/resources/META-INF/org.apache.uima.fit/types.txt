@@ -1,0 +1,1 @@
+classpath*:org/dkpro/core/io/brat/bratTypes.xml

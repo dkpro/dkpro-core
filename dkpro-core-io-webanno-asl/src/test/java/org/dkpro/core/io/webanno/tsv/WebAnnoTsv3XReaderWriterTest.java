@@ -44,7 +44,7 @@ public class WebAnnoTsv3XReaderWriterTest
     public void test()
         throws Exception
     {
-        String targetFolder = "target/test-output/" + testContext.getTestOutputFolderName();
+        String targetFolder = DkproTestContext.get().getTestOutputFolder().toString();
         
         CollectionReader reader = CollectionReaderFactory.createReader(
                 WebannoTsv3XReader.class,

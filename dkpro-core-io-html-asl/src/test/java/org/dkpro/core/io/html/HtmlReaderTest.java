@@ -20,20 +20,24 @@ package org.dkpro.core.io.html;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.CasUtil.select;
-import static org.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.html.HtmlReader;
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
+import org.dkpro.core.testing.WriterAssert;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -41,6 +45,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class HtmlReaderTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }
+    
     @Test
     public void wwwReaderTest()
         throws Exception
@@ -67,11 +76,19 @@ public class HtmlReaderTest
     public void testReadFile()
         throws Exception
     {
-        testOneWay(
-                createReaderDescription(HtmlReader.class,
-                        HtmlReader.PARAM_LANGUAGE, "en"), 
-                "html/test.html.dump", 
-                "html/test.html");
+        ReaderAssert
+            .assertThat(HtmlReader.class,
+                  HtmlReader.PARAM_LANGUAGE, "en")
+            .readingFrom("src/test/resources/html/test.html")
+            .usingWriter(WriterAssert.simpleJCasDumper(new File("test.html")))
+            .asFiles()
+            .allSatisfy(file -> {
+                assertThat(contentOf(file)).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/html/", 
+                                file.getName() + ".dump")));
+            })
+            .extracting(File::getName)
+            .containsExactlyInAnyOrder("test.html");
     }
     
     private void dumpMetaData(final DocumentMetaData aMetaData)

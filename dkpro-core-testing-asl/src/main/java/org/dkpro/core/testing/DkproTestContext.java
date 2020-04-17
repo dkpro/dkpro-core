@@ -21,6 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.rules.TestWatcher;
@@ -69,7 +70,7 @@ public class DkproTestContext extends TestWatcher
         return methodName;
     }
     
-    public String getTestOutputFolderName()
+    public String getTestWorkspaceFolderName()
     {
         return getClassName() + "-" + getMethodName();
     }
@@ -86,15 +87,77 @@ public class DkproTestContext extends TestWatcher
         folder.mkdirs();
         return folder;
     }
-
-    public File getTestOutputFolder()
+    
+    public void initializeTestWorkspace() throws IOException {
+        getTestWorkspace(true);
+    }
+    
+    File getTestWorkspace(Boolean deleteIfExists) throws IOException
     {
-        File folder = new File("target/test-output/" + getTestOutputFolderName());
-        if (folder.exists()) {
+        if (deleteIfExists == null) {
+            deleteIfExists = true;
+        }
+        File folder = new File("target/test-workspaces/" + getTestWorkspaceFolderName());
+        if (folder.exists() && deleteIfExists) {
             FileUtils.deleteQuietly(folder);
         }
         folder.mkdirs();
         return folder;
+    }    
+
+    public File getTestWorkspaceFolder(File subdirRelpath) throws IOException {
+        File root = getTestWorkspace(false);
+        File subdir = new File(root, subdirRelpath.toString());
+        if (!subdir.exists()) {
+            subdir.mkdirs();
+        }
+        
+        return subdir;
+    }
+    
+    public File getTestWorkspaceFile(File relPath) throws IOException {
+        File fileFolder = getTestWorkspaceFolder(relPath.getParentFile());
+        File file = new File(fileFolder, relPath.getName());
+        return file;
+    }
+
+    public File getTestInputFolder() throws IOException {
+        return getTestInputFolder(null);
+    }
+    
+    public File getTestInputFolder(File subfolder) throws IOException
+    {
+        File inputFolder = getTestWorkspaceFolder(new File("input"));
+        if (subfolder != null) {
+            inputFolder = new File(inputFolder, subfolder.toString());
+        }
+        return inputFolder;
+    }
+    
+    public File getTestInputFile(File relPath) throws IOException {
+        File inputFileFolder = getTestInputFolder(relPath.getParentFile());
+        File inputFile = new File(inputFileFolder, relPath.getName());
+        return inputFile;
+    }
+    
+    public File getTestOutputFolder() throws IOException
+    {
+        return getTestOutputFolder(null);
+    }
+
+    public File getTestOutputFolder(File subfolder) throws IOException
+    {
+        File outputFolder = getTestWorkspaceFolder(new File("output"));
+        if (subfolder != null) {
+            outputFolder = new File(outputFolder, subfolder.toString());
+        }
+        return outputFolder;
+    }
+    
+    public File getTestOutputFile(File relPath) throws IOException {
+        File outputFileFolder = getTestOutputFolder(relPath.getParentFile());
+        File outputFile = new File(outputFileFolder, relPath.getName());
+        return outputFile;
     }
 
     @Override

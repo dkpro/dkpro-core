@@ -19,20 +19,34 @@ package org.dkpro.core.io.brat.internal.mapping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.dkpro.core.io.brat.internal.model.BratAnnotation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TypeMappings
 {
+    public static final String TYPE_FOR_UNKNOWN_LABELS = "org.dkpro.core.io.brat.BratTag";
+    
     private final List<TypeMapping> parsedMappings;
     private final Map<String, Type> brat2UimaMappingCache;
     private final Map<String, String> uima2BratMappingCache;
+    
+    // If true, raise exception upon encountering an unknown 
+    // brat label.
+    //
+    // If false, then generate a 
+    // "de.tudarmstadt.ukp.dkpro.core.io.brat.BratLabel" annotation
+    //
+    public boolean failUponUnknownBratLabel = false;
 
     @JsonCreator
     public TypeMappings(List<TypeMapping> aMappings)
@@ -68,6 +82,11 @@ public class TypeMappings
         return type;
     }
     
+    @JsonIgnore
+    public List<TypeMapping> getParsedMappings() { 
+        return parsedMappings; 
+    }    
+    
     public TypeMapping getMappingByBratType(String aBratType)
     {
         return parsedMappings.stream()
@@ -78,6 +97,7 @@ public class TypeMappings
     
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)
     {
+        
         Type t = brat2UimaMappingCache.get(aAnno.getType());
         
         if (t == null) {
@@ -95,9 +115,23 @@ public class TypeMappings
             
             brat2UimaMappingCache.put(aAnno.getType(), t);
         }
+        
+        if (t == null && !failUponUnknownBratLabel) {
+            // Represent this unknown brat annotation as a generic
+            // BratTag.
+            //
+            t = aTs.getType(TYPE_FOR_UNKNOWN_LABELS);            
+            if (aAnno.getAttributes().size() > 0) {
+                throw new IllegalStateException("Encountered annotation with unknown brat label '"
+                        + aAnno.getType() + "'.\nThis annotation also has some attributes, which means "
+                        + "it cannot be represented as a generic, attribute-less "
+                        + t.getName() + " because the annotation has some attributes.");
 
+            }
+        }
+        
         if (t == null) {
-            throw new IllegalStateException("Unable to find appropriate UIMA type for brat type ["
+            throw new IllegalStateException("Unable to find appropriate UIMA type for brat label ["
                     + aAnno.getType() + "]");
         }
 
@@ -124,5 +158,74 @@ public class TypeMappings
         }
         
         return bratType;
+    }
+
+    public static boolean isGenericBratTag(FeatureStructure aFS) {
+        Type aType = aFS.getType();
+        return isGenericBratTag(aType);
+    }
+
+    public static boolean isGenericBratTag(Type aType) {
+        boolean isGeneric = aType.getName().equals(TYPE_FOR_UNKNOWN_LABELS);
+        return isGeneric;
+    }
+
+    public void checkForConflictingMappings() {
+        Map<String,Set<String>> pattIndex = new HashMap<String,Set<String>>();
+        for (TypeMapping aTextMapping: getParsedMappings()) {
+            String subst = aTextMapping.substitution;
+            String patt = aTextMapping.pattern.toString();
+            if (!subst.matches("^.*$\\d+.*")) {
+                Set<String> substThisPatt = pattIndex.get(patt);
+                if (substThisPatt == null) {
+                    substThisPatt = new HashSet<String>();
+                    pattIndex.put(patt, substThisPatt);
+                }
+                substThisPatt.add(subst);
+            }
+        }
+        
+        String errMess = null;
+        for (String patt: pattIndex.keySet()) {
+            Set<String> substThisPatt = pattIndex.get(patt);
+            if (substThisPatt.size() > 1) {
+                if (errMess == null) { 
+                    errMess = "Conflicting mappings found for some patterns\n"; 
+                }
+                errMess += "'" + patt + "' mapped to:\n    " + String.join("\n    ", substThisPatt);
+            }
+        }
+        
+        if (errMess != null) {
+            throw new IllegalStateException(errMess);
+        }
+    }
+
+    public static TypeMappings merge(TypeMappings customMapping, TypeMappings defaultMapping) {
+        return merge(customMapping, defaultMapping, null);
+    }
+
+    public static TypeMappings merge(TypeMappings customMapping, TypeMappings defaultMapping,
+            Boolean checkConflicts) {
+        
+        if (checkConflicts == null) {
+            checkConflicts = true;
+        }
+        
+        List<TypeMapping> mappingLst = new ArrayList<TypeMapping>();
+        if (customMapping != null) {
+            mappingLst.addAll(customMapping.getParsedMappings());
+        }
+        if (defaultMapping != null) {
+            mappingLst.addAll(defaultMapping.getParsedMappings());
+        }
+        
+        TypeMappings merged = new TypeMappings(mappingLst);
+        
+        if (checkConflicts) {
+            merged.checkForConflictingMappings();
+        }
+        
+        return merged;
     }
 }

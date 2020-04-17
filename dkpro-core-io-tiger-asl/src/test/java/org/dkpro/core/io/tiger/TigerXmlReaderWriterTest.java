@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
@@ -32,11 +33,17 @@ import org.custommonkey.xmlunit.XMLAssert;
 import org.dkpro.core.io.tiger.TigerXmlReader;
 import org.dkpro.core.io.tiger.TigerXmlWriter;
 import org.dkpro.core.testing.DkproTestContext;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class TigerXmlReaderWriterTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }    
+    
     @Test
     public void test() throws Exception
     {

@@ -20,10 +20,19 @@ package org.dkpro.core.io.xces;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
+import java.io.IOException;
+
+import org.dkpro.core.testing.DkproTestContext;
+import org.junit.Before;
 import org.junit.Test;
 
 public class XcesXmlReaderTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }    
+        
     @Test
     public void xcesOneWayBasicTest()
         throws Exception

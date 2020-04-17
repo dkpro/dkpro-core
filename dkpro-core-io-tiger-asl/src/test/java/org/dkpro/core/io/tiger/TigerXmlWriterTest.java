@@ -21,6 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
@@ -31,6 +32,7 @@ import org.dkpro.core.io.tiger.TigerXmlWriter;
 import org.dkpro.core.opennlp.OpenNlpParser;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -38,6 +40,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class TigerXmlWriterTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }    
+    
     @Test
     public void test() throws Exception
     {

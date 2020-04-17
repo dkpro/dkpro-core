@@ -27,9 +27,11 @@ import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -39,6 +41,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class ConllUReaderWriterTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }
+    
     @Test
     public void roundTrip()
         throws Exception
