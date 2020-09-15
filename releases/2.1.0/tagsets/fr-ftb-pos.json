@@ -1,0 +1,71 @@
+{
+    "name": "French Treebank",
+    "description": "No description.\n\nReferences:\n* http://www.llf.cnrs.fr/Gens/Abeille/guide-morpho-synt.02.pdf\n",
+    "language": "fr",
+    "tags": [
+        {
+            "tag_name": ",",
+            "tag_description": ", - Punctuation (Berkeley Parser)"
+        },
+        {
+            "tag_name": ".",
+            "tag_description": ". - Punctuation (Berkeley Parser)"
+        },
+        {
+            "tag_name": ":",
+            "tag_description": ": - Punctuation (Berkeley Parser)"
+        },
+        {
+            "tag_name": "A",
+            "tag_description": "Adjective"
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "Adverb"
+        },
+        {
+            "tag_name": "C",
+            "tag_description": "Conjunction"
+        },
+        {
+            "tag_name": "CL",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "D",
+            "tag_description": "Determiner"
+        },
+        {
+            "tag_name": "ET",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "Preposition"
+        },
+        {
+            "tag_name": "PREF",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PRO",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PUNC",
+            "tag_description": "Punctuation"
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "No description."
+        }
+    ]
+}
