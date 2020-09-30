@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.io;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.cas.CAS;
@@ -53,7 +53,7 @@ public class IobEncoder
         iobBeginMap = new Int2ObjectOpenHashMap<String>();
         iobInsideMap = new Int2ObjectOpenHashMap<String>();
 
-        Map<AnnotationFS, Collection<AnnotationFS>> idx = CasUtil.indexCovered(aCas, aType,
+        Map<AnnotationFS, List<AnnotationFS>> idx = CasUtil.indexCovered(aCas, aType,
                 CasUtil.getType(aCas, Token.class));
         
         String lastValue = null;

@@ -31,6 +31,8 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.jcas.cas.FSArray;
+import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -62,7 +64,7 @@ public class PennTreeUtils
         }
 
         List<PennTreeNode> children = new ArrayList<PennTreeNode>();
-        for (FeatureStructure c : create(aConstituent.getChildren())) {
+        for (FeatureStructure c : create((FSArray<Annotation>) aConstituent.getChildren())) {
             if (c instanceof Constituent) {
                 children.add(convertPennTree((Constituent) c));
             }

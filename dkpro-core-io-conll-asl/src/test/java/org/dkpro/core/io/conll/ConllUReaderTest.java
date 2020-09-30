@@ -1,14 +1,14 @@
 /*
- * Copyright 2016
- * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,14 +18,13 @@
 package org.dkpro.core.io.conll;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.testing.AssertAnnotations.assertMorph;
 import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.uima.cas.text.AnnotationIndex;
@@ -53,7 +52,7 @@ public class ConllUReaderTest
                 ConllUReader.class, 
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u/", 
-                ConllUReader.PARAM_PATTERNS, "conllu-en-orig.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-en-orig.conllu");
         
         JCas jcas = new JCasIterable(reader).iterator().next();
 
@@ -92,7 +91,7 @@ public class ConllUReaderTest
                 ConllUReader.class,
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-paragraph_and_document_boundaries.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-paragraph_and_document_boundaries.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
@@ -116,7 +115,7 @@ public class ConllUReaderTest
                 ConllUReader.class,
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-multiple_document_IDs.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-multiple_document_IDs.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
@@ -159,19 +158,17 @@ public class ConllUReaderTest
                 ConllUReader.class,
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-multiple_paragraphs.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-multiple_paragraphs.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
         AnnotationIndex<Paragraph> index = jcas.getAnnotationIndex(Paragraph.class);
 
-        List<String> paragraphIDs = new ArrayList<>();
-        Iterator<Paragraph> iterator = index.iterator();
-        while (iterator.hasNext()) {
-            Paragraph p = iterator.next();
-            paragraphIDs.add(p.getId());
-        }
+        List<String> paragraphIDs = index.stream()
+                .map(Paragraph::getId)
+                .collect(toList());
         List<String> expectedParagraphIDs = asList("mf920901-001-p1", "mf920901-001-p2");
+        
         Assert.assertEquals(expectedParagraphIDs, paragraphIDs);
 
         final String expectedTextContent = "Slovenská ústava: pro i proti Slovenská ústava: pro i"

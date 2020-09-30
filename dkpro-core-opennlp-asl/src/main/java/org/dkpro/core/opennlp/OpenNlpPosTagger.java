@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.UimaContext;
@@ -229,7 +230,7 @@ public class OpenNlpPosTagger
         String tagSplitPattern = modelProvider.getResourceMetaData().getProperty(
                 "pos.tagset.tagSplitPattern");
         
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
 // tag::model-provider-use-2[]
             Collection<Token> tokens = index.get(sentence);

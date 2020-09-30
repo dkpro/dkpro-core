@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -33,11 +33,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.MimeTypes;
-import org.dkpro.core.api.segmentation.SegmenterBase;
 import org.jdom.Element;
 import org.jdom.Text;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import eu.openminted.share.annotations.api.DocumentationResource;
@@ -366,7 +366,7 @@ public class CerminePdfReader
                 
                 // Trim leading/trailing whitespace
                 int[] offsets = {beginIndex, sb.length()};
-                SegmenterBase.trim(sb, offsets);
+                TrimUtils.trim(sb, offsets);
                 
                 AnnotationFS a = cas.createAnnotation(t, offsets[0], offsets[1]);
                 cas.addFsToIndexes(a);

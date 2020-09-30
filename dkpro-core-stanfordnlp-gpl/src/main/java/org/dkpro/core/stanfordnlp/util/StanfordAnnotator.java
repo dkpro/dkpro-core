@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -37,7 +37,6 @@ import org.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.Tag;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -153,15 +152,6 @@ public class StanfordAnnotator
         // calculate span for the current subtree
         IntPair span = tokenTree.getSpan(aNode);
 
-        // Check if the node has been marked by a TSurgeon operation.
-        // If so, add a tag-annotation on the constituent
-        if (nodeLabelValue.contains(TAG_SEPARATOR) && !nodeLabelValue.equals(TAG_SEPARATOR)) {
-            int separatorIndex = nodeLabelValue.indexOf(TAG_SEPARATOR);
-            String tag = nodeLabelValue.substring(0, separatorIndex);
-            nodeLabelValue = nodeLabelValue.substring(separatorIndex + 1, nodeLabelValue.length());
-            createTagAnnotation(span.getSource(), span.getTarget(), tag);
-        }
-
         // Check if node is a constituent node on sentence or phrase-level
         if (aNode.isPhrasal()) {
 
@@ -227,23 +217,6 @@ public class StanfordAnnotator
         else {
             throw new IllegalArgumentException("Node must be either phrasal nor pre-terminal");
         }
-    }
-
-    /**
-     * Creates a tag-annotation over a constituent
-     *
-     * @param aBegin
-     *            start-index of the constituent span
-     * @param aEnd
-     *            end-index of the constituent span
-     * @param aTag
-     *            the tag value
-     */
-    public void createTagAnnotation(int aBegin, int aEnd, String aTag)
-    {
-        Tag newTag = new Tag(jCas, aBegin, aEnd);
-        newTag.setValue(aTag);
-        jCas.addFsToIndexes(newTag);
     }
 
     /**

@@ -22,7 +22,7 @@ PennTree
    sofa: _InitialView
    begin: 0
    end: 91
-   PennTree: "(ROOT ($, ,) ($. .) (CS--- (S-CJ (PPER Sie) (VVFIN gehen) (PTKVZ ein) (CNP-OA (KON und) (NN Risiken) (NP-CJ (ADJA gewagte) (NN Verbindungen)))) (S-CJ (VVFIN versuchen) (VP-OC (VVIZU auszureizen) (NP-OA (PPOSAT ihre) (NN Möglichkeiten))))))"
+   PennTree: "(ROOT ($, ,) ($. .) (CS--- (S-CJ (PPER Sie) (VVFIN gehen) (PTKVZ ein) (CNP-OA (K..."
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen .]
 ROOT
    sofa: _InitialView

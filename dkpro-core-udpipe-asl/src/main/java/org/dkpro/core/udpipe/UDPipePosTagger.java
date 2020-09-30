@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.UimaContext;
@@ -174,7 +175,7 @@ public class UDPipePosTagger
         // model metadata
         mappingProvider.configure(cas);
         
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
             

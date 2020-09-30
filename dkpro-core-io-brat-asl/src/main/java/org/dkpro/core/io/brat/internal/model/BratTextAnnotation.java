@@ -126,16 +126,15 @@ public class BratTextAnnotation
             String[] beginEnd = offsetsArray[i].split(" ");
             int effectiveBegin = Integer.parseInt(beginEnd[0]);
             int effectiveEnd = Integer.parseInt(beginEnd[1]);
-            // in case discontinous annotation
-            // 1 2;3 4 -> 1 4
             if (i > 0 && effectiveBegin <= (1 + offsetsList.get(offsetsList.size() - 1).getEnd())) {
-                offsetsList.get(i - 1).setEnd(effectiveEnd);
+                // in case of adjacent or overlapping discontinuous annotations, merge the spans
+                // 1 2;3 4 -> 1 4
+                offsetsList.get(offsetsList.size() - 1).setEnd(effectiveEnd);
             }
             else {
-                // in case discontinous annotation
+                // in case of non-adjacent discontinuous annotation, create two offsets
                 // 1 2;4 5 -> 1 2 and 4 5
-                Offsets offset = new Offsets(effectiveBegin, effectiveEnd);
-                offsetsList.add(offset);
+                offsetsList.add(new Offsets(effectiveBegin, effectiveEnd));
             }
         }
         return offsetsList;

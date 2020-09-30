@@ -130,15 +130,16 @@ public class XmiReader
                 // Create a holder for the CAS metadata
                 CASMgrSerializer casMgrSerializer = Serialization
                         .serializeCASMgr((CASImpl) mergedCas);
-    
+
                 // Reinitialize CAS with merged type system
-                ((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgrSerializer);
+                ((CASImpl) aCAS).getBinaryCasSerDes()
+                        .setupCasFromCasMgrSerializer(casMgrSerializer);
             }
             catch (InvalidXMLException | ResourceInitializationException e) {
                 throw new IOException(e);
             }
         }
-        
+
         Resource res = nextFile();
 
         // Read XMI file

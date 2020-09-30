@@ -28,6 +28,7 @@ import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.LAYER_TOKEN;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.cas.FeatureStructure;
@@ -118,10 +119,9 @@ public class DKPro2Lxf
         ToolGeneratorIndex toolRegionIndex = new ToolGeneratorIndex(aIds.values());
         NodeIterator iter = new NodeIterator(aSource);
 
-        Map<Sentence, Collection<Token>> idxSentTok = indexCovered(aJCas, Sentence.class,
-                Token.class);
+        Map<Sentence, List<Token>> idxSentTok = indexCovered(aJCas, Sentence.class, Token.class);
 
-        Map<Sentence, Collection<Dependency>> idxSentDep = indexCovered(aJCas, Sentence.class,
+        Map<Sentence, List<Dependency>> idxSentDep = indexCovered(aJCas, Sentence.class,
                 Dependency.class);
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {

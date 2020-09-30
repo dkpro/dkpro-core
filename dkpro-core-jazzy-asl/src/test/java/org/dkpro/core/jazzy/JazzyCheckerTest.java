@@ -19,6 +19,7 @@ package org.dkpro.core.jazzy;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.fit.factory.ExternalResourceFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
@@ -78,8 +78,8 @@ public class JazzyCheckerTest
     {
         String testDocumentEnglish = "The cat sta on the mat .";
 
-        ExternalResourceDescription resource = ExternalResourceFactory
-                .createExternalResourceDescription(TestFrequencyCountResource.class);
+        ExternalResourceDescription resource = createResourceDescription(
+                TestFrequencyCountResource.class);
 
 //        String context = DkproContext.getContext().getWorkspace("web1t").getAbsolutePath();
 //        String workspace = "en";

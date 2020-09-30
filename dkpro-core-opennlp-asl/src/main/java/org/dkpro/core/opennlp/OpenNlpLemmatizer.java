@@ -22,6 +22,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.UimaContext;
@@ -145,7 +146,7 @@ public class OpenNlpLemmatizer
         // Document-specific configuration of model and mapping provider in process()
         modelProvider.configure(cas);
 
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
             

@@ -19,7 +19,7 @@ package org.dkpro.core.frequency.resources;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -48,7 +48,7 @@ public class Web1tResourceTest
     @Test
     public void configureAggregatedExample() throws Exception {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-                Annotator.MODEL_KEY, createExternalResourceDescription(
+                Annotator.MODEL_KEY, createResourceDescription(
                         Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "en",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",

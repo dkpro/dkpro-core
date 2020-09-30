@@ -31,14 +31,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.io.rtf.RTFReader;
+import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Test cases for {@link RTFReader}.
- *
- *
  */
 public class RTFReaderTest
 {
@@ -102,4 +101,7 @@ public class RTFReaderTest
         actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(reference, actual);
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

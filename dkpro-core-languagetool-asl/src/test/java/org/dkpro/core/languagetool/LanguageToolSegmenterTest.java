@@ -100,7 +100,7 @@ public class LanguageToolSegmenterTest
         AnalysisEngine aed = createEngine(LanguageToolSegmenter.class);
         aed.process(jcas);
         
-        String[] tokens = { "毛澤東", "住", "在", "北京" };
+        String[] tokens = { "毛", "澤東", "住", "在", "北京" };
         
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }

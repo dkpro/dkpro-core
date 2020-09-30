@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -177,7 +176,7 @@ public class UDPipeParser
         // model metadata
         mappingProvider.configure(cas);
         
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = new ArrayList<>(index.get(sentence));
             

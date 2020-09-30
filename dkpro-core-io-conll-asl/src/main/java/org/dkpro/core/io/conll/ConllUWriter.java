@@ -24,7 +24,6 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +85,7 @@ public class ConllUWriter
      */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conllu")
     private String filenameSuffix;
 
     /**
@@ -154,7 +153,7 @@ public class ConllUWriter
 
     private void convert(JCas aJCas, PrintWriter aOut)
     {
-        Map<SurfaceForm, Collection<Token>> surfaceIdx = indexCovered(aJCas, SurfaceForm.class,
+        Map<SurfaceForm, List<Token>> surfaceIdx = indexCovered(aJCas, SurfaceForm.class,
                 Token.class);
         Int2ObjectMap<SurfaceForm> surfaceBeginIdx = new Int2ObjectOpenHashMap<>();
         for (SurfaceForm sf : select(aJCas, SurfaceForm.class)) {
@@ -169,7 +168,11 @@ public class ConllUWriter
                 aOut.printf("# %s = %s\n", ConllUReader.META_SEND_ID, sentence.getId());
             }
             if (writeTextHeader) {
-                aOut.printf("# %s = %s\n", ConllUReader.META_TEXT, sentence.getCoveredText());
+                String sentenceText = sentence.getCoveredText();
+                // CoNLL-U does not support line breaks in the sentence text, so we need to replace
+                // such characters.
+                sentenceText = StringUtils.replaceChars(sentenceText, "\n\r", "  ");
+                aOut.printf("# %s = %s\n", ConllUReader.META_TEXT, sentenceText);
             }
             
             // Tokens

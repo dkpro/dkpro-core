@@ -22,7 +22,7 @@ PennTree
    sofa: _InitialView
    begin: 0
    end: 14
-   PennTree: "(ROOT (P3 C) (P5 E) (NX--- (P2 B) (NX-- (P1 A))) (NX--- (NX-HD (P4 D)) (NX-- (NX-HD (P6 F)) (NX-- (CARD 20)))))"
+   PennTree: "(ROOT (P3 C) (P5 E) (NX--- (P2 B) (NX-- (P1 A))) (NX--- (NX-HD (P4 D)) (NX-- (NX..."
 [A B C D E F 20]
 ROOT
    sofa: _InitialView

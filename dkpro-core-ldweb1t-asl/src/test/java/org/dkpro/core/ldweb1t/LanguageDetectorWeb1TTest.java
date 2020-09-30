@@ -18,7 +18,7 @@
 package org.dkpro.core.ldweb1t;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -30,7 +30,6 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.dkpro.core.frequency.resources.Web1TInMemoryFrequencyCountResource;
-import org.dkpro.core.ldweb1t.LanguageDetectorWeb1T;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
 
@@ -40,14 +39,14 @@ public class LanguageDetectorWeb1TTest
     public void web1tLanguageDetectorTest()
         throws Exception
     {
-        ExternalResourceDescription en = createExternalResourceDescription(
+        ExternalResourceDescription en = createResourceDescription(
                 Web1TInMemoryFrequencyCountResource.class,
                 Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION,
                 "src/test/resources/web1t/en/",
                 Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE, "en",
                 Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2");
 
-        ExternalResourceDescription de = createExternalResourceDescription(
+        ExternalResourceDescription de = createResourceDescription(
                 Web1TInMemoryFrequencyCountResource.class,
                 Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION,
                 "src/test/resources/web1t/de/",

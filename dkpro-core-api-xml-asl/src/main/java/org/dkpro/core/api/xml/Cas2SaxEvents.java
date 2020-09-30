@@ -20,11 +20,11 @@ package org.dkpro.core.api.xml;
 import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
-import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.xml.type.XmlAttribute;
 import org.dkpro.core.api.xml.type.XmlDocument;
 import org.dkpro.core.api.xml.type.XmlElement;
+import org.dkpro.core.api.xml.type.XmlNode;
 import org.dkpro.core.api.xml.type.XmlTextNode;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
@@ -64,8 +64,7 @@ public class Cas2SaxEvents
         AttributesImpl attributes = new AttributesImpl();
         
         if (aElement.getAttributes() != null) {
-            for (FeatureStructure attrFS : aElement.getAttributes()) {
-                XmlAttribute attr = (XmlAttribute) attrFS;
+            for (XmlAttribute attr : aElement.getAttributes()) {
                 attributes.addAttribute(defaultString(attr.getUri()),
                         defaultString(attr.getLocalName()), defaultString(attr.getQName()),
                         defaultString(attr.getValueType(), "CDATA"),
@@ -80,7 +79,7 @@ public class Cas2SaxEvents
         handler.startElement(uri, localName, qName, attributes);
         
         if (aElement.getChildren() != null) {
-            for (FeatureStructure child : aElement.getChildren()) {
+            for (XmlNode child : aElement.getChildren()) {
                 if (child instanceof XmlElement) {
                     process((XmlElement) child);
                 }
@@ -95,7 +94,15 @@ public class Cas2SaxEvents
 
     private void process(XmlTextNode aChild) throws SAXException
     {
-        char[] text = aChild.getCoveredText().toCharArray();
+        char[] text;
+        
+        if (aChild.getCaptured()) {
+            text = aChild.getCoveredText().toCharArray();
+        }
+        else {
+            text = aChild.getText().toCharArray();
+        }
+        
         handler.characters(text, 0, text.length);
     }
 }

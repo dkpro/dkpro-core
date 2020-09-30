@@ -22,11 +22,11 @@ import java.util.WeakHashMap;
 
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 
 public class AnnotationChecker
 {
@@ -34,13 +34,13 @@ public class AnnotationChecker
     private static Map<AnalysisComponent, Boolean> instanceMapNotExists = new WeakHashMap<>();
 
     public static void requireExists(AnalysisComponent callingInstance, JCas jcas,
-            ExtendedLogger logger, Class... types)
+            Logger logger, Class... types)
     {
         requireExists(callingInstance, jcas.getCas(), logger, types);
     }
 
     public static void requireExists(AnalysisComponent callingInstance, CAS cas,
-            ExtendedLogger logger, Class... types)
+            Logger logger, Class... types)
     {
         // we only want to check the first CAS
         if (!instanceMapExists.containsKey(callingInstance)) {
@@ -58,13 +58,13 @@ public class AnnotationChecker
     }
 
     public static void requireNotExists(AnalysisComponent callingInstance, JCas jcas,
-            ExtendedLogger logger, Class... types)
+            Logger logger, Class... types)
     {
         requireNotExists(callingInstance, jcas.getCas(), logger, types);
     }
 
     public static void requireNotExists(AnalysisComponent callingInstance, CAS cas,
-            ExtendedLogger logger, Class... types)
+            Logger logger, Class... types)
     {
         // we only want to check the first CAS
         if (!instanceMapNotExists.containsKey(callingInstance)) {

@@ -44,7 +44,6 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
@@ -54,6 +53,7 @@ import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.api.resources.MappingProviderFactory;
+import org.slf4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -267,7 +267,7 @@ public class AncoraReader
         private final StringBuilder buffer = new StringBuilder();
 
         private JCas jcas;
-        private ExtendedLogger logger;
+        private Logger logger;
 
         public void setJCas(final JCas aJCas)
         {
@@ -279,12 +279,12 @@ public class AncoraReader
             return jcas;
         }
 
-        public void setLogger(ExtendedLogger aLogger)
+        public void setLogger(Logger aLogger)
         {
             logger = aLogger;
         }
 
-        public ExtendedLogger getLogger()
+        public Logger getLogger()
         {
             return logger;
         }

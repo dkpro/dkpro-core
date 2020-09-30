@@ -24,6 +24,7 @@ import static org.apache.uima.util.Level.INFO;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.UimaContext;
@@ -154,7 +155,7 @@ public class IxaLemmatizer
         LemmatizerME analyzer = modelProvider.getResource();
 
         // Iterate over all sentences
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
             String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);

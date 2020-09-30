@@ -22,7 +22,7 @@ PennTree
    sofa: _InitialView
    begin: 0
    end: 56
-   PennTree: "(ROOT ($( ``) ($( '') (S--- (VAFIN wäre) (ADV vielleicht) (PN-SB (NE Ross) (NE Perot)) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))))"
+   PennTree: "(ROOT ($( ``) ($( '') (S--- (VAFIN wäre) (ADV vielleicht) (PN-SB (NE Ross) (NE P..."
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 ROOT
    sofa: _InitialView
@@ -504,7 +504,7 @@ PennTree
    sofa: _InitialView
    begin: 57
    end: 115
-   PennTree: "(ROOT ($( /) (S--- (NN Konzernchefs) (VVFIN lehnen) (PTKVZ ab) (NP-OA (ART den) (NN Milliardär)) (PP-MO (APPR als) (NN US-Präsidenten))))"
+   PennTree: "(ROOT ($( /) (S--- (NN Konzernchefs) (VVFIN lehnen) (PTKVZ ab) (NP-OA (ART den) ..."
 [Konzernchefs lehnen den Milliardär als US-Präsidenten ab /]
 ROOT
    sofa: _InitialView
@@ -943,7 +943,7 @@ PennTree
    sofa: _InitialView
    begin: 116
    end: 176
-   PennTree: "(ROOT (S--- (NN Texaner) (VVFIN gibt) (NP-OA (NN Auskunft) (AP-NK (ADV nur) (ADJA vage)) (PP-MNR (APPR über) (PPOSAT seine) (NN Wirtschaftspolitik)))))"
+   PennTree: "(ROOT (S--- (NN Texaner) (VVFIN gibt) (NP-OA (NN Auskunft) (AP-NK (ADV nur) (ADJ..."
 [Texaner gibt nur vage Auskunft über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1473,7 +1473,7 @@ PennTree
    sofa: _InitialView
    begin: 177
    end: 276
-   PennTree: "(ROOT ($. .) (S--- (VAFIN hat) (NP-SB (ART Der) (ADJA texanische) (NN Milliardär) (PN-NK (NE Ross) (NE Perot))) (VP-OC (VVPP aufgeschreckt) (NP-OA (ART das) (ADJA politische) (NN Establishment) (PP-MNR (APPR in) (NE Washington))))))"
+   PennTree: "(ROOT ($. .) (S--- (VAFIN hat) (NP-SB (ART Der) (ADJA texanische) (NN Milliardär..."
 [Der texanische Milliardär Ross Perot hat das politische Establishment in Washington aufgeschreckt .]
 ROOT
    sofa: _InitialView
@@ -2330,7 +2330,7 @@ PennTree
    sofa: _InitialView
    begin: 277
    end: 457
-   PennTree: "(ROOT ($. .) (S--- (VVFIN liegt) (ADJD gut) (PP-MO (APPR Nach) (NN Meinungsumfragen)) (NP-SB (ART der) (ADJA parteilose) (FM Self-mademan)) (PP-MO (APPRART im) (NN Rennen) (PP-OP (APPR um) (ART den) (NN Chefsessel) (PP-MNR (APPRART im) (PN-NK (NP-PNC (ADJA Weißen) (NN Haus))))) (PP-MNR (APPR mit) (CNP-NK (KON und) (NP-CJ (ART dem) (ADJA amtierenden) (NN Präsidenten) (PN-NK (NE George) (NE Bush))) (NP-CJ (ART dem) (NN Demokraten) (PN-NK (NE Bill) (NE Clinton))))))))"
+   PennTree: "(ROOT ($. .) (S--- (VVFIN liegt) (ADJD gut) (PP-MO (APPR Nach) (NN Meinungsumfra..."
 [Nach Meinungsumfragen liegt der parteilose Self-mademan gut im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton .]
 ROOT
    sofa: _InitialView
@@ -4475,7 +4475,7 @@ PennTree
    sofa: _InitialView
    begin: 458
    end: 554
-   PennTree: "(ROOT ($, ,) ($. .) (S--- (VAFIN sind) (NP-SB (ADV selbst) (PPOSAT seine) (NN Kritiker)) (VP-PD (VVPP überzeugt) (PP-OP (PROAV davon) (S-RE (KOUS Daß) (NE Perot) (VMFIN kann) (VP-OC (ADJD erfolgreich) (VVINF leiten) (NP-OA (ART ein) (NN Unternehmen))))))))"
+   PennTree: "(ROOT ($, ,) ($. .) (S--- (VAFIN sind) (NP-SB (ADV selbst) (PPOSAT seine) (NN Kr..."
 [Daß Perot ein Unternehmen erfolgreich leiten kann , davon sind selbst seine Kritiker überzeugt .]
 ROOT
    sofa: _InitialView
@@ -5565,7 +5565,7 @@ PennTree
    sofa: _InitialView
    begin: 555
    end: 688
-   PennTree: "(ROOT ($, ,) ($, ,) ($. .) (S--- (VVFIN bezweifeln) (NP-SB (PIAT viele) (NN Ökonomen)) (S-OC (KOUS Ob) (ADV aber) (VVFIN ausreichen) (NP-SB (PDAT diese) (NN Fähigkeiten)) (VP-MO (KOUI um) (PP-MO (APPR aus) (PPOSAT ihrer) (NN Krise)) (VZ-HD (PTKZU zu) (VVINF führen)) (NP-OA (ART die) (ADJA größte) (NN Volkswirtschaft) (NP-AG (ART der) (NN Welt)))))))"
+   PennTree: "(ROOT ($, ,) ($, ,) ($. .) (S--- (VVFIN bezweifeln) (NP-SB (PIAT viele) (NN Ökon..."
 [Ob diese Fähigkeiten aber ausreichen , um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen , bezweifeln viele Ökonomen .]
 ROOT
    sofa: _InitialView
@@ -7068,7 +7068,7 @@ PennTree
    sofa: _InitialView
    begin: 689
    end: 764
-   PennTree: "(ROOT ($. .) (S--- (KON Und) (VVFIN halten) (NP-OA (PTKNEG nicht) (PIS viel)) (PP-OP (APPR von) (ART dem) (NN 62jährigen)) (NP-SB (ADV auch) (ART die) (NN Konzernchefs) (PP-MNR (APPR in) (ART den) (NE USA)))))"
+   PennTree: "(ROOT ($. .) (S--- (KON Und) (VVFIN halten) (NP-OA (PTKNEG nicht) (PIS viel)) (P..."
 [Und auch die Konzernchefs in den USA halten nicht viel von dem 62jährigen .]
 ROOT
    sofa: _InitialView
@@ -7884,7 +7884,7 @@ PennTree
    sofa: _InitialView
    begin: 765
    end: 891
-   PennTree: "(ROOT ($( -) ($. .) (CS--- (S-CJ (ADV Zwar) (VMFIN können) (ADV durchaus) (NP-SB (ART die) (PIAT meisten) (NN Topmanager)) (VP-OC (PRF sich) (VVINF vorstellen) (NP-OA (ART einen) (NN Unternehmer)) (PP-MO (APPR als) (NN Präsidenten)))) (S-CJ (ADV nur) (PTKNEG nicht) (VP-OC (NP-OA (ADV ausgerechnet) (NE Perot))))))"
+   PennTree: "(ROOT ($( -) ($. .) (CS--- (S-CJ (ADV Zwar) (VMFIN können) (ADV durchaus) (NP-SB..."
 [Zwar können sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen - nur nicht ausgerechnet Perot .]
 ROOT
    sofa: _InitialView
@@ -9138,7 +9138,7 @@ PennTree
    sofa: _InitialView
    begin: 892
    end: 1119
-   PennTree: "(ROOT ($( ``) ($( '') ($, ,) ($. .) (S--- (VVFIN wünschten) (NE Ross) (PP-MO (APPRART im) (NN Mai)) (CH-MO (FM for) (FM President)) (NP-SB (NN Prozent) (AP-NK (ADV nur) (CARD elf))) (PP-MO (APPR Nach) (ART einer) (NN Umfrage) (NP-AG (ART des) (NN Wirtschaftsmagazins) (NE Fortune)) (PP-MNR (APPR unter) (ART den) (NN Bossen) (PP-PG (APPR von) (CARD 500) (NN Großunternehmen)))) (CS-MO (KON und) (S-CJ (KOUS während) (PRF sich) (NP-SB (CARD 78) (NN Prozent)) (PP-MO (APPR für) (NE Bush))) (S-CJ (VVFIN aussprachen) (NP-SB (CARD vier) (NN Prozent)) (PP-MO (APPR für) (NE Clinton))))))"
+   PennTree: "(ROOT ($( ``) ($( '') ($, ,) ($. .) (S--- (VVFIN wünschten) (NE Ross) (PP-MO (AP..."
 [Nach einer Umfrage des Wirtschaftsmagazins Fortune unter den Bossen von 500 Großunternehmen wünschten im Mai nur elf Prozent `` Ross for President '' , während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen .]
 ROOT
    sofa: _InitialView
@@ -11601,7 +11601,7 @@ PennTree
    sofa: _InitialView
    begin: 1120
    end: 1271
-   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (S--- (ADV Allerdings) (VVFIN glaubt) (NP-SB (ADV fast) (ART die) (NN Hälfte) (NP-AG (ART der) (FM Chief) (FM Executives))) (S-OC (KOUS daß) (NE Perot) (ADV durchaus) (VAFIN habe) (S-MO (KOUS wenn) (PPER er) (ADV denn) (VVFIN kandidiert)) (NP-OA (NN Chancen) (VP-OC (VZ-HD (PTKZU zu) (VVINF gewinnen)) (NP-OA (ART die) (NN Wahl) (PP-MNR (APPRART im) (NN November))))))))"
+   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (S--- (ADV Allerdings) (VVFIN glaubt) (NP-SB (..."
 [Allerdings glaubt fast die Hälfte der Chief Executives , daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert .]
 ROOT
    sofa: _InitialView
@@ -13403,7 +13403,7 @@ PennTree
    sofa: _InitialView
    begin: 1272
    end: 1382
-   PennTree: "(ROOT ($. .) (S--- (VVFIN nennen) (NP-SB (ART die) (NN Befragten)) (PP-MO (APPR Als) (ADJA größte) (NN Schwäche) (NP-AG (ART des) (NN Texaners))) (NP-OA (PPOSAT seinen) (NN Mangel) (PP-OP (APPR an) (NN Erfahrung) (PP-MNR (APPR auf) (ART dem) (ADJA politischen) (NN Parkett))))))"
+   PennTree: "(ROOT ($. .) (S--- (VVFIN nennen) (NP-SB (ART die) (NN Befragten)) (PP-MO (APPR ..."
 [Als größte Schwäche des Texaners nennen die Befragten seinen Mangel an Erfahrung auf dem politischen Parkett .]
 ROOT
    sofa: _InitialView
@@ -14502,7 +14502,7 @@ PennTree
    sofa: _InitialView
    begin: 1383
    end: 1476
-   PennTree: "(ROOT ($, ,) ($. .) (S--- (PIS Viele) (VVFIN meinen) (S-OC (KOUS daß) (NE Perot) (VAFIN würde) (VP-OC (VVINF laufen) (PP-MO (APPR mit) (PPOSAT seinem) (NN Befehlston)) (PP-MO (APPR auf) (ART dem) (NE Capitol)) (PP-MO (APPR gegen) (ART eine) (NN Wand))))))"
+   PennTree: "(ROOT ($, ,) ($. .) (S--- (PIS Viele) (VVFIN meinen) (S-OC (KOUS daß) (NE Perot)..."
 [Viele meinen , daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde .]
 ROOT
    sofa: _InitialView
@@ -15629,7 +15629,7 @@ PennTree
    sofa: _InitialView
    begin: 1477
    end: 1551
-   PennTree: "(ROOT ($. :) (S--- (ADV So) (VVFIN erklärt) (NP-SB (ADV etwa) (PN-NK (NE Edward) (NE Brandon)) (PP-MNR (APPR von) (ART dem) (NN Unternehmen) (PN-NK (NE National) (NE City)) (PP-MNR (APPR in) (NE Ohio))))))"
+   PennTree: "(ROOT ($. :) (S--- (ADV So) (VVFIN erklärt) (NP-SB (ADV etwa) (PN-NK (NE Edward)..."
 [So erklärt etwa Edward Brandon von dem Unternehmen National City in Ohio :]
 ROOT
    sofa: _InitialView
@@ -16521,7 +16521,7 @@ PennTree
    sofa: _InitialView
    begin: 1552
    end: 1674
-   PennTree: "(ROOT ($( ``) ($, ,) ($, ,) ($, ,) ($. .) (S--- (PPER Ich) (VVFIN glaube) (ADV kaum) (S-OC (KOUS daß) (VAFIN wäre) (NP-SB (ART ein) (NN Gefallen)) (VP-OC (VVPP getan) (NP-DA (ART dem) (NN Land)) (PP-MO (APPR mit) (PPOSAT seinem) (NN Stil) (AP-NK (ITJ naja) (ADV etwas) (ADJA undiplomatischen)) (PP-MNR (APPRART im) (PN-NK (NP-PNC (ADJA Weißen) (NN Haus)))))))))"
+   PennTree: "(ROOT ($( ``) ($, ,) ($, ,) ($, ,) ($. .) (S--- (PPER Ich) (VVFIN glaube) (ADV k..."
 [`` Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre .]
 ROOT
    sofa: _InitialView
@@ -18243,7 +18243,7 @@ PennTree
    sofa: _InitialView
    begin: 1675
    end: 1756
-   PennTree: "(ROOT ($( -) ($. .) ($( '') (CS--- (KON aber) (S-CJ (PPER Er) (VAFIN wäre) (ADV vielleicht) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))) (S-CJ (PDS das) (VAFIN ist) (PTKNEG nicht) (NP-PD (PPOSAT unser) (NN System)))))"
+   PennTree: "(ROOT ($( -) ($. .) ($( '') (CS--- (KON aber) (S-CJ (PPER Er) (VAFIN wäre) (ADV ..."
 [Er wäre vielleicht ein prächtiger Diktator - aber das ist nicht unser System . '']
 ROOT
    sofa: _InitialView
@@ -19109,7 +19109,7 @@ PennTree
    sofa: _InitialView
    begin: 1757
    end: 1904
-   PennTree: "(ROOT ($, ,) ($( ``) ($, ,) ($( '') ($. .) (S--- (KON Und) (VVFIN vermutet) (NP-SB (ART ein) (ADJA anderer) (NN Manager)) (S-OC (KOUS daß) (VAFIN würde) (NP-SB (ART ein) (NN Dogmatiker) (NP-CC (KOKOM wie) (NE Perot))) (VP-OC (PRF sich) (ADJD schwer) (VVINF tun) (PP-MO (APPR in) (NE Washington)) (S-MO (PPER es) (VAFIN sei) (ADV denn) (S-OC (PPER er) (VVFIN schafft) (PTKVZ ab) (NP-OA (ART den) (NN Kongreß))))))))"
+   PennTree: "(ROOT ($, ,) ($( ``) ($, ,) ($( '') ($. .) (S--- (KON Und) (VVFIN vermutet) (NP-..."
 [Und ein anderer Manager vermutet , daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab '' .]
 ROOT
    sofa: _InitialView
@@ -21053,7 +21053,7 @@ PennTree
    sofa: _InitialView
    begin: 1905
    end: 2093
-   PennTree: "(ROOT ($, ,) ($, ,) ($( ``) ($, ,) ($, ,) ($( '') ($. .) (S--- (VVFIN kennt) (NP-SB (ART Ein) (ADJA ehemaliger) (NN Geschäftsführer) (S-RC (PRELS der) (ADV heute) (VVFIN sitzt) (PP-MO (APPR in) (CARD fünf) (NN Konzernen)) (PP-MO (APPRART im) (NN Aufsichtsgremium)))) (NP-OA (PIS niemanden) (S-RC (PRELS der) (PTKNEG nicht) (VVFIN glaubt) (S-OC (KOUS daß) (NE Perot) (VAFIN wäre) (PP-MO (APPR als) (NN Präsident)) (NP-PD (ART eine) (ADJA absolute) (NN Katastrophe)))))))"
+   PennTree: "(ROOT ($, ,) ($, ,) ($( ``) ($, ,) ($, ,) ($( '') ($. .) (S--- (VVFIN kennt) (NP..."
 [Ein ehemaliger Geschäftsführer , der heute in fünf Konzernen im Aufsichtsgremium sitzt , `` kennt niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre '' .]
 ROOT
    sofa: _InitialView
@@ -23076,7 +23076,7 @@ PennTree
    sofa: _InitialView
    begin: 2094
    end: 2260
-   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (S--- (ADV Allerdings) (VVFIN gibt) (PPER es) (PP-MO (ART dem) (NN Magazin) (APPO zufolge)) (PP-MO (APPR in) (NN Firmen) (CAP-NK (ADJA kleinen) (KON und) (ADJA mittleren))) (NP-OA (PIAT viele) (NN Unternehmer) (CS-RC (KON und) (S-CJ (PRELS die) (VVFIN unterstützen) (NP-OA (ART den) (NN Texaner))) (S-CJ (PRELS die) (VVFIN meinen) (S-OC (NE Perot) (VAFIN sei) (NP-PD (PIS einer) (PP-PG (APPR von) (PPER ihnen)))))))))"
+   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (S--- (ADV Allerdings) (VVFIN gibt) (PPER es) ..."
 [Allerdings gibt es dem Magazin zufolge in kleinen und mittleren Firmen viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen .]
 ROOT
    sofa: _InitialView
@@ -25125,7 +25125,7 @@ PennTree
    sofa: _InitialView
    begin: 2261
    end: 2373
-   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (S--- (VVFIN machen) (VP-OC (PPER ihnen) (ADV besonders) (VZ-HD (PTKZU zu) (VVINF schaffen))) (NP-SB (CARD Zwei) (NN Themen) (CNP-APP (NN Rezession) (KON und) (NN Bürokratie)) (S-RC (PRELS die) (NE Perot) (VVFIN anspricht) (AVP-MO (ADV immer) (ADV wieder))))))"
+   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (S--- (VVFIN machen) (VP-OC (PPER ihnen) (ADV ..."
 [Zwei Themen , die Perot immer wieder anspricht , Rezession und Bürokratie , machen ihnen besonders zu schaffen .]
 ROOT
    sofa: _InitialView

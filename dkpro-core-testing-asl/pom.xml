@@ -15,14 +15,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>dkpro-core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
-    <version>1.11.0-SNAPSHOT</version>
+    <version>2.2.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-testing-asl</artifactId>
@@ -100,12 +98,45 @@
       <artifactId>junit</artifactId>
     </dependency>
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    
+    
+    <!-- The logging subsystem used by DKPro Core during testing -->
+    <dependency>
+      <!-- Use Log4J http as logging backend -->
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <!-- Use Log4J http as logging backend -->
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <!-- Route Log4J v1 over SLF4J -->
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <!-- Route Java Commons Logging over SLF4J -->
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <!-- Avoid Commons Logging -->
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>
@@ -118,14 +149,13 @@
             <usedDependencies>
               <!--
                 - We want to avoid the need to each tested module to explicitly
-                - depend on log4j, so we depend on it here.
+                - depend on log4j/slf4j, so we depend on it here.
               -->
-              <usedDependency>log4j:log4j</usedDependency>
-              <!--
-                - Also a default testing dependency to avoid warnings on all libraries that use
-                - SLF4J
-              -->
-              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
+              <usedDependency>org.apache.logging.log4j:log4j-slf4j-impl</usedDependency>
+              <usedDependency>org.slf4j:log4j-over-slf4j</usedDependency>
+              <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
+              <usedDependency>org.apache.logging.log4j:log4j-core</usedDependency>
+              <usedDependency>commons-logging:commons-logging</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>

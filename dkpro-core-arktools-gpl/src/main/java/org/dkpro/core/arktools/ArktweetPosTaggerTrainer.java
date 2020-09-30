@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -28,6 +28,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -96,7 +97,7 @@ public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
         }
 
 
-        Map<Sentence, Collection<Token>> index = indexCovered(jCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(jCas, Sentence.class, Token.class);
         for (Sentence sentence : select(jCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
             for (Token token : tokens) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -235,8 +235,8 @@ public class MateSemanticRoleLabeler
 
     private String convert(JCas aJCas, Sentence sentence)
     {
-        Map<Token, Collection<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
-        Map<SemArg, Collection<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
+        Map<Token, List<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
+        Map<SemArg, List<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
         HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
         StringBuilder conll2009String = new StringBuilder();

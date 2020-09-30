@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -137,8 +137,8 @@ public class StanfordNamedEntityRecognizerTrainer
     }
 
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException {
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
+    {
         if (tempData == null) {
             try {
                 tempData = File.createTempFile("dkpro-stanford-ner-trainer", ".tsv");
@@ -146,7 +146,8 @@ public class StanfordNamedEntityRecognizerTrainer
                         .info(String.format("Created temp file: %s", tempData.getAbsolutePath()));
                 out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
                         StandardCharsets.UTF_8));
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 throw new AnalysisEngineProcessException(e);
             }
         }
@@ -157,14 +158,15 @@ public class StanfordNamedEntityRecognizerTrainer
     /*
      * Taken from Conll2003Writer and modified for the task at hand.
      */
-    private void convert(JCas aJCas, PrintWriter aOut) {
+    private void convert(JCas aJCas, PrintWriter aOut)
+    {
         Type neType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature neValue = neType.getFeatureByBaseName("value");
 
         // Named Entities
         IobEncoder neEncoder = new IobEncoder(aJCas.getCas(), neType, neValue, false);
 
-        Map<Sentence, Collection<NamedEntity>> idx = getNamedEntityIndex(aJCas);
+        Map<Sentence, List<NamedEntity>> idx = getNamedEntityIndex(aJCas);
 
         Collection<NamedEntity> coveredNEs;
         for (Sentence sentence : select(aJCas, Sentence.class)) {
@@ -199,16 +201,17 @@ public class StanfordNamedEntityRecognizerTrainer
         }
     }
 
-    private Map<Sentence, Collection<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
-        Map<Sentence, Collection<NamedEntity>> idx = indexCovered(aJCas, Sentence.class,
+    private Map<Sentence, List<NamedEntity>> getNamedEntityIndex(JCas aJCas)
+    {
+        Map<Sentence, List<NamedEntity>> idx = indexCovered(aJCas, Sentence.class,
                 NamedEntity.class);
 
         if (acceptedTagsRegex != null) {
             Pattern pattern = Pattern.compile(acceptedTagsRegex);
 
-            Map<Sentence, Collection<NamedEntity>> filteredIdx = new HashMap<>();
+            Map<Sentence, List<NamedEntity>> filteredIdx = new HashMap<>();
             for (Sentence sentence : select(aJCas, Sentence.class)) {
-                Collection<NamedEntity> nes = new ArrayList<>();
+                List<NamedEntity> nes = new ArrayList<>();
 
                 for (NamedEntity ne : idx.get(sentence)) {
                     if (pattern.matcher(ne.getValue()).matches()) {
@@ -225,14 +228,20 @@ public class StanfordNamedEntityRecognizerTrainer
         return idx;
     }
 
-    private static final class Row {
+    private static final class Row
+    {
         Token token;
         String ne;
     }
 
     @Override
-    public void collectionProcessComplete()
-            throws AnalysisEngineProcessException {
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
+    {
+        if (tempData == null) {
+            throw new AnalysisEngineProcessException(
+                    new IllegalStateException("Trainer did not receive any training data."));
+        }
+
         IOUtils.closeQuietly(out);
 
         // Load user-provided configuration
@@ -275,7 +284,8 @@ public class StanfordNamedEntityRecognizerTrainer
     }
 
     @Override
-    public void destroy() {
+    public void destroy()
+    {
         super.destroy();
 
         // Clean up temporary data file

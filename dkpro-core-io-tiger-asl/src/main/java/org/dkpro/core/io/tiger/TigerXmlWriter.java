@@ -18,6 +18,7 @@
 package org.dkpro.core.io.tiger;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.fit.util.FSCollectionFactory.create;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -42,8 +43,9 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.FSArray;
+import org.apache.uima.jcas.tcas.Annotation;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
@@ -194,7 +196,7 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
         // Convert the parse tree (pass 2: edges)
         for (Constituent constituent : constituents) {
             TigerNode node = nodes.get(constituent);
-            for (FeatureStructure c : FSCollectionFactory.create(constituent.getChildren())) {
+            for (FeatureStructure c : create((FSArray<Annotation>) constituent.getChildren())) {
                 if (c instanceof Constituent) {
                     String synFun = ((Constituent) c).getSyntacticFunction();
                     TigerEdge edge = new TigerEdge();

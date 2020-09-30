@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
@@ -83,6 +84,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -93,6 +95,75 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the TEI XML.
+ * <table border="1">
+ * <caption>Supported TEI XML elements and attributes</caption>
+ * <tr>
+ * <th>Element</th>
+ * <th>Description</th>
+ * <th>DKPro Core type</th>
+ * <th>Attribute mappings</th>
+ * </tr>
+ * <tr>
+ * <td><code>TEI</code></td>
+ * <td>document boundary</td>
+ * <td><code>getNext(...)</code> returns one TEI document at a time</td>
+ * <td></td>
+ * </tr>
+ * <tr>
+ * <td><code>title</code></td>
+ * <td>document title</td>
+ * <td>DocumentMetaData</td>
+ * <td></td>
+ * </tr>
+ * <tr>
+ * <td><code>s</code></td>
+ * <td>s-unit</td>
+ * <td>Sentence</td>
+ * <td></td>
+ * </tr>
+ * <tr>
+ * <td><code>u</code></td>
+ * <td>utterance</td>
+ * <td>Sentence</td>
+ * <td></td>
+ * <tr>
+ * <td><code>p</code></td>
+ * <td>paragraph</td>
+ * <td>Paragraph</td>
+ * <td></td>
+ * </tr>
+ * <tr>
+ * <td><code>rs</code></td>
+ * <td>referencing string</td>
+ * <td>NamedEntity</td>
+ * <td><code>type</code> -&gt; value</td>
+ * </tr>
+ * <tr>
+ * <td><code>phr</code></td>
+ * <td>phrase</td>
+ * <td>Constituent</td>
+ * <td><code>type</code> -&gt; constituentType, <code>function</code> -&gt; syntacticFunction</td>
+ * </tr>
+ * <tr>
+ * <td><code>w</code></td>
+ * <td>word</td>
+ * <td>Token</td>
+ * <td>(<code>pos</code>, <code>type</code>) -&gt; POS.PosValue (<code>pos</code> preferred over 
+ *   <code>type</code>)</td>
+ * </tr>
+ * <tr>
+ * <td><code>mw</code></td>
+ * <td>multi-word</td>
+ * <td>Token</td>
+ * <td>same as for <code>w</code></td>
+ * </tr>
+ * <tr>
+ * <td><code>c</code></td>
+ * <td>character</td>
+ * <td>Token</td>
+ * <td>same as for <code>w</code></td>
+ * </tr>
+ * </table>
  */
 @ResourceMetaData(name = "TEI XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
@@ -216,7 +287,16 @@ public class TeiReader
     public static final String PARAM_UTTERANCES_AS_SENTENCES = "utterancesAsSentences";
     @ConfigurationParameter(name = PARAM_UTTERANCES_AS_SENTENCES, mandatory = true, defaultValue = "false")
     private boolean utterancesAsSentences;
-
+    
+    /**
+     * Trim the given elements (remote leading and trailing whitespace). DKPro Core usually expects
+     * annotations to start and end at a non-whitespace character.
+     */
+    public static final String PARAM_ELEMENTS_TO_TRIM = "elementsToTrim";
+    @ConfigurationParameter(name = PARAM_ELEMENTS_TO_TRIM, mandatory = true, defaultValue = { 
+            TAG_SUNIT, TAG_U, TAG_PARAGRAPH, TAG_RS, TAG_WORD, TAG_CHARACTER, TAG_MULTIWORD})
+    private Set<String> elementsToTrim;
+    
     private Iterator<Element> teiElementIterator;
     private Element currentTeiElement;
     private Resource currentResource;
@@ -463,13 +543,11 @@ public class TeiReader
             else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
                 if (constituents.isEmpty()) {
                     ROOT root = new ROOT(getJCas());
-                    root.setBegin(getBuffer().length());
                     root.setConstituentType("ROOT");
                     constituents.push(new ConstituentWrapper(root));
                 }
                 
                 Constituent constituent = new Constituent(getJCas());
-                constituent.setBegin(getBuffer().length());
                 constituent.setConstituentType(aAttributes.getValue(ATTR_TYPE));
                 constituent.setSyntacticFunction(aAttributes.getValue(ATTR_FUNCTION));
                 constituents.push(new ConstituentWrapper(constituent));
@@ -511,24 +589,37 @@ public class TeiReader
             else if (inTextElement && (TAG_SUNIT.equals(aName) ||
                 (utterancesAsSentences && TAG_U.equals(aName)))) {
                 if (readSentence) {
-                    new Sentence(getJCas(), sentenceStart, getBuffer().length()).addToIndexes();
+                    Sentence s = new Sentence(getJCas(), sentenceStart, getBuffer().length());
+                    if (elementsToTrim.contains(aName)) {
+                        TrimUtils.trim(getBuffer(), s);
+                    }
+                    s.addToIndexes();
                 }
                 sentenceStart = -1;
             }
             else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
                 if (readParagraph) {
-                    new Paragraph(getJCas(), paragraphStart, getBuffer().length()).addToIndexes();
+                    Paragraph para = new Paragraph(getJCas(), paragraphStart, getBuffer().length());
+                    if (elementsToTrim.contains(aName)) {
+                        TrimUtils.trim(getBuffer(), para);
+                    }
+                    para.addToIndexes();
                 }
                 paragraphStart = -1;
             }
             else if (readNamedEntity && inTextElement && TAG_RS.equals(aName)) {
                 NamedEntity ne = namedEntities.pop();
                 ne.setEnd(getBuffer().length());
+                if (elementsToTrim.contains(aName)) {
+                    TrimUtils.trim(getBuffer(), ne);
+                }
                 ne.addToIndexes();
             }
             else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
                 ConstituentWrapper wrapper = constituents.pop();
-                wrapper.constituent.setEnd(getBuffer().length());
+                wrapper.constituent.setBegin(wrapper.children.get(0).getBegin());
+                wrapper.constituent
+                        .setEnd(wrapper.children.get(wrapper.children.size() - 1).getEnd());
                 if (!constituents.isEmpty()) {
                     ConstituentWrapper parent = constituents.peek();
                     wrapper.constituent.setParent(parent.constituent);
@@ -541,7 +632,9 @@ public class TeiReader
                 // Close off the ROOT
                 if (constituents.peek().constituent instanceof ROOT) {
                     ConstituentWrapper rootWrapper = constituents.pop();
-                    rootWrapper.constituent.setEnd(getBuffer().length());
+                    rootWrapper.constituent.setBegin(wrapper.children.get(0).getBegin());
+                    rootWrapper.constituent
+                            .setEnd(wrapper.children.get(wrapper.children.size() - 1).getEnd());
                     rootWrapper.constituent.setChildren(FSCollectionFactory.createFSArray(
                             getJCas(), rootWrapper.children));
                     rootWrapper.constituent.addToIndexes();
@@ -552,8 +645,11 @@ public class TeiReader
                             .equals(aName))) {
                 if (isNotBlank(getBuffer().substring(tokenStart, getBuffer().length()))) {
                     Token token = new Token(getJCas(), tokenStart, getBuffer().length());
-                    trim(token);
-
+                    
+                    if (elementsToTrim.contains(aName)) {
+                        TrimUtils.trim(getBuffer(), token);
+                    }
+                        
                     if (posTag != null && readPOS) {
                         Type posTagType = posMappingProvider.getTagType(posTag);
                         POS pos = (POS) getJCas().getCas().createAnnotation(posTagType,
@@ -604,21 +700,6 @@ public class TeiReader
             if (captureText && !omitIgnorableWhitespace) {
                 buffer.append(aCh, aStart, aLength);
             }
-        }
-
-        private void trim(Annotation aAnnotation)
-        {
-            StringBuilder buffer = getBuffer();
-            int s = aAnnotation.getBegin();
-            int e = aAnnotation.getEnd();
-            while (Character.isWhitespace(buffer.charAt(s))) {
-                s++;
-            }
-            while ((e > s + 1) && Character.isWhitespace(buffer.charAt(e - 1))) {
-                e--;
-            }
-            aAnnotation.setBegin(s);
-            aAnnotation.setEnd(e);
         }
     }
     

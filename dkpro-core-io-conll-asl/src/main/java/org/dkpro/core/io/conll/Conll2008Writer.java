@@ -160,8 +160,8 @@ public class Conll2008Writer
 
     private void convert(JCas aJCas, PrintWriter aOut)
     {
-        Map<Token, Collection<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
-        Map<SemArg, Collection<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
+        Map<Token, List<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
+        Map<SemArg, List<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 

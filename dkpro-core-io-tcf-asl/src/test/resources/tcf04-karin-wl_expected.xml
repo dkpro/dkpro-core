@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-model href="http://de.clarin.eu/images/weblicht-tutorials/resources/tcf-04/schemas/latest/d-spin_0_4.rnc" type="application/relax-ng-compact-syntax"?>
 <D-Spin xmlns="http://www.dspin.de/data" version="0.4">
   <MetaData xmlns="http://www.dspin.de/data/metadata">
@@ -292,27 +292,24 @@
       <split tokID="t_9">2 4</split>
       <split tokID="t_10">2</split>
     </WordSplittings>
-    <geo coordFormat="DegDec" continentFormat="name" capitalFormat="name" countryFormat="ISO3166_A2">
+    <geo coordFormat="DegDec" countryFormat="ISO3166_A2" capitalFormat="name" continentFormat="name">
       <src>http://www.geonames.org/</src>
-      <gpoint lon="-74.005833" alt="10" continent="North America" capital="Washington" tokenIDs="t_3 t_4" lat="40.714167" country="US"></gpoint>
+      <gpoint continent="North America" country="US" capital="Washington" alt="10" lon="-74.005833" tokenIDs="t_3 t_4" lat="40.714167"></gpoint>
     </geo>
     <Phonetics transcription="IPA">
       <pron tokID="t_9">ˈuːɐ̯ˌlaʊ̯p</pron>
     </Phonetics>
     <textstructure>
-      <textspan start="t_0" type="page" end="t_5"></textspan>
+      <textspan start="t_0" end="t_5" type="page"></textspan>
       <textspan type="line"></textspan>
-      <textspan start="t_0" type="paragraph" end="t_11"></textspan>
-      <textspan start="t_0" type="line" end="t_1"></textspan>
-      <textspan start="t_2" type="line" end="t_5"></textspan>
-      <textspan start="t_6" type="page" end="t_11"></textspan>
-      <textspan start="t_6" type="line" end="t_8"></textspan>
-      <textspan start="t_9" type="line" end="t_11"></textspan>
+      <textspan start="t_0" end="t_11" type="paragraph"></textspan>
+      <textspan start="t_0" end="t_1" type="line"></textspan>
+      <textspan start="t_2" end="t_5" type="line"></textspan>
+      <textspan start="t_6" end="t_11" type="page"></textspan>
+      <textspan start="t_6" end="t_8" type="line"></textspan>
+      <textspan start="t_9" end="t_11" type="line"></textspan>
       <textspan type="line"></textspan>
     </textstructure>
-    <orthography>
-      <correction operation="replace" tokenIDs="t_0">Karina</correction>
-    </orthography>
     <tc:lemmas xmlns:tc="http://www.dspin.de/data/textcorpus">
       <tc:lemma ID="l_0" tokenIDs="t_0">Karin</tc:lemma>
       <tc:lemma ID="l_1" tokenIDs="t_1">fliegen</tc:lemma>
@@ -328,18 +325,18 @@
       <tc:lemma ID="l_11" tokenIDs="t_11">--</tc:lemma>
     </tc:lemmas>
     <tc:POStags xmlns:tc="http://www.dspin.de/data/textcorpus" tagset="STTS">
-      <tc:tag tokenIDs="t_0">NE</tc:tag>
-      <tc:tag tokenIDs="t_1">VVFIN</tc:tag>
-      <tc:tag tokenIDs="t_2">APPR</tc:tag>
-      <tc:tag tokenIDs="t_3">NE</tc:tag>
-      <tc:tag tokenIDs="t_4">NE</tc:tag>
-      <tc:tag tokenIDs="t_5">$.</tc:tag>
-      <tc:tag tokenIDs="t_6">PPER</tc:tag>
-      <tc:tag tokenIDs="t_7">VMFIN</tc:tag>
-      <tc:tag tokenIDs="t_8">ADV</tc:tag>
+      <tc:tag tokenIDs="t_0">EN</tc:tag>
+      <tc:tag tokenIDs="t_1">NIFVV</tc:tag>
+      <tc:tag tokenIDs="t_2">RPPA</tc:tag>
+      <tc:tag tokenIDs="t_3">EN</tc:tag>
+      <tc:tag tokenIDs="t_4">EN</tc:tag>
+      <tc:tag tokenIDs="t_5">.$</tc:tag>
+      <tc:tag tokenIDs="t_6">REPP</tc:tag>
+      <tc:tag tokenIDs="t_7">NIFMV</tc:tag>
+      <tc:tag tokenIDs="t_8">VDA</tc:tag>
       <tc:tag tokenIDs="t_9">NN</tc:tag>
-      <tc:tag tokenIDs="t_10">VVINF</tc:tag>
-      <tc:tag tokenIDs="t_11">$.</tc:tag>
+      <tc:tag tokenIDs="t_10">FNIVV</tc:tag>
+      <tc:tag tokenIDs="t_11">.$</tc:tag>
     </tc:POStags>
     <tc:depparsing xmlns:tc="http://www.dspin.de/data/textcorpus" tagset="tiger" multigovs="false" emptytoks="true">
       <tc:parse>
@@ -373,5 +370,8 @@
         <tc:reference ID="rc_3" type="adv" tokenIDs="t_8"></tc:reference>
       </tc:entity>
     </tc:references>
+    <tc:orthography xmlns:tc="http://www.dspin.de/data/textcorpus">
+      <tc:correction tokenIDs="t_0" operation="replace">Karina</tc:correction>
+    </tc:orthography>
   </TextCorpus>
 </D-Spin>

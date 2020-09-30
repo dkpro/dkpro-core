@@ -173,8 +173,8 @@ public class BinaryCasReader
                         .serializeCASMgr((mergedTypeSystemCas).getCasImpl());
     
                 // Reinitialize CAS with merged type system
-                ((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgrSerializer);
-    
+                ((CASImpl) aCAS).getBinaryCasSerDes()
+                        .setupCasFromCasMgrSerializer(casMgrSerializer);
             } catch (CASException | ResourceInitializationException e) {
                 throw new CollectionException(e);
             }
@@ -214,7 +214,7 @@ public class BinaryCasReader
         } catch (IOException e) {
             throw new CollectionException(e);
         }
-                        
+        
         // Initialize the JCas sub-system which is the most often used API in DKPro Core components
         try {
             aCAS.getJCas();
@@ -250,7 +250,6 @@ public class BinaryCasReader
             TypeSystemImpl ts)
         throws CollectionException
     {
-
         getLogger().debug("Found DKPro-Core-style embedded type system");
         ObjectInputStream ois;
         try {
@@ -258,7 +257,7 @@ public class BinaryCasReader
             CASMgrSerializer casMgr = (CASMgrSerializer) ois.readObject();
             if (ts == null) {
                 ts = casMgr.getTypeSystem();
-                ts.commit();
+                ts = ts.commit();
             }
         }
         catch (IOException | ClassNotFoundException e) {
@@ -274,7 +273,7 @@ public class BinaryCasReader
             typeSystem = (TypeSystemImpl) aTypeSystem;
         }
     }
-    
+
     /**
      * It is possible that the type system overlaps with the scan pattern for files, e.g. because
      * the type system ends in {@code .ser} and the resources also end in {@code .ser}. If this is
@@ -318,19 +317,20 @@ public class BinaryCasReader
         if (typeSystem == null) {
             CASMgrSerializer casMgr = readCasManager();
             typeSystem = casMgr.getTypeSystem();
-            typeSystem.commit();
+            typeSystem = typeSystem.commit();
         }
 
         return typeSystem;
     }
     
-    private void initCasFromEmbeddedTS (byte[] header, CAS aCAS) throws IOException {
+    private void initCasFromEmbeddedTS(byte[] header, CAS aCAS) throws IOException
+    {
         // If we encounter a Java-serialized file with an external
         // TSI, then we reinitalize the CAS with the external TSI
         // prior to loading the data
         if (header[0] == (byte) 0xAC && header[1] == (byte) 0xED) {
             CASMgrSerializer casMgr = readCasManager();
-            ((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgr);
+            ((CASImpl) aCAS).getBinaryCasSerDes().setupCasFromCasMgrSerializer(casMgr);
         }
     }
     

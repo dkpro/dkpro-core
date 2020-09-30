@@ -22,7 +22,7 @@ PennTree
    sofa: _InitialView
    begin: 0
    end: 92
-   PennTree: "(ROOT ($, ,) ($. .) (SIMPX--- (SIMPX-KONJ (VF-- (NX-OA (ART den) (NN AWO-Posten))) (MF-- (ADVX-MOD (PTKNEG nicht)))) (SIMPX-KONJ (LK-- (VXFIN-HD (VMFIN mußte))) (MF-- (NX-ON (PPER er)) (ADVX-V-MOD (ADV damals))) (VC-- (VXINF-OV (VVINF niederlegen))) (VF-- (NX-OA (NX-HD (PPOSAT Seine) (NN Position)) (PX-- (APPR bei) (NX-HD (ART der) (NN Prüfgesellschaft))))))))"
+   PennTree: "(ROOT ($, ,) ($. .) (SIMPX--- (SIMPX-KONJ (VF-- (NX-OA (ART den) (NN AWO-Posten)..."
 [Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht .]
 ROOT
    sofa: _InitialView
@@ -1527,7 +1527,7 @@ PennTree
    sofa: _InitialView
    begin: 0
    end: 36
-   PennTree: "(ROOT ($( /) ($( /) (NX--- (NX-HD (NX-KONJ (NE SPD)) (NX-KONJ (NE CDU)) (NX-KONJ (NE AfB))) (PX-- (APPR für) (NX-HD (NN Daewoo-Millionen)))))"
+   PennTree: "(ROOT ($( /) ($( /) (NX--- (NX-HD (NX-KONJ (NE SPD)) (NX-KONJ (NE CDU)) (NX-KONJ..."
 [SPD / CDU / AfB für Daewoo-Millionen]
 Constituent
    sofa: _InitialView
@@ -1986,7 +1986,7 @@ PennTree
    sofa: _InitialView
    begin: 37
    end: 94
-   PennTree: "(ROOT (SIMPX--- (KOORD-- (KON Aber)) (LK-- (VXFIN-HD (VVFIN fordert))) (MF-- (ADVX-V-MOD (ADV jetzt)) (NX-OA (NN Untersuchungsausschuß))) (VF-- (NX-ON (NE AfB) (NX-- (NE Bremerhavens))))))"
+   PennTree: "(ROOT (SIMPX--- (KOORD-- (KON Aber)) (LK-- (VXFIN-HD (VVFIN fordert))) (MF-- (AD..."
 [Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
 Constituent
    sofa: _InitialView

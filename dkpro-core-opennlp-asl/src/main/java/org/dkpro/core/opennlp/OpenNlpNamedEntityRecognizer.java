@@ -25,7 +25,6 @@ import static org.dkpro.core.api.resources.MappingProviderFactory.createNerMappi
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -193,7 +192,7 @@ public class OpenNlpNamedEntityRecognizer
 
         modelProvider.getResource().clearAdaptiveData();
 
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             // get the document text
             List<Token> tokenList = new ArrayList<>(index.get(sentence));

@@ -15,14 +15,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-asl</artifactId>
-    <version>1.11.0-SNAPSHOT</version>
+    <version>2.2.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <packaging>jar</packaging>
@@ -31,7 +29,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
-    <groovy.version>2.5.6</groovy.version>
+    <groovy.version>2.5.8</groovy.version>
   </properties>
   <dependencies>
     <dependency>
@@ -57,7 +55,7 @@
     <dependency>
       <groupId>org.dkpro.meta</groupId>
       <artifactId>dkpro-meta-core</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <version>0.2.0</version>
     </dependency>
   </dependencies>
   <dependencyManagement>
@@ -128,7 +126,7 @@
           <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.19</version>
+            <version>${snakeyaml.version}</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -144,7 +142,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>user-guide.adoc</sourceDocumentName>
               <imagesDir>./user-guide/images</imagesDir>
               <doctype>book</doctype>
@@ -165,7 +162,6 @@
             </goals>
             <configuration>
             <backend>pdf</backend>
-            <sourceHighlighter>coderay</sourceHighlighter>
             <sourceDocumentName>user-guide.adoc</sourceDocumentName>
             <imagesDir>./user-guide/images</imagesDir>
             <attributes>
@@ -183,7 +179,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>developer-guide.adoc</sourceDocumentName>
               <imagesDir>./developer-guide/images</imagesDir>
               <doctype>book</doctype>
@@ -203,7 +198,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>typesystem-reference.adoc</sourceDocumentName>
               <imagesDir>./typesystem-reference/images</imagesDir>
               <doctype>book</doctype>
@@ -223,7 +217,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>tagset-reference.adoc</sourceDocumentName>
               <imagesDir>./tagset-reference/images</imagesDir>
               <doctype>book</doctype>
@@ -243,7 +236,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>component-reference.adoc</sourceDocumentName>
               <imagesDir>./component-reference/images</imagesDir>
               <doctype>book</doctype>
@@ -263,7 +255,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>format-reference.adoc</sourceDocumentName>
               <imagesDir>./format-reference/images</imagesDir>
               <doctype>book</doctype>
@@ -283,7 +274,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>dataset-reference.adoc</sourceDocumentName>
               <imagesDir>./dataset-reference/images</imagesDir>
               <doctype>book</doctype>
@@ -303,7 +293,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>model-reference.adoc</sourceDocumentName>
               <imagesDir>./model-reference/images</imagesDir>
               <doctype>book</doctype>
@@ -323,7 +312,6 @@
             </goals>
             <configuration>
               <backend>html5</backend>
-              <sourceHighlighter>coderay</sourceHighlighter>
               <sourceDocumentName>language-reference.adoc</sourceDocumentName>
               <imagesDir>./language-reference/images</imagesDir>
               <doctype>book</doctype>

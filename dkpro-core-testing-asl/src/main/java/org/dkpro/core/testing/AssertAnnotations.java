@@ -23,6 +23,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.dkpro.core.testing.validation.Message.Level.ERROR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -30,6 +31,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -593,15 +595,17 @@ public class AssertAnnotations
                     asCopyableString(toText(i.links())));
         }
 
-        if (aExpected.length == aActual.size()) {
-            for (int i = 0; i < actual.size(); i++) {
-                assertEquals(asCopyableString(asList(aExpected[i]), true),
-                        asCopyableString(toText(actual.get(i).links()), true));
-            }
-        }
-        else {
-            fail("Expected [" + aExpected.length + "] chains but found " + aActual.size() + "]");
-        }
+        String[] expectedStrings = Arrays.stream(aExpected)
+                .map(it -> asCopyableString(asList(it), true))
+                .toArray(String[]::new);
+                
+        String[] actualStrings = aActual.stream()
+                .map(it -> asCopyableString(toText(it.links()), true))
+                .toArray(String[]::new);
+        
+        assertThat(actualStrings)
+                .describedAs("Chains match in any order")
+                .containsExactlyInAnyOrder(expectedStrings);
     }
 
     public static void assertTagset(Class<?> aLayer, String aName, String[] aExpected, JCas aJCas)

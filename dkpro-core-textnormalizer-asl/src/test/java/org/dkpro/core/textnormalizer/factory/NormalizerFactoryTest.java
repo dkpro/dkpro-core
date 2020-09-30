@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.textnormalizer.factory;
 
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -40,7 +40,7 @@ public class NormalizerFactoryTest
 
     @Before
     public void init() {
-        frequencyProvider = createExternalResourceDescription(
+        frequencyProvider = createResourceDescription(
                 Web1TFrequencyCountResource.class,
                 Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                 Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",

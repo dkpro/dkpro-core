@@ -18,7 +18,7 @@
 package org.dkpro.core.textnormalizer.frequency;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -44,7 +44,7 @@ public class ExpressiveLengtheningNormalizerTest
         AnalysisEngineDescription normalizer = createEngineDescription(
                 ExpressiveLengtheningNormalizer.class,
                 ExpressiveLengtheningNormalizer.RES_FREQUENCY_PROVIDER, 
-                        createExternalResourceDescription(
+                        createResourceDescription(
                                 Web1TFrequencyCountResource.class,
                                 Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                                 Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",

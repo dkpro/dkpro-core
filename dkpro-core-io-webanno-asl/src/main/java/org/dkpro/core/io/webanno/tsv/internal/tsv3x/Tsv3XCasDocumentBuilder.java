@@ -34,6 +34,7 @@ import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.TsvSchema.FEAT_
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.TsvSchema.FEAT_REL_TARGET;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
@@ -81,7 +82,13 @@ public class Tsv3XCasDocumentBuilder
         
         // Scan for chains
         for (Type headType : aSchema.getChainHeadTypes()) {
-            for (FeatureStructure chainHead : CasUtil.selectFS(aJCas.getCas(), headType)) {
+            // In UIMAv3, the iteration order of feature structures that are not in a sorted index
+            // is random. For some reason UIMAv2 returned them in creation order. By sorting by the
+            // FS ID, we restore the UIMAv2 situation.
+            List<FeatureStructure> heads = new ArrayList<>(
+                    CasUtil.selectFS(aJCas.getCas(), headType));
+            heads.sort(Comparator.comparing(fs -> aJCas.getLowLevelCas().ll_getFSRef(fs)));
+            for (FeatureStructure chainHead : heads) {
                 List<AnnotationFS> elements = new ArrayList<>();
                 AnnotationFS link = getFeature(chainHead, CHAIN_FIRST_FEAT, AnnotationFS.class);
                 while (link != null) {
@@ -112,12 +119,17 @@ public class Tsv3XCasDocumentBuilder
         // Scan all annotations of the types defined in the schema and use them to set up sub-token
         // units.
         for (Type type : aSchema.getUimaTypes()) {
+            if (aSchema.getIgnoredTypes().contains(type)) {
+                continue;
+            }
+            
             LayerType layerType = aSchema.getLayerType(type);
             
             boolean addDisambiguationIdIfStacked = SPAN.equals(layerType);
             
             for (AnnotationFS annotation : CasUtil.select(aJCas.getCas(), type)) {
-                doc.activateType(annotation.getType());
+                // Mind that we might actually get an annotation here which is a subtype of `type`!
+                doc.activateType(type);
                 
                 // Get the relevant begin and end offsets for the current annotation
                 int begin = annotation.getBegin();
@@ -139,8 +151,12 @@ public class Tsv3XCasDocumentBuilder
                 // token before the start token using floorEntry(end) - so let's try to correct this
                 if (
                         // found begin token but found the wrong one
-                        (beginTokenEntry != null && beginTokenEntry.getValue().getEnd() < begin) ||
-                        // didn't find end begin because annotation starts before the first token
+                        (
+                                beginTokenEntry != null && 
+                                beginTokenEntry.getValue().getEnd() < begin && 
+                                tokenEndIndex.higherEntry(begin) != null
+                        ) ||
+                        // didn't find begin token because annotation starts before the first token
                         beginTokenEntry == null
                 ) {
                     beginTokenEntry = tokenEndIndex.higherEntry(begin);
@@ -158,7 +174,11 @@ public class Tsv3XCasDocumentBuilder
                 // token after the end token using ceilingEntry(end) - so let's try to correct this
                 if (
                         // found end token but found the wrong one
-                        (endTokenEntry != null && endTokenEntry.getValue().getBegin() > end) ||
+                        (
+                                endTokenEntry != null && 
+                                endTokenEntry.getValue().getBegin() > end &&
+                                tokenEndIndex.lowerEntry(end) != null
+                        ) ||
                         // didn't find end token because annotation ends beyond the last token
                         endTokenEntry == null
                 ) {
@@ -198,10 +218,20 @@ public class Tsv3XCasDocumentBuilder
                     }
                 }
                 else if (zeroWitdh) {
-                    TsvSubToken t = beginToken.createSubToken(begin, min(beginToken.getEnd(), end));
+                    // If the zero-width annotation happens in the space between tokens or after
+                    // the last token, we move it to the end of the closest preceding token in order
+                    // not to have to drop it entirely.
+                    int position = min(beginToken.getEnd(), end);
+                    // ... or if the annotation is before the first token, then we move it to the
+                    // begin of the first token 
+                    if (position < beginToken.getBegin()) {
+                        position = beginToken.getBegin();
+                    }
+                    TsvSubToken t = beginToken.createSubToken(position, position);
                     doc.mapFS2Unit(annotation, t);
                     t.addUimaAnnotation(annotation, addDisambiguationIdIfStacked);
-                } else {
+                }
+                else {
                     // Annotation covers only suffix of the begin token - we need to create a 
                     // suffix sub-token unit on the begin token. The new sub-token defines the ID of
                     // the annotation.
@@ -287,6 +317,16 @@ public class Tsv3XCasDocumentBuilder
         for (TsvColumn col : aUnit.getDocument().getSchema().getColumns()) {
             List<AnnotationFS> annotationsForColumn = aUnit.getAnnotationsForColumn(col);
             if (!annotationsForColumn.isEmpty()) {
+//                if (SPAN.equals(col.layerType) && SLOT_TARGET.equals(col.featureType)) {
+//                    for (AnnotationFS aFS : annotationsForColumn) {
+//                        FeatureStructure[] links = getFeature(aFS, col.uimaFeature,
+//                                FeatureStructure[].class);
+//                        if (links != null && links.length > 0) {
+//                        }
+//                    }
+//                }
+                
+                
                 if (!PLACEHOLDER.equals(col.featureType)) {
                     aUnit.getDocument().activateColumn(col);
                 }
@@ -316,7 +356,8 @@ public class Tsv3XCasDocumentBuilder
                                 .getType(POS.class.getName()));
                     }
                     else {
-                        col.setTargetTypeHint(target.getType());
+                        TsvSchema schema = aUnit.getDocument().getSchema();
+                        col.setTargetTypeHint(schema.getEffectiveType(target));
                     }
                 }
             }

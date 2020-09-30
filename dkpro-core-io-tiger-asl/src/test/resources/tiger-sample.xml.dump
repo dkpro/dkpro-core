@@ -25,7 +25,7 @@ PennTree
    sofa: _InitialView
    begin: 0
    end: 56
-   PennTree: "(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) (ADV vielleicht) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))"
+   PennTree: "(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) (ADV vielleicht) (NP..."
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 ROOT
    sofa: _InitialView

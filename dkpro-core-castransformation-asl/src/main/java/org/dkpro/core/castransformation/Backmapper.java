@@ -31,13 +31,13 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.internal.util.IntListIterator;
 import org.apache.uima.internal.util.PositiveIntSet;
 import org.apache.uima.internal.util.PositiveIntSet_impl;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.CasCopier;
+import org.apache.uima.util.Logger;
 import org.dkpro.core.api.transform.alignment.AlignedString;
 import org.dkpro.core.api.transform.alignment.ImmutableInterval;
 import org.dkpro.core.api.transform.alignment.Interval;
@@ -160,7 +160,7 @@ public class Backmapper
         if (as == null) {
             // Attempt to reconstruct the alignment from the SofaChangeAnnotations.
             // This only works when they have not been altered in the mean time.
-            ExtendedLogger logger = getLogger();
+            Logger logger = getLogger();
             if (logger.isInfoEnabled()) {
                 logger.info("No mapping found from [" + from + "] to [" + to + "] on ["
                         + baseCas.hashCode() + "]. "

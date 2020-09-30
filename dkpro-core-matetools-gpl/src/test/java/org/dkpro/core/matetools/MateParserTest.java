@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -30,9 +30,6 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.hunpos.HunPosTagger;
-import org.dkpro.core.matetools.MateParser;
-import org.dkpro.core.matetools.MatePosTagger;
-import org.dkpro.core.matetools.MateSemanticRoleLabeler;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
@@ -291,6 +288,9 @@ public class MateParserTest
         if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
             Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
                     System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+            Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
+                    System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
+                    !System.getProperty("os.version").matches("10\\.([0-9]|1[0-4]).*"));
             engines.add(createEngineDescription(HunPosTagger.class));
         }
         else {

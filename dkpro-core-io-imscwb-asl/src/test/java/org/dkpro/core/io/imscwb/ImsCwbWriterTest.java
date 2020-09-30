@@ -14,142 +14,77 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.dkpro.core.io.imscwb;
+ */
+package org.dkpro.core.io.imscwb;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.util.Files.contentOf;
 
 import java.io.File;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.CasDumpWriter;
-import org.dkpro.core.io.bnc.BncReader;
-import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.io.negra.NegraExportReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.snowball.SnowballStemmer;
 import org.dkpro.core.testing.DkproTestContext;
-import org.dkpro.core.testing.EOLUtils;
+import org.dkpro.core.testing.ReaderAssert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-/**
- *
- *
- */
 public class ImsCwbWriterTest
 {
-    private static final String outputFile = "target/corpus-sample.ims";
-
     @Test
-    public void test1()
+    public void thatWritingTuebaDzSampleWorks()
         throws Exception
     {
-        File dump = new File(testContext.getTestOutputFolder(), "/dump.txt");
-        File output = new File(testContext.getTestOutputFolder(), "/output.txt");
-        
-        CollectionReader ner = createReader(
-                NegraExportReader.class,
-                NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tuebadz/corpus-sample.export",
-                NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
-
-        AnalysisEngineDescription tag = createEngineDescription(
-                OpenNlpPosTagger.class);
-
-        AnalysisEngineDescription tw = createEngineDescription(
-                ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, output,
-                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
-
-        AnalysisEngineDescription cdw = createEngineDescription(
-                CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, dump);
-
-        runPipeline(ner, tag, tw, cdw);
-
-        String reference = FileUtils.readFileToString(
-                new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), "UTF-8");
-        String actual = FileUtils.readFileToString(
-                output, "UTF-8");
-        reference = EOLUtils.normalizeLineEndings(reference);
-        actual = EOLUtils.normalizeLineEndings(actual);
-        assertEquals(reference, actual);
+        ReaderAssert.assertThat(
+                        NegraExportReader.class,
+                        NegraExportReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/tuebadz/corpus-sample.export",
+                        NegraExportReader.PARAM_LANGUAGE, "de",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8")
+                .usingEngines(
+                        createEngineDescription(OpenNlpPosTagger.class))
+                .usingWriter(
+                        ImsCwbWriter.class,
+                        ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8")
+                .writingToSingular("${TARGET}/corpus-sample.vrt")
+                .outputAsString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
     
     @Test
-    public void testAdditionalFeatures()
+    public void thatWritingTuebaDzSampleWithAdditionalFeaturesWorks()
         throws Exception
     {
-        CollectionReader ner = createReader(
-                NegraExportReader.class,
-                NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tuebadz/corpus-sample.export",
-                NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
-
-        AnalysisEngineDescription tag = createEngineDescription(
-                OpenNlpPosTagger.class);
-
-        AnalysisEngineDescription stem = createEngineDescription(
-                SnowballStemmer.class);
-
-        AnalysisEngineDescription tw = createEngineDescription(
-                ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
-                ImsCwbWriter.PARAM_WRITE_CPOS, true,
-                ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { 
-                        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem/value" });
-
-        AnalysisEngineDescription cdw = createEngineDescription(
-                CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
-
-        runPipeline(ner, tag, stem, tw, cdw);
-
-        String reference = FileUtils.readFileToString(
-                new File("src/test/resources/tuebadz/corpus-sample-addfeat-ref.txt"), "UTF-8");
-        String actual = FileUtils.readFileToString(
-                new File(outputFile), "UTF-8");
-        reference = EOLUtils.normalizeLineEndings(reference);
-        actual = EOLUtils.normalizeLineEndings(actual);
-        assertEquals(reference, actual);
-    }
-    @Ignore("FX8 is a file from the BNC. While available online for download, we currently do not "
-            + "ship it due to licensing issues.")
-    @Test
-    public void test1a()
-        throws Exception
-    {
-        CollectionReader ner = createReader(
-                BncReader.class,
-                BncReader.PARAM_SOURCE_LOCATION, "src/test/resources",
-                BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
-                BncReader.PARAM_LANGUAGE, "en");
-
-        AnalysisEngineDescription tw = createEngineDescription(
-                ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
-
-        AnalysisEngineDescription cdw = createEngineDescription(
-                CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
-
-        runPipeline(ner, tw, cdw);
-
-        String reference = FileUtils.readFileToString(
-                new File("src/test/resources/reference/bnc-sample.ims"), "UTF-8");
-        String actual = FileUtils.readFileToString(
-                new File(outputFile), "UTF-8");
-        assertEquals(reference, actual);
-    }
-
+        ReaderAssert.assertThat(
+                        NegraExportReader.class,
+                        NegraExportReader.PARAM_SOURCE_LOCATION, 
+                                "src/test/resources/tuebadz/corpus-sample.export",
+                        NegraExportReader.PARAM_LANGUAGE, "de",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8")
+                .usingEngines(
+                        createEngineDescription(OpenNlpPosTagger.class),
+                        createEngineDescription(SnowballStemmer.class))
+                .usingWriter(
+                        ImsCwbWriter.class,
+                        ImsCwbWriter.PARAM_TARGET_LOCATION, "${TARGET}/corpus-sample-addfeat.vrt",
+                        ImsCwbWriter.PARAM_SINGULAR_TARGET, true,
+                        ImsCwbWriter.PARAM_WRITE_CPOS, true,
+                        ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { 
+                                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem/value" })
+                .outputAsString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/tuebadz/corpus-sample-addfeat-ref.txt"),
+                        UTF_8));
+    }    
+    
     @Ignore("This test cannot work (yet) because we do not ship the cwb-encode and cwb-makeall binaries")
     @Test
     public void test2()

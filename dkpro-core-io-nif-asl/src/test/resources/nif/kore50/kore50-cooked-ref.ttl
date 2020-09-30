@@ -1,0 +1,1612 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<urn:kore50-cooked.ttl#offset_1223_1242>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "American Recordings" ;
+        nif:beginIndex        "1223"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1242"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/American_Recordings_(album)> .
+
+<urn:kore50-cooked.ttl#offset_826_830>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Beck" ;
+        nif:beginIndex        "826"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "830"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Jeff_Beck> .
+
+<urn:kore50-cooked.ttl#offset_3290_3294>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Euro" ;
+        nif:beginIndex        "3290"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3294"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Eurozone> .
+
+<urn:kore50-cooked.ttl#offset_2323_2328>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Apple" ;
+        nif:beginIndex        "2323"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2328"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Apple_Inc.> .
+
+<urn:kore50-cooked.ttl#offset_1487_1509>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Isle of Wight festival" ;
+        nif:beginIndex        "1487"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1509"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Isle_of_wight_festival> .
+
+<urn:kore50-cooked.ttl#offset_1603_1611>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Mitchell" ;
+        nif:beginIndex        "1603"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1611"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Joni_Mitchell> .
+
+<urn:kore50-cooked.ttl#offset_1083_1090>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Santana" ;
+        nif:beginIndex        "1083"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1090"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Carlos_Santana> .
+
+<urn:kore50-cooked.ttl#offset_450_455>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Paris" ;
+        nif:beginIndex        "450"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "455"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Paris_Hilton> .
+
+<urn:kore50-cooked.ttl#offset_1327_1332>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Jones" ;
+        nif:beginIndex        "1327"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1332"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/John_Paul_Jones_(musician)> .
+
+<urn:kore50-cooked.ttl#offset_0_3779>
+        a               nif:OffsetBasedString , nif:Context ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "3779"^^xsd:nonNegativeInteger ;
+        nif:isString    "David and Victoria named their children Brooklyn, Romeo, Cruz, and Harper Seven.\nDavid and Victoria added spice to their marriage.\nTiger was lost in the woods when he got divorced from Elin.\nTiger lost the US Open.\nMadonna played Eva and was seen with Carlos.\nIn this musical, Madonna played the role of the First Lady.\nAngelina, her father Jon, and her partner Brad never played together in the same movie.\nHeidi and her husband Seal live in Vegas.\nParis and Kim are both wealthy It Girls who had sex tapes on the Internet.\nJustin, Stefani, and Kate are among the most popular people on both MTV and Twitter.\nDylan performed Hurricane about the black fighter Carter, from his album Desire.\nDesire contains a duet with Harris in the song Joey.\nThree of the greatest guitarists started their career in a single band : Clapton, Beck, and Page.\nAllen founded the EMP in Seattle, which featured exhibitions about Hendrix and Dylan, but also about various science fiction movies.\nDespite featuring some of the most promininent musicians of their decade --- like Sinatra, Dylan, Joel, and Santana --- Columbia was aquired by Sony in the 1980s.\nAfter unsuccessful years, aging country star Cash made a grandiose comeback with his American Recordings, recorded at his home with the help of Rubin.\nThe group formed by Homme, Grohl, and Jones was supposed to be named Caligula, but the name was already taken.\nJobs and Baez dated in the late 1970s, and she performed at his Stanford memorial.\nThe Isle of Wight festival in 1970 was the biggest at its time, surpassing Woodstock with acts like Davis, Chicago, and Mitchell.\nEric preferred to play Blues instead of Rock, so he joined Mayall 's band.\nAfter the death of Steve, the former CEO of Apple, his commencement speech at Stanford was watched thousands of times.\nIn 1980, Steve dropped out of Stanford to join Microsoft, the company behind the Windows operating system.\nCairo was the code name for a project at Microsoft from 1991 to 1996. Its charter was to build technologies for a next generation operating system that would fulfill the vision of Bill.\nSteve, Bill, Sergey, and Larry have drawn a great deal of admiration these days for their pioneering successes that changed the world we live in.\nKarl and Theo made their extreme fortunes selling low-price groceries.\nWhile Apple is an electronics company, Mango is a clothing one and Orange is a communication one.\nSam, the co-founder of Equity International, was given the nickname of \\\"the grave dancer\\\" because of his ability to buy businesses that others thought were dead.\nPixar produced Cars, and John directed it.\nMars, Galaxy, and Bounty are all chocolate.\nBosch and Sharp are both home appliances producing companies.\nCity won 3:2 against the Spurs.\nThe Gunners now play their home matches at the Emirates.\nAtletico has beaten its archrival Real.\nMüller scored a hattrick against England.\nThomas and Mario are strikers playing in Munich.\nHaug congratulated Red Bull.\nVöller will never forget the match against Oranje in San Siro.\nLandgraf and Meijer played at the Tivoli.\nYabo plays for Aachen.\nHertha won against Dortmund.\nNixon resigned after Watergate despite his success in the Ping-Pong Diplomacy with China.\nThe Sun and The Times reported that Greece will have to leave the Euro soon.\nThe Enola Gay bombed Hiroshima at the end of Second World War.\nThe RAF was a terrorist group led by Baader and Meinhof that killed Schleyer.\nOnassis married Kennedy on October 20, 1968.\nArmstrong was the first man on the Moon.\nErich was born in Neunkirchen.\nMacedonia is a province of Greece.\nObama welcomed Merkel upon her arrival at JFK.\nKennedy was also an active politician, yet he is most known for his writings, some of which he published under the name of Mark Littleton." .
+
+<urn:kore50-cooked.ttl#offset_1590_1597>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Chicago" ;
+        nif:beginIndex        "1590"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1597"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Chicago_(band)> .
+
+<urn:kore50-cooked.ttl#offset_2857_2898>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Müller scored a hattrick against England." ;
+        nif:beginIndex        "2857"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2898"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2899_2947> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2817_2856> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2890_2897>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "England" ;
+        nif:beginIndex        "2890"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2897"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/England_national_football_team> .
+
+<urn:kore50-cooked.ttl#offset_2438_2458>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Equity International" ;
+        nif:beginIndex        "2438"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2458"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Equity_International> .
+
+<urn:kore50-cooked.ttl#offset_0_5>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "David" ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "5"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/David_Beckham> .
+
+<urn:kore50-cooked.ttl#offset_3082_3086>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Yabo" ;
+        nif:beginIndex        "3082"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3086"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Reinhold_Yabo> .
+
+<urn:kore50-cooked.ttl#offset_1316_1321>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Grohl" ;
+        nif:beginIndex        "1316"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1321"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Dave_Grohl> .
+
+<urn:kore50-cooked.ttl#offset_2666_2727>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Bosch and Sharp are both home appliances producing companies." ;
+        nif:beginIndex        "2666"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2727"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2728_2759> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2622_2665> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2977_2983>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Völler" ;
+        nif:beginIndex        "2977"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2983"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Rudi_Völler> .
+
+<urn:kore50-cooked.ttl#offset_2817_2856>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Atletico has beaten its archrival Real." ;
+        nif:beginIndex        "2817"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2856"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2857_2898> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2760_2816> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3192_3211>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Ping-Pong Diplomacy" ;
+        nif:beginIndex        "3192"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3211"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Ping_Pong_Diplomacy> .
+
+<urn:kore50-cooked.ttl#offset_2948_2952>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Haug" ;
+        nif:beginIndex        "2948"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2952"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Norbert_Haug> .
+
+<urn:kore50-cooked.ttl#offset_744_841>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Three of the greatest guitarists started their career in a single band : Clapton, Beck, and Page." ;
+        nif:beginIndex        "744"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "841"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_842_974> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_691_743> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2100_2105>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Steve" ;
+        nif:beginIndex        "2100"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2105"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Steve_Jobs> .
+
+<urn:kore50-cooked.ttl#offset_738_742>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Joey" ;
+        nif:beginIndex        "738"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "742"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Joey_(Bob_Dylan_song)> .
+
+<urn:kore50-cooked.ttl#offset_3260_3266>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Greece" ;
+        nif:beginIndex        "3260"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3266"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Greece> .
+
+<urn:kore50-cooked.ttl#offset_2764_2771>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Gunners" ;
+        nif:beginIndex        "2764"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2771"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Arsenal_F.C.> .
+
+<urn:kore50-cooked.ttl#offset_2851_2855>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Real" ;
+        nif:beginIndex        "2851"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2855"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Real_Madrid_C.F.> .
+
+<urn:kore50-cooked.ttl#offset_3030_3038>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "San Siro" ;
+        nif:beginIndex        "3030"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3038"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/San_Siro> .
+
+<urn:kore50-cooked.ttl#offset_842_974>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Allen founded the EMP in Seattle, which featured exhibitions about Hendrix and Dylan, but also about various science fiction movies." ;
+        nif:beginIndex        "842"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "974"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_975_1137> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_744_841> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3528_3533>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Erich" ;
+        nif:beginIndex        "3528"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3533"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Erich_Honecker> .
+
+<urn:kore50-cooked.ttl#offset_1613_1687>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Eric preferred to play Blues instead of Rock, so he joined Mayall 's band." ;
+        nif:beginIndex        "1613"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1687"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1688_1806> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1483_1612> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1483_1612>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "The Isle of Wight festival in 1970 was the biggest at its time, surpassing Woodstock with acts like Davis, Chicago, and Mitchell." ;
+        nif:beginIndex        "1483"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1612"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1613_1687> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1400_1482> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_131_136>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Tiger" ;
+        nif:beginIndex        "131"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "136"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Tiger_Woods> .
+
+<urn:kore50-cooked.ttl#offset_1400_1404>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Jobs" ;
+        nif:beginIndex        "1400"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1404"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Steve_Jobs> .
+
+<urn:kore50-cooked.ttl#offset_2125_2130>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Larry" ;
+        nif:beginIndex        "2125"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2130"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Larry_Page> .
+
+<urn:kore50-cooked.ttl#offset_3432_3440>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Schleyer" ;
+        nif:beginIndex        "3432"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3440"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Hanns-Martin_Schleyer> .
+
+<urn:kore50-cooked.ttl#offset_691_743>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Desire contains a duet with Harris in the song Joey." ;
+        nif:beginIndex        "691"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "743"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_744_841> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_610_690> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3322_3331>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Hiroshima" ;
+        nif:beginIndex        "3322"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3331"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Hiroshima> .
+
+<urn:kore50-cooked.ttl#offset_1095_1103>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Columbia" ;
+        nif:beginIndex        "1095"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1103"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Columbia_Records> .
+
+<urn:kore50-cooked.ttl#offset_2760_2816>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "The Gunners now play their home matches at the Emirates." ;
+        nif:beginIndex        "2760"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2816"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2817_2856> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2728_2759> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_277_284>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Madonna" ;
+        nif:beginIndex        "277"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "284"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Madonna_(entertainer)> .
+
+<urn:kore50-cooked.ttl#offset_215_222>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Madonna" ;
+        nif:beginIndex        "215"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "222"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Madonna_(entertainer)> .
+
+<urn:kore50-cooked.ttl#offset_1309_1314>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Homme" ;
+        nif:beginIndex        "1309"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1314"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Josh_Homme> .
+
+<urn:kore50-cooked.ttl#offset_2579_2584>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Pixar" ;
+        nif:beginIndex        "2579"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2584"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Pixar> .
+
+<urn:kore50-cooked.ttl#offset_660_666>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Carter" ;
+        nif:beginIndex        "660"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "666"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Rubin_Carter> .
+
+<urn:kore50-cooked.ttl#offset_1816_1821>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Steve" ;
+        nif:beginIndex        "1816"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1821"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Steve_Ballmer> .
+
+<urn:kore50-cooked.ttl#offset_3559_3593>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Macedonia is a province of Greece." ;
+        nif:beginIndex        "3559"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3593"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3594_3640> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3528_3558> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2948_2976>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Haug congratulated Red Bull." ;
+        nif:beginIndex        "2948"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2976"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2977_3039> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2899_2947> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3040_3081>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Landgraf and Meijer played at the Tivoli." ;
+        nif:beginIndex        "3040"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3081"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3082_3104> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2977_3039> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3546_3557>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Neunkirchen" ;
+        nif:beginIndex        "3546"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3557"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Neunkirchen,_Saarland> .
+
+<urn:kore50-cooked.ttl#offset_3217_3222>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "China" ;
+        nif:beginIndex        "3217"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3222"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/People's_Republic_of_China> .
+
+<urn:kore50-cooked.ttl#offset_450_524>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Paris and Kim are both wealthy It Girls who had sex tapes on the Internet." ;
+        nif:beginIndex        "450"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "524"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_525_609> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_408_449> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2579_2621>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Pixar produced Cars, and John directed it." ;
+        nif:beginIndex        "2579"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2621"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2622_2665> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2415_2578> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1766_1774>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Stanford" ;
+        nif:beginIndex        "1766"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1774"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Stanford_University> .
+
+<urn:kore50-cooked.ttl#offset_836_840>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Page" ;
+        nif:beginIndex        "836"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "840"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Jimmy_Page> .
+
+<urn:kore50-cooked.ttl#offset_2640_2646>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Bounty" ;
+        nif:beginIndex        "2640"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2646"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Bounty_(chocolate_bar)> .
+
+<urn:kore50-cooked.ttl#offset_719_725>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Harris" ;
+        nif:beginIndex        "719"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "725"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Emmylou_Harris> .
+
+<urn:kore50-cooked.ttl#offset_3097_3103>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Aachen" ;
+        nif:beginIndex        "3097"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3103"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Alemannia_Aachen> .
+
+<urn:kore50-cooked.ttl#offset_215_259>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Madonna played Eva and was seen with Carlos." ;
+        nif:beginIndex        "215"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "259"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_260_319> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_191_214> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_975_1137>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Despite featuring some of the most promininent musicians of their decade --- like Sinatra, Dylan, Joel, and Santana --- Columbia was aquired by Sony in the 1980s." ;
+        nif:beginIndex        "975"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1137"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1138_1288> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_842_974> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_610_615>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Dylan" ;
+        nif:beginIndex        "610"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "615"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Bob_Dylan> .
+
+<urn:kore50-cooked.ttl#offset_2817_2825>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Atletico" ;
+        nif:beginIndex        "2817"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2825"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/AtlÃ©tico_Madrid> .
+
+<urn:kore50-cooked.ttl#offset_3134_3223>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Nixon resigned after Watergate despite his success in the Ping-Pong Diplomacy with China." ;
+        nif:beginIndex        "3134"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3223"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3224_3300> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3105_3133> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2967_2975>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Red Bull" ;
+        nif:beginIndex        "2967"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2975"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/FC_Red_Bull_Salzburg> .
+
+<urn:kore50-cooked.ttl#offset_260_319>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "In this musical, Madonna played the role of the First Lady." ;
+        nif:beginIndex        "260"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "319"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_320_407> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_215_259> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1066_1071>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Dylan" ;
+        nif:beginIndex        "1066"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1071"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Bob_Dylan> .
+
+<urn:kore50-cooked.ttl#offset_1837_1845>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Stanford" ;
+        nif:beginIndex        "1837"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1845"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Stanford_University> .
+
+<urn:kore50-cooked.ttl#offset_443_448>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Vegas" ;
+        nif:beginIndex        "443"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "448"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Las_Vegas,_Nevada> .
+
+<urn:kore50-cooked.ttl#offset_2356_2361>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Mango" ;
+        nif:beginIndex        "2356"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2361"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Mango_(clothing)> .
+
+<urn:kore50-cooked.ttl#offset_191_214>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Tiger lost the US Open." ;
+        nif:beginIndex        "191"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "214"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_215_259> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_131_190> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1073_1077>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Joel" ;
+        nif:beginIndex        "1073"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1077"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Billy_Joel> .
+
+<urn:kore50-cooked.ttl#offset_3442_3449>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Onassis" ;
+        nif:beginIndex        "3442"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3449"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Jacqueline_Kennedy_Onassis> .
+
+<urn:kore50-cooked.ttl#offset_1955_1964>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Microsoft" ;
+        nif:beginIndex        "1955"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1964"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Microsoft> .
+
+<urn:kore50-cooked.ttl#offset_3105_3133>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Hertha won against Dortmund." ;
+        nif:beginIndex        "3105"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3133"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3134_3223> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3082_3104> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2728_2732>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "City" ;
+        nif:beginIndex        "2728"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2732"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Manchester_City_F.C.> .
+
+<urn:kore50-cooked.ttl#offset_2676_2681>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Sharp" ;
+        nif:beginIndex        "2676"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2681"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Sharp_Corporation> .
+
+<urn:kore50-cooked.ttl#offset_2100_2245>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Steve, Bill, Sergey, and Larry have drawn a great deal of admiration these days for their pioneering successes that changed the world we live in." ;
+        nif:beginIndex        "2100"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2245"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2246_2316> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1914_2099> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_817_824>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Clapton" ;
+        nif:beginIndex        "817"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "824"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Eric_Clapton> .
+
+<urn:kore50-cooked.ttl#offset_626_635>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Hurricane" ;
+        nif:beginIndex        "626"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "635"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Hurricane_(song)> .
+
+<urn:kore50-cooked.ttl#offset_2094_2098>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Bill" ;
+        nif:beginIndex        "2094"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2098"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Bill_Gates> .
+
+<urn:kore50-cooked.ttl#offset_3134_3139>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Nixon" ;
+        nif:beginIndex        "3134"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3139"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Richard_Nixon> .
+
+<urn:kore50-cooked.ttl#offset_921_926>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Dylan" ;
+        nif:beginIndex        "921"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "926"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Bob_Dylan> .
+
+<urn:kore50-cooked.ttl#offset_3301_3363>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "The Enola Gay bombed Hiroshima at the end of Second World War." ;
+        nif:beginIndex        "3301"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3363"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3364_3441> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3224_3300> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3641_3779>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Kennedy was also an active politician, yet he is most known for his writings, some of which he published under the name of Mark Littleton." ;
+        nif:beginIndex        "3641"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3779"^^xsd:nonNegativeInteger ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3594_3640> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3224_3231>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "The Sun" ;
+        nif:beginIndex        "3224"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3231"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/The_Sun_(United_Kingdom)> .
+
+<urn:kore50-cooked.ttl#offset_593_596>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "MTV" ;
+        nif:beginIndex        "593"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "596"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/MTV> .
+
+<urn:kore50-cooked.ttl#offset_3594_3599>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Obama" ;
+        nif:beginIndex        "3594"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3599"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Barack_Obama> .
+
+<urn:kore50-cooked.ttl#offset_3442_3486>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Onassis married Kennedy on October 20, 1968." ;
+        nif:beginIndex        "3442"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3486"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3487_3527> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3364_3441> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2604_2608>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "John" ;
+        nif:beginIndex        "2604"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2608"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/John_Lasseter> .
+
+<urn:kore50-cooked.ttl#offset_206_213>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "US Open" ;
+        nif:beginIndex        "206"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "213"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/U.S._Open_(golf)> .
+
+<urn:kore50-cooked.ttl#offset_320_328>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Angelina" ;
+        nif:beginIndex        "320"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "328"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Angelina_Jolie> .
+
+<urn:kore50-cooked.ttl#offset_3236_3245>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "The Times" ;
+        nif:beginIndex        "3236"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3245"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/The_Times> .
+
+<urn:kore50-cooked.ttl#offset_3487_3527>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Armstrong was the first man on the Moon." ;
+        nif:beginIndex        "3487"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3527"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3528_3558> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3442_3486> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_320_407>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Angelina, her father Jon, and her partner Brad never played together in the same movie." ;
+        nif:beginIndex        "320"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "407"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_408_449> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_260_319> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3364_3441>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "The RAF was a terrorist group led by Baader and Meinhof that killed Schleyer." ;
+        nif:beginIndex        "3364"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3441"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3442_3486> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3301_3363> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_683_689>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Desire" ;
+        nif:beginIndex        "683"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "689"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Desire_(Bob_Dylan_album)> .
+
+<urn:kore50-cooked.ttl#offset_3636_3639>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "JFK" ;
+        nif:beginIndex        "3636"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3639"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/John_F._Kennedy_International_Airport> .
+
+<urn:kore50-cooked.ttl#offset_3346_3362>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Second World War" ;
+        nif:beginIndex        "3346"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3362"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/World_War_II> .
+
+<urn:kore50-cooked.ttl#offset_1613_1617>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Eric" ;
+        nif:beginIndex        "1613"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1617"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Eric_Clapton> .
+
+<urn:kore50-cooked.ttl#offset_252_258>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Carlos" ;
+        nif:beginIndex        "252"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "258"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Carlos_Leon> .
+
+<urn:kore50-cooked.ttl#offset_1464_1472>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Stanford" ;
+        nif:beginIndex        "1464"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1472"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Stanford_University> .
+
+<urn:kore50-cooked.ttl#offset_408_449>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Heidi and her husband Seal live in Vegas." ;
+        nif:beginIndex        "408"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "449"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_450_524> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_320_407> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1282_1287>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Rubin" ;
+        nif:beginIndex        "1282"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1287"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Rick_Rubin> .
+
+<urn:kore50-cooked.ttl#offset_81_130>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "David and Victoria added spice to their marriage." ;
+        nif:beginIndex        "81"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "130"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_131_190> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_0_80> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_185_189>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Elin" ;
+        nif:beginIndex        "185"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "189"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Elin_Nordegren> .
+
+<urn:kore50-cooked.ttl#offset_2384_2390>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Orange" ;
+        nif:beginIndex        "2384"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2390"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Orange_(telecommunications)> .
+
+<urn:kore50-cooked.ttl#offset_430_434>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Seal" ;
+        nif:beginIndex        "430"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "434"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Seal_(musician)> .
+
+<urn:kore50-cooked.ttl#offset_3586_3592>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Greece" ;
+        nif:beginIndex        "3586"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3592"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Greece> .
+
+<urn:kore50-cooked.ttl#offset_1888_1895>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Windows" ;
+        nif:beginIndex        "1888"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1895"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Microsoft_Windows> .
+
+<urn:kore50-cooked.ttl#offset_191_196>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Tiger" ;
+        nif:beginIndex        "191"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "196"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Tiger_Woods> .
+
+<urn:kore50-cooked.ttl#offset_2622_2665>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Mars, Galaxy, and Bounty are all chocolate." ;
+        nif:beginIndex        "2622"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2665"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2666_2727> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2579_2621> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_81_86>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "David" ;
+        nif:beginIndex        "81"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "86"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/David_Beckham> .
+
+<urn:kore50-cooked.ttl#offset_533_540>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Stefani" ;
+        nif:beginIndex        "533"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "540"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Lady_gaga> .
+
+<urn:kore50-cooked.ttl#offset_3074_3080>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Tivoli" ;
+        nif:beginIndex        "3074"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3080"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/New_Tivoli> .
+
+<urn:kore50-cooked.ttl#offset_460_463>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Kim" ;
+        nif:beginIndex        "460"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "463"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Kim_Kardashian> .
+
+<urn:kore50-cooked.ttl#offset_2899_2947>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Thomas and Mario are strikers playing in Munich." ;
+        nif:beginIndex        "2899"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2947"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2948_2976> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2857_2898> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2246_2250>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Karl" ;
+        nif:beginIndex        "2246"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2250"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Karl_Albrecht> .
+
+<urn:kore50-cooked.ttl#offset_2899_2905>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Thomas" ;
+        nif:beginIndex        "2899"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2905"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Thomas_Müller_(footballer)> .
+
+<urn:kore50-cooked.ttl#offset_1688_1806>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "After the death of Steve, the former CEO of Apple, his commencement speech at Stanford was watched thousands of times." ;
+        nif:beginIndex        "1688"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1806"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1807_1913> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1613_1687> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_525_609>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Justin, Stefani, and Kate are among the most popular people on both MTV and Twitter." ;
+        nif:beginIndex        "525"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "609"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_610_690> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_450_524> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3641_3648>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Kennedy" ;
+        nif:beginIndex        "3641"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3648"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/John_P._Kennedy> .
+
+<urn:kore50-cooked.ttl#offset_860_863>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "EMP" ;
+        nif:beginIndex        "860"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "863"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/EMP_Museum> .
+
+<urn:kore50-cooked.ttl#offset_3053_3059>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Meijer" ;
+        nif:beginIndex        "3053"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3059"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Erik_Meijer_(footballer)> .
+
+<urn:kore50-cooked.ttl#offset_230_233>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Eva" ;
+        nif:beginIndex        "230"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "233"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Eva_Perón> .
+
+<urn:kore50-cooked.ttl#offset_2728_2759>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "City won 3:2 against the Spurs." ;
+        nif:beginIndex        "2728"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2759"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2760_2816> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2666_2727> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3224_3300>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "The Sun and The Times reported that Greece will have to leave the Euro soon." ;
+        nif:beginIndex        "3224"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3300"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3301_3363> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3134_3223> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2246_2316>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Karl and Theo made their extreme fortunes selling low-price groceries." ;
+        nif:beginIndex        "2246"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2316"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2317_2414> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2100_2245> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_91_99>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Victoria" ;
+        nif:beginIndex        "91"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "99"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Victoria_Beckham> .
+
+<urn:kore50-cooked.ttl#offset_1636_1641>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Blues" ;
+        nif:beginIndex        "1636"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1641"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Blues> .
+
+<urn:kore50-cooked.ttl#offset_1854_1863>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Microsoft" ;
+        nif:beginIndex        "1854"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1863"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Microsoft> .
+
+<urn:kore50-cooked.ttl#offset_3528_3558>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Erich was born in Neunkirchen." ;
+        nif:beginIndex        "3528"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3558"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3559_3593> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3487_3527> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2415_2578>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Sam, the co-founder of Equity International, was given the nickname of \\\"the grave dancer\\\" because of his ability to buy businesses that others thought were dead." ;
+        nif:beginIndex        "2415"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2578"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2579_2621> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2317_2414> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1409_1413>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Baez" ;
+        nif:beginIndex        "1409"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1413"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Joan_Baez> .
+
+<urn:kore50-cooked.ttl#offset_1672_1678>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Mayall" ;
+        nif:beginIndex        "1672"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1678"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/John_Mayall> .
+
+<urn:kore50-cooked.ttl#offset_3609_3615>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Merkel" ;
+        nif:beginIndex        "3609"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3615"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Angela_Merkel> .
+
+<urn:kore50-cooked.ttl#offset_1653_1657>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Rock" ;
+        nif:beginIndex        "1653"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1657"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Rock_music> .
+
+<urn:kore50-cooked.ttl#offset_1289_1399>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "The group formed by Homme, Grohl, and Jones was supposed to be named Caligula, but the name was already taken." ;
+        nif:beginIndex        "1289"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1399"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1400_1482> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1138_1288> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3040_3048>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Landgraf" ;
+        nif:beginIndex        "3040"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3048"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Willi_Landgraf> .
+
+<urn:kore50-cooked.ttl#offset_2622_2626>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Mars" ;
+        nif:beginIndex        "2622"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2626"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Mars_bar> .
+
+<urn:kore50-cooked.ttl#offset_1914_2099>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Cairo was the code name for a project at Microsoft from 1991 to 1996. Its charter was to build technologies for a next generation operating system that would fulfill the vision of Bill." ;
+        nif:beginIndex        "1914"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2099"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2100_2245> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1807_1913> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3487_3496>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Armstrong" ;
+        nif:beginIndex        "3487"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3496"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Neil_Armstrong> .
+
+<urn:kore50-cooked.ttl#offset_3412_3419>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Meinhof" ;
+        nif:beginIndex        "3412"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3419"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Ulrike_Meinhof> .
+
+<urn:kore50-cooked.ttl#offset_2255_2259>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Theo" ;
+        nif:beginIndex        "2255"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2259"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Theo_Albrecht> .
+
+<urn:kore50-cooked.ttl#offset_1707_1712>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Steve" ;
+        nif:beginIndex        "1707"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1712"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Steve_Jobs> .
+
+<urn:kore50-cooked.ttl#offset_131_190>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Tiger was lost in the woods when he got divorced from Elin." ;
+        nif:beginIndex        "131"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "190"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_191_214> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_81_130> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3559_3568>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Macedonia" ;
+        nif:beginIndex        "3559"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3568"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Macedonia_(Greece)> .
+
+<urn:kore50-cooked.ttl#offset_3458_3465>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Kennedy" ;
+        nif:beginIndex        "3458"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3465"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/John_F._Kennedy> .
+
+<urn:kore50-cooked.ttl#offset_1558_1567>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Woodstock" ;
+        nif:beginIndex        "1558"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1567"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Woodstock_Festival> .
+
+<urn:kore50-cooked.ttl#offset_691_697>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Desire" ;
+        nif:beginIndex        "691"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "697"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Desire_(Bob_Dylan_album)> .
+
+<urn:kore50-cooked.ttl#offset_1119_1123>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Sony" ;
+        nif:beginIndex        "1119"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1123"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Sony_Music_Entertainment> .
+
+<urn:kore50-cooked.ttl#offset_1183_1187>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Cash" ;
+        nif:beginIndex        "1183"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1187"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Johnny_Cash> .
+
+<urn:kore50-cooked.ttl#offset_2857_2863>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Müller" ;
+        nif:beginIndex        "2857"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2863"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Thomas_Müller_(footballer)> .
+
+<urn:kore50-cooked.ttl#offset_2113_2119>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Sergey" ;
+        nif:beginIndex        "2113"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2119"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Sergey_Brin> .
+
+<urn:kore50-cooked.ttl#offset_0_80>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "David and Victoria named their children Brooklyn, Romeo, Cruz, and Harper Seven." ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "80"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_81_130> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_601_608>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Twitter" ;
+        nif:beginIndex        "601"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "608"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Twitter> .
+
+<urn:kore50-cooked.ttl#offset_2910_2915>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Mario" ;
+        nif:beginIndex        "2910"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2915"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Mario_Gomez> .
+
+<urn:kore50-cooked.ttl#offset_341_344>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Jon" ;
+        nif:beginIndex        "341"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "344"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Jon_Voight> .
+
+<urn:kore50-cooked.ttl#offset_2807_2815>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Emirates" ;
+        nif:beginIndex        "2807"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2815"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Emirates_Stadium> .
+
+<urn:kore50-cooked.ttl#offset_2940_2946>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Munich" ;
+        nif:beginIndex        "2940"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2946"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/FC_Bayern_Munich> .
+
+<urn:kore50-cooked.ttl#offset_1914_1919>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Cairo" ;
+        nif:beginIndex        "1914"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1919"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Cairo_(operating_system)> .
+
+<urn:kore50-cooked.ttl#offset_3305_3314>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Enola Gay" ;
+        nif:beginIndex        "3305"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3314"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Enola_Gay> .
+
+<urn:kore50-cooked.ttl#offset_362_366>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Brad" ;
+        nif:beginIndex        "362"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "366"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Brad_Pitt> .
+
+<urn:kore50-cooked.ttl#offset_2415_2418>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Sam" ;
+        nif:beginIndex        "2415"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2418"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Sam_Zell> .
+
+<urn:kore50-cooked.ttl#offset_408_413>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Heidi" ;
+        nif:beginIndex        "408"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "413"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Heidi_Klum> .
+
+<urn:kore50-cooked.ttl#offset_2977_3039>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Völler will never forget the match against Oranje in San Siro." ;
+        nif:beginIndex        "2977"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3039"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3040_3081> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2948_2976> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2666_2671>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Bosch" ;
+        nif:beginIndex        "2666"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2671"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Robert_Bosch_GmbH> .
+
+<urn:kore50-cooked.ttl#offset_3020_3026>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Oranje" ;
+        nif:beginIndex        "3020"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3026"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Netherlands_national_football_team> .
+
+<urn:kore50-cooked.ttl#offset_546_550>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Kate" ;
+        nif:beginIndex        "546"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "550"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Kate_Perry> .
+
+<urn:kore50-cooked.ttl#offset_2628_2634>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Galaxy" ;
+        nif:beginIndex        "2628"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2634"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Galaxy_(chocolate)> .
+
+<urn:kore50-cooked.ttl#offset_842_847>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Allen" ;
+        nif:beginIndex        "842"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "847"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Paul_Allen> .
+
+<urn:kore50-cooked.ttl#offset_1400_1482>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Jobs and Baez dated in the late 1970s, and she performed at his Stanford memorial." ;
+        nif:beginIndex        "1400"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1482"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1483_1612> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1289_1399> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_610_690>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Dylan performed Hurricane about the black fighter Carter, from his album Desire." ;
+        nif:beginIndex        "610"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "690"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_691_743> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_525_609> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_3155_3164>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Watergate" ;
+        nif:beginIndex        "3155"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3164"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Watergate_scandal> .
+
+<urn:kore50-cooked.ttl#offset_1583_1588>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Davis" ;
+        nif:beginIndex        "1583"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1588"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Miles_davis> .
+
+<urn:kore50-cooked.ttl#offset_3082_3104>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Yabo plays for Aachen." ;
+        nif:beginIndex        "3082"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3104"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3105_3133> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3040_3081> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_10_18>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Victoria" ;
+        nif:beginIndex        "10"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "18"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Victoria_Beckham> .
+
+<urn:kore50-cooked.ttl#offset_909_916>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Hendrix" ;
+        nif:beginIndex        "909"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "916"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Jimi_Hendrix> .
+
+<urn:kore50-cooked.ttl#offset_3368_3371>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "RAF" ;
+        nif:beginIndex        "3368"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3371"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Red_Army_Faction> .
+
+<urn:kore50-cooked.ttl#offset_867_874>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Seattle" ;
+        nif:beginIndex        "867"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "874"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Seattle> .
+
+<urn:kore50-cooked.ttl#offset_3401_3407>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Baader" ;
+        nif:beginIndex        "3401"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3407"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Andreas_Baader> .
+
+<urn:kore50-cooked.ttl#offset_1138_1288>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "After unsuccessful years, aging country star Cash made a grandiose comeback with his American Recordings, recorded at his home with the help of Rubin." ;
+        nif:beginIndex        "1138"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1288"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1289_1399> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_975_1137> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1732_1737>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Apple" ;
+        nif:beginIndex        "1732"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1737"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Apple_Inc.> .
+
+<urn:kore50-cooked.ttl#offset_3522_3526>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Moon" ;
+        nif:beginIndex        "3522"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3526"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Moon> .
+
+<urn:kore50-cooked.ttl#offset_525_531>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Justin" ;
+        nif:beginIndex        "525"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "531"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Justin_Bieber> .
+
+<urn:kore50-cooked.ttl#offset_1807_1913>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "In 1980, Steve dropped out of Stanford to join Microsoft, the company behind the Windows operating system." ;
+        nif:beginIndex        "1807"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1913"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_1914_2099> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_1688_1806> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_1057_1064>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Sinatra" ;
+        nif:beginIndex        "1057"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "1064"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Frank_Sinatra> .
+
+<urn:kore50-cooked.ttl#offset_308_318>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "First Lady" ;
+        nif:beginIndex        "308"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "318"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/First_Lady_of_Argentina> .
+
+<urn:kore50-cooked.ttl#offset_2753_2758>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Spurs" ;
+        nif:beginIndex        "2753"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2758"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Tottenham_Hotspur_F.C.> .
+
+<urn:kore50-cooked.ttl#offset_2594_2598>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Cars" ;
+        nif:beginIndex        "2594"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2598"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Cars_(film)> .
+
+<urn:kore50-cooked.ttl#offset_3124_3132>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Dortmund" ;
+        nif:beginIndex        "3124"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3132"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Borussia_Dortmund> .
+
+<urn:kore50-cooked.ttl#offset_2107_2111>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Bill" ;
+        nif:beginIndex        "2107"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2111"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Bill_Gates> .
+
+<urn:kore50-cooked.ttl#offset_3105_3111>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Hertha" ;
+        nif:beginIndex        "3105"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3111"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Hertha_BSC> .
+
+<urn:kore50-cooked.ttl#offset_3594_3640>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "Obama welcomed Merkel upon her arrival at JFK." ;
+        nif:beginIndex        "3594"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "3640"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_3641_3779> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_3559_3593> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .
+
+<urn:kore50-cooked.ttl#offset_2317_2414>
+        a                     nif:OffsetBasedString , nif:Sentence ;
+        nif:anchorOf          "While Apple is an electronics company, Mango is a clothing one and Orange is a communication one." ;
+        nif:beginIndex        "2317"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "2414"^^xsd:nonNegativeInteger ;
+        nif:nextSentence      <urn:kore50-cooked.ttl#offset_2415_2578> ;
+        nif:previousSentence  <urn:kore50-cooked.ttl#offset_2246_2316> ;
+        nif:referenceContext  <urn:kore50-cooked.ttl#offset_0_3779> .

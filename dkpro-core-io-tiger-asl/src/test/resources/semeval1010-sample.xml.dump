@@ -25,7 +25,7 @@ PennTree
    sofa: _InitialView
    begin: 0
    end: 169
-   PennTree: "(S (PRP he) (VP (VBD spent) (PP (PP (IN in) (NPB (ADJP (JJ long) (CC and) (ADJP (RB often) (JJ solitary))) (VBZ walks) (PUNC, ,))) (CC or) (PP (IN in) (VP (VBG chatting) (PP (IN with) (NP (NPB (DT a) (NN number)) (PP (IN of) (NP (NPB (NN village) (NNS gossips)) (SBAR (WHNP (WP$ whose) (NN acquaintance)) (S (PRP he) (VP (VBD had) (VP (VBN cultivated) (PUNC. .)))))))))))) (NPB (PRP$ his) (NNS days))) (VP (VB Save) (PP (IN for) (NPB (DT this) (CD one) (NN excursion) (PUNC, ,)))))"
+   PennTree: "(S (PRP he) (VP (VBD spent) (PP (PP (IN in) (NPB (ADJP (JJ long) (CC and) (ADJP ..."
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 ROOT
    sofa: _InitialView
