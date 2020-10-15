@@ -263,6 +263,11 @@
         <version>2.7.2</version>
       </dependency>
       <dependency>
+        <groupId>xml-apis</groupId>
+        <artifactId>xml-apis</artifactId>
+        <version>1.4.01</version>
+      </dependency>
+      <dependency>
         <groupId>stax</groupId>
         <artifactId>stax-api</artifactId>
         <version>1.0.1</version>
