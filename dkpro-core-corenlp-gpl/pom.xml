@@ -578,6 +578,7 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
+              <usedDependency>xml-apis:xml-apis</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf</usedDependency>
