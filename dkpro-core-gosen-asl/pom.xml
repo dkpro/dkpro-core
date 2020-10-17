@@ -40,6 +40,16 @@
       <groupId>com.google.code</groupId>
       <artifactId>lucene-gosen-ipadic</artifactId>
       <version>1.2.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.solr</groupId>
+          <artifactId>solr-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.solr</groupId>
+          <artifactId>solr-solrj</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
