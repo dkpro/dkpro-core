@@ -18,6 +18,7 @@
 package org.dkpro.core.io.bincas;
 
 import static org.apache.uima.cas.SerialFormat.BINARY;
+import static org.apache.uima.cas.SerialFormat.BINARY_TSI;
 import static org.apache.uima.cas.SerialFormat.COMPRESSED;
 import static org.apache.uima.cas.SerialFormat.COMPRESSED_FILTERED;
 import static org.apache.uima.cas.SerialFormat.COMPRESSED_FILTERED_TS;
@@ -249,9 +250,9 @@ public class BinaryCasWriter
                 // serializeCAS(aJCas.getCas(), docOS);
                 CasIOUtils.save(aJCas.getCas(), docOS, BINARY);
             }
-            else if (BINARY.toString().equals(format)) {
-                // Java-serialized CAS without type system
-                CasIOUtils.save(aJCas.getCas(), docOS, SerialFormat.BINARY_TSI);
+            else if (BINARY_TSI.toString().equals(format)) {
+                // Java-serialized CAS with type system
+                CasIOUtils.save(aJCas.getCas(), docOS, BINARY_TSI);
             }
             else if ("4".equals(format) || COMPRESSED.toString().equals(format)) {
                 // Binary compressed CAS without type system (form 4)
@@ -279,7 +280,9 @@ public class BinaryCasWriter
             }
             else {
                 throw new IllegalArgumentException("Unknown format [" + format
-                        + "]. Must be S, S+, 0, 4, 6, or 6+");
+                        + "]. Must be S, S+, 0, 4, 6, 6+, SERIALIZED, SERIALIZED_TSI, BINARY, "
+                        + "BINARY_TSI, COMPRESSED_TSI, COMPRESSED_FILTERED, "
+                        + "COMPRESSED_FILTERED_TS or COMPRESSED_FILTERED_TSI");
             }
         }
         catch (Exception e) {

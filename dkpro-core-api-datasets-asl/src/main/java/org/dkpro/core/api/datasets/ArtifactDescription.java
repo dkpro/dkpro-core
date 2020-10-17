@@ -74,4 +74,12 @@ public interface ArtifactDescription
      * @return list of actions.
      */
     List<ActionDescription> getActions();
+    
+    /**
+     * Whether this artifact is optional. If an optional artifact cannot be located or downloaded
+     * (e.g. due to a network problem), then the rest materializes still.
+     * 
+     * @return optional status.
+     */
+    boolean isOptional();
 }

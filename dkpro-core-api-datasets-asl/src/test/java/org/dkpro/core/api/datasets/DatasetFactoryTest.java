@@ -39,11 +39,11 @@ public class DatasetFactoryTest
         throws Exception
     {
         //Path cache = testContext.getTestOutputFolder().toPath();
-        Path cache = Paths.get("target/test-output/testLoadAll");
+        Path cache = Paths.get("target/test-output/testLoadOne");
         
         DatasetFactory df = new DatasetFactory(cache);
         {
-            Dataset ds = df.load("gum-ud-en-conll-5.0.0");
+            Dataset ds = df.load("updt-fa-1.3");
             assertDatasetOk(ds);
         }
     }

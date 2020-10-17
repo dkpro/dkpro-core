@@ -30,7 +30,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.hunpos.HunPosTagger;
-import org.dkpro.core.mstparser.MstParser;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
@@ -42,8 +41,6 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
-/**
- */
 public class MstParserTest
 {
     @Ignore("Takes too long")
@@ -339,6 +336,9 @@ public class MstParserTest
         
         Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
                 System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+        Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
+                !System.getProperty("os.version").matches("10\\.([0-9]|1[0-4]).*"));
 
         aggregate.add(createEngineDescription(HunPosTagger.class));
         Object[] params = new Object[] {

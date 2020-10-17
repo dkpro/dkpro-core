@@ -28,7 +28,7 @@ licenses:
 
 artifacts:
   LICENSE.txt:
-    url: https://www.gnu.org/licenses/gpl-2.0.txt
+    url: classpath:/org/dkpro/core/api/datasets/lib/common-licenses/gpl-2.0.txt
     sha1: 0e5aad9553dc0ed784ec220bb09e22d52fefbb8b
     sha512: 7881dbc2d75fd63161fa31c2209b21c7858e9664c3cab00fcae14bddac91bded9eba2f34252b5d734fa3f98c35e6ed3a388044eba3bbb746233aafac182cc442
     verificationMode: TEXT
