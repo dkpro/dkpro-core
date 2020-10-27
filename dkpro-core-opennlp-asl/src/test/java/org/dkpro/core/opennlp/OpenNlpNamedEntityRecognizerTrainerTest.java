@@ -38,16 +38,16 @@ import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
+import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
+import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizerTrainer;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import opennlp.tools.ml.maxent.GISTrainer;
 
-@Ignore("GermEval 2014 not downloadable. See https://github.com/dkpro/dkpro-core/issues/1486")
 public class OpenNlpNamedEntityRecognizerTrainerTest
 {
     private Dataset ds;
