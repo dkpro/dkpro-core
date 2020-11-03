@@ -1,7 +1,7 @@
 groupId: org.dkpro.core.datasets.germeval2014
 datasetId: germeval2014
 # There is no uniform version for the whole datased, using the date of the most recent artifact
-version: 20140911
+version: 20200808
 language: de
 mediaType: text/x.org.dkpro.germeval-2014
 encoding: UTF-8
@@ -33,26 +33,20 @@ artifacts:
     sha1: 9c5bee7a22ab39ad6c19ab29ea9e94ac5874f9c6
     sha512: 222cf997169925ee3a09a26798d04332673693c578c24cb2d0cc550785a8b87849b161dccd9c48d2e4f3fa15290b6a10ac5262945f9c8cc6bdbd362d37416300
     verificationMode: TEXT
-  NER-de-dev.tsv:
-    url: "https://sites.google.com/site/germeval2014ner/data/NER-de-dev.tsv?attredirects=0&d=1"
-    sha1: 70aba5d247f51ec22e0bcc671c7fb325e4ff4277
-    sha512: 322f6e931988374d51eb8cb43171a8fbb612fd15d3255167f33c23389736dd21f8ac06354cd7509db94c1e16a8cedf40c68fe4a3547018d50bc343b023fdb90b
-  NER-de-test.tsv:
-    url: "https://sites.google.com/site/germeval2014ner/data/NER-de-test.tsv?attredirects=0&d=1"
-    sha1: 214deaf091e01567af2e958aac87863bf685342a
-    sha512: b835f9d8267873ea7128efeef263eaed7ecd786544dcdd00a599b69f3ed20b98460bb3ab62e939eda56bbe3d629c7605bb9fda97cc83300c7175e6748e6d1d8c
-  NER-de-train.tsv:
-    url: "https://sites.google.com/site/germeval2014ner/data/NER-de-train.tsv?attredirects=0&d=1"
-    sha1: 7644cb09676050c0a2836e06fa0aeb8509b9e1cb
-    sha512: ed0ed7b883667796386174b1b795015b6c8f690bd84d861d1b825b80c869126ddd158eb9a5f8dc7ae0df037ea9aef615db0e829766e9304a21a3f513d57f984f
+  GermEval2014NER.zip:
+    url: "https://www.ims.uni-stuttgart.de/data/GermEval2014NER.zip"
+    sha1: 827edc0232f813fb1344e06924a46e9344ec2f61
+    sha512: ce2e32e039fd847ea2a7acac736a9f73a0bbe73b9ce96cf2f7f93b60e2780b4ebf10217037ea9c0f033159b660677c70ebf7e069bd1feb375b1a51fad1e9d649
+    actions:
+      - action: explode
 
 roles:
   training:
-    - NER-de-train.tsv
+    - GermEval2014NER/NER-de-train.tsv
   testing: 
-    - NER-de-test.tsv
+    - GermEval2014NER/NER-de-test.tsv
   development:
-    - NER-de-dev.tsv
+    - GermEval2014NER/NER-de-dev.tsv
   licenses: 
     - LICENSE.txt
-    
+

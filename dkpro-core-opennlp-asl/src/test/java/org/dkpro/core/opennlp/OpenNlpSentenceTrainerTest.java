@@ -41,15 +41,15 @@ import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
+import org.dkpro.core.opennlp.OpenNlpSegmenter;
+import org.dkpro.core.opennlp.OpenNlpSentenceTrainer;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
-@Ignore("GermEval 2014 not downloadable. See https://github.com/dkpro/dkpro-core/issues/1486")
 public class OpenNlpSentenceTrainerTest
 {
     private Dataset ds;
