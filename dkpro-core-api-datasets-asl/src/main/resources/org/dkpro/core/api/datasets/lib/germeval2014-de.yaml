@@ -39,6 +39,7 @@ artifacts:
     sha512: ce2e32e039fd847ea2a7acac736a9f73a0bbe73b9ce96cf2f7f93b60e2780b4ebf10217037ea9c0f033159b660677c70ebf7e069bd1feb375b1a51fad1e9d649
     actions:
       - action: explode
+        configuration: { includes: ["*.tsv"] }
 
 roles:
   training:
