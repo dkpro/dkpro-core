@@ -46,13 +46,11 @@ import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import org.dkpro.core.io.conll.Conll2002Writer;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 
-@Ignore("GermEval 2014 not downloadable. See https://github.com/dkpro/dkpro-core/issues/1486")
 public class StanfordNamedEntityRecognizerTrainerTest
 {
     private Dataset ds;

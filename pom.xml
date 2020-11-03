@@ -39,8 +39,8 @@
     <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <uima.version>3.1.1</uima.version>
-    <uimafit.version>3.1.0-SNAPSHOT</uimafit.version>
-    <uimafit.plugin.version>3.1.0-SNAPSHOT</uimafit.plugin.version>
+    <uimafit.version>3.1.0</uimafit.version>
+    <uimafit.plugin.version>3.1.0</uimafit.plugin.version>
     <omtd.version>3.0.2.7</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
