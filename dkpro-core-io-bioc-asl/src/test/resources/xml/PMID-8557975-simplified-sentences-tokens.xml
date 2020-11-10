@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE collection SYSTEM "BioC.dtd">
+<collection>
+  <source>PubMed</source>
+  <date>20130316</date>
+  <key>PMID-8557975-simplified-sentences-tokens.key</key>
+  <document>
+    <id>8557975</id>
+    <passage>
+      <infon key="type">abstract</infon>
+      <offset>0</offset>
+      <sentence>
+	<infon key="type">original sentence</infon>
+        <offset>70</offset>
+        <annotation id="t0">
+          <infon key="type">token</infon>
+          <location offset="70" length="6"></location>
+          <text>Active</text>
+        </annotation>
+        <annotation id="t1">
+          <infon key="type">token</infon>
+          <location offset="77" length="5"></location>
+          <text>Raf-1</text>
+        </annotation>
+        <annotation id="t2">
+          <infon key="type">token</infon>
+          <location offset="83" length="14"></location>
+          <text>phosphorylates</text>
+        </annotation>
+        <annotation id="t3">
+          <infon key="type">token</infon>
+          <location offset="98" length="3"></location>
+          <text>and</text>
+        </annotation>
+        <annotation id="t4">
+          <infon key="type">token</infon>
+          <location offset="102" length="9"></location>
+          <text>activates</text>
+        </annotation>
+        <annotation id="t5">
+          <infon key="type">token</infon>
+          <location offset="112" length="3"></location>
+          <text>the</text>
+        </annotation>
+        <annotation id="t6">
+          <infon key="type">token</infon>
+          <location offset="116" length="17"></location>
+          <text>mitogen-activated</text>
+        </annotation>
+        <annotation id="t7">
+          <infon key="type">token</infon>
+          <location offset="134" length="7"></location>
+          <text>protein</text>
+        </annotation>
+        <annotation id="t8">
+          <infon key="type">token</infon>
+          <location offset="142" length="1"></location>
+          <text>(</text>
+        </annotation>
+        <annotation id="t9">
+          <infon key="type">token</infon>
+          <location offset="143" length="3"></location>
+          <text>MAP</text>
+        </annotation>
+        <annotation id="t10">
+          <infon key="type">token</infon>
+          <location offset="146" length="1"></location>
+          <text>)</text>
+        </annotation>
+        <annotation id="t11">
+          <infon key="type">token</infon>
+          <location offset="148" length="20"></location>
+          <text>kinase/extracellular</text>
+        </annotation>
+        <annotation id="t12">
+          <infon key="type">token</infon>
+          <location offset="169" length="16"></location>
+          <text>signal-regulated</text>
+        </annotation>
+        <annotation id="t13">
+          <infon key="type">token</infon>
+          <location offset="186" length="6"></location>
+          <text>kinase</text>
+        </annotation>
+        <annotation id="t14">
+          <infon key="type">token</infon>
+          <location offset="193" length="6"></location>
+          <text>kinase</text>
+        </annotation>
+        <annotation id="t15">
+          <infon key="type">token</infon>
+          <location offset="200" length="1"></location>
+          <text>1</text>
+        </annotation>
+        <annotation id="t16">
+          <infon key="type">token</infon>
+          <location offset="202" length="1"></location>
+          <text>(</text>
+        </annotation>
+        <annotation id="t17">
+          <infon key="type">token</infon>
+          <location offset="203" length="4"></location>
+          <text>MEK1</text>
+        </annotation>
+        <annotation id="t18">
+          <infon key="type">token</infon>
+          <location offset="207" length="1"></location>
+          <text>)</text>
+        </annotation>
+        <annotation id="t19">
+          <infon key="type">token</infon>
+          <location offset="208" length="1"></location>
+          <text>,</text>
+        </annotation>
+        <annotation id="t20">
+          <infon key="type">token</infon>
+          <location offset="210" length="5"></location>
+          <text>which</text>
+        </annotation>
+        <annotation id="t21">
+          <infon key="type">token</infon>
+          <location offset="216" length="2"></location>
+          <text>in</text>
+        </annotation>
+        <annotation id="t22">
+          <infon key="type">token</infon>
+          <location offset="219" length="4"></location>
+          <text>turn</text>
+        </annotation>
+        <annotation id="t23">
+          <infon key="type">token</infon>
+          <location offset="224" length="14"></location>
+          <text>phosphorylates</text>
+        </annotation>
+        <annotation id="t24">
+          <infon key="type">token</infon>
+          <location offset="239" length="3"></location>
+          <text>and</text>
+        </annotation>
+        <annotation id="t25">
+          <infon key="type">token</infon>
+          <location offset="243" length="9"></location>
+          <text>activates</text>
+        </annotation>
+        <annotation id="t26">
+          <infon key="type">token</infon>
+          <location offset="253" length="3"></location>
+          <text>the</text>
+        </annotation>
+        <annotation id="t27">
+          <infon key="type">token</infon>
+          <location offset="257" length="3"></location>
+          <text>MAP</text>
+        </annotation>
+        <annotation id="t28">
+          <infon key="type">token</infon>
+          <location offset="261" length="21"></location>
+          <text>kinases/extracellular</text>
+        </annotation>
+        <annotation id="t29">
+          <infon key="type">token</infon>
+          <location offset="283" length="6"></location>
+          <text>signal</text>
+        </annotation>
+        <annotation id="t30">
+          <infon key="type">token</infon>
+          <location offset="290" length="9"></location>
+          <text>regulated</text>
+        </annotation>
+        <annotation id="t31">
+          <infon key="type">token</infon>
+          <location offset="300" length="7"></location>
+          <text>kinases</text>
+        </annotation>
+        <annotation id="t32">
+          <infon key="type">token</infon>
+          <location offset="307" length="1"></location>
+          <text>,</text>
+        </annotation>
+        <annotation id="t33">
+          <infon key="type">token</infon>
+          <location offset="309" length="4"></location>
+          <text>ERK1</text>
+        </annotation>
+        <annotation id="t34">
+          <infon key="type">token</infon>
+          <location offset="314" length="3"></location>
+          <text>and</text>
+        </annotation>
+        <annotation id="t35">
+          <infon key="type">token</infon>
+          <location offset="318" length="4"></location>
+          <text>ERK2</text>
+        </annotation>
+        <annotation id="t36">
+          <infon key="type">token</infon>
+          <location offset="322" length="1"></location>
+          <text>.</text>
+        </annotation>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>325</offset>
+        <annotation id="t37">
+          <infon key="type">token</infon>
+          <location offset="325" length="6"></location>
+          <text>Active</text>
+        </annotation>
+        <annotation id="t38">
+          <infon key="type">token</infon>
+          <location offset="332" length="5"></location>
+          <text>Raf-1</text>
+        </annotation>
+        <annotation id="t39">
+          <infon key="type">token</infon>
+          <location offset="338" length="14"></location>
+          <text>phosphorylates</text>
+        </annotation>
+        <annotation id="t40">
+          <infon key="type">token</infon>
+          <location offset="353" length="4"></location>
+          <text>MEK1</text>
+        </annotation>
+        <annotation id="t41">
+          <infon key="type">token</infon>
+          <location offset="357" length="1"></location>
+          <text>.</text>
+        </annotation>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>360</offset>
+        <annotation id="t42">
+          <infon key="type">token</infon>
+          <location offset="360" length="6"></location>
+          <text>Active</text>
+        </annotation>
+        <annotation id="t43">
+          <infon key="type">token</infon>
+          <location offset="367" length="5"></location>
+          <text>Raf-1</text>
+        </annotation>
+        <annotation id="t44">
+          <infon key="type">token</infon>
+          <location offset="373" length="9"></location>
+          <text>activates</text>
+        </annotation>
+        <annotation id="t45">
+          <infon key="type">token</infon>
+          <location offset="383" length="4"></location>
+          <text>MEK1</text>
+        </annotation>
+        <annotation id="t46">
+          <infon key="type">token</infon>
+          <location offset="387" length="1"></location>
+          <text>.</text>
+        </annotation>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>390</offset>
+        <annotation id="t47">
+          <infon key="type">token</infon>
+          <location offset="390" length="4"></location>
+          <text>MEK1</text>
+        </annotation>
+        <annotation id="t48">
+          <infon key="type">token</infon>
+          <location offset="395" length="2"></location>
+          <text>in</text>
+        </annotation>
+        <annotation id="t49">
+          <infon key="type">token</infon>
+          <location offset="398" length="4"></location>
+          <text>turn</text>
+        </annotation>
+        <annotation id="t50">
+          <infon key="type">token</infon>
+          <location offset="403" length="14"></location>
+          <text>phosphorylates</text>
+        </annotation>
+        <annotation id="t51">
+          <infon key="type">token</infon>
+          <location offset="418" length="4"></location>
+          <text>ERK1</text>
+        </annotation>
+        <annotation id="t52">
+          <infon key="type">token</infon>
+          <location offset="422" length="1"></location>
+          <text>.</text>
+        </annotation>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>425</offset>
+        <annotation id="t53">
+          <infon key="type">token</infon>
+          <location offset="425" length="4"></location>
+          <text>MEK1</text>
+        </annotation>
+        <annotation id="t54">
+          <infon key="type">token</infon>
+          <location offset="430" length="2"></location>
+          <text>in</text>
+        </annotation>
+        <annotation id="t55">
+          <infon key="type">token</infon>
+          <location offset="433" length="4"></location>
+          <text>turn</text>
+        </annotation>
+        <annotation id="t56">
+          <infon key="type">token</infon>
+          <location offset="438" length="14"></location>
+          <text>phosphorylates</text>
+        </annotation>
+        <annotation id="t57">
+          <infon key="type">token</infon>
+          <location offset="453" length="4"></location>
+          <text>ERK2</text>
+        </annotation>
+        <annotation id="t58">
+          <infon key="type">token</infon>
+          <location offset="457" length="1"></location>
+          <text>.</text>
+        </annotation>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>460</offset>
+        <annotation id="t59">
+          <infon key="type">token</infon>
+          <location offset="460" length="4"></location>
+          <text>MEK1</text>
+        </annotation>
+        <annotation id="t60">
+          <infon key="type">token</infon>
+          <location offset="465" length="2"></location>
+          <text>in</text>
+        </annotation>
+        <annotation id="t61">
+          <infon key="type">token</infon>
+          <location offset="468" length="4"></location>
+          <text>turn</text>
+        </annotation>
+        <annotation id="t62">
+          <infon key="type">token</infon>
+          <location offset="473" length="9"></location>
+          <text>activates</text>
+        </annotation>
+        <annotation id="t63">
+          <infon key="type">token</infon>
+          <location offset="483" length="4"></location>
+          <text>ERK1</text>
+        </annotation>
+        <annotation id="t64">
+          <infon key="type">token</infon>
+          <location offset="487" length="1"></location>
+          <text>.</text>
+        </annotation>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>489</offset>
+        <annotation id="t65">
+          <infon key="type">token</infon>
+          <location offset="489" length="4"></location>
+          <text>MEK1</text>
+        </annotation>
+        <annotation id="t66">
+          <infon key="type">token</infon>
+          <location offset="494" length="2"></location>
+          <text>in</text>
+        </annotation>
+        <annotation id="t67">
+          <infon key="type">token</infon>
+          <location offset="497" length="4"></location>
+          <text>turn</text>
+        </annotation>
+        <annotation id="t68">
+          <infon key="type">token</infon>
+          <location offset="502" length="9"></location>
+          <text>activates</text>
+        </annotation>
+        <annotation id="t69">
+          <infon key="type">token</infon>
+          <location offset="512" length="4"></location>
+          <text>ERK2</text>
+        </annotation>
+        <annotation id="t70">
+          <infon key="type">token</infon>
+          <location offset="516" length="1"></location>
+          <text>.</text>
+        </annotation>
+      </sentence>
+      <!-- equ -->
+      <!-- Active -->
+      <relation id="r0">
+        <infon key="type">equ</infon>
+        <node refid="t0" role="original"></node>
+        <node refid="t37" role="simplified"></node>
+        <node refid="t42" role="simplified"></node>
+      </relation>
+      <!-- RAF-1 -->
+      <relation id="r1">
+        <infon key="type">equ</infon>
+        <node refid="t1" role="original"></node>
+        <node refid="t38" role="simplified"></node>
+        <node refid="t43" role="simplified"></node>
+      </relation>
+      <!-- phosphorylates -->
+      <relation id="r2">
+        <infon key="type">equ</infon>
+        <node refid="t2" role="original"></node>
+        <node refid="t39" role="simplified"></node>
+      </relation>
+      <!-- MEK1 -->
+      <relation id="r3">
+        <infon key="type">equ</infon>
+        <node refid="t17" role="original"></node>
+        <node refid="t40" role="simplified"></node>
+        <node refid="t45" role="simplified"></node>
+        <node refid="t47" role="simplified"></node>
+        <node refid="t53" role="simplified"></node>
+        <node refid="t59" role="simplified"></node>
+        <node refid="t65" role="simplified"></node>
+      </relation>
+      <!-- . -->
+      <relation id="r4">
+        <infon key="type">equ</infon>
+        <node refid="t36" role="original"></node>
+        <node refid="t41" role="simplified"></node>
+        <node refid="t46" role="simplified"></node>
+        <node refid="t52" role="simplified"></node>
+        <node refid="t58" role="simplified"></node>
+        <node refid="t64" role="simplified"></node>
+	<node refid="t70" role="simplified"></node>
+      </relation>
+      <!-- activates -->
+      <relation id="r5">
+        <infon key="type">equ</infon>
+        <node refid="t4" role="original"></node>
+        <node refid="t44" role="simplified"></node>
+      </relation>
+      <!-- in -->
+      <relation id="r6">
+        <infon key="type">equ</infon>
+        <node refid="t21" role="original"></node>
+        <node refid="t48" role="simplified"></node>
+        <node refid="t54" role="simplified"></node>
+        <node refid="t60" role="simplified"></node>
+        <node refid="t66" role="simplified"></node>
+      </relation>
+      <!-- turn -->
+      <relation id="r7">
+        <infon key="type">equ</infon>
+        <node refid="t22" role="original"></node>
+        <node refid="t49" role="simplified"></node>
+        <node refid="t55" role="simplified"></node>
+        <node refid="t61" role="simplified"></node>
+        <node refid="t67" role="simplified"></node>
+      </relation>
+      <!-- phosphorylates -->
+      <relation id="r8">
+        <infon key="type">equ</infon>
+        <node refid="t23" role="original"></node>
+        <node refid="t50" role="simplified"></node>
+        <node refid="t56" role="simplified"></node>
+      </relation>
+      <!-- ERK1 -->
+      <relation id="r9">
+        <infon key="type">equ</infon>
+        <node refid="t33" role="original"></node>
+        <node refid="t51" role="simplified"></node>
+        <node refid="t63" role="simplified"></node>
+      </relation>
+      <!-- ERK2 -->
+      <relation id="r10">
+        <infon key="type">equ</infon>
+        <node refid="t35" role="original"></node>
+        <node refid="t57" role="simplified"></node>
+        <node refid="t69" role="simplified"></node>
+      </relation>
+      <!-- activates -->
+      <relation id="r11">
+        <infon key="type">equ</infon>
+        <node refid="t25" role="original"></node>
+        <node refid="t62" role="simplified"></node>
+        <node refid="t68" role="simplified"></node>
+      </relation>
+    </passage>
+  </document>
+</collection>

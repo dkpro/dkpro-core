@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE collection SYSTEM "BioC.dtd">
+<collection>
+  <source>PubMed</source>
+  <date>20130316</date>
+  <key>PMID-8557975-simplified-sentences.key</key>
+  <document>
+    <id>8557975</id>
+    <passage>
+      <infon key="type">abstract</infon>
+      <offset>0</offset>
+      <sentence>
+	<infon key="type">original sentence</infon>
+        <offset>70</offset>
+        <text>Active Raf-1 phosphorylates and activates the mitogen-activated protein (MAP) kinase/extracellular signal-regulated kinase kinase 1 (MEK1), which in turn phosphorylates and activates the MAP kinases/extracellular signal regulated kinases, ERK1 and ERK2.</text>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>325</offset>
+        <text>Active Raf-1 phosphorylates MEK1.</text>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>360</offset>
+        <text>Active Raf-1 activates MEK1.</text>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>390</offset>
+        <text>MEK1 in turn phosphorylates ERK1.</text>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>425</offset>
+        <text>MEK1 in turn phosphorylates ERK2.</text>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>460</offset>
+        <text>MEK1 in turn activates ERK1.</text>
+      </sentence>
+      <sentence>
+	<infon key="type">simplified sentence</infon>
+        <offset>489</offset>
+        <text>MEK1 in turn activates ERK2.</text>
+      </sentence>
+    </passage>
+  </document>
+</collection>

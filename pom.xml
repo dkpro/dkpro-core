@@ -525,6 +525,11 @@
         <artifactId>groovy-xml</artifactId>
         <version>2.5.10</version>
       </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-xml</artifactId>
+        <version>2.9.10</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
