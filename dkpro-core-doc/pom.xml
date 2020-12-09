@@ -29,7 +29,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
-    <groovy.version>2.5.10</groovy.version>
+    <groovy.version>3.0.7</groovy.version>
   </properties>
   <dependencies>
     <dependency>
