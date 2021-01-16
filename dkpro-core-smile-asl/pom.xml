@@ -25,11 +25,11 @@
   </parent>
   <artifactId>dkpro-core-smile-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - Smile (v ${smile.version}) (ASL</name>
+  <name>DKPro Core ASL - Smile (v ${smile.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>http://haifengl.github.io/smile</description>
   <properties>
-    <smile.version>2.3.0</smile.version>
+    <smile.version>2.6.0</smile.version>
   </properties>
   <dependencies>
     <dependency>
