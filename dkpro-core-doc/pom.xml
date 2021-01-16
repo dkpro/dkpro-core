@@ -29,7 +29,6 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
-    <groovy.version>2.5.10</groovy.version>
   </properties>
   <dependencies>
     <dependency>
@@ -55,34 +54,15 @@
     <dependency>
       <groupId>org.dkpro.meta</groupId>
       <artifactId>dkpro-meta-core</artifactId>
-      <version>0.2.0</version>
+      <version>0.3.0</version>
     </dependency>
   </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.codehaus.groovy</groupId>
-        <artifactId>groovy</artifactId>
-        <version>${groovy.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.groovy</groupId>
-        <artifactId>groovy-xml</artifactId>
-        <version>${groovy.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.groovy</groupId>
-        <artifactId>groovy-templates</artifactId>
-        <version>${groovy.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <build>
     <plugins>
       <plugin>
         <groupId>org.codehaus.gmaven</groupId>
         <artifactId>groovy-maven-plugin</artifactId>
-        <version>2.1</version>
+        <version>2.1.1</version>
         <configuration>
           <classpathScope>compile</classpathScope>
         </configuration>
