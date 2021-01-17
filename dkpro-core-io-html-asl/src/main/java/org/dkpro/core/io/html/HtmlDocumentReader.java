@@ -145,7 +145,7 @@ public class HtmlDocumentReader
         
         CasXmlHandler handler = new CasXmlHandler(aJCas);
         
-        NodeTraversor traversor = new NodeTraversor(new NodeVisitor()
+        NodeVisitor visitor = new NodeVisitor()
         {
             @Override
             public void head(Node node, int depth)
@@ -234,8 +234,8 @@ public class HtmlDocumentReader
                     throw new RuntimeException(e);
                 }
             }
-        });
+        };
         
-        traversor.traverse(doc);
+        NodeTraversor.traverse(visitor, doc);
     }
 }

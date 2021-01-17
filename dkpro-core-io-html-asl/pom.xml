@@ -25,8 +25,11 @@
   </parent>
   <artifactId>dkpro-core-io-html-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - IO - HTML</name>
+  <name>DKPro Core ASL - IO - HTML (jsoup ${jsoup.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+  <properties>
+    <jsoup.version>1.13.1</jsoup.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -43,7 +46,7 @@
     <dependency>
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
-      <version>1.10.2</version>
+      <version>${jsoup.version}</version>
     </dependency>
     <dependency>
       <groupId>com.ibm.icu</groupId>

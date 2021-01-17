@@ -22,7 +22,7 @@
  */
 package org.dkpro.core.io.html.internal;
 
-import static org.jsoup.helper.StringUtil.appendNormalisedWhitespace;
+import static org.jsoup.internal.StringUtil.appendNormalisedWhitespace;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
