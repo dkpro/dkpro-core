@@ -3,6 +3,8 @@
          xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0 http://mojo.codehaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
   <ignoreVersions>
     <ignoreVersion type="regex">.*-alpha[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-Alpha[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-ALPHA[0-9]*</ignoreVersion>
     <ignoreVersion type="regex">.*-beta[0-9]*</ignoreVersion>
     <ignoreVersion type="regex">.*\.rc[0-9]*</ignoreVersion>
     <ignoreVersion type="regex">.*-M[0-9]*</ignoreVersion>
@@ -11,7 +13,31 @@
     <ignoreVersion type="regex">.*-atlassian.*</ignoreVersion>
   </ignoreVersions>
   <rules>
+    <rule groupId="commons-codec" artifactId="commons-codec" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <rule groupId="commons-cli" artifactId="commons-cli" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
     <rule groupId="commons-collections" artifactId="commons-collections" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <rule groupId="commons-io" artifactId="commons-io" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <rule groupId="commons-lang" artifactId="commons-lang" comparisonMethod="maven">
       <ignoreVersions>
         <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
       </ignoreVersions>
