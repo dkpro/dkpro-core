@@ -522,7 +522,9 @@ public class BratReader
                                     target.getType().getName().replace('.', '-') + "_role");
                         }
                         FeatureStructure link = aCas.createFS(componentType);
-                        FSUtil.setFeature(link, "role", roleAttr.getValues());
+                        if (roleAttr != null) {
+                            FSUtil.setFeature(link, "role", roleAttr.getValues());
+                        }
                         FSUtil.setFeature(link, "target", target);
                         target = link;
                     }
@@ -546,13 +548,13 @@ public class BratReader
                     }
                     else {
                         throw new IllegalStateException("Type [" + event.getType().getName()
-                                + "] has no feature naemd [" + fname + "]");
+                                + "] has no feature named [" + fname + "]");
                     }
                 }
             }
             else {
                 throw new IllegalStateException("Type [" + event.getType().getName()
-                        + "] has no feature naemd [" + slot.getKey() + "]");
+                        + "] has no feature named [" + slot.getKey() + "]");
             }
         }
     }
@@ -562,7 +564,7 @@ public class BratReader
         Feature f = aFS.getType().getFeatureByBaseName(aName);
         if (f == null) {
             throw new IllegalArgumentException("Type [" + aFS.getType().getName()
-                    + "] has no feature called [" + aName + "]");
+                    + "] has no feature named [" + aName + "]");
         }
         return f;
     }    

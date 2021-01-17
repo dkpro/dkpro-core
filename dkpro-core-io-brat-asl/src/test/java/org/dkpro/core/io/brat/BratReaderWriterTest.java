@@ -300,6 +300,35 @@ public class BratReaderWriterTest
                 "brat/document0d.ann");
     }
 
+    @Test
+    public void testBratEventWithoutRoleLabel() 
+        throws Exception
+    {
+        String mapping = String.join("\n",
+                "{",
+                "  'textTypeMapppings': [",
+                "    {",
+                "      'from': 'Quote',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.Quote'",
+                "    },",
+                "    {",
+                "      'from': 'Speaker',",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.Speaker'",
+                "    }",
+                "  ]",
+                "}");
+        
+        testOneWay(
+                createReaderDescription(BratReader.class,
+                        BratReader.PARAM_MAPPING, mapping), 
+                createEngineDescription(BratWriter.class, 
+                        BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true,
+                        BratWriter.PARAM_TYPE_MAPPINGS, ".*\\.type\\.(\\w+) -> $1"),
+                "brat/event-ref.ann",
+                "brat/event.ann");
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }
