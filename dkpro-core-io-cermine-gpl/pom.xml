@@ -30,7 +30,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>dkpro-core-io-cermine-gpl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core GPL - IO - CERMINE</name>
+  <name>DKPro Core GPL - IO - CERMINE (v${cermine.version}) (AGPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <licenses>
     <license>
@@ -39,12 +39,15 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+  <properties>
+    <cermine.version>1.13</cermine.version>
+  </properties>
   <dependencies>
     <!-- CERMINE -->
     <dependency>
       <groupId>pl.edu.icm.cermine</groupId>
       <artifactId>cermine-impl</artifactId>
-      <version>1.13</version>
+      <version>${cermine.version}</version>
     </dependency>
 
     <dependency>
@@ -85,6 +88,12 @@
       <groupId>org.jdom</groupId>
       <artifactId>jdom</artifactId>
       <version>1.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <!-- Last version of Guava compatible with Cermine 1.13 -->
+      <version>25.1-jre</version>
     </dependency>
 
     <!-- TEST scope -->
