@@ -1,0 +1,127 @@
+{
+    "name": "Danish Dependency Treebank",
+    "description": "No description.\n\nReferences:\n* http://www.buch-kromann.dk/matthias/treebank/theory.html[Kromann, 2004. \"Danish Dependency Treebank - Annotation guide: Theory\"]\n",
+    "language": "da",
+    "tags": [
+        {
+            "tag_name": "A",
+            "tag_description": "adjectives"
+        },
+        {
+            "tag_name": "AC",
+            "tag_description": "cardinals"
+        },
+        {
+            "tag_name": "AN",
+            "tag_description": "normal adjective"
+        },
+        {
+            "tag_name": "AO",
+            "tag_description": "ordinals"
+        },
+        {
+            "tag_name": "C",
+            "tag_description": "conjunction"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "coordinating conjunction"
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "subordinating conjunction"
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "noun\nNP    proper noun"
+        },
+        {
+            "tag_name": "NC",
+            "tag_description": "common noun"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "pronoun"
+        },
+        {
+            "tag_name": "PC",
+            "tag_description": "reciprocal pronoun"
+        },
+        {
+            "tag_name": "PD",
+            "tag_description": "demonstrative pronoun"
+        },
+        {
+            "tag_name": "PI",
+            "tag_description": "indefinite pronoun"
+        },
+        {
+            "tag_name": "PO",
+            "tag_description": "possessive pronoun"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "personal pronoun"
+        },
+        {
+            "tag_name": "PT",
+            "tag_description": "interrogative/relative pronoun"
+        },
+        {
+            "tag_name": "RG",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "SP",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "U",
+            "tag_description": "unique"
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "verb"
+        },
+        {
+            "tag_name": "VA",
+            "tag_description": "main verb"
+        },
+        {
+            "tag_name": "VE",
+            "tag_description": "medial verb"
+        },
+        {
+            "tag_name": "X",
+            "tag_description": "extra-linguistic units"
+        },
+        {
+            "tag_name": "XA",
+            "tag_description": "abbreviation"
+        },
+        {
+            "tag_name": "XF",
+            "tag_description": "foreign word"
+        },
+        {
+            "tag_name": "XP",
+            "tag_description": "punctuation"
+        },
+        {
+            "tag_name": "XR",
+            "tag_description": "formulae"
+        },
+        {
+            "tag_name": "XS",
+            "tag_description": "symbol"
+        },
+        {
+            "tag_name": "XX",
+            "tag_description": "other"
+        }
+    ]
+}

@@ -1,0 +1,123 @@
+{
+    "name": "MElt",
+    "description": "Follows Benoit Crabb\u00e9 and Marie Candito. 2008\n\nBenoit Crabbe\u0301 and Marie Candito. 2008. Expe\u0301riences d\u2019analyse syntaxique statistique du franc\u0327ais.\nIn Proc. of TALN\u201908, pages 45\u201354, Senlis, France.\nhttp://hal.inria.fr/docs/00/52/57/69/PDF/crabbecandi-taln2008-final.pdf\nMapped according to universal_pos_tags.1.03 (http://code.google.com/p/universal-pos-tags/)\n\nReferences:\n* http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README\n",
+    "language": "fr",
+    "tags": [
+        {
+            "tag_name": "ADJ",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "ADJWH",
+            "tag_description": "interrogative adjective"
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "ADVWH",
+            "tag_description": "interrogative adverb"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "coordination conjunction"
+        },
+        {
+            "tag_name": "CLO",
+            "tag_description": "object clitic pronoun"
+        },
+        {
+            "tag_name": "CLR",
+            "tag_description": "reflexive clitic pronoun"
+        },
+        {
+            "tag_name": "CLS",
+            "tag_description": "subject clitic pronoun"
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "subordination conjunction"
+        },
+        {
+            "tag_name": "DET",
+            "tag_description": "determiner"
+        },
+        {
+            "tag_name": "DETWH",
+            "tag_description": "interrogative determiner"
+        },
+        {
+            "tag_name": "ET",
+            "tag_description": "foreign word"
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "NC",
+            "tag_description": "common noun"
+        },
+        {
+            "tag_name": "NPP",
+            "tag_description": "proper noun"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "P+D",
+            "tag_description": "preposition+determiner amalgam"
+        },
+        {
+            "tag_name": "P+PRO",
+            "tag_description": "prepositon+pronoun amalgam"
+        },
+        {
+            "tag_name": "PONCT",
+            "tag_description": "punctuation mark"
+        },
+        {
+            "tag_name": "PREF",
+            "tag_description": "prefix"
+        },
+        {
+            "tag_name": "PRO",
+            "tag_description": "full pronoun"
+        },
+        {
+            "tag_name": "PROREL",
+            "tag_description": "relative pronoun"
+        },
+        {
+            "tag_name": "PROWH",
+            "tag_description": "interrogative pronoun"
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "indicative or conditional verb form"
+        },
+        {
+            "tag_name": "VIMP",
+            "tag_description": "imperative verb form"
+        },
+        {
+            "tag_name": "VINF",
+            "tag_description": "infinitive verb form"
+        },
+        {
+            "tag_name": "VPP",
+            "tag_description": "past participle"
+        },
+        {
+            "tag_name": "VPR",
+            "tag_description": "present participle"
+        },
+        {
+            "tag_name": "VS",
+            "tag_description": "subjunctive verb form"
+        }
+    ]
+}

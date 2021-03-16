@@ -1,0 +1,59 @@
+{
+    "name": "Ancora",
+    "description": "Ancora tagset dependencies\n\nReferences:\n* https://github.com/nlplab/brat/blob/master/configurations/CoNLL-ST-2009-Catalan/annotation.conf\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "cd",
+            "tag_description": "direct object"
+        },
+        {
+            "tag_name": "ci",
+            "tag_description": "indirect object"
+        },
+        {
+            "tag_name": "conj",
+            "tag_description": "subordinating conjuction"
+        },
+        {
+            "tag_name": "coord",
+            "tag_description": "coordinating conjuction"
+        },
+        {
+            "tag_name": "d",
+            "tag_description": "determiner"
+        },
+        {
+            "tag_name": "f",
+            "tag_description": "punctuation mark"
+        },
+        {
+            "tag_name": "impers",
+            "tag_description": "impersonality mark"
+        },
+        {
+            "tag_name": "neg",
+            "tag_description": "negation"
+        },
+        {
+            "tag_name": "pass",
+            "tag_description": "passive mark"
+        },
+        {
+            "tag_name": "prep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "s",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "suj",
+            "tag_description": "subject"
+        },
+        {
+            "tag_name": "z",
+            "tag_description": "number"
+        }
+    ]
+}
