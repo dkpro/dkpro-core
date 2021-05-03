@@ -2,7 +2,7 @@
 #
 # TIGER phrasal categories
 
-__META_SOURCE_URL__=http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_introduction.pdf
+__META_SOURCE_URL__=https://www.ims.uni-stuttgart.de/documents/ressourcen/korpora/tiger-corpus/annotation/tiger_introduction.pdf
 
 # AA superlative phrase with "am"
 AA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent

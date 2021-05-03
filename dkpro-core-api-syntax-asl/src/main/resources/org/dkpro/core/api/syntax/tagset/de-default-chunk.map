@@ -1,2 +1,2 @@
-__META_REDIRECT__=classpath:/org/dkpro/core/api/syntax/tagset/de-tt-chunk.map
-__META_OVERRIDE__.chunk.tagset=tt
+__META_REDIRECT__=classpath:/org/dkpro/core/api/syntax/tagset/de-tiger-chunk.map
+__META_OVERRIDE__.chunk.tagset=tiger
