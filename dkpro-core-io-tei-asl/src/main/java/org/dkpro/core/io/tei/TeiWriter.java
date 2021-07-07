@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.io.tei;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
@@ -140,10 +139,8 @@ public class TeiWriter
     {
         String text = aJCas.getDocumentText();
 
-        OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
-        try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
+        try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
             
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlOutputFactory.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
@@ -263,8 +260,6 @@ public class TeiWriter
                     getLogger().warn("Error closing the XML event writer", e);
                 }
             }
-            
-            closeQuietly(docOS);
         }
     }
 
@@ -272,22 +267,21 @@ public class TeiWriter
         List<Attribute> attributes = new ArrayList<Attribute>();
         if (aAnnotation instanceof Token) {
             Token t = (Token) aAnnotation;
-            if (t.getPos() != null) {
+            if (t.getPos() != null && t.getPos().getPosValue() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_TYPE, t.getPos().getPosValue()));
             }
-            if (t.getLemma() != null) {
+            if (t.getLemma() != null && t.getLemma().getValue() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_LEMMA, t.getLemma().getValue()));
             }
         }
         else if (aAnnotation instanceof NamedEntity) {
             NamedEntity ne = (NamedEntity) aAnnotation;
-            attributes.add(xmlef.createAttribute(ATTR_TYPE, ne.getValue()));
+            if (ne.getValue() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_TYPE, ne.getValue()));
+            }
         }
         else if (aAnnotation instanceof Constituent) {
             Constituent c = (Constituent) aAnnotation;
-            if ("ROOT".equals(c.getConstituentType())) {
-                System.out.println();
-            }
             if (c.getConstituentType() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_TYPE, c.getConstituentType()));
             }
@@ -300,13 +294,6 @@ public class TeiWriter
 
     private Optional<String> getTeiTag(Annotation aAnnotation)
     {
-        if (aAnnotation instanceof Constituent) {
-            Constituent c = (Constituent) aAnnotation;
-            if ("ROOT".equals(c.getConstituentType())) {
-                System.out.println();
-            }
-        }
-
         if (aAnnotation.getTypeIndexID() == Token.type) {
             if (cTextPattern.matcher(aAnnotation.getCoveredText()).matches()) {
                 return Optional.of(TAG_CHARACTER);
