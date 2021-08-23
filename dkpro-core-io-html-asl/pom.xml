@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - IO - HTML (jsoup ${jsoup.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <jsoup.version>1.13.1</jsoup.version>
+    <jsoup.version>1.14.2</jsoup.version>
   </properties>
   <dependencies>
     <dependency>
