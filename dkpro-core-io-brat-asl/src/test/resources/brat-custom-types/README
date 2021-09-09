@@ -1,0 +1,5 @@
+Some of the .ann files in this directory specify annotation that
+correspond to "custom types", i.e. types that are not known by 
+default by the Brat reader and writer.
+
+For example, de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg.

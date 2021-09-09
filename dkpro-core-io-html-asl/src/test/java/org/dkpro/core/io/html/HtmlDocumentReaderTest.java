@@ -35,6 +35,7 @@ import org.dkpro.core.io.xmi.XmiWriter;
 import org.dkpro.core.io.xml.XmlDocumentWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestOptions;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.xml.sax.InputSource;
@@ -45,6 +46,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 
 public class HtmlDocumentReaderTest
 {
+    @Before
+    public void setUp() throws IOException {
+        DkproTestContext.get().initializeTestWorkspace();
+    }
+    
     @Test
     public void testReadFileWithOnlyBody()
         throws Exception

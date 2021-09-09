@@ -1,5 +1,4 @@
 /*
- * Copyright 2019
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -21,9 +20,12 @@ import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
@@ -32,11 +34,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Mapping
 {
-    private final TypeMappings textTypeMapppings;
-    private final TypeMappings relationTypeMapppings;
-    private final Map<String, SpanMapping> textAnnotations;
-    private final Map<String, RelationMapping> relations;
-    private final MultiValuedMap<String, CommentMapping> comments;
+    private TypeMappings textTypeMapppings;
+    private TypeMappings relationTypeMapppings;
+    private Map<String, SpanMapping> textAnnotations;
+    private Map<String, RelationMapping> relations;
+    private MultiValuedMap<String, CommentMapping> comments;
+
+    public Mapping(TypeMappings aTextTypeMapppings) {
+        initializeMapping(aTextTypeMapppings, null, null, null, null);
+    }
     
     public Mapping(
             @JsonProperty(value = "textTypeMapppings", required = false) 
@@ -47,6 +53,14 @@ public class Mapping
             List<SpanMapping> aTextAnnotations,
             @JsonProperty(value = "relations", required = false) List<RelationMapping> aRelations, 
             @JsonProperty(value = "comments", required = false) List<CommentMapping> aComments)
+    {        
+        initializeMapping(aTextTypeMapppings, aRelationTypeMapppings, aTextAnnotations,
+                aRelations, aComments);
+    }
+
+    private void initializeMapping(TypeMappings aTextTypeMapppings,
+            TypeMappings aRelationTypeMapppings, List<SpanMapping> aTextAnnotations,
+            List<RelationMapping> aRelations, List<CommentMapping> aComments)
     {
         textTypeMapppings = aTextTypeMapppings;
         relationTypeMapppings = aRelationTypeMapppings;
@@ -86,4 +100,81 @@ public class Mapping
     {
         return comments.get(aType);
     }
+
+    public static Mapping merge(Mapping customMapping, Mapping defaultMapping) {
+        return merge(customMapping, defaultMapping, null);
+    }
+        
+    public static Mapping merge(Mapping customMapping, Mapping defaultMapping,
+            Boolean checkConflictingMappings)
+    {
+        if (checkConflictingMappings == null) {
+            checkConflictingMappings = true;
+        }
+        
+        TypeMappings textTypeMapppings 
+                        = TypeMappings.merge(customMapping.getTextTypeMapppings(), 
+                                             defaultMapping.getTextTypeMapppings(),
+                                             checkConflictingMappings);
+        
+        TypeMappings relTypeMapppings 
+                        = TypeMappings.merge(customMapping.getRelationTypeMapppings(), 
+                                             defaultMapping.getRelationTypeMapppings(),
+                                             checkConflictingMappings);
+        
+        // Start with empty mappings for Span, Relations and Comments.
+        List<SpanMapping> spans = new ArrayList<SpanMapping>();
+        List<RelationMapping> relations = new ArrayList<RelationMapping>();
+        List<CommentMapping> comments = new ArrayList<CommentMapping>();
+        
+        Mapping merged = new Mapping(textTypeMapppings, relTypeMapppings, spans, relations,
+                comments);
+        
+        // Add the Text Annotations from both Mapping
+        for (String type: customMapping.textAnnotations.keySet()) {
+            merged.textAnnotations.put(type, customMapping.textAnnotations.get(type));
+        }
+        for (String type: defaultMapping.textAnnotations.keySet()) {
+            if (! merged.textAnnotations.containsKey(type)) {
+                merged.textAnnotations.put(type, customMapping.textAnnotations.get(type));
+            }
+        }
+            
+        // Add the Relations from both Mapping
+        for (String type: customMapping.relations.keySet()) {
+            merged.relations.put(type, customMapping.relations.get(type));
+        }
+        for (String type: defaultMapping.relations.keySet()) {
+            if (! merged.relations.containsKey(type)) {
+                merged.relations.put(type, customMapping.relations.get(type));
+            }
+        }
+        
+        // Add the Comments from both Mapping
+        for (String type: customMapping.comments.keySet()) {
+            Collection<CommentMapping> commentsThisType = customMapping.comments.get(type);
+            for (CommentMapping comment: commentsThisType) {
+                merged.comments.put(type, comment);
+            }
+        }
+        for (String type: defaultMapping.comments.keySet()) {
+            Collection<CommentMapping> commentsThisType = defaultMapping.comments.get(type);
+            for (CommentMapping comment: commentsThisType) {
+                merged.comments.put(type, comment);
+            }
+        }
+
+        Set<String> fieldsToIgnore = new HashSet<String>();
+        fieldsToIgnore.add("(?!(uimaType|normalizedPattern)");
+        
+        if (checkConflictingMappings) {
+            merged.checkForConflictingMappings();
+        }
+        
+        return merged;
+    }
+
+    private void checkForConflictingMappings() {
+        getTextTypeMapppings().checkForConflictingMappings();
+    }        
 }

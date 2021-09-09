@@ -1,0 +1,3 @@
+This directory is meant to test scenarios where some of the .ann files 
+mention brat labels that are completely unknown, i.e. they are not part 
+of the default nor the custom mappings.

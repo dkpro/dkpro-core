@@ -20,6 +20,7 @@ package org.dkpro.core.io.brat;
 import static java.util.stream.Collectors.toList;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,6 +55,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.api.resources.FileGlob;
 import org.dkpro.core.io.brat.internal.mapping.CommentMapping;
 import org.dkpro.core.io.brat.internal.mapping.Mapping;
 import org.dkpro.core.io.brat.internal.mapping.RelationMapping;
@@ -70,6 +72,7 @@ import org.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import org.dkpro.core.io.brat.internal.model.Offsets;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParser;
@@ -89,6 +92,11 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class BratReader
     extends JCasResourceCollectionReader_ImplBase
 {
+    public enum SourceLocationType
+    {
+        SINGLE_FILE, SINGLE_DIR, GLOB_PATTERN
+    }
+    
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
@@ -165,6 +173,18 @@ public class BratReader
     @ConfigurationParameter(name = PARAM_MAPPING, mandatory = false)
     private String mappingJson;
     
+    // TODO-AD: I had to set this in the dkpro-core/pom.xml file:
+    //
+    //      <failOnMissingMetaData>false</failOnMissingMetaData>
+    //
+    //   Otherwise, the parameter below caused a "Component meta data missing"
+    //   error. Not sure why, but this issue should eventually be
+    //   resolved.
+    //    
+    public static final String PARAM_CHECK_CONFLICTING_MAPPINGS = "checkConflictingMappings";
+    @ConfigurationParameter(name = PARAM_CHECK_CONFLICTING_MAPPINGS, mandatory = false, defaultValue = "true")
+    private Boolean checkConflictingMappings = null;    
+    
     private Mapping mapping;
     
     private Map<String, AnnotationFS> idMap;
@@ -175,14 +195,19 @@ public class BratReader
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
+        possiblyAddAnnFilePattern();
+        ensureAnnFilesExist();
         super.initialize(aContext);
         
+        Mapping defMapping = DefaultMappings.getDefaultMapping_Brat2UIMA();
+        Mapping customMapping = null;
+
         if (mappingJson != null) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.setDefaultSetterInfo(JsonSetter.Value.forContentNulls(Nulls.AS_EMPTY));
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             try {
-                mapping = mapper.readValue(mappingJson, Mapping.class);
+                customMapping = mapper.readValue(mappingJson, Mapping.class);
             }
             catch (IOException e) {
                 throw new ResourceInitializationException(e);
@@ -204,15 +229,18 @@ public class BratReader
             TypeMappings textAnnotationTypeMapping = new TypeMappings(textAnnotationTypeMappings);
             TypeMappings relationTypeMapping = new TypeMappings(relationTypeMappings);
             
-            mapping = new Mapping(textAnnotationTypeMapping, relationTypeMapping, 
+            customMapping = new Mapping(textAnnotationTypeMapping, relationTypeMapping, 
                     textAnnotationTypes.stream().map(SpanMapping::parse).collect(toList()),
                     relationTypes.stream().map(RelationMapping::parse).collect(Collectors.toList()),
                     noteMappings.stream().map(CommentMapping::parse).collect(toList()));
         }
         
+        mapping = Mapping.merge(customMapping, defMapping, checkConflictingMappings);
+        
         warnings = new LinkedHashSet<String>();
-    }
-    
+    }    
+
+
     @Override
     public void close()
         throws IOException
@@ -327,6 +355,15 @@ public class BratReader
         for (Offsets offset: aAnno.getOffsets()) {
             AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(),
                     offset.getEnd());
+            
+            // For a "generic" BratLabel annotation, we must
+            // set its 'label' feature to the Brat label that was 
+            // read from the .ann file
+            //
+            if (TypeMappings.isGenericBratTag(aType)) {
+                Feature labelFeature = aType.getFeatureByBaseName("label");
+                anno.setStringValue(labelFeature, aAnno.getType());
+            }
             
             if (tmap != null) {
                 fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
@@ -481,7 +518,9 @@ public class BratReader
                 aAnno.setFeatureValueFromString(feat, attr.getValues()[0]);
             }
             else {
-                throw new IllegalStateException("Multi-valued attributes currently not supported");
+                throw new IllegalStateException(
+                        "Multi-valued attributes currently not supported.\nAnnotation was:\n"
+                                + aAnno.toString());
             }
         }
     }
@@ -566,4 +605,131 @@ public class BratReader
         }
         return f;
     }    
+    
+    //////////////////////////////////////////
+    // Start of Improvements to BratReader
+    // -- Alain Désilets
+    //////////////////////////////////////////
+
+    public static String stripProtocol(String file) {
+        String stripped = file.replaceAll("^file:", "");
+        return stripped;
+    }    
+    
+    public static String stripProtocol(File file) {
+        return stripProtocol(file.toString());
+    }    
+    
+    @Override 
+    public String getSourceLocation()
+    {
+        String location = super.getSourceLocation();
+        
+        if (isSingleLocation()) {
+            location = annFileFor(location);
+        }
+        
+        return location;
+    }
+    
+    @JsonIgnore
+    public SourceLocationType getSourceLocationType() {
+        SourceLocationType type = null;
+        
+        String location = getSourceLocation();
+        if (location.contains("*")) {
+            type = SourceLocationType.GLOB_PATTERN;
+        }
+        if (type == null && location.matches(".*\\.[a-zA-Z0-9]+$")) {
+            type = SourceLocationType.SINGLE_FILE;
+        }
+        if (type == null) {
+            type = SourceLocationType.SINGLE_DIR;
+        }
+        
+        
+        return type;
+    }
+    
+    public boolean sourceLocationIsSingleFile() {
+        return getSourceLocationType() == SourceLocationType.SINGLE_FILE;
+    }
+    
+    
+    private static String annFileFor(File bratFile) {
+        return annFileFor(bratFile.toString());
+    }    
+    
+    private static String annFileFor(String bratFile) {
+        String annFile = bratFile.replaceAll("\\.txt$", ".ann");
+        return annFile;
+    }
+    
+    private static String txtFileFor(String bratFile) {
+        String annFile = bratFile.replaceAll("\\.ann$", ".txt");
+        return annFile;
+    }
+    
+    private void ensureAnnFilesExist() throws ResourceInitializationException {
+        File[] txtFiles = FileGlob.listFiles(getTxtFilesGlobPattern()); 
+        for (File aTxtFile: txtFiles) {
+            File annFile = new File(annFileFor(aTxtFile));
+            if (!annFile.exists()) {
+                // Create an empty .ann file
+                try {
+                    annFile.createNewFile();
+                } catch (IOException e) {
+                    throw new ResourceInitializationException(e);
+                }
+            }
+        }
+    }
+
+    private String getTxtFilesGlobPattern() {
+        String pattern = null;
+        String sourceLocation = getSourceLocation();
+        SourceLocationType locType = getSourceLocationType();
+        if (locType == SourceLocationType.SINGLE_FILE) {
+            pattern = txtFileFor(sourceLocation);            
+        } else if (locType == SourceLocationType.SINGLE_DIR) {
+            pattern = new File(sourceLocation, "*.txt").toString();
+        } else {
+            pattern = txtFileFor(sourceLocation);
+        }
+        
+        return pattern;
+    }
+
+    private boolean sourceLocationIsSingleDirectory() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    private void possiblyAddAnnFilePattern()
+    {
+        if (!sourceLocationIsSingleFile()) {
+            // sourceLocation is not a single file. Make sure 
+            // the file patterns includes *.ann
+            //
+            if (patterns == null) {
+                patterns = new String[] { "*.ann" };
+            } else {
+                boolean alreadyHasAnnPattern = false;
+                for (String patt: patterns) {
+                    if (patt.equals("*.ann")) {
+                        alreadyHasAnnPattern = true;
+                        break;
+                    }
+                }
+                if (!alreadyHasAnnPattern) {
+                    String[] augmPatterns = new String[patterns.length + 1];
+                    for (int ii = 0; ii < patterns.length; ii++) {
+                        augmPatterns[ii] = patterns[ii];
+                    }
+                    augmPatterns[patterns.length] = "*.ann";
+                    patterns = augmPatterns;
+                }
+            }
+        }
+    }
 }

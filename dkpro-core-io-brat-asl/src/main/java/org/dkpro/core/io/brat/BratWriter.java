@@ -133,20 +133,20 @@ public class BratWriter extends JCasFileWriter_ImplBase
      * Enable type mappings.
      */
     public static final String PARAM_ENABLE_TYPE_MAPPINGS = "enableTypeMappings";
-    @ConfigurationParameter(name = PARAM_ENABLE_TYPE_MAPPINGS, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_ENABLE_TYPE_MAPPINGS, mandatory = true, defaultValue = "true")
     private boolean enableTypeMappings;
     
     /**
      * FIXME
      */
     public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
-    @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.(\\w+) -> $1",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.(\\w+) -> $1",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.(\\w+) -> $1",
-            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.(\\w+) -> $1"
-    })
+    @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {})
     private String[] typeMappings;
+    
+    public static final String PARAM_CHECK_CONFLICTING_MAPPINGS = "checkConflictingMappings";
+    @ConfigurationParameter(name = PARAM_CHECK_CONFLICTING_MAPPINGS, mandatory = false, defaultValue = "true")
+    private Boolean checkConflictingMappings = null;    
+    
     
     /**
      * The brat web application can currently not handle attributes on relations, thus they are
@@ -187,13 +187,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-//        parsedEventTypes = new HashMap<>();
-//        for (String rel : eventTypes) {
-//            EventParam p = EventParam.parse(rel);
-//            parsedEventTypes.put(p.getType(), p);
-//        }
-
+        stripExtension = true;
         conf = new BratConfiguration();
         converter = new DKPro2Brat(conf);
         converter.setWriteNullAttributes(writeNullAttributes);
@@ -205,8 +199,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
         converter.setRelationTypes(
                 relationTypes.stream().map(RelationMapping::parse).collect(Collectors.toList()));
         if (enableTypeMappings) {
-            converter.setTypeMapping(new TypeMappings(typeMappings));
-        }
+            TypeMappings defMappings = DefaultMappings.getDefaultMapping_UIMA2Brat()
+                                            .getTextTypeMapppings();
+            TypeMappings mergedMappings = 
+                            TypeMappings.merge(new TypeMappings(typeMappings), defMappings, 
+                                               checkConflictingMappings);
+//            converter.setTypeMapping(new TypeMappings(typeMappings));
+            converter.setTypeMapping(mergedMappings);
+        }        
     }
     
     @Override

@@ -1,0 +1,6 @@
+This directory is meant to test situations where:
+
+- some of the .ann files mention Uima labels that are defined in 
+the BratReader's DEFAULT mappings (as opposed to custome mappings)
+- the types are provided using the short names
+(ex: Token) as opposed to the fully qualified class name.
