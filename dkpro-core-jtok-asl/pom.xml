@@ -30,6 +30,15 @@
   <properties>
     <jtok.version>2.1.19</jtok.version>
   </properties>
+  <repositories>
+    <repository>
+      <id>mlt.jfrog.io</id>
+      <url>https://mlt.jfrog.io/artifactory/mlt-mvn-releases-local/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
