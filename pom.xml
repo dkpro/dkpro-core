@@ -63,13 +63,6 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-    <repository>
-      <id>jcenter</id>
-      <url>https://jcenter.bintray.com</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
     <!-- For UIMA/uimaFIT RCs -->
     <!--
     <repository>
@@ -81,7 +74,7 @@
       </releases>
     </repository>
     -->
-    <!-- For UIMA/uimaFIT SNAPSHOT -->
+    <!-- For UIMA/uimaFIT SNAPSHOT
     <repository>
       <id>apache.snapshots</id>
       <name>Apache Snapshot Repository</name>
@@ -93,25 +86,12 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    -->
     <!-- For SNAPSHOTs from the DKPro family -->
     <!--
     <repository>
       <id>ukp-oss-snapshots</id>
       <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    -->
-    <!-- For SNAPSHOTs from OpenMinTeD -->
-    <!--
-    <repository>
-      <id>omtd-snapshots</id>
-      <layout>default</layout>
-      <url>https://repo.openminted.eu/content/repositories/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
