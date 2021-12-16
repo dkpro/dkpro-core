@@ -55,14 +55,20 @@ public class ConllUReaderWriterTest
     public void roundTripV2EmptyNodes()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-empty_nodes.conllu");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class),
+                "conll/u_v2/conllu-empty_nodes.conllu");
     }
 
     @Test
     public void roundTripV2MorphologicalAnnotation()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-morphological_annotation.conllu");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class),
+                "conll/u_v2/conllu-morphological_annotation.conllu");
     }
 
     @Ignore("This unfortunately doesn't work yet.")
@@ -126,7 +132,10 @@ public class ConllUReaderWriterTest
     public void roundTripV2WordsAndTokens()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-words_and_tokens.conllu");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class),
+                "conll/u_v2/conllu-words_and_tokens.conllu");
     }
 
     @Test
