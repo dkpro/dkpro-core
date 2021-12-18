@@ -46,7 +46,7 @@
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>4.3.30.RELEASE</spring.version>
     <slf4j.version>1.7.30</slf4j.version>
-    <log4j.version>2.16.0</log4j.version>
+    <log4j.version>2.17.0</log4j.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
     <activation.version>1.2.0</activation.version>
     <icu4j.version>68.2</icu4j.version>
