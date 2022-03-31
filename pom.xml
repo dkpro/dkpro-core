@@ -44,7 +44,7 @@
     <omtd.version>3.0.2.7</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>4.3.30.RELEASE</spring.version>
+    <spring.version>5.3.18</spring.version>
     <slf4j.version>1.7.30</slf4j.version>
     <log4j.version>2.16.0</log4j.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
