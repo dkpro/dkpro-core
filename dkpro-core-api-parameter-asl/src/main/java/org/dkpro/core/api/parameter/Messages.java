@@ -17,8 +17,6 @@
  */
 package org.dkpro.core.api.parameter;
 
-import org.dkpro.core.api.parameter.Messages;
-
 public final class Messages
 {
     public static final String BUNDLE = Messages.class.getName();

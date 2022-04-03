@@ -85,7 +85,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Brat Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_BRAT})
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_BRAT })
 public class BratReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -93,24 +93,26 @@ public class BratReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
-    
+
     /**
      * Types that are relations. It is mandatory to provide the type name followed by two feature
-     * names that represent Arg1 and Arg2 separated by colons, e.g. 
-     * <pre><code>
+     * names that represent Arg1 and Arg2 separated by colons, e.g.
+     * 
+     * <pre>
+     * <code>
      * de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}
-     * </code></pre>
+     * </code>
+     * </pre>
+     * 
      * Additionally, a subcategorization feature may be specified.
      */
     @Deprecated
     public static final String PARAM_RELATION_TYPES = "relationTypes";
     @Deprecated
-    @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = false, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" 
-            })
+    @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = false, defaultValue = {
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" })
     private Set<String> relationTypes;
 
     /**
@@ -121,15 +123,17 @@ public class BratReader
     @Deprecated
     public static final String PARAM_TEXT_ANNOTATION_TYPES = "textAnnotationTypes";
     @Deprecated
-    @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = false, 
-            defaultValue = {})
+    @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = false, defaultValue = {})
     private Set<String> textAnnotationTypes;
 
     /**
      * Mapping of brat text annotations (entities or events) to UIMA types, e.g. :
-     * <pre><code>
+     * 
+     * <pre>
+     * <code>
      * Country -&gt; de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
-     * </code></pre>
+     * </code>
+     * </pre>
      */
     @Deprecated
     public static final String PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS = "textAnnotationTypeMappings";
@@ -139,9 +143,12 @@ public class BratReader
 
     /**
      * Mapping of brat relation annotations to UIMA types, e.g. :
-     * <pre><code>
+     * 
+     * <pre>
+     * <code>
      * SUBJ -&gt; de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
-     * </code></pre>
+     * </code>
+     * </pre>
      */
     @Deprecated
     public static final String PARAM_RELATION_TYPE_MAPPINGS = "relationTypeMappings";
@@ -157,26 +164,25 @@ public class BratReader
     @Deprecated
     @ConfigurationParameter(name = PARAM_NOTE_MAPPINGS, mandatory = false, defaultValue = {})
     private Set<String> noteMappings;
-    
+
     /**
      * Configuration
      */
     public static final String PARAM_MAPPING = "mapping";
     @ConfigurationParameter(name = PARAM_MAPPING, mandatory = false)
     private String mappingJson;
-    
+
     private Mapping mapping;
-    
+
     private Map<String, AnnotationFS> idMap;
-    
+
     private Set<String> warnings;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         if (mappingJson != null) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.setDefaultSetterInfo(JsonSetter.Value.forContentNulls(Nulls.AS_EMPTY));
@@ -194,42 +200,40 @@ public class BratReader
                 RelationMapping p = RelationMapping.parse(rel);
                 parsedRelationTypes.put(p.getType(), p);
             }
-    
+
             Map<String, SpanMapping> parsedTextAnnotationTypes = new HashMap<>();
             for (String rel : textAnnotationTypes) {
                 SpanMapping p = SpanMapping.parse(rel);
                 parsedTextAnnotationTypes.put(p.getType(), p);
             }
-    
+
             TypeMappings textAnnotationTypeMapping = new TypeMappings(textAnnotationTypeMappings);
             TypeMappings relationTypeMapping = new TypeMappings(relationTypeMappings);
-            
-            mapping = new Mapping(textAnnotationTypeMapping, relationTypeMapping, 
+
+            mapping = new Mapping(textAnnotationTypeMapping, relationTypeMapping,
                     textAnnotationTypes.stream().map(SpanMapping::parse).collect(toList()),
                     relationTypes.stream().map(RelationMapping::parse).collect(Collectors.toList()),
                     noteMappings.stream().map(CommentMapping::parse).collect(toList()));
         }
-        
+
         warnings = new LinkedHashSet<String>();
     }
-    
+
     @Override
-    public void close()
-        throws IOException
+    public void close() throws IOException
     {
         super.close();
-        
+
         for (String warning : warnings) {
             getLogger().warn(warning);
         }
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         idMap = new HashMap<>();
-        
+
         Resource res = nextFile();
         initCas(aJCas, res);
 
@@ -237,17 +241,16 @@ public class BratReader
         readAnnotations(aJCas, res);
     }
 
-    private void readAnnotations(JCas aJCas, Resource aRes)
-        throws IOException
+    private void readAnnotations(JCas aJCas, Resource aRes) throws IOException
     {
         BratAnnotationDocument doc;
         try (Reader r = new InputStreamReader(aRes.getInputStream(), sourceEncoding)) {
             doc = BratAnnotationDocument.read(r);
         }
-        
+
         CAS cas = aJCas.getCas();
         TypeSystem ts = aJCas.getTypeSystem();
-        
+
         List<BratRelationAnnotation> relations = new ArrayList<>();
         List<BratEventAnnotation> events = new ArrayList<>();
         List<BratNoteAnnotation> notes = new ArrayList<>();
@@ -268,27 +271,27 @@ public class BratReader
                 events.add((BratEventAnnotation) anno);
             }
             else {
-                throw new IllegalStateException("Annotation type [" + anno.getClass()
-                        + "] is currently not supported.");
+                throw new IllegalStateException(
+                        "Annotation type [" + anno.getClass() + "] is currently not supported.");
             }
         }
-        
+
         // Go through the relations now
         for (BratRelationAnnotation rel : relations) {
             Type type = mapping.getRelationTypeMapppings().getUimaType(ts, rel);
             create(cas, type, rel);
         }
-        
+
         // Go through the events again and handle the slots
         for (BratEventAnnotation e : events) {
             Type type = mapping.getTextTypeMapppings().getUimaType(ts, e);
             fillSlots(cas, type, doc, e);
         }
-        
+
         // Finally go through the notes and map them to features (if configured to do so)
         for (BratNoteAnnotation n : notes) {
             FeatureStructure anno = idMap.get(n.getTarget());
-            
+
             Type type = anno.getType();
             Collection<CommentMapping> mappings = mapping.getCommentMapping(type.getName());
 
@@ -297,7 +300,7 @@ public class BratReader
                         + "] on annotation type [" + type.getName() + "]");
                 continue;
             }
-            
+
             List<BratAttribute> attrs = new ArrayList<>();
             for (CommentMapping m : mappings) {
                 if (m.matches(n.getNote())) {
@@ -308,8 +311,7 @@ public class BratReader
         }
     }
 
-    private void readText(JCas aJCas, Resource res)
-        throws IOException
+    private void readText(JCas aJCas, Resource res) throws IOException
     {
         String annUrl = res.getResource().getURL().toString();
         String textUrl = FilenameUtils.removeExtension(annUrl) + ".txt";
@@ -318,24 +320,23 @@ public class BratReader
             aJCas.setDocumentText(IOUtils.toString(is, sourceEncoding));
         }
     }
-    
+
     private void create(CAS aCAS, Type aType, BratTextAnnotation aAnno)
     {
         SpanMapping param = mapping.getSpanMapping(aType.getName());
         TypeMapping tmap = mapping.getTextTypeMapppings().getMappingByBratType(aAnno.getType());
 
-        for (Offsets offset: aAnno.getOffsets()) {
-            AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(),
-                    offset.getEnd());
-            
+        for (Offsets offset : aAnno.getOffsets()) {
+            AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(), offset.getEnd());
+
             if (tmap != null) {
                 fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
             }
-            
+
             if (param != null) {
                 fillDefaultAttributes(anno, param.getDefaultFeatureValues());
             }
-            
+
             fillAttributes(anno, aAnno.getAttributes());
 
             if (param != null && param.getSubcat() != null) {
@@ -351,20 +352,18 @@ public class BratReader
     {
         SpanMapping param = mapping.getSpanMapping(aType.getName());
         TypeMapping tmap = mapping.getTextTypeMapppings().getMappingByBratType(aAnno.getType());
-        
-        for (Offsets offset: aAnno.getTriggerAnnotation().getOffsets()) {
-            AnnotationFS anno = aCAS.createAnnotation(aType,
-                    offset.getBegin(),
-                    offset.getEnd());
+
+        for (Offsets offset : aAnno.getTriggerAnnotation().getOffsets()) {
+            AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(), offset.getEnd());
 
             if (tmap != null) {
                 fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
             }
-            
+
             if (param != null) {
                 fillDefaultAttributes(anno, param.getDefaultFeatureValues());
             }
-            
+
             fillAttributes(anno, aAnno.getAttributes());
 
             if (param != null && param.getSubcat() != null) {
@@ -378,23 +377,23 @@ public class BratReader
             idMap.put(aAnno.getId(), anno);
         }
     }
-    
+
     private void create(CAS aCAS, Type aType, BratRelationAnnotation aAnno)
     {
         RelationMapping param = mapping.getRelationMapping(aType.getName());
         TypeMapping tmap = mapping.getRelationTypeMapppings().getMappingByBratType(aAnno.getType());
-        
+
         AnnotationFS arg1 = idMap.get(aAnno.getArg1Target());
         AnnotationFS arg2 = idMap.get(aAnno.getArg2Target());
-        
+
         AnnotationFS anno = aCAS.createFS(aType);
-        
+
         anno.setFeatureValue(getFeature(anno, param.getArg1()), arg1);
         anno.setFeatureValue(getFeature(anno, param.getArg2()), arg2);
-        
+
         AnnotationFS anchor = null;
-        if (param.getFlags1().contains(RelationMapping.FLAG_ANCHOR) && 
-                param.getFlags2().contains(RelationMapping.FLAG_ANCHOR)) {
+        if (param.getFlags1().contains(RelationMapping.FLAG_ANCHOR)
+                && param.getFlags2().contains(RelationMapping.FLAG_ANCHOR)) {
             throw new IllegalStateException("Only one argument can be the anchor.");
         }
         else if (param.getFlags1().contains(RelationMapping.FLAG_ANCHOR)) {
@@ -407,17 +406,17 @@ public class BratReader
         if (tmap != null) {
             fillDefaultAttributes(anno, tmap.getDefaultFeatureValues());
         }
-        
+
         if (param != null) {
             fillDefaultAttributes(anno, param.getDefaultFeatureValues());
         }
-        
+
         fillAttributes(anno, aAnno.getAttributes());
-        
+
         if (param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
-        
+
         if (anchor != null) {
             anno.setIntValue(anno.getType().getFeatureByBaseName(CAS.FEATURE_BASE_NAME_BEGIN),
                     anchor.getBegin());
@@ -431,7 +430,7 @@ public class BratReader
                         + "] has offsets but no anchor is specified.");
             }
         }
-        
+
         aCAS.addFsToIndexes(anno);
         idMap.put(aAnno.getId(), anno);
     }
@@ -445,11 +444,11 @@ public class BratReader
                 throw new IllegalStateException("Type [" + aAnno.getType().getName()
                         + "] has no feature named [" + e.getKey() + "]");
             }
-            
+
             aAnno.setFeatureValueFromString(feat, e.getValue());
         }
     }
-    
+
     private void fillAttributes(FeatureStructure aAnno, Collection<BratAttribute> aAttributes)
     {
         for (BratAttribute attr : aAttributes) {
@@ -473,7 +472,7 @@ public class BratReader
                 throw new IllegalStateException("Type [" + aAnno.getType().getName()
                         + "] has no feature named [" + attr.getName() + "]");
             }
-            
+
             if (attr.getValues().length == 0) {
                 // Nothing to do
             }
@@ -485,27 +484,27 @@ public class BratReader
             }
         }
     }
-    
+
     private void fillSlots(CAS aCas, Type aType, BratAnnotationDocument aDoc,
             BratEventAnnotation aE)
     {
         AnnotationFS event = idMap.get(aE.getId());
         Map<String, List<BratEventArgument>> groupedArgs = aE.getGroupedArguments();
-        
+
         for (Entry<String, List<BratEventArgument>> slot : groupedArgs.entrySet()) {
             // Resolve the target IDs to feature structures
             List<FeatureStructure> targets = new ArrayList<>();
-            
+
             // Lets see if there is a multi-valued feature by the name of the slot
             if (FSUtil.hasFeature(event, slot.getKey())
                     && FSUtil.isMultiValuedFeature(event, slot.getKey())) {
                 for (BratEventArgument arg : slot.getValue()) {
                     FeatureStructure target = idMap.get(arg.getTarget());
                     if (target == null) {
-                        throw new IllegalStateException("Unable to resolve id [" + arg.getTarget()
-                                + "]");
+                        throw new IllegalStateException(
+                                "Unable to resolve id [" + arg.getTarget() + "]");
                     }
-                    
+
                     // Handle WebAnno-style slot links
                     // FIXME It would be better if the link type could be configured, e.g. what
                     // is the name of the link feature and what is the name of the role feature...
@@ -528,7 +527,7 @@ public class BratReader
                         FSUtil.setFeature(link, "target", target);
                         target = link;
                     }
-                    
+
                     targets.add(target);
                 }
                 FSUtil.setFeature(event, slot.getKey(), targets);
@@ -538,10 +537,10 @@ public class BratReader
                 for (BratEventArgument arg : slot.getValue()) {
                     AnnotationFS target = idMap.get(arg.getTarget());
                     if (target == null) {
-                        throw new IllegalStateException("Unable to resolve id [" + arg.getTarget()
-                                + "]");
+                        throw new IllegalStateException(
+                                "Unable to resolve id [" + arg.getTarget() + "]");
                     }
-                    
+
                     String fname = arg.getSlot() + (arg.getIndex() > 0 ? arg.getIndex() : "");
                     if (FSUtil.hasFeature(event, fname)) {
                         FSUtil.setFeature(event, fname, target);
@@ -563,9 +562,9 @@ public class BratReader
     {
         Feature f = aFS.getType().getFeatureByBaseName(aName);
         if (f == null) {
-            throw new IllegalArgumentException("Type [" + aFS.getType().getName()
-                    + "] has no feature named [" + aName + "]");
+            throw new IllegalArgumentException(
+                    "Type [" + aFS.getType().getName() + "] has no feature named [" + aName + "]");
         }
         return f;
-    }    
+    }
 }
