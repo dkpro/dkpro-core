@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>25</version>
+    <version>26</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
@@ -45,14 +45,14 @@
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>4.3.30.RELEASE</spring.version>
-    <slf4j.version>1.7.30</slf4j.version>
+    <slf4j.version>1.7.36</slf4j.version>
     <log4j.version>2.16.0</log4j.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
     <activation.version>1.2.0</activation.version>
     <icu4j.version>68.2</icu4j.version>
-    <snakeyaml.version>1.27</snakeyaml.version>
-    <groovy.version>3.0.7</groovy.version>
-    <jackson.version>2.12.1</jackson.version>
+    <snakeyaml.version>1.30</snakeyaml.version>
+    <groovy.version>3.0.10</groovy.version>
+    <jackson.version>2.13.2</jackson.version>
     <jena.version>3.17.0</jena.version>
   </properties>
   <repositories>
