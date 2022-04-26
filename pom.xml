@@ -371,23 +371,17 @@
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
+        <artifactId>spring-framework-bom</artifactId>
         <version>${spring.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context-support</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-beans</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-aop</artifactId>
-        <version>${spring.version}</version>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.lucene</groupId>
@@ -403,21 +397,6 @@
         <groupId>com.googlecode.jweb1t</groupId>
         <artifactId>com.googlecode.jweb1t</artifactId>
         <version>1.4.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-slf4j-impl</artifactId>
-        <version>${log4j.version}</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -521,6 +500,12 @@
         </executions>
         <configuration>
           <failOnWarning>true</failOnWarning>
+          <ignoredDependencies>
+            <!-- 
+              - We want to depend on commons-logging-api and no complaints about spring.jcl
+              -->
+            <ignoredDependency>org.springframework:spring-jcl</ignoredDependency>
+          </ignoredDependencies>
           <usedDependencies combine.children="append">
             <!-- 
               - Logging is used via reflection and cannot be detected by Maven
