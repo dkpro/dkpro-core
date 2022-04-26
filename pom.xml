@@ -504,6 +504,7 @@
             <!-- 
               - We want to depend on commons-logging-api and no complaints about spring.jcl
               -->
+            <ignoredDependency>commons-logging:commons-logging-api</ignoredDependency>
             <ignoredDependency>org.springframework:spring-jcl</ignoredDependency>
           </ignoredDependencies>
           <usedDependencies combine.children="append">
