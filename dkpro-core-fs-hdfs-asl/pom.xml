@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - FS - HDFS (v ${hadoop.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <hadoop.version>3.3.0</hadoop.version>
+    <hadoop.version>3.3.2</hadoop.version>
   </properties>
   <dependencies>
     <dependency>
