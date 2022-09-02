@@ -105,7 +105,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
 //            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
 //            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg", 
 //            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" 
-            })
+    })
     private Set<String> spanTypes;
 
     /**

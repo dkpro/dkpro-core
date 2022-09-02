@@ -109,8 +109,7 @@ public class BratReader
     public static final String PARAM_RELATION_TYPES = "relationTypes";
     @Deprecated
     @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = false, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" 
-            })
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" })
     private Set<String> relationTypes;
 
     /**

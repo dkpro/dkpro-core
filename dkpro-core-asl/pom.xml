@@ -702,7 +702,7 @@
       <repositories>
         <repository>
           <id>ukp-oss-ext-releases</id>
-          <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-releases-local</url>
+          <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-releases-local</url>
           <releases>
             <enabled>true</enabled>
           </releases>
@@ -712,7 +712,7 @@
         </repository>
         <repository>
           <id>ukp-oss-ext-snapshots</id>
-          <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-snapshots-local/</url>
+          <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-snapshots-local/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
@@ -722,7 +722,7 @@
         </repository>
         <repository>
           <id>cogcomp.cs.uiuc.edu-releases</id>
-          <url>http://cogcomp.org/m2repo/</url>
+          <url>https://cogcomp.org/m2repo/</url>
           <releases>
             <enabled>true</enabled>
           </releases>

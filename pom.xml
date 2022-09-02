@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>25</version>
+    <version>26</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
@@ -38,22 +38,23 @@
   <properties>
     <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <uima.version>3.2.0</uima.version>
-    <uimafit.version>3.2.0</uimafit.version>
-    <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
-    <omtd.version>3.0.2.7</omtd.version>
-    <lucene.version>4.4.0</lucene.version>
-    <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>4.3.30.RELEASE</spring.version>
-    <slf4j.version>1.7.30</slf4j.version>
-    <log4j.version>2.16.0</log4j.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
+    
     <activation.version>1.2.0</activation.version>
+    <groovy.version>3.0.10</groovy.version>
     <icu4j.version>68.2</icu4j.version>
-    <snakeyaml.version>1.27</snakeyaml.version>
-    <groovy.version>3.0.7</groovy.version>
-    <jackson.version>2.12.1</jackson.version>
+    <jackson.version>2.13.2</jackson.version>
     <jena.version>3.17.0</jena.version>
+    <log4j.version>2.17.2</log4j.version>
+    <lucene.version>4.4.0</lucene.version>
+    <omtd.version>3.0.2.7</omtd.version>
+    <slf4j.version>1.7.36</slf4j.version>
+    <snakeyaml.version>1.30</snakeyaml.version>
+    <!-- The Spring version should be at least whatever uimaFIT requires -->
+    <spring.version>5.3.22</spring.version>
+    <uima.version>3.3.0</uima.version>
+    <uimafit.version>3.3.0</uimafit.version>
+    <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
   </properties>
   <repositories>
     <repository>
@@ -182,12 +183,12 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.13.1</version>
+        <version>4.13.2</version>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.18.1</version>
+        <version>3.22.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.uima</groupId>
@@ -232,7 +233,7 @@
       <dependency>
         <groupId>xerces</groupId>
         <artifactId>xercesImpl</artifactId>
-        <version>2.12.0</version>
+        <version>2.12.2</version>
       </dependency>
       <dependency>
         <groupId>xalan</groupId>
@@ -370,23 +371,17 @@
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
+        <artifactId>spring-framework-bom</artifactId>
         <version>${spring.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context-support</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-beans</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-aop</artifactId>
-        <version>${spring.version}</version>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.apache.lucene</groupId>
@@ -404,23 +399,8 @@
         <version>1.4.0</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-slf4j-impl</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
+        <artifactId>slf4j-reload4j</artifactId>
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
@@ -520,6 +500,13 @@
         </executions>
         <configuration>
           <failOnWarning>true</failOnWarning>
+          <ignoredDependencies>
+            <!-- 
+              - We want to depend on commons-logging-api and no complaints about spring.jcl
+              -->
+            <ignoredDependency>commons-logging:commons-logging-api</ignoredDependency>
+            <ignoredDependency>org.springframework:spring-jcl</ignoredDependency>
+          </ignoredDependencies>
           <usedDependencies combine.children="append">
             <!-- 
               - Logging is used via reflection and cannot be detected by Maven

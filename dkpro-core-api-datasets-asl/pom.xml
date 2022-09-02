@@ -74,7 +74,7 @@
     <dependency>
       <groupId>com.github.junrar</groupId>
       <artifactId>junrar</artifactId>
-      <version>4.0.0</version>
+      <version>7.4.1</version>
       <exclusions>
         <exclusion>
           <groupId>org.apache.commons</groupId>
