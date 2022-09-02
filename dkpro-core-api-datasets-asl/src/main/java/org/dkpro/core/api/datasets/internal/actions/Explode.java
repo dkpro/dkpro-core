@@ -50,7 +50,6 @@ import org.dkpro.core.api.datasets.internal.util.AntFileFilter;
 
 import com.github.junrar.Archive;
 import com.github.junrar.exception.RarException;
-import com.github.junrar.impl.FileVolumeManager;
 import com.github.junrar.rarfile.FileHeader;
 
 public class Explode
@@ -171,7 +170,7 @@ public class Explode
         LOG.info("Extracting files of [" + aArchive.getFileName() + "] to [" + aTarget.resolve(base)
                 + "]");
         
-        try (Archive archive = new Archive(new FileVolumeManager(aArchive.toFile()))) {
+        try (Archive archive = new Archive(aArchive.toFile())) {
             FileHeader fh = archive.nextFileHeader();
             while (fh != null) {
                 String name = stripLeadingFolders(fh.getFileNameString(), strip);

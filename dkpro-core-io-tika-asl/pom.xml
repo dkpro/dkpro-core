@@ -82,7 +82,7 @@
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
+      <artifactId>slf4j-reload4j</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -96,14 +96,17 @@
             <usedDependencies combine.children="append">
               <!-- Parsers are not detected as a direct dependency due to plugin mechanism -->
               <usedDependency>org.apache.tika:tika-parsers</usedDependency>
+            </usedDependencies>
+            <ignoredDependencies combine.children="append">
               <!-- 
                 - Logging is used via reflection and cannot be detected by Maven
               -->
-              <usedDependency>org.slf4j:slf4j-api</usedDependency>
-              <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
-              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
-              <usedDependency>org.slf4j:jul-to-slf4j</usedDependency>
-            </usedDependencies>
+              <ignoredDependency>org.slf4j:slf4j-api</ignoredDependency>
+              <ignoredDependency>org.slf4j:jcl-over-slf4j</ignoredDependency>
+              <ignoredDependency>org.slf4j:slf4j-log4j12</ignoredDependency>
+              <ignoredDependency>org.slf4j:slf4j-reload4j</ignoredDependency>
+              <ignoredDependency>org.slf4j:jul-to-slf4j</ignoredDependency>
+            </ignoredDependencies>
           </configuration>
         </plugin>
       </plugins>
