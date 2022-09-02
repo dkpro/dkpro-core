@@ -52,7 +52,7 @@
     <slf4j.version>1.7.36</slf4j.version>
     <snakeyaml.version>1.30</snakeyaml.version>
     <spring.version>5.3.19</spring.version>
-    <uima.version>3.2.0</uima.version>
+    <uima.version>3.3.0</uima.version>
     <uimafit.version>3.2.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
   </properties>
