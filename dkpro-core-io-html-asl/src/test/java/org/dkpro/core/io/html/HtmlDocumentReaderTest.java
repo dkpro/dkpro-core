@@ -58,7 +58,7 @@ public class HtmlDocumentReaderTest
         reader.getNext(jcas.getCas());
 
         assertThat(jcas.getDocumentText())
-                .isEqualTo(" Heading  This is the first paragraph.   This is the second paragraph.   ");
+                .isEqualTo(" Heading  This is the first paragraph.   This is the second paragraph.  ");
 
         assertThat(select(jcas, Heading.class))
                 .extracting(Heading::getCoveredText)
@@ -108,7 +108,7 @@ public class HtmlDocumentReaderTest
         reader.getNext(jcas.getCas());
 
         assertThat(jcas.getDocumentText())
-                .isEqualTo(" Heading  This is the first paragraph.   This is the second paragraph.   ");
+                .isEqualTo(" Heading  This is the first paragraph.   This is the second paragraph.  ");
 
         assertThat(select(jcas, Heading.class))
                 .extracting(Heading::getCoveredText)
