@@ -46,7 +46,7 @@
     <jackson.version>2.13.2</jackson.version>
     <jena.version>3.17.0</jena.version>
     <log4j.version>2.17.2</log4j.version>
-    <lucene.version>4.4.0</lucene.version>
+    <lucene.version>7.1.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
     <slf4j.version>1.7.36</slf4j.version>
     <snakeyaml.version>1.30</snakeyaml.version>
