@@ -160,7 +160,6 @@
                 - by Hadoop and ClassNotFoundExceptions will be thrown if they are
                 - missing!
               -->
-              <usedDependency>log4j:log4j</usedDependency>
               <usedDependency>org.apache.hadoop:hadoop-common</usedDependency>
               <usedDependency>org.apache.hadoop:hadoop-hdfs</usedDependency>
               <usedDependency>org.mockito:mockito-core</usedDependency>
