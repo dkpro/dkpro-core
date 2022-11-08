@@ -67,10 +67,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @LanguageCapability("en")
 @TypeCapability(
         inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+           "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
 public class IllinoisPosTagger
     extends JCasAnnotator_ImplBase
 {
