@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - IO - PDF (pdfbox ${pdfbox.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <pdfbox.version>2.0.24</pdfbox.version>
+    <pdfbox.version>2.0.26</pdfbox.version>
   </properties>
   <dependencies>
     <dependency>
