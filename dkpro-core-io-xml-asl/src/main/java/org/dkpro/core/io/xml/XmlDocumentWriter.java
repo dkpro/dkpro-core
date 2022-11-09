@@ -20,10 +20,10 @@ package org.dkpro.core.io.xml;
 import static javax.xml.transform.OutputKeys.INDENT;
 import static javax.xml.transform.OutputKeys.METHOD;
 import static javax.xml.transform.OutputKeys.OMIT_XML_DECLARATION;
+import static org.dkpro.core.api.xml.XmlParserUtils.newTransformerFactory;
 
 import java.io.OutputStream;
 
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
@@ -95,8 +95,7 @@ public class XmlDocumentWriter
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
-            SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
-            tf.setFeature("http://javax.xml.XMLConstants/feature/secure-processing", true);
+            SAXTransformerFactory tf = (SAXTransformerFactory) newTransformerFactory();
             TransformerHandler th = tf.newTransformerHandler();
             if (omitXmlDeclaration) {
                 th.getTransformer().setOutputProperty(OMIT_XML_DECLARATION, "yes");

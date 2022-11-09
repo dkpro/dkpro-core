@@ -17,16 +17,17 @@
  */
 package org.dkpro.core.io.gigaword.internal;
 
+import static org.dkpro.core.api.resources.CompressionUtils.getInputStream;
+
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
-import org.dkpro.core.api.resources.CompressionUtils;
+import org.dkpro.core.api.xml.XmlParserUtils;
 
 import com.google.common.collect.AbstractIterator;
 
@@ -48,10 +49,9 @@ public class AnnotatedGigawordDocuments
     public static AnnotatedGigawordDocuments fromAnnotatedGigawordFile(Resource aResource)
         throws Exception
     {
-        try (InputStream is = new BufferedInputStream(CompressionUtils
-                .getInputStream(aResource.getLocation(), aResource.getInputStream()))) {
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser saxParser = factory.newSAXParser();
+        try (InputStream is = new BufferedInputStream(
+                getInputStream(aResource.getLocation(), aResource.getInputStream()))) {
+            SAXParser saxParser = XmlParserUtils.newSaxParser();
             AnnotatedGigawordParser parser = new AnnotatedGigawordParser(aResource);
             saxParser.parse(is, parser);
             return new AnnotatedGigawordDocuments(parser.getArticleList());
