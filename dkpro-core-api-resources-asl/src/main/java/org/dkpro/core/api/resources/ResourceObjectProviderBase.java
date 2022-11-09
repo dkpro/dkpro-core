@@ -67,7 +67,6 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.internal.ReflectionUtil;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.dkpro.core.api.resources.internal.ApacheCommonsLoggingAdapter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -480,11 +479,9 @@ public abstract class ResourceObjectProviderBase<M>
             // Parse the POM
             Model model;
             try {
-                MavenXpp3Reader reader = new MavenXpp3Reader();
-                model = reader.read(pomUrl.openStream());
-
+                model = new MavenXpp3Reader().read(pomUrl.openStream());
             }
-            catch (XmlPullParserException e) {
+            catch (Exception e) {
                 throw new IOException(e);
             }
 
