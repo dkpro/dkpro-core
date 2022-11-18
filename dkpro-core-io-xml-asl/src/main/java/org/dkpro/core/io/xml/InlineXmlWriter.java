@@ -43,6 +43,7 @@ import org.apache.uima.util.CasToInlineXml;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.ResourceUtils;
+import org.dkpro.core.api.xml.XmlParserUtils;
 
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -92,8 +93,8 @@ public class InlineXmlWriter
         super.initialize(aContext);
 
         if (xslt != null) {
-            TransformerFactory tf = TransformerFactory.newInstance();
             try {
+                TransformerFactory tf = XmlParserUtils.newTransformerFactory();
                 URL url = ResourceUtils.resolveLocation(xslt, this, getContext());
                 transformer = tf.newTransformer(new StreamSource(url.openStream()));
             } catch (Exception e) {
