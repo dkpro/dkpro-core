@@ -22,11 +22,11 @@ import static org.apache.jena.datatypes.xsd.XSDDatatype.XSDstring;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
+import org.apache.jena.irix.IRIs;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.riot.system.IRIResolver;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -197,8 +197,8 @@ public class DKPro2Nif
             String neIdentifier = uimaNamedEntity.getIdentifier();
             
             // checkIRI returns true if there are violations, so we need to negate it
-            boolean neClassIsUri = neClass != null && !IRIResolver.checkIRI(neClass);
-            boolean neIdentifierIsUri = neIdentifier != null && !IRIResolver.checkIRI(neIdentifier);
+            boolean neClassIsUri = neClass != null && !IRIs.check(neClass);
+            boolean neIdentifierIsUri = neIdentifier != null && !IRIs.check(neIdentifier);
             
             if (!neClassIsUri && !neIdentifierIsUri) {
                 continue;
