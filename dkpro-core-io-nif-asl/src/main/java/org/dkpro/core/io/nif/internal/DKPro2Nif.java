@@ -196,9 +196,8 @@ public class DKPro2Nif
             String neClass = uimaNamedEntity.getValue();
             String neIdentifier = uimaNamedEntity.getIdentifier();
             
-            // checkIRI returns true if there are violations, so we need to negate it
-            boolean neClassIsUri = neClass != null && !IRIs.check(neClass);
-            boolean neIdentifierIsUri = neIdentifier != null && !IRIs.check(neIdentifier);
+            boolean neClassIsUri = neClass != null && IRIs.check(neClass);
+            boolean neIdentifierIsUri = neIdentifier != null && IRIs.check(neIdentifier);
             
             if (!neClassIsUri && !neIdentifierIsUri) {
                 continue;
