@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -33,6 +32,7 @@ import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.xml.CasXmlHandler;
+import org.dkpro.core.api.xml.XmlParserUtils;
 import org.xml.sax.InputSource;
 
 import eu.openminted.share.annotations.api.Component;
@@ -77,8 +77,7 @@ public class XmlDocumentReader
             CasXmlHandler handler = new CasXmlHandler(aJCas);
 
             // Parser XML
-            SAXParserFactory pf = SAXParserFactory.newInstance();
-            SAXParser parser = pf.newSAXParser();
+            SAXParser parser = XmlParserUtils.newSaxParser();
 
             InputSource source = new InputSource(is);
             source.setPublicId(res.getLocation());
