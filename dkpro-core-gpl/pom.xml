@@ -148,35 +148,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <!-- Profile for modules with dependencies that are not on Maven Central -->
-      <id>deps-not-on-maven-central</id>
-      <repositories>
-        <repository>
-          <id>icm</id>
-          <name>ICM repository</name>
-          <url>http://maven.icm.edu.pl/artifactory/repo</url>
-          <releases>
-            <enabled>true</enabled>
-            <checksumPolicy>warn</checksumPolicy>
-          </releases>
-        </repository>
-      </repositories>
-      <modules>
-        <!-- IO modules -->
-        <module>../dkpro-core-io-cermine-gpl</module>
-        <!-- Processing modules -->
-      </modules>
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>org.dkpro.core</groupId>
-            <artifactId>dkpro-core-io-cermine-gpl</artifactId>
-            <version>2.3.0-SNAPSHOT</version>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-    </profile>
-  </profiles>
 </project>
