@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.conll;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor.BASIC;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -42,13 +43,13 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.io.sequencecodec.AdjacentLabelCodec;
 import org.dkpro.core.api.io.sequencecodec.SequenceItem;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
@@ -56,7 +57,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -78,7 +78,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ConllCoreNlpReader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Character encoding of the input data.
@@ -242,27 +242,28 @@ public class ConllCoreNlpReader
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
-                tokens.put(Integer.valueOf(word[ID]), token);
+                Token token = doc.add(trim(word[FORM]), Token.class);
+                tokens.put(Integer.valueOf(trim(word[ID])), token);
                 if (wordIterator.hasNext()) {
                     doc.add(" ");
                 }
 
                 // Read lemma
-                if (!UNUSED.equals(word[LEMMA]) && readLemma) {
+                String lemmaValue = trim(word[LEMMA]);
+                if (!UNUSED.equals(lemmaValue) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(word[LEMMA]);
+                    lemma.setValue(lemmaValue);
                     lemma.addToIndexes();
                     token.setLemma(lemma);
                 }
 
                 // Read part-of-speech tag
-                String tag = word[POSTAG];
+                String tag = cleanTag(word[POSTAG]);
                 if (!UNUSED.equals(tag) && readPos) {
                     Type posTag = posMappingProvider.getTagType(tag);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(tag != null ? tag.intern() : null);
+                    pos.setPosValue(tag);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
@@ -273,8 +274,8 @@ public class ConllCoreNlpReader
             // Read named entities
             if (readNer) {
                 List<SequenceItem> encodedNerSpans = words.stream().map(w -> {
-                    int id = Integer.valueOf(w[ID]);
-                    return new SequenceItem(id, id, w[NER]);
+                    int id = Integer.valueOf(trim(w[ID]));
+                    return new SequenceItem(id, id, trim(w[NER]));
                 }).collect(Collectors.toList());
                 
                 AdjacentLabelCodec codec = new AdjacentLabelCodec(1);
@@ -286,7 +287,7 @@ public class ConllCoreNlpReader
                     Token endToken = tokens.get(nerSpan.getEnd());
                     NamedEntity ne = (NamedEntity) aJCas.getCas().createAnnotation(nerType,
                             beginToken.getBegin(), endToken.getEnd());
-                    ne.setValue(nerSpan.getLabel());
+                    ne.setValue(cleanTag(nerSpan.getLabel()));
                     ne.addToIndexes();
                 }
             }
@@ -294,29 +295,30 @@ public class ConllCoreNlpReader
             // Read dependencies
             if (readDependency) {
                 for (String[] word : words) {
-                    if (!UNUSED.equals(word[DEPREL])) {
-                        int depId = Integer.valueOf(word[ID]);
-                        int govId = Integer.valueOf(word[HEAD]);
+                    String depRel = cleanTag(word[DEPREL]);
+                    if (!UNUSED.equals(depRel)) {
+                        int depId = Integer.valueOf(trim(word[ID]));
+                        int govId = Integer.valueOf(trim(word[HEAD]));
                         
                         // Model the root as a loop onto itself
                         if (govId == 0) {
                             Dependency rel = new ROOT(aJCas);
                             rel.setGovernor(tokens.get(depId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                         else {
                             Dependency rel = new Dependency(aJCas);
                             rel.setGovernor(tokens.get(govId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                     }

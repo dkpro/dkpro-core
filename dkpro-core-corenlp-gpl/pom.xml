@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-gpl</artifactId>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>2.3.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
   <artifactId>dkpro-core-corenlp-gpl</artifactId>
@@ -134,6 +134,16 @@
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
       <artifactId>omtd-share-annotations-api</artifactId>
+    </dependency>
+    <dependency>
+      <!-- 
+        - Xerces 2.12.0 no longer draws in the XML APIs causing ClassNotFoundExceptions on JREs
+        - not including the XML APIs either. However, there is no direct code dependency on the
+        - artifact in this module.
+        -->
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -251,7 +261,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-ar-sr</artifactId>
-        <version>20141031.1</version>
+        <version>20180227.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -381,7 +391,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-left3words-distsim</artifactId>
-        <version>20131112.1</version>
+        <version>20140616.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -521,7 +531,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-ud</artifactId>
-        <version>20150418.1</version>
+        <version>20161213.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -568,6 +578,7 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
+              <usedDependency>xml-apis:xml-apis</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf</usedDependency>

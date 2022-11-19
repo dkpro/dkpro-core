@@ -17,12 +17,15 @@
  */
 package org.dkpro.core.testing;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.canParameterBeSet;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.getParameterSettings;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParameter;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -51,12 +54,20 @@ public class IOTestRunner
     private static final String RESOURCE_COLLECTION_READER_BASE = "org.dkpro.core.api.io.ResourceCollectionReaderBase";
     private static final String JCAS_FILE_WRITER_IMPL_BASE = "org.dkpro.core.api.io.JCasFileWriter_ImplBase";
         
+    /**
+     * @deprecated Use {@link ReaderAssert} instead.
+     */
+    @Deprecated
     public static void testRoundTrip(Class<? extends CollectionReader> aReader,
             Class<? extends AnalysisComponent> aWriter, String aFile)
         throws Exception
     {
-        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile,
-                aFile);
+        ReaderAssert.assertThat(aReader)
+                .readingFrom("src/test/resources/" + aFile)
+                .usingWriter(aWriter)
+                .outputAsString(FilenameUtils.getName(aFile))
+                .satisfies(output -> assertThat(output.trim()).isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/" + aFile), UTF_8).trim()));
     }
 
     public static void testRoundTrip(Class<? extends CollectionReader> aReader,
@@ -78,6 +89,12 @@ public class IOTestRunner
             AnalysisEngineDescription aWriter, String aFile)
         throws Exception
     {
+//        ReaderAssert.assertThat(aReader)
+//                .readingFrom("src/test/resources/" + aFile)
+//                .usingWriter(aWriter)
+//                .asString()
+//                .isEqualToNormalizingNewlines(
+//                        contentOf(new File("src/test/resources/" + aFile), UTF_8));
         testOneWay(aReader, aWriter, aFile, aFile);
     }
 
@@ -236,15 +253,24 @@ public class IOTestRunner
             setParameter(aWriter, ComponentParameters.PARAM_TARGET_LOCATION, output);
         }
 
-        AnalysisEngineDescription metadataStripper = createEngineDescription(
-                DocumentMetaDataStripper.class);
+        List<AnalysisEngineDescription> processors = new ArrayList<>();
+        
+        // By default, we strip the document metadata if no options are specified
+        if (aOptions == null || !aOptions.keepDocumentMetadata) {
+            processors.add(createEngineDescription(DocumentMetaDataStripper.class));
+        }
 
-        AnalysisEngineDescription validator = createEngineDescription(
-                Validator.class);
+        processors.add(createEngineDescription(Validator.class));
+        
+        if (aOptions != null && aOptions.processor != null) {
+            processors.add(aOptions.processor);
+        }
+
+        processors.add(aWriter);
 
         Validator.options = aOptions != null ? aOptions : new TestOptions();
         
-        runPipeline(aReader, validator, metadataStripper, aWriter);
+        runPipeline(aReader, processors.toArray(new AnalysisEngineDescription[] {}));
 
         AssertAnnotations.assertValid(Validator.messages);
         
@@ -283,6 +309,14 @@ public class IOTestRunner
             CasValidator validator = CasValidator.createWithAllChecks();
             options.skippedChecks.forEach(check -> validator.removeCheck(check));
             messages = validator.analyze(aJCas);
+        }
+        
+        @Override
+        public void collectionProcessComplete() throws AnalysisEngineProcessException
+        {
+            super.collectionProcessComplete();
+            
+            AssertAnnotations.assertValid(Validator.messages);
         }
     }
 }

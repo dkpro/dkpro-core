@@ -31,7 +31,6 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.testing.util.HideOutput;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.hunpos.HunPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
 import org.junit.Assume;
@@ -50,6 +49,9 @@ public class HunPosTaggerTest
     {
         Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
                 System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+        Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
+                !System.getProperty("os.version").matches("10\\.([0-9]|1[0-4]).*"));
     }
     
 //    @Test

@@ -1,0 +1,21 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<urn:freme-cooked.ttl#offset_0_140>
+        a               nif:OffsetBasedString , nif:Context ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "140"^^xsd:nonNegativeInteger ;
+        nif:isString    "This meant the Aos Sí (pronounced ees shee), the 'spirits' or 'fairies', could more easily come into our world and were particularly active." .
+
+<urn:freme-cooked.ttl#offset_15_21>
+        a                     nif:OffsetBasedString , nif:EntityOccurrence ;
+        nif:anchorOf          "Aos Sí" ;
+        nif:beginIndex        "15"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "21"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <urn:freme-cooked.ttl#offset_0_140> ;
+        itsrdf:taClassRef     owl:Thing ;
+        itsrdf:taIdentRef     <http://dbpedia.org/resource/Aos_S%25C3%25AD> .

@@ -18,9 +18,9 @@
 package org.dkpro.core.io.ancora;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.dkpro.core.api.resources.CompressionUtils.getInputStream;
 import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEMMA;
 import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POS;
 import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WORD;
@@ -33,7 +33,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -50,9 +49,9 @@ import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
-import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.api.resources.MappingProviderFactory;
+import org.dkpro.core.api.xml.XmlParserUtils;
 import org.slf4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -183,9 +182,7 @@ public class AncoraReader
             throw new IOException(e1);
         }
 
-        InputStream is = null;
-        try {
-            is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
+        try (InputStream is = getInputStream(res.getLocation(), res.getInputStream())) {
             
             // Create handler
             AncoraHandler handler = new AncoraHandler();
@@ -193,8 +190,7 @@ public class AncoraReader
             handler.setLogger(getLogger());
 
             // Parse XML
-            SAXParserFactory pf = SAXParserFactory.newInstance();
-            SAXParser parser = pf.newSAXParser();
+            SAXParser parser = XmlParserUtils.newSaxParser();
 
             InputSource source = new InputSource(is);
             source.setPublicId(res.getLocation());
@@ -203,9 +199,6 @@ public class AncoraReader
         }
         catch (ParserConfigurationException | SAXException e) {
             throw new IOException(e);
-        }
-        finally {
-            closeQuietly(is);
         }
         
         if (dropSentencesMissingPosTags) {

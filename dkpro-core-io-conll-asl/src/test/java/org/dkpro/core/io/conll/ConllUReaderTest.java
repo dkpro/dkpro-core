@@ -52,7 +52,7 @@ public class ConllUReaderTest
                 ConllUReader.class, 
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u/", 
-                ConllUReader.PARAM_PATTERNS, "conllu-en-orig.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-en-orig.conllu");
         
         JCas jcas = new JCasIterable(reader).iterator().next();
 
@@ -91,7 +91,7 @@ public class ConllUReaderTest
                 ConllUReader.class,
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-paragraph_and_document_boundaries.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-paragraph_and_document_boundaries.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
@@ -115,7 +115,7 @@ public class ConllUReaderTest
                 ConllUReader.class,
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-multiple_document_IDs.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-multiple_document_IDs.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
@@ -158,7 +158,7 @@ public class ConllUReaderTest
                 ConllUReader.class,
                 ConllUReader.PARAM_LANGUAGE, "en",
                 ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-multiple_paragraphs.conll");
+                ConllUReader.PARAM_PATTERNS, "conllu-multiple_paragraphs.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 

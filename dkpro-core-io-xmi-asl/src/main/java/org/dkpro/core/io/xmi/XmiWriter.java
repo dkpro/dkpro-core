@@ -17,11 +17,14 @@
  */
 package org.dkpro.core.io.xmi;
 
+import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+
+import javax.xml.transform.OutputKeys;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -34,6 +37,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.TypeSystemUtil;
+import org.apache.uima.util.XMLSerializer;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
@@ -83,6 +87,16 @@ public class XmiWriter
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xmi")
     private String filenameSuffix;
 
+    /**
+     * Defines the XML version used for serializing the data. The default is XML {@code "1.0"}. 
+     * However, XML 1.0 does not support certain Unicode characters. To support a wider range of 
+     * characters, you can switch this parameter to {@code "1.1"}.
+     */
+    public static final String PARAM_VERSION = "version";
+    @ConfigurationParameter(name = PARAM_VERSION, mandatory = true, defaultValue = "1.0")
+    private String version;
+    
+    
     private boolean typeSystemWritten;
 
     @Override
@@ -90,6 +104,11 @@ public class XmiWriter
         throws ResourceInitializationException
     {
         super.initialize(aContext);
+        
+        if (!asList("1.0", "1.1").contains(version)) {
+            throw new ResourceInitializationException(new IllegalArgumentException(
+                    "Invalid value for parameter version: [" + version + "]"));
+        }
 
         typeSystemWritten = false;
     }
@@ -99,7 +118,11 @@ public class XmiWriter
         throws AnalysisEngineProcessException
     {
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
-            XmiCasSerializer.serialize(aJCas.getCas(), null, docOS, prettyPrint, null);
+            XmiCasSerializer xmiCasSerializer = new XmiCasSerializer(null);
+            XMLSerializer sax2xml = new XMLSerializer(docOS, prettyPrint);
+            sax2xml.setOutputProperty(OutputKeys.VERSION, version);
+            xmiCasSerializer.serialize(aJCas.getCas(), sax2xml.getContentHandler(), null, null,
+                    null);
 
             if (!typeSystemWritten) {
                 writeTypeSystem(aJCas);

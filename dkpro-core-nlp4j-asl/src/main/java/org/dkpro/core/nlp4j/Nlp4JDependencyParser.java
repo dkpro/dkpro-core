@@ -209,22 +209,22 @@ public class Nlp4JDependencyParser
                     new OnlineComponentTagsetDescriptionProvider<NLPNode, DEPState<NLPNode>>(
                     getResourceMetaData().getProperty("dependency.tagset"), Dependency.class,
                     component)
-            {
-                @Override
-                public Set<String> listTags(String aLayer, String aTagsetName)
                 {
-                    Set<String> cleanTags = new TreeSet<String>();
-                    
-                    for (String tag : super.listTags(aLayer, aTagsetName)) {
-                        String t = StringUtils.substringAfterLast(tag, "_");
-                        if (t.length() > 0) {
-                            cleanTags.add(t);
+                    @Override
+                    public Set<String> listTags(String aLayer, String aTagsetName)
+                    {
+                        Set<String> cleanTags = new TreeSet<String>();
+                        
+                        for (String tag : super.listTags(aLayer, aTagsetName)) {
+                            String t = StringUtils.substringAfterLast(tag, "_");
+                            if (t.length() > 0) {
+                                cleanTags.add(t);
+                            }
                         }
+                        
+                        return cleanTags;
                     }
-                    
-                    return cleanTags;
-                }
-            };
+                };
             addTagset(tsdp);
 
             if (printTagSet) {

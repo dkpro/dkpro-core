@@ -58,7 +58,8 @@ public class NifReaderWriterTest
         testOneWay(
                 NifReader.class, // the reader
                 NifWriter.class, // the writer
-                "nif/brown/ref.ttl", "nif/brown/a01-cooked.ttl",
+                "nif/brown/a01-cooked-ref.ttl", 
+                "nif/brown/a01-cooked.ttl",
                 new TestOptions().resultAssertor(this::assertModelEquals));
     }
     
@@ -72,7 +73,8 @@ public class NifReaderWriterTest
         testOneWay(
                 NifReader.class, // the reader
                 NifWriter.class, // the writer
-                "nif/kore50/ref.ttl", "nif/kore50/kore50-cooked.ttl",
+                "nif/kore50/kore50-cooked-ref.ttl", 
+                "nif/kore50/kore50-cooked.ttl",
                 new TestOptions().resultAssertor(this::assertModelEquals));
     }
     
@@ -83,10 +85,23 @@ public class NifReaderWriterTest
         testOneWay(
                 NifReader.class, // the reader
                 NifWriter.class, // the writer
-                "nif/freme/ref.ttl", "nif/freme/freme-cooked.ttl",
+                "nif/freme/freme-cooked-ref.ttl", 
+                "nif/freme/freme-cooked.ttl",
                 new TestOptions().resultAssertor(this::assertModelEquals));
     }
-    
+
+    @Test
+    public void testPyNif()
+        throws Exception
+    {
+        testOneWay(
+                NifReader.class, // the reader
+                NifWriter.class, // the writer
+                "nif/pynif/pynif-example-ref.ttl", 
+                "nif/pynif/pynif-example.ttl",
+                new TestOptions().resultAssertor(this::assertModelEquals));
+    }
+
     private void assertModelEquals(File expected, File actual)
     {
         Model mExpected = ModelFactory.createDefaultModel();

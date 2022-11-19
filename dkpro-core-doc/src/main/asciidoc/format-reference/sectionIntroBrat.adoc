@@ -1,0 +1,309 @@
+// Copyright 2019
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+This format is the native format of the link:https://brat.nlplab.org[brat rapid annotation tool]. 
+Its official documentation can be found link:https://brat.nlplab.org/standoff.html[here].
+
+In general, the format consists of two files for each document:
+
+* an `.ann` file containing the annotations. These are the files you need to point the 
+  `PARAM_SOURCE_LOCATION` parameter of the `BratReader` to.
+* a plain text file (`.txt`) containing the document text in UTF-8. These files need to be next to
+  the corresponding `.ann` files and have the same name, just with the `.txt` extension instead of
+  `.ann` extension.
+
+The brat format supports different types of annotations which start with different letters in the
+`.ann` file:
+
+.brat annotation types
+|====
+| Type | Letter | Comment
+
+| Text annotations
+| `T`
+|
+
+| Event annotations
+| `E`
+|
+
+| Relation annotations
+| `R`
+|
+
+| Note annotations
+| `#`
+|
+
+| Normalization annotations
+| `N`
+| currently not supported by DKPro Core
+|====
+
+.Attributes
+Additionally, attributes (`A`) can be attached to annotations. Note that DKPro Core supports
+attributes on relations, but the brat tool itself can only deal with attributes on text annotations
+and events. The `BratReader` will try to store the values of attributes in correspondingly named
+features on the target UIMA types.
+
+.Reading the brat format
+The DKPro Core `BratReader` tries its best to map a given brat file into the UIMA type system of the
+CAS it is given. Thus, the `BratReader` is not bound strictly to the pre-defined DKPro Core types,
+but supports any custom types as well. Since the type names in UIMA are typically long (e.g.
+`de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location`) and the names used in brat tend to be short 
+(e.g. `LOC`), an explicit mapping is usually required. This mapping can be provided as JSON which
+needs to be passed to the `PARAM_MAPPINGS` parameter of the `BratReader`. Note that the parameter
+takes actual JSON, not the path to a JSON file.
+
+The mapping file consists of five sections: *text type mapping*, *relation type mapping*, *span mapping*, *relation mapping* and *comment mapping*.
+
+.Mappings JSON file: high-level structure
+[source,json]
+----
+{
+  'textTypeMapppings': [ ... ],
+  'relationTypeMapppings': [ ... ],
+  'spans': [ ... ],
+  'relations': [ ... ],
+  'comments': [ ... ]
+}
+----
+
+.Type mappings
+The *type mappings* (span and relation) indicates how to find the UIMA type for a given brat annotation. Each type mapping contains two mandatory fields:
+
+* `from`: this field is a regular expression which matches the annotation name used by brat. Note that dashes (`-`) in the brat name must be replaced by dots (`.`) or escaped dots (`\.`) to match here! It is also possible to match multiple brat annotations at once using regular expressions such as `(PER|LOC)` or `.*-LOC`.
+* `to`: this is the UIMA type to map to.
+
+The order of the mappings matter - brat annotations are matched to them in the order they are
+defined in the mappings file. This allows e.g. to put a *catch-all* mapping at the end with 
+`'from': '.*'` which would match all brat annotations not matched by a previous mapping. 
+
+.Mapping text annotations
+For the purpose of mapping, brat event (`E`) and text (`T`) annotations are both considered
+*text type annotations*.
+
+.Example: Mapping brat text-type annotations to UIMA types
+[source,json]
+----
+{
+  'textTypeMapppings': [
+    {
+      'from': 'LOC',
+      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'
+    },
+    {
+      'from': 'PER',
+      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person'
+    },
+    ...
+  ],
+  ...
+}
+----
+
+In addition to the `textTypeMapppings` section, there is a `spans` section. This can be used
+to further configure any annotations of a given UIMA type that are created by the reader. In
+addition to the `defaultFeatureValues` (see futher below) option, there is the option to store original
+brat annotation name in a feature indicated by `subCatFeature`. The example below stores the name of
+the brat annotation into the `value` feature of the `NamedEntity` type.
+
+.Example: Span mappings
+[source,json]
+----
+{
+  'spans': [
+    {",
+      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',
+      'subCatFeature': 'value',
+      'defaultFeatureValues': {
+        'identity': 'none'
+      }",
+   }",
+    ...
+  ],
+  ...
+}
+----
+
+.Mapping events
+Event annotations (`E`) from brat are basically treated like text annotations (`T`). However, events
+can have multiple arguments in brat and these arguments point to other annotations. The `BratReader`
+will try to store these argument values in the target UIMA type in corresponding feature values.
+
+For example if the brat file contains an event annotation as shown below, the target UIMA type for 
+the brat `pred` annotation should have a feature `subject` and a feature `object` which would be able
+to accept the type of annotation to which the brat `entity` annotation is mapped.
+
+[source,brat]
+----
+T1 pred 5 10	likes
+T2 entity 0 4	John
+T3 entity 11 16	pizza
+E1 pred:T1 subject:T2 object:T3
+----
+
+.Mapping relations
+Relation annotations can be mapped in the same way.
+
+.Example: Mapping brat relation annotations to UIMA types
+[source,json]
+----
+{
+  'relationTypeMapppings': [
+    {
+      'from': 'nsubj|obj|iobj',
+      'to': 'de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency'
+    },
+    ...
+  ],
+  ...
+}
+----
+
+In addition to the `textTypeMapppings` section, there is a `relations` section. Here, the features used
+to represent the relation end points can be configured. The example matches all brat relation
+annotations which have been mapped to the `Dependency` UIMA type. The first argument from the brat
+relation is mapped to the `source` feature while the second argument is mapped to the `target`
+feature. The option `flags1` or `flags2` can be set to `A` to indicate that either the offsets of the
+first or second argument are used as the offsets of the created UIMA annotation. Also, the
+`subCatFeature` and `defaultFeatureValues` already mentioned for the span mappings are supported.
+
+.Example: Mapping brat relation annotations to UIMA types
+[source,json]
+----
+{
+  'relations': [
+    {
+      'type': 'de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency',
+      'arg1': 'source',
+      'arg2': 'target',
+      'flags2': 'A',
+      'subCatFeature': 'DependencyType',
+      'defaultFeatureValues': {
+        'flavour': 'basic'
+      }
+    },
+    ...
+  ],
+  ...
+}
+----
+
+.Mapping brat comments to UIMA
+The *comment* field of annotations is the only free text field in brat (all others have a
+controlled vocabulary). Sometimes the field is indeed used for comments. But sometimes, the
+field is also used to store actual tags. In order to map comments to UIMA, a `comments`
+section needs to be added to the mapping file. A comment mapping then consists of these
+items:
+
+* `type`: the name of a UIMA type to which the brat annotation was matched.
+* `feature`: the feature of the UIMA type where the comment value should be stored
+* `match` (optional): a regular expression indicating when to use this mapping rule.
+* `replace` (optional): can be used to modify the value stores in the UIMA feature. If the
+  `match` field includes capturing groups in its regular expression, these can be accessed
+  here e.g. using `$1`. This can be used to normalize values.
+
+Mind that the same type can appear multiple times if the comment field should be mapped
+to different features depending on the comment value. The example below maps the comment
+value to the `value` feature if the comment is `PER`, `LOC`, `ORG` or `MISC`. However, if
+the value field is a URL, then the comment is mapped into the `identifier` feature.
+
+.Example: Mapping brat relation annotations to UIMA types
+[source,json]
+----
+{
+  'comments': [
+    {
+      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',
+      'feature': 'value',
+      'match': '^(PER|LOC|ORG|MISC)$',
+    },
+    {
+      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',
+      'feature': 'identifier',
+      'match': '^http://.*$'
+    },
+    ...
+  ],
+  ...
+}
+----
+
+
+.Default feature values (text-type and relation annotations)
+It may be desirable to set certain UIMA features as part of the conversion. E.g. when
+reading dependency relation annotations, it may be useful to set the `flavour` feature
+of the DKPro Core `Dependency` type to `basic`. This can be done by adding a 
+`defaultFeatureValues` section to the mapping.
+
+
+.Example: Default feature values
+[source,json]
+----
+{
+  'relationTypeMapppings': [
+    {
+      'from': 'nsubj|obj|iobj',
+      'to': 'de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency',
+      'defaultFeatureValues': {
+        'flavour': 'basic'
+      }
+    },
+    ...
+  ],
+  ...
+}
+----
+
+Another use-case of default feature values is if the brat annotation label is actually a
+concatenation of multiple tags which should be split up into multiple features at the UIMA
+level:
+
+.Example: Multiple default feature values 
+[source,json]
+----
+{
+  'textTypeMapppings': [
+    {
+      'from': 'top-left',
+      'to': 'custom.Direction',
+      'defaultFeatureValues': {
+        'horizontal': 'left',
+        'vertical': 'top'
+      }
+    },
+    {
+      'from': 'bottom-right',
+      'to': 'custom.Direction',
+      'defaultFeatureValues': {
+        'horizontal': 'right',
+        'vertical': 'bottom'
+      }
+    },
+    ...
+  ],
+  ...
+}
+----
+
+.Segmentation
+Note that the brat annotation format does not have a built-in concept of token or sentence
+boundaries. So unless these are explicitly annotated in the brat file and mapped to the DKPro Core
+`Token` and `Sentence` types, there will not be any such annotations available. If you apply a
+segmenter component (e.g. the DKPro Core  `BreakIteratorSegmenter`) to the output of the reader you 
+will get token and sentence boundaries, but they *might* not coincide with the annotations boundaries
+read from the brat file. Your mileage may vary.
