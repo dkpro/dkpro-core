@@ -23,6 +23,7 @@ import java.io.InputStream;
 
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.metadata.TikaCoreProperties;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.EmptyParser;
 import org.apache.tika.parser.ParseContext;
@@ -94,7 +95,8 @@ public class TikaReader
         BodyContentHandler handler = new BodyContentHandler(bufferSize);
         // Give hints to NameDetector about the filename
         Metadata metadata = new Metadata();
-        metadata.set(Metadata.RESOURCE_NAME_KEY, new File(fileResource.getPath()).getName());
+        metadata.set(TikaCoreProperties.RESOURCE_NAME_KEY,
+                new File(fileResource.getPath()).getName());
         
         // If we process embedded documents, we use the auto-detect parser recursively
         ParseContext parseContext = new ParseContext();

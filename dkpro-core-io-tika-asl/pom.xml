@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - IO - Tika (v ${tika.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <tika.version>1.25</tika.version>
+    <tika.version>2.6.0</tika.version>
   </properties>
   <dependencies>
     <dependency>
@@ -46,7 +46,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.tika</groupId>
-      <artifactId>tika-parsers</artifactId>
+      <artifactId>tika-parsers-standard-package</artifactId>
       <version>${tika.version}</version>
     </dependency>
     <dependency>
@@ -95,7 +95,7 @@
           <configuration>
             <usedDependencies combine.children="append">
               <!-- Parsers are not detected as a direct dependency due to plugin mechanism -->
-              <usedDependency>org.apache.tika:tika-parsers</usedDependency>
+              <usedDependency>org.apache.tika:tika-parsers-standard-package</usedDependency>
             </usedDependencies>
             <ignoredDependencies combine.children="append">
               <!-- 
