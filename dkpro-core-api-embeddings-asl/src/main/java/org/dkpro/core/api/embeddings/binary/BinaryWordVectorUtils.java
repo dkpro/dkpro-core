@@ -37,8 +37,6 @@ import org.slf4j.LoggerFactory;
  * <a href="https://deeplearning4j.org/">dl4j</a>, but provides a generic solution to efficiently
  * storing and reading word embeddings with a memory-mapped file.
  *
- * @author Paul Dubs
- * @author Richard Eckart de Castilho
  * @see <a href="https://gist.github.com/treo/f5a346d53f89566b51bf88a9a42c67c7">Original source</a>
  */
 public class BinaryWordVectorUtils
