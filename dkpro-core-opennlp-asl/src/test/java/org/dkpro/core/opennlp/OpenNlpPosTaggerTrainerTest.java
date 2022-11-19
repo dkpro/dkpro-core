@@ -36,8 +36,6 @@ import org.dkpro.core.eval.EvalUtil;
 import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2006Reader;
-import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.opennlp.OpenNlpPosTaggerTrainer;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
@@ -106,9 +104,9 @@ public class OpenNlpPosTaggerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.642212, results.getFscore(), 0.0001);
-        assertEquals(0.642212, results.getPrecision(), 0.0001);
-        assertEquals(0.642212, results.getRecall(), 0.0001);
+        assertEquals(0.636631, results.getFscore(), 0.0001);
+        assertEquals(0.636631, results.getPrecision(), 0.0001);
+        assertEquals(0.636631, results.getRecall(), 0.0001);
     }
     
     @Rule

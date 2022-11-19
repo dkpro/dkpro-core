@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <opennlp.version>1.9.3</opennlp.version>
+    <opennlp.version>2.0.0</opennlp.version>
   </properties>
   <dependencies>
     <dependency>
