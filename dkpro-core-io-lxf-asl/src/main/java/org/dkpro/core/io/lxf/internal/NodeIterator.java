@@ -25,9 +25,6 @@ import org.dkpro.core.io.lxf.internal.model.LxfNode;
 
 /**
  * Iterator over nodes of certain annotation. Used by DKPro2Lxf
- * 
- * @author Milen Kouylekov
- *
  */
 public class NodeIterator
 {
@@ -47,15 +44,18 @@ public class NodeIterator
 
         int current = 0;
 
-        if (position.containsKey(key))
+        if (position.containsKey(key)) {
             current = position.get(key) + 1;
+        }
         
         for (int i = current; i < graph.getNodes().size(); i++) {
             LxfNode node = graph.getNodes().get(i);
-            if (!node.getOrigin().equals(tool))
+            if (!node.getOrigin().equals(tool)) {
                 continue;
-            if (!node.getType().equals(level))
+            }
+            if (!node.getType().equals(level)) {
                 continue;
+            }
             position.put(key, i);
             return node;
         }

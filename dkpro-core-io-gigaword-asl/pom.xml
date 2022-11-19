@@ -46,6 +46,10 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-xml-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-resources-asl</artifactId>
     </dependency>
     <dependency>

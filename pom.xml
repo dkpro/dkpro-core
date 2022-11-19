@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>26</version>
+    <version>27</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
@@ -33,18 +33,20 @@
   <organization>
     <name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
     <url>https://www.ukp.tu-darmstadt.de/</url>
-  </organization> 
+  </organization>
   <inceptionYear>2007</inceptionYear>
   <properties>
     <currentYear>2019</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
     <maven.surefire.heap>6g</maven.surefire.heap>
-    
+
     <activation.version>1.2.0</activation.version>
     <groovy.version>3.0.10</groovy.version>
     <icu4j.version>68.2</icu4j.version>
     <jackson.version>2.14.0</jackson.version>
-    <jena.version>3.17.0</jena.version>
+    <jena.version>4.6.1</jena.version>
     <log4j.version>2.17.2</log4j.version>
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
@@ -266,6 +268,12 @@
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>woodstox-core-asl</artifactId>
         <version>4.4.1</version>
+        <exclusions>
+          <exclusion>
+            <groupId>javax.xml.stream</groupId>
+            <artifactId>stax-api</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.codehaus.woodstox</groupId>
@@ -661,7 +669,7 @@
             <groupId>javax.activation</groupId>
             <artifactId>javax.activation-api</artifactId>
             <version>1.2.0</version>
-          </dependency>    
+          </dependency>
         </dependencies>
       </plugin>
     </plugins>
