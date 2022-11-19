@@ -17,15 +17,25 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.assertj.core.api.Assertions.contentOf;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
+import java.io.File;
+
 import org.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.testing.ReaderAssert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class ConllUReaderWriterTest
 {
@@ -45,14 +55,20 @@ public class ConllUReaderWriterTest
     public void roundTripV2EmptyNodes()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-empty_nodes.conllu");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class),
+                "conll/u_v2/conllu-empty_nodes.conllu");
     }
 
     @Test
     public void roundTripV2MorphologicalAnnotation()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-morphological_annotation.conllu");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class),
+                "conll/u_v2/conllu-morphological_annotation.conllu");
     }
 
     @Ignore("This unfortunately doesn't work yet.")
@@ -82,7 +98,22 @@ public class ConllUReaderWriterTest
     public void roundTripV2SyntacticAnnotation()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-syntactic_annotation.conllu");
+        ReaderAssert.assertThat(ConllUReader.class)
+            .readingFrom("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu")
+            .asJCasList()
+            .extracting(
+                jcas -> select(jcas, Sentence.class).size(),
+                jcas -> select(jcas, Token.class).size())
+            .containsExactly(
+                tuple(1, 6));
+        
+        ReaderAssert.assertThat(ConllUReader.class)
+            .readingFrom("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu")
+            .usingWriter(ConllUWriter.class)
+            .outputAsString()
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu"),
+                        UTF_8));
     }
 
     @Ignore("This unfortunately doesn't work yet.")
@@ -101,7 +132,10 @@ public class ConllUReaderWriterTest
     public void roundTripV2WordsAndTokens()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-words_and_tokens.conllu");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class),
+                "conll/u_v2/conllu-words_and_tokens.conllu");
     }
 
     @Test

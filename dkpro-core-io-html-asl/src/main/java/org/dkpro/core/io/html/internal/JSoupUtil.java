@@ -22,8 +22,8 @@
  */
 package org.dkpro.core.io.html.internal;
 
-import static org.jsoup.helper.StringUtil.appendNormalisedWhitespace;
-
+import org.jsoup.internal.StringUtil;
+import org.jsoup.nodes.CDataNode;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
@@ -48,11 +48,11 @@ public final class JSoupUtil
     {
         String text = textNode.getWholeText();
 
-        if (preserveWhitespace(textNode.parentNode())) {
+        if (preserveWhitespace(textNode.parentNode()) || textNode instanceof CDataNode) {
             accum.append(text);
         }
         else {
-            appendNormalisedWhitespace(accum, text, lastCharIsWhitespace(accum));
+            StringUtil.appendNormalisedWhitespace(accum, text, lastCharIsWhitespace(accum));
         }
     }
 
@@ -61,12 +61,18 @@ public final class JSoupUtil
      */
     public static boolean preserveWhitespace(Node node)
     {
-        // looks only at this element and one level up, to prevent recursion & needless stack
+        // looks only at this element and five levels up, to prevent recursion & needless stack 
         // searches
-        if (node != null && node instanceof Element) {
-            Element element = (Element) node;
-            return element.tag().preserveWhitespace()
-                    || element.parent() != null && element.parent().tag().preserveWhitespace();
+        if (node instanceof Element) {
+            Element el = (Element) node;
+            int i = 0;
+            do {
+                if (el.tag().preserveWhitespace()) {
+                    return true;
+                }
+                el = el.parent();
+                i++;
+            } while (i < 6 && el != null);
         }
         return false;
     }

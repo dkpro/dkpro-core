@@ -20,7 +20,7 @@
   <parent>
     <artifactId>dkpro-core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
-    <version>2.1.1-SNAPSHOT</version>
+    <version>2.3.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-io-nif-asl</artifactId>
@@ -30,12 +30,12 @@
     <dependency>
       <groupId>org.apache.jena</groupId>
       <artifactId>jena-core</artifactId>
-      <version>3.5.0</version>
+      <version>${jena.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jena</groupId>
       <artifactId>jena-arq</artifactId>
-      <version>3.5.0</version>
+      <version>${jena.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>

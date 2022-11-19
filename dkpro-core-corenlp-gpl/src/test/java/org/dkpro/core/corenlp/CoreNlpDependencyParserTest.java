@@ -27,8 +27,6 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpDependencyParser;
-import org.dkpro.core.corenlp.CoreNlpPosTagger;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
@@ -125,9 +123,9 @@ public class CoreNlpDependencyParserTest
                 "[ 44, 45]PUNCT(punct,basic) D[44,45](,) G[35,43](sentence)",
                 "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
                 "[ 52, 60]Dependency(acl:relcl,basic) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]PREP(case,basic) D[61,63](as) G[69,81](constituents)",
+                "[ 61, 63]DOBJ(dobj,basic) D[61,63](as) G[52,60](contains)",
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(nmod:as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 69, 81]DEP(dep,basic) D[69,81](constituents) G[61,63](as)",
                 "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
                 "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",

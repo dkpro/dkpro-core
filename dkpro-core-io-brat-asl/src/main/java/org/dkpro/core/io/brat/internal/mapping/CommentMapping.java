@@ -39,7 +39,16 @@ public class CommentMapping
     
     private Matcher matcher;
     private String value;
-    
+
+    /**
+     * Jackson requires this constructor - even if it is private - do not use!
+     */
+    @SuppressWarnings("unused")
+    private CommentMapping()
+    {
+        this(null, null, null, null);
+    }
+
     @JsonCreator
     public CommentMapping(
             @JsonProperty("type") String aType, 

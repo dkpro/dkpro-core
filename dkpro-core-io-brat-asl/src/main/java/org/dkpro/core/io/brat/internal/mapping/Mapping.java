@@ -28,6 +28,7 @@ import java.util.Map;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Mapping
@@ -38,15 +39,13 @@ public class Mapping
     private final Map<String, RelationMapping> relations;
     private final MultiValuedMap<String, CommentMapping> comments;
     
+    @JsonCreator
     public Mapping(
-            @JsonProperty(value = "textTypeMapppings", required = false) 
-            TypeMappings aTextTypeMapppings, 
-            @JsonProperty(value = "relationTypeMapppings", required = false) 
-            TypeMappings aRelationTypeMapppings, 
-            @JsonProperty(value = "spans", required = false) 
-            List<SpanMapping> aTextAnnotations,
-            @JsonProperty(value = "relations", required = false) List<RelationMapping> aRelations, 
-            @JsonProperty(value = "comments", required = false) List<CommentMapping> aComments)
+            @JsonProperty(value = "textTypeMapppings") TypeMappings aTextTypeMapppings, 
+            @JsonProperty(value = "relationTypeMapppings") TypeMappings aRelationTypeMapppings, 
+            @JsonProperty(value = "spans") List<SpanMapping> aTextAnnotations,
+            @JsonProperty(value = "relations") List<RelationMapping> aRelations, 
+            @JsonProperty(value = "comments") List<CommentMapping> aComments)
     {
         textTypeMapppings = aTextTypeMapppings;
         relationTypeMapppings = aRelationTypeMapppings;

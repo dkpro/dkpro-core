@@ -132,7 +132,7 @@ public class HtmlReader
         StringBuilder builder = new StringBuilder();
         Deque<Event> events = new ArrayDeque<>();
         
-        NodeTraversor traversor = new NodeTraversor(new NodeVisitor()
+        NodeVisitor visitor = new NodeVisitor()
         {
             @Override
             public void head(Node node, int depth)
@@ -174,9 +174,9 @@ public class HtmlReader
                     }
                 }
             }
-        });
+        };
         
-        traversor.traverse(doc);
+        NodeTraversor.traverse(visitor, doc);
         
         aJCas.setDocumentText(builder.toString());
     }

@@ -40,6 +40,15 @@ public class SpanMapping
     private final String subcat;
     private final Map<String, String> defaultFeatureValues;
     
+    /**
+     * Jackson requires this constructor - even if it is private - do not use!
+     */
+    @SuppressWarnings("unused")
+    private SpanMapping()
+    {
+        this(null, null);
+    }
+    
     @JsonCreator
     public SpanMapping(
             @JsonProperty(value = "type", required = true) String aType, 

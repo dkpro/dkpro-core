@@ -29,6 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.Collections;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.cas.CAS;
@@ -44,6 +45,8 @@ import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
@@ -76,6 +79,132 @@ public class XmiWriterReaderTest
         CollectionReader reader = createReader(XmiReader.class, 
                 XmiReader.PARAM_SOURCE_LOCATION, new File(outputFolder, "output.xmi"));
         reader.getNext(inDocument.getCas());
+        
+        assertThat(outDocument.getDocumentText()).isEqualTo(inDocument.getDocumentText());
+    }
+    
+    @Test
+    public void thatWritingAndReadingXML1_0ControlCharactersWorks() throws Exception
+    {
+        System.out.println(Collections.list(
+                getClass().getClassLoader().getResources("META-INF/services/org.xml.sax.driver")));
+        XMLReader r = XMLReaderFactory.createXMLReader();
+        System.out.printf("http://xml.org/sax/features/xml-1.1: %s%n",
+                r.getFeature("http://xml.org/sax/features/xml-1.1"));
+        
+        File outputFolder = testContext.getTestOutputFolder();
+
+        StringBuilder text = new StringBuilder();
+        for (char ch = 0; ch < 0xFFFE; ch++) {
+            if (
+                    // These are rejected already by UIMA during serialization
+                    (0x0000 <= ch && ch < 0x0009) ||
+                    (0x000B <= ch && ch < 0x000D) ||
+                    (0x000E <= ch && ch < 0x0020) ||
+                    (0xD800 <= ch && ch < 0xE000)
+            ) {
+                text.append(" ");
+            }
+            else {
+                text.append(ch);
+            }
+        }
+        
+        JCas outDocument = createText(text.toString(), "en");
+        
+        DocumentMetaData dmd = DocumentMetaData.create(outDocument);
+        dmd.setDocumentId("output.xmi");
+        
+        AnalysisEngine writer = createEngine(XmiWriter.class, 
+                XmiWriter.PARAM_TARGET_LOCATION, outputFolder,
+                XmiWriter.PARAM_STRIP_EXTENSION, true,
+                XmiWriter.PARAM_VERSION, "1.0",
+                XmiWriter.PARAM_OVERWRITE, true);
+        
+        writer.process(outDocument);
+        
+        JCas inDocument = JCasFactory.createJCas();
+        
+        CollectionReader reader = createReader(XmiReader.class, 
+                XmiReader.PARAM_SOURCE_LOCATION, new File(outputFolder, "output.xmi"));
+        reader.getNext(inDocument.getCas());
+        
+        String expected = inDocument.getDocumentText();
+        String actual = outDocument.getDocumentText();
+        
+        assertThat(actual.length())
+                .isEqualTo(expected.length());
+        
+        for (int i = 0; i < expected.length(); i++) {
+            if (expected.charAt(i) != actual.charAt(i)) {
+                System.out.printf("[U+%04X] %d does not match expected %d%n", i,
+                        (int) actual.charAt(i), (int) expected.charAt(i));
+            }
+        }
+        
+        assertThat(outDocument.getDocumentText()).isEqualTo(inDocument.getDocumentText());
+    }
+    @Test
+    public void thatWritingAndReadingXML1_1ControlCharactersWorks() throws Exception
+    {
+        System.out.println(Collections.list(
+                getClass().getClassLoader().getResources("META-INF/services/org.xml.sax.driver")));
+        XMLReader r = XMLReaderFactory.createXMLReader();
+        System.out.printf("http://xml.org/sax/features/xml-1.1: %s%n",
+                r.getFeature("http://xml.org/sax/features/xml-1.1"));
+        
+        File outputFolder = testContext.getTestOutputFolder();
+
+        StringBuilder text = new StringBuilder();
+        for (char ch = 0; ch < 0xFFFE; ch++) {
+            if (
+                    // These are rejected already by UIMA during serialization
+                    ch == 0x0000 ||
+                    (0xD800 <= ch && ch < 0xE000) ||
+                    // These are rejected during parsing by the XML parser
+                    (0x007f <= ch && ch <= 0x0084) ||
+                    (0x0086 <= ch && ch <= 0x009F) ||
+                    // These are normalized to " "
+                    ch == 0x0085 || ch == 0x2028
+            ) {
+                text.append(" ");
+            }
+            else {
+                text.append(ch);
+            }
+        }
+        
+        JCas outDocument = createText(text.toString(), "en");
+        
+        DocumentMetaData dmd = DocumentMetaData.create(outDocument);
+        dmd.setDocumentId("output.xmi");
+        
+        AnalysisEngine writer = createEngine(XmiWriter.class, 
+                XmiWriter.PARAM_TARGET_LOCATION, outputFolder,
+                XmiWriter.PARAM_STRIP_EXTENSION, true,
+                XmiWriter.PARAM_VERSION, "1.1",
+                XmiWriter.PARAM_OVERWRITE, true);
+        
+        writer.process(outDocument);
+        
+        JCas inDocument = JCasFactory.createJCas();
+        
+        CollectionReader reader = createReader(XmiReader.class, 
+                XmiReader.PARAM_SOURCE_LOCATION, new File(outputFolder, "output.xmi"));
+        reader.getNext(inDocument.getCas());
+        
+        String expected = inDocument.getDocumentText();
+        String actual = outDocument.getDocumentText();
+        
+        assertThat(actual.length())
+                .isEqualTo(expected.length());
+        
+        for (int i = 0; i < expected.length(); i++) {
+            if (expected.charAt(i) != actual.charAt(i)) {
+                System.out.printf("[U+%04X] %d does not match expected %d%n", i,
+                        (int) actual.charAt(i), (int) expected.charAt(i));
+            }
+        }
         
         assertThat(outDocument.getDocumentText()).isEqualTo(inDocument.getDocumentText());
     }

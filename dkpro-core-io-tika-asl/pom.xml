@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-asl</artifactId>
-    <version>2.1.1-SNAPSHOT</version>
+    <version>2.3.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-io-tika-asl</artifactId>
@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - IO - Tika (v ${tika.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <tika.version>1.19.1</tika.version>
+    <tika.version>1.25</tika.version>
   </properties>
   <dependencies>
     <dependency>
@@ -50,6 +50,10 @@
       <version>${tika.version}</version>
     </dependency>
     <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-io-asl</artifactId>
     </dependency>
@@ -69,18 +73,16 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-      <version>1.7.25</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
-      <version>1.7.25</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
+      <artifactId>slf4j-reload4j</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -94,14 +96,17 @@
             <usedDependencies combine.children="append">
               <!-- Parsers are not detected as a direct dependency due to plugin mechanism -->
               <usedDependency>org.apache.tika:tika-parsers</usedDependency>
+            </usedDependencies>
+            <ignoredDependencies combine.children="append">
               <!-- 
                 - Logging is used via reflection and cannot be detected by Maven
               -->
-              <usedDependency>org.slf4j:slf4j-api</usedDependency>
-              <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
-              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
-              <usedDependency>org.slf4j:jul-to-slf4j</usedDependency>
-            </usedDependencies>
+              <ignoredDependency>org.slf4j:slf4j-api</ignoredDependency>
+              <ignoredDependency>org.slf4j:jcl-over-slf4j</ignoredDependency>
+              <ignoredDependency>org.slf4j:slf4j-log4j12</ignoredDependency>
+              <ignoredDependency>org.slf4j:slf4j-reload4j</ignoredDependency>
+              <ignoredDependency>org.slf4j:jul-to-slf4j</ignoredDependency>
+            </ignoredDependencies>
           </configuration>
         </plugin>
       </plugins>

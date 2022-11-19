@@ -20,7 +20,7 @@
   <parent>
     <artifactId>dkpro-core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
-    <version>2.1.1-SNAPSHOT</version>
+    <version>2.3.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-gate-asl</artifactId>
@@ -75,6 +75,16 @@
       <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
     <dependency>
+      <!-- 
+        - Xerces 2.12.0 no longer draws in the XML APIs causing ClassNotFoundExceptions on JREs
+        - not including the XML APIs either. However, there is no direct code dependency on the
+        - artifact in this module.
+        -->
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
@@ -110,7 +120,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-opennlp-asl</artifactId>
-        <version>2.1.1-SNAPSHOT</version>
+        <version>2.3.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -124,6 +134,7 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
+              <usedDependency>xml-apis:xml-apis</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.gate-model-lemmatizer-en-default</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.gate-model-tagger-en-annie</usedDependency>
