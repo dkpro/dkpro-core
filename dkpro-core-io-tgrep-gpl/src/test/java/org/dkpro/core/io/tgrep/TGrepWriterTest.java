@@ -30,9 +30,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.CompressionMethod;
-import org.dkpro.core.io.tgrep.TGrepWriter;
-import org.dkpro.core.stanfordnlp.StanfordParser;
-import org.dkpro.core.stanfordnlp.StanfordSegmenter;
+import org.dkpro.core.corenlp.CoreNlpParser;
+import org.dkpro.core.corenlp.CoreNlpSegmenter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -53,18 +52,20 @@ public class TGrepWriterTest
         
         String language = "en";
         String text = "This is a sample sentence. Followed by another one.";
-        AnalysisEngineDescription seg = createEngineDescription(StanfordSegmenter.class);
+        AnalysisEngineDescription seg = createEngineDescription(CoreNlpSegmenter.class);
 
-        AnalysisEngineDescription parse = createEngineDescription(StanfordParser.class,
-                StanfordParser.PARAM_WRITE_PENN_TREE, true,
-                StanfordParser.PARAM_LANGUAGE, "en",
-                StanfordParser.PARAM_VARIANT, "pcfg");
+        AnalysisEngineDescription parse = createEngineDescription( //
+                CoreNlpParser.class, //
+                CoreNlpParser.PARAM_WRITE_PENN_TREE, true, //
+                CoreNlpParser.PARAM_LANGUAGE, "en", //
+                CoreNlpParser.PARAM_VARIANT, "pcfg");
 
-        AnalysisEngineDescription tgrep = createEngineDescription(TGrepWriter.class,
-                TGrepWriter.PARAM_TARGET_LOCATION, outputPath,
-                TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
-                TGrepWriter.PARAM_DROP_MALFORMED_TREES, true,
-                TGrepWriter.PARAM_WRITE_COMMENTS, true,
+        AnalysisEngineDescription tgrep = createEngineDescription( //
+                TGrepWriter.class, //
+                TGrepWriter.PARAM_TARGET_LOCATION, outputPath, //
+                TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP, //
+                TGrepWriter.PARAM_DROP_MALFORMED_TREES, true, //
+                TGrepWriter.PARAM_WRITE_COMMENTS, true, //
                 TGrepWriter.PARAM_WRITE_T2C, false);
 
         JCas jcas = JCasFactory.createJCas();
