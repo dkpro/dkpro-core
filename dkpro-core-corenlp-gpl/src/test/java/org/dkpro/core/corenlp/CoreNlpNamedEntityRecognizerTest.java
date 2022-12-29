@@ -24,7 +24,6 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpNamedEntityRecognizer;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
@@ -210,8 +209,9 @@ public class CoreNlpNamedEntityRecognizerTest
         AssumeResource.assumeResource(CoreNlpNamedEntityRecognizer.class,
                 "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "ner", language, variant);
 
-        AnalysisEngine engine = createEngine(CoreNlpNamedEntityRecognizer.class,
-                CoreNlpNamedEntityRecognizer.PARAM_VARIANT, variant,
+        AnalysisEngine engine = createEngine( //
+                CoreNlpNamedEntityRecognizer.class, //
+                CoreNlpNamedEntityRecognizer.PARAM_VARIANT, variant, //
                 CoreNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
 
         return TestRunner.runTest(engine, language, testDocument);

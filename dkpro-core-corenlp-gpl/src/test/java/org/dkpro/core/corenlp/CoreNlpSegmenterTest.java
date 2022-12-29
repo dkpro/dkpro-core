@@ -30,8 +30,6 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpParser;
-import org.dkpro.core.corenlp.CoreNlpSegmenter;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
@@ -50,7 +48,7 @@ public class CoreNlpSegmenterTest
     {
         AnalysisEngineDescription aed = createEngineDescription(CoreNlpSegmenter.class);
 
-        SegmenterHarness.run(aed, "de.4", "en.9", "ar.1", "zh.1", "zh.2");
+        SegmenterHarness.run(aed, "de.4", "en.1", "en.9", "ar.1", "zh.1", "zh.2");
     }
     
     @Test
@@ -95,7 +93,8 @@ public class CoreNlpSegmenterTest
         jcas.setDocumentText("Al entregarles los libros del maestro los abrieron sin inmutarse\n"
                 + "Estaban contentos.");
         
-        AnalysisEngine aed = createEngine(CoreNlpSegmenter.class,
+        AnalysisEngine aed = createEngine( //
+                CoreNlpSegmenter.class, //
                 CoreNlpSegmenter.PARAM_NEWLINE_IS_SENTENCE_BREAK, "always",
                 CoreNlpSegmenter.PARAM_TOKENIZATION_OPTIONS, "splitAll=true,ptb3Escaping=false");
         aed.process(jcas);

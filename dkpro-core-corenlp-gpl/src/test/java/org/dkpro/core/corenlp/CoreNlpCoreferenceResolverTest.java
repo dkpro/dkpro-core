@@ -24,12 +24,6 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpCoreferenceResolver;
-import org.dkpro.core.corenlp.CoreNlpLemmatizer;
-import org.dkpro.core.corenlp.CoreNlpNamedEntityRecognizer;
-import org.dkpro.core.corenlp.CoreNlpParser;
-import org.dkpro.core.corenlp.CoreNlpPosTagger;
-import org.dkpro.core.corenlp.CoreNlpSegmenter;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
@@ -78,14 +72,13 @@ public class CoreNlpCoreferenceResolverTest
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
         String[][] ref = {
-                { "'" },
-                { "Let's go" },
-                { "Let's" },
+                { "Let" },
+                { "go" },
                 { "I" },
                 { "the Don'", "he" } };
 
         String[] pennTree = { 
-                "(ROOT (S (S (NP (POS ')) (NP (NP (NNP Let) (POS 's)) (NN go))) (. !)))", 
+                "(ROOT (S ('' ') (NP (NNP Let)) (VP (S (VP (POS 's) (NP (VB go))))) (. !)))", 
                 "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP (DT the) "
                 + "(NX (NNP Don) (POS ')))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
         };
