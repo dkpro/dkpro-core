@@ -72,24 +72,22 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 /**
  * Reads a file in the CoNLL-2012 format.
  * 
- * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
- *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
+ * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task: Modeling
+ *      Multilingual Unrestricted Coreference in OntoNotes</a>
  */
 @ResourceMetaData(name = "CoNLL 2012 Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_2012 })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense" })
 public class Conll2012Reader
     extends ConllReader_ImplBase
 {
@@ -97,8 +95,7 @@ public class Conll2012Reader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String encoding;
 
     /**
@@ -121,19 +118,17 @@ public class Conll2012Reader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-    
+
     /**
      * Read lemma information.
      * <p>
@@ -147,8 +142,7 @@ public class Conll2012Reader
     /**
      * Read semantic predicate information.
      */
-    public static final String PARAM_READ_SEMANTIC_PREDICATE = 
-            ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
     @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean readSemanticPredicate;
 
@@ -176,27 +170,24 @@ public class Conll2012Reader
     /**
      * Read named entity information.
      */
-    public static final String PARAM_READ_NAMED_ENTITY = 
-            ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean readNamedEntity;
 
     /**
-     * Use this constituent tag set to use to resolve the tag set mapping instead of using the
-     * tag set defined as part of the model meta data. This can be useful if a custom model is
-     * specified which does not have such meta data, or it can be used in readers.
+     * Use this constituent tag set to use to resolve the tag set mapping instead of using the tag
+     * set defined as part of the model meta data. This can be useful if a custom model is specified
+     * which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_CONSTITUENT_TAG_SET = 
-            ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
+    public static final String PARAM_CONSTITUENT_TAG_SET = ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
-    
+
     /**
-     * Load the constituent tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the constituent tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
@@ -206,7 +197,7 @@ public class Conll2012Reader
     public static final String PARAM_WRITE_TRACES_TO_TEXT = "writeTracesToText";
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;
-    
+
     /**
      * Use the document ID declared in the file header instead of using the filename.
      */
@@ -217,7 +208,7 @@ public class Conll2012Reader
     private static final String UNUSED = "-";
 
     // private static final int DOCUMENT_ID = 0; // Ignored
-    // private static final int PART_NUMBER = 1;  // Ignored
+    // private static final int PART_NUMBER = 1; // Ignored
     private static final int ID = 2;
     private static final int FORM = 3;
     private static final int POS = 4;
@@ -228,33 +219,35 @@ public class Conll2012Reader
     // private static final int SPEAKER = 9; // Ignored
     private static final int NAMED_ENTITIES = 10;
     private static final int APRED = 11;
-    
+
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
-    
+
     private PennTreeToJCasConverter converter;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
-                getLanguage());
 
-        constituentMappingProvider = createConstituentMappingProvider(this,
-                constituentMappingLocation, constituentTagset, getLanguage());
-        
+        if (readPos) {
+            posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                    getLanguage());
+        }
+
+        if (readConstituent) {
+            constituentMappingProvider = createConstituentMappingProvider(this,
+                    constituentMappingLocation, constituentTagset, getLanguage());
+        }
+
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
         converter.setWriteTracesToText(writeTracesToText);
         converter.setCreatePosTags(false); // We handle POS tags via the column already
         converter.setRootLabel("TOP");
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -270,8 +263,7 @@ public class Conll2012Reader
         }
     }
 
-    public void convert(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    public void convert(JCas aJCas, BufferedReader aReader) throws IOException
     {
         try {
             if (readPos) {
@@ -285,22 +277,22 @@ public class Conll2012Reader
         catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
         }
-        
+
         Map<String, CoreferenceLink> chains = new HashMap<>();
-        
+
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         List<String[]> words;
         while ((words = readSentence(aJCas, aReader)) != null) {
             if (words.isEmpty()) {
-                 // Ignore empty sentences. This can happen when there are multiple end-of-sentence
-                 // markers following each other.
-                continue; 
+                // Ignore empty sentences. This can happen when there are multiple end-of-sentence
+                // markers following each other.
+                continue;
             }
 
             int sentenceBegin = doc.getPosition();
             int sentenceEnd = sentenceBegin;
-            
+
             StringBuilder parse = new StringBuilder();
 
             // Tokens, Lemma, POS
@@ -337,7 +329,7 @@ public class Conll2012Reader
                     token.setPos(pos);
                 }
 
-                String predValue = trim(word[PRED]); 
+                String predValue = trim(word[PRED]);
                 if (!UNUSED.equals(predValue) && readSemanticPredicate) {
                     SemPred pred = new SemPred(aJCas, token.getBegin(), token.getEnd());
                     pred.setCategory(predValue);
@@ -351,7 +343,7 @@ public class Conll2012Reader
                             "(" + posValue + " " + trim(word[FORM]) + ")");
                     parse.append(fixed);
                 }
-                
+
                 String wordSenseValue = trim(word[WORD_SENSE]);
                 if (!UNUSED.equals(wordSenseValue) && readWordSense) {
                     WordSense wordSense = new WordSense(aJCas, token.getBegin(), token.getEnd());
@@ -366,10 +358,10 @@ public class Conll2012Reader
                     for (String chainFragment : chainFragments) {
                         boolean beginning = chainFragment.startsWith("(");
                         boolean ending = chainFragment.endsWith(")");
-                        
+
                         String chainId = chainFragment.substring(beginning ? 1 : 0,
                                 ending ? chainFragment.length() - 1 : chainFragment.length());
-                        
+
                         CoreferenceLink link = chains.get(chainId);
                         if (beginning) {
                             if (link == null) {
@@ -386,7 +378,7 @@ public class Conll2012Reader
                             link.setReferenceType(chainId);
                             link.setBegin(token.getBegin());
                         }
-                        
+
                         if (ending) {
                             link.setEnd(token.getEnd());
                             link.addToIndexes();
@@ -395,10 +387,10 @@ public class Conll2012Reader
                         chains.put(chainId, link);
                     }
                 }
-                
+
                 sentenceEnd = token.getEnd();
             }
-            
+
             // Named entities
             if (readNamedEntity) {
                 int currentNeBegin = -1;
@@ -407,7 +399,7 @@ public class Conll2012Reader
                     String ne = trim(words.get(i)[NAMED_ENTITIES]);
                     boolean beginning = ne.startsWith("(");
                     boolean ending = ne.endsWith(")");
-    
+
                     // When a NE is beginning, we remember what the NE is and where it began
                     if (beginning) {
                         // The NE is beginning with "(" and either ending with "(" or "*", so we
@@ -415,26 +407,26 @@ public class Conll2012Reader
                         currentNeType = cleanTag(ne.substring(1, ne.length() - 1));
                         currentNeBegin = i;
                     }
-                    
+
                     // We need to create an annotation if the current token is the end of an
                     // annotation
                     if (ending) {
                         // Determine begin and end of named entity
                         int begin = tokenById.get(currentNeBegin).getBegin();
                         int end = tokenById.get(i).getEnd();
-    
+
                         // Add named entity
                         NamedEntity namedEntity = new NamedEntity(aJCas, begin, end);
                         namedEntity.setValue(currentNeType);
                         namedEntity.addToIndexes();
-                        
+
                         // Forget remembered named entity
                         currentNeBegin = -1;
                         currentNeType = null;
                     }
                 }
             }
-            
+
             // Semantic arguments
             if (readSemanticPredicate) {
                 // Get arguments for one predicate at a time
@@ -456,7 +448,7 @@ public class Conll2012Reader
                             currentArgType = cleanTag(ne.substring(1, ne.length() - 1));
                             currentArgBegin = i;
                         }
-                        
+
                         // We need to create an annotation if the current token is the end of an
                         // annotation
                         if (ending) {
@@ -469,27 +461,27 @@ public class Conll2012Reader
                             if (!(pred.getBegin() == begin && pred.getEnd() == end)) {
                                 SemArg arg = new SemArg(aJCas, begin, end);
                                 arg.addToIndexes();
-                                
+
                                 SemArgLink link = new SemArgLink(aJCas);
                                 link.setRole(currentArgType);
                                 link.setTarget(arg);
                                 args.add(link);
                             }
-                            
+
                             // Forget remembered arg
                             currentArgBegin = -1;
                             currentArgType = null;
                         }
-                    }                    
-                    
+                    }
+
                     pred.setArguments(FSCollectionFactory.createFSArray(aJCas, args));
                 }
             }
-            
+
             // Sentence
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
             sentence.addToIndexes();
-            
+
             if (readConstituent) {
                 converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
             }
@@ -504,8 +496,7 @@ public class Conll2012Reader
     /**
      * Read a single sentence.
      */
-    private List<String[]> readSentence(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    private List<String[]> readSentence(JCas aJCas, BufferedReader aReader) throws IOException
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;
@@ -522,7 +513,7 @@ public class Conll2012Reader
                         meta.setDocumentId(matcher.group(1) + '#' + matcher.group(2));
                     }
                 }
-                
+
                 // Comment/header line
                 continue;
             }
@@ -532,11 +523,11 @@ public class Conll2012Reader
                 break; // Consider end of sentence
             }
             String[] fields = line.split("\\s+");
-//            if (fields.length != 10) {
-//                throw new IOException(
-//                        "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
-//                                + fields.length + ": [" + line + "]");
-//            }
+            // if (fields.length != 10) {
+            // throw new IOException(
+            // "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
+            // + fields.length + ": [" + line + "]");
+            // }
             words.add(fields);
         }
 

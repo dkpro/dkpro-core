@@ -81,18 +81,14 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(value = OperationType.READER)
 @ResourceMetaData(name = "NEGRA Export Format Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                NegraExportReader.PARAM_SOURCE_LOCATION  })
-@MimeTypeCapability({MimeTypes.APPLICATION_X_NEGRA3, MimeTypes.APPLICATION_X_NEGRA4})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+@Parameters(exclude = { NegraExportReader.PARAM_SOURCE_LOCATION })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_NEGRA3, MimeTypes.APPLICATION_X_NEGRA4 })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class NegraExportReader
     extends JCasCollectionReader_ImplBase
 {
@@ -119,8 +115,7 @@ public class NegraExportReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
@@ -150,15 +145,13 @@ public class NegraExportReader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -244,8 +237,7 @@ public class NegraExportReader
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
         documentsTotal = 0;
@@ -269,13 +261,14 @@ public class NegraExportReader
             throw new ResourceInitializationException(e);
         }
 
-        posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
-                language);
+        if (posEnabled) {
+            posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
+                    language);
+        }
     }
 
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException
+    public void getNext(JCas aJCas) throws IOException
     {
         JCasBuilder casBuilder = new JCasBuilder(aJCas);
 
@@ -299,11 +292,13 @@ public class NegraExportReader
         aJCas.setDocumentLanguage(language);
 
         // Configure mapping only now, because now the language is set in the CAS
-        try {
-            posMappingProvider.configure(aJCas.getCas());
-        }
-        catch (AnalysisEngineProcessException e) {
-            throw new IOException(e);
+        if (posEnabled) {
+            try {
+                posMappingProvider.configure(aJCas.getCas());
+            }
+            catch (AnalysisEngineProcessException e) {
+                throw new IOException(e);
+            }
         }
 
         // Fill CAS
@@ -329,10 +324,10 @@ public class NegraExportReader
         }
 
         casBuilder.close();
-        
-//        for (Entry<String, Annotation> e : idMap.entrySet()) {
-//            System.out.printf("%s - %s%n", e.getKey(), e.getValue().getCoveredText());
-//        }
+
+        // for (Entry<String, Annotation> e : idMap.entrySet()) {
+        // System.out.printf("%s - %s%n", e.getKey(), e.getValue().getCoveredText());
+        // }
 
         // Can only do that after the builder is closed, otherwise the text is not yet set in the
         // CAS and we get "null" for all token strings.
@@ -367,8 +362,7 @@ public class NegraExportReader
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         if (br != null) {
             return readOriginId(true) != null;
@@ -386,8 +380,7 @@ public class NegraExportReader
     }
 
     @Override
-    public void close()
-        throws IOException
+    public void close() throws IOException
     {
         closeQuietly(br);
         br = null;
@@ -400,8 +393,7 @@ public class NegraExportReader
      *            if true, stream will not advance
      * @return the next origin id or null if there is none
      */
-    private String readOriginId(boolean aPeek)
-        throws IOException
+    private String readOriginId(boolean aPeek) throws IOException
     {
         return readSentenceHeader(BOS_FIELD_ORIGIN_ID, aPeek);
     }
@@ -413,8 +405,7 @@ public class NegraExportReader
      *            if true, stream will not advance
      * @return the next origin id or null if there is none
      */
-    private String readSentenceHeader(int aField, boolean aPeek)
-        throws IOException
+    private String readSentenceHeader(int aField, boolean aPeek) throws IOException
     {
         if (aPeek) {
             br.mark(16000);
@@ -433,8 +424,7 @@ public class NegraExportReader
         return null;
     }
 
-    private void readHeaders()
-        throws IOException
+    private void readHeaders() throws IOException
     {
         br.mark(16000);
         String line = br.readLine();
@@ -454,8 +444,7 @@ public class NegraExportReader
     /**
      * @return true if all header data has been parsed.
      */
-    private boolean readHeaderLine(String[] aLine)
-        throws IOException
+    private boolean readHeaderLine(String[] aLine) throws IOException
     {
         // System.out.printf("Parsing line [%s]%n", StringUtils.join(aLine, "\t"));
 
@@ -475,8 +464,7 @@ public class NegraExportReader
         }
     }
 
-    private void readFormat(String[] aLine)
-        throws IOException
+    private void readFormat(String[] aLine) throws IOException
     {
         format = Integer.parseInt(aLine[FORMAT_FIELD_NUM]);
         switch (format) {
@@ -514,8 +502,7 @@ public class NegraExportReader
         // System.out.printf("Reading format [%d]%n", format);
     }
 
-    private void readTable(String[] aLine)
-        throws IOException
+    private void readTable(String[] aLine) throws IOException
     {
         String tableName = aLine[BOT_FIELD_NAME];
 
@@ -529,8 +516,7 @@ public class NegraExportReader
         }
     }
 
-    private void readOriginTable()
-        throws IOException
+    private void readOriginTable() throws IOException
     {
         String line = br.readLine();
         while (!startsWith(line, END_OF_TABLE)) {
@@ -604,7 +590,7 @@ public class NegraExportReader
                 pos.addToIndexes();
                 token.setPos(pos);
             }
-            
+
             // create lemma
             if (lemmaEnabled && (TOKEN_LEMMA >= 0)) {
                 Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
@@ -620,7 +606,7 @@ public class NegraExportReader
         for (; startsNotWith(line, END_OF_SENTENCE); line = br.readLine()) {
             // Ignore trailing coreferential information in Tüba D/Z
             line = StringUtils.substringBefore(line, "%%").trim();
-            
+
             // substring(1) to get rid of leading #
             String[] parts = splitLine(line.substring(1), "\t+");
             // get/create constituent, set type, function
@@ -656,7 +642,7 @@ public class NegraExportReader
         // Sanity check
         assert root.getBegin() == sentBegin;
         assert root.getEnd() == sentEnd;
-        
+
         // set sentence annotation
         Sentence sentence = new Sentence(aJCas, root.getBegin(), root.getEnd());
         sentence.addToIndexes(aJCas);
@@ -668,8 +654,7 @@ public class NegraExportReader
         }
     }
 
-    private void skipTable()
-        throws IOException
+    private void skipTable() throws IOException
     {
         String line = br.readLine();
         while (!startsWith(line, END_OF_TABLE)) {
@@ -705,8 +690,7 @@ public class NegraExportReader
         }
     }
 
-    private String[] splitLine(String str, String delimiter)
-        throws IOException
+    private String[] splitLine(String str, String delimiter) throws IOException
     {
         String[] parts = str.split(delimiter);
         if (parts.length < LINE_ARGUMENT_COUNT) {

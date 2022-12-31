@@ -172,8 +172,10 @@ public class Conll2008Reader
     {
         super.initialize(aContext);
         
+        if (readPos) {
         posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
                 getLanguage());
+        }
     }
     
     @Override

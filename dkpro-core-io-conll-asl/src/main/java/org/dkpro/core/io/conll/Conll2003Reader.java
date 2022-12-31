@@ -63,14 +63,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "CoNLL 2003 Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2003})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_2003 })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class Conll2003Reader
     extends ConllReader_ImplBase
 {
@@ -83,8 +81,7 @@ public class Conll2003Reader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
@@ -107,16 +104,14 @@ public class Conll2003Reader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -128,36 +123,33 @@ public class Conll2003Reader
     private boolean chunkEnabled;
 
     /**
-     * Use this chunk tag set to use to resolve the tag set mapping instead of using the
-     * tag set defined as part of the model meta data. This can be useful if a custom model is
-     * specified which does not have such meta data, or it can be used in readers.
+     * Use this chunk tag set to use to resolve the tag set mapping instead of using the tag set
+     * defined as part of the model meta data. This can be useful if a custom model is specified
+     * which does not have such meta data, or it can be used in readers.
      */
     public static final String PARAM_CHUNK_TAG_SET = ComponentParameters.PARAM_CHUNK_TAG_SET;
     @ConfigurationParameter(name = PARAM_CHUNK_TAG_SET, mandatory = false)
     protected String chunkTagset;
-    
+
     /**
-     * Load the chunk tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the chunk tag to UIMA type mapping from this location instead of locating the mapping
+     * automatically.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
-    
+
     /**
      * Read named entity information.
      */
-    public static final String PARAM_READ_NAMED_ENTITY = 
-            ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean namedEntityEnabled;
 
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     private String namedEntityMappingLocation;
 
@@ -166,30 +158,34 @@ public class Conll2003Reader
     private MappingProvider namedEntityMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
-                getLanguage());
 
-        chunkMappingProvider = createChunkMappingProvider(this, chunkMappingLocation, chunkTagset,
-                getLanguage());
-        
-        namedEntityMappingProvider = new MappingProvider();
-        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION,
-                "classpath:/there/is/no/mapping/yet");
-        namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE,
-                NamedEntity.class.getName());
-        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION,
-                namedEntityMappingLocation);
-        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+        if (posEnabled) {
+            posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                    getLanguage());
+        }
+
+        if (chunkEnabled) {
+            chunkMappingProvider = createChunkMappingProvider(this, chunkMappingLocation,
+                    chunkTagset, getLanguage());
+        }
+
+        if (namedEntityEnabled) {
+            namedEntityMappingProvider = new MappingProvider();
+            namedEntityMappingProvider.setDefault(MappingProvider.LOCATION,
+                    "classpath:/there/is/no/mapping/yet");
+            namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE,
+                    NamedEntity.class.getName());
+            namedEntityMappingProvider.setOverride(MappingProvider.LOCATION,
+                    namedEntityMappingLocation);
+            namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+        }
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         try {
             if (posEnabled) {
@@ -205,7 +201,7 @@ public class Conll2003Reader
         catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
         }
-        
+
         Resource res = nextFile();
         initCas(aJCas, res);
         BufferedReader reader = null;
@@ -220,20 +216,19 @@ public class Conll2003Reader
         }
     }
 
-    private void convert(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    private void convert(JCas aJCas, BufferedReader aReader) throws IOException
     {
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
         IobDecoder chunkDecoder = new IobDecoder(aJCas.getCas(), chunkValue, chunkMappingProvider);
-        
+
         Type namedEntityType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature namedEntityValue = namedEntityType.getFeatureByBaseName("value");
         IobDecoder neDecoder = new IobDecoder(aJCas.getCas(), namedEntityValue,
                 namedEntityMappingProvider);
-        
+
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {
             if (words.isEmpty()) {
@@ -246,7 +241,7 @@ public class Conll2003Reader
             List<Token> tokens = new ArrayList<Token>();
             String[] chunkTags = new String[words.size()];
             String[] namedEntityTags = new String[words.size()];
-            
+
             // Tokens, POS
             int i = 0;
             for (String[] word : words) {
@@ -254,10 +249,10 @@ public class Conll2003Reader
                 Token token = doc.add(trim(word[FORM]), Token.class);
                 sentenceEnd = token.getEnd();
                 doc.add(" ");
-                
+
                 if (posEnabled) {
                     String posTagValue = cleanTag(word[POSTAG]);
-                    
+
                     Type posTag = posMappingProvider.getTagType(posTagValue);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
@@ -266,13 +261,13 @@ public class Conll2003Reader
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
-                
+
                 tokens.add(token);
                 chunkTags[i] = cleanTag(word[CHUNK]);
                 namedEntityTags[i] = cleanTag(word[NAMED_ENTITY]);
                 i++;
             }
-            
+
             if (chunkEnabled) {
                 chunkDecoder.decode(tokens, chunkTags);
             }
@@ -280,7 +275,7 @@ public class Conll2003Reader
             if (namedEntityEnabled) {
                 neDecoder.decode(tokens, namedEntityTags);
             }
-            
+
             // Sentence
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
             sentence.addToIndexes();
@@ -295,8 +290,7 @@ public class Conll2003Reader
     /**
      * Read a single sentence.
      */
-    private static List<String[]> readSentence(BufferedReader aReader)
-        throws IOException
+    private static List<String[]> readSentence(BufferedReader aReader) throws IOException
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;

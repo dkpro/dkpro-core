@@ -18,6 +18,7 @@
 package org.dkpro.core.io.bnc;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -33,7 +34,6 @@ import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.MappingProvider;
-import org.dkpro.core.api.resources.MappingProviderFactory;
 import org.dkpro.core.io.xml.XmlTextReader;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -51,13 +51,11 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "British National Corpus (BNC) XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.APPLICATION_X_BNC)
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class BncReader
     extends XmlTextReader
 {
@@ -105,14 +103,12 @@ public class BncReader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -127,13 +123,12 @@ public class BncReader
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
-                posMappingLocation, posTagset, getLanguage());
+        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                getLanguage());
         posMappingProvider.setDefault("pos.tagset", "c5");
     }
 
@@ -191,8 +186,7 @@ public class BncReader
         }
 
         @Override
-        public void endElement(String aUri, String aLocalName, String aName)
-            throws SAXException
+        public void endElement(String aUri, String aLocalName, String aName) throws SAXException
         {
             if (TAG_TITLE.equals(aName)) {
                 DocumentMetaData.get(getJCas()).setDocumentTitle(getBuffer().toString().trim());
@@ -238,8 +232,7 @@ public class BncReader
         }
 
         @Override
-        public void characters(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void characters(char[] aCh, int aStart, int aLength) throws SAXException
         {
             if (complete) {
                 throw new SAXException("Extra content after stext is not permitted.");
@@ -251,8 +244,7 @@ public class BncReader
         }
 
         @Override
-        public void ignorableWhitespace(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void ignorableWhitespace(char[] aCh, int aStart, int aLength) throws SAXException
         {
             if (complete) {
                 throw new SAXException("Extra content after stext is not permitted.");
