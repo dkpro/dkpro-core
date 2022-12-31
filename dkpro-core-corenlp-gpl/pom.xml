@@ -181,6 +181,11 @@
 <!--     </dependency> -->
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-factored</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</artifactId>
       <scope>test</scope>
     </dependency>
@@ -595,7 +600,7 @@
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf</usedDependency>
-<!--               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-rnn</usedDependency> -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-factored</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-sd</usedDependency>
@@ -624,11 +629,6 @@
 <!--           <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-wsj-rnn</artifactId> -->
 <!--           <scope>test</scope> -->
 <!--         </dependency> -->
-        <dependency>
-          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-          <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-factored</artifactId>
-          <scope>test</scope>
-        </dependency>
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-pcfg</artifactId>
