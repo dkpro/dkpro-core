@@ -39,9 +39,6 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
-/**
- * 
- */
 public class TGrepWriterTest
 {
     @Test
