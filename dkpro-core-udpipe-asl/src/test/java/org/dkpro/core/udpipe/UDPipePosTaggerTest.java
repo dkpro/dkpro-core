@@ -17,15 +17,19 @@
  */
 package org.dkpro.core.udpipe;
 
+import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.resources.PlatformDetector;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
 import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -33,10 +37,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 public class UDPipePosTaggerTest
 {
-    
+    @Before
+    public void prepare()
+    {
+        PlatformDetector pd = new PlatformDetector();
+        Assume.assumeTrue("Unsupported platform", asList("linux-x86_32", "linux-x86_64",
+                "osx-x86_64", "windows-x86_32", "windows-x86_64").contains(pd.getPlatformId()));
+    }
+
     @Test
-    public void testNorwegian()
-        throws Exception
+    public void testNorwegian() throws Exception
     {
         runTest("no", null,
                 "Magnus Carlsen trengte bare de fire partiene med lynsjakk for å slå utfordreren Sergej Karjakin.",
@@ -46,24 +56,21 @@ public class UDPipePosTaggerTest
                         "POS_NUM", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP", "POS_PART",
                         "POS_VERB", "POS_NOUN", "POS_PROPN", "POS_PROPN" });
     }
-    
+
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", null, "This is a test .",
-                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+        runTest("en", null, "This is a test .", new String[] { "DT", "VBZ", "DT", "NN", "." },
                 new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
-        runTest("en", null, "A neural net .",
-                new String[] { "DT",  "JJ",     "NN",  "." },
+        runTest("en", null, "A neural net .", new String[] { "DT", "JJ", "NN", "." },
                 new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
-                new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
                 new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
-        
+
     private JCas runTest(String language, String aVariant, String testDocument, String[] tags,
             String[] tagClasses)
         throws Exception
@@ -71,13 +78,13 @@ public class UDPipePosTaggerTest
         String variant = aVariant != null ? aVariant : "ud";
         AssumeResource.assumeResource(UDPipePosTagger.class, "tagger", language, variant);
 
-        AnalysisEngine engine = createEngine(UDPipePosTagger.class,
-                UDPipePosTagger.PARAM_VARIANT, variant);
+        AnalysisEngine engine = createEngine(UDPipePosTagger.class, UDPipePosTagger.PARAM_VARIANT,
+                variant);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-        
+
         return jcas;
     }
 
