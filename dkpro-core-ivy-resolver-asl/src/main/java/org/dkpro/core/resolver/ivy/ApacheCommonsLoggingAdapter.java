@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.api.resources.internal;
+package org.dkpro.core.resolver.ivy;
 
 import org.apache.commons.logging.Log;
 import org.apache.ivy.util.AbstractMessageLogger;

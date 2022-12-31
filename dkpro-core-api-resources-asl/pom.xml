@@ -61,10 +61,6 @@
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.ivy</groupId>
-      <artifactId>ivy</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-metadata-asl</artifactId>
     </dependency>
