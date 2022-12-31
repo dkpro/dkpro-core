@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.mecab;
 
+import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -35,8 +36,8 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.resources.PlatformDetector;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.mecab.MeCabTagger;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,6 +50,9 @@ public class MeCabTaggerTest {
     {
         Assume.assumeFalse("No Mecab binaries for Windows: Issue #1122",
                 System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+        PlatformDetector pd = new PlatformDetector();
+        Assume.assumeTrue("Unsupported platform", 
+                asList("linux-x86_64", "linux-x86_32", "osx-x86_64").contains(pd.getPlatformId()));
     }
     
     @Test
