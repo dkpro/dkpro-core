@@ -290,7 +290,7 @@ public class MateParserTest
                     System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
             Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
                     System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
-                    !System.getProperty("os.version").matches("10\\.([0-9]|1[0-4]).*"));
+                    !System.getProperty("os.version").matches("1[0-9]\\..*|(10\\.([0-9]|1[0-4]).*)"));
             engines.add(createEngineDescription(HunPosTagger.class));
         }
         else {
