@@ -25,23 +25,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
-import java.util.UUID;
 import java.util.WeakHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -49,30 +41,10 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.ivy.Ivy;
-import org.apache.ivy.core.LogOptions;
-import org.apache.ivy.core.module.descriptor.DefaultDependencyDescriptor;
-import org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor;
-import org.apache.ivy.core.module.id.ModuleRevisionId;
-import org.apache.ivy.core.report.ArtifactDownloadReport;
-import org.apache.ivy.core.report.ResolveReport;
-import org.apache.ivy.core.resolve.ResolveOptions;
-import org.apache.ivy.core.settings.IvySettings;
-import org.apache.ivy.plugins.resolver.ChainResolver;
-import org.apache.ivy.plugins.resolver.DependencyResolver;
-import org.apache.ivy.plugins.resolver.IBiblioResolver;
-import org.apache.ivy.util.Message;
-import org.apache.maven.model.Dependency;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.internal.ReflectionUtil;
-import org.dkpro.core.api.resources.internal.ApacheCommonsLoggingAdapter;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
@@ -104,19 +76,38 @@ public abstract class ResourceObjectProviderBase<M>
 {
     private final Log log = LogFactory.getLog(ResourceObjectProviderBase.class);
 
+    /**
+     * @deprecated Moved to {@code IvyResourceObjectResolver} class
+     */
+    @Deprecated
     public static final String PROP_REPO_OFFLINE = "dkpro.model.repository.offline";
+    /**
+     * @deprecated Moved to {@code IvyResourceObjectResolver} class
+     */
+    @Deprecated
     public static final String PROP_REPO_ID = "dkpro.model.repository.id";
+    /**
+     * @deprecated Moved to {@code IvyResourceObjectResolver} class
+     */
+    @Deprecated
     public static final String PROP_REPO_URL = "dkpro.model.repository.url";
+    /**
+     * @deprecated Moved to {@code IvyResourceObjectResolver} class
+     */
+    @Deprecated
     public static final String PROP_REPO_CACHE = "dkpro.model.repository.cache";
-    
+
+    /**
+     * @deprecated Moved to {@code IvyResourceObjectResolver} class
+     */
+    @Deprecated
     public static final String FORCE_AUTO_LOAD = "forceAutoLoad";
 
-    private static final String DEFAULT_REPO_ID = "ukp-model-releases";
-
-    private static final String DEFAULT_REPO_URL = "http://zoidberg.ukp.informatik.tu-darmstadt.de/"
-            + "artifactory/public-model-releases-local";
-
-    public static final String NOT_REQUIRED = "-=* NOT REQUIRED *=-";
+    /**
+     * @deprecated Moved to {@link ResourceObjectResolver#NOT_REQUIRED}.
+     */
+    @Deprecated
+    public static final String NOT_REQUIRED = ResourceObjectResolver.NOT_REQUIRED;
 
     /**
      * The language.
@@ -154,7 +145,7 @@ public abstract class ResourceObjectProviderBase<M>
      * {@code mvn:${groupId}:${artifactId}:${version}}.
      */
     public static final String ARTIFACT_URI = "artifactUri";
-    
+
     /**
      * The version of the Maven artifact containing a resource. Variables in the location are
      * resolved when {@link #configure()} is called. (optional)
@@ -171,7 +162,7 @@ public abstract class ResourceObjectProviderBase<M>
     public static final String SHARABLE = "sharable";
 
     public static final String CATCH_ALL = "*";
-    
+
     private Properties resourceMetaData;
     private URL resourceUrl;
     private URL initialResourceUrl;
@@ -188,19 +179,19 @@ public abstract class ResourceObjectProviderBase<M>
 
     private Map<String, HasResourceMetadata> imports = new HashMap<String, HasResourceMetadata>();
 
-    private ExtensibleURLClassLoader loader = new ExtensibleURLClassLoader(getClass()
-            .getClassLoader());
+    private ExtensibleURLClassLoader loader = new ExtensibleURLClassLoader(
+            getClass().getClassLoader());
 
     private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
 
     private static Map<ResourceHandle, Object> cache = new WeakHashMap<ResourceHandle, Object>();
 
     private Map<String, String> autoOverrides = new HashMap<>();
-    
+
     /**
-     * Maintain a reference to the handle for the currently loaded resource. This handle is used
-     * as a key in the resource cache and makes sure that the resource is not removed from the
-     * cache while it is still considered as "loaded" by this provider.
+     * Maintain a reference to the handle for the currently loaded resource. This handle is used as
+     * a key in the resource cache and makes sure that the resource is not removed from the cache
+     * while it is still considered as "loaded" by this provider.
      */
     @SuppressWarnings("unused")
     private ResourceHandle resourceHandle;
@@ -336,7 +327,7 @@ public abstract class ResourceObjectProviderBase<M>
         contextClass = aClass;
         setDefault(PACKAGE, contextClass.getPackage().getName().replace('.', '/'));
     }
-    
+
     public Class<?> getContextClass()
     {
         return contextClass;
@@ -346,22 +337,22 @@ public abstract class ResourceObjectProviderBase<M>
     {
         return autoOverrides;
     }
-    
+
     public void addAutoOverride(String aParameter, String aProperty)
     {
         autoOverrides.put(aParameter, aProperty);
     }
-    
+
     public void applyAutoOverrides(Object aObject)
     {
         for (Field field : ReflectionUtil.getFields(aObject)) {
             if (ConfigurationParameterFactory.isConfigurationParameterField(field)) {
                 String parameterName = ConfigurationParameterFactory
                         .getConfigurationParameterName(field);
-                
+
                 // Check if there is an auto-override for this parameter
                 String property = autoOverrides.get(parameterName);
-                
+
                 if (property != null) {
                     try {
                         Object value = FieldUtils.readField(field, aObject, true);
@@ -374,144 +365,15 @@ public abstract class ResourceObjectProviderBase<M>
             }
         }
     }
-    
-    protected List<URL> getPomUrlsForClass(String aComponentGroupId, String aModelArtifactId,
-            Class<?> aClass)
-        throws IOException
-    {
-        if (aClass == null) {
-            throw new IllegalArgumentException("No context class specified");
-        }
-        
-        // Try to determine the location of the POM file belonging to the context object
-        URL url = contextClass.getResource(contextClass.getSimpleName() + ".class");
-        String classPart = contextClass.getName().replace(".", "/") + ".class";
-        String base = url.toString();
-        base = base.substring(0, base.length() - classPart.length());
-
-        List<String> lookupPatterns = new ArrayList<>();
-        List<URL> urls = new LinkedList<URL>();
-
-        String extraNotFoundInfo = "";
-        if ("file".equals(url.getProtocol()) && base.endsWith("target/classes/")) {
-            // This is an alternative strategy when running during a Maven build. In a normal
-            // Maven build, the Maven descriptor in META-INF is only created during the
-            // "package" phase, so we try looking in the project directory.
-            // See also: http://jira.codehaus.org/browse/MJAR-76
-
-            base = base.substring(0, base.length() - "target/classes/".length());
-            File pomFile = new File(new File(URI.create(base)), "pom.xml");
-            if (pomFile.exists()) {
-                urls.add(pomFile.toURI().toURL());
-            }
-            else {
-                extraNotFoundInfo = " Since it looks like you are running a Maven build, it POM "
-                        + "file was also searched for at [" + pomFile
-                        + "], but it doesn't exist there.";
-            }
-        }
-
-        // If the class is in a JAR (that should be the normal case), try deriving the 
-        // POM location from the JAR file name.
-        if (urls.isEmpty()) {
-            Pattern pattern = Pattern.compile(
-                    ".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
-            Matcher matcher = pattern.matcher(base);
-            if (matcher.matches()) {
-                String artifactIdAndVersion = matcher.group("ID");
-                String pomPattern = base + "META-INF/maven/" + aComponentGroupId + "/"
-                        + artifactIdAndVersion + "/pom.xml";
-                lookupPatterns.add(pomPattern);
-                ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-                Resource[] resources = resolver.getResources(pomPattern);
-                for (Resource r : resources) {
-                    urls.add(r.getURL());
-                }
-            }
-        }
-        
-        // Legacy lookup strategy deriving the POM location from the model artifact ID. This
-        // fails if a module is re-using models from another module (e.g. CoreNLP re-using 
-        // models from the StanfordNLP module).
-        if (urls.isEmpty()) {
-            // This is the default strategy supposed to look in the JAR
-            String moduleArtifactId = aModelArtifactId.split("-")[0];
-            String pomPattern = base + "META-INF/maven/" + aComponentGroupId + "/"
-                    + moduleArtifactId + "*/pom.xml";
-            lookupPatterns.add(pomPattern);
-            ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-            Resource[] resources = resolver.getResources(pomPattern);
-
-            for (Resource r : resources) {
-                urls.add(r.getURL());
-            }
-        }
-        
-        // Bail out if no POM was found
-        if (urls.isEmpty()) {
-            throw new FileNotFoundException("No POM file found using the patterns " + lookupPatterns
-                    + ". " + extraNotFoundInfo);
-        }
-        
-        return urls;
-    }
-    
-    /**
-     * Tries to get the version of the required model from the dependency management section of the
-     * Maven POM belonging to the context object.
-     *
-     * @throws IOException
-     *             if there was a problem loading the POM file
-     * @throws FileNotFoundException
-     *             if no POM could be found
-     * @throws IllegalStateException
-     *             if more than one POM was found, if the version information could not be found in
-     *             the POM, or if no context object was set.
-     * @return the version of the required model.
-     */
-    protected String getModelVersionFromMavenPom(String aComponentGroupId, String aModelGroupId,
-            String aModelArtifactId, Class<?> aClass)
-        throws IOException
-    {
-        List<URL> urls = getPomUrlsForClass(aComponentGroupId, aModelArtifactId, contextClass);
-
-        for (URL pomUrl : urls) {
-            // Parse the POM
-            Model model;
-            try {
-                model = new MavenXpp3Reader().read(pomUrl.openStream());
-            }
-            catch (Exception e) {
-                throw new IOException(e);
-            }
-
-            // Extract the version of the model artifact
-            if ((model.getDependencyManagement() != null)
-                    && (model.getDependencyManagement().getDependencies() != null)) {
-                List<Dependency> deps = model.getDependencyManagement().getDependencies();
-                for (Dependency dep : deps) {
-                    if (
-                            StringUtils.equals(dep.getGroupId(), aModelGroupId) && 
-                            StringUtils.equals(dep.getArtifactId(), aModelArtifactId)
-                    ) {
-                        return dep.getVersion();
-                    }
-                }
-            }
-        }
-
-        // Bail out if no version information for that artifact could be found
-        throw new IllegalStateException("No version information found.");
-    }
 
     /**
      * For use in test cases.
+     * 
      * @return the location of the model.
      * @throws IOException
      *             if the language-dependent default variants location is set but cannot be read.
      */
-    protected String getModelLocation()
-        throws IOException
+    protected String getModelLocation() throws IOException
     {
         return getModelLocation(null);
     }
@@ -520,9 +382,8 @@ public abstract class ResourceObjectProviderBase<M>
     {
         return lastModelLocation;
     }
-    
-    protected String getModelLocation(Properties aProperties)
-        throws IOException
+
+    protected String getModelLocation(Properties aProperties) throws IOException
     {
         Properties props = aProperties;
         if (props == null) {
@@ -551,8 +412,7 @@ public abstract class ResourceObjectProviderBase<M>
      * @throws IOException
      *             if the resource cannot be created.
      */
-    public void configure()
-        throws IOException
+    public void configure() throws IOException
     {
         boolean success = false;
 
@@ -605,15 +465,15 @@ public abstract class ResourceObjectProviderBase<M>
                             log.debug("Producing resource from thin air");
                             loadResource(props);
                         }
-                    } 
+                    }
                     else {
                         loadMetadata();
                         if (initialResourceUrl.equals(resourceUrl)) {
                             log.info("Producing resource from [" + resourceUrl + "]");
                         }
                         else {
-                            log.info("Producing resource from [" + resourceUrl + "] redirected from ["
-                                    + initialResourceUrl + "]");
+                            log.info("Producing resource from [" + resourceUrl
+                                    + "] redirected from [" + initialResourceUrl + "]");
                         }
                         loadResource(props);
                     }
@@ -650,8 +510,8 @@ public abstract class ResourceObjectProviderBase<M>
         // file. If that points to a properties file again, repeat the process.
         // If at some point the location is marked as not required return null.
         while (url != null && url.getPath().endsWith(".properties")) {
-            Properties tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
-                    url));
+            Properties tmpResourceMetaData = PropertiesLoaderUtils
+                    .loadProperties(new UrlResource(url));
 
             // Values in the redirecting properties override values in the redirected-to
             // properties - except LOCATION
@@ -662,10 +522,10 @@ public abstract class ResourceObjectProviderBase<M>
             if (redirect == null) {
                 throw new IOException("Model URL resolves to properties at [" + url
                         + "] but no redirect property [" + LOCATION + "] found there.");
-            } 
+            }
             else if (redirect.startsWith(NOT_REQUIRED)) {
                 url = null;
-            } 
+            }
             else {
                 url = resolveLocation(redirect, loader, null);
             }
@@ -682,8 +542,7 @@ public abstract class ResourceObjectProviderBase<M>
         try {
             String modelMetaDataLocation = getModelMetaDataLocation(resourceUrl.toString());
             URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
-            modelMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
-                    modelMetaDataUrl));
+            modelMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(modelMetaDataUrl));
         }
         catch (FileNotFoundException e) {
             // Ignore
@@ -697,8 +556,8 @@ public abstract class ResourceObjectProviderBase<M>
             try {
                 String modelMetaDataLocation = getModelMetaDataLocation(lastModelLocation);
                 URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
-                modelMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
-                        modelMetaDataUrl));
+                modelMetaData = PropertiesLoaderUtils
+                        .loadProperties(new UrlResource(modelMetaDataUrl));
             }
             catch (FileNotFoundException e2) {
                 // If no metadata was found, just leave the properties empty.
@@ -722,12 +581,10 @@ public abstract class ResourceObjectProviderBase<M>
             baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
         }
 
-        String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
-                + ".properties";
+        String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation) + ".properties";
 
         return modelMetaDataLocation;
     }
-
 
     @SuppressWarnings("unchecked")
     protected synchronized void loadResource(Properties aProperties) throws IOException
@@ -741,8 +598,8 @@ public abstract class ResourceObjectProviderBase<M>
         if (sharable) {
             // We need to scan the cache manually because in the end we need to keep a reference
             // to exactly the same key object that was used to store the resource in the cache.
-            handle = new ResourceHandle(getClass(), resourceUrl != null ? resourceUrl.toString()
-                    : null);
+            handle = new ResourceHandle(getClass(),
+                    resourceUrl != null ? resourceUrl.toString() : null);
             for (Entry<ResourceHandle, Object> e : cache.entrySet()) {
                 if (handle.equals(e.getKey())) {
                     resourceHandle = e.getKey();
@@ -769,13 +626,16 @@ public abstract class ResourceObjectProviderBase<M>
     }
 
     /**
-     * Tries to figure out which artifact contains the desired resource, tries to acquire it and
-     * add it to the loader. The dependencyManagement information from the POM of the caller is
-     * taken into account if possible.
+     * Tries to figure out which artifact contains the desired resource, tries to acquire it and add
+     * it to the loader. The dependencyManagement information from the POM of the caller is taken
+     * into account if possible.
      *
-     * @param aProps the properties.
-     * @throws IOException if dependencies cannot be resolved.
-     * @throws IllegalStateException if
+     * @param aProps
+     *            the properties.
+     * @throws IOException
+     *             if dependencies cannot be resolved.
+     * @throws IllegalStateException
+     *             if
      */
     private Properties resolveDependency(Properties aProps)
         throws IOException, IllegalStateException
@@ -783,15 +643,13 @@ public abstract class ResourceObjectProviderBase<M>
         String artifactUri = null;
 
         Properties resolved = new Properties(aProps);
-        
+
         // Try to get model version from POM if it has not been set explicitly yet
-        if (
-                resolved.getProperty(ARTIFACT_URI, "").contains("${" + VERSION + "}") && 
-                isNull(resolved.getProperty(VERSION))
-        ) {
+        if (resolved.getProperty(ARTIFACT_URI, "").contains("${" + VERSION + "}")
+                && isNull(resolved.getProperty(VERSION))) {
             String modelGroupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
             String componentGroupId;
-            
+
             if (aProps.getProperty(COMPONENT_GROUP_ID) != null) {
                 componentGroupId = pph.replacePlaceholders(aProps.getProperty(COMPONENT_GROUP_ID),
                         resolved);
@@ -799,16 +657,20 @@ public abstract class ResourceObjectProviderBase<M>
             else {
                 componentGroupId = modelGroupId;
             }
-            
+
             String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), resolved);
-            try {
-                // If the version is to be auto-detected, then we must have a groupId and artifactId
-                resolved.put(VERSION, getModelVersionFromMavenPom(componentGroupId, modelGroupId,
-                        artifactId, contextClass));
-            }
-            catch (Throwable e) {
-                log.error("Unable to obtain version from POM", e);
-                // Ignore - this will be tried and reported again later by handleResolvingError
+            var optionalResolver = ResourceObjectResolver.get();
+            if (optionalResolver.isPresent()) {
+                try {
+                    // If the version is to be auto-detected, then we must have a groupId and
+                    // artifactId
+                    resolved.put(VERSION, optionalResolver.get().resolveResourceArtifactVersion(
+                            componentGroupId, modelGroupId, artifactId, contextClass));
+                }
+                catch (Throwable e) {
+                    log.error("Unable to obtain version from POM", e);
+                    // Ignore - this will be tried and reported again later by handleResolvingError
+                }
             }
         }
 
@@ -821,120 +683,26 @@ public abstract class ResourceObjectProviderBase<M>
         // Register files with loader
         if (artifactUri != null) {
             if (artifactUri.startsWith("mvn:")) {
-                try {
-                    String[] parts = artifactUri.split(":");
-                    String groupId = parts[1];
-                    String artifactId = parts[2];
-                    String version = parts[3];
-                    
-                    List<File> files = resolveWithIvy(groupId, artifactId, version);
+                String[] parts = artifactUri.split(":");
+                String groupId = parts[1];
+                String artifactId = parts[2];
+                String version = parts[3];
+
+                var optionalResolver = ResourceObjectResolver.get();
+                if (optionalResolver.isPresent()) {
+                    List<File> files = optionalResolver.get().resolveResoureArtifact(groupId, artifactId,
+                            version);
                     for (File file : files) {
                         loader.addURL(file.toURI().toURL());
                     }
-                }
-                catch (ParseException e) {
-                    throw new IllegalStateException(e);
                 }
             }
             else {
                 throw new IOException("Unknown URI format: [" + artifactUri + "]");
             }
         }
-        
+
         return resolved;
-    }
-    
-    protected DependencyResolver getModelResolver()
-    {
-        IBiblioResolver ukpModels = new IBiblioResolver();
-        ukpModels.setName(System.getProperty(PROP_REPO_ID, DEFAULT_REPO_ID));
-        ukpModels.setRoot(System.getProperty(PROP_REPO_URL, DEFAULT_REPO_URL));
-        ukpModels.setM2compatible(true);
-        return ukpModels;
-    }
-
-    /**
-     * Try to fetch an artifact and its dependencies from the UKP model repository or from
-     * Maven Central.
-     *
-     * @param aGroupId the group ID.
-     * @param aArtifactId the artifact ID.
-     * @param aVersion the version
-     * @return a list of dependencies.
-     * @throws ParseException if Ivy settings cannot be parsed.
-     * @throws IOException if the dependencies cannot be resolved.
-     */
-    private List<File> resolveWithIvy(String aGroupId, String aArtifactId, String aVersion)
-        throws ParseException, IOException
-    {
-        if ("true".equals(System.getProperty(PROP_REPO_OFFLINE))) {
-            log.debug("Offline mode active - attempt to download missing resource automatically "
-                    + "is skipped.");
-            return Collections.emptyList();
-        }
-
-        // Configure Ivy
-        Message.setDefaultLogger(new ApacheCommonsLoggingAdapter(log));
-        IvySettings ivySettings = new IvySettings();
-        ivySettings.loadDefault();
-        ivySettings.configureRepositories(true);
-        ivySettings.configureDefaultVersionMatcher();
-        if (System.getProperties().containsKey(PROP_REPO_CACHE)) {
-            ivySettings.setDefaultCache(new File(System.getProperty(PROP_REPO_CACHE)));
-        }
-
-        // Add a resolver for the UKP model repository
-        DependencyResolver modelResolver = getModelResolver();
-        modelResolver.setSettings(ivySettings);
-        ivySettings.addResolver(modelResolver);
-        ((ChainResolver) ivySettings.getResolver("main")).add(modelResolver);
-
-        // Initialize Ivy
-        Ivy ivy = Ivy.newInstance(ivySettings);
-
-        // Create a dummy module which has the desired artifact as a dependency
-        // The dummy module is kept in the Ivy cache only temporary, so make use it is unique
-        // using a UUID and make sure it is removed from the cache at the end.
-        UUID uuid = UUID.randomUUID();
-        ModuleRevisionId moduleId = ModuleRevisionId
-                .newInstance("dkpro", uuid.toString(), "working");
-        DefaultModuleDescriptor md = DefaultModuleDescriptor.newDefaultInstance(moduleId);
-        DefaultDependencyDescriptor dd = new DefaultDependencyDescriptor(md,
-                ModuleRevisionId.newInstance(aGroupId, aArtifactId, aVersion), false, false, true);
-        dd.addDependencyConfiguration("default", "default");
-        md.addDependency(dd);
-
-        ResolveReport report;
-        try {
-            // Resolve the temporary module
-            ResolveOptions options = new ResolveOptions();
-            if (log.isDebugEnabled()) {
-                options.setLog(LogOptions.LOG_DEFAULT);
-            }
-            else if (log.isInfoEnabled()) {
-                options.setLog(LogOptions.LOG_DOWNLOAD_ONLY);
-            }
-            else {
-                options.setLog(LogOptions.LOG_QUIET);
-            }
-            options.setConfs(new String[] { "default" });
-            report = ivy.resolve(md, options);
-        }
-        finally {
-            // Remove temporary module
-            String resid = ResolveOptions.getDefaultResolveId(md);
-            ivy.getResolutionCacheManager().getResolvedIvyFileInCache(moduleId).delete();
-            ivy.getResolutionCacheManager().getResolvedIvyPropertiesInCache(moduleId).delete();
-            ivy.getResolutionCacheManager().getConfigurationResolveReportInCache(resid, "default")
-                    .delete();
-        }
-
-        // Get the artifact and all its transitive dependencies
-        List<File> files = new ArrayList<File>();
-        for (ArtifactDownloadReport rep : report.getAllArtifactsReports()) {
-            files.add(rep.getLocalFile());
-        }
-        return files;
     }
 
     private IOException handleResolvingError(Throwable aCause, String aLocation, Properties aProps)
@@ -951,7 +719,7 @@ public abstract class ResourceObjectProviderBase<M>
             String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), aProps);
             String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), aProps);
             String version = pph.replacePlaceholders(aProps.getProperty(VERSION, ""), aProps);
-            
+
             if (isBlank(version)) {
                 sb.append("I was unable to determine which version of the desired model is "
                         + "compatible with this component.");
@@ -964,11 +732,12 @@ public abstract class ResourceObjectProviderBase<M>
 
                 sb.append(" is on the classpath.\n");
             }
-            
+
             // Tell user how to add model dependency
             sb.append("If the version shown here is not available, try a recent version.\n");
             sb.append('\n');
-            sb.append("If you are using Maven, add the following dependency to your pom.xml file:\n");
+            sb.append(
+                    "If you are using Maven, add the following dependency to your pom.xml file:\n");
             sb.append('\n');
             sb.append("<dependency>\n");
             sb.append("  <groupId>").append(groupId).append("</groupId>\n");
@@ -977,10 +746,10 @@ public abstract class ResourceObjectProviderBase<M>
             sb.append("</dependency>\n");
             sb.append('\n');
             sb.append("Please consider that the model you are trying to use may not be publicly\n");
-            sb.append("distributable. Please refer to the DKPro Core User Guide for instructions\n");
+            sb.append(
+                    "distributable. Please refer to the DKPro Core User Guide for instructions\n");
             sb.append("on how to package non-redistributable models.");
         }
-                                    
 
         if (NOT_REQUIRED.equals(aLocation)) {
             return new IOException("Unable to load resource: " + sb.toString(), aCause);
@@ -1007,7 +776,7 @@ public abstract class ResourceObjectProviderBase<M>
     {
         return loader;
     }
-    
+
     /**
      * Builds the aggregated configuration from defaults and overrides.
      *
@@ -1015,11 +784,10 @@ public abstract class ResourceObjectProviderBase<M>
      * @throws IOException
      *             if the language-dependent default variants location is set but cannot be read.
      */
-    protected Properties getAggregatedProperties()
-        throws IOException
+    protected Properties getAggregatedProperties() throws IOException
     {
         Properties defaultValues = new Properties(defaults);
-        
+
         Properties props = getProperties();
         if (props != null) {
             defaultValues.putAll(props);
@@ -1058,8 +826,7 @@ public abstract class ResourceObjectProviderBase<M>
 
     protected abstract Properties getProperties();
 
-    protected abstract M produceResource(URL aUrl)
-        throws IOException;
+    protected abstract M produceResource(URL aUrl) throws IOException;
 
     @Override
     public Properties getResourceMetaData()
@@ -1070,8 +837,10 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Copy all properties that not already exist in target from source.
      *
-     * @param aTarget the properties to merge into.
-     * @param aSource the properties to merge from.
+     * @param aTarget
+     *            the properties to merge into.
+     * @param aSource
+     *            the properties to merge from.
      */
     protected void mergeProperties(Properties aTarget, Properties aSource)
     {
@@ -1146,13 +915,13 @@ public abstract class ResourceObjectProviderBase<M>
             return true;
         }
     }
-    
+
     public static final class ArtifactCoordinates
     {
         private String groupId;
         private String artifactId;
         private String version;
-        
+
         public ArtifactCoordinates(String aGroupId, String aArtifactId, String aVersion)
         {
             super();
@@ -1273,8 +1042,7 @@ public abstract class ResourceObjectProviderBase<M>
         }
 
         @Override
-        protected Class<?> loadClass(String name, boolean resolve)
-            throws ClassNotFoundException
+        protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException
         {
             if (FORCE_AUTO_LOAD.equals(System.getProperty(PROP_REPO_OFFLINE))) {
                 synchronized (getClassLoadingLock(name)) {
@@ -1287,7 +1055,7 @@ public abstract class ResourceObjectProviderBase<M>
                         catch (ClassNotFoundException e) {
                             // ClassNotFoundException thrown if class not found
                         }
-                        
+
                         if (c == null) {
                             c = super.loadClass(name, false);
                         }

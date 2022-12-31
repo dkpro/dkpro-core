@@ -57,6 +57,10 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-ivy-resolver-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-featurepath-asl</artifactId>
     </dependency>
     <dependency>
@@ -463,6 +467,8 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
+              <!-- Reflection-only test dependency -->
+              <usedDependency>org.dkpro.core:dkpro-core-ivy-resolver-asl</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</usedDependency>
