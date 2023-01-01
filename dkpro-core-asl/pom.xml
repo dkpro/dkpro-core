@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core</artifactId>
-    <version>2.3.0-SNAPSHOT</version>
+    <version>2.3.0</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>dkpro-core-asl</artifactId>
@@ -39,137 +39,137 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-anomaly-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-datasets-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-embeddings-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-featurepath-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-frequency-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-io-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-coref-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-lexmorph-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-metadata-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-ner-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-parameter-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-phonetics-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-resources-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-segmentation-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-semantics-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-sentiment-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-structure-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-syntax-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-transform-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-api-xml-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-castransformation-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-cisstem-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-clearnlp-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-commonscodec-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-decompounding-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-dictionaryannotator-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-eval-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -179,112 +179,112 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-frequency-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-gate-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-hunpos-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-ivy-resolver-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-fs-hdfs-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-gosen-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-icu-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-aclanthology-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-ancora-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-bincas-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-bliki-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-bnc-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-brat-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-combination-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-conll-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-ditop-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-gigaword-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-html-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-imscwb-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-json-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-jdbc-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-jwpl-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -294,222 +294,222 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-lif-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-lxf-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-negra-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-nif-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-nitf-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-pdf-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-penntree-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-perseus-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-pubannotation-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-rtf-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-solr-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tcf-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tei-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-text-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tiger-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tika-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-webanno-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tuebadz-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-tuepp-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-web1t-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-xmi-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-xml-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-xces-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-ixa-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-jazzy-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-jtok-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
      <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-languagetool-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-langdetect-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-ldweb1t-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-mallet-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-maltparser-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-morpha-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-mstparser-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-mecab-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-mystem-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-ngrams-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-nlp4j-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-norvig-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-opennlp-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-performance-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-posfilter-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-readability-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-rftagger-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-snowball-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -519,27 +519,27 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-testing-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-textcat-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-tokit-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-treetagger-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-textnormalizer-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.3.0</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -697,7 +697,7 @@
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-gate-asl</artifactId>
-            <version>2.3.0-SNAPSHOT</version>
+            <version>2.3.0</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
