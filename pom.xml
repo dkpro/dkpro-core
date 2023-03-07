@@ -53,8 +53,8 @@
     <slf4j.version>1.7.36</slf4j.version>
     <snakeyaml.version>1.33</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>5.3.24</spring.version>
-    <uima.version>3.3.1</uima.version>
+    <spring.version>5.3.25</spring.version>
+    <uima.version>3.4.1</uima.version>
     <uimafit.version>3.3.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
   </properties>
@@ -431,6 +431,19 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[11,)</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
           <execution>
             <id>enforce-banned-dependencies</id>
             <goals>
