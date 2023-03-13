@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>27</version>
+    <version>28</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
@@ -36,7 +36,7 @@
   </organization>
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <currentYear>2019</currentYear>
+    <currentYear>2023</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
@@ -47,7 +47,7 @@
     <icu4j.version>68.2</icu4j.version>
     <jackson.version>2.14.1</jackson.version>
     <jena.version>4.6.1</jena.version>
-    <log4j.version>2.17.2</log4j.version>
+    <log4j.version>2.20.0</log4j.version>
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
     <slf4j.version>1.7.36</slf4j.version>
@@ -55,7 +55,7 @@
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>5.3.25</spring.version>
     <uima.version>3.4.1</uima.version>
-    <uimafit.version>3.3.0</uimafit.version>
+    <uimafit.version>3.4.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
   </properties>
   <repositories>
