@@ -504,6 +504,7 @@
         </executions>
         <configuration>
           <failOnWarning>true</failOnWarning>
+          <excludeScope>runtime</excludeScope>
           <ignoredDependencies>
             <!-- 
               - We want to depend on commons-logging-api and no complaints about spring.jcl
@@ -511,23 +512,58 @@
             <ignoredDependency>commons-logging:commons-logging-api</ignoredDependency>
             <ignoredDependency>org.springframework:spring-jcl</ignoredDependency>
           </ignoredDependencies>
-          <usedDependencies combine.children="append">
-            <!-- 
-              - Logging is used via reflection and cannot be detected by Maven
-            <usedDependency>org.apache.logging.log4j:log4j-slf4j-impl</usedDependency>
-            <usedDependency>org.apache.logging.log4j:log4j-core</usedDependency>
-            <usedDependency>org.slf4j:log4j-over-slf4j</usedDependency>
-            <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
-            <usedDependency>commons-logging:commons-logging</usedDependency>
-            -->
-            <!-- 
+          <ignoredUnusedDeclaredDependencies combine.children="append">
+            <!--
               - JAXB is used via reflection and cannot be detected by Maven
-            <usedDependency>javax.xml.bind:jaxb-api</usedDependency>
-            <usedDependency>com.sun.xml.bind:jaxb-core</usedDependency>
-            <usedDependency>com.sun.xml.bind:jaxb-impl</usedDependency>
-            <usedDependency>javax.activation:javax.activation-api</usedDependency>
             -->
-          </usedDependencies>
+            <dependency>javax.xml.bind:jaxb-api</dependency>
+            <dependency>com.sun.xml.bind:jaxb-core</dependency>
+            <dependency>com.sun.xml.bind:jaxb-impl</dependency>
+            <dependency>javax.activation:javax.activation-api</dependency>
+            <!--
+              - Common test dependencies
+            -->
+            <dependency>junit:junit</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-api</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-params</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-engine</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-api</dependency>
+            <dependency>org.mockito:mockito-core</dependency>
+            <dependency>org.mockito:mockito-junit-jupiter</dependency>
+            <dependency>org.assertj:assertj-core</dependency>
+            <dependency>org.awaitility:awaitility</dependency>
+          </ignoredUnusedDeclaredDependencies>
+          <ignoredUnusedDeclaredDependencies combine.children="append">
+            <!--
+              - Logging is used via reflection and cannot be detected by Maven
+            -->
+            <dependency>org.apache.logging.log4j:log4j-slf4j-impl</dependency>
+            <dependency>org.apache.logging.log4j:log4j-spring-boot</dependency>
+            <dependency>org.apache.logging.log4j:log4j-layout-template-json</dependency>
+            <dependency>org.apache.logging.log4j:log4j-core</dependency>
+            <dependency>org.slf4j:log4j-over-slf4j</dependency>
+            <dependency>org.slf4j:jcl-over-slf4j</dependency>
+            <dependency>commons-logging:commons-logging</dependency>
+            <!--
+              - JAXB is used via reflection and cannot be detected by Maven
+            -->
+            <dependency>javax.xml.bind:jaxb-api</dependency>
+            <dependency>com.sun.xml.bind:jaxb-core</dependency>
+            <dependency>com.sun.xml.bind:jaxb-impl</dependency>
+            <dependency>javax.activation:javax.activation-api</dependency>
+            <!--
+              - Common test dependencies
+            -->
+            <dependency>junit:junit</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-api</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-params</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-engine</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-api</dependency>
+            <dependency>org.mockito:mockito-core</dependency>
+            <dependency>org.mockito:mockito-junit-jupiter</dependency>
+            <dependency>org.assertj:assertj-core</dependency>
+            <dependency>org.awaitility:awaitility</dependency>
+          </ignoredUnusedDeclaredDependencies>
         </configuration>
       </plugin>
       <plugin>
