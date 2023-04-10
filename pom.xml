@@ -38,8 +38,6 @@
   <properties>
     <currentYear>2023</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
     <maven.surefire.heap>6g</maven.surefire.heap>
 
     <activation.version>1.2.0</activation.version>
@@ -53,7 +51,7 @@
     <slf4j.version>1.7.36</slf4j.version>
     <snakeyaml.version>1.33</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>5.3.25</spring.version>
+    <spring.version>5.3.26</spring.version>
     <uima.version>3.4.1</uima.version>
     <uimafit.version>3.4.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
@@ -66,29 +64,7 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-    <repository>
-      <id>ukp-oss-snapshots</id>
-      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
   </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>ukp-oss-snapshots</id>
-      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
   <mailingLists>
     <mailingList>
       <name>DKPro Core user mailing list</name>
