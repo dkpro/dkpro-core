@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>29-SNAPSHOT</version>
+    <version>29</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
@@ -43,7 +43,7 @@
     <maven.surefire.heap>6g</maven.surefire.heap>
 
     <activation.version>1.2.0</activation.version>
-    <groovy.version>3.0.10</groovy.version>
+    <groovy.version>4.0.11</groovy.version>
     <icu4j.version>68.2</icu4j.version>
     <jackson.version>2.14.1</jackson.version>
     <jena.version>4.6.1</jena.version>
@@ -439,7 +439,7 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.groovy</groupId>
+        <groupId>org.apache.groovy</groupId>
         <artifactId>groovy-bom</artifactId>
         <version>${groovy.version}</version>
         <type>pom</type>
