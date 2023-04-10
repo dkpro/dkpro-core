@@ -56,6 +56,7 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-lexmorph-asl</artifactId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>

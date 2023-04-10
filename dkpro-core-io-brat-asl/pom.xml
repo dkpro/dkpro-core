@@ -57,6 +57,14 @@
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-ner-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-syntax-asl</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
     </dependency>
@@ -104,10 +112,22 @@
       <artifactId>dkpro-core-io-conll-asl</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.dkpro.core</groupId>
-      <artifactId>dkpro-core-api-ner-asl</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <usedDependencies>
+              <usedDependency>org.dkpro.core:dkpro-core-api-segmentation-asl</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-api-ner-asl</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-api-syntax-asl</usedDependency>
+            </usedDependencies>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

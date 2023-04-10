@@ -33,6 +33,7 @@ import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.web1t.util.Web1TConverter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.Parameters;
 
@@ -41,13 +42,9 @@ import eu.openminted.share.annotations.api.Parameters;
  */
 @ResourceMetaData(name = "Web1T N-Gram Index Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                Web1TWriter.PARAM_TARGET_LOCATION  })
-@MimeTypeCapability({MimeTypes.TEXT_X_NGRAM})
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
+@Parameters(exclude = { Web1TWriter.PARAM_TARGET_LOCATION })
+@MimeTypeCapability({ MimeTypes.TEXT_X_NGRAM })
+@TypeCapability(inputs = { Sentence._TypeName })
 public class Web1TWriter
     extends JCasAnnotator_ImplBase
 {
@@ -103,26 +100,23 @@ public class Web1TWriter
     private boolean createIndexes;
 
     /**
-     * Specifies the minimum frequency a NGram must have to be written to the
-     * final index. The specified value is interpreted as inclusive value, the
-     * default is 1. Thus, all NGrams with a frequency of at least 1 or higher
-     * will be written.
+     * Specifies the minimum frequency a NGram must have to be written to the final index. The
+     * specified value is interpreted as inclusive value, the default is 1. Thus, all NGrams with a
+     * frequency of at least 1 or higher will be written.
      */
     public static final String PARAM_MIN_FREQUENCY = "minFreq";
     @ConfigurationParameter(name = PARAM_MIN_FREQUENCY, mandatory = false, defaultValue = "1")
     private int minFreq;
 
     /**
-     * The input file(s) is/are split into smaller files for quick access. An
-     * own file is created if the first two starting letters (or the starting
-     * letter if the word has a length of 1 character) account for at least x%
-     * of all starting letters in the input file(s). The default value for
-     * splitting a file is 1.0%. Every word that has starting characters which
-     * does not suffice the threshold is written with other words that also did
-     * not meet the threshold into an own file for miscellaneous words. A high
-     * threshold will lead to only a few, but large files and a most likely very
-     * large misc. file. A low threshold results in many small files. Use a zero or a negative
-     * value to write everything to one file.
+     * The input file(s) is/are split into smaller files for quick access. An own file is created if
+     * the first two starting letters (or the starting letter if the word has a length of 1
+     * character) account for at least x% of all starting letters in the input file(s). The default
+     * value for splitting a file is 1.0%. Every word that has starting characters which does not
+     * suffice the threshold is written with other words that also did not meet the threshold into
+     * an own file for miscellaneous words. A high threshold will lead to only a few, but large
+     * files and a most likely very large misc. file. A low threshold results in many small files.
+     * Use a zero or a negative value to write everything to one file.
      */
     public static final String PARAM_SPLIT_TRESHOLD = "splitFileTreshold";
     @ConfigurationParameter(name = PARAM_SPLIT_TRESHOLD, mandatory = false, defaultValue = "1.0")
@@ -132,16 +126,13 @@ public class Web1TWriter
      * The type being used for segments
      */
     public static final String PARAM_CONTEXT_TYPE = "contextType";
-    @ConfigurationParameter(name = PARAM_CONTEXT_TYPE, mandatory = true, 
-            defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
+    @ConfigurationParameter(name = PARAM_CONTEXT_TYPE, mandatory = true, defaultValue = Sentence._TypeName)
     protected String contextType;
-
 
     private Web1TConverter converter;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -160,8 +151,7 @@ public class Web1TWriter
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
 
         try {
@@ -173,13 +163,12 @@ public class Web1TWriter
     }
 
     /**
-     * The input files for each ngram level is read, splitted according to the
-     * frequency of the words starting letter in the files and the split files
-     * are individually sorted and consolidated.
+     * The input files for each ngram level is read, splitted according to the frequency of the
+     * words starting letter in the files and the split files are individually sorted and
+     * consolidated.
      */
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         super.collectionProcessComplete();
 
