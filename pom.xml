@@ -49,7 +49,7 @@
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
     <slf4j.version>1.7.36</slf4j.version>
-    <snakeyaml.version>1.33</snakeyaml.version>
+    <snakeyaml.version>2.0</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>5.3.26</spring.version>
     <uima.version>3.4.1</uima.version>
