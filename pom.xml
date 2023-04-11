@@ -24,7 +24,7 @@
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
-  <version>2.3.1-SNAPSHOT</version>
+  <version>2.3.1</version>
   <packaging>pom</packaging>
   <name>DKPro Core</name>
   <!-- The description tag must be present for antrun to work!! -->
@@ -93,7 +93,7 @@
     <connection>scm:git:https://github.com/dkpro/dkpro-core.git</connection>
     <developerConnection>scm:git:https://github.com/dkpro/dkpro-core.git</developerConnection>
     <url>https://github.com/dkpro/dkpro-core</url>
-    <tag>HEAD</tag>
+    <tag>dkpro-core-2.3.1</tag>
   </scm>
   <modules>
     <module>dkpro-core-build</module>
