@@ -59,8 +59,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("en")
 @TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
+        inputs = { Token._TypeName },
+        outputs = { Stem._TypeName })
 public class SmileLancasterStemmer
     extends FeaturePathAnnotatorBase
 {
@@ -116,7 +116,7 @@ public class SmileLancasterStemmer
     @Override
     protected Set<String> getDefaultPaths()
     {
-        return Collections.singleton(Token.class.getName());
+        return Collections.singleton(Token._TypeName);
     }
 
     @Override
@@ -213,7 +213,7 @@ public class SmileLancasterStemmer
             stemAnnot.addToIndexes(jcas);
 
             // Try setting the "stem" feature on Tokens.
-            Feature feat = fs.getType().getFeatureByBaseName("stem");
+            Feature feat = fs.getType().getFeatureByBaseName(Token._FeatName_stem);
             if (feat != null && feat.getRange() != null
                     && jcas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
                 fs.setFeatureValue(feat, stemAnnot);

@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>27</version>
+    <version>29</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
@@ -36,26 +36,24 @@
   </organization>
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <currentYear>2019</currentYear>
+    <currentYear>2023</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
     <maven.surefire.heap>6g</maven.surefire.heap>
 
     <activation.version>1.2.0</activation.version>
-    <groovy.version>3.0.10</groovy.version>
+    <groovy.version>4.0.11</groovy.version>
     <icu4j.version>68.2</icu4j.version>
     <jackson.version>2.14.1</jackson.version>
     <jena.version>4.6.1</jena.version>
-    <log4j.version>2.17.2</log4j.version>
+    <log4j.version>2.20.0</log4j.version>
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
     <slf4j.version>1.7.36</slf4j.version>
     <snakeyaml.version>1.33</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>5.3.24</spring.version>
-    <uima.version>3.3.1</uima.version>
-    <uimafit.version>3.3.0</uimafit.version>
+    <spring.version>5.3.26</spring.version>
+    <uima.version>3.4.1</uima.version>
+    <uimafit.version>3.4.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
   </properties>
   <repositories>
@@ -180,9 +178,9 @@
         <version>1.0.1</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.woodstox</groupId>
-        <artifactId>woodstox-core-asl</artifactId>
-        <version>4.4.1</version>
+        <groupId>com.fasterxml.woodstox</groupId>
+        <artifactId>woodstox-core</artifactId>
+        <version>6.5.0</version>
         <exclusions>
           <exclusion>
             <groupId>javax.xml.stream</groupId>
@@ -198,7 +196,7 @@
       <dependency>
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>stax2-api</artifactId>
-        <version>3.1.4</version>
+        <version>4.2.1</version>
       </dependency>
       <dependency>
         <groupId>com.ibm.icu</groupId>
@@ -417,7 +415,7 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.groovy</groupId>
+        <groupId>org.apache.groovy</groupId>
         <artifactId>groovy-bom</artifactId>
         <version>${groovy.version}</version>
         <type>pom</type>
@@ -431,6 +429,19 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[11,)</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
           <execution>
             <id>enforce-banned-dependencies</id>
             <goals>
@@ -469,6 +480,7 @@
         </executions>
         <configuration>
           <failOnWarning>true</failOnWarning>
+          <excludeScope>runtime</excludeScope>
           <ignoredDependencies>
             <!-- 
               - We want to depend on commons-logging-api and no complaints about spring.jcl
@@ -476,23 +488,58 @@
             <ignoredDependency>commons-logging:commons-logging-api</ignoredDependency>
             <ignoredDependency>org.springframework:spring-jcl</ignoredDependency>
           </ignoredDependencies>
-          <usedDependencies combine.children="append">
-            <!-- 
-              - Logging is used via reflection and cannot be detected by Maven
-            <usedDependency>org.apache.logging.log4j:log4j-slf4j-impl</usedDependency>
-            <usedDependency>org.apache.logging.log4j:log4j-core</usedDependency>
-            <usedDependency>org.slf4j:log4j-over-slf4j</usedDependency>
-            <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
-            <usedDependency>commons-logging:commons-logging</usedDependency>
-            -->
-            <!-- 
+          <ignoredUnusedDeclaredDependencies combine.children="append">
+            <!--
               - JAXB is used via reflection and cannot be detected by Maven
-            <usedDependency>javax.xml.bind:jaxb-api</usedDependency>
-            <usedDependency>com.sun.xml.bind:jaxb-core</usedDependency>
-            <usedDependency>com.sun.xml.bind:jaxb-impl</usedDependency>
-            <usedDependency>javax.activation:javax.activation-api</usedDependency>
             -->
-          </usedDependencies>
+            <dependency>javax.xml.bind:jaxb-api</dependency>
+            <dependency>com.sun.xml.bind:jaxb-core</dependency>
+            <dependency>com.sun.xml.bind:jaxb-impl</dependency>
+            <dependency>javax.activation:javax.activation-api</dependency>
+            <!--
+              - Common test dependencies
+            -->
+            <dependency>junit:junit</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-api</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-params</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-engine</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-api</dependency>
+            <dependency>org.mockito:mockito-core</dependency>
+            <dependency>org.mockito:mockito-junit-jupiter</dependency>
+            <dependency>org.assertj:assertj-core</dependency>
+            <dependency>org.awaitility:awaitility</dependency>
+          </ignoredUnusedDeclaredDependencies>
+          <ignoredUnusedDeclaredDependencies combine.children="append">
+            <!--
+              - Logging is used via reflection and cannot be detected by Maven
+            -->
+            <dependency>org.apache.logging.log4j:log4j-slf4j-impl</dependency>
+            <dependency>org.apache.logging.log4j:log4j-spring-boot</dependency>
+            <dependency>org.apache.logging.log4j:log4j-layout-template-json</dependency>
+            <dependency>org.apache.logging.log4j:log4j-core</dependency>
+            <dependency>org.slf4j:log4j-over-slf4j</dependency>
+            <dependency>org.slf4j:jcl-over-slf4j</dependency>
+            <dependency>commons-logging:commons-logging</dependency>
+            <!--
+              - JAXB is used via reflection and cannot be detected by Maven
+            -->
+            <dependency>javax.xml.bind:jaxb-api</dependency>
+            <dependency>com.sun.xml.bind:jaxb-core</dependency>
+            <dependency>com.sun.xml.bind:jaxb-impl</dependency>
+            <dependency>javax.activation:javax.activation-api</dependency>
+            <!--
+              - Common test dependencies
+            -->
+            <dependency>junit:junit</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-api</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-params</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-engine</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-api</dependency>
+            <dependency>org.mockito:mockito-core</dependency>
+            <dependency>org.mockito:mockito-junit-jupiter</dependency>
+            <dependency>org.assertj:assertj-core</dependency>
+            <dependency>org.awaitility:awaitility</dependency>
+          </ignoredUnusedDeclaredDependencies>
         </configuration>
       </plugin>
       <plugin>

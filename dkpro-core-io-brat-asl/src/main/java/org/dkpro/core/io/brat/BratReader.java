@@ -75,6 +75,7 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
@@ -111,8 +112,9 @@ public class BratReader
     @Deprecated
     public static final String PARAM_RELATION_TYPES = "relationTypes";
     @Deprecated
-    @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = false, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" })
+    @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = false, defaultValue = {
+            Dependency._TypeName + ":" + Dependency._FeatName_Governor + ":"
+                    + Dependency._FeatName_Dependent + "{A}" })
     private Set<String> relationTypes;
 
     /**

@@ -37,10 +37,6 @@
       <artifactId>uimafit-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-    </dependency>
-    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
     </dependency>
@@ -68,6 +64,11 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-ner-asl</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

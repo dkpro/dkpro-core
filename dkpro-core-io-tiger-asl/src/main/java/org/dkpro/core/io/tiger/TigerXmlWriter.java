@@ -111,7 +111,7 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
             JAXBContext context = JAXBContext.newInstance(TigerSentence.class);
             Marshaller marshaller = context.createMarshaller();
             // We use the marshaller only for individual sentences. That way, we do not have to 
-            // build the whole TIGER object graph before seralizing, which should safe us some
+            // build the whole TIGER object graph before serializing, which should safe us some
             // memory.
             marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
             
