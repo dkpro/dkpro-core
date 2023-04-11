@@ -90,8 +90,8 @@
     <url>https://github.com/dkpro/dkpro-core/issues</url>
   </issueManagement>
   <scm>
-    <connection>scm:git:git://github.com/dkpro/dkpro-core</connection>
-    <developerConnection>scm:git:git@github.com:dkpro/dkpro-core.git</developerConnection>
+    <connection>scm:git:https://github.com/dkpro/dkpro-core.git</connection>
+    <developerConnection>scm:git:https://github.com/dkpro/dkpro-core.git</developerConnection>
     <url>https://github.com/dkpro/dkpro-core</url>
     <tag>HEAD</tag>
   </scm>
