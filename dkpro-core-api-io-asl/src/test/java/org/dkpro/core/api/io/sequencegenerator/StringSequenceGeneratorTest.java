@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.io.sequencegenerator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,10 +28,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.featurepath.FeaturePathException;
-import org.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import org.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
@@ -236,9 +233,9 @@ public class StringSequenceGeneratorTest
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         String[] sequence = sequences.get(0);
-        Assert.assertEquals(expectedSize, sequence.length);
-        Assert.assertEquals(expectedFirstToken, sequence[0]);
-        Assert.assertEquals(expectedLastToken, sequence[sequence.length - 1]);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstToken, sequence[0]);
+        assertEquals(expectedLastToken, sequence[sequence.length - 1]);
     }
 
     @Test

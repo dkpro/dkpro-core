@@ -17,21 +17,20 @@
  */
 package org.dkpro.core.io.xml;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SimpleXmlReaderWriterTest
 {
     @Test
     public void testBasic() throws Exception
     {
-        testRoundTrip(XmlDocumentReader.class, XmlDocumentWriter.class,
+        testRoundTrip( //
+                createReaderDescription(XmlDocumentReader.class), 
+                createEngineDescription(XmlDocumentWriter.class),
                 "xml/basic.xml");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

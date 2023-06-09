@@ -26,23 +26,21 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.PlatformDetector;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class UDPipeSegmenterTest
 {
-    @Before
+    @BeforeEach
     public void prepare()
     {
         PlatformDetector pd = new PlatformDetector();
-        Assume.assumeTrue("Unsupported platform", asList("linux-x86_32", "linux-x86_64",
-                "osx-x86_64", "windows-x86_32", "windows-x86_64").contains(pd.getPlatformId()));
+        Assumptions.assumeTrue(asList("linux-x86_32", "linux-x86_64",
+                "osx-x86_64", "windows-x86_32", "windows-x86_64").contains(pd.getPlatformId()), "Unsupported platform");
     }
   
     @Test
@@ -92,7 +90,4 @@ public class UDPipeSegmenterTest
         AssertAnnotations.assertToken(tExpected, select(jcas, Token.class));
         
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

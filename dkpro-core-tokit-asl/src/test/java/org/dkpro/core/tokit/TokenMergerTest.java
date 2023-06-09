@@ -20,7 +20,7 @@ package org.dkpro.core.tokit;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -31,10 +31,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.TokenMerger.LemmaMode;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
@@ -140,7 +138,4 @@ public class TokenMergerTest
 
         return aToken;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

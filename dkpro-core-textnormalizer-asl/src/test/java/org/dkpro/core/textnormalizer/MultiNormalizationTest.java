@@ -24,7 +24,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.jazzy.JazzyChecker;
 import org.dkpro.core.textnormalizer.transformation.HyphenationRemover;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MultiNormalizationTest
 {

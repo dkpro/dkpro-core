@@ -18,8 +18,8 @@
 package org.dkpro.core.io.reuters;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
@@ -28,8 +28,7 @@ import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.io.reuters.Reuters21578TxtReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
@@ -55,6 +54,6 @@ public class Reuters21578TxtReaderTest
         DocumentMetaData metaData = DocumentMetaData.get(jcas);
         assertEquals(expectedTitle, metaData.getDocumentTitle());
         assertTrue(jcas.getDocumentText().startsWith(expectedTextStart));
-        assertTrue("Only one of two documents found.", jcasIter.hasNext());
+        assertTrue(jcasIter.hasNext(), "Only one of two documents found.");
     }
 }

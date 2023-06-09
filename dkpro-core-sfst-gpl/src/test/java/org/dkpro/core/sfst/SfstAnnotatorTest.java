@@ -24,27 +24,25 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.testing.AssertAnnotations.assertMorph;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagsetParser;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.PlatformDetector;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 
 public class SfstAnnotatorTest
 {
-    @Before
+    @BeforeEach
     public void prepare()
     {
         PlatformDetector pd = new PlatformDetector();
-        Assume.assumeTrue("Unsupported platform", asList("linux-x86_32", "linux-x86_64",
-                "osx-x86_64", "windows-x86_32", "windows-x86_64").contains(pd.getPlatformId()));
+        assumeTrue(asList("linux-x86_32", "linux-x86_64", "osx-x86_64", "windows-x86_32",
+                "windows-x86_64").contains(pd.getPlatformId()), "Unsupported platform");
     }
 
     @Test
@@ -407,7 +405,4 @@ public class SfstAnnotatorTest
 
         return jcas;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

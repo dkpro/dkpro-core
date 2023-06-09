@@ -21,11 +21,8 @@ package org.dkpro.core.lingpipe;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.dkpro.core.lingpipe.LingPipeSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LingPipeSegmenterTest
 {
@@ -38,7 +35,4 @@ public class LingPipeSegmenterTest
         SegmenterHarness.run(aed, "de.1", "de.4", "en.1", "en.3", "en.5", "en.6", "en.9", "ar.1",
                 "zh.1", "zh.2");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

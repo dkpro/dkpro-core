@@ -21,6 +21,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.dkpro.core.testing.AssertAnnotations.assertDependencies;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +34,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.hunpos.HunPosTagger;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -97,7 +96,7 @@ public class MaltParserTest
     // jcas);
     // }
 
-    @Ignore("The parser model 'catmalt.mco' is created by MaltParser 1.4.1.")
+    @Disabled("The parser model 'catmalt.mco' is created by MaltParser 1.4.1.")
     @Test
     public void testCatalan()
         throws Exception
@@ -351,7 +350,7 @@ public class MaltParserTest
         // jcas);
     }
 
-    @Ignore("Model not integrated")
+    @Disabled("Model not integrated")
     @Test
     public void testPortuguese()
         throws Exception
@@ -645,7 +644,7 @@ public class MaltParserTest
      * @throws Exception
      *             if an error occurs.
      */
-    @Ignore("The tags produced by our French TreeTagger model are different form the ones that "
+    @Disabled("The tags produced by our French TreeTagger model are different form the ones that "
             + "the pre-trained MaltParser model expects. Also the input format in our MaltParser "
             + "class is currently hardcoded to the format used by the English pre-trained model. "
             + "For the French model the 5th column of the input format should contain fine-grained "
@@ -728,11 +727,13 @@ public class MaltParserTest
                     OpenNlpPosTagger.PARAM_LANGUAGE, "en"));
         }
         else if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
-            Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
-                    System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
-            Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
-                    System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
-                    !System.getProperty("os.version").matches("1[0-9]\\..*|(10\\.([0-9]|1[0-4]).*)"));
+            assumeFalse(System.getProperty("os.name").toLowerCase(Locale.US).contains("win"),
+                    "HunPos currently hangs indefinitely on Windows: Issue #1099");
+            assumeTrue(
+                    System.getProperty("os.name").toLowerCase(Locale.US).contains("mac")
+                            && !System.getProperty("os.version")
+                                    .matches("1[0-9]\\..*|(10\\.([0-9]|1[0-4]).*)"),
+                    "HunPos does not run on OS X Catalina or higher");
             engines.add(createEngineDescription(HunPosTagger.class));
         }
         else {
@@ -751,11 +752,8 @@ public class MaltParserTest
 
     private void checkModel(String aLanguage, String aVariant)
     {
-        Assume.assumeTrue(getClass().getResource(
+        assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/maltparser/lib/parser-" + aLanguage + "-"
                         + aVariant + ".mco") != null);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

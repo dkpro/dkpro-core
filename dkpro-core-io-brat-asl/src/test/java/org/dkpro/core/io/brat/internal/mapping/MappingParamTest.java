@@ -19,8 +19,7 @@ package org.dkpro.core.io.brat.internal.mapping;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.dkpro.core.io.brat.internal.mapping.TypeMapping;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MappingParamTest
 {

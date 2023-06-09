@@ -27,15 +27,9 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.opennlp.OpenNlpChunker;
-import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.dkpro.core.testing.AssumeResource;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
@@ -96,7 +90,7 @@ public class OpenNlpChunkerTest
         assertTagset(Chunk.class, "conll2000", chunkTags, jcas);
         assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
     }    
-    @Ignore("We don't have these models integrated yet")
+    @Disabled("We don't have these models integrated yet")
     @Test
     public void testPortuguese()
         throws Exception
@@ -144,14 +138,5 @@ public class OpenNlpChunkerTest
         engine.process(jcas);
 
         return jcas;
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
 }

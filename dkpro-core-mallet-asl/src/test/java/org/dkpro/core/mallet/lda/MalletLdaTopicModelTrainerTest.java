@@ -19,8 +19,8 @@ package org.dkpro.core.mallet.lda;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
@@ -28,28 +28,23 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import cc.mallet.topics.ParallelTopicModel;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class MalletLdaTopicModelTrainerTest
 {
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
 
-    @Test
-    public void testEstimator()
+    @org.junit.jupiter.api.Test
+    public void testEstimator(@TempDir File tempDir)
             throws Exception
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
 
         // tag::example[]
         int nTopics = 10;
@@ -76,10 +71,10 @@ public class MalletLdaTopicModelTrainerTest
     }
 
     @Test
-    public void testEstimatorSentence()
+    public void testEstimatorSentence(@TempDir File tempDir)
             throws Exception
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         int nTopics = 10;
         int nIterations = 50;
         String language = "en";
@@ -105,10 +100,10 @@ public class MalletLdaTopicModelTrainerTest
     }
 
     @Test
-    public void testEstimatorAlphaBeta()
+    public void testEstimatorAlphaBeta(@TempDir File tempDir)
             throws Exception
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         int nTopics = 10;
         int nIterations = 50;
         float alpha = nTopics / 50.0f;

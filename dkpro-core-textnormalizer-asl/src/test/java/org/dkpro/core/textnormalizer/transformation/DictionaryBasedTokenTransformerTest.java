@@ -19,19 +19,19 @@
 package org.dkpro.core.textnormalizer.transformation;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DictionaryBasedTokenTransformerTest
 {
     private static final String MAPPINGS_FILE = "src/test/resources/mappings.txt";
 
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         String expected = "Ich lebe in Braunschweig.";
         String input = "Ich lebe in Brannfchweig.";
@@ -42,18 +42,18 @@ public class DictionaryBasedTokenTransformerTest
                         DictionaryBasedTokenTransformer.PARAM_MODEL_LOCATION, MAPPINGS_FILE));
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void testFileNotFound()
-        throws ResourceInitializationException
+    @Test
+    public void testFileNotFound() throws ResourceInitializationException
     {
         String expected = "Ich lebe in Braunschweig.";
         String input = "Ich lebe in Brannfchweig.";
         String model = "noModelHere";
 
-        assertTransformedText(expected, input, "de",
-                createEngineDescription(BreakIteratorSegmenter.class),
-                createEngineDescription(DictionaryBasedTokenTransformer.class,
-                        DictionaryBasedTokenTransformer.PARAM_MODEL_LOCATION, model));
-
+        assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> {
+            assertTransformedText(expected, input, "de",
+                    createEngineDescription(BreakIteratorSegmenter.class),
+                    createEngineDescription(DictionaryBasedTokenTransformer.class,
+                            DictionaryBasedTokenTransformer.PARAM_MODEL_LOCATION, model));
+        });
     }
 }

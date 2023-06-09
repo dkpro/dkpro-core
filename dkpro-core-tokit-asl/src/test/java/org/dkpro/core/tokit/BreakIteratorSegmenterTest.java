@@ -32,17 +32,15 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class BreakIteratorSegmenterTest
 {
-    @Ignore("Only needed to get the list of the supported languages for the @LanguageCapability")
+    @Disabled("Only needed to get the list of the supported languages for the @LanguageCapability")
     @Test
     public void listLocales() throws Exception
     {
@@ -94,7 +92,4 @@ public class BreakIteratorSegmenterTest
     {
         SegmenterHarness.testZoning(BreakIteratorSegmenter.class);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

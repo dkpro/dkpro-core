@@ -17,17 +17,13 @@
  */
 package org.dkpro.core.decompounding.web1t;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.List;
 
-import org.dkpro.core.decompounding.web1t.Finder;
-import org.dkpro.core.decompounding.web1t.LuceneIndexer;
-import org.dkpro.core.decompounding.web1t.NGramModel;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class FinderTest
 {
@@ -35,10 +31,8 @@ public class FinderTest
     private File jWeb1T = new File("src/test/resources/web1t/de");
 
     @Test
-    public void testFinder1() throws Exception
+    public void testFinder1(@TempDir File index) throws Exception
     {
-        File index = testContext.getTestOutputFolder();
-
         // Create index
         LuceneIndexer indexer = new LuceneIndexer(source, index);
         indexer.index();
@@ -76,10 +70,8 @@ public class FinderTest
     }
 
     @Test
-    public void testFinder2() throws Exception
+    public void testFinder2(@TempDir File index) throws Exception
     {
-        File index = testContext.getTestOutputFolder();
-
         // Create index
         LuceneIndexer indexer = new LuceneIndexer(source, index, 2);
         indexer.index();
@@ -115,7 +107,4 @@ public class FinderTest
 
         index.delete();
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

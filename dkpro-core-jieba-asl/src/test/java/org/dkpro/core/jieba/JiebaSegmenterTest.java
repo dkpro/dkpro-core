@@ -25,9 +25,7 @@ import static org.dkpro.core.testing.AssertAnnotations.assertToken;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -54,7 +52,4 @@ public class JiebaSegmenterTest
         
         assertSentence(sentences, select(jcas, Sentence.class));
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -22,13 +22,9 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.nlp4j.Nlp4JLemmatizer;
-import org.dkpro.core.nlp4j.Nlp4JPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 
@@ -61,7 +57,4 @@ public class Nlp4JLemmatizerTest
         
         return jcas;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

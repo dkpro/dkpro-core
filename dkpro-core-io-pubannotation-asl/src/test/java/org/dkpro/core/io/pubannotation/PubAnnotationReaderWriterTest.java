@@ -21,9 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 
@@ -63,7 +61,4 @@ public class PubAnnotationReaderWriterTest
                 "pubannotation/SPECIES800/19667393-ref-ns.json", 
                 "pubannotation/SPECIES800/19667393.json");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

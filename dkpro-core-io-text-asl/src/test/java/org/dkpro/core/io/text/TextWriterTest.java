@@ -19,8 +19,8 @@ package org.dkpro.core.io.text;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,20 +35,18 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.CompressionMethod;
 import org.dkpro.core.api.resources.CompressionUtils;
-import org.dkpro.core.io.text.TextWriter;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class TextWriterTest
 {
+    private @TempDir File outputPath;
+    
     @Test
     public void testWriteWithDocumentUri() throws Exception
     {
-        File outputPath = testContext.getTestOutputFolder();
-        
         AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
                 TextWriter.PARAM_TARGET_LOCATION, outputPath,
                 TextWriter.PARAM_STRIP_EXTENSION, true,
@@ -68,8 +66,6 @@ public class TextWriterTest
     @Test
     public void testWriteWithDocumentId() throws Exception
     {
-        File outputPath = testContext.getTestOutputFolder();
-        
         AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
                 TextWriter.PARAM_TARGET_LOCATION, outputPath,
                 TextWriter.PARAM_STRIP_EXTENSION, true,
@@ -119,8 +115,6 @@ public class TextWriterTest
     {
         String text = StringUtils.repeat("This is a test. ", 100000);
         
-        File outputPath = testContext.getTestOutputFolder();
-        
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText(text);
         
@@ -137,7 +131,4 @@ public class TextWriterTest
                 new FileInputStream(input));
         assertEquals(text, IOUtils.toString(is));
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

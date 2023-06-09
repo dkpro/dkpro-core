@@ -19,7 +19,7 @@ package org.dkpro.core.io.xmi;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 
@@ -29,9 +29,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class XmiReaderTest
 {
@@ -79,7 +77,4 @@ public class XmiReaderTest
             reader.getNext(jcas.getCas());
         }).isInstanceOf(IOException.class).hasCauseInstanceOf(XCASParsingException.class);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

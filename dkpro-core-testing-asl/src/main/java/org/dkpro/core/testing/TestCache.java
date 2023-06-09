@@ -15,28 +15,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.cisstem;
+package org.dkpro.core.testing;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import java.io.File;
 
-import org.apache.commons.io.FileUtils;
-import org.dkpro.core.cisstem.util.CisStem;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
-public class PerformanceTest
+public class TestCache
 {
-    @Disabled
-    @Test
-    public void testGerman() throws Exception
+    public static File getCacheFolder()
     {
-        long startTime = System.currentTimeMillis();
-        for (String line : FileUtils.readLines(
-                new File("src/test/resources/wordlist/wortliste-deutsch.txt"), "UTF-8")) {
-            CisStem.stem(line);
+        File folder;
+        if (isNotEmpty(System.getProperty("dkpro.core.testCachePath"))) {
+            folder = new File(System.getProperty("dkpro.core.testCachePath"));
         }
-        long endTime = System.currentTimeMillis();
-
-        System.out.println(endTime - startTime);
+        else {
+            folder = new File("../cache");
+        }
+        folder.mkdirs();
+        return folder;
     }
 }

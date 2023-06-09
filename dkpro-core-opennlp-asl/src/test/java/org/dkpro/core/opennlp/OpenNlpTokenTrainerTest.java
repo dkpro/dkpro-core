@@ -21,7 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,12 +40,10 @@ import org.dkpro.core.eval.EvalUtil;
 import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.ConllUReader;
-import org.dkpro.core.opennlp.OpenNlpSegmenter;
-import org.dkpro.core.opennlp.OpenNlpTokenTrainer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.testing.TestCache;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -54,11 +52,9 @@ public class OpenNlpTokenTrainerTest
     private Dataset ds;
     
     @Test
-    public void test()
+    public void test(@TempDir File targetFolder)
         throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
         Split split = ds.getDefaultSplit();
         
         // Train model
@@ -119,13 +115,10 @@ public class OpenNlpTokenTrainerTest
         }
     }
 
-    @Before
+    @BeforeEach
     public void setup() throws IOException
     {
-        DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
+        DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("ud-en-conllu-1.4");
     }    
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

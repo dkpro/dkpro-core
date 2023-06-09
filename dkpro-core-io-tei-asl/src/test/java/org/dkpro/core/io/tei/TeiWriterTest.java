@@ -20,31 +20,27 @@ package org.dkpro.core.io.tei;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.dkpro.core.io.tei.TeiWriter;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
 import org.dkpro.core.opennlp.OpenNlpParser;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.opennlp.OpenNlpSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class TeiWriterTest
 {
     @Test
-    public void test()
+    public void test(@TempDir File targetFolder)
         throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
         CollectionReaderDescription textReader = createReaderDescription(
                 TextReader.class,
                 TextReader.PARAM_LANGUAGE, "en",
@@ -77,7 +73,4 @@ public class TeiWriterTest
 //        myDiff.overrideElementQualifier(new ElementNameAndAttributeQualifier());
 //        XMLAssert.assertXMLEqual(myDiff, true);     
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

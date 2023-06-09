@@ -19,9 +19,7 @@ package org.dkpro.core.io.conll;
 
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Conll2009ReaderWriterTest
 {
@@ -32,7 +30,4 @@ public class Conll2009ReaderWriterTest
         testOneWay(Conll2009Reader.class, Conll2009Writer.class, "conll/2009/en-ref.conll",
                 "conll/2009/en-orig.conll");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

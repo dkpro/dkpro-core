@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.web1t;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,8 +28,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import org.dkpro.core.io.web1t.util.Web1TFileSorter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Web1TSorterTest
 {
@@ -93,7 +93,7 @@ public class Web1TSorterTest
         return lines.toArray(new String[0]);
     }
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         setUpFileList();

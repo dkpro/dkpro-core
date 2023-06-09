@@ -18,8 +18,8 @@
 package org.dkpro.core.io.text;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,11 +32,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.text.TokenizedTextWriter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -45,15 +43,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class TokenizedTextWriterTest
 {
-    @Rule
-    public DkproTestContext context = new DkproTestContext();
+    private @TempDir File tempDir;
 
     @Test
     public void testDefault()
             throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
-        File targetFile = new File(context.getTestOutputFolder(), "TokenizedTextWriterTest.out");
+        File targetFile = new File(tempDir, "TokenizedTextWriterTest.out");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
@@ -69,7 +66,7 @@ public class TokenizedTextWriterTest
             throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
-        File targetDir = context.getTestOutputFolder();
+        File targetDir = tempDir;
         File targetFile = new File(targetDir, "id.txt");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
@@ -87,7 +84,7 @@ public class TokenizedTextWriterTest
     public void testTokens()
             throws UIMAException, IOException
     {
-        File targetFile = new File(context.getTestOutputFolder(),
+        File targetFile = new File(tempDir,
                 "TokenizedTextWriterTokensTest.out");
         String text = "This is the 1st sentence .\nHere is another sentence .";
         String typeName = Token.class.getTypeName();
@@ -105,7 +102,7 @@ public class TokenizedTextWriterTest
     public void testLemmas()
             throws IOException, UIMAException
     {
-        File targetFile = new File(context.getTestOutputFolder(), "lemmas.out");
+        File targetFile = new File(tempDir, "lemmas.out");
         targetFile.deleteOnExit();
         String expected = "lemma1 lemma2";
         int expectedLines = 1;
@@ -152,7 +149,7 @@ public class TokenizedTextWriterTest
     public void testStopwords()
             throws UIMAException, IOException
     {
-        File targetFile = new File(context.getTestOutputFolder(),"TokenizedTextWriterNoStopwords.out");
+        File targetFile = new File(tempDir,"TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoStopwords.txt");
         String text = "This is the 1st sentence .\nHere is another sentence .";
@@ -171,7 +168,7 @@ public class TokenizedTextWriterTest
     public void testNumbers()
             throws UIMAException, IOException
     {
-        File targetFile = new File(context.getTestOutputFolder(), "TokenizedTextWriterNoStopwords.out");
+        File targetFile = new File(tempDir, "TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoNumbers.txt");
         String text = "This is 1 sentence .\nHere is 2 sentences , or even 2.5 .";
@@ -190,7 +187,7 @@ public class TokenizedTextWriterTest
     public void testNoSentences()
             throws IOException, UIMAException
     {
-        File targetFile = new File(context.getTestOutputFolder(),
+        File targetFile = new File(tempDir,
                 "TokenizedTextWriterNoSentences.out");
         File tokenized = new File("src/test/resources/tokenizedTexts/textNoSentences.txt");
         String text = "This is the 1st sentence . Here is another sentence .";

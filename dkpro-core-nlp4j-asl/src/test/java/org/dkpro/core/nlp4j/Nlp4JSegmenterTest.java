@@ -20,11 +20,8 @@ package org.dkpro.core.nlp4j;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.dkpro.core.nlp4j.Nlp4JSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Nlp4JSegmenterTest
 {
@@ -43,7 +40,4 @@ public class Nlp4JSegmenterTest
     {
         SegmenterHarness.testZoning(Nlp4JSegmenter.class);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

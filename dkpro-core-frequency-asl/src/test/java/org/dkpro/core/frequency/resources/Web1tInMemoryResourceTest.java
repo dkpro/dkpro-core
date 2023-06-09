@@ -28,7 +28,7 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Web1tInMemoryResourceTest
 {

@@ -18,31 +18,26 @@
 package org.dkpro.core.io.bincas;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.factory.AnalysisEngineFactory;
-import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.util.CasCreationUtils;
-import org.dkpro.core.io.bincas.SerializedCasReader;
-import org.dkpro.core.io.bincas.SerializedCasWriter;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class SerializedCasWriterReaderTest
 {
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
+    private @TempDir File testFolder;
 
     @Test
     public void testCasWithTypeSystemEmbedded() throws Exception
@@ -60,31 +55,31 @@ public class SerializedCasWriterReaderTest
 
     public void write(boolean aIncludeTypeSystem) throws Exception
     {
-        CollectionReader reader = CollectionReaderFactory.createReader(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-                TextReader.PARAM_PATTERNS, "*.txt",
+        CollectionReader reader = createReader( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts", //
+                TextReader.PARAM_PATTERNS, "*.txt", //
                 TextReader.PARAM_LANGUAGE, "latin");
 
-        AnalysisEngine writer = AnalysisEngineFactory.createEngine(
-                SerializedCasWriter.class,
-                SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
+        AnalysisEngine writer = createEngine( //
+                SerializedCasWriter.class, //
+                SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder, //
                 SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
-                        aIncludeTypeSystem ? null : testFolder.newFile("typesystem.ser"));
+                        aIncludeTypeSystem ? null : new File(testFolder, "typesystem.ser"));
 
         runPipeline(reader, writer);
 
-        assertTrue(new File(testFolder.getRoot(), "example1.txt.ser").exists());
+        assertTrue(new File(testFolder, "example1.txt.ser").exists());
     }
 
     public void read() throws Exception
     {
-        CollectionReader reader = CollectionReaderFactory.createReader(
-                SerializedCasReader.class,
-                SerializedCasReader.PARAM_SOURCE_LOCATION, testFolder.getRoot(),
-                SerializedCasReader.PARAM_PATTERNS, "*.ser",
+        CollectionReader reader = createReader( //
+                SerializedCasReader.class, //
+                SerializedCasReader.PARAM_SOURCE_LOCATION, testFolder, //
+                SerializedCasReader.PARAM_PATTERNS, "*.ser", //
                 SerializedCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
-                        new File(testFolder.getRoot(), "typesystem.ser"));
+                        new File(testFolder, "typesystem.ser"));
 
         CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
         reader.getNext(cas);
@@ -178,7 +173,4 @@ public class SerializedCasWriterReaderTest
 //        Serialization.deserializeCAS(aCas, new ByteArrayInputStream(os2.toByteArray()), 
 //            oldTypeSystem, null);
 //    }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -17,10 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,28 +40,24 @@ import org.dkpro.core.api.resources.CompressionMethod;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.mallet.wordembeddings.MalletEmbeddingsTrainer;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class MalletEmbeddingsTrainerTest
 {
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
-    @Test(timeout = 60000)
-    public void test()
+    @Test
+    public void test(@TempDir File tempDir)
             throws UIMAException, IOException
     {
         int expectedLength = 699;
 
         // tag::example[]
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
+        File embeddingsFile = new File(tempDir, "dummy.vec");
         int dimensions = 50;
         String coveringType = Sentence.class.getCanonicalName();
 
@@ -92,7 +89,7 @@ public class MalletEmbeddingsTrainerTest
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
     }
 
-    @Test(timeout = 60000, expected = ResourceInitializationException.class)
+    @Test
     public void testNoTarget()
             throws IOException, UIMAException
     {
@@ -105,15 +102,16 @@ public class MalletEmbeddingsTrainerTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 MalletEmbeddingsTrainer.class,
                 MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1);
-        SimplePipeline.runPipeline(reader, segmenter, embeddings);
+        assertThatExceptionOfType(ResourceInitializationException.class).isThrownBy(() -> 
+        SimplePipeline.runPipeline(reader, segmenter, embeddings));
     }
 
-    @Test(timeout = 60000)
-    public void testFilterRegex()
+    @Test
+    public void testFilterRegex(@TempDir File tempDir)
             throws UIMAException, IOException
     {
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
+        File embeddingsFile = new File(tempDir, "dummy.vec");
         int expectedLength = 629;
         String coveringType = Sentence.class.getCanonicalName();
 
@@ -142,14 +140,14 @@ public class MalletEmbeddingsTrainerTest
                 .noneMatch(token -> token.matches(filterRegex)));
     }
 
-    @Test(timeout = 60000)
-    public void testCompressed()
+    @Test
+    public void testCompressed(@TempDir File tempDir)
             throws UIMAException, IOException
     {
         CompressionMethod compressionMethod = CompressionMethod.GZIP;
         File text = new File("src/test/resources/txt/*");
 
-        File targetDir = testContext.getTestOutputFolder();
+        File targetDir = tempDir;
         File targetFile = new File(targetDir, "embeddings" + compressionMethod.getExtension());
         int expectedLength = 699;
         int dimensions = 50;
@@ -185,12 +183,12 @@ public class MalletEmbeddingsTrainerTest
         bufferedReader.close();
     }
 
-    @Test(timeout = 60000)
-    public void testCharacterEmbeddings()
+    @Test
+    public void testCharacterEmbeddings(@TempDir File tempDir)
             throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "embeddings.vec");
+        File embeddingsFile = new File(tempDir, "embeddings.vec");
         int expectedLength = 47;
         int dimensions = 50;
 
@@ -218,12 +216,12 @@ public class MalletEmbeddingsTrainerTest
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
     }
 
-    @Test(timeout = 60000)
-    public void testCharacterEmbeddingsTokens()
+    @Test
+    public void testCharacterEmbeddingsTokens(@TempDir File tempDir)
             throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "embeddings.vec");
+        File embeddingsFile = new File(tempDir, "embeddings.vec");
         int expectedLength = 46;
         int dimensions = 50;
         String covering = Token.class.getTypeName();

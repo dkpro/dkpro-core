@@ -19,17 +19,15 @@ package org.dkpro.core.opennlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 
@@ -54,7 +52,7 @@ public class OpenNlpNamedEntityRecognizerTest
     }
 // end::test[]
     
-    @Test(expected = AnalysisEngineProcessException.class)
+    @Test
     public void testExceptionWithWrongMappingFileLocation()
         throws Exception
     {
@@ -62,7 +60,8 @@ public class OpenNlpNamedEntityRecognizerTest
                 OpenNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true,
                 OpenNlpNamedEntityRecognizer.PARAM_NAMED_ENTITY_MAPPING_LOCATION, "");
 
-        TestRunner.runTest(engine, "en", "SAP where John Doe works is in Germany .");
+        assertThatExceptionOfType(AnalysisEngineProcessException.class).isThrownBy(
+                () -> TestRunner.runTest(engine, "en", "SAP where John Doe works is in Germany ."));
     }
 
     @Test
@@ -102,8 +101,4 @@ public class OpenNlpNamedEntityRecognizerTest
         return TestRunner.runTest(engine, language, testDocument);
     }
 // end::test[]
-
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

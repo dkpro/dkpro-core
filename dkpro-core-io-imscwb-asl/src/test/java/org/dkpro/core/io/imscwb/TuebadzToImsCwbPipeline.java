@@ -22,13 +22,12 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.dkpro.core.io.imscwb.ImsCwbWriter;
 import org.dkpro.core.io.negra.NegraExportReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore("This is to convert the actual corpus!")
+@Disabled("This is to convert the actual corpus!")
 public class TuebadzToImsCwbPipeline
 {
     private static final String inputFile = "src/main/resources/tuebadz.export";

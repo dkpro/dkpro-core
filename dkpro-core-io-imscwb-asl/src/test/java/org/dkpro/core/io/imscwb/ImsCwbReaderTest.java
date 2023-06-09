@@ -20,16 +20,13 @@ package org.dkpro.core.io.imscwb;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
-import org.dkpro.core.io.imscwb.ImsCwbReader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -104,7 +101,7 @@ public class ImsCwbReaderTest
         assertEquals(4, i);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void wackyTest__expectedException()
         throws Exception
     {
@@ -117,14 +114,8 @@ public class ImsCwbReaderTest
                 ImsCwbReader.PARAM_READ_LEMMA, true,
                 ImsCwbReader.PARAM_READ_POS, false,
                 ImsCwbReader.PARAM_READ_SENTENCES, false);
-
-        for (JCas jcas : iteratePipeline(reader)) {
-            // should never get here
-            fail("no Exception!");
-        }
-        fail("no Exception!");
+        
+        assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> iteratePipeline(reader).iterator().next());
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

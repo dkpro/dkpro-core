@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.InputStream;
@@ -27,16 +27,15 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.dkpro.core.api.io.TextUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TextUtilsTest
 {
     private static final String STOPWORDS_LOCATION = "src/test/resources/stopwords.txt";
     private Set<String> EXPECTED_STOPWORDS = new HashSet<>();
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         EXPECTED_STOPWORDS.add("Token1");

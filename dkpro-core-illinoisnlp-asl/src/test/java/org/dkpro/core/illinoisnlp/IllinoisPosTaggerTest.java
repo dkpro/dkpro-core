@@ -26,10 +26,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import edu.illinois.cs.cogcomp.pos.POSTagPlain;
@@ -84,8 +82,4 @@ public class IllinoisPosTaggerTest
         
         return jcas;
     }
-
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

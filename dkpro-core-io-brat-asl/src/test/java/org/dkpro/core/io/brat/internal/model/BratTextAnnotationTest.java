@@ -17,10 +17,9 @@
  */
 package org.dkpro.core.io.brat.internal.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.dkpro.core.io.brat.internal.model.BratTextAnnotation;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BratTextAnnotationTest
 {

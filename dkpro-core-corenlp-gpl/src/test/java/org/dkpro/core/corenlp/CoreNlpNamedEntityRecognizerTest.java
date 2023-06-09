@@ -20,29 +20,26 @@ package org.dkpro.core.corenlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.TestAbortedException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 
-/**
- */
 public class CoreNlpNamedEntityRecognizerTest
 {
     @Test
     public void testEnglish()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
 
@@ -58,7 +55,7 @@ public class CoreNlpNamedEntityRecognizerTest
     public void test3classCaselessEnglish()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", "all.3class.caseless.distsim.crf", "ibm where john works is in germany .");
 
@@ -73,7 +70,7 @@ public class CoreNlpNamedEntityRecognizerTest
     @Test
     public void testNoWiki3classCaselessEnglish() throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", "nowiki.3class.caseless.distsim.crf",
                 "ibm where john works is in germany .");
@@ -90,7 +87,7 @@ public class CoreNlpNamedEntityRecognizerTest
     public void test4classEnglish()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", "conll.4class.distsim.crf", "IBM where John works is in Germany .");
 
@@ -106,7 +103,7 @@ public class CoreNlpNamedEntityRecognizerTest
     @Test
     public void test4classCaselessEnglish() throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", "conll.4class.caseless.distsim.crf",
                 "ibm where john works is in germany .");
@@ -122,7 +119,7 @@ public class CoreNlpNamedEntityRecognizerTest
     @Test
     public void test4classCaselessMixedEnglish() throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", "conll.4class.caseless.distsim.crf",
                 "IBM where john works is in Germany .");
@@ -138,7 +135,7 @@ public class CoreNlpNamedEntityRecognizerTest
     @Test
     public void test7classEnglish() throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", "muc.7class.distsim.crf", "IBM where John works is in Germany .");
 
@@ -153,7 +150,7 @@ public class CoreNlpNamedEntityRecognizerTest
     @Test
     public void testGerman() throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
@@ -169,7 +166,7 @@ public class CoreNlpNamedEntityRecognizerTest
     public void testHgcGerman()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("de", "hgc_175m_600.crf", "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
@@ -185,7 +182,7 @@ public class CoreNlpNamedEntityRecognizerTest
     public void testSpanish()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("es", null, "Hace 10 años Markus trabaja en SAP en Alemania .");
 
@@ -197,10 +194,11 @@ public class CoreNlpNamedEntityRecognizerTest
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
 
-    @Test(expected = AnalysisEngineProcessException.class)
+    @Test
     public void testMissingModel() throws Exception
     {
-        runTest("xx", null, "Xec xena Xeo .");
+        assertThatExceptionOfType(TestAbortedException.class)
+                .isThrownBy(() -> runTest("xx", null, "Xec xena Xeo ."));
     }
 
     private JCas runTest(String language, String variant, String testDocument)
@@ -216,7 +214,4 @@ public class CoreNlpNamedEntityRecognizerTest
 
         return TestRunner.runTest(engine, language, testDocument);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

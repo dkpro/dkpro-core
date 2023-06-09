@@ -20,51 +20,47 @@ package org.dkpro.core.io.tiger;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.apache.uima.jcas.JCas;
-import org.custommonkey.xmlunit.XMLAssert;
-import org.dkpro.core.io.tiger.TigerXmlWriter;
 import org.dkpro.core.opennlp.OpenNlpParser;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.xmlunit.assertj3.XmlAssert;
+import org.xmlunit.builder.Input;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class TigerXmlWriterTest
 {
+    @BeforeAll
+    static void setupClass() {
+        // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
+        // file where this property is globally set for all surefire runs
+        System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
+    }
+    
     @Test
-    public void test() throws Exception
+    public void test(@TempDir File tempDir) throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
-        AnalysisEngine parser = createEngine(OpenNlpParser.class,
+        AnalysisEngine parser = createEngine( //
+                OpenNlpParser.class, //
                 OpenNlpParser.PARAM_WRITE_POS, true);
         JCas jcas = TestRunner.runTest(parser, "en", "This is a test .");
 
         DocumentMetaData meta = DocumentMetaData.create(jcas);
         meta.setCollectionId("nocollection");
         meta.setDocumentId("dummy");
-        
-        AnalysisEngine writer = createEngine(TigerXmlWriter.class,
-                TigerXmlWriter.PARAM_TARGET_LOCATION, targetFolder);
-        writer.process(jcas);
-        
-        try (
-                Reader expected = new InputStreamReader(new FileInputStream(
-                        "src/test/resources/simple-sentence.xml"), "UTF-8");
-                Reader actual = new InputStreamReader(new FileInputStream(
-                        new File(targetFolder, "dummy.xml")), "UTF-8");
-        ) {
-            XMLAssert.assertXMLEqual(expected, actual);
-        }
-    }
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+        AnalysisEngine writer = createEngine( //
+                TigerXmlWriter.class, //
+                TigerXmlWriter.PARAM_TARGET_LOCATION, tempDir);
+        writer.process(jcas);
+
+        XmlAssert.assertThat(Input.fromFile(new File(tempDir, "dummy.xml")))
+                .and(Input.fromFile("src/test/resources/simple-sentence.xml")).areSimilar();
+    }
 }

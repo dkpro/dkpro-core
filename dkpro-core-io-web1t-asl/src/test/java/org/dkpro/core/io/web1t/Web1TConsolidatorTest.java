@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.web1t;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,8 +28,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import org.dkpro.core.io.web1t.util.Web1TFileConsolidator;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Web1TConsolidatorTest
 {
@@ -113,7 +113,7 @@ public class Web1TConsolidatorTest
 
     }
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         setUpFileList();

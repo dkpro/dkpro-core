@@ -32,8 +32,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
@@ -43,7 +43,7 @@ public class CompoundTest
 {
     private Compound compound;
 
-    @Before
+    @BeforeEach
     public void setUpCompound() throws UIMAException
     {
         final JCas jcas = JCasFactory.createJCas();

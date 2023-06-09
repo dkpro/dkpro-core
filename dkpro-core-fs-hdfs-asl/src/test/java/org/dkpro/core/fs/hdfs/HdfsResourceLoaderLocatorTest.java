@@ -19,7 +19,8 @@ package org.dkpro.core.fs.hdfs;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.io.File;
 import java.io.OutputStreamWriter;
@@ -33,38 +34,23 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
-import org.dkpro.core.fs.hdfs.HdfsResourceLoaderLocator;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.After;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class HdfsResourceLoaderLocatorTest
 {
-    // Need to use this for a proper temporary folder because otherwise we get an error if
-    // the tests runs within some folder that has percentage signs in its path...
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
-    
     private MiniDFSCluster hdfsCluster;
     
-    private File hadoopTmp;
-
-    @Before
-    public void startCluster()
+    @BeforeEach
+    public void startCluster(@TempDir File target, @TempDir File hadoopTmp)
         throws Exception
     {
-        Assume.assumeFalse("HDFS on Windows would require native libs which we do not supply.",
-                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+        assumeFalse(System.getProperty("os.name").toLowerCase(Locale.US).contains("win"),
+                "HDFS on Windows would require native libs which we do not supply.");
         
-        // Start dummy HDFS
-        File target = folder.newFolder("hdfs");
-        hadoopTmp = folder.newFolder("hadoop");
-
         File baseDir = new File(target, "hdfs").getAbsoluteFile();
         FileUtil.fullyDelete(baseDir);
         Configuration conf = new Configuration();
@@ -74,7 +60,7 @@ public class HdfsResourceLoaderLocatorTest
         hdfsCluster = builder.build();
     }
     
-    @After
+    @AfterEach
     public void shutdownCluster()
     {
         if (hdfsCluster != null) {
@@ -116,7 +102,4 @@ public class HdfsResourceLoaderLocatorTest
         // Verify content
         assertEquals(document, cas.getDocumentText());
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

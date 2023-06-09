@@ -23,20 +23,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import org.dkpro.core.api.datasets.Dataset;
-import org.dkpro.core.api.datasets.DatasetFactory;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 
-@Ignore("Normally we do not run this")
+@Disabled("Normally we do not run this")
 public class FindEncoding
 {
-    @Ignore("Used at times for offline testing / development")
+    private @TempDir Path cache;
+    
+    @Disabled("Used at times for offline testing / development")
     @Test
     public void getEncoding() throws IOException
     {
@@ -44,10 +43,9 @@ public class FindEncoding
         findEncoding(dsName);
     }
 
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     public void findEncoding(String eName) throws IOException
     {
-        Path cache = testContext.getCacheFolder().toPath();
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds = df.load(eName);
         for (File fnew : ds.getDataFiles()) {
@@ -64,7 +62,4 @@ public class FindEncoding
             }
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

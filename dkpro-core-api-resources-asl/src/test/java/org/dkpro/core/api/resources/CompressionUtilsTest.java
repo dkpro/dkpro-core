@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.resources;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,9 +28,7 @@ import java.io.PrintWriter;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dkpro.core.api.resources.CompressionMethod;
-import org.dkpro.core.api.resources.CompressionUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CompressionUtilsTest
 {

@@ -27,8 +27,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.CasDumpWriter;
-import org.dkpro.core.io.xml.XmlXPathReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class XPathXmlReaderFeatureTest
 {

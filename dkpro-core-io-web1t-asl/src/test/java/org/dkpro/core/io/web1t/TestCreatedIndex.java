@@ -17,19 +17,19 @@
  */
 package org.dkpro.core.io.web1t;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 
 import org.dkpro.core.frequency.Web1TFileAccessProvider;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class TestCreatedIndex
 {
 
-    @Ignore
+    @Disabled
     @Test
     // Assumes index created with data from amisch wikipedia for 1 to 3 grams
     public void testCreatedIndex() throws Exception

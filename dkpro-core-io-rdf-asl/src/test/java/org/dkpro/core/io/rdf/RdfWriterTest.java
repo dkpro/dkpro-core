@@ -19,7 +19,7 @@ package org.dkpro.core.io.rdf;
 
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.Collections;
@@ -30,11 +30,9 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.dkpro.core.io.conll.Conll2006Reader;
 import org.dkpro.core.io.conll.Conll2006Writer;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestOptions;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class RdfWriterTest
 {
@@ -61,7 +59,7 @@ public class RdfWriterTest
                 "ttl/fi-orig.ttl"); // the input file for the test
     }
 
-    @Ignore("Currently does not work because IDs are not stable on round-trips")
+    @Disabled("Currently does not work because IDs are not stable on round-trips")
     @Test
     public void roundTrip()
         throws Exception
@@ -88,7 +86,4 @@ public class RdfWriterTest
 
         assertEquals(StringUtils.join(sExpected, "\n"), StringUtils.join(sActual, "\n"));
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }
