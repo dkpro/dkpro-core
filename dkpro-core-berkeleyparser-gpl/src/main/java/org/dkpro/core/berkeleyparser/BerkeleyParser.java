@@ -21,6 +21,7 @@ package org.dkpro.core.berkeleyparser;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_MAPPING_ENABLED;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -80,11 +81,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @ResourceMetaData(name = "Berkeley Parser")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @OperationalProperties(multipleDeploymentAllowed = false)
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
-        outputs = {
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
 public class BerkeleyParser
@@ -105,19 +103,20 @@ public class BerkeleyParser
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -129,22 +128,20 @@ public class BerkeleyParser
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
      * Location of the mapping file for constituent tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION =  //
             ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
@@ -163,7 +160,7 @@ public class BerkeleyParser
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
-    
+
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
@@ -234,35 +231,37 @@ public class BerkeleyParser
     private MappingProvider constituentMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
         modelProvider = new BerkeleyParserModelProvider();
 
-        posMappingProvider = createPosMappingProvider(this, posMappingLocation, language,
-                modelProvider);
+        if (writePos) {
+            posMappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                    modelProvider);
+        }
 
         constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, language, modelProvider);
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
         modelProvider.configure(cas);
-        posMappingProvider.configure(cas);
+        if (writePos) {
+            posMappingProvider.configure(cas);
+        }
         constituentMappingProvider.configure(cas);
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-            List<String> tokenText = tokens.stream().map(t -> 
-                    t.getText()).collect(Collectors.toList());
-            
+            List<String> tokenText = tokens.stream().map(t -> t.getText())
+                    .collect(Collectors.toList());
+
             List<String> posTags = null;
             if (readPos) {
                 posTags = new ArrayList<String>(tokens.size());
@@ -271,15 +270,15 @@ public class BerkeleyParser
                 }
             }
 
-            Tree<String> parseOutput = modelProvider.getResource().getBestConstrainedParse(
-                    tokenText, posTags, false);
-            
+            Tree<String> parseOutput = modelProvider.getResource()
+                    .getBestConstrainedParse(tokenText, posTags, false);
+
             // Check if the sentence could be parsed or not
             if (parseOutput.getChildren().isEmpty()) {
                 getLogger().warn("Unable to parse sentence: [" + sentence.getCoveredText() + "]");
                 continue;
             }
-            
+
             if (!binarize) {
                 parseOutput = TreeAnnotations.unAnnotateTree(parseOutput, keepFunctionLabels);
             }
@@ -361,8 +360,7 @@ public class BerkeleyParser
 
             // Now that we know how many children we have, link annotation of
             // current node with its children
-            FSArray childArray = FSCollectionFactory.createFSArray(aJCas,
-                    childAnnotations);
+            FSArray childArray = FSCollectionFactory.createFSArray(aJCas, childAnnotations);
             constAnno.setChildren(childArray);
 
             // write annotation for current node to index
@@ -391,8 +389,7 @@ public class BerkeleyParser
         }
 
         @Override
-        protected CoarseToFineMaxRuleParser produceResource(URL aUrl)
-            throws IOException
+        protected CoarseToFineMaxRuleParser produceResource(URL aUrl) throws IOException
         {
             try (ObjectInputStream is = new ObjectInputStream(
                     new GZIPInputStream(aUrl.openStream()))) {
@@ -405,10 +402,10 @@ public class BerkeleyParser
                 double threshold = 1.0;
 
                 Properties metadata = getResourceMetaData();
-                SingletonTagset posTags = new SingletonTagset(
-                        POS.class, metadata.getProperty("pos.tagset"));
-                SingletonTagset constTags = new SingletonTagset(
-                        Constituent.class, metadata.getProperty("constituent.tagset"));
+                SingletonTagset posTags = new SingletonTagset(POS.class,
+                        metadata.getProperty("pos.tagset"));
+                SingletonTagset constTags = new SingletonTagset(Constituent.class,
+                        metadata.getProperty("constituent.tagset"));
 
                 Numberer tagNumberer = (Numberer) pData.getNumbs().get("tags");
                 for (int i = 0; i < tagNumberer.size(); i++) {

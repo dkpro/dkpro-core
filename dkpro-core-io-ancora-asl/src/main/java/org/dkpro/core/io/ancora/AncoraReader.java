@@ -21,6 +21,7 @@ import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.dkpro.core.api.resources.CompressionUtils.getInputStream;
+import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEMMA;
 import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POS;
 import static org.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WORD;
@@ -50,7 +51,6 @@ import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.MappingProvider;
-import org.dkpro.core.api.resources.MappingProviderFactory;
 import org.dkpro.core.api.xml.XmlParserUtils;
 import org.slf4j.Logger;
 import org.xml.sax.Attributes;
@@ -69,14 +69,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "AnCora XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.APPLICATION_X_ANCORA_XML})
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_XML, MimeTypes.APPLICATION_X_ANCORA_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class AncoraReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -107,20 +105,18 @@ public class AncoraReader
     public static final String PARAM_READ_SENTENCE = ComponentParameters.PARAM_READ_SENTENCE;
     @ConfigurationParameter(name = PARAM_READ_SENTENCE, mandatory = true, defaultValue = "true")
     private boolean readSentence;
-    
+
     /**
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -132,39 +128,37 @@ public class AncoraReader
     public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
     @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
     protected String posTagset;
-    
+
     /**
-     * Whether to split words containing underscores into multiple tokens. 
+     * Whether to split words containing underscores into multiple tokens.
      */
     public static final String PARAM_SPLIT_MULTI_WORD_TOKENS = "splitMultiWordTokens";
-    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, 
-            defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue = "true")
     protected boolean splitMultiWordTokens;
 
     /**
-     * Whether to ignore sentence in which any POS tags are missing. Normally, it is assumed that
-     * if any POS tags are present, then every token as a POS tag.
+     * Whether to ignore sentence in which any POS tags are missing. Normally, it is assumed that if
+     * any POS tags are present, then every token as a POS tag.
      */
     public static final String PARAM_DROP_SENTENCES_WITH_MISSING_POS = "dropSentencesMissingPosTags";
-    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, 
-            defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, defaultValue = "false")
     protected boolean dropSentencesMissingPosTags;
-    
+
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
-                mappingPosLocation, posTagset, getLanguage());
+        if (readPOS) {
+            posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
+                    getLanguage());
+        }
     }
 
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -175,15 +169,17 @@ public class AncoraReader
         }
 
         // Configure mapping only now, because now the language is set in the CAS
-        try {
-            posMappingProvider.configure(aJCas.getCas());
-        }
-        catch (AnalysisEngineProcessException e1) {
-            throw new IOException(e1);
+        if (readPOS) {
+            try {
+                posMappingProvider.configure(aJCas.getCas());
+            }
+            catch (AnalysisEngineProcessException e1) {
+                throw new IOException(e1);
+            }
         }
 
         try (InputStream is = getInputStream(res.getLocation(), res.getInputStream())) {
-            
+
             // Create handler
             AncoraHandler handler = new AncoraHandler();
             handler.setJCas(aJCas);
@@ -200,10 +196,10 @@ public class AncoraReader
         catch (ParserConfigurationException | SAXException e) {
             throw new IOException(e);
         }
-        
+
         if (dropSentencesMissingPosTags) {
             List<FeatureStructure> toRemove = new ArrayList<>();
-            
+
             // Remove sentences without pos TAGs
             for (Sentence s : select(aJCas, Sentence.class)) {
                 boolean remove = false;
@@ -214,7 +210,7 @@ public class AncoraReader
                         break;
                     }
                 }
-                
+
                 if (remove) {
                     for (Token t : selectCovered(Token.class, s)) {
                         toRemove.add(t);
@@ -227,11 +223,11 @@ public class AncoraReader
                     }
                 }
             }
-            
+
             for (FeatureStructure fs : toRemove) {
                 aJCas.getCas().removeFsFromIndexes(fs);
             }
-            
+
             // Remove tokens without pos tags that are located *BETWEEN* sentences!
             toRemove.clear();
             for (Token t : select(aJCas, Token.class)) {
@@ -245,13 +241,13 @@ public class AncoraReader
                     }
                 }
             }
-            
+
             for (FeatureStructure fs : toRemove) {
                 aJCas.getCas().removeFsFromIndexes(fs);
             }
         }
     }
-    
+
     public class AncoraHandler
         extends DefaultHandler
     {
@@ -283,8 +279,7 @@ public class AncoraReader
         }
 
         @Override
-        public void endDocument()
-            throws SAXException
+        public void endDocument() throws SAXException
         {
             getJCas().setDocumentText(buffer.toString());
         }
@@ -300,14 +295,14 @@ public class AncoraReader
             if (buffer.length() > 0) {
                 buffer.append(' ');
             }
-            
+
             // Add current token
             int start = getBuffer().length();
             buffer.append(aWord);
             int end = getBuffer().length();
-            
+
             Token token = null;
-            
+
             if (readToken) {
                 token = new Token(getJCas(), start, end);
             }
@@ -336,14 +331,14 @@ public class AncoraReader
                 token.addToIndexes();
             }
         }
-        
+
         @Override
         public void startElement(String aUri, String aLocalName, String aName,
                 Attributes aAttributes)
             throws SAXException
         {
             String wd = aAttributes.getValue(ATTR_WORD);
-            
+
             if (TAG_SENTENCE.equals(aName)) {
                 sentenceStart = getBuffer().length();
             }
@@ -353,11 +348,11 @@ public class AncoraReader
             else if (wd != null && sentenceStart != -1) {
                 String posTag = aAttributes.getValue(ATTR_POS);
                 String lemma = aAttributes.getValue(ATTR_LEMMA);
-                
+
                 // Default case without multiword splitting
                 List<String> words = asList(wd);
                 List<String> lemmas = asList(lemma);
-                
+
                 // Override default case if multiword splitting is enabled
                 if (splitMultiWordTokens && wd.contains("_")) {
                     words = asList(wd.split("_"));
@@ -366,7 +361,7 @@ public class AncoraReader
                     // then something is fishy!
                     assert words.size() == lemmas.size();
                 }
-                
+
                 for (int i = 0; i < words.size(); i++) {
                     addToken(words.get(i), lemmas.get(i), posTag);
                 }
@@ -374,8 +369,7 @@ public class AncoraReader
         }
 
         @Override
-        public void endElement(String aUri, String aLocalName, String aName)
-            throws SAXException
+        public void endElement(String aUri, String aLocalName, String aName) throws SAXException
         {
             if (TAG_SENTENCE.equals(aName)) {
                 // AnCora contains some empty/missing sentences
@@ -390,15 +384,13 @@ public class AncoraReader
         }
 
         @Override
-        public void characters(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void characters(char[] aCh, int aStart, int aLength) throws SAXException
         {
             // AnCora format exclusively uses attribute values
         }
 
         @Override
-        public void ignorableWhitespace(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void ignorableWhitespace(char[] aCh, int aStart, int aLength) throws SAXException
         {
             // AnCora format exclusively uses attribute values
         }
