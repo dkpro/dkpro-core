@@ -20,7 +20,7 @@ package org.dkpro.core.io.xces;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class XcesXmlReaderTest
 {

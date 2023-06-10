@@ -18,32 +18,27 @@
 package org.dkpro.core.io.xml;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.xml.InlineXmlWriter;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class InlineXmlWriterTest
 {
-    @Rule
-    public TemporaryFolder workspace = new TemporaryFolder();
-
     @Test
-    public void testInlineXmlCasConsumer()
+    public void testInlineXmlCasConsumer(@TempDir File tempDir)
         throws Exception
     {
         String testDocument = "This is a test.";
 
         AnalysisEngine consumer = createEngine(InlineXmlWriter.class,
-                InlineXmlWriter.PARAM_TARGET_LOCATION, workspace.getRoot().getPath(),
+                InlineXmlWriter.PARAM_TARGET_LOCATION, tempDir.getPath(),
                 InlineXmlWriter.PARAM_STRIP_EXTENSION, true);
 
         JCas jcas = consumer.newJCas();
@@ -52,15 +47,15 @@ public class InlineXmlWriterTest
         DocumentMetaData meta = DocumentMetaData.create(jcas);
         meta.setDocumentId("testId");
         meta.setDocumentTitle("title");
-        meta.setDocumentBaseUri(workspace.getRoot().toURI().toString());
-        meta.setDocumentUri(new File(workspace.getRoot(), "test.txt").toURI().toString());
+        meta.setDocumentBaseUri(tempDir.toURI().toString());
+        meta.setDocumentUri(new File(tempDir, "test.txt").toURI().toString());
 
         JCas view = jcas.createView("plainTextDocument");
         view.setDocumentText(testDocument);
 
         consumer.process(jcas);
 
-        File writtenFile = new File(workspace.getRoot(), "test.xml");
+        File writtenFile = new File(tempDir, "test.xml");
         if (!writtenFile.exists()) {
             fail("File not correctly written.");
         }

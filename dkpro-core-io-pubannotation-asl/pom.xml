@@ -65,11 +65,6 @@
       <artifactId>dkpro-core-api-io-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-testing-asl</artifactId>
       <scope>test</scope>

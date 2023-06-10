@@ -25,10 +25,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 
@@ -100,7 +98,4 @@ public class CoreNlpPosTaggerAndNamedEntityRecognizerTest
 
         return TestRunner.runTest(engine, language, testDocument);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

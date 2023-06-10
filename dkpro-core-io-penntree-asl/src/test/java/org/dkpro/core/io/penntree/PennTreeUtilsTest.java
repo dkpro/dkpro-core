@@ -24,18 +24,13 @@ import static org.dkpro.core.io.penntree.PennTreeUtils.selectDfs;
 import static org.dkpro.core.io.penntree.PennTreeUtils.toPennTree;
 import static org.dkpro.core.io.penntree.PennTreeUtils.toPrettyPennTree;
 import static org.dkpro.core.io.penntree.PennTreeUtils.toText;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.penntree.PennTreeNode;
-import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
-import org.dkpro.core.io.penntree.PennTreeUtils;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 
@@ -122,7 +117,7 @@ public class PennTreeUtilsTest
     }
 
     @Test
-    @Ignore("No asserts yet!")
+    @Disabled("No asserts yet!")
     public void testSelectDfs()
     {
         PennTreeNode n = parsePennTree(
@@ -180,7 +175,4 @@ public class PennTreeUtilsTest
         assertEquals(documentEnglish.trim(), toText(r).trim());
         AssertAnnotations.assertPennTree(pennTree, toPennTree(r));
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

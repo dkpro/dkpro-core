@@ -20,7 +20,7 @@ package org.dkpro.core.opennlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,12 +38,10 @@ import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
-import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
-import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizerTrainer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.testing.TestCache;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import opennlp.tools.ml.maxent.GISTrainer;
@@ -53,11 +51,9 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
     private Dataset ds;
     
     @Test
-    public void test()
+    public void test(@TempDir File targetFolder)
         throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
         Split split = ds.getDefaultSplit();
         
         // Train model
@@ -117,13 +113,10 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
         assertEquals(0.198122, results.getRecall(), 0.0001);
     }
     
-    @Before
+    @BeforeEach
     public void setup() throws IOException
     {
-        DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
+        DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("germeval2014-de");
     }    
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

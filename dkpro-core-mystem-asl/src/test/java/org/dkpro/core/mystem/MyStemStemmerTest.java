@@ -20,29 +20,27 @@ package org.dkpro.core.mystem;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.PlatformDetector;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 
 public class MyStemStemmerTest
 {
-    @Before
+    @BeforeEach
     public void prepare()
     {
         PlatformDetector pd = new PlatformDetector();
-        Assume.assumeTrue("Unsupported platform", 
-                asList(PlatformDetector.ARCH_X86_32).contains(pd.getPlatformId()));
+        assumeTrue(asList(PlatformDetector.ARCH_X86_32).contains(pd.getPlatformId()),
+                "Unsupported platform");
     }
-    
+
     @Test
     public void testRussian() throws Exception
     {
@@ -59,7 +57,4 @@ public class MyStemStemmerTest
 
         return result;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

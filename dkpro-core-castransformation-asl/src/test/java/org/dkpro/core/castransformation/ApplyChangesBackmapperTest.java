@@ -19,7 +19,7 @@ package org.dkpro.core.castransformation;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -39,12 +39,11 @@ import org.apache.uima.jcas.cas.AnnotationBase;
 import org.dkpro.core.castransformation.internal.AlignmentStorage;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.io.xmi.XmiWriter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 
@@ -52,6 +51,7 @@ public class ApplyChangesBackmapperTest
 {
     public static final String TARGET_VIEW = "TargetView";
 
+    private @TempDir File tempDir;
 
     @Test
     public void testBackMappingWithCachedAlignmentStateWhenRemovingTextFromTarget()
@@ -72,7 +72,7 @@ public class ApplyChangesBackmapperTest
     private void testBackMappingWhenRemovingTextFromTarget(boolean clearAlignmentState)
         throws Exception
     {
-        File output = testContext.getTestOutputFolder();
+        File output = tempDir;
         File inputFile = new File("src/test/resources/input.txt");
         File dumpFile = new File(output, "output.txt");
         String pipelineFilePath = new File(output, "pipeline.xml").getPath();
@@ -185,9 +185,6 @@ public class ApplyChangesBackmapperTest
             );
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 
     @Test
     public void testBackMappingOfGeneralFeatureStructures()

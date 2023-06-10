@@ -25,8 +25,8 @@ import static org.apache.uima.fit.factory.JCasFactory.createText;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Collections;
@@ -41,10 +41,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.CasCreationUtils;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
@@ -52,13 +50,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class XmiWriterReaderTest
 {
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
+    private @TempDir File testFolder;
 
     @Test
     public void thatWritingAndReadingXML1_1works() throws Exception
     {
-        File outputFolder = testContext.getTestOutputFolder();
+        File outputFolder = testFolder;
         
         JCas outDocument = createText(
                 readFileToString(new File("src/test/resources/texts/chinese.txt"), UTF_8), "zh");
@@ -92,7 +89,7 @@ public class XmiWriterReaderTest
         System.out.printf("http://xml.org/sax/features/xml-1.1: %s%n",
                 r.getFeature("http://xml.org/sax/features/xml-1.1"));
         
-        File outputFolder = testContext.getTestOutputFolder();
+        File outputFolder = testFolder;
 
         StringBuilder text = new StringBuilder();
         for (char ch = 0; ch < 0xFFFE; ch++) {
@@ -153,7 +150,7 @@ public class XmiWriterReaderTest
         System.out.printf("http://xml.org/sax/features/xml-1.1: %s%n",
                 r.getFeature("http://xml.org/sax/features/xml-1.1"));
         
-        File outputFolder = testContext.getTestOutputFolder();
+        File outputFolder = testFolder;
 
         StringBuilder text = new StringBuilder();
         for (char ch = 0; ch < 0xFFFE; ch++) {
@@ -226,18 +223,18 @@ public class XmiWriterReaderTest
 
         AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(
                 XmiWriter.class,
-                XmiWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
+                XmiWriter.PARAM_TARGET_LOCATION, testFolder);
 
         runPipeline(textReader, xmiWriter);
 
-        assertTrue(new File(testFolder.getRoot(), "latin.txt.xmi").exists());
+        assertTrue(new File(testFolder, "latin.txt.xmi").exists());
     }
 
     public void read() throws Exception
     {
         CollectionReader xmiReader = CollectionReaderFactory.createReader(
                 XmiReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, testFolder.getRoot().getPath(),
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, testFolder,
                 ResourceCollectionReaderBase.PARAM_PATTERNS, "*.xmi");
 
         CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
@@ -247,7 +244,4 @@ public class XmiWriterReaderTest
         assertEquals(refText, cas.getDocumentText());
         assertEquals("latin", cas.getDocumentLanguage());
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

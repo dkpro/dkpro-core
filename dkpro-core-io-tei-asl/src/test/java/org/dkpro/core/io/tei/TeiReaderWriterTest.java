@@ -23,9 +23,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TeiReaderWriterTest
 {
@@ -59,7 +57,4 @@ public class TeiReaderWriterTest
                         TeiWriter.PARAM_WRITE_CONSTITUENT, true), 
                 "reference/example2.xml");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

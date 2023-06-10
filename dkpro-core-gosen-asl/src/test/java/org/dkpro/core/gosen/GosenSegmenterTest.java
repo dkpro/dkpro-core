@@ -23,11 +23,8 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.gosen.GosenSegmenter;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -71,8 +68,4 @@ public class GosenSegmenterTest
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
 }

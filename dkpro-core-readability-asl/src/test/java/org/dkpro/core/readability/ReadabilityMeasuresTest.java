@@ -17,12 +17,12 @@
  */
 package org.dkpro.core.readability;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Method;
 
 import org.dkpro.core.readability.measure.ReadabilityMeasures;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ReadabilityMeasuresTest
 {

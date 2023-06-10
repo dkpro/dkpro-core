@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.doc
 
-import java.text.BreakIterator;
+import java.text.BreakIterator
 
 class Util {
     static def editOnGithub(url)
@@ -107,7 +107,7 @@ class Util {
             description = description
                 // Remove HTML tags in tables
                 .replaceAll(/<.+?>/, '') 
-                // Make sure the text doesn't cluse the passthrough block
+                // Make sure the text doesn't close the pass-through block
                 .replaceAll(']', '{endsb}')
                 .trim()
         }

@@ -18,7 +18,7 @@
 package org.dkpro.core.testing.validation.checks;
 
 import static org.dkpro.core.testing.validation.Message.Level.ERROR;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -26,8 +26,7 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.validation.CasValidator;
 import org.dkpro.core.testing.validation.Message;
-import org.dkpro.core.testing.validation.checks.PosAttachedToTokenCheck;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 

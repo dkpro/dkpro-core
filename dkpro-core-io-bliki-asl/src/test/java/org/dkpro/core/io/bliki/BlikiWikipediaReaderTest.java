@@ -18,20 +18,19 @@
 package org.dkpro.core.io.bliki;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.bliki.BlikiWikipediaReader;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class BlikiWikipediaReaderTest
 {
-    @Ignore("May fail due to Wikipedia API problems.")
+    @Disabled("May fail due to Wikipedia API problems.")
     @Test
     public void wikipediaReaderTestPlainText()
         throws Exception
@@ -53,7 +52,7 @@ public class BlikiWikipediaReaderTest
         assertEquals(2, i);
     }
 
-    @Ignore("May fail due to Wikipedia API problems.")
+    @Disabled("May fail due to Wikipedia API problems.")
     @Test
     public void wikipediaReaderTestMarkup()
         throws Exception
@@ -76,7 +75,7 @@ public class BlikiWikipediaReaderTest
         assertEquals(2, i);
     }
 
-    @Ignore("May fail due to Wikipedia API problems.")
+    @Disabled("May fail due to Wikipedia API problems.")
     @Test
     public void wikipediaReaderUnknownPage()
         throws Exception

@@ -20,7 +20,7 @@ package org.dkpro.core.io.rtf;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,10 +31,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for {@link RTFReader}.
@@ -71,15 +69,8 @@ public class RTFReaderTest
         assertEquals(reference, actual);
     }
 
-    /**
-     * Test for reading multiple (two) files.
-     *
-     * @throws UIMAException
-     * @throws IOException
-     */
     @Test
-    public void testTwoFiles()
-        throws UIMAException, IOException
+    public void testTwoFiles() throws Exception
     {
         String testFiles = "src/test/resources/*.rtf";
         File output = new File("target/output2.dump");
@@ -101,7 +92,4 @@ public class RTFReaderTest
         actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(reference, actual);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

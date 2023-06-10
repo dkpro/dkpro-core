@@ -21,7 +21,9 @@ import static org.apache.commons.lang3.StringUtils.repeat;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,25 +35,22 @@ import org.apache.uima.fit.testing.util.HideOutput;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 public class HunPosTaggerTest
 {
-    @Before
+    @BeforeEach
     public void prepare()
     {
-        Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
-                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
-        Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
-                System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
-                !System.getProperty("os.version").matches("1[0-9]\\..*|(10\\.([0-9]|1[0-4]).*)"));
+        assumeFalse(System.getProperty("os.name").toLowerCase(Locale.US).contains("win"),
+                "HunPos currently hangs indefinitely on Windows: Issue #1099");
+        assumeTrue(System.getProperty("os.name").toLowerCase(Locale.US).contains("mac")
+                && !System.getProperty("os.version").matches("1[0-9]\\..*|(10\\.([0-9]|1[0-4]).*)"),
+                "HunPos does not run on OS X Catalina or higher");
     }
     
 //    @Test
@@ -190,7 +189,7 @@ public class HunPosTaggerTest
     }
 
     @Test
-//  @Ignore("Platform specific")
+//  @Disabled("Platform specific")
     public void testOddCharacters()
         throws Exception
     {
@@ -204,7 +203,7 @@ public class HunPosTaggerTest
      * @throws Exception if an error occurs.
      */
     @Test
-    @Ignore("Takes too long")
+    @Disabled("Takes too long")
     public void hugeDocumentTest()
         throws Exception
     {
@@ -213,7 +212,7 @@ public class HunPosTaggerTest
         if (!run) {
             System.out.println("Test requires more heap than available, skipping");
         }
-        Assume.assumeTrue(run);
+        assumeTrue(run);
 
         String text = "This is a test .\n";
         int reps = 4000000 / text.length();
@@ -244,7 +243,7 @@ public class HunPosTaggerTest
      * @throws Exception if an error occurs.
      */
     @Test
-    @Ignore("Takes too long")
+    @Disabled("Takes too long")
     public void multiDocumentTest()
         throws Exception
     {
@@ -281,14 +280,5 @@ public class HunPosTaggerTest
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
         
         return jcas;
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
 }

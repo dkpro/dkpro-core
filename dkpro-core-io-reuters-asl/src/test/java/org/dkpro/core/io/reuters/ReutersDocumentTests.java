@@ -17,12 +17,11 @@
  */
 package org.dkpro.core.io.reuters;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
 
-import org.dkpro.core.io.reuters.ReutersDocument;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ReutersDocumentTests
 {

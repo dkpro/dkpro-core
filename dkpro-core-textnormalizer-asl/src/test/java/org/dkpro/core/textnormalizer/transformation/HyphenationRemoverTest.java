@@ -22,7 +22,7 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -32,10 +32,9 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.io.text.TokenizedTextWriter;
 import org.dkpro.core.opennlp.OpenNlpSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class HyphenationRemoverTest
 {
@@ -55,10 +54,10 @@ public class HyphenationRemoverTest
     }
 
     @Test
-    public void testHyphenationRemoverInPipelineReaderWriter()
+    public void testHyphenationRemoverInPipelineReaderWriter(@TempDir File tempDir)
         throws Exception
     {
-        File outputPath = testContext.getTestOutputFolder();
+        File outputPath = tempDir;
         
         final String language = "de";
         final String variant = "maxent";
@@ -92,7 +91,4 @@ public class HyphenationRemoverTest
         actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(expected, actual);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

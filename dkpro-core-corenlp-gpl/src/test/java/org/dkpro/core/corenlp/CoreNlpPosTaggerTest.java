@@ -23,13 +23,10 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -237,7 +234,4 @@ public class CoreNlpPosTaggerTest
                 CoreNlpPosTagger.PARAM_PRINT_TAGSET, true);
         return TestRunner.runTest(engine, aLanguage, aText);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

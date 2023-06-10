@@ -28,11 +28,10 @@ import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import java.io.File;
 
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -50,7 +49,7 @@ public class ConllUReaderWriterTest
                 "conll/u/conllu-en-orig.conllu");
     }
 
-    @Ignore("This unfortunately doesn't work yet.")
+    @Disabled("This unfortunately doesn't work yet.")
     @Test
     public void roundTripV2EmptyNodes()
         throws Exception
@@ -71,7 +70,7 @@ public class ConllUReaderWriterTest
                 "conll/u_v2/conllu-morphological_annotation.conllu");
     }
 
-    @Ignore("This unfortunately doesn't work yet.")
+    @Disabled("This unfortunately doesn't work yet.")
     @Test
     public void roundTripV2ParagraphAndDocumentBoundaries()
         throws Exception
@@ -95,7 +94,7 @@ public class ConllUReaderWriterTest
     }
 
     @Test
-    public void roundTripV2SyntacticAnnotation()
+    public void roundTripV2SyntacticAnnotation(@TempDir File tempDir)
         throws Exception
     {
         ReaderAssert.assertThat(ConllUReader.class)
@@ -110,13 +109,14 @@ public class ConllUReaderWriterTest
         ReaderAssert.assertThat(ConllUReader.class)
             .readingFrom("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu")
             .usingWriter(ConllUWriter.class)
+            .writingTo(tempDir)
             .outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu"),
                         UTF_8));
     }
 
-    @Ignore("This unfortunately doesn't work yet.")
+    @Disabled("This unfortunately doesn't work yet.")
     @Test
     public void roundTripV2UntokenizedText()
         throws Exception
@@ -149,7 +149,4 @@ public class ConllUReaderWriterTest
                 "conll/u/conllu-en-ref.conllu",
                 "conll/u/conllu-en-orig2.conllu");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

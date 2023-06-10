@@ -18,16 +18,14 @@
 
 package org.dkpro.core.mallet.lda;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.dkpro.core.mallet.lda.MalletLdaTopicModelUtils;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class MalletLdaTopicModelUtilsTest
 {
@@ -38,14 +36,11 @@ public class MalletLdaTopicModelUtilsTest
     private static final int N_ITERATIONS = 50;
     private static final String LANGUAGE = "en";
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     @Test
-    public void testGetTopWords()
+    public void testGetTopWords(@TempDir File tempDir)
             throws Exception
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         MalletLdaUtil.trainModel(modelFile);
 
         int nWords = 10;

@@ -18,14 +18,12 @@
 package org.dkpro.core.langdetect;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LangDetectLanguageIdentifierTest
 {
@@ -66,7 +64,4 @@ public class LangDetectLanguageIdentifierTest
 
         return aJCas;
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -20,8 +20,7 @@ package org.dkpro.core.commonscodec;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 
-import org.dkpro.core.commonscodec.SoundexPhoneticTranscriptor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SoundexPhoneticTranscriptorTest
 {

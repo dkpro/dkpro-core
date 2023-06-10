@@ -19,46 +19,36 @@ package org.dkpro.core.io.solr;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import java.io.IOException;
-
-import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.io.solr.SolrWriter;
 import org.dkpro.core.io.text.StringReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-/**
- * Test(s) for {@link SolrWriter}.
- *
- *
- */
 public class SolrWriterTest
 {
     /**
      * Try to initialize with a non-responding Solr server.
-     *
-     * @throws UIMAException
-     * @throws IOException
      */
-    @Test(expected = ResourceInitializationException.class)
-    public void testFailInitServer()
-        throws UIMAException, IOException
+    @Test
+    public void testFailInitServer() throws Exception
     {
         String text = "text";
         String solrUrl = "http://noSolrServerHere:8983/solr";
 
-        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
+        CollectionReaderDescription reader = createReaderDescription( //
+                StringReader.class,//
+                StringReader.PARAM_DOCUMENT_TEXT, text, //
                 StringReader.PARAM_LANGUAGE, "en");
 
-        AnalysisEngineDescription writer = createEngineDescription(SolrWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(//
+                SolrWriter.class,//
                 SolrWriter.PARAM_TARGET_LOCATION, solrUrl);
 
-        SimplePipeline.runPipeline(reader, writer);
+        assertThatExceptionOfType(ResourceInitializationException.class)
+                .isThrownBy(() -> SimplePipeline.runPipeline(reader, writer));
     }
-
 }

@@ -24,16 +24,12 @@ import static org.dkpro.core.testing.AssertAnnotations.assertConstituents;
 import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 import static org.dkpro.core.testing.AssertAnnotations.assertToken;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.penntree.PennTreebankCombinedReader;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -153,20 +149,5 @@ public class PennTreebankCombinedReaderTest
         assertToken(tokens, select(jcas, Token.class));
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://de.clarin.eu/images/weblicht-tutorials/resources/tcf-04/schemas/latest/d-spin_0_4.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="https://raw.githubusercontent.com/weblicht/tcf-spec/master/src/main/rnc-schema/d-spin_0_4.rnc" type="application/relax-ng-compact-syntax"?>
 <D-Spin xmlns="http://www.dspin.de/data" version="0.4">
 <md:MetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmd="http://www.clarin.eu/cmd/" xmlns:md="http://www.dspin.de/data/metadata" xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1320657629623/xsd"></md:MetaData>
 <tc:TextCorpus xmlns:tc="http://www.dspin.de/data/textcorpus" lang="de">

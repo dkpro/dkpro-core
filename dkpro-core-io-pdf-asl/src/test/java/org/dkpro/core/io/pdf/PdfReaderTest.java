@@ -20,27 +20,25 @@ package org.dkpro.core.io.pdf;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.io.pdf.PdfReader;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class PdfReaderTest
 {
     @Test
-    public void test()
+    public void test(@TempDir File tempDir)
         throws Exception
     {
-        File outputFile = new File(testContext.getTestOutputFolder(), "dump-output.txt");
+        File outputFile = new File(tempDir, "dump-output.txt");
 
         CollectionReader reader = createReader(PdfReader.class, 
                 PdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data", 
@@ -60,7 +58,4 @@ public class PdfReaderTest
         
         assertEquals(reference, actual);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

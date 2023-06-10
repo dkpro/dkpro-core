@@ -22,23 +22,23 @@ import static org.assertj.core.api.Assertions.contentOf;
 
 import java.io.File;
 
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
 public class Conll2006ReaderWriterTest
 {
     @Test
-    public void roundTrip()
+    public void roundTrip(@TempDir File tempDir)
         throws Exception
     {
 // tag::testRoundTrip[]
         ReaderAssert.assertThat(Conll2006Reader.class)                 // the reader
             .readingFrom("src/test/resources/conll/2006/fi-ref.conll") // the test input file
             .usingWriter(Conll2006Writer.class)                        // the writer
+            .writingTo(tempDir)                                        // the output folder
             .outputAsString()                                          // access writer output
             .isEqualToNormalizingNewlines(                             // compare to input file
                 contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
@@ -46,7 +46,7 @@ public class Conll2006ReaderWriterTest
     }
 
     @Test
-    public void testFinnTreeBank()
+    public void testFinnTreeBank(@TempDir File tempDir)
         throws Exception
     {
 // tag::testOneWay[]
@@ -55,12 +55,10 @@ public class Conll2006ReaderWriterTest
             .readingFrom("src/test/resources/conll/2006/fi-orig.conll") // the test input file
             .usingWriter(Conll2006Writer.class,                         // the writer
                 Conll2006Writer.PARAM_TARGET_ENCODING, "UTF-8")         // writer parameter
+            .writingTo(tempDir)                                        // the output folder
             .outputAsString("fi-orig.conll")                            // access writer output
             .isEqualToNormalizingNewlines(                              // compare to input file
                 contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
 // end::testOneWay[]
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

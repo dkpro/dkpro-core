@@ -18,27 +18,27 @@
 package org.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.FSUtil.getFeature;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class XmiReaderWriterTest
 {
     @Test
     public void testRoundtrip() throws Exception {
         testRoundTrip(
-                XmiReader.class, 
-                XmiWriter.class,
+                createReaderDescription(XmiReader.class), 
+                createEngineDescription(XmiWriter.class),
                 "xmi/english.xmi");
     }
 
@@ -143,7 +143,4 @@ public class XmiReaderWriterTest
 //                        XmiWriter.PARAM_TARGET_LOCATION, "target/test-output/"+
 //                        testContext.getTestOutputFolderName()));
 //    }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

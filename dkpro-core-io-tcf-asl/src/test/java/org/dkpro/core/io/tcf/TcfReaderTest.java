@@ -20,7 +20,7 @@ package org.dkpro.core.io.tcf;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +28,8 @@ import java.util.List;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.tcf.TcfReader;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -84,7 +83,7 @@ public class TcfReaderTest
                 "[ 57, 58]Dependency(--,basic) D[57,58](.) G[50,56](machen)" };
 
         List<Sentence> sentences = new ArrayList<Sentence>(select(jcas, Sentence.class));
-        assertEquals("Number of sentences", 2, sentences.size());
+        assertEquals(2, sentences.size(), "Number of sentences");
         Sentence s1 = sentences.get(0);
         Sentence s2 = sentences.get(1);
         

@@ -18,7 +18,7 @@
 package org.dkpro.core.io.combination;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,9 +28,8 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.combination.CombinationReader;
 import org.dkpro.core.io.text.TextReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CombinationReaderTest {
 

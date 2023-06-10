@@ -19,18 +19,16 @@ package org.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 
@@ -43,7 +41,7 @@ public class ClearNlpSemanticRoleLabelerTest
     public void testEnglish()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
         JCas jcas = runTest("en", null, documentEnglish);
 
@@ -58,7 +56,7 @@ public class ClearNlpSemanticRoleLabelerTest
     public void testEnglishExpand()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
         JCas jcas = runTest("en", null, documentEnglish,
                 ClearNlpSemanticRoleLabeler.PARAM_EXPAND_ARGUMENTS, true);
@@ -80,7 +78,7 @@ public class ClearNlpSemanticRoleLabelerTest
     public void testEnglishExpand2()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
         JCas jcas = runTest("en", null, "The man was sued by Jacqueline Kennedy Onassis .",
                 ClearNlpSemanticRoleLabeler.PARAM_EXPAND_ARGUMENTS, true);
@@ -93,7 +91,7 @@ public class ClearNlpSemanticRoleLabelerTest
     public void testEnglishMayo()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
         JCas jcas = runTest("en", "mayo", documentEnglish);
 
@@ -122,10 +120,7 @@ public class ClearNlpSemanticRoleLabelerTest
     }
 
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
-    @Before
+    @BeforeEach
     public void freeMemory()
     {
         Runtime.getRuntime().gc();

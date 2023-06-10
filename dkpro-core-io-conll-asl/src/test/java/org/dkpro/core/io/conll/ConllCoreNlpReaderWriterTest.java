@@ -27,9 +27,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ConllCoreNlpReaderWriterTest
 {
@@ -60,7 +58,4 @@ public class ConllCoreNlpReaderWriterTest
         
         assertThat(actual).isEqualToNormalizingNewlines(reference);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

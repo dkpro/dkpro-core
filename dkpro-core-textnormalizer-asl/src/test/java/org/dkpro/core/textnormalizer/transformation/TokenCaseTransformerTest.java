@@ -29,7 +29,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 

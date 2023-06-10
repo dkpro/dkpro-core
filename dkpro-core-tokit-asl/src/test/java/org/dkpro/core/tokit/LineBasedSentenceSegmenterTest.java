@@ -24,10 +24,7 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
@@ -61,20 +58,5 @@ public class LineBasedSentenceSegmenterTest
         SimplePipeline.runPipeline(jcas, createEngineDescription(LineBasedSentenceSegmenter.class));
         
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
-    }
-    
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }

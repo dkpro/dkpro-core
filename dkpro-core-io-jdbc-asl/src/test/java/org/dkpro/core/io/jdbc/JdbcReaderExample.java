@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.jdbc;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,11 +35,10 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.io.jdbc.JdbcReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import junit.framework.Assert;
 
 public class JdbcReaderExample
 {
@@ -49,6 +50,7 @@ public class JdbcReaderExample
     String query = "SELECT title AS \"" + JdbcReader.CAS_METADATA_TITLE + "\", text AS \""
             + JdbcReader.CAS_TEXT + "\" FROM " + TBL_NAME + ";";
 
+    @Disabled("This is just an example")
     @Test
     public void localhostMysqlExample()
         throws UIMAException, IOException
@@ -108,8 +110,8 @@ public class JdbcReaderExample
 
             CAS cas = JCasFactory.createJCas().getCas();
             jdbcReader.getNext(cas);
-            Assert.assertEquals("title" + i, DocumentMetaData.get(cas).getDocumentTitle());
-            Assert.assertEquals("text..." + i, cas.getDocumentText());
+            assertEquals("title" + i, DocumentMetaData.get(cas).getDocumentTitle());
+            assertEquals("text..." + i, cas.getDocumentText());
             i++;
         }
     }

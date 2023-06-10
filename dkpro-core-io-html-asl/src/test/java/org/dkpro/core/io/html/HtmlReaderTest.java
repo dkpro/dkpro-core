@@ -21,8 +21,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.CasUtil.select;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.net.URL;
@@ -31,29 +31,25 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.html.HtmlReader;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class HtmlReaderTest
 {
     @Test
-    public void wwwReaderTest()
+    public void wwwReaderTest(@TempDir File tempDir)
         throws Exception
     {
-        File targetDir = testContext.getTestOutputFolder();
-        
         CollectionReaderDescription reader = createReaderDescription(
                 HtmlReader.class,
                 HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.google.de")
         );
         
         AnalysisEngineDescription dumpWriter = createEngineDescription(CasDumpWriter.class, 
-                CasDumpWriter.PARAM_TARGET_LOCATION, new File(targetDir, "google.html.dump"));
+                CasDumpWriter.PARAM_TARGET_LOCATION, new File(tempDir, "google.html.dump"));
 
         for (JCas jcas : new JCasIterable(reader, dumpWriter)) {
             dumpMetaData(DocumentMetaData.get(jcas));
@@ -81,7 +77,4 @@ public class HtmlReaderTest
         System.out.println("Base URI     : " + aMetaData.getDocumentBaseUri());
         System.out.println("URI          : " + aMetaData.getDocumentUri());
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

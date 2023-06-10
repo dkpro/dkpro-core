@@ -21,7 +21,7 @@ package org.dkpro.core.textnormalizer.transformation;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.transform.JCasTransformer_ImplBase;
 import org.dkpro.core.io.text.StringReader;
 import org.dkpro.core.textnormalizer.util.JCasHolder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;

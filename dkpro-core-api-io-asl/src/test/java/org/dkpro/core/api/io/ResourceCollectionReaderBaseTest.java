@@ -20,10 +20,11 @@ package org.dkpro.core.api.io;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
 import static org.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,17 +36,15 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasCreationUtils;
-import org.dkpro.core.api.io.ResourceCollectionReaderBase;
-import org.dkpro.core.api.io.ResourceLoaderLocator;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class ResourceCollectionReaderBaseTest
 {
-    @BeforeClass
+    @BeforeAll
     public static void before()
     {
         // Route logging through log4j
@@ -133,7 +132,7 @@ public class ResourceCollectionReaderBaseTest
         searchForResourceCollectionReaderBase(reader);
     }
 
-    @Ignore("This does not work because the underlying Spring component does not do remote.")
+    @Disabled("This does not work because the underlying Spring component does not do remote.")
     @Test
     public void testRemoteZip()
         throws Exception
@@ -231,15 +230,16 @@ public class ResourceCollectionReaderBaseTest
         searchForResourceCollectionReaderBase(reader);
     }
     
-    @Test(expected = ResourceInitializationException.class)
+    @Test
     public void testBrokenPattern()
         throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
-                PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
-                PARAM_PATTERNS, new String[] { "[?]**/FileSetCollectionReaderBase.java" });
-
-        searchForResourceCollectionReaderBase(reader);
+        assertThatExceptionOfType(ResourceInitializationException.class).isThrownBy(() -> {
+            CollectionReader reader = createReader(DummyReader.class,
+                    PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
+                    PARAM_PATTERNS, new String[] { "[?]**/FileSetCollectionReaderBase.java" });
+            searchForResourceCollectionReaderBase(reader);
+        });
     }
 
     @Test
@@ -290,7 +290,7 @@ public class ResourceCollectionReaderBaseTest
         }
         cas.release();
 
-        assertTrue("Good needle [" + goodNeedle + "] not found...", found);
+        assertTrue(found, "Good needle [" + goodNeedle + "] not found...");
     }
 
     public static final class DummyReader

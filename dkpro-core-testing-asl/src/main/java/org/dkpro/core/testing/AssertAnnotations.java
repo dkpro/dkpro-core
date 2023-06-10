@@ -25,9 +25,10 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.dkpro.core.testing.validation.Message.Level.ERROR;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -89,7 +90,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import junit.framework.Assert;
 
 public class AssertAnnotations
 {
@@ -457,7 +457,7 @@ public class AssertAnnotations
         System.out.printf("%-20s - Actual  : %s%n", "Dependencies", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-        assertTrue("Dependency offsets must match dependent offsets", offsetCorrect);
+        assertTrue(offsetCorrect, "Dependency offsets must match dependent offsets");
     }
 
     public static void assertPennTree(String aExpected, PennTree aActual)
@@ -715,8 +715,8 @@ public class AssertAnnotations
         mp.configure(aJCas.getCas());
 
         Map<String, String> mapping = mp.getResource();
-        Assert.assertNotNull("No mapping found for layer [" + aLayer.getName() + "] tagset ["
-                + aName + "]", mapping);
+        assertNotNull(mapping, "No mapping found for layer [" + aLayer.getName() + "] tagset ["
+                + aName + "]");
         mapping.keySet().retainAll(MappingUtils.stripMetadata(mapping.keySet()));
         mapping.remove("*"); // Remove wildcard
 
@@ -813,8 +813,8 @@ public class AssertAnnotations
         
         {
             List<AnalysisMapping> mapping = mp.getResource();
-            Assert.assertNotNull("No mapping found for layer [" + aLayer.getName() + "] tagset ["
-                    + aName + "]", mapping);
+            assertNotNull(mapping, "No mapping found for layer [" + aLayer.getName() + "] tagset ["
+                    + aName + "]");
         }
         
         List<String> expected = new ArrayList<String>(asList(aDefaultMapped));

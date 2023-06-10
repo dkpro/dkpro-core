@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.testing;
 
-import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -60,8 +60,8 @@ public class AssumeResource
             }
         }
         
-        assumeTrue("[" + aClass.getSimpleName() + "] model not available: [" + aLanguage + "] ["
-                + aVariant + "]", exists);
+        assumeTrue(exists, "[" + aClass.getSimpleName() + "] model not available: [" + aLanguage + "] ["
+                + aVariant + "]");
     }
 
     private static boolean resourceAvailable(Class<?> aClass, String aPackage, String aTool,

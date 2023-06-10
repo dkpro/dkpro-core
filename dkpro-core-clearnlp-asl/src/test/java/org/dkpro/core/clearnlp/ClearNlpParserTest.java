@@ -19,17 +19,15 @@ package org.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
 import org.dkpro.core.testing.dumper.DependencyDumper;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
@@ -42,7 +40,7 @@ public class ClearNlpParserTest
     public void testEnglishDependencies()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
         JCas jcas = runTest("en", null, documentEnglish);
 
@@ -113,7 +111,4 @@ public class ClearNlpParserTest
 
         return TestRunner.runTest(engine, aLanguage, aText);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

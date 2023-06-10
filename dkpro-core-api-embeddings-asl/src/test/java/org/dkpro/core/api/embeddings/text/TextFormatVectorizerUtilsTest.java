@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.api.embeddings.text;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,78 +27,70 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class TextFormatVectorizerUtilsTest
 {
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     @Test
-    public void testReadEmbeddingFileTxt()
-            throws IOException, URISyntaxException
+    public void testReadEmbeddingFileTxt() throws IOException, URISyntaxException
     {
         File modelFile = new File("src/test/resources/dummy.vec");
         int expectedSize = 699;
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, float[]> embeddings = TextFormatVectorizerUtils
-                .readEmbeddingFileTxt(modelFile, hasHeader);
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils.readEmbeddingFileTxt(modelFile,
+                hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
         embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
     }
 
     @Test
-    public void testReadEmbeddingFileTxtWithHeader()
-            throws IOException, URISyntaxException
+    public void testReadEmbeddingFileTxtWithHeader() throws IOException, URISyntaxException
     {
         File modelFile = new File("src/test/resources/dummy_with_header.vec");
         int expectedSize = 699;
         int expectedDimensions = 50;
         boolean hasHeader = true;
 
-        Map<String, float[]> embeddings = TextFormatVectorizerUtils
-                .readEmbeddingFileTxt(modelFile, hasHeader);
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils.readEmbeddingFileTxt(modelFile,
+                hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
         embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
     }
 
     @Test
-    public void testReadEmbeddingFileTxtCompressed()
-            throws IOException, URISyntaxException
+    public void testReadEmbeddingFileTxtCompressed() throws IOException, URISyntaxException
     {
         File modelFile = new File("src/test/resources/embeddings.gz");
         int expectedSize = 699;
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, float[]> embeddings = TextFormatVectorizerUtils
-                .readEmbeddingFileTxt(modelFile, hasHeader);
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils.readEmbeddingFileTxt(modelFile,
+                hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
         embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
     }
 
     @Test
-    public void testConvertMalletEmbeddingsToBinary()
-            throws IOException
+    public void testConvertMalletEmbeddingsToBinary(@TempDir File tempDir) throws IOException
     {
         File modelFile = new File("src/test/resources/dummy.vec");
-        File targetFile = new File(testContext.getTestOutputFolder(), "binary");
+        File targetFile = new File(tempDir, "binary");
 
-        Map<String, float[]> embeddings = TextFormatVectorizerUtils
-                .readEmbeddingFileTxt(modelFile, false);
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils.readEmbeddingFileTxt(modelFile,
+                false);
         TextFormatVectorizerUtils.convertMalletEmbeddingsToBinary(modelFile, targetFile);
         BinaryVectorizer vec = BinaryVectorizer.load(targetFile);
 
         for (String token : embeddings.keySet()) {
-            assertTrue("Arrays to not match for token " + token,
-                    Arrays.equals(embeddings.get(token), vec.vectorize(token)));
+            assertTrue(Arrays.equals(embeddings.get(token), vec.vectorize(token)),
+                    "Arrays to not match for token " + token);
         }
     }
 

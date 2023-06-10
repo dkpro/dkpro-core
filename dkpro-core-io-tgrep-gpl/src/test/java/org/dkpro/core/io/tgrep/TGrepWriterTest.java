@@ -19,6 +19,7 @@
 package org.dkpro.core.io.tgrep;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,21 +33,17 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.CompressionMethod;
 import org.dkpro.core.corenlp.CoreNlpParser;
 import org.dkpro.core.corenlp.CoreNlpSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class TGrepWriterTest
 {
     @Test
-    public void testTxt()
+    public void testTxt(@TempDir File outputPath)
         throws Exception
     {
-        File outputPath = testContext.getTestOutputFolder();
-        
         String language = "en";
         String text = "This is a sample sentence. Followed by another one.";
         AnalysisEngineDescription seg = createEngineDescription(CoreNlpSegmenter.class);
@@ -81,13 +78,10 @@ public class TGrepWriterTest
         expected.add("(ROOT (S (VP (VBN Followed) (PP (IN by) (NP (DT another) (NN one)))) (. .)))");
         List<String> actual = FileUtils.readLines(new File(outputPath, "testCollection.txt"), "UTF-8");
 
-        Assert.assertEquals(expected.size(), actual.size());
+        assertEquals(expected.size(), actual.size());
 
         for (int i = 0; i < actual.size(); i++) {
-            Assert.assertEquals(expected.get(i), actual.get(i));
+            assertEquals(expected.get(i), actual.get(i));
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

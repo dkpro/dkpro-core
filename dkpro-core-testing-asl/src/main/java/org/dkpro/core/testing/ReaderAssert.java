@@ -220,19 +220,9 @@ public class ReaderAssert
                 return readerParameters.get(PARAM_SOURCE_LOCATION);
             }
             
-            // Can we get one from the DKPro Core test context?
-            if (DkproTestContext.get() == null) {
-                String contextOutputFolderName = "target/test-output/"
-                        + DkproTestContext.get().getTestOutputFolderName();
-                readingFrom(contextOutputFolderName);
-                return contextOutputFolderName;
-            }
-            
-            // No success?
             throw Failures.instance()
-                    .failure(String.format("Unable to determine source location. Use a @Rule "
-                            + DkproTestContext.class.getSimpleName()
-                            + " or set the location using `readingWith()"));
+                    .failure(String.format("Unable to determine source location. Set an explicit "
+                            + "source location or set the location using `readingWith()"));
         }
         else {
             return requestedSourceLocation;

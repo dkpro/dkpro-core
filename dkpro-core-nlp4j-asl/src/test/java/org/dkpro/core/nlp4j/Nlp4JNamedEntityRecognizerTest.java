@@ -19,18 +19,13 @@ package org.dkpro.core.nlp4j;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.nlp4j.Nlp4JLemmatizer;
-import org.dkpro.core.nlp4j.Nlp4JNamedEntityRecognizer;
-import org.dkpro.core.nlp4j.Nlp4JPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 
@@ -41,7 +36,7 @@ public class Nlp4JNamedEntityRecognizerTest
         throws Exception
     {
         long maxMemory = Runtime.getRuntime().maxMemory();
-        Assume.assumeTrue("Insufficient max memory: " + maxMemory, maxMemory > 3700000000l);
+        assumeTrue(maxMemory > 3700000000l, "Insufficient max memory: " + maxMemory);
         
         // Run the test pipeline. Note the full stop at the end of a sentence is preceded by a
         // whitespace. This is necessary for it to be detected as a separate token!
@@ -75,7 +70,4 @@ public class Nlp4JNamedEntityRecognizerTest
         // made dependencies in the pom.xml file.
         return TestRunner.runTest(engine, language, testDocument);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -17,9 +17,10 @@
  */
 package org.dkpro.core.api.resources;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,92 +29,81 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.dkpro.core.api.resources.ResourceObjectProviderBase;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class ResourceObjectProviderTest
 {
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
-    
-    @Test(expected = IOException.class)
-    public void testIOException() throws Exception
+    public void testIOException(@TempDir File tempDir) throws Exception
     {
         ResourceObjectProviderBase<String> provider = new ResourceObjectProviderBase<String>()
         {
             @Override
-            protected String produceResource(URL aUrl)
-                throws IOException
+            protected String produceResource(URL aUrl) throws IOException
             {
                 throw new IOException("IOException");
             }
-            
-            @Override
-            protected Properties getProperties()
-            {
-                return null;
-            }
-        };
-        
-        File fileToResolve = folder.newFile();
-        fileToResolve.createNewFile();
-        
-        provider.setDefault(ResourceObjectProviderBase.LOCATION, fileToResolve.getAbsolutePath());
-        provider.configure();
-    }
 
-    @Test(expected = RuntimeException.class)
-    public void testIORuntime() throws Exception
-    {
-        ResourceObjectProviderBase<String> provider = new ResourceObjectProviderBase<String>()
-        {
-            @Override
-            protected String produceResource(URL aUrl)
-                throws IOException
-            {
-                throw new RuntimeException("RuntimeException");
-            }
-            
             @Override
             protected Properties getProperties()
             {
                 return null;
             }
         };
-        
-        File fileToResolve = folder.newFile();
+
+        File fileToResolve = new File(tempDir, "file");
         fileToResolve.createNewFile();
-        
+
         provider.setDefault(ResourceObjectProviderBase.LOCATION, fileToResolve.getAbsolutePath());
-        provider.configure();
+        assertThatExceptionOfType(IOException.class).isThrownBy(() -> provider.configure());
     }
 
     @Test
-    public void testBadResolving() throws Exception
+    public void testIORuntime(@TempDir File tempDir) throws Exception
     {
         ResourceObjectProviderBase<String> provider = new ResourceObjectProviderBase<String>()
         {
             @Override
-            protected String produceResource(URL aUrl)
-                throws IOException
+            protected String produceResource(URL aUrl) throws IOException
             {
-                return aUrl.toString();
+                throw new RuntimeException("RuntimeException");
             }
-            
+
             @Override
             protected Properties getProperties()
             {
                 return null;
             }
         };
-        
-        File fileToResolve = folder.newFile();
+
+        File fileToResolve = new File(tempDir, "file");
+        fileToResolve.createNewFile();
+
+        provider.setDefault(ResourceObjectProviderBase.LOCATION, fileToResolve.getAbsolutePath());
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> provider.configure());
+    }
+
+    @Test
+    public void testBadResolving(@TempDir File tempDir) throws Exception
+    {
+        ResourceObjectProviderBase<String> provider = new ResourceObjectProviderBase<String>()
+        {
+            @Override
+            protected String produceResource(URL aUrl) throws IOException
+            {
+                return aUrl.toString();
+            }
+
+            @Override
+            protected Properties getProperties()
+            {
+                return null;
+            }
+        };
+
+        File fileToResolve = new File(tempDir, "file");
         fileToResolve.delete();
-        
+
         provider.setDefault(ResourceObjectProviderBase.LOCATION, fileToResolve.getAbsolutePath());
         try {
             provider.configure();
@@ -123,23 +113,23 @@ public class ResourceObjectProviderTest
             assertTrue(e.getMessage().startsWith("Unable to load resource ["));
         }
     }
-    
+
     @Test
     public void testCaching() throws Exception
     {
         SharableObjectProvider provider1 = new SharableObjectProvider();
         SharableObjectProvider provider2 = new SharableObjectProvider();
-        
+
         String loc = "classpath:" + getClass().getName().replace('.', '/') + ".class";
         provider1.setDefault(ResourceObjectProviderBase.LOCATION, loc);
         provider2.setDefault(ResourceObjectProviderBase.LOCATION, loc);
-        
+
         provider1.configure();
         provider2.configure();
-        
+
         assertTrue(provider1.getResource() == provider2.getResource());
     }
-    
+
     @Test
     public void testPomFindingInJar()
     {
@@ -147,16 +137,18 @@ public class ResourceObjectProviderTest
                 + "de.tudarmstadt.ukp.dkpro.core.corenlp-gpl/1.9.1/"
                 + "de.tudarmstadt.ukp.dkpro.core.corenlp-gpl-1.9.1.jar!/";
 
-        Pattern pattern = Pattern.compile(".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
-        
+        Pattern pattern = Pattern.compile(
+                ".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
+
         Matcher matcher = pattern.matcher(location);
-        
+
         assertTrue(matcher.matches());
-        
+
         assertEquals("de.tudarmstadt.ukp.dkpro.core.corenlp-gpl", matcher.group("ID"));
     }
-    
-    private static class SharableObjectProvider extends ResourceObjectProviderBase<Object>
+
+    private static class SharableObjectProvider
+        extends ResourceObjectProviderBase<Object>
     {
         {
             setDefault(SHARABLE, "true");
@@ -169,19 +161,9 @@ public class ResourceObjectProviderTest
         }
 
         @Override
-        protected Object produceResource(URL aUrl)
-            throws IOException
+        protected Object produceResource(URL aUrl) throws IOException
         {
             return new Object();
         }
-    }
-    
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
 }

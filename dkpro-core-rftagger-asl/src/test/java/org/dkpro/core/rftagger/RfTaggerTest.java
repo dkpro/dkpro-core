@@ -24,6 +24,7 @@ import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagsetParser;
 import static org.dkpro.core.testing.AssertAnnotations.assertToken;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -33,12 +34,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.PlatformDetector;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -46,16 +44,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class RfTaggerTest
 {
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
-    @Before
+    @BeforeEach
     public void prepare()
     {
         PlatformDetector pd = new PlatformDetector();
-        Assume.assumeTrue("Unsupported platform",
-                asList("linux-x86_32", "linux-x86_64", "osx-x86_64", "windows-x86_64")
-                        .contains(pd.getPlatformId()));
+        assumeTrue(asList("linux-x86_32", "linux-x86_64", "osx-x86_64", "windows-x86_64")
+                .contains(pd.getPlatformId()), "Unsupported platform");
     }
 
     @Test

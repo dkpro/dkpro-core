@@ -24,9 +24,7 @@
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>dkpro-core-api-metadata-asl</artifactId>
-  <packaging>jar</packaging>
   <name>DKPro Core ASL - Metadata API</name>
-  <url>https://dkpro.github.io/dkpro-core/</url>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -39,11 +37,6 @@
     <dependency>
       <groupId>org.apache.uima</groupId>
       <artifactId>uimafit-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>

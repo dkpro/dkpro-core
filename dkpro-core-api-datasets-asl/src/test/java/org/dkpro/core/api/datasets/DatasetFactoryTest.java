@@ -17,23 +17,23 @@
  */
 package org.dkpro.core.api.datasets;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class DatasetFactoryTest
 {
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
     public void testOne()
         throws Exception
@@ -48,7 +48,7 @@ public class DatasetFactoryTest
         }
     }
     
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
     public void testLoadAll()
         throws Exception
@@ -62,13 +62,11 @@ public class DatasetFactoryTest
         }
     }
 
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testShared()
+    public void testShared(@TempDir Path cache)
         throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds1 = df.load("perseus-el-2.1");
         assertDatasetOk(ds1);
@@ -76,25 +74,21 @@ public class DatasetFactoryTest
         assertDatasetOk(ds2);
     }
 
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadSimple()
+    public void testLoadSimple(@TempDir Path cache)
         throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds = df.load("germeval2014-de");
         assertDatasetOk(ds);
     }
 
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadWithExplode()
+    public void testLoadWithExplode(@TempDir Path cache)
         throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds = df.load("brown-en-teixml");
         assertDatasetOk(ds);
@@ -134,11 +128,8 @@ public class DatasetFactoryTest
     {
         if (aFiles != null) {
             for (File f : aFiles) {
-                assertTrue("File does not exist: [" + f + "]", f.exists());
+                assertThat(f).exists();
             }
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

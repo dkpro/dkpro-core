@@ -19,7 +19,9 @@ package org.dkpro.core.io.webanno.tsv;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
@@ -27,9 +29,8 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.JCasUtil;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
@@ -41,11 +42,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 public class WebAnnoTsv3XReaderWriterTest
 {
     @Test
-    public void test()
+    public void test(@TempDir File targetFolder)
         throws Exception
     {
-        String targetFolder = "target/test-output/" + testContext.getTestOutputFolderName();
-        
         CollectionReader reader = CollectionReaderFactory.createReader(
                 WebannoTsv3XReader.class,
                 WebannoTsv3XReader.PARAM_SOURCE_LOCATION, "src/test/resources/tsv3/",
@@ -88,7 +87,4 @@ public class WebAnnoTsv3XReaderWriterTest
         assertEquals(JCasUtil.select(cas2.getJCas(), Dependency.class).size(),
                 JCasUtil.select(cas1.getJCas(), Dependency.class).size());
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

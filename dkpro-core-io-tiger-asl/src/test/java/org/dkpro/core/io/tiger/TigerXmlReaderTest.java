@@ -24,28 +24,34 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.conll.Conll2012Writer;
-import org.dkpro.core.io.tiger.TigerXmlReader;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 public class TigerXmlReaderTest
 {
+    @BeforeAll
+    static void setupClass() {
+        // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
+        // file where this property is globally set for all surefire runs
+        System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
+    }
+    
     @Test
     public void test()
         throws Exception
@@ -65,7 +71,7 @@ public class TigerXmlReaderTest
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void test2()
         throws Exception
     {
@@ -75,9 +81,9 @@ public class TigerXmlReaderTest
                 TigerXmlReader.PARAM_LANGUAGE, "de",
                 TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
-        for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
-            System.out.printf("%s %n", DocumentMetaData.get(cas).getDocumentId());
-        }
+        assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> iteratePipeline(reader, new AnalysisEngineDescription[] {})
+                        .iterator().next());
     }
 
     @Test
@@ -224,7 +230,4 @@ public class TigerXmlReaderTest
             }
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

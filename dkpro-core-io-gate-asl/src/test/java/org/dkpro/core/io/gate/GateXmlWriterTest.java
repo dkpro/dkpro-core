@@ -23,7 +23,6 @@ import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.io.conll.Conll2000Reader;
 import org.dkpro.core.io.conll.Conll2002Reader;
-import org.dkpro.core.io.gate.GateXmlWriter;
 import org.dkpro.core.testing.DkproTestContext;
 import org.junit.Rule;
 import org.junit.Test;

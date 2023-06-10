@@ -21,66 +21,53 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
-import org.dkpro.core.api.io.sequencecodec.AdjacentLabelCodec;
-import org.dkpro.core.api.io.sequencecodec.SequenceItem;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-@RunWith(Parameterized.class)
 public class AdjacentLabelCodecTest
 {
-    private AdjacentLabelCodec sut;
-    private int offset;
-    
-    @Parameters
-    public static Collection<Object[]> data() {
-        return asList(new Object[][] { { 0 }, { 1 } });
+    public static Stream<Integer> data() {
+        return Stream.of(0, 1);
     }
     
-    public AdjacentLabelCodecTest(int aOffset)
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testDecodeEmpty(int offset)
     {
-        offset = aOffset;
-    }
-    
-    @Before
-    public void setup()
-    {
-        sut = new AdjacentLabelCodec(offset);
-    }
-    
-    @Test
-    public void testDecodeEmpty()
-    {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = SequenceItem.of(offset);
         List<SequenceItem> decoded = sut.decode(encoded);
         assertThat(decoded).containsExactly();
     }
 
-    @Test
-    public void testDecodeSingleValidItem()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testDecodeSingleValidItem(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = SequenceItem.of(offset, "PER");
         List<SequenceItem> decoded = sut.decode(encoded);
         assertThat(decoded).containsExactly(new SequenceItem(0 + offset, 0 + offset, "PER"));
     }
     
-    @Test
-    public void testDecodeMultiUnitSpan()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testDecodeMultiUnitSpan(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = SequenceItem.of(offset, "O", "PER", "PER", "O");
         List<SequenceItem> decoded = sut.decode(encoded);
         assertThat(decoded).containsExactly(new SequenceItem(1 + offset, 2 + offset, "PER"));
     }
 
-    @Test
-    public void testDecodeTwoAdjacentUnitsWithDifferentLabels()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testDecodeTwoAdjacentUnitsWithDifferentLabels(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = SequenceItem.of(offset, "O", "PER", "ORG", "O");
         List<SequenceItem> decoded = sut.decode(encoded);
         assertThat(decoded).containsExactly(
@@ -88,9 +75,11 @@ public class AdjacentLabelCodecTest
                 new SequenceItem(2 + offset, 2 + offset, "ORG"));
     }
 
-    @Test
-    public void testDecodeEndSmallerThanBegin()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testDecodeEndSmallerThanBegin(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = asList(new SequenceItem(1 + offset, 0 + offset, "O"));
         
         assertThatExceptionOfType(IllegalStateException.class)
@@ -98,9 +87,11 @@ public class AdjacentLabelCodecTest
                 .withMessageContaining("Illegal sequence item span");
     }
 
-    @Test
-    public void testDecodeBadItemOrder()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testDecodeBadItemOrder(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = asList(
                 new SequenceItem(1 + offset, 1 + offset, "O"), 
                 new SequenceItem(0 + offset, 0 + offset, "O"));
@@ -110,17 +101,21 @@ public class AdjacentLabelCodecTest
                 .withMessageContaining("Illegal sequence item span");
     }
 
-    @Test
-    public void testEncodeSingleUnitSingleItem()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testEncodeSingleUnitSingleItem(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> decoded = asList(new SequenceItem(0 + offset, 0 + offset, "PER"));
         List<SequenceItem> encoded = sut.encode(decoded, 1);
         assertThat(encoded).containsExactly(new SequenceItem(0 + offset, 0 + offset, "PER"));
     }
 
-    @Test
-    public void testEncodeMultipleUnitsSingleItem()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testEncodeMultipleUnitsSingleItem(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> decoded = asList(new SequenceItem(0 + offset, 1 + offset, "PER"));
         List<SequenceItem> encoded = sut.encode(decoded, 2);
         assertThat(encoded).containsExactly(
@@ -128,9 +123,11 @@ public class AdjacentLabelCodecTest
                 new SequenceItem(1 + offset, 1 + offset, "PER"));
     }
 
-    @Test
-    public void testEncodeMultipleItems()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testEncodeMultipleItems(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> decoded = asList(
                 new SequenceItem(0 + offset, 0 + offset, "PER"), 
                 new SequenceItem(1 + offset, 1 + offset, "ORG"));
@@ -140,9 +137,11 @@ public class AdjacentLabelCodecTest
                 new SequenceItem(1 + offset, 1 + offset, "ORG"));
     }
 
-    @Test
-    public void testEncodeMultipleItemsWithGap()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testEncodeMultipleItemsWithGap(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> decoded = asList(
                 new SequenceItem(0 + offset, 0 + offset, "PER"), 
                 new SequenceItem(2 + offset, 2 + offset, "ORG"));
@@ -153,9 +152,11 @@ public class AdjacentLabelCodecTest
                 new SequenceItem(2 + offset, 2 + offset, "ORG"));
     }
     
-    @Test
-    public void testEncodeBadItemSpan()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testEncodeBadItemSpan(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = asList(new SequenceItem(2 + offset, 1 + offset, "PER"));
         
         assertThatExceptionOfType(IllegalStateException.class)
@@ -163,9 +164,11 @@ public class AdjacentLabelCodecTest
                 .withMessageContaining("Illegal sequence item span");
     }
     
-    @Test
-    public void testEncodeBadItemOrder()
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testEncodeBadItemOrder(int offset)
     {
+        var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = asList(
                 new SequenceItem(1 + offset, 1 + offset, "PER"), 
                 new SequenceItem(0 + offset, 0 + offset, "ORG"));

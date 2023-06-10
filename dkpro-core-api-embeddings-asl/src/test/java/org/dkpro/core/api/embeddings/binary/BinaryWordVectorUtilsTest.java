@@ -17,10 +17,11 @@
  */
 package org.dkpro.core.api.embeddings.binary;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils.convertWordVectorsToBinary;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,19 +30,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.dkpro.core.api.embeddings.VectorizerUtils;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class BinaryWordVectorUtilsTest
 {
+    private @TempDir File tempDir;
+    
     // TODO: test for very large data (>2GB should be chunked)
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
     private Map<String, float[]> vectors;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         vectors = new HashMap<>();
@@ -57,17 +57,17 @@ public class BinaryWordVectorUtilsTest
 
         BinaryVectorizer vec = BinaryVectorizer.load(binaryTarget);
 
-        assertTrue(vec.contains("t1"));
-        assertTrue(vec.contains("t2"));
-        assertEquals(3, vec.dimensions());
-        assertEquals(2, vec.size());
-        assertTrue(vec.isCaseless());
+        assertThat(vec.contains("t1")).isTrue();
+        assertThat(vec.contains("t2")).isTrue();
+        assertThat(vec.dimensions()).isEqualTo(3);
+        assertThat(vec.size()).isEqualTo(2);
+        assertThat(vec.isCaseless()).isTrue();
 
         for (String word : vectors.keySet()) {
             float[] orig = vectors.get(word);
             float[] conv = vec.vectorize(word);
 
-            assertTrue("Vectors differ for " + word, Arrays.equals(orig, conv));
+            assertThat(conv).containsExactly(orig);
         }
     }
 
@@ -92,7 +92,7 @@ public class BinaryWordVectorUtilsTest
             float[] orig = vectors.get(word);
             float[] conv = vec.vectorize(word);
 
-            assertTrue("Vectors differ for " + word, Arrays.equals(orig, conv));
+            assertTrue(Arrays.equals(orig, conv), "Vectors differ for " + word);
         }
     }
 
@@ -109,8 +109,8 @@ public class BinaryWordVectorUtilsTest
         float[] unk2 = vec.vectorize("unk2");
         assertTrue(Arrays.equals(randVector, unk1));
         assertTrue(Arrays.equals(randVector, unk2));
-        assertTrue("Vectors or unknown words should always be the same.",
-                Arrays.equals(unk1, unk2));
+        assertTrue(
+                Arrays.equals(unk1, unk2), "Vectors or unknown words should always be the same.");
     }
 
     /**
@@ -122,7 +122,7 @@ public class BinaryWordVectorUtilsTest
     private File writeBinaryFile(Map<String, float[]> vectors)
             throws IOException
     {
-        File binaryTarget = new File(testContext.getTestOutputFolder(), "binaryTarget");
+        File binaryTarget = new File(tempDir, "binaryTarget");
         convertWordVectorsToBinary(vectors, binaryTarget);
         return binaryTarget;
     }

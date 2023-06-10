@@ -21,6 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 import static org.dkpro.core.testing.AssertAnnotations.assertToken;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,8 +35,7 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.ResourceObjectProviderBase;
 import org.dkpro.core.api.segmentation.SegmenterBase;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.junit.Assert;
-import org.junit.internal.AssumptionViolatedException;
+import org.opentest4j.TestAbortedException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -135,7 +135,7 @@ public final class SegmenterHarness
     @FunctionalInterface
     public static interface AssumeResourcePredicate {
         void assume(String aLanguage, String aVariant)
-            throws AssumptionViolatedException, IOException;
+            throws IOException;
     }
 
     public static void run(AnalysisEngineDescription aAed, String... aIgnoreIds)
@@ -169,7 +169,7 @@ public final class SegmenterHarness
                     try {
                         aCheck.assume(td.language, null);
                     }
-                    catch (AssumptionViolatedException e) {
+                    catch (TestAbortedException e) {
                         results.add(String.format("%s skipped", td.id));
                         continue;
                     }
@@ -201,7 +201,7 @@ public final class SegmenterHarness
 
                 if (!failed && ArrayUtils.contains(aIgnoreIds, td.id)) {
                     results.add(String.format("%s FAIL", td.id));
-                    Assert.fail(td.id + " passed but was expected to fail");
+                    fail(td.id + " passed but was expected to fail");
                 }
             }
         }

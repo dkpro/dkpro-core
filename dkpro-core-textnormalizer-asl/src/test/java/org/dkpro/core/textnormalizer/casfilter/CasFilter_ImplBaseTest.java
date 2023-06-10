@@ -20,9 +20,9 @@ package org.dkpro.core.textnormalizer.casfilter;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,20 +39,19 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.StringReader;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class CasFilter_ImplBaseTest
 {
     @Test
-    public void testAnnotationFilterPass()
+    public void testAnnotationFilterPass(@TempDir File tempDir)
         throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        File tmpFile = new File(tempDir, "output.dump");
         
         String input = "test";
         String expectedFirstLine = "======== CAS 0 begin ==================================";
@@ -78,10 +77,10 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testAnnotationFilterRemove()
+    public void testAnnotationFilterRemove(@TempDir File tempDir)
         throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        File tmpFile = new File(tempDir, "output.dump");
         
         String input = "";
 
@@ -100,10 +99,10 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testEmptyDocumentFilterRemove()
+    public void testEmptyDocumentFilterRemove(@TempDir File tempDir)
         throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        File tmpFile = new File(tempDir, "output.dump");
         
         String input = "";
 
@@ -121,10 +120,10 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testEmptyDocumentFilterPass()
+    public void testEmptyDocumentFilterPass(@TempDir File tempDir)
         throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        File tmpFile = new File(tempDir, "output.dump");
 
         String input = "test";
 
@@ -142,10 +141,10 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testLanguageFilterPass()
+    public void testLanguageFilterPass(@TempDir File tempDir)
         throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        File tmpFile = new File(tempDir, "output.dump");
         
         String input = "test";
 
@@ -164,10 +163,10 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testLanguageFilterRemove()
+    public void testLanguageFilterRemove(@TempDir File tempDir)
         throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        File tmpFile = new File(tempDir, "output.dump");
         
         String input = "test";
 
@@ -244,7 +243,4 @@ public class CasFilter_ImplBaseTest
             return requiredLanguages.contains(aJCas.getDocumentLanguage());
         }
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }
