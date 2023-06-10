@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - GATE (v ${gate.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <gate.version>8.2</gate.version>
+    <gate.version>8.6.1</gate.version>
   </properties>
   <dependencies>
     <dependency>

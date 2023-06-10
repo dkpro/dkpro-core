@@ -28,10 +28,12 @@ import java.io.File;
 import java.net.URL;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -39,6 +41,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class HtmlReaderTest
 {
+    @BeforeAll
+    static void setupClass() {
+        // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
+        // file where this property is globally set for all surefire runs
+        System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
+    }
+    
     @Test
     public void wwwReaderTest(@TempDir File tempDir)
         throws Exception
