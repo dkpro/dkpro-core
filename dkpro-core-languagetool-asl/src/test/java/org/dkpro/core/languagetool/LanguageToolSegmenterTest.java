@@ -109,7 +109,7 @@ public class LanguageToolSegmenterTest
     {
         AnalysisEngineDescription aed = createEngineDescription(LanguageToolSegmenter.class);
 
-        SegmenterHarness.run(aed, "de.1", "en.1", "en.3", "en.6", "en.7", "en.9", "ar.1", "zh.2");
+        SegmenterHarness.run(aed, "de.1", "en.1", "en.7", "en.9", "ar.1", "zh.2");
     }
 
     @Test
