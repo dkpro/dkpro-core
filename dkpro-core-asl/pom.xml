@@ -174,7 +174,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-flextag-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.4.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -289,7 +289,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-lcc-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.4.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -514,7 +514,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>org-dkpro-core-smile-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.4.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
@@ -544,7 +544,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>org-dkpro-core-udpipe-asl</artifactId>
-        <version>2.3.0-SNAPSHOT</version>
+        <version>2.4.0-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -677,22 +677,22 @@
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-io-annis-asl</artifactId>
-            <version>2.3.0-SNAPSHOT</version>
+            <version>2.4.0-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-io-rdf-asl</artifactId>
-            <version>2.3.0-SNAPSHOT</version>
+            <version>2.4.0-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-cogroo-asl</artifactId>
-            <version>2.3.0-SNAPSHOT</version>
+            <version>2.4.0-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-kuromoji-asl</artifactId>
-            <version>2.3.0-SNAPSHOT</version>
+            <version>2.4.0-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>

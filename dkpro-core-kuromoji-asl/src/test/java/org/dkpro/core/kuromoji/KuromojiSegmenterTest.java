@@ -26,9 +26,7 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.atilika.kuromoji.ipadic.Tokenizer;
 
@@ -83,8 +81,4 @@ public class KuromojiSegmenterTest
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
 }

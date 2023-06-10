@@ -26,12 +26,14 @@ import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import java.io.File;
 
+import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.xmi.XmiWriter;
 import org.dkpro.core.io.xml.XmlDocumentWriter;
 import org.dkpro.core.testing.TestOptions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.xmlunit.assertj3.XmlAssert;
 import org.xmlunit.builder.Input;
@@ -41,6 +43,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 
 public class HtmlDocumentReaderTest
 {
+    @BeforeAll
+    static void setupClass() {
+        // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
+        // file where this property is globally set for all surefire runs
+        System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
+    }
+    
     @Test
     public void testReadFileWithOnlyBody() throws Exception
     {

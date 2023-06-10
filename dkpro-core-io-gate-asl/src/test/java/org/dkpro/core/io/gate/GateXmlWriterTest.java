@@ -23,51 +23,56 @@ import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.io.conll.Conll2000Reader;
 import org.dkpro.core.io.conll.Conll2002Reader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GateXmlWriterTest
 {
     @Test
-    public void oneWay()
-        throws Exception
+    public void oneWay() throws Exception
     {
-        testOneWay(Conll2000Reader.class, GateXmlWriter.class, "conll/2000/chunk2000_ref.xml",
+        testOneWay( //
+                Conll2000Reader.class, //
+                GateXmlWriter.class, //
+                "conll/2000/chunk2000_ref.xml", //
                 "conll/2000/chunk2000_test.conll");
     }
 
     @Test
-    public void oneWayNamedAnnotationSet()
-        throws Exception
+    public void oneWayNamedAnnotationSet() throws Exception
     {
-        testOneWay(createReaderDescription(Conll2000Reader.class),
-                createEngineDescription(GateXmlWriter.class,
-                        GateXmlWriter.PARAM_ANNOTATION_SET_NAME, "mimir"),
-                "conll/2000/chunk2000_ref_named_as.xml", "conll/2000/chunk2000_test.conll");
+        testOneWay( //
+                createReaderDescription( //
+                        Conll2000Reader.class), //
+                createEngineDescription( //
+                        GateXmlWriter.class, //
+                        GateXmlWriter.PARAM_ANNOTATION_SET_NAME, "mimir"), //
+                "conll/2000/chunk2000_ref_named_as.xml", //
+                "conll/2000/chunk2000_test.conll");
     }
 
     @Test
-    public void oneWayNamedEntityGeneric()
-        throws Exception
+    public void oneWayNamedEntityGeneric() throws Exception
     {
-        testOneWay(Conll2002Reader.class, GateXmlWriter.class, "conll/2002/ner2002_ref_generic.xml",
+        testOneWay( //
+                Conll2002Reader.class, //
+                GateXmlWriter.class, //
+                "conll/2002/ner2002_ref_generic.xml", //
                 "conll/2002/ner2002_test.conll");
     }
 
     @Test
-    public void oneWayNamedEntitySpecific()
-        throws Exception
+    public void oneWayNamedEntitySpecific() throws Exception
     {
-        testOneWay(
-                createReaderDescription(Conll2002Reader.class, Conll2002Reader.PARAM_LANGUAGE, "en",
+        testOneWay( //
+                createReaderDescription( //
+                        Conll2002Reader.class, //
+                        Conll2002Reader.PARAM_LANGUAGE, "en", //
                         Conll2002Reader.PARAM_NAMED_ENTITY_MAPPING_LOCATION,
                         "src/test/resources/conll/2002/ner2002_conll.map"),
-                createEngineDescription(GateXmlWriter.class), "conll/2002/ner2002_ref_specific.xml",
+                createEngineDescription( //
+                        GateXmlWriter.class), //
+                "conll/2002/ner2002_ref_specific.xml", //
                 "conll/2002/ner2002_test.conll");
 
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

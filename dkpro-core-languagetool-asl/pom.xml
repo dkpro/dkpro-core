@@ -29,7 +29,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>Grammar checker based on LanguageTool (LGPL)</description>
   <properties>
-    <languagetool.version>5.2</languagetool.version>
+    <languagetool.version>6.1</languagetool.version>
   </properties>
   <dependencies>
     <dependency>

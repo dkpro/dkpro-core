@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - IO - Tika (v ${tika.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <tika.version>2.6.0</tika.version>
+    <tika.version>2.8.0</tika.version>
   </properties>
   <dependencies>
     <dependency>
