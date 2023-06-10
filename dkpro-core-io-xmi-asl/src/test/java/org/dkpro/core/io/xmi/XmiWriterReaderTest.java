@@ -18,13 +18,13 @@
 package org.dkpro.core.io.xmi;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.JCasFactory.createText;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -57,8 +57,7 @@ public class XmiWriterReaderTest
     {
         File outputFolder = testFolder;
         
-        JCas outDocument = createText(
-                readFileToString(new File("src/test/resources/texts/chinese.txt"), UTF_8), "zh");
+        JCas outDocument = createText(contentOf(new File("src/test/resources/texts/chinese.txt"), UTF_8), "zh");
         
         DocumentMetaData dmd = DocumentMetaData.create(outDocument);
         dmd.setDocumentId("output.xmi");
@@ -240,7 +239,7 @@ public class XmiWriterReaderTest
         CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
         xmiReader.getNext(cas);
 
-        String refText = readFileToString(new File("src/test/resources/texts/latin.txt"));
+        String refText = contentOf(new File("src/test/resources/texts/latin.txt"), UTF_8);
         assertEquals(refText, cas.getDocumentText());
         assertEquals("latin", cas.getDocumentLanguage());
     }
