@@ -24,11 +24,8 @@ import static org.dkpro.core.testing.AssertAnnotations.assertToken;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.cogroo.CogrooSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -68,7 +65,4 @@ public class CogrooSegmenterTest
     {
         SegmenterHarness.testZoning(CogrooSegmenter.class, "pt-BR");
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

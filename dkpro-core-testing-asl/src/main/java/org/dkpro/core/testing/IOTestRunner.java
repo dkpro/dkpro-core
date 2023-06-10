@@ -26,7 +26,7 @@ import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParam
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.contentOf;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -133,9 +133,6 @@ public class IOTestRunner
     {
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
                 + "-" + FilenameUtils.getBaseName(aFile);
-        if (DkproTestContext.get() != null) {
-            outputFolder = DkproTestContext.get().getTestOutputFolderName();
-        }
         File output = new File("target/test-output/" + outputFolder + "/dump.txt");
 
         AnalysisEngineDescription writer = createEngineDescription(
@@ -231,9 +228,6 @@ public class IOTestRunner
     {
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
                 + "-" + FilenameUtils.getBaseName(aInputFile);
-        if (DkproTestContext.get() != null) {
-            outputFolder = DkproTestContext.get().getTestOutputFolderName();
-        }
         
         File reference = new File("src/test/resources/" + aExpectedFile);
         File input = new File("src/test/resources/" + aInputFile);

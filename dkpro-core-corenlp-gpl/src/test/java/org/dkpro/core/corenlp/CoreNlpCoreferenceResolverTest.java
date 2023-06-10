@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -26,10 +26,8 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -88,7 +86,7 @@ public class CoreNlpCoreferenceResolverTest
     }
 
     @Test
-    @Ignore("Disabled due to side effects on parser unit tests. See issue 175")
+    @Disabled("Disabled due to side effects on parser unit tests. See issue 175")
     public void testTriggerReparse1()
         throws Exception
     {
@@ -175,7 +173,4 @@ public class CoreNlpCoreferenceResolverTest
 
         return jcas;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

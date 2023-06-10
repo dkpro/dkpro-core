@@ -20,8 +20,8 @@ package org.dkpro.core.io.ditop;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,13 +31,12 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.io.ditop.DiTopWriter;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 import org.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DiTopWriterTest
 {
@@ -51,7 +50,7 @@ public class DiTopWriterTest
     private static final int N_ITERATIONS = 50;
     private static final String LANGUAGE = "en";
 
-    @Before
+    @BeforeEach
     public void setUp()
         throws Exception
     {

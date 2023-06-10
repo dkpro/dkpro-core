@@ -20,7 +20,7 @@ package org.dkpro.core.api.segmentation;
 import static de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils.trim;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TrimUtilsTest
 {

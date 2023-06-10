@@ -25,20 +25,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.custommonkey.xmlunit.XMLAssert;
 import org.dkpro.core.io.xmi.XmiWriter;
 import org.dkpro.core.io.xml.XmlDocumentWriter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestOptions;
-import org.junit.Rule;
-import org.junit.Test;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+import org.junit.jupiter.api.Test;
+import org.xmlunit.assertj3.XmlAssert;
+import org.xmlunit.builder.Input;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
@@ -145,15 +141,9 @@ public class HtmlDocumentReaderTest
 
     private void assertXmlEquals(File expected, File actual)
     {
-        try {
-            XMLAssert.assertXMLEqual(new InputSource(expected.getPath()),
-                    new InputSource(actual.getPath()));
-        }
-        catch (SAXException | IOException e) {
-            throw new RuntimeException(e);
-        }
+        XmlAssert.assertThat(Input.fromFile(actual.getPath()))
+                .and(Input.fromFile(expected.getPath()))
+                .areSimilar();
+                        
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

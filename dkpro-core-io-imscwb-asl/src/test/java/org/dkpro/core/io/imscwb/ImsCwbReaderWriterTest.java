@@ -23,65 +23,62 @@ import static org.assertj.core.util.Files.contentOf;
 
 import java.io.File;
 
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class ImsCwbReaderWriterTest
 {
     @Test
-    public void thatRoundTripWithTuebaDzWorks()
+    public void thatRoundTripWithTuebaDzWorks(@TempDir File tempDir)
         throws Exception
     {
-        ReaderAssert.assertThat(
-                        ImsCwbReader.class,
+        ReaderAssert.assertThat(//
+                        ImsCwbReader.class,//
                         ImsCwbReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/tuebadz/corpus-sample-ref.txt",
-                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",
-                        ImsCwbReader.PARAM_LANGUAGE, "de")
-                .usingWriter(
-                        ImsCwbWriter.class)
-                .writingToSingular("${TARGET}/corpus-sample-ref.txt")
-                .outputAsString()
+                                "src/test/resources/tuebadz/corpus-sample-ref.txt",//
+                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",//
+                        ImsCwbReader.PARAM_LANGUAGE, "de")//
+                .usingWriter(//
+                        ImsCwbWriter.class)//
+                .writingToSingular(new File(tempDir, "/corpus-sample-ref.txt").toString())//
+                .outputAsString()//
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
 
     @Test
-    public void thatRoundTripWithMultipleInputsWorks()
+    public void thatRoundTripWithMultipleInputsWorks(@TempDir File tempDir)
         throws Exception
     {
-        ReaderAssert.assertThat(
-                        ImsCwbReader.class,
+        ReaderAssert.assertThat( //
+                        ImsCwbReader.class,//
                         ImsCwbReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/multiple/*.vrt")
-                .usingWriter(
-                        ImsCwbWriter.class)
-                .keepOriginalExtension()
-                .asFiles()
+                                "src/test/resources/multiple/*.vrt")//
+                .usingWriter(//
+                        ImsCwbWriter.class)//
+                .writingTo(tempDir)//
+                .keepOriginalExtension()//
+                .asFiles()//
                 .allSatisfy(file -> assertThat(contentOf(file, UTF_8)).isEqualToNormalizingNewlines(
                         contentOf(new File("src/test/resources/multiple", file.getName()), UTF_8)));
     }
 
     @Test
-    public void thatOneWayWithWackyWorks() throws Exception
+    public void thatOneWayWithWackyWorks(@TempDir File tempDir) throws Exception
     {
-        ReaderAssert.assertThat(
-                        ImsCwbReader.class,
+        ReaderAssert.assertThat(//
+                        ImsCwbReader.class,//
                         ImsCwbReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/wacky/test.txt",
-                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",
-                        ImsCwbReader.PARAM_LANGUAGE, "de",
-                        ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1")
-                .usingWriter(
-                        ImsCwbWriter.class)
-                .writingToSingular("${TARGET}/test.txt")
-                .outputAsString()
-                .isEqualToNormalizingNewlines(contentOf(
+                                "src/test/resources/wacky/test.txt",//
+                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",//
+                        ImsCwbReader.PARAM_LANGUAGE, "de",//
+                        ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1")//
+                .usingWriter(//
+                        ImsCwbWriter.class)//
+                .writingToSingular(new File(tempDir, "/test.txt").toString())//
+                .outputAsString()//
+                .isEqualToNormalizingNewlines(contentOf(//
                         new File("src/test/resources/wacky/test-ref.txt"), UTF_8));
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

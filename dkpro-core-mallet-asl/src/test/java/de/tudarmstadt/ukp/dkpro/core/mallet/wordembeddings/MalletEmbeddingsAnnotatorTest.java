@@ -21,8 +21,9 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,8 +40,8 @@ import org.dkpro.core.api.embeddings.VectorizerUtils;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.mallet.wordembeddings.MalletEmbeddingsAnnotator;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
@@ -53,7 +54,7 @@ public class MalletEmbeddingsAnnotatorTest
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
 
-    @Before
+    @BeforeEach
     public void setUp()
             throws URISyntaxException
     {
@@ -170,7 +171,7 @@ public class MalletEmbeddingsAnnotatorTest
         }
     }
 
-    @Test(expected = ResourceInitializationException.class)
+    @Test
     public void testLowercaseCaseless()
             throws UIMAException, IOException
     {
@@ -182,7 +183,9 @@ public class MalletEmbeddingsAnnotatorTest
                 MalletEmbeddingsAnnotator.class,
                 MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile,
                 MalletEmbeddingsAnnotator.PARAM_LOWERCASE, true);
-        SimplePipeline.runPipeline(reader, inferencer);
+        
+        assertThatExceptionOfType(ResourceInitializationException.class)
+                .isThrownBy(() -> SimplePipeline.runPipeline(reader, inferencer));
     }
 
     private static void testEmbeddingAnnotations(CollectionReaderDescription reader,

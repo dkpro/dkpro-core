@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -20,18 +20,14 @@ package org.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.matetools.MateLemmatizer;
-import org.dkpro.core.matetools.MateMorphTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 
@@ -41,7 +37,7 @@ public class MateMorphTaggerTest
     public void testGerman()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
 
         JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
@@ -71,7 +67,7 @@ public class MateMorphTaggerTest
     public void testFrench()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
 
         JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très "
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
@@ -108,7 +104,7 @@ public class MateMorphTaggerTest
     public void testSpanish()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
 
         JCas jcas = runTest("es", "Necesitamos una oración de ejemplo muy complicado , que "
                 + "contiene la mayor cantidad de componentes y dependencias como sea posible .");
@@ -143,7 +139,7 @@ public class MateMorphTaggerTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
         
         AssumeResource.assumeResource(MateMorphTagger.class, "morphtagger", aLanguage, null);
 
@@ -154,7 +150,4 @@ public class MateMorphTaggerTest
 
         return TestRunner.runTest(aggregate, aLanguage, aText);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

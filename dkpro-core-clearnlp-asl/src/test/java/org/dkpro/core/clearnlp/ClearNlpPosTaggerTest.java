@@ -19,16 +19,14 @@ package org.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
@@ -38,7 +36,7 @@ public class ClearNlpPosTaggerTest
     public void testEnglish()
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
 
         runTest("en", null, "This is a test . \n",
                 new String[] { "DT",  "VBZ",  "DT",  "NN",   "." },
@@ -83,10 +81,7 @@ public class ClearNlpPosTaggerTest
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
     }
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
-    @Before
+    @BeforeEach
     public void clearMemory()
     {
         Runtime.getRuntime().gc();

@@ -18,22 +18,21 @@
 
 package org.dkpro.core.decompounding.ranking;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dkpro.core.decompounding.ranking.MutualInformationRanker;
 import org.dkpro.core.decompounding.splitter.DecompoundedWord;
 import org.dkpro.core.decompounding.splitter.DecompoundingTree;
 import org.dkpro.core.decompounding.trie.ValueNode;
 import org.dkpro.core.decompounding.web1t.Finder;
 import org.dkpro.core.decompounding.web1t.LuceneIndexer;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class MutualInformationBasedTest
 {
@@ -43,7 +42,7 @@ public class MutualInformationBasedTest
     private static File testOutput;
     private static File index;
 
-    @BeforeClass
+    @BeforeAll
     public static void createIndex()
         throws Exception
     {
@@ -100,7 +99,7 @@ public class MutualInformationBasedTest
         }
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown()
         throws Exception
     {

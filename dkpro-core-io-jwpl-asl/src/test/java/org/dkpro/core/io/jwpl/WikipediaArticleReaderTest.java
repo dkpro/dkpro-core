@@ -18,20 +18,18 @@
 package org.dkpro.core.io.jwpl;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.jwpl.WikipediaArticleReader;
-import org.dkpro.core.io.jwpl.WikipediaReaderBase;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 
-@Ignore("Relies on non-public server")
+@Disabled("Relies on non-public server")
 public class WikipediaArticleReaderTest
 {
     @Test

@@ -21,72 +21,56 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.custommonkey.xmlunit.XMLAssert;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.xmlunit.assertj3.XmlAssert;
+import org.xmlunit.builder.Input;
 
 public class XcesXmlReaderWriterTest
 {
+    private @TempDir File targetFolder;
+
     @Test
     public void testComplexReaderWriter() throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-
-        CollectionReaderDescription reader = createReaderDescription(XcesXmlReader.class,
-                XcesXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                XcesXmlReader.PARAM_PATTERNS, "[+]xces-complex.xml",
+        CollectionReaderDescription reader = createReaderDescription(//
+                XcesXmlReader.class, //
+                XcesXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/", //
+                XcesXmlReader.PARAM_PATTERNS, "[+]xces-complex.xml", //
                 XcesXmlReader.PARAM_LANGUAGE, "el");
-                
-        AnalysisEngineDescription writer = createEngineDescription(XcesXmlWriter.class,
-                XcesXmlWriter.PARAM_STRIP_EXTENSION, true,
+
+        AnalysisEngineDescription writer = createEngineDescription(//
+                XcesXmlWriter.class, //
+                XcesXmlWriter.PARAM_STRIP_EXTENSION, true, //
                 XcesXmlWriter.PARAM_TARGET_LOCATION, targetFolder);
-        
+
         SimplePipeline.runPipeline(reader, writer);
-        
-        try (
-                Reader expected = new InputStreamReader(new FileInputStream(
-                        "src/test/resources/xces-complex.xml"), "UTF-8");
-                Reader actual = new InputStreamReader(new FileInputStream(
-                        new File(targetFolder, "xces-complex.xml")), "UTF-8");
-        ) {
-            XMLAssert.assertXMLEqual(expected, actual);
-        }
+
+        XmlAssert.assertThat(Input.fromFile(new File(targetFolder, "xces-complex.xml")))
+                .and(Input.fromFile("src/test/resources/xces-complex.xml")).areSimilar();
     }
-    
+
     @Test
     public void testBasicReaderWriter() throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-
-        CollectionReaderDescription reader = createReaderDescription(XcesBasicXmlReader.class,
-                XcesBasicXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                XcesBasicXmlReader.PARAM_PATTERNS, "[+]xces-basic.xml",
+        CollectionReaderDescription reader = createReaderDescription( //
+                XcesBasicXmlReader.class, //
+                XcesBasicXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/", //
+                XcesBasicXmlReader.PARAM_PATTERNS, "[+]xces-basic.xml", //
                 XcesBasicXmlReader.PARAM_LANGUAGE, "el");
-                
-        AnalysisEngineDescription writer = createEngineDescription(XcesBasicXmlWriter.class,
-                XcesBasicXmlWriter.PARAM_STRIP_EXTENSION, true,
-                XcesBasicXmlWriter.PARAM_TARGET_LOCATION, targetFolder);
-        
-        SimplePipeline.runPipeline(reader, writer);
-        
-        try (
-                Reader expected = new InputStreamReader(new FileInputStream(
-                        "src/test/resources/xces-basic.xml"), "UTF-8");
-                Reader actual = new InputStreamReader(new FileInputStream(
-                        new File(targetFolder, "xces-basic.xml")), "UTF-8");
-        ) {
-            XMLAssert.assertXMLEqual(expected, actual);
-        }
-    }
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+        AnalysisEngineDescription writer = createEngineDescription(//
+                XcesBasicXmlWriter.class, //
+                XcesBasicXmlWriter.PARAM_STRIP_EXTENSION, true, //
+                XcesBasicXmlWriter.PARAM_TARGET_LOCATION, targetFolder);
+
+        SimplePipeline.runPipeline(reader, writer);
+
+        XmlAssert.assertThat(Input.fromFile(new File(targetFolder, "xces-basic.xml")))
+                .and(Input.fromFile("src/test/resources/xces-basic.xml")).areSimilar();
+    }
 }

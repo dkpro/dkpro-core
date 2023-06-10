@@ -28,7 +28,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -79,15 +78,15 @@ public class TokenMerger
     @ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = true)
     private String annotationType;
 
-    /**
-     * A constraint on the annotations that should be considered in form of a JXPath statement.
-     * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
-     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to merge only tokens that are
-     * part of a location named entity.
-     */
-    public static final String PARAM_CONSTRAINT = "constraint";
-    @ConfigurationParameter(name = PARAM_CONSTRAINT, mandatory = false)
-    private String constraint;
+//    /**
+//     * A constraint on the annotations that should be considered in form of a JXPath statement.
+//     * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
+//     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to merge only tokens that are
+//     * part of a location named entity.
+//     */
+//    public static final String PARAM_CONSTRAINT = "constraint";
+//    @ConfigurationParameter(name = PARAM_CONSTRAINT, mandatory = false)
+//    private String constraint;
 
     /**
      * Configure what should happen to the lemma of the merged tokens. It is possible to JOIN the
@@ -174,13 +173,13 @@ public class TokenMerger
                 continue;
             }
 
-            if (constraint != null) {
-                JXPathContext ctx = JXPathContext.newContext(cover);
-                boolean match = ctx.iterate(constraint).hasNext();
-                if (!match) {
-                    continue;
-                }
-            }
+//            if (constraint != null) {
+//                JXPathContext ctx = JXPathContext.newContext(cover);
+//                boolean match = ctx.iterate(constraint).hasNext();
+//                if (!match) {
+//                    continue;
+//                }
+//            }
 
             Iterator<Token> i = covered.iterator();
 

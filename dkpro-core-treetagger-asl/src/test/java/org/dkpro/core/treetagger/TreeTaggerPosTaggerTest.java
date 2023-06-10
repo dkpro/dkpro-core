@@ -21,7 +21,8 @@ import static org.apache.commons.lang3.StringUtils.repeat;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -42,14 +43,10 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.testing.util.HideOutput;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.dkpro.core.treetagger.TreeTaggerPosTagger;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -57,7 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class TreeTaggerPosTaggerTest
 {
-    @Before
+    @BeforeEach
     public void initTrace()
     {
         // TreeTaggerWrapper.TRACE = true;
@@ -66,7 +63,7 @@ public class TreeTaggerPosTaggerTest
     @Test
     public void testEnglishAutoDownload() throws Exception
     {
-        Assume.assumeTrue(getClass().getResource(
+        assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
                 System.getProperty("treetagger.home") != null);
 
@@ -1200,7 +1197,7 @@ public class TreeTaggerPosTaggerTest
     }   
 
     @Test
-    @Ignore("Slovene model currently not in Artifactory because we do not know tagset yet")
+    @Disabled("Slovene model currently not in Artifactory because we do not know tagset yet")
     public void testSlovene()
         throws Exception
     {
@@ -1266,7 +1263,7 @@ public class TreeTaggerPosTaggerTest
     }
 
     @Test
-//    @Ignore("Platform specific")
+//    @Disabled("Platform specific")
     public void testOddCharacters()
         throws Exception
     {
@@ -1280,7 +1277,7 @@ public class TreeTaggerPosTaggerTest
      * Generate a very large document and test it.
      */
     @Test
-    @Ignore("Ignoring test to avoid memory errors (see issue #850 in GitHub")
+    @Disabled("Ignoring test to avoid memory errors (see issue #850 in GitHub")
     public void hugeDocumentTest()
         throws Exception
     {
@@ -1289,7 +1286,7 @@ public class TreeTaggerPosTaggerTest
         if (!run) {
             System.out.println("Test requires more heap than available, skipping");
         }
-        Assume.assumeTrue(run);
+        assumeTrue(run);
 
         // Disable trace as this significantly slows down the test
         TreeTaggerWrapper.TRACE = false;
@@ -1352,7 +1349,7 @@ public class TreeTaggerPosTaggerTest
      * Run the {@link #hugeDocumentTest()} 100 times.
      */
     @Test
-    @Ignore("This test takes a very long time. Only include it if you need to "
+    @Disabled("This test takes a very long time. Only include it if you need to "
             + "test the stability of the annotator")
     public void loadTest()
         throws Exception
@@ -1365,11 +1362,11 @@ public class TreeTaggerPosTaggerTest
 
     private void checkModelsAndBinary(String lang)
     {
-        Assume.assumeTrue(
+        assumeTrue(
                 getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
                         + lang + "-le.bin") != null);
 
-        Assume.assumeTrue(getClass().getResource(
+        assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
                 System.getProperty("treetagger.home") != null);
     }
@@ -1462,7 +1459,7 @@ public class TreeTaggerPosTaggerTest
 //    }
 
 //    @Test
-//    @Ignore("This test should fail, however - due to fixes in the Tokenizer, " +
+//    @Disabled("This test should fail, however - due to fixes in the Tokenizer, " +
 //            "we can currently not provokate a failure with the given 'strange' " +
 //            "document.")
 //    public
@@ -1541,7 +1538,4 @@ public class TreeTaggerPosTaggerTest
 //          
 //          tt.process(jcas);
 //    }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

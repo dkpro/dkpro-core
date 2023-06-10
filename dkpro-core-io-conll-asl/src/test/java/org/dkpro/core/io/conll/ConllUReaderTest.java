@@ -24,6 +24,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.testing.AssertAnnotations.assertMorph;
 import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -31,10 +32,7 @@ import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -100,7 +98,7 @@ public class ConllUReaderTest
         final String actualDocumentID = m.getDocumentId();
         final String expectedDocumentID = "mf920901-001";
 
-        Assert.assertEquals("Document ID mismatch", expectedDocumentID, actualDocumentID);
+        assertEquals(expectedDocumentID, actualDocumentID, "Document ID mismatch");
     }
 
     @Test
@@ -125,29 +123,7 @@ public class ConllUReaderTest
         final String actualDocumentID = m.getDocumentId();
         final String expectedDocumentID = "mf920901-001;mf920901-002";
 
-        Assert.assertEquals("Document ID mismatch", expectedDocumentID, actualDocumentID);
-        // The following code is commented out because when running on our Windows Jenkins slave,
-        // the log message does not get recorded. It does get logged and I also tested on a local
-        // Windows as well as on Mac and it works. The Jenkins seems to log in German, i.e.
-        // "WARNUNG" instead of "WARN", but looking at the code which captures the warnings, that
-        // should actually not matter since the WARN enum constant is compared. Since I cannot
-        // reproduce the issue which Jenkins has under any circumstances so far, I am commenting
-        // this part of the test out.
-//        }
-//        finally {
-//            logger.removeAppender(appender);
-//        }
-//        final List<LoggingEvent> log = appender.getLog();
-//        final LoggingEvent firstLogEntry = log.get(0);
-//        Assert.assertEquals(Level.WARN, firstLogEntry.getLevel());
-//        Assert.assertEquals("org.dkpro.core.io.conll.ConllUReader",
-//                firstLogEntry.getLoggerName());
-//
-//        final String patternString = "File\\s[\\w:/%-\\.]+\\scontains\\smultiple\\sdocument\\sIDs:\\s"
-//                + "\\[mf920901-001,\\smf920901-002]";
-//        Pattern pattern = Pattern.compile(patternString);
-//        Matcher matcher = pattern.matcher(firstLogEntry.getMessage().toString());
-//        Assert.assertTrue(matcher.matches());
+        assertEquals(expectedDocumentID, actualDocumentID, "Document ID mismatch");
     }
 
     @Test
@@ -169,14 +145,14 @@ public class ConllUReaderTest
                 .collect(toList());
         List<String> expectedParagraphIDs = asList("mf920901-001-p1", "mf920901-001-p2");
         
-        Assert.assertEquals(expectedParagraphIDs, paragraphIDs);
+        assertEquals(expectedParagraphIDs, paragraphIDs);
 
         final String expectedTextContent = "Slovenská ústava: pro i proti Slovenská ústava: pro i"
                 + " proti\n"
                 + "\n"
                 + "Slovenská ústava: pro i proti";
         final String actualTextContent = jcas.getDocumentText();
-        Assert.assertEquals(expectedTextContent, actualTextContent);
+        assertEquals(expectedTextContent, actualTextContent);
 
         String[] sentences = {
                 "Slovenská ústava: pro i proti",
@@ -184,31 +160,4 @@ public class ConllUReaderTest
                 "Slovenská ústava: pro i proti" };
         assertSentence(sentences, select(jcas, Sentence.class));
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
-//    class TestAppender extends AppenderSkeleton {
-//        private final List<LoggingEvent> log = new ArrayList<>();
-//
-//        @Override
-//        public boolean requiresLayout() {
-//            return false;
-//        }
-//
-//        @Override
-//        protected void append(final LoggingEvent loggingEvent) {
-//            if (loggingEvent.getLevel().equals(Level.WARN)) {
-//                log.add(loggingEvent);
-//            }
-//        }
-//
-//        @Override
-//        public void close() {
-//        }
-//
-//        public List<LoggingEvent> getLog() {
-//            return new ArrayList<LoggingEvent>(log);
-//        }
-//    }
 }

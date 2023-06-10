@@ -21,9 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Conll2012ReaderWriterTest
 {
@@ -70,7 +68,4 @@ public class Conll2012ReaderWriterTest
 //                        Conll2012Writer.PARAM_TARGET_LOCATION, "target/test-output/"+
 //                          testContext.getTestOutputFolderName()));
 //    }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

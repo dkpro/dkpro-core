@@ -28,17 +28,12 @@ import java.util.Collection;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
-@RunWith(Parameterized.class)
 public class OpenNlpPosTaggerBulkTest
 {
     private static final String NO_TAGSET_CHECK = null;
@@ -132,40 +127,20 @@ public class OpenNlpPosTaggerBulkTest
                     new String[] { "pron-det", "v-fin", "artm", "nm", "." },
                     new String[] { "POS", "POS", "POS", "POS", "POS" } } };
     
-    @Parameters
     public static Collection<Object[]> data() {
         return asList(DATA);
     }
     
-    private final String language;
-    private final String variant;
-    private final String tagset;
-    private final String[] tags;
-    private final String text;
-    private final String[] originalPos;
-    private final String[] mappedPos;
-    
-    public OpenNlpPosTaggerBulkTest(String aLanguage, String aVariant, String aTagset,
-            String[] aTags, String aText, String[] aOriginalPos, String[] aMappedPos)
+    @ParameterizedTest
+    @MethodSource("data")
+    public void test(String language, String variant, String tagset,
+            String[] tags, String text, String[] originalPos, String[] mappedPos)
+        throws Exception
     {
-        language = aLanguage;
-        variant = aVariant;
-        tagset = aTagset;
-        tags = aTags;
-        text = aText;
-        originalPos = aOriginalPos;
-        mappedPos = aMappedPos;
-        
         if ((tags == null && tagset != null) || (tags != null && tagset == null)) {
             throw new IllegalArgumentException(
                     "Tags and tagset must both be specified or both be null");
         }
-    }
-    
-    @Test
-    public void test()
-        throws Exception
-    {
         assumeResource(OpenNlpPosTagger.class, "tagger", language, variant);
         
         AnalysisEngine engine = createEngine(
@@ -181,7 +156,4 @@ public class OpenNlpPosTaggerBulkTest
             assertTagset(POS.class, tagset, tags, jcas);
         }
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

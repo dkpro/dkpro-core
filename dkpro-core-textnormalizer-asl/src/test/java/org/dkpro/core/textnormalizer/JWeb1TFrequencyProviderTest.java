@@ -17,14 +17,14 @@
  */
 package org.dkpro.core.textnormalizer;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import org.dkpro.core.frequency.Web1TFileAccessProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class JWeb1TFrequencyProviderTest
 {

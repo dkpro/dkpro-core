@@ -52,7 +52,6 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.dkpro.core.api.resources.ResourceObjectProviderBase;
 import org.dkpro.core.api.resources.ResourceObjectResolver;
-import org.dkpro.core.api.resources.internal.ApacheCommonsLoggingAdapter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;

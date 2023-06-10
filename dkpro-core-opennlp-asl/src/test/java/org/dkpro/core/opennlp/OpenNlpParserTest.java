@@ -28,12 +28,9 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.opennlp.OpenNlpParser;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -271,7 +268,4 @@ public class OpenNlpParserTest
 
         return TestRunner.runTest(parser, aLanguage, aDocument);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

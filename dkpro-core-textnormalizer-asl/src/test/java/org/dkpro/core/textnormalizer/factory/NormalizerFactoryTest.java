@@ -18,7 +18,7 @@
 package org.dkpro.core.textnormalizer.factory;
 
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -28,9 +28,9 @@ import org.apache.uima.resource.ExternalResourceDescription;
 import org.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 import org.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
 import org.dkpro.core.textnormalizer.ReplacementFileNormalizer.TargetSurroundings;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
@@ -38,7 +38,7 @@ public class NormalizerFactoryTest
 {
     private ExternalResourceDescription frequencyProvider;
 
-    @Before
+    @BeforeEach
     public void init() {
         frequencyProvider = createResourceDescription(
                 Web1TFrequencyCountResource.class,
@@ -48,7 +48,7 @@ public class NormalizerFactoryTest
                 Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t");  
     }
 
-    @Ignore("This test will not work while the module is in transition - after we need to fix it")
+    @Disabled("This test will not work while the module is in transition - after we need to fix it")
     @Test
     public void testNormalizerFactory() throws Exception
     {

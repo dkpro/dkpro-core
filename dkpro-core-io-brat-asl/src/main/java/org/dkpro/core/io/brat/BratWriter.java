@@ -46,6 +46,8 @@ import org.dkpro.core.io.brat.internal.model.BratConfiguration;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
@@ -90,7 +92,7 @@ public class BratWriter
      */
     public static final String PARAM_EXCLUDE_TYPES = "excludeTypes";
     @ConfigurationParameter(name = PARAM_EXCLUDE_TYPES, mandatory = true, defaultValue = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+            Sentence._TypeName })
     private Set<String> excludeTypes;
 
     /**
@@ -118,7 +120,8 @@ public class BratWriter
      */
     public static final String PARAM_RELATION_TYPES = "relationTypes";
     @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = true, defaultValue = {
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent" })
+            Dependency._TypeName + ":" + Dependency._FeatName_Governor + ":"
+                    + Dependency._FeatName_Dependent })
     private Set<String> relationTypes;
 
     // /**

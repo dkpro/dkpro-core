@@ -18,12 +18,12 @@
 package org.dkpro.core.testing;
 
 import static org.dkpro.core.testing.AssertAnnotations.asCopyableString;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AssertAnnotationsTest
 {

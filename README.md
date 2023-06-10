@@ -1,6 +1,5 @@
 # DKPro Core
 
-[![Build Status](https://zoidberg.ukp.informatik.tu-darmstadt.de:443/jenkins/job/DKPro%20Core%20(GitHub)/badge/icon)](https://zoidberg.ukp.informatik.tu-darmstadt.de:443/jenkins/job/DKPro%20Core%20(GitHub)/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.dkpro.core/dkpro-core/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.dkpro.core/dkpro-core)
 [![Join the chat at https://gitter.im/dkpro/dkpro-core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dkpro/dkpro-core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

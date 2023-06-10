@@ -30,16 +30,15 @@ import org.apache.uima.collection.CollectionReader;
 import org.dkpro.core.io.negra.NegraExportReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.snowball.SnowballStemmer;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class ImsCwbWriterTest
 {
     @Test
-    public void thatWritingTuebaDzSampleWorks()
+    public void thatWritingTuebaDzSampleWorks(@TempDir File tempDir)
         throws Exception
     {
         ReaderAssert.assertThat(
@@ -53,14 +52,14 @@ public class ImsCwbWriterTest
                 .usingWriter(
                         ImsCwbWriter.class,
                         ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8")
-                .writingToSingular("${TARGET}/corpus-sample.vrt")
+                .writingToSingular(new File(tempDir, "corpus-sample.vrt").toString())
                 .outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
     
     @Test
-    public void thatWritingTuebaDzSampleWithAdditionalFeaturesWorks()
+    public void thatWritingTuebaDzSampleWithAdditionalFeaturesWorks(@TempDir File tempDir)
         throws Exception
     {
         ReaderAssert.assertThat(
@@ -74,7 +73,7 @@ public class ImsCwbWriterTest
                         createEngineDescription(SnowballStemmer.class))
                 .usingWriter(
                         ImsCwbWriter.class,
-                        ImsCwbWriter.PARAM_TARGET_LOCATION, "${TARGET}/corpus-sample-addfeat.vrt",
+                        ImsCwbWriter.PARAM_TARGET_LOCATION, new File(tempDir, "corpus-sample-addfeat.vrt"),
                         ImsCwbWriter.PARAM_SINGULAR_TARGET, true,
                         ImsCwbWriter.PARAM_WRITE_CPOS, true,
                         ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { 
@@ -85,7 +84,7 @@ public class ImsCwbWriterTest
                         UTF_8));
     }    
     
-    @Ignore("This test cannot work (yet) because we do not ship the cwb-encode and cwb-makeall binaries")
+    @Disabled("This test cannot work (yet) because we do not ship the cwb-encode and cwb-makeall binaries")
     @Test
     public void test2()
         throws Exception
@@ -107,7 +106,4 @@ public class ImsCwbWriterTest
 
         runPipeline(ner, tag, tw);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

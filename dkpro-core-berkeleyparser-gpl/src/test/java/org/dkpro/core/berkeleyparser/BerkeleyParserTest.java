@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -33,13 +33,10 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.berkeleyparser.BerkeleyParser;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -455,7 +452,4 @@ public class BerkeleyParserTest
 
         return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
     }
-        
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

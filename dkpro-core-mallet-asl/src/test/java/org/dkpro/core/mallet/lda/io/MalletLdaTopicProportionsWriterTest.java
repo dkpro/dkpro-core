@@ -19,8 +19,8 @@ package org.dkpro.core.mallet.lda.io;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,11 +35,9 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 import org.dkpro.core.mallet.lda.MalletLdaUtil;
-import org.dkpro.core.mallet.lda.io.MalletLdaTopicProportionsWriter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  *
@@ -47,15 +45,12 @@ import org.junit.Test;
 public class MalletLdaTopicProportionsWriterTest
 {
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     @Test
-    public void testSingularTarget()
+    public void testSingularTarget(@TempDir File tempDir)
             throws UIMAException, IOException, URISyntaxException
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
-        File targetFile = new File(testContext.getTestOutputFolder(), "topics.txt");
+        File modelFile = new File(tempDir, "model");
+        File targetFile = new File(tempDir, "topics.txt");
         MalletLdaUtil.trainModel(modelFile);
 
         int expectedLines = 2;
@@ -86,10 +81,10 @@ public class MalletLdaTopicProportionsWriterTest
     }
 
     @Test
-    public void testMultipleTargets()
+    public void testMultipleTargets(@TempDir File tempDir)
             throws IOException, UIMAException
     {
-        File targetDir = testContext.getTestOutputFolder();
+        File targetDir = tempDir;
         File expectedFile0 = new File(targetDir, "dummy1.txt.topics");
         File expectedFile1 = new File(targetDir, "dummy2.txt.topics");
 
@@ -97,7 +92,7 @@ public class MalletLdaTopicProportionsWriterTest
         String expectedLine0Regex = "dummy1.txt\t(0\\.[0-9]{4}\\t){9}0\\.[0-9]{4}";
         String expectedLine1Regex = "dummy2.txt\t(0\\.[0-9]{4}\\t){9}0\\.[0-9]{4}";
 
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         MalletLdaUtil.trainModel(modelFile);
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
@@ -131,13 +126,13 @@ public class MalletLdaTopicProportionsWriterTest
     }
 
     @Test
-    public void testMultipleTargetsNoDocids()
+    public void testMultipleTargetsNoDocids(@TempDir File tempDir)
             throws IOException, UIMAException
     {
-        File targetDir = testContext.getTestOutputFolder();
+        File targetDir = tempDir;
         File expectedFile0 = new File(targetDir, "dummy1.txt.topics");
         File expectedFile1 = new File(targetDir, "dummy2.txt.topics");
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         MalletLdaUtil.trainModel(modelFile);
 
         int expectedLines = 1;

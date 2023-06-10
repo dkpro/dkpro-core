@@ -23,7 +23,7 @@ import org.cogroo.analyzer.Analyzer;
 import org.cogroo.analyzer.ComponentFactory;
 import org.cogroo.text.Document;
 import org.cogroo.text.impl.DocumentImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SimpleTest
 {

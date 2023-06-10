@@ -17,11 +17,14 @@
  */
 package org.dkpro.core.mecab;
 
+import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -35,20 +38,23 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.resources.PlatformDetector;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.mecab.MeCabTagger;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class MeCabTaggerTest {
-    @Before
+    @BeforeEach
     public void prepare()
     {
-        Assume.assumeFalse("No Mecab binaries for Windows: Issue #1122",
-                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+        assumeFalse(System.getProperty("os.name").toLowerCase(Locale.US).contains("win"),
+                "No Mecab binaries for Windows: Issue #1122");
+        PlatformDetector pd = new PlatformDetector();
+        assumeTrue(
+                asList("linux-x86_64", "linux-x86_32", "osx-x86_64").contains(pd.getPlatformId()),
+                "Unsupported platform");
     }
     
     @Test

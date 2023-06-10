@@ -39,6 +39,7 @@ import org.dkpro.core.api.embeddings.text.TextFormatVectorizer;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.mallet.MalletModelTrainer;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -49,12 +50,9 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Mallet Embeddings Annotator")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding" }
-)
+@TypeCapability(inputs = { Token._TypeName }, outputs = { WordEmbedding._TypeName })
 public class MalletEmbeddingsAnnotator
-        extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     /**
      * The file containing the word embeddings.
@@ -98,12 +96,11 @@ public class MalletEmbeddingsAnnotator
     private boolean modelHasHeader;
 
     /**
-     * The annotation type to use for the model.  For lemmas, use
+     * The annotation type to use for the model. For lemmas, use
      * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_TOKEN_FEATURE_PATH = 
-            MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = Token._TypeName)
     private String tokenFeaturePath;
 
     /**
@@ -114,8 +111,7 @@ public class MalletEmbeddingsAnnotator
     private boolean lowercase;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         if (modelHasHeader && modelIsBinary) {
@@ -124,9 +120,8 @@ public class MalletEmbeddingsAnnotator
         }
 
         try {
-            vectorizer = modelIsBinary ?
-                    BinaryVectorizer.load(modelLocation) :
-                    TextFormatVectorizer.load(modelLocation);
+            vectorizer = modelIsBinary ? BinaryVectorizer.load(modelLocation)
+                    : TextFormatVectorizer.load(modelLocation);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
@@ -139,8 +134,7 @@ public class MalletEmbeddingsAnnotator
     }
 
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         Type type = aJCas.getTypeSystem().getType(tokenFeaturePath);
 
@@ -154,8 +148,7 @@ public class MalletEmbeddingsAnnotator
         }
     }
 
-    private void addAnnotation(JCas aJCas, String text, int begin, int end)
-            throws IOException
+    private void addAnnotation(JCas aJCas, String text, int begin, int end) throws IOException
     {
         if (lowercase) {
             text = text.toLowerCase();
@@ -188,16 +181,14 @@ public class MalletEmbeddingsAnnotator
      * @throws IOException
      *             if an I/O error occurs
      */
-    private Optional<float[]> getVector(String token)
-            throws IOException
+    private Optional<float[]> getVector(String token) throws IOException
     {
         if (annotateUnknownTokens) {
             return Optional.of(vectorizer.vectorize(token));
         }
         else {
-            return vectorizer.contains(token) ?
-                    Optional.of(vectorizer.vectorize(token)) :
-                    Optional.empty();
+            return vectorizer.contains(token) ? Optional.of(vectorizer.vectorize(token))
+                    : Optional.empty();
         }
     }
 }

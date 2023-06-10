@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.lxf;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -35,7 +35,7 @@ import org.dkpro.core.io.lxf.internal.DKPro2Lxf;
 import org.dkpro.core.io.lxf.internal.Lxf2DKPro;
 import org.dkpro.core.io.lxf.internal.model.LxfGraph;
 import org.dkpro.core.io.lxf.internal.model.LxfObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

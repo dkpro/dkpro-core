@@ -30,7 +30,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.io.text.StringReader;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 

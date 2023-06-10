@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -21,6 +21,7 @@ package org.dkpro.core.corenlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,11 +33,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -112,7 +110,7 @@ public class CoreNlpSegmenterTest
         }
         System.out.printf("%-20s - Expected: %s%n", "Tokens", Arrays.asList(expectedTokens));
         System.out.printf("%-20s - Actual  : %s%n", "Tokens", tokens);
-        Assert.assertEquals(Arrays.asList(expectedTokens), tokens);
+        assertEquals(Arrays.asList(expectedTokens), tokens);
     }
     
     @Test
@@ -146,7 +144,4 @@ public class CoreNlpSegmenterTest
     {
         SegmenterHarness.testZoning(CoreNlpSegmenter.class);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

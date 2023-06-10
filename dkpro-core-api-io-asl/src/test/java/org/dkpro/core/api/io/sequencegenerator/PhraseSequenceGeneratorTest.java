@@ -20,7 +20,7 @@ package org.dkpro.core.api.io.sequencegenerator;
 import static org.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.jCasWithLemmas;
 import static org.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.jCasWithSentence;
 import static org.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.jCasWithTokens;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,9 +30,7 @@ import java.util.List;
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.featurepath.FeaturePathException;
-import org.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -103,9 +101,9 @@ public class PhraseSequenceGeneratorTest
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         LexicalPhrase[] sequence = sequences.get(0);
-        Assert.assertEquals(expectedSize, sequence.length);
-        Assert.assertEquals(expectedFirstToken, sequence[0].getText());
-        Assert.assertEquals(expectedLastToken, sequence[sequence.length - 1].getText());
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstToken, sequence[0].getText());
+        assertEquals(expectedLastToken, sequence[sequence.length - 1].getText());
     }
 
     @Test
@@ -126,8 +124,8 @@ public class PhraseSequenceGeneratorTest
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         LexicalPhrase[] sequence = sequences.get(0);
-        Assert.assertEquals(expectedSize, sequence.length);
-        Assert.assertEquals(expectedFirstToken, sequence[0].getText());
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstToken, sequence[0].getText());
     }
 
     @Test
@@ -148,8 +146,8 @@ public class PhraseSequenceGeneratorTest
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         LexicalPhrase[] sequence = sequences.get(0);
-        Assert.assertEquals(expectedSize, sequence.length);
-        Assert.assertEquals(expectedFirstToken, sequence[0].getText());
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstToken, sequence[0].getText());
     }
 
     @Test
@@ -170,7 +168,7 @@ public class PhraseSequenceGeneratorTest
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         LexicalPhrase[] sequence = sequences.get(0);
-        Assert.assertEquals(expectedSize, sequence.length);
-        Assert.assertEquals(expectedFirstToken, sequence[0].getText());
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstToken, sequence[0].getText());
     }
 }
