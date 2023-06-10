@@ -18,6 +18,7 @@
 package org.dkpro.core.io.xmi;
 
 import static java.util.Arrays.asList;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
