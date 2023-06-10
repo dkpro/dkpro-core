@@ -60,14 +60,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "IMS CWB Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_IMSCWB})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_IMSCWB })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class ImsCwbReader
     extends ResourceCollectionReaderBase
 {
@@ -75,23 +73,20 @@ public class ImsCwbReader
      * Character encoding of the output.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = DEFAULT_ENCODING)
     private String encoding;
 
     /**
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -170,14 +165,15 @@ public class ImsCwbReader
     private Resource lastResource;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
         wackyIterator = new TextIterable(getResources(), encoding);
 
-        posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
-                getLanguage());
+        if (readPos) {
+            posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
+                    getLanguage());
+        }
 
         documentCount = 0;
         qualifier = 0;
@@ -185,15 +181,13 @@ public class ImsCwbReader
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return wackyIterator.hasNext();
     }
 
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         Resource res = wackyIterator.getCurrentResource();
         CorpusText text = wackyIterator.next();
@@ -201,7 +195,7 @@ public class ImsCwbReader
         // Reset counter when a new file is read.
         if (!res.equals(lastResource)) {
             qualifier = 0;
-            lastResource  = res;
+            lastResource = res;
         }
 
         String documentId;
@@ -222,16 +216,18 @@ public class ImsCwbReader
             meta.setDocumentUri(text.getDocumentTitle());
         }
 
-        try {
-            posMappingProvider.configure(aCAS);
-        }
-        catch (AnalysisEngineProcessException e) {
-            throw new IOException(e);
+        if (readPos) {
+            try {
+                posMappingProvider.configure(aCAS);
+            }
+            catch (AnalysisEngineProcessException e) {
+                throw new IOException(e);
+            }
         }
 
-        List<AnnotationFS> tokenAnnotations    = new ArrayList<AnnotationFS>();
-        List<AnnotationFS> lemmaAnnotations    = new ArrayList<AnnotationFS>();
-        List<AnnotationFS> posAnnotations      = new ArrayList<AnnotationFS>();
+        List<AnnotationFS> tokenAnnotations = new ArrayList<AnnotationFS>();
+        List<AnnotationFS> lemmaAnnotations = new ArrayList<AnnotationFS>();
+        List<AnnotationFS> posAnnotations = new ArrayList<AnnotationFS>();
         List<AnnotationFS> sentenceAnnotations = new ArrayList<AnnotationFS>();
 
         TypeSystem typeSystem = aCAS.getTypeSystem();
@@ -247,7 +243,7 @@ public class ImsCwbReader
             for (int i = 0; i < sentence.getTokens().size(); i++) {
                 String token = doReplaceNonXml(sentence.getTokens().get(i));
                 String lemma = doReplaceNonXml(sentence.getLemmas().get(i));
-                String pos   = doReplaceNonXml(sentence.getPOS().get(i));
+                String pos = doReplaceNonXml(sentence.getPOS().get(i));
                 int len = token.length();
 
                 if (readPos) {
@@ -258,23 +254,19 @@ public class ImsCwbReader
                 }
 
                 if (readLemmas) {
-                    AnnotationFS lemmaAnno = aCAS.createAnnotation(
-                                lemmaType, offset, offset + len);
+                    AnnotationFS lemmaAnno = aCAS.createAnnotation(lemmaType, offset, offset + len);
                     lemmaAnno.setStringValue(lemmaType.getFeatureByBaseName("value"), lemma);
                     lemmaAnnotations.add(lemmaAnno);
                 }
 
                 if (readTokens) {
-                    AnnotationFS tokenAnno = aCAS.createAnnotation(
-                            tokenType, offset, offset + len);
+                    AnnotationFS tokenAnno = aCAS.createAnnotation(tokenType, offset, offset + len);
                     if (readPos) {
-                        tokenAnno.setFeatureValue(
-                                tokenType.getFeatureByBaseName("pos"),
+                        tokenAnno.setFeatureValue(tokenType.getFeatureByBaseName("pos"),
                                 posAnnotations.get(posAnnotations.size() - 1));
                     }
                     if (readLemmas) {
-                        tokenAnno.setFeatureValue(
-                                tokenType.getFeatureByBaseName("lemma"),
+                        tokenAnno.setFeatureValue(tokenType.getFeatureByBaseName("lemma"),
                                 lemmaAnnotations.get(lemmaAnnotations.size() - 1));
                     }
                     tokenAnnotations.add(tokenAnno);
@@ -288,8 +280,8 @@ public class ImsCwbReader
             }
 
             if (readSentences) {
-                AnnotationFS sentenceAnno = aCAS.createAnnotation(
-                        sentenceType, savedOffset, offset);
+                AnnotationFS sentenceAnno = aCAS.createAnnotation(sentenceType, savedOffset,
+                        offset);
                 sentenceAnnotations.add(sentenceAnno);
             }
         }

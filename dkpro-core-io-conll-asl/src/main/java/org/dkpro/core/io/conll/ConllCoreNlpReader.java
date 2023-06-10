@@ -19,6 +19,8 @@ package org.dkpro.core.io.conll;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor.BASIC;
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_ENCODING;
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_MAPPING_ENABLED;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.BufferedReader;
@@ -63,20 +65,21 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 /**
  * Reads files in the default CoreNLP CoNLL format.
  * 
- * @see <a href="https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/pipeline/CoNLLOutputter.html">CoreNLP CoNLLOutputter</a>
+ * @see <a href=
+ *      "https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/pipeline/CoNLLOutputter.html">CoreNLP
+ *      CoNLLOutputter</a>
  */
 @ResourceMetaData(name = "CoNLL CoreNLP Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_CORENLP})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_CORENLP })
+@TypeCapability(outputs = { //
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData", //
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence", //
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token", //
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity", //
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS", //
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma", //
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ConllCoreNlpReader
     extends ConllReader_ImplBase
 {
@@ -84,15 +87,14 @@ public class ConllCoreNlpReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
      * Read fine-grained part-of-speech information.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_POS, defaultValue = "true")
     private boolean readPos;
 
     /**
@@ -108,23 +110,21 @@ public class ConllCoreNlpReader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-    
+
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = //
             ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     private String namedEntityMappingLocation;
@@ -132,23 +132,22 @@ public class ConllCoreNlpReader
     /**
      * Read morphological features.
      */
-    public static final String PARAM_READ_NAMED_ENTITY = 
-            ComponentParameters.PARAM_READ_NAMED_ENTITY;
-    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, defaultValue = "true")
     private boolean readNer;
 
     /**
      * Read lemma information.
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
-    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, defaultValue = "true")
     private boolean readLemma;
 
     /**
      * Read syntactic dependency information.
      */
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
-    @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, defaultValue = "true")
     private boolean readDependency;
 
     private static final String UNUSED = "_";
@@ -163,30 +162,31 @@ public class ConllCoreNlpReader
 
     private MappingProvider posMappingProvider;
     private MappingProvider namedEntityMappingProvider;
-    
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
-                getLanguage());
-        
-        namedEntityMappingProvider = new MappingProvider();
-        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION,
-                "classpath:/there/is/no/mapping/yet");
-        namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE,
-                NamedEntity.class.getName());
-        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION,
-                namedEntityMappingLocation);
-        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+
+        if (readPos) {
+            posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                    getLanguage());
+        }
+
+        if (readNer) {
+            namedEntityMappingProvider = new MappingProvider();
+            namedEntityMappingProvider.setDefault(MappingProvider.LOCATION,
+                    "classpath:/there/is/no/mapping/yet");
+            namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE,
+                    NamedEntity.class.getName());
+            namedEntityMappingProvider.setOverride(MappingProvider.LOCATION,
+                    namedEntityMappingLocation);
+            namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+        }
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -202,8 +202,7 @@ public class ConllCoreNlpReader
         }
     }
 
-    public void convert(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    public void convert(JCas aJCas, BufferedReader aReader) throws IOException
     {
         if (readPos) {
             try {
@@ -228,9 +227,9 @@ public class ConllCoreNlpReader
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {
             if (words.isEmpty()) {
-                 // Ignore empty sentences. This can happen when there are multiple end-of-sentence
-                 // markers following each other.
-                continue; 
+                // Ignore empty sentences. This can happen when there are multiple end-of-sentence
+                // markers following each other.
+                continue;
             }
 
             int sentenceBegin = doc.getPosition();
@@ -277,10 +276,10 @@ public class ConllCoreNlpReader
                     int id = Integer.valueOf(trim(w[ID]));
                     return new SequenceItem(id, id, trim(w[NER]));
                 }).collect(Collectors.toList());
-                
+
                 AdjacentLabelCodec codec = new AdjacentLabelCodec(1);
                 List<SequenceItem> decodedNerSpans = codec.decode(encodedNerSpans);
-                                
+
                 for (SequenceItem nerSpan : decodedNerSpans) {
                     Type nerType = namedEntityMappingProvider.getTagType(nerSpan.getLabel());
                     Token beginToken = tokens.get(nerSpan.getBegin());
@@ -299,7 +298,7 @@ public class ConllCoreNlpReader
                     if (!UNUSED.equals(depRel)) {
                         int depId = Integer.valueOf(trim(word[ID]));
                         int govId = Integer.valueOf(trim(word[HEAD]));
-                        
+
                         // Model the root as a loop onto itself
                         if (govId == 0) {
                             Dependency rel = new ROOT(aJCas);
@@ -339,8 +338,7 @@ public class ConllCoreNlpReader
     /**
      * Read a single sentence.
      */
-    private static List<String[]> readSentence(BufferedReader aReader)
-        throws IOException
+    private static List<String[]> readSentence(BufferedReader aReader) throws IOException
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;
@@ -350,13 +348,13 @@ public class ConllCoreNlpReader
                 firstLineOfSentence = true;
                 break; // End of sentence
             }
-            
+
             if (line.startsWith("<") && line.endsWith(">")) {
                 // FinnTreeBank uses pseudo-XML to attach extra metadata to sentences.
                 // Currently, we just ignore this.
                 break; // Consider end of sentence
             }
-            
+
             if (firstLineOfSentence && line.startsWith("#")) {
                 // GUM uses a comment to attach extra metadata to sentences.
                 // Currently, we just ignore this.
@@ -364,7 +362,7 @@ public class ConllCoreNlpReader
             }
 
             firstLineOfSentence = false;
-            
+
             String[] fields = line.split("\t");
             if (fields.length != 7) {
                 throw new IOException(
