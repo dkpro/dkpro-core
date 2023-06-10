@@ -29,7 +29,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>http://haifengl.github.io/smile</description>
   <properties>
-    <smile.version>2.6.0</smile.version>
+    <smile.version>3.0.1</smile.version>
   </properties>
   <dependencies>
     <dependency>
