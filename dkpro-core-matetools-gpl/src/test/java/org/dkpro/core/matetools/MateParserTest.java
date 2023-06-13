@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -20,6 +20,8 @@ package org.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +34,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.hunpos.HunPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TagsetDescriptionStripper;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -286,11 +285,13 @@ public class MateParserTest
         List<AnalysisEngineDescription> engines = new ArrayList<AnalysisEngineDescription>();
 
         if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
-            Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
-                    System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
-            Assume.assumeTrue("HunPos does not run on OS X Catalina or higher",
-                    System.getProperty("os.name").toLowerCase(Locale.US).contains("mac") &&
-                    !System.getProperty("os.version").matches("10\\.([0-9]|1[0-4]).*"));
+            assumeFalse(System.getProperty("os.name").toLowerCase(Locale.US).contains("win"),
+                    "HunPos currently hangs indefinitely on Windows: Issue #1099");
+            assumeTrue(
+                    System.getProperty("os.name").toLowerCase(Locale.US).contains("mac")
+                            && !System.getProperty("os.version")
+                                    .matches("1[0-9]\\..*|(10\\.([0-9]|1[0-4]).*)"),
+                    "HunPos does not run on OS X Catalina or higher");
             engines.add(createEngineDescription(HunPosTagger.class));
         }
         else {
@@ -310,7 +311,7 @@ public class MateParserTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
         AssumeResource.assumeResource(MateSemanticRoleLabeler.class, "parser", aLanguage, null);
         
@@ -320,7 +321,4 @@ public class MateParserTest
 
         return TestRunner.runTest(aggregate, aLanguage, aText);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

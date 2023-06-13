@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -29,7 +29,8 @@ import static org.dkpro.core.testing.AssertAnnotations.assertPennTree;
 import static org.dkpro.core.testing.AssertAnnotations.assertSyntacticFunction;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -37,15 +38,11 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpParser;
-import org.dkpro.core.corenlp.CoreNlpPosTagger;
 import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -113,8 +110,7 @@ public class CoreNlpParserTest
     // TODO Maybe test link to parents (not tested by syntax tree recreation)
 
     @Test
-    public void testGermanPcfg()
-        throws Exception
+    public void testGermanPcfg() throws Exception
     {
         JCas jcas = runTest("de", "pcfg", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
@@ -130,10 +126,12 @@ public class CoreNlpParserTest
         String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
                 "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_PUNCT", "POS_PRON", "POS_ADV",
-                "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_VERB", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN",
+                "POS_PUNCT", "POS_PRON", "POS_ADV", "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_NOUN",
+                "POS_VERB", "POS_PUNCT" };
 
-        String[] dependencies = {/** No dependencies for German */ };
+        String[] dependencies = { /** No dependencies for German */
+        };
 
         String pennTree = "(ROOT (S (PPER Wir) (VVFIN brauchen) (NP (ART ein) (AP (ADV sehr) "
                 + "(ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS welches) (NP "
@@ -146,8 +144,7 @@ public class CoreNlpParserTest
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertSyntacticFunction(synFunc, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertTagset(POS.class, "stts", GERMAN_POS_TAGS, jcas);
@@ -157,8 +154,7 @@ public class CoreNlpParserTest
     }
 
     @Test
-    public void testGermanFactored()
-        throws Exception
+    public void testGermanFactored() throws Exception
     {
         JCas jcas = runTest("de", "factored",
                 "Wir brauchen ein sehr kompliziertes Beispiel , welches "
@@ -173,10 +169,12 @@ public class CoreNlpParserTest
         String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
                 "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_PUNCT", "POS_PRON", "POS_ADV",
-                "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_VERB", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN",
+                "POS_PUNCT", "POS_PRON", "POS_ADV", "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_NOUN",
+                "POS_VERB", "POS_PUNCT" };
 
-        String[] dependencies = { /** No dependencies for German */ };
+        String[] dependencies = { /** No dependencies for German */
+        };
 
         String pennTree = "(ROOT (S (PPER Wir) (VVFIN brauchen) (NP (ART ein) (AP "
                 + "(ADV sehr) (ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS welches) "
@@ -187,8 +185,7 @@ public class CoreNlpParserTest
 
         String[] unmappedConst = { "NUR" };
 
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
@@ -199,22 +196,20 @@ public class CoreNlpParserTest
     }
 
     @Test
-    public void testEnglishPcfg()
-        throws Exception
+    public void testEnglishPcfg() throws Exception
     {
         JCas jcas = runTest("en", "pcfg", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,98",
-                "NP 8,110", "NP 8,43", "PP 61,98", "PP 99,110", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 8,110", "NP 8,43", "PP 61,98", "PP 99,110", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,98",
-                "NP 8,110", "NP 8,43", "PP 61,98", "PP 99,110", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 8,110", "NP 8,43", "PP 61,98", "PP 99,110", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -244,8 +239,7 @@ public class CoreNlpParserTest
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertTagset(POS.class, "ptb", ENGLISH_POS_TAGS, jcas);
         assertTagsetMapping(POS.class, "ptb", ENGLISH_POS_UNMAPPED, jcas);
@@ -256,22 +250,20 @@ public class CoreNlpParserTest
     }
 
     @Test
-    public void testEnglishFactored()
-        throws Exception
+    public void testEnglishFactored() throws Exception
     {
         JCas jcas = runTest("en", "factored", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "ADJP 61,68", "NP 0,2",
-                "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "ADJP 61,68", "NP 0,2",
-                "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -301,8 +293,7 @@ public class CoreNlpParserTest
         String[] unmappedDep = { "gov" };
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertTagset(POS.class, "ptb", ENGLISH_POS_TAGS, jcas);
@@ -314,40 +305,39 @@ public class CoreNlpParserTest
     }
 
     // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
-//    @Ignore("Only supported in CoreNLP 3.6.0")
-//    @Test
-//    public void testEnglishKeepPunctuation()
-//        throws Exception
-//    {
-//        JCas jcas = runTest("en", "rnn", "This is a test .", 
-//                CoreNlpParser.PARAM_KEEP_PUNCTUATION, true);
-//
-//        String[] dependencies = {
-//                "[  0,  4]NSUBJ(nsubj) D[0,4](This) G[10,14](test)",
-//                "[  5,  7]COP(cop) D[5,7](is) G[10,14](test)",
-//                "[  8,  9]DET(det) D[8,9](a) G[10,14](test)",
-//                "[ 10, 14]ROOT(root) D[10,14](test) G[10,14](test)" };
-//
-//        assertDependencies(dependencies, select(jcas, Dependency.class));
-//    }
+    // @Disabled("Only supported in CoreNLP 3.6.0")
+    // @Test
+    // public void testEnglishKeepPunctuation()
+    // throws Exception
+    // {
+    // JCas jcas = runTest("en", "rnn", "This is a test .",
+    // CoreNlpParser.PARAM_KEEP_PUNCTUATION, true);
+    //
+    // String[] dependencies = {
+    // "[ 0, 4]NSUBJ(nsubj) D[0,4](This) G[10,14](test)",
+    // "[ 5, 7]COP(cop) D[5,7](is) G[10,14](test)",
+    // "[ 8, 9]DET(det) D[8,9](a) G[10,14](test)",
+    // "[ 10, 14]ROOT(root) D[10,14](test) G[10,14](test)" };
+    //
+    // assertDependencies(dependencies, select(jcas, Dependency.class));
+    // }
 
+    @Disabled("The model version (20140104.1) we used is no longer compatible with the current CoreNLP version")
     @Test
-    public void testEnglishRnn()
-        throws Exception
+    public void testEnglishRnn() throws Exception
     {
         JCas jcas = runTest("en", "rnn", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 61,98",
-                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 61,98",
-                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -377,8 +367,7 @@ public class CoreNlpParserTest
         String[] unmappedDep = { "gov" };
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertTagset(POS.class, "ptb", ENGLISH_POS_TAGS, jcas);
@@ -389,12 +378,13 @@ public class CoreNlpParserTest
         assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
+    @Disabled("The model version (20141031.1) we used is no longer compatible with the current CoreNLP version")
     @Test
-    public void testEnglishShiftReduce()
-        throws Exception
+    public void testEnglishShiftReduce() throws Exception
     {
-        JCas jcas = runTestWithPosTagger("en", "sr", "We need a very complicated example sentence , which "
-                + "contains as many constituents and dependencies as possible .");
+        JCas jcas = runTestWithPosTagger("en", "sr",
+                "We need a very complicated example sentence , which "
+                        + "contains as many constituents and dependencies as possible .");
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
@@ -404,8 +394,7 @@ public class CoreNlpParserTest
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -434,27 +423,23 @@ public class CoreNlpParserTest
         String[] unmappedDep = { "gov" };
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", ENGLISH_POS_TAGS,
-                jcas);
-        assertTagsetMapping(CoreNlpPosTagger.class, POS.class, "ptb",
-                ENGLISH_POS_UNMAPPED, jcas);
-        assertTagset(CoreNlpParser.class, Constituent.class, "ptb",
-                ENGLISH_CONSTITUENT_TAGS, jcas);
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", ENGLISH_POS_TAGS, jcas);
+        assertTagsetMapping(CoreNlpPosTagger.class, POS.class, "ptb", ENGLISH_POS_UNMAPPED, jcas);
+        assertTagset(CoreNlpParser.class, Constituent.class, "ptb", ENGLISH_CONSTITUENT_TAGS, jcas);
         assertTagsetMapping(CoreNlpParser.class, Constituent.class, "ptb",
                 ENGLISH_CONSTITUENT_UNMAPPED, jcas);
-        assertTagset(CoreNlpParser.class, Dependency.class, "stanford341",
-                ENGLISH_DEPENDENCY_TAGS, jcas);
-        assertTagsetMapping(CoreNlpParser.class, Dependency.class, "stanford341",
-                unmappedDep, jcas);
+        assertTagset(CoreNlpParser.class, Dependency.class, "stanford341", ENGLISH_DEPENDENCY_TAGS,
+                jcas);
+        assertTagsetMapping(CoreNlpParser.class, Dependency.class, "stanford341", unmappedDep,
+                jcas);
     }
 
+    @Disabled("Need to upgrade model artifacts for this to work again")
     @Test
-    public void testEnglishShiftReduceBeam()
-        throws Exception
+    public void testEnglishShiftReduceBeam() throws Exception
     {
         JCas jcas = runTestWithPosTagger("en", "sr-beam", "We need a very complicated example "
                 + "sentence , which contains as many constituents and dependencies as possible .");
@@ -467,8 +452,7 @@ public class CoreNlpParserTest
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -497,8 +481,7 @@ public class CoreNlpParserTest
         String[] unmappedDep = { "gov" };
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertTagset(POS.class, "ptb", ENGLISH_POS_TAGS, jcas);
@@ -509,23 +492,22 @@ public class CoreNlpParserTest
         assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
+    @Disabled("The model version (20140104.1) we used is no longer compatible with the current CoreNLP version")
     @Test
-    public void testEnglishWsjRnn()
-        throws Exception
+    public void testEnglishWsjRnn() throws Exception
     {
         JCas jcas = runTest("en", "wsj-rnn", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 61,98",
-                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 61,98",
-                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112",
-                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
+                "NP 8,110", "NP 8,43", "PP 99,110", "QP 61,68", "ROOT 0,112", "S 0,112", "S 52,110",
+                "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -555,8 +537,7 @@ public class CoreNlpParserTest
         String[] unmappedDep = { "gov" };
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertTagset(POS.class, "ptb", ENGLISH_POS_TAGS, jcas);
@@ -574,8 +555,7 @@ public class CoreNlpParserTest
      *             if there is an error.
      */
     @Test
-    public void testEnglishFactoredDirectSpeech()
-        throws Exception
+    public void testEnglishFactoredDirectSpeech() throws Exception
     {
         JCas jcas = runTest("en", "factored",
                 "\" It 's cold outside , \" he said , \" and it 's starting to rain . \"");
@@ -599,15 +579,14 @@ public class CoreNlpParserTest
      *             if there is an error.
      */
     @Test
-    public void testEnglishFactoredDirectSpeech2()
-        throws Exception
+    public void testEnglishFactoredDirectSpeech2() throws Exception
     {
         // JCas jcas = runTest("en", "factored",
         // "‘Prices are used as a barrier so that the sort of " +
         // "people we don't want go over the road ,’ he said .");
-        JCas jcas = runTest("en", "factored", new String[] { "‘", "It", "'s", "cold", "outside",
-                ",", "’", "he", "said", ",", "‘", "and", "it", "'s", "starting", "to", "rain", ".",
-                "’" });
+        JCas jcas = runTest("en", "factored",
+                new String[] { "‘", "It", "'s", "cold", "outside", ",", "’", "he", "said", ",", "‘",
+                        "and", "it", "'s", "starting", "to", "rain", ".", "’" });
 
         String[] posOriginal = new String[] { "``", "PRP", "VBZ", "JJ", "JJ", ",", "''", "PRP",
                 "VBD", ",", "``", "CC", "PRP", "VBZ", "VBG", "TO", "NN", ".", "''" };
@@ -621,9 +600,9 @@ public class CoreNlpParserTest
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
     }
 
+    @Disabled("Need to upgrade model artifacts for this to work again")
     @Test
-    public void testSpanishShiftReduceBeam()
-        throws Exception
+    public void testSpanishShiftReduceBeam() throws Exception
     {
         JCas jcas = runTestWithPosTagger("es", "sr-beam", "Necesitamos una oración de ejemplo "
                 + "muy complicado , que contiene la mayor cantidad de componentes y dependencias "
@@ -640,19 +619,19 @@ public class CoreNlpParserTest
                 "grup.nom 100,112", "grup.nom 16,129", "grup.nom 27,34", "grup.nom 68,112",
                 "grup.nom 86,112", "grup.nom 86,97", "grup.verb 0,11", "grup.verb 118,121",
                 "grup.verb 56,64", "participi 39,49", "prep 24,26", "prep 83,85", "relatiu 52,55",
-                "s.a 122,129", "s.a 68,73", "sadv 35,38", "sentence 0,131", "sn 12,129",
-                "sn 27,34", "sn 65,112", "sn 86,112", "sp 24,34", "sp 83,112", "spec 12,15",
-                "spec 65,67" };
+                "s.a 122,129", "s.a 68,73", "sadv 35,38", "sentence 0,131", "sn 12,129", "sn 27,34",
+                "sn 65,112", "sn 86,112", "sp 24,34", "sp 83,112", "spec 12,15", "spec 65,67" };
 
-        String[] dependencies = { };
+        String[] dependencies = {};
 
-        String[] posMapped = { "POS_VERB", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADV", "POS_ADJ", "POS_PUNCT", "POS_PRON",
-                "POS_VERB", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_CONJ", "POS_VERB", "POS_ADJ",
+        String[] posMapped = { "POS_VERB", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADV",
+                "POS_ADJ", "POS_PUNCT", "POS_PRON", "POS_VERB", "POS_DET", "POS_ADJ", "POS_NOUN",
+                "POS_ADP", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_CONJ", "POS_VERB", "POS_ADJ",
                 "POS_PUNCT" };
 
-        String[] posOriginal = { "vmip000", "di0000", "nc0s000", "sp000", "nc0s000", "rg",
-                "aq0000", "fc", "pr000000", "vmip000", "da0000", "aq0000", "nc0s000", "sp000",
-                "nc0p000", "cc", "nc0p000", "cs", "vssp000", "aq0000", "fp" };
+        String[] posOriginal = { "vmip000", "di0000", "nc0s000", "sp000", "nc0s000", "rg", "aq0000",
+                "fc", "pr000000", "vmip000", "da0000", "aq0000", "nc0s000", "sp000", "nc0p000",
+                "cc", "nc0p000", "cs", "vssp000", "aq0000", "fp" };
 
         String pennTree = "(ROOT (sentence (grup.verb (vmip000 Necesitamos)) (sn (spec "
                 + "(di0000 una)) (grup.nom (nc0s000 oración) (sp (prep (sp000 de)) (sn "
@@ -677,19 +656,15 @@ public class CoreNlpParserTest
         String[] unmappedConst = { "f" };
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertTagset(CoreNlpPosTagger.class, POS.class, "ancora", posTags, jcas);
-        assertTagsetMapping(CoreNlpPosTagger.class, POS.class, "ancora",
-                unmappedPos, jcas);
-        assertTagset(CoreNlpParser.class, Constituent.class, "ancora",
-                constituentTags, jcas);
-        assertTagsetMapping(CoreNlpParser.class, Constituent.class, "ancora",
-                unmappedConst, jcas);
-        //        assertTagset(Dependency.class, "stanford341", depTags, jcas);
-//        assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
+        assertTagsetMapping(CoreNlpPosTagger.class, POS.class, "ancora", unmappedPos, jcas);
+        assertTagset(CoreNlpParser.class, Constituent.class, "ancora", constituentTags, jcas);
+        assertTagsetMapping(CoreNlpParser.class, Constituent.class, "ancora", unmappedConst, jcas);
+        // assertTagset(Dependency.class, "stanford341", depTags, jcas);
+        // assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
     /**
@@ -699,15 +674,13 @@ public class CoreNlpParserTest
      *             if there is an error.
      */
     @Test
-    public void testExistingPos()
-        throws Exception
+    public void testExistingPos() throws Exception
     {
         AnalysisEngineDescription engine = createEngineDescription(
                 createEngineDescription(CoreNlpPosTagger.class),
-                createEngineDescription(CoreNlpParser.class,
-                        CoreNlpParser.PARAM_READ_POS, true,
-                        CoreNlpParser.PARAM_WRITE_POS, false,
-                        CoreNlpParser.PARAM_WRITE_PENN_TREE, true));
+                createEngineDescription(CoreNlpParser.class, CoreNlpParser.PARAM_READ_POS, true,
+                        CoreNlpParser.PARAM_WRITE_POS, false, CoreNlpParser.PARAM_WRITE_PENN_TREE,
+                        true));
 
         JCas jcas = TestRunner.runTest(engine, "en", "This is a test .");
 
@@ -718,9 +691,12 @@ public class CoreNlpParserTest
 
         assertPOS(null, posOriginal, select(jcas, POS.class));
 
-        /* Due to https://github.com/dkpro/dkpro-core/issues/852, the results are instable;
-         * if the test fails for the expected output, try the 2nd variant.
-         * FIXME: once https://github.com/dkpro/dkpro-core/issues/852 is resolved, the try/catch clause should be removed.*/
+        /*
+         * Due to https://github.com/dkpro/dkpro-core/issues/852, the results are instable; if the
+         * test fails for the expected output, try the 2nd variant. FIXME: once
+         * https://github.com/dkpro/dkpro-core/issues/852 is resolved, the try/catch clause should
+         * be removed.
+         */
         try {
             assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         }
@@ -730,10 +706,9 @@ public class CoreNlpParserTest
     }
 
     @Test
-    public void testFrenchFactored()
-        throws Exception
+    public void testFrenchFactored() throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("fr", "factored", "Nous avons besoin d' une phrase par exemple très "
                 + "compliqué , qui contient des constituants que de nombreuses dépendances et que "
@@ -749,15 +724,16 @@ public class CoreNlpParserTest
                 "ROOT 0,138", "SENT 0,138", "Srel 61,90", "Ssub 124,136", "Ssub 91,136", "VN 0,58",
                 "VN 65,73" };
 
-        String[] dependencies = {/** No dependencies for French */ };
+        String[] dependencies = { /** No dependencies for French */
+        };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADV",
-                "POS_VERB", "POS_PUNCT", "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_DET", "POS_ADJ", "POS_NOUN",
-                "POS_CONJ", "POS_CONJ", "POS_ADJ", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN",
+                "POS_ADP", "POS_NOUN", "POS_ADV", "POS_VERB", "POS_PUNCT", "POS_PRON", "POS_VERB",
+                "POS_DET", "POS_NOUN", "POS_CONJ", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_CONJ",
+                "POS_CONJ", "POS_ADJ", "POS_PUNCT" };
 
-        String[] posOriginal = { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV", "VPP",
-                "PUNC", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ",
-                "PUNC" };
+        String[] posOriginal = { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV", "VPP", "PUNC",
+                "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PUNC" };
 
         String pennTree = "(ROOT (SENT (VN (CLS Nous) (V avons) (NP (NC besoin) (PP (P d') (NP "
                 + "(DET une) (NC phrase) (AdP (MWADV (P par) (N exemple)) (ADV très))))) "
@@ -774,17 +750,16 @@ public class CoreNlpParserTest
 
         // NO DEP TAGS String[] depTags = {};
 
-        String[] unmappedPos = { };
+        String[] unmappedPos = {};
 
-        String[] unmappedConst = { "MWA", "MWADV", "MWC", "MWCL", "MWD", "MWET",
-                "MWI", "MWN", "MWP", "MWPRO", "MWV" };
+        String[] unmappedConst = { "MWA", "MWADV", "MWC", "MWCL", "MWD", "MWET", "MWI", "MWN",
+                "MWP", "MWPRO", "MWV" };
 
         // NO DEP TAGS String[] unmappedDep = {};
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
 
         assertTagset(POS.class, "corenlp34", posTags, jcas);
@@ -796,10 +771,9 @@ public class CoreNlpParserTest
     }
 
     @Test
-    public void testFrench2()
-        throws Exception
+    public void testFrench2() throws Exception
     {
-        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("fr", null, "La traduction d' un texte du français vers l' anglais .");
 
@@ -809,8 +783,8 @@ public class CoreNlpParserTest
         String[] constituentOriginal = { "AP 29,37", "NP 0,53", "NP 17,37", "NP 43,53", "PP 14,37",
                 "PP 26,37", "PP 38,53", "ROOT 0,55", "SENT 0,55" };
 
-        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_ADP", "POS_DET",
-                "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP",
+                "POS_ADJ", "POS_ADP", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
         String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "ADJ", "P", "DET", "NC",
                 "PUNC" };
@@ -821,16 +795,13 @@ public class CoreNlpParserTest
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
     }
 
     @Test
-    public void testChineseFactored()
-        throws Exception
+    public void testChineseFactored() throws Exception
     {
-        JCas jcas = runTest("zh", "factored",
-                "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+        JCas jcas = runTest("zh", "factored", "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
 
         String[] constituentMapped = { "ADJP 12,14", "ADJP 9,14", "ADVP 20,22", "ADVP 37,40",
                 "ADVP 9,11", "NP 0,2", "NP 17,19", "NP 23,25", "NP 29,34", "NP 32,34", "NP 6,19",
@@ -842,8 +813,7 @@ public class CoreNlpParserTest
                 "NP 17,19", "NP 23,25", "NP 29,34", "NP 32,34", "NP 6,19", "QP 29,31", "QP 6,8",
                 "ROOT 0,47", "VP 26,34", "VP 26,45", "VP 3,19", "VP 37,45", "VP 43,45" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
                 "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]Dependency(nummod,basic) D[6,8](一个) G[17,19](句子)",
                 "[  9, 11]ADVMOD(advmod,basic) D[9,11](非常) G[12,14](复杂)",
@@ -872,9 +842,9 @@ public class CoreNlpParserTest
                 + "(AD 例如)) (NP (NN 其中)) (VP (VP (VV 包含) (NP (QP (CD 许多)) (NP (NN 成分)))) "
                 + "(CC 和) (VP (DVP (ADVP (AD 尽可能)) (DEV 的)) (VP (VV 依赖))))) (PU 。)))";
 
-        String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER",
-                "DEV", "DT", "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT",
-                "OD", "ON", "P", "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
+        String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
+                "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "ON", "P",
+                "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
 
         String[] constituentTags = { "ADJP", "ADVP", "CLP", "CP", "DFL", "DNP", "DP", "DVP", "FLR",
                 "FRAG", "INC", "INTJ", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT", "UCP",
@@ -890,8 +860,7 @@ public class CoreNlpParserTest
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertTagset(POS.class, "ctb", posTags, jcas);
         assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
@@ -902,8 +871,7 @@ public class CoreNlpParserTest
     }
 
     @Test
-    public void testChineseXinhuaFactored()
-        throws Exception
+    public void testChineseXinhuaFactored() throws Exception
     {
         JCas jcas = runTest("zh", "xinhua-factored",
                 "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
@@ -920,8 +888,7 @@ public class CoreNlpParserTest
                 "QP 6,8", "ROOT 0,47", "VP 12,14", "VP 26,34", "VP 26,40", "VP 3,45", "VP 37,40",
                 "VP 9,14" };
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
                 "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]Dependency(nummod,basic) D[6,8](一个) G[43,45](依赖)",
                 "[  9, 11]ADVMOD(advmod,basic) D[9,11](非常) G[12,14](复杂)",
@@ -948,8 +915,7 @@ public class CoreNlpParserTest
         String pennTree = "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (NP (QP (CD 一个)) (CP (IP (NP "
                 + "(CP (IP (VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 句子))) (IP "
                 + "(ADVP (AD 例如)) (NP (NN 其中)) (VP (VP (VV 包含) (NP (QP (CD 许多)) (NP "
-                + "(NN 成分)))) (CC 和) (VP (ADVP (AD 尽可能)))))) (DEC 的)) (NP (NN 依赖)))) "
-                + "(PU 。)))";
+                + "(NN 成分)))) (CC 和) (VP (ADVP (AD 尽可能)))))) (DEC 的)) (NP (NN 依赖)))) " + "(PU 。)))";
 
         String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
                 "ETC", "FW", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "P", "PN", "PU",
@@ -961,16 +927,15 @@ public class CoreNlpParserTest
 
         // NO DEP TAGS String[] depTags = new String[] {};
 
-        String[] unmappedPos = { };
+        String[] unmappedPos = {};
 
-        String[] unmappedConst = { };
+        String[] unmappedConst = {};
 
         // NO DEP TAGS String[] unmappedDep = new String[] {};
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertTagset(POS.class, "ctb", posTags, jcas);
         assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
@@ -981,8 +946,7 @@ public class CoreNlpParserTest
     }
 
     @Test
-    public void testArabicFactored()
-        throws Exception
+    public void testArabicFactored() throws Exception
     {
         JCas jcas = runTest("ar", "factored",
                 "نحتاج مثالا معقدا جدا ل جملة تحتوي على أكبر قدر ممكن من العناصر و الروابط .");
@@ -991,9 +955,9 @@ public class CoreNlpParserTest
                 "NP 56,73", "NP 6,21", "PP 22,73", "PP 35,73", "PP 53,73", "ROOT 0,75", "S 0,75",
                 "S 29,73", "SBAR 29,73", "VP 0,73", "VP 29,73" };
 
-        String[] constituentOriginal = { "NP 24,28", "NP 24,73", "NP 39,73", "NP 44,52",
-                "NP 44,73", "NP 56,73", "NP 6,21", "PP 22,73", "PP 35,73", "PP 53,73", "ROOT 0,75",
-                "S 0,75", "S 29,73", "SBAR 29,73", "VP 0,73", "VP 29,73" };
+        String[] constituentOriginal = { "NP 24,28", "NP 24,73", "NP 39,73", "NP 44,52", "NP 44,73",
+                "NP 56,73", "NP 6,21", "PP 22,73", "PP 35,73", "PP 53,73", "ROOT 0,75", "S 0,75",
+                "S 29,73", "SBAR 29,73", "VP 0,73", "VP 29,73" };
 
         String[] dependencies = {};
 
@@ -1001,11 +965,12 @@ public class CoreNlpParserTest
                 + "(NP (NN جملة)) (SBAR (S (VP (VBP تحتوي) (PP (IN على) (NP (NN أكبر) (NP (NP (NN قدر) "
                 + "(JJ ممكن)) (PP (IN من) (NP (DTNN العناصر) (CC و) (DTNN الروابط)))))))))))) (PUNC .)))";
 
-        String[] posMapped = { "POS_VERB", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_NOUN",
-                "POS_NOUN", "POS_ADJ", "POS_ADP", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_VERB", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_NOUN",
+                "POS_VERB", "POS_ADP", "POS_NOUN", "POS_NOUN", "POS_ADJ", "POS_ADP", "POS_NOUN",
+                "POS_CONJ", "POS_NOUN", "POS_PUNCT" };
 
-        String[] posOriginal = { "VBP", "NN", "JJ", "NN", "IN", "NN", "VBP", "IN", "NN", "NN",
-                "JJ", "IN", "DTNN", "CC", "DTNN", "PUNC" };
+        String[] posOriginal = { "VBP", "NN", "JJ", "NN", "IN", "NN", "VBP", "IN", "NN", "NN", "JJ",
+                "IN", "DTNN", "CC", "DTNN", "PUNC" };
 
         String[] posTags = { "ADJ_NUM", "CC", "CD", "DT", "DTJJ", "DTJJR", "DTNN", "DTNNP",
                 "DTNNPS", "DTNNS", "IN", "JJ", "JJR", "NN", "NNP", "NNPS", "NNS", "NOUN_QUANT",
@@ -1022,8 +987,7 @@ public class CoreNlpParserTest
 
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        assertConstituents(constituentMapped, constituentOriginal,
-                select(jcas, Constituent.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertTagset(POS.class, "atb", posTags, jcas);
         assertTagsetMapping(POS.class, "atb", unmappedPos, jcas);
@@ -1040,8 +1004,7 @@ public class CoreNlpParserTest
      *             if there is an error.
      */
     @Test
-    public void testEnglishSyntaxTreeReconstruction()
-        throws Exception
+    public void testEnglishSyntaxTreeReconstruction() throws Exception
     {
         JCas jcas = runTest("en", "factored", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
@@ -1066,8 +1029,8 @@ public class CoreNlpParserTest
             pennFromRecreatedTree = recreation.pennString();
         }
 
-        assertTrue("The recreated syntax-tree did not match the input syntax-tree.",
-                pennOriginal.equals(pennFromRecreatedTree));
+        assertTrue(pennOriginal.equals(pennFromRecreatedTree),
+                "The recreated syntax-tree did not match the input syntax-tree.");
     }
 
     private JCas runTestWithPosTagger(String aLanguage, String aVariant, String aText,
@@ -1076,18 +1039,15 @@ public class CoreNlpParserTest
     {
         AssumeResource.assumeResource(CoreNlpParser.class,
                 "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, aVariant);
-        
+
         AggregateBuilder aggregate = new AggregateBuilder();
 
         aggregate.add(createEngineDescription(CoreNlpPosTagger.class));
 
-        Object[] params = new Object[] {
-                CoreNlpParser.PARAM_VARIANT, aVariant,
-                CoreNlpParser.PARAM_PRINT_TAGSET, true,
-                CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
-                CoreNlpParser.PARAM_WRITE_DEPENDENCY, true,
-                CoreNlpParser.PARAM_WRITE_PENN_TREE, true,
-                CoreNlpParser.PARAM_WRITE_POS, false};
+        Object[] params = new Object[] { CoreNlpParser.PARAM_VARIANT, aVariant,
+                CoreNlpParser.PARAM_PRINT_TAGSET, true, CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
+                CoreNlpParser.PARAM_WRITE_DEPENDENCY, true, CoreNlpParser.PARAM_WRITE_PENN_TREE,
+                true, CoreNlpParser.PARAM_WRITE_POS, false };
         params = ArrayUtils.addAll(params, aExtraParams);
         aggregate.add(createEngineDescription(CoreNlpParser.class, params));
 
@@ -1099,40 +1059,31 @@ public class CoreNlpParserTest
     {
         AssumeResource.assumeResource(CoreNlpParser.class,
                 "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, aVariant);
-        
+
         AggregateBuilder aggregate = new AggregateBuilder();
 
-        Object[] params = new Object[] {
-                CoreNlpParser.PARAM_VARIANT, aVariant,
-                CoreNlpParser.PARAM_PRINT_TAGSET, true,
-                CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
-                CoreNlpParser.PARAM_WRITE_DEPENDENCY, true,
-                CoreNlpParser.PARAM_WRITE_PENN_TREE, true,
-                CoreNlpParser.PARAM_READ_POS, false,
-                CoreNlpParser.PARAM_WRITE_POS, true};
+        Object[] params = new Object[] { CoreNlpParser.PARAM_VARIANT, aVariant,
+                CoreNlpParser.PARAM_PRINT_TAGSET, true, CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
+                CoreNlpParser.PARAM_WRITE_DEPENDENCY, true, CoreNlpParser.PARAM_WRITE_PENN_TREE,
+                true, CoreNlpParser.PARAM_READ_POS, false, CoreNlpParser.PARAM_WRITE_POS, true };
         params = ArrayUtils.addAll(params, aExtraParams);
         aggregate.add(createEngineDescription(CoreNlpParser.class, params));
 
         return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
     }
 
-    private JCas runTest(String aLanguage, String aVariant, String[] aTokens)
-        throws Exception
+    private JCas runTest(String aLanguage, String aVariant, String[] aTokens) throws Exception
     {
         AssumeResource.assumeResource(CoreNlpParser.class,
                 "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, aVariant);
 
         // setup English
         AnalysisEngineDescription parser = createEngineDescription(CoreNlpParser.class,
-                CoreNlpParser.PARAM_VARIANT, aVariant,
-                CoreNlpParser.PARAM_PRINT_TAGSET, true,
-                CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
-                CoreNlpParser.PARAM_WRITE_DEPENDENCY, true,
-                CoreNlpParser.PARAM_WRITE_PENN_TREE, true,
-                CoreNlpParser.PARAM_READ_POS, false,
-                CoreNlpParser.PARAM_WRITE_POS, true,
-                CoreNlpParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
-                CoreNlpParser.PARAM_QUOTE_END, new String[] { "’" });
+                CoreNlpParser.PARAM_VARIANT, aVariant, CoreNlpParser.PARAM_PRINT_TAGSET, true,
+                CoreNlpParser.PARAM_WRITE_CONSTITUENT, true, CoreNlpParser.PARAM_WRITE_DEPENDENCY,
+                true, CoreNlpParser.PARAM_WRITE_PENN_TREE, true, CoreNlpParser.PARAM_READ_POS,
+                false, CoreNlpParser.PARAM_WRITE_POS, true, CoreNlpParser.PARAM_QUOTE_BEGIN,
+                new String[] { "‘" }, CoreNlpParser.PARAM_QUOTE_END, new String[] { "’" });
 
         AnalysisEngine engine = createEngine(parser);
         JCas jcas = engine.newJCas();
@@ -1150,7 +1101,4 @@ public class CoreNlpParserTest
 
         return jcas;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

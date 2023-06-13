@@ -17,28 +17,23 @@
  */
 package org.dkpro.core.api.datasets;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.util.List;
 
-import org.dkpro.core.api.datasets.Dataset;
-import org.dkpro.core.api.datasets.DatasetLoader;
-import org.dkpro.core.api.datasets.Split;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-@Ignore("Normally we do not run this")
+@Disabled("Normally we do not run this")
 public class DatasetLoaderTest
 {
     @Test
-    public void testUniversalDependencyTreebankV1_3()
+    public void testUniversalDependencyTreebankV1_3(@TempDir File tempDir)
         throws Exception
     {
-        List<Dataset> dss = new DatasetLoader(DkproTestContext.getCacheFolder())
+        List<Dataset> dss = new DatasetLoader(tempDir)
                 .loadUniversalDependencyTreebankV1_3();
         for (Dataset ds : dss) {
             assertDatasetOk(ds);
@@ -46,8 +41,8 @@ public class DatasetLoaderTest
     }
     private void assertDatasetOk(Dataset ds)
     {
-        assertNotNull("Name not set", ds.getName());
-        assertNotNull("Language not set", ds.getLanguage());
+        assertThat(ds.getName()).isNotNull();
+        assertThat(ds.getLanguage()).isNotNull();
         Split split = ds.getDefaultSplit();
         assertNullOrExists(split.getTestFiles());
         assertNullOrExists(split.getTestFiles());
@@ -59,11 +54,8 @@ public class DatasetLoaderTest
     {
         if (aFiles != null) {
             for (File f : aFiles) {
-                assertTrue("File does not exist: [" + f + "]", f.exists());
+                assertThat(f).exists();
             }
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

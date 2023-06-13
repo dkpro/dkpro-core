@@ -19,7 +19,8 @@ package org.dkpro.core.io.web1t;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,10 +34,9 @@ import org.dkpro.core.clearnlp.ClearNlpLemmatizer;
 import org.dkpro.core.frequency.Web1TFileAccessProvider;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -46,11 +46,9 @@ public class Web1TWriterTest
     private final int MAX_NGRAM = 3;
 
     @Test
-    public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath()
+    public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath(@TempDir File folder)
         throws Exception
     {
-        File folder = testContext.getTestOutputFolder();
-        
         Web1TFileAccessProvider web1tProvider = prepareWeb1TFormatTest(folder, new String[] {
                 Token.class.getName() + "/pos/PosValue", Token.class.getName() + "/lemma/value" });
 
@@ -64,11 +62,9 @@ public class Web1TWriterTest
     }
 
     @Test
-    public void web1TFormatTestWithMultiSlashedTypesAsFeaturePath()
+    public void web1TFormatTestWithMultiSlashedTypesAsFeaturePath(@TempDir File folder)
         throws Exception
     {
-        File folder = testContext.getTestOutputFolder();
-        
         Web1TFileAccessProvider web1tProvider = prepareWeb1TFormatTest(folder,
                 new String[] { Token.class.getName() + "/lemma/value" });
 
@@ -79,11 +75,9 @@ public class Web1TWriterTest
     }
 
     @Test
-    public void web1TFormatTest_randomFrequencies()
+    public void web1TFormatTest_randomFrequencies(@TempDir File folder)
         throws Exception
     {
-        File folder = testContext.getTestOutputFolder();
-        
         Web1TFileAccessProvider web1tProvider = prepareWeb1TFormatTest(folder,
                 new String[] { Token.class.getName() });
 
@@ -94,23 +88,25 @@ public class Web1TWriterTest
 
     }
 
-    @Test(expected = ResourceInitializationException.class)
-    public void web1TFormatTest_exceptionForInvalidMinFrequency1()
+    @Test
+    public void web1TFormatTest_exceptionForInvalidMinFrequency1(@TempDir File folder)
         throws Exception
     {
-        writeWeb1TFormat(new String[] { Token.class.getName() }, -1);
+        assertThatExceptionOfType(ResourceInitializationException.class).isThrownBy(
+                () -> writeWeb1TFormat(folder, new String[] { Token.class.getName() }, -1));
 
     }
 
-    @Test(expected = ResourceInitializationException.class)
-    public void web1TFormatTest_exceptionForInvalidMinFrequency2()
+    @Test
+    public void web1TFormatTest_exceptionForInvalidMinFrequency2(@TempDir File folder)
         throws Exception
     {
-        writeWeb1TFormat(new String[] { Token.class.getName() }, 0);
+        assertThatExceptionOfType(ResourceInitializationException.class).isThrownBy(
+                () -> writeWeb1TFormat(folder, new String[] { Token.class.getName() }, 0));
 
     }
 
-    private void writeWeb1TFormat(String[] strings, int minFreq)
+    private void writeWeb1TFormat(File aFolder, String[] strings, int minFreq)
         throws UIMAException, IOException
     {
         CollectionReader reader = createReader(TextReader.class,
@@ -125,7 +121,7 @@ public class Web1TWriterTest
         AnalysisEngineDescription lemmatizer = createEngineDescription(ClearNlpLemmatizer.class);
 
         AnalysisEngineDescription ngramWriter = createEngineDescription(Web1TWriter.class,
-                Web1TWriter.PARAM_TARGET_LOCATION, testContext.getTestOutputFolder(),
+                Web1TWriter.PARAM_TARGET_LOCATION, aFolder,
                 Web1TWriter.PARAM_INPUT_TYPES, strings, 
                 Web1TWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM, 
                 Web1TWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM,
@@ -167,7 +163,4 @@ public class Web1TWriterTest
 
         SimplePipeline.runPipeline(reader, segmenter, tagger, lemmatizer, ngramWriter);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

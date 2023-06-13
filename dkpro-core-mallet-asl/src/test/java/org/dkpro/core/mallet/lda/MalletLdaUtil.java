@@ -28,7 +28,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class MalletLdaUtil

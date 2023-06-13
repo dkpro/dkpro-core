@@ -45,9 +45,9 @@ import org.dkpro.core.decompounding.uima.resource.SharedLinkingMorphemes;
 import org.dkpro.core.decompounding.uima.resource.SharedPatriciaTries;
 import org.dkpro.core.decompounding.uima.resource.SplitterResource;
 import org.dkpro.core.decompounding.web1t.LuceneIndexer;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
@@ -64,7 +64,7 @@ public class CompoundAnnotatorTest
     static String indexPath = "target/test/index";
 
 
-    @BeforeClass
+    @BeforeAll
     public static void createIndex()
         throws Exception
     {
@@ -179,7 +179,7 @@ public class CompoundAnnotatorTest
         return result.toArray(new String[] {});
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown()
         throws Exception
     {

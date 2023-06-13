@@ -23,9 +23,8 @@ import static org.dkpro.core.testing.AssertAnnotations.assertNamedEntity;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.cogroo.CogrooNamedEntityRecognizer;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 

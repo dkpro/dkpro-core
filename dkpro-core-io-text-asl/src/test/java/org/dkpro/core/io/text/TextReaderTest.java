@@ -20,8 +20,8 @@ package org.dkpro.core.io.text;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.CasUtil.select;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,10 +31,7 @@ import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
-import org.dkpro.core.io.text.TextReader;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
@@ -189,6 +186,4 @@ public class TextReaderTest
         System.out.println("Base URI     : " + aMetaData.getDocumentBaseUri());
         System.out.println("URI          : " + aMetaData.getDocumentUri());
     }
-
-    @Rule public TestName name = new TestName();
 }

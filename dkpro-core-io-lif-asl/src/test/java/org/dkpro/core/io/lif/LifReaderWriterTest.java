@@ -22,9 +22,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LifReaderWriterTest
 {
@@ -88,7 +86,4 @@ public class LifReaderWriterTest
                 "lif/specification-ner-ref.lif", // the reference file for the output
                 "lif/specification-ner.lif"); // the input file for the test
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

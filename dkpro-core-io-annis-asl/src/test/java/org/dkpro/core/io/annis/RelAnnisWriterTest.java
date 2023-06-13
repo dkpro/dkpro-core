@@ -21,26 +21,21 @@ import static org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.io.annis.RelAnnisWriter;
 import org.dkpro.core.io.negra.NegraExportReader;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class RelAnnisWriterTest
 {
-    @Rule
-    public TemporaryFolder workspace = new TemporaryFolder();
-
     @Test
-    public void tuebaTest()
+    public void tuebaTest(@TempDir File workspace)
         throws Exception
     {
         // create NegraExportReader output
@@ -51,12 +46,12 @@ public class RelAnnisWriterTest
                 NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
 
         AnalysisEngineDescription writer = createEngineDescription(RelAnnisWriter.class,
-                RelAnnisWriter.PARAM_PATH, workspace.getRoot().getPath());
+                RelAnnisWriter.PARAM_PATH, workspace.getPath());
 
         SimplePipeline.runPipeline(reader, writer);
 
         // Check if the output matches the reference output
-        for (File f : workspace.getRoot().listFiles()) {
+        for (File f : workspace.listFiles()) {
             System.out.print("Checking [" + f.getName() + "]... ");
             if (readFileToString(new File("src/test/resources/tueba/reference", f.getName()),
                     "UTF-8").equals(readFileToString(f, "UTF-8"))) {
@@ -68,7 +63,7 @@ public class RelAnnisWriterTest
         }
 
         // Check if the output matches the reference output
-        for (File f : workspace.getRoot().listFiles()) {
+        for (File f : workspace.listFiles()) {
             assertTrue(contentEqualsIgnoreEOL(
                     new File("src/test/resources/tueba/reference", f.getName()), f, "UTF-8"));
         }

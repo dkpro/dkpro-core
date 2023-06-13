@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.syntax.tagset;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.dkpro.core.api.resources.MappingProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MappingsTest
 {

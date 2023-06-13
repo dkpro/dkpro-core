@@ -18,15 +18,13 @@
  */
 package org.dkpro.core.api.transform.alignment;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.dkpro.core.api.transform.alignment.AlignedString;
-import org.dkpro.core.api.transform.alignment.ImmutableInterval;
-import org.dkpro.core.api.transform.alignment.Interval;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class AlignedStringTest
 {
@@ -35,7 +33,7 @@ public class AlignedStringTest
     private AlignedString top;
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception
     {
         //                      11
@@ -47,7 +45,7 @@ public class AlignedStringTest
         System.out.println("-------------------------------------------");
     }
 
-    @After
+    @AfterEach
     public void after()
     {
         System.out.println("                   1    |    2    |    3    |    4    |    5");
@@ -60,7 +58,7 @@ public class AlignedStringTest
     @Test
     public void testGet()
     {
-        assertEquals(baseString, top.get());
+        assertThat(top.get()).isEqualTo(baseString);
     }
 
     @Test
@@ -119,11 +117,11 @@ public class AlignedStringTest
 
     /**
      * This is how you would expect to do hypenation removal, but it's wrong - use method used in
-     * testInsert2. This here will not work, because AlignedString will try to interpolate the
+     * testInsert2. This here will not work, because AlignedString will tr@Disabled(dterpolate the
      * start position of the uli interval (18) within the replaced interval (16-22).
      */
     @Test
-    @Ignore("Wrong method to do hypenation removal")
+    @Disabled("Wrong method to do hypenation removal")
     public void testInsert3()
     {
         //              0123456789012345678901234567890

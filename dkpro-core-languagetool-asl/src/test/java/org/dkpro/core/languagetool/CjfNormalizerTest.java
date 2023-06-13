@@ -22,9 +22,7 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.languagetool.CjfNormalizer.Direction;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CjfNormalizerTest
 {
@@ -50,7 +48,4 @@ public class CjfNormalizerTest
 
         assertTransformedText(normalizedText, inputText, "zh", normalizer);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

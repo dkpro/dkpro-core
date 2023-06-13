@@ -26,9 +26,8 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -37,10 +36,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class ConllUWriterTest
 {
     @Test
-    public void thatLineBreaksDoNotBreakTheFormat() throws Exception
+    public void thatLineBreaksDoNotBreakTheFormat(@TempDir File tempDir) throws Exception
     {
-        File target = testContext.getTestOutputFolder();
-
         JCas jcas = JCasFactory.createText("Test\ntest.");
         new Sentence(jcas, 0, 10).addToIndexes();
         new Token(jcas, 0, 4).addToIndexes();
@@ -51,17 +48,14 @@ public class ConllUWriterTest
         dmd.setDocumentId("output");
 
         AnalysisEngine writer = createEngine(ConllUWriter.class, 
-                ConllUWriter.PARAM_TARGET_LOCATION, target);
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
 
         writer.process(jcas);
 
         String reference = readFileToString(
                 new File("src/test/resources/conll/u_v2/conllu-linebreaks.conllu"), "UTF-8").trim();
-        String actual = readFileToString(new File(target, "output.conllu"), "UTF-8").trim();
+        String actual = readFileToString(new File(tempDir, "output.conllu"), "UTF-8").trim();
 
         assertThat(actual).isEqualToNormalizingNewlines(reference);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

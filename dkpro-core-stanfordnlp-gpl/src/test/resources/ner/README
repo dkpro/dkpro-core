@@ -1,4 +1,0 @@
-Got original training props file from here: 
-	https://github.com/stanfordnlp/CoreNLP/tree/master/scripts/ner
-	
-The training props file here is the result of merging all the 'english.xxx...prop' files from there, using all the common parameters and removing the ones that are part of the StanfordNamedEntityRecognizerTrainer component now.

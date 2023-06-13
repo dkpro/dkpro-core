@@ -20,10 +20,7 @@ package org.dkpro.core.io.gate;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.io.conll.Conll2000Reader;
-import org.dkpro.core.io.gate.GateXmlWriter2;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GateXmlWriterTest2
 {
@@ -31,10 +28,10 @@ public class GateXmlWriterTest2
     public void oneWay()
         throws Exception
     {
-        testOneWay(Conll2000Reader.class, GateXmlWriter2.class,
-                "conll/2000/chunk2000_ref2.xml", "conll/2000/chunk2000_test.conll");
+        testOneWay( //
+                Conll2000Reader.class, //
+                GateXmlWriter2.class, //
+                "conll/2000/chunk2000_ref2.xml", //
+                "conll/2000/chunk2000_test.conll");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

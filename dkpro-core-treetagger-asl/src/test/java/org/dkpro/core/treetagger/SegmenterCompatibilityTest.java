@@ -20,7 +20,8 @@ package org.dkpro.core.treetagger;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.Collection;
 
@@ -28,16 +29,14 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.dkpro.core.treetagger.TreeTaggerPosTagger;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 
 public class SegmenterCompatibilityTest
 {
-    @Before
+    @BeforeEach
     public void initTrace()
     {
         // TreeTaggerWrapper.TRACE = true;
@@ -73,11 +72,11 @@ public class SegmenterCompatibilityTest
 
     private void checkModelsAndBinary(String lang)
     {
-        Assume.assumeTrue(
+        assumeTrue(
                 getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
                         + lang + "-le.bin") != null);
 
-        Assume.assumeTrue(getClass().getResource(
+        assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
     }
 }

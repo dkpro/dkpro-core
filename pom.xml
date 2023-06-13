@@ -20,11 +20,11 @@
   <parent>
     <groupId>org.dkpro</groupId>
     <artifactId>dkpro-parent-pom</artifactId>
-    <version>27</version>
+    <version>30</version>
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core</artifactId>
-  <version>2.3.0-SNAPSHOT</version>
+  <version>2.4.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>DKPro Core</name>
   <!-- The description tag must be present for antrun to work!! -->
@@ -36,26 +36,30 @@
   </organization>
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <currentYear>2019</currentYear>
+    <currentYear>2023</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
     <maven.surefire.heap>6g</maven.surefire.heap>
 
+    <junit-jupiter.version>5.9.2</junit-jupiter.version>
+    <junit-platform.version>1.9.2</junit-platform.version>
+    <mockito.version>4.11.0</mockito.version>
+    <assertj.version>3.24.2</assertj.version>
+    <xmlunit.version>2.9.1</xmlunit.version>
+
     <activation.version>1.2.0</activation.version>
-    <groovy.version>3.0.10</groovy.version>
-    <icu4j.version>68.2</icu4j.version>
-    <jackson.version>2.14.0</jackson.version>
+    <groovy.version>4.0.11</groovy.version>
+    <icu4j.version>73.1</icu4j.version>
+    <jackson.version>2.15.1</jackson.version>
     <jena.version>4.6.1</jena.version>
-    <log4j.version>2.17.2</log4j.version>
+    <log4j.version>2.20.0</log4j.version>
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
-    <slf4j.version>1.7.36</slf4j.version>
+    <slf4j.version>2.0.7</slf4j.version>
     <snakeyaml.version>1.33</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>5.3.23</spring.version>
-    <uima.version>3.3.1</uima.version>
-    <uimafit.version>3.3.0</uimafit.version>
+    <spring.version>5.3.27</spring.version>
+    <uima.version>3.4.1</uima.version>
+    <uimafit.version>3.4.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
   </properties>
   <repositories>
@@ -66,83 +70,7 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-    <!-- For UIMA/uimaFIT RCs -->
-    <!--
-    <repository>
-      <id>ext-staging</id>
-      <name>Staging repo</name>
-      <url>https://repository.apache.org/content/repositories/orgapacheuima-1205/</url>
-      <releases>
-          <enabled>true</enabled>
-      </releases>
-    </repository>
-    -->
-    <!-- For UIMA/uimaFIT SNAPSHOT
-    <repository>
-      <id>apache.snapshots</id>
-      <name>Apache Snapshot Repository</name>
-      <url>https://repository.apache.org/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    -->
-    <!-- For SNAPSHOTs from the DKPro family -->
-    <!--
-    <repository>
-      <id>ukp-oss-snapshots</id>
-      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    -->
   </repositories>
-  <pluginRepositories>
-    <!-- For UIMA/uimaFIT RCs -->
-    <!--
-    <pluginRepository>
-      <id>ext-staging</id>
-      <name>Staging repo</name>
-      <url>https://repository.apache.org/content/repositories/orgapacheuima-1205/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </pluginRepository>
-    -->
-    <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
-    <pluginRepository>
-      <id>apache.snapshots</id>
-      <name>Apache Snapshot Repository</name>
-      <url>https://repository.apache.org/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-    <!-- For SNAPSHOTs from OpenMinTeD -->
-    <!--  
-    <pluginRepository>
-      <id>omtd-snapshots</id>
-      <layout>default</layout>
-      <url>https://repo.openminted.eu/content/repositories/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-    -->
-  </pluginRepositories>
   <mailingLists>
     <mailingList>
       <name>DKPro Core user mailing list</name>
@@ -168,8 +96,8 @@
     <url>https://github.com/dkpro/dkpro-core/issues</url>
   </issueManagement>
   <scm>
-    <connection>scm:git:git://github.com/dkpro/dkpro-core</connection>
-    <developerConnection>scm:git:git@github.com:dkpro/dkpro-core.git</developerConnection>
+    <connection>scm:git:https://github.com/dkpro/dkpro-core.git</connection>
+    <developerConnection>scm:git:https://github.com/dkpro/dkpro-core.git</developerConnection>
     <url>https://github.com/dkpro/dkpro-core</url>
     <tag>HEAD</tag>
   </scm>
@@ -180,24 +108,114 @@
     <!-- Documentation and examples modules -->
     <module>dkpro-core-doc</module>
   </modules>
+  <dependencies>
+    <!-- Testing -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xmlunit</groupId>
+      <artifactId>xmlunit-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xmlunit</groupId>
+      <artifactId>xmlunit-assertj3</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- The logging subsystem used by DKPro Core during testing -->
+    <dependency>
+      <!-- Use Log4J v2 as logging backend -->
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- Route Log4J v1 over SLF4J -->
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- Route Java Commons Logging over SLF4J -->
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- Avoid Commons Logging -->
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.13.2</version>
-      </dependency>
-      <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.22.0</version>
+        <version>${assertj.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-core</artifactId>
+        <version>${xmlunit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-assertj3</artifactId>
+        <version>${xmlunit.version}</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-bom</artifactId>
-        <version>4.8.1</version>
+        <version>4.11.0</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.opentest4j</groupId>
+        <artifactId>opentest4j</artifactId>
+        <version>1.2.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.uima</groupId>
@@ -243,21 +261,12 @@
         <groupId>xerces</groupId>
         <artifactId>xercesImpl</artifactId>
         <version>2.12.2</version>
-      </dependency>
-      <dependency>
-        <groupId>xalan</groupId>
-        <artifactId>xalan</artifactId>
-        <version>2.7.2</version>
-      </dependency>
-      <dependency>
-        <groupId>xalan</groupId>
-        <artifactId>serializer</artifactId>
-        <version>2.7.2</version>
-      </dependency>
-      <dependency>
-        <groupId>xml-apis</groupId>
-        <artifactId>xml-apis</artifactId>
-        <version>1.4.01</version>
+        <exclusions>
+          <exclusion>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>stax</groupId>
@@ -265,9 +274,9 @@
         <version>1.0.1</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.woodstox</groupId>
-        <artifactId>woodstox-core-asl</artifactId>
-        <version>4.4.1</version>
+        <groupId>com.fasterxml.woodstox</groupId>
+        <artifactId>woodstox-core</artifactId>
+        <version>6.5.0</version>
         <exclusions>
           <exclusion>
             <groupId>javax.xml.stream</groupId>
@@ -283,7 +292,7 @@
       <dependency>
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>stax2-api</artifactId>
-        <version>3.1.4</version>
+        <version>4.2.1</version>
       </dependency>
       <dependency>
         <groupId>com.ibm.icu</groupId>
@@ -298,7 +307,7 @@
       <dependency>
         <groupId>commons-cli</groupId>
         <artifactId>commons-cli</artifactId>
-        <version>1.4</version>
+        <version>1.5.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -328,7 +337,7 @@
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.11.0</version>
+        <version>2.13.0</version>
       </dependency>
       <dependency>
         <groupId>commons-lang</groupId>
@@ -343,12 +352,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.21</version>
+        <version>1.23.0</version>
       </dependency>
       <dependency>
         <groupId>org.tukaani</groupId>
         <artifactId>xz</artifactId>
-        <version>1.8</version>
+        <version>1.9</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ant</groupId>
@@ -375,6 +384,17 @@
         </exclusions>
       </dependency>
       <dependency>
+        <groupId>xom</groupId>
+        <artifactId>xom</artifactId>
+        <version>1.3.8</version>
+        <exclusions>
+          <exclusion>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
         <groupId>org.dom4j</groupId>
         <artifactId>dom4j</artifactId>
         <version>2.1.3</version>
@@ -382,7 +402,7 @@
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>30.1-jre</version>
+        <version>32.0.1-jre</version>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
@@ -444,14 +464,9 @@
         <version>1.2</version>
       </dependency>
       <dependency>
-        <groupId>xmlunit</groupId>
-        <artifactId>xmlunit</artifactId>
-        <version>1.6</version>
-      </dependency>
-      <dependency>
         <groupId>it.unimi.dsi</groupId>
         <artifactId>fastutil</artifactId>
-        <version>8.4.4</version>
+        <version>8.5.11</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ivy</groupId>
@@ -491,7 +506,7 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.groovy</groupId>
+        <groupId>org.apache.groovy</groupId>
         <artifactId>groovy-bom</artifactId>
         <version>${groovy.version}</version>
         <type>pom</type>
@@ -508,6 +523,47 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[11,)</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+          <execution>
+            <id>enforce-banned-dependencies</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <bannedDependencies>
+                  <excludes>
+<!--                     <exclude>xerces:*</exclude> -->
+                    <exclude>xalan:*</exclude>
+                    <exclude>xml-apis:*</exclude>
+<!--                     <exclude>commons-lang:commons-lang</exclude> -->
+<!--                     <exclude>org.apache.commons:commons-math</exclude> matetools still uses this -->
+                    <exclude>commons-math:commons-math</exclude>
+<!--                     <exclude>commons-collections:commons-collections</exclude> -->
+                  </excludes>
+                </bannedDependencies>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <execution>
@@ -520,6 +576,7 @@
         </executions>
         <configuration>
           <failOnWarning>true</failOnWarning>
+          <excludeScope>runtime</excludeScope>
           <ignoredDependencies>
             <!-- 
               - We want to depend on commons-logging-api and no complaints about spring.jcl
@@ -527,23 +584,38 @@
             <ignoredDependency>commons-logging:commons-logging-api</ignoredDependency>
             <ignoredDependency>org.springframework:spring-jcl</ignoredDependency>
           </ignoredDependencies>
-          <usedDependencies combine.children="append">
-            <!-- 
+          <ignoredUnusedDeclaredDependencies combine.children="append">
+            <!--
               - Logging is used via reflection and cannot be detected by Maven
-            <usedDependency>org.apache.logging.log4j:log4j-slf4j-impl</usedDependency>
-            <usedDependency>org.apache.logging.log4j:log4j-core</usedDependency>
-            <usedDependency>org.slf4j:log4j-over-slf4j</usedDependency>
-            <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
-            <usedDependency>commons-logging:commons-logging</usedDependency>
             -->
-            <!-- 
+            <dependency>org.apache.logging.log4j:log4j-slf4j2-impl</dependency>
+            <dependency>org.apache.logging.log4j:log4j-spring-boot</dependency>
+            <dependency>org.apache.logging.log4j:log4j-layout-template-json</dependency>
+            <dependency>org.apache.logging.log4j:log4j-core</dependency>
+            <dependency>org.slf4j:log4j-over-slf4j</dependency>
+            <dependency>org.slf4j:jcl-over-slf4j</dependency>
+            <dependency>commons-logging:commons-logging</dependency>
+            <!--
               - JAXB is used via reflection and cannot be detected by Maven
-            <usedDependency>javax.xml.bind:jaxb-api</usedDependency>
-            <usedDependency>com.sun.xml.bind:jaxb-core</usedDependency>
-            <usedDependency>com.sun.xml.bind:jaxb-impl</usedDependency>
-            <usedDependency>javax.activation:javax.activation-api</usedDependency>
             -->
-          </usedDependencies>
+            <dependency>javax.xml.bind:jaxb-api</dependency>
+            <dependency>com.sun.xml.bind:jaxb-core</dependency>
+            <dependency>com.sun.xml.bind:jaxb-impl</dependency>
+            <dependency>javax.activation:javax.activation-api</dependency>
+            <!--
+              - Common test dependencies
+            -->
+            <dependency>org.junit.jupiter:junit-jupiter-api</dependency>
+            <dependency>org.junit.jupiter:junit-jupiter-params</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-engine</dependency>
+            <dependency>org.junit.platform:junit-platform-suite-api</dependency>
+            <dependency>org.mockito:mockito-core</dependency>
+            <dependency>org.mockito:mockito-junit-jupiter</dependency>
+            <dependency>org.assertj:assertj-core</dependency>
+            <dependency>org.xmlunit:xmlunit-core</dependency>
+            <dependency>org.xmlunit:xmlunit-assertj3</dependency>
+            <dependency>org.awaitility:awaitility</dependency>
+          </ignoredUnusedDeclaredDependencies>
         </configuration>
       </plugin>
       <plugin>
@@ -692,6 +764,16 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.6.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <configuration>
             <autoVersionSubmodules>true</autoVersionSubmodules>
@@ -723,7 +805,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
-          <version>2.8.1</version>
+          <version>2.14.2</version>
           <configuration>
             <rulesUri>file:${session.executionRootDirectory}/dkpro-core-build/src/main/resources/dkpro-core/version-rules.xml</rulesUri>
           </configuration>
@@ -746,7 +828,7 @@
           <plugin>
             <groupId>org.spdx</groupId>
             <artifactId>spdx-maven-plugin</artifactId>
-            <version>0.2.5</version>
+            <version>0.6.3</version>
             <executions>
               <execution>
                 <id>build-spdx</id>
@@ -802,7 +884,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.10</version>
             <executions>
               <execution>
                 <id>addToSourceFolder</id>
@@ -853,7 +934,7 @@
                 <dependency>
                   <groupId>com.puppycrawl.tools</groupId>
                   <artifactId>checkstyle</artifactId>
-                  <version>8.31</version>
+                  <version>8.45.1</version>
                 </dependency>
               </dependencies>
               <configuration>

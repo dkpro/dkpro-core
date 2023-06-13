@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -28,10 +28,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -127,7 +125,7 @@ public class CoreNlpDependencyParserTest
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]DEP(dep,basic) D[69,81](constituents) G[61,63](as)",
                 "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",
                 "[102,110]Dependency(acl,basic) D[102,110](possible) G[69,81](constituents)",
                 "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
@@ -165,7 +163,7 @@ public class CoreNlpDependencyParserTest
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]POBJ(pobj,basic) D[69,81](constituents) G[61,63](as)",
                 "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(prep,basic) D[99,101](as) G[69,81](constituents)",
                 "[102,110]POBJ(pobj,basic) D[102,110](possible) G[99,101](as)",
                 "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
@@ -203,7 +201,7 @@ public class CoreNlpDependencyParserTest
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]Dependency(nmod:as,basic) D[69,81](constituents) G[52,60](contains)",
                 "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",
                 "[102,110]Dependency(acl,basic) D[102,110](possible) G[69,81](constituents)",
                 "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
@@ -294,7 +292,7 @@ public class CoreNlpDependencyParserTest
                 "[ 65, 70]AMOD(amod,basic) D[65,70](viele) G[71,84](Konstituenten)",
                 "[ 71, 84]DOBJ(dobj,basic) D[71,84](Konstituenten) G[101,111](beinhaltet)",
                 "[ 85, 88]CC(cc,basic) D[85,88](und) G[71,84](Konstituenten)",
-                "[ 89,100]CONJ(conj:und,basic) D[89,100](Dependenzen) G[71,84](Konstituenten)",
+                "[ 89,100]CONJ(conj,basic) D[89,100](Dependenzen) G[71,84](Konstituenten)",
                 "[101,111]Dependency(acl,basic) D[101,111](beinhaltet) G[4,12](brauchen)",
                 "[112,113]PUNCT(punct,basic) D[112,113](.) G[4,12](brauchen)" };
 
@@ -437,7 +435,7 @@ public class CoreNlpDependencyParserTest
                 "[ 23, 25]NSUBJ(nsubj,basic) D[23,25](其中) G[26,28](包含)",
                 "[ 26, 28]CCOMP(ccomp,basic) D[26,28](包含) G[3,5](需要)",
                 "[ 29, 31]DEP(dep,basic) D[29,31](许多) G[32,34](成分)",
-                "[ 32, 34]CONJ(conj:和,basic) D[32,34](成分) G[43,45](依赖)",
+                "[ 32, 34]CONJ(conj,basic) D[32,34](成分) G[43,45](依赖)",
                 "[ 35, 36]CC(cc,basic) D[35,36](和) G[43,45](依赖)",
                 "[ 37, 40]ADVMOD(advmod:dvp,basic) D[37,40](尽可能) G[43,45](依赖)",
                 "[ 41, 42]MARK(mark,basic) D[41,42](的) G[37,40](尽可能)",
@@ -541,7 +539,4 @@ public class CoreNlpDependencyParserTest
 
         return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

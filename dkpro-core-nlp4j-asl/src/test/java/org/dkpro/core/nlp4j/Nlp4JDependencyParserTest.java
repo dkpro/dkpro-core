@@ -19,18 +19,14 @@ package org.dkpro.core.nlp4j;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.nlp4j.Nlp4JDependencyParser;
-import org.dkpro.core.nlp4j.Nlp4JPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
@@ -48,7 +44,7 @@ public class Nlp4JDependencyParserTest
         throws Exception
     {
         long maxMemory = Runtime.getRuntime().maxMemory();
-        Assume.assumeTrue("Insufficient max memory: " + maxMemory, maxMemory > 3700000000l);
+        assumeTrue(maxMemory > 3700000000l, "Insufficient max memory: " + maxMemory);
         
         JCas jcas = runTest("en", null, "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
@@ -94,7 +90,4 @@ public class Nlp4JDependencyParserTest
 
         return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

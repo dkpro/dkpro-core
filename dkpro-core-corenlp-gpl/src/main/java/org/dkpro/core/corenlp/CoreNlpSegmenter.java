@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -158,6 +158,7 @@ public class CoreNlpSegmenter
 
                 Properties coreNlpProps = new Properties();
                 coreNlpProps.setProperty("tokenize.language", props.getProperty(LANGUAGE));
+                coreNlpProps.setProperty("tokenize.ssplit", "false");
                 //coreNlpProps.setProperty("tokenize.class", null);
                 //coreNlpProps.setProperty("tokenize.whitespace", "false");
                 //coreNlpProps.setProperty("tokenize.keepeol", "false");
@@ -193,6 +194,7 @@ public class CoreNlpSegmenter
                 
                 String extraOptions = null;
                 
+
                 TokenizerAnnotator annotator = new TokenizerAnnotator(verbose, coreNlpProps,
                         extraOptions);
                 

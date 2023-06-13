@@ -22,14 +22,9 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.cogroo.CogrooFeaturizer;
-import org.dkpro.core.cogroo.CogrooPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 
@@ -71,14 +66,5 @@ public class CogrooFeaturizerTest
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertMorph(aFeatures, select(jcas, MorphologicalFeatures.class));
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
 }

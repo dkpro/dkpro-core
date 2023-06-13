@@ -31,10 +31,9 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.ResourceObjectProviderBase;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -66,11 +65,9 @@ public class OpenNlpPosTaggerTest
     }
     
     @Test
-    public void testEnglishAutoLoad()
+    public void testEnglishAutoLoad(@TempDir File testOutput)
         throws Exception
     {
-        File testOutput = testContext.getTestOutputFolder();
-        
         String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, 
                 new File(testOutput, "models").getPath());
         String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, 
@@ -99,11 +96,9 @@ public class OpenNlpPosTaggerTest
     }
 
     @Test
-    public void testEnglishManualURI()
+    public void testEnglishManualURI(@TempDir File testOutput)
         throws Exception
     {
-        File testOutput = testContext.getTestOutputFolder();
-        
         String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, 
                 new File(testOutput, "models").getPath());
         String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, 
@@ -156,7 +151,4 @@ public class OpenNlpPosTaggerTest
         
         return jcas;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

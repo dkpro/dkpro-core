@@ -18,7 +18,7 @@
 package org.dkpro.core.textnormalizer;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -29,7 +29,7 @@ import org.dkpro.core.castransformation.ApplyChangesAnnotator;
 import org.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
 import org.dkpro.core.textnormalizer.ReplacementFileNormalizer.TargetSurroundings;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 

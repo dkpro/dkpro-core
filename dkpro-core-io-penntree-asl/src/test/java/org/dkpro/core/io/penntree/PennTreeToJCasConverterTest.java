@@ -18,6 +18,9 @@
 
 package org.dkpro.core.io.penntree;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.util.Collection;
 
 import org.apache.uima.UIMAException;
@@ -26,13 +29,9 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.api.resources.MappingProviderFactory;
-import org.dkpro.core.io.penntree.PennTreeNode;
-import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
-import org.dkpro.core.io.penntree.PennTreeUtils;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.validation.extras.AllTokensHavePos;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -78,10 +77,10 @@ public class PennTreeToJCasConverterTest
 
         for (Constituent constituent : constituents) {
             if (!constituent.getConstituentType().equals("ROOT")) {
-                Assert.assertNotNull(constituent.getParent());
+                assertNotNull(constituent.getParent());
             }
             else {
-                Assert.assertNull(constituent.getParent());
+                assertNull(constituent.getParent());
             }
         }
     }

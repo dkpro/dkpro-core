@@ -21,14 +21,10 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.testing.AssertAnnotations.assertToken;
 
-import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.dkpro.core.tokit.StopWordRemover;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -44,17 +40,12 @@ public class StopWordRemoverTest
     private static final String STOPWORDSFILE_LOCATION1 = "src/test/resources/stopwords1.txt";
     private static final String STOPWORDSFILE_LOCATION2 = "src/test/resources/stopwords2.txt";
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     /**
      * Simple test case: one stopword file.
-     *
-     * @throws UIMAException
      */
     @Test
     public void test()
-        throws UIMAException
+        throws Exception
     {
         String[] expectedTokens = new String[] { "text", "containing", "stopwords", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
@@ -65,12 +56,10 @@ public class StopWordRemoverTest
 
     /**
      * Testing two stopword files with different language codes.
-     *
-     * @throws UIMAException
      */
     @Test
     public void test2Files()
-        throws UIMAException
+        throws Exception
     {
         String[] expectedTokens = new String[] { "text", "containing", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
@@ -84,13 +73,11 @@ public class StopWordRemoverTest
     /**
      * Testing two stopword files of identical language code.
      *
-     * @throws UIMAException
-     *
      * @see <a href="https://github.com/dkpro/dkpro-core/issues/600">Issue 600</a>
      */
     @Test
     public void testFilesSameLanguage()
-        throws UIMAException
+        throws Exception
     {
         String[] expectedTokens = new String[] { "text", "containing", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,

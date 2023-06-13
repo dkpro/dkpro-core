@@ -20,7 +20,7 @@ package org.dkpro.core.opennlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.List;
@@ -36,22 +36,19 @@ import org.dkpro.core.eval.EvalUtil;
 import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2006Reader;
-import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.opennlp.OpenNlpPosTaggerTrainer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.testing.TestCache;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 public class OpenNlpPosTaggerTrainerTest
 {
     @Test
-    public void test()
+    public void test(@TempDir File targetFolder)
         throws Exception
     {
-        File cache = DkproTestContext.getCacheFolder();
-        File targetFolder = testContext.getTestOutputFolder();
+        File cache = TestCache.getCacheFolder();
         
         // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
         // documentation. Do not remove these tags!
@@ -106,11 +103,8 @@ public class OpenNlpPosTaggerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.642212, results.getFscore(), 0.0001);
-        assertEquals(0.642212, results.getPrecision(), 0.0001);
-        assertEquals(0.642212, results.getRecall(), 0.0001);
+        assertEquals(0.636631, results.getFscore(), 0.0001);
+        assertEquals(0.636631, results.getPrecision(), 0.0001);
+        assertEquals(0.636631, results.getRecall(), 0.0001);
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

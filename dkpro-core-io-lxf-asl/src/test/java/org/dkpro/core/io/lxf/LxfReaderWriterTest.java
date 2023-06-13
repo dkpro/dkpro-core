@@ -19,9 +19,7 @@ package org.dkpro.core.io.lxf;
 
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LxfReaderWriterTest
 {
@@ -95,7 +93,4 @@ public class LxfReaderWriterTest
                 LxfWriter.class, // the writer
                 "lxf/maltparser/ref.lxf", "lxf/maltparser/orig.lxf");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -18,24 +18,10 @@
 package org.dkpro.core.doc;
 
 import static groovy.io.FileType.FILES;
-import groovy.json.*;
-import groovy.text.XmlTemplateEngine;
-import groovy.transform.Field;
-import groovy.util.XmlParser;
-import org.dkpro.meta.core.MetadataAggregator;
-import org.dkpro.meta.core.maven.ContextHolder;
-import org.dkpro.meta.core.model.MetadataModel;
-
-import static org.apache.uima.UIMAFramework.getXMLParser;
-import static org.apache.uima.fit.factory.ResourceCreationSpecifierFactory.*;
-import static org.apache.uima.util.CasCreationUtils.mergeTypeSystems;
-import org.apache.commons.configuration.PropertiesConfiguration
-import org.apache.commons.io.FilenameUtils;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.resource.metadata.TypeSystemDescription;
-import org.apache.uima.util.XMLInputSource;
-import org.yaml.snakeyaml.Yaml;
+import org.dkpro.meta.core.MetadataAggregator
+import org.dkpro.meta.core.model.MetadataModel
+import org.dkpro.meta.core.maven.ContextHolder
+import org.yaml.snakeyaml.Yaml
 
 class DocumentationBuilder {
     public void run() {

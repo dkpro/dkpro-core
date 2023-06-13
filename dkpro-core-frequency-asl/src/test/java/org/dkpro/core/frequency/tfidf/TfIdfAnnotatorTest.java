@@ -21,8 +21,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.util.HashMap;
@@ -37,11 +37,9 @@ import org.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeIdf;
 import org.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeTf;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -54,26 +52,26 @@ public class TfIdfAnnotatorTest
 
     private final static String CONSUMER_TEST_DATA_PATH = "src/test/resources/consumer/";
 
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
-
     protected File model;
 
-    @Before
-    public void buildModel()
+    @BeforeEach
+    public void buildModel(@TempDir File tempDir)
         throws Exception
     {
-        model = folder.newFile();
+        model = new File(tempDir, "model");
 
         // write the model
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, 
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
         AnalysisEngineDescription aggregate = createEngineDescription(
-                createEngineDescription(BreakIteratorSegmenter.class),
-                createEngineDescription(TfIdfWriter.class, 
-                        TfIdfWriter.PARAM_FEATURE_PATH, Token.class, 
+                createEngineDescription( //
+                        BreakIteratorSegmenter.class), //
+                createEngineDescription( //
+                        TfIdfWriter.class,  //
+                        TfIdfWriter.PARAM_FEATURE_PATH, Token.class,  //
                         TfIdfWriter.PARAM_TARGET_LOCATION, model));
 
         SimplePipeline.runPipeline(reader, aggregate);
@@ -83,16 +81,18 @@ public class TfIdfAnnotatorTest
     public void tfidfTest_normal_constantOne()
         throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, 
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfIdfAnnotator.class,
-                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class,
-                TfIdfAnnotator.PARAM_TFDF_PATH, model, 
-                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, 
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(
+                TfIdfAnnotator.class, //
+                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class, //
+                TfIdfAnnotator.PARAM_TFDF_PATH, model,  //
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL,  //
                 TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.CONSTANT_ONE);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
@@ -113,16 +113,18 @@ public class TfIdfAnnotatorTest
     public void tfidfTest_binary_binary()
         throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, 
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfIdfAnnotator.class,
-                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class,
-                TfIdfAnnotator.PARAM_TFDF_PATH, model, 
-                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.BINARY,
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription( //
+                TfIdfAnnotator.class, //
+                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class, //
+                TfIdfAnnotator.PARAM_TFDF_PATH, model,  //
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.BINARY, //
                 TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.BINARY);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
@@ -143,16 +145,18 @@ public class TfIdfAnnotatorTest
     public void tfidfTest_normal_log()
         throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, 
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfIdfAnnotator.class,
-                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class,
-                TfIdfAnnotator.PARAM_TFDF_PATH, model, 
-                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, 
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription( //
+                TfIdfAnnotator.class, //
+                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class, //
+                TfIdfAnnotator.PARAM_TFDF_PATH, model,  //
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL,  //
                 TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.LOG);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
@@ -175,8 +179,8 @@ public class TfIdfAnnotatorTest
         if (DocumentMetaData.get(jcas).getDocumentTitle().equals("test1.txt")) {
             int i = 0;
             for (Tfidf tfidf : select(jcas, Tfidf.class)) {
-                assertEquals(tfidf.getTerm(), expectedDoc1.get(tfidf.getTerm()).doubleValue(),
-                        tfidf.getTfidfValue(), EPSILON);
+                assertEquals(expectedDoc1.get(tfidf.getTerm()).doubleValue(),
+                        tfidf.getTfidfValue(), EPSILON, tfidf.getTerm());
                 i++;
             }
             assertEquals(3, i);
@@ -184,8 +188,8 @@ public class TfIdfAnnotatorTest
         else if (DocumentMetaData.get(jcas).getDocumentTitle().equals("test2.txt")) {
             int i = 0;
             for (Tfidf tfidf : select(jcas, Tfidf.class)) {
-                assertEquals(tfidf.getTerm(), expectedDoc2.get(tfidf.getTerm()).doubleValue(),
-                        tfidf.getTfidfValue(), EPSILON);
+                assertEquals(expectedDoc2.get(tfidf.getTerm()).doubleValue(),
+                        tfidf.getTfidfValue(), EPSILON, tfidf.getTerm());
                 i++;
             }
             assertEquals(3, i);
@@ -193,14 +197,5 @@ public class TfIdfAnnotatorTest
         else {
             fail("There should be no other documents in that directory.");
         }
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
 }

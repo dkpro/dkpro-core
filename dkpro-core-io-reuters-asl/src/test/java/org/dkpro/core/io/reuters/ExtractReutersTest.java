@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.io.reuters;
 
-import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Arrays;
@@ -28,10 +28,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.dkpro.core.io.reuters.ExtractReuters;
-import org.dkpro.core.io.reuters.ReutersDocument;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ExtractReutersTest
 {
@@ -80,20 +77,20 @@ public class ExtractReutersTest
         assertEquals(expectedDateFirst.toString(), doc0.getDate().toString());
         assertTrue(doc0.getTopics().contains(expectedTopicFirst));
         assertTrue(doc0.getBody().startsWith(expectedBodyFirst));
-        Assert.assertEquals(expectedlLewissplitFirst, doc0.getLewissplit());
-        Assert.assertEquals(expectedCgisplitFirst, doc0.getCgisplit());
-        Assert.assertEquals(oldIdFirst, doc0.getOldid());
-        Assert.assertEquals(newIdFirst, doc0.getNewid());
+        assertEquals(expectedlLewissplitFirst, doc0.getLewissplit());
+        assertEquals(expectedCgisplitFirst, doc0.getCgisplit());
+        assertEquals(oldIdFirst, doc0.getOldid());
+        assertEquals(newIdFirst, doc0.getNewid());
 
         ReutersDocument doc4 = docs.get(4);
         assertEquals(expectedTitle4, doc4.getTitle());
         assertEquals(expectedDate4.toString(), doc4.getDate().toString());
         assertEquals(expectedTopic4, doc4.getTopics());
         assertTrue(doc0.getBody().startsWith(expectedBodyFirst));
-        Assert.assertEquals(expectedlLewissplit4, doc4.getLewissplit());
-        Assert.assertEquals(expectedCgisplit4, doc4.getCgisplit());
-        Assert.assertEquals(oldId4, doc4.getOldid());
-        Assert.assertEquals(newId4, doc4.getNewid());
+        assertEquals(expectedlLewissplit4, doc4.getLewissplit());
+        assertEquals(expectedCgisplit4, doc4.getCgisplit());
+        assertEquals(oldId4, doc4.getOldid());
+        assertEquals(newId4, doc4.getNewid());
 
         /* assert last doc */
         ReutersDocument doc999 = docs.get(999);
@@ -101,9 +98,9 @@ public class ExtractReutersTest
         assertEquals(expectedDateLast.toString(), doc999.getDate().toString());
         assertTrue(doc999.getTopics().contains(expectedTopicLast));
         assertTrue(doc999.getBody().startsWith(expectedBodyLast));
-        Assert.assertEquals(expectedlLewissplitLast, doc999.getLewissplit());
-        Assert.assertEquals(expectedCgisplitLast, doc999.getCgisplit());
-        Assert.assertEquals(oldIdLast, doc999.getOldid());
-        Assert.assertEquals(newIdLast, doc999.getNewid());
+        assertEquals(expectedlLewissplitLast, doc999.getLewissplit());
+        assertEquals(expectedCgisplitLast, doc999.getCgisplit());
+        assertEquals(oldIdLast, doc999.getOldid());
+        assertEquals(newIdLast, doc999.getNewid());
     }
 }

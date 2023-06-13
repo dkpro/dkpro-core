@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -19,6 +19,7 @@
 package org.dkpro.core.io.tgrep;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,41 +31,35 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.CompressionMethod;
-import org.dkpro.core.io.tgrep.TGrepWriter;
-import org.dkpro.core.stanfordnlp.StanfordParser;
-import org.dkpro.core.stanfordnlp.StanfordSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.corenlp.CoreNlpParser;
+import org.dkpro.core.corenlp.CoreNlpSegmenter;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
-/**
- * 
- */
 public class TGrepWriterTest
 {
     @Test
-    public void testTxt()
+    public void testTxt(@TempDir File outputPath)
         throws Exception
     {
-        File outputPath = testContext.getTestOutputFolder();
-        
         String language = "en";
         String text = "This is a sample sentence. Followed by another one.";
-        AnalysisEngineDescription seg = createEngineDescription(StanfordSegmenter.class);
+        AnalysisEngineDescription seg = createEngineDescription(CoreNlpSegmenter.class);
 
-        AnalysisEngineDescription parse = createEngineDescription(StanfordParser.class,
-                StanfordParser.PARAM_WRITE_PENN_TREE, true,
-                StanfordParser.PARAM_LANGUAGE, "en",
-                StanfordParser.PARAM_VARIANT, "pcfg");
+        AnalysisEngineDescription parse = createEngineDescription( //
+                CoreNlpParser.class, //
+                CoreNlpParser.PARAM_WRITE_PENN_TREE, true, //
+                CoreNlpParser.PARAM_LANGUAGE, "en", //
+                CoreNlpParser.PARAM_VARIANT, "pcfg");
 
-        AnalysisEngineDescription tgrep = createEngineDescription(TGrepWriter.class,
-                TGrepWriter.PARAM_TARGET_LOCATION, outputPath,
-                TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
-                TGrepWriter.PARAM_DROP_MALFORMED_TREES, true,
-                TGrepWriter.PARAM_WRITE_COMMENTS, true,
+        AnalysisEngineDescription tgrep = createEngineDescription( //
+                TGrepWriter.class, //
+                TGrepWriter.PARAM_TARGET_LOCATION, outputPath, //
+                TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP, //
+                TGrepWriter.PARAM_DROP_MALFORMED_TREES, true, //
+                TGrepWriter.PARAM_WRITE_COMMENTS, true, //
                 TGrepWriter.PARAM_WRITE_T2C, false);
 
         JCas jcas = JCasFactory.createJCas();
@@ -83,13 +78,10 @@ public class TGrepWriterTest
         expected.add("(ROOT (S (VP (VBN Followed) (PP (IN by) (NP (DT another) (NN one)))) (. .)))");
         List<String> actual = FileUtils.readLines(new File(outputPath, "testCollection.txt"), "UTF-8");
 
-        Assert.assertEquals(expected.size(), actual.size());
+        assertEquals(expected.size(), actual.size());
 
         for (int i = 0; i < actual.size(); i++) {
-            Assert.assertEquals(expected.get(i), actual.get(i));
+            assertEquals(expected.get(i), actual.get(i));
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

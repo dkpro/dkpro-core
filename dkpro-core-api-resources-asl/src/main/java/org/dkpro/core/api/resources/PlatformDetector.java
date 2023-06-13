@@ -23,15 +23,15 @@ import java.nio.ByteOrder;
  */
 public class PlatformDetector
 {
-    public static String OS_WINDOWS   = "windows";
-    public static String OS_OSX       = "osx";
-    public static String OS_SOLARIS   = "solaris";
-    public static String OS_LINUX     = "linux";
+    public static final String OS_WINDOWS   = "windows";
+    public static final String OS_OSX       = "osx";
+    public static final String OS_SOLARIS   = "solaris";
+    public static final String OS_LINUX     = "linux";
 
-    public static String ARCH_PPC     = "ppc";
-    public static String ARCH_X86_32  = "x86_32";
-    public static String ARCH_X86_64  = "x86_64";
-    public static String ARCH_SPARC   = "sparc";
+    public static final String ARCH_PPC     = "ppc";
+    public static final String ARCH_X86_32  = "x86_32";
+    public static final String ARCH_X86_64  = "x86_64";
+    public static final String ARCH_SPARC   = "sparc";
 
     private String _arch = "";
     private String _os = "";

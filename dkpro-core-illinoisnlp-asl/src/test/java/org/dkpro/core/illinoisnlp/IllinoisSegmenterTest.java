@@ -21,7 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IllinoisSegmenterTest
 {

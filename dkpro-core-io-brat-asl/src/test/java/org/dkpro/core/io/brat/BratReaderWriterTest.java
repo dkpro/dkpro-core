@@ -29,11 +29,10 @@ import java.io.File;
 
 import org.dkpro.core.io.conll.Conll2009Reader;
 import org.dkpro.core.io.conll.Conll2012Reader;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.ReaderAssert;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class BratReaderWriterTest
 {
@@ -98,7 +97,7 @@ public class BratReaderWriterTest
                 "conll/2012/en-orig.conll");
     }
 
-    @Ignore("Test largely ok but due to same spans for constituents not stable, thus ignoring")
+    @Disabled("Test largely ok but due to same spans for constituents not stable, thus ignoring")
     @Test
     public void testConll2012_2()
         throws Exception
@@ -269,18 +268,21 @@ public class BratReaderWriterTest
     }
     
     @Test
-    public void testBratWithDiscontinuousFragmentNear() 
+    public void testBratWithDiscontinuousFragmentNear(@TempDir File tempDir) 
         throws Exception
     {
-        ReaderAssert.assertThat(BratReader.class,
+        ReaderAssert.assertThat( //
+                BratReader.class,//
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
                 asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                         "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
                         "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"))
-            .readingFrom("src/test/resources/brat/document0c.ann")
-            .usingWriter(BratWriter.class, 
+            .readingFrom("src/test/resources/brat/document0c.ann") //
+            .usingWriter( //
+                    BratWriter.class, //
                     BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true)
-            .outputAsString("document0c.ann")
+            .writingTo(tempDir) //
+            .outputAsString("document0c.ann") //
             .isEqualToNormalizingNewlines(
                     contentOf(new File("src/test/resources/brat/document0c.ann"), UTF_8));        
     }
@@ -328,7 +330,4 @@ public class BratReaderWriterTest
                 "brat/event-ref.ann",
                 "brat/event.ann");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

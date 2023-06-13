@@ -19,16 +19,9 @@ package org.dkpro.core.testing;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.impl.XmiCasSerializer;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.ResourceObjectProviderBase;
@@ -153,21 +146,21 @@ public class TestRunner
 
         aEngine.process(jcas);
         
-        DkproTestContext context = DkproTestContext.get();
-        if  (context != null) {
-            File folder = new File("target/test-output/" + context.getTestOutputFolderName());
-            if (!folder.exists()) {
-                FileUtils.deleteQuietly(folder);
-            }
-            folder.mkdirs();
-
-            try (OutputStream docOS = new FileOutputStream(new File(folder, "output.xmi"))) {
-                XmiCasSerializer.serialize(jcas.getCas(), null, docOS, true, null);
-            }
-            catch (Exception e) {
-                throw new AnalysisEngineProcessException(e);
-            }
-        }
+//        DkproTestContext context = DkproTestContext.get();
+//        if  (context != null) {
+//            File folder = new File("target/test-output/" + context.getTestOutputFolderName());
+//            if (!folder.exists()) {
+//                FileUtils.deleteQuietly(folder);
+//            }
+//            folder.mkdirs();
+//
+//            try (OutputStream docOS = new FileOutputStream(new File(folder, "output.xmi"))) {
+//                XmiCasSerializer.serialize(jcas.getCas(), null, docOS, true, null);
+//            }
+//            catch (Exception e) {
+//                throw new AnalysisEngineProcessException(e);
+//            }
+//        }
         
         AssertAnnotations.assertValid(jcas);
         

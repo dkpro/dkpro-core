@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019
+ * Copyright 2007-2023
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -20,17 +20,14 @@ package org.dkpro.core.corenlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpLemmatizer;
-import org.dkpro.core.corenlp.CoreNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 
@@ -56,11 +53,12 @@ public class CoreNlpLemmatizerTest
                     "dependency", "as", "possible", "." });
     }
 
-    @Test(expected = AnalysisEngineProcessException.class)
+    @Test
     public void testNotEnglish()
         throws Exception
     {
-        runTest("de", "Das ist ein test .", new String[] {} );
+        assertThatExceptionOfType(AnalysisEngineProcessException.class)
+                .isThrownBy(() -> runTest("de", "Das ist ein test .", new String[] {}));
     }
 
     @Test
@@ -82,7 +80,4 @@ public class CoreNlpLemmatizerTest
 
         AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

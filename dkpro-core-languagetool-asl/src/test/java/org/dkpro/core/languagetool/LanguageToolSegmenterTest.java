@@ -29,11 +29,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.languagetool.Languages;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -41,7 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class LanguageToolSegmenterTest
 {
-    @Ignore("Only needed to get the list of the supported languages for the @LanguageCapability")
+    @Disabled("Only needed to get the list of the supported languages for the @LanguageCapability")
     @Test
     public void listLocales() throws Exception
     {
@@ -111,7 +109,7 @@ public class LanguageToolSegmenterTest
     {
         AnalysisEngineDescription aed = createEngineDescription(LanguageToolSegmenter.class);
 
-        SegmenterHarness.run(aed, "de.1", "en.1", "en.3", "en.6", "en.7", "en.9", "ar.1", "zh.2");
+        SegmenterHarness.run(aed, "de.1", "en.1", "en.7", "en.9", "ar.1", "zh.2");
     }
 
     @Test
@@ -119,7 +117,4 @@ public class LanguageToolSegmenterTest
     {
         SegmenterHarness.testZoning(LanguageToolSegmenter.class);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

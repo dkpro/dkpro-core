@@ -22,13 +22,12 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingleAt;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.FilenameFilter;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.PrefixFileFilter;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -39,12 +38,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.CasCreationUtils;
 import org.dkpro.core.io.xmi.XmiWriter;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -53,25 +49,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
-@RunWith(value = Parameterized.class)
 public class WebAnnoTsv3XReaderWriterRoundTripTest
 {
-    @Parameters(name = "{index}: running on file {0}")
-    public static Iterable<File> tsvFiles()
-    {
+    public static Stream<File> tsvFiles() {
         return asList(new File("src/test/resources/tsv3-suite/").listFiles(
-                (FilenameFilter) new PrefixFileFilter(asList("test", "issue", "sample"))));
+                (file, name) -> asList("test", "issue", "sample").stream().anyMatch(name::startsWith)
+        )).stream();
     }
 
-    private File referenceFolder;
-
-    public WebAnnoTsv3XReaderWriterRoundTripTest(File aFolder)
-    {
-        referenceFolder = aFolder;
-    }
-
-    @Test
-    public void runTest() throws Exception
+    @ParameterizedTest(name = "{index}: running on file {0}")
+    @MethodSource("tsvFiles")
+    @DisplayName("WebAnno Tsv3X Reader Writer Round Trip Test")
+    public void runTest(File referenceFolder) throws Exception
     {
         TypeSystemDescription global = TypeSystemDescriptionFactory.createTypeSystemDescription();
         TypeSystemDescription local;
@@ -166,7 +155,4 @@ public class WebAnnoTsv3XReaderWriterRoundTripTest
             }
         }
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

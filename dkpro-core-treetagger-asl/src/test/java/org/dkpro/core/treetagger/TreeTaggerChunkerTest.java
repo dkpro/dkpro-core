@@ -22,7 +22,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.testing.AssertAnnotations.assertChunks;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -30,13 +31,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.dkpro.core.treetagger.TreeTaggerChunker;
-import org.dkpro.core.treetagger.TreeTaggerPosTagger;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
@@ -187,14 +183,11 @@ public class TreeTaggerChunkerTest
 
     private void checkModelsAndBinary(String lang)
     {
-        Assume.assumeTrue(
+        assumeTrue(
                 getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-"
                         + lang + "-le.bin") != null);
 
-        Assume.assumeTrue(getClass().getResource(
+        assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -18,13 +18,12 @@
 
 package org.dkpro.core.decompounding.web1t;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 
-import org.dkpro.core.decompounding.web1t.Finder;
-import org.junit.Test;
-
-import junit.framework.Assert;
+import org.junit.jupiter.api.Test;
 
 public class FinderPerformanceTest
 {
@@ -48,7 +47,7 @@ public class FinderPerformanceTest
 
         for (String word : words) {
             long start = System.currentTimeMillis();
-            Assert.assertTrue(f.find(word).size() > 0);
+            assertTrue(f.find(word).size() > 0);
             long end = System.currentTimeMillis();
             time += end - start;
             System.out.println("Time for '" + word + "' (ms): "

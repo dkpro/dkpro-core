@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.testing;
 
-import static org.apache.commons.lang3.StringUtils.replaceOnce;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.canParameterBeSet;
@@ -32,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -195,37 +193,11 @@ public class WriterAssert
                     writerParameters.get(PARAM_TARGET_LOCATION)));
         }
 
-        requestedTargetLocation = resolvePlaceholders(requestedTargetLocation);
-        
         setParameter(actual, PARAM_TARGET_LOCATION, requestedTargetLocation);
         
         return this;
     }
     
-    protected static <T> T resolvePlaceholders(T aLocation)
-    {
-        if (aLocation instanceof String) {
-            String location = (String) aLocation;
-            
-            if (location.startsWith(VAR_TARGET)) {
-                if (DkproTestContext.get() == null) {
-                    throw Failures.instance()
-                            .failure(String.format("Cannot substitute `%s` - no %s found.",
-                                    VAR_TARGET, DkproTestContext.class.getSimpleName()));
-                }
-                
-                File contextOutputFolder = new File("target/test-output/"
-                        + DkproTestContext.get().getTestOutputFolderName());
-                if (contextOutputFolder.exists()) {
-                    FileUtils.deleteQuietly(contextOutputFolder);
-                }
-                
-                return (T) replaceOnce(location, VAR_TARGET, contextOutputFolder.getPath());
-            }
-        }
-        
-        return aLocation;
-    }
     
     /**
      * Infers the actual target location.
@@ -243,17 +215,9 @@ public class WriterAssert
                 return writerParameters.get(PARAM_TARGET_LOCATION);
             }
             
-            // Can we get one from the DKPro Core test context?
-            if (DkproTestContext.get() != null) {
-                writingTo(VAR_TARGET);
-                return getParameterSettings(actual).get(PARAM_TARGET_LOCATION);
-            }
-            
             // No success?
-            throw Failures.instance()
-                    .failure(String.format("Unable to determine target location. Use a @Rule "
-                            + DkproTestContext.class.getSimpleName()
-                            + " or set the location using `writingTo()"));
+            throw Failures.instance().failure(String.format(
+                    "Unable to determine target location. Set the location using `writingTo()"));
         }
         else {
             return requestedTargetLocation;
@@ -311,7 +275,7 @@ public class WriterAssert
             Map<String, Object> writerParameters = getParameterSettings(actual);
             if (writerParameters.containsKey(PARAM_TARGET_LOCATION)) {
                 Object location = writerParameters.get(PARAM_TARGET_LOCATION);
-                setParameter(actual, PARAM_TARGET_LOCATION, resolvePlaceholders(location));
+                setParameter(actual, PARAM_TARGET_LOCATION, location);
             }
         }
     }

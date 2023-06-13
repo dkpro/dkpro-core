@@ -19,8 +19,8 @@ package org.dkpro.core.api.resources;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,16 +33,11 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.dkpro.core.api.resources.ResourceUtils;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class ResourceUtilsTest
 {
-    @Rule
-    public TemporaryFolder workspace = new TemporaryFolder();
-
     @Test
     public void testGetUrlAsFile()
         throws Exception
@@ -80,10 +75,11 @@ public class ResourceUtilsTest
     }
 
     @Test
-    public void testWithSpace()
+    public void testWithSpace(@TempDir File tempDir)
         throws Exception
     {
-        File dir = workspace.newFolder("this is a test");
+        File dir = new File(tempDir, "this is a test");
+        dir.mkdirs();
         File file = new File(dir, "this is a file name.extension with spaces");
 
         System.out.println("Original: " + file);

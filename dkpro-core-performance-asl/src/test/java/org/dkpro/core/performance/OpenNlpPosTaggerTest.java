@@ -24,14 +24,13 @@ import static org.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.tei.TeiReader;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.performance.Stopwatch;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class OpenNlpPosTaggerTest
 {
-    @Ignore
+    @Disabled
     @Test
     public void performanceTest() throws Exception
     {

@@ -26,8 +26,8 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.api.resources.DkproContext;
 import org.dkpro.core.io.tei.TeiReader;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
@@ -36,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class PipelineExample
 {
 
-    @Ignore
+    @Disabled
     @Test
     public void pipelineTest() throws Exception
     {

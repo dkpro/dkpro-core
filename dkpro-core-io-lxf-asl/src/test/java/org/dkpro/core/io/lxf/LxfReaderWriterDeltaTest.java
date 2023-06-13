@@ -26,17 +26,14 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class LxfReaderWriterDeltaTest
 {
     @Test
-    public void test() throws Exception
+    public void test(@TempDir File target) throws Exception
     {
-        File target = testContext.getTestOutputFolder();
-        
         CollectionReaderDescription reader = createReaderDescription(LxfReader.class,
                 LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/repp/orig.lxf");
         
@@ -49,7 +46,4 @@ public class LxfReaderWriterDeltaTest
         
         runPipeline(reader, tagger, writer);
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }
