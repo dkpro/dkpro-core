@@ -17,19 +17,9 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-/**
- * key-value pairs. Can record essentially arbitrary information. "type" will be a particular common
- * key in the major sub elements below. For PubMed references, passage "type" might signal "title"
- * or "abstract". For annotations, it might indicate "noun phrase", "gene", or "disease". In the
- * programming language data structures, infons are typically represented as a map from strings to
- * strings. This means keys should be unique within each parent element.
- */
-@XmlAccessorType(XmlAccessType.NONE)
 public class BioCInfon
 {
     private String key;
@@ -37,7 +27,7 @@ public class BioCInfon
 
     public BioCInfon()
     {
-        // Required for JAXB
+        // Required for serialization
     }
 
     public BioCInfon(String aKey, String aValue)
@@ -46,12 +36,12 @@ public class BioCInfon
         value = aValue;
     }
 
-    @XmlAttribute(name = "key")
     public String getKey()
     {
         return key;
     }
 
+    @XmlAttribute(name = "key")
     public void setKey(String aKey)
     {
         key = aKey;

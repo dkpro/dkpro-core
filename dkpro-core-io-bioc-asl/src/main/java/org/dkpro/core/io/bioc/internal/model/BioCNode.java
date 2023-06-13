@@ -17,40 +17,41 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-@XmlAccessorType(XmlAccessType.PROPERTY)
 public class BioCNode
 {
-    private String refid;
+    private String refId;
     private String role;
 
-    /**
-     * Id of an annotated object or other relation.
-     */
-    @XmlAttribute(name = "refid")
+    public BioCNode()
+    {
+        // Needed for serialization
+    }
+
+    public BioCNode(String aRefId, String aRole)
+    {
+        refId = aRefId;
+        role = aRole;
+    }
+
     public String getRefId()
     {
-        return refid;
+        return refId;
     }
 
-    public void setRefId(String aRefid)
+    @XmlAttribute(name = "refid")
+    public void setRefId(String aRefId)
     {
-        refid = aRefid;
+        refId = aRefId;
     }
 
-    /**
-     * Describes how the referenced annotated object or other relation participates in the current
-     * relationship. Has a default value so can be left out if there is no meaningful value.
-     */
-    @XmlAttribute(name = "role")
     public String getRole()
     {
         return role;
     }
 
+    @XmlAttribute(name = "role")
     public void setRole(String aRole)
     {
         role = aRole;

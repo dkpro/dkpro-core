@@ -22,48 +22,49 @@ import static java.util.stream.Collectors.toMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-public class BioCRelation
-    extends BioCObject
+@XmlTransient
+public abstract class BioCObject
 {
-    private String id;
-    private List<BioCNode> nodes;
+    private List<BioCInfon> infons;
 
-    public String getId()
+    public List<BioCInfon> getInfons()
     {
-        return id;
+        return infons;
     }
 
-    @XmlAttribute(name = "id")
-    public void setId(String aId)
+    @XmlElement(name = "infon")
+    public void setInfons(List<BioCInfon> aInfons)
     {
-        id = aId;
+        infons = aInfons;
     }
 
-    public List<BioCNode> getNodes()
+    public void addInfon(String aKey, String aValue)
     {
-        return nodes;
-    }
-
-    @XmlElement(name = "node")
-    public void setNodes(List<BioCNode> aNodes)
-    {
-        nodes = aNodes;
-    }
-
-    public void addNode(String aRole, String aRefId)
-    {
-        if (nodes == null) {
-            nodes = new ArrayList<>();
+        if (infons == null) {
+            infons = new ArrayList<>();
         }
-        nodes.add(new BioCNode(aRefId, aRole));
+        infons.add(new BioCInfon(aKey, aValue));
     }
 
-    public Map<String, String> nodeMap()
+    public Optional<String> infon(String aKey)
     {
-        return nodes.stream().collect(toMap(BioCNode::getRole, BioCNode::getRefId));
+        if (infons == null) {
+            return Optional.empty();
+        }
+
+        return infons.stream() //
+                .filter(i -> i.getKey().equals(aKey)) //
+                .findFirst() //
+                .map(BioCInfon::getValue);
+    }
+
+    public Map<String, String> infonMap()
+    {
+        return infons.stream().collect(toMap(BioCInfon::getKey, BioCInfon::getValue));
     }
 }

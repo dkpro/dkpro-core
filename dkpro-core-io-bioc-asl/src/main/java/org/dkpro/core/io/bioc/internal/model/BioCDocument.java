@@ -17,57 +17,35 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * A document in the collection. A single, complete stand-alone document as described by it's parent
- * source.
- */
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "document")
 public class BioCDocument
-    extends BioCContainer_ImplBase
+    extends BioCObject
 {
     private String id;
-    private List<BioCPassage> passages = new ArrayList<>();
-    
-    /**
-     * Typically, the id of the document in the parent source. Should at least be unique in the
-     * collection.
-     */
-    @XmlElement(name = "id")
+    private List<BioCPassage> passages;
+
     public String getId()
     {
         return id;
     }
 
+    @XmlElement(name = "id")
     public void setId(String aId)
     {
         id = aId;
     }
 
-    public void addPassage(BioCPassage aPassage)
-    {
-        passages.add(aPassage);
-    }
-
-    /**
-     * One portion of the document. For now PubMed documents have a title and an abstract.
-     * Structured abstracts could have additional passages. For a full text document, passages could
-     * be sections such as Introduction, Materials and Methods, or Conclusion. Another option would
-     * be paragraphs. Passages impose a linear structure on the document. Further structure in the
-     * document can be implied by the infon["type"] value.
-     */
-    @XmlElement(name = "passage")
     public List<BioCPassage> getPassages()
     {
         return passages;
     }
 
+    @XmlElement(name = "passage")
     public void setPassages(List<BioCPassage> aPassages)
     {
         passages = aPassages;

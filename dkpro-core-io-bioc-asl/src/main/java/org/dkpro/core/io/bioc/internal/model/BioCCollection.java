@@ -17,86 +17,78 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
+import static org.dkpro.core.io.bioc.BioCComponent.E_DATE;
+import static org.dkpro.core.io.bioc.BioCComponent.E_DOCUMENT;
+import static org.dkpro.core.io.bioc.BioCComponent.E_KEY;
+import static org.dkpro.core.io.bioc.BioCComponent.E_SOURCE;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-/**
- * Group of documents, usually from a larger corpus. If a group of documents is from several
- * corpora, use several collections.
- */
 @XmlRootElement(name = "collection")
-@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = { "source", "date", "key", "infons", "documents" })
 public class BioCCollection
-    extends BioCObject_ImplBase
+    extends BioCObject
 {
     private String source;
     private String date;
     private String key;
     private List<BioCDocument> documents;
 
-    /**
-     * Name of the source corpus from which the documents were selected.
-     */
-    @XmlElement(name = "source")
     public String getSource()
     {
         return source;
     }
 
+    @XmlElement(name = E_SOURCE)
     public void setSource(String aSource)
     {
         source = aSource;
     }
 
-    /**
-     * Date documents extracted from original source. Can be as simple as yyyymmdd or an ISO
-     * timestamp.
-     */
-    @XmlElement(name = "date")
     public String getDate()
     {
         return date;
     }
 
+    @XmlElement(name = E_DATE)
     public void setDate(String aDate)
     {
         date = aDate;
     }
 
-    /**
-     * Separate file describing the types used and any other useful information about the data in
-     * the file. For example, if a file includes part-of-speech tags, this file should describe the
-     * part-of-speech tags used.
-     */
-    @XmlElement(name = "key")
     public String getKey()
     {
         return key;
     }
 
+    @XmlElement(name = E_KEY)
     public void setKey(String aKey)
     {
         key = aKey;
     }
 
-    /**
-     * A document in the collection. A single, complete stand-alone document as described by it's
-     * parent source.
-     */
-    @XmlElement(name = "document")
     public List<BioCDocument> getDocuments()
     {
         return documents;
     }
 
+    @XmlElement(name = E_DOCUMENT)
     public void setDocuments(List<BioCDocument> aDocuments)
     {
         documents = aDocuments;
+    }
+
+    public void addDocument(BioCDocument aDocument)
+    {
+        if (documents == null) {
+            documents = new ArrayList<>();
+        }
+
+        documents.add(aDocument);
     }
 }

@@ -24,22 +24,47 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
-public abstract class BioCContainer_ImplBase
-    extends BioCObject_ImplBase
+public abstract class BioCAnnotationContainer
+    extends BioCObject
 {
-    private List<BioCRelation> relations = new ArrayList<>();
+    private List<BioCAnnotation> annotations;
+    private List<BioCRelation> relations;
 
-    /**
-     * Relationship between multiple annotations.
-     */
-    @XmlElement(name = "relation")
+    public List<BioCAnnotation> getAnnotations()
+    {
+        return annotations;
+    }
+
+    @XmlElement(name = "annotation")
+    public void setAnnotations(List<BioCAnnotation> aAnnotations)
+    {
+        annotations = aAnnotations;
+    }
+
+    public void addAnnotation(BioCAnnotation aAnnotation)
+    {
+        if (annotations == null) {
+            annotations = new ArrayList<>();
+        }
+        annotations.add(aAnnotation);
+    }
+
     public List<BioCRelation> getRelations()
     {
         return relations;
     }
 
+    @XmlElement(name = "relation")
     public void setRelations(List<BioCRelation> aRelations)
     {
         relations = aRelations;
+    }
+
+    public void addRelation(BioCRelation aRelation)
+    {
+        if (relations == null) {
+            relations = new ArrayList<>();
+        }
+        relations.add(aRelation);
     }
 }

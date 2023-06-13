@@ -1,11 +1,11 @@
-// Copyright 2019
-// Ubiquitous Knowledge Processing (UKP) Lab
-// Technische Universität Darmstadt
-// 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// 
+// Licensed to the Technische Universität Darmstadt under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The Technische Universität Darmstadt 
+// licenses this file to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.
+//  
 // http://www.apache.org/licenses/LICENSE-2.0
 // 
 // Unless required by applicable law or agreed to in writing, software
@@ -14,22 +14,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+NOTE: This is a port of the BioC support from INCEpTION.
+
+NOTE: Support for BioC is quite experimental.
+
 link:http://bioc.sourceforge.net[BioC] is a simple format to share text data and annotations popular in the BioNLP community.
 
-The support for BioC in DKPro Core is still quite limited. There is a reader and a writer component already, but much of the information is captured by the reader and written by the writer. So it can be used to read text from BioC files, but most annotations are being ignored.
+This is a new and still experimental BioC format. 
 
-.What works
-* The reader can read BioC files containing one or more documents. For every document, a CAS is produced. 
-* The reader imports passages as `Div` annotation, sentences as `Sentence` annotations and BioC annotations of the type `token` as `Token` annotations. 
-* When reading, the IDs of tokens, sentences and passages are stored to the `id` feature of the respective DKPro Core annotations. The are preserved when writing the data back to files.
-* `text` can be read either from the passage, the sentence or the token level - the first one of these which is encountered is used.
+* Sentence information is supported
+  * If sentences are present in a BioC document, they are imported. Otherwise, {product-name} will
+    automatically try to determine sentence boundaries.
+  * On export, the BioC files are always created with sentence information.
+* Passages are imported as a `Div` annotations and the passage `type` infon is set as the `type`
+  feature on these `Div` annotations
+* When reading span or relation annotations, the `type` infon is used to look up a suitable 
+  annotation layer. If a layer exists where either the full technical name of the layer or the
+  simple technical name (the part after the last dot) match the type, then an attempt will be made
+  to match the annotation to that layer. If the annotation has other infons that match features on
+  that layer, they will also be matched.
+* When exporting annotations, the `type` infon will always be set to the full layer name and
+  features will be serialized to infons matching their names.
+* If a document has not been imported from a BioC file containing passages and does not contain
+  `Div` annotations from any other source either, then on export a single passage containing the
+  entire document is created.
+* Cross-passage relations are not supported.
+* Sentence-level infons are not supported.
+* Passage-level infons are not supported.
+* Document-level infons are not supported.
 * The writer writes one BioC file per CAS (i.e. writing multiple documents to a single collection file is not supported).
-* When writing, if there are no sentence annotations, then the `text` is written at the passage level.
-
-.What does not work
-* Most `infon` elements are completely ignored (except `type`).
-* Relations are not supported at all yet.
-* The reader does not capture most collection-level metadata except. The `source` datum is captured and stored as the `collectionId` in the CASes' `DocumentMetaData` annotation and it is also used by the writer.
+* When reading, the IDs of tokens, sentences and passages are stored to the `id` feature of the respective DKPro Core annotations. The are preserved when writing the data back to files.
 
  
 .Example BioC (excerpt from `sentence.xml` file included in the BioC Java 1.0.1 package)

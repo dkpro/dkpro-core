@@ -17,105 +17,47 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.dkpro.core.io.bioc.internal.BioCInfonConstants.KEY_TYPE;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
-/**
- * One portion of the document. For now PubMed documents have a title and an abstract. Structured
- * abstracts could have additional passages. For a full text document, passages could be sections
- * such as Introduction, Materials and Methods, or Conclusion. Another option would be paragraphs.
- * Passages impose a linear structure on the document. Further structure in the document can be
- * implied by the infon["type"] value.
- */
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = { "infons", "offset", "text", "sentences", "annotations", "relations" })
 public class BioCPassage
-    extends BioCContainer_ImplBase
+    extends BioCAnnotationContainer
 {
     private int offset;
     private String text;
-    private List<BioCAnnotation> annotations = new ArrayList<>();
-    private List<BioCSentence> sentences = new ArrayList<>();
+    private List<BioCSentence> sentences;
 
-    public BioCPassage()
-    {
-        // TODO Auto-generated constructor stub
-    }
-    
-    public BioCPassage(String aType, int aOffset)
-    {
-        if (isNotBlank(aType)) {
-            putInfon(KEY_TYPE, aType);
-        }
-        offset = aOffset;
-        // text = aAnnotation.getCoveredText();
-    }
-    
-    /**
-     * Where the passage occurs in the parent document. Depending on the source corpus, this might
-     * be a very relevant number. They should be sequential and identify a passage's position in the
-     * document. Since pubmed is extracted from an XML file, the title has an offset of zero, while
-     * the abstract is assumed to begin after the title and one space.
-     */
-    @XmlElement(name = "offset")
     public int getOffset()
     {
         return offset;
     }
 
+    @XmlElement(name = "offset")
     public void setOffset(int aOffset)
     {
         offset = aOffset;
     }
 
-    /**
-     * The original text of the passage.
-     */
-    @XmlElement(name = "text")
     public String getText()
     {
         return text;
     }
 
+    @XmlElement(name = "text")
     public void setText(String aText)
     {
         text = aText;
     }
 
-    /**
-     * Stand-off annotations.
-     */
-    @XmlElement(name = "annotation")
-    public List<BioCAnnotation> getAnnotations()
-    {
-        return annotations;
-    }
-
-    public void setAnnotations(List<BioCAnnotation> aAnnotations)
-    {
-        annotations = aAnnotations;
-    }
-
-    public void addSentence(BioCSentence aSentence)
-    {
-        sentences.add(aSentence);
-    }
-
-    /**
-     * Sentences of the passage.
-     */
-    @XmlElement(name = "sentence")
     public List<BioCSentence> getSentences()
     {
         return sentences;
     }
 
+    @XmlElement(name = "sentence")
     public void setSentences(List<BioCSentence> aSentences)
     {
         sentences = aSentences;

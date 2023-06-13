@@ -17,92 +17,48 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import static org.dkpro.core.io.bioc.internal.BioCInfonConstants.KEY_TYPE;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.apache.uima.cas.text.AnnotationFS;
-
-/**
- * Stand-off annotation.
- */
-@XmlAccessorType(XmlAccessType.NONE)
 public class BioCAnnotation
-    extends BioCObject_ImplBase
+    extends BioCObject
 {
     private String id;
-    private List<BioCLocation> locations = new ArrayList<>();
     private String text;
+    private List<BioCLocation> locations;
 
-    public BioCAnnotation()
-    {
-        // Needed by JAXB
-    }
-
-    public BioCAnnotation(String aType, AnnotationFS aAnnotation)
-    {
-        putInfon(KEY_TYPE, aType);
-        locations.add(new BioCLocation(aAnnotation.getBegin(),
-                aAnnotation.getEnd() - aAnnotation.getBegin()));
-        text = aAnnotation.getCoveredText();
-    }
-
-    /**
-     * Used to refer to this annotation in relations.
-     */
-    @XmlAttribute(name = "id")
     public String getId()
     {
         return id;
     }
 
+    @XmlAttribute(name = "id")
     public void setId(String aId)
     {
         id = aId;
     }
 
-    /**
-     * Location of the annotated text. Multiple locations indicate a multi-span annotation.
-     */
-    @XmlElement(name = "location")
-    public List<BioCLocation> getLocations()
-    {
-        return locations;
-    }
-
-    public void setLocations(List<BioCLocation> aLocations)
-    {
-        locations = aLocations;
-    }
-
-    /**
-     * Unless something else is defined one would be expect the annotated text. The length is
-     * redundant in this case. Other uses for this text could be the normalized ID for a gene in a
-     * gene database.
-     */
-    @XmlElement(name = "text")
     public String getText()
     {
         return text;
     }
 
+    @XmlElement(name = "text")
     public void setText(String aText)
     {
         text = aText;
     }
 
-    @Override
-    public String toString()
+    public List<BioCLocation> getLocations()
     {
-        return new ToStringBuilder(this, ToStringStyle.NO_FIELD_NAMES_STYLE).append("id", id)
-                .append("text", text).append("locations", locations).toString();
+        return locations;
+    }
+
+    @XmlElement(name = "location")
+    public void setLocations(List<BioCLocation> aLocations)
+    {
+        locations = aLocations;
     }
 }

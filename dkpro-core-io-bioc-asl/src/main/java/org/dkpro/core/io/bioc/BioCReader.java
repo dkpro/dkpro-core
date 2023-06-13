@@ -17,211 +17,145 @@
  */
 package org.dkpro.core.io.bioc;
 
-import static org.dkpro.core.api.resources.CompressionUtils.getInputStream;
+import static org.dkpro.core.io.bioc.BioCComponent.addCollectionMetadataField;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Optional;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.helpers.DefaultValidationEventHandler;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.parameter.MimeTypes;
-import org.dkpro.core.io.bioc.internal.BioC2DKPro;
+import org.dkpro.core.io.bioc.internal.BioCToCas;
 import org.dkpro.core.io.bioc.internal.model.BioCDocument;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * UIMA collection reader for plain text files.
+ * Reader for the BioC format.
  */
-@ResourceMetaData(name = "BioC Reader")
+@ResourceMetaData(name = "BioC XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.APPLICATION_X_BIOC)
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class BioCReader
-    extends JCasResourceCollectionReader_ImplBase
+    extends BioCReaderImplBase
 {
-    // XML stuff
     private JAXBContext context;
     private Unmarshaller unmarshaller;
-    private XMLInputFactory xmlInputFactory;
-    
-    // State between files
-    private Resource res;
-    private InputStream is;
-    private XMLEventReader xmlEventReader;
-    private String source;
-    
+    private Optional<BioCDocument> nextDocument;
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        // Set up XML deserialization 
         try {
             context = JAXBContext.newInstance(BioCDocument.class);
-            unmarshaller = context.createUnmarshaller();
-            unmarshaller.setEventHandler(new DefaultValidationEventHandler());
-            xmlInputFactory = XMLInputFactory.newInstance();
         }
         catch (JAXBException e) {
             throw new ResourceInitializationException(e);
         }
 
-        // Seek first article
         try {
-            step();
+            nextDocument = nextBioCDocument();
         }
-        catch (IOException e) {
+        catch (CollectionException | XMLStreamException | JAXBException | IOException e) {
             throw new ResourceInitializationException(e);
         }
     }
 
-    private void closeAll()
-    {
-        closeQuietly(xmlEventReader);
-        xmlEventReader = null;
-        IOUtils.closeQuietly(is);
-        is = null;
-        res = null;
-    }
-    
-    @Override
-    public void destroy()
-    {
-        closeAll();
-        super.destroy();
-    }
-    
-    @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
-    {
-        // If there is still a reader, then there is still an article. This requires that we call
-        // step() already during initialization.
-        return xmlEventReader != null;
-    }
-    
-    /**
-     * Seek article in file. Stop once article element has been found without reading it.
-     */
-    private void step() throws IOException
-    {
-        // Open next file
-        while (true) {
-            try {
-                if (res == null) {
-                    // Call to super here because we want to know about the resources, not the 
-                    // articles
-                    if (getResourceIterator().hasNext()) {
-                        // There are still resources left to read
-                        res = nextFile();
-                        is = getInputStream(res.getLocation(), res.getInputStream());
-                        xmlEventReader = xmlInputFactory.createXMLEventReader(is);
-                    }
-                    else {
-                        // No more files to read
-                        return;
-                    }
-                }
-                
-                // Seek article in file. Stop once article element has been found without reading it
-                XMLEvent e = null;
-                while ((e = xmlEventReader.peek()) != null) {
-                    if (isStartElement(e, "source")) {
-                        xmlEventReader.next();
-                        source = xmlEventReader.getElementText();
-                    }
-                    else if (isStartElement(e, "document")) {
-                        return;
-                    }
-                    else {
-                        xmlEventReader.next();
-                    }
-                }
-                
-                // End of file reached
-                closeAll();
-            }
-            catch (XMLStreamException e) {
-                throw new IOException(e);
-            }
-        }
-    }
-    
     @Override
     public void getNext(JCas aJCas) throws IOException, CollectionException
     {
+        initCas(aJCas, currentResource());
+
+        addCollectionMetadataField(aJCas, E_KEY, getCollectionKey());
+        addCollectionMetadataField(aJCas, E_SOURCE, getCollectionSource());
+        addCollectionMetadataField(aJCas, E_DATE, getCollectionDate());
+
+        var document = nextDocument.get();
+
+        // if (getCollectionSource() != null) {
+        // DocumentMetaData.get(aJCas).setDocumentId(getCollectionSource());
+        // }
+        //
+        // if (document.getId() != null) {
+        // DocumentMetaData.get(aJCas).setDocumentId(document.getId());
+        // }
+
+        JCasBuilder jb = new JCasBuilder(aJCas);
+        new BioCToCas().readDocument(jb, document);
+        jb.close();
+
         try {
-            XMLEvent e = null;
-            while ((e = xmlEventReader.peek()) != null) {
-               if (isStartElement(e, "document")) {
-                    BioCDocument document = unmarshaller
-                            .unmarshal(xmlEventReader, BioCDocument.class).getValue();
-
-                    initCas(aJCas, res, document.getId());
-                    
-                    DocumentMetaData dmd = DocumentMetaData.get(aJCas);
-                    dmd.setCollectionId(source);
-                    
-                    BioC2DKPro.convert(document, aJCas);
-                }
-                else {
-                    xmlEventReader.next();
-                }
-
-            }
+            nextDocument = nextBioCDocument();
         }
-        catch (Exception e) {
+        catch (XMLStreamException | JAXBException e) {
             throw new IOException(e);
         }
-        
-        // Seek next article so we know what to return on hasNext()
-        step();
-    }
-    
-    public static boolean isStartElement(XMLEvent aEvent, String aElement)
-    {
-        return aEvent.isStartElement()
-                && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
     }
 
-    public static boolean isEndElement(XMLEvent aEvent, String aElement)
+    @Override
+    public boolean hasNext() throws IOException, CollectionException
     {
-        return aEvent.isEndElement()
-                && ((EndElement) aEvent).getName().getLocalPart().equals(aElement);
+        return nextDocument.isPresent();
     }
-    
-    private static void closeQuietly(XMLEventReader aRes)
+
+    private Optional<BioCDocument> nextBioCDocument()
+        throws XMLStreamException, JAXBException, CollectionException, IOException
     {
-        if (aRes != null) {
-            try {
-                aRes.close();
-            }
-            catch (XMLStreamException e) {
-                // Ignore
-            }
+        if (!isFileOpen()) {
+            openNextFile();
+            readCollectionMetdata();
         }
+
+        if (isFileOpen()) {
+            return nextBioCDocumentInFile();
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    protected void openNextFile() throws IOException, XMLStreamException, CollectionException
+    {
+        super.openNextFile();
+        try {
+            unmarshaller = context.createUnmarshaller();
+        }
+        catch (JAXBException e) {
+            new IOException(e);
+        }
+    }
+
+    @Override
+    protected void closeFile()
+    {
+        unmarshaller = null;
+        super.closeFile();
+    }
+
+    private Optional<BioCDocument> nextBioCDocumentInFile() throws XMLStreamException, JAXBException
+    {
+        if (seekNextBioCDocumentInFile()) {
+            var document = unmarshaller.unmarshal(getXmlEventReader(), BioCDocument.class)
+                    .getValue();
+            return Optional.of(document);
+        }
+
+        closeFile();
+
+        return Optional.empty();
     }
 }

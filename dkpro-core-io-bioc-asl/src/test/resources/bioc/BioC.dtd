@@ -86,7 +86,7 @@
 
     annotation:  Stand-off annotation
 
-    id: Used to refer to this annotation in relations.
+    id: Used to refer to this annotation in ie.
 
     location: Location of the annotated text. Multiple locations
     indicate a multi-span annotation.

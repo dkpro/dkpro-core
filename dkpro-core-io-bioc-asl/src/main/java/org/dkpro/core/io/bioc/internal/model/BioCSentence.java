@@ -17,81 +17,35 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-/**
- * One sentence of the passage.
- */
-@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = { "infons", "offset", "text", "annotations", "relations" })
 public class BioCSentence
-    extends BioCContainer_ImplBase
+    extends BioCAnnotationContainer
 {
     private int offset;
     private String text;
-    private List<BioCAnnotation> annotations = new ArrayList<>();
 
-    /**
-     * A document offset to where the sentence begins in the passage. This value is the sum of the
-     * passage offset and the local offset within the passage.
-     */
-    @XmlElement(name = "offset")
     public int getOffset()
     {
         return offset;
     }
 
+    @XmlElement(name = "offset")
     public void setOffset(int aOffset)
     {
         offset = aOffset;
     }
 
-    /**
-     * The original text of the sentence. (optional)
-     */
-    @XmlElement(name = "text")
     public String getText()
     {
         return text;
     }
 
+    @XmlElement(name = "text")
     public void setText(String aText)
     {
         text = aText;
-    }
-
-    public void addAnnotation(BioCAnnotation aAnnotation)
-    {
-        annotations.add(aAnnotation);
-    }
-    
-    /**
-     * Stand-off annotation.
-     */
-    @XmlElement(name = "annotation")
-    public List<BioCAnnotation> getAnnotations()
-    {
-        return annotations;
-    }
-    
-    public List<BioCAnnotation> getAnnotationsMatching(String aKey, String aValue)
-    {
-        return annotations.stream()
-                .filter(anno -> Objects.equals(anno.getInfonValue(aKey), aValue))
-                .collect(toList());
-    }
-
-    public void setAnnotations(List<BioCAnnotation> aAnnotations)
-    {
-        annotations = aAnnotations;
     }
 }
