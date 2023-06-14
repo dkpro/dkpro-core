@@ -17,20 +17,24 @@
  */
 package org.dkpro.core.api.xml;
 
-import static javax.xml.XMLConstants.ACCESS_EXTERNAL_DTD;
-import static javax.xml.XMLConstants.ACCESS_EXTERNAL_STYLESHEET;
-import static javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING;
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
+import static java.util.Comparator.comparing;
 import static javax.xml.transform.OutputKeys.INDENT;
 import static javax.xml.transform.OutputKeys.METHOD;
 import static javax.xml.transform.OutputKeys.OMIT_XML_DECLARATION;
 
 import java.io.Writer;
 import java.lang.invoke.MethodHandles;
+import java.util.Comparator;
 
 import javax.xml.XMLConstants;
+import javax.xml.namespace.QName;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
@@ -48,14 +52,29 @@ public class XmlParserUtils
 {
     private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private static final String EXTTERNAL_GENERAL_ENTITIES = "http://xml.org/sax/features/external-general-entities";
-    private static final String EXTERNAL_PARAMETER_ENTITIES = "http://xml.org/sax/features/external-parameter-entities";
-    private static final String DISALLOW_DOCTYPE_DECL = "http://apache.org/xml/features/disallow-doctype-decl";
-    private static final String LOAD_EXTERNAL_DTD = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
+    public static final String EXTTERNAL_GENERAL_ENTITIES = "http://xml.org/sax/features/external-general-entities";
+    public static final String EXTERNAL_PARAMETER_ENTITIES = "http://xml.org/sax/features/external-parameter-entities";
+    public static final String DISALLOW_DOCTYPE_DECL = "http://apache.org/xml/features/disallow-doctype-decl";
+    public static final String LOAD_EXTERNAL_DTD = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
 
     private XmlParserUtils()
     {
         // No instances
+    }
+
+    public static Comparator<QName> caseInsensitiveQNameComparator()
+    {
+        return comparing(QName::getNamespaceURI).thenComparing(QName::getLocalPart,
+                CASE_INSENSITIVE_ORDER);
+    }
+
+    public static String getQName(QName aElement)
+    {
+        var qName = aElement.getLocalPart();
+        if (!aElement.getPrefix().isEmpty()) {
+            qName = aElement.getPrefix() + ':' + qName;
+        }
+        return qName;
     }
 
     public static ContentHandler makeXmlSerializer(Writer aOut)
@@ -73,10 +92,10 @@ public class XmlParserUtils
     public static SAXTransformerFactory newTransformerFactory()
         throws TransformerConfigurationException
     {
-        TransformerFactory factory = TransformerFactory.newInstance();
-        factory.setFeature(FEATURE_SECURE_PROCESSING, true);
-        factory.setAttribute(ACCESS_EXTERNAL_DTD, "");
-        factory.setAttribute(ACCESS_EXTERNAL_STYLESHEET, "");
+        var factory = TransformerFactory.newInstance();
+        factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
         return (SAXTransformerFactory) factory;
     }
 
@@ -85,7 +104,7 @@ public class XmlParserUtils
     {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setXIncludeAware(false);
-        factory.setFeature(FEATURE_SECURE_PROCESSING, true);
+        factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         setFeature(factory, EXTTERNAL_GENERAL_ENTITIES, false);
         setFeature(factory, EXTERNAL_PARAMETER_ENTITIES, false);
         setFeature(factory, DISALLOW_DOCTYPE_DECL, true);
@@ -93,7 +112,14 @@ public class XmlParserUtils
         return factory;
     }
 
-    private static void setFeature(SAXParserFactory aFactory, String aFeature, boolean aValue)
+    public static SAXParserFactory enableNamespaceSupport(SAXParserFactory aFactory)
+        throws ParserConfigurationException
+    {
+        XmlParserUtils.setFeature(aFactory, "http://xml.org/sax/features/namespaces", true);
+        return aFactory;
+    }
+
+    public static void setFeature(SAXParserFactory aFactory, String aFeature, boolean aValue)
         throws ParserConfigurationException
     {
         try {
@@ -109,13 +135,35 @@ public class XmlParserUtils
         }
     }
 
+    public static SAXParser newSaxParser(SAXParserFactory aFactory)
+        throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException,
+        SAXException
+    {
+        SAXParser saxParser = aFactory.newSAXParser();
+        saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+        return saxParser;
+    }
+
     public static SAXParser newSaxParser()
         throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException,
         SAXException
     {
-        SAXParser saxParser = newSaxParserFactory().newSAXParser();
-        saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-        return saxParser;
+        return newSaxParser(newSaxParserFactory());
+    }
+
+    public static XMLInputFactory newXmlInputFactory()
+    {
+        XMLInputFactory xmlInputFactory = XMLInputFactory.newFactory();
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+        xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        xmlInputFactory.setProperty(XMLInputFactory.IS_VALIDATING, false);
+        return xmlInputFactory;
+    }
+
+    public static boolean isStartElement(XMLEvent aEvent, String aElement)
+    {
+        return aEvent.isStartElement()
+                && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
     }
 }

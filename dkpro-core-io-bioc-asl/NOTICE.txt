@@ -1,0 +1,4 @@
+This is a port of the BioC support from INCEpTION 28.x.
+
+Support for falling back to the simple span/relation layers from INCEpTION was remove since the respective types
+do not exist in DKPro Core.
