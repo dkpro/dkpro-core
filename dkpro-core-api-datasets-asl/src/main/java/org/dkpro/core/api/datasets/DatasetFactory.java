@@ -62,6 +62,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -69,21 +70,21 @@ import org.yaml.snakeyaml.constructor.Constructor;
 public class DatasetFactory
 {
     public static final String PROP_DATASET_VERIFICATION_POLICY = "dkpro.dataset.verification.policy";
-    
+
     private static final DatasetValidationPolicy defaultVerificationPolicy = DatasetValidationPolicy
             .valueOf(System.getProperty(PROP_DATASET_VERIFICATION_POLICY,
                     DatasetValidationPolicy.STRICT.name()));
-    
+
     private Map<String, DatasetDescriptionImpl> datasets;
-    
+
     private final Map<String, Class<? extends Action_ImplBase>> actionRegistry;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private Path cacheRoot;
-    
+
     private ClassLoader classLoader;
-    
+
     {
         actionRegistry = new HashMap<>();
         actionRegistry.put("explode", Explode.class);
@@ -115,26 +116,22 @@ public class DatasetFactory
         return cacheRoot;
     }
 
-    public List<String> listIds()
-        throws IOException
+    public List<String> listIds() throws IOException
     {
         return unmodifiableList(new ArrayList<>(registry().keySet()));
     }
-    
-    public DatasetDescription getDescription(String aId)
-        throws IOException
+
+    public DatasetDescription getDescription(String aId) throws IOException
     {
         return registry().get(aId);
     }
 
-    public Dataset load(String aId)
-        throws IOException
+    public Dataset load(String aId) throws IOException
     {
         return load(aId, defaultVerificationPolicy);
     }
-    
-    public Dataset load(String aId, DatasetValidationPolicy aPolicy)
-        throws IOException
+
+    public Dataset load(String aId, DatasetValidationPolicy aPolicy) throws IOException
     {
         DatasetDescription desc = getDescription(aId);
         if (desc == null) {
@@ -144,8 +141,7 @@ public class DatasetFactory
         return new LoadedDataset(this, desc);
     }
 
-    private Map<String, DatasetDescriptionImpl> registry()
-        throws IOException
+    private Map<String, DatasetDescriptionImpl> registry() throws IOException
     {
         // If no cache was set, create one and make sure to clean it up on exit
         if (cacheRoot == null) {
@@ -161,9 +157,8 @@ public class DatasetFactory
 
         return datasets;
     }
-    
-    private Map<String, DatasetDescriptionImpl> loadFromYaml()
-        throws IOException
+
+    private Map<String, DatasetDescriptionImpl> loadFromYaml() throws IOException
     {
         // Scan for locators
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -177,7 +172,7 @@ public class DatasetFactory
                 IOUtils.lineIterator(is, "UTF-8").forEachRemaining(l -> patterns.add(l));
             }
         }
-        
+
         // Scan for YAML dataset descriptions
         List<Resource> resources = new ArrayList<>();
         for (String pattern : patterns) {
@@ -187,7 +182,7 @@ public class DatasetFactory
         }
 
         // Configure YAML deserialization
-        Constructor datasetConstructor = new Constructor(DatasetDescriptionImpl.class);
+        Constructor datasetConstructor = new Constructor(DatasetDescriptionImpl.class, new LoaderOptions());
         TypeDescription datasetDesc = new TypeDescription(DatasetDescriptionImpl.class);
         datasetDesc.putMapPropertyType("artifacts", String.class, ArtifactDescriptionImpl.class);
         datasetDesc.putListPropertyType("licenses", LicenseDescriptionImpl.class);
@@ -196,12 +191,12 @@ public class DatasetFactory
         artifactDesc.putListPropertyType("actions", ActionDescriptionImpl.class);
         datasetConstructor.addTypeDescription(artifactDesc);
         Yaml yaml = new Yaml(datasetConstructor);
-        
+
         // Ensure that there is a fixed order (at least if toString is correctly implemented)
         Collections.sort(resources, (a, b) -> {
             return a.toString().compareTo(b.toString());
         });
-        
+
         // Load the YAML descriptions
         Map<String, DatasetDescriptionImpl> sets = new LinkedHashMap<>();
         for (Resource res : resources) {
@@ -211,20 +206,19 @@ public class DatasetFactory
                 DatasetDescriptionImpl ds = yaml.loadAs(is, DatasetDescriptionImpl.class);
                 ds.setId(id);
                 ds.setOwner(this);
-                
+
                 // Inject artifact names into artifacts
                 for (Entry<String, ArtifactDescription> e : ds.getArtifacts().entrySet()) {
                     ((ArtifactDescriptionImpl) e.getValue()).setName(e.getKey());
                     ((ArtifactDescriptionImpl) e.getValue()).setDataset(ds);
                 }
-                
+
                 sets.put(ds.getId(), ds);
             }
         }
-        
+
         log.debug("Loaded [{}] dataset description", sets.size());
 
-        
         return sets;
     }
 
@@ -256,7 +250,7 @@ public class DatasetFactory
             return resolve(aDataset).resolve(aArtifact.getName());
         }
     }
-    
+
     /**
      * Verify/download/update artifact in cache. Execute post-download actions.
      */
@@ -265,7 +259,7 @@ public class DatasetFactory
     {
         Path root = resolve(aDataset);
         Collection<ArtifactDescription> artifacts = aDataset.getArtifacts().values();
-        
+
         // First validate if local copies are still up-to-date
         boolean reload = false;
         packageValidationLoop: for (ArtifactDescription artifact : artifacts) {
@@ -273,7 +267,7 @@ public class DatasetFactory
             if (!Files.exists(cachedFile)) {
                 continue;
             }
-            
+
             if (artifact.getUrl() != null) {
                 boolean verificationOk = checkDigest(cachedFile, artifact);
                 if (!verificationOk) {
@@ -282,7 +276,7 @@ public class DatasetFactory
                 }
             }
         }
-        
+
         // If any of the packages are outdated, clear the cache and download again
         if (reload) {
             if (!DatasetValidationPolicy.DESPERATE.equals(aPolicy)) {
@@ -293,7 +287,7 @@ public class DatasetFactory
                 log.info("DESPERATE policy in effect. Not clearing local cache for [{}]", root);
             }
         }
-        
+
         for (ArtifactDescription artifact : artifacts) {
             if (artifact.getText() != null) {
                 materializeEmbeddedText(artifact);
@@ -305,12 +299,11 @@ public class DatasetFactory
                 catch (Exception e) {
                     if (artifact.isOptional()) {
                         if (log.isDebugEnabled()) {
-                            log.warn("Skipping optional artifact [{}]",
-                                    artifact.getName(), e);
+                            log.warn("Skipping optional artifact [{}]", artifact.getName(), e);
                         }
                         else {
-                            log.warn("Skipping optional artifact [{}]: {}",
-                                    artifact.getName(), e.getMessage());
+                            log.warn("Skipping optional artifact [{}]: {}", artifact.getName(),
+                                    e.getMessage());
                         }
                     }
                     else {
@@ -319,7 +312,7 @@ public class DatasetFactory
                 }
             }
         }
-                 
+
         // Perform a post-fetch action such as unpacking
         Path postActionCompleteMarker = resolve(aDataset).resolve(".postComplete");
         if (!Files.exists(postActionCompleteMarker)) {
@@ -333,12 +326,12 @@ public class DatasetFactory
                             log.info("Post-download action [{}]", action.getAction());
                             Class<? extends Action_ImplBase> implClass = actionRegistry
                                     .get(action.getAction());
-                            
+
                             if (implClass == null) {
-                                throw new IllegalStateException(
-                                        "Unknown or unsupported action [" + action.getAction() + "]");
+                                throw new IllegalStateException("Unknown or unsupported action ["
+                                        + action.getAction() + "]");
                             }
-                            
+
                             Action_ImplBase impl = implClass.newInstance();
                             impl.apply(action, aDataset, artifact, cachedFile);
                         }
@@ -354,19 +347,19 @@ public class DatasetFactory
             Files.createFile(postActionCompleteMarker);
         }
     }
-    
+
     private void materializeRemoteFileArtifact(ArtifactDescription artifact,
             DatasetValidationPolicy aPolicy)
         throws IOException
     {
         Path cachedFile = resolve(artifact.getDataset(), artifact);
-        
+
         if (Files.exists(cachedFile)) {
             return;
         }
-        
+
         Files.createDirectories(cachedFile.getParent());
-        
+
         ResourceLoader resourceLoader = new DefaultResourceLoader(classLoader);
         Resource res = resourceLoader.getResource(artifact.getUrl());
         if (!res.exists()) {
@@ -379,10 +372,10 @@ public class DatasetFactory
         else {
             log.info("Fetching [{}]", cachedFile);
         }
-        
+
         URLConnection connection = res.getURL().openConnection();
         connection.setRequestProperty("User-Agent", "Java");
-        
+
         try (InputStream is = connection.getInputStream()) {
             Files.copy(is, cachedFile);
         }
@@ -408,11 +401,11 @@ public class DatasetFactory
             }
         }
     }
-    
+
     private void materializeEmbeddedText(ArtifactDescription artifact) throws IOException
     {
         Path cachedFile = resolve(artifact.getDataset(), artifact);
-        
+
         // Check if file on disk corresponds to text stored in artifact description
         if (Files.exists(cachedFile)) {
             String text = FileUtils.readFileToString(cachedFile.toFile(), UTF_8);
@@ -421,9 +414,9 @@ public class DatasetFactory
                 return;
             }
         }
-        
+
         Files.createDirectories(cachedFile.getParent());
-        
+
         log.info("Creating [{}]", cachedFile);
         try (Writer out = Files.newBufferedWriter(cachedFile, StandardCharsets.UTF_8)) {
             out.write(artifact.getText());
@@ -445,7 +438,7 @@ public class DatasetFactory
                     "Unknown verification mode [" + aArtifact.getVerificationMode() + "]");
         }
     }
-    
+
     private boolean checkDigest(Path aFile, ArtifactDescription aArtifact) throws IOException
     {
         MessageDigest sha1;
@@ -457,14 +450,14 @@ public class DatasetFactory
         catch (NoSuchAlgorithmException e) {
             throw new IOException(e);
         }
-        
+
         try (InputStream is = getDigestInputStream(aFile, aArtifact)) {
             DigestInputStream sha1Filter = new DigestInputStream(is, sha1);
             DigestInputStream sha512Filter = new DigestInputStream(sha1Filter, sha512);
             IOUtils.copy(sha512Filter, new NullOutputStream());
             String sha1Hash = new String(Hex.encodeHex(sha1Filter.getMessageDigest().digest()));
             String sha512Hash = new String(Hex.encodeHex(sha512Filter.getMessageDigest().digest()));
-            
+
             if (aArtifact.getSha1() != null) {
                 if (!sha1Hash.equals(aArtifact.getSha1())) {
                     log.info(
