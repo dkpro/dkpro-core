@@ -20,6 +20,7 @@ package org.dkpro.core.io.tei;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
+import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_XML_ID;
 import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_BODY;
 import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_FILE_DESC;
 import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_HEADER;
@@ -64,6 +65,7 @@ import org.dkpro.core.api.parameter.MimeTypes;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -141,10 +143,10 @@ public class TeiWriter
 
         XMLEventWriter xmlEventWriter = null;
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
-            
+
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlOutputFactory.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
-            
+
             xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS, "UTF-8");
             if (indent) {
                 xmlEventWriter = new IndentingXMLEventWriter(xmlEventWriter);
@@ -266,12 +268,27 @@ public class TeiWriter
     private Iterator<Attribute> getAttributes(Annotation aAnnotation) {
         List<Attribute> attributes = new ArrayList<Attribute>();
         if (aAnnotation instanceof Token) {
-            Token t = (Token) aAnnotation;
+            var t = (Token) aAnnotation;
+            if (t.getId() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_XML_ID, t.getId()));
+            }
             if (t.getPos() != null && t.getPos().getPosValue() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_TYPE, t.getPos().getPosValue()));
             }
             if (t.getLemma() != null && t.getLemma().getValue() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_LEMMA, t.getLemma().getValue()));
+            }
+        }
+        else if (aAnnotation instanceof Sentence) {
+            var s = (Sentence) aAnnotation;
+            if (s.getId() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_XML_ID, s.getId()));
+            }
+        }
+        else if (aAnnotation instanceof Div) {
+            var div = (Div) aAnnotation;
+            if (div.getId() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_XML_ID, div.getId()));
             }
         }
         else if (aAnnotation instanceof NamedEntity) {
