@@ -421,12 +421,12 @@
         <artifactId>dkpro-core-jazzy-asl</artifactId>
         <version>2.5.0-SNAPSHOT</version>
       </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.dkpro.core</groupId>-->
+<!--        <artifactId>dkpro-core-jtok-asl</artifactId>-->
+<!--        <version>2.5.0-SNAPSHOT</version>-->
+<!--      </dependency>-->
       <dependency>
-        <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-jtok-asl</artifactId>
-        <version>2.5.0-SNAPSHOT</version>
-      </dependency>
-     <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-languagetool-asl</artifactId>
         <version>2.5.0-SNAPSHOT</version>
@@ -639,7 +639,7 @@
     <module>../dkpro-core-ivy-resolver-asl</module>
     <module>../dkpro-core-ixa-asl</module>
     <module>../dkpro-core-jazzy-asl</module>
-    <module>../dkpro-core-jtok-asl</module>
+<!--    <module>../dkpro-core-jtok-asl</module>-->
     <module>../dkpro-core-jieba-asl</module>
     <module>../dkpro-core-languagetool-asl</module>
     <module>../dkpro-core-langdetect-asl</module>
