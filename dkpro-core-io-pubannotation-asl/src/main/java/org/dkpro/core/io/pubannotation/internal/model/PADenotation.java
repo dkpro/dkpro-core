@@ -24,6 +24,7 @@ package org.dkpro.core.io.pubannotation.internal.model;
 //   {"id": "E2", "span": {"begin": 31, "end": 38}, "obj": "Regulation"}
 // ]
 public class PADenotation
+    implements PAIdentifiableObject
 {
     private String id;
     private PAOffsets span;
@@ -39,6 +40,14 @@ public class PADenotation
         span = new PAOffsets(aBegin, aEnd);
     }
 
+    public PADenotation(String aId, String aType, int aBegin, int aEnd)
+    {
+        id = aId;
+        obj = aType;
+        span = new PAOffsets(aBegin, aEnd);
+    }
+
+    @Override
     public String getId()
     {
         return id;
