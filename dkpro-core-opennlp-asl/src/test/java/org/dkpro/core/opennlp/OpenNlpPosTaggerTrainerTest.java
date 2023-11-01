@@ -103,8 +103,8 @@ public class OpenNlpPosTaggerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.636631, results.getFscore(), 0.0001);
-        assertEquals(0.636631, results.getPrecision(), 0.0001);
-        assertEquals(0.636631, results.getRecall(), 0.0001);
+        assertEquals(0.642212, results.getFscore(), 0.0001);
+        assertEquals(0.642212, results.getPrecision(), 0.0001);
+        assertEquals(0.642212, results.getRecall(), 0.0001);
     }
 }

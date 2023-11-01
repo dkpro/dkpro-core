@@ -31,7 +31,7 @@
   <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) (GPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <corenlp.version>4.5.1</corenlp.version>
+    <corenlp.version>4.5.5</corenlp.version>
   </properties>
   <dependencies>
     <dependency>
@@ -54,32 +54,17 @@
       <groupId>edu.stanford.nlp</groupId>
       <artifactId>stanford-corenlp</artifactId>
       <version>${corenlp.version}</version>
-<!--       <exclusions> -->
-<!--         <exclusion> -->
-<!--           <groupId>org.ejml</groupId> -->
-<!--           <artifactId>ejml-ddense</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--           <groupId>org.ejml</groupId> -->
-<!--           <artifactId>ejml-core</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--           <groupId>org.ejml</groupId> -->
-<!--           <artifactId>ejml-simple</artifactId> -->
-<!--         </exclusion> -->
-<!--       </exclusions> -->
       <exclusions>
         <exclusion>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>xalan</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
-<!--     <dependency> -->
-<!--       <groupId>com.googlecode.efficient-java-matrix-library</groupId> -->
-<!--       <artifactId>ejml</artifactId> -->
-<!--       <version>0.25</version> -->
-<!--     </dependency> -->
     <!-- https://github.com/dkpro/dkpro-core/issues/779
       <dependency>
       <groupId>edu.stanford.nlp</groupId>

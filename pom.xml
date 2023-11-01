@@ -40,22 +40,22 @@
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <maven.surefire.heap>6g</maven.surefire.heap>
 
-    <junit-jupiter.version>5.9.3</junit-jupiter.version>
-    <junit-platform.version>1.9.3</junit-platform.version>
+    <junit-jupiter.version>5.10.0</junit-jupiter.version>
+    <junit-platform.version>1.10.0</junit-platform.version>
     <mockito.version>4.11.0</mockito.version>
     <assertj.version>3.24.2</assertj.version>
     <xmlunit.version>2.9.1</xmlunit.version>
 
     <activation.version>1.2.0</activation.version>
-    <groovy.version>4.0.11</groovy.version>
-    <icu4j.version>73.1</icu4j.version>
-    <jackson.version>2.15.1</jackson.version>
+    <groovy.version>4.0.15</groovy.version>
+    <icu4j.version>74.1</icu4j.version>
+    <jackson.version>2.15.3</jackson.version>
     <jena.version>4.6.1</jena.version>
-    <log4j.version>2.20.0</log4j.version>
+    <log4j.version>2.21.1</log4j.version>
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
-    <slf4j.version>2.0.7</slf4j.version>
-    <snakeyaml.version>2.0</snakeyaml.version>
+    <slf4j.version>2.0.9</slf4j.version>
+    <snakeyaml.version>2.2</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>5.3.30</spring.version>
     <uima.version>3.4.1</uima.version>
@@ -276,7 +276,7 @@
       <dependency>
         <groupId>com.fasterxml.woodstox</groupId>
         <artifactId>woodstox-core</artifactId>
-        <version>6.5.0</version>
+        <version>6.5.1</version>
         <exclusions>
           <exclusion>
             <groupId>javax.xml.stream</groupId>
@@ -307,7 +307,7 @@
       <dependency>
         <groupId>commons-cli</groupId>
         <artifactId>commons-cli</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -332,12 +332,12 @@
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.15</version>
+        <version>1.16.0</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.13.0</version>
+        <version>2.15.0</version>
       </dependency>
       <dependency>
         <groupId>commons-lang</groupId>
@@ -347,17 +347,17 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-text</artifactId>
-        <version>1.10.0</version>
+        <version>1.11.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.12.0</version>
+        <version>3.13.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.23.0</version>
+        <version>1.24.0</version>
       </dependency>
       <dependency>
         <groupId>org.tukaani</groupId>
@@ -391,7 +391,7 @@
       <dependency>
         <groupId>xom</groupId>
         <artifactId>xom</artifactId>
-        <version>1.3.8</version>
+        <version>1.3.9</version>
         <exclusions>
           <exclusion>
             <groupId>xalan</groupId>
@@ -402,12 +402,12 @@
       <dependency>
         <groupId>org.dom4j</groupId>
         <artifactId>dom4j</artifactId>
-        <version>2.1.3</version>
+        <version>2.1.4</version>
       </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>32.0.1-jre</version>
+        <version>32.1.3-jre</version>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
@@ -471,7 +471,7 @@
       <dependency>
         <groupId>it.unimi.dsi</groupId>
         <artifactId>fastutil</artifactId>
-        <version>8.5.11</version>
+        <version>8.5.12</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ivy</groupId>
@@ -516,11 +516,6 @@
         <version>${groovy.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.dataformat</groupId>
-        <artifactId>jackson-dataformat-xml</artifactId>
-        <version>2.9.10</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -939,7 +934,7 @@
                 <dependency>
                   <groupId>com.puppycrawl.tools</groupId>
                   <artifactId>checkstyle</artifactId>
-                  <version>8.45.1</version>
+                  <version>10.12.4</version>
                 </dependency>
               </dependencies>
               <configuration>

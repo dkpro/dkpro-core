@@ -43,6 +43,8 @@
     <dependency>
       <groupId>org.apache.opennlp</groupId>
       <artifactId>opennlp-tools</artifactId>
+      <!-- IXA is not compatible with OpenNLP 2.2.0 or higher -->
+      <version>2.1.0</version>
     </dependency>
     <dependency>
       <groupId>eus.ixa</groupId>
