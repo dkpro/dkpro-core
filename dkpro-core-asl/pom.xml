@@ -426,7 +426,7 @@
         <artifactId>dkpro-core-jtok-asl</artifactId>
         <version>2.5.0-SNAPSHOT</version>
       </dependency>
-     <dependency>
+      <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-languagetool-asl</artifactId>
         <version>2.5.0-SNAPSHOT</version>
