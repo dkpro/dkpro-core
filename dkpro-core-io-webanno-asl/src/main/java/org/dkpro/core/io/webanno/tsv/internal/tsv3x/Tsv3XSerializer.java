@@ -1,21 +1,23 @@
 /*
- * Copyright 2017
- * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.dkpro.core.io.webanno.tsv.internal.tsv3x;
+ */
+package org.dkpro.core.io.webanno.tsv.internal.tsv3x;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.splitPreserveAllTokens;
 import static org.apache.uima.fit.util.FSUtil.getFeature;
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.Escaping.escapeText;
@@ -34,6 +36,7 @@ import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants.LINE_BREAK;
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants.NULL_COLUMN;
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants.NULL_VALUE;
+import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants.PREFIX_SENTENCE_ID;
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants.PREFIX_TEXT;
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants.SLOT_SEP;
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.model.FormatConstants.STACK_SEP;
@@ -64,26 +67,31 @@ public class Tsv3XSerializer
     public void write(PrintWriter aOut, TsvDocument aDocument)
     {
         write(aOut, aDocument.getFormatHeader());
-        
+
         List<TsvColumn> headerColumns = aDocument.getSchema()
                 .getHeaderColumns(aDocument.getActiveColumns());
-        
+
         write(aOut, headerColumns);
-        
+
         for (TsvSentence sentence : aDocument.getSentences()) {
             aOut.print(LINE_BREAK);
             write(aOut, sentence, headerColumns);
         }
     }
-    
+
     public void write(PrintWriter aOut, TsvFormatHeader aHeader)
     {
         aOut.print(HEADER_PREFIX_FORMAT);
         aOut.printf("%s %s\n", aHeader.getName(), aHeader.getVersion());
     }
-    
+
     /**
      * Write the schema header.
+     * 
+     * @param aOut
+     *            the writer
+     * @param aHeaderColumns
+     *            the header columns
      */
     public void write(PrintWriter aOut, List<TsvColumn> aHeaderColumns)
     {
@@ -94,7 +102,7 @@ public class Tsv3XSerializer
                     aOut.print(LINE_BREAK);
                 }
                 currentType = col.uimaType;
-                
+
                 switch (col.layerType) {
                 case SPAN:
                     aOut.print(HEADER_PREFIX_SPAN_LAYER);
@@ -108,14 +116,14 @@ public class Tsv3XSerializer
                 }
                 aOut.print(col.uimaType.getName());
             }
-            
+
             if (RELATION_REF.equals(col.featureType)) {
                 aOut.print(HEADER_FIELD_SEPARATOR);
                 aOut.print(HEADER_PREFIX_BASE_TYPE);
                 if (col.getTargetTypeHint() != null) {
                     // COMPATIBILITY NOTE:
-                    // WebAnnoTsv3Writer obtains the type of a relation target column not from 
-                    // the type system definition but rather by looking at target used by the  
+                    // WebAnnoTsv3Writer obtains the type of a relation target column not from
+                    // the type system definition but rather by looking at target used by the
                     // first actual annotation. This assumes that relations are always only on
                     // a single type.
                     aOut.printf(col.getTargetTypeHint().getName());
@@ -127,11 +135,11 @@ public class Tsv3XSerializer
             else if (SLOT_TARGET.equals(col.featureType)) {
                 // NOTE: This is the same as for the RELATION_REF except that the type
                 // name is not prefixed with "BT_" here.
-                
+
                 if (col.getTargetTypeHint() != null) {
                     // COMPATIBILITY NOTE:
-                    // WebAnnoTsv3Writer obtains the type of a slot target column not from 
-                    // the type system definition but rather by looking at target used by the  
+                    // WebAnnoTsv3Writer obtains the type of a slot target column not from
+                    // the type system definition but rather by looking at target used by the
                     // first actual annotation.
                     aOut.print(HEADER_FIELD_SEPARATOR);
                     aOut.print(col.getTargetTypeHint());
@@ -161,27 +169,35 @@ public class Tsv3XSerializer
                 }
             }
         }
-        
+
         // Add line-break to terminate the final column definition
         if (!aHeaderColumns.isEmpty()) {
             aOut.print(LINE_BREAK);
         }
-        
+
         // COMPATIBILITY NOTE:
         // This is really just to make the output match exactly TSV3
-        aOut.print(LINE_BREAK); 
+        aOut.print(LINE_BREAK);
     }
-    
+
     public void write(PrintWriter aOut, TsvSentence aSentence, List<TsvColumn> aHeaderColumns)
     {
         String[] lines = splitPreserveAllTokens(aSentence.getUimaSentence().getCoveredText(),
                 LINE_BREAK);
+
+        String sentenceId = aSentence.getUimaSentence().getId();
+        if (isNotBlank(sentenceId)) {
+            aOut.print(PREFIX_SENTENCE_ID);
+            aOut.print(escapeText(sentenceId));
+            aOut.print(LINE_BREAK);
+        }
+
         for (String line : lines) {
             aOut.print(PREFIX_TEXT);
             aOut.print(escapeText(line));
             aOut.print(LINE_BREAK);
         }
-        
+
         for (TsvToken token : aSentence.getTokens()) {
             write(aOut, token, aHeaderColumns);
             aOut.write(LINE_BREAK);
@@ -195,18 +211,17 @@ public class Tsv3XSerializer
     public void write(PrintWriter aOut, TsvUnit aUnit, List<TsvColumn> aHeaderColumns)
     {
         TsvDocument doc = aUnit.getDocument();
-        
+
         // Write unit ID
         aOut.print(aUnit.getId());
         aOut.print(FIELD_SEPARATOR);
-        
+
         // Write unit offset
         aOut.printf("%d-%d", aUnit.getBegin(), aUnit.getEnd());
         aOut.print(FIELD_SEPARATOR);
-        
+
         // Write unit text
-        aOut.print(doc.getJCas().getDocumentText().substring(aUnit.getBegin(),
-                aUnit.getEnd()));
+        aOut.print(doc.getJCas().getDocumentText().substring(aUnit.getBegin(), aUnit.getEnd()));
         aOut.printf(FIELD_SEPARATOR);
 
         // Write the remaining columns according to the schema definition
@@ -216,7 +231,7 @@ public class Tsv3XSerializer
             aOut.printf(FIELD_SEPARATOR);
         }
     }
-    
+
     private void writeValues(PrintWriter aOut, TsvUnit aUnit, TsvColumn aCol)
     {
         List<AnnotationFS> columnAnnos = aUnit.getAnnotationsForColumn(aCol);
@@ -230,13 +245,13 @@ public class Tsv3XSerializer
                 if (i > 0) {
                     aOut.print(STACK_SEP);
                 }
-                
+
                 AnnotationFS fs = columnAnnos.get(i);
                 writeValue(aOut, aUnit.getDocument(), aCol, fs);
             }
         }
     }
-    
+
     private void writeValue(PrintWriter aOut, TsvDocument aDoc, TsvColumn aCol, AnnotationFS aFS)
     {
         // What kind of column is it? Depending on the type of column, the annotation value
@@ -264,17 +279,17 @@ public class Tsv3XSerializer
             writeSlotTarget(aOut, aDoc, aCol, aFS);
             break;
         }
-        case CHAIN_ELEMENT_TYPE: 
+        case CHAIN_ELEMENT_TYPE:
             writeChainElement(aOut, aDoc, aCol, aFS);
             break;
-        case CHAIN_LINK_TYPE: 
+        case CHAIN_LINK_TYPE:
             writeChainLink(aOut, aDoc, aCol, aFS);
             break;
         default:
             throw new IllegalStateException("Unknown feature type: [" + aCol.featureType + "]");
         }
     }
-    
+
     private static void writeDisambiguationId(PrintWriter aOut, TsvDocument aDoc, AnnotationFS aFS)
     {
         Integer disambiguationId = aDoc.getDisambiguationId(aFS);
@@ -296,18 +311,18 @@ public class Tsv3XSerializer
         value = value == null ? NULL_VALUE : escapeValue(String.valueOf(value));
         aOut.print(value);
     }
-    
+
     private static void writeRelationReference(PrintWriter aOut, TsvDocument aDoc, TsvColumn aCol,
             AnnotationFS aFS)
     {
         AnnotationFS targetFS = getFeature(aFS, FEAT_REL_TARGET, AnnotationFS.class);
         AnnotationFS sourceFS = getFeature(aFS, FEAT_REL_SOURCE, AnnotationFS.class);
-        
+
         // The column contains the ID of the unit from which the relation is pointing to the
         // current unit, i.e. the sourceUnit of the relation.
         TsvUnit sourceUnit = aDoc.findIdDefiningUnit(sourceFS);
         aOut.print(sourceUnit.getId());
-        
+
         // If the source/target is ambiguous, add the disambiguation IDs
         Integer sourceId = aDoc.getDisambiguationId(sourceFS);
         Integer targetId = aDoc.getDisambiguationId(targetFS);
@@ -317,7 +332,7 @@ public class Tsv3XSerializer
             aOut.printf("[%d_%d]", sourceId, targetId);
         }
     }
-    
+
     private static void writeSlotRole(PrintWriter aOut, TsvDocument aDoc, TsvColumn aCol,
             AnnotationFS aFS)
     {
@@ -337,7 +352,7 @@ public class Tsv3XSerializer
         }
         writeDisambiguationId(aOut, aDoc, aFS);
     }
-    
+
     private static void writeSlotTarget(PrintWriter aOut, TsvDocument aDoc, TsvColumn aCol,
             AnnotationFS aFS)
     {
@@ -350,8 +365,7 @@ public class Tsv3XSerializer
                 AnnotationFS targetFS = getFeature(links[i], TsvSchema.FEAT_SLOT_TARGET,
                         AnnotationFS.class);
                 if (targetFS == null) {
-                    throw new IllegalStateException(
-                            "Slot link has no target: " + links[i]);
+                    throw new IllegalStateException("Slot link has no target: " + links[i]);
                 }
 
                 TsvUnit target = aDoc.findIdDefiningUnit(targetFS);
@@ -359,7 +373,7 @@ public class Tsv3XSerializer
                     throw new IllegalStateException(
                             "Unable to find ID-defining unit for annotation: " + targetFS);
                 }
-                
+
                 aOut.print(target.getId());
                 writeDisambiguationId(aOut, aDoc, targetFS);
             }
@@ -369,8 +383,8 @@ public class Tsv3XSerializer
             // the span of the slot host
             aOut.print(NULL_VALUE);
         }
-    }    
-    
+    }
+
     private static void writeChainElement(PrintWriter aOut, TsvDocument aDoc, TsvColumn aCol,
             AnnotationFS aFS)
     {
@@ -378,10 +392,10 @@ public class Tsv3XSerializer
         value = value == null ? NULL_VALUE : escapeValue(value);
 
         TsvChain chain = aDoc.getChain(aFS);
-        
+
         aOut.printf("%s[%d]", value, chain.getId());
     }
-    
+
     private static void writeChainLink(PrintWriter aOut, TsvDocument aDoc, TsvColumn aCol,
             AnnotationFS aFS)
     {
@@ -389,7 +403,7 @@ public class Tsv3XSerializer
         value = value == null ? NULL_VALUE : escapeValue(value);
 
         TsvChain chain = aDoc.getChain(aFS);
-        
+
         aOut.printf("%s->%d-%d", value, chain.getId(), chain.indexOf(aFS) + 1);
     }
 }

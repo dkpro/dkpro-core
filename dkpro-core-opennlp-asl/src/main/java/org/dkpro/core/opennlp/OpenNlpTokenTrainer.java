@@ -55,7 +55,6 @@ import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.tokenize.TokenizerFactory;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
-import opennlp.tools.tokenize.lang.Factory;
 import opennlp.tools.util.TrainingParameters;
 
 /**
@@ -130,7 +129,7 @@ public class OpenNlpTokenTrainer
      */
     public static final String PARAM_ALPHA_NUMERIC_PATTERN = "alphaNumericPattern";
     @ConfigurationParameter(name = PARAM_ALPHA_NUMERIC_PATTERN, mandatory = false, 
-            defaultValue = Factory.DEFAULT_ALPHANUMERIC)
+            defaultValue = "^[A-Za-z0-9]+$" /* Factory.DEFAULT_ALPHANUMERIC */)
     private Pattern alphaNumericPattern;
 
     /**

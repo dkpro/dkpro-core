@@ -1,26 +1,28 @@
 /*
- * Copyright 2017
- * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.dkpro.core.io.webanno.tsv.internal.tsv3x.model;
+ */
+package org.dkpro.core.io.webanno.tsv.internal.tsv3x.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,9 +36,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class TsvDocument
 {
-    private final Pattern PATTERN_UNIT_ID = Pattern.compile(
-            "^(?<SENT>\\d+)-(?<TOKEN>\\d+)(\\.(?<SUBTOKEN>\\d))?$");
-    
+    private final Pattern PATTERN_UNIT_ID = Pattern
+            .compile("^(?<SENT>\\d+)-(?<TOKEN>\\d+)(\\.(?<SUBTOKEN>\\d))?$");
+
     private final TsvFormatHeader format;
     private final TsvSchema schema;
     private final JCas jcas;
@@ -48,14 +50,14 @@ public class TsvDocument
     private final Set<Type> activeTypes = new HashSet<>();
     private final Map<AnnotationFS, Integer> fs2IdIndex = new HashMap<>();
     private final Map<Integer, AnnotationFS> id2fsIndex = new HashMap<>();
-    
+
     public TsvDocument(TsvFormatHeader aFormat, TsvSchema aSchema, JCas aJCas)
     {
         format = aFormat;
         schema = aSchema;
         jcas = aJCas;
     }
-    
+
     public void activateColumn(TsvColumn aColumn)
     {
         activeColumns.add(aColumn);
@@ -65,7 +67,7 @@ public class TsvDocument
     {
         return activeColumns;
     }
-    
+
     public void activateType(Type aType)
     {
         activeTypes.add(aType);
@@ -75,7 +77,7 @@ public class TsvDocument
     {
         return activeTypes;
     }
-    
+
     /**
      * Get the unit which defines the TSV ID for the given feature structure. This can be either a
      * token or it could be a sub-token if the feature structure is properly nested in a token of if
@@ -88,14 +90,18 @@ public class TsvDocument
      */
     public TsvUnit findIdDefiningUnit(AnnotationFS aFS)
     {
-        return fs2unitIndex.get(aFS);
+        TsvUnit unit = fs2unitIndex.get(aFS);
+        if (unit == null) {
+            throw new NoSuchElementException("No ID-defining unit found for annotation: " + aFS);
+        }
+        return unit;
     }
-    
+
     public void mapFS2Unit(AnnotationFS aFS, TsvUnit aUnit)
     {
         fs2unitIndex.put(aFS, aUnit);
     }
-    
+
     public TsvChain createChain(Type aHeadType, Type aElementType, List<AnnotationFS> aElements)
     {
         TsvChain chain = new TsvChain(chains.size() + 1, aHeadType, aElementType, aElements,
@@ -110,7 +116,7 @@ public class TsvDocument
         chains.add(chain);
         return chain;
     }
-    
+
     public AnnotationFS getChainElement(int aChainId, int aElementIndex)
     {
         TsvChain chain = getChain(aChainId);
@@ -121,31 +127,31 @@ public class TsvDocument
             return null;
         }
     }
-    
+
     public TsvSentence createSentence(Sentence aUimaSentence)
     {
         TsvSentence sentence = new TsvSentence(this, aUimaSentence, sentences.size() + 1);
         sentences.add(sentence);
         return sentence;
     }
-    
+
     public TsvToken createToken(TsvSentence aSentence, Token aUimaToken, int aPosition)
     {
         TsvToken token = new TsvToken(this, aSentence, aUimaToken, aPosition);
         mapFS2Unit(token.getUimaToken(), token);
         return token;
     }
-    
+
     public TsvUnit getUnit(String aUnitId)
     {
         Matcher m = PATTERN_UNIT_ID.matcher(aUnitId);
         if (!m.matches()) {
             throw new IllegalArgumentException("Invalid unit ID: [" + aUnitId + "]");
         }
-        
+
         TsvToken token = getToken(Integer.valueOf(m.group("SENT")) - 1,
                 Integer.valueOf(m.group("TOKEN")) - 1);
-        
+
         String stid = m.group("SUBTOKEN");
         if (stid != null) {
             return token.getSubTokens().get(Integer.valueOf(stid) - 1);
@@ -159,7 +165,7 @@ public class TsvDocument
     {
         return sentences.get(aSentencePosition).getTokens().get(aTokenPosition);
     }
-    
+
     public List<TsvChain> getChains()
     {
         return chains;
@@ -175,22 +181,22 @@ public class TsvDocument
     {
         return fs2ChainIndex.get(aTargetFS);
     }
-    
+
     public List<TsvSentence> getSentences()
     {
         return sentences;
     }
-    
+
     public TsvSchema getSchema()
     {
         return schema;
     }
-    
+
     public JCas getJCas()
     {
         return jcas;
     }
-        
+
     public void addDisambiguationId(AnnotationFS aAnnotation)
     {
         int newId = fs2IdIndex.size() + 1;
@@ -203,7 +209,8 @@ public class TsvDocument
     public void addDisambiguationId(AnnotationFS aAnnotation, int aId)
     {
         AnnotationFS oldEntry = id2fsIndex.put(aId, aAnnotation);
-        assert oldEntry == null || aAnnotation.equals(oldEntry);
+        assert oldEntry == null || aAnnotation.equals(oldEntry) : "Disambiguation ID [" + aId
+                + "] is not unique";
         fs2IdIndex.put(aAnnotation, aId);
     }
 
@@ -211,19 +218,18 @@ public class TsvDocument
     {
         return fs2IdIndex.get(aAnnotation);
     }
-    
+
     public AnnotationFS getDisambiguatedAnnotation(int aDisambiguationId)
     {
         return id2fsIndex.get(aDisambiguationId);
     }
-    
+
     public Set<AnnotationFS> getDisambiguatedAnnotations()
     {
         return fs2IdIndex.keySet();
     }
-    
-    public AnnotationFS resolveReference(Type aType, String aId,
-            int aDisambiguationId)
+
+    public AnnotationFS resolveReference(Type aType, String aId, int aDisambiguationId)
     {
         AnnotationFS annotation;
         // If there is a disambiguation ID then we can easily look up the annotation via the ID.
@@ -245,7 +251,7 @@ public class TsvDocument
                                 + aType.getName() + "] in unit [" + aId + "]");
             }
         }
-        
+
         return annotation;
     }
 
