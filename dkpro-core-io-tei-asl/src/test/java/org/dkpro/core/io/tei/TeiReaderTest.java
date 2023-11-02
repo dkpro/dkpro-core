@@ -76,6 +76,22 @@ public class TeiReaderTest
     }
 
     @Test
+    void thatXmlIdsArePreserved(@TempDir File tempDir) throws Exception
+    {
+        var x = ReaderAssert.assertThat(//
+                TeiReader.class, //
+                TeiReader.PARAM_LANGUAGE, "en", //
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/with_xml_id/input.xml")//
+                .usingWriter(//
+                        TeiWriter.class, TeiWriter.PARAM_OVERWRITE, true)
+                .writingTo(tempDir);//
+        x.outputAsString()//
+                .isEqualToNormalizingNewlines(contentOf(
+                        new File("src/test/resources/with_xml_id/input-ref.xml"),
+                        UTF_8));
+    }
+
+    @Test
     public void thatBrownCorpusIsReadCorrectly() throws Exception
     {
         ReaderAssert.assertThat(//

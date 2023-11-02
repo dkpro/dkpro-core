@@ -1,0 +1,24 @@
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <text xml:id="doc1">
+    <body>
+      <p xml:id="p1">
+        <s xml:id="s1">
+          <w xml:id="t1">This</w>
+          <w xml:id="t2">is</w>
+          <w xml:id="t3">a</w>
+          <w xml:id="t4">test</w>
+          <c xml:id="t5">.</c>
+        </s>
+      </p>
+      <p xml:id="p2">
+        <s xml:id="s2">
+          <w xml:id="t6">This</w>
+          <w xml:id="t7">is</w>
+          <w xml:id="t8">a</w>
+          <w xml:id="t9">test</w>
+          <c xml:id="t10">.</c>
+        </s>
+      </p>
+    </body>
+  </text>
+</TEI>

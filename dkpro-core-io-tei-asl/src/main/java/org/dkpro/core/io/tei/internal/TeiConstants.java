@@ -80,6 +80,7 @@ public final class TeiConstants
     public static final String ATTR_FUNCTION = "function";
     public static final String ATTR_LEMMA = "lemma";
 
+    public static final String ATTR_XML_ID = "xml:id";
     
     public static final String TEI_NS = "http://www.tei-c.org/ns/1.0";
     public static final QName E_TEI_TEI = new QName(TEI_NS, TAG_TEI_DOC);
