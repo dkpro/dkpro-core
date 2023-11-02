@@ -24,14 +24,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
 import org.dkpro.core.opennlp.OpenNlpParser;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.opennlp.OpenNlpSegmenter;
-import org.dkpro.core.testing.dumper.CasDumpWriter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -41,30 +38,30 @@ public class TeiWriterTest
     public void test(@TempDir File targetFolder)
         throws Exception
     {
-        CollectionReaderDescription textReader = createReaderDescription(
+        var textReader = createReaderDescription(
                 TextReader.class,
                 TextReader.PARAM_LANGUAGE, "en",
                 TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
                 TextReader.PARAM_PATTERNS, "*.txt");
 
-        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
+        var segmenter = createEngineDescription(OpenNlpSegmenter.class);
 
-        AnalysisEngineDescription posTagger = createEngineDescription(OpenNlpPosTagger.class);
+        var posTagger = createEngineDescription(OpenNlpPosTagger.class);
 
-        AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class);
+        var parser = createEngineDescription(OpenNlpParser.class);
 
-        AnalysisEngineDescription ner = createEngineDescription(OpenNlpNamedEntityRecognizer.class);
+        var ner = createEngineDescription(OpenNlpNamedEntityRecognizer.class);
 
-        AnalysisEngineDescription dump = createEngineDescription(CasDumpWriter.class);
+//        var dump = createEngineDescription(CasDumpWriter.class);
 
-        AnalysisEngineDescription teiWriter = createEngineDescription(
+        var teiWriter = createEngineDescription(
                 TeiWriter.class,
                 TeiWriter.PARAM_TARGET_LOCATION, targetFolder,
                 TeiWriter.PARAM_WRITE_CONSTITUENT, true);
 
-        runPipeline(textReader, segmenter, posTagger, parser, ner, dump, teiWriter);
+        runPipeline(textReader, segmenter, posTagger, parser, ner, teiWriter);
 
-        File output = new File(targetFolder, "example1.txt.xml");
+        var output = new File(targetFolder, "example1.txt.xml");
         assertTrue(output.exists());
 
 //        Diff myDiff = new Diff(

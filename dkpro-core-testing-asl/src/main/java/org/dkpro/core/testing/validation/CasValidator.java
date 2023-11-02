@@ -32,6 +32,10 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.validation.checks.Check;
 import org.reflections.Reflections;
 
+/**
+ * @deprecated Use the uimaFIT {@link org.apache.uima.fit.validation.Validator} instead.
+ */
+@Deprecated
 public class CasValidator
 {
     private Set<Class<? extends Check>> checks = new LinkedHashSet<>();

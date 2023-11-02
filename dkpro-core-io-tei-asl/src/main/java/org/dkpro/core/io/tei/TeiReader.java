@@ -20,11 +20,13 @@ package org.dkpro.core.io.tei;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.trim;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_POS;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
+import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_XML_ID;
 import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_CHARACTER;
 import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_MULTIWORD;
 import static org.dkpro.core.io.tei.internal.TeiConstants.TAG_PARAGRAPH;
@@ -412,8 +414,6 @@ public class TeiReader
             throw new IOException(e1);
         }
 
-        InputStream is = null;
-
         try {
             JCas jcas = aCAS.getJCas();
 
@@ -432,9 +432,6 @@ public class TeiReader
         }
         catch (SAXException e) {
             throw new IOException(e);
-        }
-        finally {
-            closeQuietly(is);
         }
 
         // Move currentTeiElement to the next text
@@ -481,8 +478,11 @@ public class TeiReader
         private boolean inTextElement = false;
         private boolean captureText = false;
         private int paragraphStart = -1;
+        private String paragraphId = null;
         private int sentenceStart = -1;
+        private String sentenceId = null;
         private int tokenStart = -1;
+        private String tokenId = null;
         private String posTag = null;
         private String lemma = null;
         private Stack<ConstituentWrapper> constituents = new Stack<>();
@@ -530,9 +530,11 @@ public class TeiReader
             else if (inTextElement && (TAG_SUNIT.equals(aName) || 
                     (utterancesAsSentences && TAG_U.equals(aName)))) {
                 sentenceStart = getBuffer().length();
+                sentenceId = aAttributes.getValue(ATTR_XML_ID);
             }
             else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
                 paragraphStart = getBuffer().length();
+                paragraphId = aAttributes.getValue(ATTR_XML_ID);
             }
             else if (readNamedEntity && inTextElement && TAG_RS.equals(aName)) {
                 NamedEntity ne = new NamedEntity(getJCas());
@@ -556,6 +558,7 @@ public class TeiReader
                     && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName) || TAG_MULTIWORD
                             .equals(aName))) {
                 tokenStart = getBuffer().length();
+                tokenId = aAttributes.getValue(ATTR_XML_ID);
                 if (StringUtils.isNotEmpty(aAttributes.getValue(ATTR_POS))) {
                     posTag = aAttributes.getValue(ATTR_POS);
                 }
@@ -590,22 +593,26 @@ public class TeiReader
                 (utterancesAsSentences && TAG_U.equals(aName)))) {
                 if (readSentence) {
                     Sentence s = new Sentence(getJCas(), sentenceStart, getBuffer().length());
+                    s.setId(trim(sentenceId));
                     if (elementsToTrim.contains(aName)) {
                         TrimUtils.trim(getBuffer(), s);
                     }
                     s.addToIndexes();
                 }
                 sentenceStart = -1;
+                sentenceId = null;
             }
             else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
                 if (readParagraph) {
                     Paragraph para = new Paragraph(getJCas(), paragraphStart, getBuffer().length());
+                    para.setId(trim(paragraphId));
                     if (elementsToTrim.contains(aName)) {
                         TrimUtils.trim(getBuffer(), para);
                     }
                     para.addToIndexes();
                 }
                 paragraphStart = -1;
+                paragraphId = null;
             }
             else if (readNamedEntity && inTextElement && TAG_RS.equals(aName)) {
                 NamedEntity ne = namedEntities.pop();
@@ -645,6 +652,7 @@ public class TeiReader
                             .equals(aName))) {
                 if (isNotBlank(getBuffer().substring(tokenStart, getBuffer().length()))) {
                     Token token = new Token(getJCas(), tokenStart, getBuffer().length());
+                    token.setId(trim(tokenId));
                     
                     if (elementsToTrim.contains(aName)) {
                         TrimUtils.trim(getBuffer(), token);
@@ -681,6 +689,7 @@ public class TeiReader
                 }
 
                 tokenStart = -1;
+                tokenId = null;
             }
         }
 
