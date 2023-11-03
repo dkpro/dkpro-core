@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<TEI.2>
+ <text created="2016-05-17" url="http://hdl.handle.net/11858/00-246C-0000-0023-8CFB-2" corpus="The Old Bailey Corpus 2.0, 1720-1913">
+ <body>
+ <div0 id="17900417" type="sessionsPaper">
+ <interp inst="17900417" type="collection" value="BAILEY"/>
+ <interp inst="17900417" type="year" value="1790"/>
+ <interp inst="17900417" type="uri" value="sessionsPapers/17900417"/>
+ <interp inst="17900417" type="date" value="17900417"/>
+ <xptr doc="17900417" type="transcription"/>
+ 
+ <div1 id="f17900417-1" type="frontMatter">
+ <interp inst="f17900417-1" type="collection" value="BAILEY"/>
+ <interp inst="f17900417-1" type="year" value="1790"/>
+ <interp inst="f17900417-1" type="uri" value="sessionsPapers/17900417"/>
+ <interp inst="f17900417-1" type="date" value="17900417"/>
+ 
+ <xptr doc="179004170001" type="pageFacsimile"/>THE WHOLE PROCEEDINGS On postponing the Trial of JOHN FRITH, FOR High-Treason, On SATURDAY, APRIL 17th, 1790, At JUSTICE-HALL, in the OLD BAILEY, CONTAINING The SPEECHES of the PRISONER, The EVIDENCE of the Reverend Mr. VILLETTE, Mr. Alderman NEWMAN and others, respecting his present Insanity.
+ <p>TAKEN IN SHORT-HAND BY E. HODGSON, PROFESSOR OF SHORT-HAND; And Published by Authority.</p>
+ <p>NUMBER IV. PART 
+ <persName id="f17900417-1-person1">
+ I. 
+ <interp inst="f17900417-1-person1" type="given" value="I."/>
+ <interp inst="f17900417-1-person1" type="gender" value="indeterminate"/>
+ </persName> 
+ (Of the SESSIONS PAPER.)</p>
+ <p>LONDON:</p>
+ <p>Printed for E. HODGSON (the Proprietor); And Sold by him, at his House, No. 14, White Lion Street, Islington; Sold also by 
+ <persName id="f17900417-1-person2">
+ J. 
+ <interp inst="f17900417-1-person2" type="given" value="J."/>
+ <interp inst="f17900417-1-person2" type="gender" value="indeterminate"/>
+ </persName> 
+ WALMSLAY, No. 35, Chancery Lane; S. BLADON, No. 13, Pater-noster Row; and C. D. PIGUENIT, No. 8, Aldgate.</p>
+ <p>MDCCXC.</p>
+ <p>
+ <xptr doc="179004170002" type="pageFacsimile"/>BEFORE the Right Honourable WILLIAM PICKETT, 
+ <persName id="f17900417-1-person3" type="judiciaryName">
+ LORD
+ MAYOR
+ <interp inst="f17900417-1-person3" type="surname" value="MAYOR"/>
+ <interp inst="f17900417-1-person3" type="given" value="LORD"/>
+ <interp inst="f17900417-1-person3" type="gender" value="male"/>
+ </persName> 
+ of the City of London; the Rt. Honourable 
+ <persName id="f17900417-1-person4" type="judiciaryName">
+ LLOYD
+ Lord
+ <interp inst="f17900417-1-person4" type="surname" value="Lord"/>
+ <interp inst="f17900417-1-person4" type="given" value="LLOYD"/>
+ <interp inst="f17900417-1-person4" type="gender" value="male"/>
+ </persName> 
+ KENYON, Lord Chief Justice of His Majesty's Court of King's Bench; Sir 
+ <persName id="f17900417-1-person5" type="judiciaryName">
+ BEAUMONT
+ HOTHAM
+ <interp inst="f17900417-1-person5" type="surname" value="HOTHAM"/>
+ <interp inst="f17900417-1-person5" type="given" value="BEAUMONT"/>
+ <interp inst="f17900417-1-person5" type="gender" value="male"/>
+ </persName> 
+ , Knt. one of the Barons of his Majesty's Court of Exchequer; the Honourable 
+ <persName id="f17900417-1-person6" type="judiciaryName">
+ JOHN
+ HEATH
+ <interp inst="f17900417-1-person6" type="surname" value="HEATH"/>
+ <interp inst="f17900417-1-person6" type="given" value="JOHN"/>
+ <interp inst="f17900417-1-person6" type="gender" value="male"/>
+ </persName> 
+ , Esq; one of the Justices of His Majesty's Court of Common Pleas; 
+ <persName id="f17900417-1-person7" type="judiciaryName">
+ JOHN
+ WILLIAM ROSE
+ <interp inst="f17900417-1-person7" type="surname" value="WILLIAM ROSE"/>
+ <interp inst="f17900417-1-person7" type="given" value="JOHN"/>
+ <interp inst="f17900417-1-person7" type="gender" value="male"/>
+ </persName> 
+ , Esq; Serjeant at Law, Recorder of the said City, and others his Majesty's Justices of Oyer and Terminer of the City of London, and Justices of Gaol Delivery of Newgate, holden for the said City and County of Middlesex.</p>
+ 
+ <p>Second Middlesex Jury.</p>
+ <p>
+ 
+ <persName id="f17900417-1-person8" type="jurorName">
+ William
+ George
+ <interp inst="f17900417-1-person8" type="surname" value="George"/>
+ <interp inst="f17900417-1-person8" type="given" value="William"/>
+ <interp inst="f17900417-1-person8" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person9" type="jurorName">
+ Dutton
+ Greenwood
+ <interp inst="f17900417-1-person9" type="surname" value="Greenwood"/>
+ <interp inst="f17900417-1-person9" type="given" value="Dutton"/>
+ <interp inst="f17900417-1-person9" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person10" type="jurorName">
+ William
+ Augustus Mitchell
+ <interp inst="f17900417-1-person10" type="surname" value="Augustus Mitchell"/>
+ <interp inst="f17900417-1-person10" type="given" value="William"/>
+ <interp inst="f17900417-1-person10" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person11" type="jurorName">
+ Kains
+ Ford
+ <interp inst="f17900417-1-person11" type="surname" value="Ford"/>
+ <interp inst="f17900417-1-person11" type="given" value="Kains"/>
+ <interp inst="f17900417-1-person11" type="gender" value="indeterminate"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person12" type="jurorName">
+ John
+ Dell
+ <interp inst="f17900417-1-person12" type="surname" value="Dell"/>
+ <interp inst="f17900417-1-person12" type="given" value="John"/>
+ <interp inst="f17900417-1-person12" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person13" type="jurorName">
+ William.
+ May
+ <interp inst="f17900417-1-person13" type="surname" value="May"/>
+ <interp inst="f17900417-1-person13" type="given" value="William."/>
+ <interp inst="f17900417-1-person13" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person14" type="jurorName">
+ Thomas
+ Hill
+ <interp inst="f17900417-1-person14" type="surname" value="Hill"/>
+ <interp inst="f17900417-1-person14" type="given" value="Thomas"/>
+ <interp inst="f17900417-1-person14" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person15" type="jurorName">
+ William
+ Matthews
+ <interp inst="f17900417-1-person15" type="surname" value="Matthews"/>
+ <interp inst="f17900417-1-person15" type="given" value="William"/>
+ <interp inst="f17900417-1-person15" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person16" type="jurorName">
+ Francis
+ Osliffe
+ <interp inst="f17900417-1-person16" type="surname" value="Osliffe"/>
+ <interp inst="f17900417-1-person16" type="given" value="Francis"/>
+ <interp inst="f17900417-1-person16" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person17" type="jurorName">
+ William
+ Ramsden
+ <interp inst="f17900417-1-person17" type="surname" value="Ramsden"/>
+ <interp inst="f17900417-1-person17" type="given" value="William"/>
+ <interp inst="f17900417-1-person17" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person18" type="jurorName">
+ William
+ Sedcole
+ <interp inst="f17900417-1-person18" type="surname" value="Sedcole"/>
+ <interp inst="f17900417-1-person18" type="given" value="William"/>
+ <interp inst="f17900417-1-person18" type="gender" value="male"/>
+ </persName> 
+ .</p>
+ <p>
+ 
+ <persName id="f17900417-1-person19" type="jurorName">
+ Laban
+ Tilbrooke
+ <interp inst="f17900417-1-person19" type="surname" value="Tilbrooke"/>
+ <interp inst="f17900417-1-person19" type="given" value="Laban"/>
+ <interp inst="f17900417-1-person19" type="gender" value="indeterminate"/>
+ </persName> 
+ .</p>
+ 
+ <p>Counsel for the Crown.</p>
+ <p>Mr. ATTORNEY GENERAL.</p>
+ <p>Mr. SOLICITOR GENERAL.</p>
+ <p>Mr. LAW.</p>
+ <p>Mr. SILVESTER.</p>
+ <p>Counsel for the Prisoner.</p>
+ <p>Mr. SHEPHERD and</p>
+ <p>Mr. GARROW.</p>
+ </div1>
+ 
+ 
+ <div1 id="t17900417-1" type="trialAccount" n="1">
+ <interp inst="t17900417-1" type="collection" value="BAILEY"/>
+ <interp inst="t17900417-1" type="year" value="1790"/>
+ <interp inst="t17900417-1" type="uri" value="sessionsPapers/17900417"/>
+ <interp inst="t17900417-1" type="date" value="17900417"/>
+ <join id="t17900417-1-off1-c20" result="criminalCharge" targOrder="Y" targets="t17900417-1-defend21 t17900417-1-off1 t17900417-1-verdict2"/>
+ 
+ <p>328. THE prisoner being put to the bar, the clerk began to arraign him:</p>
+ <p><u age="" editor="" event="17900417-1" n="1" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="" speaker="17900417-????" year="1790" class="" trial="t17900417-1" wc="11" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="1" p6="1786-1817">" JOHN FRITH , you stand indicted by the name of John Frith :"</u> when Mr. Shepherd, one of his counsel, addressed the Court as follows:</p>
+ <p>Mr. Shepherd. <u age="" editor="" event="17900417-2" n="2" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="166" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="2" p6="1786-1817">My lord, before the prisoner is arraigned, I wish to make an application. To day my friend, Mr. Garrow, and myself, are counsel for the defendant, Mr. Frith: and though we are furnished with what we think a sufficient defence, yet we should feel ourselves deficient, if while we thought so, there was other evidence that could be brought forward; and we think there is some very important evidence which might be procured before the next sessions, on behalf of Mr. Frith: on that account, we, as counsel for him, apply to the humanity of the Attorney General, to beg he would consent to the postponing this trial to the next sessions. In this case we exercise our duty as counsel: Mr. Frith is entitled to the best of our judgment: whether he will chuse to be guided that, is certainly a consideration for his own mind. Mr. Attorney General always will attend to applications of this sort; we therefore do hope that he will consent.</u></p>
+ <p>Court. <u age="" editor="" event="17900417-3" n="3" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="7" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="3" p6="1786-1817">This application is made on your judgment.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-4" n="4" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="43" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="4" p6="1786-1817">I entirely concur with my learned friend. We certainly, as counsel, are suitors to Mr. Attorney General's humanity, that more time may be allowed for the prisoner's defence. Whether Mr. Frith himself will or will not consent, I do not know.</u></p>
+ <p>Mr. Garrow to Mr. Frith. <u age="" editor="" event="17900417-5" n="5" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="2" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="5" p6="1786-1817">Mr. Frith,</u> <xptr doc="179004170003" type="pageFacsimile"/><u age="" editor="" event="17900417-6" n="6" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="39" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="6" p6="1786-1817">we have been applying to the Court, or to Mr. Attorney General, to permit your trial to stand over till next sessions, upon our judgment; it appearing to us that it will be better, and your defence better arranged.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-7" n="7" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="35" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="7" p6="1786-1817">I object to it, on account of my health, being in a bad state through long confinement. I should rather meet it now: it is depriving a subject of his liberty, and endangering his health.</u></p>
+ <p>Mr. Attorney General. <u age="" editor="" event="17900417-8" n="8" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="104" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="8" p6="1786-1817">Notwithstanding what this unhappy gentleman has said, I am given to understand that there may be some circumstances in his situation; and likewise that he is not very well able in point of pecuniary concerns, to be so ready in the collection of materials for his defence, as many other prisoners are: therefore if my friends are of opinion that he must go to his trial now under great disadvantages, possibly arising from the last cause, as well as the other, I shall have no objection to give the gentlemen such time as will enable them to collect such evidence as they may chuse.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-9" n="9" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="63" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="9" p6="1786-1817">Then I shall make an application to some member of parliament, or the legislature. I therefore totally appeal against such power of putting off the trial any further; and whoever dares to oppose me in that respect, I will represent him to the legislature, or some member of parliament; either to General North, or some gentleman whom I have the honour of knowing.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-10" n="10" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="49" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="10" p6="1786-1817">My lord, we are put into an arduous situation. But for one, I feel it to be my, duty to take upon myself, in opposition to the prisoner, for the prisoner's benefit, to pray that the Court, or rather the Attorney General, will consent to postponing this trial.</u></p>
+ <p>Court. <u age="" editor="" event="17900417-11" n="11" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="47" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="11" p6="1786-1817">Mr. Attorney General has conducted himself on this occasion, as he always does, exceedingly liberal and proper; and is ready to give all that indulgence that humanity calls for, because justice could not be attained without reasonable delay interposing, therefore it must stand over till next sessions.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-12" n="12" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="141" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="12" p6="1786-1817">I do not admit of it. And I shall make an application to parliament, that I have been here three months in disagreeable confinement; and the king has broke the mutual obligation between him and the subject: and the assault is of such a simple kind of manner; and what I have met with is of such a nature, that I desire to speak by way of extenuation, and to plead guilty or not guilty to the facts. I then shall make an application as being illegally detained in prison, that you will not admit a British subject to plead to the indictment: I therefore shall make an application to the legislature, that you are violating the laws of this kingdom. I will not put it in the power of the gentlemen that are employed for me to put it off.</u></p>
+ <p>Court. <u age="" editor="" event="17900417-13" n="13" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="199" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="13" p6="1786-1817">It is impossible for the most inattentive observer not to be aware that there may in this case be a previous enquiry necessary: such is the humanity of the law in England, that in all stages, both when the act is committed, at the time when the prisoner makes his defence, and even at the day of execution, it is important to settle what his state of mind is; and at the time he is called to plead, if there are circumstances that suggest to one's mind, that he is not in the possession of his reason, we must certainly be careful that nothing is introduced into the administration of justice, but what belongs to that administration. The justice of the law has provided a remedy in such cases; therefore I think there ought now to be an enquiry made, touching the sanity of this man at this time; whether he is in a situation of mind to say what his grounds of defence here are. I know it is untrodden ground, though it is constitutional: then get a jury together to enquire into the present state of his mind: the twelve men that are there, will do.</u></p>
+ <p>Prisoner to Mr. Garrow. <u age="0" editor="" event="17900417-14" n="14" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="8" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="14" p6="1786-1817">I beg the favour to speak to you.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-15" n="15" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="4" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="15" p6="1786-1817">By all means, Sir.</u></p>
+ <p>
+ <xptr doc="179004170004" type="pageFacsimile"/>Prisoner. <u age="0" editor="" event="17900417-16" n="16" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="92" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="16" p6="1786-1817">The privy counsel were pleased to send the king's physician to me, after I had appeared before my Lord Kenyon, on the 22d of January. I was examined at the privy counsel by Lord Camden; and they sent the king's physician to me. I made dates and memorandums of the physician's visits, likewise remarks that I spoke to him at various times; and of the apothecary's visits also: they persevered in my being in perfect health, fit to meet my trial; and I have put down the conversations.</u></p>
+ <p>Mr. Justice Heath. <u age="" editor="" event="17900417-17" n="17" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="7" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="17" p6="1786-1817">The jury will take notice of that.</u></p>
+ <p>The jury sworn as follows.</p>
+ <p>"You shall diligently enquire, and true presentment make, for, and on behalf of our sovereign lord the king, whether John Frith, the now prisoner at the bar, who stands indicted for <rs id="t17900417-1-off1" type="offenceDescription">
+ <interp inst="t17900417-1-off1" type="offenceCategory" value="royalOffences"/>
+ <interp inst="t17900417-1-off1" type="offenceSubcategory" value="treason"/>
+ high treason
+ </rs> , be of sound mind and understanding, or not, and a true verdict give according: to the best of your understanding, so help you God."</p>
+ <p>Mr. Shepherd. <u age="" editor="" event="17900417-18" n="18" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="63" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="18" p6="1786-1817">Mr. Frith, you are aware that the gentlemen of the jury, that have been just worn, are going to enquire whether you are in a fit situation to plead at this time, and to be tried. Now I wish you would state to these gentlemen what reasons you have to give, to induce them to think you are, and to produce any memorandums.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-19" n="19" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="415" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="19" p6="1786-1817">I have had a physician attended me two months past. On the 22d of January, I came into these circumstances: and they were pleased to send the king's physician to examine me, whether I was perfectly in my senses: I persevered in being so, and would take no drugs from the apothecary. I begged him to attend as a friend to me, to protect me from insult, supposing there was any possibility that I could be insulted in this great prison: but if I had not been well, I would have had my own physician, Dr. Heberden, who attended my father formerly, when living: I looked upon him as a friend attending me, to prove that I was in my senses, or any thing else. I made memorandums of his visits, and the various conversations that we had together. I made memorandums likewise of letters: a letter which I wrote to Mess. Cox and Greenwood; and I have a copy of it, and one that I wrote about the 24th of February, during the time that the last sessions was here, when I thought I might be tried; I then recopied it again. I then mentioned that a disagreeable thing had happened, that General Clarke is coming home in disgrace. To hide that infamy that has happened, they wished to give it out that I was out of my senses. The agents who had immediately freed me from the inconveniences I was under, they were ordered to deny the subject the liberty of drawing on his agent on the house where he had money to answer his bills. They acknowledged me to have been perfectly in my senses at the time when I first came to England; I drew on them, and I have totally freed myself from the inconvenience I was under, from being improperly detained in the county of Cheshire. I was writing a letter of what was publickly given out concerning the subject: I then wrote to Mess. Cox, Cox and Greenwood, to beg they would send down some gentlemen here, to prove how the liberty of the subject was invaded in 1787, in June; and such letters will prove, that the 24th of last February, I was right in my mind then; and that now I recopied it again about a fortnight ago: and it went through my attorney, to Mess. Cox, Cox and Greenwood's house: that will prove the state of my mind at that period of time.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-20" n="20" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="25" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="20" p6="1786-1817">Will you have the goodness, Mr. Frith, to state to the jury the circumstance that took place on your arrival at Liverpool, about the clergyman.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-21" n="21" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="42" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="21" p6="1786-1817">When I first arrived at Liverpool I perceived I had some powers like those which St. Paul had; and the sun that St. Paul gives a description of in the Testament; an extraordinary power that came down upon me, the power of</u> <xptr doc="179004170005" type="pageFacsimile"/><u age="0" editor="" event="17900417-22" n="22" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="146" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="22" p6="1786-1817">Christ; in consequence of my persecution and being ill used, the public wanted to receive me as a must extraordinary kind of a man; they would have received me in any manner that I pleased; when I went to St. Thomas's church I was there surprised to hear the clergyman preach a most extraordinary sermon upon me, as if I was a God: I found my friends wanted me to support that kind of fanaticism in this country; this sermon was printed afterwards by Eyre, the printer at Warrington; when I came to London to the king concerning some military business, I told him nothing about any supernatural abilities, or the power of God; when I went to the Infirmary over Westminster-bridge, to the Asylum, I was surprised to hear General Washington's late Chaplain, Mr. Duche, he said, I remember the words he said,</u></p>
+ <p><u age="0" editor="" event="17900417-23" n="23" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="99" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="23" p6="1786-1817">"see him clothed in grace," pointing to me; there were some supernatural appearances at that time, therefore I could wish the privy council, when I came to England, or the Parliament, might be witnesses that I did not want to set up any kind of powers to the public; but there are such extraordinary appearances that attend me at this moment, that it is singular; and all I do daily is to make memorandums, daily to prove myself in my senses: some friends in Cheshire wanted me to set up some kind of fanaticism, some new branch of religion.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-24" n="24" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="39" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="24" p6="1786-1817">Would you be so good, Mr. Frith, to\ in\ form the Court, as you have an opportunity now, of the complaint you made to me of the effect your confinement has upon you, and the pain in your ear?</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-25" n="25" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="103" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="25" p6="1786-1817">In respect to the body of people, St. Paul when he was at Jerusalem, the same kind of power then came down on the public; there is both a kind of good and evil power which we are all liable to in this world; in consequence of that I feel myself in a particularly disagreeable situation in confinement; I am under a state of suffocation almost, the divine ordinances weighing so very low down that I am entirely reduced to a shadow almost, that is all to me as if it was a death seemingly, I am so in a state of confinement.</u></p>
+ <p>The Rev. Mr. VILLETTE sworn.</p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-26" n="26" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="19" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="26" p6="1786-1817">I believe, Sir, you have had an opportunity of conversing with this gentleman since he has been in custody?</u> - <u age="0" editor="" event="17900417-27" n="27" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0021" year="1790" class="higher (1-5)" trial="t17900417-1" wc="1" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="2" hiscoCode="14120" hiscoLabel="Minister of Religion" nTrial="27" p6="1786-1817">Yes.</u></p>
+ <p><u age="" editor="" event="17900417-28" n="28" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="10" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="28" p6="1786-1817">State the impressions that such conversations made on your mind?</u> - <u age="0" editor="" event="17900417-29" n="29" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0021" year="1790" class="higher (1-5)" trial="t17900417-1" wc="124" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="2" hiscoCode="14120" hiscoLabel="Minister of Religion" nTrial="29" p6="1786-1817">The first time I saw him I really thought from the appearance he had, that he was deranged in his mind; I took notice so to the man that had the care of him; some time after he sent for a bible; I sent him one; then we had some conversation; and he told me he had a pocket volume of that book, but that they took it from him when he was before the privy council; he said, I am much obliged to you: I went to him a few days ago; he was reading; he said, it was the Psalms; I then talked about his trial; and he then entered into such conversation as you have heard about St. Paul and Christ.</u></p>
+ <p><u age="" editor="" event="17900417-30" n="30" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="10" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="30" p6="1786-1817">This conversation is not new, you have heard it before?</u> - <u age="0" editor="" event="17900417-31" n="31" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0021" year="1790" class="higher (1-5)" trial="t17900417-1" wc="1" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="2" hiscoCode="14120" hiscoLabel="Minister of Religion" nTrial="31" p6="1786-1817">Yes.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-32" n="32" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="15" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="32" p6="1786-1817">I said it was when I was landed at Liverpool, and was giving a narrative.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-33" n="33" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="17" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="33" p6="1786-1817">From the whole of your intercourse with him did it appear to you that he was insane?</u> - <u age="0" editor="" event="17900417-34" n="34" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0021" year="1790" class="higher (1-5)" trial="t17900417-1" wc="4" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="2" hiscoCode="14120" hiscoLabel="Minister of Religion" nTrial="34" p6="1786-1817">I really thought so.</u></p>
+ <p><u age="" editor="" event="17900417-35" n="35" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="4" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="35" p6="1786-1817">You think so now?</u> - <u age="0" editor="" event="17900417-36" n="36" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0021" year="1790" class="higher (1-5)" trial="t17900417-1" wc="2" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="2" hiscoCode="14120" hiscoLabel="Minister of Religion" nTrial="36" p6="1786-1817">I do.</u></p>
+ <p>
+ 
+ <persName id="t17900417-1-person23">
+ RICHARD
+ AKERMAN
+ <interp inst="t17900417-1-person23" type="surname" value="AKERMAN"/>
+ <interp inst="t17900417-1-person23" type="given" value="RICHARD"/>
+ <interp inst="t17900417-1-person23" type="gender" value="male"/>
+ </persName> 
+ , Esq. sworn.</p>
+ <p><u age="" editor="" event="17900417-37" n="37" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="9" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="37" p6="1786-1817">You have had frequent opportunities of seeing Mr. Frith?</u> - <u age="0" editor="" event="17900417-38" n="38" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0018" year="1790" class="" trial="t17900417-1" wc="12" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="38" p6="1786-1817">I have frequently seen Mr. Frith; I have been with him frequently.</u></p>
+ <p><u age="" editor="" event="17900417-39" n="39" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="25" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="39" p6="1786-1817">State from the conversation you have bad with him, and his conduct on the whole, what your opinion is of the state of his mind?</u> - <u age="0" editor="" event="17900417-40" n="40" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0018" year="1790" class="" trial="t17900417-1" wc="20" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="40" p6="1786-1817">It is very hard I should be called upon; I have heard such conversation as you have heard in Court.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-41" n="41" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="6" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="41" p6="1786-1817">I will not trouble Mr. Akerman.</u></p>
+ <p>
+ <xptr doc="179004170006" type="pageFacsimile"/>Prisoner. <u age="0" editor="" event="17900417-42" n="42" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="28" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="42" p6="1786-1817">I have been very silent and close for many reasons, and to protect my person; I have read the Psalms, my Lord, as I had no other books.</u></p>
+ <p>Mr. Sheriff NEWMAN sworn.</p>
+ <p>Mr. Shepherd. <u age="" editor="" event="17900417-43" n="43" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="14" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="43" p6="1786-1817">Have you had any conversation with Mr. Frith since he has been in custody?</u> - <u age="0" editor="" event="17900417-44" n="44" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0022" year="1790" class="" trial="t17900417-1" wc="238" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="44" p6="1786-1817">Very frequently; I went the second day after he was in Newgate; I went entirely out of curiosity; I found him a subject of great compassion: he began talking to me very deranged for the first ten minutes; I asked him why he went over to Holland? he said, he went eastward in pursuit of the light; I said, what light? he said, why you have read the scriptures? I said, yes; says he, the same light that fell upon St. Paul when he went to Damascus; I said, what brought you back? why, says he, when I got there I found the light was in the west as well as in the east. He desired to have the liberty of walking in the yard; and I consulted Mr. Akerman: and he said, there was an order concerning him. I found him every time in the same way; I was there once when Dr. Millan came down; I met him there; he for the first five minutes had doubts, but before he went away he was perfectly satisfied the prisoner was insane; I have not the least doubt, nor possibly can have a doubt; I frequently found him reading in the book of Kings, and he told me he was learning the art of war, and he should come to be a general, and he should like to understand the art of making war as the ancients did.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-45" n="45" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="92" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="45" p6="1786-1817">I do not remember speaking about that, and I made memorandums of my conversations with Mr. Newman: I never spoke about particular lights; I said, when I went over to Holland, as the ministers neglected doing their duty to me as a subject, in protecting me from the insults of the body of people; stirring up licentiousness, aiming at me; they drove me out of the kingdom; I went to Holland to shelter myself from the body of the people; but I do not remember saying any thing of following the light.</u></p>
+ <p>To Mr. Newman. <u age="" editor="" event="17900417-46" n="46" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="13" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="46" p6="1786-1817">Do you think it was absolute incapacity of mind, or feigned or assumed?</u> - <u age="0" editor="" event="17900417-47" n="47" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0022" year="1790" class="" trial="t17900417-1" wc="45" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="47" p6="1786-1817">I believe absolutely that he is totally deranged, and not in the use of his senses for ten minutes together; every day I saw him he was so, and of that there is not a doubt; I went at different times merely to make observations.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-48" n="48" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="10" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="48" p6="1786-1817">Mr. Frith, are you acquainted with Mr. Burnsell the auctioneer?</u> - <u age="0" editor="" event="17900417-49" n="49" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="107" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="49" p6="1786-1817">Yes; he took an extraordinary liberty in putting into the Public Advertiser, the third of February, a letter, dated the first, declaring me insane, a most extraordinary liberty; I thought it prudent to keep a copy: I have made memorandums, but they have been taken from me by Colonel Amherst, the same as Mr. Wilkes's papers were seized, a kind of alteration of the laws of the land, a kind of scheme to make a man appear insane, to totally disguise, to undo the liberty of the British subject; in fact it is such a concealed evil that I do not know where it will end.</u></p>
+ <p><u age="" editor="" event="17900417-50" n="50" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="8" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="50" p6="1786-1817">Had Mr. Burnsell any ill will to you?</u></p>
+ <p>- <u age="0" editor="" event="17900417-51" n="51" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="84" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="51" p6="1786-1817">None at all; he was only employed to hide the mutiny that those applauses of the clergymen had occasioned; he went to a person that lives with Mrs. Dowdswell, in Upper Brook-street; he had a letter, and was perhaps see'd; the clergyman declared me as a God, the body of the people as a man insane; myself applying to the King merely to get my birth again; when I went to my friend Mr. Burnsell, I spoke of no powers of God or Christ.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-52" n="52" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="13" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="52" p6="1786-1817">Was that before the complaint that you was afflicted with in your ear?</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-53" n="53" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="15" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="53" p6="1786-1817">Before that, the pain in my ear; shall I finish with respect to Mr. Burnsell?</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-54" n="54" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="3" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="54" p6="1786-1817">If you please.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-55" n="55" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="33" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="55" p6="1786-1817">I found he wished to suppose me not right in my senses, and that he could produce no proof; he has declared in the public papers, that I behaved in such a violent</u> <xptr doc="179004170007" type="pageFacsimile"/><u age="0" editor="" event="17900417-56" n="56" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="82" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="56" p6="1786-1817">manner, in his house, as totally to prove myself out of my senses; I have the facts now on one side put down, that I can find no one circumstance of the kind, and to put such a letter into the news paper; if they wish to make a man appear insane, he should be taken before the Lord Chancellor, and there make a general declaration, some way or other; but it is done to interfere with the liberty of the subject.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-57" n="57" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="12" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="57" p6="1786-1817">Mr. Frith, how long was afflicted with that complaint in your ear?</u> - <u age="0" editor="" event="17900417-58" n="58" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="96" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="58" p6="1786-1817">I indured it, I supposed it merely as a triffling thing, but that complaint arises from a power of witchcraft, which existed about a hundred years ago, in this country; there is a power which women are now afflicted with; there is a power that rules now, that women can torment men, if they are in a room - over your head, they may annoy you by speaking in your ear; I have had a noise in my ear like speech; it is in the power of women, to annoy men publickly, even throughout the whole continent.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-59" n="59" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="18" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="59" p6="1786-1817">Could you satisfy one of the Jury, that such a noise exists in your ear at this time?</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-60" n="60" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="11" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="60" p6="1786-1817">That there is a noise in my ear at this time?</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-61" n="61" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="1" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="61" p6="1786-1817">Yes.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-62" n="62" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="7" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="62" p6="1786-1817">No, I am free from it now.</u></p>
+ <p>Mr. Garrow. <u age="" editor="" event="17900417-63" n="63" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="7" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="63" p6="1786-1817">Oh! you are free from it now?</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-64" n="64" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="148" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="64" p6="1786-1817">Yes, but it is the power and effects, of what they call witchcraft, or some kind of communication between women and men; but I have remained such a chaste man for these four years, that it has fallen upon me particularly; and the Physician, by leaving me a month ago, and visiting me as friend, will totally speak to the fact; the last time he visited me, was on the 19th of March, says he, I hope you will be restored, and fit to take your trial; but I know your friend Mr. Hogarth, I have seen him, and some people that are in Court, will be able to declare me in my senses: I have said little or nothing at all lately, and been totally silent, so that it is impossible for me to be in that state. Shall I beg the favor to address my Lord.</u></p>
+ <p>Lord Chief Justice. <u age="" editor="" event="17900417-65" n="65" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="4" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="65" p6="1786-1817">If you please, Sir.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-66" n="66" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="78" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="66" p6="1786-1817">Do you recollect me, in the year 1773, when I applied to you in person, on a case of some landed property, between me and one Entwille, at Cheshire; when you was a counsel and was one of my counsel, with one Mr. Hughes, knowing me then, and likewise in October, at the assizes, respecting some contested property, some landed property I have in Cheshire; now that circumstance may corroborate my declaration of the state of my mind.</u></p>
+ <p>Lord Chief Justice. <u age="" editor="" event="17900417-67" n="67" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="5" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="67" p6="1786-1817">I do not recollect it.</u></p>
+ <p>Mr. FULLER sworn.</p>
+ <p><u age="0" editor="" event="17900417-68" n="68" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0023" year="1790" class="" trial="t17900417-1" wc="24" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="68" p6="1786-1817">I have frequently seen Mr. Frith, since he came from the East Indies; I have had opportunities of conversing with him at particular times.</u></p>
+ <p>Mr. Shepperd. <u age="" editor="" event="17900417-69" n="69" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="21" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="69" p6="1786-1817">Do you recollect any thing particular in his conversation, that induced you to take notice of the state of his mind?</u> - <u age="0" editor="" event="17900417-70" n="70" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0023" year="1790" class="" trial="t17900417-1" wc="196" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="70" p6="1786-1817">Yes, several times; on Christmas Eve was two years, I spent four hours with him; I conversed with him for three hours before I knew any thing was the matter with him, and upon asking him a question, respecting the matters he had mentioned before, concerning his ill treatment by Major Amherst , and Ensign Steward, in the West Indies; he declared then the reason he was ill treated, was, that he wished to reveal what the government wished to conceal; for that he saw a cloud come down from Heaven, that it cemented into a rock, and out of that sprung a false island of Jamaica, and because he wished to reveal it, he had, he said, been confined one hundred and sixty-tree days; and they had taken different means; that he had taken an oath of this before Sir Sampson Wright: a copy of which he gave me, and he wanted to have it published, but Woodfall, the printer, refused; and he said, he hoped, that I, as one of his friends, I would make it a conversation, in hopes it would reach the ears of the king; I thought that the speech of a</u> <xptr doc="179004170008" type="pageFacsimile"/><u age="0" editor="" event="17900417-71" n="71" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0023" year="1790" class="" trial="t17900417-1" wc="150" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="71" p6="1786-1817">madman; and he said, that he had wrote to the King and to Sir George Young , the secretary of war, and could receive no redress, and that they had reduced him to half pay: I understood that a Gentleman of the name of Garrow, was employed as his counsel, and I sent the copy of this oath enclosed in a letter, to\ in\ form him of it: I last Christmas day, by chance, went into the same friend's house, at No. 22, in Frith street; there I drank tea with Mr. Frith; he then told me, he was worse used then common, that he was persecuted, and that they wanted to set him up as antichrist, or a fourth person in the Godhead, and that he looked upon to be blasphemy, or else he might have a good living; that and many other instances I can prove if necessary.</u></p>
+ <p><u age="" editor="" event="17900417-72" n="72" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="9" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="72" p6="1786-1817">Did you believe him to be in his senses?</u> - <u age="0" editor="" event="17900417-73" n="73" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0023" year="1790" class="" trial="t17900417-1" wc="25" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="73" p6="1786-1817">No, upon my oath, and upon that one subject of his conceiving himself to be in his senses, and ill treated, and particularly by government.</u></p>
+ <p><u age="" editor="" event="17900417-74" n="74" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="24" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="74" p6="1786-1817">If I understand you right, the last conversation that happened, was about a month before the circumstance happened, for which he was taken up?</u> - <u age="0" editor="" event="17900417-75" n="75" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0023" year="1790" class="" trial="t17900417-1" wc="11" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="75" p6="1786-1817">Yes, Sir, and there were four people more that heard it.</u></p>
+ <p>Court. <u age="" editor="" event="17900417-76" n="76" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="297" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="76" p6="1786-1817">Gentlemen of the Jury, the enquiry which you are now called upon, is not whether the prisoner was in this unfortunate state of mind, when the accident happened, nor is it necessary to discuss or enquire at all, what effect his present state of mind may have, whenever that question comes to be discussed; but the humanity of the law of England falling into that, which common humanity, without any written law would suggest, has prescribed, that no man shall be called upon to make his defence, at a time when his mind is in that situation, as not to appear capable of so doing; for, however guilty he may be, the enquiring into his guilt, must be postponed to that season, when, by collecting together his intellects, and having them entire; he shall be able so to model his defence, as to ward off the punishment of the law; it is for you, therefore, to enquire whether the prisoner is now in that state of mind; and inasmuch as artful men may put on appearances which are not the reality of the case; I think the counsel for the prisoner have judged extremely proper for your satisfaction and the public's; not to suffer your judgment to proceed on that which he has now said, though that is extremely pregnant with observation; but they have called witnesses, and gone back to the earlier period of his life, and stated to you, at a time when the two letters were written, the language of which you have heard, which seems to me, not to leave any doubt on any man's mind, therefore, the question the Court proposes to you now, is, Whether he is at this time in a sane or an insane state of mind?</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-77" n="77" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="38" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="77" p6="1786-1817">Permit me to speak, the physician is the most principal person, who has visited me as a friend, he can tell more than from any other private person's declarations what ever; I appeal as a British subject.</u></p>
+ <p>Jury. <u age="" editor="" event="17900417-78" n="78" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="13" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="78" p6="1786-1817">My Lord, we are all of opinion that the prisoner is quite insane .</u></p>
+ <p>Court. <u age="" editor="" event="17900417-79" n="79" printer="" publisher="E. Hodgson" role="Judge" scribe="E. Hodgson" sex="m" speaker="17900417-?CRT" year="1790" class="higher (1-5)" trial="t17900417-1" wc="7" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="1" hiscoCode="12210" hiscoLabel="Judge" nTrial="79" p6="1786-1817">He must be remanded for the present.</u></p>
+ <p>Prisoner. <u age="0" editor="" event="17900417-80" n="80" printer="" publisher="E. Hodgson" role="" scribe="E. Hodgson" sex="m" speaker="17900417-0017" year="1790" class="" trial="t17900417-1" wc="18" p2="1720-1816" p3="1785-1849" p4="1769-1817" p5="1759-1797" hisclass="" hiscoCode="" hiscoLabel="" nTrial="80" p6="1786-1817">Then I must call on that physician, who said, on the 19th, I was perfectly in my senses.</u></p>
+ <p>The prisoner was then removed from the bar.</p>
+ </div1>
+ 
+ </div0>
+ </body>
+ </text>
+</TEI.2>
