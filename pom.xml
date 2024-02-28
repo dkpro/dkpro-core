@@ -36,12 +36,16 @@
   </organization>
   <inceptionYear>2007</inceptionYear>
   <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
+    <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
+    
     <currentYear>2023</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <maven.surefire.heap>6g</maven.surefire.heap>
 
-    <junit-jupiter.version>5.10.0</junit-jupiter.version>
-    <junit-platform.version>1.10.0</junit-platform.version>
+    <junit-jupiter.version>5.10.1</junit-jupiter.version>
+    <junit-platform.version>1.10.1</junit-platform.version>
     <mockito.version>4.11.0</mockito.version>
     <assertj.version>3.24.2</assertj.version>
     <xmlunit.version>2.9.1</xmlunit.version>
@@ -58,8 +62,8 @@
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>5.3.30</spring.version>
-    <uima.version>3.4.1</uima.version>
-    <uimafit.version>3.4.0</uimafit.version>
+    <uima.version>3.5.0</uima.version>
+    <uimafit.version>3.5.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
   </properties>
   <repositories>
@@ -504,6 +508,16 @@
         <version>1.2.0</version>
       </dependency>
       <dependency>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>4.0.0</version>
+      </dependency>
+      <dependency>
         <groupId>com.fasterxml.jackson</groupId>
         <artifactId>jackson-bom</artifactId>
         <version>${jackson.version}</version>
@@ -596,12 +610,17 @@
             <dependency>org.slf4j:jcl-over-slf4j</dependency>
             <dependency>commons-logging:commons-logging</dependency>
             <!--
-              - JAXB is used via reflection and cannot be detected by Maven
+              - Javax JAXB is used via reflection and cannot be detected by Maven
             -->
             <dependency>javax.xml.bind:jaxb-api</dependency>
             <dependency>com.sun.xml.bind:jaxb-core</dependency>
             <dependency>com.sun.xml.bind:jaxb-impl</dependency>
             <dependency>javax.activation:javax.activation-api</dependency>
+            <!--
+              - Jakarta JAXB is used via reflection and cannot be detected by Maven
+            -->
+            <dependency>jakarta.xml.bind:jakarta.xml.bind-api</dependency>
+            <dependency>org.glassfish.jaxb</dependency>
             <!--
               - Common test dependencies
             -->
@@ -727,6 +746,7 @@
           </properties>
         </configuration>
         <dependencies>
+          <!-- Javax JAXB -->
           <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>

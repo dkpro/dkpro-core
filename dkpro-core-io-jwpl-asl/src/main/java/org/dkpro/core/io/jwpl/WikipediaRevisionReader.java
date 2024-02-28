@@ -18,16 +18,14 @@
 package org.dkpro.core.io.jwpl;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.jwpl.util.WikiUtils;
-
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
-import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
+import org.dkpro.jwpl.api.exception.WikiApiException;
+import org.dkpro.jwpl.revisionmachine.api.Revision;
 
 /**
  * Reads Wikipedia page revisions.
@@ -52,29 +50,12 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
             if (!revisionIds.isEmpty()) {
                 // in case we iterate over a given list of revisions
                 String nextId = revIdIterator.next();
-                try {
                     revision = this.revisionApi.getRevision(Integer.parseInt(nextId));
-                }
-                catch (Exception e) {
-                    // in case of lost connection
-                    // TODO should be handled in RevisionAPI
-                    revisionApi.reconnect();
-                    revision = this.revisionApi.getRevision(Integer.parseInt(nextId));
-                }
             }
             else {
                 //in case we iterate over ALL revisions
-                try {
                     revision = this.revisionApi.getRevision(currentArticle.getPageId(),
                             timestampIter.next());
-                }
-                catch (Exception e) {
-                    //in case of lost connection
-                    //TODO should be handled in RevisionAPI
-                    revisionApi.reconnect();
-                    revision = this.revisionApi.getRevision(currentArticle.getPageId(),
-                            timestampIter.next());
-                }
             }
 
             String text = "";
@@ -92,9 +73,6 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
             addRevisionAnnotation(jcas, revision);
         }
         catch (WikiApiException e) {
-            throw new CollectionException(e);
-        }
-        catch (SQLException e) {
             throw new CollectionException(e);
         }
     }

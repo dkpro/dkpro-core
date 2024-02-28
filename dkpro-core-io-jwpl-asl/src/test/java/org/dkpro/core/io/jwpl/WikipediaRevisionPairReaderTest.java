@@ -23,27 +23,29 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.jwpl.api.WikiConstants.Language;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 
-@Disabled("Relies on non-public server")
-public class WikipediaRevisionPairReaderTest
+class WikipediaRevisionPairReaderTest
 {
-    // FIXME currently there is no test database to test revisions
+    @Disabled("Currently there is no test database to test revisions")
     @Test
-    public void wikipediaRevisionReaderTest()
+    void wikipediaRevisionReaderTest()
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
                 WikipediaRevisionPairReader.class,
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english);
+                WikipediaRevisionPairReader.PARAM_HOST, "localhost", //
+                WikipediaRevisionPairReader.PARAM_DB, "wikiapi_test", //
+                WikipediaRevisionPairReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaRevisionPairReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaRevisionPairReader.PARAM_USER, "sa", //
+                WikipediaRevisionPairReader.PARAM_PASSWORD, "", //
+                WikipediaRevisionPairReader.PARAM_LANGUAGE, Language.simple_english);
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
