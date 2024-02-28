@@ -34,15 +34,15 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.dkpro.core.io.jwpl.util.WikiUtils;
+import org.dkpro.jwpl.api.MetaData;
+import org.dkpro.jwpl.api.Page;
+import org.dkpro.jwpl.api.PageIterator;
+import org.dkpro.jwpl.api.exception.WikiTitleParsingException;
+import org.dkpro.jwpl.parser.mediawiki.FlushTemplates;
+import org.dkpro.jwpl.parser.mediawiki.MediaWikiParser;
+import org.dkpro.jwpl.parser.mediawiki.MediaWikiParserFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.wikipedia.api.MetaData;
-import de.tudarmstadt.ukp.wikipedia.api.Page;
-import de.tudarmstadt.ukp.wikipedia.api.PageIterator;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
 
 /**
  * Abstract base class for standard Wikipedia readers reading single articles

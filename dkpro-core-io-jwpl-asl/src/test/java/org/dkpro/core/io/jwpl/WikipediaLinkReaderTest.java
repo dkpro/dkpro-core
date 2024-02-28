@@ -21,64 +21,66 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
-import org.apache.uima.jcas.JCas;
-import org.junit.jupiter.api.Disabled;
+import org.dkpro.jwpl.api.WikiConstants.Language;
+import org.dkpro.jwpl.parser.Link;
 import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink;
-import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
-import de.tudarmstadt.ukp.wikipedia.parser.Link;
 
-@Disabled("Relies on non-public server")
-public class WikipediaLinkReaderTest
+class WikipediaLinkReaderTest
 {
     @Test
-    public void wikipediaReaderTest()
+    void wikipediaReaderTest()
         throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
+        var reader = createReaderDescription(
                 WikipediaLinkReader.class,
                 WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, Link.type.INTERNAL.name(),
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+                WikipediaLinkReader.PARAM_HOST, "localhost", //
+                WikipediaLinkReader.PARAM_DB, "wikiapi_test", //
+                WikipediaLinkReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaLinkReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaLinkReader.PARAM_USER, "sa", //
+                WikipediaLinkReader.PARAM_PASSWORD, "", //
+                WikipediaLinkReader.PARAM_LANGUAGE, Language._test);
 
         int i = 0;
-        for (JCas jcas : new JCasIterable(reader)) {
+        for (var jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             i++;
         }
 
-        assertEquals(28, i);
+        assertEquals(30, i);
     }
 
     @Test
-    public void wikipediaLinkReaderTest()
+    void wikipediaLinkReaderTest()
         throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
+        var reader = createReaderDescription(
                 WikipediaLinkReader.class,
                 WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, Link.type.INTERNAL.name(),
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+                WikipediaLinkReader.PARAM_HOST, "localhost", //
+                WikipediaLinkReader.PARAM_DB, "wikiapi_test", //
+                WikipediaLinkReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaLinkReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaLinkReader.PARAM_USER, "sa", //
+                WikipediaLinkReader.PARAM_PASSWORD, "", //
+                WikipediaLinkReader.PARAM_LANGUAGE, Language._test);
 
         int linkCounter = 0;
-        for (JCas jcas : new JCasIterable(reader)) {
-            for (WikipediaLink link : JCasUtil.select(jcas, WikipediaLink.class)) {
+        for (var jcas : new JCasIterable(reader)) {
+            for (var link : JCasUtil.select(jcas, WikipediaLink.class)) {
                 System.out.println(link.getCoveredText());
                 linkCounter++;
             }
             assertNotNull(jcas);
         }
 
-        assertEquals(0, linkCounter);
+        assertEquals(2, linkCounter);
     }
 }

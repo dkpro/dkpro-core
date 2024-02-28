@@ -18,10 +18,9 @@
 package org.dkpro.core.io.jwpl;
 
 import org.apache.uima.fit.descriptor.TypeCapability;
-
-import de.tudarmstadt.ukp.wikipedia.api.Page;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
-import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
+import org.dkpro.jwpl.api.Page;
+import org.dkpro.jwpl.api.exception.WikiTitleParsingException;
+import org.dkpro.jwpl.parser.ParsedPage;
 
 /**
  * Reads all discussion pages.

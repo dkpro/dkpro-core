@@ -27,13 +27,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.jwpl.api.MetaData;
+import org.dkpro.jwpl.api.exception.WikiApiException;
+import org.dkpro.jwpl.revisionmachine.api.RevisionAPIConfiguration;
+import org.dkpro.jwpl.revisionmachine.api.RevisionApi;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo;
-import de.tudarmstadt.ukp.wikipedia.api.MetaData;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
-import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionAPIConfiguration;
-import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
 /**
  * Reads all general article infos without retrieving the whole Page objects

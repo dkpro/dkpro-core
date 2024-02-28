@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.io.jwpl;
 
-import de.tudarmstadt.ukp.wikipedia.api.Page;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
+import org.dkpro.jwpl.api.Page;
+import org.dkpro.jwpl.api.exception.WikiTitleParsingException;
 
 /**
  * Reads all article pages.

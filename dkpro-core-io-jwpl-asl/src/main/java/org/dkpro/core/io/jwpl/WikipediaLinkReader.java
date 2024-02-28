@@ -25,12 +25,12 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.jwpl.api.Page;
+import org.dkpro.jwpl.api.exception.WikiTitleParsingException;
+import org.dkpro.jwpl.parser.Link;
+import org.dkpro.jwpl.parser.ParsedPage;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink;
-import de.tudarmstadt.ukp.wikipedia.api.Page;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
-import de.tudarmstadt.ukp.wikipedia.parser.Link;
-import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 
 /**
  * Read links from Wikipedia.

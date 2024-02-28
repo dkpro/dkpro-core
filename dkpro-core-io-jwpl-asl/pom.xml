@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - IO - Wikipedia via JWPL</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <jwpl.version>0.9.2</jwpl.version>
+    <jwpl.version>2.0.0</jwpl.version>
   </properties>
   <dependencies>
     <dependency>
@@ -44,30 +44,20 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-      <artifactId>de.tudarmstadt.ukp.wikipedia.revisionmachine</artifactId>
+      <groupId>org.dkpro.jwpl</groupId>
+      <artifactId>dkpro-jwpl-revisionmachine</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-      <artifactId>de.tudarmstadt.ukp.wikipedia.util</artifactId>
+      <groupId>org.dkpro.jwpl</groupId>
+      <artifactId>dkpro-jwpl-util</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-      <artifactId>de.tudarmstadt.ukp.wikipedia.api</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>log4j</groupId>
-          <artifactId>log4j</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>org.dkpro.jwpl</groupId>
+      <artifactId>dkpro-jwpl-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-      <artifactId>de.tudarmstadt.ukp.wikipedia.parser</artifactId>
+      <groupId>org.dkpro.jwpl</groupId>
+      <artifactId>dkpro-jwpl-parser</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
@@ -77,47 +67,58 @@
       <groupId>eu.openminted.share.annotations</groupId>
       <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.7.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.api</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-api</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.parser</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-parser</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.datamachine</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-datamachine</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.mwdumper</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-mwdumper</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.timemachine</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-timemachine</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.revisionmachine</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-revisionmachine</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.util</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-util</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-        <artifactId>de.tudarmstadt.ukp.wikipedia.wikimachine</artifactId>
+        <groupId>org.dkpro.jwpl</groupId>
+        <artifactId>dkpro-jwpl-wikimachine</artifactId>
         <version>${jwpl.version}</version>
       </dependency>
     </dependencies>
@@ -139,5 +140,18 @@
         </includes>
       </resource>
     </resources>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <usedDependencies>
+              <usedDependency>org.hsqldb:hsqldb</usedDependency>
+            </usedDependencies>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>

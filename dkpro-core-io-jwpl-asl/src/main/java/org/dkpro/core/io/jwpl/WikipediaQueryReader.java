@@ -21,9 +21,8 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
-
-import de.tudarmstadt.ukp.wikipedia.api.PageQuery;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
+import org.dkpro.jwpl.api.PageQuery;
+import org.dkpro.jwpl.api.exception.WikiApiException;
 
 /**
  * Reads all article pages that match a query created by the numerous parameters of this class.
