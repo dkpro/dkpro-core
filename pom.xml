@@ -44,7 +44,7 @@
     <junit-platform.version>1.10.0</junit-platform.version>
     <mockito.version>4.11.0</mockito.version>
     <assertj.version>3.24.2</assertj.version>
-    <xmlunit.version>2.9.1</xmlunit.version>
+    <xmlunit.version>2.10.0</xmlunit.version>
 
     <activation.version>1.2.0</activation.version>
     <groovy.version>4.0.15</groovy.version>
