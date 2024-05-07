@@ -30,10 +30,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.dkpro.core.io.jwpl.util.WikiUtils;
-
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
-import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
-import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
+import org.dkpro.jwpl.api.exception.WikiApiException;
+import org.dkpro.jwpl.parser.ParsedPage;
+import org.dkpro.jwpl.revisionmachine.api.Revision;
 
 /**
  * Reads pairs of adjacent revisions of all articles.

@@ -26,12 +26,12 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
+import org.dkpro.jwpl.api.DatabaseConfiguration;
+import org.dkpro.jwpl.api.WikiConstants.Language;
+import org.dkpro.jwpl.api.Wikipedia;
+import org.dkpro.jwpl.api.exception.WikiInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig;
-import de.tudarmstadt.ukp.wikipedia.api.DatabaseConfiguration;
-import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
-import de.tudarmstadt.ukp.wikipedia.api.Wikipedia;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiInitializationException;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
@@ -66,6 +66,16 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     private Language language;
 
+    /** The JDBC URL of the database to connect to */
+    public static final String PARAM_JDBC_URL = "jdbcUrl";
+    @ConfigurationParameter(name = PARAM_JDBC_URL, mandatory = false)
+    private String jdbcUrl;
+
+    /** The database driver for the database */
+    public static final String PARAM_DRIVER = "driver";
+    @ConfigurationParameter(name = PARAM_DRIVER, mandatory = false)
+    private String driver;
+
     /**
      * Sets whether the database configuration should be stored in the CAS, so that annotators down
      * the pipeline can access additional data.
@@ -85,14 +95,15 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
     {
         super.initialize(context);
 
-        dbconfig = new DatabaseConfiguration(
-                host,
-                db,
-                user,
-                password,
-                language
-        );
-
+        dbconfig = new DatabaseConfiguration();
+        dbconfig.setDatabase(db);
+        dbconfig.setHost(host);
+        dbconfig.setUser(user);
+        dbconfig.setPassword(password);
+        dbconfig.setLanguage(language);
+        dbconfig.setJdbcURL(jdbcUrl);
+        dbconfig.setDatabaseDriver(driver);
+        
         try {
             this.wiki = new Wikipedia(dbconfig);
         }

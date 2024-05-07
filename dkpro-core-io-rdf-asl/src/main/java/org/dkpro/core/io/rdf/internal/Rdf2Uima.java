@@ -19,6 +19,7 @@ package org.dkpro.core.io.rdf.internal;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.commons.collections4.iterators.IteratorIterable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.ontology.OntResource;

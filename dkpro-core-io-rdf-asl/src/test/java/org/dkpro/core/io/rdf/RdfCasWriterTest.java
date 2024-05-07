@@ -89,8 +89,8 @@ public class RdfCasWriterTest
 
         var targetFile = new File(aTemp, "test.ttl");
         assertThat(contentOf(targetFile, UTF_8)) //
-                .contains("ner:NamedEntity-value       \"PER\" ;")
-                .contains("ner:NamedEntity-identifier  <iri:somewhere> ;");
+                .contains("ner:NamedEntity-value       \"PER\";")
+                .contains("ner:NamedEntity-identifier  <iri:somewhere>;");
 
         cas.reset();
 
