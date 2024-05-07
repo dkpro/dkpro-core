@@ -20,11 +20,12 @@ package org.dkpro.core.io.jwpl.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.dkpro.jwpl.api.DatabaseConfiguration;
+import org.dkpro.jwpl.api.WikiConstants.Language;
+import org.dkpro.jwpl.api.Wikipedia;
+import org.dkpro.jwpl.api.exception.WikiApiException;
+
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig;
-import de.tudarmstadt.ukp.wikipedia.api.DatabaseConfiguration;
-import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
-import de.tudarmstadt.ukp.wikipedia.api.Wikipedia;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 
 
 /**

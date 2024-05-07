@@ -25,8 +25,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CommentMapping
 {
-    private static final Pattern PATTERN = Pattern.compile(
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-.]+)" +
+    private static final Pattern PATTERN = Pattern.compile( //
+            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-.]+)" + //
             "[:](?<FEAT>[a-zA-Z][a-zA-Z0-9]+)");
     
     private static final String TYPE = "TYPE";

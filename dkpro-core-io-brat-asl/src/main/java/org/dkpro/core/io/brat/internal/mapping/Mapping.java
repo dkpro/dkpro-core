@@ -21,6 +21,7 @@ import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,12 @@ public class Mapping
     private final Map<String, RelationMapping> relations;
     private final MultiValuedMap<String, CommentMapping> comments;
     
+    public Mapping()
+    {
+        this(new TypeMappings(), new TypeMappings(), new ArrayList<>(), new ArrayList<>(),
+                new ArrayList<>());
+    }
+    
     @JsonCreator
     public Mapping(
             @JsonProperty(value = "textTypeMapppings") TypeMappings aTextTypeMapppings, 
@@ -50,10 +57,12 @@ public class Mapping
         textTypeMapppings = aTextTypeMapppings;
         relationTypeMapppings = aRelationTypeMapppings;
         
-        textAnnotations = aTextAnnotations != null ? aTextAnnotations.stream()
-                .collect(toMap(SpanMapping::getType, identity())) : emptyMap();
-        relations = aRelations != null ? aRelations.stream()
-                .collect(toMap(RelationMapping::getType, identity())) : emptyMap();
+        textAnnotations = aTextAnnotations != null
+                ? aTextAnnotations.stream().collect(toMap(SpanMapping::getType, identity()))
+                : emptyMap();
+        relations = aRelations != null
+                ? aRelations.stream().collect(toMap(RelationMapping::getType, identity()))
+                : emptyMap();
                 
         comments = new ArrayListValuedHashMap<>();
         if (aComments != null) {
