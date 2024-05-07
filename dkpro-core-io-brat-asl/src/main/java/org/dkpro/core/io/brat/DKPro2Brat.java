@@ -40,8 +40,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
@@ -65,10 +63,12 @@ import org.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import org.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
 import org.dkpro.core.io.brat.internal.model.Offsets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DKPro2Brat
 {
-    private final Log log = LogFactory.getLog(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     private final static Pattern NEWLINE_EXTRACT_PATTERN = Pattern.compile("(.+?)(?:\\R|$)+");
 
