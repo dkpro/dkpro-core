@@ -41,6 +41,13 @@ public class TypeMapping
     
     private Matcher matcher;
 
+    public TypeMapping()
+    {
+        bratTypePattern = null;
+        uimaType = null;
+        defaultFeatureValues = null;
+    }
+
     @JsonCreator
     public TypeMapping(
             @JsonProperty(value = "from", required = true) String aPattern, 
