@@ -18,24 +18,17 @@
 package org.dkpro.core.io.rdf.internal;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.collections4.iterators.IteratorIterable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.ontology.OntResource;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
-import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
-import org.apache.uima.cas.Type;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -44,83 +37,81 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class Rdf2Uima
 {
-    public static void convert(Statement aContext, JCas aJCas)
-        throws CASException
+    public static void convert(Statement aContext, JCas aJCas) throws CASException
     {
-        Model m = aContext.getModel();
+        var m = aContext.getModel();
 
         // Set up names
-        Resource tView = m.createResource(RdfCas.TYPE_VIEW);
-        Resource tFeatureStructure = m.createResource(RdfCas.TYPE_FEATURE_STRUCTURE);
-        Property pIndexedIn = m.createProperty(RdfCas.PROP_INDEXED_IN);
+        var tView = m.createResource(RdfCas.TYPE_VIEW);
+        var tFeatureStructure = m.createResource(RdfCas.TYPE_FEATURE_STRUCTURE);
+        var pIndexedIn = m.createProperty(RdfCas.PROP_INDEXED_IN);
 
-        Map<Resource, FeatureStructure> fsIndex = new HashMap<>();
-        
+        var fsIndex = new HashMap<Resource, FeatureStructure>();
+
         // Convert the views/SofAs
-        Map<Resource, JCas> viewIndex = new HashMap<>();
-        Iterator<Resource> viewIter = m.listSubjectsWithProperty(RDF.type, tView);
-        for (Resource view : new IteratorIterable<Resource>(viewIter)) {
-            JCas viewJCas = convertView(view, aJCas);
+        var viewIndex = new HashMap<Resource, JCas>();
+        var viewIter = m.listSubjectsWithProperty(RDF.type, tView);
+        for (var view : new IteratorIterable<Resource>(viewIter)) {
+            var viewJCas = convertView(view, aJCas);
             viewIndex.put(view, viewJCas);
             fsIndex.put(view, viewJCas.getSofa());
         }
-    
+
         // Convert the FSes but without setting their feature values yet - we cannot fill
         // the feature values just set because some of them may point to FSes not yet created
-        List<Resource> fses = m.listSubjectsWithProperty(RDF.type, tFeatureStructure).toList();
-        for (Resource fs : fses) {
-            FeatureStructure uimaFS = initFS(fs.as(OntResource.class), aJCas);
+        var fses = m.listSubjectsWithProperty(RDF.type, tFeatureStructure).toList();
+        for (var fs : fses) {
+            var uimaFS = initFS(fs.as(OntResource.class), aJCas);
             fsIndex.put(fs, uimaFS);
         }
-        
+
         // Now fill the FSes with their feature values
-        for (Resource fs : fses) {
+        for (var fs : fses) {
             convertFS(fs.as(OntResource.class), aJCas, fsIndex);
         }
-        
+
         // Finally add the FSes to the indexes of the respective views
-        for (Resource fs : fses) {
-            Iterator<Statement> indexedInIter = fs.listProperties(pIndexedIn);
-            for (Statement indexedIn : new IteratorIterable<Statement>(indexedInIter)) {
-                JCas viewJCas = viewIndex.get(indexedIn.getResource());
+        for (var fs : fses) {
+            var indexedInIter = fs.listProperties(pIndexedIn);
+            for (var indexedIn : new IteratorIterable<Statement>(indexedInIter)) {
+                var viewJCas = viewIndex.get(indexedIn.getResource());
                 viewJCas.addFsToIndexes(fsIndex.get(fs));
             }
         }
     }
 
-    public static JCas convertView(Resource aView, JCas aJCas)
-        throws CASException
+    public static JCas convertView(Resource aView, JCas aJCas) throws CASException
     {
-        Model m = aView.getModel();
+        var m = aView.getModel();
 
         // Set up names
-        Property pSofaID = m.createProperty(RdfCas.PROP_SOFA_ID);
-        Property pSofaString = m.createProperty(RdfCas.PROP_SOFA_STRING);
-        Property pSofaMimeType = m.createProperty(RdfCas.PROP_SOFA_MIME_TYPE);
+        var pSofaID = m.createProperty(RdfCas.PROP_SOFA_ID);
+        var pSofaString = m.createProperty(RdfCas.PROP_SOFA_STRING);
+        var pSofaMimeType = m.createProperty(RdfCas.PROP_SOFA_MIME_TYPE);
 
         // Get the values
-        String viewName = aView.getProperty(pSofaID).getString();
-        String sofaString = aView.getProperty(pSofaString).getString();
-        String sofaMimeType = aView.getProperty(pSofaMimeType).getString();
+        var viewName = aView.getProperty(pSofaID).getString();
+        var sofaString = aView.getProperty(pSofaString).getString();
+        var sofaMimeType = aView.getProperty(pSofaMimeType).getString();
 
         // Instantiate the view/SofA
-        JCas view = JCasUtil.getView(aJCas, viewName, true);
+        var view = JCasUtil.getView(aJCas, viewName, true);
         view.setSofaDataString(sofaString, sofaMimeType);
-        
+
         return view;
     }
-    
+
     public static FeatureStructure initFS(OntResource aFS, JCas aJCas)
     {
-        CAS cas = aJCas.getCas();
-        
+        var cas = aJCas.getCas();
+
         // Figure out the UIMA type - there can be only one type per FS
-        Set<Resource> types = aFS.listRDFTypes(true).toSet();
+        var types = aFS.listRDFTypes(true).toSet();
         types.removeIf(res -> res.getURI().startsWith(RdfCas.NS_RDFCAS));
         assert types.size() == 1;
-        Type type = CasUtil.getType(cas,
-                types.iterator().next().getURI().substring(RdfCas.NS_UIMA.length()));        
-        
+        var type = CasUtil.getType(cas,
+                types.iterator().next().getURI().substring(RdfCas.NS_UIMA.length()));
+
         FeatureStructure fs;
         if (type.getName().equals(DocumentMetaData.class.getName())) {
             // Special handling to avoid ending up with two document annotations in the CAS
@@ -129,35 +120,33 @@ public class Rdf2Uima
         else {
             fs = cas.createFS(type);
         }
-        
+
         return fs;
     }
-    
+
     public static FeatureStructure convertFS(OntResource aFS, JCas aJCas,
             Map<Resource, FeatureStructure> aFsIndex)
     {
-        FeatureStructure fs = aFsIndex.get(aFS);
-        
-        Iterator<Statement> stmtIter = aFS.listProperties();
-        for (Statement stmt : new IteratorIterable<Statement>(stmtIter)) {
+        var fs = aFsIndex.get(aFS);
+
+        var stmtIter = aFS.listProperties();
+        for (var stmt : new IteratorIterable<Statement>(stmtIter)) {
             // Skip all non-features
             if (!stmt.getPredicate().getURI().startsWith("uima:")) {
-                // System.out.println("Skipping: " + stmt);
                 continue;
             }
-            
-            String featureName = StringUtils.substringAfterLast(stmt.getPredicate().getURI(), "-");
-            Feature uimaFeat = fs.getType().getFeatureByBaseName(featureName);
+
+            var featureName = StringUtils.substringAfterLast(stmt.getPredicate().getURI(), "-");
+            var uimaFeat = fs.getType().getFeatureByBaseName(featureName);
 
             // Cannot update start/end of document annotation because that FS is already indexed, so
             // we skip those
             if (fs == aJCas.getDocumentAnnotationFs()
                     && (CAS.FEATURE_BASE_NAME_BEGIN.equals(featureName)
                             || CAS.FEATURE_BASE_NAME_END.equals(featureName))) {
-                System.out.println("Skipping: " + stmt);
                 continue;
-            }            
-            
+            }
+
             if (uimaFeat.getRange().isPrimitive()) {
                 switch (uimaFeat.getRange().getName()) {
                 case CAS.TYPE_NAME_BOOLEAN:
@@ -182,13 +171,18 @@ public class Rdf2Uima
                     fs.setShortValue(uimaFeat, stmt.getObject().asLiteral().getShort());
                     break;
                 case CAS.TYPE_NAME_STRING: {
-                    fs.setStringValue(uimaFeat, stmt.getObject().asLiteral().getString());
+                    if (stmt.getObject().isLiteral()) {
+                        fs.setStringValue(uimaFeat, stmt.getObject().asLiteral().getString());
+                    }
+                    else {
+                       fs.setStringValue(uimaFeat, stmt.getObject().asResource().getURI());
+                    }
                     break;
                 }
                 default:
-                    throw new IllegalArgumentException("Feature [" + uimaFeat.getName()
-                            + "] has unsupported primitive type ["
-                            + uimaFeat.getRange().getName() + "]");
+                    throw new IllegalArgumentException(
+                            "Feature [" + uimaFeat.getName() + "] has unsupported primitive type ["
+                                    + uimaFeat.getRange().getName() + "]");
                 }
             }
             else {
@@ -200,7 +194,7 @@ public class Rdf2Uima
                 fs.setFeatureValue(uimaFeat, targetUimaFS);
             }
         }
-        
+
         return fs;
     }
 }
