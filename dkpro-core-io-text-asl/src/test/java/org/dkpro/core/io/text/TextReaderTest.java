@@ -17,21 +17,25 @@
  */
 package org.dkpro.core.io.text;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.CasUtil.select;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.CasUtil;
-import org.apache.uima.jcas.JCas;
-import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
@@ -42,139 +46,145 @@ public class TextReaderTest
     private static final List<String> FILES = Arrays.asList(FILE1, FILE2);
 
     @Test
-    public void fileSystemReaderTest()
-        throws Exception
-    {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
+    void thatBomIsNotIncludedInDocumentText(@TempDir Path aTemp)  throws Exception {
+        var documentText = "text";
+        var tempFile = aTemp.resolve("test.txt");
 
-        for (JCas jcas : new JCasIterable(reader)) {
-            DocumentMetaData md = DocumentMetaData.get(jcas);
+        try (var os = Files.newOutputStream(tempFile)) {
+            // Write BOM
+            os.write(0xEF);
+            os.write(0xBB);
+            os.write(0xBF);
+            // Write text
+            os.write(documentText.getBytes(UTF_8));
+        }
+        
+        var reader = createReader( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, tempFile.toString());
+        
+        var jcas = JCasFactory.createJCas();
+        reader.getNext(jcas.getCasImpl());
+        
+        assertThat(jcas.getDocumentText()).isEqualTo(documentText);
+    }
+    
+    @Test
+    public void fileSystemReaderTest() throws Exception
+    {
+        var reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts", //
+                TextReader.PARAM_PATTERNS, "[+]*.txt");
+
+        for (var jcas : new JCasIterable(reader)) {
+            var md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
-            assertEquals(1, CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType())
-                      .size());
+            assertEquals(1,
+                    CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
             assertTrue(FILES.contains(md.getDocumentId()));
 
-            assertTrue(
-                    !FILE1.equals(md.getDocumentId()) || (
-                            "This is a test.".equals(jcas.getDocumentText()) &&
-                            15 == md.getEnd()));
+            assertTrue(!FILE1.equals(md.getDocumentId())
+                    || ("This is a test.".equals(jcas.getDocumentText()) && 15 == md.getEnd()));
 
-            assertTrue(
-                    !FILE2.equals(md.getDocumentId())
+            assertTrue(!FILE2.equals(md.getDocumentId())
                     || "This is a second test.".equals(jcas.getDocumentText()));
         }
     }
 
     @Test
-    public void fileSystemReaderAbsolutePathTest()
-        throws Exception
+    public void fileSystemReaderAbsolutePathTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,  "src/test/resources/texts",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
+        var reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
+                TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
-        for (JCas jcas : new JCasIterable(reader)) {
-            DocumentMetaData md = DocumentMetaData.get(jcas);
+        for (var jcas : new JCasIterable(reader)) {
+            var md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
             assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 
-            assertTrue(
-                    !FILE1.equals(md.getDocumentId()) || (
-                            "This is a test.".equals(jcas.getDocumentText()) &&
-                            15 == md.getEnd()));
+            assertTrue(!FILE1.equals(md.getDocumentId())
+                    || ("This is a test.".equals(jcas.getDocumentText()) && 15 == md.getEnd()));
 
-            assertTrue(
-                    !FILE2.equals(md.getDocumentId())
+            assertTrue(!FILE2.equals(md.getDocumentId())
                     || "This is a second test.".equals(jcas.getDocumentText()));
         }
     }
 
     @Test
-    public void fileSystemReaderTest3()
-        throws Exception
+    public void fileSystemReaderTest3() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                createTypeSystemDescription(),
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/name with space",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
+        var reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/name with space", //
+                TextReader.PARAM_PATTERNS, new String[] { INCLUDE_PREFIX + "*.txt" });
 
-        for (JCas jcas : new JCasIterable(reader)) {
-            DocumentMetaData md = DocumentMetaData.get(jcas);
+        for (var jcas : new JCasIterable(reader)) {
+            var md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
             assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 
-            assertTrue(
-                    !FILE1.equals(md.getDocumentId()) || (
-                            "This is a test.".equals(jcas.getDocumentText()) &&
-                            15 == md.getEnd()));
+            assertTrue(!FILE1.equals(md.getDocumentId())
+                    || ("This is a test.".equals(jcas.getDocumentText()) && 15 == md.getEnd()));
 
-            assertTrue(
-                    !FILE2.equals(md.getDocumentId())
+            assertTrue(!FILE2.equals(md.getDocumentId())
                     || "This is a second test.".equals(jcas.getDocumentText()));
         }
     }
 
     @Test
-    public void fileSystemReaderTest2()
-        throws Exception
+    public void fileSystemReaderTest2() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                createTypeSystemDescription(),
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
+        var reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts", //
+                TextReader.PARAM_PATTERNS, new String[0]);
 
-        for (JCas jcas : new JCasIterable(reader)) {
-            DocumentMetaData md = DocumentMetaData.get(jcas);
+        for (var jcas : new JCasIterable(reader)) {
+            var md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
             assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 
-            assertTrue(
-                    !FILE1.equals(md.getDocumentId())
+            assertTrue(!FILE1.equals(md.getDocumentId())
                     || "This is a test.".equals(jcas.getDocumentText()));
 
-            assertTrue(
-                    !FILE2.equals(md.getDocumentId())
+            assertTrue(!FILE2.equals(md.getDocumentId())
                     || "This is a second test.".equals(jcas.getDocumentText()));
         }
     }
 
     @Test
-    public void fileSystemReaderTest4()
-        throws Exception
+    public void fileSystemReaderTest4() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                createTypeSystemDescription(),
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "classpath:texts",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
+        var reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, "classpath:texts", //
+                TextReader.PARAM_PATTERNS, new String[0]);
 
-        for (JCas jcas : new JCasIterable(reader)) {
-            DocumentMetaData md = DocumentMetaData.get(jcas);
+        for (var jcas : new JCasIterable(reader)) {
+            var md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
             assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 
-            assertTrue(
-                    !FILE1.equals(md.getDocumentId())
+            assertTrue(!FILE1.equals(md.getDocumentId())
                     || "This is a test.".equals(jcas.getDocumentText()));
 
-            assertTrue(
-                    !FILE2.equals(md.getDocumentId())
+            assertTrue(!FILE2.equals(md.getDocumentId())
                     || "This is a second test.".equals(jcas.getDocumentText()));
         }
     }
