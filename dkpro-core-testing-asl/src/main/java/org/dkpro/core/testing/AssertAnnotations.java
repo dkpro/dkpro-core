@@ -125,17 +125,21 @@ public class AssertAnnotations
     
     public static void assertToken(String[] aExpected, Collection<Token> aActual)
     {
-        if (aExpected == null) {
-            return;
-        }
-
-        List<String> expected = asList(aExpected);
-        List<String> actual = toText(aActual);
-
-        System.out.printf("%-20s - Expected: %s%n", "Tokens", asCopyableString(expected));
-        System.out.printf("%-20s - Actual  : %s%n", "Tokens", asCopyableString(actual));
-
-        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+        assertThat(aActual) //
+            .extracting(Token::getCoveredText) //
+            .containsExactly(aExpected);
+//        
+//        if (aExpected == null) {
+//            return;
+//        }
+//
+//        List<String> expected = asList(aExpected);
+//        List<String> actual = toText(aActual);
+//
+//        System.out.printf("%-20s - Expected: %s%n", "Tokens", asCopyableString(expected));
+//        System.out.printf("%-20s - Actual  : %s%n", "Tokens", asCopyableString(actual));
+//
+//        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
     public static void assertSentence(String[] aExpected, Collection<Sentence> aActual)

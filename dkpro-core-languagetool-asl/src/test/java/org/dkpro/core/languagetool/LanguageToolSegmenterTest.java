@@ -102,6 +102,20 @@ public class LanguageToolSegmenterTest
         
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
+    @Test
+    public void testChinese() throws Exception
+    {
+        var jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("zh");
+        jcas.setDocumentText("丁肇中");
+        
+        AnalysisEngine aed = createEngine(LanguageToolSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "丁", "肇", "中" };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
 
     @Test
     public void run()
