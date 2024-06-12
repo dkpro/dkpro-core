@@ -1,1 +1,87 @@
-{"target":"http://pubannotation.org/docs/sourcedb/PubMed/sourceid/19667393","sourcedb":"PubMed","sourceid":"19667393","text":"Methanoregula formicica sp. nov., a methane-producing archaeon isolated from methanogenic sludge.\nA novel methane-producing archaeon, strain SMSP(T), was isolated from an anaerobic, propionate-degrading enrichment culture that was originally obtained from granular sludge in a mesophilic upflow anaerobic sludge blanket (UASB) reactor used to treat a beer brewery effluent. Cells were non-motile, blunt-ended, straight rods, 1.0-2.6 \u03bcm long by 0.5 \u03bcm wide; cells were sometimes up to 7 \u03bcm long. Asymmetrical cell division was observed in rod-shaped cells. Coccoid cells (0.5-1.0 \u03bcm in diameter) were also observed in mid- to late-exponential phase cultures. Growth was observed between 10 and 40 \u00b0C (optimum, 30-33 \u00b0C) and pH 7.0 and 7.6 (optimum, pH 7.4). The G+C content of the genomic DNA was 56.2 mol%. The strain utilized formate and hydrogen for growth and methane production. Based on comparative sequence analyses of the 16S rRNA and mcrA (encoding the alpha subunit of methyl-coenzyme M reductase, a key enzyme in the methane-producing pathway) genes, strain SMSP(T) was affiliated with group E1/E2 within the order Methanomicrobiales. The closest relative based on both 16S rRNA and mcrA gene sequences was Methanoregula boonei 6A8(T) (96.3\u200a% 16S rRNA gene sequence similarity, 85.4\u200a% deduced McrA amino acid sequence similarity). The percentage of 16S rRNA gene sequence similarity indicates that strain SMSP(T) and Methanoregula boonei 6A8(T) represent different species within the same genus. This is supported by our findings of shared phenotypic properties, including cell morphology and growth temperature range, and phenotypic differences in substrate usage and pH range. Based on these genetic and phenotypic properties, we propose that strain SMSP(T) represents a novel species of the genus Methanoregula, for which we propose the name Methanoregula formicica sp. nov., with the type strain SMSP(T) (=NBRC 105244(T) =DSM 22288(T)).","project":"SPECIES800","denotations":[{"id":"T1","span":{"begin":0,"end":23},"obj":"882104"},{"id":"T2","span":{"begin":141,"end":148},"obj":"882104"},{"id":"T3","span":{"begin":1068,"end":1075},"obj":"882104"},{"id":"T4","span":{"begin":1217,"end":1241},"obj":"358766"},{"id":"T5","span":{"begin":1415,"end":1422},"obj":"882104"},{"id":"T6","span":{"begin":1427,"end":1451},"obj":"358766"},{"id":"T7","span":{"begin":1762,"end":1769},"obj":"882104"},{"id":"T8","span":{"begin":1855,"end":1878},"obj":"882104"},{"id":"T9","span":{"begin":1910,"end":1917},"obj":"882104"}],"namespaces":[{"prefix":"_base","uri":"http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info\u0026id="}]}
+{
+	"target": "http://pubannotation.org/docs/sourcedb/PubMed/sourceid/19667393",
+	"sourcedb": "PubMed",
+	"sourceid": "19667393",
+	"text": "Methanoregula formicica sp. nov., a methane-producing archaeon isolated from methanogenic sludge.\nA novel methane-producing archaeon, strain SMSP(T), was isolated from an anaerobic, propionate-degrading enrichment culture that was originally obtained from granular sludge in a mesophilic upflow anaerobic sludge blanket (UASB) reactor used to treat a beer brewery effluent. Cells were non-motile, blunt-ended, straight rods, 1.0-2.6 \u03bcm long by 0.5 \u03bcm wide; cells were sometimes up to 7 \u03bcm long. Asymmetrical cell division was observed in rod-shaped cells. Coccoid cells (0.5-1.0 \u03bcm in diameter) were also observed in mid- to late-exponential phase cultures. Growth was observed between 10 and 40 \u00b0C (optimum, 30-33 \u00b0C) and pH 7.0 and 7.6 (optimum, pH 7.4). The G+C content of the genomic DNA was 56.2 mol%. The strain utilized formate and hydrogen for growth and methane production. Based on comparative sequence analyses of the 16S rRNA and mcrA (encoding the alpha subunit of methyl-coenzyme M reductase, a key enzyme in the methane-producing pathway) genes, strain SMSP(T) was affiliated with group E1/E2 within the order Methanomicrobiales. The closest relative based on both 16S rRNA and mcrA gene sequences was Methanoregula boonei 6A8(T) (96.3\u200a% 16S rRNA gene sequence similarity, 85.4\u200a% deduced McrA amino acid sequence similarity). The percentage of 16S rRNA gene sequence similarity indicates that strain SMSP(T) and Methanoregula boonei 6A8(T) represent different species within the same genus. This is supported by our findings of shared phenotypic properties, including cell morphology and growth temperature range, and phenotypic differences in substrate usage and pH range. Based on these genetic and phenotypic properties, we propose that strain SMSP(T) represents a novel species of the genus Methanoregula, for which we propose the name Methanoregula formicica sp. nov., with the type strain SMSP(T) (=NBRC 105244(T) =DSM 22288(T)).",
+	"project": "SPECIES800",
+	"denotations": [
+		{
+			"id": "T1",
+			"span": {
+				"begin": 0,
+				"end": 23
+			},
+			"obj": "882104"
+		},
+		{
+			"id": "T2",
+			"span": {
+				"begin": 141,
+				"end": 148
+			},
+			"obj": "882104"
+		},
+		{
+			"id": "T3",
+			"span": {
+				"begin": 1068,
+				"end": 1075
+			},
+			"obj": "882104"
+		},
+		{
+			"id": "T4",
+			"span": {
+				"begin": 1217,
+				"end": 1241
+			},
+			"obj": "358766"
+		},
+		{
+			"id": "T5",
+			"span": {
+				"begin": 1415,
+				"end": 1422
+			},
+			"obj": "882104"
+		},
+		{
+			"id": "T6",
+			"span": {
+				"begin": 1427,
+				"end": 1451
+			},
+			"obj": "358766"
+		},
+		{
+			"id": "T7",
+			"span": {
+				"begin": 1762,
+				"end": 1769
+			},
+			"obj": "882104"
+		},
+		{
+			"id": "T8",
+			"span": {
+				"begin": 1855,
+				"end": 1878
+			},
+			"obj": "882104"
+		},
+		{
+			"id": "T9",
+			"span": {
+				"begin": 1910,
+				"end": 1917
+			},
+			"obj": "882104"
+		}
+	],
+	"namespaces": [
+		{
+			"prefix": "_base",
+			"uri": "http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info\u0026id="
+		}
+	]
+}
