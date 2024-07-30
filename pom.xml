@@ -40,17 +40,17 @@
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <maven.surefire.heap>6g</maven.surefire.heap>
 
-    <junit-jupiter.version>5.10.2</junit-jupiter.version>
-    <junit-platform.version>1.10.2</junit-platform.version>
+    <junit-jupiter.version>5.10.3</junit-jupiter.version>
+    <junit-platform.version>1.10.3</junit-platform.version>
     <mockito.version>4.11.0</mockito.version>
-    <assertj.version>3.25.3</assertj.version>
+    <assertj.version>3.26.3</assertj.version>
     <xmlunit.version>2.10.0</xmlunit.version>
 
     <ant-version>1.10.14</ant-version>
     <activation.version>1.2.0</activation.version>
-    <groovy.version>4.0.21</groovy.version>
+    <groovy.version>4.0.22</groovy.version>
     <icu4j.version>74.2</icu4j.version>
-    <jackson.version>2.17.1</jackson.version>
+    <jackson.version>2.17.2</jackson.version>
     <jena.version>4.10.0</jena.version>
     <log4j.version>2.23.1</log4j.version>
     <lucene.version>4.4.0</lucene.version>
@@ -65,7 +65,7 @@
     
     <build-ant-version>${ant-version}</build-ant-version>
     <build-groovy-version>${groovy.version}</build-groovy-version>
-    <build-asciidoctorj-pdf-version>2.3.15</build-asciidoctorj-pdf-version>
+    <build-asciidoctorj-pdf-version>2.3.17</build-asciidoctorj-pdf-version>
   </properties>
   <repositories>
     <repository>
@@ -281,7 +281,7 @@
       <dependency>
         <groupId>com.fasterxml.woodstox</groupId>
         <artifactId>woodstox-core</artifactId>
-        <version>6.6.2</version>
+        <version>6.7.0</version>
         <exclusions>
           <exclusion>
             <groupId>javax.xml.stream</groupId>
@@ -312,7 +312,7 @@
       <dependency>
         <groupId>commons-cli</groupId>
         <artifactId>commons-cli</artifactId>
-        <version>1.7.0</version>
+        <version>1.8.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -337,7 +337,7 @@
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.17.0</version>
+        <version>1.17.1</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -357,17 +357,17 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.14.0</version>
+        <version>3.15.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.26.1</version>
+        <version>1.26.2</version>
       </dependency>
       <dependency>
         <groupId>org.tukaani</groupId>
         <artifactId>xz</artifactId>
-        <version>1.9</version>
+        <version>1.10</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ant</groupId>
@@ -471,12 +471,12 @@
       <dependency>
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
-        <version>1.3.1</version>
+        <version>1.3.3</version>
       </dependency>
       <dependency>
         <groupId>it.unimi.dsi</groupId>
         <artifactId>fastutil</artifactId>
-        <version>8.5.13</version>
+        <version>8.5.14</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ivy</groupId>
@@ -511,12 +511,12 @@
       <dependency>
         <groupId>jakarta.persistence</groupId>
         <artifactId>jakarta.persistence-api</artifactId>
-        <version>3.0.0</version>
+        <version>3.2.0</version>
       </dependency>
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.2</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson</groupId>
@@ -945,7 +945,7 @@
                 <dependency>
                   <groupId>com.puppycrawl.tools</groupId>
                   <artifactId>checkstyle</artifactId>
-                  <version>10.16.0</version>
+                  <version>10.17.0</version>
                 </dependency>
               </dependencies>
               <configuration>

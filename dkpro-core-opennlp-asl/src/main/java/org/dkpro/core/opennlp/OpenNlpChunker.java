@@ -36,7 +36,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.IobDecoder;
-import org.dkpro.core.api.metadata.Tagset;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.parameter.ResourceParameter;
@@ -152,10 +151,10 @@ public class OpenNlpChunker
             protected Chunker produceResource(InputStream aStream)
                 throws Exception
             {
-                ChunkerModel model = new ChunkerModel(aStream);
+                var model = new ChunkerModel(aStream);
 
-                Tagset tsdp = new OpenNlpChunkerTagsetDescriptionProvider(getResourceMetaData()
-                        .getProperty("chunk.tagset"), Chunk.class, model.getChunkerModel());
+                var tsdp = new OpenNlpChunkerTagsetDescriptionProvider(getResourceMetaData()
+                        .getProperty("chunk.tagset"), Chunk.class, model.getArtifact("chunker.model"));
                 addTagset(tsdp);
 
                 if (printTagSet) {
