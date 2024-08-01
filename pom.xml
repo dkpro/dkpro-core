@@ -49,7 +49,7 @@
     <ant-version>1.10.14</ant-version>
     <activation.version>1.2.0</activation.version>
     <groovy.version>4.0.22</groovy.version>
-    <icu4j.version>74.2</icu4j.version>
+    <icu4j.version>75.1</icu4j.version>
     <jackson.version>2.17.2</jackson.version>
     <jena.version>4.10.0</jena.version>
     <log4j.version>2.23.1</log4j.version>
@@ -58,7 +58,7 @@
     <slf4j.version>2.0.13</slf4j.version>
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>5.3.30</spring.version>
+    <spring.version>5.3.37</spring.version>
     <uima.version>3.5.0</uima.version>
     <uimafit.version>3.5.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
