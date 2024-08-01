@@ -23,10 +23,12 @@
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-io-combination-asl</artifactId>
   <name>DKPro Core ASL - IO - Combination</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <packaging>jar</packaging>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -47,9 +49,11 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-io-text-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>

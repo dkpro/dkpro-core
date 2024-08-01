@@ -23,11 +23,13 @@
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <name>DKPro Core ASL - Decompounding</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <artifactId>dkpro-core-decompounding-asl</artifactId>
   <packaging>jar</packaging>
   <description>DKPro core module for decompounding.</description>
+
   <dependencies>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -89,14 +91,17 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-resources-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>

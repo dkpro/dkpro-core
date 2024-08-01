@@ -23,19 +23,23 @@
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-jtok-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - JTok (v ${jtok.version}) (LGPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+
   <properties>
     <jtok.version>2.1.21</jtok.version>
   </properties>
+
   <repositories>
     <repository>
       <id>mlt-github</id>
       <url>https://raw.githubusercontent.com/DFKI-MLT/Maven-Repository/main</url>
     </repository>
   </repositories>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -60,14 +64,17 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-testing-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
