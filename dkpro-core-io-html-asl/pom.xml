@@ -30,7 +30,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <jsoup.version>1.17.2</jsoup.version>
+    <jsoup.version>1.18.1</jsoup.version>
   </properties>
 
   <dependencies>
