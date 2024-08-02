@@ -17,45 +17,51 @@
  */
 package org.dkpro.core.io.pdf;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.assertj.core.api.Assertions.contentOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.testing.EOLUtils;
 import org.dkpro.core.testing.dumper.CasDumpWriter;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 public class PdfReaderTest
 {
+    @BeforeAll
+    static void setupClass() {
+        // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
+        // file where this property is globally set for all surefire runs
+        System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
+    }
+    
     @Test
-    public void test(@TempDir File tempDir)
-        throws Exception
+    public void test(@TempDir File tempDir) throws Exception
     {
-        File outputFile = new File(tempDir, "dump-output.txt");
+        var outputFile = new File(tempDir, "dump-output.txt");
 
-        CollectionReader reader = createReader(PdfReader.class, 
-                PdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data", 
+        var reader = createReader(PdfReader.class, //
+                PdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data", //
                 PdfReader.PARAM_PATTERNS, "[+]**/*.pdf");
 
-        AnalysisEngine writer = createEngine(CasDumpWriter.class,
+        var writer = createEngine(CasDumpWriter.class, //
                 CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);
 
         SimplePipeline.runPipeline(reader, writer);
 
-        String reference = readFileToString(new File("src/test/resources/reference/test.dump"),
-                "UTF-8").trim();
-        String actual = readFileToString(outputFile, "UTF-8").trim();
+        var reference = contentOf(new File("src/test/resources/reference/test.dump"), UTF_8).trim();
+        var actual = contentOf(outputFile, UTF_8).trim();
 
         actual = EOLUtils.normalizeLineEndings(actual);
         reference = EOLUtils.normalizeLineEndings(reference);
-        
+
         assertEquals(reference, actual);
     }
 }

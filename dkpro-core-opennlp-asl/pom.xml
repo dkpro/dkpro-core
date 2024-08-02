@@ -17,19 +17,23 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>dkpro-core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-opennlp-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+
   <properties>
     <opennlp.version>2.3.3</opennlp.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -58,42 +62,52 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-ivy-resolver-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-featurepath-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-resources-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-metadata-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-io-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-lexmorph-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-syntax-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-ner-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
@@ -102,21 +116,25 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-testing-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-eval-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-io-conll-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-datasets-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -150,6 +168,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -454,6 +473,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -477,6 +497,7 @@
       </plugins>
     </pluginManagement>
   </build>
+
   <profiles>
     <profile>
       <id>use-full-resources</id>

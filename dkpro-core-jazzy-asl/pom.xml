@@ -23,14 +23,17 @@
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-jazzy-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - Jazzy (v ${jazzy.version}) (LGPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>http://jazzy.sourceforge.net/</description>
+
   <properties>
     <jazzy.version>0.5.2</jazzy.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -56,32 +59,39 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-frequency-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-anomaly-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-resources-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-ngrams-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
       <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>

@@ -41,38 +41,35 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class OpenNlpPosTaggerTest
 {
     @Test
-    public void simpleExample()
-        throws Exception
+    public void simpleExample() throws Exception
     {
-        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
+        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the
         // documentation. Do not remove these tags!
         // tag::example[]
         JCas jcas = JCasFactory.createText("This is a test", "en");
-        
-        runPipeline(jcas,
-                createEngineDescription(OpenNlpSegmenter.class),
+
+        runPipeline(jcas, createEngineDescription(OpenNlpSegmenter.class),
                 createEngineDescription(OpenNlpPosTagger.class));
-        
+
         for (Token t : select(jcas, Token.class)) {
             System.out.printf("%s %s%n", t.getCoveredText(), t.getPos().getPosValue());
         }
         // end::example[]
-        
+
         assertPOS(
                 new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN" }, 
                 new String[] { "DT", "VBZ", "DT", "NN" },
                 select(jcas, POS.class));
     }
-    
+
     @Test
-    public void testEnglishAutoLoad(@TempDir File testOutput)
-        throws Exception
+    public void testEnglishAutoLoad(@TempDir File testOutput) throws Exception
     {
-        String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, 
+        String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE,
                 new File(testOutput, "models").getPath());
-        String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, 
+        String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE,
                 ResourceObjectProviderBase.FORCE_AUTO_LOAD);
-        
+
         try {
             TestRunner.autoloadModelsOnNextTestRun();
             runTest("en", null, "This is a test .",
@@ -96,20 +93,19 @@ public class OpenNlpPosTaggerTest
     }
 
     @Test
-    public void testEnglishManualURI(@TempDir File testOutput)
-        throws Exception
+    public void testEnglishManualURI(@TempDir File testOutput) throws Exception
     {
-        String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, 
+        String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE,
                 new File(testOutput, "models").getPath());
-        String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, 
+        String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE,
                 ResourceObjectProviderBase.FORCE_AUTO_LOAD);
-        
+
         try {
             TestRunner.autoloadModelsOnNextTestRun();
-            
+
             String[] tagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
             String[] tags = { "DT",   "VBZ", "DT",  "NN",   "." };
-            
+
             AnalysisEngine engine = createEngine(OpenNlpPosTagger.class,
                     OpenNlpPosTagger.PARAM_MODEL_ARTIFACT_URI, "mvn:de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent:20120616.1",
                     OpenNlpPosTagger.PARAM_VARIANT, "maxent",
@@ -148,7 +144,7 @@ public class OpenNlpPosTaggerTest
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-        
+
         return jcas;
     }
 }

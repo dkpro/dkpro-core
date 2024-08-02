@@ -23,11 +23,13 @@
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-textnormalizer-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - Text normalizer</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>Provides normalizer for text. E.g. takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they really are umlauts depending on a frequency model.</description>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -48,54 +50,67 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-castransformation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-frequency-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-anomaly-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-featurepath-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-resources-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-transform-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-frequency-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-metadata-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-io-web1t-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-tokit-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-jazzy-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
@@ -104,16 +119,19 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-io-text-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-testing-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-opennlp-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -137,17 +155,19 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-opennlp-asl</artifactId>
-        <version>2.5.0-SNAPSHOT</version>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <build>
     <pluginManagement>
       <plugins>

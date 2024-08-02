@@ -23,14 +23,17 @@
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-textcat-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - TextCat (v ${textcat.version}) (LGPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>http://textcat.sourceforge.net/</description>
+
   <properties>
     <textcat.version>1.0.1</textcat.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>

@@ -180,9 +180,9 @@ public class OpenNlpPosTagger
 // end::model-provider-decl[]
 
                 // Extract tagset information from the model
-                OpenNlpTagsetDescriptionProvider tsdp = new OpenNlpTagsetDescriptionProvider(
+                var tsdp = new OpenNlpTagsetDescriptionProvider(
                         getResourceMetaData().getProperty("pos.tagset"), POS.class,
-                        model.getPosModel());
+                        model.getArtifact("pos.model"));
                 if (getResourceMetaData().containsKey("pos.tagset.tagSplitPattern")) {
                     tsdp.setTagSplitPattern(getResourceMetaData().getProperty(
                             "pos.tagset.tagSplitPattern"));

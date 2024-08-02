@@ -25,19 +25,15 @@ import static org.dkpro.core.api.resources.MappingProviderFactory.createConstitu
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
@@ -73,13 +69,12 @@ import opennlp.tools.util.Span;
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "OpenNLP Parser")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
+@TypeCapability( //
+        inputs = { //
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token", //
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = { //
+                        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent", //
+                        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
 public class OpenNlpParser
     extends JCasAnnotator_ImplBase
 {
@@ -98,19 +93,20 @@ public class OpenNlpParser
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -123,23 +119,22 @@ public class OpenNlpParser
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, //
+            defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
      * Location of the mapping file for constituent tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = //
             ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
@@ -152,8 +147,8 @@ public class OpenNlpParser
     protected boolean printTagSet;
 
     /**
-     * Sets whether to create or not to create POS tags. The creation of
-     * constituent tags must be turned on for this to work.
+     * Sets whether to create or not to create POS tags. The creation of constituent tags must be
+     * turned on for this to work.
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -172,8 +167,7 @@ public class OpenNlpParser
     private MappingProvider constituentMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -181,44 +175,43 @@ public class OpenNlpParser
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(this,
                 posMappingLocation, language, modelProvider);
-        
+
         constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, language, modelProvider);
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
-        CAS cas = aJCas.getCas();
+        var cas = aJCas.getCas();
 
         modelProvider.configure(cas);
         posMappingProvider.configure(cas);
         constituentMappingProvider.configure(cas);
 
-        for (Sentence sentence : select(aJCas, Sentence.class)) {
-            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+        for (var sentence : select(aJCas, Sentence.class)) {
+            var tokens = selectCovered(aJCas, Token.class, sentence);
 
-            Parse parseInput = new Parse(cas.getDocumentText(),
+            var parseInput = new Parse(cas.getDocumentText(),
                     new Span(sentence.getBegin(), sentence.getEnd()),
                     AbstractBottomUpParser.INC_NODE, 0, 0);
             int i = 0;
-            for (Token t : tokens) {
+            for (var t : tokens) {
                 parseInput.insert(new Parse(cas.getDocumentText(),
                         new Span(t.getBegin(), t.getEnd()), AbstractBottomUpParser.TOK_NODE, 0, i));
                 i++;
             }
 
-            Parse parseOutput = modelProvider.getResource().parse(parseInput);
+            var parseOutput = modelProvider.getResource().parse(parseInput);
 
             createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens);
 
             if (createPennTreeString) {
-                StringBuffer sb = new StringBuffer();
+                var sb = new StringBuffer();
                 parseOutput.setType("ROOT"); // in DKPro the root is ROOT, not TOP
                 parseOutput.show(sb);
 
-                PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
+                var pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
                 pTree.setPennTree(sb.toString());
                 pTree.addToIndexes();
             }
@@ -238,7 +231,7 @@ public class OpenNlpParser
         // If the node is a word-level constituent node (== POS):
         // create parent link on token and (if not turned off) create POS tag
         if (aNode.isPosTag()) {
-            Token token = getToken(aTokens, aNode.getSpan().getStart(), aNode.getSpan().getEnd());
+            var token = getToken(aTokens, aNode.getSpan().getStart(), aNode.getSpan().getEnd());
 
             // link token to its parent constituent
             if (aParentFS != null) {
@@ -247,8 +240,8 @@ public class OpenNlpParser
 
             // only add POS to index if we want POS-tagging
             if (createPosTags) {
-                Type posTag = posMappingProvider.getTagType(aNode.getType());
-                POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
+                var posTag = posMappingProvider.getTagType(aNode.getType());
+                var posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
                 posAnno.setPosValue(aNode.getType() != null ? aNode.getType().intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
@@ -260,28 +253,28 @@ public class OpenNlpParser
         }
         // Check if node is a constituent node on sentence or phrase-level
         else {
-            String typeName = aNode.getType();
+            var typeName = aNode.getType();
             if (AbstractBottomUpParser.TOP_NODE.equals(typeName)) {
                 typeName = "ROOT"; // in DKPro the root is ROOT, not TOP
             }
 
             // create the necessary objects and methods
-            Type constType = constituentMappingProvider.getTagType(typeName);
+            var constType = constituentMappingProvider.getTagType(typeName);
 
-            Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(constType,
+            var constAnno = (Constituent) aJCas.getCas().createAnnotation(constType,
                     aNode.getSpan().getStart(), aNode.getSpan().getEnd());
             constAnno.setConstituentType(typeName);
-            
+
             // link to parent
             if (aParentFS != null) {
                 constAnno.setParent(aParentFS);
             }
 
             // Do we have any children?
-            List<Annotation> childAnnotations = new ArrayList<Annotation>();
-            for (Parse child : aNode.getChildren()) {
-                Annotation childAnnotation = createConstituentAnnotationFromTree(aJCas, child,
-                        constAnno, aTokens);
+            var childAnnotations = new ArrayList<Annotation>();
+            for (var child : aNode.getChildren()) {
+                var childAnnotation = createConstituentAnnotationFromTree(aJCas, child, constAnno,
+                        aTokens);
                 if (childAnnotation != null) {
                     childAnnotations.add(childAnnotation);
                 }
@@ -289,7 +282,7 @@ public class OpenNlpParser
 
             // Now that we know how many children we have, link annotation of
             // current node with its children
-            FSArray childArray = FSCollectionFactory.createFSArray(aJCas, childAnnotations);
+            var childArray = FSCollectionFactory.createFSArray(aJCas, childAnnotations);
             constAnno.setChildren(childArray);
 
             // write annotation for current node to index
@@ -304,7 +297,7 @@ public class OpenNlpParser
      */
     private Token getToken(List<Token> aTokens, int aBegin, int aEnd)
     {
-        for (Token t : aTokens) {
+        for (var t : aTokens) {
             if (aBegin == t.getBegin() && aEnd == t.getEnd()) {
                 return t;
             }
@@ -330,15 +323,13 @@ public class OpenNlpParser
         }
 
         @Override
-        protected Parser produceResource(InputStream aStream)
-            throws Exception
+        protected Parser produceResource(InputStream aStream) throws Exception
         {
-            ParserModel model = new ParserModel(aStream);
-            Properties metadata = getResourceMetaData();
+            var model = new ParserModel(aStream);
+            var metadata = getResourceMetaData();
 
-            addTagset(new OpenNlpTagsetDescriptionProvider(
-                    metadata.getProperty("pos.tagset"), POS.class, model.getParserTaggerModel()
-                            .getPosModel()));
+            addTagset(new OpenNlpTagsetDescriptionProvider(metadata.getProperty("pos.tagset"),
+                    POS.class, model.getParserTaggerModel().getArtifact("pos.model")));
             addTagset(new OpenNlpParserTagsetDescriptionProvider(
                     metadata.getProperty("constituent.tagset"), Constituent.class, model,
                     metadata));

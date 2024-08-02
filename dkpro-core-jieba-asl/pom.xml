@@ -23,12 +23,15 @@
     <version>2.5.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-jieba-asl</artifactId>
   <name>DKPro Core ASL - Jieba (v ${jieba.version}) (ASL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+
   <properties>
     <jieba.version>1.0.2</jieba.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.huaban</groupId>
@@ -46,6 +49,7 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
@@ -54,6 +58,7 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-testing-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

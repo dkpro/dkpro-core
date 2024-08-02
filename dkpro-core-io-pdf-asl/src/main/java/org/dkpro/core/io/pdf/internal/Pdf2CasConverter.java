@@ -20,8 +20,10 @@ package org.dkpro.core.io.pdf.internal;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.TextPosition;
@@ -56,7 +58,8 @@ public class Pdf2CasConverter
     public void writeText(final CAS aCas, final InputStream aIs)
         throws IOException
     {
-        final PDDocument doc = PDDocument.load(aIs);
+        var pdfBytes = IOUtils.toByteArray(aIs);
+        var doc = Loader.loadPDF(pdfBytes);
 
         try {
             if (doc.isEncrypted()) {

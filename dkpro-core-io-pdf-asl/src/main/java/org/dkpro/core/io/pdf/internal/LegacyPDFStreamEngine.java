@@ -86,28 +86,28 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
      */
     LegacyPDFStreamEngine() throws IOException
     {
-        addOperator(new BeginText());
-        addOperator(new Concatenate());
-        addOperator(new DrawObject()); // special text version
-        addOperator(new EndText());
-        addOperator(new SetGraphicsStateParameters());
-        addOperator(new Save());
-        addOperator(new Restore());
-        addOperator(new NextLine());
-        addOperator(new SetCharSpacing());
-        addOperator(new MoveText());
-        addOperator(new MoveTextSetLeading());
-        addOperator(new SetFontAndSize());
-        addOperator(new ShowText());
-        addOperator(new ShowTextAdjusted());
-        addOperator(new SetTextLeading());
-        addOperator(new SetMatrix());
-        addOperator(new SetTextRenderingMode());
-        addOperator(new SetTextRise());
-        addOperator(new SetWordSpacing());
-        addOperator(new SetTextHorizontalScaling());
-        addOperator(new ShowTextLine());
-        addOperator(new ShowTextLineAndSpace());
+        addOperator(new BeginText(this));
+        addOperator(new Concatenate(this));
+        addOperator(new DrawObject(this)); // special text version
+        addOperator(new EndText(this));
+        addOperator(new SetGraphicsStateParameters(this));
+        addOperator(new Save(this));
+        addOperator(new Restore(this));
+        addOperator(new NextLine(this));
+        addOperator(new SetCharSpacing(this));
+        addOperator(new MoveText(this));
+        addOperator(new MoveTextSetLeading(this));
+        addOperator(new SetFontAndSize(this));
+        addOperator(new ShowText(this));
+        addOperator(new ShowTextAdjusted(this));
+        addOperator(new SetTextLeading(this));
+        addOperator(new SetMatrix(this));
+        addOperator(new SetTextRenderingMode(this));
+        addOperator(new SetTextRise(this));
+        addOperator(new SetWordSpacing(this));
+        addOperator(new SetTextHorizontalScaling(this));
+        addOperator(new ShowTextLine(this));
+        addOperator(new ShowTextLineAndSpace(this));
 
         // load additional glyph list for Unicode mapping
         String path = "org/apache/pdfbox/resources/glyphlist/additional.txt";
@@ -144,7 +144,7 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
      * This method was originally written by Ben Litchfield for PDFStreamEngine.
      */
     @Override
-    protected void showGlyph(Matrix textRenderingMatrix, PDFont font, int code, String unicode,
+    protected void showGlyph(Matrix textRenderingMatrix, PDFont font, int code,
                              Vector displacement) throws IOException
     {
         //
@@ -286,7 +286,7 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
         float spaceWidthDisplay = spaceWidthText * textRenderingMatrix.getScalingFactorX();
 
         // use our additional glyph list for Unicode mapping
-        unicode = font.toUnicode(code, glyphList);
+        var unicode = font.toUnicode(code, glyphList);
 
         // when there is no Unicode mapping available, Acrobat simply coerces the character code
         // into Unicode, so we do the same. Subclasses of PDFStreamEngine don't necessarily want
