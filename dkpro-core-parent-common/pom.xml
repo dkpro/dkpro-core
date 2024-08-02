@@ -54,10 +54,6 @@
     <uima.version>3.5.0</uima.version>
     <uimafit.version>3.5.0</uimafit.version>
     <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
-    
-    <build-ant-version>${ant-version}</build-ant-version>
-    <build-groovy-version>${groovy.version}</build-groovy-version>
-    <build-asciidoctorj-pdf-version>2.3.17</build-asciidoctorj-pdf-version>
   </properties>
 
   <dependencies>
@@ -751,21 +747,6 @@
               <uima.v2_pretty_print_format>true</uima.v2_pretty_print_format>
             </systemPropertyVariables>
           </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>versions-maven-plugin</artifactId>
-          <version>2.16.2</version>
-          <configuration>
-            <rulesUri>file:${session.executionRootDirectory}/dkpro-core-build/src/main/resources/dkpro-core/version-rules.xml</rulesUri>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.dkpro.core</groupId>
-              <artifactId>dkpro-core-build</artifactId>
-              <version>${project.version}</version>
-            </dependency>
-          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>

@@ -82,6 +82,12 @@
     <url>https://github.com/dkpro/dkpro-core</url>
     <tag>HEAD</tag>
   </scm>
+  
+  <properties>
+    <build-ant-version>1.10.14</build-ant-version>
+    <build-groovy-version>4.0.22</build-groovy-version>
+    <build-asciidoctorj-pdf-version>2.3.17</build-asciidoctorj-pdf-version>
+  </properties>
 
   <modules>
     <module>dkpro-core-parent-common</module>
@@ -105,6 +111,21 @@
             <useReleaseProfile>false</useReleaseProfile>
             <arguments>${arguments} -Dmaven.surefire.heap=${maven.surefire.heap} -Pdkpro-release</arguments>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.16.2</version>
+          <configuration>
+            <rulesUri>file:${session.executionRootDirectory}/dkpro-core-build/src/main/resources/dkpro-core/version-rules.xml</rulesUri>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.dkpro.core</groupId>
+              <artifactId>dkpro-core-build</artifactId>
+              <version>${project.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
