@@ -27,8 +27,12 @@ import java.util.Arrays;
 
 import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.io.TempDir;
 
+@DisabledOnOs(value = OS.WINDOWS, //
+        disabledReason = "mmapped buffers cannot be unmapped explicitly, so we cannot delete the temp dir on Windows")
 public class TextFormatVectorizerUtilsTest
 {
     @Test
