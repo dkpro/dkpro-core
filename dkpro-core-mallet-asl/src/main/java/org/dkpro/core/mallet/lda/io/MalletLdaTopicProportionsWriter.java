@@ -20,7 +20,6 @@ package org.dkpro.core.mallet.lda.io;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Locale;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -69,9 +68,7 @@ public class MalletLdaTopicProportionsWriter
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        try {
-            OutputStream outputStream = getOutputStream(aJCas, filenameExtension);
-
+        try (var outputStream = getOutputStream(aJCas, filenameExtension)) {
             if (writeDocid) {
                 outputStream.write(DocumentMetaData.get(aJCas).getDocumentId().getBytes());
                 outputStream.write(COLUMN_SEPARATOR.getBytes());

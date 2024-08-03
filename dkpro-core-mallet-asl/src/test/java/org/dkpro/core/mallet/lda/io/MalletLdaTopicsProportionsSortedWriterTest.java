@@ -38,9 +38,6 @@ import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/**
- *
- */
 public class MalletLdaTopicsProportionsSortedWriterTest
 {
     private static final String CAS_DIR = "src/test/resources/txt";
@@ -63,19 +60,20 @@ public class MalletLdaTopicsProportionsSortedWriterTest
         String expectedLine0Regex = "dummy1.txt(\t[0-9]+:0\\.[0-9]{4}){" + nTopicsOutput + "}";
         String expectedLine1Regex = "dummy2.txt(\t[0-9]+:0\\.[0-9]{4}){" + nTopicsOutput + "}";
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, //
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN, //
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletLdaTopicModelInferencer.class,
+        AnalysisEngineDescription inferencer = createEngineDescription( //
+                MalletLdaTopicModelInferencer.class, //
                 MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, modelFile);
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                MalletLdaTopicsProportionsSortedWriter.class,
-                MalletLdaTopicsProportionsSortedWriter.PARAM_TARGET_LOCATION, targetFile,
+        AnalysisEngineDescription writer = createEngineDescription( //
+                MalletLdaTopicsProportionsSortedWriter.class, //
+                MalletLdaTopicsProportionsSortedWriter.PARAM_TARGET_LOCATION, targetFile, //
                 MalletLdaTopicsProportionsSortedWriter.PARAM_N_TOPICS, nTopicsOutput);
 
         SimplePipeline.runPipeline(reader, segmenter, inferencer, writer);
@@ -85,8 +83,8 @@ public class MalletLdaTopicsProportionsSortedWriterTest
         assertEquals(expectedLines, lines.size());
 
         /* assert first field */
-        lines.stream()
-                .map(line -> line.split("\t"))
+        lines.stream() //
+                .map(line -> line.split("\t")) //
                 .forEach(fields -> assertTrue(fields[0].startsWith("dummy")));
     }
 }
