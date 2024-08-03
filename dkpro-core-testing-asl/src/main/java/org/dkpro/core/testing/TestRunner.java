@@ -23,6 +23,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
+import org.apache.uima.fit.util.LifeCycleUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.resources.ResourceObjectProviderBase;
 
@@ -77,7 +78,16 @@ public class TestRunner
             String aLanguage, String aDocument)
         throws UIMAException
     {
-        return runTest(aDocumentId, createEngine(aEngine), aLanguage, aDocument);
+        var engine = createEngine(aEngine);
+        try {
+            return runTest(aDocumentId, engine, aLanguage, aDocument);
+        }
+        finally {
+            if (engine != null) {
+                LifeCycleUtil.collectionProcessComplete(engine);
+                LifeCycleUtil.destroy(engine);
+            }
+        }
     }
 
     /**
@@ -130,7 +140,7 @@ public class TestRunner
             System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
         }
         offline = true;
-        
+
         JCas jcas = aEngine.newJCas();
 
         if (aDocumentId != null) {
@@ -145,30 +155,30 @@ public class TestRunner
         tb.buildTokens(jcas, aDocument);
 
         aEngine.process(jcas);
-        
-//        DkproTestContext context = DkproTestContext.get();
-//        if  (context != null) {
-//            File folder = new File("target/test-output/" + context.getTestOutputFolderName());
-//            if (!folder.exists()) {
-//                FileUtils.deleteQuietly(folder);
-//            }
-//            folder.mkdirs();
-//
-//            try (OutputStream docOS = new FileOutputStream(new File(folder, "output.xmi"))) {
-//                XmiCasSerializer.serialize(jcas.getCas(), null, docOS, true, null);
-//            }
-//            catch (Exception e) {
-//                throw new AnalysisEngineProcessException(e);
-//            }
-//        }
-        
+
+        // DkproTestContext context = DkproTestContext.get();
+        // if (context != null) {
+        // File folder = new File("target/test-output/" + context.getTestOutputFolderName());
+        // if (!folder.exists()) {
+        // FileUtils.deleteQuietly(folder);
+        // }
+        // folder.mkdirs();
+        //
+        // try (OutputStream docOS = new FileOutputStream(new File(folder, "output.xmi"))) {
+        // XmiCasSerializer.serialize(jcas.getCas(), null, docOS, true, null);
+        // }
+        // catch (Exception e) {
+        // throw new AnalysisEngineProcessException(e);
+        // }
+        // }
+
         AssertAnnotations.assertValid(jcas);
-        
+
         return jcas;
     }
-    
+
     private static boolean offline = true;
-    
+
     public static void autoloadModelsOnNextTestRun()
     {
         offline = false;

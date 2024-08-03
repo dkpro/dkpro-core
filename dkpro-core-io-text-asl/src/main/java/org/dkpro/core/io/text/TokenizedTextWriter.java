@@ -19,8 +19,6 @@ package org.dkpro.core.io.text;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -157,9 +155,7 @@ public class TokenizedTextWriter
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        try {
-            OutputStream outputStream = getOutputStream(aJCas, extension);
-
+        try (var outputStream = getOutputStream(aJCas, extension)) {
             /* iterate over sentences */
             for (String[] line : sequenceGenerator.tokenSequences(aJCas)) {
                 if (line.length > 0) {

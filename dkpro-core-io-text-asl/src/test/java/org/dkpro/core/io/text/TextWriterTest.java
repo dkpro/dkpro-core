@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import org.apache.commons.io.IOUtils;
@@ -43,23 +42,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class TextWriterTest
 {
     private @TempDir File outputPath;
-    
+
     @Test
     public void testWriteWithDocumentUri() throws Exception
     {
         AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
-                TextWriter.PARAM_TARGET_LOCATION, outputPath,
-                TextWriter.PARAM_STRIP_EXTENSION, true,
-                TextWriter.PARAM_OVERWRITE, true);
-        
+                TextWriter.PARAM_TARGET_LOCATION, outputPath, TextWriter.PARAM_STRIP_EXTENSION,
+                true, TextWriter.PARAM_OVERWRITE, true);
+
         JCas jcas = JCasFactory.createJCas();
-        
+
         DocumentMetaData dmd = DocumentMetaData.create(jcas);
         dmd.setDocumentBaseUri("file:/dummy");
         dmd.setDocumentUri("file:/dummy/text1.txt");
-        
+
         runPipeline(jcas, writer);
-        
+
         assertTrue(new File(outputPath, "text1.txt").exists());
     }
 
@@ -67,24 +65,22 @@ public class TextWriterTest
     public void testWriteWithDocumentId() throws Exception
     {
         AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
-                TextWriter.PARAM_TARGET_LOCATION, outputPath,
-                TextWriter.PARAM_STRIP_EXTENSION, true,
-                TextWriter.PARAM_OVERWRITE, true);
-        
+                TextWriter.PARAM_TARGET_LOCATION, outputPath, TextWriter.PARAM_STRIP_EXTENSION,
+                true, TextWriter.PARAM_OVERWRITE, true);
+
         JCas jcas = JCasFactory.createJCas();
-        
+
         DocumentMetaData dmd = DocumentMetaData.create(jcas);
         dmd.setCollectionId("dummy");
         dmd.setDocumentId("text1.txt");
-        
+
         runPipeline(jcas, writer);
-        
+
         assertTrue(new File(outputPath, "text1.txt").exists());
     }
 
     @Test
-    public void testStdOut()
-        throws Exception
+    public void testStdOut() throws Exception
     {
         final String text = "This is a test";
 
@@ -110,25 +106,26 @@ public class TextWriterTest
     }
 
     @Test
-    public void testCompressed()
-        throws Exception
+    public void testCompressed() throws Exception
     {
-        String text = StringUtils.repeat("This is a test. ", 100000);
-        
-        JCas jcas = JCasFactory.createJCas();
+        var text = StringUtils.repeat("This is a test. ", 100000);
+
+        var jcas = JCasFactory.createJCas();
         jcas.setDocumentText(text);
-        
-        DocumentMetaData meta = DocumentMetaData.create(jcas);
+
+        var meta = DocumentMetaData.create(jcas);
         meta.setDocumentId("dummy");
 
-        AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
-                TextWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
+        var writer = createEngineDescription( //
+                TextWriter.class, //
+                TextWriter.PARAM_COMPRESSION, CompressionMethod.GZIP, //
                 TextWriter.PARAM_TARGET_LOCATION, outputPath);
         runPipeline(jcas, writer);
-        
-        File input = new File(outputPath, "dummy.txt.gz");
-        InputStream is = CompressionUtils.getInputStream(input.getPath(),
-                new FileInputStream(input));
-        assertEquals(text, IOUtils.toString(is));
+
+        var input = new File(outputPath, "dummy.txt.gz");
+        try (var is = CompressionUtils.getInputStream(input.getPath(),
+                new FileInputStream(input))) {
+            assertEquals(text, IOUtils.toString(is));
+        }
     }
 }

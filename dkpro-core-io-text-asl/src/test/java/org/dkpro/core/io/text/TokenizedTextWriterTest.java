@@ -46,33 +46,33 @@ public class TokenizedTextWriterTest
     private @TempDir File tempDir;
 
     @Test
-    public void testDefault()
-            throws UIMAException, IOException
+    public void testDefault() throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
         File targetFile = new File(tempDir, "TokenizedTextWriterTest.out");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
-        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+        AnalysisEngineDescription writer = createEngineDescription( //
+                TokenizedTextWriter.class, //
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile, //
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true, //
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
-    public void testMultipleFiles()
-            throws UIMAException, IOException
+    public void testMultipleFiles() throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
         File targetDir = tempDir;
         File targetFile = new File(targetDir, "id.txt");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
-        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetDir,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, false,
+        AnalysisEngineDescription writer = createEngineDescription( //
+                TokenizedTextWriter.class, //
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetDir, //
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, false, //
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(targetDir.isDirectory());
@@ -81,11 +81,9 @@ public class TokenizedTextWriterTest
     }
 
     @Test
-    public void testTokens()
-            throws UIMAException, IOException
+    public void testTokens() throws UIMAException, IOException
     {
-        File targetFile = new File(tempDir,
-                "TokenizedTextWriterTokensTest.out");
+        File targetFile = new File(tempDir, "TokenizedTextWriterTokensTest.out");
         String text = "This is the 1st sentence .\nHere is another sentence .";
         String typeName = Token.class.getTypeName();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
@@ -99,8 +97,7 @@ public class TokenizedTextWriterTest
     }
 
     @Test
-    public void testLemmas()
-            throws IOException, UIMAException
+    public void testLemmas() throws IOException, UIMAException
     {
         File targetFile = new File(tempDir, "lemmas.out");
         targetFile.deleteOnExit();
@@ -132,10 +129,11 @@ public class TokenizedTextWriterTest
         Sentence sentence = new Sentence(jCas, 0, 13);
         sentence.addToIndexes(jCas);
 
-        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_FEATURE_PATH, featurePath,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+        AnalysisEngineDescription writer = createEngineDescription( //
+                TokenizedTextWriter.class, //
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile, //
+                TokenizedTextWriter.PARAM_FEATURE_PATH, featurePath, //
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true, //
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
 
         SimplePipeline.runPipeline(jCas, writer);
@@ -146,27 +144,26 @@ public class TokenizedTextWriterTest
     }
 
     @Test
-    public void testStopwords()
-            throws UIMAException, IOException
+    public void testStopwords() throws UIMAException, IOException
     {
-        File targetFile = new File(tempDir,"TokenizedTextWriterNoStopwords.out");
+        var targetFile = new File(tempDir, "TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
-        File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoStopwords.txt");
-        String text = "This is the 1st sentence .\nHere is another sentence .";
-        String stopwordsFile = "src/test/resources/stopwords_en.txt";
+        var tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoStopwords.txt");
+        var text = "This is the 1st sentence .\nHere is another sentence .";
+        var stopwordsFile = "src/test/resources/stopwords_en.txt";
 
-        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_STOPWORDS_FILE, stopwordsFile,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+        var writer = createEngineDescription( //
+                TokenizedTextWriter.class, //
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile, //
+                TokenizedTextWriter.PARAM_STOPWORDS_FILE, stopwordsFile, //
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true, //
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
-    public void testNumbers()
-            throws UIMAException, IOException
+    public void testNumbers() throws UIMAException, IOException
     {
         File targetFile = new File(tempDir, "TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
@@ -174,28 +171,28 @@ public class TokenizedTextWriterTest
         String text = "This is 1 sentence .\nHere is 2 sentences , or even 2.5 .";
         String numbersRegex = "^[0-9]+(\\.[0-9]*)?$";
 
-        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_NUMBER_REGEX, numbersRegex,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+        AnalysisEngineDescription writer = createEngineDescription( //
+                TokenizedTextWriter.class, //
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile, //
+                TokenizedTextWriter.PARAM_NUMBER_REGEX, numbersRegex, //
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true, //
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
-    public void testNoSentences()
-            throws IOException, UIMAException
+    public void testNoSentences() throws IOException, UIMAException
     {
-        File targetFile = new File(tempDir,
-                "TokenizedTextWriterNoSentences.out");
+        File targetFile = new File(tempDir, "TokenizedTextWriterNoSentences.out");
         File tokenized = new File("src/test/resources/tokenizedTexts/textNoSentences.txt");
         String text = "This is the 1st sentence . Here is another sentence .";
 
-        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
-                TokenizedTextWriter.PARAM_OVERWRITE, true,
+        AnalysisEngineDescription writer = createEngineDescription( //
+                TokenizedTextWriter.class, //
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile, //
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true, //
+                TokenizedTextWriter.PARAM_OVERWRITE, true, //
                 TokenizedTextWriter.PARAM_COVERING_TYPE, null);
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
