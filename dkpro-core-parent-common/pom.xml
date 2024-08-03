@@ -542,6 +542,7 @@
               -->
             <ignoredDependency>commons-logging:commons-logging-api</ignoredDependency>
             <ignoredDependency>org.springframework:spring-jcl</ignoredDependency>
+            <ignoredDependency>org.slf4j:slf4j-api</ignoredDependency>
           </ignoredDependencies>
           <ignoredUnusedDeclaredDependencies combine.children="append">
             <!--
