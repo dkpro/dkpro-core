@@ -17,6 +17,12 @@
  */
 package org.dkpro.core.doc;
 
+import static groovy.io.FileType.FILES;
+import org.dkpro.meta.core.MetadataAggregator
+import org.dkpro.meta.core.model.MetadataModel
+import org.dkpro.meta.core.maven.ContextHolder
+import org.yaml.snakeyaml.Yaml
+
 class DocumentationBuilder {
     public void run() {
         File dkproCorePath = new File(ContextHolder.basedir, '..');
