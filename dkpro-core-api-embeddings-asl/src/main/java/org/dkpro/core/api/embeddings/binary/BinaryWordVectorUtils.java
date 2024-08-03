@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.util.Locale;
 import java.util.Map;
 
@@ -48,13 +47,16 @@ public class BinaryWordVectorUtils
      * Write a map of token embeddings into binary format. Uses the default locale {@link Locale#US}
      * and assume case-sensitivity iff there is any token containing an uppercase letter.
      *
-     * @param vectors      a {@code Map<String, float[]>} holding all tokens with embeddings
-     * @param binaryTarget the target file {@link File}
-     * @throws IOException if an I/O error occurs
+     * @param vectors
+     *            a {@code Map<String, float[]>} holding all tokens with embeddings
+     * @param binaryTarget
+     *            the target file {@link File}
+     * @throws IOException
+     *             if an I/O error occurs
      * @see #convertWordVectorsToBinary(Map, boolean, Locale, File)
      */
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, File binaryTarget)
-            throws IOException
+        throws IOException
     {
         boolean caseless = vectors.keySet().stream()
                 .allMatch(token -> token.equals(token.toLowerCase()));
@@ -64,15 +66,20 @@ public class BinaryWordVectorUtils
     /**
      * Write a map of token embeddings into binary format.
      *
-     * @param vectors      a {@code Map<String, float[]>} holding all tokens with embeddings
-     * @param aCaseless    if true, tokens are expected to be caseless
-     * @param aLocale      the {@link Locale}
-     * @param binaryTarget the target file {@link File}
-     * @throws IOException if an I/O error occurs
+     * @param vectors
+     *            a {@code Map<String, float[]>} holding all tokens with embeddings
+     * @param aCaseless
+     *            if true, tokens are expected to be caseless
+     * @param aLocale
+     *            the {@link Locale}
+     * @param binaryTarget
+     *            the target file {@link File}
+     * @throws IOException
+     *             if an I/O error occurs
      */
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, boolean aCaseless,
             Locale aLocale, File binaryTarget)
-            throws IOException
+        throws IOException
     {
         if (vectors.isEmpty()) {
             throw new IllegalArgumentException("Word embeddings map must not be empty.");
@@ -82,47 +89,44 @@ public class BinaryWordVectorUtils
         assert vectors.values().stream().allMatch(v -> v.length == vectorLength);
 
         Header header = prepareHeader(aCaseless, aLocale, vectors.size(), vectorLength);
-        DataOutputStream output = new DataOutputStream(
-                new BufferedOutputStream(new FileOutputStream(binaryTarget)));
-        header.write(output);
+        try (var output = new DataOutputStream(
+                new BufferedOutputStream(new FileOutputStream(binaryTarget)))) {
+            header.write(output);
 
-        LOG.info("Sorting data...");
-        String[] words = vectors.keySet().stream()
-                .sorted()
-                .toArray(String[]::new);
+            LOG.info("Sorting data...");
+            String[] words = vectors.keySet().stream().sorted().toArray(String[]::new);
 
-        LOG.info("Writing strings...");
-        for (String word : words) {
-            output.writeUTF(word);
+            LOG.info("Writing strings...");
+            for (String word : words) {
+                output.writeUTF(word);
+            }
+
+            LOG.info("Writing UNK vector...");
+            {
+                float[] vector = VectorizerUtils.randomVector(header.getVectorLength());
+                writeVector(output, vector);
+            }
+
+            LOG.info("Writing vectors...");
+            for (String word : words) {
+                float[] vector = vectors.get(word);
+                writeVector(output, vector);
+            }
         }
-
-        LOG.info("Writing UNK vector...");
-        {
-            float[] vector = VectorizerUtils.randomVector(header.getVectorLength());
-            writeVector(output, vector);
-        }
-
-        LOG.info("Writing vectors...");
-        for (String word : words) {
-            float[] vector = vectors.get(word);
-            writeVector(output, vector);
-        }
-        output.close();
     }
 
-    private static void writeVector(DataOutputStream output, float[] vector)
-            throws IOException
+    private static void writeVector(DataOutputStream output, float[] vector) throws IOException
     {
-        ByteBuffer buffer = ByteBuffer.allocate(vector.length * Float.BYTES);
-        FloatBuffer floatBuffer = buffer.asFloatBuffer();
+        var buffer = ByteBuffer.allocate(vector.length * Float.BYTES);
+        var floatBuffer = buffer.asFloatBuffer();
         floatBuffer.put(vector);
         output.write(buffer.array());
     }
 
-    private static Header prepareHeader(boolean aCaseless,
-            Locale aLocale, int wordCount, int vectorLength)
+    private static Header prepareHeader(boolean aCaseless, Locale aLocale, int wordCount,
+            int vectorLength)
     {
-        Header header = new Header();
+        var header = new Header();
         header.setVersion(1);
         header.setWordCount(wordCount);
         header.setVectorLength(vectorLength);

@@ -27,25 +27,28 @@ import java.util.Arrays;
 
 import org.dkpro.core.api.embeddings.Vectorizer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
+@DisabledOnOs(value = OS.WINDOWS, //
+        disabledReason = "mmapped buffers cannot be unmapped explicitly, so we cannot delete the temp dir on Windows")
 public class TextFormatVectorizerTest
 {
     @Test
-    public void testVectorizer()
-            throws Exception
+    public void testVectorizer() throws Exception
     {
         File modelFile = new File("src/test/resources/dummy.vec");
         Vectorizer vectorizer = TextFormatVectorizer.load(modelFile);
         int expectedSize = 699;
         int expectedDimensions = 50;
-        float[] expectedVectorHer = new float[] { -0.003060f, 0.003507f,
-                -0.008743f, -0.002152f, -0.004767f, -0.007613f, 0.004302f, 0.002171f, -0.002029f,
-                0.001279f, 0.002584f, 0.002896f, 0.006834f, 0.000398f, 0.005685f, -0.006861f,
-                -0.005104f, -0.006102f, 0.001795f, -0.005347f, 0.006562f, -0.009437f, -0.005975f,
-                -0.007835f, 0.000151f, 0.008032f, -0.004748f, 0.006110f, -0.008335f, -0.005110f,
-                -0.004147f, 0.005215f, -0.009278f, -0.008693f, -0.004793f, -0.006631f, 0.005200f,
-                0.003343f, -0.002542f, 0.006161f, 0.009828f, -0.001308f, 0.004804f, 0.001710f,
-                0.005781f, 0.002312f, -0.002556f, 0.007643f, 0.003270f, -0.000747f };
+        float[] expectedVectorHer = new float[] { -0.003060f, 0.003507f, -0.008743f, -0.002152f,
+                -0.004767f, -0.007613f, 0.004302f, 0.002171f, -0.002029f, 0.001279f, 0.002584f,
+                0.002896f, 0.006834f, 0.000398f, 0.005685f, -0.006861f, -0.005104f, -0.006102f,
+                0.001795f, -0.005347f, 0.006562f, -0.009437f, -0.005975f, -0.007835f, 0.000151f,
+                0.008032f, -0.004748f, 0.006110f, -0.008335f, -0.005110f, -0.004147f, 0.005215f,
+                -0.009278f, -0.008693f, -0.004793f, -0.006631f, 0.005200f, 0.003343f, -0.002542f,
+                0.006161f, 0.009828f, -0.001308f, 0.004804f, 0.001710f, 0.005781f, 0.002312f,
+                -0.002556f, 0.007643f, 0.003270f, -0.000747f };
         float[] expectedVectorPartiality = new float[] { 0.003056f, -0.004063f, 0.008095f,
                 0.008563f, -0.004409f, -0.000555f, 0.002892f, -0.003428f, -0.009526f, 0.005398f,
                 0.005198f, 0.000784f, 0.000739f, -0.002909f, -0.000911f, 0.001754f, 0.000432f,
@@ -63,8 +66,7 @@ public class TextFormatVectorizerTest
     }
 
     @Test
-    public void testCaseless()
-            throws IOException
+    public void testCaseless() throws IOException
     {
         File modelFile = new File("src/test/resources/dummy_lowercased.vec");
         Vectorizer vectorizer = TextFormatVectorizer.load(modelFile);

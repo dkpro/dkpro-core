@@ -32,12 +32,16 @@ import java.util.Map;
 import org.dkpro.core.api.embeddings.VectorizerUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.io.TempDir;
 
+@DisabledOnOs(value = OS.WINDOWS, //
+        disabledReason = "mmapped buffers cannot be unmapped explicitly, so we cannot delete the temp dir on Windows")
 public class BinaryWordVectorUtilsTest
 {
     private @TempDir File tempDir;
-    
+
     // TODO: test for very large data (>2GB should be chunked)
     private Map<String, float[]> vectors;
 
@@ -50,30 +54,28 @@ public class BinaryWordVectorUtilsTest
     }
 
     @Test
-    public void testConvertWordVectorsToBinary()
-            throws Exception
+    public void testConvertWordVectorsToBinary() throws Exception
     {
         var binaryTarget = writeBinaryFile(vectors);
-        
+
         try (var vec = BinaryVectorizer.load(binaryTarget)) {
             assertThat(vec.contains("t1")).isTrue();
             assertThat(vec.contains("t2")).isTrue();
             assertThat(vec.dimensions()).isEqualTo(3);
             assertThat(vec.size()).isEqualTo(2);
             assertThat(vec.isCaseless()).isTrue();
-    
+
             for (var word : vectors.keySet()) {
                 var orig = vectors.get(word);
                 var conv = vec.vectorize(word);
-    
+
                 assertThat(conv).containsExactly(orig);
             }
         }
     }
 
     @Test
-    public void testConvertWordVectorsToBinaryCaseSensitive()
-            throws Exception
+    public void testConvertWordVectorsToBinaryCaseSensitive() throws Exception
     {
         vectors.put("T1", new float[] { 0.1f, 0.2f, 0.3f });
         var binaryTarget = writeBinaryFile(vectors);
@@ -97,20 +99,19 @@ public class BinaryWordVectorUtilsTest
     }
 
     @Test
-    public void testRandomVector()
-            throws IOException
+    public void testRandomVector() throws IOException
     {
         var binaryTarget = writeBinaryFile(vectors);
 
         try (var vec = BinaryVectorizer.load(binaryTarget)) {
             var randVector = VectorizerUtils.randomVector(3);
-    
+
             var unk1 = vec.vectorize("unk1");
             var unk2 = vec.vectorize("unk2");
             assertTrue(Arrays.equals(randVector, unk1));
             assertTrue(Arrays.equals(randVector, unk2));
-            assertTrue(
-                    Arrays.equals(unk1, unk2), "Vectors or unknown words should always be the same.");
+            assertTrue(Arrays.equals(unk1, unk2),
+                    "Vectors or unknown words should always be the same.");
         }
     }
 
@@ -118,10 +119,10 @@ public class BinaryWordVectorUtilsTest
      * Write a binary vectors file to a testContext-dependent location.
      *
      * @return the binary vectors {@link File}
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
-    private File writeBinaryFile(Map<String, float[]> vectors)
-            throws IOException
+    private File writeBinaryFile(Map<String, float[]> vectors) throws IOException
     {
         var binaryTarget = new File(tempDir, "binaryTarget");
         convertWordVectorsToBinary(vectors, binaryTarget);

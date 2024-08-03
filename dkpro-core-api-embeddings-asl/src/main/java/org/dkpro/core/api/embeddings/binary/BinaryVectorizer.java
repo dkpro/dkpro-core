@@ -15,6 +15,8 @@
  */
 package org.dkpro.core.api.embeddings.binary;
 
+import static java.nio.channels.FileChannel.MapMode.READ_ONLY;
+
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -23,7 +25,6 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Locale;
@@ -38,7 +39,7 @@ import org.slf4j.LoggerFactory;
  * @see BinaryWordVectorUtils
  */
 public class BinaryVectorizer
-        implements Vectorizer
+    implements Vectorizer
 {
     private static final Logger LOG = LoggerFactory.getLogger(BinaryVectorizer.class);
     private final String[] words;
@@ -51,7 +52,7 @@ public class BinaryVectorizer
 
     private BinaryVectorizer(Header aHeader, RandomAccessFile aFile, String[] aWords,
             long vectorStartOffset, float[] aUnk)
-            throws IOException
+        throws IOException
     {
         file = aFile;
         header = aHeader;
@@ -71,7 +72,7 @@ public class BinaryVectorizer
         }
 
         parts = new FloatBuffer[neededPartitions];
-        FileChannel channel = aFile.getChannel();
+        var channel = aFile.getChannel();
         for (int i = 0; i < neededPartitions; i++) {
             long start = vectorStartOffset + ((long) i * maxPartitionSizeBytes);
             long length = maxPartitionSizeBytes;
@@ -79,12 +80,13 @@ public class BinaryVectorizer
                 length = (aWords.length % maxVectorsPerPartition) * header.getVectorLength()
                         * Float.BYTES;
             }
-            parts[i] = channel.map(FileChannel.MapMode.READ_ONLY, start, length).asFloatBuffer();
+            parts[i] = channel.map(READ_ONLY, start, length).asFloatBuffer();
         }
     }
-    
+
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException
+    {
         if (file != null) {
             file.close();
         }
@@ -93,12 +95,13 @@ public class BinaryVectorizer
     /**
      * Load a binary embeddings file and return a new {@link BinaryVectorizer} object.
      *
-     * @param f a {@link File}
+     * @param f
+     *            a {@link File}
      * @return a new {@link BinaryVectorizer}
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
-    public static BinaryVectorizer load(File f)
-            throws IOException
+    public static BinaryVectorizer load(File f) throws IOException
     {
         var file = new RandomAccessFile(f, "rw");
 
@@ -115,7 +118,8 @@ public class BinaryVectorizer
         // Load UNK vector
         byte[] buffer = new byte[header.getVectorLength() * Float.BYTES];
         file.readFully(buffer);
-        ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+
+        var byteBuffer = ByteBuffer.wrap(buffer);
         float[] unk = new float[header.getVectorLength()];
         for (int i = 0; i < unk.length; i++) {
             unk[i] = byteBuffer.getFloat(i * Float.BYTES);
@@ -126,8 +130,8 @@ public class BinaryVectorizer
         return new BinaryVectorizer(header, file, words, offset, unk);
     }
 
-    @Override public float[] vectorize(String aWord)
-            throws IOException
+    @Override
+    public float[] vectorize(String aWord) throws IOException
     {
         String word = aWord;
         if (header.isCaseless()) {
@@ -156,7 +160,8 @@ public class BinaryVectorizer
         return vector;
     }
 
-    @Override public boolean contains(String aWord)
+    @Override
+    public boolean contains(String aWord)
     {
         String word = aWord;
         if (header.isCaseless()) {
@@ -166,22 +171,26 @@ public class BinaryVectorizer
         return Arrays.binarySearch(words, word) >= 0;
     }
 
-    @Override public float[] unknownVector()
+    @Override
+    public float[] unknownVector()
     {
         return unknownVector;
     }
 
-    @Override public int dimensions()
+    @Override
+    public int dimensions()
     {
         return header.getVectorLength();
     }
 
-    @Override public int size()
+    @Override
+    public int size()
     {
         return header.getWordCount();
     }
 
-    @Override public boolean isCaseless()
+    @Override
+    public boolean isCaseless()
     {
         return header.isCaseless();
     }
@@ -195,8 +204,7 @@ public class BinaryVectorizer
         private boolean caseless;
         private String locale;
 
-        public static Header read(DataInput aInput)
-                throws IOException
+        public static Header read(DataInput aInput) throws IOException
         {
             byte[] magicBytes = new byte[MAGIC.length()];
             aInput.readFully(magicBytes);
@@ -273,8 +281,7 @@ public class BinaryVectorizer
             this.vectorLength = vectorLength;
         }
 
-        public void write(OutputStream aOutput)
-                throws IOException
+        public void write(OutputStream aOutput) throws IOException
         {
             DataOutputStream out = new DataOutputStream(aOutput);
 

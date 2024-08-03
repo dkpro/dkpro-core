@@ -134,6 +134,19 @@ public class MalletEmbeddingsAnnotator
     }
 
     @Override
+    public void destroy()
+    {
+        if (vectorizer != null) {
+            try {
+                vectorizer.close();
+            }
+            catch (Exception e) {
+                getLogger().error("Error while closing vectorizer", e);
+            }
+        }
+    }
+
+    @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         Type type = aJCas.getTypeSystem().getType(tokenFeaturePath);
