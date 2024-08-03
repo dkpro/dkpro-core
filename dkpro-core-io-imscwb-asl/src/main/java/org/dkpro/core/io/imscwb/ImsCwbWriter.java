@@ -32,6 +32,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -78,17 +79,13 @@ import eu.openminted.share.annotations.api.Parameters;
  */
 @ResourceMetaData(name = "IMS CWB Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                ImsCwbWriter.PARAM_TARGET_LOCATION  })
-@MimeTypeCapability({MimeTypes.TEXT_X_IMSCWB})
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@Parameters(exclude = { ImsCwbWriter.PARAM_TARGET_LOCATION })
+@MimeTypeCapability({ MimeTypes.TEXT_X_IMSCWB })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class ImsCwbWriter
     extends JCasFileWriter_ImplBase
 {
@@ -107,17 +104,15 @@ public class ImsCwbWriter
      * Specify the suffix of output files. Default value <code>.vrt</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".vrt")
     private String filenameSuffix;
-    
+
     /**
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = DEFAULT_ENCODING)
     private String encoding;
 
     /**
@@ -230,10 +225,11 @@ public class ImsCwbWriter
     private Process childProcess;
     private File dataDirectory;
     private File registryDirectory;
+    
+    private OutputStream targetStream;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -241,8 +237,7 @@ public class ImsCwbWriter
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         String documentId = DocumentMetaData.get(jcas).getDocumentId();
         String documentUri = DocumentMetaData.get(jcas).getDocumentUri();
@@ -264,7 +259,7 @@ public class ImsCwbWriter
             }
         }
 
-        try (BufferedWriter out = new BufferedWriter(
+        try (var out = new BufferedWriter(
                 new OutputStreamWriter(getOutputStream(jcas, filenameSuffix), encoding))) {
             if (writeTextTag) {
                 startElement(out, E_TEXT, ATTR_ID, documentId);
@@ -352,8 +347,7 @@ public class ImsCwbWriter
         aOut.write(LS);
     }
 
-    private void endElement(Writer aOut, String aElement)
-        throws IOException
+    private void endElement(Writer aOut, String aElement) throws IOException
     {
         aOut.write("</");
         aOut.write(aElement);
@@ -362,8 +356,7 @@ public class ImsCwbWriter
 
     }
 
-    private void field(Writer aOut, String aValue)
-        throws IOException
+    private void field(Writer aOut, String aValue) throws IOException
     {
         aOut.write(TAB);
         aOut.write(escapeXml(aValue));
@@ -378,13 +371,14 @@ public class ImsCwbWriter
             if (childProcess == null) {
                 startCqpProcess();
             }
+            
             return new NamedOutputStream(null,
                     new CloseShieldOutputStream(childProcess.getOutputStream()));
         }
-        
+
         return super.getOutputStream(aJCas, aExtension);
     }
-    
+
     private void startCqpProcess() throws IOException
     {
         dataDirectory = new File(getTargetLocation(), "data");
@@ -447,8 +441,7 @@ public class ImsCwbWriter
                 }
                 String typeName = segments[0];
                 String featureName = segments.length > 1 ? segments[1] : "";
-                String name = (substringAfterLast(typeName, ".") + "_" + featureName)
-                        .toLowerCase();
+                String name = (substringAfterLast(typeName, ".") + "_" + featureName).toLowerCase();
                 cmd.add("-P");
                 cmd.add(name);
             }
@@ -500,12 +493,11 @@ public class ImsCwbWriter
     }
 
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         if (childProcess != null) {
             IOUtils.closeQuietly(childProcess.getOutputStream());
-            
+
             try {
                 childProcess.waitFor();
                 attendChildProceess();
@@ -539,6 +531,8 @@ public class ImsCwbWriter
                 }
             }
         }
+
+        super.collectionProcessComplete();
     }
 
     private void runCwbCommand(String aCommand, String... aArguments)
@@ -622,20 +616,18 @@ public class ImsCwbWriter
         switch (covered.size()) {
         case 0:
             if (getLogger().isWarnEnabled()) {
-                getLogger().warn(
-                        "There is no annotation of type [" + typeName
-                                + "] available which is covered by [" + aCoveringAnnotation
-                                + "], returning empty string.");
+                getLogger().warn("There is no annotation of type [" + typeName
+                        + "] available which is covered by [" + aCoveringAnnotation
+                        + "], returning empty string.");
             }
             return "";
         case 1:
             return covered.get(0).getFeatureValueAsString(feature);
         default:
             if (getLogger().isWarnEnabled()) {
-                getLogger().warn(
-                        "There are multiple annotations of type [" + typeName
-                                + "] available which are covered by [" + aCoveringAnnotation
-                                + "], returning the first.");
+                getLogger().warn("There are multiple annotations of type [" + typeName
+                        + "] available which are covered by [" + aCoveringAnnotation
+                        + "], returning the first.");
             }
             return covered.get(0).getFeatureValueAsString(feature);
         }

@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.testing;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.canParameterBeSet;
@@ -25,12 +26,9 @@ import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParam
 import static org.dkpro.core.api.parameter.ComponentParameters.PARAM_TARGET_LOCATION;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -314,9 +312,9 @@ public class WriterAssert
         }
 
         if (aPathSuffix != null) {
-            files = files.stream()
-                    .filter(file -> file.getPath().endsWith(aPathSuffix))
-                    .collect(Collectors.toList());
+            files = files.stream() //
+                    .filter(file -> file.getPath().endsWith(aPathSuffix)) //
+                    .toList();
         }
         
         if (files.isEmpty()) {
@@ -344,7 +342,7 @@ public class WriterAssert
             }
         }
 
-        return new StringAssert(Files.contentOf(files.get(0), StandardCharsets.UTF_8));
+        return new StringAssert(Files.contentOf(files.get(0), UTF_8));
     }
     
     /**

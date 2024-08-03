@@ -51,7 +51,7 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Cache DKPro Core dataset repository
-      id: maven-cache
+      id: dataset-cache
       uses: actions/cache@v4
       with:
         path: |
