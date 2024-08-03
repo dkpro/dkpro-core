@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+
 import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
