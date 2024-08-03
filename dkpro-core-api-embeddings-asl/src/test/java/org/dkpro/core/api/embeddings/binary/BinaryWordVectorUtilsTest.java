@@ -53,21 +53,21 @@ public class BinaryWordVectorUtilsTest
     public void testConvertWordVectorsToBinary()
             throws Exception
     {
-        File binaryTarget = writeBinaryFile(vectors);
-
-        BinaryVectorizer vec = BinaryVectorizer.load(binaryTarget);
-
-        assertThat(vec.contains("t1")).isTrue();
-        assertThat(vec.contains("t2")).isTrue();
-        assertThat(vec.dimensions()).isEqualTo(3);
-        assertThat(vec.size()).isEqualTo(2);
-        assertThat(vec.isCaseless()).isTrue();
-
-        for (String word : vectors.keySet()) {
-            float[] orig = vectors.get(word);
-            float[] conv = vec.vectorize(word);
-
-            assertThat(conv).containsExactly(orig);
+        var binaryTarget = writeBinaryFile(vectors);
+        
+        try (var vec = BinaryVectorizer.load(binaryTarget)) {
+            assertThat(vec.contains("t1")).isTrue();
+            assertThat(vec.contains("t2")).isTrue();
+            assertThat(vec.dimensions()).isEqualTo(3);
+            assertThat(vec.size()).isEqualTo(2);
+            assertThat(vec.isCaseless()).isTrue();
+    
+            for (var word : vectors.keySet()) {
+                var orig = vectors.get(word);
+                var conv = vec.vectorize(word);
+    
+                assertThat(conv).containsExactly(orig);
+            }
         }
     }
 
@@ -76,23 +76,23 @@ public class BinaryWordVectorUtilsTest
             throws Exception
     {
         vectors.put("T1", new float[] { 0.1f, 0.2f, 0.3f });
-        File binaryTarget = writeBinaryFile(vectors);
+        var binaryTarget = writeBinaryFile(vectors);
 
-        BinaryVectorizer vec = BinaryVectorizer.load(binaryTarget);
+        try (var vec = BinaryVectorizer.load(binaryTarget)) {
+            assertTrue(vec.contains("t1"));
+            assertTrue(vec.contains("t2"));
+            assertTrue(vec.contains("T1"));
+            assertFalse(vec.contains("T2"));
+            assertEquals(3, vec.dimensions());
+            assertEquals(3, vec.size());
+            assertFalse(vec.isCaseless());
 
-        assertTrue(vec.contains("t1"));
-        assertTrue(vec.contains("t2"));
-        assertTrue(vec.contains("T1"));
-        assertFalse(vec.contains("T2"));
-        assertEquals(3, vec.dimensions());
-        assertEquals(3, vec.size());
-        assertFalse(vec.isCaseless());
+            for (var word : vectors.keySet()) {
+                var orig = vectors.get(word);
+                var conv = vec.vectorize(word);
 
-        for (String word : vectors.keySet()) {
-            float[] orig = vectors.get(word);
-            float[] conv = vec.vectorize(word);
-
-            assertTrue(Arrays.equals(orig, conv), "Vectors differ for " + word);
+                assertTrue(Arrays.equals(orig, conv), "Vectors differ for " + word);
+            }
         }
     }
 
@@ -100,17 +100,18 @@ public class BinaryWordVectorUtilsTest
     public void testRandomVector()
             throws IOException
     {
-        File binaryTarget = writeBinaryFile(vectors);
+        var binaryTarget = writeBinaryFile(vectors);
 
-        BinaryVectorizer vec = BinaryVectorizer.load(binaryTarget);
-        float[] randVector = VectorizerUtils.randomVector(3);
-
-        float[] unk1 = vec.vectorize("unk1");
-        float[] unk2 = vec.vectorize("unk2");
-        assertTrue(Arrays.equals(randVector, unk1));
-        assertTrue(Arrays.equals(randVector, unk2));
-        assertTrue(
-                Arrays.equals(unk1, unk2), "Vectors or unknown words should always be the same.");
+        try (var vec = BinaryVectorizer.load(binaryTarget)) {
+            var randVector = VectorizerUtils.randomVector(3);
+    
+            var unk1 = vec.vectorize("unk1");
+            var unk2 = vec.vectorize("unk2");
+            assertTrue(Arrays.equals(randVector, unk1));
+            assertTrue(Arrays.equals(randVector, unk2));
+            assertTrue(
+                    Arrays.equals(unk1, unk2), "Vectors or unknown words should always be the same.");
+        }
     }
 
     /**
@@ -122,7 +123,7 @@ public class BinaryWordVectorUtilsTest
     private File writeBinaryFile(Map<String, float[]> vectors)
             throws IOException
     {
-        File binaryTarget = new File(tempDir, "binaryTarget");
+        var binaryTarget = new File(tempDir, "binaryTarget");
         convertWordVectorsToBinary(vectors, binaryTarget);
         return binaryTarget;
     }

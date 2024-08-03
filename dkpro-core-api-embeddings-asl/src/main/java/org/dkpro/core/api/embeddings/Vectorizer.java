@@ -25,7 +25,7 @@ import java.io.IOException;
  * @see org.dkpro.core.api.embeddings.binary.BinaryVectorizer
  * @see org.dkpro.core.api.embeddings.text.TextFormatVectorizer
  */
-public interface Vectorizer
+public interface Vectorizer extends AutoCloseable
 {
     /**
      * Get the vector for a token. If the token is unknown, implementing classes should return the

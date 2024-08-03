@@ -47,11 +47,13 @@ public class BinaryVectorizer
     private final int maxVectorsPerPartition;
     private Locale locale;
     private float[] unknownVector;
+    private RandomAccessFile file;
 
-    private BinaryVectorizer(Header aHeader, RandomAccessFile file, String[] aWords,
+    private BinaryVectorizer(Header aHeader, RandomAccessFile aFile, String[] aWords,
             long vectorStartOffset, float[] aUnk)
             throws IOException
     {
+        file = aFile;
         header = aHeader;
         words = aWords;
 
@@ -69,7 +71,7 @@ public class BinaryVectorizer
         }
 
         parts = new FloatBuffer[neededPartitions];
-        FileChannel channel = file.getChannel();
+        FileChannel channel = aFile.getChannel();
         for (int i = 0; i < neededPartitions; i++) {
             long start = vectorStartOffset + ((long) i * maxPartitionSizeBytes);
             long length = maxPartitionSizeBytes;
@@ -78,6 +80,13 @@ public class BinaryVectorizer
                         * Float.BYTES;
             }
             parts[i] = channel.map(FileChannel.MapMode.READ_ONLY, start, length).asFloatBuffer();
+        }
+    }
+    
+    @Override
+    public void close() throws IOException {
+        if (file != null) {
+            file.close();
         }
     }
 
@@ -91,7 +100,7 @@ public class BinaryVectorizer
     public static BinaryVectorizer load(File f)
             throws IOException
     {
-        RandomAccessFile file = new RandomAccessFile(f, "rw");
+        var file = new RandomAccessFile(f, "rw");
 
         // Load header
         Header header = Header.read(file);
