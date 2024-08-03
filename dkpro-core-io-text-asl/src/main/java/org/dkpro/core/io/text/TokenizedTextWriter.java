@@ -1,14 +1,14 @@
 /*
- * Copyright 2017
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,7 @@ package org.dkpro.core.io.text;
 
 import java.io.File;
 import java.io.IOException;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -44,18 +45,18 @@ import eu.openminted.share.annotations.api.Parameters;
  */
 @ResourceMetaData(name = "Tokenized Text Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
-                JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET,
-                JCasFileWriter_ImplBase.PARAM_OVERWRITE, 
+@Parameters( //
+        exclude = { //
+                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION, //
+                JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET, //
+                JCasFileWriter_ImplBase.PARAM_OVERWRITE, //
                 TokenizedTextWriter.PARAM_STOPWORDS_FILE })
-@MimeTypeCapability({MimeTypes.TEXT_PLAIN})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.TEXT_PLAIN })
+@TypeCapability( //
+        inputs = { //
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class TokenizedTextWriter
-        extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
     private static final String TOKEN_SEPARATOR = " ";
     private static final String NUMBER_REPLACEMENT = "NUM";
@@ -85,11 +86,12 @@ public class TokenizedTextWriter
      * Make sure that these regular expressions are fit to the segmentation, e.g. if your work on
      * tokens, your tokenizer might split prefixes such as + and - from the rest of the number.
      */
-    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, //
+            defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String featurePath;
 
     /**
-     * Regular expression to match numbers. These are written to the output as {@code NUM}. 
+     * Regular expression to match numbers. These are written to the output as {@code NUM}.
      */
     public static final String PARAM_NUMBER_REGEX = "numberRegex";
     @ConfigurationParameter(name = PARAM_NUMBER_REGEX, mandatory = true, defaultValue = "")
@@ -118,26 +120,24 @@ public class TokenizedTextWriter
      * If no line breaks within a document are desired, set this value to {@code null}.
      */
     public static final String PARAM_COVERING_TYPE = "coveringType";
-    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = true, 
-            defaultValue = DEFAULT_COVERING_TYPE)
+    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = true, defaultValue = DEFAULT_COVERING_TYPE)
     private String coveringType;
 
     private StringSequenceGenerator sequenceGenerator;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
         try {
-            sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                    .featurePath(featurePath)
-                    .filterRegex(numberRegex)
-                    .filterRegexReplacement(NUMBER_REPLACEMENT)
-                    .stopwordsFile(stopwordsFile)
-                    .stopwordsReplacement(STOPWORD_REPLACEMENT)
-                    .coveringType(coveringType)
+            sequenceGenerator = new PhraseSequenceGenerator.Builder() //
+                    .featurePath(featurePath) //
+                    .filterRegex(numberRegex) //
+                    .filterRegexReplacement(NUMBER_REPLACEMENT) //
+                    .stopwordsFile(stopwordsFile) //
+                    .stopwordsReplacement(STOPWORD_REPLACEMENT) //
+                    .coveringType(coveringType) //
                     .buildStringSequenceGenerator();
         }
         catch (IOException e) {
@@ -152,12 +152,11 @@ public class TokenizedTextWriter
      * org.apache.uima.analysis_component.JCasAnnotator_ImplBase#process(org.apache.uima.jcas.JCas)
      */
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (var outputStream = getOutputStream(aJCas, extension)) {
             /* iterate over sentences */
-            for (String[] line : sequenceGenerator.tokenSequences(aJCas)) {
+            for (var line : sequenceGenerator.tokenSequences(aJCas)) {
                 if (line.length > 0) {
                     /* write first token */
                     outputStream.write(line[0].getBytes(targetEncoding));
@@ -176,8 +175,7 @@ public class TokenizedTextWriter
     }
 
     @Override
-    public void collectionProcessComplete()
-            throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         if (getTargetLocation() == null) {
             getLogger().info("Output written to file <stdout>");
