@@ -56,33 +56,33 @@ public class OpenNlpChunkerTrainerTest
         
         // Train model
         System.out.println("Training model from training data");
-        CollectionReaderDescription trainReader = createReaderDescription(
-                Conll2000Reader.class,
-                Conll2000Reader.PARAM_PATTERNS, split.getTrainingFiles(),
+        CollectionReaderDescription trainReader = createReaderDescription( //
+                Conll2000Reader.class, //
+                Conll2000Reader.PARAM_PATTERNS, split.getTrainingFiles(), //
                 Conll2000Reader.PARAM_LANGUAGE, ds.getLanguage());
         
-        AnalysisEngineDescription trainer = createEngineDescription(
-                OpenNlpChunkerTrainer.class,
-                OpenNlpChunkerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
+        AnalysisEngineDescription trainer = createEngineDescription( //
+                OpenNlpChunkerTrainer.class, //
+                OpenNlpChunkerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"), //
 //                OpenNlpChunkerTrainer.PARAM_ALGORITHM, "PERCEPTRON",
 //                OpenNlpChunkerTrainer.PARAM_CUTOFF, 0,
-                OpenNlpChunkerTrainer.PARAM_NUM_THREADS, 2,
-                OpenNlpChunkerTrainer.PARAM_LANGUAGE, ds.getLanguage(),
+                OpenNlpChunkerTrainer.PARAM_NUM_THREADS, 2, //
+                OpenNlpChunkerTrainer.PARAM_LANGUAGE, ds.getLanguage(), //
                 OpenNlpChunkerTrainer.PARAM_ITERATIONS, 10);
         
         SimplePipeline.runPipeline(trainReader, trainer);
         
         // Apply model and collect labels
         System.out.println("Applying model to test data");
-        CollectionReaderDescription testReader = createReaderDescription(
-                Conll2000Reader.class,
-                Conll2000Reader.PARAM_PATTERNS, split.getTestFiles(),
-                Conll2000Reader.PARAM_READ_CHUNK, false,
+        CollectionReaderDescription testReader = createReaderDescription( //
+                Conll2000Reader.class, //
+                Conll2000Reader.PARAM_PATTERNS, split.getTestFiles(), //
+                Conll2000Reader.PARAM_READ_CHUNK, false, //
                 Conll2000Reader.PARAM_LANGUAGE, ds.getLanguage());
         
-        AnalysisEngineDescription ner = createEngineDescription(
-                OpenNlpChunker.class,
-                OpenNlpChunker.PARAM_PRINT_TAGSET, true,
+        AnalysisEngineDescription ner = createEngineDescription( //
+                OpenNlpChunker.class, //
+                OpenNlpChunker.PARAM_PRINT_TAGSET, true, //
                 OpenNlpChunker.PARAM_MODEL_LOCATION, new File(targetFolder, "model.bin"));
 
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner),
