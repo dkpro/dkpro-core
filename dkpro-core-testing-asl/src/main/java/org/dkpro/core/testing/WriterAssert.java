@@ -26,9 +26,11 @@ import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParam
 import static org.dkpro.core.api.parameter.ComponentParameters.PARAM_TARGET_LOCATION;
 
 import java.io.File;
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -49,7 +51,7 @@ import org.slf4j.LoggerFactory;
 public class WriterAssert
     extends AbstractAssert<WriterAssert, AnalysisEngineDescription>
 {
-    private Logger LOG = LoggerFactory.getLogger(getClass());
+    private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     
     public static final String VAR_TARGET = "${TARGET}";
 
