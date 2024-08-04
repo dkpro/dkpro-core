@@ -43,7 +43,6 @@
   <modules>
     <module>../dkpro-core-corenlp-gpl</module>
     <module>../dkpro-core-lingpipe-gpl</module>
-    <module>../dkpro-core-matetools-gpl</module>
     <module>../dkpro-core-sfst-gpl</module>
     <module>../dkpro-core-io-tgrep-gpl</module>
   </modules>
