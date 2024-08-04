@@ -75,8 +75,7 @@ public class Web1TWriterTest
     }
 
     @Test
-    public void web1TFormatTest_randomFrequencies(@TempDir File folder)
-        throws Exception
+    public void web1TFormatTest_randomFrequencies(@TempDir File folder) throws Exception
     {
         Web1TFileAccessProvider web1tProvider = prepareWeb1TFormatTest(folder,
                 new String[] { Token.class.getName() });
@@ -109,9 +108,9 @@ public class Web1TWriterTest
     private void writeWeb1TFormat(File aFolder, String[] strings, int minFreq)
         throws UIMAException, IOException
     {
-        CollectionReader reader = createReader(TextReader.class,
-                TextReader.PARAM_LANGUAGE, "en",
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+        CollectionReader reader = createReader(TextReader.class, //
+                TextReader.PARAM_LANGUAGE, "en", //
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/", //
                 TextReader.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -120,11 +119,12 @@ public class Web1TWriterTest
 
         AnalysisEngineDescription lemmatizer = createEngineDescription(ClearNlpLemmatizer.class);
 
-        AnalysisEngineDescription ngramWriter = createEngineDescription(Web1TWriter.class,
-                Web1TWriter.PARAM_TARGET_LOCATION, aFolder,
-                Web1TWriter.PARAM_INPUT_TYPES, strings, 
-                Web1TWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM, 
-                Web1TWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM,
+        AnalysisEngineDescription ngramWriter = createEngineDescription( //
+                Web1TWriter.class, //
+                Web1TWriter.PARAM_TARGET_LOCATION, aFolder, //
+                Web1TWriter.PARAM_INPUT_TYPES, strings, //
+                Web1TWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM, //
+                Web1TWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM, //
                 Web1TWriter.PARAM_MIN_FREQUENCY, minFreq);
 
         SimplePipeline.runPipeline(reader, segmenter, tagger, lemmatizer, ngramWriter);
@@ -135,18 +135,18 @@ public class Web1TWriterTest
     {
         writeWeb1TFormat(target, inputTypes);
 
-        Web1TFileAccessProvider web1tProvider = new Web1TFileAccessProvider("en", target,
-                MIN_NGRAM, MAX_NGRAM);
+        Web1TFileAccessProvider web1tProvider = new Web1TFileAccessProvider("en", target, MIN_NGRAM,
+                MAX_NGRAM);
 
         return web1tProvider;
     }
 
-    private void writeWeb1TFormat(File target, String[] inputPath)
-        throws Exception
+    private void writeWeb1TFormat(File target, String[] inputPath) throws Exception
     {
-        CollectionReader reader = createReader(TextReader.class,
-                TextReader.PARAM_LANGUAGE, "en",
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+        CollectionReader reader = createReader( //
+                TextReader.class, //
+                TextReader.PARAM_LANGUAGE, "en", //
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/", //
                 TextReader.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -155,10 +155,11 @@ public class Web1TWriterTest
 
         AnalysisEngineDescription lemmatizer = createEngineDescription(ClearNlpLemmatizer.class);
 
-        AnalysisEngineDescription ngramWriter = createEngineDescription(Web1TWriter.class,
-                Web1TWriter.PARAM_TARGET_LOCATION, target,
-                Web1TWriter.PARAM_INPUT_TYPES, inputPath, 
-                Web1TWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM, 
+        AnalysisEngineDescription ngramWriter = createEngineDescription( //
+                Web1TWriter.class, //
+                Web1TWriter.PARAM_TARGET_LOCATION, target, //
+                Web1TWriter.PARAM_INPUT_TYPES, inputPath, //
+                Web1TWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM, //
                 Web1TWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM);
 
         SimplePipeline.runPipeline(reader, segmenter, tagger, lemmatizer, ngramWriter);

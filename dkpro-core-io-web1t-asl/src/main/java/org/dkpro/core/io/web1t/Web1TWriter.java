@@ -137,7 +137,7 @@ public class Web1TWriter
         super.initialize(context);
 
         try {
-            this.converter = new Web1TConverter(outputPath, minNgramLength, maxNgramLength);
+            converter = new Web1TConverter(outputPath, minNgramLength, maxNgramLength);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
