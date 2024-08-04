@@ -72,7 +72,7 @@ public class DKPro2Nif
         // Get a URI for the document
         DocumentMetaData dmd = DocumentMetaData.get(aJCas);
         String docuri = dmd.getDocumentUri() != null ? dmd.getDocumentUri()
-                : "urn:" + dmd.getDocumentId();
+                : "doc:" + dmd.getDocumentId();
         
         // Convert document -> context node
         Individual context;
