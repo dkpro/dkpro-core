@@ -157,7 +157,6 @@
     <profile>
       <id>experimental</id>
       <modules>
-        <module>../dkpro-core-cogroo-asl</module>
         <module>../dkpro-core-kuromoji-asl</module>
         <module>../dkpro-core-io-annis-asl</module>
         <module>../dkpro-core-io-gate-asl</module>
