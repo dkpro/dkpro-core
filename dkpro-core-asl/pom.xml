@@ -135,7 +135,6 @@
     <module>../dkpro-core-mstparser-asl</module>
     <module>../dkpro-core-mystem-asl</module>
     <module>../dkpro-core-ngrams-asl</module>
-    <module>../dkpro-core-nlp4j-asl</module>
     <module>../dkpro-core-norvig-asl</module>
     <module>../dkpro-core-opennlp-asl</module>
     <module>../dkpro-core-performance-asl</module>
