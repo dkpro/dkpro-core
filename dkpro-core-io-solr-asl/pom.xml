@@ -31,7 +31,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <solr-solrj.version>6.6.6</solr-solrj.version>
+    <solr-solrj.version>9.6.1</solr-solrj.version>
   </properties>
 
   <dependencies>
