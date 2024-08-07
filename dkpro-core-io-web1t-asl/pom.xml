@@ -153,11 +153,11 @@
           <ignoredDependencies>
             <ignoredDependency>org.dkpro.core:dkpro-core-api-segmentation-asl</ignoredDependency>
           </ignoredDependencies>
-            <usedDependencies>
-              <!-- Models not detected by byte-code analysis -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-pos-de-maxent</usedDependency>
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-lemma-de-gsd</usedDependency>
-            </usedDependencies>
+          <usedDependencies>
+            <!-- Models not detected by byte-code analysis -->
+            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
+            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-lemma-de-gsd</usedDependency>
+          </usedDependencies>
         </configuration>
       </plugin>
     </plugins>
