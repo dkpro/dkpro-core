@@ -106,7 +106,6 @@
     <!-- Processing modules -->
     <module>../dkpro-core-castransformation-asl</module>
     <module>../dkpro-core-cisstem-asl</module>
-    <module>../dkpro-core-clearnlp-asl</module>
     <module>../dkpro-core-commonscodec-asl</module>
     <module>../dkpro-core-decompounding-asl</module>
     <module>../dkpro-core-dictionaryannotator-asl</module>
