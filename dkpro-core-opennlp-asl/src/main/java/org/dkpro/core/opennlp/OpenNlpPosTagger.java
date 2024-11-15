@@ -56,6 +56,7 @@ import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTagFormat;
 import opennlp.tools.postag.POSTaggerME;
 
 /**
@@ -195,7 +196,7 @@ public class OpenNlpPosTagger
 
 // tag::model-provider-decl[]
                 // Create a new POS tagger instance from the loaded model
-                return new POSTaggerME(model);
+                return new POSTaggerME(model, POSTagFormat.CUSTOM);
             }
         };
 // end::model-provider-decl[]
