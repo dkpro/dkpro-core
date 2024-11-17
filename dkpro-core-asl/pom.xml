@@ -120,7 +120,6 @@
     <module>../dkpro-core-hunpos-asl</module>
     <module>../dkpro-core-icu-asl</module>
     <module>../dkpro-core-ivy-resolver-asl</module>
-    <module>../dkpro-core-ixa-asl</module>
     <module>../dkpro-core-jazzy-asl</module>
     <module>../dkpro-core-jtok-asl</module>
     <module>../dkpro-core-jieba-asl</module>
