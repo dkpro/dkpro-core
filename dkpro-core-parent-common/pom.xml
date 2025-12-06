@@ -35,10 +35,10 @@
     <junit-jupiter.version>5.10.3</junit-jupiter.version>
     <junit-platform.version>1.10.3</junit-platform.version>
     <mockito.version>4.11.0</mockito.version>
-    <assertj.version>3.26.3</assertj.version>
+    <assertj.version>3.27.6</assertj.version>
     <xmlunit.version>2.10.0</xmlunit.version>
 
-    <ant-version>1.10.14</ant-version>
+    <ant-version>1.10.15</ant-version>
     <activation.version>1.2.0</activation.version>
     <groovy.version>5.0.3</groovy.version>
     <icu4j.version>78.1</icu4j.version>
@@ -224,7 +224,7 @@
       <dependency>
         <groupId>com.fasterxml.woodstox</groupId>
         <artifactId>woodstox-core</artifactId>
-        <version>6.7.0</version>
+        <version>7.1.1</version>
         <exclusions>
           <exclusion>
             <groupId>javax.xml.stream</groupId>
@@ -372,11 +372,6 @@
         <type>pom</type>
       </dependency>
       <dependency>
-        <groupId>com.fasterxml.woodstox</groupId>
-        <artifactId>woodstox-core</artifactId>
-        <version>7.1.1</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.lucene</groupId>
         <artifactId>lucene-core</artifactId>
         <version>${lucene.version}</version>
@@ -419,12 +414,12 @@
       <dependency>
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
-        <version>1.3.3</version>
+        <version>1.3.5</version>
       </dependency>
       <dependency>
         <groupId>it.unimi.dsi</groupId>
         <artifactId>fastutil</artifactId>
-        <version>8.5.14</version>
+        <version>8.5.18</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ivy</groupId>
