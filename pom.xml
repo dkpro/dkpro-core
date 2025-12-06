@@ -85,8 +85,15 @@
   
   <properties>
     <build-ant-version>1.10.14</build-ant-version>
-    <build-groovy-version>4.0.22</build-groovy-version>
-    <build-asciidoctorj-pdf-version>2.3.17</build-asciidoctorj-pdf-version>
+    <build-groovy-version>5.0.3</build-groovy-version>
+    <build-asciidoctorj-pdf-version>2.3.23</build-asciidoctorj-pdf-version>
+    <!-- Plugin versions managed centrally -->
+    <versions.plugin.version>2.20.1</versions.plugin.version>
+    <gmavenplus.plugin.version>4.2.1</gmavenplus.plugin.version>
+    <spdx.plugin.version>1.0.3</spdx.plugin.version>
+    <license.plugin.version>5.0.0</license.plugin.version>
+    <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
+    <checkstyle.version>12.2.0</checkstyle.version>
   </properties>
 
   <modules>
@@ -115,7 +122,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
-          <version>2.16.2</version>
+          <version>${versions.plugin.version}</version>
           <configuration>
             <rulesUri>file:${session.executionRootDirectory}/dkpro-core-build/src/main/resources/dkpro-core/version-rules.xml</rulesUri>
           </configuration>
