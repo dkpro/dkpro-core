@@ -28,12 +28,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.resource.ExternalResourceDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasCreationUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -48,16 +46,88 @@ public class ResourceCollectionReaderBaseTest
     public static void before()
     {
         // Route logging through log4j
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
+        System.setProperty("org.apache.uima.logger.class",
+                "org.apache.uima.util.impl.Log4jLogger_impl");
     }
-    
+
     @Test
-    public void testClasspath()
-        throws Exception
+    public void testClasspath() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "classpath*:/org/",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]**/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testZip() throws Exception
+    {
+        var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "classpath*:/org/", ResourceCollectionReaderBase.PARAM_PATTERNS,
+                "jar:file:src/test/resources/testfiles.zip!",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]**/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testZip2() throws Exception
+    {
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "jar:file:src/test/resources/testfiles.zip",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]**/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testZip3() throws Exception
+    {
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "jar:file:src/test/resources/testfiles.zip",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]test*/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testZip4() throws Exception
+    {
+        var url = new File("src/test/resources/testfiles.zip").toURI().toURL();
+        var path = "jar:" + url.toString();
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, path,
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]test*/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testZipNoPattern() throws Exception
+    {
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "jar:file:src/test/resources/testfiles.zip!/testfiles/IobDecoder.class");
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Disabled("This does not work because the underlying Spring component does not do remote.")
+    @Test
+    public void testRemoteZip() throws Exception
+    {
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "jar:http://search.maven.org/remotecontent?filepath=org/annolab/tt4j/org.annolab.tt4j/1.0.16/org.annolab.tt4j-1.0.16.jar!",
+                ResourceCollectionReaderBase.PARAM_PATTERNS,
                 new String[] { "[+]**/FileSetCollectionReaderBase.class",
                         "[-]**/ResourceCollectionReaderBase.class" });
 
@@ -65,208 +135,107 @@ public class ResourceCollectionReaderBaseTest
     }
 
     @Test
-    public void testZip()
-        throws Exception
+    public void testFile() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "jar:file:src/test/resources/testfiles.zip!",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]**/ResourceCollectionReaderBase.class" });
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-
-    @Test
-    public void testZip2()
-        throws Exception
-    {
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "jar:file:src/test/resources/testfiles.zip",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]**/ResourceCollectionReaderBase.class" });
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-
-    @Test
-    public void testZip3()
-        throws Exception
-    {
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "jar:file:src/test/resources/testfiles.zip",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]test*/ResourceCollectionReaderBase.class" });
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-
-    @Test
-    public void testZip4()
-        throws Exception
-    {
-        URL url = new File("src/test/resources/testfiles.zip").toURI().toURL();
-        String path = "jar:" + url.toString();
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, path,
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]test*/ResourceCollectionReaderBase.class" });
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-
-    @Test
-    public void testZipNoPattern()
-        throws Exception
-    {
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "jar:file:src/test/resources/testfiles.zip!/testfiles/FileSetCollectionReaderBase.class");
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-
-    @Disabled("This does not work because the underlying Spring component does not do remote.")
-    @Test
-    public void testRemoteZip()
-        throws Exception
-    {
-        CollectionReader reader = createReader(
-                DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "jar:http://search.maven.org/remotecontent?filepath=org/annolab/tt4j/org.annolab.tt4j/1.0.16/org.annolab.tt4j-1.0.16.jar!",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]**/ResourceCollectionReaderBase.class" });
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-
-    @Test
-    public void testFile()
-        throws Exception
-    {
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/org/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "[+]**/FileSetCollectionReaderBase.java",
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/IobDecoder.java",
                         "[-]**/ResourceCollectionReaderBase.java" });
 
         searchForResourceCollectionReaderBase(reader);
     }
 
     @Test
-    public void testFileNoPrefix()
-        throws Exception
+    public void testFileNoPrefix() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
+                ResourceCollectionReaderBase.PARAM_PATTERNS,
+                new String[] { "**/IobDecoder.java", "[-]**/ResourceCollectionReaderBase.java" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testFileNoPattern1() throws Exception
+    {
+        var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/org/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "**/FileSetCollectionReaderBase.java",
-                        "[-]**/ResourceCollectionReaderBase.java" });
+                "file:src/main/java/org/**/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
 
     @Test
-    public void testFileNoPattern1()
-        throws Exception
+    public void testFileNoPattern2() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
+        var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/org/**/FileSetCollectionReaderBase.java");
+                "file:src/main/java/org/dkpro/core/api/io/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
 
     @Test
-    public void testFileNoPattern2()
-        throws Exception
+    public void testFileNoPattern3() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
+        var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+                "s*/main/java/org/dkpro/core/api/io/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
 
     @Test
-    public void testFileNoPattern3()
-        throws Exception
+    public void testFileNoPattern4() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "s*/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+        var reader = createReader(DummyReader.class, PARAM_SOURCE_LOCATION,
+                "file:s*/main/java/org/dkpro/core/api/io/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
 
     @Test
-    public void testFileNoPattern4()
-        throws Exception
+    public void testFileNoSource() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
-                PARAM_SOURCE_LOCATION,
-                "file:s*/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+        var reader = createReader(DummyReader.class, PARAM_PATTERNS,
+                "src/main/java/org/**/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
 
     @Test
-    public void testFileNoSource()
-        throws Exception
-    {
-        CollectionReader reader = createReader(DummyReader.class,
-                PARAM_PATTERNS, "src/main/java/org/**/FileSetCollectionReaderBase.java");
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-    
-    @Test
-    public void testBrokenPattern()
-        throws Exception
+    public void testBrokenPattern() throws Exception
     {
         assertThatExceptionOfType(ResourceInitializationException.class).isThrownBy(() -> {
-            CollectionReader reader = createReader(DummyReader.class,
-                    PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
-                    PARAM_PATTERNS, new String[] { "[?]**/FileSetCollectionReaderBase.java" });
+            CollectionReader reader = createReader(DummyReader.class, PARAM_SOURCE_LOCATION,
+                    "file:src/main/java/org/", PARAM_PATTERNS,
+                    new String[] { "[?]**/IobDecoder.java" });
             searchForResourceCollectionReaderBase(reader);
         });
     }
 
     @Test
-    public void testExternalLoaderLocator()
-        throws Exception
+    public void testExternalLoaderLocator() throws Exception
     {
-        ExternalResourceDescription locator = createResourceDescription(
+        var locator = createResourceDescription(
                 ResourceLoaderLocator.class);
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/org/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        "[+]**/FileSetCollectionReaderBase.java",
-                        "[-]**/ResourceCollectionReaderBase.java" },
+        var reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
+                ResourceCollectionReaderBase.PARAM_PATTERNS,
+                new String[] { "[+]**/IobDecoder.java", "[-]**/ResourceCollectionReaderBase.java" },
                 ResourceCollectionReaderBase.KEY_RESOURCE_RESOLVER, locator);
 
         searchForResourceCollectionReaderBase(reader);
     }
 
-    public void searchForResourceCollectionReaderBase(CollectionReader aReader)
-        throws Exception
+    public void searchForResourceCollectionReaderBase(CollectionReader aReader) throws Exception
     {
-        String goodNeedle = "FileSetCollectionReaderBase";
-        String badNeedle = "ResourceCollectionReaderBase";
+        var goodNeedle = "IobDecoder";
+        var badNeedle = "ResourceCollectionReaderBase";
 
-        boolean found = false;
-        CAS cas = CasCreationUtils.createCas(aReader.getProcessingResourceMetaData());
+        var found = false;
+        var cas = CasCreationUtils.createCas(aReader.getProcessingResourceMetaData());
         while (aReader.hasNext()) {
             aReader.getNext(cas);
             DocumentMetaData meta = DocumentMetaData.get(cas);
@@ -275,10 +244,10 @@ public class ResourceCollectionReaderBaseTest
             System.out.printf("  ColID: [%s]%n", meta.getCollectionId());
             System.out.printf("  DocID: [%s]%n", meta.getDocumentId());
             System.out.println();
-            
+
             assertTrue(meta.getDocumentBaseUri().length() == 0
                     || meta.getDocumentBaseUri().endsWith("/"));
-            
+
             if (meta.getDocumentUri().contains(goodNeedle)) {
                 found = true;
                 break;
@@ -297,16 +266,14 @@ public class ResourceCollectionReaderBaseTest
         extends ResourceCollectionReaderBase
     {
         @Override
-        public void getNext(CAS aCAS)
-            throws IOException, CollectionException
+        public void getNext(CAS aCAS) throws IOException, CollectionException
         {
             Resource res = nextFile();
             initCas(aCAS, res);
         }
 
         @Override
-        public void close()
-            throws IOException
+        public void close() throws IOException
         {
             // Ignore
         }
