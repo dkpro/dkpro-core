@@ -91,8 +91,8 @@ public class SharedPatriciaTries
             {
                 setContextObject(SharedPatriciaTries.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.decompounding-model-splitter-${language}-"
-                        + "${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.decompounding-model-splitter-${language}-" + "${variant}");
                 setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/"
                         + "splitter-${language}-${variant}.properties");
                 setDefault(VARIANT, "kompVVic");
@@ -115,8 +115,8 @@ public class SharedPatriciaTries
             {
                 setContextObject(SharedPatriciaTries.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.decompounding-model-splitter-${language}-"
-                        + "${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.decompounding-model-splitter-${language}-" + "${variant}");
                 setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/"
                         + "splitter-${language}-${variant}.properties");
                 setDefault(VARIANT, "kompVHic");
@@ -139,8 +139,8 @@ public class SharedPatriciaTries
             {
                 setContextObject(SharedPatriciaTries.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.decompounding-model-splitter-${language}-"
-                        + "${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.decompounding-model-splitter-${language}-" + "${variant}");
                 setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/"
                         + "splitter-${language}-${variant}.properties");
                 setDefault(VARIANT, "grfExt");
@@ -162,8 +162,7 @@ public class SharedPatriciaTries
 
     }
 
-    public SplitterAlgorithm getSplitter()
-        throws IOException, ResourceInitializationException
+    public SplitterAlgorithm getSplitter() throws IOException, ResourceInitializationException
     {
         if (this.splitter == null) {
             kompVVicProvider.configure();

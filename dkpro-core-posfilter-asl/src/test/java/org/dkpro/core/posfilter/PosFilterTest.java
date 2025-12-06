@@ -47,8 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class PosFilterTest
 {
     @Test
-    public void testEnglish1()
-        throws Exception
+    public void testEnglish1() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text1.conll";
 
@@ -60,8 +59,7 @@ public class PosFilterTest
     }
 
     @Test
-    public void testEnglish2()
-        throws Exception
+    public void testEnglish2() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text1.conll";
 
@@ -74,13 +72,12 @@ public class PosFilterTest
     }
 
     @Test
-    public void testEnglish3()
-        throws Exception
+    public void testEnglish3() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text2.conll";
 
         String[] tokens = { "This", "is", "a", "not", "so", "long", "test", "sentence", "." };
-        
+
         String[] lemmas = { "be", "long", "test", "sentence" };
 
         runTest("en", testDocument, tokens, lemmas, null, null, null,
@@ -89,15 +86,14 @@ public class PosFilterTest
     }
 
     @Test
-    public void testEnglish4()
-        throws Exception
+    public void testEnglish4() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text2.conll";
 
         String[] tokens = { "This", "is", "a", "not", "so", "long", "test", "sentence", "." };
-        
+
         String[] originalPos = { "VBZ", "JJ", "NN", "NN" };
-        
+
         String[] mappedPos = { "POS_VERB", "POS_ADJ", "POS_NOUN", "POS_NOUN" };
 
         runTest("en", testDocument, tokens, null, null, originalPos, mappedPos,
@@ -112,16 +108,15 @@ public class PosFilterTest
         List<Object> posFilterParams = new ArrayList<Object>();
         posFilterParams.addAll(asList(aExtraParams));
 
-        CollectionReaderDescription reader = createReaderDescription(Conll2006Reader.class, 
+        CollectionReaderDescription reader = createReaderDescription(Conll2006Reader.class,
                 Conll2006Reader.PARAM_SOURCE_LOCATION, testDocument,
-                Conll2006Reader.PARAM_POS_TAG_SET, "ptb",
-                Conll2006Reader.PARAM_LANGUAGE, "en");
-        
+                Conll2006Reader.PARAM_POS_TAG_SET, "ptb", Conll2006Reader.PARAM_LANGUAGE, "en");
+
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(SnowballStemmer.class),
                 createEngineDescription(PosFilter.class,
                         posFilterParams.toArray(new Object[posFilterParams.size()])));
-        
+
         JCas jcas = SimplePipeline.iteratePipeline(reader, aggregate).iterator().next();
 
         Type stemType = jcas.getCas().getTypeSystem().getType(Stem.class.getCanonicalName());

@@ -37,19 +37,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class ImsCwbReaderTest
 {
     @Test
-    public void wackyTest()
-        throws Exception
+    public void wackyTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                ImsCwbReader.class,
+        CollectionReaderDescription reader = createReaderDescription(ImsCwbReader.class,
                 ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
-                ImsCwbReader.PARAM_LANGUAGE, "de",
-                ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]test.txt");
+                ImsCwbReader.PARAM_LANGUAGE, "de", ImsCwbReader.PARAM_SOURCE_ENCODING,
+                "ISO-8859-15", ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]test.txt");
 
-        String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von " +
-                "September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai " +
-                "2000 von Stefan B\u00F6rzel \u00FCbernommen . ";
+        String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von "
+                + "September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai "
+                + "2000 von Stefan B\u00F6rzel \u00FCbernommen . ";
 
         int i = 0;
         for (JCas jcas : iteratePipeline(reader)) {
@@ -60,11 +57,11 @@ public class ImsCwbReaderTest
                 assertEquals(11406, select(jcas, POS.class).size());
                 assertEquals(717, select(jcas, Sentence.class).size());
 
-                assertEquals(firstSentence, select(jcas, Sentence.class).iterator().next()
-                        .getCoveredText());
+                assertEquals(firstSentence,
+                        select(jcas, Sentence.class).iterator().next().getCoveredText());
 
-                assertEquals("http://www.epguides.de/nikita.htm", DocumentMetaData.get(jcas)
-                        .getDocumentTitle());
+                assertEquals("http://www.epguides.de/nikita.htm",
+                        DocumentMetaData.get(jcas).getDocumentTitle());
             }
             i++;
         }
@@ -74,18 +71,13 @@ public class ImsCwbReaderTest
     }
 
     @Test
-    public void wackyTest_noAnnotations()
-        throws Exception
+    public void wackyTest_noAnnotations() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                ImsCwbReader.class,
+        CollectionReaderDescription reader = createReaderDescription(ImsCwbReader.class,
                 ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
-                ImsCwbReader.PARAM_PATTERNS, "[+]test.txt",
-                ImsCwbReader.PARAM_LANGUAGE, "de",
-                ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-                ImsCwbReader.PARAM_READ_TOKEN, false,
-                ImsCwbReader.PARAM_READ_LEMMA, false,
-                ImsCwbReader.PARAM_READ_POS, false,
+                ImsCwbReader.PARAM_PATTERNS, "[+]test.txt", ImsCwbReader.PARAM_LANGUAGE, "de",
+                ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15", ImsCwbReader.PARAM_READ_TOKEN,
+                false, ImsCwbReader.PARAM_READ_LEMMA, false, ImsCwbReader.PARAM_READ_POS, false,
                 ImsCwbReader.PARAM_READ_SENTENCES, false);
 
         int i = 0;
@@ -102,19 +94,14 @@ public class ImsCwbReaderTest
     }
 
     @Test
-    public void wackyTest__expectedException()
-        throws Exception
+    public void wackyTest__expectedException() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                ImsCwbReader.class,
+        CollectionReaderDescription reader = createReaderDescription(ImsCwbReader.class,
                 ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky",
-                ImsCwbReader.PARAM_LANGUAGE, "de",
-                ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-                ImsCwbReader.PARAM_READ_TOKEN, false,
-                ImsCwbReader.PARAM_READ_LEMMA, true,
-                ImsCwbReader.PARAM_READ_POS, false,
-                ImsCwbReader.PARAM_READ_SENTENCES, false);
-        
+                ImsCwbReader.PARAM_LANGUAGE, "de", ImsCwbReader.PARAM_SOURCE_ENCODING,
+                "ISO-8859-15", ImsCwbReader.PARAM_READ_TOKEN, false, ImsCwbReader.PARAM_READ_LEMMA,
+                true, ImsCwbReader.PARAM_READ_POS, false, ImsCwbReader.PARAM_READ_SENTENCES, false);
+
         assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(() -> iteratePipeline(reader).iterator().next());
     }

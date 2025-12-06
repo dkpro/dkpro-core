@@ -33,12 +33,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 public class SmileLancasterStemmerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", "computers Computers deliberately", 
-                new String[] {"comput", "comput", "delib"} );
-        
+        runTest("en", "computers Computers deliberately",
+                new String[] { "comput", "comput", "delib" });
+
         runTest("en",
                 "We need a very complicated example sentence , which "
                         + "contains as many constituents and dependencies as possible .",
@@ -47,67 +46,57 @@ public class SmileLancasterStemmerTest
     }
 
     @Test
-    public void testEnglishWithDefaultRulesConfiguration()
-        throws Exception
+    public void testEnglishWithDefaultRulesConfiguration() throws Exception
     {
-        runTest("en", "proceed",
-                new String[] {"process"}
-        );
+        runTest("en", "proceed", new String[] { "process" });
     }
 
     @Test
-    public void testEnglishWithClassPathRulesConfiguration()
-        throws Exception
+    public void testEnglishWithClassPathRulesConfiguration() throws Exception
     {
-        runTest("en", "proceed",
-                new String[] {"procee"}, // using default rules the expected would be process
-                SmileLancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt"
-        );
+        runTest("en", "proceed", new String[] { "procee" }, // using default rules the expected
+                                                            // would be process
+                SmileLancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt");
     }
 
     @Test
-    public void testEnglishWithFilePathRulesConfiguration()
-        throws Exception
+    public void testEnglishWithFilePathRulesConfiguration() throws Exception
     {
-        runTest("en", "proceed",
-                new String[] {"procee"}, // using default rules the expected would be process
-                SmileLancasterStemmer.PARAM_MODEL_LOCATION, "file:src/test/resources/Lancaster_test_rules.txt"
-        );
+        runTest("en", "proceed", new String[] { "procee" }, // using default rules the expected
+                                                            // would be process
+                SmileLancasterStemmer.PARAM_MODEL_LOCATION,
+                "file:src/test/resources/Lancaster_test_rules.txt");
     }
 
     @Test
-    public void testAlternativeLanguageConfiguration()
-        throws Exception
+    public void testAlternativeLanguageConfiguration() throws Exception
     {
-        runTest("dl", "proceed",
-                new String[] {"procee"}, // using default rules the expected would be process
+        runTest("dl", "proceed", new String[] { "procee" }, // using default rules the expected
+                                                            // would be process
                 SmileLancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt",
-                SmileLancasterStemmer.PARAM_LANGUAGE, "dl"
-        );
+                SmileLancasterStemmer.PARAM_LANGUAGE, "dl");
     }
 
     @Test
-    public void testEnglishCaseInsensitive()
-        throws Exception
+    public void testEnglishCaseInsensitive() throws Exception
     {
-        runTest("en", "EDUCATIONAL Educational educational", 
-                new String[] {"educ", "educ", "educ"});
+        runTest("en", "EDUCATIONAL Educational educational",
+                new String[] { "educ", "educ", "educ" });
     }
 
     @Test
-    public void testEnglishCaseFiltered()
-        throws Exception
+    public void testEnglishCaseFiltered() throws Exception
     {
         String[] stems = { "educ" };
         String[] pos = { "NNS", "JJ", "NN", "NNS" };
-        
+
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(OpenNlpPosTagger.class),
                 createEngineDescription(SmileLancasterStemmer.class,
                         SmileLancasterStemmer.PARAM_FILTER_FEATUREPATH, "pos/PosValue",
                         SmileLancasterStemmer.PARAM_FILTER_CONDITION_OPERATOR, "EQUALS",
                         SmileLancasterStemmer.PARAM_FILTER_CONDITION_VALUE, "JJ"));
-        
+
         JCas result = TestRunner.runTest(aggregate, "en", "Babies educational sleep .s");
 
         AssertAnnotations.assertStem(stems, select(result, Stem.class));
@@ -121,7 +110,7 @@ public class SmileLancasterStemmerTest
                 createEngineDescription(SmileLancasterStemmer.class, aParams), aLanguage, aText);
 
         AssertAnnotations.assertStem(aStems, select(result, Stem.class));
-        
+
         return result;
     }
 }

@@ -69,11 +69,9 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "XPath-based XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })
 public class XmlXPathReader
     extends FileSetCollectionReaderBase
 {
@@ -146,8 +144,7 @@ public class XmlXPathReader
     private HashMap<String, String> substitution;
 
     @Override
-    public void initialize(UimaContext arg0)
-        throws ResourceInitializationException
+    public void initialize(UimaContext arg0) throws ResourceInitializationException
     {
         super.initialize(arg0);
 
@@ -184,9 +181,8 @@ public class XmlXPathReader
         // Substitution
         if (substituteTags != null && substituteTags.length > 0) {
             if (substituteTags.length % 2 != 0) {
-                throw new IllegalArgumentException(
-                        "Parameter substitute tags must "
-                                + "be given in an array of even number of elements, in 'before, after' order");
+                throw new IllegalArgumentException("Parameter substitute tags must "
+                        + "be given in an array of even number of elements, in 'before, after' order");
             }
 
             useSubstitution = true;
@@ -246,8 +242,7 @@ public class XmlXPathReader
      *         false iff there is neither nodes nor files remaining
      */
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         if (nodes.isEmpty()) {
             if (fileIterator.hasNext()) {
@@ -262,8 +257,7 @@ public class XmlXPathReader
     }
 
     @Override
-    public void getNext(CAS cas)
-        throws IOException
+    public void getNext(CAS cas) throws IOException
     {
         // Initialize CAS with document meta data
         initCas(cas, currentFileResource, null);
@@ -346,9 +340,9 @@ public class XmlXPathReader
         }
         else if (idNodes.getLength() != 1) {
             // DocID not unique (two id elements in one doc)
-            throw new IllegalStateException("DocID tag \"" + docIdTag
-                    + "\" has multiple occurences: "
-                    + currentFileResource.getFile().getAbsolutePath());
+            throw new IllegalStateException(
+                    "DocID tag \"" + docIdTag + "\" has multiple occurences: "
+                            + currentFileResource.getFile().getAbsolutePath());
         }
 
         Node idNode = idNodes.item(0);

@@ -83,8 +83,7 @@ public class MappingProviderTest
     @Test
     public void testTagsetChange() throws Exception
     {
-        CasConfigurableProviderBase<String> modelProvider = 
-                new CasConfigurableProviderBase<String>()
+        CasConfigurableProviderBase<String> modelProvider = new CasConfigurableProviderBase<String>()
         {
             {
                 setDefault(LOCATION, "src/test/resources/${language}.model");
@@ -122,8 +121,7 @@ public class MappingProviderTest
     @Test
     public void testRedirectedModel() throws Exception
     {
-        CasConfigurableProviderBase<String> modelProvider = 
-                new CasConfigurableProviderBase<String>()
+        CasConfigurableProviderBase<String> modelProvider = new CasConfigurableProviderBase<String>()
         {
             {
                 setDefault(LOCATION, "src/test/resources/${language}-redirect2.properties");

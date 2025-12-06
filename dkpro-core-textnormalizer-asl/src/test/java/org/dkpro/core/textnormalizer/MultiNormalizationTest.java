@@ -29,29 +29,25 @@ import org.junit.jupiter.api.Test;
 public class MultiNormalizationTest
 {
     @Test
-    public void test()
-            throws Exception
+    public void test() throws Exception
     {
         runTest("Isch habe ein- en super-tollen Bär-\nen.", "ich habe einen spirituellen Bären.");
     }
-    
-    public void runTest(String inputText, String normalizedText)
-        throws Exception
+
+    public void runTest(String inputText, String normalizedText) throws Exception
     {
 
-        AnalysisEngineDescription hyphens = createEngineDescription(
-                HyphenationRemover.class,
+        AnalysisEngineDescription hyphens = createEngineDescription(HyphenationRemover.class,
                 HyphenationRemover.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription spellchecker = createEngineDescription(
-                JazzyChecker.class,
+        AnalysisEngineDescription spellchecker = createEngineDescription(JazzyChecker.class,
                 JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
 
         AnalysisEngineDescription spelling = createEngineDescription(SpellingNormalizer.class);
 
-        assertTransformedText(normalizedText, inputText, "de",hyphens, segmenter, spellchecker, 
+        assertTransformedText(normalizedText, inputText, "de", hyphens, segmenter, spellchecker,
                 spelling);
     }
 }

@@ -28,40 +28,47 @@ public class PARelation
     private String subj;
     private String pred;
     private String obj;
-    
+
     public PARelation()
     {
         // Default constructor
     }
-    
+
     public String getId()
     {
         return id;
     }
+
     public void setId(String aId)
     {
         id = aId;
     }
+
     public String getSubj()
     {
         return subj;
     }
+
     public void setSubj(String aSubj)
     {
         subj = aSubj;
     }
+
     public String getPred()
     {
         return pred;
     }
+
     public void setPred(String aPred)
     {
         pred = aPred;
     }
+
     public String getObj()
     {
         return obj;
     }
+
     public void setObj(String aObj)
     {
         obj = aObj;

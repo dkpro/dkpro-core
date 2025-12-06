@@ -59,11 +59,11 @@ public class TextFormatVectorizerUtils
      * @see #readEmbeddingFileTxt(InputStream, boolean)
      */
     public static Map<String, float[]> readEmbeddingFileTxt(File file, boolean hasHeader)
-            throws IOException
+        throws IOException
     {
         LOG.info("Reading embeddings from file " + file);
-        InputStream is = CompressionUtils
-                .getInputStream(file.getAbsolutePath(), new FileInputStream(file));
+        InputStream is = CompressionUtils.getInputStream(file.getAbsolutePath(),
+                new FileInputStream(file));
 
         return readEmbeddingFileTxt(is, hasHeader);
     }
@@ -82,7 +82,7 @@ public class TextFormatVectorizerUtils
      */
     public static Map<String, float[]> readEmbeddingFileTxt(InputStream inputStream,
             boolean hasHeader)
-            throws IOException
+        throws IOException
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -134,16 +134,15 @@ public class TextFormatVectorizerUtils
         String[] array = line.split(" ");
         int size = array.length;
 
-        double[] vector = Arrays.stream(array, 1, size)
-                .mapToDouble(Float::parseFloat)
-                .toArray();
+        double[] vector = Arrays.stream(array, 1, size).mapToDouble(Float::parseFloat).toArray();
         return Pair.of(array[0], doubleToFloatArray(vector));
     }
 
     /**
      * Convert a double array into a float array
      *
-     * @param doubles a double[]
+     * @param doubles
+     *            a double[]
      * @return a float[] of the same length as the input with each element casted to a float
      */
     private static float[] doubleToFloatArray(double[] doubles)
@@ -167,7 +166,7 @@ public class TextFormatVectorizerUtils
      *             if an I/O error occurs.
      */
     public static void convertMalletEmbeddingsToBinary(File malletEmbeddings, File targetFile)
-            throws IOException
+        throws IOException
     {
         convertMalletEmbeddingsToBinary(malletEmbeddings, false, Locale.US, targetFile);
     }
@@ -189,10 +188,10 @@ public class TextFormatVectorizerUtils
      */
     public static void convertMalletEmbeddingsToBinary(File malletEmbeddings, boolean aCaseless,
             Locale aLocale, File targetFile)
-            throws IOException
+        throws IOException
     {
         Map<String, float[]> embeddings = readEmbeddingFileTxt(malletEmbeddings, false);
-        BinaryWordVectorUtils
-                .convertWordVectorsToBinary(embeddings, aCaseless, aLocale, targetFile);
+        BinaryWordVectorUtils.convertWordVectorsToBinary(embeddings, aCaseless, aLocale,
+                targetFile);
     }
 }

@@ -140,8 +140,8 @@ public class LeftToRightSplitterAlgorithm
 
             if (leftGood && rightGood) {
                 // createFromString removes the trailing + if rightWord is empty.
-                DecompoundedWord split = DecompoundedWord.createFromString(leftWord + "+"
-                        + rightWord);
+                DecompoundedWord split = DecompoundedWord
+                        .createFromString(leftWord + "+" + rightWord);
                 split.setSplitPos(i);
                 result.add(split);
             }
@@ -153,9 +153,8 @@ public class LeftToRightSplitterAlgorithm
                             leftWord.length() - morpheme.length());
                     if (leftWord.endsWith(morpheme) && dict.contains(leftWithoutMorpheme)
                             && rightGood) {
-                        DecompoundedWord split = DecompoundedWord
-                                .createFromString(leftWithoutMorpheme + "(" + morpheme + ")+"
-                                        + rightWord);
+                        DecompoundedWord split = DecompoundedWord.createFromString(
+                                leftWithoutMorpheme + "(" + morpheme + ")+" + rightWord);
                         split.setSplitPos(i);
                         result.add(split);
                     }

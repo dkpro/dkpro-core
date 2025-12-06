@@ -30,11 +30,11 @@ public class TigerGraph
 
     @XmlAttribute
     public boolean discontinuous;
-    
+
     @XmlElementWrapper(name = "terminals")
     @XmlElement(name = "t")
     public List<TigerTerminal> terminals;
-    
+
     @XmlElementWrapper(name = "nonterminals")
     @XmlElement(name = "nt")
     public List<TigerNonTerminal> nonTerminals;

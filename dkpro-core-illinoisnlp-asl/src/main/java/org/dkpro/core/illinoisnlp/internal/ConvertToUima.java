@@ -41,7 +41,7 @@ public class ConvertToUima
     {
         CAS cas = aJCas.getCas();
         List<Constituent> pos = document.getView(ViewNames.POS).getConstituents();
-        
+
         int i = 0;
         for (Constituent p : pos) {
             String tag = p.getLabel();
@@ -57,13 +57,13 @@ public class ConvertToUima
             i++;
         }
     }
-    
+
     public static void convertChunks(JCas aJCas, List<Token> casTokens, TextAnnotation document,
             MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> pos = document.getView(ViewNames.SHALLOW_PARSE).getConstituents();
-        
+
         for (Constituent p : pos) {
             String tag = p.getLabel();
 
@@ -75,13 +75,13 @@ public class ConvertToUima
             chunkAnno.addToIndexes();
         }
     }
-    
+
     public static void convertNamedEntity(JCas aJCas, TextAnnotation document,
             MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> ne = document.getView(ViewNames.NER_CONLL).getConstituents();
-        
+
         for (Constituent p : ne) {
             String tag = p.getLabel();
 
@@ -93,17 +93,17 @@ public class ConvertToUima
             neAnno.addToIndexes();
         }
     }
-    
+
     public static void convertLemma(JCas aJCas, List<Token> casTokens, TextAnnotation document)
     {
         List<Constituent> lemma = document.getView(ViewNames.LEMMA).getConstituents();
-        
+
         int i = 0;
         for (Constituent l : lemma) {
             Lemma casLemma = new Lemma(aJCas, l.getStartCharOffset(), l.getEndCharOffset());
             casLemma.setValue(l.getLabel());
             casLemma.addToIndexes();
-            
+
             casTokens.get(i).setLemma(casLemma);
             i++;
         }

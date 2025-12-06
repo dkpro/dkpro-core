@@ -37,20 +37,19 @@ public class FrequencyBasedTest
 {
     private static File source;
     private static File jWeb1T;
-    
+
     private static File testOutput;
     private static File index;
 
     @BeforeAll
-    public static void createIndex()
-        throws Exception
+    public static void createIndex() throws Exception
     {
         source = new File("src/test/resources/ranking/n-grams");
         jWeb1T = new File("src/test/resources/web1t/de");
-        
+
         testOutput = new File("target/test-output/FrequencyBasedTest");
         index = new File(testOutput, "index");
-        
+
         index.mkdirs();
 
         LuceneIndexer indexer = new LuceneIndexer(source, index);
@@ -58,8 +57,7 @@ public class FrequencyBasedTest
     }
 
     @Test
-    public void testRankList()
-        throws IOException
+    public void testRankList() throws IOException
     {
         try (Finder finder = new Finder(index, jWeb1T)) {
             FrequencyGeometricMeanRanker ranker = new FrequencyGeometricMeanRanker(finder);
@@ -86,8 +84,7 @@ public class FrequencyBasedTest
     }
 
     @Test
-    public void testRankTree()
-        throws IOException
+    public void testRankTree() throws IOException
     {
         try (Finder finder = new Finder(index, jWeb1T)) {
             FrequencyGeometricMeanRanker ranker = new FrequencyGeometricMeanRanker(finder);
@@ -95,19 +92,18 @@ public class FrequencyBasedTest
             DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
             DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
             DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
-    
+
             DecompoundingTree tree = new DecompoundingTree(s1);
             tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s2));
             tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
-    
+
             DecompoundedWord result = ranker.highestRank(tree);
             assertEquals(s3, result);
         }
     }
 
     @AfterAll
-    public static void tearDown()
-        throws Exception
+    public static void tearDown() throws Exception
     {
         // Delete index again
         for (File f : index.listFiles()) {

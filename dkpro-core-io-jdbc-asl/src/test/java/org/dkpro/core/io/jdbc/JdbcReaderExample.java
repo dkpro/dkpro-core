@@ -52,17 +52,13 @@ public class JdbcReaderExample
 
     @Disabled("This is just an example")
     @Test
-    public void localhostMysqlExample()
-        throws UIMAException, IOException
+    public void localhostMysqlExample() throws UIMAException, IOException
     {
         // This is a dummy example. It only shows how to use JdbcReader and may not run on your
         // system.
-        CollectionReader jdbcReader = CollectionReaderFactory.createReader(
-                JdbcReader.class,
-                JdbcReader.PARAM_DATABASE, DB_NAME,
-                JdbcReader.PARAM_USER, DB_USER,
-                JdbcReader.PARAM_PASSWORD, DB_PASS,
-                JdbcReader.PARAM_QUERY, query);
+        CollectionReader jdbcReader = CollectionReaderFactory.createReader(JdbcReader.class,
+                JdbcReader.PARAM_DATABASE, DB_NAME, JdbcReader.PARAM_USER, DB_USER,
+                JdbcReader.PARAM_PASSWORD, DB_PASS, JdbcReader.PARAM_QUERY, query);
 
         AnalysisEngine extractor = AnalysisEngineFactory.createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, "-");
@@ -71,8 +67,7 @@ public class JdbcReaderExample
     }
 
     @Test
-    public void hsqldbExampleTest()
-        throws SQLException, UIMAException, IOException
+    public void hsqldbExampleTest() throws SQLException, UIMAException, IOException
     {
         // Setup in-memory database.
         Connection conn = null;
@@ -81,10 +76,14 @@ public class JdbcReaderExample
             conn = DriverManager.getConnection("jdbc:hsqldb:mem:/" + DB_NAME, DB_USER, DB_PASS);
             stmnt = conn.createStatement();
             stmnt.addBatch("CREATE TABLE " + TBL_NAME + " (title varchar(50), text varchar(100));");
-            stmnt.addBatch("INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title1', 'text...1');");
-            stmnt.addBatch("INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title2', 'text...2');");
-            stmnt.addBatch("INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title3', 'text...3');");
-            stmnt.addBatch("INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title4', 'text...4');");
+            stmnt.addBatch(
+                    "INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title1', 'text...1');");
+            stmnt.addBatch(
+                    "INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title2', 'text...2');");
+            stmnt.addBatch(
+                    "INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title3', 'text...3');");
+            stmnt.addBatch(
+                    "INSERT INTO " + TBL_NAME + " (title, text) VALUES ('title4', 'text...4');");
             stmnt.executeBatch();
         }
         finally {
@@ -92,14 +91,11 @@ public class JdbcReaderExample
             DbUtils.closeQuietly(conn);
         }
         // Read out with JdbcReader.
-        CollectionReader jdbcReader = CollectionReaderFactory.createReader(
-                JdbcReader.class,
-                JdbcReader.PARAM_DATABASE, "test_db",
-                JdbcReader.PARAM_USER, "root",
-                JdbcReader.PARAM_PASSWORD, "",
-                JdbcReader.PARAM_QUERY, query,
-                JdbcReader.PARAM_DRIVER, "org.hsqldb.jdbc.JDBCDriver",
-                JdbcReader.PARAM_CONNECTION, "jdbc:hsqldb:mem:");
+        CollectionReader jdbcReader = CollectionReaderFactory.createReader(JdbcReader.class,
+                JdbcReader.PARAM_DATABASE, "test_db", JdbcReader.PARAM_USER, "root",
+                JdbcReader.PARAM_PASSWORD, "", JdbcReader.PARAM_QUERY, query,
+                JdbcReader.PARAM_DRIVER, "org.hsqldb.jdbc.JDBCDriver", JdbcReader.PARAM_CONNECTION,
+                "jdbc:hsqldb:mem:");
 
         int i = 1;
         while (jdbcReader.hasNext()) {

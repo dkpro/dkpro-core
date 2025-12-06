@@ -35,19 +35,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class FileSetCollectionReaderBaseTest
 {
     @Test
-    public void testBaseUri()
-        throws Exception
+    public void testBaseUri() throws Exception
     {
-        CollectionReader reader = createReader(DummyReader.class,
-                createTypeSystemDescription(), FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "src/main/java/org/", FileSetCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/*.java" });
+        CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
+                FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/main/java/org/",
+                FileSetCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.java" });
 
         checkBaseUri(reader);
     }
 
-    public void checkBaseUri(CollectionReader aReader)
-        throws Exception
+    public void checkBaseUri(CollectionReader aReader) throws Exception
     {
         CAS cas = CasCreationUtils.createCas(aReader.getProcessingResourceMetaData());
         while (aReader.hasNext()) {
@@ -66,8 +63,7 @@ public class FileSetCollectionReaderBaseTest
         extends FileSetCollectionReaderBase
     {
         @Override
-        public void getNext(CAS aCAS)
-            throws IOException, CollectionException
+        public void getNext(CAS aCAS) throws IOException, CollectionException
         {
             FileResource res = nextFile();
             initCas(aCAS, res, null);

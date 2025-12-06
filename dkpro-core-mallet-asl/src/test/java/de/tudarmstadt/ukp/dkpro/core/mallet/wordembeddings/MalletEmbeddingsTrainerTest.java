@@ -50,8 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class MalletEmbeddingsTrainerTest
 {
     @Test
-    public void test(@TempDir File tempDir)
-            throws UIMAException, IOException
+    public void test(@TempDir File tempDir) throws UIMAException, IOException
     {
         int expectedLength = 699;
 
@@ -63,8 +62,7 @@ public class MalletEmbeddingsTrainerTest
 
         CollectionReaderDescription reader = createReaderDescription( //
                 TextReader.class, //
-                TextReader.PARAM_SOURCE_LOCATION, text,
-                TextReader.PARAM_LANGUAGE, "en");
+                TextReader.PARAM_SOURCE_LOCATION, text, TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription( //
                 MalletEmbeddingsTrainer.class, //
@@ -91,8 +89,7 @@ public class MalletEmbeddingsTrainerTest
     }
 
     @Test
-    public void testNoTarget()
-            throws IOException, UIMAException
+    public void testNoTarget() throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
 
@@ -105,13 +102,12 @@ public class MalletEmbeddingsTrainerTest
         AnalysisEngineDescription embeddings = createEngineDescription( //
                 MalletEmbeddingsTrainer.class, //
                 MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1);
-        assertThatExceptionOfType(ResourceInitializationException.class).isThrownBy(() -> 
-        SimplePipeline.runPipeline(reader, segmenter, embeddings));
+        assertThatExceptionOfType(ResourceInitializationException.class)
+                .isThrownBy(() -> SimplePipeline.runPipeline(reader, segmenter, embeddings));
     }
 
     @Test
-    public void testFilterRegex(@TempDir File tempDir)
-            throws UIMAException, IOException
+    public void testFilterRegex(@TempDir File tempDir) throws UIMAException, IOException
     {
         File text = new File("src/test/resources/txt/*");
         File embeddingsFile = new File(tempDir, "dummy.vec");
@@ -146,8 +142,7 @@ public class MalletEmbeddingsTrainerTest
     }
 
     @Test
-    public void testCompressed(@TempDir File tempDir)
-            throws UIMAException, IOException
+    public void testCompressed(@TempDir File tempDir) throws UIMAException, IOException
     {
         CompressionMethod compressionMethod = CompressionMethod.GZIP;
         File text = new File("src/test/resources/txt/*");
@@ -173,26 +168,24 @@ public class MalletEmbeddingsTrainerTest
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         try (var bufferedReader = new BufferedReader(
-                new InputStreamReader(CompressionUtils.getInputStream(
-                        targetFile.getAbsolutePath(), Files.newInputStream(targetFile.toPath()))))) {
-        String line;
-        int lineCounter = 0;
-        while ((line = bufferedReader.readLine()) != null) {
-            lineCounter++;
-            String[] fields = line.split(" ");
-            assertEquals(dimensions + 1, fields.length);
-            assertTrue(Arrays.stream(fields, 1, fields.length)
-                    .mapToDouble(Double::parseDouble)
-                    .allMatch(f -> 1 > f && -1 < f));
-        }
-        assertEquals(expectedLength, lineCounter);
+                new InputStreamReader(CompressionUtils.getInputStream(targetFile.getAbsolutePath(),
+                        Files.newInputStream(targetFile.toPath()))))) {
+            String line;
+            int lineCounter = 0;
+            while ((line = bufferedReader.readLine()) != null) {
+                lineCounter++;
+                String[] fields = line.split(" ");
+                assertEquals(dimensions + 1, fields.length);
+                assertTrue(Arrays.stream(fields, 1, fields.length).mapToDouble(Double::parseDouble)
+                        .allMatch(f -> 1 > f && -1 < f));
+            }
+            assertEquals(expectedLength, lineCounter);
 
         }
     }
 
     @Test
-    public void testCharacterEmbeddings(@TempDir File tempDir)
-            throws IOException, UIMAException
+    public void testCharacterEmbeddings(@TempDir File tempDir) throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
         File embeddingsFile = new File(tempDir, "embeddings.vec");
@@ -227,7 +220,7 @@ public class MalletEmbeddingsTrainerTest
 
     @Test
     public void testCharacterEmbeddingsTokens(@TempDir File tempDir)
-            throws IOException, UIMAException
+        throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
         File embeddingsFile = new File(tempDir, "embeddings.vec");

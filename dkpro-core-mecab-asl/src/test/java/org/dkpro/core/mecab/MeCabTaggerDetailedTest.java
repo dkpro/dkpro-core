@@ -47,7 +47,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
 
-public class MeCabTaggerDetailedTest {
+public class MeCabTaggerDetailedTest
+{
     @BeforeEach
     public void prepare()
     {
@@ -58,14 +59,13 @@ public class MeCabTaggerDetailedTest {
                 asList("linux-x86_64", "linux-x86_32", "osx-x86_64").contains(pd.getPlatformId()),
                 "Unsupported platform");
     }
-    
+
     @Test
-    public void testMeCabTagger() throws UIMAException, IOException {
-        CollectionReaderDescription reader = createReaderDescription(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja",
-                TextReader.PARAM_PATTERNS, new String[] { "[+]detailedTest.txt" });
+    public void testMeCabTagger() throws UIMAException, IOException
+    {
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources", TextReader.PARAM_LANGUAGE,
+                "ja", TextReader.PARAM_PATTERNS, new String[] { "[+]detailedTest.txt" });
 
         AnalysisEngine jTagger = createEngine(MeCabTagger.class);
         try {
@@ -79,12 +79,14 @@ public class MeCabTaggerDetailedTest {
             for (Sentence s : totalFound) {
                 System.out.println(s.getCoveredText());
             }
-        } finally {
+        }
+        finally {
             jTagger.destroy();
         }
     }
 
-    private void evaluateSentence(Collection<Sentence> totalFound, JCas jcas) {
+    private void evaluateSentence(Collection<Sentence> totalFound, JCas jcas)
+    {
         Sentence sent = totalFound.iterator().next();
         List<JapaneseToken> tokens = JCasUtil.selectCovered(jcas, JapaneseToken.class,
                 sent.getBegin(), sent.getEnd());
@@ -241,7 +243,8 @@ public class MeCabTaggerDetailedTest {
         assertEquals("", tokens.get(token).getDan());
     }
 
-    private String getPOS(JCas jcas, Token token) {
+    private String getPOS(JCas jcas, Token token)
+    {
         List<POS> selectCovered = JCasUtil.selectCovered(jcas, POS.class, token.getBegin(),
                 token.getEnd());
         if (selectCovered.size() == 1) {
@@ -250,7 +253,8 @@ public class MeCabTaggerDetailedTest {
         return "";
     }
 
-    private String getLemma(JCas jcas, Token token) {
+    private String getLemma(JCas jcas, Token token)
+    {
         List<Lemma> selectCovered = JCasUtil.selectCovered(jcas, Lemma.class, token.getBegin(),
                 token.getEnd());
         if (selectCovered.size() == 1) {
@@ -259,7 +263,8 @@ public class MeCabTaggerDetailedTest {
         return "";
     }
 
-    private String getForm(Token token) {
+    private String getForm(Token token)
+    {
         return token.getCoveredText();
     }
 

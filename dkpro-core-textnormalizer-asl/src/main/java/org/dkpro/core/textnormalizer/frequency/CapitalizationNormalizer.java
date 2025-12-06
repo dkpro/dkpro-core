@@ -43,8 +43,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Capitalization Normalizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class CapitalizationNormalizer
     extends JCasTransformerChangeBased_ImplBase
 {
@@ -56,8 +55,7 @@ public class CapitalizationNormalizer
     protected FrequencyCountProvider frequencyProvider;
 
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         // Pattern for repetitions of one character more than 2 times
         Pattern moreThanTwoCapitalLetter = Pattern.compile("[A-Z].*[A-Z]");
@@ -77,8 +75,7 @@ public class CapitalizationNormalizer
         }
     }
 
-    private String getBestReplacement(String origTokenText)
-        throws IOException
+    private String getBestReplacement(String origTokenText) throws IOException
     {
         List<String[]> all = new ArrayList<String[]>();
 

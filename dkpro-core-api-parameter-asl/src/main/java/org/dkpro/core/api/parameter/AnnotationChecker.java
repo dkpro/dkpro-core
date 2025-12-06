@@ -33,14 +33,14 @@ public class AnnotationChecker
     private static Map<AnalysisComponent, Boolean> instanceMapExists = new WeakHashMap<>();
     private static Map<AnalysisComponent, Boolean> instanceMapNotExists = new WeakHashMap<>();
 
-    public static void requireExists(AnalysisComponent callingInstance, JCas jcas,
-            Logger logger, Class... types)
+    public static void requireExists(AnalysisComponent callingInstance, JCas jcas, Logger logger,
+            Class... types)
     {
         requireExists(callingInstance, jcas.getCas(), logger, types);
     }
 
-    public static void requireExists(AnalysisComponent callingInstance, CAS cas,
-            Logger logger, Class... types)
+    public static void requireExists(AnalysisComponent callingInstance, CAS cas, Logger logger,
+            Class... types)
     {
         // we only want to check the first CAS
         if (!instanceMapExists.containsKey(callingInstance)) {
@@ -57,14 +57,14 @@ public class AnnotationChecker
         }
     }
 
-    public static void requireNotExists(AnalysisComponent callingInstance, JCas jcas,
-            Logger logger, Class... types)
+    public static void requireNotExists(AnalysisComponent callingInstance, JCas jcas, Logger logger,
+            Class... types)
     {
         requireNotExists(callingInstance, jcas.getCas(), logger, types);
     }
 
-    public static void requireNotExists(AnalysisComponent callingInstance, CAS cas,
-            Logger logger, Class... types)
+    public static void requireNotExists(AnalysisComponent callingInstance, CAS cas, Logger logger,
+            Class... types)
     {
         // we only want to check the first CAS
         if (!instanceMapNotExists.containsKey(callingInstance)) {

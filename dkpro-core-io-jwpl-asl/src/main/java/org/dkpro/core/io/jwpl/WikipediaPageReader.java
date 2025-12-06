@@ -33,10 +33,9 @@ import org.dkpro.jwpl.parser.ParsedPage;
  *
  * No Redirects or disambiguation pages are regarded, however.
  */
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig"})
-public class WikipediaPageReader extends WikipediaStandardReaderBase
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig" })
+public class WikipediaPageReader
+    extends WikipediaStandardReaderBase
 {
     /** If set to true, only the first paragraph instead of the whole article is used. */
     public static final String PARAM_ONLY_FIRST_PARAGRAPH = "OnlyFirstParagraph";
@@ -44,24 +43,19 @@ public class WikipediaPageReader extends WikipediaStandardReaderBase
     private boolean onlyFirstParagraph;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
         if (!outputPlainText && onlyFirstParagraph) {
-            throw new ResourceInitializationException(
-                    new IllegalArgumentException(
-                            "First paragraph can only be accessed in plain text mode. Either '" +
-                            PARAM_ONLY_FIRST_PARAGRAPH + "' or '" + PARAM_OUTPUT_PLAIN_TEXT +
-                            "' need to be set differently."
-                    )
-            );
+            throw new ResourceInitializationException(new IllegalArgumentException(
+                    "First paragraph can only be accessed in plain text mode. Either '"
+                            + PARAM_ONLY_FIRST_PARAGRAPH + "' or '" + PARAM_OUTPUT_PLAIN_TEXT
+                            + "' need to be set differently."));
         }
     }
 
-
-    //TODO Use SWEBLE
+    // TODO Use SWEBLE
     @Override
     protected String getPlainDocumentText(Page page)
     {
@@ -74,7 +68,7 @@ public class WikipediaPageReader extends WikipediaStandardReaderBase
             }
         }
         else {
-            if (pp != null ) {
+            if (pp != null) {
                 text = pp.getText();
             }
         }

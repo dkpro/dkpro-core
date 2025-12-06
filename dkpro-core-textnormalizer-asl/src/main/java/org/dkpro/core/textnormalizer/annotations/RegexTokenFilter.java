@@ -44,9 +44,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Regex Token Filter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class RegexTokenFilter
     extends JCasAnnotator_ImplBase
 {
@@ -68,16 +66,14 @@ public class RegexTokenFilter
     private Pattern filterRegex;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         filterRegex = Pattern.compile(regex);
     };
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         List<Token> toRemove = new LinkedList<>();
         for (Token token : select(aJCas, Token.class)) {

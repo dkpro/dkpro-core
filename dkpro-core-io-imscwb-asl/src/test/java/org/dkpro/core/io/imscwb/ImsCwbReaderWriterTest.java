@@ -30,15 +30,14 @@ import org.junit.jupiter.api.io.TempDir;
 public class ImsCwbReaderWriterTest
 {
     @Test
-    public void thatRoundTripWithTuebaDzWorks(@TempDir File tempDir)
-        throws Exception
+    public void thatRoundTripWithTuebaDzWorks(@TempDir File tempDir) throws Exception
     {
         ReaderAssert.assertThat(//
-                        ImsCwbReader.class,//
-                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/tuebadz/corpus-sample-ref.txt",//
-                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",//
-                        ImsCwbReader.PARAM_LANGUAGE, "de")//
+                ImsCwbReader.class, //
+                ImsCwbReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/tuebadz/corpus-sample-ref.txt", //
+                ImsCwbReader.PARAM_POS_TAG_SET, "stts", //
+                ImsCwbReader.PARAM_LANGUAGE, "de")//
                 .usingWriter(//
                         ImsCwbWriter.class)//
                 .writingToSingular(new File(tempDir, "/corpus-sample-ref.txt").toString())//
@@ -48,13 +47,11 @@ public class ImsCwbReaderWriterTest
     }
 
     @Test
-    public void thatRoundTripWithMultipleInputsWorks(@TempDir File tempDir)
-        throws Exception
+    public void thatRoundTripWithMultipleInputsWorks(@TempDir File tempDir) throws Exception
     {
         ReaderAssert.assertThat( //
-                        ImsCwbReader.class,//
-                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/multiple/*.vrt")//
+                ImsCwbReader.class, //
+                ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/multiple/*.vrt")//
                 .usingWriter(//
                         ImsCwbWriter.class)//
                 .writingTo(tempDir)//
@@ -68,12 +65,11 @@ public class ImsCwbReaderWriterTest
     public void thatOneWayWithWackyWorks(@TempDir File tempDir) throws Exception
     {
         ReaderAssert.assertThat(//
-                        ImsCwbReader.class,//
-                        ImsCwbReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/wacky/test.txt",//
-                        ImsCwbReader.PARAM_POS_TAG_SET, "stts",//
-                        ImsCwbReader.PARAM_LANGUAGE, "de",//
-                        ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1")//
+                ImsCwbReader.class, //
+                ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/test.txt", //
+                ImsCwbReader.PARAM_POS_TAG_SET, "stts", //
+                ImsCwbReader.PARAM_LANGUAGE, "de", //
+                ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1")//
                 .usingWriter(//
                         ImsCwbWriter.class)//
                 .writingToSingular(new File(tempDir, "/test.txt").toString())//

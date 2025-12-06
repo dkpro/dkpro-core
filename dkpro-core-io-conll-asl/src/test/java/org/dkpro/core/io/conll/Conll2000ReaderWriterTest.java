@@ -26,11 +26,10 @@ import org.junit.jupiter.api.Test;
 public class Conll2000ReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
         testRoundTrip( //
-                createReaderDescription(Conll2000Reader.class),  //
+                createReaderDescription(Conll2000Reader.class), //
                 createEngineDescription(Conll2000Writer.class), //
                 "conll/2000/chunk2000_test.conll");
     }

@@ -46,7 +46,8 @@ public class TextReaderTest
     private static final List<String> FILES = Arrays.asList(FILE1, FILE2);
 
     @Test
-    void thatBomIsNotIncludedInDocumentText(@TempDir Path aTemp)  throws Exception {
+    void thatBomIsNotIncludedInDocumentText(@TempDir Path aTemp) throws Exception
+    {
         var documentText = "text";
         var tempFile = aTemp.resolve("test.txt");
 
@@ -58,17 +59,17 @@ public class TextReaderTest
             // Write text
             os.write(documentText.getBytes(UTF_8));
         }
-        
+
         var reader = createReader( //
                 TextReader.class, //
                 TextReader.PARAM_SOURCE_LOCATION, tempFile.toString());
-        
+
         var jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCasImpl());
-        
+
         assertThat(jcas.getDocumentText()).isEqualTo(documentText);
     }
-    
+
     @Test
     public void fileSystemReaderTest() throws Exception
     {

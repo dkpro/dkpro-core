@@ -38,8 +38,7 @@ public class Reuters21578TxtReaderTest
     private static final String REUTERS_FILE_PATTERN = "reut2-*.txt";
 
     @Test
-    public void test()
-            throws ResourceInitializationException
+    public void test() throws ResourceInitializationException
     {
         String expectedTitle = "BAHIA COCOA REVIEW";
         String expectedTextStart = "Showers";

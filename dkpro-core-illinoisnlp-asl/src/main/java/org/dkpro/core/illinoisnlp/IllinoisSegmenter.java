@@ -36,23 +36,21 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Illinois CCG Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class IllinoisSegmenter
     extends SegmenterBase
 {
     private Tokenizer tokenizer;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         tokenizer = new IllinoisTokenizer();
     }
-    
+
     @Override
     protected void process(JCas aJCas, String text, int zoneBegin)
         throws AnalysisEngineProcessException
@@ -70,29 +68,28 @@ public class IllinoisSegmenter
                     ts[i - 1].getSecond() + zoneBegin);
             lastBegin = i;
         }
-        
-        tokens.getSentenceEndTokenIndexes();
-        
 
-//        
-//        for (Paragraph paragraph : paragraphs) {
-//            if (writeParagraph) {
-//                Annotation p = new de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph(
-//                        aJCas, paragraph.getStartIndex(), paragraph.getEndIndex());
-//                p.addToIndexes();
-//            }
-//            
-//            for (TextUnit tu : paragraph.getTextUnits()) {
-//                if (isWriteSentence()) {
-//                    createSentence(aJCas, tu.getStartIndex(), tu.getEndIndex());
-//                }
-//                
-//                for (Token t : tu.getTokens()) {
-//                    if (isWriteToken()) {
-//                        createToken(aJCas, t.getStartIndex(), t.getEndIndex());
-//                    }
-//                }
-//            }
-//        }
+        tokens.getSentenceEndTokenIndexes();
+
+        //
+        // for (Paragraph paragraph : paragraphs) {
+        // if (writeParagraph) {
+        // Annotation p = new de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph(
+        // aJCas, paragraph.getStartIndex(), paragraph.getEndIndex());
+        // p.addToIndexes();
+        // }
+        //
+        // for (TextUnit tu : paragraph.getTextUnits()) {
+        // if (isWriteSentence()) {
+        // createSentence(aJCas, tu.getStartIndex(), tu.getEndIndex());
+        // }
+        //
+        // for (Token t : tu.getTokens()) {
+        // if (isWriteToken()) {
+        // createToken(aJCas, t.getStartIndex(), t.getEndIndex());
+        // }
+        // }
+        // }
+        // }
     }
 }

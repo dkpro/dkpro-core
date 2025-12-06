@@ -32,42 +32,39 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 public class LingPipePosTaggerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", null, "This is a test .",
-                new String[] { "DT", "BEZ", "AT", "NN", "." },
+        runTest("en", null, "This is a test .", new String[] { "DT", "BEZ", "AT", "NN", "." },
                 new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
-        runTest("en", null, "A neural net .", 
-                new String[] { "AT", "JJ", "NN", "." }, 
+        runTest("en", null, "A neural net .", new String[] { "AT", "JJ", "NN", "." },
                 new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
                 new String[] { "NP", "BEZ", "VBG", "NNS", "." },
                 new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
-        
+
         // This is WRONG tagging. "jumps" is tagged as "NNS"
-        JCas jcas = runTest("en", "general-brown", "The quick brown fox jumps over the lazy dog . \n",
+        JCas jcas = runTest("en", "general-brown",
+                "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "AT", "JJ", "JJ", "NN", "NNS", "IN", "AT", "JJ", "NN", "." },
-                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN",
-                        "POS_PUNCT" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
+                        "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         String[] brownTags = { "'", "''", "(", ")", "*", ",", "--", ".", ":", "ABL", "ABN", "ABX",
                 "AP", "AP$", "AT", "BE", "BED", "BEDZ", "BEG", "BEM", "BEN", "BER", "BEZ", "CC",
-                "CD", "CD$", "CS", "DO", "DOD", "DOZ", "DT", "DT$", "DTI", "DTS", "DTX", "EX",
-                "HV", "HVD", "HVG", "HVN", "HVZ", "IN", "JJ", "JJ$", "JJR", "JJS", "JJT", "MD",
-                "NIL", "NN", "NN$", "NNS", "NNS$", "NP", "NP$", "NPS", "NPS$", "NR", "NR$", "NRS",
-                "OD", "PN", "PN$", "PP$", "PP$$", "PPL", "PPLS", "PPO", "PPS", "PPSS", "QL", "QLP",
-                "RB", "RB$", "RBR", "RBT", "RN", "RP", "TL", "TO", "UH", "VB", "VBD", "VBG", "VBN",
-                "VBZ", "WDT", "WP$", "WPO", "WPS", "WQL", "WRB", "``" };
+                "CD", "CD$", "CS", "DO", "DOD", "DOZ", "DT", "DT$", "DTI", "DTS", "DTX", "EX", "HV",
+                "HVD", "HVG", "HVN", "HVZ", "IN", "JJ", "JJ$", "JJR", "JJS", "JJT", "MD", "NIL",
+                "NN", "NN$", "NNS", "NNS$", "NP", "NP$", "NPS", "NPS$", "NR", "NR$", "NRS", "OD",
+                "PN", "PN$", "PP$", "PP$$", "PPL", "PPLS", "PPO", "PPS", "PPSS", "QL", "QLP", "RB",
+                "RB$", "RBR", "RBT", "RN", "RP", "TL", "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBZ",
+                "WDT", "WP$", "WPO", "WPS", "WQL", "WRB", "``" };
 
         String[] unmappedBrown = { "'", "''", "*", "--", "AP$", "DT$", "JJ$", "NIL", "``" };
-        
+
         AssertAnnotations.assertTagset(POS.class, "brown", brownTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "brown", unmappedBrown, jcas);
 
-        
         jcas = runTest("en", "bio-genia", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "RB", "VBN", "NN", "NNS", "IN", "DT", "NN", "NN", "." },
                 new String[] { "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP",
@@ -83,18 +80,17 @@ public class LingPipePosTaggerTest
         AssertAnnotations.assertTagset(POS.class, "ptb", ptbTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPtb, jcas);
 
-        
         jcas = runTest("en", "bio-medpost", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DD", "NN", "JJ", "NN", "NNS", "II", "DD", "NN", "NN", "." },
                 new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
                         "POS_DET", "POS_NOUN", "POS_NOUN", "POS_PUNCT" });
-        
+
         String[] medpostTags = { "''", "(", ")", ",", ".", ":", "CC", "CC+", "CS", "CS+", "CSN",
                 "CST", "DB", "DD", "EX", "GE", "II", "II+", "JJ", "JJ+", "JJR", "JJT", "MC", "NN",
                 "NN+", "NNP", "NNS", "PN", "PND", "PNG", "PNR", "RR", "RR+", "RRR", "RRT", "SYM",
                 "TO", "VBB", "VBD", "VBG", "VBI", "VBN", "VBZ", "VDB", "VDD", "VDN", "VDZ", "VHB",
-                "VHD", "VHG", "VHI", "VHZ", "VM", "VVB", "VVD", "VVG", "VVGJ", "VVGN", "VVI",
-                "VVN", "VVNJ", "VVZ", "``" };
+                "VHD", "VHG", "VHI", "VHZ", "VM", "VVB", "VVD", "VVG", "VVGJ", "VVGN", "VVI", "VVN",
+                "VVNJ", "VVZ", "``" };
 
         String[] unmappedMedpost = { "CC+", "CS+", "II+", "JJ+", "NN+", "RR+" };
 
@@ -107,13 +103,13 @@ public class LingPipePosTaggerTest
         throws Exception
     {
         AnalysisEngine engine = createEngine(LingPipePosTagger.class,
-                LingPipePosTagger.PARAM_VARIANT, variant,
-                LingPipePosTagger.PARAM_PRINT_TAGSET, true);
+                LingPipePosTagger.PARAM_VARIANT, variant, LingPipePosTagger.PARAM_PRINT_TAGSET,
+                true);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-        
+
         return jcas;
     }
 }

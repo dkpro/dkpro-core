@@ -17,6 +17,10 @@
  */
 package org.dkpro.core.api.io;
 
+import static java.util.Collections.sort;
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
+import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,7 +35,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
@@ -63,10 +66,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  * <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
  * 
  * <pre>
- * CollectionReader reader = createReader(FooReader.class,
- *         FooReader.PARAM_LANGUAGE, &quot;en&quot;,
- *         FooReader.PARAM_SOURCE_LOCATION, &quot;some/path&quot;,
- *         FooReader.PARAM_PATTERNS, &quot;[+]foodata/*&#42;/*.foo&quot;);
+ * var reader = createReader(FooReader.class, FooReader.PARAM_LANGUAGE, &quot;en&quot;,
+ *         FooReader.PARAM_SOURCE_LOCATION, &quot;some/path&quot;, FooReader.PARAM_PATTERNS,
+ *         &quot;[+]foodata/*&#42;/*.foo&quot;);
  * </pre>
  * <p>
  * The list of resources returned is sorted, so for the same set of resources, they are always
@@ -78,17 +80,16 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  * @since 1.0.6
  */
 @Component(value = OperationType.READER)
-@Parameters(
-        exclude = { 
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN,
-                ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES,
-                ResourceCollectionReaderBase.PARAM_LOG_FREQ })
+@Parameters(exclude = { //
+        ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, //
+        ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN, //
+        ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES, //
+        ResourceCollectionReaderBase.PARAM_LOG_FREQ })
 public abstract class ResourceCollectionReaderBase
     extends CasCollectionReader_ImplBase
 {
     protected static final String JAR_PREFIX = "jar:file:";
-    
+
     public static final String INCLUDE_PREFIX = "[+]";
     public static final String EXCLUDE_PREFIX = "[-]";
 
@@ -137,14 +138,14 @@ public abstract class ResourceCollectionReaderBase
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
-    
+
     /**
      * Name of optional external (UIMA) resource that contains the Locator for a (Spring)
      * ResourcePatternResolver implementation for locating (spring) resources.
      */
     public static final String KEY_RESOURCE_RESOLVER = "resolver";
     @ExternalResource(key = KEY_RESOURCE_RESOLVER, mandatory = false)
-    private final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+    private PathMatchingResourcePatternResolver resolver;
 
     /**
      * The frequency with which read documents are logged.
@@ -158,23 +159,25 @@ public abstract class ResourceCollectionReaderBase
     private int completed;
     private Collection<Resource> resources;
     private Iterator<Resource> resourceIterator;
-    
+
     private ProgressMeter progress;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
+        resolver = new PathMatchingResourcePatternResolver();
+        resolver.setUseCaches(false);
+
         if ((patterns == null || patterns.length == 0) && StringUtils.isBlank(sourceLocation)) {
             throw new IllegalArgumentException(
                     "Either a source location, pattern, or both must be specified.");
         }
-        
+
         // if an ExternalResourceLocator providing a custom ResourcePatternResolver
         // has been specified, use it, by default use PathMatchingResourcePatternresolver
-        
+
         // If there are no patterns, then look for a pattern in the location itself.
         // If the source location contains a wildcard, split it up into a base and a pattern
         if (patterns == null) {
@@ -182,10 +185,10 @@ public abstract class ResourceCollectionReaderBase
             int colon = sourceLocation.indexOf(':');
             if (asterisk != -1 && asterisk > colon) {
                 // asterisk < colon in a case such as "classpath*:file.txt"
-                int separator = Math.max(Math.max(
-                        sourceLocation.lastIndexOf(File.separatorChar, asterisk),
-                        sourceLocation.lastIndexOf('/', asterisk)), sourceLocation.lastIndexOf(':',
-                        asterisk));
+                int separator = Math.max(
+                        Math.max(sourceLocation.lastIndexOf(File.separatorChar, asterisk),
+                                sourceLocation.lastIndexOf('/', asterisk)),
+                        sourceLocation.lastIndexOf(':', asterisk));
                 if (separator != -1) {
                     // If there is a separator before the asterisk use it to separate into
                     // base and pattern. This is meant to catch cases such as "dir/foo*.txt" of
@@ -202,8 +205,8 @@ public abstract class ResourceCollectionReaderBase
         }
 
         // Parse the patterns and inject them into the FileSet
-        List<String> includes = new ArrayList<String>();
-        List<String> excludes = getDefaultExcludes();
+        var includes = new ArrayList<String>();
+        var excludes = getDefaultExcludes();
         if (patterns != null) {
             for (String pattern : patterns) {
                 if (pattern.startsWith(INCLUDE_PREFIX)) {
@@ -213,9 +216,9 @@ public abstract class ResourceCollectionReaderBase
                     excludes.add(pattern.substring(EXCLUDE_PREFIX.length()));
                 }
                 else if (pattern.matches("^\\[.\\].*")) {
-                    throw new ResourceInitializationException(new IllegalArgumentException(
-                            "Patterns have to start with " + INCLUDE_PREFIX + " or "
-                                    + EXCLUDE_PREFIX + "."));
+                    throw new ResourceInitializationException(
+                            new IllegalArgumentException("Patterns have to start with "
+                                    + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX + "."));
                 }
                 else {
                     includes.add(pattern);
@@ -241,7 +244,7 @@ public abstract class ResourceCollectionReaderBase
             resources = scan(getSourceLocation(), includes, excludes);
 
             progress = new ProgressMeter(resources.size());
-            
+
             // Get the iterator that will be used to actually traverse the FileSet.
             resourceIterator = resources.iterator();
 
@@ -251,10 +254,10 @@ public abstract class ResourceCollectionReaderBase
             throw new ResourceInitializationException(e);
         }
     }
-    
+
     protected List<String> getDefaultExcludes()
     {
-        List<String> excludes = new ArrayList<String>();
+        var excludes = new ArrayList<String>();
         // These should be the same as documented here: http://ant.apache.org/manual/dirtasks.html
         if (useDefaultExcludes) {
             excludes.add("**/*~");
@@ -298,10 +301,9 @@ public abstract class ResourceCollectionReaderBase
      * @throws MalformedURLException
      *             if the location cannot be converted to a valid URL.
      */
-    protected String locationToUrl(String aLocation)
-        throws MalformedURLException
+    protected String locationToUrl(String aLocation) throws MalformedURLException
     {
-        String location = aLocation;
+        var location = aLocation;
 
         if (isUnmarkedFileLocation(aLocation)) {
             location = new File(location).toURI().toURL().toString();
@@ -341,7 +343,7 @@ public abstract class ResourceCollectionReaderBase
     protected Resource nextFile()
     {
         try {
-            Resource res = resourceIterator.next();
+            var res = resourceIterator.next();
             progress.setDone(completed);
             if (logFreq > 0 && completed % logFreq == 0) {
                 getLogger().info(String.format("%s: %s", progress, res.location));
@@ -352,17 +354,17 @@ public abstract class ResourceCollectionReaderBase
             completed++;
         }
     }
-    
+
     protected String getSourceLocation()
     {
         return sourceLocation;
     }
-    
+
     protected boolean isSingleLocation()
     {
         return patterns == null;
     }
-    
+
     /**
      * Get the base location used by the reader. This location always ends in a / if it is set at
      * all. If there is no base, an empty string is returned.
@@ -373,11 +375,11 @@ public abstract class ResourceCollectionReaderBase
     {
         return getBase(getSourceLocation());
     }
-    
+
     protected String getBase(String aBase)
     {
-        boolean singleLocation = patterns == null;
-        
+        var singleLocation = patterns == null;
+
         String base;
         if (aBase != null) {
             base = aBase;
@@ -404,10 +406,9 @@ public abstract class ResourceCollectionReaderBase
     {
         return resolver;
     }
-    
+
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return resourceIterator.hasNext();
     }
@@ -416,11 +417,11 @@ public abstract class ResourceCollectionReaderBase
             Collection<String> aExcludes)
         throws IOException
     {
-        boolean singleLocation = isSingleLocation();
-        String base = getBase(aBase);
+        var singleLocation = isSingleLocation();
+        var base = getBase(aBase);
 
         getLogger().info("Scanning [" + base + "]");
-        
+
         Collection<String> includes;
         Collection<String> excludes;
 
@@ -443,19 +444,19 @@ public abstract class ResourceCollectionReaderBase
             excludes = aExcludes;
         }
 
-        AntPathMatcher matcher = new AntPathMatcher();
-        List<Resource> result = new ArrayList<Resource>();
+        var matcher = new AntPathMatcher();
+        var result = new ArrayList<Resource>();
 
         // Collect the bases only if we need them later on. If no base is set, then getUri() will
         // not work because the base ("") may be resolved to one or more JAR locations and getUri()
         // internally expects file locations
-        Set<String> rsBases = new HashSet<String>();
+        var rsBases = new HashSet<String>();
         if (base.length() > 0 && !singleLocation) {
             // E.g. a classpath location may resolve to multiple locations. Thus we collect all the
             // locations to which the base resolves.
-            org.springframework.core.io.Resource[] rBases = resolver.getResources(base);
-            for (org.springframework.core.io.Resource rBase : rBases) {
-                URI uri = getUri(rBase, false);
+            var rBases = resolver.getResources(base);
+            for (var rBase : rBases) {
+                var uri = getUri(rBase, false);
                 if (uri != null) {
                     rsBases.add(uri.toString());
                 }
@@ -465,19 +466,18 @@ public abstract class ResourceCollectionReaderBase
         // Now we process the include patterns one after the other
         for (String include : includes) {
             // We resolve the resources for each base+include combination.
-            org.springframework.core.io.Resource[] resourceList = resolver.getResources(base
-                    + include);
-            nextResource: for (org.springframework.core.io.Resource resource : resourceList) {
-                URI uResource = getUri(resource, true);
+            var resourceList = resolver.getResources(base + include);
+            nextResource: for (var resource : resourceList) {
+                var uResource = getUri(resource, true);
                 if (uResource == null) {
                     continue;
                 }
-                String sResource = uResource.toString();
+                var sResource = uResource.toString();
 
                 // Determine the resolved base for this location
                 String matchBase = null;
                 if (base.length() > 0 && !singleLocation) {
-                    for (String b : rsBases) {
+                    for (var b : rsBases) {
                         if (!sResource.startsWith(b)) {
                             continue;
                         }
@@ -491,8 +491,8 @@ public abstract class ResourceCollectionReaderBase
 
                     if (matchBase == null) {
                         // This should not happen...
-                        throw new IllegalStateException("No base found for location [" + sResource
-                                + "]");
+                        throw new IllegalStateException(
+                                "No base found for location [" + sResource + "]");
                     }
                 }
                 else {
@@ -505,8 +505,8 @@ public abstract class ResourceCollectionReaderBase
                 // resolved base locations one after the other and looking if the result is
                 // matched by the exclude.
                 if (excludes != null) {
-                    for (String exclude : excludes) {
-                        String rest = sResource.substring(matchBase.length());
+                    for (var exclude : excludes) {
+                        var rest = sResource.substring(matchBase.length());
                         if (matcher.match(exclude, rest)) {
                             if (getLogger().isDebugEnabled()) {
                                 getLogger().debug("Excluded: " + sResource);
@@ -517,19 +517,19 @@ public abstract class ResourceCollectionReaderBase
                 }
 
                 // If the resource was not excluded, we add it to the results.
-                String p = sResource.substring(matchBase.length());
-                String loc = base + p;
+                var p = sResource.substring(matchBase.length());
+                var loc = base + p;
                 if (isSingleLocation()) {
                     // If it was a single location, then use the parent folder as base
-                    p = StringUtils.substringAfterLast(matchBase, "/");
-                    matchBase = StringUtils.substringBeforeLast(matchBase, "/") + '/';
+                    p = substringAfterLast(matchBase, "/");
+                    matchBase = substringBeforeLast(matchBase, "/") + '/';
                 }
-                Resource r = new Resource(loc, base, resource.getURI(), matchBase, p, resource);
+                var r = new Resource(loc, base, resource.getURI(), matchBase, p, resource);
                 result.add(r);
             }
         }
 
-        Collections.sort(result, new Comparator<Resource>()
+        sort(result, new Comparator<Resource>()
         {
             @Override
             public int compare(Resource aO1, Resource aO2)
@@ -539,11 +539,9 @@ public abstract class ResourceCollectionReaderBase
         });
 
         if (singleLocation && result.isEmpty()) {
-            throw new FileNotFoundException(
-                    "Resource not found or not a file: ["
-                            + aBase
-                            + "]. Please specify a file or use a pattern. Directories without patterns are "
-                            + "not valid.");
+            throw new FileNotFoundException("Resource not found or not a file: [" + aBase
+                    + "]. Please specify a file or use a pattern. Directories without patterns are "
+                    + "not valid.");
         }
 
         return result;
@@ -615,10 +613,10 @@ public abstract class ResourceCollectionReaderBase
      */
     protected void initCas(CAS aCas, Resource aResource, String aQualifier)
     {
-        String qualifier = aQualifier != null ? "#" + aQualifier : "";
+        var qualifier = aQualifier != null ? "#" + aQualifier : "";
         try {
             // Set the DKPro Core document metadata
-            DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
+            var docMetaData = DocumentMetaData.create(aCas);
             docMetaData.setDocumentTitle(new File(aResource.getPath()).getName());
             docMetaData.setDocumentUri(aResource.getResolvedUri().toString() + qualifier);
             docMetaData.setDocumentId(aResource.getPath() + qualifier);
@@ -694,8 +692,7 @@ public abstract class ResourceCollectionReaderBase
             return resource;
         }
 
-        public InputStream getInputStream()
-            throws IOException
+        public InputStream getInputStream() throws IOException
         {
             return resource.getInputStream();
         }

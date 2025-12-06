@@ -34,7 +34,7 @@ import com.ibm.icu.text.CharsetMatch;
 public class FindEncoding
 {
     private @TempDir Path cache;
-    
+
     @Disabled("Used at times for offline testing / development")
     @Test
     public void getEncoding() throws IOException

@@ -56,10 +56,11 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated
- * before.
+ * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated before.
  *
- * <p><b>References</b></p>
+ * <p>
+ * <b>References</b>
+ * </p>
  * <ul>
  * <li>HALÁCSY, Péter; KORNAI, András; ORAVECZ, Csaba. HunPos: an open source trigram tagger. In:
  * Proceedings of the 45th annual meeting of the ACL on interactive poster and demonstration
@@ -71,11 +72,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @ResourceMetaData(name = "HunPos POS-Tagger")
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
-        outputs = { 
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class HunPosTagger
     extends JCasAnnotator_ImplBase
@@ -95,19 +93,20 @@ public class HunPosTagger
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -119,16 +118,14 @@ public class HunPosTagger
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -136,7 +133,7 @@ public class HunPosTagger
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     private CasConfigurableProviderBase<File> modelProvider;
@@ -144,8 +141,7 @@ public class HunPosTagger
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -167,8 +163,7 @@ public class HunPosTagger
             }
 
             @Override
-            protected File produceResource(URL aUrl)
-                throws IOException
+            protected File produceResource(URL aUrl) throws IOException
             {
                 return ResourceUtils.getUrlAsFile(aUrl, true);
             }
@@ -183,8 +178,7 @@ public class HunPosTagger
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
@@ -217,10 +211,10 @@ public class HunPosTagger
         try {
             proc = pb.start();
 
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(proc.getOutputStream(),
-                    modelEncoding));
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(),
-                    modelEncoding));
+            PrintWriter out = new PrintWriter(
+                    new OutputStreamWriter(proc.getOutputStream(), modelEncoding));
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(proc.getInputStream(), modelEncoding));
 
             for (Sentence sentence : select(aJCas, Sentence.class)) {
                 List<Token> tokens = selectCovered(Token.class, sentence);

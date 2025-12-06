@@ -21,7 +21,7 @@ public final class AncoraConstants
 {
     public static final String TAG_ARTICLE = "article";
     public static final String TAG_SENTENCE = "sentence";
-    
+
     public static final String ATTR_WORD = "wd";
     public static final String ATTR_LEMMA = "lem";
     public static final String ATTR_POS = "pos";

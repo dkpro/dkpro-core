@@ -52,7 +52,7 @@ public class Lif2DKPro
 {
     private Map<String, Token> tokenIdx;
     private Container container;
-    
+
     public void convert(Container aContainer, JCas aJCas)
     {
         tokenIdx = new HashMap<>();
@@ -63,33 +63,34 @@ public class Lif2DKPro
 
         // Paragraph
         getView(Discriminators.Uri.PARAGRAPH).getAnnotations().stream()
-            .filter(a -> Discriminators.Uri.PARAGRAPH.equals(a.getAtType()))
-            .forEach(para -> convertParagraph(aJCas, para));
+                .filter(a -> Discriminators.Uri.PARAGRAPH.equals(a.getAtType()))
+                .forEach(para -> convertParagraph(aJCas, para));
 
         // Sentence
         getView(Discriminators.Uri.SENTENCE).getAnnotations().stream()
-            .filter(a -> Discriminators.Uri.SENTENCE.equals(a.getAtType()))
-            .forEach(sent -> convertSentence(aJCas, sent));
+                .filter(a -> Discriminators.Uri.SENTENCE.equals(a.getAtType()))
+                .forEach(sent -> convertSentence(aJCas, sent));
 
         // Token, POS, Lemma (builds token index)
         getView(Discriminators.Uri.TOKEN).getAnnotations().stream()
-            .filter(a -> Discriminators.Uri.TOKEN.equals(a.getAtType()))
-            .forEach(token -> convertToken(aJCas, token));
+                .filter(a -> Discriminators.Uri.TOKEN.equals(a.getAtType()))
+                .forEach(token -> convertToken(aJCas, token));
 
         // NamedEntity
         getView(Discriminators.Uri.NE).getAnnotations().stream()
-            .filter(a -> isNamedEntity(a.getAtType()))
-            .forEach(ne -> convertNamedEntity(aJCas, ne));
-        
+                .filter(a -> isNamedEntity(a.getAtType()))
+                .forEach(ne -> convertNamedEntity(aJCas, ne));
+
         // Dependencies (requires token index)
         getView(Discriminators.Uri.DEPENDENCY).getAnnotations().stream()
-            .filter(a -> Discriminators.Uri.DEPENDENCY.equals(a.getAtType()))
-            .forEach(dep -> convertDependency(aJCas, dep));
-        
+                .filter(a -> Discriminators.Uri.DEPENDENCY.equals(a.getAtType()))
+                .forEach(dep -> convertDependency(aJCas, dep));
+
         // Constituents (requires token index)
         getView(Discriminators.Uri.PHRASE_STRUCTURE).getAnnotations().stream()
-            .filter(a -> Discriminators.Uri.PHRASE_STRUCTURE.equals(a.getAtType()))
-            .forEach(ps -> convertConstituents(aJCas, getView(Discriminators.Uri.CONSTITUENT), ps));
+                .filter(a -> Discriminators.Uri.PHRASE_STRUCTURE.equals(a.getAtType()))
+                .forEach(ps -> convertConstituents(aJCas, getView(Discriminators.Uri.CONSTITUENT),
+                        ps));
     }
 
     private View getView(String aType)
@@ -99,11 +100,12 @@ public class Lif2DKPro
         List<View> views = container.findViewsThatContain(aType);
         if (!views.isEmpty()) {
             return views.get(views.size() - 1);
-        } else {
+        }
+        else {
             return container.getView(0);
         }
     }
-    
+
     private void convertConstituents(JCas aJCas, View view, Annotation ps)
     {
         String rootId = findRoot(view, ps);
@@ -120,8 +122,7 @@ public class Lif2DKPro
                     if (Discriminators.Uri.CONSTITUENT.equals(con.getAtType())) {
                         Constituent conAnno;
                         if (rootId.equals(con.getId())) {
-                            conAnno = new 
-                                    de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT(
+                            conAnno = new de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT(
                                     aJCas);
                         }
                         else {
@@ -196,11 +197,10 @@ public class Lif2DKPro
         sentence.addToIndexes();
         return sentence;
     }
-    
+
     private Token convertToken(JCas aTarget, Annotation aToken)
     {
-        Token token = new Token(aTarget, aToken.getStart().intValue(), aToken
-                .getEnd().intValue());
+        Token token = new Token(aTarget, aToken.getStart().intValue(), aToken.getEnd().intValue());
         String pos = aToken.getFeature(Features.Token.POS);
         String lemma = aToken.getFeature(Features.Token.LEMMA);
 
@@ -220,12 +220,12 @@ public class Lif2DKPro
         }
 
         token.addToIndexes();
-        
+
         tokenIdx.put(aToken.getId(), token);
-        
+
         return token;
     }
-    
+
     private NamedEntity convertNamedEntity(JCas aTarget, Annotation aNamedEntity)
     {
         NamedEntity neAnno = new NamedEntity(aTarget, aNamedEntity.getStart().intValue(),
@@ -234,7 +234,7 @@ public class Lif2DKPro
         neAnno.addToIndexes();
         return neAnno;
     }
-    
+
     private Dependency convertDependency(JCas aTarget, Annotation aDependency)
     {
         String dependent = aDependency.getFeature(Features.Dependency.DEPENDENT);
@@ -259,7 +259,7 @@ public class Lif2DKPro
             depAnno.setEnd(depAnno.getDependent().getEnd());
             depAnno.addToIndexes();
         }
-        
+
         return depAnno;
     }
 
@@ -268,7 +268,7 @@ public class Lif2DKPro
     {
         return aAnnotation.getFeatureSet(aName);
     }
-    
+
     private void percolateOffsets(org.apache.uima.jcas.tcas.Annotation aNode)
     {
         if (aNode instanceof Constituent) {
@@ -278,11 +278,11 @@ public class Lif2DKPro
             for (org.apache.uima.jcas.tcas.Annotation a : select(conAnno.getChildren(),
                     org.apache.uima.jcas.tcas.Annotation.class)) {
                 percolateOffsets(a);
-                
+
                 begin = Math.min(a.getBegin(), begin);
                 end = Math.max(a.getEnd(), end);
             }
-            
+
             if (aNode.getBegin() != 0) {
                 assert begin == aNode.getBegin();
             }
@@ -298,7 +298,7 @@ public class Lif2DKPro
             }
         }
     }
-    
+
     private String findRoot(View aView, Annotation aPS)
     {
         // Get all the constituents int he phrase structure
@@ -307,26 +307,24 @@ public class Lif2DKPro
 
         List<Annotation> psConstituents = aView.getAnnotations().stream()
                 .filter(a -> Discriminators.Uri.CONSTITUENT.equals(a.getAtType()))
-                .filter(con -> constituents.contains(con.getId()))
-                .collect(Collectors.toList());
-        
+                .filter(con -> constituents.contains(con.getId())).collect(Collectors.toList());
+
         // Remove all constituents that are children of other constituents within the PS
         psConstituents.forEach(con -> {
             Set<String> children = getSetFeature(con, Features.Constituent.CHILDREN);
             children.forEach(child -> constituents.remove(child));
         });
-        
+
         // If all went well, only one constituent should be left and that is the root constituent
         assert 1 == constituents.size();
-        
+
         // Return the ID of the root constituent
         return constituents.iterator().next();
     }
-    
+
     private boolean isNamedEntity(String aTypeName)
     {
-        return Discriminators.Uri.NE.equals(aTypeName)
-                || Discriminators.Uri.DATE.equals(aTypeName)
+        return Discriminators.Uri.NE.equals(aTypeName) || Discriminators.Uri.DATE.equals(aTypeName)
                 || Discriminators.Uri.LOCATION.equals(aTypeName)
                 || Discriminators.Uri.ORGANIZATION.equals(aTypeName)
                 || Discriminators.Uri.PERSON.equals(aTypeName);

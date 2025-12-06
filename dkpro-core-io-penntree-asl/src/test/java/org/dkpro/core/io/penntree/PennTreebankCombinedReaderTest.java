@@ -39,34 +39,33 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 public class PennTreebankCombinedReaderTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
-        CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
-                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
+        CollectionReader reader = createReader(PennTreebankCombinedReader.class,
+                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION,
                 "src/test/resources/stanfordPennTrees/stanford-english-trees-first2.mrg");
-        
+
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
 
-        String text = "Al Qaida Endorses George W. Bush for President\n" + 
-                "Al-Qaeda tries to incite more violence in Iraq\n";
-        
+        String text = "Al Qaida Endorses George W. Bush for President\n"
+                + "Al-Qaeda tries to incite more violence in Iraq\n";
+
         String[] sentences = { "Al Qaida Endorses George W. Bush for President",
                 "Al-Qaeda tries to incite more violence in Iraq" };
-        
+
         String[] tokens1 = { "Al", "Qaida", "Endorses", "George", "W.", "Bush", "for",
                 "President" };
 
         String[] constituentMapped1 = { "Constituent 0,46", "Constituent 0,8", "Constituent 18,32",
                 "Constituent 33,46", "Constituent 37,46", "Constituent 9,46", "ROOT 0,46" };
 
-        String[] constituentOriginal1 = { "NP 0,8", "NP 18,32", "NP 37,46", "PP 33,46",
-                "ROOT 0,46", "S 0,46", "VP 9,46" };
-        
+        String[] constituentOriginal1 = { "NP 0,8", "NP 18,32", "NP 37,46", "PP 33,46", "ROOT 0,46",
+                "S 0,46", "VP 9,46" };
+
         String[] tokens2 = { "Al-Qaeda", "tries", "to", "incite", "more", "violence", "in",
                 "Iraq" };
-        
+
         String[] constituentMapped2 = { "Constituent 47,55", "Constituent 47,93",
                 "Constituent 56,93", "Constituent 62,93", "Constituent 65,93", "Constituent 72,85",
                 "Constituent 86,93", "Constituent 89,93", "ROOT 47,93" };
@@ -76,9 +75,9 @@ public class PennTreebankCombinedReaderTest
 
         assertEquals(text, jcas.getDocumentText());
         assertSentence(sentences, select(jcas, Sentence.class));
-        
+
         Sentence[] actualSentences = select(jcas, Sentence.class).toArray(new Sentence[0]);
-        
+
         assertToken(tokens1, selectCovered(Token.class, actualSentences[0]));
         assertConstituents(constituentMapped1, constituentOriginal1,
                 selectCovered(Constituent.class, actualSentences[0]));
@@ -87,21 +86,20 @@ public class PennTreebankCombinedReaderTest
         assertConstituents(constituentMapped2, constituentOriginal2,
                 selectCovered(Constituent.class, actualSentences[1]));
     }
-    
+
     @Test
-    public void testWithDirectSpeech()
-        throws Exception
+    public void testWithDirectSpeech() throws Exception
     {
-        CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
+        CollectionReader reader = createReader(PennTreebankCombinedReader.class,
                 PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
-                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
+                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION,
                 "src/test/resources/stanfordPennTrees/tree_with_direct_speech.mrg");
-        
+
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
 
         String[] sentences = { "`` And what do you know ? ''" };
-        
+
         String[] tokens = { "``", "And", "what", "do", "you", "know", "?", "''" };
 
         String[] posMapped = { "POS_PUNCT", "POS_CONJ", "POS_PRON", "POS_VERB", "POS_PRON",
@@ -122,25 +120,24 @@ public class PennTreebankCombinedReaderTest
     }
 
     @Test
-    public void testWithParentheses()
-        throws Exception
+    public void testWithParentheses() throws Exception
     {
-        CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
+        CollectionReader reader = createReader(PennTreebankCombinedReader.class,
                 PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
-                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
+                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION,
                 "src/test/resources/stanfordPennTrees/tree_with_parentheses.mrg");
-        
+
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
 
         String[] sentences = { "( CNN ) ." };
-        
+
         String[] tokens = { "(", "CNN", ")", "." };
 
         String[] posMapped = { "POS_PUNCT", "POS_PROPN", "POS_PUNCT", "POS_PUNCT" };
 
         String[] posOriginal = { "-LRB-", "NNP", "-RRB-", "." };
-        
+
         String[] constituentMapped = { "FRAG 0,9", "NP 2,5", "ROOT 0,9" };
 
         String[] constituentOriginal = { "FRAG 0,9", "NP 2,5", "ROOT 0,9" };

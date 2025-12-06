@@ -31,14 +31,19 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * <p>Detection based on character n-grams. Uses the <a href="http://textcat.sourceforge.net">Java
- * Text Categorizing Library</a> based on a technique by Cavnar and Trenkle.</p>
+ * <p>
+ * Detection based on character n-grams. Uses the <a href="http://textcat.sourceforge.net">Java Text
+ * Categorizing Library</a> based on a technique by Cavnar and Trenkle.
+ * </p>
  * 
- * <p><b>References</b></p>
+ * <p>
+ * <b>References</b>
+ * </p>
  * <ul>
- * <li>Cavnar, W. B. and J. M. Trenkle (1994). N-Gram-Based Text Categorization. 
- * In Proceedings of Third Annual Symposium on Document Analysis and Information Retrieval, 
- * Las Vegas, NV, UNLV Publications/Reprographics, pp. 161-175, 11-13 April 1994.</li></ul>
+ * <li>Cavnar, W. B. and J. M. Trenkle (1994). N-Gram-Based Text Categorization. In Proceedings of
+ * Third Annual Symposium on Document Analysis and Information Retrieval, Las Vegas, NV, UNLV
+ * Publications/Reprographics, pp. 161-175, 11-13 April 1994.</li>
+ * </ul>
  */
 @Component(OperationType.LANGUAGE_IDENTIFIER)
 @ResourceMetaData(name = "TextCat Language Identifier (Character N-Gram-based)")
@@ -68,8 +73,7 @@ public class LanguageIdentifier
     private final TextCategorizer categorizer = new TextCategorizer();
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         String docText = aJCas.getDocumentText();
         if (docText != null) {

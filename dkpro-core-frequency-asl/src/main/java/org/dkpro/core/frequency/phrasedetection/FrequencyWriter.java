@@ -44,7 +44,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "Frequency Writer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class FrequencyWriter
-        extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
     /**
      * When concatenating multiple tokens, this string is inserted between them.
@@ -141,8 +141,7 @@ public class FrequencyWriter
     private StringSequenceGenerator sequenceGenerator;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         if (sortByAlphabet && sortByCount) {
@@ -155,15 +154,10 @@ public class FrequencyWriter
 
         /* init sequence generator */
         try {
-            sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                    .featurePath(featurePath)
-                    .coveringType(coveringType)
-                    .lowercase(lowercase)
-                    .stopwordsFile(stopwordsFile)
-                    .stopwordsReplacement(stopwordsReplacement)
-                    .filterRegex(filterRegex)
-                    .filterRegexReplacement(regexReplacement)
-                    .buildStringSequenceGenerator();
+            sequenceGenerator = new PhraseSequenceGenerator.Builder().featurePath(featurePath)
+                    .coveringType(coveringType).lowercase(lowercase).stopwordsFile(stopwordsFile)
+                    .stopwordsReplacement(stopwordsReplacement).filterRegex(filterRegex)
+                    .filterRegexReplacement(regexReplacement).buildStringSequenceGenerator();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
@@ -171,11 +165,10 @@ public class FrequencyWriter
     }
 
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try {
-            /* iterate over sequences (e.g. sentences)*/
+            /* iterate over sequences (e.g. sentences) */
             for (String[] sequence : sequenceGenerator.tokenSequences(aJCas)) {
                 /* iterate over tokens in sequence */
                 for (int i = 0; i < sequence.length; i++) {
@@ -187,9 +180,10 @@ public class FrequencyWriter
 
                     /* count bigrams */
                     if (i + 1 < sequence.length) {
-                        String bigram = unigram + BIGRAM_SEPARATOR + sequence[i + 1]
-                                .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
-                                .replaceAll(NEWLINE_REGEX, COLUMN_SEP_REPLACEMENT);
+                        String bigram = unigram + BIGRAM_SEPARATOR
+                                + sequence[i + 1]
+                                        .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
+                                        .replaceAll(NEWLINE_REGEX, COLUMN_SEP_REPLACEMENT);
                         bigrams.add(bigram);
                     }
                 }
@@ -201,8 +195,7 @@ public class FrequencyWriter
     }
 
     @Override
-    public void collectionProcessComplete()
-            throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         getLogger().info("Vocabulary size: " + unigrams.uniqueSet().size());
         try {
@@ -222,8 +215,10 @@ public class FrequencyWriter
     /**
      * Write counter with counts from a bag to an output stream.
      *
-     * @param os      an {@link OutputStream}
-     * @param counter a {@link Bag} of string counter
+     * @param os
+     *            an {@link OutputStream}
+     * @param counter
+     *            a {@link Bag} of string counter
      */
     private void writeNgrams(OutputStream os, Bag<String> counter)
     {
@@ -236,8 +231,8 @@ public class FrequencyWriter
             stream = stream.sorted(String::compareTo);
         }
         else if (sortByCount) {
-            stream = stream.sorted((o1, o2) ->
-                    -Integer.compare(counter.getCount(o1), counter.getCount(o2)));
+            stream = stream.sorted(
+                    (o1, o2) -> -Integer.compare(counter.getCount(o1), counter.getCount(o2)));
         }
 
         /* write tokens with counts */

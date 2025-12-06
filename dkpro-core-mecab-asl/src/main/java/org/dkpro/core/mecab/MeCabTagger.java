@@ -55,13 +55,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @ResourceMetaData(name = "MeCab POS-Tagger")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("ja")
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"}
-        )
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class MeCabTagger
     extends SegmenterBase
 {
@@ -73,8 +70,7 @@ public class MeCabTagger
      * native code cannot be read.
      */
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         logger = getContext().getLogger();
@@ -89,8 +85,7 @@ public class MeCabTagger
         }
     }
 
-    private Tagger getMeCabJNI()
-        throws ResourceInitializationException, IOException
+    private Tagger getMeCabJNI() throws ResourceInitializationException, IOException
     {
         PlatformDetector pd = new PlatformDetector();
         Tagger tagger = null;
@@ -108,22 +103,20 @@ public class MeCabTagger
                 tagger = initTagger(platform, "libmecab.2.dylib", "libMeCab.so");
             }
             else {
-                throw new ResourceInitializationException(new Throwable("MeCab native code for "
-                        + platform + " is not supported"));
+                throw new ResourceInitializationException(
+                        new Throwable("MeCab native code for " + platform + " is not supported"));
             }
         }
         catch (UnsatisfiedLinkError e) {
-            this.getLogger()
-                    .log(Level.SEVERE,
-                            "Cannot load the MeCab native code.\nMake sure that the system path (i.e. LD_LIBRARY_PATH) contains the library (i.e. libMeCab.so)\n");
+            this.getLogger().log(Level.SEVERE,
+                    "Cannot load the MeCab native code.\nMake sure that the system path (i.e. LD_LIBRARY_PATH) contains the library (i.e. libMeCab.so)\n");
             throw new ResourceInitializationException(e);
 
         }
         return tagger;
     }
 
-    private Tagger initTagger(String platform, String sysLib, String javaWrapper)
-        throws IOException
+    private Tagger initTagger(String platform, String sysLib, String javaWrapper) throws IOException
     {
         String prefix = "lib/tagger/jp/bin-" + platform;
         String packagePrefix = getClass().getPackage().getName().replaceAll("\\.", "/");
@@ -267,8 +260,8 @@ public class MeCabTagger
 
                 if (morph.matches("[。！？]")) {
                     curSenBegin = createSentence(aJCas, text, begin, curSenBegin, curMorphList,
-                            curPOSList, curBaseFormList, curReadingFormList, curIBOList,
-                            curDanList, curKeiList, begin, curSenBegin);
+                            curPOSList, curBaseFormList, curReadingFormList, curIBOList, curDanList,
+                            curKeiList, begin, curSenBegin);
                 }
             }
 
@@ -388,8 +381,8 @@ public class MeCabTagger
 
     private void createSentenceAddToIndex(JCas aJCas, int begin, int curSenBegin, int curMorphBegin)
     {
-        Sentence curSentence = new Sentence(aJCas, begin + curSenBegin, begin + curSenBegin
-                + curMorphBegin);
+        Sentence curSentence = new Sentence(aJCas, begin + curSenBegin,
+                begin + curSenBegin + curMorphBegin);
         curSentence.addToIndexes();
     }
 
@@ -413,8 +406,8 @@ public class MeCabTagger
             jpyToken.setDan(curDanList.get(j));
             jpyToken.setKei(curKeiList.get(j));
             jpyToken.addToIndexes();
-            POS curPOS = new POS(aJCas, begin + curSenBegin + curMorphBegin, begin + curSenBegin
-                    + curMorphBegin + curMorph.length());
+            POS curPOS = new POS(aJCas, begin + curSenBegin + curMorphBegin,
+                    begin + curSenBegin + curMorphBegin + curMorph.length());
             curPOS.setPosValue(curPOSList.get(j));
             POSUtils.assignCoarseValue(curPOS);
             curPOS.addToIndexes();
@@ -422,8 +415,8 @@ public class MeCabTagger
             if (lemmaString == null) {
                 lemmaString = jpyToken.getText();
             }
-            Lemma curLemma = new Lemma(aJCas, begin + curSenBegin + curMorphBegin, begin
-                    + curSenBegin + curMorphBegin + curMorph.length());
+            Lemma curLemma = new Lemma(aJCas, begin + curSenBegin + curMorphBegin,
+                    begin + curSenBegin + curMorphBegin + curMorph.length());
             curLemma.setValue(lemmaString);
             curLemma.addToIndexes();
 
@@ -495,9 +488,12 @@ public class MeCabTagger
      * belong to the same word. O = 1-morpheme word B = morpheme marks the beginning of a word I =
      * morpheme is part of a word
      * 
-     * @param morph a morpheme.
-     * @param features a set of features.
-     * @param iboList a IBO list.
+     * @param morph
+     *            a morpheme.
+     * @param features
+     *            a set of features.
+     * @param iboList
+     *            a IBO list.
      * @return the IBO code.
      */
     private String getIBO(String morph, String[] features, List<String> iboList)

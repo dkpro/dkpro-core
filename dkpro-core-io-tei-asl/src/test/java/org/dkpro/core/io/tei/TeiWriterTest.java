@@ -35,12 +35,9 @@ import org.junit.jupiter.api.io.TempDir;
 public class TeiWriterTest
 {
     @Test
-    public void test(@TempDir File targetFolder)
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
-        var textReader = createReaderDescription(
-                TextReader.class,
-                TextReader.PARAM_LANGUAGE, "en",
+        var textReader = createReaderDescription(TextReader.class, TextReader.PARAM_LANGUAGE, "en",
                 TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
                 TextReader.PARAM_PATTERNS, "*.txt");
 
@@ -52,22 +49,20 @@ public class TeiWriterTest
 
         var ner = createEngineDescription(OpenNlpNamedEntityRecognizer.class);
 
-//        var dump = createEngineDescription(CasDumpWriter.class);
+        // var dump = createEngineDescription(CasDumpWriter.class);
 
-        var teiWriter = createEngineDescription(
-                TeiWriter.class,
-                TeiWriter.PARAM_TARGET_LOCATION, targetFolder,
-                TeiWriter.PARAM_WRITE_CONSTITUENT, true);
+        var teiWriter = createEngineDescription(TeiWriter.class, TeiWriter.PARAM_TARGET_LOCATION,
+                targetFolder, TeiWriter.PARAM_WRITE_CONSTITUENT, true);
 
         runPipeline(textReader, segmenter, posTagger, parser, ner, teiWriter);
 
         var output = new File(targetFolder, "example1.txt.xml");
         assertTrue(output.exists());
 
-//        Diff myDiff = new Diff(
-//                new InputSource("src/test/resources/reference/example1.txt.xml"),
-//                new InputSource(output.getPath()));
-//        myDiff.overrideElementQualifier(new ElementNameAndAttributeQualifier());
-//        XMLAssert.assertXMLEqual(myDiff, true);     
+        // Diff myDiff = new Diff(
+        // new InputSource("src/test/resources/reference/example1.txt.xml"),
+        // new InputSource(output.getPath()));
+        // myDiff.overrideElementQualifier(new ElementNameAndAttributeQualifier());
+        // XMLAssert.assertXMLEqual(myDiff, true);
     }
 }

@@ -42,16 +42,14 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "LAPPS Grid LIF Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_LIF_JSON})
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_LIF_JSON })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class LifReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -59,13 +57,11 @@ public class LifReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -83,7 +79,7 @@ public class LifReader
                 container = (Container) Serializer.parse(json, DataContainer.class).getPayload();
             }
         }
-        
+
         new Lif2DKPro().convert(container, aJCas);
     }
 }

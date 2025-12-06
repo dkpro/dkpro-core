@@ -14,7 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.dkpro.core.io.pubannotation;
+ */
+package org.dkpro.core.io.pubannotation;
 
 import java.io.OutputStream;
 
@@ -57,10 +58,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  * @see <a href="http://www.pubannotation.org/docs/annotation-format/">PubAnnotation format</a>
  */
 @ResourceMetaData(name = "PubAnnotation Writer")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_PUB_ANNOTATION_JSON})
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_PUB_ANNOTATION_JSON })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class PubAnnotationWriter
     extends JCasFileWriter_ImplBase
 {
@@ -77,44 +76,41 @@ public class PubAnnotationWriter
     public static final String PARAM_SPAN_ID_FEATURE = "spanIdFeature";
     @ConfigurationParameter(name = PARAM_SPAN_ID_FEATURE, mandatory = false)
     private String spanIdFeature;
-    
+
     /**
      * The feature on the span annotation type which receives the label.
      */
     public static final String PARAM_SPAN_LABEL_FEATURE = "spanLabelFeature";
     @ConfigurationParameter(name = PARAM_SPAN_LABEL_FEATURE, mandatory = false)
     private String spanLabelFeature;
-    
+
     /**
      * Specify the suffix of output files. Default value <code>.json</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".json")
     private String filenameSuffix;
 
     private ObjectMapper mapper;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         mapper = new ObjectMapper();
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         PADocument doc = new PADocument();
-        
+
         DKPro2PubAnnotation converter = new DKPro2PubAnnotation();
         converter.setSpanMapping(spanType, spanIdFeature, spanLabelFeature);
         converter.convert(aJCas, doc);
-        
+
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
             mapper.writerWithDefaultPrettyPrinter().writeValue(docOS, doc);
         }

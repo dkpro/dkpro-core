@@ -39,15 +39,13 @@ import gate.corpora.export.GateXMLExporter;
 import gate.util.GateException;
 
 /**
- * Writer for the GATE XML format. This writer uses an explicit mapping from DKPro Core types
- * to typical GATE naming convensions.
+ * Writer for the GATE XML format. This writer uses an explicit mapping from DKPro Core types to
+ * typical GATE naming convensions.
  */
 @ResourceMetaData(name = "GATE XML Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_GATE_XML })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class GateXmlWriter
     extends JCasFileWriter_ImplBase
 {
@@ -55,8 +53,7 @@ public class GateXmlWriter
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
@@ -66,31 +63,28 @@ public class GateXmlWriter
     public static final String PARAM_ANNOTATION_SET_NAME = "annotationSetName";
     @ConfigurationParameter(name = PARAM_ANNOTATION_SET_NAME, mandatory = false)
     private String annotationSetName;
-    
+
     /**
      * Character encoding used by the output files.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     private DocumentExporter exporter;
-    
+
     private DKPro2Gate converter;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
         exporter = new GateXMLExporter();
         converter = new DKPro2Gate();
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         DocumentImpl document;
         try {
@@ -105,12 +99,12 @@ public class GateXmlWriter
         catch (GateException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
             if (targetEncoding != null) {
                 document.setEncoding(targetEncoding);
             }
-            
+
             exporter.export(document, docOS);
         }
         catch (Exception e) {

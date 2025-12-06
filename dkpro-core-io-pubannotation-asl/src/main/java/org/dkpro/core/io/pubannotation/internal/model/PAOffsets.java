@@ -22,7 +22,7 @@ public class PAOffsets
 {
     private int begin;
     private int end;
-    
+
     public PAOffsets()
     {
         // Default constructor

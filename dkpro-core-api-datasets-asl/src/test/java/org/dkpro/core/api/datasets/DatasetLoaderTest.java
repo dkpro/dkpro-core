@@ -30,15 +30,14 @@ import org.junit.jupiter.api.io.TempDir;
 public class DatasetLoaderTest
 {
     @Test
-    public void testUniversalDependencyTreebankV1_3(@TempDir File tempDir)
-        throws Exception
+    public void testUniversalDependencyTreebankV1_3(@TempDir File tempDir) throws Exception
     {
-        List<Dataset> dss = new DatasetLoader(tempDir)
-                .loadUniversalDependencyTreebankV1_3();
+        List<Dataset> dss = new DatasetLoader(tempDir).loadUniversalDependencyTreebankV1_3();
         for (Dataset ds : dss) {
             assertDatasetOk(ds);
         }
     }
+
     private void assertDatasetOk(Dataset ds)
     {
         assertThat(ds.getName()).isNotNull();

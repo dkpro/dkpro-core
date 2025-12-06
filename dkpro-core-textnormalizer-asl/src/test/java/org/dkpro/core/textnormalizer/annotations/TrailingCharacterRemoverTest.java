@@ -33,8 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TrailingCharacterRemoverTest
 {
     @Test
-    public void basicTest()
-        throws UIMAException
+    public void basicTest() throws UIMAException
     {
         String inputText = "Ein Text)( mitA Fehlern( . und9-9 a komischen Tokens.";
         String[] tokensExpected = { "Ein", "Text", "mit", "Fehlern", ".", "und", "a", "komischen",
@@ -42,13 +41,12 @@ public class TrailingCharacterRemoverTest
 
         AnalysisEngineDescription engine = createEngineDescription(TrailingCharacterRemover.class);
         JCas jcas = TestRunner.runTest(engine, "de", inputText);
-        
+
         AssertAnnotations.assertToken(tokensExpected, select(jcas, Token.class));
     }
 
     @Test
-    public void minTokenLengthTest()
-        throws UIMAException
+    public void minTokenLengthTest() throws UIMAException
     {
         int minimumTokenLength = 3;
         String inputText = "Ein T-- mit komischen) To. a";
@@ -57,7 +55,7 @@ public class TrailingCharacterRemoverTest
         AnalysisEngineDescription engine = createEngineDescription(TrailingCharacterRemover.class,
                 TrailingCharacterRemover.PARAM_MIN_TOKEN_LENGTH, minimumTokenLength);
         JCas jcas = TestRunner.runTest(engine, "de", inputText);
-        
+
         AssertAnnotations.assertToken(tokensExpected, select(jcas, Token.class));
     }
 }

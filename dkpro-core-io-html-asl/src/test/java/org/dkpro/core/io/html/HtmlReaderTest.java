@@ -42,22 +42,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class HtmlReaderTest
 {
     @BeforeAll
-    static void setupClass() {
+    static void setupClass()
+    {
         // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
         // file where this property is globally set for all surefire runs
         System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
     }
-    
+
     @Test
-    public void wwwReaderTest(@TempDir File tempDir)
-        throws Exception
+    public void wwwReaderTest(@TempDir File tempDir) throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                HtmlReader.class,
-                HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.google.de")
-        );
-        
-        AnalysisEngineDescription dumpWriter = createEngineDescription(CasDumpWriter.class, 
+        CollectionReaderDescription reader = createReaderDescription(HtmlReader.class,
+                HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.google.de"));
+
+        AnalysisEngineDescription dumpWriter = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, new File(tempDir, "google.html.dump"));
 
         for (JCas jcas : new JCasIterable(reader, dumpWriter)) {
@@ -67,18 +65,14 @@ public class HtmlReaderTest
             assertTrue(jcas.getDocumentText().startsWith("Google"));
         }
     }
-    
+
     @Test
-    public void testReadFile()
-        throws Exception
+    public void testReadFile() throws Exception
     {
-        testOneWay(
-                createReaderDescription(HtmlReader.class,
-                        HtmlReader.PARAM_LANGUAGE, "en"), 
-                "html/test.html.dump", 
-                "html/test.html");
+        testOneWay(createReaderDescription(HtmlReader.class, HtmlReader.PARAM_LANGUAGE, "en"),
+                "html/test.html.dump", "html/test.html");
     }
-    
+
     private void dumpMetaData(final DocumentMetaData aMetaData)
     {
         System.out.println("Collection ID: " + aMetaData.getCollectionId());

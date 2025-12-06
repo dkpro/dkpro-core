@@ -27,13 +27,16 @@ import java.util.Set;
  * Inspired by nltk.probability.ConditionalFreqDist Maps a condition to a
  * {@link FrequencyDistribution}.
  * 
- * <p>This class could be used to learn how frequently a word collocates with another word. 
- * Suppose we want to know how frequently the word "of" appears after the word "because", then
- * {@link ConditionalFrequencyDistribution} can be used as follows:</p>
+ * <p>
+ * This class could be used to learn how frequently a word collocates with another word. Suppose we
+ * want to know how frequently the word "of" appears after the word "because", then
+ * {@link ConditionalFrequencyDistribution} can be used as follows:
+ * </p>
  * 
- * <blockquote><pre>
- * ConditionalFrequencyDistribution&lt;String, String&gt; cfd =
- *     new ConditionalFrequencyDistribution&lt;String, String&gt;();
+ * <blockquote>
+ * 
+ * <pre>
+ * var cfd = new ConditionalFrequencyDistribution&lt;String, String&gt;();
  *
  * cfd.addSample("because", "in");
  * cfd.addSample("because", "of");
@@ -41,15 +44,21 @@ import java.util.Set;
  * cfd.addSample("because", "of");
  *
  * System.out.println(cfd.getCount("despite", "of"));
- * </pre></blockquote>
+ * </pre>
  * 
- * <p>The last call to {@link ConditionalFrequencyDistribution#getCount} will yield 2,
- * because given the <code>condition</code> that the first word in a two-word sequence is "because",
- * the word "of" has appeared twice.</p>
+ * </blockquote>
  * 
- * <p>This class was inspired by NLTK's <a href=
+ * <p>
+ * The last call to {@link ConditionalFrequencyDistribution#getCount} will yield 2, because given
+ * the <code>condition</code> that the first word in a two-word sequence is "because", the word "of"
+ * has appeared twice.
+ * </p>
+ * 
+ * <p>
+ * This class was inspired by NLTK's <a href=
  * "http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.ConditionalFreqDist-class.html">
- * FreqDist</a>.</p>
+ * FreqDist</a>.
+ * </p>
  * 
  * @param <C>
  *            the type of the conditions
@@ -135,7 +144,7 @@ public class ConditionalFrequencyDistribution<C, V>
     {
         return cfd.get(condition);
     }
-    
+
     /**
      * Directly set the frequency distribution for a given condition.
      * 
@@ -144,7 +153,8 @@ public class ConditionalFrequencyDistribution<C, V>
      * @param fd
      *            the distribution.
      */
-    public void setFrequencyDistribution(C condition, FrequencyDistribution<V> fd) {
+    public void setFrequencyDistribution(C condition, FrequencyDistribution<V> fd)
+    {
         cfd.put(condition, fd);
     }
 
@@ -256,7 +266,7 @@ public class ConditionalFrequencyDistribution<C, V>
             cfd.remove(condition);
         }
     }
-    
+
     @Override
     public String toString()
     {

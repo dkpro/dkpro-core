@@ -55,13 +55,9 @@ import eu.openminted.share.annotations.api.Parameters;
  * TGrep2 corpus file writer. Requires {@link PennTree}s to be annotated before.
  */
 @ResourceMetaData(name = "TGrep2 Writer")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_TGREP2})
-@Parameters(
-        exclude = { 
-                TGrepWriter.PARAM_TARGET_LOCATION  })
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_TGREP2 })
+@Parameters(exclude = { TGrepWriter.PARAM_TARGET_LOCATION })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
 public class TGrepWriter
     extends JCasAnnotator_ImplBase
 {
@@ -111,8 +107,7 @@ public class TGrepWriter
     private File tgrep2File;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -134,8 +129,7 @@ public class TGrepWriter
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         String filename;
         String collectionId;
@@ -159,8 +153,9 @@ public class TGrepWriter
         try {
             PrintWriter pw = writers.get(filename);
             if (pw == null) {
-                pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(
-                        outputPath, filename + EXT_CORPUS)), "UTF-8"));
+                pw = new PrintWriter(new OutputStreamWriter(
+                        new FileOutputStream(new File(outputPath, filename + EXT_CORPUS)),
+                        "UTF-8"));
                 writers.put(filename, pw);
             }
 
@@ -241,8 +236,7 @@ public class TGrepWriter
     }
 
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         for (PrintWriter pw : writers.values()) {
             IOUtils.closeQuietly(pw);
@@ -274,8 +268,7 @@ public class TGrepWriter
      * @throws IOException
      *             if the employed tgrep2 process is interrupted or if it reports an error
      */
-    private void writeTgrepBinary(String aFilename)
-        throws IOException
+    private void writeTgrepBinary(String aFilename) throws IOException
     {
         List<String> cmd = new ArrayList<String>();
         cmd.add(tgrep2File.getAbsolutePath());

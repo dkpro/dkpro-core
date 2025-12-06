@@ -252,12 +252,12 @@ public class DatasetLoader
 
             Path base = aTarget.toPath().toAbsolutePath();
             Path out = base.resolve(name).toAbsolutePath();
-            
+
             if (!out.startsWith(base)) {
                 // Ignore attempts to write outside the base
                 continue;
             }
-            
+
             if (entry.isDirectory()) {
                 FileUtils.forceMkdir(out.toFile());
             }

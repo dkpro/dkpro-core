@@ -54,8 +54,7 @@ public class ApplyChangesBackmapperTest
     private @TempDir File tempDir;
 
     @Test
-    public void testBackMappingWithCachedAlignmentStateWhenRemovingTextFromTarget()
-        throws Exception
+    public void testBackMappingWithCachedAlignmentStateWhenRemovingTextFromTarget() throws Exception
     {
         boolean clearAlignmentCache = false;
         testBackMappingWhenRemovingTextFromTarget(clearAlignmentCache);
@@ -77,12 +76,8 @@ public class ApplyChangesBackmapperTest
         File dumpFile = new File(output, "output.txt");
         String pipelineFilePath = new File(output, "pipeline.xml").getPath();
 
-        CollectionReaderDescription reader = createReaderDescription(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION,
-                inputFile,
-                TextReader.PARAM_LANGUAGE, "en"
-        );
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, inputFile, TextReader.PARAM_LANGUAGE, "en");
 
         AnalysisEngineDescription deletes = createEngineDescription(SofaDeleteAnnotator.class);
 
@@ -91,8 +86,8 @@ public class ApplyChangesBackmapperTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription clearAlignmentCache =
-                createEngineDescription(ClearAlignmentCache.class);
+        AnalysisEngineDescription clearAlignmentCache = createEngineDescription(
+                ClearAlignmentCache.class);
 
         AnalysisEngineDescription backMapper = createEngineDescription(Backmapper.class,
                 Backmapper.PARAM_CHAIN, new String[] { TARGET_VIEW, CAS.NAME_DEFAULT_SOFA });
@@ -122,12 +117,10 @@ public class ApplyChangesBackmapperTest
 
         SimplePipeline.runPipeline(reader, pipeline);
 
-        String expected = FileUtils.readFileToString(
-                new File("src/test/resources/output.txt"),
-                "UTF-8"
-        );
+        String expected = FileUtils.readFileToString(new File("src/test/resources/output.txt"),
+                "UTF-8");
         String actual = FileUtils.readFileToString(dumpFile, "UTF-8");
-        
+
         expected = EOLUtils.normalizeLineEndings(expected);
         actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(expected, actual);
@@ -137,8 +130,7 @@ public class ApplyChangesBackmapperTest
         extends JCasAnnotator_ImplBase
     {
         @Override
-        public void process(JCas jCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas jCas) throws AnalysisEngineProcessException
         {
             try {
                 // Removes some "sentences" in a deterministic way. Assumes there are at least 5
@@ -166,10 +158,13 @@ public class ApplyChangesBackmapperTest
         }
     }
 
-    public static class ClearAlignmentCache extends JCasAnnotator_ImplBase {
+    public static class ClearAlignmentCache
+        extends JCasAnnotator_ImplBase
+    {
 
         @Override
-        public void process(JCas jCas) throws AnalysisEngineProcessException {
+        public void process(JCas jCas) throws AnalysisEngineProcessException
+        {
             // Simulates a CAS restore before backmapping where the alignment cache has been
             // cleared, so that the fallback to reconstructing alignment state works in the
             // Backmapper. This is somewhat hacked, since it depends very much on inner mechanics of
@@ -178,27 +173,18 @@ public class ApplyChangesBackmapperTest
             // restore it to resume processing from that point with a complete process restart
             // between store and restore, since the alignment store is a singleton that will
             // otherwise persist and not be cleared.
-            AlignmentStorage.getInstance().put(
-                    jCas.getCasImpl().getBaseCAS(),
-                    CAS.NAME_DEFAULT_SOFA, TARGET_VIEW,
-                    null
-            );
+            AlignmentStorage.getInstance().put(jCas.getCasImpl().getBaseCAS(),
+                    CAS.NAME_DEFAULT_SOFA, TARGET_VIEW, null);
         }
     }
 
     @Test
-    public void testBackMappingOfGeneralFeatureStructures()
-        throws Exception
+    public void testBackMappingOfGeneralFeatureStructures() throws Exception
     {
 
         File inputFile = new File("src/test/resources/input.txt");
-        CollectionReaderDescription reader = createReaderDescription(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION,
-                inputFile,
-                TextReader.PARAM_LANGUAGE,
-                "en"
-        );
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, inputFile, TextReader.PARAM_LANGUAGE, "en");
 
         AnalysisEngineDescription applyChanges = createEngineDescription(
                 ApplyChangesAnnotator.class);
@@ -209,16 +195,12 @@ public class ApplyChangesBackmapperTest
                 Backmapper.PARAM_CHAIN, new String[] { TARGET_VIEW, CAS.NAME_DEFAULT_SOFA });
 
         AnalysisEngineDescription assertNotYetMappedBack = createEngineDescription(
-                AssertFeatureStructureCount.class,
-                AssertFeatureStructureCount.PARAM_EXPECTED_COUNT,
-                0
-        );
+                AssertFeatureStructureCount.class, AssertFeatureStructureCount.PARAM_EXPECTED_COUNT,
+                0);
 
         AnalysisEngineDescription assertMappedBack = createEngineDescription(
-                AssertFeatureStructureCount.class,
-                AssertFeatureStructureCount.PARAM_EXPECTED_COUNT,
-                1
-        );
+                AssertFeatureStructureCount.class, AssertFeatureStructureCount.PARAM_EXPECTED_COUNT,
+                1);
 
         AggregateBuilder builder = new AggregateBuilder();
         builder.add(applyChanges, ApplyChangesAnnotator.VIEW_TARGET, TARGET_VIEW,
@@ -238,8 +220,7 @@ public class ApplyChangesBackmapperTest
     {
 
         @Override
-        public void process(JCas jCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas jCas) throws AnalysisEngineProcessException
         {
             new AnnotationBase(jCas).addToIndexes();
         }
@@ -255,8 +236,7 @@ public class ApplyChangesBackmapperTest
         private int expectedCount;
 
         @Override
-        public void process(JCas jCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas jCas) throws AnalysisEngineProcessException
         {
             int fsCount = (int) JCasUtil.select(jCas, AnnotationBase.class).stream()
                     .filter(t -> t.getClass().equals(AnnotationBase.class)).count();

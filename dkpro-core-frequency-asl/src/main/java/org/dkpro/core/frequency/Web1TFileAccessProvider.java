@@ -25,8 +25,7 @@ import com.googlecode.jweb1t.JWeb1TSearcher;
 public class Web1TFileAccessProvider
     extends Web1TProviderBase
 {
-    public Web1TFileAccessProvider(String language, String... indexFiles)
-        throws IOException
+    public Web1TFileAccessProvider(String language, String... indexFiles) throws IOException
     {
         searcher = new JWeb1TSearcher(indexFiles);
         basePath = new File(indexFiles[0]).getParent();

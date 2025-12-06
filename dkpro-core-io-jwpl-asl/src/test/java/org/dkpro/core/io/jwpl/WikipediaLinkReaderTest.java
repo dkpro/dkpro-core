@@ -32,11 +32,9 @@ import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink;
 class WikipediaLinkReaderTest
 {
     @Test
-    void wikipediaReaderTest()
-        throws Exception
+    void wikipediaReaderTest() throws Exception
     {
-        var reader = createReaderDescription(
-                WikipediaLinkReader.class,
+        var reader = createReaderDescription(WikipediaLinkReader.class,
                 WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, Link.type.INTERNAL.name(),
                 WikipediaLinkReader.PARAM_HOST, "localhost", //
                 WikipediaLinkReader.PARAM_DB, "wikiapi_test", //
@@ -57,11 +55,9 @@ class WikipediaLinkReaderTest
     }
 
     @Test
-    void wikipediaLinkReaderTest()
-        throws Exception
+    void wikipediaLinkReaderTest() throws Exception
     {
-        var reader = createReaderDescription(
-                WikipediaLinkReader.class,
+        var reader = createReaderDescription(WikipediaLinkReader.class,
                 WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, Link.type.INTERNAL.name(),
                 WikipediaLinkReader.PARAM_HOST, "localhost", //
                 WikipediaLinkReader.PARAM_DB, "wikiapi_test", //

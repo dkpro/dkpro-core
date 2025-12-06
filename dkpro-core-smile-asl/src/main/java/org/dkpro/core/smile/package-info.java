@@ -17,7 +17,8 @@
  */
 
 /**
- * Lancaster stemmer based on the <a href="http://haifengl.github.io/smile">Smile</a> machine learning package.
+ * Lancaster stemmer based on the <a href="http://haifengl.github.io/smile">Smile</a> machine
+ * learning package.
  *
  * @since 1.9.0
  */

@@ -32,12 +32,9 @@ public class NitfReaderTest
     {
         final String DATA_PATH = "src/test/resources/data/";
 
-        CollectionReader articleReader = CollectionReaderFactory.createReader(
-                NitfReader.class,
-                NitfReader.PARAM_SOURCE_LOCATION, DATA_PATH,
-                NitfReader.PARAM_PATTERNS, "[+]/**/*.xml",
-                NitfReader.PARAM_LANGUAGE, "en",
-                NitfReader.PARAM_OFFSET, 0);
+        CollectionReader articleReader = CollectionReaderFactory.createReader(NitfReader.class,
+                NitfReader.PARAM_SOURCE_LOCATION, DATA_PATH, NitfReader.PARAM_PATTERNS,
+                "[+]/**/*.xml", NitfReader.PARAM_LANGUAGE, "en", NitfReader.PARAM_OFFSET, 0);
 
         AnalysisEngine extractor = AnalysisEngineFactory.createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, "-");

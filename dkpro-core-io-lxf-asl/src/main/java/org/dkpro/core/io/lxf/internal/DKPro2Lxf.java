@@ -14,7 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.dkpro.core.io.lxf.internal;
+ */
+package org.dkpro.core.io.lxf.internal;
 
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -177,9 +178,9 @@ public class DKPro2Lxf
                 // as well
                 POS pos = token.getPos();
                 LxfNode morphNode = null;
-                
+
                 boolean newMorphNode = false;
-                
+
                 if (pos != null) {
                     if ((aSource == null || needsExport(aJCas, pos))) {
                         morphNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
@@ -201,14 +202,14 @@ public class DKPro2Lxf
                 // Convert lemma if exists
                 Lemma lemma = token.getLemma();
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
-                    LxfNode lemmaNode = newMorphNode ? morphNode : null; 
+                    LxfNode lemmaNode = newMorphNode ? morphNode : null;
                     if (lemmaNode == null) {
                         lemmaNode = new LxfNode(LAYER_MORPHOLOGY, aToolName,
                                 toolNodeIndex.nextIndex(toolid), 0);
                         aTarget.addNode(lemmaNode);
                         aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(),
                                 toolEdgeIndex.nextIndex(toolid), 0, lemmaNode, tokenNode));
-                        //idxMorph.put(token, lemmaNode);
+                        // idxMorph.put(token, lemmaNode);
                     }
                     lemmaNode.setFeature(FEAT_LEMMA, token.getLemma().getValue());
                 }

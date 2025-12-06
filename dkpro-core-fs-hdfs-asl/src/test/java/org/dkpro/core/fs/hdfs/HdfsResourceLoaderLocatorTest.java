@@ -43,14 +43,13 @@ import org.junit.jupiter.api.io.TempDir;
 public class HdfsResourceLoaderLocatorTest
 {
     private MiniDFSCluster hdfsCluster;
-    
+
     @BeforeEach
-    public void startCluster(@TempDir File target, @TempDir File hadoopTmp)
-        throws Exception
+    public void startCluster(@TempDir File target, @TempDir File hadoopTmp) throws Exception
     {
         assumeFalse(System.getProperty("os.name").toLowerCase(Locale.US).contains("win"),
                 "HDFS on Windows would require native libs which we do not supply.");
-        
+
         File baseDir = new File(target, "hdfs").getAbsoluteFile();
         FileUtil.fullyDelete(baseDir);
         Configuration conf = new Configuration();
@@ -59,7 +58,7 @@ public class HdfsResourceLoaderLocatorTest
         MiniDFSCluster.Builder builder = new MiniDFSCluster.Builder(conf);
         hdfsCluster = builder.build();
     }
-    
+
     @AfterEach
     public void shutdownCluster()
     {
@@ -67,38 +66,35 @@ public class HdfsResourceLoaderLocatorTest
             hdfsCluster.shutdown();
         }
     }
-    
+
     @Test
-    public void testExternalLoaderLocator()
-        throws Exception
+    public void testExternalLoaderLocator() throws Exception
     {
         String hdfsURI = "hdfs://localhost:" + hdfsCluster.getNameNodePort() + "/";
-        
+
         String document = "This is a test.";
-        
+
         // Write test document
         hdfsCluster.getFileSystem().mkdirs(new Path("/user/test"));
         try (OutputStreamWriter os = new OutputStreamWriter(
                 hdfsCluster.getFileSystem().create(new Path("/user/test/file.txt")), "UTF-8")) {
             os.write(document);
         }
-        
+
         // Set up HDFS resource locator
         ExternalResourceDescription locator = createResourceDescription(
-                HdfsResourceLoaderLocator.class,
-                HdfsResourceLoaderLocator.PARAM_FILESYSTEM, hdfsURI);
-        
+                HdfsResourceLoaderLocator.class, HdfsResourceLoaderLocator.PARAM_FILESYSTEM,
+                hdfsURI);
+
         // Configure reader to read from HDFS
-        CollectionReader reader = createReader(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "hdfs:/user/test",
-                        TextReader.PARAM_PATTERNS, "file.txt",
-                        TextReader.KEY_RESOURCE_RESOLVER, locator);
-        
+        CollectionReader reader = createReader(TextReader.class, TextReader.PARAM_SOURCE_LOCATION,
+                "hdfs:/user/test", TextReader.PARAM_PATTERNS, "file.txt",
+                TextReader.KEY_RESOURCE_RESOLVER, locator);
+
         // Read data
         JCas cas = JCasFactory.createJCas();
         reader.getNext(cas.getCas());
-        
+
         // Verify content
         assertEquals(document, cas.getDocumentText());
     }

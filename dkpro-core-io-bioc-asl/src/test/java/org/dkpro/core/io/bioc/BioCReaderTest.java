@@ -48,7 +48,7 @@ public class BioCReaderTest
     public static final String BASIC_RELATION_LABEL_FEATURE_NAME = "label";
     public static final String BASIC_SPAN_LAYER_NAME = "custom.Span";
     public static final String BASIC_SPAN_LABEL_FEATURE_NAME = "label";
-    
+
     @Disabled("DKPro Core does not have the basic span/relation types that INCEpTION has, hence no fallback")
     @Test
     void testReadFallback() throws Exception

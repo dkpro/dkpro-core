@@ -70,43 +70,43 @@ public class FrequencyDistributionTest
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.inc(badKey);
     }
-    
-    @Test
-    public void clearTest() {
-        List<String> tokens = Arrays
-                .asList("This is a first test that contains a first test example".split(" "));
-
-        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
-        fd.incAll(tokens);
-        fd.clear();
-        assertEquals(0L,  fd.getMaxFreq());
-        assertNull(fd.getSampleWithMaxFreq());
-    }
 
     @Test
-    public void saveAndLoadFdTest(@TempDir File tempDir)
-        throws Exception
+    public void clearTest()
     {
         List<String> tokens = Arrays
                 .asList("This is a first test that contains a first test example".split(" "));
 
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.incAll(tokens);
-        
+        fd.clear();
+        assertEquals(0L, fd.getMaxFreq());
+        assertNull(fd.getSampleWithMaxFreq());
+    }
+
+    @Test
+    public void saveAndLoadFdTest(@TempDir File tempDir) throws Exception
+    {
+        List<String> tokens = Arrays
+                .asList("This is a first test that contains a first test example".split(" "));
+
+        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        fd.incAll(tokens);
+
         File outputFile = new File(tempDir, "test");
 
         fd.save(outputFile);
 
         FrequencyDistribution<String> loadedFd = new FrequencyDistribution<String>();
         loadedFd.load(outputFile);
-        
+
         assertEquals(11, loadedFd.getN());
         assertEquals(8, loadedFd.getB());
 
         assertEquals(0, loadedFd.getCount("humpelgrumpf"));
         assertEquals(1, loadedFd.getCount("This"));
         assertEquals(2, loadedFd.getCount("test"));
-        
+
         assertEquals("a", loadedFd.getSampleWithMaxFreq());
     }
 

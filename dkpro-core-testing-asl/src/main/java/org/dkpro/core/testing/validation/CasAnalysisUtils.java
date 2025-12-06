@@ -34,11 +34,11 @@ public class CasAnalysisUtils
     public static Set<FeatureStructure> collectIndexed(CAS aCas)
     {
         LowLevelCAS llcas = aCas.getLowLevelCAS();
-        Set<FeatureStructure> fses = new TreeSet<>((fs1, fs2) -> llcas.ll_getFSRef(fs1)
-                - llcas.ll_getFSRef(fs2));
+        Set<FeatureStructure> fses = new TreeSet<>(
+                (fs1, fs2) -> llcas.ll_getFSRef(fs1) - llcas.ll_getFSRef(fs2));
 
-        FSIterator<FeatureStructure> i = aCas.getIndexRepository().getAllIndexedFS(
-                aCas.getTypeSystem().getTopType());
+        FSIterator<FeatureStructure> i = aCas.getIndexRepository()
+                .getAllIndexedFS(aCas.getTypeSystem().getTopType());
 
         i.forEachRemaining(fs -> fses.add(fs));
 
@@ -48,11 +48,11 @@ public class CasAnalysisUtils
     public static Set<FeatureStructure> collectReachable(CAS aCas)
     {
         LowLevelCAS llcas = aCas.getLowLevelCAS();
-        Set<FeatureStructure> fses = new TreeSet<>((fs1, fs2) -> llcas.ll_getFSRef(fs1)
-                - llcas.ll_getFSRef(fs2));
+        Set<FeatureStructure> fses = new TreeSet<>(
+                (fs1, fs2) -> llcas.ll_getFSRef(fs1) - llcas.ll_getFSRef(fs2));
 
-        FSIterator<FeatureStructure> i = aCas.getIndexRepository().getAllIndexedFS(
-                aCas.getTypeSystem().getTopType());
+        FSIterator<FeatureStructure> i = aCas.getIndexRepository()
+                .getAllIndexedFS(aCas.getTypeSystem().getTopType());
 
         i.forEachRemaining(fs -> collect(fses, fs));
 
@@ -92,7 +92,7 @@ public class CasAnalysisUtils
             Set<FeatureStructure> aIndexed, FeatureStructure aFS, FeatureStructure aLastIndexed)
     {
         if (aFS != null && !aFSes.containsKey(aFS)) {
-            // We might find an annotation indirectly. In that case make sure we consider it as 
+            // We might find an annotation indirectly. In that case make sure we consider it as
             // an indexed annotation instead of wrongly recording it as non-indexed
             if (aIndexed.contains(aFS)) {
                 aFSes.put(aFS, aFS);
@@ -131,22 +131,22 @@ public class CasAnalysisUtils
     public static Map<FeatureStructure, FeatureStructure> getNonIndexedFSesWithOwner(CAS aCas)
     {
         TypeSystem ts = aCas.getTypeSystem();
-        
+
         LowLevelCAS llcas = aCas.getLowLevelCAS();
 
         Set<FeatureStructure> allIndexedFS = collectIndexed(aCas);
-        Map<FeatureStructure, FeatureStructure> allReachableFS = new TreeMap<>((fs1, fs2) -> 
-                llcas.ll_getFSRef(fs1) - llcas.ll_getFSRef(fs2));
-        
-        FSIterator<FeatureStructure> i = aCas.getIndexRepository().getAllIndexedFS(
-                aCas.getTypeSystem().getTopType());
+        Map<FeatureStructure, FeatureStructure> allReachableFS = new TreeMap<>(
+                (fs1, fs2) -> llcas.ll_getFSRef(fs1) - llcas.ll_getFSRef(fs2));
+
+        FSIterator<FeatureStructure> i = aCas.getIndexRepository()
+                .getAllIndexedFS(aCas.getTypeSystem().getTopType());
 
         i.forEachRemaining(fs -> collect(allReachableFS, allIndexedFS, fs, fs));
 
         // Remove all that are not annotations
         allReachableFS.entrySet()
                 .removeIf(e -> !ts.subsumes(aCas.getAnnotationType(), e.getKey().getType()));
-        
+
         // Remove all that are indexed
         allReachableFS.entrySet().removeIf(e -> e.getKey() == e.getValue());
 

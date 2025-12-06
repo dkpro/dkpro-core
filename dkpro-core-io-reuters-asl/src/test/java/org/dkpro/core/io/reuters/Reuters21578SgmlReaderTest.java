@@ -38,8 +38,7 @@ public class Reuters21578SgmlReaderTest
     private static final String FILE_PATTERN = "*.sgm";
 
     @Test
-    public void test()
-            throws ResourceInitializationException
+    public void test() throws ResourceInitializationException
     {
         int expectedCount = 1000;
         File outputFile = new File("target/output");

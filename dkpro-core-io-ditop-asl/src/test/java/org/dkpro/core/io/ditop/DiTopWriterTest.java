@@ -51,20 +51,17 @@ public class DiTopWriterTest
     private static final String LANGUAGE = "en";
 
     @BeforeEach
-    public void setUp()
-        throws Exception
+    public void setUp() throws Exception
     {
         /* Generate model */
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, TextReader.PARAM_PATTERNS,
+                CAS_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
+                MalletLdaTopicModelTrainer.class, MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION,
+                MODEL_FILE, MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
@@ -72,23 +69,20 @@ public class DiTopWriterTest
     }
 
     @Test
-    public void testSimple()
-        throws UIMAException, IOException
+    public void testSimple() throws UIMAException, IOException
     {
         int expectedNDocuments = 2;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, TextReader.PARAM_PATTERNS,
+                CAS_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletLdaTopicModelInferencer.class,
                 MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
-                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
-                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
-                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME);
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP, DiTopWriter.PARAM_MODEL_LOCATION,
+                MODEL_FILE, DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME);
 
         SimplePipeline.runPipeline(reader, segmenter, inferencer, ditopwriter);
 
@@ -115,8 +109,7 @@ public class DiTopWriterTest
     }
 
     @Test
-    public void testCollectionValuesExact()
-        throws UIMAException, IOException
+    public void testCollectionValuesExact() throws UIMAException, IOException
     {
         int expectedNDocuments = 2;
         String exactName = new File(CAS_DIR).toURI().toString();
@@ -124,17 +117,15 @@ public class DiTopWriterTest
         boolean exactMatch = true;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, TextReader.PARAM_PATTERNS,
+                CAS_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletLdaTopicModelInferencer.class,
                 MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
-                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
-                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
-                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP, DiTopWriter.PARAM_MODEL_LOCATION,
+                MODEL_FILE, DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
                 DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
                 DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
 
@@ -163,29 +154,25 @@ public class DiTopWriterTest
     }
 
     @Test
-    public void testCollectionValuesExactNoMatch()
-        throws UIMAException, IOException
+    public void testCollectionValuesExactNoMatch() throws UIMAException, IOException
     {
         int expectedNDocuments = 0;
         // FIXME I'm pretty sure this absolute path should not be here - check and relativize
         // if possible.
         String[] collectionValues = {
-                "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/"
-        };
+                "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/" };
         boolean exactMatch = true;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, TextReader.PARAM_PATTERNS,
+                CAS_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletLdaTopicModelInferencer.class,
                 MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
-                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
-                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
-                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP, DiTopWriter.PARAM_MODEL_LOCATION,
+                MODEL_FILE, DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
                 DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
                 DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
 
@@ -214,25 +201,22 @@ public class DiTopWriterTest
     }
 
     @Test
-    public void testCollectionValuesNotExact()
-        throws UIMAException, IOException
+    public void testCollectionValuesNotExact() throws UIMAException, IOException
     {
         int expectedNDocuments = 2;
         String[] collectionValues = new String[] { "txt" };
         boolean exactMatch = false;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, TextReader.PARAM_PATTERNS,
+                CAS_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletLdaTopicModelInferencer.class,
                 MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
-                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
-                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
-                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP, DiTopWriter.PARAM_MODEL_LOCATION,
+                MODEL_FILE, DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
                 DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
                 DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
 
@@ -261,25 +245,22 @@ public class DiTopWriterTest
     }
 
     @Test
-    public void testCollectionValuesNotExactNoMatch()
-        throws UIMAException, IOException
+    public void testCollectionValuesNotExactNoMatch() throws UIMAException, IOException
     {
         int expectedNDocuments = 0;
         String[] collectionValues = new String[] { "abcd" };
         boolean exactMatch = false;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, TextReader.PARAM_PATTERNS,
+                CAS_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletLdaTopicModelInferencer.class,
                 MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
-                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
-                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
-                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP, DiTopWriter.PARAM_MODEL_LOCATION,
+                MODEL_FILE, DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
                 DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
                 DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
 

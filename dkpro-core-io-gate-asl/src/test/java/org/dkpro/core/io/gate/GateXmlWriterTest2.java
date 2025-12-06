@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
 public class GateXmlWriterTest2
 {
     @Test
-    public void oneWay()
-        throws Exception
+    public void oneWay() throws Exception
     {
         testOneWay( //
                 Conll2000Reader.class, //

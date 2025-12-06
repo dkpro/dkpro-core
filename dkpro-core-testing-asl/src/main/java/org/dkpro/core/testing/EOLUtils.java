@@ -20,7 +20,6 @@ package org.dkpro.core.testing;
 public class EOLUtils
 {
 
-    
     public static String normalizeLineEndings(String text)
     {
         String result = text.replaceAll("\\r\\n", "\n");

@@ -39,10 +39,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "LingPipe Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class LingPipeSegmenter
     extends SegmenterBase
 {
@@ -50,8 +48,7 @@ public class LingPipeSegmenter
     private TokenizerFactory tokenizerFactory;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -64,13 +61,13 @@ public class LingPipeSegmenter
         throws AnalysisEngineProcessException
     {
         String text = aJCas.getDocumentText();
-        
+
         // Generate tokens
-        Tokenization toks = new Tokenization(text, tokenizerFactory);        
+        Tokenization toks = new Tokenization(text, tokenizerFactory);
         for (int n = 0; n < toks.numTokens(); n++) {
             createToken(aJCas, toks.tokenStart(n), toks.tokenEnd(n));
         }
-        
+
         // Generate sentences
         int[] sentenceBoundaries = sentenceModel.boundaryIndices(toks.tokens(), toks.whitespaces());
         if (sentenceBoundaries.length == 0) {

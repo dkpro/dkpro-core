@@ -36,36 +36,33 @@ import org.junit.jupiter.api.Test;
 public class LanguageDetectorWeb1TTest
 {
     @Test
-    public void web1tLanguageDetectorTest()
-        throws Exception
+    public void web1tLanguageDetectorTest() throws Exception
     {
         ExternalResourceDescription en = createResourceDescription(
                 Web1TInMemoryFrequencyCountResource.class,
                 Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION,
-                "src/test/resources/web1t/en/",
-                Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE, "en",
-                Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2");
+                "src/test/resources/web1t/en/", Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE,
+                "en", Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2");
 
         ExternalResourceDescription de = createResourceDescription(
                 Web1TInMemoryFrequencyCountResource.class,
                 Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION,
-                "src/test/resources/web1t/de/",
-                Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE, "de",
-                Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2");
+                "src/test/resources/web1t/de/", Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE,
+                "de", Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2");
 
         List<ExternalResourceDescription> resources = new ArrayList<ExternalResourceDescription>();
         resources.add(en);
         resources.add(de);
 
         AnalysisEngineDescription engine = createEngineDescription(
-                createEngineDescription(BreakIteratorSegmenter.class), 
+                createEngineDescription(BreakIteratorSegmenter.class),
                 createEngineDescription(LanguageDetectorWeb1T.class,
                         LanguageDetectorWeb1T.PARAM_MAX_NGRAM_SIZE, 2,
                         LanguageDetectorWeb1T.RES_FREQUENCY_PROVIDER_RESOURCES, resources));
 
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("This is an English example.");
-        
+
         runPipeline(jcas, engine);
 
         assertEquals("en", jcas.getDocumentLanguage());

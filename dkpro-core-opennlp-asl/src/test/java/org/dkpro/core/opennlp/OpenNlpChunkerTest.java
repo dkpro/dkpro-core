@@ -36,21 +36,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 public class OpenNlpChunkerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        JCas jcas = runTest("en", null, "We need a very complicated example sentence, which " +
-                "contains as many constituents and dependencies as possible.");
+        JCas jcas = runTest("en", null, "We need a very complicated example sentence, which "
+                + "contains as many constituents and dependencies as possible.");
 
-        String[] chunks = { 
-                "[  0,  2]NC(NP) (We)",
-                "[  3,  7]VC(VP) (need)",
-                "[  8, 43]NC(NP) (a very complicated example sentence)",
-                "[ 45, 50]NC(NP) (which)",
-                "[ 51, 59]VC(VP) (contains)",
-                "[ 60, 62]PC(PP) (as)",
-                "[ 63, 97]NC(NP) (many constituents and dependencies)",
-                "[ 98,100]PC(PP) (as)",
+        String[] chunks = { "[  0,  2]NC(NP) (We)", "[  3,  7]VC(VP) (need)",
+                "[  8, 43]NC(NP) (a very complicated example sentence)", "[ 45, 50]NC(NP) (which)",
+                "[ 51, 59]VC(VP) (contains)", "[ 60, 62]PC(PP) (as)",
+                "[ 63, 97]NC(NP) (many constituents and dependencies)", "[ 98,100]PC(PP) (as)",
                 "[101,109]ADJC(ADJP) (possible)" };
 
         String[] chunkTags = { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "PP", "PRT", "SBAR",
@@ -64,21 +58,15 @@ public class OpenNlpChunkerTest
     }
 
     @Test
-    public void testEnglishIxa()
-        throws Exception
+    public void testEnglishIxa() throws Exception
     {
         JCas jcas = runTest("en", "perceptron-ixa", "We need a very complicated example sentence, "
                 + "which contains as many constituents and dependencies as possible.");
 
-        String[] chunks = { 
-                "[  0,  2]NC(NP) (We)",
-                "[  3,  7]VC(VP) (need)",
-                "[  8, 43]NC(NP) (a very complicated example sentence)",
-                "[ 45, 50]NC(NP) (which)",
-                "[ 51, 59]VC(VP) (contains)",
-                "[ 60, 62]O(SBAR) (as)",
-                "[ 63, 97]NC(NP) (many constituents and dependencies)",
-                "[ 98,100]PC(PP) (as)",
+        String[] chunks = { "[  0,  2]NC(NP) (We)", "[  3,  7]VC(VP) (need)",
+                "[  8, 43]NC(NP) (a very complicated example sentence)", "[ 45, 50]NC(NP) (which)",
+                "[ 51, 59]VC(VP) (contains)", "[ 60, 62]O(SBAR) (as)",
+                "[ 63, 97]NC(NP) (many constituents and dependencies)", "[ 98,100]PC(PP) (as)",
                 "[101,109]ADJC(ADJP) (possible)" };
 
         String[] chunkTags = { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "PP", "PRT", "SBAR",
@@ -89,23 +77,23 @@ public class OpenNlpChunkerTest
         assertChunks(chunks, select(jcas, Chunk.class));
         assertTagset(Chunk.class, "conll2000", chunkTags, jcas);
         assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
-    }    
+    }
+
     @Disabled("We don't have these models integrated yet")
     @Test
-    public void testPortuguese()
-        throws Exception
+    public void testPortuguese() throws Exception
     {
         JCas jcas = runTest("pt", "cogroo", "Precisamos de uma frase exemplo muito complicado, que "
                 + "contém o maior número de eleitores e dependências possível.");
 
-        String[] chunks = new String[] { 
+        String[] chunks = new String[] {
                 "[  0, 43]Chunk(NP) (We need a very complicated example sentence)",
                 "[ 43, 44]Chunk(O) (,)",
                 "[ 45,109]Chunk(NP) (which contains as many constituents and dependencies as possible)",
                 "[109,110]Chunk(O) (.)" };
 
-        String[] chunkTags = new String[] { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "O",
-                "PP", "PRT", "SBAR", "UCP", "VP" };
+        String[] chunkTags = new String[] { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "O", "PP",
+                "PRT", "SBAR", "UCP", "VP" };
 
         // String[] unmappedChunk = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
@@ -114,11 +102,10 @@ public class OpenNlpChunkerTest
         // FIXME assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
     }
 
-    private JCas runTest(String aLanguage, String aVariant, String aText)
-        throws Exception
+    private JCas runTest(String aLanguage, String aVariant, String aText) throws Exception
     {
         String variant = aVariant != null ? aVariant : "default";
-        
+
         AssumeResource.assumeResource(OpenNlpChunker.class, "chunker", aLanguage, variant);
 
         AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
@@ -126,8 +113,7 @@ public class OpenNlpChunkerTest
         AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
 
         AnalysisEngineDescription chunker = createEngineDescription(OpenNlpChunker.class,
-                OpenNlpChunker.PARAM_VARIANT, aVariant,
-                OpenNlpChunker.PARAM_PRINT_TAGSET, true);
+                OpenNlpChunker.PARAM_VARIANT, aVariant, OpenNlpChunker.PARAM_PRINT_TAGSET, true);
 
         AnalysisEngineDescription aggregate = createEngineDescription(segmenter, tagger, chunker);
 

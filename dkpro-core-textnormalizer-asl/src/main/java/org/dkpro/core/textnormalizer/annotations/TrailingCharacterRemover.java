@@ -45,11 +45,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Trailing Character Remover")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" } )
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class TrailingCharacterRemover
     extends JCasAnnotator_ImplBase
 {
@@ -74,16 +72,14 @@ public class TrailingCharacterRemover
     private int minTokenLength;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         suffixPattern = Pattern.compile(String.format(".*?(%s)$", pattern));
     };
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         List<Token> toRemove = new ArrayList<>();
         List<Token> tokens = new ArrayList<>(select(aJCas, Token.class));

@@ -38,7 +38,7 @@ public class LxfEdge
         setFrom(new String[] { aFrom.getOrigin(), aFrom.getId() });
         setTo(new String[] { aTo.getOrigin(), aTo.getId() });
     }
-    
+
     public String[] getFrom()
     {
         return from;

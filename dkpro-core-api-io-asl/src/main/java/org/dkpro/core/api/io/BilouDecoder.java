@@ -36,11 +36,10 @@ public class BilouDecoder
     private MappingProvider mappingProvider;
 
     private boolean internTags = true;
-    
+
     private String openChunk;
     private int start;
     private int end;
-    
 
     public BilouDecoder(CAS aCas, Feature aValueFeature, MappingProvider aMappingProvider)
     {
@@ -54,21 +53,19 @@ public class BilouDecoder
     {
         internTags = aInternTags;
     }
-    
+
     public void decode(List<? extends AnnotationFS> aTokens, String[] aTags)
     {
         int i = 0;
         for (AnnotationFS token : aTokens) {
             String tag = aTags[i];
-            
+
             // Check if the BILOU encoding is present and fail if not
-            if (
-                    !(tag.length() == 1 && tag.charAt(0) == 'O') &&
-                    !(tag.length() >= 2 && tag.charAt(1) == '-')
-            ) {
+            if (!(tag.length() == 1 && tag.charAt(0) == 'O')
+                    && !(tag.length() >= 2 && tag.charAt(1) == '-')) {
                 throw new IllegalStateException("Tag is not BILOU-encoded: [" + tag + "]");
             }
-            
+
             switch (tag.charAt(0)) {
             case 'B':
                 start = token.getBegin();
@@ -94,14 +91,14 @@ public class BilouDecoder
             default:
                 throw new IllegalStateException("Tag is not BILOU-encoded: [" + tag + "]");
             }
-            
+
             i++;
         }
-        
+
         // End of processing signal
         chunkComplete();
     }
-    
+
     private void chunkComplete()
     {
         if (openChunk != null) {

@@ -40,8 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 public class PennTreeToJCasConverterTest
 {
     @Test
-    public void whenConvertingFromStringThenTheParentOfConstituensAreSet()
-        throws UIMAException
+    public void whenConvertingFromStringThenTheParentOfConstituensAreSet() throws UIMAException
     {
         MappingProvider posMappingProvider = MappingProviderFactory.createPosMappingProvider(null,
                 null, null, (String) null);
@@ -72,7 +71,7 @@ public class PennTreeToJCasConverterTest
         converter.convertPennTree(aSentence, parsePennTree);
 
         AssertAnnotations.assertValid(jcas, AllTokensHavePos.class);
-        
+
         Collection<Constituent> constituents = JCasUtil.select(jcas, Constituent.class);
 
         for (Constituent constituent : constituents) {

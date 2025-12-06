@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 public class JTokSegmenterTest
 {
     @Test
-    public void runHarness()
-        throws Throwable
+    public void runHarness() throws Throwable
     {
         AnalysisEngineDescription aed = createEngineDescription(JTokSegmenter.class);
 

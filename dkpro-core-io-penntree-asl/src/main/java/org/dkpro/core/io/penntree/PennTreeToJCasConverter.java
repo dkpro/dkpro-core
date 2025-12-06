@@ -50,10 +50,10 @@ public class PennTreeToJCasConverter
     private boolean createPosTags;
     private boolean internTags = true;
     private String rootLabel = ROOT;
-    
+
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
-    
+
     public PennTreeToJCasConverter(MappingProvider aPosMappingProvider,
             MappingProvider aConstituentMappingProvider)
     {
@@ -105,7 +105,7 @@ public class PennTreeToJCasConverter
     {
         return convertPennTree(aJCas, aText, aNode, null, true);
     }
-    
+
     private Constituent convertPennTree(JCas aJCas, StringBuilder aText, PennTreeNode aNode,
             Constituent aParent, boolean aBOS)
     {
@@ -113,20 +113,20 @@ public class PennTreeToJCasConverter
         Constituent constituent = null;
         Constituent parent = aParent;
         boolean generatedParent = false;
-        
+
         // Do we need to insert an artificial ROOT node?
         if (aParent == null) {
-            // Case 2: no root node:        (S
+            // Case 2: no root node: (S
             if (!rootLabel.equals(aNode.getLabel()) && !isBlank(aNode.getLabel())) {
                 constituent = createConstituent(aJCas, aNode.getLabel());
-                
+
                 parent = new ROOT(aJCas);
                 parent.setConstituentType(ROOT);
                 parent.setChildren(createFSArray(aJCas, new Constituent[] { constituent }));
                 generatedParent = true;
             }
             // Case 1: unlabeled root node: ( (S...
-            // Case 3: labeled root node:   (ROOT (S...
+            // Case 3: labeled root node: (ROOT (S...
             else {
                 constituent = new ROOT(aJCas);
                 constituent.setConstituentType(ROOT);
@@ -135,9 +135,9 @@ public class PennTreeToJCasConverter
         else {
             constituent = createConstituent(aJCas, aNode.getLabel());
         }
-        
+
         constituent.setBegin(aText.length());
-        
+
         List<Annotation> children = new ArrayList<Annotation>();
         for (PennTreeNode c : aNode.getChildren()) {
             if (c.isPreTerminal()) {
@@ -145,13 +145,13 @@ public class PennTreeToJCasConverter
                 if (!writeTracesToText && NONE.equals(c.getLabel())) {
                     continue;
                 }
-                
+
                 // Add space between tokens with inside sentence. Do not add token at the beginning
                 // of the sentence, even if we append into a larger document.
                 if (!bos) {
                     aText.append(' ');
                 }
-                
+
                 // Add to the document test
                 int begin = aText.length();
                 aText.append(unescapeToken(c.getChildren().get(0).getLabel()));
@@ -164,7 +164,7 @@ public class PennTreeToJCasConverter
                 }
                 token.setParent(constituent);
                 token.addToIndexes();
-                
+
                 children.add(token);
             }
             else {
@@ -174,23 +174,23 @@ public class PennTreeToJCasConverter
         }
 
         constituent.setEnd(aText.length());
-        
-        int[] offsets = {constituent.getBegin(), constituent.getEnd()};
+
+        int[] offsets = { constituent.getBegin(), constituent.getEnd() };
         trim(aText, offsets);
         constituent.setBegin(offsets[0]);
         constituent.setEnd(offsets[1]);
         constituent.setChildren(createFSArray(aJCas, children));
         constituent.setParent(parent);
         constituent.addToIndexes();
-        
+
         // We we created an additional ROOT node, then we need to set its offsets as well
         if (generatedParent) {
             parent.setBegin(constituent.getBegin());
             parent.setEnd(constituent.getEnd());
             parent.addToIndexes();
         }
-        
-        return constituent;        
+
+        return constituent;
     }
 
     public Constituent convertPennTree(Sentence aSentence, PennTreeNode aNode)
@@ -202,38 +202,37 @@ public class PennTreeToJCasConverter
         catch (CASException e) {
             throw new IllegalStateException(e);
         }
-            
+
         List<Token> tokens = selectCovered(Token.class, aSentence);
         List<PennTreeNode> preTerminalNodes = PennTreeUtils.getPreTerminals(aNode);
         Map<PennTreeNode, Token> tokenMap = new HashMap<>();
         for (int i = 0; i < tokens.size(); i++) {
             tokenMap.put(preTerminalNodes.get(i), tokens.get(i));
         }
-        
+
         return convertPennTree(jcas, aNode, null, tokenMap);
     }
-    
 
-    private Constituent convertPennTree(JCas aJCas, PennTreeNode aNode,
-            Constituent aParent, Map<PennTreeNode, Token> aTokenMap)
+    private Constituent convertPennTree(JCas aJCas, PennTreeNode aNode, Constituent aParent,
+            Map<PennTreeNode, Token> aTokenMap)
     {
         Constituent constituent = null;
         Constituent parent = aParent;
         boolean generatedParent = false;
-        
+
         // Do we need to insert an artificial ROOT node?
         if (aParent == null) {
-            // Case 2: no root node:        (S
+            // Case 2: no root node: (S
             if (!rootLabel.equals(aNode.getLabel()) && !isBlank(aNode.getLabel())) {
                 constituent = createConstituent(aJCas, aNode.getLabel());
-                
+
                 parent = new ROOT(aJCas);
                 parent.setConstituentType(ROOT);
                 parent.setChildren(createFSArray(aJCas, new Constituent[] { constituent }));
                 generatedParent = true;
             }
             // Case 1: unlabeled root node: ( (S...
-            // Case 3: labeled root node:   (ROOT (S...
+            // Case 3: labeled root node: (ROOT (S...
             else {
                 constituent = new ROOT(aJCas);
                 constituent.setConstituentType(ROOT);
@@ -242,7 +241,7 @@ public class PennTreeToJCasConverter
         else {
             constituent = createConstituent(aJCas, aNode.getLabel());
         }
-        
+
         List<Annotation> children = new ArrayList<Annotation>();
         for (PennTreeNode c : aNode.getChildren()) {
             if (c.isPreTerminal()) {
@@ -264,15 +263,15 @@ public class PennTreeToJCasConverter
         constituent.setChildren(createFSArray(aJCas, children));
         constituent.setParent(parent);
         constituent.addToIndexes();
-        
+
         // We we created an additional ROOT node, then we need to set its offsets as well
         if (generatedParent) {
             parent.setBegin(constituent.getBegin());
             parent.setEnd(constituent.getEnd());
             parent.addToIndexes();
         }
-        
-        return constituent;        
+
+        return constituent;
     }
 
     private POS createPOS(JCas aJCas, PennTreeNode aPreterminal, int aBegin, int aEnd)
@@ -280,7 +279,7 @@ public class PennTreeToJCasConverter
         POS posAnno;
         if (posMappingProvider != null) {
             Type posTag = posMappingProvider.getTagType(aPreterminal.getLabel());
-            posAnno = (POS) aJCas.getCas().createAnnotation(posTag, aBegin, aEnd); 
+            posAnno = (POS) aJCas.getCas().createAnnotation(posTag, aBegin, aEnd);
         }
         else {
             posAnno = new POS(aJCas, aBegin, aEnd);
@@ -292,7 +291,7 @@ public class PennTreeToJCasConverter
         posAnno.addToIndexes();
         return posAnno;
     }
-    
+
     private Constituent createConstituent(JCas aJCas, String aLabel)
     {
         if (NONE.equals(aLabel)) {
@@ -310,13 +309,13 @@ public class PennTreeToJCasConverter
         else {
             constituentAnno = new Constituent(aJCas, 0, 0);
         }
-        
+
         constituentAnno.setConstituentType(label[0]);
-        
+
         if (label.length >= 2) {
             constituentAnno.setSyntacticFunction(label[1]);
         }
-        
+
         return constituentAnno;
     }
 }

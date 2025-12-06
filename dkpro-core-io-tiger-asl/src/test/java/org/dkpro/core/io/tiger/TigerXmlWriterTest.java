@@ -37,12 +37,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class TigerXmlWriterTest
 {
     @BeforeAll
-    static void setupClass() {
+    static void setupClass()
+    {
         // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
         // file where this property is globally set for all surefire runs
         System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
     }
-    
+
     @Test
     public void test(@TempDir File tempDir) throws Exception
     {

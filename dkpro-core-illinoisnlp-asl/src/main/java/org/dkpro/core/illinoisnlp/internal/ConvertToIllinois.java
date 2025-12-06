@@ -103,7 +103,7 @@ public class ConvertToIllinois
 
         return document;
     }
-    
+
     private void convertSpanLabelView(TextAnnotation document, String aView, JCas aJCas,
             IntPair[] tokens, Class<?> type, String aFeature)
     {

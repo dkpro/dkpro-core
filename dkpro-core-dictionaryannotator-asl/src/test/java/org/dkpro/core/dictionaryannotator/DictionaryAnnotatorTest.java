@@ -59,8 +59,8 @@ public class DictionaryAnnotatorTest
     {
         AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
                 DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-                DictionaryAnnotator.PARAM_VALUE, "PERSON",
-                DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+                DictionaryAnnotator.PARAM_VALUE, "PERSON", DictionaryAnnotator.PARAM_MODEL_LOCATION,
+                "src/test/resources/persons.txt");
 
         JCas jcas = JCasFactory.createJCas();
         TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
@@ -121,8 +121,8 @@ public class DictionaryAnnotatorTest
     {
         AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
                 DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-                DictionaryAnnotator.PARAM_VALUE, "PERSON",
-                DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+                DictionaryAnnotator.PARAM_VALUE, "PERSON", DictionaryAnnotator.PARAM_MODEL_LOCATION,
+                "src/test/resources/persons.txt");
 
         JCas jcas = JCasFactory.createJCas();
         TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);

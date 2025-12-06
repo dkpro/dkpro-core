@@ -44,50 +44,44 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.READABILITY_ANNOTATOR)
 @ResourceMetaData(name = "Readability Annotator")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore" })
-public class ReadabilityAnnotator 
+public class ReadabilityAnnotator
     extends JCasAnnotator_ImplBase
 {
-    
+
     private ReadabilityMeasures readability;
-    
+
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
         this.readability = new ReadabilityMeasures();
     }
 
-    
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
-        
+
         if (jcas.getDocumentLanguage() != null) {
             readability.setLanguage(jcas.getDocumentLanguage());
         }
-        
+
         int nrofSentences = 0;
         List<String> words = new ArrayList<String>();
-        
+
         for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
             nrofSentences++;
-            
+
             List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
 
             for (Token token : tokens) {
                 words.add(token.getCoveredText());
             }
         }
-        
+
         for (Measures measure : Measures.values()) {
             ReadabilityScore score = new ReadabilityScore(jcas);
             score.setMeasureName(measure.name());

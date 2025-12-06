@@ -175,7 +175,7 @@ public class Rdf2Uima
                         fs.setStringValue(uimaFeat, stmt.getObject().asLiteral().getString());
                     }
                     else {
-                       fs.setStringValue(uimaFeat, stmt.getObject().asResource().getURI());
+                        fs.setStringValue(uimaFeat, stmt.getObject().asResource().getURI());
                     }
                     break;
                 }

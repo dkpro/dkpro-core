@@ -38,17 +38,16 @@ public class MutualInformationBasedTest
 {
     private static File source;
     private static File jWeb1T;
-    
+
     private static File testOutput;
     private static File index;
 
     @BeforeAll
-    public static void createIndex()
-        throws Exception
+    public static void createIndex() throws Exception
     {
         source = new File("src/test/resources/ranking/n-grams-2");
         jWeb1T = new File("src/test/resources/web1t/de");
-        
+
         testOutput = new File("target/test-output/MutualInformationBasedTest");
         index = new File(testOutput, "index");
         index.mkdirs();
@@ -100,8 +99,7 @@ public class MutualInformationBasedTest
     }
 
     @AfterAll
-    public static void tearDown()
-        throws Exception
+    public static void tearDown() throws Exception
     {
         // Delete index again
         for (File f : index.listFiles()) {

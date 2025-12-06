@@ -53,17 +53,14 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.CO_REFERENCE_ANNOTATOR)
 @ResourceMetaData(name = "CoreNLP Coreference Resolver")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
-                "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink"})
+                "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink" })
 public class CoreNlpCoreferenceResolver
     extends JCasAnnotator_ImplBase
 {
@@ -71,8 +68,7 @@ public class CoreNlpCoreferenceResolver
      * DCoRef parameter: Sieve passes - each class is defined in dcoref/sievepasses/.
      */
     public static final String PARAM_SIEVES = "sieves";
-    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, 
-            mandatory = true)
+    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, mandatory = true)
     private String sieves;
 
     /**
@@ -128,42 +124,40 @@ public class CoreNlpCoreferenceResolver
     public static final String PARAM_QUOTE_END = "quoteEnd";
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
-    
+
     private CasConfigurableProviderBase<DeterministicCorefAnnotator> annotatorProvider;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         annotatorProvider = new CoreNlpPosTaggerModelProvider(this);
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-        
+
         annotatorProvider.configure(cas);
-        
+
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
-        
+
         Annotation document = new Annotation((String) null);
         converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
-        
+
         // Transfer back into the CAS
         CoreNlp2DKPro.convertCorefChains(aJCas, document);
     };
-    
+
     private class CoreNlpPosTaggerModelProvider
         extends ModelProviderBase<DeterministicCorefAnnotator>
     {
@@ -176,7 +170,7 @@ public class CoreNlpCoreferenceResolver
                     "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/coref/${language}/${variant}/countries");
             setDefault(VARIANT, "default");
         }
-        
+
         @Override
         protected DeterministicCorefAnnotator produceResource(URL aUrl) throws IOException
         {
@@ -195,9 +189,9 @@ public class CoreNlpCoreferenceResolver
             props.setProperty(Constants.POSTPROCESSING_PROP, String.valueOf(postprocessing));
             props.setProperty(Constants.SINGLETON_PROP, String.valueOf(singleton));
             props.setProperty(Constants.SINGLETON_MODEL_PROP, base + "singleton.predictor.ser");
-            
+
             props.setProperty(Constants.MAXDIST_PROP, String.valueOf(maxdist));
-//          props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
+            // props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
             props.setProperty(Constants.REPLICATECONLL_PROP, "false");
             props.setProperty(Constants.CONLL_SCORER, Constants.conllMentionEvalScript);
 
@@ -210,7 +204,8 @@ public class CoreNlpCoreferenceResolver
             props.setProperty(HybridCorefProperties.ANIMATE_PROP, base + "animate.unigrams.txt");
             // props.getProperty(Constants.INANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_INANIMATE),
             props.setProperty(Constants.INANIMATE_PROP, base + "inanimate.unigrams.txt");
-            props.setProperty(HybridCorefProperties.INANIMATE_PROP, base + "inanimate.unigrams.txt");
+            props.setProperty(HybridCorefProperties.INANIMATE_PROP,
+                    base + "inanimate.unigrams.txt");
             // props.getProperty(Constants.MALE_PROP),
             props.setProperty(Constants.MALE_PROP, base + "male.unigrams.txt");
             props.setProperty(HybridCorefProperties.MALE_PROP, base + "male.unigrams.txt");
@@ -229,36 +224,37 @@ public class CoreNlpCoreferenceResolver
             // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
             props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
             props.setProperty(HybridCorefProperties.STATES_PROP, base + "state-abbreviations.txt");
-            // props.getProperty(Constants.GENDER_NUMBER_PROP, 
-            //     DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
+            // props.getProperty(Constants.GENDER_NUMBER_PROP,
+            // DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
             props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.map.ser.gz");
             props.setProperty(HybridCorefProperties.GENDER_NUMBER_PROP, base + "gender.data.gz");
             // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
             props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
             props.setProperty(HybridCorefProperties.COUNTRIES_PROP, base + "countries");
-            // props.getProperty(Constants.STATES_PROVINCES_PROP, 
-            //     DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
+            // props.getProperty(Constants.STATES_PROVINCES_PROP,
+            // DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
             props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
-            props.setProperty(HybridCorefProperties.STATES_PROVINCES_PROP, base + "statesandprovinces");
-    
+            props.setProperty(HybridCorefProperties.STATES_PROVINCES_PROP,
+                    base + "statesandprovinces");
+
             // The following properties are only relevant if the "CorefDictionaryMatch" sieve
             // is enabled.
             // PropertiesUtils.getStringArray(props, Constants.DICT_LIST_PROP,
-            //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, DefaultPaths.DEFAULT_DCOREF_DICT2,
-            //   DefaultPaths.DEFAULT_DCOREF_DICT3, DefaultPaths.DEFAULT_DCOREF_DICT4}),
-            props.put(Constants.DICT_LIST_PROP, '[' + base + "coref.dict1.tsv" + ',' + base
-                    + "coref.dict2.tsv" + ',' + base + "coref.dict3.tsv" + ',' + base
-                    + "coref.dict4.tsv" + ']');
+            // new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, DefaultPaths.DEFAULT_DCOREF_DICT2,
+            // DefaultPaths.DEFAULT_DCOREF_DICT3, DefaultPaths.DEFAULT_DCOREF_DICT4}),
+            props.put(Constants.DICT_LIST_PROP,
+                    '[' + base + "coref.dict1.tsv" + ',' + base + "coref.dict2.tsv" + ',' + base
+                            + "coref.dict3.tsv" + ',' + base + "coref.dict4.tsv" + ']');
             // props.getProperty(Constants.DICT_PMI_PROP, DefaultPaths.DEFAULT_DCOREF_DICT1),
             props.put(Constants.DICT_PMI_PROP, base + "coref.dict1.tsv");
-            // props.getProperty(Constants.SIGNATURES_PROP, 
-            //     DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
+            // props.getProperty(Constants.SIGNATURES_PROP,
+            // DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
             props.put(Constants.SIGNATURES_PROP, base + "ne.signatures.txt");
 
-            props.put("coref.md.model",  base + "md-model-dep.ser.gz");
-            
+            props.put("coref.md.model", base + "md-model-dep.ser.gz");
+
             DeterministicCorefAnnotator annotator = new DeterministicCorefAnnotator(props);
-            
+
             return annotator;
         }
     }

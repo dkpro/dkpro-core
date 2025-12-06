@@ -33,12 +33,11 @@ class WikipediaRevisionPairReaderTest
 {
     @Disabled("Currently there is no test database to test revisions")
     @Test
-    void wikipediaRevisionReaderTest()
-        throws Exception
+    void wikipediaRevisionReaderTest() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-                WikipediaRevisionPairReader.class,
-                WikipediaRevisionPairReader.PARAM_HOST, "localhost", //
+                WikipediaRevisionPairReader.class, WikipediaRevisionPairReader.PARAM_HOST,
+                "localhost", //
                 WikipediaRevisionPairReader.PARAM_DB, "wikiapi_test", //
                 WikipediaRevisionPairReader.PARAM_JDBC_URL,
                 "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
@@ -57,8 +56,8 @@ class WikipediaRevisionPairReaderTest
             DocumentMetaData md1 = DocumentMetaData.get(view1);
             DocumentMetaData md2 = DocumentMetaData.get(view2);
 
-//            System.out.println(md1);
-//            System.out.println(md2);
+            // System.out.println(md1);
+            // System.out.println(md2);
 
             i++;
             if (i > 10) {

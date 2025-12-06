@@ -52,15 +52,15 @@ public class WriterAssert
     extends AbstractAssert<WriterAssert, AnalysisEngineDescription>
 {
     private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    
+
     public static final String VAR_TARGET = "${TARGET}";
 
     // See JCasFileWriter_ImplBase
     private static final String PARAM_SINGULAR_TARGET = "singularTarget";
     private static final String PARAM_STRIP_EXTENSION = "stripExtension";
-    
+
     private JCasIterable jcasIterable;
-    
+
     private Object requestedTargetLocation;
     private boolean singularTargetAnnounced = false;
     private boolean stripExtension = true;
@@ -68,9 +68,9 @@ public class WriterAssert
     public WriterAssert(AnalysisEngineDescription aWriter)
     {
         super(aWriter, WriterAssert.class);
-        
+
         isNotNull();
-        
+
         if (!actual.isPrimitive()) {
             failWithMessage("Writer cannot be an aggregate. Use `usingEngine` if you need to add "
                     + "additional analysis engines or secondary writers.");
@@ -83,33 +83,33 @@ public class WriterAssert
     {
         return assertThat(createEngineDescription(aWriterClass, aConfigurationData));
     }
-    
+
     public static WriterAssert assertThat(AnalysisEngineDescription aWriter)
     {
         return new WriterAssert(aWriter);
     }
-    
+
     public WriterAssert consuming(JCasIterable aJCasIterable)
     {
         jcasIterable = aJCasIterable;
-        
+
         return this;
     }
-    
+
     /**
      * By default, the original extension is stripped from the original file name and the writer's
-     * extension is then added. By calling this method, the original extension is retained and 
-     * in addition the writer's extension is added.
+     * extension is then added. By calling this method, the original extension is retained and in
+     * addition the writer's extension is added.
      * 
      * @return the assert for chaining.
      */
     public WriterAssert keepOriginalExtension()
     {
         stripExtension = false;
-        
+
         return this;
     }
-    
+
     /**
      * Configure the writer to write to the given file.
      * 
@@ -140,11 +140,10 @@ public class WriterAssert
     /**
      * Configure the writer to write all output into a single file at the given location. The
      * location is the final file name, not a folder name. The singular target flag can either be
-     * configured using this method or by setting {@code PARAM_SINGULAR_TARGET} to {@code true}
-     * in the writer description. This method can also be used to indicate that a component
-     * implicitly writes a singular target, even if it does not support
-     * {@code PARAM_SINGULAR_TARGET}. This affects e.g. how {@link #asFiles()} interprets the
-     * target location.
+     * configured using this method or by setting {@code PARAM_SINGULAR_TARGET} to {@code true} in
+     * the writer description. This method can also be used to indicate that a component implicitly
+     * writes a singular target, even if it does not support {@code PARAM_SINGULAR_TARGET}. This
+     * affects e.g. how {@link #asFiles()} interprets the target location.
      * 
      * @param aLocation
      *            a location.
@@ -172,33 +171,33 @@ public class WriterAssert
     public WriterAssert _writingTo(Object aLocation)
     {
         isNotNull();
-        
+
         if (requestedTargetLocation != null) {
             failWithMessage("Target location has already been set to [%s]",
                     requestedTargetLocation);
         }
-        
+
         requestedTargetLocation = aLocation;
-        
+
         if (!canParameterBeSet(actual, PARAM_TARGET_LOCATION)) {
-            failWithMessage("Parameter [%s] cannot be set on writer [%s]",
-                    PARAM_TARGET_LOCATION, actual.getImplementationName());
+            failWithMessage("Parameter [%s] cannot be set on writer [%s]", PARAM_TARGET_LOCATION,
+                    actual.getImplementationName());
         }
-        
+
         // Is the target location defined in the writer parameters?
         Map<String, Object> writerParameters = getParameterSettings(actual);
         if (writerParameters.containsKey(PARAM_TARGET_LOCATION)) {
-            throw Failures.instance().failure(String.format(
-                    "Target location [%s] already defined in the writer parameters.",
-                    writerParameters.get(PARAM_TARGET_LOCATION)));
+            throw Failures.instance()
+                    .failure(String.format(
+                            "Target location [%s] already defined in the writer parameters.",
+                            writerParameters.get(PARAM_TARGET_LOCATION)));
         }
 
         setParameter(actual, PARAM_TARGET_LOCATION, requestedTargetLocation);
-        
+
         return this;
     }
-    
-    
+
     /**
      * Infers the actual target location.
      * 
@@ -207,14 +206,14 @@ public class WriterAssert
     protected Object targetLocation()
     {
         Map<String, Object> writerParameters = getParameterSettings(actual);
-        
+
         // Was the target location set explicitly?
         if (requestedTargetLocation == null) {
             // Is the target location known from the writer parameters?
             if (writerParameters.containsKey(PARAM_TARGET_LOCATION)) {
                 return writerParameters.get(PARAM_TARGET_LOCATION);
             }
-            
+
             // No success?
             throw Failures.instance().failure(String.format(
                     "Unable to determine target location. Set the location using `writingTo()"));
@@ -223,7 +222,7 @@ public class WriterAssert
             return requestedTargetLocation;
         }
     }
-    
+
     protected List<File> listTargetLocationFiles()
     {
         Object location = targetLocation();
@@ -231,44 +230,44 @@ public class WriterAssert
         if (location instanceof String) {
             location = new File((String) location);
         }
-        
+
         if (location instanceof File) {
             File fileLocation = (File) location;
-            
+
             if (!fileLocation.exists()) {
                 throw Failures.instance().failure(
                         String.format("Target location [%s] does not exist.", fileLocation));
             }
-            
+
             if (isSingularTarget()) {
                 return Arrays.asList(fileLocation);
             }
-            
+
             return Arrays.asList(fileLocation.listFiles());
         }
 
         throw Failures.instance().failure(String
                 .format("Target location [%s] cannot be interpreted as a directory.", location));
     }
-    
+
     protected boolean isSingularTarget()
     {
         Map<String, Object> writerParameters = getParameterSettings(actual);
-        
+
         if (Boolean.TRUE.equals(writerParameters.get(PARAM_SINGULAR_TARGET))) {
             return true;
         }
-        
+
         return singularTargetAnnounced;
     }
-    
+
     protected void configureWriter()
     {
         // By default, we strip the original extension when writing to avoid extension accumulation
         if (stripExtension && canParameterBeSet(actual, PARAM_STRIP_EXTENSION)) {
             setParameter(actual, PARAM_STRIP_EXTENSION, true);
         }
-        
+
         // If the target location is specified in the writer descriptor only, replace any variable
         // in it if possible
         if (canParameterBeSet(actual, PARAM_TARGET_LOCATION)) {
@@ -286,13 +285,13 @@ public class WriterAssert
      * <p>
      * This method triggers the execution of the text pipeline.
      * 
-     * @return the output written to the target location as a string. 
+     * @return the output written to the target location as a string.
      */
     public StringAssert outputAsString()
     {
         return outputAsString(null);
     }
-    
+
     /**
      * Gets the output written to the target location as a string.
      * <p>
@@ -306,9 +305,9 @@ public class WriterAssert
     public StringAssert outputAsString(String aPathSuffix)
     {
         run();
-        
+
         List<File> files = listTargetLocationFiles();
-        
+
         if (files.isEmpty()) {
             failWithMessage("Not output found at target location [%s].", requestedTargetLocation);
         }
@@ -318,7 +317,7 @@ public class WriterAssert
                     .filter(file -> file.getPath().endsWith(aPathSuffix)) //
                     .toList();
         }
-        
+
         if (files.isEmpty()) {
             if (aPathSuffix != null) {
                 failWithMessage("Not output file ending in [%s] found at target location [%s].",
@@ -346,21 +345,21 @@ public class WriterAssert
 
         return new StringAssert(Files.contentOf(files.get(0), UTF_8));
     }
-    
+
     /**
-     * Gets the output written to the target location as a file. This method fails if more than
-     * one output file was created or if no output was created.
+     * Gets the output written to the target location as a file. This method fails if more than one
+     * output file was created or if no output was created.
      * <p>
      * This method triggers the execution of the text pipeline.
      * 
-     * @return the output written to the target location as a file. 
+     * @return the output written to the target location as a file.
      */
     public FileAssert asFile()
     {
         run();
-        
+
         List<File> files = listTargetLocationFiles();
-        
+
         if (files.isEmpty()) {
             failWithMessage("Not output found at target location [%s].", requestedTargetLocation);
         }
@@ -373,43 +372,44 @@ public class WriterAssert
 
         return new FileAssert(files.get(0));
     }
+
     /**
      * Gets the files written to the target location.
      * <p>
      * This method triggers the execution of the text pipeline.
      * 
-     * @return the files written to the target location. 
+     * @return the files written to the target location.
      */
     public ListAssert<File> asFiles()
     {
         run();
-        
+
         return new ListAssert<>(listTargetLocationFiles());
     }
-    
+
     protected void run()
     {
         configureWriter();
-        
+
         // Obtains the actual target location, also ensuring that it was actually defined.
         Object actualTargetLocation = targetLocation();
-        
+
         LOG.debug("Writing to target location  : {}", actualTargetLocation);
         LOG.debug("- is singular target        : {}", isSingularTarget());
-        
+
         AnalysisEngine writer = null;
         try {
             writer = createEngine(actual);
-            
+
             for (JCas jcas : jcasIterable) {
                 writer.process(jcas);
             }
-            
+
             LifeCycleUtil.collectionProcessComplete(writer);
         }
         catch (Exception e) {
-            AssertionError error = Failures.instance().failure(String.format(
-                    "Pipeline execution failed: %s", e.getMessage()));
+            AssertionError error = Failures.instance()
+                    .failure(String.format("Pipeline execution failed: %s", e.getMessage()));
             error.initCause(e);
             throw error;
         }

@@ -27,7 +27,7 @@ public class DataPackage
     public static final DataPackage LICENSE_CC_BY_SA_3_0 = new DataPackage.Builder()
             .url("https://creativecommons.org/licenses/by-sa/3.0/legalcode.txt")
             .sha1("fb41626a3005c2b6e14b8b3f5d9d0b19b5faaa51").target("LICENSE.txt").build();
-    
+
     private String url;
     private String target;
     private String sha1;
@@ -62,7 +62,7 @@ public class DataPackage
     {
         return md5;
     }
-    
+
     public Callback getPostAction()
     {
         return action;
@@ -99,7 +99,7 @@ public class DataPackage
             md5 = aMd5;
             return this;
         }
-        
+
         public Builder postAction(Callback aAction)
         {
             action = aAction;
@@ -111,11 +111,10 @@ public class DataPackage
             return new DataPackage(this);
         }
     }
-    
+
     @FunctionalInterface
     public static interface Callback
     {
-        void run(DataPackage aPackage)
-            throws Exception;
+        void run(DataPackage aPackage) throws Exception;
     }
 }

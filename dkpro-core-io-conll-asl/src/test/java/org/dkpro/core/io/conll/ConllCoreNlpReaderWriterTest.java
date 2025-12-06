@@ -32,30 +32,27 @@ import org.junit.jupiter.api.Test;
 public class ConllCoreNlpReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                ConllCoreNlpReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(ConllCoreNlpReader.class,
                 ConllCoreNlpReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/corenlp",
                 ConllCoreNlpReader.PARAM_PATTERNS, "en-orig.conll");
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                ConllCoreNlpWriter.class,
-                ConllCoreNlpWriter.PARAM_TARGET_LOCATION, "target/test-output/ConllCoreNlpReaderWriterTest-roundTrip",
+        AnalysisEngineDescription writer = createEngineDescription(ConllCoreNlpWriter.class,
+                ConllCoreNlpWriter.PARAM_TARGET_LOCATION,
+                "target/test-output/ConllCoreNlpReaderWriterTest-roundTrip",
                 ConllCoreNlpWriter.PARAM_FILENAME_EXTENSION, ".conll",
-                ConllCoreNlpWriter.PARAM_STRIP_EXTENSION, true,
-                ConllCoreNlpWriter.PARAM_OVERWRITE, true);
+                ConllCoreNlpWriter.PARAM_STRIP_EXTENSION, true, ConllCoreNlpWriter.PARAM_OVERWRITE,
+                true);
 
         runPipeline(reader, writer);
 
         String reference = FileUtils.readFileToString(
-                new File("src/test/resources/conll/corenlp/en-ref.conll"), "UTF-8")
-                .trim();
+                new File("src/test/resources/conll/corenlp/en-ref.conll"), "UTF-8").trim();
         String actual = FileUtils.readFileToString(
                 new File("target/test-output/ConllCoreNlpReaderWriterTest-roundTrip/en-orig.conll"),
                 "UTF-8").trim();
-        
+
         assertThat(actual).isEqualToNormalizingNewlines(reference);
     }
 }

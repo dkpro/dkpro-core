@@ -119,7 +119,7 @@ public class Explode
 
         LOG.info("Extracting files of [" + aArchive.getFileName() + "] to [" + aTarget.resolve(base)
                 + "]");
-        
+
         try (SevenZFile archive = new SevenZFile(aArchive.toFile())) {
             SevenZArchiveEntry entry = archive.getNextEntry();
             while (entry != null) {
@@ -137,7 +137,7 @@ public class Explode
                                 "Archive tries to generate file outside target folder: [" + name
                                         + "]");
                     }
-                    
+
                     if (entry.isDirectory()) {
                         Files.createDirectories(out);
                     }
@@ -169,7 +169,7 @@ public class Explode
 
         LOG.info("Extracting files of [" + aArchive.getFileName() + "] to [" + aTarget.resolve(base)
                 + "]");
-        
+
         try (Archive archive = new Archive(aArchive.toFile())) {
             FileHeader fh = archive.nextFileHeader();
             while (fh != null) {
@@ -187,7 +187,7 @@ public class Explode
                                 "Archive tries to generate file outside target folder: [" + name
                                         + "]");
                     }
-                    
+
                     if (fh.isDirectory()) {
                         Files.createDirectories(out);
                     }
@@ -219,7 +219,7 @@ public class Explode
 
         LOG.info("Extracting files of [" + aArchive.getFileName() + "] to [" + aTarget.resolve(base)
                 + "]");
-        
+
         ArchiveEntry entry = null;
         while ((entry = aAStream.getNextEntry()) != null) {
             String name = stripLeadingFolders(entry.getName(), strip);
@@ -235,7 +235,7 @@ public class Explode
                     throw new IOException(
                             "Archive tries to generate file outside target folder: [" + name + "]");
                 }
-                
+
                 if (entry.isDirectory()) {
                     Files.createDirectories(out);
                 }
@@ -252,7 +252,7 @@ public class Explode
         if (aName == null) {
             return null;
         }
-        
+
         if (aLevels > 0) {
             Path p = Paths.get(aName);
             if (p.getNameCount() <= aLevels) {
@@ -275,8 +275,7 @@ public class Explode
      */
     public static String getPathWithoutFileExtension(Path aFilename)
     {
-        
-        
+
         // We always extract archives into a subfolder. Figure out the name of the folder.
         String base = aFilename.getFileName().toString();
         while (base.contains(".")) {

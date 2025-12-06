@@ -68,7 +68,7 @@ public class Gate2DKPro
                     pos.addToIndexes(jcas);
                     token.setPos(pos);
                 }
-                
+
                 String lemmaValue = (String) fm.get(FEAT_LEMMA);
                 if (lemmaValue != null) {
                     Lemma lemma = new Lemma(jcas, startIndex, endIndex);
@@ -76,7 +76,7 @@ public class Gate2DKPro
                     lemma.addToIndexes(jcas);
                     token.setLemma(lemma);
                 }
-                
+
                 String stemValue = (String) fm.get(FEAT_STEM);
                 if (stemValue != null) {
                     Stem stem = new Stem(jcas, startIndex, endIndex);
@@ -84,7 +84,7 @@ public class Gate2DKPro
                     stem.addToIndexes(jcas);
                     token.setStem(stem);
                 }
-                
+
                 token.addToIndexes(jcas);
             }
             else {

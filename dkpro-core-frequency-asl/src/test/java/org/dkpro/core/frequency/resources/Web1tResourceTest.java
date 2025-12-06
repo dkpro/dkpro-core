@@ -32,24 +32,26 @@ import org.junit.jupiter.api.Test;
 
 public class Web1tResourceTest
 {
-    public static class Annotator extends JCasAnnotator_ImplBase {
+    public static class Annotator
+        extends JCasAnnotator_ImplBase
+    {
         final static String MODEL_KEY = "FrequencyProvider";
         @ExternalResource(key = MODEL_KEY)
         private FrequencyCountProvider model;
 
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             System.out.println(model.getClass().getName());
         }
     }
 
     @Test
-    public void configureAggregatedExample() throws Exception {
+    public void configureAggregatedExample() throws Exception
+    {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-                Annotator.MODEL_KEY, createResourceDescription(
-                        Web1TFrequencyCountResource.class,
+                Annotator.MODEL_KEY,
+                createResourceDescription(Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "en",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"));

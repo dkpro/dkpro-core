@@ -26,7 +26,7 @@ public class LxfText
     {
         // No-args constructor required for Jackson
     }
-    
+
     public LxfText(String aData)
     {
         data = aData;

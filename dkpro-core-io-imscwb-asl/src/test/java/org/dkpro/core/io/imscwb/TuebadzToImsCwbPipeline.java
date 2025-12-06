@@ -14,7 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.dkpro.core.io.imscwb;
+ */
+package org.dkpro.core.io.imscwb;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
@@ -34,22 +35,18 @@ public class TuebadzToImsCwbPipeline
     private static final String outputFile = "target/tuebadz.ims.xml";
 
     @Test
-    public void convert()
-        throws Exception
+    public void convert() throws Exception
     {
-        CollectionReader ner = createReader(
-                NegraExportReader.class,
+        CollectionReader ner = createReader(NegraExportReader.class,
                 NegraExportReader.PARAM_SOURCE_LOCATION, inputFile,
-                NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-1");
+                NegraExportReader.PARAM_LANGUAGE, "de", NegraExportReader.PARAM_SOURCE_ENCODING,
+                "ISO-8859-1");
 
-        AnalysisEngineDescription tag = createEngineDescription(
-                OpenNlpPosTagger.class);
+        AnalysisEngineDescription tag = createEngineDescription(OpenNlpPosTagger.class);
 
-        AnalysisEngineDescription tw = createEngineDescription(
-                ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
+        AnalysisEngineDescription tw = createEngineDescription(ImsCwbWriter.class,
+                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile, ImsCwbWriter.PARAM_TARGET_ENCODING,
+                "UTF-8");
 
         runPipeline(ner, tag, tw);
     }

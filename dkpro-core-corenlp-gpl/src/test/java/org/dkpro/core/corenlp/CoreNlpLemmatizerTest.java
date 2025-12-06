@@ -36,26 +36,24 @@ public class CoreNlpLemmatizerTest
     @Test
     public void testUnderscore() throws Exception
     {
-        runTest("en", "foo _ bar",
-                new String[] { "foo",  "_",  "bar" });
+        runTest("en", "foo _ bar", new String[] { "foo", "_", "bar" });
     }
 
     @Test
     public void testEnglish() throws Exception
     {
-        runTest("en", "This is a test .",
-                new String[] { "this",  "be",  "a", "test", "." });
+        runTest("en", "This is a test .", new String[] { "this", "be", "a", "test", "." });
 
-        runTest("en", "We need a very complicated example sentence , which "
-                + "contains as many constituents and dependencies as possible .",
-                new String[] { "we", "need", "a", "very", "complicated", "example",
-                    "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                    "dependency", "as", "possible", "." });
+        runTest("en",
+                "We need a very complicated example sentence , which "
+                        + "contains as many constituents and dependencies as possible .",
+                new String[] { "we", "need", "a", "very", "complicated", "example", "sentence", ",",
+                        "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
+                        "possible", "." });
     }
 
     @Test
-    public void testNotEnglish()
-        throws Exception
+    public void testNotEnglish() throws Exception
     {
         assertThatExceptionOfType(AnalysisEngineProcessException.class)
                 .isThrownBy(() -> runTest("de", "Das ist ein test .", new String[] {}));
@@ -64,19 +62,20 @@ public class CoreNlpLemmatizerTest
     @Test
     public void testUrl() throws Exception
     {
-        runTest("en", "Details hinzu findet man unter http://www.armytimes.com/news/2009/11/army_M4_112109w/ .",
-                new String[] { "detail", "hinzu", "findet", "man", "unter", "http://www.armytimes.com/news/2009/11/army_m4_112109w/", "." });
+        runTest("en",
+                "Details hinzu findet man unter http://www.armytimes.com/news/2009/11/army_M4_112109w/ .",
+                new String[] { "detail", "hinzu", "findet", "man", "unter",
+                        "http://www.armytimes.com/news/2009/11/army_m4_112109w/", "." });
 
     }
-    
-    private void runTest(String aLanguage, String testDocument, String[] lemmas)
-        throws Exception
+
+    private void runTest(String aLanguage, String testDocument, String[] lemmas) throws Exception
     {
         AnalysisEngineDescription posTagger = createEngineDescription(CoreNlpPosTagger.class);
         AnalysisEngineDescription lemmatizer = createEngineDescription(CoreNlpLemmatizer.class);
 
-        JCas aJCas = TestRunner.runTest(createEngineDescription(posTagger, lemmatizer),
-                aLanguage, testDocument);
+        JCas aJCas = TestRunner.runTest(createEngineDescription(posTagger, lemmatizer), aLanguage,
+                testDocument);
 
         AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
     }

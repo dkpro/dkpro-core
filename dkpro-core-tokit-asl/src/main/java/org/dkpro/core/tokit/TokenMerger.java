@@ -51,18 +51,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Merges any Tokens that are covered by a given annotation type. E.g. this component can be used
- * to create a single tokens from all tokens that constitute a multi-token named entity.
+ * Merges any Tokens that are covered by a given annotation type. E.g. this component can be used to
+ * create a single tokens from all tokens that constitute a multi-token named entity.
  */
 @ResourceMetaData(name = "Token Merger")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class TokenMerger
     extends JCasAnnotator_ImplBase
 {
@@ -78,15 +75,15 @@ public class TokenMerger
     @ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = true)
     private String annotationType;
 
-//    /**
-//     * A constraint on the annotations that should be considered in form of a JXPath statement.
-//     * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
-//     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to merge only tokens that are
-//     * part of a location named entity.
-//     */
-//    public static final String PARAM_CONSTRAINT = "constraint";
-//    @ConfigurationParameter(name = PARAM_CONSTRAINT, mandatory = false)
-//    private String constraint;
+    // /**
+    // * A constraint on the annotations that should be considered in form of a JXPath statement.
+    // * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
+    // * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to merge only tokens that are
+    // * part of a location named entity.
+    // */
+    // public static final String PARAM_CONSTRAINT = "constraint";
+    // @ConfigurationParameter(name = PARAM_CONSTRAINT, mandatory = false)
+    // private String constraint;
 
     /**
      * Configure what should happen to the lemma of the merged tokens. It is possible to JOIN the
@@ -134,8 +131,7 @@ public class TokenMerger
     /**
      * Override the tagset mapping.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -173,13 +169,13 @@ public class TokenMerger
                 continue;
             }
 
-//            if (constraint != null) {
-//                JXPathContext ctx = JXPathContext.newContext(cover);
-//                boolean match = ctx.iterate(constraint).hasNext();
-//                if (!match) {
-//                    continue;
-//                }
-//            }
+            // if (constraint != null) {
+            // JXPathContext ctx = JXPathContext.newContext(cover);
+            // boolean match = ctx.iterate(constraint).hasNext();
+            // if (!match) {
+            // continue;
+            // }
+            // }
 
             Iterator<Token> i = covered.iterator();
 

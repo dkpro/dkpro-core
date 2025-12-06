@@ -35,11 +35,10 @@ public class TagsetDescriptionStripper
     extends JCasAnnotator_ImplBase
 {
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
-        List<TagsetDescription> tagdesc = new ArrayList<TagsetDescription>(select(aJCas,
-                TagsetDescription.class));
+        List<TagsetDescription> tagdesc = new ArrayList<TagsetDescription>(
+                select(aJCas, TagsetDescription.class));
         for (TagsetDescription t : tagdesc) {
             t.removeFromIndexes();
         }

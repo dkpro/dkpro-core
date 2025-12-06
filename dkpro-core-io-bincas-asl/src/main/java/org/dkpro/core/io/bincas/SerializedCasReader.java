@@ -54,25 +54,24 @@ public class SerializedCasReader
             CASMgrSerializer.class.getName(), //
             String.class.getName(), //
             "!*"));
-    
+
     /**
      * The file from which to obtain the type system if it is not embedded in the serialized CAS.
      */
     public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
     private String typeSystemLocation;
-    
+
     private CASMgrSerializer casMgrSerializer;
-    
+
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         Resource res = nextFile();
-        try (var is = new ObjectInputStream(CompressionUtils.getInputStream(res.getLocation(),
-                res.getInputStream()));) {
+        try (var is = new ObjectInputStream(
+                CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()));) {
             is.setObjectInputFilter(SERIALIZED_CAS_INPUT_FILTER);
-            
+
             var object = is.readObject();
             if (object instanceof CASCompleteSerializer) {
                 // Annotations and CAS metadata saved together
@@ -97,14 +96,14 @@ public class SerializedCasReader
             throw new IOException(e);
         }
     }
-    
+
     private CASMgrSerializer readCasManager() throws IOException
     {
         // If we already read the type system, return it - do not read it again.
         if (casMgrSerializer != null) {
             return casMgrSerializer;
         }
-        
+
         org.springframework.core.io.Resource r;
         // Is absolute?
         if (typeSystemLocation.indexOf(':') != -1 || typeSystemLocation.startsWith("/")
@@ -118,15 +117,15 @@ public class SerializedCasReader
         }
         getLogger().debug("Reading type system from [" + r.getURI() + "]");
 
-        try (var is = new ObjectInputStream(CompressionUtils.getInputStream(typeSystemLocation, 
-                r.getInputStream()))) {
+        try (var is = new ObjectInputStream(
+                CompressionUtils.getInputStream(typeSystemLocation, r.getInputStream()))) {
             is.setObjectInputFilter(SERIALIZED_CAS_INPUT_FILTER);
             casMgrSerializer = (CASMgrSerializer) is.readObject();
         }
         catch (ClassNotFoundException e) {
             throw new IOException(e);
         }
-        
+
         return casMgrSerializer;
     }
 }

@@ -51,9 +51,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Naive lexicon-based lemmatizer. The words are looked up using the wordform lexicons of
- * LanguageTool. Multiple readings are produced. The annotator simply takes the most frequent
- * lemma from those readings. If no readings could be found, the original text is assigned as
- * lemma.
+ * LanguageTool. Multiple readings are produced. The annotator simply takes the most frequent lemma
+ * from those readings. If no readings could be found, the original text is assigned as lemma.
  */
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "LanguageTool Lemmatizer")
@@ -61,12 +60,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
         "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
         "tl", "uk" })
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class LanguageToolLemmatizer
     extends JCasAnnotator_ImplBase
 {
@@ -76,45 +72,42 @@ public class LanguageToolLemmatizer
     public static final String PARAM_SANITIZE = "sanitize";
     @ConfigurationParameter(name = PARAM_SANITIZE, mandatory = true, defaultValue = "true")
     private boolean sanitize;
-    
+
     /**
      * Characters to remove from lemmas if {@link #PARAM_SANITIZE} is enabled.
      */
     public static final String PARAM_SANTIZE_CHARS = "sanitizeChars";
-    @ConfigurationParameter(name = PARAM_SANTIZE_CHARS, mandatory = true, defaultValue = { "(",
-            ")", "[", "]" })
+    @ConfigurationParameter(name = PARAM_SANTIZE_CHARS, mandatory = true, defaultValue = { "(", ")",
+            "[", "]" })
     private String[] sanitizeChars;
-    
+
     private MappingProvider mappingProvider;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         mappingProvider = new MappingProvider();
         mappingProvider.setContextObject(this);
         mappingProvider.setDefault(MappingProvider.VARIANT, "default");
         mappingProvider.setDefaultVariantsLocation("${package}/lib/language-tagset.map");
-        mappingProvider.setDefault(MappingProvider.LOCATION, 
+        mappingProvider.setDefault(MappingProvider.LOCATION,
                 "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${variant}.map");
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         mappingProvider.configure(aJCas.getCas());
-        
+
         try {
             Language lang = Languages.getLanguageForShortCode(aJCas.getDocumentLanguage());
             Language defaultVariant = lang.getDefaultLanguageVariant();
             if (defaultVariant != null) {
-                getLogger().info(
-                        "Using default variant ["
-                                + defaultVariant.getShortCodeWithCountryAndVariant()
-                                + "] for language [" + aJCas.getDocumentLanguage() + "]");
+                getLogger().info("Using default variant ["
+                        + defaultVariant.getShortCodeWithCountryAndVariant() + "] for language ["
+                        + aJCas.getDocumentLanguage() + "]");
                 lang = defaultVariant;
             }
 
@@ -133,22 +126,22 @@ public class LanguageToolLemmatizer
                     Token token = tokens.get(i);
 
                     String l = null;
-                    
+
                     // Try using the POS to disambiguate the lemma
                     if (token.getPos() != null) {
                         l = getByPos(token.getPos(), as.getTokens()[i]);
                     }
-                    
+
                     // Get the most frequent lemma
                     if (l == null) {
                         l = getMostFrequentLemma(as.getTokens()[i]);
                     }
-                    
+
                     // Sanitize if we have a lemma by now
                     if (sanitize && l != null) {
                         l = sanitizeLemma(token.getText(), l);
                     }
-                    
+
                     if (l == null) {
                         l = token.getText();
                     }
@@ -169,48 +162,48 @@ public class LanguageToolLemmatizer
     private String getByPos(POS aPos, AnalyzedTokenReadings aReadings)
     {
         String tag = aPos.getPosValue();
-        //System.out.printf("%s %n", tag);
+        // System.out.printf("%s %n", tag);
         for (AnalyzedToken t : aReadings.getReadings()) {
-            //System.out.printf("-- %s %s ", t.getPOSTag(), t.getLemma());
+            // System.out.printf("-- %s %s ", t.getPOSTag(), t.getLemma());
 
             if (t.getPOSTag() == null) {
                 return null;
             }
-            
+
             // Lets see if we have mapped tagsets
             try {
                 String typeName = mappingProvider.getTagType(t.getPOSTag()).getName();
                 if (aPos.getClass().getName().equals(typeName)) {
-                    //System.out.printf("- mapped match%n");
+                    // System.out.printf("- mapped match%n");
                     return t.getLemma();
                 }
             }
             catch (IllegalStateException e) {
                 // Type could not be looked up. Go on with other types of matching
             }
-            
+
             // Full match... feeling lucky ;) This is quite unlikely to happen because the tagset
             // used by LanguageTool is most certainly different from tagset used by POS tagger.
             if (tag.equals(t.getPOSTag())) {
-                //System.out.printf("- full match%n");
+                // System.out.printf("- full match%n");
                 return t.getLemma();
             }
-            
+
             // Some tagsets used by LanguageTool use ':' as separator. If we are lucky, the string
             // before the first ':' matches our POS tag.
-            
+
             if (t.getPOSTag().length() > 1 && tag.equals(t.getPOSTag().split(":")[0])) {
-                //System.out.printf("- first element match%n");
+                // System.out.printf("- first element match%n");
                 return t.getLemma();
             }
-            
-            //System.out.printf("- no match%n");
+
+            // System.out.printf("- no match%n");
         }
-        
-        //System.out.printf("- no reading matches%n");
+
+        // System.out.printf("- no reading matches%n");
         return null;
     }
-    
+
     private String getMostFrequentLemma(AnalyzedTokenReadings aReadings)
     {
         FrequencyDistribution<String> freq = new FrequencyDistribution<String>();
@@ -232,7 +225,7 @@ public class LanguageToolLemmatizer
 
         return best;
     }
-    
+
     private String sanitizeLemma(String aWordForm, String aLemma)
     {
         String sanitized = aLemma;

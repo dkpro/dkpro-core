@@ -18,8 +18,8 @@
  */
 
 /**
- * Classes for tracking changes in a String. These have been originally developed as part of
- * AnnoLab within the DFG-Projekt "Linguistische Profile interdisziplinärer Register" (LingPro)
- * (10.2006 - 09.2009).
+ * Classes for tracking changes in a String. These have been originally developed as part of AnnoLab
+ * within the DFG-Projekt "Linguistische Profile interdisziplinärer Register" (LingPro) (10.2006 -
+ * 09.2009).
  */
 package org.dkpro.core.api.transform.alignment;

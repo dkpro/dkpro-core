@@ -46,29 +46,27 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Lemmatizer from the Cognitive Computation Group at University of Illinois at Urbana-Champaign.  
+ * Lemmatizer from the Cognitive Computation Group at University of Illinois at Urbana-Champaign.
  */
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "Illinois CCG Lemmatizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class IllinoisLemmatizer
     extends JCasAnnotator_ImplBase
 {
     private ModelProviderBase<Annotator> modelProvider;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        modelProvider = new ModelProviderBase<Annotator>() {
+
+        modelProvider = new ModelProviderBase<Annotator>()
+        {
             {
                 setContextObject(IllinoisLemmatizer.this);
                 setDefault(LOCATION, NOT_REQUIRED);
@@ -81,22 +79,20 @@ public class IllinoisLemmatizer
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
 
-                Annotator annotator = 
-                        new edu.illinois.cs.cogcomp.nlp.lemmatizer.IllinoisLemmatizer();
+                Annotator annotator = new edu.illinois.cs.cogcomp.nlp.lemmatizer.IllinoisLemmatizer();
 
                 return annotator;
             }
         };
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
         modelProvider.configure(cas);
-        
+
         ConvertToIllinois converter = new ConvertToIllinois();
         TextAnnotation document = converter.convert(aJCas);
 

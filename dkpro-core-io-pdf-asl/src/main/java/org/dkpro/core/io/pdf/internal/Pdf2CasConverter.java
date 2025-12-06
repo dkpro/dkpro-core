@@ -49,14 +49,12 @@ public class Pdf2CasConverter
     private String paragraphType;
     private String headingType;
 
-    public Pdf2CasConverter()
-        throws IOException
+    public Pdf2CasConverter() throws IOException
     {
         super();
     }
 
-    public void writeText(final CAS aCas, final InputStream aIs)
-        throws IOException
+    public void writeText(final CAS aCas, final InputStream aIs) throws IOException
     {
         var pdfBytes = IOUtils.toByteArray(aIs);
         var doc = Loader.loadPDF(pdfBytes);
@@ -77,8 +75,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void startDocument(final PDDocument aPdf)
-        throws IOException
+    protected void startDocument(final PDDocument aPdf) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("<document>");
@@ -86,8 +83,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void endDocument(final PDDocument aPdf)
-        throws IOException
+    protected void endDocument(final PDDocument aPdf) throws IOException
     {
         cas.setDocumentText(text.toString());
 
@@ -97,8 +93,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void processLineSeparator()
-        throws IOException
+    protected void processLineSeparator() throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("<br/>");
@@ -112,8 +107,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void processWordSeparator()
-        throws IOException
+    protected void processWordSeparator() throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("< >");
@@ -151,8 +145,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void startRegion(final Style aStyle)
-        throws IOException
+    protected void startRegion(final Style aStyle) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("<" + aStyle + ">");
@@ -163,8 +156,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void endRegion(final Style aStyle)
-        throws IOException
+    protected void endRegion(final Style aStyle) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("</" + aStyle + ">");
@@ -187,7 +179,7 @@ public class Pdf2CasConverter
         text.append('\n');
 
         // Trim leading/trailing whitespace
-        int[] offsets = {begin, end};
+        int[] offsets = { begin, end };
         TrimUtils.trim(text, offsets);
 
         // Add annotation
@@ -215,8 +207,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void writeCharacters(final TextPosition aText)
-        throws IOException
+    protected void writeCharacters(final TextPosition aText) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("[" + aText.getUnicode() + "]");
@@ -279,7 +270,8 @@ public class Pdf2CasConverter
                         }
                     }
                     catch (final NumberFormatException e) {
-                        log.warn("Invalid numeric entity in fragment [" + cand + "] - Dropping it.");
+                        log.warn(
+                                "Invalid numeric entity in fragment [" + cand + "] - Dropping it.");
                     }
 
                     // Expand the entity and set proper skip (if found)

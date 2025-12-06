@@ -39,40 +39,41 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Lemmatize based on a finite-state machine. Uses the <a href="https://github.com/knowitall/morpha">
- * Java port</a> of <a href="http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.html">Morpha</a>.
+ * Lemmatize based on a finite-state machine. Uses the
+ * <a href="https://github.com/knowitall/morpha"> Java port</a> of
+ * <a href="http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.html">Morpha</a>.
  *
- * <p>References:</p>
+ * <p>
+ * References:
+ * </p>
  * <ul>
- * <li>Minnen, G., J. Carroll and D. Pearce (2001). Applied morphological 
- * processing of English, Natural Language Engineering, 7(3). 207-223.</li>
+ * <li>Minnen, G., J. Carroll and D. Pearce (2001). Applied morphological processing of English,
+ * Natural Language Engineering, 7(3). 207-223.</li>
  * </ul>
  */
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "Morpha Lemmatizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("en")
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                     "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                     "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class MorphaLemmatizer
     extends JCasAnnotator_ImplBase
 {
     /**
      * Pass part-of-speech information on to Morpha. Since we currently do not know in which format
-     * the part-of-speech tags are expected by Morpha, we just pass on the actual pos tag value
-     * we get from the token. This may produce worse results than not passing on pos tags at all,
-     * so this is disabled by default.
+     * the part-of-speech tags are expected by Morpha, we just pass on the actual pos tag value we
+     * get from the token. This may produce worse results than not passing on pos tags at all, so
+     * this is disabled by default.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
     private boolean readPos;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         // Iterate over all sentences
         for (Sentence sentence : select(aJCas, Sentence.class)) {
@@ -83,8 +84,8 @@ public class MorphaLemmatizer
 
                 String lemmaString;
                 if (readPos && (t.getPos() != null)) {
-                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(
-                            t.getText(), t.getPos().getPosValue());
+                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer
+                            .stemToken(t.getText(), t.getPos().getPosValue());
                 }
                 else {
                     lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer

@@ -40,31 +40,19 @@ public class PipelineExample
     @Test
     public void pipelineTest() throws Exception
     {
-        String corpusPath = DkproContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
-        CollectionReader reader = createReader(
-                TeiReader.class,
-                TeiReader.PARAM_SOURCE_LOCATION, corpusPath,
-                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }
-        );
+        String corpusPath = DkproContext.getContext().getWorkspace("toolbox_corpora")
+                .getAbsolutePath() + "/brown_tei/";
+        CollectionReader reader = createReader(TeiReader.class, TeiReader.PARAM_SOURCE_LOCATION,
+                corpusPath, TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                BreakIteratorSegmenter.class
-        );
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription ngramWriter = createEngineDescription(
-                Web1TWriter.class,
-                Web1TWriter.PARAM_TARGET_LOCATION, "target/web1t/",
-                Web1TWriter.PARAM_INPUT_TYPES, new String[] { Token.class.getName() },
-                Web1TWriter.PARAM_MIN_NGRAM_LENGTH, 1,
-                Web1TWriter.PARAM_MAX_NGRAM_LENGTH, 3,
-                Web1TWriter.PARAM_MIN_FREQUENCY, 2
-        );
+        AnalysisEngineDescription ngramWriter = createEngineDescription(Web1TWriter.class,
+                Web1TWriter.PARAM_TARGET_LOCATION, "target/web1t/", Web1TWriter.PARAM_INPUT_TYPES,
+                new String[] { Token.class.getName() }, Web1TWriter.PARAM_MIN_NGRAM_LENGTH, 1,
+                Web1TWriter.PARAM_MAX_NGRAM_LENGTH, 3, Web1TWriter.PARAM_MIN_FREQUENCY, 2);
 
-        SimplePipeline.runPipeline(
-                reader,
-                segmenter,
-                ngramWriter
-        );
+        SimplePipeline.runPipeline(reader, segmenter, ngramWriter);
 
         JWeb1TIndexer indexCreator = new JWeb1TIndexer("target/web1t/", 3);
         indexCreator.create();

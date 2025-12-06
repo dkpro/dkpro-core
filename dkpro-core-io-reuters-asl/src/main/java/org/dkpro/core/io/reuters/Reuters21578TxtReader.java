@@ -54,16 +54,13 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Reuters-21578 Corpus Text Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_REUTERS21578})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_REUTERS21578 })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class Reuters21578TxtReader
     extends JCasResourceCollectionReader_ImplBase
 {
     @Override
-    public void getNext(JCas jCas)
-            throws IOException, CollectionException
+    public void getNext(JCas jCas) throws IOException, CollectionException
     {
         Resource resource = getResourceIterator().next();
         File file = new File(resource.getResolvedUri());
@@ -76,15 +73,14 @@ public class Reuters21578TxtReader
         }
     }
 
-    private void initCas(CAS aCas, File aFile)
-            throws IOException, CASException
+    private void initCas(CAS aCas, File aFile) throws IOException, CASException
     {
         Map<String, String> doc = readFile(aFile);
         DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
         docMetaData.setDocumentTitle(doc.get("title"));
         docMetaData.setDocumentUri(aFile.toURI().toString());
-        docMetaData.setDocumentId(aFile.getParentFile().getName() + "_"
-                + FilenameUtils.getBaseName(aFile.getName()));
+        docMetaData.setDocumentId(
+                aFile.getParentFile().getName() + "_" + FilenameUtils.getBaseName(aFile.getName()));
         docMetaData.setDocumentBaseUri(aFile.getParent());
         docMetaData.setCollectionId(getSourceLocation());
 
@@ -95,12 +91,13 @@ public class Reuters21578TxtReader
     /**
      * Read a Reuters text file into a Map
      *
-     * @param reutersFile a Reuters text file
+     * @param reutersFile
+     *            a Reuters text file
      * @return a Map with keys {@code dateline}, {@code title}, and {@code text}
-     * @throws IOException if the file cannot be read
+     * @throws IOException
+     *             if the file cannot be read
      */
-    private static Map<String, String> readFile(File reutersFile)
-            throws IOException
+    private static Map<String, String> readFile(File reutersFile) throws IOException
     {
         BufferedReader reader = new BufferedReader(new FileReader(reutersFile));
         String dateline = reader.readLine();

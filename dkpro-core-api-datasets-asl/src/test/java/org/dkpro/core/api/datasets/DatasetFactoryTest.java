@@ -35,26 +35,24 @@ public class DatasetFactoryTest
 {
     @Disabled("Used at times for offline testing / development")
     @Test
-    public void testOne()
-        throws Exception
+    public void testOne() throws Exception
     {
-        //Path cache = testContext.getTestOutputFolder().toPath();
+        // Path cache = testContext.getTestOutputFolder().toPath();
         Path cache = Paths.get("target/test-output/testLoadOne");
-        
+
         DatasetFactory df = new DatasetFactory(cache);
         {
             Dataset ds = df.load("updt-fa-1.3");
             assertDatasetOk(ds);
         }
     }
-    
+
     @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadAll()
-        throws Exception
+    public void testLoadAll() throws Exception
     {
         Path cache = Paths.get("target/test-output/testLoadAll");
-        
+
         DatasetFactory df = new DatasetFactory(cache);
         for (String id : df.listIds()) {
             Dataset ds = df.load(id);
@@ -64,8 +62,7 @@ public class DatasetFactoryTest
 
     @Disabled("Used at times for offline testing / development")
     @Test
-    public void testShared(@TempDir Path cache)
-        throws Exception
+    public void testShared(@TempDir Path cache) throws Exception
     {
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds1 = df.load("perseus-el-2.1");
@@ -76,8 +73,7 @@ public class DatasetFactoryTest
 
     @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadSimple(@TempDir Path cache)
-        throws Exception
+    public void testLoadSimple(@TempDir Path cache) throws Exception
     {
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds = df.load("germeval2014-de");
@@ -86,32 +82,32 @@ public class DatasetFactoryTest
 
     @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadWithExplode(@TempDir Path cache)
-        throws Exception
+    public void testLoadWithExplode(@TempDir Path cache) throws Exception
     {
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds = df.load("brown-en-teixml");
         assertDatasetOk(ds);
-        
+
         assertFalse(Files.exists(cache.resolve("brownCorpus-TEI-XML/brown_tei/Corpus.xml")));
     }
 
     private void assertDatasetOk(Dataset ds)
     {
-        
+
         System.out.printf("Dataset         : %s%n", ds.getName());
         System.out.printf("Data files      : %d%n", ds.getDataFiles().length);
-        
+
         Split split = ds.getDefaultSplit();
         if (split != null) {
             System.out.printf("Training set    : %d%n",
                     split.getTrainingFiles() != null ? split.getTrainingFiles().length : "none");
             System.out.printf("Development set : %d%n",
-                    split.getDevelopmentFiles() != null ? split.getDevelopmentFiles().length : "none");
+                    split.getDevelopmentFiles() != null ? split.getDevelopmentFiles().length
+                            : "none");
             System.out.printf("Testing set     : %d%n",
                     split.getTestFiles() != null ? split.getTestFiles().length : "none");
         }
-        
+
         assertNotNull("Name not set", ds.getName());
         assertNotNull("Language not set", ds.getLanguage());
         if (split != null) {

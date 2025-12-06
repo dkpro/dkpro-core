@@ -42,21 +42,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class RegexSegmenterTest
 {
     @Test
-    public void simpleExample()
-        throws Exception
+    public void simpleExample() throws Exception
     {
-        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
+        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the
         // documentation. Do not remove these tags!
         // tag::example[]
         JCas jcas = JCasFactory.createText("This is sentence 1 .\nThis is number 2 .", "en");
-        
-        runPipeline(jcas,
-                createEngineDescription(RegexSegmenter.class,
-                        // Treat each line as a sentence
-                        RegexSegmenter.PARAM_SENTENCE_BOUNDARY_REGEX, "\n",
-                        // Use whitespace to detect tokens
-                        RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, "\\s+"));
-        
+
+        runPipeline(jcas, createEngineDescription(RegexSegmenter.class,
+                // Treat each line as a sentence
+                RegexSegmenter.PARAM_SENTENCE_BOUNDARY_REGEX, "\n",
+                // Use whitespace to detect tokens
+                RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, "\\s+"));
+
         for (Sentence s : select(jcas, Sentence.class)) {
             for (Token t : selectCovered(Token.class, s)) {
                 System.out.printf("[%s] ", t.getCoveredText());
@@ -64,28 +62,21 @@ public class RegexSegmenterTest
             System.out.println();
         }
         // end::example[]
-        
-        assertToken(
-                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
-                        "." },
-                select(jcas, Token.class));
-        assertSentence(
-                new String[] { 
-                        "This is sentence 1 .",
-                        "This is number 2 ." },
+
+        assertToken(new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
+                "." }, select(jcas, Token.class));
+        assertSentence(new String[] { "This is sentence 1 .", "This is number 2 ." },
                 select(jcas, Sentence.class));
     }
-    
+
     @Test
-    public void testWhitespace()
-        throws ResourceInitializationException
+    public void testWhitespace() throws ResourceInitializationException
     {
         String text = "This is a tokenized text .";
         String[] expectedSentences = new String[] { "This is a tokenized text ." };
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text", "." };
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -95,8 +86,7 @@ public class RegexSegmenterTest
     }
 
     @Test
-    public void testWhitespaceTwoLines()
-        throws ResourceInitializationException
+    public void testWhitespaceTwoLines() throws ResourceInitializationException
     {
         String text = "This is a tokenized text .\nAnother line with tokens .";
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text", ".",
@@ -105,8 +95,7 @@ public class RegexSegmenterTest
                 "Another line with tokens ." };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -116,15 +105,13 @@ public class RegexSegmenterTest
     }
 
     @Test
-    public void testWhitespaceNoPunctuation()
-        throws ResourceInitializationException
+    public void testWhitespaceNoPunctuation() throws ResourceInitializationException
     {
         String text = "This is a tokenized text";
         String[] expectedSentences = new String[] { "This is a tokenized text" };
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text" };
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -134,15 +121,13 @@ public class RegexSegmenterTest
     }
 
     @Test
-    public void testTrailingWhitespace()
-        throws ResourceInitializationException
+    public void testTrailingWhitespace() throws ResourceInitializationException
     {
         String text = "This is a tokenized text ";
         String[] expectedSentences = new String[] { "This is a tokenized text " };
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text" };
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -152,8 +137,7 @@ public class RegexSegmenterTest
     }
 
     @Test
-    public void testWhitespacePunctuation()
-        throws ResourceInitializationException
+    public void testWhitespacePunctuation() throws ResourceInitializationException
     {
         String text = "This , is a tokenized text , with a final period .";
         String[] expectedSentences = new String[] {
@@ -162,8 +146,7 @@ public class RegexSegmenterTest
                 "with", "a", "final", "period", "." };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -173,8 +156,7 @@ public class RegexSegmenterTest
     }
 
     @Test
-    public void testRegex()
-        throws ResourceInitializationException
+    public void testRegex() throws ResourceInitializationException
     {
         String text = "This-is-a-text-.";
         String regex = "[-\n]";
@@ -182,8 +164,7 @@ public class RegexSegmenterTest
         String[] expectedTokens = new String[] { "This", "is", "a", "text", "." };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class,
                 RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, regex);
 
@@ -194,8 +175,7 @@ public class RegexSegmenterTest
     }
 
     @Test
-    public void simpleExampleWithDivs()
-            throws Exception
+    public void simpleExampleWithDivs() throws Exception
     {
         JCas jcas = JCasFactory.createText("This is sentence 1 .\nThis is number 2 .", "en");
         Div d = new Div(jcas, 0, 20);
@@ -203,12 +183,11 @@ public class RegexSegmenterTest
         d = new Div(jcas, 21, 39);
         d.addToIndexes();
 
-        runPipeline(jcas,
-                createEngineDescription(RegexSegmenter.class,
-                        // Treat each line as a sentence
-                        RegexSegmenter.PARAM_SENTENCE_BOUNDARY_REGEX, "\n",
-                        // Use whitespace to detect tokens
-                        RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, "\\s+"));
+        runPipeline(jcas, createEngineDescription(RegexSegmenter.class,
+                // Treat each line as a sentence
+                RegexSegmenter.PARAM_SENTENCE_BOUNDARY_REGEX, "\n",
+                // Use whitespace to detect tokens
+                RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, "\\s+"));
 
         for (Sentence s : select(jcas, Sentence.class)) {
             for (Token t : selectCovered(Token.class, s)) {
@@ -217,14 +196,9 @@ public class RegexSegmenterTest
             System.out.println();
         }
 
-        assertToken(
-                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
-                        "." },
-                select(jcas, Token.class));
-        assertSentence(
-                new String[] {
-                        "This is sentence 1 .",
-                        "This is number 2 ." },
+        assertToken(new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
+                "." }, select(jcas, Token.class));
+        assertSentence(new String[] { "This is sentence 1 .", "This is number 2 ." },
                 select(jcas, Sentence.class));
     }
 }

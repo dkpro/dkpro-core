@@ -31,19 +31,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 public class HepplePosTaggerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", null, "This is a test . \n",
-                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+        runTest("en", null, "This is a test . \n", new String[] { "DT", "VBZ", "DT", "NN", "." },
                 new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
-        runTest("en", null, "A neural net . \n",
-                new String[] { "DT",  "NN", "JJ",  "." },
+        runTest("en", null, "A neural net . \n", new String[] { "DT", "NN", "JJ", "." },
                 new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges . \n",
-                new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
                 new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
@@ -51,9 +48,8 @@ public class HepplePosTaggerTest
             String[] tagClasses)
         throws Exception
     {
-        AnalysisEngine engine = createEngine(HepplePosTagger.class,
-                HepplePosTagger.PARAM_VARIANT, variant,
-                HepplePosTagger.PARAM_PRINT_TAGSET, true);
+        AnalysisEngine engine = createEngine(HepplePosTagger.class, HepplePosTagger.PARAM_VARIANT,
+                variant, HepplePosTagger.PARAM_PRINT_TAGSET, true);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 

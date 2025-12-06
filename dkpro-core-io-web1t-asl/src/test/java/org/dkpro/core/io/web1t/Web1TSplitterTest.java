@@ -43,8 +43,7 @@ public class Web1TSplitterTest
     File output;
 
     @Test
-    public void testSplitter()
-        throws IOException
+    public void testSplitter() throws IOException
     {
         Web1TFileSplitter splitter = new Web1TFileSplitter(input, output, "UTF-8", fdist, 0.1, 0);
         splitter.split();
@@ -61,15 +60,14 @@ public class Web1TSplitterTest
         assertEquals(0, splits.size());
     }
 
-    private int countWordsInSplitFiles(List<File> splits)
-        throws IOException
+    private int countWordsInSplitFiles(List<File> splits) throws IOException
     {
 
         int words = 0;
         for (File file : splits) {
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
-                    file), "UTF-8"));
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
             while (reader.readLine() != null) {
                 words++;
@@ -81,24 +79,22 @@ public class Web1TSplitterTest
     }
 
     @BeforeEach
-    public void setUp()
-        throws IOException
+    public void setUp() throws IOException
     {
         fdist = createTestInputFile();
         output = new File("src/test/resources/tmp." + this.getClass().getName());
         output.mkdir();
     }
 
-    private FrequencyDistribution<String> createTestInputFile()
-        throws IOException
+    private FrequencyDistribution<String> createTestInputFile() throws IOException
     {
         input = new File("input.txt");
 
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(input), "UTF-8"));
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(input), "UTF-8"));
 
-        String[] words = new String[] { "Can", "you", "can", "a", "can", "as",
-                "a", "canner", "can", "can", "a", "can" };
+        String[] words = new String[] { "Can", "you", "can", "a", "can", "as", "a", "canner", "can",
+                "can", "a", "can" };
 
         FrequencyDistribution<String> fdist = new FrequencyDistribution<String>();
         for (String word : words) {

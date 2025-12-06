@@ -26,12 +26,11 @@ public class SoundexPhoneticTranscriptorTest
 {
 
     @Test
-    public void soundexTest() throws Exception {
+    public void soundexTest() throws Exception
+    {
 
-        runTest(
-                createEngineDescription(SoundexPhoneticTranscriptor.class),
-                "The knight entered the store in the night .",
-                "T000", "K523", "E536", "T000", "S360", "I500", "T000", "N230", ""
-        );
+        runTest(createEngineDescription(SoundexPhoneticTranscriptor.class),
+                "The knight entered the store in the night .", "T000", "K523", "E536", "T000",
+                "S360", "I500", "T000", "N230", "");
     }
 }

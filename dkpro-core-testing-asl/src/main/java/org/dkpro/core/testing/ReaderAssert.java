@@ -61,9 +61,9 @@ public class ReaderAssert
     private Logger LOG = LoggerFactory.getLogger(getClass());
 
     private Object requestedSourceLocation;
-    
+
     private AnalysisEngineDescription[] engines;
-    
+
     private boolean stripDocumentMetadata = true;
     private boolean validate = true;
     private TestOptions validationOptions = new TestOptions();
@@ -71,7 +71,7 @@ public class ReaderAssert
     public ReaderAssert(CollectionReaderDescription aReader)
     {
         super(aReader, ReaderAssert.class);
-        
+
         isNotNull();
     }
 
@@ -81,20 +81,20 @@ public class ReaderAssert
     {
         return assertThat(createReaderDescription(aReaderClass, aConfigurationData));
     }
-    
+
     public static ReaderAssert assertThat(CollectionReaderDescription aReader)
     {
         return new ReaderAssert(aReader);
     }
-    
+
     /**
      * Configure the reader to read from the given file.
      * 
      * @param aLocation
      *            a file location.
      * @return the assert for chaining.
-    * @see #readingFrom(String)
-      */
+     * @see #readingFrom(String)
+     */
     public ReaderAssert readingFrom(File aLocation)
     {
         return _readingFrom(aLocation);
@@ -117,38 +117,39 @@ public class ReaderAssert
     protected ReaderAssert _readingFrom(Object aLocation)
     {
         isNotNull();
-        
+
         if (requestedSourceLocation != null) {
             failWithMessage("Source location has already been set to [%s]",
                     requestedSourceLocation);
         }
 
         requestedSourceLocation = aLocation;
-        
+
         if (!canParameterBeSet(actual, PARAM_SOURCE_LOCATION)) {
-            failWithMessage("Parameter [%s] cannot be set on reader [%s]",
-                    PARAM_SOURCE_LOCATION, actual.getImplementationName());
+            failWithMessage("Parameter [%s] cannot be set on reader [%s]", PARAM_SOURCE_LOCATION,
+                    actual.getImplementationName());
         }
 
         // Is the source location defined in the reader parameters?
         Map<String, Object> readerParameters = getParameterSettings(actual);
         if (readerParameters.containsKey(PARAM_SOURCE_LOCATION)) {
-            throw Failures.instance().failure(String.format(
-                    "Source location [%s] already defined in the reader parameters.",
-                    readerParameters.get(PARAM_SOURCE_LOCATION)));
+            throw Failures.instance()
+                    .failure(String.format(
+                            "Source location [%s] already defined in the reader parameters.",
+                            readerParameters.get(PARAM_SOURCE_LOCATION)));
         }
-        
+
         setParameter(actual, PARAM_SOURCE_LOCATION, requestedSourceLocation);
-        
+
         return this;
     }
 
     public ReaderAssert usingEngines(AnalysisEngineDescription... aEngines)
     {
         isNotNull();
-        
+
         engines = aEngines;
-        
+
         return this;
     }
 
@@ -158,11 +159,11 @@ public class ReaderAssert
     {
         return usingWriter(createEngineDescription(aComponentClass, aConfigurationData));
     }
-        
+
     public WriterAssert usingWriter(AnalysisEngineDescription aWriter)
     {
         isNotNull();
-        
+
         try {
             return WriterAssert.assertThat(aWriter).consuming(toJCasIterable());
         }
@@ -192,7 +193,7 @@ public class ReaderAssert
     {
         validate = false;
     }
-    
+
     /**
      * Skip the given checks during reader output validation.
      * 
@@ -203,7 +204,7 @@ public class ReaderAssert
     {
         validationOptions.skipCheck(aCheck);
     }
-    
+
     /**
      * Infers the actual source location.
      * 
@@ -212,14 +213,14 @@ public class ReaderAssert
     protected Object sourceLocation()
     {
         Map<String, Object> readerParameters = getParameterSettings(actual);
-        
+
         // Was the source location set explicitly?
         if (requestedSourceLocation == null) {
             // Is the target location known from the reader parameters?
             if (readerParameters.containsKey(PARAM_SOURCE_LOCATION)) {
                 return readerParameters.get(PARAM_SOURCE_LOCATION);
             }
-            
+
             throw Failures.instance()
                     .failure(String.format("Unable to determine source location. Set an explicit "
                             + "source location or set the location using `readingWith()"));
@@ -228,7 +229,7 @@ public class ReaderAssert
             return requestedSourceLocation;
         }
     }
-    
+
     protected List<AnalysisEngineDescription> processors() throws ResourceInitializationException
     {
         List<AnalysisEngineDescription> processors = new ArrayList<>();
@@ -243,14 +244,14 @@ public class ReaderAssert
         if (stripDocumentMetadata) {
             processors.add(createEngineDescription(DocumentMetaDataStripper.class));
         }
-        
+
         return processors;
     }
-    
+
     public ListAssert<JCas> asJCasList()
     {
         List<JCas> casses = new ArrayList<>();
-        
+
         try {
             for (JCas jcas : toJCasIterable()) {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -266,10 +267,10 @@ public class ReaderAssert
             error.initCause(e);
             throw error;
         }
-        
+
         return new ListAssert<>(casses);
     }
-    
+
     public JCasIterable toJCasIterable() throws ResourceInitializationException
     {
         // Obtains the actual source location, also ensuring that it was actually defined.

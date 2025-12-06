@@ -45,8 +45,7 @@ public class StringSequenceGenerator
 {
     private PhraseSequenceGenerator psg;
 
-    protected StringSequenceGenerator(PhraseSequenceGenerator.Builder builder)
-            throws IOException
+    protected StringSequenceGenerator(PhraseSequenceGenerator.Builder builder) throws IOException
     {
         psg = builder.build();
     }
@@ -60,25 +59,22 @@ public class StringSequenceGenerator
      * @throws FeaturePathException
      *             if there was a problem creating the feature path.
      */
-    public List<String[]> tokenSequences(JCas aJCas)
-            throws FeaturePathException
+    public List<String[]> tokenSequences(JCas aJCas) throws FeaturePathException
     {
-        return psg.tokenSequences(aJCas).stream()
-                .map(this::phrases2String)
+        return psg.tokenSequences(aJCas).stream().map(this::phrases2String)
                 .collect(Collectors.toList());
     }
 
     /**
      * Convert {@link LexicalPhrase} arrays to string arrays by extracting their texts.
      *
-     * @param phrases an array of {@link LexicalPhrase}s.
+     * @param phrases
+     *            an array of {@link LexicalPhrase}s.
      * @return an array of strings.
      */
     private String[] phrases2String(LexicalPhrase[] phrases)
     {
-        return Stream.of(phrases)
-                .map(LexicalPhrase::getText)
-                .filter(string -> !string.isEmpty())
+        return Stream.of(phrases).map(LexicalPhrase::getText).filter(string -> !string.isEmpty())
                 .toArray(String[]::new);
     }
 }

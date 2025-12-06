@@ -119,7 +119,7 @@ public class OpenNlpParser
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, //
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, //
             defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
@@ -143,7 +143,7 @@ public class OpenNlpParser
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
@@ -151,7 +151,7 @@ public class OpenNlpParser
      * turned on for this to work.
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, defaultValue = "false")
     private boolean createPosTags;
 
     /**
@@ -159,7 +159,7 @@ public class OpenNlpParser
      * containing the whole parse tree in Penn Treebank style format.
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
-    @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, defaultValue = "false")
     private boolean createPennTreeString;
 
     private CasConfigurableProviderBase<Parser> modelProvider;

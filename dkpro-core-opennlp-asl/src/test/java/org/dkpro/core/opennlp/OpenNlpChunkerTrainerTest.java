@@ -49,29 +49,28 @@ public class OpenNlpChunkerTrainerTest
     private Dataset ds;
 
     @Test
-    public void test(@TempDir File targetFolder)
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
         Split split = ds.getDefaultSplit();
-        
+
         // Train model
         System.out.println("Training model from training data");
         CollectionReaderDescription trainReader = createReaderDescription( //
                 Conll2000Reader.class, //
                 Conll2000Reader.PARAM_PATTERNS, split.getTrainingFiles(), //
                 Conll2000Reader.PARAM_LANGUAGE, ds.getLanguage());
-        
+
         AnalysisEngineDescription trainer = createEngineDescription( //
                 OpenNlpChunkerTrainer.class, //
                 OpenNlpChunkerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"), //
-//                OpenNlpChunkerTrainer.PARAM_ALGORITHM, "PERCEPTRON",
-//                OpenNlpChunkerTrainer.PARAM_CUTOFF, 0,
+                // OpenNlpChunkerTrainer.PARAM_ALGORITHM, "PERCEPTRON",
+                // OpenNlpChunkerTrainer.PARAM_CUTOFF, 0,
                 OpenNlpChunkerTrainer.PARAM_NUM_THREADS, 2, //
                 OpenNlpChunkerTrainer.PARAM_LANGUAGE, ds.getLanguage(), //
                 OpenNlpChunkerTrainer.PARAM_ITERATIONS, 10);
-        
+
         SimplePipeline.runPipeline(trainReader, trainer);
-        
+
         // Apply model and collect labels
         System.out.println("Applying model to test data");
         CollectionReaderDescription testReader = createReaderDescription( //
@@ -79,7 +78,7 @@ public class OpenNlpChunkerTrainerTest
                 Conll2000Reader.PARAM_PATTERNS, split.getTestFiles(), //
                 Conll2000Reader.PARAM_READ_CHUNK, false, //
                 Conll2000Reader.PARAM_LANGUAGE, ds.getLanguage());
-        
+
         AnalysisEngineDescription ner = createEngineDescription( //
                 OpenNlpChunker.class, //
                 OpenNlpChunker.PARAM_PRINT_TAGSET, true, //
@@ -88,26 +87,26 @@ public class OpenNlpChunkerTrainerTest
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner),
                 Chunk.class, chunk -> chunk.getChunkValue());
         System.out.printf("Actual samples: %d%n", actual.size());
-        
+
         // Read reference data collect labels
-        ConfigurationParameterFactory.setParameter(testReader, 
-                Conll2000Reader.PARAM_READ_CHUNK, true);
+        ConfigurationParameterFactory.setParameter(testReader, Conll2000Reader.PARAM_READ_CHUNK,
+                true);
         List<Span<String>> expected = EvalUtil.loadSamples(testReader, Chunk.class, chunk -> {
             return chunk.getChunkValue();
         });
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
-        
+
         assertEquals(0.912441, results.getFscore(), 0.0001);
         assertEquals(0.914613, results.getPrecision(), 0.0001);
         assertEquals(0.910280, results.getRecall(), 0.0001);
     }
-    
+
     @BeforeEach
     public void setup() throws IOException
     {
         DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("conll2000-en");
-    }    
+    }
 }

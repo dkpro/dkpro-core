@@ -44,15 +44,15 @@ public abstract class FrequencyCountProviderBase
     private int scaleDownFactor = 1;
 
     @Override
-    public double getProbability(String phrase)
-        throws IOException
+    public double getProbability(String phrase) throws IOException
     {
         long n = getNrOfNgrams(FrequencyUtils.getPhraseLength(phrase));
 
         if (n == 0) {
-            throw new IOException("Requesting probability of a phrase for which no total phrase count information is available.");
+            throw new IOException(
+                    "Requesting probability of a phrase for which no total phrase count information is available.");
         }
-        
+
         long f = getFrequency(phrase);
         // TODO we need real language models with backoff and smoothing
         if (f == 0) {
@@ -62,8 +62,7 @@ public abstract class FrequencyCountProviderBase
     }
 
     @Override
-    public double getLogProbability(String phrase)
-        throws IOException
+    public double getLogProbability(String phrase) throws IOException
     {
         double probability = getProbability(phrase);
         double logProbability = Math.log(probability);
@@ -71,15 +70,13 @@ public abstract class FrequencyCountProviderBase
     }
 
     @Override
-    public long getFrequency(String phrase)
-        throws IOException
+    public long getFrequency(String phrase) throws IOException
     {
         long frequency = getFrequencyFromProvider(phrase);
         return frequency / getScaleDownFactor();
     }
 
-    protected abstract long getFrequencyFromProvider(String phrase)
-        throws IOException;
+    protected abstract long getFrequencyFromProvider(String phrase) throws IOException;
 
     public double getLogLikelihood(int termFrequency, int sizeOfCorpus, String term)
         throws IOException
@@ -104,8 +101,7 @@ public abstract class FrequencyCountProviderBase
     }
 
     @Override
-    public String getID()
-        throws IllegalArgumentException
+    public String getID() throws IllegalArgumentException
     {
         return this.getClass().getSimpleName();
     }

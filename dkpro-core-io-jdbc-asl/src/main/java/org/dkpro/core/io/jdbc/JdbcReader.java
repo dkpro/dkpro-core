@@ -62,12 +62,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(value = OperationType.READER)
 @ResourceMetaData(name = "JDBC-based Database Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 
 public class JdbcReader
-        extends CasCollectionReader_ImplBase
+    extends CasCollectionReader_ImplBase
 {
     public static final String CAS_TEXT = "cas_text";
     public static final String CAS_METADATA_TITLE = "cas_metadata_title";
@@ -78,8 +76,8 @@ public class JdbcReader
     public static final String CAS_METADATA_DOCUMENT_URI = "cas_metadata_document_uri";
     public static final String CAS_METADATA_DOCUMENT_BASE_URI = "cas_metadata_document_base_uri";
 
-    private static final Set<String> CAS_COLUMNS = new HashSet<>(asList(
-            CAS_TEXT, CAS_METADATA_TITLE, CAS_METADATA_LANGUAGE, CAS_METADATA_DOCUMENT_ID,
+    private static final Set<String> CAS_COLUMNS = new HashSet<>(asList(CAS_TEXT,
+            CAS_METADATA_TITLE, CAS_METADATA_LANGUAGE, CAS_METADATA_DOCUMENT_ID,
             CAS_METADATA_COLLECTION_ID, CAS_METADATA_DOCUMENT_URI, CAS_METADATA_DOCUMENT_BASE_URI));
 
     /**
@@ -155,8 +153,7 @@ public class JdbcReader
     private Set<String> columnNames;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -169,8 +166,7 @@ public class JdbcReader
         }
     }
 
-    private void openDatabaseConnection()
-            throws SQLException, ClassNotFoundException
+    private void openDatabaseConnection() throws SQLException, ClassNotFoundException
     {
         // Open connection
         if (!connection.endsWith("/")) {
@@ -184,13 +180,12 @@ public class JdbcReader
 
     }
 
-    private void query()
-            throws SQLException
+    private void query() throws SQLException
     {
         getLogger().info("Executing query: '" + query + "'.");
 
-        Statement statement = sqlConnection
-                .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        Statement statement = sqlConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
         resultSet = statement.executeQuery(query);
         resultSet.last();
         resultSetSize = resultSet.getRow();
@@ -212,8 +207,7 @@ public class JdbcReader
     }
 
     @Override
-    public void getNext(CAS cas)
-            throws IOException, CollectionException
+    public void getNext(CAS cas) throws IOException, CollectionException
     {
         try {
             resultSet.next(); // advance to next item (used to be done in hasNext())
@@ -268,15 +262,13 @@ public class JdbcReader
     }
 
     @Override
-    public boolean hasNext()
-            throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return (completed < resultSetSize);
     }
 
     @Override
-    public void close()
-            throws IOException
+    public void close() throws IOException
     {
         DbUtils.closeQuietly(resultSet);
         DbUtils.closeQuietly(sqlConnection);

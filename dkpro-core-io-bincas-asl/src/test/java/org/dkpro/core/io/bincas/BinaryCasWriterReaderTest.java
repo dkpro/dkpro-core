@@ -91,7 +91,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class BinaryCasWriterReaderTest
 {
     private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    
+
     private static final int NONE = 1;
     private static final int METADATA = 2;
     private static final int ALL = 3;

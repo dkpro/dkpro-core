@@ -50,45 +50,40 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class OpenNlpTokenTrainerTest
 {
     private Dataset ds;
-    
+
     @Test
-    public void test(@TempDir File targetFolder)
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
         Split split = ds.getDefaultSplit();
-        
+
         // Train model
         System.out.println("Training model from training data");
-        CollectionReaderDescription trainReader = createReaderDescription(
-                ConllUReader.class,
-                ConllUReader.PARAM_PATTERNS, split.getTrainingFiles(),
-                ConllUReader.PARAM_LANGUAGE, ds.getLanguage());
-        
-        AnalysisEngineDescription trainer = createEngineDescription(
-                OpenNlpTokenTrainer.class,
+        CollectionReaderDescription trainReader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_PATTERNS, split.getTrainingFiles(), ConllUReader.PARAM_LANGUAGE,
+                ds.getLanguage());
+
+        AnalysisEngineDescription trainer = createEngineDescription(OpenNlpTokenTrainer.class,
                 OpenNlpTokenTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
-                OpenNlpTokenTrainer.PARAM_NUM_THREADS, 2,
-                OpenNlpTokenTrainer.PARAM_LANGUAGE, ds.getLanguage());
-        
+                OpenNlpTokenTrainer.PARAM_NUM_THREADS, 2, OpenNlpTokenTrainer.PARAM_LANGUAGE,
+                ds.getLanguage());
+
         SimplePipeline.runPipeline(trainReader, trainer);
-        
+
         // Apply model and collect labels
         System.out.println("Applying model to test data");
-        CollectionReaderDescription testReader = createReaderDescription(
-                ConllUReader.class,
-                ConllUReader.PARAM_PATTERNS, split.getTestFiles(),
-                ConllUReader.PARAM_LANGUAGE, ds.getLanguage());
-        
-        AnalysisEngineDescription stripper = createEngineDescription(
-                TokenStripper.class);
-        
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                OpenNlpSegmenter.class,
-                OpenNlpSegmenter.PARAM_WRITE_SENTENCE, false,
-                OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION, new File(targetFolder, "model.bin"));
+        CollectionReaderDescription testReader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_PATTERNS, split.getTestFiles(), ConllUReader.PARAM_LANGUAGE,
+                ds.getLanguage());
 
-        List<Span<String>> actual = EvalUtil.loadSamples(
-                iteratePipeline(testReader, stripper, segmenter), Token.class, null);
+        AnalysisEngineDescription stripper = createEngineDescription(TokenStripper.class);
+
+        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
+                OpenNlpSegmenter.PARAM_WRITE_SENTENCE, false,
+                OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION,
+                new File(targetFolder, "model.bin"));
+
+        List<Span<String>> actual = EvalUtil
+                .loadSamples(iteratePipeline(testReader, stripper, segmenter), Token.class, null);
         System.out.printf("Actual samples: %d%n", actual.size());
 
         // Read reference data collect labels
@@ -96,18 +91,17 @@ public class OpenNlpTokenTrainerTest
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
-        
+
         assertEquals(0.978346, results.getFscore(), 0.0001);
         assertEquals(0.980009, results.getPrecision(), 0.0001);
         assertEquals(0.976690, results.getRecall(), 0.0001);
     }
-    
+
     public static class TokenStripper
         extends JCasAnnotator_ImplBase
     {
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             for (Token s : select(aJCas, Token.class)) {
                 s.removeFromIndexes();
@@ -120,5 +114,5 @@ public class OpenNlpTokenTrainerTest
     {
         DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("ud-en-conllu-1.4");
-    }    
+    }
 }

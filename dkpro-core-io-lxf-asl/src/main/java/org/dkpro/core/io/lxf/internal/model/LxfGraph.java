@@ -70,7 +70,7 @@ public class LxfGraph
     {
         regions = aRegions;
     }
-    
+
     public LxfRegion getRegion(String[] aRegionId)
     {
         // We only match on the ID, not on the origin
@@ -95,8 +95,10 @@ public class LxfGraph
     public List<LxfEdge> getEdges(LxfNode aFrom, String aRange)
     {
         // For the domain, we only match on the ID, not on the origin
-        return edges.stream().filter(e -> (aFrom.getId().equals(e.getFrom()[1])
-                && aRange.equals(getNode(e.getTo()).getLayer()))).collect(Collectors.toList());
+        return edges.stream()
+                .filter(e -> (aFrom.getId().equals(e.getFrom()[1])
+                        && aRange.equals(getNode(e.getTo()).getLayer())))
+                .collect(Collectors.toList());
     }
 
     public List<LxfEdge> getEdges(String aDomain, LxfNode aTo)

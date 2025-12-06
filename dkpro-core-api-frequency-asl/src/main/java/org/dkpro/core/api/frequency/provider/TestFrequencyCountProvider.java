@@ -20,59 +20,53 @@ package org.dkpro.core.api.frequency.provider;
 import java.util.Iterator;
 
 /**
- *  Frequency provider to be used in unit tests.
- *  The returned frequency is based on the number of characters.
+ * Frequency provider to be used in unit tests. The returned frequency is based on the number of
+ * characters.
  */
 public class TestFrequencyCountProvider
     extends FrequencyCountProviderBase
 {
 
     @Override
-    protected long getFrequencyFromProvider(String phrase)
-        throws IllegalArgumentException
+    protected long getFrequencyFromProvider(String phrase) throws IllegalArgumentException
     {
-        return new Double(Math.floor(
-                            Math.pow(
-                                    10.0,
-                                    Integer.valueOf(phrase.length()).doubleValue())
-                            )
-                         ).longValue();
+        return new Double(
+                Math.floor(Math.pow(10.0, Integer.valueOf(phrase.length()).doubleValue())))
+                        .longValue();
     }
 
     @Override
-    public long getNrOfNgrams(int n) {
+    public long getNrOfNgrams(int n)
+    {
         return 100l * n;
     }
-    
+
     @Override
-    public long getNrOfDistinctNgrams(int n)
-        throws IllegalArgumentException
+    public long getNrOfDistinctNgrams(int n) throws IllegalArgumentException
     {
         return 10l * n;
     }
-    
+
     @Override
-    public long getNrOfTokens() {
+    public long getNrOfTokens()
+    {
         return 100l;
     }
 
     @Override
-    public Iterator<String> getNgramIterator(int n)
-        throws IllegalArgumentException
+    public Iterator<String> getNgramIterator(int n) throws IllegalArgumentException
     {
         throw new UnsupportedOperationException("This method is currently not supported.");
     }
 
     @Override
-    public String getLanguage()
-        throws IllegalArgumentException
+    public String getLanguage() throws IllegalArgumentException
     {
         return "__test";
     }
 
     @Override
-    public String getID()
-        throws IllegalArgumentException
+    public String getID() throws IllegalArgumentException
     {
         return "1.5.0";
     }

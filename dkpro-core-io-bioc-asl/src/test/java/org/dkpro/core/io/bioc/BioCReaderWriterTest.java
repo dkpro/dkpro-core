@@ -51,14 +51,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class BioCReaderWriterTest
-{    
+{
     private static final String TYPESYSTEM_XML = "typesystem.xml";
     private static final String REFERENCE_XML = "reference.xml";
     private static final String DATA_XML = "data.xml";
 
     private static final Set<String> DISABLED = Set.of("passage-without-sentences",
             "annotation-with-single-feature-fallback");
-    
+
     public static Iterable<File> testSuiteFiles()
     {
         return asList(new File("src/test/resources/bioc-suite/") //
@@ -70,9 +70,9 @@ public class BioCReaderWriterTest
     public void runTest(File aReferenceFolder) throws Exception
     {
         assumeThat(DISABLED) //
-            .as("DKPro Core does not have the basic span/relation types that INCEpTION has, hence no fallback") //
-            .doesNotContain(aReferenceFolder.getName());
-        
+                .as("DKPro Core does not have the basic span/relation types that INCEpTION has, hence no fallback") //
+                .doesNotContain(aReferenceFolder.getName());
+
         TypeSystemDescription merged = createTestTypeSystem(aReferenceFolder);
 
         String targetFolder = "target/test-output/bioc-suite/" + aReferenceFolder.getName();

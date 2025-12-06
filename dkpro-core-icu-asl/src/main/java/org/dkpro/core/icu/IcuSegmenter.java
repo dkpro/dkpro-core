@@ -46,9 +46,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
         "ro", "ru", "rw", "se", "sg", "si", "sk", "sl", "sn", "so", "sq", "sr", "sv", "sw", "ta",
         "te", "tg", "th", "ti", "to", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "wo", "yo", "zh",
         "zu" })
-@TypeCapability(
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class IcuSegmenter
     extends SegmenterBase

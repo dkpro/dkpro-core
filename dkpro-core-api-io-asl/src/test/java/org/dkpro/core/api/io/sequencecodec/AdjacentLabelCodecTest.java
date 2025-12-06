@@ -29,10 +29,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class AdjacentLabelCodecTest
 {
-    public static Stream<Integer> data() {
+    public static Stream<Integer> data()
+    {
         return Stream.of(0, 1);
     }
-    
+
     @ParameterizedTest
     @MethodSource("data")
     public void testDecodeEmpty(int offset)
@@ -52,7 +53,7 @@ public class AdjacentLabelCodecTest
         List<SequenceItem> decoded = sut.decode(encoded);
         assertThat(decoded).containsExactly(new SequenceItem(0 + offset, 0 + offset, "PER"));
     }
-    
+
     @ParameterizedTest
     @MethodSource("data")
     public void testDecodeMultiUnitSpan(int offset)
@@ -70,8 +71,7 @@ public class AdjacentLabelCodecTest
         var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = SequenceItem.of(offset, "O", "PER", "ORG", "O");
         List<SequenceItem> decoded = sut.decode(encoded);
-        assertThat(decoded).containsExactly(
-                new SequenceItem(1 + offset, 1 + offset, "PER"), 
+        assertThat(decoded).containsExactly(new SequenceItem(1 + offset, 1 + offset, "PER"),
                 new SequenceItem(2 + offset, 2 + offset, "ORG"));
     }
 
@@ -81,9 +81,8 @@ public class AdjacentLabelCodecTest
     {
         var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = asList(new SequenceItem(1 + offset, 0 + offset, "O"));
-        
-        assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> sut.decode(encoded))
+
+        assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> sut.decode(encoded))
                 .withMessageContaining("Illegal sequence item span");
     }
 
@@ -92,12 +91,10 @@ public class AdjacentLabelCodecTest
     public void testDecodeBadItemOrder(int offset)
     {
         var sut = new AdjacentLabelCodec(offset);
-        List<SequenceItem> encoded = asList(
-                new SequenceItem(1 + offset, 1 + offset, "O"), 
+        List<SequenceItem> encoded = asList(new SequenceItem(1 + offset, 1 + offset, "O"),
                 new SequenceItem(0 + offset, 0 + offset, "O"));
-        
-        assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> sut.decode(encoded))
+
+        assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> sut.decode(encoded))
                 .withMessageContaining("Illegal sequence item span");
     }
 
@@ -118,8 +115,7 @@ public class AdjacentLabelCodecTest
         var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> decoded = asList(new SequenceItem(0 + offset, 1 + offset, "PER"));
         List<SequenceItem> encoded = sut.encode(decoded, 2);
-        assertThat(encoded).containsExactly(
-                new SequenceItem(0 + offset, 0 + offset, "PER"), 
+        assertThat(encoded).containsExactly(new SequenceItem(0 + offset, 0 + offset, "PER"),
                 new SequenceItem(1 + offset, 1 + offset, "PER"));
     }
 
@@ -128,12 +124,10 @@ public class AdjacentLabelCodecTest
     public void testEncodeMultipleItems(int offset)
     {
         var sut = new AdjacentLabelCodec(offset);
-        List<SequenceItem> decoded = asList(
-                new SequenceItem(0 + offset, 0 + offset, "PER"), 
+        List<SequenceItem> decoded = asList(new SequenceItem(0 + offset, 0 + offset, "PER"),
                 new SequenceItem(1 + offset, 1 + offset, "ORG"));
         List<SequenceItem> encoded = sut.encode(decoded, 2);
-        assertThat(encoded).containsExactly(
-                new SequenceItem(0 + offset, 0 + offset, "PER"), 
+        assertThat(encoded).containsExactly(new SequenceItem(0 + offset, 0 + offset, "PER"),
                 new SequenceItem(1 + offset, 1 + offset, "ORG"));
     }
 
@@ -142,37 +136,34 @@ public class AdjacentLabelCodecTest
     public void testEncodeMultipleItemsWithGap(int offset)
     {
         var sut = new AdjacentLabelCodec(offset);
-        List<SequenceItem> decoded = asList(
-                new SequenceItem(0 + offset, 0 + offset, "PER"), 
+        List<SequenceItem> decoded = asList(new SequenceItem(0 + offset, 0 + offset, "PER"),
                 new SequenceItem(2 + offset, 2 + offset, "ORG"));
         List<SequenceItem> encoded = sut.encode(decoded, 3);
-        assertThat(encoded).containsExactly(
-                new SequenceItem(0 + offset, 0 + offset, "PER"), 
+        assertThat(encoded).containsExactly(new SequenceItem(0 + offset, 0 + offset, "PER"),
                 new SequenceItem(1 + offset, 1 + offset, "O"),
                 new SequenceItem(2 + offset, 2 + offset, "ORG"));
     }
-    
+
     @ParameterizedTest
     @MethodSource("data")
     public void testEncodeBadItemSpan(int offset)
     {
         var sut = new AdjacentLabelCodec(offset);
         List<SequenceItem> encoded = asList(new SequenceItem(2 + offset, 1 + offset, "PER"));
-        
+
         assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(() -> sut.encode(encoded, 2))
                 .withMessageContaining("Illegal sequence item span");
     }
-    
+
     @ParameterizedTest
     @MethodSource("data")
     public void testEncodeBadItemOrder(int offset)
     {
         var sut = new AdjacentLabelCodec(offset);
-        List<SequenceItem> encoded = asList(
-                new SequenceItem(1 + offset, 1 + offset, "PER"), 
+        List<SequenceItem> encoded = asList(new SequenceItem(1 + offset, 1 + offset, "PER"),
                 new SequenceItem(0 + offset, 0 + offset, "ORG"));
-        
+
         assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(() -> sut.encode(encoded, 2))
                 .withMessageContaining("Illegal sequence item span");

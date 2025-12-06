@@ -44,13 +44,13 @@ public class CasValidator
     {
         // Nothing to do
     }
-    
+
     @SafeVarargs
     public CasValidator(Class<? extends Check>... aChecks)
     {
         setChecks(aChecks);
     }
-    
+
     public void setChecks(Collection<Class<? extends Check>> aChecks)
     {
         checks = new LinkedHashSet<>();
@@ -83,15 +83,14 @@ public class CasValidator
                 ok &= check.check(aCas, aMessages);
             }
             catch (InstantiationException | IllegalAccessException e) {
-                aMessages.add(new Message(this, Message.Level.ERROR,
-                        "Cannot instantiate [%s]: %s", checkClass.getSimpleName(), ExceptionUtils
-                                .getRootCauseMessage(e)));
+                aMessages.add(new Message(this, Message.Level.ERROR, "Cannot instantiate [%s]: %s",
+                        checkClass.getSimpleName(), ExceptionUtils.getRootCauseMessage(e)));
             }
         }
 
         return ok;
     }
-    
+
     public static CasValidator createWithAllChecks()
     {
         Reflections reflections = new Reflections(Check.class.getPackage().getName());

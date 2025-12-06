@@ -46,21 +46,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 public class TigerXmlReaderTest
 {
     @BeforeAll
-    static void setupClass() {
+    static void setupClass()
+    {
         // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
         // file where this property is globally set for all surefire runs
         System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
     }
-    
+
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+                TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample.xml", TigerXmlReader.PARAM_LANGUAGE,
+                "de", TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
@@ -72,14 +71,12 @@ public class TigerXmlReaderTest
     }
 
     @Test
-    public void test2()
-        throws Exception
+    public void test2() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]simple-broken-sentence.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+                TigerXmlReader.PARAM_LANGUAGE, "de", TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(() -> iteratePipeline(reader, new AnalysisEngineDescription[] {})
@@ -87,51 +84,40 @@ public class TigerXmlReaderTest
     }
 
     @Test
-    public void tigerSampleTest()
-        throws Exception
+    public void tigerSampleTest() throws Exception
     {
         testOneWay(
-                createReaderDescription(TigerXmlReader.class,
-                        TigerXmlReader.PARAM_LANGUAGE, "de",
+                createReaderDescription(TigerXmlReader.class, TigerXmlReader.PARAM_LANGUAGE, "de",
                         TigerXmlReader.PARAM_READ_PENN_TREE, true),
-                "tiger-sample.xml.dump",
-                "tiger-sample.xml");
+                "tiger-sample.xml.dump", "tiger-sample.xml");
     }
 
     @Test
-    public void semevalSampleTest()
-        throws Exception
+    public void semevalSampleTest() throws Exception
     {
         testOneWay(
-                createReaderDescription(TigerXmlReader.class,
-                        TigerXmlReader.PARAM_LANGUAGE, "en",
+                createReaderDescription(TigerXmlReader.class, TigerXmlReader.PARAM_LANGUAGE, "en",
                         TigerXmlReader.PARAM_READ_PENN_TREE, true),
-                "semeval1010-sample.xml.dump",
+                "semeval1010-sample.xml.dump", "semeval1010-en-sample.xml");
+    }
+
+    @Test
+    public void semevalSampleTest2() throws Exception
+    {
+        testOneWay(
+                createReaderDescription(TigerXmlReader.class, TigerXmlReader.PARAM_LANGUAGE, "en",
+                        TigerXmlReader.PARAM_READ_PENN_TREE, true),
+                createEngineDescription(Conll2012Writer.class), "semeval1010-en-sample.conll",
                 "semeval1010-en-sample.xml");
     }
 
     @Test
-    public void semevalSampleTest2()
-        throws Exception
-    {
-        testOneWay(
-                createReaderDescription(TigerXmlReader.class,
-                        TigerXmlReader.PARAM_LANGUAGE, "en",
-                        TigerXmlReader.PARAM_READ_PENN_TREE, true),
-                createEngineDescription(Conll2012Writer.class),
-                "semeval1010-en-sample.conll",
-                "semeval1010-en-sample.xml");
-    }
-
-    @Test
-    public void testNoncontiguousFrameTarget()
-        throws Exception
+    public void testNoncontiguousFrameTarget() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-noncontiguousframe.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+                TigerXmlReader.PARAM_LANGUAGE, "de", TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         int[][] frameRanges = new int[][] { { 4, 11 }, { 33, 47 }, { 71, 74 }, { 112, 138 },
                 { 143, 147 }, { 246, 255 } };
@@ -155,26 +141,19 @@ public class TigerXmlReaderTest
     }
 
     @Test
-    public void testFrameTargetHavingMultipleChildren()
-        throws Exception
+    public void testFrameTargetHavingMultipleChildren() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-complexframe.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+                TigerXmlReader.PARAM_LANGUAGE, "de", TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         int[][] frameRanges = new int[][] { { 26, 41 }, { 54, 61 }, { 64, 85 }, { 97, 104 },
                 { 120, 130 }, { 135, 151 }, { 152, 169 } };
-        /* Frame targets:
-         * Glaubwürdigkeit
-         * wichtig
-         * ein Zeichen zu setzen
-         * gewillt
-         * Erreichung
-         * Millenniumsziele
-         * <eine aktive Rolle> ... <übernehmen> (Noncontiguous frame target)
-         * **/
+        /*
+         * Frame targets: Glaubwürdigkeit wichtig ein Zeichen zu setzen gewillt Erreichung
+         * Millenniumsziele <eine aktive Rolle> ... <übernehmen> (Noncontiguous frame target)
+         **/
 
         for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
             for (Sentence sentence : select(cas, Sentence.class)) {
@@ -195,20 +174,16 @@ public class TigerXmlReaderTest
     }
 
     @Test
-    public void testContiguousFrameTarget()
-        throws Exception
+    public void testContiguousFrameTarget() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-contiguousframe.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
-
+                TigerXmlReader.PARAM_LANGUAGE, "de", TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         /**
-         * first element is contiguous
-         * it spans over 2 tokens "schlage" and "mit", so the boundary should be
-         * schlage.begin and mit.end ==> (4, 15)
+         * first element is contiguous it spans over 2 tokens "schlage" and "mit", so the boundary
+         * should be schlage.begin and mit.end ==> (4, 15)
          */
         int[][] frameRanges = new int[][] { { 4, 15 }, { 33, 47 }, { 71, 74 }, { 112, 138 },
                 { 143, 147 }, { 246, 255 } };

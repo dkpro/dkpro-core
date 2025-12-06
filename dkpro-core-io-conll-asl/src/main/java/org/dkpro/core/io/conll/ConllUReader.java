@@ -70,16 +70,14 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  */
 @ResourceMetaData(name = "CoNLL-U Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_U })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ConllUReader
     extends ConllReader_ImplBase
 {
@@ -87,29 +85,28 @@ public class ConllUReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
      * Read fine-grained part-of-speech information.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_POS, defaultValue = "true")
     private boolean readPos;
 
     /**
      * Read coarse-grained part-of-speech information.
      */
     public static final String PARAM_READ_CPOS = ComponentParameters.PARAM_READ_CPOS;
-    @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_CPOS, defaultValue = "true")
     private boolean readCPos;
 
     /**
      * Treat coarse-grained part-of-speech as fine-grained part-of-speech information.
      */
     public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
-    @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, defaultValue = "false")
     private boolean useCPosAsPos;
 
     /**
@@ -125,46 +122,44 @@ public class ConllUReader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-    
+
     /**
      * Read morphological features.
      */
     public static final String PARAM_READ_MORPH = ComponentParameters.PARAM_READ_MORPH;
-    @ConfigurationParameter(name = PARAM_READ_MORPH, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_MORPH, defaultValue = "true")
     private boolean readMorph;
 
     /**
      * Read lemma information.
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
-    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, defaultValue = "true")
     private boolean readLemma;
 
     /**
      * Read syntactic dependency information.
      */
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
-    @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, defaultValue = "true")
     private boolean readDependency;
 
     /**
-     * Read paragraph information. If no paragraph information is provided in the file, or if set
-     * to false, then output one sentence per line, separated by an empty line.
+     * Read paragraph information. If no paragraph information is provided in the file, or if set to
+     * false, then output one sentence per line, separated by an empty line.
      */
     public static final String PARAM_READ_PARAGRAPH = ComponentParameters.PARAM_READ_PARAGRAPH;
-    @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, defaultValue = "true")
     private boolean readParagraph;
 
     private static final String UNUSED = "_";
@@ -179,7 +174,7 @@ public class ConllUReader
     private static final int DEPREL = 7;
     private static final int DEPS = 8;
     private static final int MISC = 9;
-    
+
     public static final String META_SEND_ID = "sent_id";
     public static final String META_DOCUMENT_ID = "newdoc id";
     public static final String META_PARAGRAPH_ID = "newpar id";
@@ -188,18 +183,16 @@ public class ConllUReader
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
                 getLanguage());
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -215,8 +208,7 @@ public class ConllUReader
         }
     }
 
-    public void convert(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    public void convert(JCas aJCas, BufferedReader aReader) throws IOException
     {
         if (readPos) {
             try {
@@ -226,7 +218,7 @@ public class ConllUReader
                 throw new IOException(e);
             }
         }
-        
+
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         Paragraph p = null;
@@ -237,12 +229,11 @@ public class ConllUReader
         while (true) {
             // Read sentence comments (if any)
             Map<String, String> comments = readSentenceComments(aReader);
-            
-            if (!documentContainsParagraphInformation.isPresent()) {
-                documentContainsParagraphInformation = Optional.of(
-                        comments.keySet().contains(META_PARAGRAPH_ID));
-            }
 
+            if (!documentContainsParagraphInformation.isPresent()) {
+                documentContainsParagraphInformation = Optional
+                        .of(comments.keySet().contains(META_PARAGRAPH_ID));
+            }
 
             // Read sentence
             List<String[]> words = readSentence(aReader);
@@ -250,23 +241,23 @@ public class ConllUReader
                 // End of file
                 break;
             }
-            
+
             if (words.isEmpty()) {
-                 // Ignore empty sentences. This can happen when there are multiple end-of-sentence
-                 // markers following each other.
+                // Ignore empty sentences. This can happen when there are multiple end-of-sentence
+                // markers following each other.
                 continue;
             }
             if (comments.keySet().contains(META_DOCUMENT_ID)) {
                 documentIDValues.add(comments.get(META_DOCUMENT_ID));
             }
 
-
             if (!readParagraph || !documentContainsParagraphInformation.get()) {
                 if (doc.getPosition() > 0) {
                     doc.add("\n");
                     shouldAddSpace = false;
                 }
-            } else if (readParagraph) {
+            }
+            else if (readParagraph) {
                 if (p != null && comments.keySet().contains(META_PARAGRAPH_ID)) {
                     doc.add("\n\n");
                     shouldAddSpace = false;
@@ -279,16 +270,16 @@ public class ConllUReader
             int surfaceBegin = -1;
             int surfaceEnd = -1;
             String surfaceString = null;
-            
+
             // Tokens, Lemma, POS
             Int2ObjectMap<Token> tokens = new Int2ObjectOpenHashMap<>();
             Iterator<String[]> wordIterator = words.iterator();
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
-                
+
                 String idValue = trim(word[ID]);
                 String formValue = trim(word[FORM]);
-                
+
                 if (idValue.contains("-")) {
                     String[] fragments = idValue.split("-");
                     surfaceBegin = Integer.valueOf(trim(fragments[0]));
@@ -296,8 +287,8 @@ public class ConllUReader
                     surfaceString = formValue;
                     continue;
                 }
-//                the following must be placed after check for dashes in ID in order not to insert
-//                unnecessary spaces
+                // the following must be placed after check for dashes in ID in order not to insert
+                // unnecessary spaces
                 if (shouldAddSpace) {
                     if (doc.getPosition() == sentenceBegin) {
                         sentenceBegin++;
@@ -338,7 +329,7 @@ public class ConllUReader
                     }
                     pos.setCoarseValue(cPosTag);
                 }
-                
+
                 if (pos != null) {
                     pos.addToIndexes();
                     token.setPos(pos);
@@ -352,7 +343,7 @@ public class ConllUReader
                     morphtag.setValue(featsValue);
                     morphtag.addToIndexes();
                     token.setMorph(morphtag);
-                    
+
                     // Try parsing out individual feature values. Since the DKPro Core
                     // MorphologicalFeatures type is based on the definition from the UD project,
                     // we can do this rather straightforwardly.
@@ -363,7 +354,7 @@ public class ConllUReader
                         StringBuilder key = new StringBuilder(trim(keyValue[0]));
                         key.setCharAt(0, Character.toLowerCase(key.charAt(0)));
                         String value = trim(keyValue[1]);
-                        
+
                         Feature feat = morphType.getFeatureByBaseName(key.toString());
                         if (feat != null) {
                             morphtag.setStringValue(feat, value);
@@ -382,7 +373,7 @@ public class ConllUReader
                     surfaceEnd = -1;
                     surfaceString = null;
                 }
-                
+
                 sentenceEnd = token.getEnd();
             }
 
@@ -390,23 +381,22 @@ public class ConllUReader
             if (readDependency) {
                 for (String[] word : words) {
                     String depRelValue = cleanTag(word[DEPREL]);
-                    
+
                     if (!UNUSED.equals(depRelValue)) {
                         int depId = Integer.valueOf(trim(word[ID]));
                         int govId = Integer.valueOf(trim(word[HEAD]));
-    
+
                         // Model the root as a loop onto itself
-                        makeDependency(aJCas, govId, depId, depRelValue, BASIC, tokens,
-                                word);
+                        makeDependency(aJCas, govId, depId, depRelValue, BASIC, tokens, word);
                     }
-                    
+
                     String depsValue = trim(word[DEPS]);
                     if (!UNUSED.equals(depsValue)) {
                         // list items separated by vertical bar
                         String[] items = depsValue.split("\\|");
                         for (String item : items) {
                             String[] sItem = item.split(":");
-                            
+
                             int depId = Integer.valueOf(trim(word[ID]));
                             int govId = Integer.valueOf(trim(sItem[0]));
 
@@ -421,7 +411,6 @@ public class ConllUReader
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
             sentence.setId(comments.get(META_SEND_ID));
             sentence.addToIndexes();
-
 
             if (comments.keySet().contains(META_PARAGRAPH_ID)) {
                 final String paragraphID = comments.get(META_PARAGRAPH_ID);
@@ -454,11 +443,10 @@ public class ConllUReader
         doc.close();
     }
 
-    private Map<String, String> readSentenceComments(BufferedReader aReader)
-        throws IOException
+    private Map<String, String> readSentenceComments(BufferedReader aReader) throws IOException
     {
         Map<String, String> comments = new LinkedHashMap<>();
-        
+
         while (true) {
             // Check if the next line could be a header line
             aReader.mark(2);
@@ -479,15 +467,14 @@ public class ConllUReader
                 break;
             }
         }
-        
+
         return comments;
     }
-    
+
     /**
      * Read a single sentence.
      */
-    private static List<String[]> readSentence(BufferedReader aReader)
-        throws IOException
+    private static List<String[]> readSentence(BufferedReader aReader) throws IOException
     {
         List<String[]> words = new ArrayList<>();
         String line;

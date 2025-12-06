@@ -14,7 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.dkpro.core.io.lxf;
+ */
+package org.dkpro.core.io.lxf;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -47,53 +48,48 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "CLARINO LAP LXF Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_LXF_JSON })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class LxfWriter
     extends JCasFileWriter_ImplBase
 {
     /**
      * Use this filename extension.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".lxf")
     private String filenameSuffix;
 
     /**
-     * Write only the changes to the annotations. This works only in conjunction with the 
+     * Write only the changes to the annotations. This works only in conjunction with the
      * {@link LxfReader}.
      */
     public static final String PARAM_DELTA = "delta";
     @ConfigurationParameter(name = PARAM_DELTA, mandatory = true, defaultValue = "false")
     private boolean delta;
-    
+
     private ObjectMapper mapper;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         mapper = new ObjectMapper();
         // Hack because LXF dumper presently creates invalid JSON
         mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         LxfGraph lxf = new LxfGraph();
-        
+
         if (delta) {
             DocumentMetaData dmd = DocumentMetaData.get(aJCas);
             try (InputStream is = new BufferedInputStream(
@@ -108,7 +104,7 @@ public class LxfWriter
         else {
             DKPro2Lxf.convert(aJCas, lxf);
         }
-        
+
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
             mapper.writerWithDefaultPrettyPrinter().writeValue(docOS, lxf);
         }

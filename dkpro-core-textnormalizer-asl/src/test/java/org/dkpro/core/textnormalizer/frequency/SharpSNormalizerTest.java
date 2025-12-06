@@ -31,25 +31,23 @@ public class SharpSNormalizerTest
     @Test
     public void test() throws Exception
     {
-        //check sharpS normalization
+        // check sharpS normalization
         test("süss", "süß");
     }
 
-    public void test(String inputText, String normalizedText)
-        throws Exception
+    public void test(String inputText, String normalizedText) throws Exception
     {
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription normalizer = createEngineDescription(
-                SharpSNormalizer.class,
-                SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD,0,
-                SharpSNormalizer.RES_FREQUENCY_PROVIDER, createResourceDescription(
-                        Web1TFrequencyCountResource.class,
+        AnalysisEngineDescription normalizer = createEngineDescription(SharpSNormalizer.class,
+                SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, 0,
+                SharpSNormalizer.RES_FREQUENCY_PROVIDER,
+                createResourceDescription(Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
 
         assertTransformedText(normalizedText, inputText, "de", segmenter, normalizer);
-    }    
+    }
 }

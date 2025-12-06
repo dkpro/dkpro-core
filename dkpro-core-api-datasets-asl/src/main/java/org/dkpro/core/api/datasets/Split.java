@@ -22,8 +22,8 @@ import java.io.File;
 public interface Split
 {
     File[] getTrainingFiles();
-    
+
     File[] getTestFiles();
-    
+
     File[] getDevelopmentFiles();
 }

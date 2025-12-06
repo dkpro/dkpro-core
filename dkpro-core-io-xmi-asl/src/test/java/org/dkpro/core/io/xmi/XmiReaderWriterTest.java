@@ -35,7 +35,7 @@ public class XmiReaderWriterTest
     {
         testRoundTrip( //
                 createReaderDescription(XmiReader.class), //
-                createEngineDescription(XmiWriter.class),  //
+                createEngineDescription(XmiWriter.class), //
                 "xmi/english.xmi");
     }
 
@@ -43,9 +43,8 @@ public class XmiReaderWriterTest
     public void testReadingFileWithDocumentMetaData() throws Exception
     {
         var reader = createReader( //
-                XmiReader.class,  //
-                XmiReader.PARAM_SOURCE_LOCATION,
-                "src/test/resources/xmi",  //
+                XmiReader.class, //
+                XmiReader.PARAM_SOURCE_LOCATION, "src/test/resources/xmi", //
                 XmiReader.PARAM_PATTERNS, "english.xmi");
 
         var doc = JCasFactory.createJCas();

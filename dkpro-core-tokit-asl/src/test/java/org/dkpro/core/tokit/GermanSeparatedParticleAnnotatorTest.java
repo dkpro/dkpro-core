@@ -46,8 +46,7 @@ public class GermanSeparatedParticleAnnotatorTest
                 new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$." },
                 new String[] { "wir", "vorschlagen", "eine", "Treffen", "vor", "." });
 
-        runTest("de", "Fangen wir jetzt an ?",
-                new String[] { "fangen", "wir", "jetzt", "an", "?" },
+        runTest("de", "Fangen wir jetzt an ?", new String[] { "fangen", "wir", "jetzt", "an", "?" },
                 new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$." },
                 new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$." },
                 new String[] { "anfangen", "wir", "jetzt", "an", "?" });

@@ -30,7 +30,8 @@ import org.dkpro.core.testing.validation.Message;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
-public class ParentSetCheck implements Check
+public class ParentSetCheck
+    implements Check
 {
     // tag::check-example[]
     @Override
@@ -40,20 +41,20 @@ public class ParentSetCheck implements Check
             Collection<Annotation> children = select(parent.getChildren(), Annotation.class);
             for (Annotation child : children) {
                 Annotation declParent = FSUtil.getFeature(child, "parent", Annotation.class);
-                
+
                 if (declParent == null) {
-                    aMessages.add(new Message(this, ERROR, String.format(
-                            "Child without parent set: %s", child)));
-                    
+                    aMessages.add(new Message(this, ERROR,
+                            String.format("Child without parent set: %s", child)));
+
                 }
                 else if (declParent != parent) {
-                    aMessages.add(new Message(this, ERROR, String.format(
-                            "Child points to wrong parent: %s", child)));
-                    
+                    aMessages.add(new Message(this, ERROR,
+                            String.format("Child points to wrong parent: %s", child)));
+
                 }
             }
         }
-        
+
         return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
     // end::check-example[]

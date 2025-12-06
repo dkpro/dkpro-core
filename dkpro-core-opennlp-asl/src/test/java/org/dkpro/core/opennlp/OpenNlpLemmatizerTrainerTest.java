@@ -46,75 +46,68 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 public class OpenNlpLemmatizerTrainerTest
 {
     @Test
-    public void test(@TempDir File targetFolder)
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
         File cache = TestCache.getCacheFolder();
-        
+
         // Obtain dataset
         DatasetFactory loader = new DatasetFactory(cache);
         Dataset ds = loader.load("gum-en-conll-3.0.0");
         Split split = ds.getSplit(0.8);
-        
+
         // Parameters
         boolean useExtendedTTTagset = false;
         int iterations = 10;
-        
+
         // Train model
         System.out.println("Training model from training data");
-        CollectionReaderDescription trainReader = createReaderDescription(
-                Conll2006Reader.class,
+        CollectionReaderDescription trainReader = createReaderDescription(Conll2006Reader.class,
                 Conll2006Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2006Reader.PARAM_USE_CPOS_AS_POS, useExtendedTTTagset,
                 Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
-        
-        AnalysisEngineDescription trainer = createEngineDescription(
-                OpenNlpLemmatizerTrainer.class,
+
+        AnalysisEngineDescription trainer = createEngineDescription(OpenNlpLemmatizerTrainer.class,
                 OpenNlpLemmatizerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
                 OpenNlpLemmatizerTrainer.PARAM_LANGUAGE, ds.getLanguage(),
                 OpenNlpLemmatizerTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpLemmatizerTrainer.PARAM_ITERATIONS, iterations);
 
-        AnalysisEngineDescription trainWriter = createEngineDescription(
-                Conll2006Writer.class,
-                Conll2006Writer.PARAM_SINGULAR_TARGET, true,
-                Conll2006Writer.PARAM_TARGET_LOCATION, new File(targetFolder, "in.conll"));
+        AnalysisEngineDescription trainWriter = createEngineDescription(Conll2006Writer.class,
+                Conll2006Writer.PARAM_SINGULAR_TARGET, true, Conll2006Writer.PARAM_TARGET_LOCATION,
+                new File(targetFolder, "in.conll"));
 
         SimplePipeline.runPipeline(trainReader, trainer, trainWriter);
-        
+
         // Apply model and collect labels
         System.out.println("Applying model to test data");
-        CollectionReaderDescription testReader = createReaderDescription(
-                Conll2006Reader.class,
+        CollectionReaderDescription testReader = createReaderDescription(Conll2006Reader.class,
                 Conll2006Reader.PARAM_PATTERNS, split.getTestFiles(),
                 Conll2006Reader.PARAM_USE_CPOS_AS_POS, useExtendedTTTagset,
-                Conll2006Reader.PARAM_READ_LEMMA, false,
-                Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
-        
-        AnalysisEngineDescription lemmatizer = createEngineDescription(
-                OpenNlpLemmatizer.class,
+                Conll2006Reader.PARAM_READ_LEMMA, false, Conll2006Reader.PARAM_LANGUAGE,
+                ds.getLanguage());
+
+        AnalysisEngineDescription lemmatizer = createEngineDescription(OpenNlpLemmatizer.class,
                 OpenNlpLemmatizer.PARAM_MODEL_LOCATION, new File(targetFolder, "model.bin"));
 
-        AnalysisEngineDescription testWriter = createEngineDescription(
-                Conll2006Writer.class,
-                Conll2006Writer.PARAM_SINGULAR_TARGET, true,
-                Conll2006Writer.PARAM_TARGET_LOCATION, new File(targetFolder, "out.conll"));
-        
+        AnalysisEngineDescription testWriter = createEngineDescription(Conll2006Writer.class,
+                Conll2006Writer.PARAM_SINGULAR_TARGET, true, Conll2006Writer.PARAM_TARGET_LOCATION,
+                new File(targetFolder, "out.conll"));
+
         List<Span<String>> actual = EvalUtil.loadSamples(
-                iteratePipeline(testReader, lemmatizer, testWriter), Lemma.class, lemma -> 
-                lemma.getValue());
+                iteratePipeline(testReader, lemmatizer, testWriter), Lemma.class,
+                lemma -> lemma.getValue());
         System.out.printf("Actual samples: %d%n", actual.size());
-        
+
         // Read reference data collect labels
-        ConfigurationParameterFactory.setParameter(testReader, 
-                Conll2006Reader.PARAM_READ_LEMMA, true);
+        ConfigurationParameterFactory.setParameter(testReader, Conll2006Reader.PARAM_READ_LEMMA,
+                true);
         List<Span<String>> expected = EvalUtil.loadSamples(testReader, Lemma.class, lemma -> {
             return lemma.getValue();
         });
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
-        
+
         assertEquals(0.961978, results.getFscore(), 0.0001);
         assertEquals(0.961978, results.getPrecision(), 0.0001);
         assertEquals(0.961978, results.getRecall(), 0.0001);

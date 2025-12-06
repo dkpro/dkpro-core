@@ -28,8 +28,9 @@ public class MappingParamTest
     {
         TypeMapping param = TypeMapping
                 .parse("Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity");
-        
+
         assertThat(param.matches("Country")).isTrue();
-        assertThat(param.apply()).isEqualTo("de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity");
+        assertThat(param.apply())
+                .isEqualTo("de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity");
     }
 }

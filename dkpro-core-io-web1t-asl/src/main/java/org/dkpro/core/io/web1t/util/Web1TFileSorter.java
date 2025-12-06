@@ -29,23 +29,20 @@ public class Web1TFileSorter
     private List<File> sortedFiles = new LinkedList<File>();
     private final Comparator<String> comparator;
 
-    public Web1TFileSorter(List<File> unsortedFiles,
-            Comparator<String> comparator)
+    public Web1TFileSorter(List<File> unsortedFiles, Comparator<String> comparator)
     {
         this.inputFiles = unsortedFiles;
         this.comparator = comparator;
     }
 
-    public void sort()
-        throws IOException
+    public void sort() throws IOException
     {
         for (File file : inputFiles) {
 
             List<File> l = ExternalSort.sortInBatch(file, comparator);
 
             File sortedSplitFile = new File(
-                    Web1TUtil.cutOffUnderscoredSuffixFromFileName(file)
-                            + "_sorted");
+                    Web1TUtil.cutOffUnderscoredSuffixFromFileName(file) + "_sorted");
             sortedFiles.add(sortedSplitFile);
             ExternalSort.mergeSortedFiles(l, sortedSplitFile, comparator);
         }

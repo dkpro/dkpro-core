@@ -56,13 +56,13 @@ public abstract class AbstractInterval
     {
         // Cases:
         //
-        //         start                     end
-        //           |                        |
-        //  1     #######                     |
-        //  2        |                     #######
-        //  3   ####################################
-        //  4        |        #######         |
-        //           |                        |
+        // start end
+        // | |
+        // 1 ####### |
+        // 2 | #######
+        // 3 ####################################
+        // 4 | ####### |
+        // | |
 
         return (((i.getStart() <= getStart()) && (getStart() < i.getEnd())) || // Case 1-3
                 ((i.getStart() < getEnd()) && (getEnd() <= i.getEnd())) || // Case 1-3

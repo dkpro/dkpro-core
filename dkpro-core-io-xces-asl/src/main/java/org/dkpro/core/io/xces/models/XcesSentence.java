@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlID;
 
 public class XcesSentence
 {
-    @XmlID 
+    @XmlID
     @XmlAttribute
     public String id;
 

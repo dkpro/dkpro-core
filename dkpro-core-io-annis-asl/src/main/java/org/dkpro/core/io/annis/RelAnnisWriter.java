@@ -63,14 +63,12 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.WRITER)
 @ResourceMetaData(name = "RelANNIS Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class RelAnnisWriter
     extends JCasConsumer_ImplBase
 {
@@ -98,8 +96,7 @@ public class RelAnnisWriter
     /**
      * Write constituent structure information.
      */
-    public static final String PARAM_WRITE_CONSTITUENT = 
-            ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "true")
     private boolean writeConstituents;
 
@@ -123,8 +120,7 @@ public class RelAnnisWriter
     private Map<Token, List<Dependency>> dependencies;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -144,8 +140,8 @@ public class RelAnnisWriter
         for (String fileId : FILE_IDS) {
             File filePath = new File(path, fileId + ".tab");
             try {
-                PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(
-                        filePath), "UTF-8"));
+                PrintWriter pw = new PrintWriter(
+                        new OutputStreamWriter(new FileOutputStream(filePath), "UTF-8"));
                 writers.put(fileId, pw);
             }
             catch (UnsupportedEncodingException e) {
@@ -158,8 +154,7 @@ public class RelAnnisWriter
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         export(jcas);
         if (writeDependencies) {
@@ -267,16 +262,16 @@ public class RelAnnisWriter
             int pos = selectCovered(jcas, Token.class, 0, t.getBegin()).size();
 
             // store node token
-            writeToFile("node", currNodeId, textId, documentId, "token_merged",
-                    "tok_" + currNodeId, t.getBegin(), t.getEnd(), pos, "true", t.getCoveredText());
+            writeToFile("node", currNodeId, textId, documentId, "token_merged", "tok_" + currNodeId,
+                    t.getBegin(), t.getEnd(), pos, "true", t.getCoveredText());
             // store node_annotation (token)
             if (writePos && (t.getPos() != null)) {
-                writeToFile("node_annotation", currNodeId, "token_merged", "pos", t.getPos()
-                        .getPosValue());
+                writeToFile("node_annotation", currNodeId, "token_merged", "pos",
+                        t.getPos().getPosValue());
             }
             if (writeLemma && (t.getLemma() != null)) {
-                writeToFile("node_annotation", currNodeId, "token_merged", "lemma", t.getLemma()
-                        .getValue());
+                writeToFile("node_annotation", currNodeId, "token_merged", "lemma",
+                        t.getLemma().getValue());
             }
             // store token with corresponding nodeId in hashmap for dependency
             // output

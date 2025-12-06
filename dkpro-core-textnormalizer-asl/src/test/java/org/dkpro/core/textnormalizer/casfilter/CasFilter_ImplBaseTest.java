@@ -48,22 +48,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 public class CasFilter_ImplBaseTest
 {
     @Test
-    public void testAnnotationFilterPass(@TempDir File tempDir)
-        throws UIMAException, IOException
+    public void testAnnotationFilterPass(@TempDir File tempDir) throws UIMAException, IOException
     {
         File tmpFile = new File(tempDir, "output.dump");
-        
+
         String input = "test";
         String expectedFirstLine = "======== CAS 0 begin ==================================";
 
-        CollectionReaderDescription reader = createReaderDescription(
-                StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(AnnotationBasedFilter.class);
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
-        AnalysisEngineDescription writer = createEngineDescription(
-                CasDumpWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
@@ -77,16 +73,14 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testAnnotationFilterRemove(@TempDir File tempDir)
-        throws UIMAException, IOException
+    public void testAnnotationFilterRemove(@TempDir File tempDir) throws UIMAException, IOException
     {
         File tmpFile = new File(tempDir, "output.dump");
-        
+
         String input = "";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(AnnotationBasedFilter.class);
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
@@ -103,12 +97,11 @@ public class CasFilter_ImplBaseTest
         throws UIMAException, IOException
     {
         File tmpFile = new File(tempDir, "output.dump");
-        
+
         String input = "";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(EmptyDocumentFilter.class);
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
@@ -120,16 +113,14 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testEmptyDocumentFilterPass(@TempDir File tempDir)
-        throws UIMAException, IOException
+    public void testEmptyDocumentFilterPass(@TempDir File tempDir) throws UIMAException, IOException
     {
         File tmpFile = new File(tempDir, "output.dump");
 
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(EmptyDocumentFilter.class);
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
@@ -141,16 +132,14 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testLanguageFilterPass(@TempDir File tempDir)
-        throws UIMAException, IOException
+    public void testLanguageFilterPass(@TempDir File tempDir) throws UIMAException, IOException
     {
         File tmpFile = new File(tempDir, "output.dump");
-        
+
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(LanguageFilter.class,
                 LanguageFilter.PARAM_REQUIRED_LANGUAGES, new String[] { "de", "en" });
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
@@ -163,16 +152,14 @@ public class CasFilter_ImplBaseTest
     }
 
     @Test
-    public void testLanguageFilterRemove(@TempDir File tempDir)
-        throws UIMAException, IOException
+    public void testLanguageFilterRemove(@TempDir File tempDir) throws UIMAException, IOException
     {
         File tmpFile = new File(tempDir, "output.dump");
-        
+
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "ch");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "ch");
         AnalysisEngineDescription filter = createEngineDescription(LanguageFilter.class,
                 LanguageFilter.PARAM_REQUIRED_LANGUAGES, new String[] { "de", "en" });
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
@@ -194,8 +181,7 @@ public class CasFilter_ImplBaseTest
          * @throws AnalysisEngineProcessException
          */
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             String text = aJCas.getDocumentText();
             if (text.length() > 0) {

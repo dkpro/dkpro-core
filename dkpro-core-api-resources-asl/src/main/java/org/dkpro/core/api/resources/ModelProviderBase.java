@@ -64,8 +64,8 @@ public class ModelProviderBase<M>
     {
         setContextObject(aObject);
 
-        setDefault(ARTIFACT_ID, "${groupId}." + aShortName + "-model-" + aType
-                + "-${language}-${variant}");
+        setDefault(ARTIFACT_ID,
+                "${groupId}." + aShortName + "-model-" + aType + "-${language}-${variant}");
         setDefault(LOCATION,
                 "classpath:/${package}/lib/" + aType + "-${language}-${variant}.properties");
         setDefaultVariantsLocation("${package}/lib/" + aType + "-default-variants.map");
@@ -75,17 +75,16 @@ public class ModelProviderBase<M>
         addAutoOverride(ComponentParameters.PARAM_MODEL_LOCATION, LOCATION);
         addAutoOverride(ComponentParameters.PARAM_VARIANT, VARIANT);
         addAutoOverride(ComponentParameters.PARAM_LANGUAGE, LANGUAGE);
-        
+
         applyAutoOverrides(aObject);
     }
     // end::model-provider-convenience[]
-    
+
     @Override
-    public void configure(CAS aCas)
-        throws AnalysisEngineProcessException
+    public void configure(CAS aCas) throws AnalysisEngineProcessException
     {
         super.configure(aCas);
-        
+
         try {
             recordTagsets(aCas);
         }
@@ -93,10 +92,9 @@ public class ModelProviderBase<M>
             throw new AnalysisEngineProcessException(e);
         }
     }
-    
+
     @Override
-    protected M produceResource(InputStream aStream)
-        throws Exception
+    protected M produceResource(InputStream aStream) throws Exception
     {
         return null;
     }
@@ -110,8 +108,8 @@ public class ModelProviderBase<M>
     protected void addTagset(Tagset aProvider)
     {
         addTagset(aProvider, true);
-    }    
-    
+    }
+
     protected void addTagset(Tagset aProvider, boolean aOutput)
     {
         tagsets.add(aProvider);
@@ -120,8 +118,7 @@ public class ModelProviderBase<M>
         }
     }
 
-    protected void recordTagsets(CAS aCas)
-        throws CASException
+    protected void recordTagsets(CAS aCas) throws CASException
     {
         JCas jcas = aCas.getJCas();
 
@@ -129,8 +126,8 @@ public class ModelProviderBase<M>
             Tagset provider = ((HasTagsets) this).getTagset();
 
             for (Entry<String, String> e : provider.getLayers().entrySet()) {
-                TagsetDescription tsd = new TagsetDescription(jcas, 0, aCas.getDocumentText()
-                        .length());
+                TagsetDescription tsd = new TagsetDescription(jcas, 0,
+                        aCas.getDocumentText().length());
                 tsd.setLayer(e.getKey());
                 tsd.setName(e.getValue());
 
@@ -146,7 +143,7 @@ public class ModelProviderBase<M>
                 if (getContextClass() != null) {
                     meta.setComponentName(getContextClass().getName());
                 }
-                
+
                 // Initialize with information from the aggregated properties
                 try {
                     Properties props = getAggregatedProperties();
@@ -165,7 +162,7 @@ public class ModelProviderBase<M>
                     meta.setModelLanguage(md.getProperty(LANGUAGE));
                     meta.setModelVersion(md.getProperty(VERSION));
                 }
-                
+
                 meta.setModelLocation(getLastModelLocation());
 
                 tsd.setComponentName(meta.getComponentName());
@@ -174,7 +171,7 @@ public class ModelProviderBase<M>
                 tsd.setModelVariant(meta.getModelVariant());
                 tsd.setModelVersion(meta.getModelVersion());
                 tsd.setInput(meta.isInput());
-                
+
                 List<TagDescription> tags = new ArrayList<TagDescription>();
                 for (String tag : provider.listTags(e.getKey(), e.getValue())) {
                     TagDescription td = new TagDescription(jcas);

@@ -60,8 +60,7 @@ public class PrintTopicWordWeights
      * @throws IOException
      *             if the model cannot be read
      */
-    public PrintTopicWordWeights(File modelFile, int nWords)
-        throws IOException
+    public PrintTopicWordWeights(File modelFile, int nWords) throws IOException
     {
         try {
             model = ParallelTopicModel.read(modelFile);
@@ -82,8 +81,7 @@ public class PrintTopicWordWeights
      * @throws IOException
      *             if an I/O error occurs while writing to the output file
      */
-    public void writeWords(File targetFile)
-        throws IOException
+    public void writeWords(File targetFile) throws IOException
     {
         targetFile.getParentFile().mkdirs();
         LOGGER.info("Writing output to " + targetFile);
@@ -101,8 +99,8 @@ public class PrintTopicWordWeights
                     LOGGER.debug("Ignoring '" + word + "'.");
                 }
                 else {
-                    outputStream.write(
-                            String.format(LOCALE, "%s%s%f", word, FIELD_SEPARATOR, weight));
+                    outputStream
+                            .write(String.format(LOCALE, "%s%s%f", word, FIELD_SEPARATOR, weight));
 
                     wordCount++;
                     if (wordCount >= nWords) {
@@ -118,8 +116,7 @@ public class PrintTopicWordWeights
 
     }
 
-    public static void main(String[] args)
-        throws IOException
+    public static void main(String[] args) throws IOException
     {
         if (args.length < 2 || args.length % 2 != 0) {
             printHelp();

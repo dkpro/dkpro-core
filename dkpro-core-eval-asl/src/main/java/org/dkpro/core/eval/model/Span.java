@@ -28,7 +28,7 @@ public class Span<T>
     {
         this(null, aBegin, aEnd, aLabel);
     }
-    
+
     public Span(String aDocumentUri, int aBegin, int aEnd, T aLabel)
     {
         documentUri = aDocumentUri;

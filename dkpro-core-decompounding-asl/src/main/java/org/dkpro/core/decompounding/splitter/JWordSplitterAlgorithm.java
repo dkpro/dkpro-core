@@ -111,17 +111,16 @@ public class JWordSplitterAlgorithm
         // Not needed for this algorithm
     }
 
-    private class InternalGermanWordSplitter extends GermanWordSplitter
+    private class InternalGermanWordSplitter
+        extends GermanWordSplitter
     {
-        public InternalGermanWordSplitter(boolean aHideConnectingCharacters)
-            throws IOException
+        public InternalGermanWordSplitter(boolean aHideConnectingCharacters) throws IOException
         {
             super(aHideConnectingCharacters);
         }
 
         @Override
-        protected Set<String> getWordList()
-            throws IOException
+        protected Set<String> getWordList() throws IOException
         {
             if (dict == null) {
                 return super.getWordList();

@@ -30,8 +30,7 @@ import org.apache.uima.util.Logger;
 public class AnnotationChecker
 {
     private static WeakHashMap<AnalysisComponent, Boolean> instanceMapExists = new WeakHashMap<>();
-    private static WeakHashMap<AnalysisComponent, Boolean> instanceMapNotExists = 
-            new WeakHashMap<>();
+    private static WeakHashMap<AnalysisComponent, Boolean> instanceMapNotExists = new WeakHashMap<>();
 
     public static void requireExists(AnalysisComponent callingInstance, JCas jcas, Logger logger,
             Class... types)

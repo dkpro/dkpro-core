@@ -54,14 +54,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Penn Treebank Chunked Format Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_PTB_CHUNKED})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_PTB_CHUNKED })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class PennTreebankChunkedReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -69,15 +67,13 @@ public class PennTreebankChunkedReader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -85,28 +81,28 @@ public class PennTreebankChunkedReader
      * Write token annotations to the CAS.
      */
     public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
-    @ConfigurationParameter(name = PARAM_READ_TOKEN, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_TOKEN, defaultValue = "true")
     private boolean readToken;
 
     /**
      * Write part-of-speech annotations to the CAS.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_POS, defaultValue = "true")
     private boolean readPOS;
 
     /**
      * Write sentence annotations to the CAS.
      */
     public static final String PARAM_READ_SENTENCE = ComponentParameters.PARAM_READ_SENTENCE;
-    @ConfigurationParameter(name = PARAM_READ_SENTENCE, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_SENTENCE, defaultValue = "true")
     private boolean readSentence;
 
     /**
      * Write chunk annotations to the CAS.
      */
     public static final String PARAM_READ_CHUNK = ComponentParameters.PARAM_READ_CHUNK;
-    @ConfigurationParameter(name = PARAM_READ_CHUNK, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_CHUNK, defaultValue = "true")
     private boolean readChunk;
 
     /**
@@ -122,7 +118,7 @@ public class PennTreebankChunkedReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = "UTF-8")
     protected String encoding;
 
     public static final String ENCODING_AUTO = "auto";
@@ -130,8 +126,7 @@ public class PennTreebankChunkedReader
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -140,8 +135,7 @@ public class PennTreebankChunkedReader
     }
 
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
 
@@ -200,8 +194,8 @@ public class PennTreebankChunkedReader
 
                     // This should not happen, skip these cases
                     if (token_tag == null) {
-                        getLogger()
-                                .error("After splitting token from tag value became NULL, skipping this token");
+                        getLogger().error(
+                                "After splitting token from tag value became NULL, skipping this token");
                         continue;
                     }
                     else if (token_tag.length < 2) {

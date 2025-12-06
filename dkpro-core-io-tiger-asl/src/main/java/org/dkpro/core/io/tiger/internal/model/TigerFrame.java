@@ -29,10 +29,10 @@ public class TigerFrame
 
     @XmlAttribute
     public String name;
-    
+
     @XmlElement(name = "fe")
     public List<TigerFrameElement> fes;
-    
+
     @XmlElement(name = "target")
     public TigerTarget target;
 }

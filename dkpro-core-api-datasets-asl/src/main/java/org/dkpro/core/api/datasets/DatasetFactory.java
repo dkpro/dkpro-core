@@ -182,7 +182,8 @@ public class DatasetFactory
         }
 
         // Configure YAML deserialization
-        Constructor datasetConstructor = new Constructor(DatasetDescriptionImpl.class, new LoaderOptions());
+        Constructor datasetConstructor = new Constructor(DatasetDescriptionImpl.class,
+                new LoaderOptions());
         TypeDescription datasetDesc = new TypeDescription(DatasetDescriptionImpl.class);
         datasetDesc.putMapPropertyType("artifacts", String.class, ArtifactDescriptionImpl.class);
         datasetDesc.putListPropertyType("licenses", LicenseDescriptionImpl.class);

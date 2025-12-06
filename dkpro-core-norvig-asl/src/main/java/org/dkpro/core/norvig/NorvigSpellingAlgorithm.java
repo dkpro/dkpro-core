@@ -70,8 +70,7 @@ public class NorvigSpellingAlgorithm
      * @throws IOException
      *             if the words cannot be read.
      */
-    public void train(Reader aReader)
-        throws IOException
+    public void train(Reader aReader) throws IOException
     {
         BufferedReader in = new BufferedReader(aReader);
 
@@ -103,8 +102,7 @@ public class NorvigSpellingAlgorithm
      * @throws IOException
      *             if the words cannot be read.
      */
-    public void train(URL aUrl, String aEncoding)
-        throws IOException
+    public void train(URL aUrl, String aEncoding) throws IOException
     {
         try (InputStream is = aUrl.openStream()) {
             train(new InputStreamReader(is, aEncoding));

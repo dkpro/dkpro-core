@@ -32,12 +32,11 @@ public class AlignedStringTest
     private AlignedString bottom;
     private AlignedString top;
 
-
     @BeforeEach
     public void setUp() throws Exception
     {
-        //                      11
-        //            012345678901
+        // 11
+        // 012345678901
         baseString = "I am a test.";
         bottom = new AlignedString(baseString);
         top = new AlignedString(bottom);
@@ -75,18 +74,18 @@ public class AlignedStringTest
         assertEquals(sb.toString(), bottom.get());
         assertEquals(sb.toString(), top.get());
     }
-    
+
     @Test
     public void testInsert2()
     {
-        //            0123456789012345678901234567890
+        // 0123456789012345678901234567890
         baseString = "This is a hyphen- ated sentence";
         bottom = new AlignedString(baseString);
         top = new AlignedString(bottom);
 
         System.out.println("Delete word fragment");
-        final String fragment = top.get(18,22);
-        top.delete(18,22);
+        final String fragment = top.get(18, 22);
+        top.delete(18, 22);
         System.out.println("Top    : " + top.get() + " - " + top.dataSegmentsToString());
         System.out.println("Bottom : " + bottom.get() + " - " + bottom.dataSegmentsToString());
 
@@ -124,7 +123,7 @@ public class AlignedStringTest
     @Disabled("Wrong method to do hypenation removal")
     public void testInsert3()
     {
-        //              0123456789012345678901234567890
+        // 0123456789012345678901234567890
         baseString = "This is a hyphen- ated sentence";
         bottom = new AlignedString(baseString);
         top = new AlignedString(bottom);
@@ -198,9 +197,8 @@ public class AlignedStringTest
     }
 
     /**
-     * If we delete and then try to resolve a segment start ends at the start
-     * boundary of the deleted segment, we do not want the deleted segment to
-     * be included in the resolved interval.
+     * If we delete and then try to resolve a segment start ends at the start boundary of the
+     * deleted segment, we do not want the deleted segment to be included in the resolved interval.
      */
     @Test
     public void testResolve()
@@ -229,7 +227,8 @@ public class AlignedStringTest
     @Test
     public void testResolve3()
     {
-        bottom = new AlignedString("<Post class=\"System\" user=\"11-08-adultsUser12\">11-08-adultsUser13");
+        bottom = new AlignedString(
+                "<Post class=\"System\" user=\"11-08-adultsUser12\">11-08-adultsUser13");
         top = new AlignedString(bottom);
 
         top.replace(0, 47, " ");
@@ -243,7 +242,8 @@ public class AlignedStringTest
         assertEquals(47, i.getStart());
         assertEquals(65, i.getEnd());
 
-        bottom = new AlignedString("<Post class=\"System\" user=\"11-08-adultsUser12\">11-08-adultsUser13");
+        bottom = new AlignedString(
+                "<Post class=\"System\" user=\"11-08-adultsUser12\">11-08-adultsUser13");
         top = new AlignedString(bottom);
 
         top.replace(47, 65, "John");
@@ -281,7 +281,7 @@ public class AlignedStringTest
         top.replace(2, 4, "want");
 
         final StringBuilder topRef = new StringBuilder(baseString);
-        topRef.replace(2,4,"want");
+        topRef.replace(2, 4, "want");
 
         assertEquals(topRef.toString(), top.get());
     }
@@ -293,8 +293,8 @@ public class AlignedStringTest
         top.replace(4, 8, "nnahave");
 
         final StringBuilder topRef = new StringBuilder(baseString);
-        topRef.replace(2,4,"want");
-        topRef.replace(4,8,"nnahave");
+        topRef.replace(2, 4, "want");
+        topRef.replace(4, 8, "nnahave");
 
         assertEquals(topRef.toString(), top.get());
 
@@ -394,33 +394,25 @@ public class AlignedStringTest
     }
 
     /**
-     * For the given interval on the underlying data, get the corresponding
-     * interval on this level.
+     * For the given interval on the underlying data, get the corresponding interval on this level.
      *
-     * Example:
-     *                  11 11 11 111 12
-     *      012 34567 8901 23 45 678 90
-     * AD  |111|22ZZ2|3333|44|55|YYY|55|
+     * Example: 11 11 11 111 12 012 34567 8901 23 45 678 90 AD |111|22ZZ2|3333|44|55|YYY|55|
      *
-     * UL  |111|XX|22|ZZ|2|XXXXX|3333|XX|44|XXXX|5555|XXXX|
-     *      012 34 56 78 9 11111 1111 12 22 2222 2223 3333
-     *                     01234 5678 90 12 3456 7890 1234
+     * UL |111|XX|22|ZZ|2|XXXXX|3333|XX|44|XXXX|5555|XXXX| 012 34 56 78 9 11111 1111 12 22 2222 2223
+     * 3333 01234 5678 90 12 3456 7890 1234
      *
-     * As you can see there is a YYY inserted in the AD. Otherwise some parts
-     * of the UL (marked "X") have been removed in the AD. Also an ZZ part has
-     * been added to UL
+     * As you can see there is a YYY inserted in the AD. Otherwise some parts of the UL (marked "X")
+     * have been removed in the AD. Also an ZZ part has been added to UL
      *
-     * Calling this method with getStart()=22 getEnd()=30 ("4XXXX555") should return
-     * [13, 20] ("455YYY5").
+     * Calling this method with getStart()=22 getEnd()=30 ("4XXXX555") should return [13, 20]
+     * ("455YYY5").
      *
-     * Generally:
-     * - if the getStart() is within a deleted region, then find the next oblique
-     *   segment in AD to the right and return its getStart() position.
-     * - if the getEnd() is within a deleted region, then find the next oblique
-     *   segment in AD to the left and return its getEnd() position.
+     * Generally: - if the getStart() is within a deleted region, then find the next oblique segment
+     * in AD to the right and return its getStart() position. - if the getEnd() is within a deleted
+     * region, then find the next oblique segment in AD to the left and return its getEnd()
+     * position.
      *
-     * Anchors are always in UL. They are referenced from the ObliqueSegments
-     * in AD.
+     * Anchors are always in UL. They are referenced from the ObliqueSegments in AD.
      */
     @Test
     public void testInverseResolve()

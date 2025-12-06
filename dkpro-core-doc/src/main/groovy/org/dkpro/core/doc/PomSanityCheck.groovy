@@ -21,7 +21,8 @@ import static groovy.io.FileType.FILES;
 import org.dkpro.meta.core.maven.ContextHolder
 import groovy.xml.XmlParser
 
-class PomSanityCheck {
+class PomSanityCheck
+{
     public void run() {
         ContextHolder.log.info("Running POM sanity check ${ContextHolder.basedir}...")
         
@@ -57,9 +58,8 @@ class PomSanityCheck {
             }
         }
     }
-    
+
     public static void main(String... args) {
         new PomSanityCheck().run()
     }
 }
-

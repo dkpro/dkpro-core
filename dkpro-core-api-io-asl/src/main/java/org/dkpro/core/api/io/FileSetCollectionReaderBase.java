@@ -61,9 +61,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  * @deprecated use {@link ResourceCollectionReaderBase} instead.
  */
 @Component(value = OperationType.READER)
-@Parameters(
-        exclude = { 
-                FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION  })
+@Parameters(exclude = { FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION })
 @Deprecated
 public abstract class FileSetCollectionReaderBase
     extends CasCollectionReader_ImplBase

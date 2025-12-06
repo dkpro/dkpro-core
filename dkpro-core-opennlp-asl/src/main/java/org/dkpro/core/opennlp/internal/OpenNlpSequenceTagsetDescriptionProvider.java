@@ -42,7 +42,7 @@ public class OpenNlpSequenceTagsetDescriptionProvider
         layer = aLayer.getName();
         model = aModel;
     }
-    
+
     public void setTagSplitPattern(String aTagSplitPattern)
     {
         tagSplitPattern = aTagSplitPattern;

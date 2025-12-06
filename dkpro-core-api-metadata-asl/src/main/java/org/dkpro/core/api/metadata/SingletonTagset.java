@@ -31,7 +31,7 @@ public class SingletonTagset
     private String layer;
     private String tagset;
     private Set<String> tags;
-    
+
     public SingletonTagset(Class<?> aLayer, String aTagsetName)
     {
         layer = aLayer.getName();
@@ -80,12 +80,12 @@ public class SingletonTagset
     {
         tags.addAll(aTags);
     }
-    
+
     public void remove(String aTag)
     {
         tags.remove(aTag);
     }
-    
+
     public void removeAll(SingletonTagset aOther)
     {
         Entry<String, String> entry = aOther.getLayers().entrySet().iterator().next();

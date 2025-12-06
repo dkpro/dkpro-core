@@ -37,6 +37,7 @@ import org.dkpro.core.api.featurepath.FeaturePathException;
 import org.dkpro.core.api.featurepath.FeaturePathFactory;
 import org.dkpro.core.api.parameter.ComponentParameters;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
@@ -56,36 +57,34 @@ public class AnnotationByTextFilter
      * In the latter case, the model artifact (if any) is searched as well.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION)
     private File modelLocation;
     private Set<String> words;
 
     /**
-     * If true, annotation texts are filtered case-independently (i.e. words that
-     * occur in the list with different casing are not filtered out).
+     * If true, annotation texts are filtered case-independently (i.e. words that occur in the list
+     * with different casing are not filtered out).
      */
     public static final String PARAM_IGNORE_CASE = "ignoreCase";
-    @ConfigurationParameter(name = PARAM_IGNORE_CASE, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_IGNORE_CASE, defaultValue = "true")
     private boolean ignoreCase;
 
     /**
      * The character encoding used by the model.
      */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String modelEncoding;
 
     /**
      * Annotation type to filter.
      */
     public static final String PARAM_TYPE_NAME = "typeName";
-    @ConfigurationParameter(name = PARAM_TYPE_NAME, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    @ConfigurationParameter(name = PARAM_TYPE_NAME, defaultValue = Token._TypeName)
     private String typeName;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -97,8 +96,7 @@ public class AnnotationByTextFilter
         }
     };
 
-    private void readWords()
-        throws IOException
+    private void readWords() throws IOException
     {
         words = new HashSet<>();
         for (String line : FileUtils.readLines(modelLocation, modelEncoding)) {
@@ -107,8 +105,7 @@ public class AnnotationByTextFilter
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         Set<AnnotationFS> toRemove = new HashSet<>();
         try {

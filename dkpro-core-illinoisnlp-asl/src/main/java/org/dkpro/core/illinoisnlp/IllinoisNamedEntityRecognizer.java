@@ -53,11 +53,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "Illinois CCG Named Entity Recognizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class IllinoisNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
 {
@@ -75,89 +73,88 @@ public class IllinoisNamedEntityRecognizer
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     protected String language;
 
-//    /**
-//     * Variant of a model the model. Used to address a specific model if here are multiple models
-//     * for one language.
-//     */
-//    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-//    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue="person")
+    // /**
+    // * Variant of a model the model. Used to address a specific model if here are multiple models
+    // * for one language.
+    // */
+    // public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    // @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue="person")
     protected String variant = "conll";
 
-//    /**
-//     * Location from which the model is read.
-//     */
-//    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-//    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-//    protected String modelLocation;
+    // /**
+    // * Location from which the model is read.
+    // */
+    // public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    // @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    // protected String modelLocation;
 
-//    /**
-//     * Location of the mapping file for named entity tags to UIMA types.
-//     */
-//    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
-//        ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
-//    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
+    // /**
+    // * Location of the mapping file for named entity tags to UIMA types.
+    // */
+    // public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION =
+    // ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    // @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
     private ModelProviderBase<Annotator> modelProvider;
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<Annotator>() {
+        modelProvider = new ModelProviderBase<Annotator>()
+        {
             {
                 setContextObject(IllinoisNamedEntityRecognizer.this);
                 setDefault(LOCATION, NOT_REQUIRED);
             }
 
             @Override
-            protected Annotator produceResource(URL aURL)
-                throws IOException
+            protected Annotator produceResource(URL aURL) throws IOException
             {
                 if (!"en".equals(getAggregatedProperties().getProperty(LANGUAGE))) {
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
-                
+
                 NERAnnotator annotator = new NERAnnotator(new ResourceManager(new Properties()),
                         ViewNames.NER_CONLL);
 
-//                SingletonTagset tags = new SingletonTagset(NamedEntity.class, "ptb");
-//
-//                try {
-//                    TrainedPOSTagger trainedTagger = (TrainedPOSTagger) FieldUtils
-//                            .readField(annotator, "tagger", true);
-//                    Learner known = (POSTaggerKnown) FieldUtils.readField(trainedTagger, "known",
-//                            true);
-//                    for (int i = 0; i < known.getLabelLexicon().size(); i++) {
-//                        tags.add(known.getLabelLexicon().lookupKey(i).getStringValue());
-//                    }
-//
-//                    Learner unknown = (POSTaggerUnknown) FieldUtils.readField(trainedTagger,
-//                            "unknown", true);
-//                    for (int i = 0; i < unknown.getLabelLexicon().size(); i++) {
-//                        tags.add(unknown.getLabelLexicon().lookupKey(i).getStringValue());
-//                    }
-//                }
-//                catch (IllegalAccessException e) {
-//                    throw new IllegalStateException(e);
-//                }
-//                
-//                addTagset(tags);
-//
-//                if (printTagSet) {
-//                    getContext().getLogger().log(INFO, getTagset().toString());
-//                }
-                
+                // SingletonTagset tags = new SingletonTagset(NamedEntity.class, "ptb");
+                //
+                // try {
+                // TrainedPOSTagger trainedTagger = (TrainedPOSTagger) FieldUtils
+                // .readField(annotator, "tagger", true);
+                // Learner known = (POSTaggerKnown) FieldUtils.readField(trainedTagger, "known",
+                // true);
+                // for (int i = 0; i < known.getLabelLexicon().size(); i++) {
+                // tags.add(known.getLabelLexicon().lookupKey(i).getStringValue());
+                // }
+                //
+                // Learner unknown = (POSTaggerUnknown) FieldUtils.readField(trainedTagger,
+                // "unknown", true);
+                // for (int i = 0; i < unknown.getLabelLexicon().size(); i++) {
+                // tags.add(unknown.getLabelLexicon().lookupKey(i).getStringValue());
+                // }
+                // }
+                // catch (IllegalAccessException e) {
+                // throw new IllegalStateException(e);
+                // }
+                //
+                // addTagset(tags);
+                //
+                // if (printTagSet) {
+                // getContext().getLogger().log(INFO, getTagset().toString());
+                // }
+
                 return annotator;
             }
         };
 
         mappingProvider = new MappingProvider();
-        mappingProvider
-                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/lbj/lib/ner-default-variants.map");
+        mappingProvider.setDefaultVariantsLocation(
+                "de/tudarmstadt/ukp/dkpro/core/lbj/lib/ner-default-variants.map");
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
                 + "core/lbj/lib/ner-${language}-${variant}.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
@@ -167,8 +164,7 @@ public class IllinoisNamedEntityRecognizer
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
@@ -185,7 +181,7 @@ public class IllinoisNamedEntityRecognizer
         catch (AnnotatorException e) {
             throw new IllegalStateException(e);
         }
-        
+
         ConvertToUima.convertNamedEntity(aJCas, document, mappingProvider);
     }
 }

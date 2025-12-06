@@ -61,9 +61,8 @@ public class NGramIterable<T extends AnnotationFS>
         // remove last element, if it contains a punctuation mark
         if (tokenList.size() > 0) {
             String lastElementText = tokenList.get(tokenList.size() - 1).getCoveredText();
-            if (lastElementText.length() == 1
-                    && (lastElementText.equals(".")
-                            || lastElementText.equals("!") || lastElementText.equals("?"))) {
+            if (lastElementText.length() == 1 && (lastElementText.equals(".")
+                    || lastElementText.equals("!") || lastElementText.equals("?"))) {
                 tokenList.remove(tokenList.size() - 1);
             }
         }
@@ -86,8 +85,8 @@ public class NGramIterable<T extends AnnotationFS>
         int size = tokenList.size();
         for (int i = 0; i < (size + 1 - k); i++) {
             try {
-                NGram ngram = new NGram(tokenList.get(i).getCAS().getJCas(), tokenList.get(i)
-                        .getBegin(), tokenList.get(i + k - 1).getEnd());
+                NGram ngram = new NGram(tokenList.get(i).getCAS().getJCas(),
+                        tokenList.get(i).getBegin(), tokenList.get(i + k - 1).getEnd());
                 ngram.setText(getTokenText(tokenList, i, i + k - 1));
                 nGrams.add(ngram);
             }

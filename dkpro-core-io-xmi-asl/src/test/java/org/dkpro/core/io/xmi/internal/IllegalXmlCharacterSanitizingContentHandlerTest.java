@@ -100,7 +100,8 @@ class IllegalXmlCharacterSanitizingContentHandlerTest
         assertThat(stringCollector.toString().toCharArray()).containsExactly('\uFFFD', '\uFFFD');
     }
 
-    private static class ContentToString implements ContentHandler
+    private static class ContentToString
+        implements ContentHandler
     {
         private final StringBuilder text = new StringBuilder();
 

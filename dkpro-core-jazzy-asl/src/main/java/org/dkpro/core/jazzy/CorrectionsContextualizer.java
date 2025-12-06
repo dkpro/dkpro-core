@@ -56,34 +56,32 @@ public class CorrectionsContextualizer
     extends JCasAnnotator_ImplBase
 {
     private static final String BOS = "<S>";
-    
+
     /**
      * Resource providing the frequency counts.
      */
     public final static String RES_FREQUENCY_PROVIDER = "FrequencyProvider";
     @ExternalResource(key = RES_FREQUENCY_PROVIDER)
     private FrequencyCountProvider provider;
-    
-    protected Map<String,Long> countCache;
-    
+
+    protected Map<String, Long> countCache;
+
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
-        countCache = new HashMap<String,Long>();
+        countCache = new HashMap<String, Long>();
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
             List<Token> tokens = JCasUtil.selectCovered(jcas, Token.class, sentence);
             List<String> tokenStrings = JCasUtil.toText(tokens);
             for (SpellingAnomaly anomaly : JCasUtil.selectCovered(jcas, SpellingAnomaly.class,
                     sentence)) {
-                
+
                 FSArray suggestedActions = anomaly.getSuggestions();
                 int n = suggestedActions.size();
                 FSArray newActions = new FSArray(jcas, n + 1);
@@ -92,35 +90,35 @@ public class CorrectionsContextualizer
 
                     List<String> changedWords = getChangedWords(action.getReplacement(),
                             tokenStrings, getCandidatePosition(anomaly, tokens));
-                    
+
                     double probability = getSentenceProbability(changedWords);
-                    
+
                     action.setCertainty((float) probability);
                     newActions.set(i, action);
-                    
+
                 }
-                
+
                 // add the original word as a possibility
                 // might turn out that it fits in well according to ngram model
                 SuggestedAction newAction = new SuggestedAction(jcas);
                 newAction.setReplacement(anomaly.getCoveredText());
                 newAction.setCertainty((float) getSentenceProbability(tokenStrings));
                 newActions.set(n, newAction);
-                
+
                 anomaly.setSuggestions(newActions);
-            }        
+            }
         }
     }
-    
+
     protected double getSentenceProbability(List<String> words)
         throws AnalysisEngineProcessException
     {
         double sentenceProbability = 0.0;
-        
+
         if (words.size() < 1) {
             return 0.0;
         }
-        
+
         long nrOfUnigrams;
         try {
             nrOfUnigrams = provider.getNrOfTokens();
@@ -128,31 +126,31 @@ public class CorrectionsContextualizer
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         List<String> trigrams = new ArrayList<String>();
 
         // in the google n-grams this is not represented (only single BOS markers)
         // but I leave it in place in case we add another n-gram provider
         trigrams.add(getTrigram(BOS, BOS, words.get(0)));
-        
+
         if (words.size() > 1) {
             trigrams.add(getTrigram(BOS, words.get(0), words.get(1)));
         }
-        
+
         for (String trigram : new NGramStringIterable(words, 3, 3)) {
             trigrams.add(trigram);
         }
-        
+
         // FIXME - implement backoff or linear interpolation
 
         for (String trigram : trigrams) {
             long trigramFreq = getNGramCount(trigram);
 
             String[] parts = StringUtils.split(trigram, " ");
-            
+
             String bigram = StringUtils.join(Arrays.copyOfRange(parts, 0, 2), " ");
             long bigramFreq = getNGramCount(bigram);
-            
+
             String unigram = StringUtils.join(Arrays.copyOfRange(parts, 0, 1), " ");
             long unigramFreq = getNGramCount(unigram);
 
@@ -165,20 +163,21 @@ public class CorrectionsContextualizer
             if (unigramFreq < 1) {
                 unigramFreq = 1;
             }
-            
-            double trigramProb = Math.log( (double) trigramFreq / bigramFreq);
-            double bigramProb  = Math.log( (double) bigramFreq  / unigramFreq);
-            double unigramProb = Math.log( (double) unigramFreq / nrOfUnigrams);
+
+            double trigramProb = Math.log((double) trigramFreq / bigramFreq);
+            double bigramProb = Math.log((double) bigramFreq / unigramFreq);
+            double unigramProb = Math.log((double) unigramFreq / nrOfUnigrams);
 
             double interpolated = (trigramProb + bigramProb + unigramProb) / 3.0;
-            
+
             sentenceProbability += interpolated;
         }
-        
+
         return Math.exp(sentenceProbability);
     }
-    
-    protected long getNGramCount(String ngram) throws AnalysisEngineProcessException {
+
+    protected long getNGramCount(String ngram) throws AnalysisEngineProcessException
+    {
         if (!countCache.containsKey(ngram)) {
             try {
                 countCache.put(ngram, provider.getFrequency(ngram));
@@ -187,7 +186,7 @@ public class CorrectionsContextualizer
                 throw new AnalysisEngineProcessException(e);
             }
         }
-        
+
         return countCache.get(ngram);
     }
 }

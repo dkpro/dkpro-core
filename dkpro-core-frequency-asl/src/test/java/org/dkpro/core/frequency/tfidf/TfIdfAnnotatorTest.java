@@ -55,44 +55,40 @@ public class TfIdfAnnotatorTest
     protected File model;
 
     @BeforeEach
-    public void buildModel(@TempDir File tempDir)
-        throws Exception
+    public void buildModel(@TempDir File tempDir) throws Exception
     {
         model = new File(tempDir, "model");
 
         // write the model
         CollectionReaderDescription reader = createReaderDescription( //
                 TextReader.class, //
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
-        AnalysisEngineDescription aggregate = createEngineDescription(
+        AnalysisEngineDescription aggregate = createEngineDescription(createEngineDescription( //
+                BreakIteratorSegmenter.class), //
                 createEngineDescription( //
-                        BreakIteratorSegmenter.class), //
-                createEngineDescription( //
-                        TfIdfWriter.class,  //
-                        TfIdfWriter.PARAM_FEATURE_PATH, Token.class,  //
+                        TfIdfWriter.class, //
+                        TfIdfWriter.PARAM_FEATURE_PATH, Token.class, //
                         TfIdfWriter.PARAM_TARGET_LOCATION, model));
 
         SimplePipeline.runPipeline(reader, aggregate);
     }
 
     @Test
-    public void tfidfTest_normal_constantOne()
-        throws Exception
+    public void tfidfTest_normal_constantOne() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription( //
                 TextReader.class, //
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(
-                TfIdfAnnotator.class, //
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfIdfAnnotator.class, //
                 TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class, //
-                TfIdfAnnotator.PARAM_TFDF_PATH, model,  //
-                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL,  //
+                TfIdfAnnotator.PARAM_TFDF_PATH, model, //
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, //
                 TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.CONSTANT_ONE);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
@@ -110,12 +106,11 @@ public class TfIdfAnnotatorTest
     }
 
     @Test
-    public void tfidfTest_binary_binary()
-        throws Exception
+    public void tfidfTest_binary_binary() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription( //
                 TextReader.class, //
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -123,7 +118,7 @@ public class TfIdfAnnotatorTest
         AnalysisEngineDescription tfidfAnnotator = createEngineDescription( //
                 TfIdfAnnotator.class, //
                 TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class, //
-                TfIdfAnnotator.PARAM_TFDF_PATH, model,  //
+                TfIdfAnnotator.PARAM_TFDF_PATH, model, //
                 TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.BINARY, //
                 TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.BINARY);
 
@@ -142,12 +137,11 @@ public class TfIdfAnnotatorTest
     }
 
     @Test
-    public void tfidfTest_normal_log()
-        throws Exception
+    public void tfidfTest_normal_log() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription( //
                 TextReader.class, //
-                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,  //
+                TextReader.PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH, //
                 TextReader.PARAM_PATTERNS, INCLUDE_PREFIX + "*.txt");
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -155,8 +149,8 @@ public class TfIdfAnnotatorTest
         AnalysisEngineDescription tfidfAnnotator = createEngineDescription( //
                 TfIdfAnnotator.class, //
                 TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class, //
-                TfIdfAnnotator.PARAM_TFDF_PATH, model,  //
-                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL,  //
+                TfIdfAnnotator.PARAM_TFDF_PATH, model, //
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, //
                 TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.LOG);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
@@ -179,8 +173,8 @@ public class TfIdfAnnotatorTest
         if (DocumentMetaData.get(jcas).getDocumentTitle().equals("test1.txt")) {
             int i = 0;
             for (Tfidf tfidf : select(jcas, Tfidf.class)) {
-                assertEquals(expectedDoc1.get(tfidf.getTerm()).doubleValue(),
-                        tfidf.getTfidfValue(), EPSILON, tfidf.getTerm());
+                assertEquals(expectedDoc1.get(tfidf.getTerm()).doubleValue(), tfidf.getTfidfValue(),
+                        EPSILON, tfidf.getTerm());
                 i++;
             }
             assertEquals(3, i);
@@ -188,8 +182,8 @@ public class TfIdfAnnotatorTest
         else if (DocumentMetaData.get(jcas).getDocumentTitle().equals("test2.txt")) {
             int i = 0;
             for (Tfidf tfidf : select(jcas, Tfidf.class)) {
-                assertEquals(expectedDoc2.get(tfidf.getTerm()).doubleValue(),
-                        tfidf.getTfidfValue(), EPSILON, tfidf.getTerm());
+                assertEquals(expectedDoc2.get(tfidf.getTerm()).doubleValue(), tfidf.getTfidfValue(),
+                        EPSILON, tfidf.getTerm());
                 i++;
             }
             assertEquals(3, i);

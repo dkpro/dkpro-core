@@ -36,11 +36,9 @@ public class LeftToRightSplitAlgorithmTest
     @Test
     public void testSplit1()
     {
-        Dictionary dict = new SimpleDictionary("Akt", "ion", "plan", "Aktion",
-                "Aktionsplan");
+        Dictionary dict = new SimpleDictionary("Akt", "ion", "plan", "Aktion", "Aktionsplan");
         LinkingMorphemes morphemes = new LinkingMorphemes("s");
-        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-                morphemes);
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict, morphemes);
 
         List<DecompoundedWord> result = algo.split("Aktionsplan").getAllSplits();
         assertEquals(6, result.size());
@@ -55,11 +53,10 @@ public class LeftToRightSplitAlgorithmTest
     @Test
     public void testSplit2()
     {
-        Dictionary dict = new SimpleDictionary("Donau", "dampf", "schiff",
-                "fahrt", "dampfschiff", "schifffahrt");
+        Dictionary dict = new SimpleDictionary("Donau", "dampf", "schiff", "fahrt", "dampfschiff",
+                "schifffahrt");
         LinkingMorphemes morphemes = new LinkingMorphemes("s");
-        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-                morphemes);
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict, morphemes);
 
         List<DecompoundedWord> result = algo.split("Donaudampfschifffahrt").getAllSplits();
         assertEquals(6, result.size());
@@ -68,11 +65,9 @@ public class LeftToRightSplitAlgorithmTest
     @Test
     public void testSplit3()
     {
-        Dictionary dict = new SimpleDictionary("Super", "mann", "anzug",
-                "Supermann", "anzug");
+        Dictionary dict = new SimpleDictionary("Super", "mann", "anzug", "Supermann", "anzug");
         LinkingMorphemes morphemes = new LinkingMorphemes("s");
-        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-                morphemes);
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict, morphemes);
 
         List<DecompoundedWord> result = algo.split("Supermannanzug").getAllSplits();
         // Super+mann+anzug, Supermann+anzug
@@ -84,11 +79,10 @@ public class LeftToRightSplitAlgorithmTest
     {
         Dictionary dict = new SimpleDictionary("alarm", "reaktion");
         LinkingMorphemes morphemes = new LinkingMorphemes("en");
-        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-                morphemes);
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict, morphemes);
 
         List<DecompoundedWord> result = algo.split("alarmreaktionen").getAllSplits();
-        
+
         // Super+mann+anzug, Supermann+anzug
         assertEquals(3, result.size());
         assertEquals("alarmreaktionen", result.get(0).toString());
@@ -109,7 +103,7 @@ public class LeftToRightSplitAlgorithmTest
         Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
 
-        LeftToRightSplitterAlgorithm splitter = new LeftToRightSplitterAlgorithm(dict,morphemes);
+        LeftToRightSplitterAlgorithm splitter = new LeftToRightSplitterAlgorithm(dict, morphemes);
 
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
 

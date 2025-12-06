@@ -61,29 +61,28 @@ public class LanguageDetectorWeb1T
     private FrequencyCountProvider[] frequencyProviders;
 
     /**
-     * The minimum n-gram size that should be considered. Default is 1. 
+     * The minimum n-gram size that should be considered. Default is 1.
      */
     public static final String PARAM_MIN_NGRAM_SIZE = "minNGramSize";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_SIZE, mandatory = true, defaultValue = "1")
     private int minNGramSize;
-    
+
     /**
-     * The maximum n-gram size that should be considered. Default is 3. 
+     * The maximum n-gram size that should be considered. Default is 3.
      */
     public static final String PARAM_MAX_NGRAM_SIZE = "maxNGramSize";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_SIZE, mandatory = true, defaultValue = "3")
     private int maxNGramSize;
 
-    private Map<String,FrequencyCountProvider> providerMap;
-    
+    private Map<String, FrequencyCountProvider> providerMap;
+
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
-        
-        providerMap = new HashMap<String,FrequencyCountProvider>();
-        
+
+        providerMap = new HashMap<String, FrequencyCountProvider>();
+
         for (FrequencyCountProvider provider : frequencyProviders) {
             try {
                 providerMap.put(provider.getLanguage(), provider);
@@ -95,28 +94,27 @@ public class LanguageDetectorWeb1T
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
-      
+
         List<String> words = JCasUtil.toText(JCasUtil.select(jcas, Token.class));
-        
+
         if (words.size() < 1) {
             return;
         }
-        
+
         List<String> ngrams = new ArrayList<String>();
         if (words.size() > 1) {
             ngrams.add(getNgram(BOS, words.get(0), words.get(1)));
         }
-        
+
         for (String ngram : new NGramStringIterable(words, 1, 3)) {
             ngrams.add(ngram);
         }
-                
+
         try {
-            Map<String,Double> langProbs = getLanguageProbabilities(ngrams);
-            
+            Map<String, Double> langProbs = getLanguageProbabilities(ngrams);
+
             String maxLanguage = "x-unspecified";
             double maxLogProb = Double.NEGATIVE_INFINITY;
             for (String lang : langProbs.keySet()) {
@@ -133,28 +131,27 @@ public class LanguageDetectorWeb1T
             throw new AnalysisEngineProcessException(e);
         }
     }
-    
-    private Map<String,Double> getLanguageProbabilities(List<String> ngrams)
-            throws Exception
+
+    private Map<String, Double> getLanguageProbabilities(List<String> ngrams) throws Exception
     {
-        Map<String,Double> langProbs = new HashMap<String,Double>();
-       
+        Map<String, Double> langProbs = new HashMap<String, Double>();
+
         for (String lang : providerMap.keySet()) {
-                                    
+
             FrequencyCountProvider provider = providerMap.get(lang);
-            
+
             long nrOfUnigrams = provider.getNrOfNgrams(1);
-            long nrOfBigrams  = provider.getNrOfNgrams(2);
+            long nrOfBigrams = provider.getNrOfNgrams(2);
             long nrOfTrigrams = provider.getNrOfNgrams(3);
-            
+
             double textLogProbability = 0.0;
-            
+
             for (String ngram : ngrams) {
-                
+
                 long frequency = provider.getFrequency(ngram);
 
                 int ngramSize = FrequencyUtils.getPhraseLength(ngram);
-                                
+
                 long normalization = 1;
                 int weighting = 1;
                 if (ngramSize == 1) {
@@ -168,24 +165,25 @@ public class LanguageDetectorWeb1T
                     weighting = 4;
                     normalization = nrOfTrigrams;
                 }
-    
+
                 if (frequency > 0) {
-                    double logProb = Math.log( weighting * ((double) frequency) / normalization );
-                    
+                    double logProb = Math.log(weighting * ((double) frequency) / normalization);
+
                     textLogProbability += logProb;
                 }
                 else {
-                    textLogProbability += Math.log( 1.0 / normalization);
+                    textLogProbability += Math.log(1.0 / normalization);
                 }
             }
-            
+
             langProbs.put(lang, textLogProbability);
         }
-        
+
         return langProbs;
     }
-    
-    private String getNgram(String ...strings) {
+
+    private String getNgram(String... strings)
+    {
         return StringUtils.join(strings, " ");
     }
 }

@@ -23,7 +23,7 @@ public enum VerificationMode
      * Calculate the hash based on the binary content of the file.
      */
     BINARY,
-    
+
     /**
      * Normalize whitespace before calculating the hash.
      */

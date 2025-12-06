@@ -23,7 +23,8 @@ import org.dkpro.meta.core.model.MetadataModel
 import org.dkpro.meta.core.maven.ContextHolder
 import org.yaml.snakeyaml.Yaml
 
-class DocumentationBuilder {
+class DocumentationBuilder
+{
     public void run() {
         File dkproCorePath = new File(ContextHolder.basedir, '..');
         
@@ -70,8 +71,9 @@ class DocumentationBuilder {
             }
         }
     }
-    
-    public static void main(String... args) {
+
+    public static void main(String... args)
+    {
         new DocumentationBuilder().run();
     }
 }

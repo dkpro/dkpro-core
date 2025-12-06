@@ -24,8 +24,8 @@ public interface ArtifactDescription
     /**
      * @return the dataset to which this artifact belongs.
      */
-    DatasetDescription  getDataset();
-    
+    DatasetDescription getDataset();
+
     /**
      * @return artifact name/ID
      */
@@ -48,12 +48,12 @@ public interface ArtifactDescription
      * @return SHA1 hash of the artifact.
      */
     String getSha1();
-    
+
     /**
      * @return SHA512 hash of the artifact.
      */
     String getSha512();
-    
+
     /**
      * @return the verification mode.
      */
@@ -74,7 +74,7 @@ public interface ArtifactDescription
      * @return list of actions.
      */
     List<ActionDescription> getActions();
-    
+
     /**
      * Whether this artifact is optional. If an optional artifact cannot be located or downloaded
      * (e.g. due to a network problem), then the rest materializes still.

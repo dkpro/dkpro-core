@@ -32,60 +32,55 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 public class OpenNlpSnowballStemmerTest
 {
     @Test
-    public void testGerman()
-        throws Exception
+    public void testGerman() throws Exception
     {
-        runTest("de", "Automobile Fenster", 
-                new String[] {"Automobil", "Fenst"} );
+        runTest("de", "Automobile Fenster", new String[] { "Automobil", "Fenst" });
     }
 
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", "computers Computers deliberately", 
-                new String[] {"comput", "Comput", "deliber"} );
-        
-        runTest("en", "We need a very complicated example sentence , which " +
-                "contains as many constituents and dependencies as possible .",
+        runTest("en", "computers Computers deliberately",
+                new String[] { "comput", "Comput", "deliber" });
+
+        runTest("en",
+                "We need a very complicated example sentence , which "
+                        + "contains as many constituents and dependencies as possible .",
                 new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",",
                         "which", "contain", "as", "mani", "constitu", "and", "depend", "as",
                         "possibl", "." });
     }
 
     @Test
-    public void testEnglishCaseInsensitive()
-        throws Exception
+    public void testEnglishCaseInsensitive() throws Exception
     {
-        runTest("en", "EDUCATIONAL Educational educational", 
-                new String[] {"educ", "educ", "educ"},
-                OpenNlpSnowballStemmer.PARAM_LOWER_CASE, true);
+        runTest("en", "EDUCATIONAL Educational educational",
+                new String[] { "educ", "educ", "educ" }, OpenNlpSnowballStemmer.PARAM_LOWER_CASE,
+                true);
     }
 
     @Test
-    public void testEnglishCaseSensitive()
-        throws Exception
+    public void testEnglishCaseSensitive() throws Exception
     {
-        runTest("en", "EDUCATIONAL Educational educational", 
-                new String[] {"EDUCATIONAL", "Educat", "educ"},
+        runTest("en", "EDUCATIONAL Educational educational",
+                new String[] { "EDUCATIONAL", "Educat", "educ" },
                 OpenNlpSnowballStemmer.PARAM_LOWER_CASE, false);
     }
 
     @Test
-    public void testEnglishCaseFiltered()
-        throws Exception
+    public void testEnglishCaseFiltered() throws Exception
     {
         String[] stems = { "educ" };
         String[] pos = { "NNS", "JJ", "NN", "NNS" };
-        
+
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(OpenNlpPosTagger.class),
-                createEngineDescription(OpenNlpSnowballStemmer.class, 
+                createEngineDescription(OpenNlpSnowballStemmer.class,
                         OpenNlpSnowballStemmer.PARAM_LOWER_CASE, true,
                         OpenNlpSnowballStemmer.PARAM_FILTER_FEATUREPATH, "pos/PosValue",
                         OpenNlpSnowballStemmer.PARAM_FILTER_CONDITION_OPERATOR, "EQUALS",
                         OpenNlpSnowballStemmer.PARAM_FILTER_CONDITION_VALUE, "JJ"));
-        
+
         JCas result = TestRunner.runTest(aggregate, "en", "Babies educational sleep .s");
 
         AssertAnnotations.assertStem(stems, select(result, Stem.class));
@@ -99,7 +94,7 @@ public class OpenNlpSnowballStemmerTest
                 createEngineDescription(OpenNlpSnowballStemmer.class, aParams), aLanguage, aText);
 
         AssertAnnotations.assertStem(aStems, select(result, Stem.class));
-        
+
         return result;
     }
 }

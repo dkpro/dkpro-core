@@ -47,12 +47,10 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "PDFBox PDF Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_PDF})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading", 
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_PDF })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
 public class PdfReader
     extends ResourceCollectionReaderBase
 {
@@ -64,8 +62,7 @@ public class PdfReader
      * e.g. to convert ligatures to separate characters.
      */
     public static final String PARAM_SUBSTITUTION_TABLE_LOCATION = "substitutionTableLocation";
-    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE_LOCATION, mandatory = false, 
-            defaultValue = BUILT_IN)
+    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE_LOCATION, mandatory = false, defaultValue = BUILT_IN)
     private String substitutionTableLocation;
 
     /**
@@ -86,8 +83,7 @@ public class PdfReader
      * The first page to be extracted from the PDF.
      */
     public static final String PARAM_START_PAGE = "startPage";
-    @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, 
-            defaultValue = NOT_RESTRICTED)
+    @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, defaultValue = NOT_RESTRICTED)
     private int startPage;
 
     /**
@@ -100,8 +96,7 @@ public class PdfReader
     private Trie<String> substitutionTable;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -137,8 +132,7 @@ public class PdfReader
     }
 
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         Resource resource = nextFile();
         initCas(aCAS, resource, null);

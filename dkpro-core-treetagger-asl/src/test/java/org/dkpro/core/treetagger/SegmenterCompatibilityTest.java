@@ -72,11 +72,10 @@ public class SegmenterCompatibilityTest
 
     private void checkModelsAndBinary(String lang)
     {
-        assumeTrue(
-                getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
-                        + lang + "-le.bin") != null);
+        assumeTrue(getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
+                + lang + "-le.bin") != null);
 
-        assumeTrue(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
+        assumeTrue(getClass()
+                .getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
     }
 }

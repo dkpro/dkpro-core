@@ -21,10 +21,9 @@ public final class GateAnnieConstants
 {
     public static final String FEAT_LEMMA = "lemma";
     public static final String FEAT_STEM = "stem";
-    
+
     private GateAnnieConstants()
     {
         // No instances
     }
 }
-

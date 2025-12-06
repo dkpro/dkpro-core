@@ -47,7 +47,7 @@ public class OpenNlpSegmenterTest
         runTest(language, variant, text, sentences, tokens);
         runTestWithModelsLocation(language, variant, text, sentences, tokens);
     }
-    
+
     @Disabled("We don't have these models integrated yet")
     @Test
     public void testPortugueseCogroo() throws Exception
@@ -55,13 +55,12 @@ public class OpenNlpSegmenterTest
         final String text = "Este é um teste. E mais uma.";
         final String[] sentences = { "Este é um teste.", "E mais uma." };
         final String[] tokens = { "Este", "é", "um", "teste", ".", "E", "mais", "uma", "." };
-        
+
         runTest("pt", "cogroo", text, sentences, tokens);
     }
 
     @Test
-    public void runHarness()
-        throws Throwable
+    public void runHarness() throws Throwable
     {
         AnalysisEngineDescription aed = createEngineDescription(OpenNlpSegmenter.class);
 
@@ -75,36 +74,37 @@ public class OpenNlpSegmenterTest
         throws Exception
     {
         AssumeResource.assumeResource(OpenNlpSegmenter.class, "sentence", aLanguage, aVariant);
-        
-        AnalysisEngine engine = createEngine(OpenNlpSegmenter.class,
-                OpenNlpSegmenter.PARAM_VARIANT, aVariant);
-        
+
+        AnalysisEngine engine = createEngine(OpenNlpSegmenter.class, OpenNlpSegmenter.PARAM_VARIANT,
+                aVariant);
+
         // Cannot use TestRunner because that uses TokenBuilder to create a segmentation.
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(aLanguage);
         jcas.setDocumentText(aDocument);
         engine.process(jcas);
-        
+
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
 
         return jcas;
     }
 
-    private JCas runTestWithModelsLocation(final String aLanguage, final String variant, 
+    private JCas runTestWithModelsLocation(final String aLanguage, final String variant,
             final String aDocument, final String[] sentences, final String[] tokens)
         throws Exception
     {
         AssumeResource.assumeResource(OpenNlpSegmenter.class, "sentence", aLanguage, variant);
-        
+
         final AnalysisEngine engine = createEngine(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_VARIANT, variant,
                 OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION,
                 "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/sentence-" + aLanguage + "-"
-                        + variant + ".bin", OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION,
+                        + variant + ".bin",
+                OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION,
                 "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/token-" + aLanguage + "-"
                         + variant + ".bin");
-        
+
         // Cannot use TestRunner because that uses TokenBuilder to create a segmentation.
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(aLanguage);

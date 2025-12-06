@@ -31,11 +31,9 @@ class WikipediaRevisionReaderTest
 {
     @Disabled("Currently there is no test database to test revisions")
     @Test
-    void wikipediaRevisionReaderTest()
-        throws Exception
+    void wikipediaRevisionReaderTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                WikipediaRevisionReader.class,
+        CollectionReaderDescription reader = createReaderDescription(WikipediaRevisionReader.class,
                 WikipediaRevisionPairReader.PARAM_HOST, "localhost", //
                 WikipediaRevisionPairReader.PARAM_DB, "wikiapi_test", //
                 WikipediaRevisionPairReader.PARAM_JDBC_URL,

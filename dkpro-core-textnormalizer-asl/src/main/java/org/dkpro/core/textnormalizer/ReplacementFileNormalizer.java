@@ -52,9 +52,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Replacement File Normalizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
 @Deprecated
 public class ReplacementFileNormalizer
     extends Normalizer_ImplBase
@@ -65,7 +65,7 @@ public class ReplacementFileNormalizer
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private String replacePath;
-    
+
     /**
      * The character encoding used by the model.
      */
@@ -104,8 +104,7 @@ public class ReplacementFileNormalizer
     protected Map<String, String> replacementMap;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -136,8 +135,7 @@ public class ReplacementFileNormalizer
     @Override
     protected Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas)
     {
-        Map<Integer, List<SofaChangeAnnotation>> changesMap = 
-                new TreeMap<Integer, List<SofaChangeAnnotation>>();
+        Map<Integer, List<SofaChangeAnnotation>> changesMap = new TreeMap<Integer, List<SofaChangeAnnotation>>();
         int mapKey = 1;
 
         String coveredText = jcas.getDocumentText().toLowerCase();
@@ -187,8 +185,7 @@ public class ReplacementFileNormalizer
         };
     }
 
-    private Map<String, String> getReplacementMap()
-        throws ResourceInitializationException
+    private Map<String, String> getReplacementMap() throws ResourceInitializationException
     {
         Map<String, String> replacementMap = new HashMap<String, String>();
         try {

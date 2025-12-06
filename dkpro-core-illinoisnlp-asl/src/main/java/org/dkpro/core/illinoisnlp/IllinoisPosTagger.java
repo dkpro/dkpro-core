@@ -65,12 +65,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @ResourceMetaData(name = "Illinois CCG POS-Tagger")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("en")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-       outputs = {
-           "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class IllinoisPosTagger
     extends JCasAnnotator_ImplBase
 {
@@ -80,10 +77,10 @@ public class IllinoisPosTagger
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
-    
-//    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-//    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-//    private String modelLocation;
+
+    // public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    // @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    // private String modelLocation;
 
     /**
      * Use this language instead of the document language.
@@ -92,18 +89,16 @@ public class IllinoisPosTagger
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
 
-//    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-//    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-//    private String variant;
-    
+    // public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    // @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    // private String variant;
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, 
-            defaultValue = "classpath:/org/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, defaultValue = "classpath:/org/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
     private String posMappingLocation;
 
     private ModelProviderBase<Annotator> modelProvider;
@@ -111,12 +106,12 @@ public class IllinoisPosTagger
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
-        modelProvider = new ModelProviderBase<Annotator>() {
+        modelProvider = new ModelProviderBase<Annotator>()
+        {
             {
                 setContextObject(IllinoisPosTagger.this);
                 setDefault(LOCATION, NOT_REQUIRED);
@@ -128,16 +123,16 @@ public class IllinoisPosTagger
                 if (!"en".equals(getAggregatedProperties().getProperty(LANGUAGE))) {
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
-                
+
                 POSAnnotator annotator = new POSAnnotator(false);
 
                 SingletonTagset tags = new SingletonTagset(POS.class, "ptb");
 
                 try {
-                    POSTagger trainedTagger = (POSTagger) FieldUtils
-                            .readField(annotator, "tagger", true);
-                    Learner known = (POSTaggerKnown) FieldUtils.readField(trainedTagger, "taggerKnown",
+                    POSTagger trainedTagger = (POSTagger) FieldUtils.readField(annotator, "tagger",
                             true);
+                    Learner known = (POSTaggerKnown) FieldUtils.readField(trainedTagger,
+                            "taggerKnown", true);
                     for (int i = 0; i < known.getLabelLexicon().size(); i++) {
                         tags.add(known.getLabelLexicon().lookupKey(i).getStringValue());
                     }
@@ -151,19 +146,19 @@ public class IllinoisPosTagger
                 catch (IllegalAccessException e) {
                     throw new IllegalStateException(e);
                 }
-                
+
                 addTagset(tags);
 
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
                 }
-                
+
                 return annotator;
             }
         };
-        
-//        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-//                language, taggerProvider);
+
+        // mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+        // language, taggerProvider);
 
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, posMappingLocation);
@@ -171,8 +166,7 @@ public class IllinoisPosTagger
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
@@ -193,7 +187,7 @@ public class IllinoisPosTagger
         for (Sentence s : select(aJCas, Sentence.class)) {
             // Get tokens from CAS
             List<Token> casTokens = selectCovered(aJCas, Token.class, s);
-            
+
             ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider);
         }
     }

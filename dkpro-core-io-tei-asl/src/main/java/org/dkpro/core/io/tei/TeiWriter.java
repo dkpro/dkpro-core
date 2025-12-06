@@ -79,17 +79,15 @@ import javanet.staxutils.IndentingXMLEventWriter;
  */
 @ResourceMetaData(name = "TEI XML Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_TEI_XML })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class TeiWriter
     extends JCasFileWriter_ImplBase
 {
@@ -97,8 +95,7 @@ public class TeiWriter
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
@@ -113,16 +110,14 @@ public class TeiWriter
      * Write constituent annotations to the CAS. Disabled by default because it requires type
      * priorities to be set up (Constituents must have a higher prio than Tokens).
      */
-    public static final String PARAM_WRITE_CONSTITUENT = 
-            ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "false")
     private boolean writeConstituent;
 
     /**
      * Write named entity annotations to the CAS. Overlapping named entities are not supported.
      */
-    public static final String PARAM_WRITE_NAMED_ENTITY = 
-            ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
 
@@ -136,8 +131,7 @@ public class TeiWriter
     private final XMLEventFactory xmlef = XMLEventFactory.newInstance();
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         String text = aJCas.getDocumentText();
 
@@ -193,8 +187,8 @@ public class TeiWriter
                     // Check if next annotation is fully nested
                     if (cur == null || nextAnnot.getEnd() <= cur.getEnd()) {
                         // Text between current and next annotation
-                        xmlEventWriter.add(xmlef.createCharacters(text.substring(pos,
-                                nextAnnot.getBegin())));
+                        xmlEventWriter.add(
+                                xmlef.createCharacters(text.substring(pos, nextAnnot.getBegin())));
                         // Next annotation
                         xmlEventWriter
                                 .add(xmlef.createStartElement(new QName(TEI_NS, teiElement.get()),
@@ -265,7 +259,8 @@ public class TeiWriter
         }
     }
 
-    private Iterator<Attribute> getAttributes(Annotation aAnnotation) {
+    private Iterator<Attribute> getAttributes(Annotation aAnnotation)
+    {
         List<Attribute> attributes = new ArrayList<Attribute>();
         if (aAnnotation instanceof Token) {
             var t = (Token) aAnnotation;

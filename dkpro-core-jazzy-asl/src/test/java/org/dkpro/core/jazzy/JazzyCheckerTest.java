@@ -41,8 +41,7 @@ public class JazzyCheckerTest
 {
 
     @Test
-    public void spellCheckerTest()
-        throws Exception
+    public void spellCheckerTest() throws Exception
     {
         String testDocumentEnglish = "The cat sta on the mat . Some errosr occur in user "
                 + "discourse morre often . What do you tink ?";
@@ -53,9 +52,9 @@ public class JazzyCheckerTest
         errorsEnglish.add("morre");
         errorsEnglish.add("tink");
 
-        AnalysisEngine engine = createEngine(JazzyChecker.class,
-                JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/testdict.txt");
-        
+        AnalysisEngine engine = createEngine(JazzyChecker.class, JazzyChecker.PARAM_MODEL_LOCATION,
+                "src/test/resources/testdict.txt");
+
         JCas aJCas = engine.newJCas();
 
         TokenBuilder<Token, Sentence> tb = TokenBuilder.create(Token.class, Sentence.class);
@@ -64,47 +63,39 @@ public class JazzyCheckerTest
 
         int i = 0;
         for (SpellingAnomaly errorAnnotation : select(aJCas, SpellingAnomaly.class)) {
-//            System.out.println(errorAnnotation.getCoveredText() + " - "
-//                    + errorAnnotation.getSuggestions(0).getReplacement());
+            // System.out.println(errorAnnotation.getCoveredText() + " - "
+            // + errorAnnotation.getSuggestions(0).getReplacement());
             assertEquals(errorsEnglish.get(i), errorAnnotation.getCoveredText());
             i++;
         }
         assertEquals(4, i);
     }
-    
+
     @Test
-    public void contextualizedSpellCheckerTest()
-        throws Exception
+    public void contextualizedSpellCheckerTest() throws Exception
     {
         String testDocumentEnglish = "The cat sta on the mat .";
 
         ExternalResourceDescription resource = createResourceDescription(
                 TestFrequencyCountResource.class);
 
-//        String context = DkproContext.getContext().getWorkspace("web1t").getAbsolutePath();
-//        String workspace = "en";
-//        ExternalResourceDescription resource = createExternalResourceDescription(
-//                Web1TFrequencyCountResource.class,
-//                Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
-//                Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "3",
-//                Web1TFrequencyCountResource.PARAM_INDEX_PATH, 
-//                        new File(context, workspace).getAbsolutePath()
-//        );
-        
-        AnalysisEngine engine = createEngine(
-                createEngineDescription(
-                    createEngineDescription(
-                        JazzyChecker.class,
-                        JazzyChecker.PARAM_SCORE_THRESHOLD, 3,
-                        JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/testdict_variants.txt"
-                    ),
-                    createEngineDescription(
-                        CorrectionsContextualizer.class,
-                        CorrectionsContextualizer.RES_FREQUENCY_PROVIDER, resource
-                    )
-                )
-        );
-        
+        // String context = DkproContext.getContext().getWorkspace("web1t").getAbsolutePath();
+        // String workspace = "en";
+        // ExternalResourceDescription resource = createExternalResourceDescription(
+        // Web1TFrequencyCountResource.class,
+        // Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
+        // Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "3",
+        // Web1TFrequencyCountResource.PARAM_INDEX_PATH,
+        // new File(context, workspace).getAbsolutePath()
+        // );
+
+        AnalysisEngine engine = createEngine(createEngineDescription(
+                createEngineDescription(JazzyChecker.class, JazzyChecker.PARAM_SCORE_THRESHOLD, 3,
+                        JazzyChecker.PARAM_MODEL_LOCATION,
+                        "src/test/resources/testdict_variants.txt"),
+                createEngineDescription(CorrectionsContextualizer.class,
+                        CorrectionsContextualizer.RES_FREQUENCY_PROVIDER, resource)));
+
         JCas aJCas = engine.newJCas();
 
         TokenBuilder<Token, Sentence> tb = TokenBuilder.create(Token.class, Sentence.class);

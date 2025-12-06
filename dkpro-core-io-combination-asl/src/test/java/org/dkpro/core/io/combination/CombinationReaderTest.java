@@ -31,28 +31,22 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.TextReader;
 import org.junit.jupiter.api.Test;
 
-public class CombinationReaderTest {
+public class CombinationReaderTest
+{
 
     @Test
-    public void combinationReaderTest() 
-        throws Exception
+    public void combinationReaderTest() throws Exception
     {
         List<File> readerFiles = new ArrayList<>();
-        readerFiles.add(
-                CombinationReader.descriptionToFile(CollectionReaderFactory.createReaderDescription(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts/a/*.txt"))
-        );
-        readerFiles.add(
-                CombinationReader.descriptionToFile(CollectionReaderFactory.createReaderDescription(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts/b/*.txt"))
-        );
+        readerFiles.add(CombinationReader
+                .descriptionToFile(CollectionReaderFactory.createReaderDescription(TextReader.class,
+                        TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts/a/*.txt")));
+        readerFiles.add(CombinationReader
+                .descriptionToFile(CollectionReaderFactory.createReaderDescription(TextReader.class,
+                        TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts/b/*.txt")));
 
         CollectionReaderDescription combinationReader = createReaderDescription(
-                CombinationReader.class,
-                CombinationReader.PARAM_READERS, readerFiles.toArray()
-        );
+                CombinationReader.class, CombinationReader.PARAM_READERS, readerFiles.toArray());
 
         int i = 0;
         for (JCas jcas : new JCasIterable(combinationReader)) {

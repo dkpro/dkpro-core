@@ -32,19 +32,19 @@ import org.junit.jupiter.api.Test;
 public class JWordSplitterTest
 {
     @Test
-    public void testSplitter()
-        throws IOException
+    public void testSplitter() throws IOException
     {
         JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
         List<DecompoundedWord> result = splitter.split("Aktionsplan").getAllSplits();
-        
+
         assertEquals(2, result.size());
         assertEquals("Aktionsplan", result.get(0).toString());
         assertEquals("Aktion(s)+plan", result.get(1).toString());
     }
 
     @Test
-    public void testSplliter2() throws IOException {
+    public void testSplliter2() throws IOException
+    {
         JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
         final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
@@ -53,12 +53,13 @@ public class JWordSplitterTest
         Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         splitter.setDictionary(dict);
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-        
+
         assertThat(result).hasSize(1);
     }
 
     @Test
-    public void testSplliter3() throws IOException {
+    public void testSplliter3() throws IOException
+    {
         JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
         final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
@@ -67,7 +68,7 @@ public class JWordSplitterTest
         Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         splitter.setDictionary(dict);
         List<DecompoundedWord> result = splitter.split("Schwerwiegend").getAllSplits();
-        
+
         assertThat(result).hasSize(1);
     }
 }

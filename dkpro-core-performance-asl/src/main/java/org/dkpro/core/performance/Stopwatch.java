@@ -49,11 +49,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Stopwatch")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation" }, outputs = {
+        "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation" })
 
 public class Stopwatch
     extends JCasAnnotator_ImplBase
@@ -64,19 +61,17 @@ public class Stopwatch
     public static final String KEY_MEAN = "mean";
     public static final String KEY_SUM = "sum";
     public static final String KEY_STDDEV = "stddev";
-    
+
     public static final String PARAM_TIMER_NAME = "timerName";
     /**
-     * Name of the timer pair.
-     * Upstream and downstream timer need to use the same name.
+     * Name of the timer pair. Upstream and downstream timer need to use the same name.
      */
     @ConfigurationParameter(name = PARAM_TIMER_NAME, mandatory = true)
     private String timerName;
-    
+
     public static final String PARAM_OUTPUT_FILE = "timerOutputFile";
     /**
-     * Name of the timer pair.
-     * Upstream and downstream timer need to use the same name.
+     * Name of the timer pair. Upstream and downstream timer need to use the same name.
      */
     @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = false)
     private File outputFile;
@@ -84,22 +79,20 @@ public class Stopwatch
     private List<Long> times;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
         times = new ArrayList<Long>();
-        
+
         isDownstreamTimer = null;
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         this.jcas = jcas;
-        
+
         long currentTime = System.currentTimeMillis();
 
         if (isDownstreamTimer()) {
@@ -119,14 +112,13 @@ public class Stopwatch
     }
 
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         super.collectionProcessComplete();
 
         if (isDownstreamTimer()) {
-            getLogger().info("Results from Timer '" + timerName + "' after processing all documents.");
-            
+            getLogger()
+                    .info("Results from Timer '" + timerName + "' after processing all documents.");
 
             DescriptiveStatistics statTimes = new DescriptiveStatistics();
             for (Long timeValue : times) {
@@ -148,7 +140,7 @@ public class Stopwatch
             formatter.close();
 
             getLogger().info(sb.toString());
-            
+
             if (outputFile != null) {
                 try {
                     Properties props = new Properties();
@@ -157,17 +149,20 @@ public class Stopwatch
                     props.setProperty(KEY_STDDEV, "" + stddev);
                     OutputStream out = new FileOutputStream(outputFile);
                     props.store(out, "timer " + timerName + " result file");
-                } catch (FileNotFoundException e) {
+                }
+                catch (FileNotFoundException e) {
                     throw new AnalysisEngineProcessException(e);
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     throw new AnalysisEngineProcessException(e);
                 }
             }
         }
     }
-    
-    private boolean isDownstreamTimer() {
-        
+
+    private boolean isDownstreamTimer()
+    {
+
         if (isDownstreamTimer == null) {
             // this is only a downstream timer if there already is a timer annotation with the same
             // name
@@ -177,7 +172,7 @@ public class Stopwatch
                 }
             }
         }
-        
+
         if (isDownstreamTimer == null) {
             isDownstreamTimer = false;
         }

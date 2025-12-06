@@ -42,8 +42,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsFileString()
-            throws Exception
+    public void testReadStopwordsFileString() throws Exception
     {
         String stopwordsFile = STOPWORDS_LOCATION;
         Set<String> stopwords = TextUtils.readStopwordsFile(stopwordsFile, false);
@@ -51,8 +50,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsFile()
-            throws Exception
+    public void testReadStopwordsFile() throws Exception
     {
         File stopwordsFile = new File(STOPWORDS_LOCATION);
         Set<String> stopwords = TextUtils.readStopwordsFile(stopwordsFile, false);
@@ -60,8 +58,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsInputStream()
-            throws Exception
+    public void testReadStopwordsInputStream() throws Exception
     {
         InputStream stopwordsFile = Files.newInputStream(new File(STOPWORDS_LOCATION).toPath());
         Set<String> stopwords = TextUtils.readStopwordsInputStream(stopwordsFile, false);
@@ -69,8 +66,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsFile3()
-            throws Exception
+    public void testReadStopwordsFile3() throws Exception
     {
         Path stopwordsFile = new File(STOPWORDS_LOCATION).toPath();
         Set<String> stopwords = TextUtils.readStopwordsPath(stopwordsFile, false);
@@ -78,8 +74,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsURL()
-            throws Exception
+    public void testReadStopwordsURL() throws Exception
     {
         URL stopwordsURL = getClass().getResource("/stopwords.txt");
         Set<String> stopwords = TextUtils.readStopwordsURL(stopwordsURL, false);

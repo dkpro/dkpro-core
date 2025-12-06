@@ -150,8 +150,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  * <td><code>w</code></td>
  * <td>word</td>
  * <td>Token</td>
- * <td>(<code>pos</code>, <code>type</code>) -&gt; POS.PosValue (<code>pos</code> preferred over 
- *   <code>type</code>)</td>
+ * <td>(<code>pos</code>, <code>type</code>) -&gt; POS.PosValue (<code>pos</code> preferred over
+ * <code>type</code>)</td>
  * </tr>
  * <tr>
  * <td><code>mw</code></td>
@@ -169,17 +169,15 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "TEI XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_TEI_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class TeiReader
     extends ResourceCollectionReaderBase
 {
@@ -187,59 +185,58 @@ public class TeiReader
      * Write token annotations to the CAS.
      */
     public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
-    @ConfigurationParameter(name = PARAM_READ_TOKEN, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_TOKEN, defaultValue = "true")
     private boolean readToken;
 
     /**
      * Write part-of-speech annotations to the CAS.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_POS, defaultValue = "true")
     private boolean readPOS;
 
     /**
      * Write lemma annotations to the CAS.
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
-    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, defaultValue = "true")
     private boolean readLemma;
 
     /**
      * Write sentence annotations to the CAS.
      */
     public static final String PARAM_READ_SENTENCE = ComponentParameters.PARAM_READ_SENTENCE;
-    @ConfigurationParameter(name = PARAM_READ_SENTENCE, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_SENTENCE, defaultValue = "true")
     private boolean readSentence;
 
     /**
      * Write constituent annotations to the CAS.
      */
     public static final String PARAM_READ_CONSTITUENT = ComponentParameters.PARAM_READ_CONSTITUENT;
-    @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, defaultValue = "true")
     private boolean readConstituent;
 
     /**
      * Write named entity annotations to the CAS.
      */
-    public static final String PARAM_READ_NAMED_ENTITY = 
-            ComponentParameters.PARAM_READ_NAMED_ENTITY;
-    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, defaultValue = "true")
     private boolean readNamedEntity;
 
     /**
      * Write paragraphs annotations to the CAS.
      */
     public static final String PARAM_READ_PARAGRAPH = "readParagraph";
-    @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, defaultValue = "true")
     private boolean readParagraph;
 
     /**
-     * Use the xml:id attribute on the TEI elements as document ID. Mind that many TEI files
-     * may not have this attribute on all TEI elements and you may end up with no document ID
-     * at all. Also mind that the IDs should be unique.
+     * Use the xml:id attribute on the TEI elements as document ID. Mind that many TEI files may not
+     * have this attribute on all TEI elements and you may end up with no document ID at all. Also
+     * mind that the IDs should be unique.
      */
     public static final String PARAM_USE_XML_ID = "useXmlId";
-    @ConfigurationParameter(name = PARAM_USE_XML_ID, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_USE_XML_ID, defaultValue = "false")
     private boolean useXmlId;
 
     /**
@@ -247,7 +244,7 @@ public class TeiReader
      * the filenames should be unique in this case.
      */
     public static final String PARAM_USE_FILENAME_ID = "useFilenameId";
-    @ConfigurationParameter(name = PARAM_USE_FILENAME_ID, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_USE_FILENAME_ID, defaultValue = "false")
     private boolean useFilenameId;
 
     /**
@@ -255,22 +252,21 @@ public class TeiReader
      */
     // REC: This does not seem to work. Maybe because SAXWriter does not generate this event?
     public static final String PARAM_OMIT_IGNORABLE_WHITESPACE = "omitIgnorableWhitespace";
-    @ConfigurationParameter(name = PARAM_OMIT_IGNORABLE_WHITESPACE, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_OMIT_IGNORABLE_WHITESPACE, defaultValue = "false")
     private boolean omitIgnorableWhitespace;
 
     /**
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, //
+            defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -282,23 +278,23 @@ public class TeiReader
     public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
     @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
     protected String posTagset;
-    
+
     /**
      * Interpret utterances "u" as sentenes "s". (EXPERIMENTAL)
      */
     public static final String PARAM_UTTERANCES_AS_SENTENCES = "utterancesAsSentences";
-    @ConfigurationParameter(name = PARAM_UTTERANCES_AS_SENTENCES, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_UTTERANCES_AS_SENTENCES, defaultValue = "false")
     private boolean utterancesAsSentences;
-    
+
     /**
      * Trim the given elements (remote leading and trailing whitespace). DKPro Core usually expects
      * annotations to start and end at a non-whitespace character.
      */
     public static final String PARAM_ELEMENTS_TO_TRIM = "elementsToTrim";
-    @ConfigurationParameter(name = PARAM_ELEMENTS_TO_TRIM, mandatory = true, defaultValue = { 
-            TAG_SUNIT, TAG_U, TAG_PARAGRAPH, TAG_RS, TAG_WORD, TAG_CHARACTER, TAG_MULTIWORD})
+    @ConfigurationParameter(name = PARAM_ELEMENTS_TO_TRIM, defaultValue = {
+            TAG_SUNIT, TAG_U, TAG_PARAGRAPH, TAG_RS, TAG_WORD, TAG_CHARACTER, TAG_MULTIWORD })
     private Set<String> elementsToTrim;
-    
+
     private Iterator<Element> teiElementIterator;
     private Element currentTeiElement;
     private Resource currentResource;
@@ -307,8 +303,7 @@ public class TeiReader
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -362,8 +357,8 @@ public class TeiReader
 
                 List<Element> teiElements = teiPath.selectNodes(xml);
 
-//                System.out.printf("Found %d TEI elements in %s.%n", teiElements.size(),
-//                        currentResource.getLocation());
+                // System.out.printf("Found %d TEI elements in %s.%n", teiElements.size(),
+                // currentResource.getLocation());
 
                 teiElementIterator = teiElements.iterator();
                 currentTeiElementNumber = 0;
@@ -389,15 +384,13 @@ public class TeiReader
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return teiElementIterator != null || currentTeiElement != null;
     }
 
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         initCas(aCAS, currentResource);
 
@@ -491,8 +484,7 @@ public class TeiReader
         private final StringBuilder buffer = new StringBuilder();
 
         @Override
-        public void endDocument()
-            throws SAXException
+        public void endDocument() throws SAXException
         {
             getJCas().setDocumentText(buffer.toString());
         }
@@ -507,7 +499,7 @@ public class TeiReader
                 Attributes aAttributes)
             throws SAXException
         {
-//            System.out.printf("%b START %s %n", captureText, aLocalName);
+            // System.out.printf("%b START %s %n", captureText, aLocalName);
             if (!inTextElement && TAG_TEI_DOC.equals(aName)) {
                 if (useXmlId) {
                     documentId = aAttributes.getValue("xml:id");
@@ -527,8 +519,8 @@ public class TeiReader
                 captureText = true;
                 inTextElement = true;
             }
-            else if (inTextElement && (TAG_SUNIT.equals(aName) || 
-                    (utterancesAsSentences && TAG_U.equals(aName)))) {
+            else if (inTextElement && (TAG_SUNIT.equals(aName)
+                    || (utterancesAsSentences && TAG_U.equals(aName)))) {
                 sentenceStart = getBuffer().length();
                 sentenceId = aAttributes.getValue(ATTR_XML_ID);
             }
@@ -548,15 +540,14 @@ public class TeiReader
                     root.setConstituentType("ROOT");
                     constituents.push(new ConstituentWrapper(root));
                 }
-                
+
                 Constituent constituent = new Constituent(getJCas());
                 constituent.setConstituentType(aAttributes.getValue(ATTR_TYPE));
                 constituent.setSyntacticFunction(aAttributes.getValue(ATTR_FUNCTION));
                 constituents.push(new ConstituentWrapper(constituent));
             }
-            else if (inTextElement
-                    && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName) || TAG_MULTIWORD
-                            .equals(aName))) {
+            else if (inTextElement && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName)
+                    || TAG_MULTIWORD.equals(aName))) {
                 tokenStart = getBuffer().length();
                 tokenId = aAttributes.getValue(ATTR_XML_ID);
                 if (StringUtils.isNotEmpty(aAttributes.getValue(ATTR_POS))) {
@@ -570,10 +561,9 @@ public class TeiReader
         }
 
         @Override
-        public void endElement(String aUri, String aLocalName, String aName)
-            throws SAXException
+        public void endElement(String aUri, String aLocalName, String aName) throws SAXException
         {
-//            System.out.printf("%b END %s %n", captureText, aLocalName);
+            // System.out.printf("%b END %s %n", captureText, aLocalName);
             if (!inTextElement && TAG_TITLE.equals(aName)) {
                 DocumentMetaData meta = DocumentMetaData.get(getJCas());
                 // Read only the first title and hope it is the main title
@@ -589,8 +579,8 @@ public class TeiReader
                 captureText = false;
                 inTextElement = false;
             }
-            else if (inTextElement && (TAG_SUNIT.equals(aName) ||
-                (utterancesAsSentences && TAG_U.equals(aName)))) {
+            else if (inTextElement && (TAG_SUNIT.equals(aName)
+                    || (utterancesAsSentences && TAG_U.equals(aName)))) {
                 if (readSentence) {
                     Sentence s = new Sentence(getJCas(), sentenceStart, getBuffer().length());
                     s.setId(trim(sentenceId));
@@ -632,32 +622,31 @@ public class TeiReader
                     wrapper.constituent.setParent(parent.constituent);
                     parent.children.add(wrapper.constituent);
                 }
-                wrapper.constituent.setChildren(FSCollectionFactory.createFSArray(getJCas(),
-                        wrapper.children));
+                wrapper.constituent.setChildren(
+                        FSCollectionFactory.createFSArray(getJCas(), wrapper.children));
                 wrapper.constituent.addToIndexes();
-                
+
                 // Close off the ROOT
                 if (constituents.peek().constituent instanceof ROOT) {
                     ConstituentWrapper rootWrapper = constituents.pop();
                     rootWrapper.constituent.setBegin(wrapper.children.get(0).getBegin());
                     rootWrapper.constituent
                             .setEnd(wrapper.children.get(wrapper.children.size() - 1).getEnd());
-                    rootWrapper.constituent.setChildren(FSCollectionFactory.createFSArray(
-                            getJCas(), rootWrapper.children));
+                    rootWrapper.constituent.setChildren(
+                            FSCollectionFactory.createFSArray(getJCas(), rootWrapper.children));
                     rootWrapper.constituent.addToIndexes();
                 }
             }
-            else if (inTextElement
-                    && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName) || TAG_MULTIWORD
-                            .equals(aName))) {
+            else if (inTextElement && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName)
+                    || TAG_MULTIWORD.equals(aName))) {
                 if (isNotBlank(getBuffer().substring(tokenStart, getBuffer().length()))) {
                     Token token = new Token(getJCas(), tokenStart, getBuffer().length());
                     token.setId(trim(tokenId));
-                    
+
                     if (elementsToTrim.contains(aName)) {
                         TrimUtils.trim(getBuffer(), token);
                     }
-                        
+
                     if (posTag != null && readPOS) {
                         Type posTagType = posMappingProvider.getTagType(posTag);
                         POS pos = (POS) getJCas().getCas().createAnnotation(posTagType,
@@ -683,7 +672,7 @@ public class TeiReader
                             token.setParent(parent.constituent);
                             parent.children.add(token);
                         }
-                        
+
                         token.addToIndexes();
                     }
                 }
@@ -694,8 +683,7 @@ public class TeiReader
         }
 
         @Override
-        public void characters(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void characters(char[] aCh, int aStart, int aLength) throws SAXException
         {
             if (captureText) {
                 buffer.append(aCh, aStart, aLength);
@@ -703,19 +691,19 @@ public class TeiReader
         }
 
         @Override
-        public void ignorableWhitespace(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void ignorableWhitespace(char[] aCh, int aStart, int aLength) throws SAXException
         {
             if (captureText && !omitIgnorableWhitespace) {
                 buffer.append(aCh, aStart, aLength);
             }
         }
     }
-    
-    private static class ConstituentWrapper {
+
+    private static class ConstituentWrapper
+    {
         public Constituent constituent;
         public List<Annotation> children = new ArrayList<Annotation>();
-        
+
         public ConstituentWrapper(Constituent aConstituent)
         {
             constituent = aConstituent;

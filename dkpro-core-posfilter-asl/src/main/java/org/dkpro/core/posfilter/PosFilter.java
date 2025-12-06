@@ -88,7 +88,7 @@ public class PosFilter
     public static final String PARAM_ADP = "adp";
     @ConfigurationParameter(name = PARAM_ADP, mandatory = true, defaultValue = "false")
     private boolean adp;
-    
+
     /**
      * Keep/remove adverbs (true: keep, false: remove)
      */
@@ -195,8 +195,7 @@ public class PosFilter
     private boolean x;
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         getContext().getLogger().log(Level.CONFIG, "Entering " + this.getClass().getSimpleName());
 
@@ -207,8 +206,8 @@ public class PosFilter
         Type typeToRemoveType = jcas.getCas().getTypeSystem().getType(typeToRemove);
 
         if (typeToRemoveType == null) {
-            throw new AnalysisEngineProcessException(new Throwable(
-                    "Could not get type for feature path: " + typeToRemove));
+            throw new AnalysisEngineProcessException(
+                    new Throwable("Could not get type for feature path: " + typeToRemove));
         }
 
         List<AnnotationFS> toRemove = new ArrayList<AnnotationFS>();
@@ -350,9 +349,8 @@ public class PosFilter
         List<AnnotationFS> annotations = CasUtil.selectCovered(annotation.getCAS(), type,
                 annotation);
         if (annotations.size() != 1) {
-            getLogger().debug(
-                    "Could not find matching annotation of type " + type + " for annotation: "
-                            + annotation.getCoveredText());
+            getLogger().debug("Could not find matching annotation of type " + type
+                    + " for annotation: " + annotation.getCoveredText());
             return null;
         }
 

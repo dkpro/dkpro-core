@@ -100,7 +100,7 @@ public class Buckets
     {
         return buckets.toString();
     }
-    
+
     static class Bucket
     {
         private final LinkedList<Double> values = new LinkedList<Double>();

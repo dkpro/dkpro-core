@@ -32,25 +32,28 @@ import org.junit.jupiter.api.Test;
 
 public class Web1tInMemoryResourceTest
 {
-    public static class Annotator extends JCasAnnotator_ImplBase {
+    public static class Annotator
+        extends JCasAnnotator_ImplBase
+    {
         final static String MODEL_KEY = "FrequencyProvider";
         @ExternalResource(key = MODEL_KEY)
         private FrequencyCountProvider model;
 
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             System.out.println(model.getClass().getName());
         }
     }
 
     @Test
-    public void configureAggregatedExample() throws Exception {
+    public void configureAggregatedExample() throws Exception
+    {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-                Annotator.MODEL_KEY, createResourceDescription(
-                        Web1TInMemoryFrequencyCountResource.class,
-                        Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION, "src/test/resources/web1t/",
+                Annotator.MODEL_KEY,
+                createResourceDescription(Web1TInMemoryFrequencyCountResource.class,
+                        Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION,
+                        "src/test/resources/web1t/",
                         Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE, "en",
                         Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"));
 

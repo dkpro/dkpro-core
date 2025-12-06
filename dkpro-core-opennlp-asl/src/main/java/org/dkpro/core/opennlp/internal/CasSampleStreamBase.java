@@ -31,68 +31,68 @@ public abstract class CasSampleStreamBase<T>
     private boolean complete = false;
     private boolean inProduction = false;
     private AtomicReference<JCas> jcasReference = new AtomicReference<>();
-//    private Thread readingThread;
-//    private Thread sendingThread;
-    
+    // private Thread readingThread;
+    // private Thread sendingThread;
+
     public CasSampleStreamBase()
     {
         // Nothing to do
     }
-    
-    public void send(JCas aJCas) {
+
+    public void send(JCas aJCas)
+    {
         jcasReference.set(aJCas);
-        
-//        if (readingThread != null) {
-//            readingThread.interrupt();
-//        }
-        
+
+        // if (readingThread != null) {
+        // readingThread.interrupt();
+        // }
+
         // Wait for the CAS to have been processed
         while (inProduction || (!complete && jcasReference.get() != null)) {
             try {
-//                sendingThread = Thread.currentThread();
+                // sendingThread = Thread.currentThread();
                 TimeUnit.MILLISECONDS.sleep(10);
             }
             catch (InterruptedException e) {
-//                sendingThread = null;
+                // sendingThread = null;
                 Thread.interrupted();
                 // Ignore
             }
         }
     }
-    
+
     @Override
-    public T read()
-        throws IOException
+    public T read() throws IOException
     {
         if (complete) {
             // Nothing more to read
             return null;
         }
-        
+
         // Block while the processing is not complete and we do not have a CAS
         while (jcasReference.get() == null || !isActive()) {
             if (complete) {
                 // Nothing more to read
                 return null;
             }
-            
+
             // Get sentences if any available
             if (jcasReference.get() != null) {
                 init(jcasReference.get());
             }
             else {
                 try {
-//                    readingThread = Thread.currentThread();
+                    // readingThread = Thread.currentThread();
                     TimeUnit.MILLISECONDS.sleep(10);
                 }
                 catch (InterruptedException e) {
                     Thread.interrupted();
-//                    readingThread = null;
+                    // readingThread = null;
                     // Ignore
                 }
             }
         }
-    
+
         try {
             inProduction = true;
             return produce(jcasReference.get());
@@ -101,28 +101,26 @@ public abstract class CasSampleStreamBase<T>
             inProduction = false;
         }
     }
-    
+
     public abstract void init(JCas aJCas);
-    
+
     public abstract boolean isActive();
-    
+
     public abstract T produce(JCas aJCas);
-    
+
     public void documentComplete()
     {
         jcasReference.set(null);
     }
 
     @Override
-    public void reset()
-        throws IOException, UnsupportedOperationException
+    public void reset() throws IOException, UnsupportedOperationException
     {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void close()
-        throws IOException
+    public void close() throws IOException
     {
         complete = true;
     }

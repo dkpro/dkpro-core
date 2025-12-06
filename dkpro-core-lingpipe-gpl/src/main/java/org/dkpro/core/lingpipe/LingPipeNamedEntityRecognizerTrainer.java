@@ -71,9 +71,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_LINGPIPE_NER)
-@Parameters(
-        exclude = { 
-                LingPipeNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION  })
+@Parameters(exclude = { LingPipeNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION })
 @ResourceMetaData(name = "LingPipe Named Entity Recognizer Trainer")
 public class LingPipeNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase
@@ -89,8 +87,7 @@ public class LingPipeNamedEntityRecognizerTrainer
      * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue()
      * named entity} by type.
      */
-    public static final String PARAM_ACCEPTED_TAGS_REGEX = 
-            ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
+    public static final String PARAM_ACCEPTED_TAGS_REGEX = ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
     @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
     protected String acceptedTagsRegex;
 
@@ -104,13 +101,15 @@ public class LingPipeNamedEntityRecognizerTrainer
     private PrintWriter out;
 
     @Override
-    public void process(JCas aJCas) throws AnalysisEngineProcessException {
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
+    {
         if (tempData == null) {
             try {
                 tempData = File.createTempFile("dkpro-lingpipe-ner-trainer", ".tsv");
                 out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
                         StandardCharsets.UTF_8));
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 throw new AnalysisEngineProcessException(e);
             }
         }
@@ -130,7 +129,8 @@ public class LingPipeNamedEntityRecognizerTrainer
                     NamedEntity next = coveredNEs.iterator().next();
                     if (next != ne) {
                         out.print(" B");
-                    } else {
+                    }
+                    else {
                         out.print(" I");
                     }
 
@@ -138,7 +138,8 @@ public class LingPipeNamedEntityRecognizerTrainer
                     out.print(next.getValue());
 
                     ne = next;
-                } else {
+                }
+                else {
                     out.print(" O");
                 }
                 out.println();
@@ -148,9 +149,9 @@ public class LingPipeNamedEntityRecognizerTrainer
         }
     }
 
-    private Map<Token, List<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
-        Map<Token, List<NamedEntity>> idx = indexCovered(aJCas, Token.class,
-                NamedEntity.class);
+    private Map<Token, List<NamedEntity>> getNamedEntityIndex(JCas aJCas)
+    {
+        Map<Token, List<NamedEntity>> idx = indexCovered(aJCas, Token.class, NamedEntity.class);
 
         if (acceptedTagsRegex != null) {
             Pattern pattern = Pattern.compile(acceptedTagsRegex);
@@ -175,16 +176,16 @@ public class LingPipeNamedEntityRecognizerTrainer
     }
 
     @Override
-    public void collectionProcessComplete() throws AnalysisEngineProcessException {
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
+    {
         if (out != null) {
             IOUtils.closeQuietly(out);
         }
 
-        //Setting up Chunker Estimator
+        // Setting up Chunker Estimator
         TokenizerFactory factory = IndoEuropeanTokenizerFactory.INSTANCE;
-        CharLmRescoringChunker chunkerEstimator = new CharLmRescoringChunker(
-                factory, NUM_CHUNKINGS_RESCORED, nGram, NUM_CHARS, nGram
-        );
+        CharLmRescoringChunker chunkerEstimator = new CharLmRescoringChunker(factory,
+                NUM_CHUNKINGS_RESCORED, nGram, NUM_CHARS, nGram);
 
         Conll2002ChunkTagParser parser = new Conll2002ChunkTagParser();
         parser.setHandler(chunkerEstimator);
@@ -194,13 +195,16 @@ public class LingPipeNamedEntityRecognizerTrainer
             parser.parse(in);
 
             AbstractExternalizable.compileTo(chunkerEstimator, targetLocation);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
 
     }
 
-    private static class Conll2002ChunkTagParser extends StringParser<ObjectHandler<Chunking>> {
+    private static class Conll2002ChunkTagParser
+        extends StringParser<ObjectHandler<Chunking>>
+    {
 
         /**
          * token ?posTag entityTag
@@ -231,9 +235,8 @@ public class LingPipeNamedEntityRecognizerTrainer
         private static final String IN_TAG_PREFIX = "I-";
         private static final String OUT_TAG = "O";
 
-        private final LineTaggingParser mParser = new LineTaggingParser(
-                TOKEN_TAG_LINE_REGEX, TOKEN_GROUP, TAG_GROUP, IGNORE_LINE_REGEX, EOS_REGEX
-        );
+        private final LineTaggingParser mParser = new LineTaggingParser(TOKEN_TAG_LINE_REGEX,
+                TOKEN_GROUP, TAG_GROUP, IGNORE_LINE_REGEX, EOS_REGEX);
 
         private final TagChunkCodec mCodec = new BioTagChunkCodec(
                 // no tokenizer
@@ -241,13 +244,11 @@ public class LingPipeNamedEntityRecognizerTrainer
                 // don't enforce consistency
                 false,
                 // custom BIO tag coding matches regex
-                BEGIN_TAG_PREFIX,
-                IN_TAG_PREFIX,
-                OUT_TAG
-        );
+                BEGIN_TAG_PREFIX, IN_TAG_PREFIX, OUT_TAG);
 
         @Override
-        public void parseString(char[] cs, int start, int end) {
+        public void parseString(char[] cs, int start, int end)
+        {
             mParser.parseString(cs, start, end);
         }
 
@@ -255,9 +256,10 @@ public class LingPipeNamedEntityRecognizerTrainer
          * @param handler
          */
         @Override
-        public void setHandler(ObjectHandler<Chunking> handler) {
-            ObjectHandler<Tagging<String>> taggingHandler
-                    = TagChunkCodecAdapters.chunkingToTagging(mCodec, handler);
+        public void setHandler(ObjectHandler<Chunking> handler)
+        {
+            ObjectHandler<Tagging<String>> taggingHandler = TagChunkCodecAdapters
+                    .chunkingToTagging(mCodec, handler);
             mParser.setHandler(taggingHandler);
         }
 

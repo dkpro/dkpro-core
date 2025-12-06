@@ -40,65 +40,55 @@ public class NifReaderWriterTest
     // This is not a test method - just a development utility to convert the Python-like TTL
     // example files into the format that is used by Apache Jena.
     // @Test
-    public void convert()
-        throws Exception
+    public void convert() throws Exception
     {
-        convert("src/test/resources/nif/brown/a01.ttl", "src/test/resources/nif/brown/a01-cooked.ttl");
-        convert("src/test/resources/nif/kore50/kore50.ttl", "src/test/resources/nif/kore50/kore50-cooked.ttl");
-        convert("src/test/resources/nif/freme/freme.ttl", "src/test/resources/nif/freme/freme-cooked.ttl");
+        convert("src/test/resources/nif/brown/a01.ttl",
+                "src/test/resources/nif/brown/a01-cooked.ttl");
+        convert("src/test/resources/nif/kore50/kore50.ttl",
+                "src/test/resources/nif/kore50/kore50-cooked.ttl");
+        convert("src/test/resources/nif/freme/freme.ttl",
+                "src/test/resources/nif/freme/freme-cooked.ttl");
     }
-    
+
     @Test
-    public void testBrown()
-        throws Exception
+    public void testBrown() throws Exception
     {
         // Hm, does not seem to work
         // ARQ.getContext().set(RIOT.multilineLiterals, true);
-        
-        testOneWay(
-                NifReader.class, // the reader
+
+        testOneWay(NifReader.class, // the reader
                 NifWriter.class, // the writer
-                "nif/brown/a01-cooked-ref.ttl", 
-                "nif/brown/a01-cooked.ttl",
-                new TestOptions().resultAssertor(this::assertModelEquals));
-    }
-    
-    @Test
-    public void testKore50()
-        throws Exception
-    {
-        // Hm, does not seem to work
-        // ARQ.getContext().set(RIOT.multilineLiterals, true);
-        
-        testOneWay(
-                NifReader.class, // the reader
-                NifWriter.class, // the writer
-                "nif/kore50/kore50-cooked-ref.ttl", 
-                "nif/kore50/kore50-cooked.ttl",
-                new TestOptions().resultAssertor(this::assertModelEquals));
-    }
-    
-    @Test
-    public void testFreme()
-        throws Exception
-    {
-        testOneWay(
-                NifReader.class, // the reader
-                NifWriter.class, // the writer
-                "nif/freme/freme-cooked-ref.ttl", 
-                "nif/freme/freme-cooked.ttl",
+                "nif/brown/a01-cooked-ref.ttl", "nif/brown/a01-cooked.ttl",
                 new TestOptions().resultAssertor(this::assertModelEquals));
     }
 
     @Test
-    public void testPyNif()
-        throws Exception
+    public void testKore50() throws Exception
     {
-        testOneWay(
-                NifReader.class, // the reader
+        // Hm, does not seem to work
+        // ARQ.getContext().set(RIOT.multilineLiterals, true);
+
+        testOneWay(NifReader.class, // the reader
                 NifWriter.class, // the writer
-                "nif/pynif/pynif-example-ref.ttl", 
-                "nif/pynif/pynif-example.ttl",
+                "nif/kore50/kore50-cooked-ref.ttl", "nif/kore50/kore50-cooked.ttl",
+                new TestOptions().resultAssertor(this::assertModelEquals));
+    }
+
+    @Test
+    public void testFreme() throws Exception
+    {
+        testOneWay(NifReader.class, // the reader
+                NifWriter.class, // the writer
+                "nif/freme/freme-cooked-ref.ttl", "nif/freme/freme-cooked.ttl",
+                new TestOptions().resultAssertor(this::assertModelEquals));
+    }
+
+    @Test
+    public void testPyNif() throws Exception
+    {
+        testOneWay(NifReader.class, // the reader
+                NifWriter.class, // the writer
+                "nif/pynif/pynif-example-ref.ttl", "nif/pynif/pynif-example.ttl",
                 new TestOptions().resultAssertor(this::assertModelEquals));
     }
 
@@ -116,9 +106,8 @@ public class NifReaderWriterTest
 
         assertEquals(StringUtils.join(sExpected, "\n"), StringUtils.join(sActual, "\n"));
     }
-    
-    private static void convert(String aIn, String aOut)
-        throws Exception
+
+    private static void convert(String aIn, String aOut) throws Exception
     {
         OntModel model = ModelFactory.createOntologyModel();
         try (InputStream is = new FileInputStream(aIn)) {

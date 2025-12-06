@@ -48,13 +48,13 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 /**
  * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
  * 
- * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
+ * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared
+ *      Task: Multi-lingual Dependency Parsing</a>
  */
 @ResourceMetaData(name = "CoNLL 2006 Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
-@TypeCapability(inputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_2006 })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
@@ -71,64 +71,60 @@ public class Conll2006Writer
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     /**
      * Use this filename extension.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, defaultValue = ".conll")
     private String filenameSuffix;
 
     /**
      * Write fine-grained part-of-speech information.
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, defaultValue = "true")
     private boolean writePos;
 
     /**
      * Write coarse-grained part-of-speech information.
      */
     public static final String PARAM_WRITE_CPOS = ComponentParameters.PARAM_WRITE_CPOS;
-    @ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_CPOS, defaultValue = "true")
     private boolean writeCPos;
 
     /**
      * Write morphological features.
      */
     public static final String PARAM_WRITE_MORPH = "writeMorph";
-    @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_MORPH, defaultValue = "true")
     private boolean writeMorph;
 
     /**
      * Write lemma information.
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, defaultValue = "true")
     private boolean writeLemma;
 
     /**
      * Write syntactic dependency information.
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
-    @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, defaultValue = "true")
     private boolean writeDependency;
-    
+
     /**
      * Write text covered by the token instead of the token form.
      */
-    public static final String PARAM_WRITE_COVERED_TEXT = 
-            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
-    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    public static final String PARAM_WRITE_COVERED_TEXT = ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, defaultValue = "true")
     private boolean writeCovered;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (PrintWriter out = new PrintWriter(
                 new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding));) {
@@ -147,12 +143,12 @@ public class Conll2006Writer
 
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
-            
+
             // Check if we should try to include the FEATS in output
             List<MorphologicalFeatures> morphology = selectCovered(MorphologicalFeatures.class,
                     sentence);
             boolean useFeats = tokens.size() == morphology.size();
-            
+
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
                 row.id = i + 1;
@@ -165,20 +161,19 @@ public class Conll2006Writer
 
             // Dependencies
             List<Dependency> basicDeps = selectCovered(Dependency.class, sentence).stream()
-                    .filter(dep -> dep.getFlavor() == null || 
-                            DependencyFlavor.BASIC.equals(dep.getFlavor()))
+                    .filter(dep -> dep.getFlavor() == null
+                            || DependencyFlavor.BASIC.equals(dep.getFlavor()))
                     .collect(Collectors.toList());
             for (Dependency rel : basicDeps) {
-                Row row =  ctokens.get(rel.getDependent());
+                Row row = ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
                     String form = row.token.getCoveredText();
                     if (!writeCovered) {
                         form = row.token.getText();
                     }
-                    
+
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
-                            + form
-                            + "] is dependent of more than one dependency.");
+                            + form + "] is dependent of more than one dependency.");
                 }
                 row.deprel = rel;
             }
@@ -189,7 +184,7 @@ public class Conll2006Writer
                 if (!writeCovered) {
                     form = row.token.getText();
                 }
-                
+
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
@@ -207,7 +202,7 @@ public class Conll2006Writer
                     POS posAnno = row.token.getPos();
                     cpos = posAnno.getCoarseValue();
                 }
-                
+
                 int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 if (writeDependency && (row.deprel != null)) {
@@ -218,23 +213,22 @@ public class Conll2006Writer
                         headId = 0;
                     }
                 }
-                
+
                 String head = UNUSED;
                 if (headId != UNUSED_INT) {
                     head = Integer.toString(headId);
                 }
-                
+
                 String feats = UNUSED;
                 if (writeMorph && (row.feats != null)) {
                     feats = row.feats.getValue();
                 }
-                
+
                 String phead = UNUSED;
                 String pdeprel = UNUSED;
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        form, lemma, cpos, pos, feats, head, deprel, phead,
-                        pdeprel);
+                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id, form, lemma, cpos,
+                        pos, feats, head, deprel, phead, pdeprel);
             }
 
             aOut.println();

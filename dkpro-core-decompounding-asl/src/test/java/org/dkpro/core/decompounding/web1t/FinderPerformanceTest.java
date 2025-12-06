@@ -29,8 +29,7 @@ public class FinderPerformanceTest
 {
 
     /**
-     * Test the finder performace on the generated web1t index Time is printed
-     * on the console.
+     * Test the finder performace on the generated web1t index Time is printed on the console.
      */
     @Test
     public void testPerformance1() throws IOException
@@ -41,8 +40,8 @@ public class FinderPerformanceTest
         }
         File jWeb1T = new File("/home/likewise-open/UKP/santos/UKP/Library/DKPro/web1t/de");
         Finder f = new Finder(file, jWeb1T);
-        String[] words = new String[] { "hallo welt", "wie geht es euch",
-                "alpha", "zutun", "lasst uns nach hause gehen", "rennen" };
+        String[] words = new String[] { "hallo welt", "wie geht es euch", "alpha", "zutun",
+                "lasst uns nach hause gehen", "rennen" };
         long time = 0;
 
         for (String word : words) {
@@ -50,12 +49,10 @@ public class FinderPerformanceTest
             assertTrue(f.find(word).size() > 0);
             long end = System.currentTimeMillis();
             time += end - start;
-            System.out.println("Time for '" + word + "' (ms): "
-                    + (end - start));
+            System.out.println("Time for '" + word + "' (ms): " + (end - start));
         }
 
-        System.out.println("  -> Average time (ms): "
-                + ((float) time / (float) words.length));
+        System.out.println("  -> Average time (ms): " + ((float) time / (float) words.length));
     }
 
     @Test
@@ -69,8 +66,7 @@ public class FinderPerformanceTest
 
         Finder f = new Finder(file, jWeb1T);
 
-        String[] words = { "filmtauscher", "minimalanforderungen",
-                "berufungsinstanz" };
+        String[] words = { "filmtauscher", "minimalanforderungen", "berufungsinstanz" };
 
         long time = 0;
         long count = 0;
@@ -85,12 +81,10 @@ public class FinderPerformanceTest
                 time += end - start;
                 count++;
 
-                System.out.println("Time for '" + searchFor + "' (ms): "
-                        + (end - start));
+                System.out.println("Time for '" + searchFor + "' (ms): " + (end - start));
             }
         }
 
-        System.out.println("Average time (ms): "
-                + ((float) time / (float) count));
+        System.out.println("Average time (ms): " + ((float) time / (float) count));
     }
 }

@@ -92,20 +92,17 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "MaltParser Dependency Parser")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 
 public class MaltParser
     extends JCasAnnotator_ImplBase
 {
     private static final String UNUSED = "_";
-    
+
     /**
      * Use this language instead of the document language to resolve the model.
      */
@@ -121,19 +118,20 @@ public class MaltParser
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -168,10 +166,8 @@ public class MaltParser
     private CasConfigurableProviderBase<MaltParserService> modelProvider;
     private Set<String> features;
 
-
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -187,7 +183,8 @@ public class MaltParser
             throw new ResourceInitializationException(e);
         }
 
-        modelProvider = new ModelProviderBase<MaltParserService>(this, "maltparser", "parser") {
+        modelProvider = new ModelProviderBase<MaltParserService>(this, "maltparser", "parser")
+        {
             private MaltParserService parser;
 
             {
@@ -221,22 +218,22 @@ public class MaltParser
                     // we know covered text
                     unsupportedFeatures.remove("FORM");
                     // we know lemma if lemmatizer ran before
-                    unsupportedFeatures.remove("LEMMA"); 
+                    unsupportedFeatures.remove("LEMMA");
                     // we know POS tag if POS tagger ran before
-                    unsupportedFeatures.remove("POSTAG"); 
+                    unsupportedFeatures.remove("POSTAG");
                     // CPOSTAG - only supported if we know a mapping from POSTAG to CPOSTAG (FIXME)
                     // FEATS - not properly supported in DKPro Core yet! (FIXME)
                     if (!unsupportedFeatures.isEmpty()) {
                         String message = "Model these uses unsupported features: "
                                 + unsupportedFeatures;
                         if (ignoreMissingFeatures) {
-                            getLogger().warn(message); 
+                            getLogger().warn(message);
                         }
                         else {
                             throw new IOException(message);
                         }
                     }
-                    
+
                     // However, Maltparser is not happy at all if the model file does not have the
                     // right name, so we are forced to create a temporary directory and place the
                     // file there.
@@ -257,7 +254,7 @@ public class MaltParser
                     }
 
                     // Maltparser has a very odd way of finding out which command line options it
-                    // supports. By manually initializing the OptionManager before Maltparser 
+                    // supports. By manually initializing the OptionManager before Maltparser
                     // tries it, we can work around Maltparsers' own broken code.
                     if (OptionManager.instance().getOptionContainerIndices().size() == 0) {
                         OptionManager.instance().loadOptionDescriptionFile(
@@ -267,10 +264,9 @@ public class MaltParser
 
                     // Ok, now we can finally initialize the parser
                     parser = new MaltParserService();
-                    parser.initializeParserModel("-w " + workingDir + " -c " + modelFile.getName()
-                            + " -m parse");
+                    parser.initializeParserModel(
+                            "-w " + workingDir + " -c " + modelFile.getName() + " -m parse");
                     // parser.initializeParserModel("-u " + modelUrl.toString() + " -m parse");
-
 
                     Properties metadata = getResourceMetaData();
 
@@ -278,8 +274,8 @@ public class MaltParser
                             .forDirectFieldAccess(parser);
                     SingleMalt singleMalt = (SingleMalt) paDirect.getPropertyValue("singleMalt");
 
-                    SingletonTagset posTags = new SingletonTagset(
-                            POS.class, metadata.getProperty("pos.tagset"));
+                    SingletonTagset posTags = new SingletonTagset(POS.class,
+                            metadata.getProperty("pos.tagset"));
                     ParseSymbolTable posTagTable = (ParseSymbolTable) singleMalt.getSymbolTables()
                             .getSymbolTable("POSTAG");
                     for (int i = 0; i < posTagTable.getValueCounter(); i++) {
@@ -287,9 +283,9 @@ public class MaltParser
                     }
                     posTags.remove("#null#"); // Technical symbol introduced in MaltParser 1.8
                     addTagset(posTags, false);
-                    
-                    SingletonTagset depTags = new SingletonTagset(
-                            Dependency.class, metadata.getProperty("dependency.tagset"));
+
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class,
+                            metadata.getProperty("dependency.tagset"));
                     ParseSymbolTable depRelTable = (ParseSymbolTable) singleMalt.getSymbolTables()
                             .getSymbolTable("DEPREL");
                     for (int i = 0; i < depRelTable.getValueCounter(); i++) {
@@ -318,8 +314,7 @@ public class MaltParser
      * @see AnalysisComponent#collectionProcessComplete()
      */
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         if (workingDir != null && workingDir.isDirectory()) {
             FileUtils.deleteQuietly(workingDir);
@@ -327,8 +322,7 @@ public class MaltParser
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         modelProvider.configure(aJCas.getCas());
 
@@ -342,14 +336,14 @@ public class MaltParser
             String[] parserInput = new String[tokens.size()];
             for (int i = 0; i < parserInput.length; i++) {
                 Token t = tokens.get(i);
-                
+
                 int id = i + 1;
                 String form = t.getText();
                 String lemma = UNUSED;
                 String cpostag = UNUSED;
                 String postag = UNUSED;
                 String feats = UNUSED;
-                
+
                 if (features.contains("LEMMA")) {
                     if (t.getLemma() != null) {
                         lemma = t.getLemma().getValue();
@@ -359,17 +353,17 @@ public class MaltParser
                                 "Model uses feature LEMMA but there is no lemma information in CAS");
                     }
                 }
-                
+
                 // Actually, this cannot work, because we only know about the DKPro Core coarse
                 // grained categories, which are most likely different from the coarse-grained
                 // categories required by the model. We would need to include a mapping with the
                 // model to recover the required coarse grained categories from the fine-grained
                 // categories in POSTAG.
                 if (features.contains("CPOSTAG")) {
-//                    if (t.getPos() != null) {
-//                        cpostag = t.getPos().getPosValue();
-//                    }
-//                    else 
+                    // if (t.getPos() != null) {
+                    // cpostag = t.getPos().getPosValue();
+                    // }
+                    // else
                     if (!ignoreMissingFeatures) {
                         throw new IllegalStateException(
                                 "Model uses feature CPOSTAG but there is no part-of-speech information in CAS");
@@ -465,8 +459,9 @@ public class MaltParser
                 }
             }
             catch (MaltChainedException e) {
-                logger.log(Level.WARNING, "MaltParser exception creating dependency annotations: "
-                        + e.getMessage(), e);
+                logger.log(Level.WARNING,
+                        "MaltParser exception creating dependency annotations: " + e.getMessage(),
+                        e);
                 // don't pass on exception - go on with next sentence
                 continue;
             }
@@ -510,7 +505,7 @@ public class MaltParser
             IOUtils.closeQuietly(jis);
         }
     }
-    
+
     private Set<String> getFeatures(URL aUrl) throws IOException
     {
         JarEntry je = null;
@@ -523,7 +518,7 @@ public class MaltParser
 
                 if (entryName.endsWith(".info")) {
                     Set<String> features = new HashSet<String>();
-                    
+
                     for (String line : IOUtils.readLines(jis, "UTF-8")) {
                         if (line.contains("InputColumn(")) {
                             int offset = line.indexOf("InputColumn(");
@@ -534,7 +529,7 @@ public class MaltParser
                             }
                         }
                     }
-                    
+
                     return features;
                 }
             }

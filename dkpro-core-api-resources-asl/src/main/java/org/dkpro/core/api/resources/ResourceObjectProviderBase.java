@@ -182,7 +182,8 @@ public abstract class ResourceObjectProviderBase<M>
     private ExtensibleURLClassLoader loader = new ExtensibleURLClassLoader(
             getClass().getClassLoader());
 
-    private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+    private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, '\\',
+            false);
 
     private static Map<ResourceHandle, Object> cache = new WeakHashMap<ResourceHandle, Object>();
 
@@ -690,8 +691,8 @@ public abstract class ResourceObjectProviderBase<M>
 
                 var optionalResolver = ResourceObjectResolver.get();
                 if (optionalResolver.isPresent()) {
-                    List<File> files = optionalResolver.get().resolveResoureArtifact(groupId, artifactId,
-                            version);
+                    List<File> files = optionalResolver.get().resolveResoureArtifact(groupId,
+                            artifactId, version);
                     for (File file : files) {
                         loader.addURL(file.toURI().toURL());
                     }

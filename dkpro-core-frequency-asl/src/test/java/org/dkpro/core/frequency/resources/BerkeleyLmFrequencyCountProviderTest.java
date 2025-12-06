@@ -32,26 +32,29 @@ import org.junit.jupiter.api.Test;
 
 public class BerkeleyLmFrequencyCountProviderTest
 {
-    public static class Annotator extends JCasAnnotator_ImplBase {
+    public static class Annotator
+        extends JCasAnnotator_ImplBase
+    {
         final static String MODEL_KEY = "FrequencyProvider";
         @ExternalResource(key = MODEL_KEY)
         private FrequencyCountResourceBase model;
 
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             System.out.println(model.getClass().getName());
         }
     }
 
     @Test
-    public void configureAggregatedExample() throws Exception {
+    public void configureAggregatedExample() throws Exception
+    {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-                Annotator.MODEL_KEY, createResourceDescription(
-                        BerkeleyLmFrequencyCountProvider.class,
+                Annotator.MODEL_KEY,
+                createResourceDescription(BerkeleyLmFrequencyCountProvider.class,
                         BerkeleyLmFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
-                        BerkeleyLmFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
+                        BerkeleyLmFrequencyCountProvider.PARAM_BINARY,
+                        "src/test/resources/test.ser"));
 
         // Check the external resource was injected
         AnalysisEngine ae = createEngine(desc);

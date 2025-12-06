@@ -28,7 +28,7 @@ public class Meta
     @Override
     public String toString()
     {
-        return "Meta [name=" + name + ", author=" + author + ", date=" + date
-                + ", description=" + description + ", format=" + format + "]";
+        return "Meta [name=" + name + ", author=" + author + ", date=" + date + ", description="
+                + description + ", format=" + format + "]";
     }
 }

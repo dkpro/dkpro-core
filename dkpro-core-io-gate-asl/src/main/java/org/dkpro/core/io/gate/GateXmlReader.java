@@ -38,16 +38,13 @@ import gate.util.GateException;
  */
 @ResourceMetaData(name = "GATE XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_GATE_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class GateXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -63,8 +60,7 @@ public class GateXmlReader
     }
 
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         // TODO Auto-generated method stub
 

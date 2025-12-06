@@ -72,16 +72,14 @@ public class CompoundTest
     @Test
     public void testAll() throws UIMAException
     {
-        assertThat(compound.getSplitsWithoutMorpheme(ALL))
-                .extracting(Annotation::getCoveredText)
+        assertThat(compound.getSplitsWithoutMorpheme(ALL)).extracting(Annotation::getCoveredText)
                 .containsExactly("getränk", "automat", "auto", "mat");
     }
 
     @Test
     public void testLowest() throws UIMAException
     {
-        assertThat(compound.getSplitsWithoutMorpheme(LOWEST))
-                .extracting(Annotation::getCoveredText)
+        assertThat(compound.getSplitsWithoutMorpheme(LOWEST)).extracting(Annotation::getCoveredText)
                 .containsExactly("getränk", "auto", "mat");
 
     }
@@ -90,16 +88,14 @@ public class CompoundTest
     public void testHighest() throws UIMAException
     {
         assertThat(compound.getSplitsWithoutMorpheme(HIGHEST))
-                .extracting(Annotation::getCoveredText)
-                .containsExactly("getränk", "automat");
+                .extracting(Annotation::getCoveredText).containsExactly("getränk", "automat");
 
     }
 
     @Test
     public void testNone() throws UIMAException
     {
-        assertThat(compound.getSplitsWithoutMorpheme(NONE))
-                .extracting(Annotation::getCoveredText)
+        assertThat(compound.getSplitsWithoutMorpheme(NONE)).extracting(Annotation::getCoveredText)
                 .isEmpty();
     }
 }

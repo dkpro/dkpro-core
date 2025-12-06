@@ -40,8 +40,8 @@ public class Web1TFileConsolidator
     private final String TAB = "\t";
     private final String LF = "\n";
 
-    public Web1TFileConsolidator(List<File> sortedInputFiles,
-            Comparator<String> comparator, String fileEncoding, int minFreq)
+    public Web1TFileConsolidator(List<File> sortedInputFiles, Comparator<String> comparator,
+            String fileEncoding, int minFreq)
     {
         this.inputFiles = sortedInputFiles;
         this.comparator = comparator;
@@ -49,15 +49,14 @@ public class Web1TFileConsolidator
         this.minFreq = minFreq;
     }
 
-    public void consolidate()
-        throws IOException
+    public void consolidate() throws IOException
     {
 
         consolidatedFiles = new LinkedList<File>();
         // new temporary files for storing the sorted and consolidated data
         for (File file : inputFiles) {
-            consolidatedFiles.add(new File(Web1TUtil
-                    .cutOffUnderscoredSuffixFromFileName(file) + "_cons"));
+            consolidatedFiles
+                    .add(new File(Web1TUtil.cutOffUnderscoredSuffixFromFileName(file) + "_cons"));
         }
 
         for (int i = 0; i < inputFiles.size(); i++) {
@@ -66,11 +65,10 @@ public class Web1TFileConsolidator
             File file_out = consolidatedFiles.get(i);
 
             BufferedReader sortedSplitFileReader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(file_in),
-                            fileEncoding));
+                    new InputStreamReader(new FileInputStream(file_in), fileEncoding));
 
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(file_out), fileEncoding));
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(file_out), fileEncoding));
 
             String prevEntry = null;
             String entry = null;
@@ -96,14 +94,12 @@ public class Web1TFileConsolidator
                 else {
 
                     // Entries are equal, add up frequency
-                    if (arePrevEntryAndCurrentEntryEqual(prevEntry,
-                            entryWithoutFreq, comparator)) {
+                    if (arePrevEntryAndCurrentEntryEqual(prevEntry, entryWithoutFreq, comparator)) {
                         prevEntryFreq += entryFreq;
                     }
                     else { // Entry changed, write aggregated entry
 
-                        writeAggregatedEntryToFile(writer, prevEntry,
-                                prevEntryFreq);
+                        writeAggregatedEntryToFile(writer, prevEntry, prevEntryFreq);
 
                         // Prepare next iteration
                         prevEntry = entryWithoutFreq;
@@ -114,13 +110,13 @@ public class Web1TFileConsolidator
             }
             writeAggregatedEntryToFile(writer, prevEntry, prevEntryFreq);
             writer.close();
-            
+
             sortedSplitFileReader.close();
         }
     }
 
-    private void writeAggregatedEntryToFile(BufferedWriter writer,
-            String entry, Integer entryFrequency)
+    private void writeAggregatedEntryToFile(BufferedWriter writer, String entry,
+            Integer entryFrequency)
         throws IOException
     {
 
@@ -131,8 +127,8 @@ public class Web1TFileConsolidator
         writer.write(entry + TAB + entryFrequency + LF);
     }
 
-    private boolean arePrevEntryAndCurrentEntryEqual(String prevEntry,
-            String entryWithoutFreq, Comparator<String> comparator)
+    private boolean arePrevEntryAndCurrentEntryEqual(String prevEntry, String entryWithoutFreq,
+            Comparator<String> comparator)
     {
         return comparator.compare(prevEntry, entryWithoutFreq) == 0;
     }

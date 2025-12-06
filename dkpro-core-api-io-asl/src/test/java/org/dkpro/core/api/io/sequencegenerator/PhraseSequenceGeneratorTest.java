@@ -39,8 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class PhraseSequenceGeneratorTest
 {
     @Test
-    public void testTokenSequences()
-            throws Exception
+    public void testTokenSequences() throws Exception
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -50,8 +49,7 @@ public class PhraseSequenceGeneratorTest
         JCas jCas = jCasWithTokens();
 
         PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .build();
+                .featurePath(featurePath).build();
 
         LexicalPhrase[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -60,8 +58,7 @@ public class PhraseSequenceGeneratorTest
     }
 
     @Test
-    public void testLemmaSequences()
-            throws IOException, FeaturePathException, UIMAException
+    public void testLemmaSequences() throws IOException, FeaturePathException, UIMAException
     {
         String featurePath = Token.class.getName() + "/lemma/value";
         int expectedSize = 2;
@@ -71,8 +68,7 @@ public class PhraseSequenceGeneratorTest
         JCas jCas = jCasWithLemmas();
 
         PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .build();
+                .featurePath(featurePath).build();
 
         LexicalPhrase[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -82,7 +78,7 @@ public class PhraseSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePathCovering()
-            throws FeaturePathException, UIMAException, IOException
+        throws FeaturePathException, UIMAException, IOException
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -93,10 +89,7 @@ public class PhraseSequenceGeneratorTest
         JCas jCas = jCasWithSentence();
 
         PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .lowercase(false)
-                .coveringType(covering)
-                .build();
+                .featurePath(featurePath).lowercase(false).coveringType(covering).build();
 
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
@@ -108,7 +101,7 @@ public class PhraseSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceStopwordsURL()
-            throws FeaturePathException, UIMAException, IOException
+        throws FeaturePathException, UIMAException, IOException
     {
         int expectedSize = 2;
         URL stopwordsFile = this.getClass().getResource("/stopwords.txt");
@@ -117,9 +110,7 @@ public class PhraseSequenceGeneratorTest
         JCas jCas = jCasWithTokens();
 
         PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .stopwordsURL(stopwordsFile)
-                .lowercase(false)
-                .build();
+                .stopwordsURL(stopwordsFile).lowercase(false).build();
 
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
@@ -130,7 +121,7 @@ public class PhraseSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceStopwordsFile()
-            throws FeaturePathException, UIMAException, IOException
+        throws FeaturePathException, UIMAException, IOException
     {
         int expectedSize = 2;
         File stopwordsFile = new File("src/test/resources/stopwords.txt");
@@ -139,9 +130,7 @@ public class PhraseSequenceGeneratorTest
         JCas jCas = jCasWithTokens();
 
         PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .stopwordsFile(stopwordsFile)
-                .lowercase(false)
-                .build();
+                .stopwordsFile(stopwordsFile).lowercase(false).build();
 
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
@@ -152,7 +141,7 @@ public class PhraseSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceStopwordsFileString()
-            throws FeaturePathException, UIMAException, IOException
+        throws FeaturePathException, UIMAException, IOException
     {
         int expectedSize = 2;
         String stopwordsFile = "src/test/resources/stopwords.txt";
@@ -161,9 +150,7 @@ public class PhraseSequenceGeneratorTest
         JCas jCas = jCasWithTokens();
 
         PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .stopwordsFile(stopwordsFile)
-                .lowercase(false)
-                .build();
+                .stopwordsFile(stopwordsFile).lowercase(false).build();
 
         List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());

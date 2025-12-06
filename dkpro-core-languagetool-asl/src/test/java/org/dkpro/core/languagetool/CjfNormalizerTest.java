@@ -27,15 +27,13 @@ import org.junit.jupiter.api.Test;
 public class CjfNormalizerTest
 {
     @Test
-    public void testToSimplified()
-        throws Exception
+    public void testToSimplified() throws Exception
     {
         runTest("毛澤東住在北京", "毛泽东住在北京", CjfNormalizer.Direction.TO_SIMPLIFIED);
     }
 
     @Test
-    public void testToTraditional()
-        throws Exception
+    public void testToTraditional() throws Exception
     {
         runTest("毛泽东住在北京", "毛澤東住在北京", CjfNormalizer.Direction.TO_TRADITIONAL);
     }

@@ -41,8 +41,7 @@ public class HyphenationRemoverTest
     private static final String RESOURCE_GERMAN_DICTIONARY = "src/test/resources/dictionary/ngerman";
 
     @Test
-    public void testHyphenationRemover()
-        throws Exception
+    public void testHyphenationRemover() throws Exception
     {
         String inputText = "Ich habe ein- en super-tollen Bär-\nen.";
         String normalizedText = "Ich habe einen super-tollen Bären.";
@@ -54,33 +53,29 @@ public class HyphenationRemoverTest
     }
 
     @Test
-    public void testHyphenationRemoverInPipelineReaderWriter(@TempDir File tempDir)
-        throws Exception
+    public void testHyphenationRemoverInPipelineReaderWriter(@TempDir File tempDir) throws Exception
     {
         File outputPath = tempDir;
-        
+
         final String language = "de";
         final String variant = "maxent";
         String sourcePath = "src/test/resources/texts/test3.txt";
 
-        final String expected = "Ich habe einen super-tollen Bären .\n" + 
-                "Für eine Registrierung einer Organisation und eine EMail Adresse .\n";
+        final String expected = "Ich habe einen super-tollen Bären .\n"
+                + "Für eine Registrierung einer Organisation und eine EMail Adresse .\n";
 
         /* process input file */
-        final CollectionReader reader = createReader(TextReader.class,
-                TextReader.PARAM_LANGUAGE, language,
-                TextReader.PARAM_SOURCE_LOCATION, sourcePath);
+        final CollectionReader reader = createReader(TextReader.class, TextReader.PARAM_LANGUAGE,
+                language, TextReader.PARAM_SOURCE_LOCATION, sourcePath);
 
         AnalysisEngineDescription hyphenationRemover = createEngineDescription(
-                HyphenationRemover.class, 
-                HyphenationRemover.PARAM_MODEL_LOCATION, RESOURCE_GERMAN_DICTIONARY);
+                HyphenationRemover.class, HyphenationRemover.PARAM_MODEL_LOCATION,
+                RESOURCE_GERMAN_DICTIONARY);
 
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                OpenNlpSegmenter.class,
+        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_VARIANT, variant);
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                TokenizedTextWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, new File(outputPath, "test3.txt"),
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);

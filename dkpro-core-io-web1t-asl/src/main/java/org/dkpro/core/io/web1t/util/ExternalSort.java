@@ -107,10 +107,10 @@ public class ExternalSort
                     // in bytes
                     long currentblocksize = 0;
                     // as long as you have enough memory
-                    while ((currentblocksize < blocksize) && ((line = fbr.readLine()) != null)) { 
+                    while ((currentblocksize < blocksize) && ((line = fbr.readLine()) != null)) {
                         tmplist.add(line);
                         // java uses 16 bits per character?
-                        currentblocksize += line.length() * 2; 
+                        currentblocksize += line.length() * 2;
                     }
                     files.add(sortAndSave(tmplist, cmp));
                     tmplist.clear();
@@ -249,7 +249,7 @@ public class ExternalSort
         }
         mergeSortedFiles(l, new File(outputfile), comparator);
     }
-    
+
     private static class BinaryFileBuffer
     {
         public static int BUFFERSIZE = 2048;

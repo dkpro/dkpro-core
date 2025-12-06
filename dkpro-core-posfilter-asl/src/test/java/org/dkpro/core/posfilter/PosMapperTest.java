@@ -39,8 +39,7 @@ public class PosMapperTest
     private final String testDocument1 = "This sentence consists of fourtynine characters .";
 
     @Test
-    public void testEnglishOriginal()
-        throws Exception
+    public void testEnglishOriginal() throws Exception
     {
         String testDocument = testDocument1;
 
@@ -52,8 +51,7 @@ public class PosMapperTest
     }
 
     @Test
-    public void testEnglishMapped()
-        throws Exception
+    public void testEnglishMapped() throws Exception
     {
         String testDocument = testDocument1;
 
@@ -69,8 +67,8 @@ public class PosMapperTest
         throws Exception
     {
         List<AnalysisEngineDescription> descs = new ArrayList<AnalysisEngineDescription>();
-        descs.add(createEngineDescription(OpenNlpPosTagger.class,
-                OpenNlpPosTagger.PARAM_LANGUAGE, "en"));
+        descs.add(createEngineDescription(OpenNlpPosTagger.class, OpenNlpPosTagger.PARAM_LANGUAGE,
+                "en"));
 
         if (mapToDifferentTagset) {
             descs.add(createEngineDescription(PosMapper.class, PosMapper.PARAM_MAPPING_FILE,
@@ -78,8 +76,8 @@ public class PosMapperTest
                     new File(testBase, "dummy-to-dkpro.map")));
         }
 
-        AnalysisEngineDescription aggregate = createEngineDescription(descs
-                .toArray(new AnalysisEngineDescription[0]));
+        AnalysisEngineDescription aggregate = createEngineDescription(
+                descs.toArray(new AnalysisEngineDescription[0]));
         JCas jcas = TestRunner.runTest(aggregate, language, testDocument);
 
         AssertAnnotations.assertPOS(aPosDkpro, aPosOriginal, select(jcas, POS.class));

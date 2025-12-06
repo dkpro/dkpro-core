@@ -38,7 +38,8 @@ public class MutualInformationRanker
      *
      * Use {@link #setFinder(Finder)} before using this class
      */
-    public MutualInformationRanker() {
+    public MutualInformationRanker()
+    {
     }
 
     public MutualInformationRanker(Finder aFinder)
@@ -114,7 +115,6 @@ public class MutualInformationRanker
 
         return (float) (total / count);
     }
-
 
     /**
      * Searches a a path throw the tree

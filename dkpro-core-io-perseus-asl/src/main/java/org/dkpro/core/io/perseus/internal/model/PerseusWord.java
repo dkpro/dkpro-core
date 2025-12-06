@@ -22,13 +22,13 @@ import javax.xml.bind.annotation.XmlID;
 
 public class PerseusWord
 {
-    @XmlID 
+    @XmlID
     @XmlAttribute
     public String id;
 
     @XmlAttribute
     public String form;
-    
+
     @XmlAttribute
     public String lemma;
 
@@ -43,10 +43,10 @@ public class PerseusWord
 
     @XmlAttribute
     public int head;
-    
+
     @XmlAttribute(name = "insertion_id")
     public String insertionId;
-    
+
     @XmlAttribute
     public String artificial;
 }

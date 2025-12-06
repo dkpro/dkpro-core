@@ -53,15 +53,13 @@ public class SerializedCasWriter
     /**
      * Location to write the type system to. The type system is saved using Java serialization, it
      * is not saved as a XML type system description. We recommend to use the name
-     * {@code typesystem.ser}.
-     * <br>
-     * The {@link #PARAM_COMPRESSION} parameter has no effect on the
-     * type system. Instead, if the type system file should be compressed or not is detected from
-     * the file name extension (e.g. ".gz").
-     * <br>
+     * {@code typesystem.ser}. <br>
+     * The {@link #PARAM_COMPRESSION} parameter has no effect on the type system. Instead, if the
+     * type system file should be compressed or not is detected from the file name extension (e.g.
+     * ".gz"). <br>
      * If this parameter is set, the type system and index repository are no longer serialized into
-     * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not
-     * read such files. Use this only if you really know what you are doing.
+     * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not read
+     * such files. Use this only if you really know what you are doing.
      */
     public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
@@ -70,16 +68,14 @@ public class SerializedCasWriter
     /**
      * Use this filename extension.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".ser")
     private String filenameExtension;
 
     private boolean typeSystemWritten;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         // To support writing to ZIPs, the type system must be written before the CAS document
         // output stream is obtained.
@@ -92,7 +88,7 @@ public class SerializedCasWriter
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         ObjectOutputStream docOS = null;
         try {
             NamedOutputStream os = getOutputStream(aJCas, filenameExtension);
@@ -118,8 +114,7 @@ public class SerializedCasWriter
         }
     }
 
-    private void writeTypeSystem(JCas aJCas)
-        throws IOException
+    private void writeTypeSystem(JCas aJCas) throws IOException
     {
         // If the type system location is an absolute file system location, write it there,
         // otherwise use the default storage which places the file relative to the target location
@@ -148,8 +143,7 @@ public class SerializedCasWriter
         }
     }
 
-    private void writeTypeSystem(JCas aJCas, OutputStream aOS)
-        throws IOException
+    private void writeTypeSystem(JCas aJCas, OutputStream aOS) throws IOException
     {
         ObjectOutputStream typeOS = new ObjectOutputStream(aOS);
         CASMgrSerializer casMgrSerializer = serializeCASMgr(aJCas.getCasImpl());

@@ -65,23 +65,20 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.MORPHOLOGICAL_TAGGER)
 @ResourceMetaData(name = "SFST Morphological Analyzer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-    inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures" })
 public class SfstAnnotator
     extends JCasAnnotator_ImplBase
 {
     private static final String FLUSH_TOKEN = "-= FLUSH =-";
-    
-    public static enum Mode {
-        FIRST,
-        ALL
+
+    public static enum Mode
+    {
+        FIRST, ALL
     }
-    
+
     /**
      * Write part-of-speech information.
      */
@@ -111,19 +108,20 @@ public class SfstAnnotator
     private String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -144,7 +142,7 @@ public class SfstAnnotator
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
-    
+
     /**
      * Whether to record only the first ({@code FIRST}) or all possible analyses ({@code ALL}).
      */
@@ -153,11 +151,10 @@ public class SfstAnnotator
     private Mode mode;
 
     /**
-     * Load the morphological features mapping from this location instead of locating the
-     * mapping automatically.
+     * Load the morphological features mapping from this location instead of locating the mapping
+     * automatically.
      */
-    public static final String PARAM_MORPH_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
 
@@ -173,10 +170,9 @@ public class SfstAnnotator
     private MorphologicalFeaturesParser featuresParser;
     private RuntimeProvider runtimeProvider;
     private Locale locale;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -189,16 +185,15 @@ public class SfstAnnotator
                 setDefault(LOCATION,
                         "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/morph-${language}-${variant}.properties");
             }
-            
+
             @Override
-            protected File produceResource(URL aUrl)
-                throws IOException
+            protected File produceResource(URL aUrl) throws IOException
             {
                 Properties metadata = getResourceMetaData();
-                
-                SingletonTagset morphFeats = new SingletonTagset(
-                        MorphologicalFeatures.class, metadata.getProperty("morph.tagset"));
-                
+
+                SingletonTagset morphFeats = new SingletonTagset(MorphologicalFeatures.class,
+                        metadata.getProperty("morph.tagset"));
+
                 try (LittleEndianDataInputStream is = new LittleEndianDataInputStream(
                         aUrl.openStream())) {
                     byte type = is.readByte(); // "c" for "compact"
@@ -222,10 +217,10 @@ public class SfstAnnotator
                 if (printTagSet) {
                     getLogger().info(getTagset().toString());
                 }
-                
+
                 return ResourceUtils.getUrlAsFile(aUrl, true);
             }
-            
+
             private String readZeroTerminatedString(DataInput aIn, String aEncoding)
                 throws IOException
             {
@@ -240,14 +235,13 @@ public class SfstAnnotator
         };
 
         featuresParser = new MorphologicalFeaturesParser(this, modelProvider);
-        
+
         // provider for the sfst binary
         runtimeProvider = new RuntimeProvider("classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/bin/");
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
@@ -259,7 +253,7 @@ public class SfstAnnotator
             locale = new Locale(
                     PARAM_LANGUAGE != null ? PARAM_LANGUAGE : cas.getDocumentLanguage());
         }
-        
+
         String modelEncoding = (String) modelProvider.getResourceMetaData().get("model.encoding");
         if (modelEncoding == null) {
             throw new AnalysisEngineProcessException(
@@ -286,10 +280,10 @@ public class SfstAnnotator
         try {
             proc = pb.start();
 
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(proc.getOutputStream(),
-                    modelEncoding));
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(),
-                    modelEncoding));
+            PrintWriter out = new PrintWriter(
+                    new OutputStreamWriter(proc.getOutputStream(), modelEncoding));
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(proc.getInputStream(), modelEncoding));
 
             for (Sentence sentence : select(aJCas, Sentence.class)) {
                 List<Token> tokens = selectCovered(Token.class, sentence);
@@ -326,12 +320,12 @@ public class SfstAnnotator
                             // Echo line, ignore.
                             continue analysisLoop;
                         }
-                        
+
                         if (lastIn.contains(FLUSH_TOKEN)) {
                             // End of analysis
                             continue tokenLoop;
                         }
-                        
+
                         if (lastIn.startsWith("no result for")) {
                             // if we're treating sentence-initial tokens specially,
                             // don't create an empty analysis just yet
@@ -345,26 +339,26 @@ public class SfstAnnotator
                                     token.getBegin(), token.getEnd());
                             morph.setValue("");
                             morph.addToIndexes();
-                            
+
                             if (token.getMorph() == null) {
                                 token.setMorph(morph);
                             }
-                            
+
                             // We need to continue the inner loop because we still need to consume
                             // the flush marker.
                             continue analysisLoop;
                         }
-                        
+
                         // Analysis line
                         if (!skip) {
-                            MorphologicalFeatures morph = featuresParser
-                                    .parse(aJCas, token, lastIn);
-                            
+                            MorphologicalFeatures morph = featuresParser.parse(aJCas, token,
+                                    lastIn);
+
                             if (token.getMorph() == null) {
                                 token.setMorph(morph);
                             }
                         }
-                            
+
                         switch (mode) {
                         case FIRST:
                             // Go to next token after reading first analysis
