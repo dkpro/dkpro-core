@@ -145,7 +145,7 @@ public abstract class ResourceCollectionReaderBase
      */
     public static final String KEY_RESOURCE_RESOLVER = "resolver";
     @ExternalResource(key = KEY_RESOURCE_RESOLVER, mandatory = false)
-    private PathMatchingResourcePatternResolver resolver;
+    private ResourcePatternResolver resolver;
 
     /**
      * The frequency with which read documents are logged.
@@ -167,8 +167,9 @@ public abstract class ResourceCollectionReaderBase
     {
         super.initialize(aContext);
 
-        resolver = new PathMatchingResourcePatternResolver();
-        resolver.setUseCaches(false);
+        if (resolver == null) {
+            resolver = makeResolver();
+        }
 
         if ((patterns == null || patterns.length == 0) && StringUtils.isBlank(sourceLocation)) {
             throw new IllegalArgumentException(
@@ -253,6 +254,13 @@ public abstract class ResourceCollectionReaderBase
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
+    }
+
+    private PathMatchingResourcePatternResolver makeResolver()
+    {
+        var pr = new PathMatchingResourcePatternResolver();
+        pr.setUseCaches(false);
+        return pr;
     }
 
     protected List<String> getDefaultExcludes()

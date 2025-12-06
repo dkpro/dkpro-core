@@ -1,4 +1,5 @@
 /*
+
  * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -31,7 +32,6 @@ import java.io.IOException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.resource.ExternalResourceDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasCreationUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -55,9 +55,8 @@ public class ResourceCollectionReaderBaseTest
     {
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "classpath*:/org/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]**/ResourceCollectionReaderBase.class" });
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]**/ResourceCollectionReaderBase.class" });
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -68,9 +67,8 @@ public class ResourceCollectionReaderBaseTest
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
                 "jar:file:src/test/resources/testfiles.zip!",
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]**/ResourceCollectionReaderBase.class" });
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]**/ResourceCollectionReaderBase.class" });
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -81,9 +79,8 @@ public class ResourceCollectionReaderBaseTest
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
                 "jar:file:src/test/resources/testfiles.zip",
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]**/ResourceCollectionReaderBase.class" });
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]**/ResourceCollectionReaderBase.class" });
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -94,9 +91,8 @@ public class ResourceCollectionReaderBaseTest
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
                 "jar:file:src/test/resources/testfiles.zip",
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]test*/ResourceCollectionReaderBase.class" });
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]test*/ResourceCollectionReaderBase.class" });
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -108,9 +104,8 @@ public class ResourceCollectionReaderBaseTest
         var path = "jar:" + url.toString();
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, path,
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/FileSetCollectionReaderBase.class",
-                        "[-]test*/ResourceCollectionReaderBase.class" });
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/IobDecoder.class", "[-]test*/ResourceCollectionReaderBase.class" });
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -120,7 +115,7 @@ public class ResourceCollectionReaderBaseTest
     {
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "jar:file:src/test/resources/testfiles.zip!/testfiles/FileSetCollectionReaderBase.class");
+                "jar:file:src/test/resources/testfiles.zip!/testfiles/IobDecoder.class");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -144,8 +139,7 @@ public class ResourceCollectionReaderBaseTest
     {
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/FileSetCollectionReaderBase.java",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/IobDecoder.java",
                         "[-]**/ResourceCollectionReaderBase.java" });
 
         searchForResourceCollectionReaderBase(reader);
@@ -157,8 +151,7 @@ public class ResourceCollectionReaderBaseTest
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "**/FileSetCollectionReaderBase.java",
-                        "[-]**/ResourceCollectionReaderBase.java" });
+                new String[] { "**/IobDecoder.java", "[-]**/ResourceCollectionReaderBase.java" });
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -168,7 +161,7 @@ public class ResourceCollectionReaderBaseTest
     {
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/org/**/FileSetCollectionReaderBase.java");
+                "file:src/main/java/org/**/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -178,7 +171,7 @@ public class ResourceCollectionReaderBaseTest
     {
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "file:src/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+                "file:src/main/java/org/dkpro/core/api/io/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -188,17 +181,17 @@ public class ResourceCollectionReaderBaseTest
     {
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                "s*/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+                "s*/main/java/org/dkpro/core/api/io/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
 
-    @Disabled("Seems to no longer work with Spring 7")
+    @Disabled("Seems to not work with Spring 7")
     @Test
     public void testFileNoPattern4() throws Exception
     {
         var reader = createReader(DummyReader.class, PARAM_SOURCE_LOCATION,
-                "file:s*/main/java/org/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+                "file:s*/main/java/org/dkpro/core/api/io/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -207,7 +200,7 @@ public class ResourceCollectionReaderBaseTest
     public void testFileNoSource() throws Exception
     {
         var reader = createReader(DummyReader.class, PARAM_PATTERNS,
-                "src/main/java/org/**/FileSetCollectionReaderBase.java");
+                "src/main/java/org/**/IobDecoder.java");
 
         searchForResourceCollectionReaderBase(reader);
     }
@@ -216,9 +209,9 @@ public class ResourceCollectionReaderBaseTest
     public void testBrokenPattern() throws Exception
     {
         assertThatExceptionOfType(ResourceInitializationException.class).isThrownBy(() -> {
-            var reader = createReader(DummyReader.class, PARAM_SOURCE_LOCATION,
+            CollectionReader reader = createReader(DummyReader.class, PARAM_SOURCE_LOCATION,
                     "file:src/main/java/org/", PARAM_PATTERNS,
-                    new String[] { "[?]**/FileSetCollectionReaderBase.java" });
+                    new String[] { "[?]**/IobDecoder.java" });
             searchForResourceCollectionReaderBase(reader);
         });
     }
@@ -226,13 +219,12 @@ public class ResourceCollectionReaderBaseTest
     @Test
     public void testExternalLoaderLocator() throws Exception
     {
-        ExternalResourceDescription locator = createResourceDescription(
+        var locator = createResourceDescription(
                 ResourceLoaderLocator.class);
-        CollectionReader reader = createReader(DummyReader.class,
+        var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS,
-                new String[] { "[+]**/FileSetCollectionReaderBase.java",
-                        "[-]**/ResourceCollectionReaderBase.java" },
+                new String[] { "[+]**/IobDecoder.java", "[-]**/ResourceCollectionReaderBase.java" },
                 ResourceCollectionReaderBase.KEY_RESOURCE_RESOLVER, locator);
 
         searchForResourceCollectionReaderBase(reader);
@@ -240,10 +232,10 @@ public class ResourceCollectionReaderBaseTest
 
     public void searchForResourceCollectionReaderBase(CollectionReader aReader) throws Exception
     {
-        var goodNeedle = "FileSetCollectionReaderBase";
+        var goodNeedle = "IobDecoder";
         var badNeedle = "ResourceCollectionReaderBase";
 
-        boolean found = false;
+        var found = false;
         var cas = CasCreationUtils.createCas(aReader.getProcessingResourceMetaData());
         while (aReader.hasNext()) {
             aReader.getNext(cas);
