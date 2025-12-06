@@ -39,9 +39,7 @@ import eu.openminted.share.annotations.api.Parameters;
  */
 @ResourceMetaData(name = "TF/IDF Model Writer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@Parameters(
-        exclude = { 
-                TfIdfWriter.PARAM_TARGET_LOCATION  })
+@Parameters(exclude = { TfIdfWriter.PARAM_TARGET_LOCATION })
 public class TfIdfWriter
     extends JCasAnnotator_ImplBase
 {
@@ -72,16 +70,14 @@ public class TfIdfWriter
     private DfStore dfStore;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         dfStore = new DfStore(featurePath, lowercase);
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         dfStore.registerNewDocument();
 
@@ -96,8 +92,7 @@ public class TfIdfWriter
      * When this method is called by the framework, the dfModel is serialized.
      */
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         try {
             TfidfUtils.writeDfModel(dfStore, outputPath);

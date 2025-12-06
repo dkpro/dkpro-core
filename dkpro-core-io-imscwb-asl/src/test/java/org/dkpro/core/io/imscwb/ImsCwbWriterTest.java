@@ -38,71 +38,56 @@ import org.junit.jupiter.api.io.TempDir;
 public class ImsCwbWriterTest
 {
     @Test
-    public void thatWritingTuebaDzSampleWorks(@TempDir File tempDir)
-        throws Exception
+    public void thatWritingTuebaDzSampleWorks(@TempDir File tempDir) throws Exception
     {
-        ReaderAssert.assertThat(
-                        NegraExportReader.class,
-                        NegraExportReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/tuebadz/corpus-sample.export",
+        ReaderAssert
+                .assertThat(NegraExportReader.class, NegraExportReader.PARAM_SOURCE_LOCATION,
+                        "src/test/resources/tuebadz/corpus-sample.export",
                         NegraExportReader.PARAM_LANGUAGE, "de",
                         NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8")
-                .usingEngines(
-                        createEngineDescription(OpenNlpPosTagger.class))
-                .usingWriter(
-                        ImsCwbWriter.class,
-                        ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8")
+                .usingEngines(createEngineDescription(OpenNlpPosTagger.class))
+                .usingWriter(ImsCwbWriter.class, ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8")
                 .writingToSingular(new File(tempDir, "corpus-sample.vrt").toString())
-                .outputAsString()
-                .isEqualToNormalizingNewlines(contentOf(
+                .outputAsString().isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), UTF_8));
     }
-    
+
     @Test
     public void thatWritingTuebaDzSampleWithAdditionalFeaturesWorks(@TempDir File tempDir)
         throws Exception
     {
-        ReaderAssert.assertThat(
-                        NegraExportReader.class,
-                        NegraExportReader.PARAM_SOURCE_LOCATION, 
-                                "src/test/resources/tuebadz/corpus-sample.export",
-                        NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8")
-                .usingEngines(
-                        createEngineDescription(OpenNlpPosTagger.class),
+        ReaderAssert.assertThat(NegraExportReader.class, NegraExportReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/tuebadz/corpus-sample.export", NegraExportReader.PARAM_LANGUAGE,
+                "de", NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8")
+                .usingEngines(createEngineDescription(OpenNlpPosTagger.class),
                         createEngineDescription(SnowballStemmer.class))
-                .usingWriter(
-                        ImsCwbWriter.class,
-                        ImsCwbWriter.PARAM_TARGET_LOCATION, new File(tempDir, "corpus-sample-addfeat.vrt"),
-                        ImsCwbWriter.PARAM_SINGULAR_TARGET, true,
-                        ImsCwbWriter.PARAM_WRITE_CPOS, true,
-                        ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { 
+                .usingWriter(ImsCwbWriter.class, ImsCwbWriter.PARAM_TARGET_LOCATION,
+                        new File(tempDir, "corpus-sample-addfeat.vrt"),
+                        ImsCwbWriter.PARAM_SINGULAR_TARGET, true, ImsCwbWriter.PARAM_WRITE_CPOS,
+                        true, ImsCwbWriter.PARAM_ADDITIONAL_FEATURES,
+                        new String[] {
                                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem/value" })
                 .outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
                         new File("src/test/resources/tuebadz/corpus-sample-addfeat-ref.txt"),
                         UTF_8));
-    }    
-    
+    }
+
     @Disabled("This test cannot work (yet) because we do not ship the cwb-encode and cwb-makeall binaries")
     @Test
-    public void test2()
-        throws Exception
+    public void test2() throws Exception
     {
-        CollectionReader ner = createReader(
-                NegraExportReader.class,
+        CollectionReader ner = createReader(NegraExportReader.class,
                 NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus-sample.export",
-                NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
+                NegraExportReader.PARAM_LANGUAGE, "de", NegraExportReader.PARAM_SOURCE_ENCODING,
+                "UTF-8");
 
-        AnalysisEngineDescription tag = createEngineDescription(
-                OpenNlpPosTagger.class);
+        AnalysisEngineDescription tag = createEngineDescription(OpenNlpPosTagger.class);
 
-        AnalysisEngineDescription tw = createEngineDescription(
-                ImsCwbWriter.class,
+        AnalysisEngineDescription tw = createEngineDescription(ImsCwbWriter.class,
                 ImsCwbWriter.PARAM_TARGET_LOCATION, "target/cqbformat",
-                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
-                ImsCwbWriter.PARAM_CQP_HOME, "/Users/bluefire/bin/cwb-2.2.b99");
+                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8", ImsCwbWriter.PARAM_CQP_HOME,
+                "/Users/bluefire/bin/cwb-2.2.b99");
 
         runPipeline(ner, tag, tw);
     }

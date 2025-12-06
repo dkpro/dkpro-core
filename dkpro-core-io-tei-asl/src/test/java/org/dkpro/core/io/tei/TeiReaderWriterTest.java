@@ -28,33 +28,26 @@ import org.junit.jupiter.api.Test;
 public class TeiReaderWriterTest
 {
     @Test
-    public void testWithoutTrim()
-        throws Exception
+    public void testWithoutTrim() throws Exception
     {
         testRoundTrip(
-                createReaderDescription(TeiReader.class,
-                        TeiReader.PARAM_ELEMENTS_TO_TRIM, emptyList()), 
-                createEngineDescription(TeiWriter.class), 
-                "reference/example1.xml");
+                createReaderDescription(TeiReader.class, TeiReader.PARAM_ELEMENTS_TO_TRIM,
+                        emptyList()),
+                createEngineDescription(TeiWriter.class), "reference/example1.xml");
     }
-    
+
     @Test
-    public void testWithTrimming()
-        throws Exception
+    public void testWithTrimming() throws Exception
     {
-        testOneWay(TeiReader.class, TeiWriter.class, 
-                "reference/example1_out.xml", 
+        testOneWay(TeiReader.class, TeiWriter.class, "reference/example1_out.xml",
                 "reference/example1.xml");
     }
 
     @Test
-    public void test2()
-        throws Exception
+    public void test2() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(TeiReader.class), 
-                createEngineDescription(TeiWriter.class,
-                        TeiWriter.PARAM_WRITE_CONSTITUENT, true), 
+        testRoundTrip(createReaderDescription(TeiReader.class),
+                createEngineDescription(TeiWriter.class, TeiWriter.PARAM_WRITE_CONSTITUENT, true),
                 "reference/example2.xml");
     }
 }

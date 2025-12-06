@@ -71,8 +71,7 @@ public class PhraseSequenceGenerator
 
     private final boolean useCharacters;
 
-    private PhraseSequenceGenerator(Builder builder)
-            throws IOException
+    private PhraseSequenceGenerator(Builder builder) throws IOException
     {
         this.lowercase = builder.lowercase;
         this.coveringTypeName = builder.coveringType;
@@ -98,8 +97,7 @@ public class PhraseSequenceGenerator
      * @throws FeaturePathException
      *             if there was a problem creating the feature path.
      */
-    public List<LexicalPhrase[]> tokenSequences(JCas aJCas)
-            throws FeaturePathException
+    public List<LexicalPhrase[]> tokenSequences(JCas aJCas) throws FeaturePathException
     {
         return useCharacters ? characterSequences(aJCas) : annotationSequences(aJCas);
     }
@@ -116,14 +114,13 @@ public class PhraseSequenceGenerator
      * @throws FeaturePathException
      *             if there was a problem creating the feature path.
      */
-    private List<LexicalPhrase[]> annotationSequences(JCas aJCas)
-            throws FeaturePathException
+    private List<LexicalPhrase[]> annotationSequences(JCas aJCas) throws FeaturePathException
     {
         List<LexicalPhrase[]> phrases = new ArrayList<>();
 
         if (coveringTypeName.isPresent()) {
-            Type coveringType = FeaturePathUtils
-                    .getType(aJCas.getTypeSystem(), coveringTypeName.get());
+            Type coveringType = FeaturePathUtils.getType(aJCas.getTypeSystem(),
+                    coveringTypeName.get());
 
             /* iterate over covering annotations */
             for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), coveringType)) {
@@ -149,12 +146,11 @@ public class PhraseSequenceGenerator
      * @throws FeaturePathException
      *             if there was a problem creating the feature path.
      */
-    private List<LexicalPhrase[]> characterSequences(JCas aJCas)
-            throws FeaturePathException
+    private List<LexicalPhrase[]> characterSequences(JCas aJCas) throws FeaturePathException
     {
         if (coveringTypeName.isPresent()) {
-            Type coveringType = FeaturePathUtils
-                    .getType(aJCas.getTypeSystem(), coveringTypeName.get());
+            Type coveringType = FeaturePathUtils.getType(aJCas.getTypeSystem(),
+                    coveringTypeName.get());
 
             return CasUtil.select(aJCas.getCas(), coveringType).stream()
                     .map(covering -> characterSequence(aJCas, covering.getCoveredText(),
@@ -186,12 +182,12 @@ public class PhraseSequenceGenerator
      */
     private LexicalPhrase[] annotationSequence(JCas aJCas,
             Optional<AnnotationFS> coveringAnnotation)
-            throws FeaturePathException
+        throws FeaturePathException
     {
         List<LexicalPhrase> sequence = new ArrayList<>();
 
-        FeaturePathFactory.FeaturePathIterator<AnnotationFS> valueIterator =
-                FeaturePathUtils.featurePathIterator(aJCas, featurePath, coveringAnnotation);
+        FeaturePathFactory.FeaturePathIterator<AnnotationFS> valueIterator = FeaturePathUtils
+                .featurePathIterator(aJCas, featurePath, coveringAnnotation);
 
         /* iterate over tokens (optionally within covering annotation) */
         while (valueIterator.hasNext()) {
@@ -222,9 +218,12 @@ public class PhraseSequenceGenerator
      * Whitespaces are replaced by {@link #WHITESPACE_CHAR_REPLACEMENT}. All characters that are
      * neither alphabetic, digits, or whitespace are omitted.
      *
-     * @param aJCas the {@link JCas}
-     * @param text  the text to extract characters from
-     * @param begin the begin of the first {@link LexicalPhrase} annotation
+     * @param aJCas
+     *            the {@link JCas}
+     * @param text
+     *            the text to extract characters from
+     * @param begin
+     *            the begin of the first {@link LexicalPhrase} annotation
      * @return an array of {@link LexicalPhrase}s
      */
     private LexicalPhrase[] characterSequence(JCas aJCas, String text, int begin)
@@ -232,11 +231,9 @@ public class PhraseSequenceGenerator
         List<LexicalPhrase> sequence = new ArrayList<>();
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
-            if (Character.isAlphabetic(c) || Character.isDigit(c) || Character
-                    .isWhitespace(c)) {
-                String s = Character.isWhitespace(c) ?
-                        WHITESPACE_CHAR_REPLACEMENT :
-                        String.valueOf(c);
+            if (Character.isAlphabetic(c) || Character.isDigit(c) || Character.isWhitespace(c)) {
+                String s = Character.isWhitespace(c) ? WHITESPACE_CHAR_REPLACEMENT
+                        : String.valueOf(c);
                 if (lowercase) {
                     s = s.toLowerCase();
                 }
@@ -267,7 +264,8 @@ public class PhraseSequenceGenerator
         private boolean characters = false;
 
         /**
-         * @param featurePath set the feature path to use for creating token sequences.
+         * @param featurePath
+         *            set the feature path to use for creating token sequences.
          * @return a {@link Builder}
          */
         public Builder featurePath(String featurePath)
@@ -276,19 +274,18 @@ public class PhraseSequenceGenerator
             return this;
         }
 
-        public Builder stopwordsFile(String stopwordsFile)
-                throws MalformedURLException
+        public Builder stopwordsFile(String stopwordsFile) throws MalformedURLException
         {
             if (stopwordsFile.isEmpty()) {
                 this.stopwordsFile = Optional.empty();
                 return this;
-            } else {
+            }
+            else {
                 return stopwordsFile(new File(stopwordsFile));
             }
         }
 
-        public Builder stopwordsFile(File stopwordsFile)
-                throws MalformedURLException
+        public Builder stopwordsFile(File stopwordsFile) throws MalformedURLException
         {
             if (stopwordsFile != null) {
                 URL url = stopwordsFile.toURI().toURL();
@@ -300,7 +297,8 @@ public class PhraseSequenceGenerator
         }
 
         /**
-         * @param stopwordsURL set the location of the stopwords file
+         * @param stopwordsURL
+         *            set the location of the stopwords file
          * @return a {@link Builder}
          */
         public Builder stopwordsURL(URL stopwordsURL)
@@ -322,10 +320,12 @@ public class PhraseSequenceGenerator
         }
 
         /**
-         * @param minTokenLength tokens shorter than the given length are filtered out
+         * @param minTokenLength
+         *            tokens shorter than the given length are filtered out
          * @return a {@link Builder}
          */
-        @SuppressWarnings("unused") public Builder minTokenLength(int minTokenLength)
+        @SuppressWarnings("unused")
+        public Builder minTokenLength(int minTokenLength)
         {
             this.minTokenLength = minTokenLength;
             return this;
@@ -355,13 +355,14 @@ public class PhraseSequenceGenerator
          */
         public Builder filterRegexReplacement(String filterRegexReplacement)
         {
-            this.filterRegexReplacement =
-                    filterRegexReplacement == null ? "" : filterRegexReplacement;
+            this.filterRegexReplacement = filterRegexReplacement == null ? ""
+                    : filterRegexReplacement;
             return this;
         }
 
         /**
-         * @param lowercase If true, all tokens are lowercased
+         * @param lowercase
+         *            If true, all tokens are lowercased
          * @return a {@link Builder}
          */
         public Builder lowercase(boolean lowercase)
@@ -378,9 +379,8 @@ public class PhraseSequenceGenerator
          */
         public Builder coveringType(String coveringType)
         {
-            this.coveringType = coveringType == null || coveringType.isEmpty() ?
-                    Optional.empty() :
-                    Optional.of(coveringType);
+            this.coveringType = coveringType == null || coveringType.isEmpty() ? Optional.empty()
+                    : Optional.of(coveringType);
             return this;
         }
 
@@ -402,23 +402,23 @@ public class PhraseSequenceGenerator
          * Generate a {@link PhraseSequenceGenerator}
          *
          * @return a {@link PhraseSequenceGenerator} instance
-         * @throws IOException if a stopwords file is specified but cannot be read
+         * @throws IOException
+         *             if a stopwords file is specified but cannot be read
          */
-        public PhraseSequenceGenerator build()
-                throws IOException
+        public PhraseSequenceGenerator build() throws IOException
         {
             return new PhraseSequenceGenerator(this);
         }
 
         /**
-         * Generate a {@link StringSequenceGenerator} that directly returns Strings
-         * instead of {@link LexicalPhrase}s.
+         * Generate a {@link StringSequenceGenerator} that directly returns Strings instead of
+         * {@link LexicalPhrase}s.
          *
          * @return a {@link StringSequenceGenerator} instance
-         * @throws IOException if a stopwords file is specified but cannot be read
+         * @throws IOException
+         *             if a stopwords file is specified but cannot be read
          */
-        public StringSequenceGenerator buildStringSequenceGenerator()
-                throws IOException
+        public StringSequenceGenerator buildStringSequenceGenerator() throws IOException
         {
             return new StringSequenceGenerator(this);
         }

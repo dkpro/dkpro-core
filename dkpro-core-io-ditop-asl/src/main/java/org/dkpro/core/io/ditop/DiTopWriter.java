@@ -60,19 +60,14 @@ import eu.openminted.share.annotations.api.Parameters;
 /**
  * This annotator (consumer) writes output files as required by
  * <a href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
- * {@link org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same
- * model.
+ * {@link org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same model.
  */
 @ResourceMetaData(name = "DiTop Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                DiTopWriter.PARAM_TARGET_LOCATION  })
-@MimeTypeCapability({MimeTypes.APPLICATION_X_DITOP})
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" })
+@Parameters(exclude = { DiTopWriter.PARAM_TARGET_LOCATION })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_DITOP })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" })
 public class DiTopWriter
     extends JCasFileWriter_ImplBase
 {
@@ -145,8 +140,7 @@ public class DiTopWriter
     protected BufferedWriter writerDocTopic;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -164,14 +158,13 @@ public class DiTopWriter
             throw new ResourceInitializationException(e);
         }
 
-        collectionValuesSet = collectionValues == null ? Collections.<String>emptySet()
+        collectionValuesSet = collectionValues == null ? Collections.<String> emptySet()
                 : new HashSet<>(Arrays.asList(collectionValues));
         collectionCounter = new HashBag<>();
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         for (TopicDistribution distribution : select(aJCas, TopicDistribution.class)) {
             String docName = getDocumentId(aJCas);
@@ -210,17 +203,14 @@ public class DiTopWriter
     }
 
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         super.collectionProcessComplete();
 
         getLogger().info("Collection statistics: " + collectionCounter.toString());
-        getLogger().info(
-                collectionValuesSet.isEmpty() ?
-                        "Writing all documents." :
-                        "Writing documents from these collections only: "
-                                + collectionValuesSet.toString());
+        getLogger().info(collectionValuesSet.isEmpty() ? "Writing all documents."
+                : "Writing documents from these collections only: "
+                        + collectionValuesSet.toString());
 
         try {
             writerDocTopic.close();
@@ -233,8 +223,7 @@ public class DiTopWriter
 
     }
 
-    private void initializeTopicFile()
-        throws IOException
+    private void initializeTopicFile() throws IOException
     {
         File topicFile = new File(collectionDir, DOC_TOPICS_FILE);
         getLogger().info(String.format("Writing file '%s'.", topicFile.getPath()));
@@ -255,16 +244,15 @@ public class DiTopWriter
      * @throws IOException
      *             if a low-level I/O error occurs
      */
-    private void writetermMatrixFiles()
-        throws IOException
+    private void writetermMatrixFiles() throws IOException
     {
         File topicTermFile = new File(collectionDir, TOPIC_TERM_FILE);
         File topicTermMatrixFile = new File(collectionDir, TOPIC_TERM_MATRIX_FILE);
         File topicSummaryFile = new File(collectionDir, TOPIC_SUMMARY_FILE);
 
         BufferedWriter writerTopicTerm = new BufferedWriter(new FileWriter(topicTermFile));
-        BufferedWriter writerTopicTermMatrix = new BufferedWriter(new FileWriter(
-                topicTermMatrixFile));
+        BufferedWriter writerTopicTermMatrix = new BufferedWriter(
+                new FileWriter(topicTermMatrixFile));
         BufferedWriter writerTopicTermShort = new BufferedWriter(new FileWriter(topicSummaryFile));
 
         getLogger().info(String.format("Writing file '%s'.", topicTermFile));
@@ -286,8 +274,8 @@ public class DiTopWriter
                 }
                 count++;
                 writerTopicTerm.write(alphabet.lookupObject(s.getID()) + ", ");
-                writerTopicTermMatrix.write(alphabet.lookupObject(s.getID()) + " (" + s.getWeight()
-                        + "), ");
+                writerTopicTermMatrix
+                        .write(alphabet.lookupObject(s.getID()) + " (" + s.getWeight() + "), ");
                 /** add to topic label */
             }
             writerTopicTerm.newLine();
@@ -300,8 +288,7 @@ public class DiTopWriter
         writerTopicTermShort.close();
     }
 
-    private void writeConfigFile()
-        throws IOException
+    private void writeConfigFile() throws IOException
     {
         File configFile = new File(targetLocation, CONFIG_FILE);
         Map<String, Set<Integer>> corpora; // holds all corpus names mapped to (multiple) topic
@@ -311,8 +298,8 @@ public class DiTopWriter
         if (appendConfig && configFile.exists()) {
             // read existing entries from config file
             corpora = readConfigFile(configFile);
-            currentCorpusTopicNumbers = corpora.containsKey(corpusName) ?
-                    corpora.get(corpusName) : new HashSet<>();
+            currentCorpusTopicNumbers = corpora.containsKey(corpusName) ? corpora.get(corpusName)
+                    : new HashSet<>();
         }
         else {
             corpora = new HashMap<>();
@@ -346,8 +333,7 @@ public class DiTopWriter
      * @throws IOException
      *             if an I/O error occurs.
      */
-    private static Map<String, Set<Integer>> readConfigFile(File configFile)
-        throws IOException
+    private static Map<String, Set<Integer>> readConfigFile(File configFile) throws IOException
     {
         Map<String, Set<Integer>> entries = new HashMap<>();
 
@@ -414,9 +400,8 @@ public class DiTopWriter
         assert !collectionValuesExactMatch;
         for (String value : collectionValuesSet) {
             if (collectionId.toLowerCase().contains(value.toLowerCase())) {
-                getLogger().debug(
-                        String.format("Changing collection ID from '%s' to '%s'.",
-                                collectionId, value));
+                getLogger().debug(String.format("Changing collection ID from '%s' to '%s'.",
+                        collectionId, value));
                 return value;
             }
         }
@@ -431,8 +416,7 @@ public class DiTopWriter
      *            the JCas.
      * @return the document id string or null if it is not available.
      */
-    protected String getDocumentId(JCas aJCas)
-        throws IllegalStateException
+    protected String getDocumentId(JCas aJCas) throws IllegalStateException
     {
         String docName = DocumentMetaData.get(aJCas).getDocumentId();
         if (docName == null) {

@@ -46,9 +46,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "CLARIN-DE WebLicht TCF Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_TCF})
-@TypeCapability(outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+@MimeTypeCapability({ MimeTypes.TEXT_TCF })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
@@ -57,15 +56,14 @@ import eu.openminted.share.annotations.api.DocumentationResource;
         "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
         "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
-        "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+        "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
 public class TcfReader
     extends JCasResourceCollectionReader_ImplBase
 {
     int j = 0;
 
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);

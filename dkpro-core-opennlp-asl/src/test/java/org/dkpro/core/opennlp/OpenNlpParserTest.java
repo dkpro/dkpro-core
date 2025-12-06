@@ -39,8 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 public class OpenNlpParserTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
         JCas jcas = runTest("en", "chunking", "We need a very complicated example sentence , "
                 + "which contains as many constituents and dependencies as possible .");
@@ -78,7 +77,7 @@ public class OpenNlpParserTest
         String[] unmappedPos = {};
 
         String[] unmappedConst = { "ADV", "AUX", "EDITED", "NEG", "O", "TOP", "TYPO", "UH" };
-        
+
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
@@ -89,8 +88,7 @@ public class OpenNlpParserTest
     }
 
     @Test
-    public void testEnglishIxa()
-        throws Exception
+    public void testEnglishIxa() throws Exception
     {
         JCas jcas = runTest("en", "chunking-ixa", "We need a very complicated example sentence , "
                 + "which contains as many constituents and dependencies as possible .");
@@ -128,7 +126,7 @@ public class OpenNlpParserTest
         String[] unmappedPos = {};
 
         String[] unmappedConst = { "ADV", "AUX", "EDITED", "NEG", "O", "TOP", "TYPO", "UH" };
-        
+
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
@@ -139,8 +137,7 @@ public class OpenNlpParserTest
     }
 
     @Test
-    public void testSpanishIxa()
-        throws Exception
+    public void testSpanishIxa() throws Exception
     {
         JCas jcas = runTest("es", "chunking-ixa", "Necesitamos una oración de ejemplo "
                 + "muy complicado , que contiene la mayor cantidad de componentes y dependencias "
@@ -241,7 +238,7 @@ public class OpenNlpParserTest
                 "ZM", "ZP", "ZU" };
 
         String[] unmappedConst = { "O", "TOP" };
-        
+
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
@@ -255,16 +252,13 @@ public class OpenNlpParserTest
      * Setup CAS to test parser for the English language (is only called once if an English test is
      * run)
      */
-    private JCas runTest(String aLanguage, String aVariant, String aDocument)
-        throws Exception
+    private JCas runTest(String aLanguage, String aVariant, String aDocument) throws Exception
     {
         AssumeResource.assumeResource(OpenNlpParser.class, "parser", aLanguage, aVariant);
-        
+
         AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
-                OpenNlpParser.PARAM_VARIANT, aVariant,
-                OpenNlpParser.PARAM_PRINT_TAGSET, true,
-                OpenNlpParser.PARAM_WRITE_POS, true,
-                OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
+                OpenNlpParser.PARAM_VARIANT, aVariant, OpenNlpParser.PARAM_PRINT_TAGSET, true,
+                OpenNlpParser.PARAM_WRITE_POS, true, OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
         return TestRunner.runTest(parser, aLanguage, aDocument);
     }

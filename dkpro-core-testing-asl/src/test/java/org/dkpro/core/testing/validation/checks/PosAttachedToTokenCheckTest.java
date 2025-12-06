@@ -33,18 +33,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 public class PosAttachedToTokenCheckTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
         new POS(jcas, 0, 4).addToIndexes();
-        
+
         CasValidator validator = new CasValidator(PosAttachedToTokenCheck.class);
         List<Message> messages = validator.analyze(jcas);
-        
+
         messages.forEach(m -> System.out.println(m));
-        
+
         assertTrue(messages.stream().anyMatch(m -> m.level == ERROR));
     }
 }

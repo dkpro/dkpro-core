@@ -26,8 +26,7 @@ import org.junit.jupiter.api.Test;
 public class ReutersDocumentTests
 {
     @Test
-    public void test()
-            throws ParseException
+    public void test() throws ParseException
     {
         ReutersDocument doc = new ReutersDocument();
         String title = "test";

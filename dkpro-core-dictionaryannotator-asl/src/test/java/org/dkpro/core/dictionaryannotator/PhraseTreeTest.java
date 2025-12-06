@@ -28,22 +28,20 @@ import org.junit.jupiter.api.Test;
 public class PhraseTreeTest
 {
     private PhraseTree phrases;
-    
+
     @BeforeEach
-    public void setUp()
-        throws Exception
+    public void setUp() throws Exception
     {
         phrases = new PhraseTree();
-        
+
         phrases.addPhrase("the red dog".split(" "));
         phrases.addPhrase("the red".split(" "));
         phrases.addPhrase("the new kid".split(" "));
         phrases.addPhrase("a".split(" "));
     }
-    
+
     @Test
-    public void containsTest()
-        throws Exception
+    public void containsTest() throws Exception
     {
         assertFalse(phrases.contains("the".split(" ")));
         assertFalse(phrases.contains("the new".split(" ")));
@@ -54,22 +52,21 @@ public class PhraseTreeTest
         assertTrue(phrases.contains("the red".split(" ")));
         assertTrue(phrases.contains("the new kid".split(" ")));
     }
-    
+
     @Test
-    public void matchTest()
-        throws Exception
+    public void matchTest() throws Exception
     {
         String[] sentence = "the red dog whines".split(" ");
         String[] longestMatch = phrases.getLongestMatch(sentence);
-        
+
         assertArrayEquals(longestMatch, "the red dog".split(" "));
-        
+
         sentence = "the".split(" ");
         assertNull(phrases.getLongestMatch(sentence));
-        
+
         sentence = "red dog".split(" ");
         assertNull(phrases.getLongestMatch(sentence));
-        
+
         sentence = "the new".split(" ");
         assertNull(phrases.getLongestMatch(sentence));
     }

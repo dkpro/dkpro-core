@@ -39,17 +39,19 @@ import com.ibm.icu.text.CharsetDetector;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * <p>Reads the ACL anthology corpus and outputs CASes with plain text documents.</p>
+ * <p>
+ * Reads the ACL anthology corpus and outputs CASes with plain text documents.
+ * </p>
  *
- * <p>The reader tries to strip out hyphenation and replace problematic characters to produce a
- * cleaned text. Otherwise, it is a plain text reader.</p>
+ * <p>
+ * The reader tries to strip out hyphenation and replace problematic characters to produce a cleaned
+ * text. Otherwise, it is a plain text reader.
+ * </p>
  */
 @ResourceMetaData(name = "ACL Anthology Corpus Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.TEXT_PLAIN)
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class AclAnthologyReader
     extends ResourceCollectionReaderBase
 {
@@ -74,8 +76,7 @@ public class AclAnthologyReader
             (char) 9632, (char) 9642, (char) 10003, (char) 65279, (char) 65533 };
 
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aCAS, res);

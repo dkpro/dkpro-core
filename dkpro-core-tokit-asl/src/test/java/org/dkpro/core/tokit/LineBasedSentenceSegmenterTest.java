@@ -31,32 +31,30 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 public class LineBasedSentenceSegmenterTest
 {
     @Test
-    public void testUnix()
-        throws Exception
+    public void testUnix() throws Exception
     {
         String text = "This is \n" + "a test.\n\n" + "Right now!\nEnd";
 
         String[] sentences = { "This is", "a test.", "Right now!", "End" };
-        
+
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText(text);
         SimplePipeline.runPipeline(jcas, createEngineDescription(LineBasedSentenceSegmenter.class));
-        
+
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
     }
 
     @Test
-    public void testWindows()
-        throws Exception
+    public void testWindows() throws Exception
     {
         String text = "This is \r\n" + "a test.\r\n\r\n" + "Right now!\r\nEnd";
 
         String[] sentences = { "This is", "a test.", "Right now!", "End" };
-        
+
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText(text);
         SimplePipeline.runPipeline(jcas, createEngineDescription(LineBasedSentenceSegmenter.class));
-        
+
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
     }
 }

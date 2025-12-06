@@ -46,25 +46,22 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "Annotated Gigaword Text Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.TEXT_PLAIN)
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class AnnotatedGigawordReader
     extends ResourceCollectionReaderBase
 {
     private MultiFileArticleIterator iter;
-    
+
     @Override
     public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         iter = new MultiFileArticleIterator();
     }
-    
+
     @Override
-    public void getNext(CAS aJCas)
-        throws IOException, CollectionException
+    public void getNext(CAS aJCas) throws IOException, CollectionException
     {
         AnnotatedGigawordArticle article = iter.next();
         Resource res = article.getResource();
@@ -72,28 +69,27 @@ public class AnnotatedGigawordReader
 
         DocumentMetaData dmd = DocumentMetaData.get(aJCas);
         dmd.setDocumentId(article.getId());
-        
+
         aJCas.setDocumentText(article.getText());
     }
-    
+
     @Override
     public boolean hasNext() throws IOException, CollectionException
     {
         return iter.hasNext();
     }
-    
-    private class MultiFileArticleIterator extends AbstractIterator<AnnotatedGigawordArticle>
+
+    private class MultiFileArticleIterator
+        extends AbstractIterator<AnnotatedGigawordArticle>
     {
         private Iterator<AnnotatedGigawordArticle> currentFileIterator;
-        
+
         @Override
         protected AnnotatedGigawordArticle computeNext()
         {
             try {
-                while (
-                        (currentFileIterator == null || !currentFileIterator.hasNext())
-                        && AnnotatedGigawordReader.super.hasNext()
-                ) {
+                while ((currentFileIterator == null || !currentFileIterator.hasNext())
+                        && AnnotatedGigawordReader.super.hasNext()) {
                     Resource res = nextFile();
                     try (InputStream is = new BufferedInputStream(CompressionUtils
                             .getInputStream(res.getLocation(), res.getInputStream()))) {
@@ -106,11 +102,11 @@ public class AnnotatedGigawordReader
             catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            
+
             if (currentFileIterator == null || !currentFileIterator.hasNext()) {
                 return endOfData();
             }
-            
+
             return currentFileIterator.next();
         }
     }

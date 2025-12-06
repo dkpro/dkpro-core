@@ -43,20 +43,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 public class ConllUReaderTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                ConllUReader.class, 
-                ConllUReader.PARAM_LANGUAGE, "en",
-                ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u/", 
-                ConllUReader.PARAM_PATTERNS, "conllu-en-orig.conllu");
-        
+        CollectionReaderDescription reader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_LANGUAGE, "en", ConllUReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/conll/u/", ConllUReader.PARAM_PATTERNS,
+                "conllu-en-orig.conllu");
+
         JCas jcas = new JCasIterable(reader).iterator().next();
 
-        String[] sentences = {
-                "They buy and sell books.",
-                "I have not a clue." };
+        String[] sentences = { "They buy and sell books.", "I have not a clue." };
 
         String[] posMapped = { "POS", "POS_VERB", "POS_CONJ", "POS_VERB", "POS_NOUN", "POS_PUNCT",
                 "POS", "POS_VERB", "POS_ADV", "POS_DET", "POS_NOUN", "POS_PUNCT" };
@@ -73,23 +69,20 @@ public class ConllUReaderTest
                 "[ 27, 31]     -     -    -    -    -     -    -    -  Sing      -  1    -    -    -  Pres      -     - have (Number=Sing|Person=1|Tense=Pres)",
                 "[ 32, 35]     -     -    -    -    -     -    -  Neg     -      -  -    -    -    -     -      -     - not (Negative=Neg)",
                 "[ 36, 37]     -     -    -    -    -     -    -    -     -      -  -    -  Art    -     -      -     - a (Definite=Ind|PronType=Art)",
-                "[ 38, 42]     -     -    -    -    -     -    -    -  Sing      -  -    -    -    -     -      -     - clue (Number=Sing)"
-        };
-        
+                "[ 38, 42]     -     -    -    -    -     -    -    -  Sing      -  -    -    -    -     -      -     - clue (Number=Sing)" };
+
         assertSentence(sentences, select(jcas, Sentence.class));
         assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         assertMorph(morphologicalFeeatures, select(jcas, MorphologicalFeatures.class));
     }
 
     @Test
-    public void testDocumentID()
-            throws Exception
+    public void testDocumentID() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                ConllUReader.class,
-                ConllUReader.PARAM_LANGUAGE, "en",
-                ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-paragraph_and_document_boundaries.conllu");
+        CollectionReaderDescription reader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_LANGUAGE, "en", ConllUReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/conll/u_v2/", ConllUReader.PARAM_PATTERNS,
+                "conllu-paragraph_and_document_boundaries.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
@@ -102,23 +95,20 @@ public class ConllUReaderTest
     }
 
     @Test
-    public void testMultipleDocumentIDs()
-            throws Exception
+    public void testMultipleDocumentIDs() throws Exception
     {
-//        final TestAppender appender = new TestAppender();
-//        final Logger logger = Logger.getRootLogger();
-//        logger.addAppender(appender);
-//        try {
-        CollectionReaderDescription reader = createReaderDescription(
-                ConllUReader.class,
-                ConllUReader.PARAM_LANGUAGE, "en",
-                ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-multiple_document_IDs.conllu");
+        // final TestAppender appender = new TestAppender();
+        // final Logger logger = Logger.getRootLogger();
+        // logger.addAppender(appender);
+        // try {
+        CollectionReaderDescription reader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_LANGUAGE, "en", ConllUReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/conll/u_v2/", ConllUReader.PARAM_PATTERNS,
+                "conllu-multiple_document_IDs.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
-        AnnotationIndex<DocumentMetaData> index = jcas
-                .getAnnotationIndex(DocumentMetaData.class);
+        AnnotationIndex<DocumentMetaData> index = jcas.getAnnotationIndex(DocumentMetaData.class);
         DocumentMetaData m = index.iterator().get();
         final String actualDocumentID = m.getDocumentId();
         final String expectedDocumentID = "mf920901-001;mf920901-002";
@@ -127,36 +117,28 @@ public class ConllUReaderTest
     }
 
     @Test
-    public void testParagraphs()
-            throws Exception
+    public void testParagraphs() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                ConllUReader.class,
-                ConllUReader.PARAM_LANGUAGE, "en",
-                ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u_v2/",
-                ConllUReader.PARAM_PATTERNS, "conllu-multiple_paragraphs.conllu");
+        CollectionReaderDescription reader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_LANGUAGE, "en", ConllUReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/conll/u_v2/", ConllUReader.PARAM_PATTERNS,
+                "conllu-multiple_paragraphs.conllu");
 
         JCas jcas = new JCasIterable(reader).iterator().next();
 
         AnnotationIndex<Paragraph> index = jcas.getAnnotationIndex(Paragraph.class);
 
-        List<String> paragraphIDs = index.stream()
-                .map(Paragraph::getId)
-                .collect(toList());
+        List<String> paragraphIDs = index.stream().map(Paragraph::getId).collect(toList());
         List<String> expectedParagraphIDs = asList("mf920901-001-p1", "mf920901-001-p2");
-        
+
         assertEquals(expectedParagraphIDs, paragraphIDs);
 
         final String expectedTextContent = "Slovenská ústava: pro i proti Slovenská ústava: pro i"
-                + " proti\n"
-                + "\n"
-                + "Slovenská ústava: pro i proti";
+                + " proti\n" + "\n" + "Slovenská ústava: pro i proti";
         final String actualTextContent = jcas.getDocumentText();
         assertEquals(expectedTextContent, actualTextContent);
 
-        String[] sentences = {
-                "Slovenská ústava: pro i proti",
-                "Slovenská ústava: pro i proti",
+        String[] sentences = { "Slovenská ústava: pro i proti", "Slovenská ústava: pro i proti",
                 "Slovenská ústava: pro i proti" };
         assertSentence(sentences, select(jcas, Sentence.class));
     }

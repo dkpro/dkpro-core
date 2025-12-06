@@ -37,11 +37,10 @@ public class IobDecoder
     private MappingProvider mappingProvider;
 
     private boolean internTags = true;
-    
+
     private String openChunk;
     private int start;
     private int end;
-    
 
     public IobDecoder(CAS aCas, Feature aChunkValue, MappingProvider aMappingProvider)
     {
@@ -55,7 +54,7 @@ public class IobDecoder
     {
         internTags = aInternTags;
     }
-    
+
     public void decode(List<? extends AnnotationFS> aTokens, String[] aChunkTags)
     {
         int i = 0;
@@ -78,20 +77,20 @@ public class IobDecoder
                 else {
                     openChunk = chunk;
                 }
-                
+
                 start = token.getBegin();
             }
 
             // Record how much of the chunk we have seen so far
             end = token.getEnd();
-            
+
             i++;
         }
-        
+
         // End of processing signal
         chunkComplete();
     }
-    
+
     private void chunkComplete()
     {
         if (openChunk != null) {

@@ -81,8 +81,10 @@ public class TrieTest
     @Test
     public void testSimpleDict() throws IOException
     {
-        final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
+        final File affixFile = ResourceUtils.getUrlAsFile(
+                getClass().getResource(
+                        "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"),
+                false);
         final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
                 false);
@@ -107,8 +109,10 @@ public class TrieTest
     @Test
     public void testSimpleDictReverse() throws IOException
     {
-        final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
+        final File affixFile = ResourceUtils.getUrlAsFile(
+                getClass().getResource(
+                        "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"),
+                false);
         final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
                 false);

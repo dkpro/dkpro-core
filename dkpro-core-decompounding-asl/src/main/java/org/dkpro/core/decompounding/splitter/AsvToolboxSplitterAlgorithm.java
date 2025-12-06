@@ -42,12 +42,12 @@ public class AsvToolboxSplitterAlgorithm
     private final Log logger;
 
     public AsvToolboxSplitterAlgorithm(File kompVVicTree, File kompVHic, File grfExt)
-            throws ResourceInitializationException
+        throws ResourceInitializationException
     {
         logger = LogFactory.getLog(this.getClass());
         splitter = new Zerleger2();
         splitter.init(kompVVicTree.getAbsolutePath(), kompVHic.getAbsolutePath(),
-            grfExt.getAbsolutePath());
+                grfExt.getAbsolutePath());
     }
 
     @Override
@@ -108,7 +108,7 @@ public class AsvToolboxSplitterAlgorithm
         Pretree grfTree = new Pretree();
         String anweisungGrf = new String();
         String anweisungKomp = new String();
-        //        boolean d = true; // debugguing
+        // boolean d = true; // debugguing
 
         String reverse(String torev)
         {
@@ -121,32 +121,33 @@ public class AsvToolboxSplitterAlgorithm
 
         public Vector<String> kZerlegung(String aAktwort)
         {
-            //            if (d) {
-            //                logger.debug("grf: " + aAktwort + "->");
-            //            }
+            // if (d) {
+            // logger.debug("grf: " + aAktwort + "->");
+            // }
             String aktwort = grundFormReduktion(aAktwort);
-            //            if (d) {
-            //                logger.debug(aktwort);
-            //            }
+            // if (d) {
+            // logger.debug(aktwort);
+            // }
             Vector<String> retvec = new Vector<String>();
             String classvv = new String();
             String classvh = new String();
-            String zahlStrvv = "", zahlStrvh = "", suffixvv = "", suffixvh = "", vvteil1 = "", vhteil1 = "", vvteil2 = "", vhteil2 = "";
+            String zahlStrvv = "", zahlStrvh = "", suffixvv = "", suffixvh = "", vvteil1 = "",
+                    vhteil1 = "", vvteil2 = "", vhteil2 = "";
             Vector<String> zervh = new Vector<String>();
             Vector<String> zervv = new Vector<String>();
             int zahlvv = 0, zahlvh = 0;
             boolean vhOk, vvOk;
-            //            if (d) {
-            //                logger.debug("Zerlege " + aktwort);
-            //            }
+            // if (d) {
+            // logger.debug("Zerlege " + aktwort);
+            // }
             classvv = kompvvTree.classify(aktwort + "<");
             classvh = kompvhTree.classify(reverse(aktwort) + "<");
-            //            if (d) {
-            //                logger.debug("VV liefert " + classvv);
-            //            }
-            //            if (d) {
-            //                logger.debug("VH liefert " + classvh);
-            //            }
+            // if (d) {
+            // logger.debug("VV liefert " + classvv);
+            // }
+            // if (d) {
+            // logger.debug("VH liefert " + classvh);
+            // }
 
             zervv = new Vector<String>();
             zervh = new Vector<String>();
@@ -164,9 +165,9 @@ public class AsvToolboxSplitterAlgorithm
             if (vvOk) {
                 for (int i = 0; i < classvv.length(); i++) {
                     char c = classvv.charAt(i);
-                    //                    if (d) {
-                    //                        logger.debug("Parse: " + c + " " + (int) c);
-                    //                    }
+                    // if (d) {
+                    // logger.debug("Parse: " + c + " " + (int) c);
+                    // }
                     if ((c < 58) && (c > 47)) {
                         zahlStrvv += c;
                     }
@@ -178,9 +179,9 @@ public class AsvToolboxSplitterAlgorithm
             if (vhOk) {
                 for (int i = 0; i < classvh.length(); i++) {
                     char c = classvh.charAt(i);
-                    //                    if (d) {
-                    //                        logger.info("Parse: " + c + " " + (int) c);
-                    //                    }
+                    // if (d) {
+                    // logger.info("Parse: " + c + " " + (int) c);
+                    // }
                     if ((c < 58) && (c > 47)) {
                         zahlStrvh += c;
                     }
@@ -211,10 +212,10 @@ public class AsvToolboxSplitterAlgorithm
 
             if (vvOk) {
                 for (int i = 0; i < suffixvv.length(); i++) {
-                    //                    if (d) {
-                        //                        logger.debug("VV matche " + suffixvv.charAt(i) + " und "
-                                //                                + aktwort.charAt(zahlvv + i));
-                    //                    }
+                    // if (d) {
+                    // logger.debug("VV matche " + suffixvv.charAt(i) + " und "
+                    // + aktwort.charAt(zahlvv + i));
+                    // }
                     if (aktwort.length() > (zahlvv + i)) {
                         if (suffixvv.charAt(i) != aktwort.charAt(zahlvv + i)) {
                             vvOk = false;
@@ -240,9 +241,9 @@ public class AsvToolboxSplitterAlgorithm
                 vvteil2 = aktwort.substring(zahlvv + suffixvv.length(), aktwort.length());
                 zervv.addElement(vvteil1);
                 zervv.addElement(vvteil2);
-                //                if (d) {
-                    //                    logger.debug("VV zerlegt in " + vvteil1 + " " + vvteil2);
-                //                }
+                // if (d) {
+                // logger.debug("VV zerlegt in " + vvteil1 + " " + vvteil2);
+                // }
                 if (vvteil2.length() <= 3) {
                     vvOk = false;
                 }
@@ -255,9 +256,9 @@ public class AsvToolboxSplitterAlgorithm
                         aktwort.length());
                 zervh.addElement(vhteil1);
                 zervh.addElement(vhteil2);
-                //                if (d) {
-                    //                    logger.debug("VH zerlegt in " + vhteil1 + " " + vhteil2);
-                //                }
+                // if (d) {
+                // logger.debug("VH zerlegt in " + vhteil1 + " " + vhteil2);
+                // }
 
                 if (vhteil1.length() <= 3) {
                     vhOk = false;
@@ -307,9 +308,9 @@ public class AsvToolboxSplitterAlgorithm
                 retvec.addElement(aktwort);
             }
 
-            //            if (d) {
-            //                logger.debug("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
-            //            }
+            // if (d) {
+            // logger.debug("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
+            // }
 
             if (retvec.size() == 1) {
                 // If there was no split, return verbatim
@@ -325,8 +326,8 @@ public class AsvToolboxSplitterAlgorithm
                     // throw new
                     // IllegalStateException("Bad assumption: first split not changed by
                     // grundFormReduktion");
-                    logger.error("Unable to map split " + asList(w1, w2)
-                            + " back to original " + aAktwort + "... no splitting");
+                    logger.error("Unable to map split " + asList(w1, w2) + " back to original "
+                            + aAktwort + "... no splitting");
                     retvec.add(aAktwort);
                 }
                 else {
@@ -345,8 +346,8 @@ public class AsvToolboxSplitterAlgorithm
                     // throw new
                     // IllegalStateException("Bad assumption: first split not changed by
                     // grundFormReduktion");
-                    logger.error("Unable to map split " + asList(w1, w2, w3)
-                            + " back to original " + aAktwort + "... no splitting");
+                    logger.error("Unable to map split " + asList(w1, w2, w3) + " back to original "
+                            + aAktwort + "... no splitting");
                     retvec.add(aAktwort);
                 }
                 else {
@@ -372,9 +373,9 @@ public class AsvToolboxSplitterAlgorithm
                 }
             }
 
-            //            if (d) {
-            //                logger.debug("Ergebnis: " + retvec);
-            //            }
+            // if (d) {
+            // logger.debug("Ergebnis: " + retvec);
+            // }
 
             Vector<String> retvec2 = new Vector<String>();
 
@@ -395,9 +396,9 @@ public class AsvToolboxSplitterAlgorithm
                 retvec2 = retvec;
             }
 
-            //            if (d) {
-            //                logger.debug("Ergebnis2: " + retvec2.toString());
-            //            }
+            // if (d) {
+            // logger.debug("Ergebnis2: " + retvec2.toString());
+            // }
 
             return retvec2;
         } // end kZerlegung
@@ -504,7 +505,7 @@ public class AsvToolboxSplitterAlgorithm
             // logger.info("Loading from "+grfFile);
             logger.debug("Loading " + kompvv + " ...");
             kompvvTree.load(kompvv);
-            //                logger.debug("loaded");
+            // logger.debug("loaded");
             kompvvTree.setIgnoreCase(true);
             kompvvTree.setThresh(0.51);
 
@@ -513,14 +514,14 @@ public class AsvToolboxSplitterAlgorithm
 
             kompvhTree.load(kompvh);
 
-            //                logger.debug("loaded");
+            // logger.debug("loaded");
             kompvhTree.setIgnoreCase(true); // Trainingsmenge in
             // lowcase :(
             kompvhTree.setThresh(0.51); // weiss nicht?
             logger.debug("Loading " + gfred + " ...");
 
             grfTree.load(gfred);
-            //                logger.debug("loaded");
+            // logger.debug("loaded");
             grfTree.setIgnoreCase(true); // Trainingsmenge in lowcase
             // :(
             grfTree.setThresh(0.46); // weiss nicht?

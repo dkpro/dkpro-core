@@ -38,7 +38,7 @@ public class TestFrequencyProviderTest
         assertEquals(10, provider.getFrequency("aa"));
         assertEquals(100, provider.getFrequency("aaa"));
         assertEquals(100, provider.getFrequency("a a"));
-    
+
         provider.setScaleDownFactor(20);
         assertEquals(0, provider.getFrequency("a"));
         assertEquals(5, provider.getFrequency("aa"));

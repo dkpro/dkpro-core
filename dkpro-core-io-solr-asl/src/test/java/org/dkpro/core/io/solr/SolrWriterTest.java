@@ -40,12 +40,12 @@ public class SolrWriterTest
         String solrUrl = "http://noSolrServerHere:8983/solr";
 
         CollectionReaderDescription reader = createReaderDescription( //
-                StringReader.class,//
+                StringReader.class, //
                 StringReader.PARAM_DOCUMENT_TEXT, text, //
                 StringReader.PARAM_LANGUAGE, "en");
 
         AnalysisEngineDescription writer = createEngineDescription(//
-                SolrWriter.class,//
+                SolrWriter.class, //
                 SolrWriter.PARAM_TARGET_LOCATION, solrUrl);
 
         assertThatExceptionOfType(ResourceInitializationException.class)

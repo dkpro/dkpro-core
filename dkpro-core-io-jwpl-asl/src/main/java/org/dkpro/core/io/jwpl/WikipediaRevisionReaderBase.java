@@ -105,8 +105,7 @@ public abstract class WikipediaRevisionReaderBase
     protected Set<String> revisionIds = null;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         revisionIds = new HashSet<String>();
@@ -128,15 +127,13 @@ public abstract class WikipediaRevisionReaderBase
         }
 
         // Use one of the lists or iterate over all articles?
-        if (!revisionIds.isEmpty())
-        {
+        if (!revisionIds.isEmpty()) {
             revIdIterator = revisionIds.iterator();
         }
         else // use iterator over all pages in the db
         {
             MetaData md = wiki.getMetaData();
-            this.nrOfArticles = md.getNumberOfPages()
-                    - md.getNumberOfDisambiguationPages()
+            this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages()
                     - md.getNumberOfRedirectPages();
 
             pageIter = new PageIterator(wiki, true, pageBuffer);
@@ -168,8 +165,7 @@ public abstract class WikipediaRevisionReaderBase
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
 
         // If a list of revisions is provided, just use the hasNext() of the iterator
@@ -188,8 +184,7 @@ public abstract class WikipediaRevisionReaderBase
                 if (pageIter.hasNext()) {
                     currentArticle = pageIter.next();
                     currentArticleIndex++;
-                    this.timestampIter = getTimestampIter(currentArticle
-                            .getPageId());
+                    this.timestampIter = getTimestampIter(currentArticle.getPageId());
                 }
                 else {
                     return false;
@@ -210,25 +205,21 @@ public abstract class WikipediaRevisionReaderBase
     {
         if (revisionIds.isEmpty()) {
             // if we iterate over ALL revisions, we can only report the progress in <articles>
-            return new Progress[] { new ProgressImpl(Long.valueOf(
-                    currentArticleIndex).intValue(), Long.valueOf(nrOfArticles)
-                    .intValue(), Progress.ENTITIES) };
+            return new Progress[] { new ProgressImpl(Long.valueOf(currentArticleIndex).intValue(),
+                    Long.valueOf(nrOfArticles).intValue(), Progress.ENTITIES) };
         }
         else {
             // if we iterate over a revision list, we can actually report the progress in
             // <revisions>
-            return new Progress[] { new ProgressImpl(Long.valueOf(
-                    currentRevisionIndex).intValue(), Long.valueOf(revisionIds.size())
-                    .intValue(), Progress.ENTITIES) };
+            return new Progress[] { new ProgressImpl(Long.valueOf(currentRevisionIndex).intValue(),
+                    Long.valueOf(revisionIds.size()).intValue(), Progress.ENTITIES) };
         }
     }
 
-    protected Iterator<Timestamp> getTimestampIter(int pageId)
-        throws IOException
+    protected Iterator<Timestamp> getTimestampIter(int pageId) throws IOException
     {
         try {
-            List<Timestamp> timestamps = this.revisionApi
-                    .getRevisionTimestamps(pageId);
+            List<Timestamp> timestamps = this.revisionApi.getRevisionTimestamps(pageId);
             Collections.sort(timestamps);
             return timestamps.iterator();
         }
@@ -278,8 +269,7 @@ public abstract class WikipediaRevisionReaderBase
      * @throws IOException
      *             if any error occurs while reading the file
      */
-    private Set<String> loadFile(String fileName)
-        throws IOException
+    private Set<String> loadFile(String fileName) throws IOException
     {
         Set<String> container = new HashSet<String>();
 

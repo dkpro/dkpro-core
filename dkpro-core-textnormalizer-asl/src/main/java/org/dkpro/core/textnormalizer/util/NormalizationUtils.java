@@ -28,10 +28,12 @@ import org.dkpro.core.api.transform.alignment.AlignedString;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 
-public class NormalizationUtils {
+public class NormalizationUtils
+{
 
-    public static void applyChanges(AlignedString as, List<SofaChangeAnnotation> changes) {
-        
+    public static void applyChanges(AlignedString as, List<SofaChangeAnnotation> changes)
+    {
+
         // If we remove or add stuff all offsets right of the change location
         // will change and thus the offsets in the change annotation are no
         // longer valid. If we move from right to left it works better because

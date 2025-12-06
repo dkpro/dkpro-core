@@ -35,8 +35,7 @@ public class ExtractReutersTest
     private static final String REUTERS_DIR = "src/test/resources/reuters-sgml";
 
     @Test
-    public void testExtract()
-            throws Exception
+    public void testExtract() throws Exception
     {
         int expectedDocs = 1000;
         String expectedTitleFirst = "BAHIA COCOA REVIEW";
@@ -51,9 +50,8 @@ public class ExtractReutersTest
         String expectedTitle4 = "NATIONAL AVERAGE PRICES FOR FARMER-OWNED RESERVE";
         Date expectedDate4 = new GregorianCalendar(1987, 1, 26, 15, 10, 44).getTime();
         String expectedBody4 = "The U.S. Agriculture Department";
-        Set<String> expectedTopic4 = new HashSet<>(
-                Arrays.asList(
-                        new String[] { "grain", "wheat", "corn", "barley", "oat", "sorghum" }));
+        Set<String> expectedTopic4 = new HashSet<>(Arrays
+                .asList(new String[] { "grain", "wheat", "corn", "barley", "oat", "sorghum" }));
         ReutersDocument.LEWISSPLIT expectedlLewissplit4 = ReutersDocument.LEWISSPLIT.TRAIN;
         ReutersDocument.CGISPLIT expectedCgisplit4 = ReutersDocument.CGISPLIT.TRAINING_SET;
         int oldId4 = 5548;

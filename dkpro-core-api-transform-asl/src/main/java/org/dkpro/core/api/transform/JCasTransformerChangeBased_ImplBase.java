@@ -50,8 +50,7 @@ public abstract class JCasTransformerChangeBased_ImplBase
     private List<Change> changes;
 
     @Override
-    public void beforeProcess(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void beforeProcess(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         super.beforeProcess(aInput, aOutput);
         changes = new ArrayList<Change>();
@@ -72,8 +71,8 @@ public abstract class JCasTransformerChangeBased_ImplBase
         Change previousChange = null;
         for (Change change : changes) {
             if (previousChange != null && change.overlaps(previousChange)) {
-                throw new IllegalStateException("Change " + change + " must not overlap with "
-                        + previousChange);
+                throw new IllegalStateException(
+                        "Change " + change + " must not overlap with " + previousChange);
             }
             previousChange = change;
         }
@@ -93,8 +92,8 @@ public abstract class JCasTransformerChangeBased_ImplBase
                 alignedString.replace(change.getStart(), change.getEnd(), change.getText());
                 break;
             default:
-                throw new IllegalStateException("Unknown change action [" + change.getAction()
-                        + "]");
+                throw new IllegalStateException(
+                        "Unknown change action [" + change.getAction() + "]");
             }
         }
 
@@ -102,7 +101,7 @@ public abstract class JCasTransformerChangeBased_ImplBase
 
         // Below we repeat the super.afterProcess() code but inject adjustments of the offsets.
         // We do NOT call super.afterProcess()
-        
+
         // Copy the annotation types mentioned in PARAM_TYPES_TO_COPY
         // We have do do this in the afterProcess() phase, because otherwise the SofA in the
         // target CAS does not exist yet.
@@ -110,7 +109,7 @@ public abstract class JCasTransformerChangeBased_ImplBase
         CAS outputCas = aOutput.getCas();
 
         CasCopier copier = new CasCopier(inputCas, aOutput.getCas());
-        
+
         Feature mDestSofaFeature = aOutput.getTypeSystem()
                 .getFeatureByFullName(CAS.FEATURE_FULL_NAME_SOFA);
 
@@ -118,7 +117,7 @@ public abstract class JCasTransformerChangeBased_ImplBase
             Type annotationType = getType(outputCas, CAS.TYPE_NAME_ANNOTATION);
             Feature beginFeature = annotationType.getFeatureByBaseName(CAS.FEATURE_BASE_NAME_BEGIN);
             Feature endFeature = annotationType.getFeatureByBaseName(CAS.FEATURE_BASE_NAME_END);
-            
+
             for (FeatureStructure fs : selectFS(inputCas, getType(inputCas, typeName))) {
                 if (!copier.alreadyCopied(fs)) {
                     FeatureStructure fsCopy = copier.copyFs(fs);
@@ -129,16 +128,16 @@ public abstract class JCasTransformerChangeBased_ImplBase
                             fsCopy.setFeatureValue(mDestSofaFeature, aOutput.getSofa());
                         }
                     }
-                    
+
                     // Update the begin/end offsets
                     if (fs instanceof AnnotationFS) {
                         AnnotationFS annoFs = (AnnotationFS) fs;
-                        Interval i = alignedString.inverseResolve(new ImmutableInterval(annoFs
-                                .getBegin(), annoFs.getEnd()));
+                        Interval i = alignedString.inverseResolve(
+                                new ImmutableInterval(annoFs.getBegin(), annoFs.getEnd()));
                         fsCopy.setIntValue(beginFeature, i.getStart());
                         fsCopy.setIntValue(endFeature, i.getEnd());
                     }
-                    
+
                     aOutput.addFsToIndexes(fsCopy);
                 }
             }
@@ -167,12 +166,11 @@ public abstract class JCasTransformerChangeBased_ImplBase
 
     private static enum ChangeAction
     {
-        INSERT,
-        DELETE,
-        REPLACE
+        INSERT, DELETE, REPLACE
     }
 
-    private static class Change extends ImmutableInterval
+    private static class Change
+        extends ImmutableInterval
     {
         private ChangeAction action;
         private String text;
@@ -207,8 +205,8 @@ public abstract class JCasTransformerChangeBased_ImplBase
         @Override
         public String toString()
         {
-            return "[action=" + action + ", text=" + text + ", begin=" + getStart()
-                    + ", end=" + getEnd() + "]";
+            return "[action=" + action + ", text=" + text + ", begin=" + getStart() + ", end="
+                    + getEnd() + "]";
         }
     }
 }

@@ -35,14 +35,14 @@ import org.junit.jupiter.api.io.TempDir;
 public class RelAnnisWriterTest
 {
     @Test
-    public void tuebaTest(@TempDir File workspace)
-        throws Exception
+    public void tuebaTest(@TempDir File workspace) throws Exception
     {
         // create NegraExportReader output
         CollectionReaderDescription reader = createReaderDescription(NegraExportReader.class,
-                NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba/input/tueba-sample.export",
+                NegraExportReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/tueba/input/tueba-sample.export",
                 NegraExportReader.PARAM_LANGUAGE, "de",
-//                NegraExportReader.PARAM_READ_PENN_TREE, false,
+                // NegraExportReader.PARAM_READ_PENN_TREE, false,
                 NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
 
         AnalysisEngineDescription writer = createEngineDescription(RelAnnisWriter.class,

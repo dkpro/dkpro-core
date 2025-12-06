@@ -28,19 +28,17 @@ import com.fasterxml.jackson.core.JsonGenerator;
 public class BratTextAnnotation
     extends BratAnnotation
 {
-    private static final Pattern PATTERN = Pattern.compile(
-            "(?<ID>T[0-9]+)\\t" + 
-            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_\\-]+) " +
-            "(?<OFFSETS>[0-9]+ [0-9]+(;[0-9]+ [0-9]+)*)\\t" +
-            "(?<TEXT>.*)");
-    
+    private static final Pattern PATTERN = Pattern
+            .compile("(?<ID>T[0-9]+)\\t" + "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_\\-]+) "
+                    + "(?<OFFSETS>[0-9]+ [0-9]+(;[0-9]+ [0-9]+)*)\\t" + "(?<TEXT>.*)");
+
     private static final String ID = "ID";
     private static final String TYPE = "TYPE";
     private static final String OFFSETS = "OFFSETS";
     private static final String TEXT = "TEXT";
-    
+
     private final String[] texts;
-    
+
     private final List<Offsets> offsets;
 
     public BratTextAnnotation(int aId, String aType, List<Offsets> aOffsets, String[] aTexts)
@@ -54,7 +52,7 @@ public class BratTextAnnotation
         offsets = aOffsets;
         texts = aTexts;
     }
-      
+
     private static String[] splitText(String aText, List<Offsets> aOffsets)
     {
         String[] result = new String[aOffsets.size()];
@@ -71,12 +69,12 @@ public class BratTextAnnotation
     {
         return offsets;
     }
-    
+
     public String[] getText()
     {
         return texts;
     }
-    
+
     @Override
     public void write(JsonGenerator aJG) throws IOException
     {
@@ -105,7 +103,7 @@ public class BratTextAnnotation
         return getId() + '\t' + getType() + ' ' + generateOffset(offsets) + '\t'
                 + String.join(" ", texts);
     }
-    
+
     private String generateOffset(List<Offsets> aOffsets)
     {
         StringBuilder sb = new StringBuilder();
@@ -117,7 +115,7 @@ public class BratTextAnnotation
         }
         return sb.toString();
     }
-    
+
     private static List<Offsets> generateOffsetsString(String aOffsetsStr)
     {
         String[] offsetsArray = aOffsetsStr.split(";");
@@ -139,7 +137,6 @@ public class BratTextAnnotation
         }
         return offsetsList;
     }
-
 
     public static BratTextAnnotation parse(String aLine)
     {

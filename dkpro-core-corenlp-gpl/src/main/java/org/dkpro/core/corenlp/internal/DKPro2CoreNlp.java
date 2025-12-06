@@ -79,7 +79,7 @@ import edu.stanford.nlp.util.CoreMap;
 public class DKPro2CoreNlp
 {
     private CoreLabelTokenFactory tokenFactory = new CoreLabelTokenFactory();
-    
+
     private boolean ptb3Escaping;
     private List<String> quoteBegin;
     private List<String> quoteEnd;
@@ -90,12 +90,12 @@ public class DKPro2CoreNlp
     {
         readPos = aReadPos;
     }
-    
+
     public boolean isReadPos()
     {
         return readPos;
     }
-    
+
     public String getEncoding()
     {
         return encoding != null ? encoding.name() : null;
@@ -139,27 +139,27 @@ public class DKPro2CoreNlp
     public Annotation convert(JCas aSource, Annotation aTarget)
     {
         List<CoreLabel> allTokens = new ArrayList<>();
-        
+
         // Document annotation
         aTarget.set(CoreAnnotations.TextAnnotation.class, aSource.getDocumentText());
-        
+
         // Sentences
         List<CoreMap> sentences = new ArrayList<>();
         for (Sentence s : select(aSource, Sentence.class)) {
             if (StringUtils.isBlank(s.getCoveredText())) {
                 continue;
             }
-            
+
             String sentenceText = s.getCoveredText();
             if (encoding != null && !"UTF-8".equals(encoding.name())) {
                 sentenceText = new String(sentenceText.getBytes(StandardCharsets.UTF_8), encoding);
             }
-            
+
             Annotation sentence = new Annotation(sentenceText);
             sentence.set(CharacterOffsetBeginAnnotation.class, s.getBegin());
             sentence.set(CharacterOffsetEndAnnotation.class, s.getEnd());
             sentence.set(SentenceIndexAnnotation.class, sentences.size());
-            
+
             // Tokens
             Map<Token, IndexedWord> idxTokens = new HashMap<>();
             List<CoreLabel> tokens = new ArrayList<>();
@@ -168,7 +168,7 @@ public class DKPro2CoreNlp
                 if (encoding != null && !"UTF-8".equals(encoding.name())) {
                     tokenText = new String(tokenText.getBytes(StandardCharsets.UTF_8), encoding);
                 }
-                
+
                 CoreLabel token = tokenFactory.makeToken(tokenText, t.getBegin(),
                         t.getEnd() - t.getBegin());
                 // First add token so that tokens.size() returns a 1-based counting as required
@@ -178,22 +178,22 @@ public class DKPro2CoreNlp
                 token.set(IndexAnnotation.class, tokens.size());
                 token.set(TokenKey.class, t);
                 idxTokens.put(t, new IndexedWord(token));
-                
+
                 // POS tags
                 if (readPos && t.getPos() != null) {
                     token.set(PartOfSpeechAnnotation.class, t.getPos().getPosValue());
                 }
-                
+
                 // Lemma
                 if (t.getLemma() != null) {
                     token.set(LemmaAnnotation.class, t.getLemma().getValue());
                 }
-                
+
                 // Stem
                 if (t.getStem() != null) {
                     token.set(StemAnnotation.class, t.getStem().getValue());
                 }
-                
+
                 // NamedEntity
                 // TODO: only token-based NEs are supported, but not multi-token NEs
                 // Supporting multi-token NEs via selectCovering would be very slow. To support
@@ -217,7 +217,7 @@ public class DKPro2CoreNlp
                 tree.indexSpans();
                 sentence.set(TreeAnnotation.class, tree);
             }
-            
+
             // Dependencies
             List<TypedDependency> basicDependencies = new ArrayList<>();
             List<TypedDependency> enhancedDependencies = new ArrayList<>();
@@ -225,7 +225,7 @@ public class DKPro2CoreNlp
                 TypedDependency dep = new TypedDependency(
                         GrammaticalRelation.valueOf(d.getDependencyType()),
                         idxTokens.get(d.getGovernor()), idxTokens.get(d.getDependent()));
-                
+
                 if (d.getFlavor() == null || DependencyFlavor.BASIC.equals(d.getFlavor())) {
                     basicDependencies.add(dep);
                 }
@@ -238,20 +238,20 @@ public class DKPro2CoreNlp
             sentence.set(BasicDependenciesAnnotation.class, new SemanticGraph(basicDependencies));
             sentence.set(EnhancedDependenciesAnnotation.class,
                     new SemanticGraph(enhancedDependencies));
-            
+
             if (ptb3Escaping) {
                 tokens = applyPtbEscaping(tokens, quoteBegin, quoteEnd);
             }
 
             sentence.set(TokensAnnotation.class, tokens);
             sentences.add(sentence);
-            
+
             allTokens.addAll(tokens);
         }
-        
+
         aTarget.set(SentencesAnnotation.class, sentences);
         aTarget.set(TokensAnnotation.class, allTokens);
-        
+
         return aTarget;
     }
 
@@ -259,7 +259,7 @@ public class DKPro2CoreNlp
     {
         return createStanfordTree(root, new LabeledScoredTreeFactory(CoreLabel.factory()));
     }
-    
+
     /**
      * Recursively creates an edu.stanford.nlp.trees.Tree from a ROOT annotation It also saves the
      * whitespaces before and after a token as <code>CoreAnnotation.BeforeAnnotation</code> and
@@ -280,7 +280,7 @@ public class DKPro2CoreNlp
     {
         return createStanfordTree(root, tFact, null);
     }
-    
+
     public static Tree createStanfordTree(org.apache.uima.jcas.tcas.Annotation root,
             TreeFactory tFact, Map<Token, IndexedWord> aIdxTokens)
     {
@@ -318,7 +318,7 @@ public class DKPro2CoreNlp
             // POS-Annotation on the token
             // because the POS is not directly stored within the treee
             Token wordAnnotation = (Token) root;
-            
+
             // create leaf-node for the tree
             Tree wordNode;
             if (aIdxTokens != null) {
@@ -368,12 +368,12 @@ public class DKPro2CoreNlp
 
         return rootNode;
     }
-    
+
     private static boolean isLeaf(Constituent constituent)
     {
         return (constituent.getChildren() == null || constituent.getChildren().size() == 0);
     }
-    
+
     @SuppressWarnings("unchecked")
     public static <T extends HasWord> List<T> applyPtbEscaping(List<T> words,
             Collection<String> quoteBegin, Collection<String> quoteEnd)
@@ -383,7 +383,7 @@ public class DKPro2CoreNlp
         // escaper takes context into account, e.g. when transforming regular double
         // quotes into PTB opening and closing quotes (`` and '').
         words = (List<T>) escaper.apply(words);
-        
+
         for (HasWord w : words) {
             if (quoteBegin != null && quoteBegin.contains(w.word())) {
                 w.setWord("``");
@@ -392,7 +392,7 @@ public class DKPro2CoreNlp
                 w.setWord("\'\'");
             }
         }
-        
+
         return words;
     }
 }

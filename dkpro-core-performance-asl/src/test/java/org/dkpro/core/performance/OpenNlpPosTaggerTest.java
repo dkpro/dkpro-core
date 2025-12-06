@@ -35,24 +35,15 @@ public class OpenNlpPosTaggerTest
     public void performanceTest() throws Exception
     {
         SimplePipeline.runPipeline(
-            createReader(
-                    TeiReader.class,
-                    TeiReader.PARAM_LANGUAGE, "en",
-                    TeiReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus/",
-                    TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}),
-            createEngineDescription(
-                    createEngineDescription(
-                            Stopwatch.class,
-                            Stopwatch.PARAM_TIMER_NAME, "testTimer"),
-                    createEngineDescription(
-                            BreakIteratorSegmenter.class),
-                    createEngineDescription(
-                            OpenNlpPosTagger.class),
-                    createEngineDescription(
-                            Stopwatch.class,
-                            Stopwatch.PARAM_TIMER_NAME, "testTimer",
-                            Stopwatch.PARAM_OUTPUT_FILE, "target/result.txt")
-            )
-        );
+                createReader(TeiReader.class, TeiReader.PARAM_LANGUAGE, "en",
+                        TeiReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus/",
+                        TeiReader.PARAM_PATTERNS, new String[] { INCLUDE_PREFIX + "*.xml" }),
+                createEngineDescription(
+                        createEngineDescription(Stopwatch.class, Stopwatch.PARAM_TIMER_NAME,
+                                "testTimer"),
+                        createEngineDescription(BreakIteratorSegmenter.class),
+                        createEngineDescription(OpenNlpPosTagger.class),
+                        createEngineDescription(Stopwatch.class, Stopwatch.PARAM_TIMER_NAME,
+                                "testTimer", Stopwatch.PARAM_OUTPUT_FILE, "target/result.txt")));
     }
 }

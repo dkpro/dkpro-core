@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Aggregator providing a unified access to multiple {@link Tagset}s. It is
- * assumed that for each layer only a single deletate provider is responsible.
+ * Aggregator providing a unified access to multiple {@link Tagset}s. It is assumed that for each
+ * layer only a single deletate provider is responsible.
  */
 public class AggregateTagset
     extends TagsetBase

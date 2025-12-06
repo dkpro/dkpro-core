@@ -28,17 +28,17 @@ import org.dkpro.core.api.datasets.internal.SplitImpl;
 public interface Dataset
 {
     String getName();
-    
+
     String getLanguage();
-    
+
     String getEncoding();
-    
+
     File[] getDataFiles();
-    
-    File[] getLicenseFiles();  
-    
+
+    File[] getLicenseFiles();
+
     Split getDefaultSplit();
-    
+
     File getFile(String aPath);
 
     default Split getSplit(double aTrainRatio)
@@ -49,11 +49,13 @@ public interface Dataset
     default Split getSplit(double aTrainRatio, double aTestRatio)
     {
         Log LOG = LogFactory.getLog(getClass());
-        
+
         File[] all = getDataFiles();
-        Arrays.sort(all, (File a, File b) -> { return a.getName().compareTo(b.getName()); });
+        Arrays.sort(all, (File a, File b) -> {
+            return a.getName().compareTo(b.getName());
+        });
         LOG.info("Found " + all.length + " files");
-        
+
         int trainPivot = (int) Math.round(all.length * aTrainRatio);
         int testPivot = (int) Math.round(all.length * aTestRatio) + trainPivot;
         File[] train = (File[]) ArrayUtils.subarray(all, 0, trainPivot);
@@ -61,11 +63,11 @@ public interface Dataset
 
         LOG.debug("Assigned " + train.length + " files to training set");
         LOG.debug("Assigned " + test.length + " files to test set");
-        
+
         if (testPivot != all.length) {
             LOG.info("Files missing from split: [" + (all.length - testPivot) + "]");
         }
-        
+
         return new SplitImpl(train, test, null);
     }
 }

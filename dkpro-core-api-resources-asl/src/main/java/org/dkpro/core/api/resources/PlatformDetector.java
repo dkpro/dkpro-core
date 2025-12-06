@@ -23,15 +23,15 @@ import java.nio.ByteOrder;
  */
 public class PlatformDetector
 {
-    public static final String OS_WINDOWS   = "windows";
-    public static final String OS_OSX       = "osx";
-    public static final String OS_SOLARIS   = "solaris";
-    public static final String OS_LINUX     = "linux";
+    public static final String OS_WINDOWS = "windows";
+    public static final String OS_OSX = "osx";
+    public static final String OS_SOLARIS = "solaris";
+    public static final String OS_LINUX = "linux";
 
-    public static final String ARCH_PPC     = "ppc";
-    public static final String ARCH_X86_32  = "x86_32";
-    public static final String ARCH_X86_64  = "x86_64";
-    public static final String ARCH_SPARC   = "sparc";
+    public static final String ARCH_PPC = "ppc";
+    public static final String ARCH_X86_32 = "x86_32";
+    public static final String ARCH_X86_64 = "x86_64";
+    public static final String ARCH_SPARC = "sparc";
 
     private String _arch = "";
     private String _os = "";
@@ -40,10 +40,8 @@ public class PlatformDetector
     private String[] _chmodCmd;
 
     {
-        updatePlatform(
-                System.getProperties().getProperty("os.name"),
-                System.getProperties().getProperty("os.arch"),
-                ByteOrder.nativeOrder());
+        updatePlatform(System.getProperties().getProperty("os.name"),
+                System.getProperties().getProperty("os.arch"), ByteOrder.nativeOrder());
     }
 
     /**
@@ -135,9 +133,12 @@ public class PlatformDetector
     /**
      * Updates the platform-specific settings and normalizes them.
      *
-     * @param aOs the operating system string.
-     * @param aArch the architecture string.
-     * @param aByteOrder the byte-order string.
+     * @param aOs
+     *            the operating system string.
+     * @param aArch
+     *            the architecture string.
+     * @param aByteOrder
+     *            the byte-order string.
      */
     public void updatePlatform(final String aOs, final String aArch, final ByteOrder aByteOrder)
     {

@@ -98,17 +98,15 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "TIGER-XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML, MimeTypes.APPLICATION_X_SEMEVAL_2010_XML})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_TIGER_XML, MimeTypes.APPLICATION_X_SEMEVAL_2010_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
 public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -116,15 +114,13 @@ public class TigerXmlReader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -143,7 +139,7 @@ public class TigerXmlReader
      * using the original tag set in the corpus, not using the mapped tagset!
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
-    @ConfigurationParameter(name = PARAM_READ_PENN_TREE, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_READ_PENN_TREE, defaultValue = "false")
     private boolean pennTreeEnabled;
 
     /**
@@ -151,14 +147,13 @@ public class TigerXmlReader
      * have child nodes), then just ignore these sentences.
      */
     public static final String PARAM_IGNORE_ILLEGAL_SENTENCES = "ignoreIllegalSentences";
-    @ConfigurationParameter(name = PARAM_IGNORE_ILLEGAL_SENTENCES, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_IGNORE_ILLEGAL_SENTENCES, defaultValue = "false")
     private boolean ignoreIllegalSentences;
 
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -167,8 +162,7 @@ public class TigerXmlReader
     }
 
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -462,7 +456,7 @@ public class TigerXmlReader
             tokenBoundaryList.add(new int[] { tokenArray[0].getBegin(), tokenArray[0].getEnd() });
         }
 
-        //Give warning for noncontiguous frame targets
+        // Give warning for noncontiguous frame targets
         if (tokenBoundaryList.size() > 1) {
             String completeFrameTarget = "";
             for (String word : tokenList) {
@@ -489,7 +483,7 @@ public class TigerXmlReader
     private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals,
             Map<String, Constituent> aNonTerminals, TigerGraph aGraph, Constituent aParent,
             TigerEdge aInEdge, TigerNode aNode)
-                throws IllegalAnnotationStructureException
+        throws IllegalAnnotationStructureException
     {
         int begin = Integer.MAX_VALUE;
         int end = 0;

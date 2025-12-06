@@ -48,8 +48,7 @@ public class MalletLdaTopicsProportionsSortedWriterTest
     private static final String LANGUAGE = "en";
 
     @Test
-    public void test(@TempDir File tempDir)
-            throws UIMAException, IOException
+    public void test(@TempDir File tempDir) throws UIMAException, IOException
     {
         File targetFile = new File(tempDir, "topics.txt");
         File modelFile = new File(tempDir, "model");

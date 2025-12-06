@@ -35,17 +35,16 @@ public class TigerXmlReaderWriterTest
     @Test
     public void test(@TempDir File tempDir) throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                TigerXmlReader.class,
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TigerXmlReader.PARAM_PATTERNS, "simple-sentence.xml");
-                
+
         AnalysisEngineDescription writer = createEngineDescription(TigerXmlWriter.class,
-                TigerXmlWriter.PARAM_STRIP_EXTENSION, true,
-                TigerXmlWriter.PARAM_TARGET_LOCATION, tempDir);
-        
+                TigerXmlWriter.PARAM_STRIP_EXTENSION, true, TigerXmlWriter.PARAM_TARGET_LOCATION,
+                tempDir);
+
         SimplePipeline.runPipeline(reader, writer);
-        
+
         XmlAssert.assertThat(Input.fromFile(new File(tempDir, "simple-sentence.xml")))
                 .and(Input.fromFile("src/test/resources/simple-sentence.xml")).areSimilar();
     }

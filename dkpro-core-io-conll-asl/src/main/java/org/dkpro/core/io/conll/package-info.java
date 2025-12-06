@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 /**
- * Provides classes for the conversion of conll file formats.
- * Especially to and from Brat response formats
+ * Provides classes for the conversion of conll file formats. Especially to and from Brat response
+ * formats
  */
 package org.dkpro.core.io.conll;

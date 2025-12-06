@@ -52,19 +52,20 @@ public class SharedDictionary
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -76,10 +77,9 @@ public class SharedDictionary
      * The character encoding used by the model.
      */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String modelEncoding;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -99,12 +99,13 @@ public class SharedDictionary
             return false;
         }
 
-        affixModelProvider = new ModelProviderBase<InputStream>() {
+        affixModelProvider = new ModelProviderBase<InputStream>()
+        {
             {
                 setContextObject(SharedDictionary.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.decompounding-model-spelling-${language}-"
-                        + "${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.decompounding-model-spelling-${language}-" + "${variant}");
                 setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/"
                         + "spelling-${language}-${variant}.properties");
                 setDefault(VARIANT, "affix");
@@ -116,8 +117,7 @@ public class SharedDictionary
             }
 
             @Override
-            protected InputStream produceResource(InputStream aStream)
-                throws Exception
+            protected InputStream produceResource(InputStream aStream) throws Exception
             {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(aStream));
                 String line;
@@ -131,11 +131,12 @@ public class SharedDictionary
             }
         };
 
-        modelProvider = new ModelProviderBase<Dictionary>() {
+        modelProvider = new ModelProviderBase<Dictionary>()
+        {
             {
                 setContextObject(SharedDictionary.this);
-                setDefault(ARTIFACT_ID, "${groupId}.decompounding-model-spelling-${language}-"
-                        + "${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.decompounding-model-spelling-${language}-" + "${variant}");
                 setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/"
                         + "spelling-${language}-${variant}.properties");
                 setDefault(VARIANT, "igerman98");
@@ -147,14 +148,12 @@ public class SharedDictionary
             }
 
             @Override
-            protected Dictionary produceResource(InputStream aStream)
-                throws Exception
+            protected Dictionary produceResource(InputStream aStream) throws Exception
             {
                 return new German98Dictionary(aStream, affixModelProvider.getResource(),
                         modelEncoding);
             }
         };
-
 
         return true;
 

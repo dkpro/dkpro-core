@@ -39,28 +39,25 @@ import de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore;
 
 public class ReadabilityAnnotatorTest
 {
-    private final static double EPSILON = 0.1; 
-    
-    static HashMap<String, Double>  correctResult = new HashMap<String, Double>();
-    static
-    {
+    private final static double EPSILON = 0.1;
+
+    static HashMap<String, Double> correctResult = new HashMap<String, Double>();
+    static {
         correctResult.put("kincaid", 7.6);
-        correctResult.put("ari",  9.1);
+        correctResult.put("ari", 9.1);
         correctResult.put("coleman_liau", 11.6);
         correctResult.put("flesch", 70.6);
         correctResult.put("lix", 5.0);
         correctResult.put("smog", 9.9);
         correctResult.put("fog", 10.6);
     }
-    
+
     @Test
-    public void readabilityAnnotatorTest()
-        throws Exception
+    public void readabilityAnnotatorTest() throws Exception
     {
-        String text = FileUtils.readFileToString(
-                new File("src/test/resources/readability/test_document_en.txt")
-          );
-        
+        String text = FileUtils
+                .readFileToString(new File("src/test/resources/readability/test_document_en.txt"));
+
         Map<String, Boolean> measureMap = new HashMap<String, Boolean>();
         for (Measures measure : Measures.values()) {
             measureMap.put(measure.name(), true);
@@ -69,8 +66,8 @@ public class ReadabilityAnnotatorTest
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(BreakIteratorSegmenter.class),
                 createEngineDescription(ReadabilityAnnotator.class));
-        
-        AnalysisEngine ae = createEngine(aggregate); 
+
+        AnalysisEngine ae = createEngine(aggregate);
         JCas jcas = ae.newJCas();
         jcas.setDocumentLanguage("en");
         jcas.setDocumentText(text);

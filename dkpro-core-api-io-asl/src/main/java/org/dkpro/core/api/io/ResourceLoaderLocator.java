@@ -36,11 +36,10 @@ public class ResourceLoaderLocator
 {
     /**
      * Parameter RESOURCE_LOADER_CLASS
-     * 
      */
     private static final String PARAM_RESOURCE_LOADERCLASS = "resourceLoaderClass";
     @ConfigurationParameter(name = PARAM_RESOURCE_LOADERCLASS, mandatory = false)
-    private final Class<? extends ResourcePatternResolver> resourceLoaderClass = 
+    private final Class<? extends ResourcePatternResolver> resourceLoaderClass = //
             PathMatchingResourcePatternResolver.class;
     private ResourcePatternResolver resolverInstance;
 

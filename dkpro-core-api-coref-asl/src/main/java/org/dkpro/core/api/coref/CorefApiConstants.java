@@ -20,6 +20,7 @@ package org.dkpro.core.api.coref;
 /**
  * Actually just an excuse to get a javadoc artifact.
  */
-public class CorefApiConstants {
+public class CorefApiConstants
+{
 
 }

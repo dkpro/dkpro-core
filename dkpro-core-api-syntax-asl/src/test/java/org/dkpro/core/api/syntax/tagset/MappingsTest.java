@@ -36,14 +36,12 @@ public class MappingsTest
     {
         Collection<File> files = FileUtils.listFiles(
                 new File("src/main/resources/org/dkpro/core/api/syntax/tagset"),
-                new WildcardFileFilter("*.map"),
-                TrueFileFilter.TRUE);
-        
+                new WildcardFileFilter("*.map"), TrueFileFilter.TRUE);
+
         assertTagsetMapping(files);
     }
-    
-    public static void assertTagsetMapping(Collection<File> files)
-        throws IOException
+
+    public static void assertTagsetMapping(Collection<File> files) throws IOException
     {
         for (File file : files) {
             boolean failure = false;

@@ -37,14 +37,13 @@ public class XmiReaderTest
     public void testTypeSystemMerge() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
-        
-        CollectionReader reader = createReader(XmiReader.class,
-                XmiReader.PARAM_SOURCE_LOCATION, "src/test/resources/xmi/english.xmi",
-                XmiReader.PARAM_TYPE_SYSTEM_FILE, "src/test/resources/ts/typesystem.xml",
-                XmiReader.PARAM_MERGE_TYPE_SYSTEM, true);
-        
+
+        CollectionReader reader = createReader(XmiReader.class, XmiReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/xmi/english.xmi", XmiReader.PARAM_TYPE_SYSTEM_FILE,
+                "src/test/resources/ts/typesystem.xml", XmiReader.PARAM_MERGE_TYPE_SYSTEM, true);
+
         reader.getNext(jcas.getCas());
-        
+
         Type spanType = jcas.getTypeSystem().getType("de.tudarmstadt.ukp.dkpro.core.io.xmi.Span");
         AnnotationFS span = jcas.getCas().createAnnotation(spanType, 0, 1);
         jcas.getCas().addFsToIndexes(span);
@@ -54,12 +53,12 @@ public class XmiReaderTest
     public void testNoTypeSystemMerge() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
-        
-        CollectionReader reader = createReader(XmiReader.class,
-                XmiReader.PARAM_SOURCE_LOCATION, "src/test/resources/xmi/english.xmi");
-        
+
+        CollectionReader reader = createReader(XmiReader.class, XmiReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/xmi/english.xmi");
+
         reader.getNext(jcas.getCas());
-        
+
         Type spanType = jcas.getTypeSystem().getType("de.tudarmstadt.ukp.dkpro.core.io.xmi.Span");
         assertNull(spanType);
     }
@@ -68,11 +67,11 @@ public class XmiReaderTest
     public void testTypeSystemReplace() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
-        
-        CollectionReader reader = createReader(XmiReader.class,
-                XmiReader.PARAM_SOURCE_LOCATION, "src/test/resources/xmi/english.xmi",
-                XmiReader.PARAM_TYPE_SYSTEM_FILE, "src/test/resources/ts/typesystem.xml");
-        
+
+        CollectionReader reader = createReader(XmiReader.class, XmiReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/xmi/english.xmi", XmiReader.PARAM_TYPE_SYSTEM_FILE,
+                "src/test/resources/ts/typesystem.xml");
+
         assertThatThrownBy(() -> {
             reader.getNext(jcas.getCas());
         }).isInstanceOf(IOException.class).hasCauseInstanceOf(XCASParsingException.class);

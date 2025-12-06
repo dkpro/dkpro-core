@@ -23,12 +23,14 @@ import java.util.List;
 /**
  * Used for temporary storing extracted texts before adding to the CAS.
  */
-public class CorpusText {
+public class CorpusText
+{
 
     private final List<CorpusSentence> sentences;
     private String documentTitle;
 
-    public CorpusText() {
+    public CorpusText()
+    {
         this("");
     }
 
@@ -38,7 +40,8 @@ public class CorpusText {
         documentTitle = title;
     }
 
-    public void addSentence(CorpusSentence s) {
+    public void addSentence(CorpusSentence s)
+    {
         sentences.add(s);
     }
 
@@ -52,9 +55,8 @@ public class CorpusText {
         return documentTitle;
     }
 
-    public void setDocumentTitle(String documentTitle) {
+    public void setDocumentTitle(String documentTitle)
+    {
         this.documentTitle = documentTitle;
     }
 }
-
-

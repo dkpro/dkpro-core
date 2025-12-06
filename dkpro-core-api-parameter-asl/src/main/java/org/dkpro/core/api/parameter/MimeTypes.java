@@ -26,8 +26,7 @@ public final class MimeTypes
     public final static String APPLICATION_RTF = "application/rtf";
     public final static String APPLICATION_TEI_XML = "application/tei+xml";
     public final static String APPLICATION_VND_XMI_XML = "application/vnd.xmi+xml";
-    
-    
+
     // DKPro Core application types
     public final static String APPLICATION_X_ANCORA_XML = "application/x.org.dkpro.ancora+xml";
     public final static String APPLICATION_X_BIOC = "application/x.org.dkpro.bioc+xml";
@@ -57,7 +56,7 @@ public final class MimeTypes
     public final static String APPLICATION_X_TUEBADZ_CHUNK = "application/x.org.dkpro.tuebadz-chunk";
     public final static String APPLICATION_X_XCES = "application/x.org.dkpro.xces+xml";
     public final static String APPLICATION_X_XCES_BASIC = "application/x.org.dkpro.xces-basic+xml";
-    
+
     // Standard text types (http://www.iana.org/assignments/media-types/media-types.xhtml)
     public final static String TEXT_CSV = "text/csv";
     public final static String TEXT_HTML = "text/html";
@@ -68,7 +67,7 @@ public final class MimeTypes
 
     // Non-standard text types
     public final static String TEXT_TCF = "text/tcf+xml";
-    
+
     // DKPro Core text types
     public final static String TEXT_X_CONLL_2000 = "text/x.org.dkpro.conll-2000";
     public final static String TEXT_X_CONLL_2002 = "text/x.org.dkpro.conll-2002";

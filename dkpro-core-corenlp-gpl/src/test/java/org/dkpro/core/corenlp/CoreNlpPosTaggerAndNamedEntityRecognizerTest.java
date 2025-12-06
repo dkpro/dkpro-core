@@ -36,10 +36,8 @@ public class CoreNlpPosTaggerAndNamedEntityRecognizerTest
     public void thatDurationIsRecognized() throws Exception
     {
         JCas jcas = runTest("en", "John lives for 200 years .");
-        
-        String[] ne = {
-                "[  0,  4]Person(PERSON) (John)",
-                "[ 15, 18]NamedEntity(DURATION) (200)",
+
+        String[] ne = { "[  0,  4]Person(PERSON) (John)", "[ 15, 18]NamedEntity(DURATION) (200)",
                 "[ 19, 24]NamedEntity(DURATION) (years)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
@@ -49,10 +47,8 @@ public class CoreNlpPosTaggerAndNamedEntityRecognizerTest
     public void thatMoneyIsRecognized() throws Exception
     {
         JCas jcas = runTest("en", "John buys a laptop for 200 dollars .");
-        
-        String[] ne = {
-                "[  0,  4]Person(PERSON) (John)",
-                "[ 23, 26]NamedEntity(MONEY) (200)",
+
+        String[] ne = { "[  0,  4]Person(PERSON) (John)", "[ 23, 26]NamedEntity(MONEY) (200)",
                 "[ 27, 34]NamedEntity(MONEY) (dollars)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
@@ -62,9 +58,8 @@ public class CoreNlpPosTaggerAndNamedEntityRecognizerTest
     public void thatOrdinalNumbersAreRecognized() throws Exception
     {
         JCas jcas = runTest("en", "John made the second place in the run .");
-        
-        String[] ne = {
-                "[  0,  4]Person(PERSON) (John)",
+
+        String[] ne = { "[  0,  4]Person(PERSON) (John)",
                 "[ 14, 20]NamedEntity(ORDINAL) (second)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
@@ -74,17 +69,14 @@ public class CoreNlpPosTaggerAndNamedEntityRecognizerTest
     public void thatCardinalNumbersAreRecognized() throws Exception
     {
         JCas jcas = runTest("en", "John bought one hundred laptops .");
-        
-        String[] ne = {
-                "[  0,  4]Person(PERSON) (John)",
-                "[ 12, 15]NamedEntity(NUMBER) (one)",
+
+        String[] ne = { "[  0,  4]Person(PERSON) (John)", "[ 12, 15]NamedEntity(NUMBER) (one)",
                 "[ 16, 23]NamedEntity(NUMBER) (hundred)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
 
-    private JCas runTest(String language, String testDocument)
-        throws Exception
+    private JCas runTest(String language, String testDocument) throws Exception
     {
         AssumeResource.assumeResource(CoreNlpNamedEntityRecognizer.class,
                 "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "ner", language, null);

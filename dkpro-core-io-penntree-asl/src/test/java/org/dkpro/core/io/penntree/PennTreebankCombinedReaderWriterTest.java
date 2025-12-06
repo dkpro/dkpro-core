@@ -41,44 +41,37 @@ import org.junit.jupiter.api.io.TempDir;
 public class PennTreebankCombinedReaderWriterTest
 {
     private @TempDir File tempDir;
-    
+
     @Test
-    public void testTreeWithRoot()
-        throws Exception
+    public void testTreeWithRoot() throws Exception
     {
-        testRoundTrip("tree_with_ROOT.mrg", 
-                PennTreebankCombinedWriter.PARAM_NO_ROOT_LABEL, false);
+        testRoundTrip("tree_with_ROOT.mrg", PennTreebankCombinedWriter.PARAM_NO_ROOT_LABEL, false);
     }
 
     @Test
-    public void testTreeWithTraceRemoved()
-        throws Exception
+    public void testTreeWithTraceRemoved() throws Exception
     {
         testOneWay("tree_with_trace_filtered.mrg", "tree_with_trace.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
-    public void testTreeWithTrace()
-        throws Exception
+    public void testTreeWithTrace() throws Exception
     {
-        testRoundTrip("tree_with_trace.mrg",
-                PennTreebankCombinedReader.PARAM_REMOVE_TRACES, false,
+        testRoundTrip("tree_with_trace.mrg", PennTreebankCombinedReader.PARAM_REMOVE_TRACES, false,
                 PennTreebankCombinedReader.PARAM_WRITE_TRACES_TO_TEXT, true,
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
-    public void testTreeWithParentheses()
-        throws Exception
+    public void testTreeWithParentheses() throws Exception
     {
         testRoundTrip("tree_with_parentheses.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
-    public void testTreeWithDirectSpeech()
-        throws Exception
+    public void testTreeWithDirectSpeech() throws Exception
     {
         testRoundTrip("tree_with_direct_speech.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
@@ -87,8 +80,7 @@ public class PennTreebankCombinedReaderWriterTest
     @Disabled("This file contains trees in different variations of formatting that are not "
             + "performed verbatim. Other tests check for individual tree structures.")
     @Test
-    public void testAll()
-        throws Exception
+    public void testAll() throws Exception
     {
         testRoundTrip("stanford-english-trees.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
@@ -133,10 +125,7 @@ public class PennTreebankCombinedReaderWriterTest
         assertEquals(expected.trim(), actual.trim());
     }
 
-    
-
-    public void testRoundTrip(String aFile, Object... aExtraParams)
-        throws Exception
+    public void testRoundTrip(String aFile, Object... aExtraParams) throws Exception
     {
         testOneWay(aFile, aFile, aExtraParams);
     }

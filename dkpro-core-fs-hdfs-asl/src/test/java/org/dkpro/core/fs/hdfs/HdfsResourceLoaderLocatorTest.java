@@ -30,10 +30,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileUtil;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hdfs.MiniDFSCluster;
-import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ExternalResourceDescription;
 import org.dkpro.core.io.text.TextReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,15 +40,14 @@ import org.junit.jupiter.api.io.TempDir;
 public class HdfsResourceLoaderLocatorTest
 {
     private MiniDFSCluster hdfsCluster;
-    
+
     @BeforeEach
-    public void startCluster(@TempDir File target, @TempDir File hadoopTmp)
-        throws Exception
+    public void startCluster(@TempDir File target, @TempDir File hadoopTmp) throws Exception
     {
         assumeFalse(System.getProperty("os.name").toLowerCase(Locale.US).contains("win"),
                 "HDFS on Windows would require native libs which we do not supply.");
-        
-        File baseDir = new File(target, "hdfs").getAbsoluteFile();
+
+        var baseDir = new File(target, "hdfs").getAbsoluteFile();
         FileUtil.fullyDelete(baseDir);
         Configuration conf = new Configuration();
         conf.set(MiniDFSCluster.HDFS_MINIDFS_BASEDIR, baseDir.getAbsolutePath());
@@ -59,7 +55,7 @@ public class HdfsResourceLoaderLocatorTest
         MiniDFSCluster.Builder builder = new MiniDFSCluster.Builder(conf);
         hdfsCluster = builder.build();
     }
-    
+
     @AfterEach
     public void shutdownCluster()
     {
@@ -67,38 +63,35 @@ public class HdfsResourceLoaderLocatorTest
             hdfsCluster.shutdown();
         }
     }
-    
+
     @Test
-    public void testExternalLoaderLocator()
-        throws Exception
+    public void testExternalLoaderLocator() throws Exception
     {
-        String hdfsURI = "hdfs://localhost:" + hdfsCluster.getNameNodePort() + "/";
-        
-        String document = "This is a test.";
-        
+        var hdfsURI = "hdfs://localhost:" + hdfsCluster.getNameNodePort() + "/";
+
+        var document = "This is a test.";
+
         // Write test document
         hdfsCluster.getFileSystem().mkdirs(new Path("/user/test"));
-        try (OutputStreamWriter os = new OutputStreamWriter(
+        try (var os = new OutputStreamWriter(
                 hdfsCluster.getFileSystem().create(new Path("/user/test/file.txt")), "UTF-8")) {
             os.write(document);
         }
-        
+
         // Set up HDFS resource locator
-        ExternalResourceDescription locator = createResourceDescription(
-                HdfsResourceLoaderLocator.class,
+        var locator = createResourceDescription(HdfsResourceLoaderLocator.class,
                 HdfsResourceLoaderLocator.PARAM_FILESYSTEM, hdfsURI);
-        
+
         // Configure reader to read from HDFS
-        CollectionReader reader = createReader(
-                TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "hdfs:/user/test",
-                        TextReader.PARAM_PATTERNS, "file.txt",
-                        TextReader.KEY_RESOURCE_RESOLVER, locator);
-        
+        var reader = createReader(TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, "hdfs:/user/test", //
+                TextReader.PARAM_PATTERNS, "file.txt", //
+                TextReader.KEY_RESOURCE_RESOLVER, locator);
+
         // Read data
-        JCas cas = JCasFactory.createJCas();
+        var cas = JCasFactory.createJCas();
         reader.getNext(cas.getCas());
-        
+
         // Verify content
         assertEquals(document, cas.getDocumentText());
     }

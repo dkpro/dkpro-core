@@ -52,136 +52,116 @@ public class HunPosTaggerTest
                 && !System.getProperty("os.version").matches("1[0-9]\\..*|(10\\.([0-9]|1[0-4]).*)"),
                 "HunPos does not run on OS X Catalina or higher");
     }
-    
-//    @Test
-//    public void testCatalan()
-//        throws Exception
-//    {
-//        runTest("ca", null, "Aquesta és una prova .",
-//                new String[] { "Pd-nsn--n-a", "Vcr3s", "N-msan", "Z" },
-//                new String[] { "POS",  "POS", "POS",  "POS" });
-//    }
-    
+
+    // @Test
+    // public void testCatalan()
+    // throws Exception
+    // {
+    // runTest("ca", null, "Aquesta és una prova .",
+    // new String[] { "Pd-nsn--n-a", "Vcr3s", "N-msan", "Z" },
+    // new String[] { "POS", "POS", "POS", "POS" });
+    // }
+
     @Test
-    public void testCroatian()
-        throws Exception
+    public void testCroatian() throws Exception
     {
-        runTest("hr", null, "Ovo je test .",
-                new String[] { "Pd-nsn--n-a", "Vcr3s", "N-msan", "Z" },
-                new String[] { "POS",  "POS", "POS",  "POS" });
+        runTest("hr", null, "Ovo je test .", new String[] { "Pd-nsn--n-a", "Vcr3s", "N-msan", "Z" },
+                new String[] { "POS", "POS", "POS", "POS" });
     }
 
     @Test
-    public void testDanish()
-        throws Exception
+    public void testDanish() throws Exception
     {
-        runTest("da", null, "Dette er en test .",
-                new String[] { "PD", "VA", "PI", "NC", "XP" },
+        runTest("da", null, "Dette er en test .", new String[] { "PD", "VA", "PI", "NC", "XP" },
                 new String[] { "POS_PRON", "POS_VERB", "POS_PRON", "POS_NOUN", "POS_PUNCT" });
     }
 
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", null, "This is a test .",
-                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+        runTest("en", null, "This is a test .", new String[] { "DT", "VBZ", "DT", "NN", "." },
                 new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
-        runTest("en", null, "A neural net .",
-                new String[] { "DT",  "JJ",     "NN",  "." },
-                new String[] { "POS_DET", "POS_ADJ",    "POS_NOUN",  "POS_PUNCT" });
+        runTest("en", null, "A neural net .", new String[] { "DT", "JJ", "NN", "." },
+                new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
-                new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
                 new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
     @Test
-    public void testFarsi()
-        throws Exception
+    public void testFarsi() throws Exception
     {
         runTest("fa", null, "این یک تست است . \n",
                 new String[] { "DET", "PRO", "N_SING", "V_COP", "DELM" },
                 new String[] { "POS_DET", "POS_PRON", "POS_NOUN", "POS_VERB", "POS_PUNCT" });
     }
-    
+
     @Test
-    public void testGerman()
-        throws Exception
+    public void testGerman() throws Exception
     {
         runTest("de", null, "Das ist ein Test .",
-                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
+                new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
     }
 
     @Test
-    public void testHungarian()
-        throws Exception
+    public void testHungarian() throws Exception
     {
-        runTest("hu", null, "Ez egy teszt .",
-                new String[] { "NOUN", "ART", "NOUN", "PUNCT" },
-                new String[] { "POS",  "POS", "POS",  "POS" });
+        runTest("hu", null, "Ez egy teszt .", new String[] { "NOUN", "ART", "NOUN", "PUNCT" },
+                new String[] { "POS", "POS", "POS", "POS" });
     }
 
     @Test
-    public void testPortuguese()
-        throws Exception
+    public void testPortuguese() throws Exception
     {
         runTest("pt", null, "Este é um teste .",
-                new String[] {"pron-det", "v-fin", "art", "n", "punc" },
+                new String[] { "pron-det", "v-fin", "art", "n", "punc" },
                 new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
-        
-        runTest("pt", "tbchp", "Este é um teste .",
-                new String[] { "D", "SR-P", "D-UM", "N", "." },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
-        
-        runTest("pt", "mm", "Este é um teste .",
-                new String[] { "PROSUB", "V",   "ART", "N",   "." },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+
+        runTest("pt", "tbchp", "Este é um teste .", new String[] { "D", "SR-P", "D-UM", "N", "." },
+                new String[] { "POS", "POS", "POS", "POS", "POS" });
+
+        runTest("pt", "mm", "Este é um teste .", new String[] { "PROSUB", "V", "ART", "N", "." },
+                new String[] { "POS", "POS", "POS", "POS", "POS" });
 
         runTest("pt", "bosque", "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n", "punc" },
                 new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
     }
-    
+
     @Test
-    public void testRussian()
-        throws Exception
+    public void testRussian() throws Exception
     {
-        runTest("ru", null, "Это тест .",
-                new String[] { "A", "S", "PUNC" },
-                new String[] { "POS",  "POS", "POS" });
+        runTest("ru", null, "Это тест .", new String[] { "A", "S", "PUNC" },
+                new String[] { "POS", "POS", "POS" });
     }
 
     @Test
-    public void testSlovenian()
-        throws Exception
+    public void testSlovenian() throws Exception
     {
-        runTest("sl", null, "To je test .",
-                new String[] { "zaimek-kazalni", "glagol-pomožni", "samostalnik-občno_ime",
-                        "PUNC" },
-                new String[] { "POS",  "POS", "POS",  "POS" });
+        runTest("sl", null, "To je test .", new String[] { "zaimek-kazalni", "glagol-pomožni",
+                "samostalnik-občno_ime", "PUNC" }, new String[] { "POS", "POS", "POS", "POS" });
     }
 
     @Test
-    public void testSwedish()
-        throws Exception
+    public void testSwedish() throws Exception
     {
         runTest("sv", null, "Detta är ett test .",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND",
                         "NN_NEU_SIN_IND_NOM", "DL_MAD" },
                 new String[] { "POS", "POS", "POS", "POS", "POS" });
-        
+
         runTest("sv", "paroletags", "Detta är ett test .",
                 new String[] { "PF@NS0@S", "V@IPAS", "DI@NS@S", "NCNSN@IS", "FE" },
-                new String[] { "POS",  "POS", "POS",  "POS", "POS" });
-        
+                new String[] { "POS", "POS", "POS", "POS", "POS" });
+
         runTest("sv", "suctags", "Detta är ett test .",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND",
                         "NN_NEU_SIN_IND_NOM", "DL_MAD" },
                 new String[] { "POS", "POS", "POS", "POS", "POS" });
-        
+
         // runTest("sv", "suc2x", "Detta är ett test .",
         // new String[] { "PN_NEU_SIN_DEF_SUB@OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND",
         // "NN_NEU_SIN_IND_NOM", "MAD" },
@@ -189,23 +169,22 @@ public class HunPosTaggerTest
     }
 
     @Test
-//  @Disabled("Platform specific")
-    public void testOddCharacters()
-        throws Exception
+    // @Disabled("Platform specific")
+    public void testOddCharacters() throws Exception
     {
-        runTest("en", null, "² § ¶ § °",
-                new String[] { "NNP", "NNP", "NNP", "NNP", "NNP" },
-                new String[] { "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_PROPN"});
+        runTest("en", null, "² § ¶ § °", new String[] { "NNP", "NNP", "NNP", "NNP", "NNP" },
+                new String[] { "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_PROPN" });
     }
 
     /**
      * Generate a very large document and test it.
-     * @throws Exception if an error occurs.
+     * 
+     * @throws Exception
+     *             if an error occurs.
      */
     @Test
     @Disabled("Takes too long")
-    public void hugeDocumentTest()
-        throws Exception
+    public void hugeDocumentTest() throws Exception
     {
         // Start Java with -Xmx512m
         boolean run = Runtime.getRuntime().maxMemory() > (500000000);
@@ -234,18 +213,19 @@ public class HunPosTaggerTest
             assertEquals("In position " + i, expectedTags[i % 5], posAnnotation.getPosValue());
         }
 
-        System.out.println("Successfully tagged document with " + testString.length() +
-                " characters");
+        System.out.println(
+                "Successfully tagged document with " + testString.length() + " characters");
     }
 
     /**
      * Test using the same AnalysisEngine multiple times.
-     * @throws Exception if an error occurs.
+     * 
+     * @throws Exception
+     *             if an error occurs.
      */
     @Test
     @Disabled("Takes too long")
-    public void multiDocumentTest()
-        throws Exception
+    public void multiDocumentTest() throws Exception
     {
         String testDocument = "This is a test .";
         String[] tags = { "DT", "VBZ", "DT", "NN", "." };
@@ -266,19 +246,18 @@ public class HunPosTaggerTest
             hideOut.restoreOutput();
         }
     }
-    
+
     private JCas runTest(String language, String variant, String testDocument, String[] tags,
             String[] tagClasses)
         throws Exception
     {
-        AnalysisEngine engine = createEngine(HunPosTagger.class,
-                HunPosTagger.PARAM_VARIANT, variant,
-                HunPosTagger.PARAM_PRINT_TAGSET, true);
+        AnalysisEngine engine = createEngine(HunPosTagger.class, HunPosTagger.PARAM_VARIANT,
+                variant, HunPosTagger.PARAM_PRINT_TAGSET, true);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-        
+
         return jcas;
     }
 }

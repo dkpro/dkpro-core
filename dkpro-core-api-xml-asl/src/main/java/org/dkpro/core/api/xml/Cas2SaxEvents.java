@@ -38,7 +38,7 @@ public class Cas2SaxEvents
     {
         handler = aHandler;
     }
-    
+
     public void process(JCas aJCas) throws SAXException
     {
         XmlDocument doc = selectSingle(aJCas, XmlDocument.class);
@@ -53,7 +53,7 @@ public class Cas2SaxEvents
         if (aDoc.getRoot() == null) {
             throw new SAXException("Document has no root element");
         }
-        
+
         process(aDoc.getRoot());
 
         handler.endDocument();
@@ -62,7 +62,7 @@ public class Cas2SaxEvents
     public void process(XmlElement aElement) throws SAXException
     {
         AttributesImpl attributes = new AttributesImpl();
-        
+
         if (aElement.getAttributes() != null) {
             for (XmlAttribute attr : aElement.getAttributes()) {
                 attributes.addAttribute(defaultString(attr.getUri()),
@@ -71,13 +71,13 @@ public class Cas2SaxEvents
                         defaultString(attr.getValue()));
             }
         }
-        
+
         String uri = defaultString(aElement.getUri());
         String localName = defaultString(aElement.getLocalName());
         String qName = defaultString(aElement.getQName());
-        
+
         handler.startElement(uri, localName, qName, attributes);
-        
+
         if (aElement.getChildren() != null) {
             for (XmlNode child : aElement.getChildren()) {
                 if (child instanceof XmlElement) {
@@ -88,21 +88,21 @@ public class Cas2SaxEvents
                 }
             }
         }
-        
+
         handler.endElement(uri, localName, qName);
     }
 
     private void process(XmlTextNode aChild) throws SAXException
     {
         char[] text;
-        
+
         if (aChild.getCaptured()) {
             text = aChild.getCoveredText().toCharArray();
         }
         else {
             text = aChild.getText().toCharArray();
         }
-        
+
         handler.characters(text, 0, text.length);
     }
 }

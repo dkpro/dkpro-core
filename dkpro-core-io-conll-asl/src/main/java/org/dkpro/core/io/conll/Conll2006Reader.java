@@ -104,7 +104,7 @@ public class Conll2006Reader
      * used.
      */
     public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
-    @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, defaultValue = "false")
     private boolean useCPosAsPos;
 
     /**

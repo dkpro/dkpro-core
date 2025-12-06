@@ -56,16 +56,14 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  */
 @ResourceMetaData(name = "CoNLL-U Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_U })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ConllUWriter
     extends JCasFileWriter_ImplBase
 {
@@ -76,71 +74,67 @@ public class ConllUWriter
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     /**
      * Use this filename extension.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conllu")
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, defaultValue = ".conllu")
     private String filenameSuffix;
 
     /**
      * Write fine-grained part-of-speech information.
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, defaultValue = "true")
     private boolean writePos;
 
     /**
      * Write coarse-grained part-of-speech information.
      */
     public static final String PARAM_WRITE_CPOS = ComponentParameters.PARAM_WRITE_CPOS;
-    @ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_CPOS, defaultValue = "true")
     private boolean writeCPos;
 
     /**
      * Write morphological features.
      */
     public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
-    @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_MORPH, defaultValue = "true")
     private boolean writeMorph;
 
     /**
      * Write lemma information.
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, defaultValue = "true")
     private boolean writeLemma;
 
     /**
      * Write syntactic dependency information.
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
-    @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, defaultValue = "true")
     private boolean writeDependency;
-    
+
     /**
      * Write text covered by the token instead of the token form.
      */
-    public static final String PARAM_WRITE_COVERED_TEXT = 
-            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
-    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    public static final String PARAM_WRITE_COVERED_TEXT = ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, defaultValue = "true")
     private boolean writeCovered;
-    
+
     /**
      * Include the full sentence text as a comment in front of each sentence.
      */
     public static final String PARAM_WRITE_TEXT_COMMENT = "writeTextComment";
-    @ConfigurationParameter(name = PARAM_WRITE_TEXT_COMMENT, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_TEXT_COMMENT, defaultValue = "true")
     private boolean writeTextHeader;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (PrintWriter out = new PrintWriter(
                 new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding));) {
@@ -159,7 +153,7 @@ public class ConllUWriter
         for (SurfaceForm sf : select(aJCas, SurfaceForm.class)) {
             surfaceBeginIdx.put(sf.getBegin(), sf);
         }
-        
+
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Map<Token, Row> ctokens = new LinkedHashMap<>();
 
@@ -174,10 +168,10 @@ public class ConllUWriter
                 sentenceText = StringUtils.replaceChars(sentenceText, "\n\r", "  ");
                 aOut.printf("# %s = %s\n", ConllUReader.META_TEXT, sentenceText);
             }
-            
+
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
-            
+
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
                 row.id = i + 1;
@@ -200,12 +194,12 @@ public class ConllUWriter
 
             // Write sentence in CONLL-U format
             for (Row row : ctokens.values()) {
-                
+
                 String form = row.token.getCoveredText();
                 if (!writeCovered) {
                     form = row.token.getText();
                 }
-                
+
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
@@ -213,7 +207,7 @@ public class ConllUWriter
 
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)
-                    && row.token.getPos().getPosValue() != null) {
+                        && row.token.getPos().getPosValue() != null) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                 }
@@ -237,7 +231,7 @@ public class ConllUWriter
                             headId = 0;
                         }
                     }
-                    
+
                     StringBuilder depsBuf = new StringBuilder();
                     for (Dependency d : row.deps) {
                         if (depsBuf.length() > 0) {
@@ -256,17 +250,17 @@ public class ConllUWriter
                         deps = depsBuf.toString();
                     }
                 }
-                
+
                 String head = UNUSED;
                 if (headId != UNUSED_INT) {
                     head = Integer.toString(headId);
                 }
-                
+
                 String feats = UNUSED;
                 if (writeMorph && (row.token.getMorph() != null)) {
                     feats = row.token.getMorph().getValue();
                 }
-                
+
                 String misc = UNUSED;
                 if (row.noSpaceAfter) {
                     misc = "SpaceAfter=No";
@@ -282,10 +276,9 @@ public class ConllUWriter
                             sf.getValue(), UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED,
                             UNUSED);
                 }
-                
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        form, lemma, cpos, pos, feats, head, deprel, deps,
-                        misc);
+
+                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id, form, lemma, cpos,
+                        pos, feats, head, deprel, deps, misc);
             }
 
             aOut.println();

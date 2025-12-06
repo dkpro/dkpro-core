@@ -53,14 +53,13 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "XCES Basic XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
-@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES_BASIC})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_XCES_BASIC })
 public class XcesBasicXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
 
         Resource res = nextFile();
@@ -72,8 +71,8 @@ public class XcesBasicXmlReader
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
             XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
             XMLEventReader xmlEventReaderBasic = xmlInputFactory.createXMLEventReader(is);
-            
-            //JAXB context for XCES body with basic type
+
+            // JAXB context for XCES body with basic type
             JAXBContext contextBasic = JAXBContext.newInstance(XcesBodyBasic.class);
             Unmarshaller unmarshallerBasic = contextBasic.createUnmarshaller();
 
@@ -97,8 +96,7 @@ public class XcesBasicXmlReader
                         readPara(jb, parasBasic);
                     }
                     catch (RuntimeException ex) {
-                        getLogger().warn(
-                                "Input is not in basic xces format.");
+                        getLogger().warn("Input is not in basic xces format.");
                     }
                 }
                 else {
@@ -123,13 +121,13 @@ public class XcesBasicXmlReader
 
     private void readPara(JCasBuilder jb, Object bodyObj)
     {
-        //Below is the sample paragraph format
-        //<p id="p1">Αυτή είναι η πρώτη γραμμή.</p>
-        if (bodyObj instanceof XcesBodyBasic) {            
+        // Below is the sample paragraph format
+        // <p id="p1">Αυτή είναι η πρώτη γραμμή.</p>
+        if (bodyObj instanceof XcesBodyBasic) {
             for (XcesParaBasic p : ((XcesBodyBasic) bodyObj).p) {
                 int start = jb.getPosition();
                 int end = start + p.s.length();
-                Paragraph para = new Paragraph(jb.getJCas(), start,end);             
+                Paragraph para = new Paragraph(jb.getJCas(), start, end);
                 para.addToIndexes(jb.getJCas());
                 jb.add(p.s);
                 jb.add("\n\n");

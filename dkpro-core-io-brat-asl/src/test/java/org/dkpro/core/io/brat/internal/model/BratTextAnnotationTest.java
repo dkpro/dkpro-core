@@ -38,7 +38,7 @@ public class BratTextAnnotationTest
         BratTextAnnotation v = BratTextAnnotation.parse(in);
         assertEquals(in, v.toString());
     }
-    
+
     @Test
     public void parseTestDiscontinousMergeFragments()
     {

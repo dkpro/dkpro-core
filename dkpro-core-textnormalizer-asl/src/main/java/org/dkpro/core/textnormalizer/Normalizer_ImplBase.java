@@ -36,11 +36,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
  * Base class for normalizers
  *
  */
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
 @Deprecated
 public abstract class Normalizer_ImplBase
     extends JCasAnnotator_ImplBase
@@ -65,19 +63,19 @@ public abstract class Normalizer_ImplBase
      * @param as
      *            an aligned string.
      * @return the mapping.
-     * @throws AnalysisEngineProcessException if there is an error.
+     * @throws AnalysisEngineProcessException
+     *             if there is an error.
      */
     protected abstract Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
         throws AnalysisEngineProcessException;
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         // Put all SofaChangeAnnotations in a map,
         // where a token position maps to a list of SFCs that should be applied for that token
         Map<Integer, List<SofaChangeAnnotation>> changesMap = createSofaChangesMap(jcas);
-        
+
         // create an AlignedString with all the changes applied and sort by offset
         List<SofaChangeAnnotation> allChanges = new ArrayList<SofaChangeAnnotation>();
         for (Map.Entry<Integer, List<SofaChangeAnnotation>> changesEntry : changesMap.entrySet()) {

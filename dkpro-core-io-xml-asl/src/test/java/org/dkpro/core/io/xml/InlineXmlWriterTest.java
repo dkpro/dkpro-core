@@ -32,8 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class InlineXmlWriterTest
 {
     @Test
-    public void testInlineXmlCasConsumer(@TempDir File tempDir)
-        throws Exception
+    public void testInlineXmlCasConsumer(@TempDir File tempDir) throws Exception
     {
         String testDocument = "This is a test.";
 

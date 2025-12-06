@@ -69,11 +69,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.CHUNKER)
 @ResourceMetaData(name = "TreeTagger Chunker")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class TreeTaggerChunker
     extends JCasAnnotator_ImplBase
 {
@@ -97,21 +94,22 @@ public class TreeTaggerChunker
     public static final String PARAM_EXECUTABLE_PATH = "executablePath";
     @ConfigurationParameter(name = PARAM_EXECUTABLE_PATH, mandatory = false)
     private File executablePath;
-    
+
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -130,15 +128,14 @@ public class TreeTaggerChunker
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, //
+            defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for chunk tags to UIMA types.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
 
@@ -146,7 +143,7 @@ public class TreeTaggerChunker
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
@@ -155,9 +152,9 @@ public class TreeTaggerChunker
      * exceptions if illegal data is provided.
      */
     public static final String PARAM_PERFORMANCE_MODE = "performanceMode";
-    @ConfigurationParameter(name = PARAM_PERFORMANCE_MODE, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PERFORMANCE_MODE, defaultValue = "false")
     private boolean performanceMode;
-    
+
     /**
      * A sequence to flush the internal TreeTagger buffer and to force it to output the rest of the
      * completed analysis. This is typically just a sequence of like 5-10 full stops (".") separated
@@ -168,23 +165,24 @@ public class TreeTaggerChunker
     public static final String PARAM_FLUSH_SEQUENCE = "flushSequence";
     @ConfigurationParameter(name = PARAM_FLUSH_SEQUENCE, mandatory = false)
     private String flushSequence;
-    
+
     private CasConfigurableProviderBase<TreeTaggerWrapper<Token>> modelProvider;
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<TreeTaggerWrapper<Token>>() {
+        modelProvider = new ModelProviderBase<TreeTaggerWrapper<Token>>()
+        {
             private TreeTaggerWrapper<Token> treetagger;
-            
+
             {
                 setContextObject(TreeTaggerChunker.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.treetagger-model-chunker-${language}-${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.treetagger-model-chunker-${language}-${variant}");
                 setDefault(LOCATION,
                         "classpath:/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-${language}-${variant}.properties");
                 setDefault(VARIANT, "le"); // le = little-endian
@@ -192,7 +190,7 @@ public class TreeTaggerChunker
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
                 setOverride(VARIANT, variant);
-                
+
                 treetagger = new TreeTaggerWrapper<Token>();
                 treetagger.setPerformanceMode(performanceMode);
                 treetagger.setEpsilon(0.00000001);
@@ -204,28 +202,27 @@ public class TreeTaggerChunker
             }
 
             @Override
-            protected TreeTaggerWrapper<Token> produceResource(URL aUrl)
-                throws IOException
+            protected TreeTaggerWrapper<Token> produceResource(URL aUrl) throws IOException
             {
                 Properties meta = getResourceMetaData();
-                String encoding = modelEncoding != null ? modelEncoding : meta
-                        .getProperty("encoding");
+                String encoding = modelEncoding != null ? modelEncoding
+                        : meta.getProperty("encoding");
                 String tagset = meta.getProperty("chunk.tagset");
                 String flush = meta.getProperty("flushSequence",
                         DefaultModel.DEFAULT_FLUSH_SEQUENCE);
                 if (flushSequence != null) {
                     flush = flushSequence;
                 }
-                
+
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
-                
+
                 DefaultModel model = new DefaultModel(modelFile.getPath() + ":" + encoding,
                         modelFile, encoding, flush);
-                
+
                 // Reconfigure tagger
                 treetagger.setModel(model);
                 treetagger.setAdapter(new MappingTokenAdapter(meta));
-                
+
                 // Get tagset
                 List<String> tags = TreeTaggerModelUtil.getTagset(modelFile, encoding);
                 SingletonTagset chunkTags = new SingletonTagset(Chunk.class, tagset);
@@ -250,8 +247,7 @@ public class TreeTaggerChunker
     }
 
     @Override
-    public void process(final JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(final JCas aJCas) throws AnalysisEngineProcessException
     {
         final CAS cas = aJCas.getCas();
 
@@ -277,7 +273,7 @@ public class TreeTaggerChunker
 
                     String[] fields1 = aChunk.split("/");
                     String[] fields2 = fields1[1].split("-");
-                    //String tag = fields1[0];
+                    // String tag = fields1[0];
                     String flag = fields2.length == 2 ? fields2[0] : "NONE";
                     String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
 
@@ -312,13 +308,13 @@ public class TreeTaggerChunker
         try {
             TreeTaggerWrapper<Token> treetagger = modelProvider.getResource();
             treetagger.setHandler(handler);
-            
+
             // Issue #636 - process each sentence individually to ensure that sentence boundaries
             // are respected
             for (Sentence sentence : select(aJCas, Sentence.class)) {
                 List<Token> posTags = new ArrayList<Token>(selectCovered(Token.class, sentence));
                 treetagger.process(posTags);
-                
+
                 // Commit the final chunk
                 handler.token(null, null, null);
             }
@@ -328,17 +324,18 @@ public class TreeTaggerChunker
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
-        }        
+        }
     }
-    
-    private static class MappingTokenAdapter implements TokenAdapter<Token>
+
+    private static class MappingTokenAdapter
+        implements TokenAdapter<Token>
     {
         private Map<String, String> mapping;
 
         public MappingTokenAdapter(Properties aMetadata)
         {
             mapping = new HashMap<String, String>();
-            
+
             for (Entry<Object, Object> e : aMetadata.entrySet()) {
                 String key = String.valueOf(e.getKey());
                 if (key.startsWith("pos.tag.map.")) {
@@ -348,7 +345,7 @@ public class TreeTaggerChunker
                 }
             }
         }
-        
+
         @Override
         public String getText(Token aToken)
         {
@@ -357,7 +354,7 @@ public class TreeTaggerChunker
                 if (pos == null) {
                     pos = aToken.getPosValue();
                 }
-                
+
                 return aToken.getText() + "-" + pos;
             }
         }

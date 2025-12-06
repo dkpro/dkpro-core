@@ -28,7 +28,7 @@ public class PADenotation
     private String id;
     private PAOffsets span;
     private String obj;
-    
+
     public PADenotation()
     {
         // Default constructor

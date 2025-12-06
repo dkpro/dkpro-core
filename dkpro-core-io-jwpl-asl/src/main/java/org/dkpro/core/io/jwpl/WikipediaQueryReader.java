@@ -120,8 +120,7 @@ public class WikipediaQueryReader
     protected boolean queryInitialized = false; // indicates whether a query parameter was used
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 

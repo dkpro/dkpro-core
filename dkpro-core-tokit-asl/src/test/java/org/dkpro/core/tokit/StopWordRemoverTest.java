@@ -44,8 +44,7 @@ public class StopWordRemoverTest
      * Simple test case: one stopword file.
      */
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         String[] expectedTokens = new String[] { "text", "containing", "stopwords", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
@@ -58,14 +57,12 @@ public class StopWordRemoverTest
      * Testing two stopword files with different language codes.
      */
     @Test
-    public void test2Files()
-        throws Exception
+    public void test2Files() throws Exception
     {
         String[] expectedTokens = new String[] { "text", "containing", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
-                StopWordRemover.PARAM_MODEL_LOCATION, new String[] {
-                        "[*]" + STOPWORDSFILE_LOCATION1,
-                        "[en]" + STOPWORDSFILE_LOCATION2 });
+                StopWordRemover.PARAM_MODEL_LOCATION,
+                new String[] { "[*]" + STOPWORDSFILE_LOCATION1, "[en]" + STOPWORDSFILE_LOCATION2 });
         JCas jcas = TestRunner.runTest(stopwordremover, LANGUAGE, TEXT);
         assertToken(expectedTokens, select(jcas, Token.class));
     }
@@ -76,14 +73,12 @@ public class StopWordRemoverTest
      * @see <a href="https://github.com/dkpro/dkpro-core/issues/600">Issue 600</a>
      */
     @Test
-    public void testFilesSameLanguage()
-        throws Exception
+    public void testFilesSameLanguage() throws Exception
     {
         String[] expectedTokens = new String[] { "text", "containing", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
                 StopWordRemover.PARAM_MODEL_LOCATION, new String[] {
-                        "[en]" + STOPWORDSFILE_LOCATION1,
-                        "[en]" + STOPWORDSFILE_LOCATION2 });
+                        "[en]" + STOPWORDSFILE_LOCATION1, "[en]" + STOPWORDSFILE_LOCATION2 });
         JCas jcas = TestRunner.runTest(stopwordremover, LANGUAGE, TEXT);
         assertToken(expectedTokens, select(jcas, Token.class));
     }

@@ -72,19 +72,17 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "CLARIN-DE WebLicht TCF Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_TCF})
-@TypeCapability(
-        inputs = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
-            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
-            "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+@MimeTypeCapability({ MimeTypes.TEXT_TCF })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+        "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
 public class TcfWriter
     extends JCasFileWriter_ImplBase
 {
@@ -92,8 +90,7 @@ public class TcfWriter
      * Specify the suffix of output files. Default value <code>.tcf</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".tcf")
     private String filenameSuffix;
 
@@ -104,7 +101,7 @@ public class TcfWriter
     public static final String PARAM_PRESERVE_IF_EMPTY = "preserveIfEmpty";
     @ConfigurationParameter(name = PARAM_PRESERVE_IF_EMPTY, mandatory = true, defaultValue = "false")
     private boolean preserveIfEmpty;
-    
+
     /**
      * Merge with source TCF file if one is available.
      */
@@ -120,24 +117,22 @@ public class TcfWriter
     private String tcfVersion;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        // #670 - TcfWriter can currently not properly write to ZIP files because of the "try and 
-        // error" approach that we take to trying to merge with an existing file. In particular, if 
+        // #670 - TcfWriter can currently not properly write to ZIP files because of the "try and
+        // error" approach that we take to trying to merge with an existing file. In particular, if
         // the attempt fails and we go without merging, we cannot delete the broken entry from the
-        // ZIP file. 
+        // ZIP file.
         if (StringUtils.startsWith(getTargetLocation(), JAR_PREFIX)) {
-            throw new ResourceInitializationException(new IllegalStateException(
-                    "TcfWriter cannot write to ZIP files."));
+            throw new ResourceInitializationException(
+                    new IllegalStateException("TcfWriter cannot write to ZIP files."));
         }
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         InputStream docIS = null;
         try {
@@ -168,8 +163,8 @@ public class TcfWriter
                         }
                     }
                     catch (IOException e) {
-                        getLogger().debug(
-                                "Cannot open source file to merge with: " + e.getMessage());
+                        getLogger()
+                                .debug("Cannot open source file to merge with: " + e.getMessage());
                     }
                 }
                 finally {
@@ -187,7 +182,7 @@ public class TcfWriter
             else {
                 getLogger().debug("Merging disabled");
             }
-            
+
             // If merging failed or is disabled, go on without merging
             if (writeWithoutMerging) {
                 OutputStream docOS = null;
@@ -218,8 +213,7 @@ public class TcfWriter
      * @throws WLFormatException
      *             if a TCF problem occurs.
      */
-    public void casToTcfWriter(JCas aJCas, OutputStream aOs)
-        throws WLFormatException
+    public void casToTcfWriter(JCas aJCas, OutputStream aOs) throws WLFormatException
     {
         // create TextCorpus object, specifying its language from the aJcas Object
         TextCorpusStored textCorpus = new TextCorpusStored(aJCas.getDocumentLanguage());
@@ -250,7 +244,7 @@ public class TcfWriter
     public void casToTcfWriter(InputStream aIs, JCas aJCas, OutputStream aOs)
         throws WLFormatException
     {
-        // If we have annotations for these layers in the CAS, we rewrite those layers. 
+        // If we have annotations for these layers in the CAS, we rewrite those layers.
         List<TextCorpusLayerTag> layersToReplaceList = new ArrayList<>();
         if (exists(aJCas, POS.class) || !preserveIfEmpty) {
             layersToReplaceList.add(POSTAGS);
@@ -270,16 +264,15 @@ public class TcfWriter
         if (exists(aJCas, CoreferenceChain.class) || !preserveIfEmpty) {
             layersToReplaceList.add(REFERENCES);
         }
-        
+
         EnumSet<TextCorpusLayerTag> layersToReplaceSet = EnumSet.copyOf(layersToReplaceList);
-                
+
         // If these layers are present in the TCF file, we use them from there, otherwise
         // we generate them
         EnumSet<TextCorpusLayerTag> layersToReadSet = EnumSet.of(TOKENS, SENTENCES);
-        
-        try (TextCorpusStreamedWithReplaceableLayers textCorpus = 
-                new TextCorpusStreamedWithReplaceableLayers(aIs, layersToReadSet, 
-                        layersToReplaceSet, aOs)) {
+
+        try (TextCorpusStreamedWithReplaceableLayers textCorpus = new TextCorpusStreamedWithReplaceableLayers(
+                aIs, layersToReadSet, layersToReplaceSet, aOs)) {
             new DKPro2Tcf().convert(aJCas, textCorpus);
         }
     }

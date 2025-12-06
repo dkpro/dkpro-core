@@ -44,7 +44,7 @@ public class BasicDependenciesFormATreeCheck
     public boolean check(JCas aCas, List<Message> aMessages)
     {
         for (Sentence sentence : select(aCas, Sentence.class)) {
-            // Get only the basic dependencies (assuming that those where the flavor is set to 
+            // Get only the basic dependencies (assuming that those where the flavor is set to
             // null are also basic!
             List<Dependency> basicDependencies = selectCoveredBasic(sentence);
             if (basicDependencies.isEmpty()) {
@@ -53,8 +53,7 @@ public class BasicDependenciesFormATreeCheck
 
             // Check that there is exactly a single ROOT dependency
             List<Dependency> roots = basicDependencies.stream()
-                    .filter(dep -> ROOT.class.equals(dep.getClass()))
-                    .collect(Collectors.toList());
+                    .filter(dep -> ROOT.class.equals(dep.getClass())).collect(Collectors.toList());
             if (roots.size() != 1) {
                 aMessages.add(new Message(this, ERROR,
                         "Sentence [%s] has multiple dependency roots: %s", sentence, roots));
@@ -67,15 +66,14 @@ public class BasicDependenciesFormATreeCheck
             for (Token token : tokens) {
                 List<Dependency> attachedDependencies = selectCoveredBasic(token);
                 if (attachedDependencies.size() > 1) {
-                    attachedDependencies.stream()
-                            .forEach(dep -> aMessages.add(new Message(this, ERROR,
-                                "Multiple dependencies attached to [%s]: %s", token, dep)));
+                    attachedDependencies.stream().forEach(dep -> aMessages.add(new Message(this,
+                            ERROR, "Multiple dependencies attached to [%s]: %s", token, dep)));
                 }
                 else if (!attachedDependencies.isEmpty()) {
                     idxDep.put(token, attachedDependencies.get(0));
                 }
             }
-            
+
             // Check that for each dependency, we can reach the ROOT node
             nextDep: for (Dependency dep : basicDependencies) {
                 Dependency cur = dep;
@@ -86,13 +84,12 @@ public class BasicDependenciesFormATreeCheck
                                 "Root of dependency [%s] is not tree root but [%s]", dep, cur));
                         continue nextDep;
                     }
-                    
+
                     // Check if root was reached
                     if (cur.getGovernor() == cur.getDependent()) {
                         continue nextDep;
                     }
-                    
-                    
+
                     // Check if governor token has no dependency attached
                     Dependency next = idxDep.get(cur.getGovernor());
                     if (next == null) {
@@ -101,19 +98,19 @@ public class BasicDependenciesFormATreeCheck
                                 cur.getGovernor(), cur));
                         continue nextDep;
                     }
-                    
+
                     cur = next;
                 }
             }
         }
-        
+
         return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
-    
+
     private List<Dependency> selectCoveredBasic(AnnotationFS aAnnotation)
     {
-        return selectCovered(Dependency.class, aAnnotation).stream().filter(dep -> 
-                DependencyFlavor.BASIC.equals(dep.getFlavor()) || dep.getFlavor() == null)
+        return selectCovered(Dependency.class, aAnnotation).stream().filter(
+                dep -> DependencyFlavor.BASIC.equals(dep.getFlavor()) || dep.getFlavor() == null)
                 .collect(Collectors.toList());
     }
 }

@@ -29,25 +29,26 @@ import org.xml.sax.helpers.DefaultHandler;
  * Read text from the Annotated Gigaword Corpus. This reader does <b>not</b> read any of the
  * annotations yet.
  */
-public class AnnotatedGigawordParser extends DefaultHandler
+public class AnnotatedGigawordParser
+    extends DefaultHandler
 {
     private final Resource resource;
-    
+
     private List<AnnotatedGigawordArticle> articleList = new ArrayList<>();
-    
+
     // flags for parsing articles
     private boolean inDocument = false;
     private boolean inSentences = false;
     private boolean inToken = false;
     private boolean inWord = false;
     private boolean inOffsetBegin = false;
-    
+
     // variables for reconstructing articles
     private StringBuilder docText = new StringBuilder();
     private String currentDocId = "";
     private String currentWord = "";
     private int currentOffsetBegin = 0;
-    
+
     public AnnotatedGigawordParser(Resource aResource)
     {
         super();
@@ -74,7 +75,7 @@ public class AnnotatedGigawordParser extends DefaultHandler
             inOffsetBegin = true;
         }
     }
-    
+
     @Override
     public void endElement(String uri, String localName, String qName)
     {
@@ -101,19 +102,21 @@ public class AnnotatedGigawordParser extends DefaultHandler
             inOffsetBegin = false;
         }
     }
-    
+
     @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) throws SAXException
+    {
         if (inWord) {
             currentWord = new String(ch, start, length);
         }
         if (inOffsetBegin) {
             currentOffsetBegin = Integer.parseInt(new String(ch, start, length).trim());
         }
-        
+
     }
-    
-    public List<AnnotatedGigawordArticle> getArticleList() {
+
+    public List<AnnotatedGigawordArticle> getArticleList()
+    {
         return articleList;
     }
 }

@@ -53,7 +53,7 @@ public class IOTestRunner
 {
     private static final String RESOURCE_COLLECTION_READER_BASE = "org.dkpro.core.api.io.ResourceCollectionReaderBase";
     private static final String JCAS_FILE_WRITER_IMPL_BASE = "org.dkpro.core.api.io.JCasFileWriter_ImplBase";
-        
+
     /**
      * @deprecated Use {@link ReaderAssert} instead.
      */
@@ -62,10 +62,8 @@ public class IOTestRunner
             Class<? extends AnalysisComponent> aWriter, String aFile)
         throws Exception
     {
-        ReaderAssert.assertThat(aReader)
-                .readingFrom("src/test/resources/" + aFile)
-                .usingWriter(aWriter)
-                .outputAsString(FilenameUtils.getName(aFile))
+        ReaderAssert.assertThat(aReader).readingFrom("src/test/resources/" + aFile)
+                .usingWriter(aWriter).outputAsString(FilenameUtils.getName(aFile))
                 .satisfies(output -> assertThat(output.trim()).isEqualToNormalizingNewlines(
                         contentOf(new File("src/test/resources/" + aFile), UTF_8).trim()));
     }
@@ -74,8 +72,8 @@ public class IOTestRunner
             Class<? extends AnalysisComponent> aWriter, String aFile, TestOptions aOptions)
         throws Exception
     {
-        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile,
-                aFile, aOptions);
+        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile, aFile,
+                aOptions);
     }
 
     public static void testRoundTrip(CollectionReaderDescription aReader,
@@ -89,12 +87,12 @@ public class IOTestRunner
             AnalysisEngineDescription aWriter, String aFile)
         throws Exception
     {
-//        ReaderAssert.assertThat(aReader)
-//                .readingFrom("src/test/resources/" + aFile)
-//                .usingWriter(aWriter)
-//                .asString()
-//                .isEqualToNormalizingNewlines(
-//                        contentOf(new File("src/test/resources/" + aFile), UTF_8));
+        // ReaderAssert.assertThat(aReader)
+        // .readingFrom("src/test/resources/" + aFile)
+        // .usingWriter(aWriter)
+        // .asString()
+        // .isEqualToNormalizingNewlines(
+        // contentOf(new File("src/test/resources/" + aFile), UTF_8));
         testOneWay(aReader, aWriter, aFile, aFile);
     }
 
@@ -111,7 +109,7 @@ public class IOTestRunner
     {
         testOneWay(aReader, aExpectedFile, aFile, null);
     }
-    
+
     /**
      * One-way test reading a file and writing to the same format but comparing against a reference
      * file instead of the original file.
@@ -135,13 +133,12 @@ public class IOTestRunner
                 + "-" + FilenameUtils.getBaseName(aFile);
         File output = new File("target/test-output/" + outputFolder + "/dump.txt");
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                CasDumpWriter.class, CasDumpWriter.PARAM_TARGET_LOCATION, output,
-                CasDumpWriter.PARAM_SORT, true);
+        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
+                CasDumpWriter.PARAM_TARGET_LOCATION, output, CasDumpWriter.PARAM_SORT, true);
 
         testOneWay2(aReader, writer, aExpectedFile, "dump.txt", aFile, aOptions);
     }
-    
+
     public static void testOneWay(Class<? extends CollectionReader> aReader,
             Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile)
         throws Exception
@@ -156,16 +153,16 @@ public class IOTestRunner
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
         if (!dkproReaderBase.isAssignableFrom(aReader)) {
-            throw new IllegalArgumentException("Reader must be a subclass of ["
-                    + RESOURCE_COLLECTION_READER_BASE + "]");
+            throw new IllegalArgumentException(
+                    "Reader must be a subclass of [" + RESOURCE_COLLECTION_READER_BASE + "]");
         }
 
         Class<?> dkproWriterBase = Class.forName(JCAS_FILE_WRITER_IMPL_BASE);
         if (!dkproWriterBase.isAssignableFrom(aWriter)) {
-            throw new IllegalArgumentException("writer must be a subclass of ["
-                    + JCAS_FILE_WRITER_IMPL_BASE + "]");
+            throw new IllegalArgumentException(
+                    "writer must be a subclass of [" + JCAS_FILE_WRITER_IMPL_BASE + "]");
         }
-        
+
         // We assume that the writer is creating a file with the same extension as is provided as
         // the expected file
         String extension = FilenameUtils.getExtension(aExpectedFile);
@@ -173,8 +170,8 @@ public class IOTestRunner
         Object[] aExtraParams = {};
 
         testOneWay2(createReaderDescription(aReader, aExtraParams),
-                createEngineDescription(aWriter, aExtraParams), aExpectedFile, name + "."
-                        + extension, aFile, aOptions);
+                createEngineDescription(aWriter, aExtraParams), aExpectedFile,
+                name + "." + extension, aFile, aOptions);
     }
 
     public static void testOneWay(CollectionReaderDescription aReader,
@@ -191,17 +188,17 @@ public class IOTestRunner
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
         if (!dkproReaderBase.isAssignableFrom(Class.forName(aReader.getImplementationName()))) {
-            throw new IllegalArgumentException("Reader must be a subclass of ["
-                    + RESOURCE_COLLECTION_READER_BASE + "]");
+            throw new IllegalArgumentException(
+                    "Reader must be a subclass of [" + RESOURCE_COLLECTION_READER_BASE + "]");
         }
 
         Class<?> dkproWriterBase = Class.forName(JCAS_FILE_WRITER_IMPL_BASE);
         if (!dkproWriterBase
                 .isAssignableFrom(Class.forName(aWriter.getAnnotatorImplementationName()))) {
-            throw new IllegalArgumentException("writer must be a subclass of ["
-                    + JCAS_FILE_WRITER_IMPL_BASE + "]");
+            throw new IllegalArgumentException(
+                    "writer must be a subclass of [" + JCAS_FILE_WRITER_IMPL_BASE + "]");
         }
-        
+
         // We assume that the writer is creating a file with the same extension as is provided as
         // the expected file
         String extension = FilenameUtils.getExtension(aExpectedFile);
@@ -209,7 +206,7 @@ public class IOTestRunner
 
         testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile, aOptions);
     }
-    
+
     @Deprecated
     public static void testOneWay2(Class<? extends CollectionReader> aReader,
             Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aOutputFile,
@@ -217,10 +214,10 @@ public class IOTestRunner
         throws Exception
     {
         testOneWay2(createReaderDescription(aReader, aExtraParams),
-                createEngineDescription(aWriter, aExtraParams),
-                aExpectedFile, aOutputFile, aFile, null);
+                createEngineDescription(aWriter, aExtraParams), aExpectedFile, aOutputFile, aFile,
+                null);
     }
-    
+
     public static void testOneWay2(CollectionReaderDescription aReader,
             AnalysisEngineDescription aWriter, String aExpectedFile, String aOutputFile,
             String aInputFile, TestOptions aOptions)
@@ -228,7 +225,7 @@ public class IOTestRunner
     {
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
                 + "-" + FilenameUtils.getBaseName(aInputFile);
-        
+
         File reference = new File("src/test/resources/" + aExpectedFile);
         File input = new File("src/test/resources/" + aInputFile);
         File output = new File("target/test-output/" + outputFolder);
@@ -248,14 +245,14 @@ public class IOTestRunner
         }
 
         List<AnalysisEngineDescription> processors = new ArrayList<>();
-        
+
         // By default, we strip the document metadata if no options are specified
         if (aOptions == null || !aOptions.keepDocumentMetadata) {
             processors.add(createEngineDescription(DocumentMetaDataStripper.class));
         }
 
         processors.add(createEngineDescription(Validator.class));
-        
+
         if (aOptions != null && aOptions.processor != null) {
             processors.add(aOptions.processor);
         }
@@ -263,11 +260,11 @@ public class IOTestRunner
         processors.add(aWriter);
 
         Validator.options = aOptions != null ? aOptions : new TestOptions();
-        
+
         runPipeline(aReader, processors.toArray(new AnalysisEngineDescription[] {}));
 
         AssertAnnotations.assertValid(Validator.messages);
-        
+
         if (aOptions == null || aOptions.resultAssertor == null) {
             String expected = FileUtils.readFileToString(reference, "UTF-8");
             String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
@@ -279,37 +276,35 @@ public class IOTestRunner
             aOptions.resultAssertor.accept(reference, new File(output, aOutputFile));
         }
     }
-    
+
     public static class Validator
         extends JCasAnnotator_ImplBase
     {
         public static List<Message> messages;
-        
+
         public static TestOptions options;
-        
+
         @Override
-        public void initialize(UimaContext aContext)
-            throws ResourceInitializationException
+        public void initialize(UimaContext aContext) throws ResourceInitializationException
         {
             super.initialize(aContext);
-            
+
             messages = new ArrayList<>();
         }
-        
+
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             CasValidator validator = CasValidator.createWithAllChecks();
             options.skippedChecks.forEach(check -> validator.removeCheck(check));
             messages = validator.analyze(aJCas);
         }
-        
+
         @Override
         public void collectionProcessComplete() throws AnalysisEngineProcessException
         {
             super.collectionProcessComplete();
-            
+
             AssertAnnotations.assertValid(Validator.messages);
         }
     }

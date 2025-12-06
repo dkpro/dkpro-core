@@ -189,7 +189,7 @@ public class Conll2012Reader
      * Load the constituent tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = // 
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = //
             ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
@@ -205,7 +205,7 @@ public class Conll2012Reader
      * Use the document ID declared in the file header instead of using the filename.
      */
     public static final String PARAM_USE_HEADER_METADATA = "useHeaderMetadata";
-    @ConfigurationParameter(name = PARAM_USE_HEADER_METADATA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_USE_HEADER_METADATA, defaultValue = "true")
     private boolean useHeaderMetadata;
 
     private static final String UNUSED = "-";

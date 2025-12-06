@@ -42,7 +42,7 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 public class RuntimeProvider
 {
     private Log log = LogFactory.getLog(getClass());
-    
+
     public static final String MODE_EXECUTABLE = "executable";
 
     private boolean installed;
@@ -71,7 +71,7 @@ public class RuntimeProvider
             if (!mfl.endsWith("/")) {
                 mfl += "/";
             }
-            
+
             boolean fallbackTo32Tried = false;
             URL manifestUrl = null;
             try {
@@ -83,20 +83,22 @@ public class RuntimeProvider
             catch (FileNotFoundException e) {
                 // Ok, maybe we try a 32-bit fallback
             }
-            
+
             if (manifestUrl == null
                     && PlatformDetector.ARCH_X86_64.equals(platformDetector.getArch())) {
                 fallbackTo32Tried = true;
                 try {
-                    manifestUrl = resolveLocation(baseLocation + platformDetector.getOs() + "-"
-                            + PlatformDetector.ARCH_X86_32 + "/manifest.properties", this, null);
+                    manifestUrl = resolveLocation(
+                            baseLocation + platformDetector.getOs() + "-"
+                                    + PlatformDetector.ARCH_X86_32 + "/manifest.properties",
+                            this, null);
                     platformId = platformDetector.getOs() + "-" + PlatformDetector.ARCH_X86_32;
                 }
                 catch (FileNotFoundException e) {
                     // Ok, well, then we will generate an error next.
                 }
             }
-            
+
             if (manifestUrl == null) {
                 StringBuilder sb = new StringBuilder();
                 sb.append("No files found for [").append(platformDetector.getPlatformId())
@@ -110,7 +112,7 @@ public class RuntimeProvider
                 log.warn("No binaries found for [" + platformDetector.getPlatformId() + "], using ["
                         + platformId + "] instead");
             }
-            
+
             manifest = PropertiesLoaderUtils.loadProperties(new UrlResource(manifestUrl));
         }
         return manifest;

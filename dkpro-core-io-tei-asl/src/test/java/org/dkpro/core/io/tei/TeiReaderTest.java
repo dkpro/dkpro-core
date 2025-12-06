@@ -86,9 +86,8 @@ public class TeiReaderTest
                         TeiWriter.class, TeiWriter.PARAM_OVERWRITE, true)
                 .writingTo(tempDir);//
         x.outputAsString()//
-                .isEqualToNormalizingNewlines(contentOf(
-                        new File("src/test/resources/with_xml_id/input-ref.xml"),
-                        UTF_8));
+                .isEqualToNormalizingNewlines(
+                        contentOf(new File("src/test/resources/with_xml_id/input-ref.xml"), UTF_8));
     }
 
     @Test

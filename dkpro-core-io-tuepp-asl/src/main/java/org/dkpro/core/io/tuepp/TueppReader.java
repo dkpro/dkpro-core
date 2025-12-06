@@ -60,8 +60,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * UIMA collection reader for Tübingen Partially Parsed Corpus of Written German (TüPP-D/Z) XML 
- * files. 
+ * UIMA collection reader for Tübingen Partially Parsed Corpus of Written German (TüPP-D/Z) XML
+ * files.
  * <ul>
  * <li>Only the part-of-speech with the best rank (rank 1) is read, if there is a tie between
  * multiple tags, the first one from the XML file is read.</li>
@@ -74,14 +74,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <li>Meta data headers are not read.</li>
  * </ul>
  */
-@MimeTypeCapability({MimeTypes.APPLICATION_X_TUEPP_XML})
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_TUEPP_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class TueppReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -89,29 +87,29 @@ public class TueppReader
      * Day
      */
     private static final String TAG_DAY = "DAY";
-    
+
     /**
      * Article
      */
     private static final String TAG_ART = "ART";
-    
+
     /**
      * Forced line break
      */
     private static final String TAG_BR = "BR";
-    
+
     /**
      * Main title
      */
     private static final String TAG_TI = "TI";
     private static final String TAG_H2 = "H2";
     private static final String TAG_H3 = "H3";
-    
+
     /**
      * Text body
      */
     private static final String TAG_TX = "TX";
-    
+
     /**
      * Text type
      */
@@ -176,15 +174,13 @@ public class TueppReader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -201,8 +197,7 @@ public class TueppReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     private MappingProvider posMappingProvider;
@@ -211,22 +206,21 @@ public class TueppReader
     private JAXBContext context;
     private Unmarshaller unmarshaller;
     private XMLInputFactory xmlInputFactory;
-    
+
     // State between files
     private Resource res;
     private InputStream is;
     private XMLEventReader xmlEventReader;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
         posMappingProvider = createPosMappingProvider(this, mappingPosLocation, posTagset,
                 getLanguage());
 
-        // Set up XML deserialization 
+        // Set up XML deserialization
         try {
             context = JAXBContext.newInstance(TueppToken.class);
             unmarshaller = context.createUnmarshaller();
@@ -253,23 +247,22 @@ public class TueppReader
         is = null;
         res = null;
     }
-    
+
     @Override
     public void destroy()
     {
         closeAll();
         super.destroy();
     }
-    
+
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         // If there is still a reader, then there is still an article. This requires that we call
         // step() already during initialization.
         return xmlEventReader != null;
     }
-    
+
     /**
      * Seek article in file. Stop once article element has been found without reading it.
      */
@@ -279,7 +272,7 @@ public class TueppReader
         while (true) {
             try {
                 if (res == null) {
-                    // Call to super here because we want to know about the resources, not the 
+                    // Call to super here because we want to know about the resources, not the
                     // articles
                     if (getResourceIterator().hasNext()) {
                         // There are still resources left to read
@@ -293,7 +286,7 @@ public class TueppReader
                         return;
                     }
                 }
-                
+
                 // Seek article in file. Stop once article element has been found without reading it
                 XMLEvent e = null;
                 while ((e = xmlEventReader.peek()) != null) {
@@ -304,7 +297,7 @@ public class TueppReader
                         xmlEventReader.next();
                     }
                 }
-                
+
                 // End of file reached
                 closeAll();
             }
@@ -313,10 +306,9 @@ public class TueppReader
             }
         }
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         try {
             posMappingProvider.configure(aJCas.getCas());
@@ -380,17 +372,17 @@ public class TueppReader
     {
         Token token = aBuilder.add(aToken.form, Token.class);
         aBuilder.add(" ");
-        
+
         TueppPos pos = aToken.getPrimaryTag();
         if (pos != null) {
             Type posType = posMappingProvider.getTagType(pos.tag);
-            POS posAnno = (POS) aBuilder.getJCas().getCas()
-                    .createAnnotation(posType, token.getBegin(), token.getEnd());
+            POS posAnno = (POS) aBuilder.getJCas().getCas().createAnnotation(posType,
+                    token.getBegin(), token.getEnd());
             posAnno.setPosValue(pos.tag != null ? pos.tag.intern() : null);
             POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             token.setPos(posAnno);
-            
+
             TueppBaseform baseform = pos.getPrimaryBaseForm();
             if (baseform != null) {
                 Lemma lemma = new Lemma(aBuilder.getJCas(), token.getBegin(), token.getEnd());
@@ -412,7 +404,7 @@ public class TueppReader
         return aEvent.isEndElement()
                 && ((EndElement) aEvent).getName().getLocalPart().equals(aElement);
     }
-    
+
     private static void closeQuietly(XMLEventReader aRes)
     {
         if (aRes != null) {

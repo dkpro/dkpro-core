@@ -38,14 +38,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class NifReaderTest
 {
     @Test
-    public void testBrown()
-        throws Exception
+    public void testBrown() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(NifReader.class,
                 NifReader.PARAM_SOURCE_LOCATION, "src/test/resources/nif/brown/a01-cooked.ttl");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-        
+
         assertEquals(0, select(jcas, Heading.class).size());
         assertEquals(0, select(jcas, Paragraph.class).size());
         assertEquals(98, select(jcas, Sentence.class).size());
@@ -57,14 +56,13 @@ public class NifReaderTest
     }
 
     @Test
-    public void testKore50()
-        throws Exception
+    public void testKore50() throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(NifReader.class,
                 NifReader.PARAM_SOURCE_LOCATION, "src/test/resources/nif/kore50/kore50-cooked.ttl");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-        
+
         assertEquals(0, select(jcas, Heading.class).size());
         assertEquals(0, select(jcas, Paragraph.class).size());
         assertEquals(50, select(jcas, Sentence.class).size());

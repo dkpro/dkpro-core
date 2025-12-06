@@ -41,23 +41,23 @@ public class MalletLdaUtil
     /**
      * Estimate a model for testing.
      *
-     * @param modelFile the target {@link File}
-     * @throws UIMAException    if a UIMA error occurs
-     * @throws IOException if an I/O error occurs
+     * @param modelFile
+     *            the target {@link File}
+     * @throws UIMAException
+     *             if a UIMA error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
-    public static void trainModel(File modelFile)
-            throws UIMAException, IOException
+    public static void trainModel(File modelFile) throws UIMAException, IOException
     {
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, TextReader.PARAM_PATTERNS,
+                CAS_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, modelFile,
-                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
+                MalletLdaTopicModelTrainer.class, MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION,
+                modelFile, MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
     }

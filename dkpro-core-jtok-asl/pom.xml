@@ -30,7 +30,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <jtok.version>2.1.21</jtok.version>
+    <jtok.version>2.1.23</jtok.version>
   </properties>
 
   <repositories>

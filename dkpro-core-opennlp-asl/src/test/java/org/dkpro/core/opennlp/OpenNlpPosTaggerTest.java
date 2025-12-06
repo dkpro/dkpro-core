@@ -56,10 +56,8 @@ public class OpenNlpPosTaggerTest
         }
         // end::example[]
 
-        assertPOS(
-                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN" }, 
-                new String[] { "DT", "VBZ", "DT", "NN" },
-                select(jcas, POS.class));
+        assertPOS(new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN" },
+                new String[] { "DT", "VBZ", "DT", "NN" }, select(jcas, POS.class));
     }
 
     @Test
@@ -72,8 +70,7 @@ public class OpenNlpPosTaggerTest
 
         try {
             TestRunner.autoloadModelsOnNextTestRun();
-            runTest("en", null, "This is a test .",
-                    new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+            runTest("en", null, "This is a test .", new String[] { "DT", "VBZ", "DT", "NN", "." },
                     new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
         }
         finally {
@@ -104,12 +101,13 @@ public class OpenNlpPosTaggerTest
             TestRunner.autoloadModelsOnNextTestRun();
 
             String[] tagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
-            String[] tags = { "DT",   "VBZ", "DT",  "NN",   "." };
+            String[] tags = { "DT", "VBZ", "DT", "NN", "." };
 
             AnalysisEngine engine = createEngine(OpenNlpPosTagger.class,
-                    OpenNlpPosTagger.PARAM_MODEL_ARTIFACT_URI, "mvn:de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent:20120616.1",
-                    OpenNlpPosTagger.PARAM_VARIANT, "maxent",
-                    OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
+                    OpenNlpPosTagger.PARAM_MODEL_ARTIFACT_URI,
+                    "mvn:de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent:20120616.1",
+                    OpenNlpPosTagger.PARAM_VARIANT, "maxent", OpenNlpPosTagger.PARAM_PRINT_TAGSET,
+                    true);
 
             JCas jcas = TestRunner.runTest(engine, "en", "This is a test .");
 
@@ -137,9 +135,8 @@ public class OpenNlpPosTaggerTest
     {
         AssumeResource.assumeResource(OpenNlpPosTagger.class, "tagger", language, variant);
 
-        AnalysisEngine engine = createEngine(OpenNlpPosTagger.class,
-                OpenNlpPosTagger.PARAM_VARIANT, variant,
-                OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
+        AnalysisEngine engine = createEngine(OpenNlpPosTagger.class, OpenNlpPosTagger.PARAM_VARIANT,
+                variant, OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 

@@ -93,7 +93,7 @@ public abstract class PdfLayoutEventStripper
     {
         super();
     }
-    
+
     /**
      * This will take a PDDocument and write the text of that document to the print writer.
      * 
@@ -110,21 +110,19 @@ public abstract class PdfLayoutEventStripper
         currentPageNo = 0;
         document = doc;
         startDocument(document);
-        
+
         processPages(document.getPages());
         endDocument(document);
     }
-    
+
     private void resetEngine()
     {
         currentPageNo = 0;
         document = null;
-        if (charactersByArticle != null)
-        {
+        if (charactersByArticle != null) {
             charactersByArticle.clear();
         }
-        if (characterListMapping != null)
-        {
+        if (characterListMapping != null) {
             characterListMapping.clear();
         }
     }
@@ -141,12 +139,10 @@ public abstract class PdfLayoutEventStripper
     protected void processPages(PDPageTree pages) throws IOException
     {
         maxPage = pages.getCount();
-        
-        for (PDPage page : pages)
-        {
+
+        for (PDPage page : pages) {
             currentPageNo++;
-            if (page.hasContents())
-            {
+            if (page.hasContents()) {
                 processPage(page);
             }
         }

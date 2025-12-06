@@ -25,8 +25,7 @@ import org.junit.jupiter.api.Test;
 public class XcesXmlReaderTest
 {
     @Test
-    public void xcesOneWayBasicTest()
-        throws Exception
+    public void xcesOneWayBasicTest() throws Exception
     {
         testOneWay(
                 createReaderDescription(XcesBasicXmlReader.class,
@@ -36,13 +35,11 @@ public class XcesXmlReaderTest
     }
 
     @Test
-    public void xcesOneWayTest()
-        throws Exception
+    public void xcesOneWayTest() throws Exception
     {
         testOneWay(
-                createReaderDescription(XcesXmlReader.class,
-                        XcesXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                        XcesXmlReader.PARAM_LANGUAGE, "el"),
+                createReaderDescription(XcesXmlReader.class, XcesXmlReader.PARAM_SOURCE_LOCATION,
+                        "src/test/resources/", XcesXmlReader.PARAM_LANGUAGE, "el"),
                 "xces-complex.xml.dump", "xces-complex.xml");
     }
 }

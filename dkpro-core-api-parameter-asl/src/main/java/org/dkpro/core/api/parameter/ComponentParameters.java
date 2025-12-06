@@ -48,16 +48,18 @@ public final class ComponentParameters
     public static final String PARAM_ACCEPTED_TAGS_REGEX = "acceptedTagsRegex";
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = "modelArtifactUri";
-    
+
     /**
      * Location from which the model is read. This is either a local path or a classpath location.
      * In the latter case, the model artifact (if any) is searched as well.
@@ -213,7 +215,7 @@ public final class ComponentParameters
     private static final String TAG_SET = "TagSet";
 
     private static final String MAPPING_LOCATION = "MappingLocation";
-    
+
     private static final String COVERED_TEXT = "CoveredText";
 
     // =============================================================================================
@@ -277,7 +279,7 @@ public final class ComponentParameters
     public static final String PARAM_WRITE_DEPENDENCY = WRITE + DEPENDENCY;
 
     public static final String PARAM_WRITE_NAMED_ENTITY = WRITE + NAMED_ENTITY;
-    
+
     public static final String PARAM_WRITE_COVERED_TEXT = WRITE + COVERED_TEXT;
 
     public static final String PARAM_WRITE_SEMANTIC_PREDICATE = WRITE + SEMANTIC_PREDICATE;
@@ -313,12 +315,12 @@ public final class ComponentParameters
     // =============================================================================================
 
     public static final String DEFAULT_MAPPING_ENABLED = "true";
-    
+
     /**
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = "mappingEnabled";
-    
+
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */

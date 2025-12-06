@@ -142,7 +142,7 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s1 = DecompoundedWord.createFromString("Aktion(s)+plan");
         DecompoundedWord s2 = DecompoundedWord.createFromString("Aktionsplan");
-        
+
         assertThat(s1.isCompound()).isTrue();
         assertThat(s2.isCompound()).isFalse();
     }
@@ -152,7 +152,7 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s1 = DecompoundedWord.createFromString("Aktion(s)+plan");
         DecompoundedWord s2 = DecompoundedWord.createFromString("unter+flur+konvektor(en)");
-        
+
         assertThat(s1.hasLastFragmentMorpheme()).isFalse();
         assertThat(s2.hasLastFragmentMorpheme()).isTrue();
     }

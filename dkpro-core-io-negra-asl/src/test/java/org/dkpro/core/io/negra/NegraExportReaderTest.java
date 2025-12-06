@@ -23,62 +23,49 @@ import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import org.junit.jupiter.api.Test;
 
 /**
- * Sample is taken from
- * http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus
+ * Sample is taken from http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus
  * /corpus-sample.export Only the second sentence is used.
  *
  */
 public class NegraExportReaderTest
 {
     @Test
-    public void negraTest()
-        throws Exception
+    public void negraTest() throws Exception
     {
         testOneWay(
-                createReaderDescription(NegraExportReader.class,
-                        NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
-                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
-                "sentence.export.dump", 
-                "sentence.export");
+                createReaderDescription(NegraExportReader.class, NegraExportReader.PARAM_LANGUAGE,
+                        "de", NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true),
+                "sentence.export.dump", "sentence.export");
     }
 
     @Test
-    public void negraTigerTest()
-        throws Exception
+    public void negraTigerTest() throws Exception
     {
         testOneWay(
-                createReaderDescription(NegraExportReader.class,
-                        NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
-                "tiger-sample.export.dump", 
-                "tiger-sample.export");
+                createReaderDescription(NegraExportReader.class, NegraExportReader.PARAM_LANGUAGE,
+                        "de", NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true),
+                "tiger-sample.export.dump", "tiger-sample.export");
     }
 
     @Test
-    public void tuebaTest()
-        throws Exception
+    public void tuebaTest() throws Exception
     {
         testOneWay(
-                createReaderDescription(NegraExportReader.class,
-                        NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
-                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
-                "tueba-sample.export.dump", 
-                "tueba-sample.export");
+                createReaderDescription(NegraExportReader.class, NegraExportReader.PARAM_LANGUAGE,
+                        "de", NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true),
+                "tueba-sample.export.dump", "tueba-sample.export");
     }
 
     @Test
-    public void testFormat4WithCoref()
-        throws Exception
+    public void testFormat4WithCoref() throws Exception
     {
         testOneWay(
-                createReaderDescription(NegraExportReader.class,
-                        NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
-                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
-                "format4-with-coref-sample.export.dump", 
-                "format4-with-coref-sample.export");
+                createReaderDescription(NegraExportReader.class, NegraExportReader.PARAM_LANGUAGE,
+                        "de", NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true),
+                "format4-with-coref-sample.export.dump", "format4-with-coref-sample.export");
     }
 }

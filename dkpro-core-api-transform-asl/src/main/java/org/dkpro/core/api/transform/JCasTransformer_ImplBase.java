@@ -52,23 +52,20 @@ public abstract class JCasTransformer_ImplBase
     private String[] typesToCopy;
 
     @Override
-    public boolean hasNext()
-        throws AnalysisEngineProcessException
+    public boolean hasNext() throws AnalysisEngineProcessException
     {
         return output != null;
     }
 
     @Override
-    public AbstractCas next()
-        throws AnalysisEngineProcessException
+    public AbstractCas next() throws AnalysisEngineProcessException
     {
         JCas buffer = output;
         output = null;
         return buffer;
     }
 
-    protected void beforeProcess(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    protected void beforeProcess(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         try {
             DocumentMetaData.copy(aInput, aOutput);
@@ -76,8 +73,8 @@ public abstract class JCasTransformer_ImplBase
         catch (IllegalArgumentException e) {
             // If there is no metadata, then it is not there and we do not copy it. No need to
             // warn.
-            //getLogger().warn("Document does not have a DocumentMetaData annotation.");
-            
+            // getLogger().warn("Document does not have a DocumentMetaData annotation.");
+
             // If the source document has a language set, copy it to the target even if we do not
             // use a DKPro Core DocumentMetaData annotation as document annotation
             if (aInput.getDocumentLanguage() != null) {
@@ -94,7 +91,7 @@ public abstract class JCasTransformer_ImplBase
         CAS inputCas = aInput.getCas();
 
         CasCopier copier = new CasCopier(inputCas, aOutput.getCas());
-        
+
         Feature mDestSofaFeature = aOutput.getTypeSystem()
                 .getFeatureByFullName(CAS.FEATURE_FULL_NAME_SOFA);
 
@@ -119,10 +116,9 @@ public abstract class JCasTransformer_ImplBase
     {
         return typesToCopy;
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS inputCas = aJCas.getCas();
         output = getEmptyJCas();
@@ -132,6 +128,5 @@ public abstract class JCasTransformer_ImplBase
         afterProcess(aJCas, output);
     }
 
-    public abstract void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException;
+    public abstract void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException;
 }

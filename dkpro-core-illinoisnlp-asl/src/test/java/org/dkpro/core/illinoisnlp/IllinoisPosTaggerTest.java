@@ -35,30 +35,26 @@ import edu.illinois.cs.cogcomp.pos.POSTagPlain;
 public class IllinoisPosTaggerTest
 {
     @Test
-    public void testEnglishNative()
-        throws Exception
+    public void testEnglishNative() throws Exception
     {
         File tempFile = File.createTempFile("dkpro", ".txt");
         FileUtils.write(tempFile, "This is a test .", "UTF-8");
         POSTagPlain.main(new String[] { tempFile.getAbsolutePath() });
     }
-    
+
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", null, "This is a test . \n",
-                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+        runTest("en", null, "This is a test . \n", new String[] { "DT", "VBZ", "DT", "NN", "." },
                 new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
-        runTest("en", null, "A neural net . \n",
-                new String[] { "DT",  "NN",     "NN",  "." },
-                new String[] { "POS_DET", "POS_NOUN",    "POS_NOUN",  "POS_PUNCT" });
+        runTest("en", null, "A neural net . \n", new String[] { "DT", "NN", "NN", "." },
+                new String[] { "POS_DET", "POS_NOUN", "POS_NOUN", "POS_PUNCT" });
 
         JCas jcas = runTest("en", null, "John is purchasing oranges . \n",
-                new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
                 new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
-        
+
         String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC", "CD", "DT",
                 "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS", "PDT",
                 "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD",
@@ -79,7 +75,7 @@ public class IllinoisPosTaggerTest
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-        
+
         return jcas;
     }
 }

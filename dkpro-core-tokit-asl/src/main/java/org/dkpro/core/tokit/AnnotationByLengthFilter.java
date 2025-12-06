@@ -52,8 +52,7 @@ public class AnnotationByLengthFilter
      * A set of annotation types that should be filtered.
      */
     public static final String PARAM_FILTER_ANNOTATION_TYPES = "FilterTypes";
-    @ConfigurationParameter(name = PARAM_FILTER_ANNOTATION_TYPES, mandatory = true, 
-            defaultValue = {})
+    @ConfigurationParameter(name = PARAM_FILTER_ANNOTATION_TYPES, mandatory = true, defaultValue = {})
     private Set<String> filterTypes;
 
     /**

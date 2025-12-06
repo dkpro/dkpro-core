@@ -44,8 +44,7 @@ public class StopWordSet
         data = new HashSet<String>();
     }
 
-    public StopWordSet(String[] fileNames)
-        throws IOException
+    public StopWordSet(String[] fileNames) throws IOException
     {
         super();
         data = new HashSet<String>();
@@ -63,8 +62,7 @@ public class StopWordSet
      * @throws IOException
      *             if the file could not be read.
      */
-    public void addStopWordListFile(String fileName)
-        throws IOException
+    public void addStopWordListFile(String fileName) throws IOException
     {
         try (Reader reader = new FileReader(fileName)) {
             load(new FileReader(fileName));
@@ -72,8 +70,7 @@ public class StopWordSet
     }
 
     @Override
-    public void load(DataResource dataRes)
-        throws ResourceInitializationException
+    public void load(DataResource dataRes) throws ResourceInitializationException
     {
         try (InputStream is = dataRes.getInputStream()) {
             load(is);
@@ -83,14 +80,12 @@ public class StopWordSet
         }
     }
 
-    public void load(InputStream aIs)
-        throws IOException
+    public void load(InputStream aIs) throws IOException
     {
         load(aIs, "UTF-8");
     }
 
-    public void load(InputStream aIs, String aEncoding)
-        throws IOException
+    public void load(InputStream aIs, String aEncoding) throws IOException
     {
         load(new InputStreamReader(aIs, aEncoding));
     }
@@ -104,8 +99,7 @@ public class StopWordSet
      * @throws IOException
      *             if the data could not be read.
      */
-    public void load(Reader aReader)
-        throws IOException
+    public void load(Reader aReader) throws IOException
     {
         String line = null;
         BufferedReader br = new BufferedReader(aReader);

@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlID;
 
 public class PerseusSentence
 {
-    @XmlID 
+    @XmlID
     @XmlAttribute(name = "id")
     public String id;
 

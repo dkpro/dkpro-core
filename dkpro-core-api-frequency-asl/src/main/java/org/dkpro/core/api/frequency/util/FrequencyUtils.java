@@ -21,17 +21,17 @@ public class FrequencyUtils
 {
     /**
      * Return the length of the phrase in tokens, i.e. which n-th gram this is.
-     * @param phrase The phrase to test.
+     * 
+     * @param phrase
+     *            The phrase to test.
      * @return The length of the phrase in tokens
      */
-    public static int getPhraseLength(String phrase) {
+    public static int getPhraseLength(String phrase)
+    {
         return phrase.split(" ").length;
     }
 
-    public static double loglikelihood(
-            long tfCorpus1,
-            long sizeCorpus1,
-            long tfCorpus2,
+    public static double loglikelihood(long tfCorpus1, long sizeCorpus1, long tfCorpus2,
             long sizeCorpus2)
     {
         double E1 = (double) sizeCorpus1 * (tfCorpus1 + tfCorpus2) / (sizeCorpus1 + sizeCorpus2);

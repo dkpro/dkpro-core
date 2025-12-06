@@ -34,7 +34,6 @@ public abstract class Web1TProviderBase
     protected Searcher searcher;
     protected String basePath;
     protected String language;
-    
 
     @Override
     public long getNrOfNgrams(int n)
@@ -55,15 +54,13 @@ public abstract class Web1TProviderBase
     }
 
     @Override
-    protected long getFrequencyFromProvider(String phrase)
-        throws IOException
+    protected long getFrequencyFromProvider(String phrase) throws IOException
     {
         return searcher.getFrequency(phrase);
     }
 
     @Override
-    public Iterator<String> getNgramIterator(int n)
-        throws IOException
+    public Iterator<String> getNgramIterator(int n) throws IOException
     {
         return new JWeb1TIterator(basePath, n).getIterator();
     }

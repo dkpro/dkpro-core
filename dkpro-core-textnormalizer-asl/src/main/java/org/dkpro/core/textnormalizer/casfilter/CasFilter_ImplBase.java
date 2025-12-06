@@ -20,9 +20,12 @@ package org.dkpro.core.textnormalizer.casfilter;
 
 import java.util.List;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.AbstractCas;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.JCasMultiplier_ImplBase;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.FlowControllerFactory;
@@ -43,10 +46,9 @@ import org.apache.uima.resource.ResourceInitializationException;
  * method.
  * <p>
  * Note that methods such as
- * {@link SimplePipeline#runPipeline(org.apache.uima.cas.CAS, 
- * org.apache.uima.analysis_engine.AnalysisEngine...)} and {@link 
- * SimplePipeline#iteratePipeline(org.apache.uima.collection.CollectionReaderDescription, 
- * AnalysisEngineDescription...)}
+ * {@link SimplePipeline#runPipeline(CAS, AnalysisEngine...)}
+ * and
+ * {@link SimplePipeline#iteratePipeline(CollectionReaderDescription, AnalysisEngineDescription...)}
  * do not allow direct access to the JCas' produced by a JCasMultiplier.
  */
 public abstract class CasFilter_ImplBase
@@ -55,15 +57,13 @@ public abstract class CasFilter_ImplBase
     private JCas current = null;
 
     @Override
-    public boolean hasNext()
-        throws AnalysisEngineProcessException
+    public boolean hasNext() throws AnalysisEngineProcessException
     {
         return current != null;
     }
 
     @Override
-    public AbstractCas next()
-        throws AnalysisEngineProcessException
+    public AbstractCas next() throws AnalysisEngineProcessException
     {
         JCas result = current;
         current = null;
@@ -71,8 +71,7 @@ public abstract class CasFilter_ImplBase
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         current = pass(aJCas) ? aJCas : null;
     }
@@ -104,8 +103,8 @@ public abstract class CasFilter_ImplBase
         throws ResourceInitializationException
     {
         AggregateBuilder aggregateBuilder = new AggregateBuilder();
-        aggregateBuilder.setFlowControllerDescription(FlowControllerFactory
-                .createFlowControllerDescription(FixedFlowController.class,
+        aggregateBuilder.setFlowControllerDescription(
+                FlowControllerFactory.createFlowControllerDescription(FixedFlowController.class,
                         FixedFlowController.PARAM_ACTION_AFTER_CAS_MULTIPLIER, "drop"));
 
         for (AnalysisEngineDescription aEngine : aEngines) {
@@ -126,7 +125,7 @@ public abstract class CasFilter_ImplBase
             List<AnalysisEngineDescription> aEngines)
         throws ResourceInitializationException
     {
-        return createAggregateBuilderDescription(aEngines
-                .toArray(new AnalysisEngineDescription[aEngines.size()]));
+        return createAggregateBuilderDescription(
+                aEngines.toArray(new AnalysisEngineDescription[aEngines.size()]));
     }
 }

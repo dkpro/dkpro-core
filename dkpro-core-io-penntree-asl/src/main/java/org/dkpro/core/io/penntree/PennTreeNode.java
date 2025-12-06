@@ -27,7 +27,7 @@ public class PennTreeNode
     private PennTreeNode parent;
     private String label;
     private List<PennTreeNode> children = new ArrayList<PennTreeNode>();
-    
+
     public PennTreeNode getParent()
     {
         return parent;
@@ -57,18 +57,18 @@ public class PennTreeNode
     {
         children = aChildren;
     }
-    
+
     public void addChild(PennTreeNode aNode)
     {
         aNode.setParent(this);
         children.add(aNode);
     }
-    
+
     public boolean isPreTerminal()
     {
         return children.size() == 1 && children.get(0).isTerminal();
     }
-    
+
     public boolean isTerminal()
     {
         return children.isEmpty();

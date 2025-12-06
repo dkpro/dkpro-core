@@ -60,13 +60,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.CHUNKER)
 @ResourceMetaData(name = "Illinois CCG Chunker")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 @LanguageCapability("en")
 public class IllinoisChunker
     extends JCasAnnotator_ImplBase
@@ -77,10 +74,10 @@ public class IllinoisChunker
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
-    
-//    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-//    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-//    private String modelLocation;
+
+    // public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    // @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    // private String modelLocation;
 
     /**
      * Use this language instead of the document language.
@@ -89,16 +86,15 @@ public class IllinoisChunker
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
 
-//    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-//    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-//    private String variant;
-    
+    // public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    // @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    // private String variant;
+
     /**
-     * Load the chunk tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the chunk tag to UIMA type mapping from this location instead of locating the mapping
+     * automatically.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false, defaultValue = "classpath:/org/dkpro/core/api/syntax/tagset/en-conll2000-chunk.map")
     protected String chunkMappingLocation;
 
@@ -107,12 +103,12 @@ public class IllinoisChunker
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
-        modelProvider = new ModelProviderBase<Annotator>() {
+        modelProvider = new ModelProviderBase<Annotator>()
+        {
             {
                 setContextObject(IllinoisChunker.this);
                 setDefault(LOCATION, NOT_REQUIRED);
@@ -124,7 +120,7 @@ public class IllinoisChunker
                 if (!"en".equals(getAggregatedProperties().getProperty(LANGUAGE))) {
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
-                
+
                 ChunkerAnnotator annotator = new ChunkerAnnotator();
 
                 SingletonTagset tags = new SingletonTagset(Chunk.class, "conll2000");
@@ -143,20 +139,20 @@ public class IllinoisChunker
                 catch (IllegalAccessException e) {
                     throw new IllegalStateException(e);
                 }
-                
+
                 addTagset(tags);
 
                 if (printTagSet) {
                     getLogger().info(getTagset().toString());
                 }
-                
+
                 return annotator;
             }
         };
-        
-//        mappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
-//                language, modelProvider);
-        
+
+        // mappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
+        // language, modelProvider);
+
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, chunkMappingLocation);
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());

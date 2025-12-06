@@ -47,14 +47,14 @@ import gate.corpora.DocumentContentImpl;
 import gate.util.GateException;
 import gate.util.SimpleFeatureMapImpl;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+
 public class DKPro2Gate
 
 {
     /*
      * Converts DKPro to Gate using default unnamed annotation set (kept for backward compatibility
      */
-    public Document convert(JCas aSource, Document aTarget)
-        throws GateException
+    public Document convert(JCas aSource, Document aTarget) throws GateException
     {
         return convert(aSource, aTarget, null);
     }
@@ -66,23 +66,23 @@ public class DKPro2Gate
         throws GateException
     {
         IntOpenHashSet processed = new IntOpenHashSet();
-        
+
         aTarget.setContent(new DocumentContentImpl(aSource.getDocumentText()));
 
         AnnotationSet as;
-        
+
         if (annotationSetName == null || annotationSetName.length() == 0) {
             as = aTarget.getAnnotations();
         }
         else {
             as = aTarget.getAnnotations(annotationSetName);
         }
-        
+
         for (TOP fs : selectAll(aSource)) {
             if (processed.contains(fs.getAddress())) {
                 continue;
             }
-            
+
             if (fs instanceof Token) {
                 Token t = (Token) fs;
                 FeatureMap fm = new SimpleFeatureMapImpl();
@@ -126,8 +126,8 @@ public class DKPro2Gate
                             ORGANIZATION_ANNOTATION_TYPE, fm);
                 }
                 else {
-                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()),
-                            "NamedEntity", fm);
+                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()), "NamedEntity",
+                            fm);
                 }
             }
             else if (fs instanceof Sentence) {
@@ -139,10 +139,10 @@ public class DKPro2Gate
             else {
                 System.out.printf("Don't know how to handle type: %s%n", fs.getType().getName());
             }
-            
+
             processed.add(fs.getAddress());
         }
-        
+
         return aTarget;
     }
 }

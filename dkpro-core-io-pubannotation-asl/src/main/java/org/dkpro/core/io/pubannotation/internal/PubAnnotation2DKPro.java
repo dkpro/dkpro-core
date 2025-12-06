@@ -39,7 +39,7 @@ public class PubAnnotation2DKPro
     private String spanIdFeatureName;
     private String spanLabelFeatureName;
     private boolean resolveNamespaces;
-    
+
     public void convert(PADocument aDoc, JCas aCAS)
     {
         aCAS.setDocumentText(aDoc.getText());
@@ -52,7 +52,7 @@ public class PubAnnotation2DKPro
         if (isNotBlank(aDoc.getSourceId())) {
             dmd.setDocumentId(aDoc.getSourceId());
         }
-        
+
         // If the target is set in PubAnnotation, treat it as the document URI and clear the
         // documentBaseUri since we do not know the base URI for PubAnnotation files.
         // REC: not sure if this is a great idea...
@@ -84,7 +84,7 @@ public class PubAnnotation2DKPro
                 }
                 spanAnnotation.setFeatureValueFromString(spanLabelFeature, value);
             }
-            
+
             cas.addFsToIndexes(spanAnnotation);
         }
     }
@@ -93,12 +93,12 @@ public class PubAnnotation2DKPro
     {
         resolveNamespaces = aResolveNamespaces;
     }
-    
+
     public boolean getResolveNamespaces()
     {
         return resolveNamespaces;
     }
-    
+
     public void setSpanMapping(String aSpanType, String aSpanIdFeature, String aSpanLabelFeature)
     {
         spanTypeName = aSpanType;

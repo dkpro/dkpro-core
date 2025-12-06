@@ -37,22 +37,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 public class OpenNlpPosTaggerBulkTest
 {
     private static final String NO_TAGSET_CHECK = null;
-    
+
     private static final String[] TAGSET_BOSQUE = { "?", "adj", "adv", "art", "conj-c", "conj-s",
             "ec", "in", "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp",
             "punc", "v-fin", "v-ger", "v-inf", "v-pcp", "vp" };
-    
+
     private static final Object[][] DATA = {
-            { "en", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "This is a test .", 
+            { "en", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK, "This is a test .",
                     new String[] { "DT", "VBZ", "DT", "NN", "." },
                     new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "en", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "A neural net .", 
+            { "en", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK, "A neural net .",
                     new String[] { "DT", "JJ", "NN", "." },
                     new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" } },
-            { "en", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "John is purchasing oranges .",
+            { "en", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK, "John is purchasing oranges .",
                     new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
                     new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" } },
             // This is WRONG tagging. "jumps" is tagged as "NNS"
@@ -66,75 +63,61 @@ public class OpenNlpPosTaggerBulkTest
                     new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },
                     new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN",
                             "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" } },
-            { "de", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Das ist ein Test .", 
+            { "de", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Das ist ein Test .",
                     new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "de", "maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Das ist ein Test .",
+            { "de", "maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Das ist ein Test .",
                     new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "de", "perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Das ist ein Test .",
+            { "de", "perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Das ist ein Test .",
                     new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "it", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK, 
-                    "Questo è un test .", 
+            { "it", null, NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Questo è un test .",
                     new String[] { "PD", "Vip3", "RI", "Sn", "FS" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "it", "perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Questo è un test .",
+            { "it", "perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Questo è un test .",
                     new String[] { "PD", "Vip3", "RI", "Sn", "FS" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "es", "maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Esta es una prueba .",
+            { "es", "maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Esta es una prueba .",
                     new String[] { "PD", "VSI", "DI", "NC", "Fp" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "es", "maxent-ixa", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Esta es una prueba .",
+            { "es", "maxent-ixa", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Esta es una prueba .",
                     new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "es", "perceptron-ixa", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Esta es una prueba .",
+            { "es", "perceptron-ixa", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Esta es una prueba .",
                     new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "sv", "maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Detta är ett test .", 
+            { "sv", "maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Detta är ett test .",
                     new String[] { "PO", "AV", "EN", "NN", "IP" },
                     new String[] { "POS", "POS", "POS", "POS", "POS" } },
-            { "pt", null, "bosque", TAGSET_BOSQUE,
-                    "Este é um teste .", 
+            { "pt", null, "bosque", TAGSET_BOSQUE, "Este é um teste .",
                     new String[] { "pron-det", "v-fin", "art", "n", "punc" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "pt", "maxent", "bosque", TAGSET_BOSQUE,
-                    "Este é um teste .", 
+            { "pt", "maxent", "bosque", TAGSET_BOSQUE, "Este é um teste .",
                     new String[] { "pron-det", "v-fin", "art", "n", "punc" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "pt", "perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Este é um teste .",
+            { "pt", "perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Este é um teste .",
                     new String[] { "pron-det", "v-fin", "art", "n", "punc" },
                     new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" } },
-            { "pt", "mm-maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Este é um teste .",
+            { "pt", "mm-maxent", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Este é um teste .",
                     new String[] { "PROSUB", "V", "ART", "N", "." },
                     new String[] { "POS", "POS", "POS", "POS", "POS" } },
-            { "pt", "mm-perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Este é um teste .",
+            { "pt", "mm-perceptron", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Este é um teste .",
                     new String[] { "PROSUB", "V", "ART", "N", "." },
                     new String[] { "POS", "POS", "POS", "POS", "POS" } },
-            { "pt", "cogroo", NO_TAGSET_CHECK, NO_TAGSET_CHECK,
-                    "Este é um teste .",
+            { "pt", "cogroo", NO_TAGSET_CHECK, NO_TAGSET_CHECK, "Este é um teste .",
                     new String[] { "pron-det", "v-fin", "artm", "nm", "." },
                     new String[] { "POS", "POS", "POS", "POS", "POS" } } };
-    
-    public static Collection<Object[]> data() {
+
+    public static Collection<Object[]> data()
+    {
         return asList(DATA);
     }
-    
+
     @ParameterizedTest
     @MethodSource("data")
-    public void test(String language, String variant, String tagset,
-            String[] tags, String text, String[] originalPos, String[] mappedPos)
+    public void test(String language, String variant, String tagset, String[] tags, String text,
+            String[] originalPos, String[] mappedPos)
         throws Exception
     {
         if ((tags == null && tagset != null) || (tags != null && tagset == null)) {
@@ -142,16 +125,14 @@ public class OpenNlpPosTaggerBulkTest
                     "Tags and tagset must both be specified or both be null");
         }
         assumeResource(OpenNlpPosTagger.class, "tagger", language, variant);
-        
-        AnalysisEngine engine = createEngine(
-                OpenNlpPosTagger.class,
-                OpenNlpPosTagger.PARAM_VARIANT, variant,
-                OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
-        
+
+        AnalysisEngine engine = createEngine(OpenNlpPosTagger.class, OpenNlpPosTagger.PARAM_VARIANT,
+                variant, OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
+
         JCas jcas = TestRunner.runTest(engine, language, text);
-        
+
         assertPOS(mappedPos, originalPos, select(jcas, POS.class));
- 
+
         if (tagset != null) {
             assertTagset(POS.class, tagset, tags, jcas);
         }

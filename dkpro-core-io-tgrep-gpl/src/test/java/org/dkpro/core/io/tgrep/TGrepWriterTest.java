@@ -41,8 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class TGrepWriterTest
 {
     @Test
-    public void testTxt(@TempDir File outputPath)
-        throws Exception
+    public void testTxt(@TempDir File outputPath) throws Exception
     {
         String language = "en";
         String text = "This is a sample sentence. Followed by another one.";
@@ -73,10 +72,13 @@ public class TGrepWriterTest
 
         List<String> expected = new ArrayList<String>();
         expected.add("# testDocument,0,26");
-        expected.add("(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN sample) (NN sentence))) (. .)))");
+        expected.add(
+                "(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN sample) (NN sentence))) (. .)))");
         expected.add("# testDocument,27,51");
-        expected.add("(ROOT (S (VP (VBN Followed) (PP (IN by) (NP (DT another) (NN one)))) (. .)))");
-        List<String> actual = FileUtils.readLines(new File(outputPath, "testCollection.txt"), "UTF-8");
+        expected.add(
+                "(ROOT (S (VP (VBN Followed) (PP (IN by) (NP (DT another) (NN one)))) (. .)))");
+        List<String> actual = FileUtils.readLines(new File(outputPath, "testCollection.txt"),
+                "UTF-8");
 
         assertEquals(expected.size(), actual.size());
 

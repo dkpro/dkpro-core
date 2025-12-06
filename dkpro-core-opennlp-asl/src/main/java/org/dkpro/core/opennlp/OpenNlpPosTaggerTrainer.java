@@ -57,49 +57,49 @@ public class OpenNlpPosTaggerTrainer
      * Store this language to the model instead of the document language.
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    @ConfigurationParameter(name = PARAM_LANGUAGE)
     private String language;
 
     /**
      * Training algorithm.
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
 
     /**
      * Trainer type.
      */
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     /**
      * Number of training iterations.
      */
     public static final String PARAM_ITERATIONS = "iterations";
-    @ConfigurationParameter(name = PARAM_ITERATIONS, mandatory = true, defaultValue = "100")
+    @ConfigurationParameter(name = PARAM_ITERATIONS, defaultValue = "100")
     private int iterations;
 
     /**
      * Frequency cut-off.
      */
     public static final String PARAM_CUTOFF = "cutoff";
-    @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
+    @ConfigurationParameter(name = PARAM_CUTOFF, defaultValue = "5")
     private int cutoff;
 
     /**
      * @see POSTaggerME#DEFAULT_BEAM_SIZE
      */
     public static final String PARAM_BEAMSIZE = "beamSize";
-    @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
+    @ConfigurationParameter(name = PARAM_BEAMSIZE, defaultValue = "3")
     private int beamSize;
 
     /**
      * Number of parallel threads.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, defaultValue = "1")
     private int numThreads;
 
     @Override

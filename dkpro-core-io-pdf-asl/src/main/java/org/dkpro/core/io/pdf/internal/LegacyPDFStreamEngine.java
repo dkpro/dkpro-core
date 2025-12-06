@@ -65,14 +65,15 @@ import org.apache.pdfbox.util.Vector;
 /**
  * LEGACY text calculations which are known to be incorrect but are depended on by PDFTextStripper.
  *
- * This class exists only so that we don't break the code of users who have their own subclasses
- * of PDFTextStripper. It replaces the good implementation of showGlyph in PDFStreamEngine, with
- * a bad implementation which is backwards compatible.
+ * This class exists only so that we don't break the code of users who have their own subclasses of
+ * PDFTextStripper. It replaces the good implementation of showGlyph in PDFStreamEngine, with a bad
+ * implementation which is backwards compatible.
  *
- * DO NOT USE THIS CODE UNLESS YOU ARE WORKING WITH PDFTextStripper.
- * THIS CODE IS DELIBERATELY INCORRECT, USE PDFStreamEngine INSTEAD.
+ * DO NOT USE THIS CODE UNLESS YOU ARE WORKING WITH PDFTextStripper. THIS CODE IS DELIBERATELY
+ * INCORRECT, USE PDFStreamEngine INSTEAD.
  */
-class LegacyPDFStreamEngine extends PDFStreamEngine
+class LegacyPDFStreamEngine
+    extends PDFStreamEngine
 {
     private static final Log LOG = LogFactory.getLog(LegacyPDFStreamEngine.class);
 
@@ -118,8 +119,10 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
     /**
      * This will initialise and process the contents of the stream.
      *
-     * @param page the page to process
-     * @throws java.io.IOException if there is an error accessing the stream.
+     * @param page
+     *            the page to process
+     * @throws java.io.IOException
+     *             if there is an error accessing the stream.
      */
     @Override
     public void processPage(PDPage page) throws IOException
@@ -127,12 +130,10 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
         this.pageRotation = page.getRotation();
         this.pageSize = page.getCropBox();
 
-        if (pageSize.getLowerLeftX() == 0 && pageSize.getLowerLeftY() == 0)
-        {
+        if (pageSize.getLowerLeftX() == 0 && pageSize.getLowerLeftY() == 0) {
             translateMatrix = null;
         }
-        else
-        {
+        else {
             // translation matrix for cropbox
             translateMatrix = Matrix.getTranslateInstance(-pageSize.getLowerLeftX(),
                     -pageSize.getLowerLeftY());
@@ -144,14 +145,14 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
      * This method was originally written by Ben Litchfield for PDFStreamEngine.
      */
     @Override
-    protected void showGlyph(Matrix textRenderingMatrix, PDFont font, int code,
-                             Vector displacement) throws IOException
+    protected void showGlyph(Matrix textRenderingMatrix, PDFont font, int code, Vector displacement)
+        throws IOException
     {
         //
         // legacy calculations which were previously in PDFStreamEngine
         //
-        //  DO NOT USE THIS CODE UNLESS YOU ARE WORKING WITH PDFTextStripper.
-        //  THIS CODE IS DELIBERATELY INCORRECT
+        // DO NOT USE THIS CODE UNLESS YOU ARE WORKING WITH PDFTextStripper.
+        // THIS CODE IS DELIBERATELY INCORRECT
         //
 
         PDGraphicsState state = getGraphicsState();
@@ -161,60 +162,50 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
         Matrix textMatrix = getTextMatrix();
 
         BoundingBox bbox = font.getBoundingBox();
-        if (bbox.getLowerLeftY() < Short.MIN_VALUE)
-        {
+        if (bbox.getLowerLeftY() < Short.MIN_VALUE) {
             // PDFBOX-2158 and PDFBOX-3130
             // files by Salmat eSolutions / ClibPDF Library
-            bbox.setLowerLeftY(- (bbox.getLowerLeftY() + 65536));
+            bbox.setLowerLeftY(-(bbox.getLowerLeftY() + 65536));
         }
         // 1/2 the bbox is used as the height todo: why?
         float glyphHeight = bbox.getHeight() / 2;
 
         // sometimes the bbox has very high values, but CapHeight is OK
         PDFontDescriptor fontDescriptor = font.getFontDescriptor();
-        if (fontDescriptor != null)
-        {
+        if (fontDescriptor != null) {
             float capHeight = fontDescriptor.getCapHeight();
-            if (capHeight != 0 && (capHeight < glyphHeight || glyphHeight == 0))
-            {
+            if (capHeight != 0 && (capHeight < glyphHeight || glyphHeight == 0)) {
                 glyphHeight = capHeight;
             }
         }
 
         // transformPoint from glyph space -> text space
         float height;
-        if (font instanceof PDType3Font)
-        {
+        if (font instanceof PDType3Font) {
             height = font.getFontMatrix().transformPoint(0, glyphHeight).y;
         }
-        else
-        {
+        else {
             height = glyphHeight / 1000;
         }
 
         float displacementX = displacement.getX();
         // the sorting algorithm is based on the width of the character. As the displacement
-        // for vertical characters doesn't provide any suitable value for it, we have to 
+        // for vertical characters doesn't provide any suitable value for it, we have to
         // calculate our own
-        if (font.isVertical())
-        {
+        if (font.isVertical()) {
             displacementX = font.getWidth(code) / 1000;
             // there may be an additional scaling factor for true type fonts
             TrueTypeFont ttf = null;
-            if (font instanceof PDTrueTypeFont)
-            {
-                ttf = ((PDTrueTypeFont)font).getTrueTypeFont();
+            if (font instanceof PDTrueTypeFont) {
+                ttf = ((PDTrueTypeFont) font).getTrueTypeFont();
             }
-            else if (font instanceof PDType0Font)
-            {
-                PDCIDFont cidFont = ((PDType0Font)font).getDescendantFont();
-                if (cidFont instanceof PDCIDFontType2)
-                {
-                    ttf = ((PDCIDFontType2)cidFont).getTrueTypeFont();
+            else if (font instanceof PDType0Font) {
+                PDCIDFont cidFont = ((PDType0Font) font).getDescendantFont();
+                if (cidFont instanceof PDCIDFontType2) {
+                    ttf = ((PDCIDFontType2) cidFont).getTrueTypeFont();
                 }
             }
-            if (ttf != null && ttf.getUnitsPerEm() != 1000)
-            {
+            if (ttf != null && ttf.getUnitsPerEm() != 1000) {
                 displacementX *= 1000f / ttf.getUnitsPerEm();
             }
         }
@@ -222,8 +213,8 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
         //
         // legacy calculations which were previously in PDFStreamEngine
         //
-        //  DO NOT USE THIS CODE UNLESS YOU ARE WORKING WITH PDFTextStripper.
-        //  THIS CODE IS DELIBERATELY INCORRECT
+        // DO NOT USE THIS CODE UNLESS YOU ARE WORKING WITH PDFTextStripper.
+        // THIS CODE IS DELIBERATELY INCORRECT
         //
 
         // (modified) combined displacement, this is calculated *without* taking the character
@@ -255,30 +246,25 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
         // saved).
 
         float glyphSpaceToTextSpaceFactor = 1 / 1000f;
-        if (font instanceof PDType3Font)
-        {
+        if (font instanceof PDType3Font) {
             glyphSpaceToTextSpaceFactor = font.getFontMatrix().getScaleX();
         }
 
         float spaceWidthText = 0;
-        try
-        {
+        try {
             // to avoid crash as described in PDFBOX-614, see what the space displacement should be
             spaceWidthText = font.getSpaceWidth() * glyphSpaceToTextSpaceFactor;
         }
-        catch (Throwable exception)
-        {
+        catch (Throwable exception) {
             LOG.warn(exception, exception);
         }
 
-        if (spaceWidthText == 0)
-        {
+        if (spaceWidthText == 0) {
             spaceWidthText = font.getAverageFontWidth() * glyphSpaceToTextSpaceFactor;
             // the average space width appears to be higher than necessary so make it smaller
             spaceWidthText *= .80f;
         }
-        if (spaceWidthText == 0)
-        {
+        if (spaceWidthText == 0) {
             spaceWidthText = 1.0f; // if could not find font, use a generic value
         }
 
@@ -291,15 +277,12 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
         // when there is no Unicode mapping available, Acrobat simply coerces the character code
         // into Unicode, so we do the same. Subclasses of PDFStreamEngine don't necessarily want
         // this, which is why we leave it until this point in PDFTextStreamEngine.
-        if (unicode == null)
-        {
-            if (font instanceof PDSimpleFont)
-            {
+        if (unicode == null) {
+            if (font instanceof PDSimpleFont) {
                 char c = (char) code;
                 unicode = new String(new char[] { c });
             }
-            else
-            {
+            else {
                 // Acrobat doesn't seem to coerce composite font's character codes, instead it
                 // skips them. See the "allah2.pdf" TestTextStripper file.
                 return;
@@ -308,30 +291,29 @@ class LegacyPDFStreamEngine extends PDFStreamEngine
 
         // adjust for cropbox if needed
         Matrix translatedTextRenderingMatrix;
-        if (translateMatrix == null)
-        {
+        if (translateMatrix == null) {
             translatedTextRenderingMatrix = textRenderingMatrix;
         }
-        else
-        {
+        else {
             translatedTextRenderingMatrix = Matrix.concatenate(translateMatrix,
                     textRenderingMatrix);
             nextX -= pageSize.getLowerLeftX();
             nextY -= pageSize.getLowerLeftY();
         }
 
-        processTextPosition(new TextPosition(pageRotation, pageSize.getWidth(),
-                pageSize.getHeight(), translatedTextRenderingMatrix, nextX, nextY,
-                Math.abs(dyDisplay), dxDisplay,
-                Math.abs(spaceWidthDisplay), unicode, new int[] { code } , font, fontSize,
-                (int)(fontSize * textMatrix.getScalingFactorX())));
+        processTextPosition(
+                new TextPosition(pageRotation, pageSize.getWidth(), pageSize.getHeight(),
+                        translatedTextRenderingMatrix, nextX, nextY, Math.abs(dyDisplay), dxDisplay,
+                        Math.abs(spaceWidthDisplay), unicode, new int[] { code }, font, fontSize,
+                        (int) (fontSize * textMatrix.getScalingFactorX())));
     }
 
     /**
      * A method provided as an event interface to allow a subclass to perform some specific
      * functionality when text needs to be processed.
      *
-     * @param text The text to be processed.
+     * @param text
+     *            The text to be processed.
      */
     protected void processTextPosition(TextPosition text)
     {

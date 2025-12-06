@@ -31,10 +31,10 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 /**
- * Converts a chunk annotations into IOB-style 
+ * Converts a chunk annotations into IOB-style
  */
 public class IobEncoder
-{  
+{
     private Int2ObjectMap<String> iobBeginMap;
     private Int2ObjectMap<String> iobInsideMap;
 
@@ -48,34 +48,32 @@ public class IobEncoder
     public IobEncoder(CAS aCas, Type aType, Feature aValueFeature, boolean aIob1)
     {
         iob1 = aIob1;
-        
+
         // fill map for whole JCas in order to efficiently encode IOB
         iobBeginMap = new Int2ObjectOpenHashMap<String>();
         iobInsideMap = new Int2ObjectOpenHashMap<String>();
 
         Map<AnnotationFS, List<AnnotationFS>> idx = CasUtil.indexCovered(aCas, aType,
                 CasUtil.getType(aCas, Token.class));
-        
+
         String lastValue = null;
         for (AnnotationFS chunk : CasUtil.select(aCas, aType)) {
             String value = chunk.getStringValue(aValueFeature);
 
             for (AnnotationFS token : idx.get(chunk)) {
-                if (
-                        token.getBegin() == chunk.getBegin() && 
-                        (!iob1 || (lastValue != null && lastValue.equals(value)))
-                ) {
+                if (token.getBegin() == chunk.getBegin()
+                        && (!iob1 || (lastValue != null && lastValue.equals(value)))) {
                     iobBeginMap.put(token.getBegin(), value);
                 }
                 else {
                     iobInsideMap.put(token.getBegin(), value);
                 }
             }
-            
+
             lastValue = value;
         }
     }
-    
+
     /**
      * Returns the IOB tag for a given token.
      * 
@@ -88,11 +86,11 @@ public class IobEncoder
         if (iobBeginMap.containsKey(token.getBegin())) {
             return "B-" + iobBeginMap.get(token.getBegin());
         }
-        
+
         if (iobInsideMap.containsKey(token.getBegin())) {
             return "I-" + iobInsideMap.get(token.getBegin());
         }
-        
+
         return "O";
     }
 }

@@ -85,7 +85,8 @@ public class ResourceUtils
      * @param aCache
      *            use the cache or not.
      * @return the temporary location on the file system.
-     * @throws IOException if an I/O error has occurred,
+     * @throws IOException
+     *             if an I/O error has occurred,
      * @see PathMatchingResourcePatternResolver
      */
     public static File getClasspathAsFolder(String aClasspathBase, boolean aCache)
@@ -171,8 +172,7 @@ public class ResourceUtils
      * @throws IOException
      *             if the URL cannot be accessed to (re)create the file.
      */
-    public static File getUrlAsFile(URL aUrl, boolean aCache)
-        throws IOException
+    public static File getUrlAsFile(URL aUrl, boolean aCache) throws IOException
     {
         return getUrlAsFile(aUrl, aCache, false);
     }
@@ -266,8 +266,7 @@ public class ResourceUtils
      *             if the file has permissions issues.
      */
 
-    public static synchronized File getUrlAsExecutable(URL aUrl, boolean aCache)
-        throws IOException
+    public static synchronized File getUrlAsExecutable(URL aUrl, boolean aCache) throws IOException
     {
 
         File file;
@@ -293,8 +292,8 @@ public class ResourceUtils
                     else if (isEnvironmentVariableDefined(DKPRO_HOME_ENV_VAR, errorMessage)
                             && checkFolderPermissions(errorMessage,
                                     System.getenv(DKPRO_HOME_ENV_VAR) + File.separator + "temp")) {
-                        file = getFileAsExecutable(aUrl, System.getenv(DKPRO_HOME_ENV_VAR)
-                                + File.separator + "temp");
+                        file = getFileAsExecutable(aUrl,
+                                System.getenv(DKPRO_HOME_ENV_VAR) + File.separator + "temp");
                     }
                     else {
                         if (!isUserHomeDefined(errorMessage)
@@ -358,8 +357,7 @@ public class ResourceUtils
      * @throws IOException
      *             if the target could not be found.
      */
-    public static URL resolveLocation(String aLocation)
-        throws IOException
+    public static URL resolveLocation(String aLocation) throws IOException
     {
         return resolveLocation(aLocation, null, null);
     }
@@ -379,8 +377,7 @@ public class ResourceUtils
      * @throws IOException
      *             if the target could not be found.
      */
-    public static URL resolveLocation(String aLocation, UimaContext aContext)
-        throws IOException
+    public static URL resolveLocation(String aLocation, UimaContext aContext) throws IOException
     {
         return resolveLocation(aLocation, null, aContext);
     }
@@ -479,8 +476,8 @@ public class ResourceUtils
                 ex = e;
             }
             if (url == null) {
-                FileNotFoundException e = new FileNotFoundException("No file found at ["
-                        + aLocation + "]");
+                FileNotFoundException e = new FileNotFoundException(
+                        "No file found at [" + aLocation + "]");
                 if (ex != null) {
                     e.initCause(ex);
                 }
@@ -501,7 +498,7 @@ public class ResourceUtils
      *            StringBuilder containing an error message for the exception which will be thrown
      * @return true if the variable is defined
      *
-     * */
+     */
 
     private static boolean isUserHomeDefined(StringBuilder aStringBuilder)
     {
@@ -522,7 +519,7 @@ public class ResourceUtils
      *            StringBuilder containing an error message if an exception is thrown
      * @return true if the variable is defined
      *
-     * */
+     */
 
     private static boolean isEnvironmentVariableDefined(String aVariable,
             StringBuilder aStringBuilder)
@@ -546,7 +543,7 @@ public class ResourceUtils
      *            String containing the directory path.
      * @return true if the variable is defined
      *
-     * */
+     */
 
     private static synchronized boolean checkFolderPermissions(StringBuilder aStringBuilder,
             String aDirectory)
@@ -581,13 +578,13 @@ public class ResourceUtils
      * @throws IOException
      *             If a file could not be created
      *
-     * */
+     */
 
     private static synchronized File getFileAsExecutable(URL aUrl, String aDirectory)
         throws IOException
     {
 
-        return File.createTempFile(FilenameUtils.getBaseName(aUrl.getPath()), ".temp", new File(
-                aDirectory));
+        return File.createTempFile(FilenameUtils.getBaseName(aUrl.getPath()), ".temp",
+                new File(aDirectory));
     }
 }

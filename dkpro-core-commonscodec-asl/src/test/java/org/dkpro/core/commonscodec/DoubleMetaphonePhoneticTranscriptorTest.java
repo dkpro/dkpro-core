@@ -26,12 +26,11 @@ public class DoubleMetaphonePhoneticTranscriptorTest
 {
 
     @Test
-    public void doubleMetaphoneTest() throws Exception {
+    public void doubleMetaphoneTest() throws Exception
+    {
 
-        runTest(
-                createEngineDescription(DoubleMetaphonePhoneticTranscriptor.class),
-                "The knight entered the store in the night .",
-                "0", "NT", "ANTR", "0", "STR", "AN", "0", "NT", ""
-        );
+        runTest(createEngineDescription(DoubleMetaphonePhoneticTranscriptor.class),
+                "The knight entered the store in the night .", "0", "NT", "ANTR", "0", "STR", "AN",
+                "0", "NT", "");
     }
 }

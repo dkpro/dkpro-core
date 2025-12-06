@@ -31,34 +31,32 @@ import org.junit.jupiter.api.io.TempDir;
 public class Conll2006ReaderWriterTest
 {
     @Test
-    public void roundTrip(@TempDir File tempDir)
-        throws Exception
+    public void roundTrip(@TempDir File tempDir) throws Exception
     {
-// tag::testRoundTrip[]
-        ReaderAssert.assertThat(Conll2006Reader.class)                 // the reader
-            .readingFrom("src/test/resources/conll/2006/fi-ref.conll") // the test input file
-            .usingWriter(Conll2006Writer.class)                        // the writer
-            .writingTo(tempDir)                                        // the output folder
-            .outputAsString()                                          // access writer output
-            .isEqualToNormalizingNewlines(                             // compare to input file
-                contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
-// end::testRoundTrip[]
+        // tag::testRoundTrip[]
+        ReaderAssert.assertThat(Conll2006Reader.class) // the reader
+                .readingFrom("src/test/resources/conll/2006/fi-ref.conll") // the test input file
+                .usingWriter(Conll2006Writer.class) // the writer
+                .writingTo(tempDir) // the output folder
+                .outputAsString() // access writer output
+                .isEqualToNormalizingNewlines( // compare to input file
+                        contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
+        // end::testRoundTrip[]
     }
 
     @Test
-    public void testFinnTreeBank(@TempDir File tempDir)
-        throws Exception
+    public void testFinnTreeBank(@TempDir File tempDir) throws Exception
     {
-// tag::testOneWay[]
-        ReaderAssert.assertThat(Conll2006Reader.class,                  // the reader
-                Conll2006Reader.PARAM_SOURCE_ENCODING, "UTF-8")         // reader parameter
-            .readingFrom("src/test/resources/conll/2006/fi-orig.conll") // the test input file
-            .usingWriter(Conll2006Writer.class,                         // the writer
-                Conll2006Writer.PARAM_TARGET_ENCODING, "UTF-8")         // writer parameter
-            .writingTo(tempDir)                                        // the output folder
-            .outputAsString("fi-orig.conll")                            // access writer output
-            .isEqualToNormalizingNewlines(                              // compare to input file
-                contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
-// end::testOneWay[]
+        // tag::testOneWay[]
+        ReaderAssert.assertThat(Conll2006Reader.class, // the reader
+                Conll2006Reader.PARAM_SOURCE_ENCODING, "UTF-8") // reader parameter
+                .readingFrom("src/test/resources/conll/2006/fi-orig.conll") // the test input file
+                .usingWriter(Conll2006Writer.class, // the writer
+                        Conll2006Writer.PARAM_TARGET_ENCODING, "UTF-8") // writer parameter
+                .writingTo(tempDir) // the output folder
+                .outputAsString("fi-orig.conll") // access writer output
+                .isEqualToNormalizingNewlines( // compare to input file
+                        contentOf(new File("src/test/resources/conll/2006/fi-ref.conll"), UTF_8));
+        // end::testOneWay[]
     }
 }

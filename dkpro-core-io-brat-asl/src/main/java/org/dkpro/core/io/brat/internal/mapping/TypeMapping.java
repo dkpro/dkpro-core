@@ -27,18 +27,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TypeMapping
 {
-    private static final Pattern PATTERN = Pattern.compile(
-            "(?<BRAT>.+?)" +
-            "\\s*->\\s*" +
-            "(?<UIMA>.+?)");
-    
+    private static final Pattern PATTERN = Pattern
+            .compile("(?<BRAT>.+?)" + "\\s*->\\s*" + "(?<UIMA>.+?)");
+
     private static final String BRAT = "BRAT";
     private static final String UIMA = "UIMA";
 
     private final Pattern bratTypePattern;
     private final String uimaType;
     private final Map<String, String> defaultFeatureValues;
-    
+
     private Matcher matcher;
 
     public TypeMapping()
@@ -49,8 +47,7 @@ public class TypeMapping
     }
 
     @JsonCreator
-    public TypeMapping(
-            @JsonProperty(value = "from", required = true) String aPattern, 
+    public TypeMapping(@JsonProperty(value = "from", required = true) String aPattern,
             @JsonProperty(value = "to", required = true) String aReplacement,
             @JsonProperty(value = "defaultFeatureValues") Map<String, String> aDefaults)
     {
@@ -63,18 +60,18 @@ public class TypeMapping
     {
         this(aPattern, aReplacement, Collections.emptyMap());
     }
-    
+
     public boolean matches(String aType)
     {
         matcher = bratTypePattern.matcher(aType);
         return matcher.matches();
     }
-    
+
     public String apply()
     {
         return matcher.replaceFirst(uimaType);
     }
-    
+
     public Map<String, String> getDefaultFeatureValues()
     {
         return defaultFeatureValues;
@@ -83,7 +80,7 @@ public class TypeMapping
     public static TypeMapping parse(String aValue)
     {
         Matcher m = PATTERN.matcher(aValue);
-        
+
         if (!m.matches()) {
             throw new IllegalArgumentException("Illegal mapping parameter format [" + aValue + "]");
         }

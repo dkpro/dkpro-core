@@ -47,8 +47,8 @@ public class ConllUWriterTest
         DocumentMetaData dmd = DocumentMetaData.create(jcas);
         dmd.setDocumentId("output");
 
-        AnalysisEngine writer = createEngine(ConllUWriter.class, 
-                ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
+        AnalysisEngine writer = createEngine(ConllUWriter.class, ConllUWriter.PARAM_TARGET_LOCATION,
+                tempDir);
 
         writer.process(jcas);
 

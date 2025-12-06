@@ -43,7 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
  */
 @ResourceMetaData(name = "Mallet LDA Topic Proportions Writer")
 public class MalletLdaTopicProportionsWriter
-        extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
     private static final Locale LOCALE = Locale.US;
     private static final String COLUMN_SEPARATOR = "\t";
@@ -59,14 +59,12 @@ public class MalletLdaTopicProportionsWriter
      * If {@link #PARAM_SINGULAR_TARGET} is set to false (default), this extension will be appended
      * to the output files.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".topics")
     private String filenameExtension;
 
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (var outputStream = getOutputStream(aJCas, filenameExtension)) {
             if (writeDocid) {

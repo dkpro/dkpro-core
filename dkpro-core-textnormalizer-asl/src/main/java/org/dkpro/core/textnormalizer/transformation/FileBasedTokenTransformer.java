@@ -74,8 +74,7 @@ public class FileBasedTokenTransformer
     private boolean ignoreCase;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -88,8 +87,7 @@ public class FileBasedTokenTransformer
     }
 
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         select(aInput, Token.class).stream()
                 .filter(token -> ignoreCase
@@ -98,12 +96,9 @@ public class FileBasedTokenTransformer
                 .forEach(token -> replace(token.getBegin(), token.getEnd(), replacement));
     }
 
-    private Collection<String> readTokens(File file)
-        throws IOException
+    private Collection<String> readTokens(File file) throws IOException
     {
-        return Files.lines(file.toPath())
-                .map(String::trim)
-                .map(line -> ignoreCase ? line.toLowerCase() : line)
-                .collect(Collectors.toSet());
+        return Files.lines(file.toPath()).map(String::trim)
+                .map(line -> ignoreCase ? line.toLowerCase() : line).collect(Collectors.toSet());
     }
 }

@@ -17,9 +17,10 @@
  */
 
 /**
- * Integration of the <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/DecisionTreeTagger.html">
- * TreeTagger</a> part-of-speech tagger, lemmatizer and chunker via <a href="http://code.google.com/p/tt4j/">
- * TT4J</a>.
+ * Integration of the
+ * <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/DecisionTreeTagger.html">
+ * TreeTagger</a> part-of-speech tagger, lemmatizer and chunker via
+ * <a href="http://code.google.com/p/tt4j/"> TT4J</a>.
  *
  * @since 1.1.0
  */

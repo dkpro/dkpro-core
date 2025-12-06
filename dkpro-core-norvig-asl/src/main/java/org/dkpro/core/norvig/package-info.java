@@ -17,7 +17,8 @@
  */
 
 /**
- * Spelling correction based on <a href="http://norvig.com/spell-correct.html">Norvig's algorithm</a>.
+ * Spelling correction based on <a href="http://norvig.com/spell-correct.html">Norvig's
+ * algorithm</a>.
  *
  * @since 1.1.0
  */

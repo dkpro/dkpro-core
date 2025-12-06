@@ -37,12 +37,9 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "N-Gram Annotator")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-    inputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-    outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram" })
 public class NGramAnnotator
     extends JCasAnnotator_ImplBase
 {
@@ -54,8 +51,7 @@ public class NGramAnnotator
     private int n;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         for (Sentence s : select(aJCas, Sentence.class)) {
             for (NGram ngram : NGramIterable.create(selectCovered(Token.class, s), n)) {

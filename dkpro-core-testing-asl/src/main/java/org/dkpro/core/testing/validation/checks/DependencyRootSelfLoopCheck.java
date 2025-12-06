@@ -42,20 +42,18 @@ public class DependencyRootSelfLoopCheck
             if (dependencies.isEmpty()) {
                 continue;
             }
-            
+
             List<Dependency> roots = dependencies.stream()
-                    .filter(dep -> 
-                        dep.getGovernor() != null && 
-                        dep.getDependent() != null &&
-                        dep.getGovernor() == dep.getDependent())
+                    .filter(dep -> dep.getGovernor() != null && dep.getDependent() != null
+                            && dep.getGovernor() == dep.getDependent())
                     .collect(Collectors.toList());
-            
+
             if (roots.isEmpty()) {
                 aMessages.add(new Message(this, ERROR,
                         "Sentence has no self-looping dependency root: %s", sentence));
             }
         }
-        
+
         return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
 }

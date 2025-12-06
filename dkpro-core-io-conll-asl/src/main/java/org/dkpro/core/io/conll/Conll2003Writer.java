@@ -55,14 +55,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "CoNLL 2003 Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2003})
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_2003 })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class Conll2003Writer
     extends JCasFileWriter_ImplBase
 {
@@ -72,56 +70,51 @@ public class Conll2003Writer
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     /**
      * Use this filename extension.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, defaultValue = ".conll")
     private String filenameSuffix;
 
     /**
      * Write part-of-speech information.
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, defaultValue = "true")
     private boolean writePos;
 
     /**
      * Write chunking information.
      */
     public static final String PARAM_WRITE_CHUNK = ComponentParameters.PARAM_WRITE_CHUNK;
-    @ConfigurationParameter(name = PARAM_WRITE_CHUNK, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_CHUNK, defaultValue = "true")
     private boolean writeChunk;
 
     /**
      * Write named entity information.
      */
-    public static final String PARAM_WRITE_NAMED_ENTITY = 
-            ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
-    @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, defaultValue = "true")
     private boolean writeNamedEntity;
 
     /**
      * Write text covered by the token instead of the token form.
      */
-    public static final String PARAM_WRITE_COVERED_TEXT = 
-            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
-    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    public static final String PARAM_WRITE_COVERED_TEXT = ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, defaultValue = "true")
     private boolean writeCovered;
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         PrintWriter out = null;
         try {
-            out = new PrintWriter(new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
-                    targetEncoding));
+            out = new PrintWriter(
+                    new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding));
             convert(aJCas, out);
         }
         catch (Exception e) {
@@ -139,7 +132,7 @@ public class Conll2003Writer
 
         Type neType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature neValue = neType.getFeatureByBaseName("value");
-        
+
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
@@ -151,7 +144,7 @@ public class Conll2003Writer
 
             // Named Entities
             IobEncoder neEncoder = new IobEncoder(aJCas.getCas(), neType, neValue, true);
-            
+
             for (Token token : tokens) {
                 Row row = new Row();
                 row.token = token;
@@ -166,7 +159,7 @@ public class Conll2003Writer
                 if (!writeCovered) {
                     form = row.token.getText();
                 }
-                
+
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();

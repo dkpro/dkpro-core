@@ -36,14 +36,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class AnnotationByLengthFilterTest
 {
 
-    private static String content  = "1 22 333 4444 55555 666666 7777777 88888888 999999999";
+    private static String content = "1 22 333 4444 55555 666666 7777777 88888888 999999999";
 
     @Test
-    public void testMin()
-        throws Exception
+    public void testMin() throws Exception
     {
-        AnalysisEngine filter = createEngine(
-                AnnotationByLengthFilter.class,
+        AnalysisEngine filter = createEngine(AnnotationByLengthFilter.class,
                 AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, Token.class,
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 5);
 
@@ -54,15 +52,14 @@ public class AnnotationByLengthFilterTest
         tb.buildTokens(jcas, content);
         filter.process(jcas);
 
-        assertEquals("55555 666666 7777777 88888888 999999999", StringUtils.join(toText(select(jcas, Token.class)), " "));
+        assertEquals("55555 666666 7777777 88888888 999999999",
+                StringUtils.join(toText(select(jcas, Token.class)), " "));
     }
 
     @Test
-    public void testMax()
-        throws Exception
+    public void testMax() throws Exception
     {
-        AnalysisEngine filter = createEngine(
-                AnnotationByLengthFilter.class,
+        AnalysisEngine filter = createEngine(AnnotationByLengthFilter.class,
                 AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, Token.class,
                 AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
 
@@ -73,15 +70,14 @@ public class AnnotationByLengthFilterTest
         tb.buildTokens(jcas, content);
         filter.process(jcas);
 
-        assertEquals("1 22 333 4444 55555", StringUtils.join(toText(select(jcas, Token.class)), " "));
+        assertEquals("1 22 333 4444 55555",
+                StringUtils.join(toText(select(jcas, Token.class)), " "));
     }
 
     @Test
-    public void testMinMax()
-        throws Exception
+    public void testMinMax() throws Exception
     {
-        AnalysisEngine filter = createEngine(
-                AnnotationByLengthFilter.class,
+        AnalysisEngine filter = createEngine(AnnotationByLengthFilter.class,
                 AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, Token.class,
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 3,
                 AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
@@ -97,13 +93,11 @@ public class AnnotationByLengthFilterTest
     }
 
     @Test
-    public void testMinMaxTokenStem()
-        throws Exception
+    public void testMinMaxTokenStem() throws Exception
     {
-        AnalysisEngine filter = createEngine(
-                AnnotationByLengthFilter.class,
-                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {
-                        Token.class.getName(), Stem.class.getName()},
+        AnalysisEngine filter = createEngine(AnnotationByLengthFilter.class,
+                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES,
+                new String[] { Token.class.getName(), Stem.class.getName() },
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 3,
                 AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
 

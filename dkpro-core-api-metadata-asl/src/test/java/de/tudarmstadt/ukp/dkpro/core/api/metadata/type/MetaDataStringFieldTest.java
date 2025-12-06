@@ -32,8 +32,7 @@ import org.junit.jupiter.api.Test;
 public class MetaDataStringFieldTest
 {
     @Test
-    public void testSimple()
-        throws UIMAException
+    public void testSimple() throws UIMAException
     {
         String key = "key";
         String value = "value";
@@ -50,8 +49,7 @@ public class MetaDataStringFieldTest
     }
 
     @Test
-    public void testTwoIdentical()
-        throws UIMAException
+    public void testTwoIdentical() throws UIMAException
     {
         String key = "key";
         String value = "value";
@@ -63,13 +61,11 @@ public class MetaDataStringFieldTest
 
         Collection<MetaDataStringField> metadata = select(jcas, MetaDataStringField.class);
         assertEquals(expectedSize, metadata.size());
-        metadata.stream()
-                .peek(mdsf -> assertEquals(key, mdsf.getKey()))
+        metadata.stream().peek(mdsf -> assertEquals(key, mdsf.getKey()))
                 .forEach(mdsf -> assertEquals(value, mdsf.getValue()));
     }
 
-    public void testTwoDifferent()
-        throws UIMAException
+    public void testTwoDifferent() throws UIMAException
     {
         String key1 = "key1";
         String value1 = "value1";

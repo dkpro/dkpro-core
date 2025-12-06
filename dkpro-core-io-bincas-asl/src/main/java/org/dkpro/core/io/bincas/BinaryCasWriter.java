@@ -161,24 +161,21 @@ public class BinaryCasWriter
     extends JCasFileWriter_ImplBase
 {
     public static final String AUTO = "AUTO";
-    
+
     /**
      * Location to write the type system to. The type system is saved using Java serialization, it
      * is not saved as a XML type system description. We recommend to use the name
-     * {@code typesystem.ser}.
-     * <br>
-     * The {@link #PARAM_COMPRESSION} parameter has no effect on the
-     * type system. Instead, if the type system file should be compressed or not is detected from
-     * the file name extension (e.g. ".gz").
-     * <br>
+     * {@code typesystem.ser}. <br>
+     * The {@link #PARAM_COMPRESSION} parameter has no effect on the type system. Instead, if the
+     * type system file should be compressed or not is detected from the file name extension (e.g.
+     * ".gz"). <br>
      * If this parameter is set, the type system and index repository are no longer serialized into
-     * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not
-     * read such files. Use this only if you really know what you are doing.
-     * <br>
-     * This parameter has no effect if formats S+ or 6+ are used as the type system information
-     * is embedded in each individual file. Otherwise, it is recommended that this parameter be
-     * set unless some other mechanism is used to initialize the CAS with the same type system and
-     * index repository during reading that was used during writing.
+     * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not read
+     * such files. Use this only if you really know what you are doing. <br>
+     * This parameter has no effect if formats S+ or 6+ are used as the type system information is
+     * embedded in each individual file. Otherwise, it is recommended that this parameter be set
+     * unless some other mechanism is used to initialize the CAS with the same type system and index
+     * repository during reading that was used during writing.
      */
     public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
@@ -193,24 +190,21 @@ public class BinaryCasWriter
 
     /**
      * The file extension. If this is set to {@link AUTO}, then the extension will be chosen based
-     * on the default extension specified by the UIMA {@link SerialFormat} class. However, this
-     * only works when using the new long format names (e.g. <code>COMPRESSED_FILTERED_TSI</code>).
-     * When using the old short names (e.g. <code>6</code>), the default extension <i>.bin</i> is
-     * used.
+     * on the default extension specified by the UIMA {@link SerialFormat} class. However, this only
+     * works when using the new long format names (e.g. <code>COMPRESSED_FILTERED_TSI</code>). When
+     * using the old short names (e.g. <code>6</code>), the default extension <i>.bin</i> is used.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = AUTO)
     private String filenameExtension;
 
     private boolean typeSystemWritten;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         if (AUTO.equals(filenameExtension)) {
             try {
                 filenameExtension = "." + SerialFormat.valueOf(format).getDefaultFileExtension();
@@ -220,28 +214,27 @@ public class BinaryCasWriter
             }
         }
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (NamedOutputStream docOS = getOutputStream(aJCas, filenameExtension)) {
             if ("S".equals(format) || SERIALIZED.toString().equals(format)) {
                 // Java-serialized CAS without type system
                 getLogger().debug("Writing CAS to [" + docOS + "]");
-                //                 CASSerializer serializer = new CASSerializer();
-//                 serializer.addCAS(aJCas.getCasImpl());
-//                 ObjectOutputStream objOS = new ObjectOutputStream(docOS);
-//                 objOS.writeObject(serializer);
-//                 objOS.flush();
+                // CASSerializer serializer = new CASSerializer();
+                // serializer.addCAS(aJCas.getCasImpl());
+                // ObjectOutputStream objOS = new ObjectOutputStream(docOS);
+                // objOS.writeObject(serializer);
+                // objOS.flush();
                 CasIOUtils.save(aJCas.getCas(), docOS, SERIALIZED);
             }
             else if ("S+".equals(format) || SERIALIZED_TSI.toString().equals(format)) {
                 // Java-serialized CAS with type system
-//                ObjectOutputStream objOS = new ObjectOutputStream(docOS);
-//                CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());
-//                objOS.writeObject(serializer);
-//                objOS.flush();
+                // ObjectOutputStream objOS = new ObjectOutputStream(docOS);
+                // CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());
+                // objOS.writeObject(serializer);
+                // objOS.flush();
                 CasIOUtils.save(aJCas.getCas(), docOS, SERIALIZED_TSI);
                 typeSystemWritten = true; // Embedded type system
             }
@@ -288,7 +281,7 @@ public class BinaryCasWriter
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         // To support writing to ZIPs, the type system must be written separately from the CAS data
         try {
             if (typeSystemLocation != null && !typeSystemWritten) {
@@ -301,8 +294,7 @@ public class BinaryCasWriter
         }
     }
 
-    private void writeTypeSystem(JCas aJCas)
-        throws IOException
+    private void writeTypeSystem(JCas aJCas) throws IOException
     {
         // If the type system location is an absolute file system location, write it there,
         // otherwise use the default storage which places the file relative to the target location
@@ -321,9 +313,8 @@ public class BinaryCasWriter
             }
         }
     }
-   
-    private void writeHeader(OutputStream aOS)
-        throws IOException
+
+    private void writeHeader(OutputStream aOS) throws IOException
     {
         byte[] header = new byte[] { 'D', 'K', 'P', 'r', 'o', '1' };
         DataOutputStream dataOS = new DataOutputStream(aOS);
@@ -331,8 +322,7 @@ public class BinaryCasWriter
         dataOS.flush();
     }
 
-    private void writeTypeSystem(JCas aJCas, OutputStream aOS)
-        throws IOException
+    private void writeTypeSystem(JCas aJCas, OutputStream aOS) throws IOException
     {
         ObjectOutputStream typeOS = new ObjectOutputStream(aOS);
         CASMgrSerializer casMgrSerializer = serializeCASMgr(aJCas.getCasImpl());

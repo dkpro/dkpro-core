@@ -34,21 +34,19 @@ public class UmlautNormalizerTest
         test("Der Apfel ist sueß und lecker", "Der Apfel ist süß und lecker");
     }
 
-    public void test(String inputText, String normalizedText)
-        throws Exception
+    public void test(String inputText, String normalizedText) throws Exception
     {
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription normalizer = createEngineDescription(
-                UmlautNormalizer.class,
-                UmlautNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD,0,
-                UmlautNormalizer.RES_FREQUENCY_PROVIDER, createResourceDescription(
-                        Web1TFrequencyCountResource.class,
+        AnalysisEngineDescription normalizer = createEngineDescription(UmlautNormalizer.class,
+                UmlautNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, 0,
+                UmlautNormalizer.RES_FREQUENCY_PROVIDER,
+                createResourceDescription(Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
 
         assertTransformedText(normalizedText, inputText, "de", segmenter, normalizer);
-    }    
+    }
 }

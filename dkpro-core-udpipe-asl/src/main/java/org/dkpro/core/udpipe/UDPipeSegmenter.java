@@ -45,10 +45,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "UDPipe Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class UDPipeSegmenter
     extends SegmenterBase
 {
@@ -58,7 +56,7 @@ public class UDPipeSegmenter
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     protected String language;
-    
+
     /**
      * Override the default variant used to locate the model.
      */
@@ -67,31 +65,31 @@ public class UDPipeSegmenter
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
-    
+
     private ModelProviderBase<Model> modelProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -99,8 +97,8 @@ public class UDPipeSegmenter
         {
             {
                 setContextObject(UDPipeSegmenter.this);
-                setDefault(LOCATION, "classpath:/org/dkpro/core/udpipe/lib/" +
-                        "segmenter-${language}-${variant}.properties");
+                setDefault(LOCATION, "classpath:/org/dkpro/core/udpipe/lib/"
+                        + "segmenter-${language}-${variant}.properties");
                 setDefault(VARIANT, "ud");
 
                 setOverride(LOCATION, modelLocation);
@@ -109,11 +107,10 @@ public class UDPipeSegmenter
             }
 
             @Override
-            protected Model produceResource(URL aUrl)
-                throws IOException
+            protected Model produceResource(URL aUrl) throws IOException
             {
                 UDPipeUtils.init();
-                
+
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
                 return Model.load(modelFile.getAbsolutePath());
             }
@@ -121,8 +118,7 @@ public class UDPipeSegmenter
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         modelProvider.configure(aJCas.getCas());
         super.process(aJCas);
@@ -146,8 +142,7 @@ public class UDPipeSegmenter
                         (int) w.getTokenRangeEnd() + aZoneBegin);
             }
 
-            createSentence(aJCas, 
-                    (int) words.get(1).getTokenRangeStart() + aZoneBegin,
+            createSentence(aJCas, (int) words.get(1).getTokenRangeStart() + aZoneBegin,
                     (int) words.get((int) words.size() - 1).getTokenRangeEnd() + aZoneBegin);
             sentence = new cz.cuni.mff.ufal.udpipe.Sentence();
         }

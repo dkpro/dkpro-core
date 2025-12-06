@@ -39,15 +39,15 @@ import java.util.regex.Pattern;
  * <p>
  * This is an adaption of the {@code ExtractReuters} class in the {@code lucene-benchmarks} package.
  *
- * @see <a href="http://lucene.apache.org/core/5_3_1/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html">ExtractReuters</a>
+ * @see <a href=
+ *      "http://lucene.apache.org/core/5_3_1/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html">ExtractReuters</a>
  */
 public class ExtractReuters
 {
     private static Set<String> NESTED_TAGS = new HashSet<>(
             Arrays.asList(new String[] { "TOPICS" }));
-    private static Pattern EXTRACTION_PATTERN = Pattern
-            .compile(
-                    " (LEWISSPLIT)=\"(.*?)\"|(CGISPLIT)=\"(.*?)\"|(OLDID)=\"(.*?)\"|(NEWID)=\"(.*?)\"|<(TITLE)>(.*?)</TITLE>|<(DATE)>(.*?)</DATE>|<(BODY)>(.*?)</BODY>|<(TOPICS)>(.*?)</TOPICS>|<(PLACES)>(.*?)</PLACES>|<(PEOPLE)>(.*?)</PEOPLE>|<(ORGS)>(.*?)</ORGS>|<(EXCHANGES)>(.*?)</EXCHANGES>|<(COMPANIES)>(.*?)</COMPANIES>|<(UNKNOWN)>(.*?)</UNKNOWN>|<(DATELINE)>(.*?)</DATELINE>");
+    private static Pattern EXTRACTION_PATTERN = Pattern.compile(
+            " (LEWISSPLIT)=\"(.*?)\"|(CGISPLIT)=\"(.*?)\"|(OLDID)=\"(.*?)\"|(NEWID)=\"(.*?)\"|<(TITLE)>(.*?)</TITLE>|<(DATE)>(.*?)</DATE>|<(BODY)>(.*?)</BODY>|<(TOPICS)>(.*?)</TOPICS>|<(PLACES)>(.*?)</PLACES>|<(PEOPLE)>(.*?)</PEOPLE>|<(ORGS)>(.*?)</ORGS>|<(EXCHANGES)>(.*?)</EXCHANGES>|<(COMPANIES)>(.*?)</COMPANIES>|<(UNKNOWN)>(.*?)</UNKNOWN>|<(DATELINE)>(.*?)</DATELINE>");
     private static Pattern NESTED_EXTRACTION_PATTERN = Pattern.compile("<D>(.*?)</D>");
 
     private static String[] META_CHARS = { "&", "<", ">", "\"", "'" };
@@ -65,8 +65,7 @@ public class ExtractReuters
      * @throws ParseException
      *             if there was a problem parsing a date
      */
-    public static List<ReutersDocument> extract(Path reutersDir)
-            throws IOException, ParseException
+    public static List<ReutersDocument> extract(Path reutersDir) throws IOException, ParseException
     {
         List<ReutersDocument> docs = new ArrayList<>();
         DirectoryStream<Path> stream = Files.newDirectoryStream(reutersDir, "*.sgm");
@@ -91,13 +90,13 @@ public class ExtractReuters
      *             if there was a problem parsing a date
      */
     public static List<ReutersDocument> extractFile(InputStream sgmFile, URI uri)
-            throws IOException, ParseException
+        throws IOException, ParseException
     {
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(sgmFile, StandardCharsets.ISO_8859_1));
 
-        List<ReutersDocument> entries = new ArrayList<>();  // collection of all documents in file
-        StringBuilder docBuffer = new StringBuilder(1024);  // text of current document
+        List<ReutersDocument> entries = new ArrayList<>(); // collection of all documents in file
+        StringBuilder docBuffer = new StringBuilder(1024); // text of current document
 
         String line;
         while ((line = reader.readLine()) != null) {
@@ -125,8 +124,8 @@ public class ExtractReuters
 
                             /* replace SGML characters */
                             for (int j = 0; j < META_CHARS_SERIALIZATIONS.length; j++) {
-                                value = value
-                                        .replaceAll(META_CHARS_SERIALIZATIONS[j], META_CHARS[j]);
+                                value = value.replaceAll(META_CHARS_SERIALIZATIONS[j],
+                                        META_CHARS[j]);
                             }
 
                             /* extract value(s) */
@@ -161,7 +160,7 @@ public class ExtractReuters
      *            the value of the outer tag from which nested tags are extracted
      */
     private static void extractNested(ReutersDocument doc, String tag, String text)
-            throws ParseException
+        throws ParseException
     {
         Matcher nestedMatcher = NESTED_EXTRACTION_PATTERN.matcher(text);
         while (nestedMatcher.find()) {

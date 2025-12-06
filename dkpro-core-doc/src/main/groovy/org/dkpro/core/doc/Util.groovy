@@ -19,7 +19,8 @@ package org.dkpro.core.doc
 
 import java.text.BreakIterator
 
-class Util {
+class Util
+{
     static def editOnGithub(url)
     {
         """
@@ -30,14 +31,11 @@ class Util {
         ++++
         """.stripIndent()
     }
-    
+
     /*
-    static def tagsetLink(name)
-    {
-        return "<<tagset-reference.adoc#tagset-${ id },${ name }>>
-    }
-    */
-    
+     * static def tagsetLink(name) { return "<<tagset-reference.adoc#tagset-${ id },${ name }>> }
+     */
+
     static def typeLink(name)
     {
         if (name.startsWith('uima.cas.')) {
@@ -58,12 +56,12 @@ class Util {
     {
         return "<<component-reference.adoc#engine-${name},${name}>>"
     }
-    
+
     static def modelLink(model)
     {
         return "<<model-reference.adoc#model-${model.@artifactId},${model.@shortArtifactId}>>"
     }
-    
+
     static def modelLink(model, title)
     {
         return "<<model-reference.adoc#model-${model.@artifactId},${title}>>"
@@ -94,7 +92,7 @@ class Util {
         }
         return description
     }
-    
+
     static def shortDesc(description) {
         if (description) {
             BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US)

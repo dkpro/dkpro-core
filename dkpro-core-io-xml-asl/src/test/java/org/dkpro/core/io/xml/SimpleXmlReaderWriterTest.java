@@ -29,8 +29,7 @@ public class SimpleXmlReaderWriterTest
     public void testBasic() throws Exception
     {
         testRoundTrip( //
-                createReaderDescription(XmlDocumentReader.class), 
-                createEngineDescription(XmlDocumentWriter.class),
-                "xml/basic.xml");
+                createReaderDescription(XmlDocumentReader.class),
+                createEngineDescription(XmlDocumentWriter.class), "xml/basic.xml");
     }
 }

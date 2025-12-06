@@ -35,8 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 public class PennTreebankChunkedReaderTest
 {
     @Test
-    public void testCountsOfAnnotations()
-        throws Exception
+    public void testCountsOfAnnotations() throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos");
 
@@ -47,8 +46,7 @@ public class PennTreebankChunkedReaderTest
     }
 
     @Test
-    public void testPartOfSpeechTagAssignment()
-        throws Exception
+    public void testPartOfSpeechTagAssignment() throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos");
 
@@ -56,17 +54,17 @@ public class PennTreebankChunkedReaderTest
                 "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN", "JJS", "IN",
                 "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
 
-        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_PROPN", "POS_PROPN",
-                "POS_PROPN", "POS_VERB", "POS_PRON", "POS_VERB", "POS_VERB", "POS_DET", "POS_PUNCT", "POS_NUM", "POS_NUM", "POS_NOUN",
-                "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_ADP", "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_X", "POS_NOUN", "POS_CONJ", "POS_NOUN",
-                "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_VERB",
+                "POS_ADP", "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_VERB", "POS_PRON",
+                "POS_VERB", "POS_VERB", "POS_DET", "POS_PUNCT", "POS_NUM", "POS_NUM", "POS_NOUN",
+                "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_ADP", "POS_PROPN", "POS_PROPN", "POS_PROPN",
+                "POS_X", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_NOUN", "POS_PUNCT" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jCas, POS.class));
     }
 
     @Test
-    public void testTokenBoundaries()
-        throws Exception
+    public void testTokenBoundaries() throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos");
 
@@ -79,8 +77,7 @@ public class PennTreebankChunkedReaderTest
     }
 
     @Test
-    public void testErroneouslyJoinedTokensWithCorrectedTag()
-        throws Exception
+    public void testErroneouslyJoinedTokensWithCorrectedTag() throws Exception
     {
         JCas jcas = readTestFile("erroneouslyJoinedTokensAndTheirTags.pos");
 
@@ -92,13 +89,11 @@ public class PennTreebankChunkedReaderTest
     }
 
     @Test
-    public void testDashedWordsTokenization()
-        throws Exception
+    public void testDashedWordsTokenization() throws Exception
     {
         JCas jcas = readTestFile("generalTest.pos");
 
-        String[] chunks = { 
-                "[  0, 12]Chunk(null) (A consortium)",
+        String[] chunks = { "[  0, 12]Chunk(null) (A consortium)",
                 "[ 16, 33]Chunk(null) (private investors)",
                 "[ 47, 62]Chunk(null) (LJH Funding Co.)", "[ 68, 70]Chunk(null) (it)",
                 "[ 80,104]Chunk(null) (a $ 409 million cash bid)", "[109,113]Chunk(null) (most)",
@@ -112,8 +107,7 @@ public class PennTreebankChunkedReaderTest
      * We annotate only one pos if several exist, the first one mentioned
      */
     @Test
-    public void testTokensWithSeveralPossiblePOSTags()
-        throws Exception
+    public void testTokensWithSeveralPossiblePOSTags() throws Exception
     {
         JCas jcas = readTestFile("severalPOSToken.pos");
 
@@ -125,8 +119,7 @@ public class PennTreebankChunkedReaderTest
     }
 
     @Test
-    public void testSuppressedTokenAnnotation()
-        throws Exception
+    public void testSuppressedTokenAnnotation() throws Exception
     {
         // POS/Chunk is set to true, yet it should not be annotated
         JCas jCas = readTestFile("generalTest.pos", false, true, true, true);
@@ -138,8 +131,7 @@ public class PennTreebankChunkedReaderTest
     }
 
     @Test
-    public void testSuppressedPosAnnotation()
-        throws Exception
+    public void testSuppressedPosAnnotation() throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos", true, false, true, true);
 
@@ -150,8 +142,7 @@ public class PennTreebankChunkedReaderTest
     }
 
     @Test
-    public void testSuppressedSentenceAnnotations()
-        throws Exception
+    public void testSuppressedSentenceAnnotations() throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos", true, true, false, true);
 
@@ -162,8 +153,7 @@ public class PennTreebankChunkedReaderTest
     }
 
     @Test
-    public void testSuppressedChunkAnnotations()
-        throws Exception
+    public void testSuppressedChunkAnnotations() throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos", true, true, true, false);
 
@@ -173,8 +163,7 @@ public class PennTreebankChunkedReaderTest
         assertEquals(0, select(jCas, Chunk.class).size());
     }
 
-    private static JCas readTestFile(String aFile)
-        throws Exception
+    private static JCas readTestFile(String aFile) throws Exception
     {
         return readTestFile(aFile, true, true, true, true);
     }

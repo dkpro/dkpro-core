@@ -25,7 +25,7 @@ public class AnnotationDecl
 {
     @XmlElement(name = "feature")
     public List<FeatureDecl> features;
-    
+
     @XmlElement(name = "edgelabel")
     public List<EdgeLabelDecl> edgeLabels;
 

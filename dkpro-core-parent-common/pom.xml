@@ -35,25 +35,24 @@
     <junit-jupiter.version>5.10.3</junit-jupiter.version>
     <junit-platform.version>1.10.3</junit-platform.version>
     <mockito.version>4.11.0</mockito.version>
-    <assertj.version>3.26.3</assertj.version>
-    <xmlunit.version>2.10.0</xmlunit.version>
+    <assertj.version>3.27.6</assertj.version>
+    <xmlunit.version>2.11.0</xmlunit.version>
 
-    <ant-version>1.10.14</ant-version>
+    <ant-version>1.10.15</ant-version>
     <activation.version>1.2.0</activation.version>
-    <groovy.version>4.0.22</groovy.version>
-    <icu4j.version>75.1</icu4j.version>
+    <groovy.version>5.0.3</groovy.version>
+    <icu4j.version>78.1</icu4j.version>
     <jackson.version>2.17.2</jackson.version>
     <jena.version>4.10.0</jena.version>
     <log4j.version>2.23.1</log4j.version>
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
-    <slf4j.version>2.0.13</slf4j.version>
+    <slf4j.version>2.0.17</slf4j.version>
     <snakeyaml.version>2.2</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>5.3.37</spring.version>
-    <uima.version>3.5.0</uima.version>
-    <uimafit.version>3.5.0</uimafit.version>
-    <uimafit.plugin.version>${uimafit.version}</uimafit.plugin.version>
+    <spring.version>7.0.1</spring.version>
+    <uima.version>3.6.1</uima.version>
+    <uimafit.plugin.version>${uima.version}</uimafit.plugin.version>
   </properties>
 
   <dependencies>
@@ -133,18 +132,17 @@
     <dependencies>
       <dependency>
         <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
+        <artifactId>assertj-bom</artifactId>
         <version>${assertj.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.xmlunit</groupId>
-        <artifactId>xmlunit-core</artifactId>
+        <artifactId>xmlunit-bom</artifactId>
         <version>${xmlunit.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.xmlunit</groupId>
-        <artifactId>xmlunit-assertj3</artifactId>
-        <version>${xmlunit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
@@ -167,38 +165,10 @@
       </dependency>
       <dependency>
         <groupId>org.apache.uima</groupId>
-        <artifactId>uimaj-core</artifactId>
+        <artifactId>uimaj-bom</artifactId>
         <version>${uima.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.uima</groupId>
-        <artifactId>uimaj-json</artifactId>
-        <version>${uima.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.uima</groupId>
-        <artifactId>uimaj-tools</artifactId>
-        <version>${uima.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.uima</groupId>
-        <artifactId>uimaj-cpe</artifactId>
-        <version>${uima.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.uima</groupId>
-        <artifactId>uimaj-document-annotation</artifactId>
-        <version>${uima.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.uima</groupId>
-        <artifactId>uimafit-core</artifactId>
-        <version>${uimafit.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.uima</groupId>
-        <artifactId>uimafit-cpe</artifactId>
-        <version>${uimafit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.yaml</groupId>
@@ -224,7 +194,7 @@
       <dependency>
         <groupId>com.fasterxml.woodstox</groupId>
         <artifactId>woodstox-core</artifactId>
-        <version>6.7.0</version>
+        <version>7.1.1</version>
         <exclusions>
           <exclusion>
             <groupId>javax.xml.stream</groupId>
@@ -280,12 +250,12 @@
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.17.1</version>
+        <version>1.20.0</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.16.1</version>
+        <version>2.21.0</version>
       </dependency>
       <dependency>
         <groupId>commons-lang</groupId>
@@ -295,12 +265,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-text</artifactId>
-        <version>1.12.0</version>
+        <version>1.14.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.15.0</version>
+        <version>3.20.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -355,7 +325,7 @@
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>32.1.3-jre</version>
+        <version>33.5.0-jre</version>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
@@ -414,12 +384,12 @@
       <dependency>
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
-        <version>1.3.3</version>
+        <version>1.3.5</version>
       </dependency>
       <dependency>
         <groupId>it.unimi.dsi</groupId>
         <artifactId>fastutil</artifactId>
-        <version>8.5.14</version>
+        <version>8.5.18</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ivy</groupId>
@@ -756,7 +726,7 @@
           <plugin>
             <groupId>org.spdx</groupId>
             <artifactId>spdx-maven-plugin</artifactId>
-            <version>0.7.3</version>
+            <version>${spdx.plugin.version}</version>
             <executions>
               <execution>
                 <id>build-spdx</id>
@@ -849,9 +819,9 @@
         <pluginManagement>
           <plugins>
             <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-checkstyle-plugin</artifactId>
-              <version>3.3.1</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>${maven.checkstyle.plugin.version}</version>
               <inherited>true</inherited>
               <dependencies>
                 <dependency>
@@ -862,7 +832,7 @@
                 <dependency>
                   <groupId>com.puppycrawl.tools</groupId>
                   <artifactId>checkstyle</artifactId>
-                  <version>10.17.0</version>
+                  <version>${checkstyle.version}</version>
                 </dependency>
               </dependencies>
               <configuration>

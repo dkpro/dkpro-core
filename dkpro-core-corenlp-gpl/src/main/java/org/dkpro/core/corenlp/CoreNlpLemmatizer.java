@@ -50,13 +50,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "CoreNLP Lemmatizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class CoreNlpLemmatizer
     extends JCasAnnotator_ImplBase
 {
@@ -84,22 +81,22 @@ public class CoreNlpLemmatizer
     public static final String PARAM_QUOTE_END = "quoteEnd";
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
-    
+
     private boolean verbose = false;
-    
+
     private CasConfigurableProviderBase<MorphaAnnotator> annotatorProvider;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        annotatorProvider = new ModelProviderBase<MorphaAnnotator>(this, "stanfordnlp", "lemma") {
+
+        annotatorProvider = new ModelProviderBase<MorphaAnnotator>(this, "stanfordnlp", "lemma")
+        {
             {
                 setDefault(LOCATION, NOT_REQUIRED);
             }
-            
+
             @Override
             protected MorphaAnnotator produceResource(URL aUrl) throws IOException
             {
@@ -108,33 +105,32 @@ public class CoreNlpLemmatizer
             }
         };
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         if (!"en".equals(aJCas.getDocumentLanguage())) {
             throw new AnalysisEngineProcessException(Messages.BUNDLE,
                     Messages.ERR_UNSUPPORTED_LANGUAGE,
                     new String[] { aJCas.getDocumentLanguage() });
         }
-        
+
         CAS cas = aJCas.getCas();
-        
+
         annotatorProvider.configure(cas);
-        
+
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
-        
+
         Annotation document = new Annotation((String) null);
         converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
-        
+
         // Transfer back into the CAS
         CoreNlp2DKPro.convertLemmas(aJCas, document);
     };

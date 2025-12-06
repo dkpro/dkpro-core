@@ -30,13 +30,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 /**
  * Utility analysis engine for use with CAS multipliers in uimaFIT pipelines.
  */
-public class JCasHolder extends JCasAnnotator_ImplBase
+public class JCasHolder
+    extends JCasAnnotator_ImplBase
 {
     private static JCas value;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try {
             value = JCasFactory.createJCas();

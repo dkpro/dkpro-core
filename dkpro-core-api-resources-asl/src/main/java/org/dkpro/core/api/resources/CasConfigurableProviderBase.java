@@ -28,8 +28,7 @@ public abstract class CasConfigurableProviderBase<M>
 {
     private String language;
 
-    public void configure(CAS aCas)
-        throws AnalysisEngineProcessException
+    public void configure(CAS aCas) throws AnalysisEngineProcessException
     {
         try {
             language = aCas.getDocumentLanguage();

@@ -28,8 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 public class PubAnnotationReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
         testOneWay(
                 createReaderDescription(PubAnnotationReader.class,
@@ -40,13 +39,12 @@ public class PubAnnotationReaderWriterTest
                         PubAnnotationWriter.PARAM_SPAN_TYPE, NamedEntity.class,
                         PubAnnotationWriter.PARAM_SPAN_LABEL_FEATURE, "value",
                         PubAnnotationWriter.PARAM_SPAN_ID_FEATURE, "identifier"),
-                "pubannotation/SPECIES800/19667393-ref.json", 
+                "pubannotation/SPECIES800/19667393-ref.json",
                 "pubannotation/SPECIES800/19667393.json");
     }
 
     @Test
-    public void roundTripResolveNamespaces()
-        throws Exception
+    public void roundTripResolveNamespaces() throws Exception
     {
         testOneWay(
                 createReaderDescription(PubAnnotationReader.class,
@@ -58,7 +56,7 @@ public class PubAnnotationReaderWriterTest
                         PubAnnotationWriter.PARAM_SPAN_TYPE, NamedEntity.class,
                         PubAnnotationWriter.PARAM_SPAN_LABEL_FEATURE, "value",
                         PubAnnotationWriter.PARAM_SPAN_ID_FEATURE, "identifier"),
-                "pubannotation/SPECIES800/19667393-ref-ns.json", 
+                "pubannotation/SPECIES800/19667393-ref-ns.json",
                 "pubannotation/SPECIES800/19667393.json");
     }
 }

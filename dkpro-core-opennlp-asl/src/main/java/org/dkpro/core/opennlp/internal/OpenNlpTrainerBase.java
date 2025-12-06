@@ -41,9 +41,7 @@ import opennlp.tools.util.model.BaseModel;
 /**
  * Train a model for OpenNLP.
  */
-@Parameters(
-        exclude = { 
-                OpenNlpTrainerBase.PARAM_TARGET_LOCATION  })
+@Parameters(exclude = { OpenNlpTrainerBase.PARAM_TARGET_LOCATION })
 public abstract class OpenNlpTrainerBase<T extends CasSampleStreamBase>
     extends JCasConsumer_ImplBase
 {
@@ -51,47 +49,44 @@ public abstract class OpenNlpTrainerBase<T extends CasSampleStreamBase>
      * Location to which the output is written.
      */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
-    @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
+    @ConfigurationParameter(name = PARAM_TARGET_LOCATION)
     private File targetLocation;
 
     private T stream;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private Future<? extends BaseModel> future;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         stream = makeSampleStream();
-        
+
         Callable<? extends BaseModel> trainTask = makeTrainer();
-        
+
         future = executor.submit(trainTask);
     }
-    
+
     public abstract T makeSampleStream();
-    
+
     public abstract Callable<? extends BaseModel> makeTrainer();
-    
+
     public T getStream()
     {
         return stream;
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         if (!future.isCancelled()) {
             stream.send(aJCas);
         }
     }
-    
+
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         try {
             stream.close();
@@ -99,7 +94,7 @@ public abstract class OpenNlpTrainerBase<T extends CasSampleStreamBase>
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         BaseModel model;
         try {
             model = future.get();
@@ -107,7 +102,7 @@ public abstract class OpenNlpTrainerBase<T extends CasSampleStreamBase>
         catch (InterruptedException | ExecutionException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         try (OutputStream out = new FileOutputStream(targetLocation)) {
             model.serialize(out);
         }

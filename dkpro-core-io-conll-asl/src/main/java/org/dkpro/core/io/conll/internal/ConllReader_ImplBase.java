@@ -36,7 +36,7 @@ public abstract class ConllReader_ImplBase
      * Trim field values.
      */
     public static final String PARAM_TRIM_FIELDS = "trimFields";
-    @ConfigurationParameter(name = PARAM_TRIM_FIELDS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_TRIM_FIELDS, defaultValue = "true")
     protected boolean trimFields;
 
     protected String cleanTag(String aField)
@@ -44,7 +44,7 @@ public abstract class ConllReader_ImplBase
         if (aField == null) {
             return null;
         }
-        
+
         return trim(aField).intern();
     }
 
@@ -53,10 +53,10 @@ public abstract class ConllReader_ImplBase
         if (aField == null || !trimFields) {
             return aField;
         }
-        
+
         return aField.trim();
     }
-    
+
     protected Dependency makeDependency(JCas aJCas, int govId, int depId, String label,
             String flavor, Int2ObjectMap<Token> tokens, String[] word)
     {

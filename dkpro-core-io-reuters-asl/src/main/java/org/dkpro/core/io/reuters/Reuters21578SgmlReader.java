@@ -46,33 +46,30 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Reuters-21578 Corpus SGML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_REUTERS21578_SGML})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_REUTERS21578_SGML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class Reuters21578SgmlReader
-        extends JCasResourceCollectionReader_ImplBase
+    extends JCasResourceCollectionReader_ImplBase
 {
     private Queue<ReutersDocument> documentQueue;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         documentQueue = new LinkedList<>();
     }
 
-    @Override public void getNext(JCas jCas)
-            throws IOException, CollectionException
+    @Override
+    public void getNext(JCas jCas) throws IOException, CollectionException
     {
         if (documentQueue.isEmpty()) {
             /* read next SGML file */
             assert getResourceIterator().hasNext();
             Resource resource = getResourceIterator().next();
             try {
-                documentQueue.addAll(ExtractReuters
-                        .extractFile(resource.getInputStream(), resource.getResolvedUri()));
+                documentQueue.addAll(ExtractReuters.extractFile(resource.getInputStream(),
+                        resource.getResolvedUri()));
             }
             catch (ParseException e) {
                 throw new CollectionException(e);
@@ -94,19 +91,18 @@ public class Reuters21578SgmlReader
     }
 
     @Override
-    public boolean hasNext()
-            throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return !documentQueue.isEmpty() || getResourceIterator().hasNext();
     }
 
-    @Override public Progress[] getProgress()
+    @Override
+    public Progress[] getProgress()
     {
         return new Progress[0];
     }
 
-    private void initCas(CAS aCas, ReutersDocument doc)
-            throws IOException, CASException
+    private void initCas(CAS aCas, ReutersDocument doc) throws IOException, CASException
     {
         DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
         docMetaData.setDocumentTitle(doc.getTitle());

@@ -85,8 +85,7 @@ public class DictionaryBasedTokenTransformer
     private Map<String, String> mappings;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -99,8 +98,7 @@ public class DictionaryBasedTokenTransformer
     }
 
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         // Processing must be done back-to-front to ensure that offsets for the next token being
         // processed remain valid. If this is done front-to-back, replacing a token with a
@@ -115,8 +113,7 @@ public class DictionaryBasedTokenTransformer
         }
     }
 
-    private Map<String, String> readMappings(URL aUrl)
-        throws IOException
+    private Map<String, String> readMappings(URL aUrl) throws IOException
     {
         try (InputStream is = aUrl.openStream()) {
             Map<String, String> mappings = new HashMap<>();
@@ -127,9 +124,8 @@ public class DictionaryBasedTokenTransformer
                 String[] words = line.split(separator);
                 String key = words[0].trim();
                 if (mappings.containsKey(key)) {
-                    getLogger().warn(
-                            String.format("Duplicate entry '%s' in mappings file '%s'.", key,
-                                    aUrl));
+                    getLogger().warn(String.format("Duplicate entry '%s' in mappings file '%s'.",
+                            key, aUrl));
                 }
                 mappings.put(key, words[1].trim());
             }

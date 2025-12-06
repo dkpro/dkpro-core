@@ -55,21 +55,18 @@ public class MappingsTest
             POS_AUX.class, POS_CONJ.class, POS_DET.class, POS_INTJ.class, POS_NOUN.class,
             POS_NUM.class, POS_PART.class, POS_PRON.class, POS_PROPN.class, POS_PUNCT.class,
             POS_SCONJ.class, POS_SYM.class, POS_VERB.class, POS_X.class };
-    
+
     @Test
     public void testMappings() throws Exception
     {
         Collection<File> files = FileUtils.listFiles(
                 new File("src/main/resources/org/dkpro/core/api/lexmorph/tagset"),
-                new WildcardFileFilter("*-pos.map"),
-                TrueFileFilter.TRUE);
-        
-        
+                new WildcardFileFilter("*-pos.map"), TrueFileFilter.TRUE);
+
         assertTagsetMapping(files);
     }
-    
-    public static void assertTagsetMapping(Collection<File> files)
-        throws IOException
+
+    public static void assertTagsetMapping(Collection<File> files) throws IOException
     {
         for (File file : files) {
             boolean failure = false;

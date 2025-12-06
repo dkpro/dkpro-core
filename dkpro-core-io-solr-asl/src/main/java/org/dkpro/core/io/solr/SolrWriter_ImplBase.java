@@ -116,17 +116,13 @@ public abstract class SolrWriter_ImplBase
     private SolrClient solrClient;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
-        getLogger().info(
-                String.format("Using Solr server at %s.%nQueue size: %d\tThreads: %d%n",
-                        targetLocation, queueSize, numThreads));
-        solrClient = new ConcurrentUpdateSolrClient.Builder(targetLocation)
-                .withQueueSize(queueSize)
-                .withThreadCount(numThreads)
-                .build();
+        getLogger().info(String.format("Using Solr server at %s.%nQueue size: %d\tThreads: %d%n",
+                targetLocation, queueSize, numThreads));
+        solrClient = new ConcurrentUpdateSolrClient.Builder(targetLocation).withQueueSize(queueSize)
+                .withThreadCount(numThreads).build();
         try {
             int status = solrClient.ping().getStatus();
             if (status != 0) {
@@ -140,8 +136,7 @@ public abstract class SolrWriter_ImplBase
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try {
             SolrInputDocument solrDocument = generateSolrDocument(aJCas);
@@ -153,20 +148,19 @@ public abstract class SolrWriter_ImplBase
     }
 
     @Override
-    public void collectionProcessComplete()
-            throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         super.collectionProcessComplete();
 
         try {
             UpdateResponse response = solrClient.commit(waitFlush, waitSearcher);
-            getLogger().info(String.format("Solr server at '%s' responded: %s",
-                    targetLocation, response.toString()));
+            getLogger().info(String.format("Solr server at '%s' responded: %s", targetLocation,
+                    response.toString()));
             if (optimizeIndex) {
                 getLogger().info("Starting index optimization...");
                 solrClient.optimize(waitFlush, waitSearcher);
-                getLogger().info(String.format("Solr server at '%s' responded: %s",
-                        targetLocation, response.toString()));
+                getLogger().info(String.format("Solr server at '%s' responded: %s", targetLocation,
+                        response.toString()));
             }
             solrClient.close();
         }
@@ -204,9 +198,9 @@ public abstract class SolrWriter_ImplBase
     }
 
     /**
-    *
-    * @return the SolrClient
-    */
+     *
+     * @return the SolrClient
+     */
     public SolrClient getSolrClient()
     {
         return solrClient;

@@ -26,7 +26,7 @@ public class TigerSplitword
 {
     @XmlAttribute
     public String idref = null;
-    
+
     @XmlElement(name = "part")
     public List<TigerPart> parts;
 }

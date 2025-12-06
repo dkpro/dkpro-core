@@ -40,9 +40,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "Paragraph Splitter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
 public class ParagraphSplitter
     extends JCasAnnotator_ImplBase
 {

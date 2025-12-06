@@ -25,7 +25,8 @@ import java.io.IOException;
  * @see org.dkpro.core.api.embeddings.binary.BinaryVectorizer
  * @see org.dkpro.core.api.embeddings.text.TextFormatVectorizer
  */
-public interface Vectorizer extends AutoCloseable
+public interface Vectorizer
+    extends AutoCloseable
 {
     /**
      * Get the vector for a token. If the token is unknown, implementing classes should return the
@@ -37,13 +38,13 @@ public interface Vectorizer extends AutoCloseable
      * @throws IOException
      *             if there was an error accessing the vector file.
      */
-    float[] vectorize(String token)
-            throws IOException;
+    float[] vectorize(String token) throws IOException;
 
     /**
      * True if the token is known by the vectorizer.
      *
-     * @param token a token String
+     * @param token
+     *            a token String
      * @return true if the token is known
      */
     boolean contains(String token);

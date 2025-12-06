@@ -36,9 +36,8 @@ public class BerkeleyLmProvider
 
     private final NgramLanguageModel<String> lm;
     private String language;
-    
-    public BerkeleyLmProvider(String binaryFile, String language)
-        throws Exception
+
+    public BerkeleyLmProvider(String binaryFile, String language) throws Exception
     {
         lm = LmReaders.readLmBinary(binaryFile);
         this.language = language;
@@ -49,7 +48,7 @@ public class BerkeleyLmProvider
     public long getFrequency(String phrase)
     {
         throw new UnsupportedOperationException("Not implemented yet.");
-//        return getProbnew Float(Math.exp(logProb)).longValue();
+        // return getProbnew Float(Math.exp(logProb)).longValue();
     }
 
     @Override
@@ -93,7 +92,7 @@ public class BerkeleyLmProvider
     {
         return this.language;
     }
-    
+
     @Override
     public String getID()
     {

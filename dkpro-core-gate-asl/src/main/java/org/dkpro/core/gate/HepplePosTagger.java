@@ -57,12 +57,9 @@ import hepple.postag.POSTagger;
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @ResourceMetaData(name = "GATE Hepple POS-Tagger")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class HepplePosTagger
     extends JCasAnnotator_ImplBase
 {
@@ -98,16 +95,14 @@ public class HepplePosTagger
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -115,7 +110,7 @@ public class HepplePosTagger
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     private CasConfigurableProviderBase<URL> ruleProvider;
@@ -123,18 +118,18 @@ public class HepplePosTagger
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        ruleProvider = new CasConfigurableProviderBase<URL>() {
+        ruleProvider = new CasConfigurableProviderBase<URL>()
+        {
             {
                 setContextObject(HepplePosTagger.this);
 
                 setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/gate");
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
-                        "tagger/${language}/${variant}/ruleset");
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/"
+                        + "tagger/${language}/${variant}/ruleset");
                 setDefault(VARIANT, "annie");
 
                 setOverride(LOCATION, rulesetLocation);
@@ -149,10 +144,11 @@ public class HepplePosTagger
             }
         };
 
-        lexiconProvider = new CasConfigurableProviderBase<URL>() {
+        lexiconProvider = new CasConfigurableProviderBase<URL>()
+        {
             {
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
-                        "tagger/${language}/${variant}/lexicon");
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/"
+                        + "tagger/${language}/${variant}/lexicon");
                 setDefault(VARIANT, "annie");
 
                 setOverride(LOCATION, lexiconLocation);
@@ -167,14 +163,12 @@ public class HepplePosTagger
             }
         };
 
-        mappingProvider = createPosMappingProvider(this, posMappingLocation,
-                language, ruleProvider);
+        mappingProvider = createPosMappingProvider(this, posMappingLocation, language,
+                ruleProvider);
     }
 
-
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
         lexiconProvider.configure(cas);
@@ -183,8 +177,8 @@ public class HepplePosTagger
 
         POSTagger posTagger;
         try {
-            posTagger = new POSTagger(lexiconProvider.getResource(),
-                    ruleProvider.getResource(), "UTF-8");
+            posTagger = new POSTagger(lexiconProvider.getResource(), ruleProvider.getResource(),
+                    "UTF-8");
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);

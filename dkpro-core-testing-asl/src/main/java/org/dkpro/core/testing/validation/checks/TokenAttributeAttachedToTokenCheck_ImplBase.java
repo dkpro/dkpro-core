@@ -44,32 +44,29 @@ public abstract class TokenAttributeAttachedToTokenCheck_ImplBase
         Feature feat = JCasUtil.getType(aJCas, Token.class).getFeatureByBaseName(aFeature);
 
         List<AnnotationFS> attached = select(aJCas, Token.class).stream()
-                .map(t -> (AnnotationFS) t.getFeatureValue(feat))
-                .filter(v -> v != null)
+                .map(t -> (AnnotationFS) t.getFeatureValue(feat)).filter(v -> v != null)
                 .collect(Collectors.toList());
         List<AnnotationFS> all = select(aJCas, aType).stream().collect(Collectors.toList());
 
         all.removeAll(attached);
-        
+
         // We only require that one attribute at a given position is attached. There may be
         // additional secondary attributes at the same position that are not attached.
         List<AnnotationFS> secondary = new ArrayList<>();
-        attached.forEach(attr ->
-                selectAt(aJCas, aType, attr.getBegin(), attr.getEnd()).stream()
-                    .filter(secAttr -> attr != secAttr)
-                    .forEach(secAttr -> secondary.add(secAttr)));
+        attached.forEach(attr -> selectAt(aJCas, aType, attr.getBegin(), attr.getEnd()).stream()
+                .filter(secAttr -> attr != secAttr).forEach(secAttr -> secondary.add(secAttr)));
         all.removeAll(secondary);
-        
+
         for (AnnotationFS a : all) {
-            aMessages.add(new Message(this, ERROR, String.format(
-                    "Unattached attribute %s: %s [%d..%d]", aType.getSimpleName(), a.getType()
-                            .getName(), a.getBegin(), a.getEnd())));
+            aMessages.add(new Message(this, ERROR,
+                    String.format("Unattached attribute %s: %s [%d..%d]", aType.getSimpleName(),
+                            a.getType().getName(), a.getBegin(), a.getEnd())));
         }
 
         for (AnnotationFS a : secondary) {
-            aMessages.add(new Message(this, INFO, String.format(
-                    "Secondary attribute %s: %s [%d..%d]", aType.getSimpleName(), a.getType()
-                            .getName(), a.getBegin(), a.getEnd())));
+            aMessages.add(new Message(this, INFO,
+                    String.format("Secondary attribute %s: %s [%d..%d]", aType.getSimpleName(),
+                            a.getType().getName(), a.getBegin(), a.getEnd())));
         }
     }
 }

@@ -37,51 +37,41 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 public class TcfReaderWriterTest
 {
     @Test
-    public void test1()
-            throws Exception
+    public void test1() throws Exception
     {
-        testOneWay(
-                createReaderDescription(TcfReader.class),
-                createEngineDescription(TcfWriter.class,
-                        TcfWriter.PARAM_MERGE, false,
+        testOneWay(createReaderDescription(TcfReader.class),
+                createEngineDescription(TcfWriter.class, TcfWriter.PARAM_MERGE, false,
                         TcfWriter.PARAM_FILENAME_EXTENSION, ".xml"),
-                "tcf-after-expected.xml", 
-                "tcf-after.xml",
+                "tcf-after-expected.xml", "tcf-after.xml",
                 new TestOptions().keepDocumentMetadata().resultAssertor(this::assertXmlEquals));
     }
 
     @Test
-    public void testWithCmdMetadata()
-            throws Exception
+    public void testWithCmdMetadata() throws Exception
     {
-        testOneWay(
-                createReaderDescription(TcfReader.class),
-                createEngineDescription(TcfWriter.class,
-                        TcfWriter.PARAM_FILENAME_EXTENSION, ".xml"),
-                "tcf04-karin-wl_expected.xml", 
-                "tcf04-karin-wl.xml",
-                new TestOptions()
-                        .keepDocumentMetadata()
-                        .resultAssertor(this::assertXmlEquals)
+        testOneWay(createReaderDescription(TcfReader.class),
+                createEngineDescription(
+                        TcfWriter.class, TcfWriter.PARAM_FILENAME_EXTENSION, ".xml"),
+                "tcf04-karin-wl_expected.xml", "tcf04-karin-wl.xml",
+                new TestOptions().keepDocumentMetadata().resultAssertor(this::assertXmlEquals)
                         // To spot-check if replaced layers enter into the output, we reverse the
                         // POS tags.
                         .processor(createEngineDescription(PosReplacer.class)));
     }
-    
+
     @Test
-    public void testRoundtrip()
-        throws Exception
+    public void testRoundtrip() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(TcfReader.class),
-                createEngineDescription(TcfWriter.class,
-                        TcfWriter.PARAM_MERGE, false,
+        testRoundTrip(createReaderDescription(TcfReader.class),
+                createEngineDescription(TcfWriter.class, TcfWriter.PARAM_MERGE, false,
                         TcfWriter.PARAM_FILENAME_EXTENSION, ".xml"),
                 "wlfxb_expected.xml",
                 new TestOptions().keepDocumentMetadata().resultAssertor(this::assertXmlEquals));
     }
-    
-    public static class PosReplacer extends JCasAnnotator_ImplBase {
+
+    public static class PosReplacer
+        extends JCasAnnotator_ImplBase
+    {
 
         @Override
         public void process(JCas aJCas) throws AnalysisEngineProcessException

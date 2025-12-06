@@ -20,21 +20,21 @@ package org.dkpro.core.api.datasets;
 public enum DatasetValidationPolicy
 {
     /**
-     * If the local hash does not match or if there is no local data, download it. If the 
-     * freshly downloaded data does not match, fail.
+     * If the local hash does not match or if there is no local data, download it. If the freshly
+     * downloaded data does not match, fail.
      */
     STRICT,
-    
+
     /**
      * If the local hash does not match if there is no local data, download it. If the freshly
      * downloaded data does not match, continue.
      */
     CONTINUE,
-    
+
     /**
      * Use the local cached version, even if its hash does not match. Do not try to download it
-     * again. If there is no cached version, try downloading the data and use it whether it 
-     * matches the hash or not.
+     * again. If there is no cached version, try downloading the data and use it whether it matches
+     * the hash or not.
      */
     DESPERATE;
 }

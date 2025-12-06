@@ -55,75 +55,65 @@ public class MalletEmbeddingsAnnotatorTest
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
 
     @BeforeEach
-    public void setUp()
-            throws URISyntaxException
+    public void setUp() throws URISyntaxException
     {
         modelFile = new File(getClass().getResource("/dummy.vec").toURI());
         binaryModelFile = new File(getClass().getResource("/dummy.binary").toURI());
     }
 
     @Test
-    public void test()
-            throws ResourceInitializationException
+    public void test() throws ResourceInitializationException
     {
         // tag::example[]
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, "en");
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletEmbeddingsAnnotator.class,
-                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile);
-        //end::example[]
+                MalletEmbeddingsAnnotator.class, MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION,
+                modelFile);
+        // end::example[]
 
         testEmbeddingAnnotations(reader, segmenter, inferencer);
     }
 
     @Test
-    public void testBinary()
-            throws ResourceInitializationException
+    public void testBinary() throws ResourceInitializationException
     {
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, "en");
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletEmbeddingsAnnotator.class,
-                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, binaryModelFile,
-                MalletEmbeddingsAnnotator.PARAM_MODEL_IS_BINARY, true);
+                MalletEmbeddingsAnnotator.class, MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION,
+                binaryModelFile, MalletEmbeddingsAnnotator.PARAM_MODEL_IS_BINARY, true);
 
         testEmbeddingAnnotations(reader, segmenter, inferencer);
     }
 
     @Test
-    public void testUnknownTokensText()
-            throws ResourceInitializationException
+    public void testUnknownTokensText() throws ResourceInitializationException
     {
         int dim = 50;
         float[] unkVector = VectorizerUtils.randomVector(dim);
         int minTokenLength = 3; // minimum token length in test vector file
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, "en");
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletEmbeddingsAnnotator.class,
-                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile,
-                MalletEmbeddingsAnnotator.PARAM_ANNOTATE_UNKNOWN_TOKENS, true);
+                MalletEmbeddingsAnnotator.class, MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION,
+                modelFile, MalletEmbeddingsAnnotator.PARAM_ANNOTATE_UNKNOWN_TOKENS, true);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {
             for (Token token : select(jcas, Token.class)) {
                 if (token.getCoveredText().length() < minTokenLength) {
                     float[] vector = selectCovered(WordEmbedding.class, token).get(0)
-                            .getWordEmbedding()
-                            .toArray();
+                            .getWordEmbedding().toArray();
                     assertTrue(Arrays.equals(vector, unkVector));
                 }
             }
@@ -131,22 +121,19 @@ public class MalletEmbeddingsAnnotatorTest
     }
 
     @Test
-    public void testUnknownTokensTextRandom()
-            throws ResourceInitializationException
+    public void testUnknownTokensTextRandom() throws ResourceInitializationException
     {
         int dim = 50;
         int minTokenLength = 3; // minimum token length in test vector file
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, "en");
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletEmbeddingsAnnotator.class,
-                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile,
-                MalletEmbeddingsAnnotator.PARAM_ANNOTATE_UNKNOWN_TOKENS, true);
+                MalletEmbeddingsAnnotator.class, MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION,
+                modelFile, MalletEmbeddingsAnnotator.PARAM_ANNOTATE_UNKNOWN_TOKENS, true);
 
         float[] randomVector = null;
         boolean isFirst = true;
@@ -155,8 +142,7 @@ public class MalletEmbeddingsAnnotatorTest
                 if (token.getCoveredText().length() < minTokenLength) {
                     /* token should be unknown */
                     float[] vector = selectCovered(WordEmbedding.class, token).get(0)
-                            .getWordEmbedding()
-                            .toArray();
+                            .getWordEmbedding().toArray();
                     assertEquals(dim, vector.length);
 
                     if (isFirst) {
@@ -172,18 +158,15 @@ public class MalletEmbeddingsAnnotatorTest
     }
 
     @Test
-    public void testLowercaseCaseless()
-            throws UIMAException, IOException
+    public void testLowercaseCaseless() throws UIMAException, IOException
     {
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, "en");
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletEmbeddingsAnnotator.class,
-                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile,
-                MalletEmbeddingsAnnotator.PARAM_LOWERCASE, true);
-        
+                MalletEmbeddingsAnnotator.class, MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION,
+                modelFile, MalletEmbeddingsAnnotator.PARAM_LOWERCASE, true);
+
         assertThatExceptionOfType(ResourceInitializationException.class)
                 .isThrownBy(() -> SimplePipeline.runPipeline(reader, inferencer));
     }

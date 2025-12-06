@@ -33,58 +33,28 @@ public class MappingTest
     @Test
     public void testParse() throws Exception
     {
-        String json = String.join("\n",
-                "{",
-                "  'textTypeMapppings': [",
-                "    {",
+        String json = String.join("\n", "{", "  'textTypeMapppings': [", "    {",
                 "      'from': 'NamedEntity',",
                 "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',",
-                "      'defaultFeatureValues': {",
-                "        'identity': 'none'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'relationTypeMapppings': [",
-                "    {",
-                "      'from': 'Dependency',",
+                "      'defaultFeatureValues': {", "        'identity': 'none'", "      }", "    }",
+                "  ],", "  'relationTypeMapppings': [", "    {", "      'from': 'Dependency',",
                 "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency',",
-                "      'defaultFeatureValues': {",
-                "        'flavour': 'basic'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'spans': [",
-                "    {",
+                "      'defaultFeatureValues': {", "        'flavour': 'basic'", "      }", "    }",
+                "  ],", "  'spans': [", "    {",
                 "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',",
-                "      'subCatFeature': 'value',",
-                "      'defaultFeatureValues': {",
-                "        'identity': 'none'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'relations': [",
+                "      'subCatFeature': 'value',", "      'defaultFeatureValues': {",
+                "        'identity': 'none'", "      }", "    }", "  ],", "  'relations': [",
                 "    {",
                 "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency',",
-                "      'arg1': 'source',",
-                "      'arg2': 'target',",
-                "      'flags2': 'A',",
-                "      'subCatFeature': 'DependencyType',",
-                "      'defaultFeatureValues': {",
-                "        'flavour': 'basic'",
-                "      }",
-                "    }",
-                "  ],",
-                "  'comments': [",
-                "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',",
-                "      'feature': 'identifier'",
-                "    }",
-                "  ]",
-                "}");
-        
+                "      'arg1': 'source',", "      'arg2': 'target',", "      'flags2': 'A',",
+                "      'subCatFeature': 'DependencyType',", "      'defaultFeatureValues': {",
+                "        'flavour': 'basic'", "      }", "    }", "  ],", "  'comments': [",
+                "    {", "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',",
+                "      'feature': 'identifier'", "    }", "  ]", "}");
+
         Mapping mapping = parse(json);
     }
-    
+
     private Mapping parse(String aJson) throws JsonParseException, JsonMappingException, IOException
     {
         ObjectMapper mapper = new ObjectMapper();

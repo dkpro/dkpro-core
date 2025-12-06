@@ -49,24 +49,21 @@ import opennlp.tools.ml.maxent.GISTrainer;
 public class OpenNlpNamedEntityRecognizerTrainerTest
 {
     private Dataset ds;
-    
+
     @Test
-    public void test(@TempDir File targetFolder)
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
         Split split = ds.getDefaultSplit();
-        
+
         // Train model
         File model = new File(targetFolder, "model.bin");
-        CollectionReaderDescription trainReader = createReaderDescription(
-                Conll2002Reader.class,
+        CollectionReaderDescription trainReader = createReaderDescription(Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
-                Conll2002Reader.PARAM_HAS_HEADER, true,
-                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
-        
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, Conll2002Reader.PARAM_HAS_HEADER,
+                true, Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
+
         AnalysisEngineDescription trainer = createEngineDescription(
                 OpenNlpNamedEntityRecognizerTrainer.class,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION, model,
@@ -75,48 +72,45 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_CUTOFF, 5,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_ITERATIONS, 10);
-        
+
         SimplePipeline.runPipeline(trainReader, trainer);
-        
+
         // Apply model and collect labels
         System.out.println("Applying model to test data");
-        CollectionReaderDescription testReader = createReaderDescription(
-                Conll2002Reader.class,
+        CollectionReaderDescription testReader = createReaderDescription(Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
-                Conll2002Reader.PARAM_LANGUAGE, "de",
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
+                Conll2002Reader.PARAM_LANGUAGE, "de", Conll2002Reader.PARAM_COLUMN_SEPARATOR,
+                ColumnSeparators.TAB.getName(), Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
                 Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, false);
-        
-        AnalysisEngineDescription ner = createEngineDescription(
-                OpenNlpNamedEntityRecognizer.class,
+
+        AnalysisEngineDescription ner = createEngineDescription(OpenNlpNamedEntityRecognizer.class,
                 OpenNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true,
                 OpenNlpNamedEntityRecognizer.PARAM_MODEL_LOCATION, model);
 
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner),
                 NamedEntity.class, ne -> ne.getValue());
         System.out.printf("Actual samples: %d%n", actual.size());
-        
+
         // Read reference data collect labels
-        ConfigurationParameterFactory.setParameter(testReader, 
+        ConfigurationParameterFactory.setParameter(testReader,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
-        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class, ne -> 
-                ne.getValue());
+        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class,
+                ne -> ne.getValue());
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
-        
+
         assertEquals(0.323254, results.getFscore(), 0.0001);
         assertEquals(0.877419, results.getPrecision(), 0.0001);
         assertEquals(0.198122, results.getRecall(), 0.0001);
     }
-    
+
     @BeforeEach
     public void setup() throws IOException
     {
         DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("germeval2014-de");
-    }    
+    }
 }

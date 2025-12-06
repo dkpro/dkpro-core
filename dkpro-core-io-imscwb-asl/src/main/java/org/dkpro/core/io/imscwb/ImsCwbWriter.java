@@ -225,7 +225,7 @@ public class ImsCwbWriter
     private Process childProcess;
     private File dataDirectory;
     private File registryDirectory;
-    
+
     private OutputStream targetStream;
 
     @Override
@@ -371,7 +371,7 @@ public class ImsCwbWriter
             if (childProcess == null) {
                 startCqpProcess();
             }
-            
+
             return new NamedOutputStream(null,
                     new CloseShieldOutputStream(childProcess.getOutputStream()));
         }

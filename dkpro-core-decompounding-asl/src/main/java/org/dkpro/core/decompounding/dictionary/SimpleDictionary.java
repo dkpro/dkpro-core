@@ -46,8 +46,7 @@ public class SimpleDictionary
      * @param aDict
      *            The file with all words
      */
-    public SimpleDictionary(File aDict, String aEncoding)
-        throws IOException
+    public SimpleDictionary(File aDict, String aEncoding) throws IOException
     {
         try (BufferedReader in = new BufferedReader(
                 new InputStreamReader(new FileInputStream(aDict), aEncoding))) {

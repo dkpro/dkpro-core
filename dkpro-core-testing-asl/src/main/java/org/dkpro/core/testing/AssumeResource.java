@@ -29,7 +29,7 @@ public class AssumeResource
 {
     public static void assumeResource(Class<?> aClass, String aTool, String aLanguage,
             String aVariant)
-                throws IOException
+        throws IOException
     {
         String pack = aClass.getPackage().getName().replace('.', '/');
         assumeResource(aClass, pack, aTool, aLanguage, aVariant);
@@ -37,16 +37,16 @@ public class AssumeResource
 
     public static void assumeResource(Class<?> aClass, String aPackage, String aTool,
             String aLanguage, String aVariant)
-                throws IOException
+        throws IOException
     {
         boolean exists = resourceAvailable(aClass, aPackage, aTool, aLanguage, aVariant);
-        
+
         if (!exists && aPackage.startsWith("org/dkpro/core")) {
             // Try the legacy packages
             String pack = aPackage.replace("org/dkpro/core", "de/tudarmstadt/ukp/dkpro/core");
             exists = resourceAvailable(aClass, pack, aTool, aLanguage, aVariant);
         }
-        
+
         if (!exists) {
             // The English default model should always be included in the default test dependencies,
             // so issue a special warning here
@@ -59,14 +59,14 @@ public class AssumeResource
                         + aLanguage + "] [" + aVariant + "] - skipping");
             }
         }
-        
-        assumeTrue(exists, "[" + aClass.getSimpleName() + "] model not available: [" + aLanguage + "] ["
-                + aVariant + "]");
+
+        assumeTrue(exists, "[" + aClass.getSimpleName() + "] model not available: [" + aLanguage
+                + "] [" + aVariant + "]");
     }
 
     private static boolean resourceAvailable(Class<?> aClass, String aPackage, String aTool,
             String aLanguage, String aVariant)
-                throws IOException
+        throws IOException
     {
         String variant = aVariant;
 

@@ -31,37 +31,33 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 public class IllinoisNamedEntityRecognizerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
         // Run the test pipeline. Note the full stop at the end of a sentence is preceded by a
         // whitespace. This is necessary for it to be detected as a separate token!
         JCas jcas = runTest("en", null, "SAP where John Doe works is in Germany .");
 
         // Define the reference data that we expect to get back from the test
-        String[] namedEntity = { 
-                "[  0,  3]NamedEntity(ORG) (SAP)",
-                "[ 10, 18]NamedEntity(PER) (John Doe)",
-                "[ 31, 38]NamedEntity(LOC) (Germany)" };
+        String[] namedEntity = { "[  0,  3]NamedEntity(ORG) (SAP)",
+                "[ 10, 18]NamedEntity(PER) (John Doe)", "[ 31, 38]NamedEntity(LOC) (Germany)" };
 
         // Compare the annotations created in the pipeline to the reference data
         AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));
     }
-    
+
     // Auxiliary method that sets up the analysis engine or pipeline used in the test.
     // Typically, we have multiple tests per unit test file that each invoke this method.
-    private JCas runTest(String language, String variant, String testDocument)
-        throws Exception
+    private JCas runTest(String language, String variant, String testDocument) throws Exception
     {
         AnalysisEngineDescription pos = createEngineDescription(IllinoisPosTagger.class);
-        
+
         AnalysisEngineDescription ner = createEngineDescription(IllinoisNamedEntityRecognizer.class,
-                //IllinoisNamedEntityRecognizer.PARAM_VARIANT, variant,
+                // IllinoisNamedEntityRecognizer.PARAM_VARIANT, variant,
                 IllinoisNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
 
         AnalysisEngineDescription engine = createEngineDescription(pos, ner);
 
-        // Here we invoke the TestRunner which performs basic whitespace tokenization and 
+        // Here we invoke the TestRunner which performs basic whitespace tokenization and
         // sentence splitting, creates a CAS, runs the pipeline, etc. TestRunner explicitly
         // disables automatic model loading. Thus, models used in unit tests must be explicitly
         // made dependencies in the pom.xml file.

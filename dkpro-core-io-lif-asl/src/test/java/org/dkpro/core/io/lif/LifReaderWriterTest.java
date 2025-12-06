@@ -27,61 +27,49 @@ import org.junit.jupiter.api.Test;
 public class LifReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(LifReader.class), // the reader
-                createEngineDescription(LifWriter.class,  // the writer
-                        LifWriter.PARAM_WRITE_TIMESTAMP, false),  
+        testRoundTrip(createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class, // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false),
                 "conll/2006/fi-ref.lif"); // the input also used as output reference
     }
-    
+
     @Test
-    public void authenticPosLifFileWithWrapper()
-        throws Exception
+    public void authenticPosLifFileWithWrapper() throws Exception
     {
-        testOneWay(
-                createReaderDescription(LifReader.class), // the reader
-                createEngineDescription(LifWriter.class,  // the writer
-                        LifWriter.PARAM_WRITE_TIMESTAMP, false,
-                        LifWriter.PARAM_ADD_ENVELOPE, true),  
+        testOneWay(createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class, // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false, LifWriter.PARAM_ADD_ENVELOPE, true),
                 "lif/stanford-pos-ref.lif", // the reference file for the output
                 "lif/stanford-pos.lif"); // the input file for the test
     }
-    
+
     @Test
-    public void oneDependencyStructure()
-        throws Exception
+    public void oneDependencyStructure() throws Exception
     {
-        testOneWay(
-                createReaderDescription(LifReader.class), // the reader
-                createEngineDescription(LifWriter.class,  // the writer
-                        LifWriter.PARAM_WRITE_TIMESTAMP, false),  
+        testOneWay(createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class, // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false),
                 "lif/dependencystructure-ref.lif", // the reference file for the output
                 "lif/dependencystructure.lif"); // the input file for the test
     }
-    
+
     @Test
-    public void onePhraseStructure()
-        throws Exception
+    public void onePhraseStructure() throws Exception
     {
-        testOneWay(
-                createReaderDescription(LifReader.class), // the reader
-                createEngineDescription(LifWriter.class,  // the writer
-                        LifWriter.PARAM_WRITE_TIMESTAMP, false),  
+        testOneWay(createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class, // the writer
+                        LifWriter.PARAM_WRITE_TIMESTAMP, false),
                 "lif/phrasestructure-ref.lif", // the reference file for the output
                 "lif/phrasestructure.lif"); // the input file for the test
     }
 
-
     @Test
-    public void oneNamedEntity()
-            throws Exception
+    public void oneNamedEntity() throws Exception
     {
-        testOneWay(
-                createReaderDescription(LifReader.class), // the reader
-                createEngineDescription(LifWriter.class,  // the writer
+        testOneWay(createReaderDescription(LifReader.class), // the reader
+                createEngineDescription(LifWriter.class, // the writer
                         LifWriter.PARAM_WRITE_TIMESTAMP, false),
                 "lif/specification-ner-ref.lif", // the reference file for the output
                 "lif/specification-ner.lif"); // the input file for the test

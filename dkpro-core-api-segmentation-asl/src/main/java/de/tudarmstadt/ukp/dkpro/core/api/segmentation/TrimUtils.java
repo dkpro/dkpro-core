@@ -41,11 +41,14 @@ public class TrimUtils
         aAnnotation.setBegin(offsets[0]);
         aAnnotation.setEnd(offsets[1]);
     }
-    
+
     /**
      * Remove trailing or leading whitespace from the annotation.
-     * @param aText the text.
-     * @param aSpan the offsets.
+     * 
+     * @param aText
+     *            the text.
+     * @param aSpan
+     *            the offsets.
      */
     public static void trim(CharSequence aText, int[] aSpan)
     {
@@ -53,29 +56,21 @@ public class TrimUtils
             // Nothing to do on empty spans
             return;
         }
-        
+
         int begin = aSpan[0];
         int end = aSpan[1];
 
-        // First we trim at the end. If a trimmed span is empty, we want to return the original 
+        // First we trim at the end. If a trimmed span is empty, we want to return the original
         // begin as the begin/end of the trimmed span
-        while (
-                (end > 0)
-                && end > begin
-                && trimChar(aText.charAt(end - 1))
-        ) {
-            end --;
+        while ((end > 0) && end > begin && trimChar(aText.charAt(end - 1))) {
+            end--;
         }
 
         // Then, trim at the start
-        while (
-                (begin < (aText.length() - 1))
-                && begin < end
-                && trimChar(aText.charAt(begin))
-        ) {
-            begin ++;
+        while ((begin < (aText.length() - 1)) && begin < end && trimChar(aText.charAt(begin))) {
+            begin++;
         }
-        
+
         aSpan[0] = begin;
         aSpan[1] = end;
     }
@@ -83,15 +78,22 @@ public class TrimUtils
     private static boolean trimChar(final char aChar)
     {
         switch (aChar) {
-        case '\n':     return true; // Line break
-        case '\r':     return true; // Carriage return
-        case '\t':     return true; // Tab
-        case '\u200E': return true; // LEFT-TO-RIGHT MARK
-        case '\u200F': return true; // RIGHT-TO-LEFT MARK
-        case '\u2028': return true; // LINE SEPARATOR
-        case '\u2029': return true; // PARAGRAPH SEPARATOR
+        case '\n':
+            return true; // Line break
+        case '\r':
+            return true; // Carriage return
+        case '\t':
+            return true; // Tab
+        case '\u200E':
+            return true; // LEFT-TO-RIGHT MARK
+        case '\u200F':
+            return true; // RIGHT-TO-LEFT MARK
+        case '\u2028':
+            return true; // LINE SEPARATOR
+        case '\u2029':
+            return true; // PARAGRAPH SEPARATOR
         default:
-            return  Character.isWhitespace(aChar);
+            return Character.isWhitespace(aChar);
         }
     }
 }

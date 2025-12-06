@@ -45,9 +45,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Tika Multi-Format Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class TikaReader
     extends ResourceCollectionReaderBase
 {
@@ -55,13 +53,12 @@ public class TikaReader
      * Parse embedded documents in addition to the main document.
      */
     public static final String PARAM_PARSE_EMBEDDED_DOCUMENTS = "parseEmbeddedDocuments";
-    @ConfigurationParameter(name = PARAM_PARSE_EMBEDDED_DOCUMENTS, mandatory = false,
-            defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PARSE_EMBEDDED_DOCUMENTS, mandatory = false, defaultValue = "false")
     private boolean parseEmbeddedDocuments;
-    
+
     /**
-     * Internal buffer size. If the buffer size is exceeded, the reader will throw an exception 
-     * (-1 means unlimited size).
+     * Internal buffer size. If the buffer size is exceeded, the reader will throw an exception (-1
+     * means unlimited size).
      */
     public static final String PARAM_BUFFER_SIZE = "bufferSize";
     @ConfigurationParameter(name = PARAM_BUFFER_SIZE, mandatory = false, defaultValue = "-1")
@@ -71,8 +68,7 @@ public class TikaReader
     private AutoDetectParser parser;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -82,8 +78,7 @@ public class TikaReader
     }
 
     @Override
-    public void getNext(CAS cas)
-        throws IOException
+    public void getNext(CAS cas) throws IOException
     {
         // Get next file
         Resource fileResource = nextFile();
@@ -97,16 +92,16 @@ public class TikaReader
         Metadata metadata = new Metadata();
         metadata.set(TikaCoreProperties.RESOURCE_NAME_KEY,
                 new File(fileResource.getPath()).getName());
-        
+
         // If we process embedded documents, we use the auto-detect parser recursively
         ParseContext parseContext = new ParseContext();
         if (parseEmbeddedDocuments) {
             parseContext.set(Parser.class, parser);
         }
-        else {  
+        else {
             parseContext.set(Parser.class, new EmptyParser());
         }
-        
+
         String docText = null;
         try (InputStream in = fileResource.getInputStream()) {
             parser.parse(in, handler, metadata, parseContext);

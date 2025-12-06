@@ -59,12 +59,11 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.TOPIC_EXTRACTOR)
 @ResourceMetaData(name = "Mallet LDA Topic Model Inferencer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }
-)
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" })
 public class MalletLdaTopicModelInferencer
-        extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     private static final String NONE_LABEL = "X";
 
@@ -123,10 +122,8 @@ public class MalletLdaTopicModelInferencer
      * The annotation type to use for the model. For lemmas, use
      * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_TOKEN_FEATURE_PATH = 
-            MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, 
-            defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String tokenFeaturePath;
     /**
      * Ignore tokens (or lemmas, respectively) that are shorter than the given value.
@@ -147,8 +144,7 @@ public class MalletLdaTopicModelInferencer
     private StringSequenceGenerator sequenceGenerator;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -169,10 +165,8 @@ public class MalletLdaTopicModelInferencer
         inferencer = model.getInferencer();
         malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
         try {
-            sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                    .featurePath(tokenFeaturePath)
-                    .minTokenLength(minTokenLength)
-                    .lowercase(lowercase)
+            sequenceGenerator = new PhraseSequenceGenerator.Builder().featurePath(tokenFeaturePath)
+                    .minTokenLength(minTokenLength).lowercase(lowercase)
                     .buildStringSequenceGenerator();
         }
         catch (IOException e) {
@@ -181,8 +175,7 @@ public class MalletLdaTopicModelInferencer
     }
 
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try {
             List<String[]> tokenSequences = sequenceGenerator.tokenSequences(aJCas);
@@ -197,7 +190,6 @@ public class MalletLdaTopicModelInferencer
                 TokenSequence ts = new TokenSequence(tokenSequences.get(0));
                 Instance instance = new Instance(ts, NONE_LABEL, metadata.getDocumentId(),
                         metadata.getDocumentUri());
-
 
                 /* infer topic distribution across document */
                 TopicDistribution topicDistributionAnnotation = new TopicDistribution(aJCas);
@@ -231,10 +223,11 @@ public class MalletLdaTopicModelInferencer
      * minTopicProb. If more topics comply with these criteria, only retain the n
      * (maxTopicAssignments) largest values.
      *
-     * @param topicDistribution a double array containing the document's topic proportions
+     * @param topicDistribution
+     *            a double array containing the document's topic proportions
      * @return an array of integers pointing to the topics assigned to the document
      * @deprecated this method should be removed at some point because assignment / topic tagging
-     * should be done in a dedicated step (module).
+     *             should be done in a dedicated step (module).
      */
     // TODO: should return a boolean[] of the same size as topicDistribution
     // TODO: should probably be moved to a dedicated module because assignments (topic tagging)
@@ -246,8 +239,8 @@ public class MalletLdaTopicModelInferencer
          * threshold is the largest value divided by the maximum number of topics or the fixed
          * number set as minTopicProb parameter.
          */
-        double threshold = Math.max(Collections.max(
-                Arrays.asList(ArrayUtils.toObject(topicDistribution))).doubleValue()
+        double threshold = Math.max(
+                Collections.max(Arrays.asList(ArrayUtils.toObject(topicDistribution))).doubleValue()
                         / maxTopicAssignments,
                 minTopicProb);
 
@@ -267,8 +260,8 @@ public class MalletLdaTopicModelInferencer
         if (indexes.size() > maxTopicAssignments) {
 
             /* sort index list by corresponding values */
-            Collections.sort(indexes, (aO1, aO2) -> 
-                    Double.compare(topicDistribution[aO1], topicDistribution[aO2]));
+            Collections.sort(indexes,
+                    (aO1, aO2) -> Double.compare(topicDistribution[aO1], topicDistribution[aO2]));
 
             while (indexes.size() > maxTopicAssignments) {
                 indexes.remove(0);

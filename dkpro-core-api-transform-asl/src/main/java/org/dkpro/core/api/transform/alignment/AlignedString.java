@@ -87,9 +87,9 @@ public class AlignedString
 
     public void fireChange()
     {
-//        if (!_startDirty) {
-//            System.out.println("startDirty true");
-//        }
+        // if (!_startDirty) {
+        // System.out.println("startDirty true");
+        // }
 
         _stringDirty = true;
         _startDirty = true;
@@ -195,8 +195,8 @@ public class AlignedString
         }
 
         if (end < start) {
-            throw new IllegalStateException("BUG: End [" + end
-                    + "] of resolved interval before start [" + start + "]!");
+            throw new IllegalStateException(
+                    "BUG: End [" + end + "] of resolved interval before start [" + start + "]!");
         }
 
         return new ImmutableInterval(start, end);
@@ -205,14 +205,10 @@ public class AlignedString
     /**
      * For the given interval on the underlying data, get the corresponding interval on this level.
      * 
-     * Example:
-     *                   11 11 111 11
-     *      012 345 6789 01 23 456 78
-     * AD  |111|22ZZ2|3333|44|55|YYY|55|
+     * Example: 11 11 111 11 012 345 6789 01 23 456 78 AD |111|22ZZ2|3333|44|55|YYY|55|
      *
-     * UL  |111|XX|22|ZZ|2|XXXXX|3333|XX|44|XXXX|5555|XXXX|
-     *      012 34 56 78 9 11111 1111 12 22 2222 2223 3333
-     *                     01234 5678 90 12 3456 7890 1234
+     * UL |111|XX|22|ZZ|2|XXXXX|3333|XX|44|XXXX|5555|XXXX| 012 34 56 78 9 11111 1111 12 22 2222 2223
+     * 3333 01234 5678 90 12 3456 7890 1234
      * 
      * As you can see there is a YYY inserted in the AD. Otherwise some parts of the UL (marked "X")
      * have been removed in the AD. Also an ZZ part has been added to UL
@@ -220,11 +216,9 @@ public class AlignedString
      * Calling this method with start=22 end=30 should return [12, 18] as this is the interval 5
      * from UL plus the "Y" that has been inserted in AD.
      * 
-     * Generally: 
-     * - if the start is within a deleted region, then find the next oblique segment in
-     *   AD to the right and return its start position. 
-     * - if the end is within a deleted region, then
-     *   find the next oblique segment in AD to the left and return its end position.
+     * Generally: - if the start is within a deleted region, then find the next oblique segment in
+     * AD to the right and return its start position. - if the end is within a deleted region, then
+     * find the next oblique segment in AD to the left and return its end position.
      * 
      * Anchors are always in UL. They are referenced from the ObliqueSegments in AD.
      * 
@@ -363,7 +357,8 @@ public class AlignedString
     private AbstractDataSegment getSegmentAt(final int position, final boolean includeAnchors)
     {
         if (position < 0) {
-            throw new IndexOutOfBoundsException("Negative position not allowed: [" + position + "]");
+            throw new IndexOutOfBoundsException(
+                    "Negative position not allowed: [" + position + "]");
         }
 
         final AbstractDataSegment first = _first;
@@ -543,11 +538,10 @@ public class AlignedString
      * word. In the following example the empty oblique segments allows us to do an inverse resolve
      * from "hyphen- ated" to "hyphenated".
      * 
-     * Underlying:
-     * (B:0[This is a hyphen]16)(A:16)(B:16[- ]18)(A:18)(B:18[ated]22)(A:22)(B:22[ sentence]31)
+     * Underlying: (B:0[This is a hyphen]16)(A:16)(B:16[- ]18)(A:18)(B:18[ated]22)(A:22)(B:22[
+     * sentence]31)
      *
-     * Wrapping:
-     * (O:0[This is a hyphen]16)(B:16[ated]20)(O:20[]20)(O:20[ sentence]29)
+     * Wrapping: (O:0[This is a hyphen]16)(B:16[ated]20)(O:20[]20)(O:20[ sentence]29)
      */
     private void dropSuperflourous(final AbstractDataSegment seg)
     {
@@ -579,7 +573,8 @@ public class AlignedString
      *            the start offset.
      * @param end
      *            the end offset+1.
-     * @param d the data used to replace the current data.
+     * @param d
+     *            the data used to replace the current data.
      */
     public void replace(final int start, final int end, final String d)
     {
@@ -940,8 +935,8 @@ public class AlignedString
             final int pos = position - getStart();
 
             // Create new segment
-            final BaseSegment suffix = new BaseSegment(this, _next, _data.substring(pos,
-                    _data.length()));
+            final BaseSegment suffix = new BaseSegment(this, _next,
+                    _data.substring(pos, _data.length()));
 
             // Change current segment
             _data = _data.substring(0, pos);
@@ -1105,7 +1100,7 @@ public class AlignedString
             return sb.toString();
         }
     }
-    
+
     /**
      * DataSegment iterator.
      */

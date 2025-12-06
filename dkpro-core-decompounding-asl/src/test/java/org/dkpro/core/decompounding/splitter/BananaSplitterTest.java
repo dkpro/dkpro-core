@@ -38,7 +38,7 @@ public class BananaSplitterTest
         splitter.setDictionary(new SimpleDictionary("Garage", "einfahrt"));
 
         List<DecompoundedWord> result = splitter.split("Garageneinfahrt").getAllSplits();
-        
+
         assertEquals(2, result.size());
         assertEquals("Garageneinfahrt", result.get(0).toString());
         assertEquals("garage(n)+einfahrt", result.get(1).toString());
@@ -53,9 +53,9 @@ public class BananaSplitterTest
         Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         BananaSplitterAlgorithm splitter = new BananaSplitterAlgorithm();
         splitter.setDictionary(dict);
-        
+
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-        
+
         assertThat(result).hasSize(1);
     }
 }

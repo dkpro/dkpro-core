@@ -35,11 +35,11 @@ import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink;
 /**
  * Read links from Wikipedia.
  */
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
-                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink"})
-public class WikipediaLinkReader extends WikipediaStandardReaderBase {
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+        "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink" })
+public class WikipediaLinkReader
+    extends WikipediaStandardReaderBase
+{
 
     /**
      * Which types of links are allowed?
@@ -55,28 +55,29 @@ public class WikipediaLinkReader extends WikipediaStandardReaderBase {
     }
 
     @Override
-    protected String getPlainDocumentText(Page page) {
+    protected String getPlainDocumentText(Page page)
+    {
         String text = "";
         ParsedPage pp = parser.parse(page.getText());
-        if (pp != null ) {
+        if (pp != null) {
             text = pp.getText();
         }
         return text;
     }
 
     @Override
-    public void getNext(JCas jcas)
-            throws IOException, CollectionException {
+    public void getNext(JCas jcas) throws IOException, CollectionException
+    {
         super.getNext(jcas);
 
         ParsedPage pp = parser.parse(getPage().getText());
 
-        //Don't do anything if there is no document text
+        // Don't do anything if there is no document text
         if (jcas.getDocumentText().length() == 0) {
             return;
         }
 
-        //add link annotations
+        // add link annotations
         List<String> allowedLinkTypeList = Arrays.asList(this.allowedLinkTypes);
         WikipediaLink wikipediaLink;
         int begin = 0;
@@ -84,7 +85,7 @@ public class WikipediaLinkReader extends WikipediaStandardReaderBase {
         for (Link link : pp.getLinks()) {
             if (allowedLinkTypeList.contains(link.getType().name())) {
                 // TODO: The begin and end of a link is defined with an absolute position in the
-                // raw text. But, Wikipedia guidelines claim that the first mention has to be 
+                // raw text. But, Wikipedia guidelines claim that the first mention has to be
                 // marked
                 begin = 0;
                 end = 0;

@@ -39,7 +39,8 @@ public class CompoundProbabilityRanker
      *
      * Use {@link #setFinder(Finder)} before using this class
      */
-    public CompoundProbabilityRanker() {
+    public CompoundProbabilityRanker()
+    {
     }
 
     /**

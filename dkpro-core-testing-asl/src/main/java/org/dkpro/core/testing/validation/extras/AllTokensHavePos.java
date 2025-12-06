@@ -29,28 +29,28 @@ import org.dkpro.core.testing.validation.checks.Check;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public class AllTokensHavePos implements Check
+public class AllTokensHavePos
+    implements Check
 {
     @Override
     public boolean check(JCas aJCas, List<Message> aMessages)
     {
-        List<Token> withoutPOS = select(aJCas, Token.class).stream()
-                .filter(t -> t.getPos() == null)
+        List<Token> withoutPOS = select(aJCas, Token.class).stream().filter(t -> t.getPos() == null)
                 .collect(Collectors.toList());
-        
+
         for (Token t : withoutPOS) {
-            aMessages.add(new Message(this, ERROR, String.format("Token has no POS: %s [%d..%d]", t
-                    .getType().getName(), t.getBegin(), t.getEnd())));
+            aMessages.add(new Message(this, ERROR, String.format("Token has no POS: %s [%d..%d]",
+                    t.getType().getName(), t.getBegin(), t.getEnd())));
         }
 
         List<Token> withoutPOSValue = select(aJCas, Token.class).stream()
                 .filter(t -> t.getPos() != null && t.getPos().getPosValue() == null)
                 .collect(Collectors.toList());
-        
+
         for (Token t : withoutPOSValue) {
-            aMessages.add(new Message(this, ERROR, String.format(
-                    "Token has no POS value: %s [%d..%d]", t.getType().getName(), t.getBegin(),
-                    t.getEnd())));
+            aMessages.add(
+                    new Message(this, ERROR, String.format("Token has no POS value: %s [%d..%d]",
+                            t.getType().getName(), t.getBegin(), t.getEnd())));
         }
 
         return aMessages.stream().anyMatch(m -> m.level == ERROR);

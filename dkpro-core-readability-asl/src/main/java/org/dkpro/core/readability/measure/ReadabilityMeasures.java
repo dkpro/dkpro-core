@@ -21,24 +21,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Java port of readability measures from the Linux 'style' command ('diction'
- * package).
+ * Java port of readability measures from the Linux 'style' command ('diction' package).
  * 
  */
 // FIXME add unit test
 public class ReadabilityMeasures
 {
 
-    public enum Measures {
-        ari,
-        coleman_liau,
-        flesch,
-        fog,
-        kincaid,
-        lix,
-        smog
+    public enum Measures
+    {
+        ari, coleman_liau, flesch, fog, kincaid, lix, smog
     }
-    
+
     private final WordSyllableCounter syllableCounter;
     private String language;
 
@@ -54,7 +48,8 @@ public class ReadabilityMeasures
         this.syllableCounter = new WordSyllableCounter(language);
     }
 
-    public double getReadabilityScore(Measures measure, List<String> words, int nrofSentences) {
+    public double getReadabilityScore(Measures measure, List<String> words, int nrofSentences)
+    {
         if (measure.equals(Measures.ari)) {
             return ari(words, nrofSentences);
         }
@@ -80,10 +75,9 @@ public class ReadabilityMeasures
             throw new IllegalArgumentException("Unknown measure: " + measure.name());
         }
     }
-    
+
     /*
-     * only the strings consist of numbers or letters
-     * are considered as words.
+     * only the strings consist of numbers or letters are considered as words.
      */
     private boolean isWord(String strWord)
     {
@@ -95,7 +89,7 @@ public class ReadabilityMeasures
         }
         return true;
     }
-    
+
     private List<String> filterWords(List<String> words)
     {
         List<String> newWords = new ArrayList<String>();
@@ -106,12 +100,14 @@ public class ReadabilityMeasures
         }
         return newWords;
     }
-    
+
     /**
      * Calculate Kincaid Formula (reading grade).
      * 
-     * @param words words
-     * @param nrofSentences number of sentences.
+     * @param words
+     *            words
+     * @param nrofSentences
+     *            number of sentences.
      * @return score.
      * 
      */
@@ -121,18 +117,20 @@ public class ReadabilityMeasures
         int nrofSyllables = this.syllableCounter.countSyllables(words);
         return kincaid(words.size(), nrofSyllables, nrofSentences);
     }
-    
+
     private double kincaid(Integer nrofWords, Integer nrofSyllables, Integer nrofSentences)
     {
         return 11.8 * (((double) nrofSyllables) / nrofWords)
                 + 0.39 * (((double) nrofWords) / nrofSentences) - 15.59;
     }
-    
+
     /**
      * Calculate Automated Readability Index (reading grade).
      * 
-     * @param words words.
-     * @param nrofSentences number of sentences.
+     * @param words
+     *            words.
+     * @param nrofSentences
+     *            number of sentences.
      * @return score.
      */
     public double ari(List<String> words, int nrofSentences)
@@ -141,18 +139,20 @@ public class ReadabilityMeasures
         int nrofLetters = this.getNrofLetters(words);
         return ari(nrofLetters, words.size(), nrofSentences);
     }
-    
+
     private double ari(Integer nrofLetters, Integer nrofWords, Integer nrofSentences)
     {
         return 4.71 * (((double) nrofLetters) / nrofWords)
                 + 0.5 * (((double) nrofWords) / nrofSentences) - 21.43;
     }
-    
+
     /**
      * Calculate Coleman-Liau formula.
      * 
-     * @param words words.
-     * @param nrofSentences number of sentences.
+     * @param words
+     *            words.
+     * @param nrofSentences
+     *            number of sentences.
      * @return score.
      * 
      */
@@ -162,6 +162,7 @@ public class ReadabilityMeasures
         int nrofLetters = this.getNrofLetters(words);
         return coleman_liau(nrofLetters, words.size(), nrofSentences);
     }
+
     private double coleman_liau(Integer nrofLetters, Integer nrofWords, Integer nrofSentences)
     {
         return 5.89 * (((double) nrofLetters) / nrofWords)
@@ -171,8 +172,10 @@ public class ReadabilityMeasures
     /**
      * Calculate Flesch reading ease score.
      * 
-     * @param words words.
-     * @param nrofSentences number of sentences.
+     * @param words
+     *            words.
+     * @param nrofSentences
+     *            number of sentences.
      * @return score.
      */
     public double flesch(List<String> words, int nrofSentences)
@@ -181,20 +184,22 @@ public class ReadabilityMeasures
         int nrofSyllables = this.syllableCounter.countSyllables(words);
         return flesch(nrofSyllables, words.size(), nrofSentences);
     }
+
     private double flesch(Integer nrofSyllables, Integer nrofWords, Integer nrofSentences)
     {
-        return 206.835 - 84.6 * (((double) nrofSyllables) / nrofWords) - 1.015
-                * (((double) nrofWords) / nrofSentences);
+        return 206.835 - 84.6 * (((double) nrofSyllables) / nrofWords)
+                - 1.015 * (((double) nrofWords) / nrofSentences);
     }
 
-   // 206.835-84.6*(((double)syllables)/words)-1.015*(((double)words)/sentences);
-    
-    
+    // 206.835-84.6*(((double)syllables)/words)-1.015*(((double)words)/sentences);
+
     /**
      * Calculate FOG index.
      * 
-     * @param words words.
-     * @param nrofSentences number of sentences.
+     * @param words
+     *            words.
+     * @param nrofSentences
+     *            number of sentences.
      * @return score.
      */
     public double fog(List<String> words, int nrofSentences)
@@ -203,6 +208,7 @@ public class ReadabilityMeasures
         int nrofBigwords = getNrofBigwords(words);
         return fog(words.size(), nrofBigwords, nrofSentences);
     }
+
     private double fog(Integer nrofWords, Integer nrofBigwords, Integer nrofSentences)
     {
         return ((((double) nrofWords) / nrofSentences + (100.0 * nrofBigwords) / nrofWords) * 0.4);
@@ -211,11 +217,12 @@ public class ReadabilityMeasures
     /**
      * Calculate Björnsson's Lix formula.
      * 
-     * @param words words.
-     * @param nrofSentences number of sentences.
-     * @return the wheeler smith index as result and the grade level in grade.
-     *          If grade is 0, the index is lower than any grade, if the index
-     *          is 99, it is higher than any grade.
+     * @param words
+     *            words.
+     * @param nrofSentences
+     *            number of sentences.
+     * @return the wheeler smith index as result and the grade level in grade. If grade is 0, the
+     *         index is lower than any grade, if the index is 99, it is higher than any grade.
      */
     public double lix(List<String> words, int nrofSentences)
     {
@@ -223,6 +230,7 @@ public class ReadabilityMeasures
         int nrofLongWords = this.getNrofLongwords(words);
         return lix(words.size(), nrofLongWords, nrofSentences);
     }
+
     private double lix(Integer nrofWords, Integer nrofLongWords, Integer nrofSentences)
     {
         double idx = ((double) nrofWords) / nrofSentences + 100.0 * (nrofLongWords) / nrofWords;
@@ -258,8 +266,10 @@ public class ReadabilityMeasures
     /**
      * Calculate SMOG-Grading.
      * 
-     * @param words words.
-     * @param nrofSentences number of sentences.
+     * @param words
+     *            words.
+     * @param nrofSentences
+     *            number of sentences.
      * @return score.
      */
     public double smog(List<String> words, int nrofSentences)
@@ -267,12 +277,12 @@ public class ReadabilityMeasures
         words = filterWords(words);
         int nrofBigwords = this.getNrofBigwords(words);
         return smog(nrofBigwords, nrofSentences);
-    } 
+    }
+
     private double smog(Integer nrofBigWords, Integer nrofSentences)
     {
         return Math.sqrt((((double) nrofBigWords) / ((double) nrofSentences)) * 30.0) + 3.0;
     }
-    
 
     public String getLanguage()
     {

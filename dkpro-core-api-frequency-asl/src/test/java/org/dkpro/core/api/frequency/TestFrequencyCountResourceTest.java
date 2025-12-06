@@ -40,8 +40,7 @@ public class TestFrequencyCountResourceTest
         private FrequencyCountProvider provider;
 
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             try {
                 System.out.println(provider.getNrOfDistinctNgrams(1));

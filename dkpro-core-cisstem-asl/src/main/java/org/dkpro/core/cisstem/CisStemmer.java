@@ -44,7 +44,6 @@ import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
-
 /**
  * UIMA wrapper for the CISTEM algorithm.
  * 
@@ -64,9 +63,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @ResourceMetaData(name = "CIS Stemmer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "de" })
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
 public class CisStemmer
     extends FeaturePathAnnotatorBase
 {

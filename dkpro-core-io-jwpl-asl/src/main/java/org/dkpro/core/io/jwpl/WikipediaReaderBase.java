@@ -39,7 +39,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  * Abstract base class for all Wikipedia readers.
  */
 @Component(value = OperationType.READER)
-public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
+public abstract class WikipediaReaderBase
+    extends JCasCollectionReader_ImplBase
 {
     /** The host server. */
     public static final String PARAM_HOST = "Host";
@@ -88,10 +89,8 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
 
     protected Wikipedia wiki;
 
-
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -103,7 +102,7 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
         dbconfig.setLanguage(language);
         dbconfig.setJdbcURL(jdbcUrl);
         dbconfig.setDatabaseDriver(driver);
-        
+
         try {
             this.wiki = new Wikipedia(dbconfig);
         }

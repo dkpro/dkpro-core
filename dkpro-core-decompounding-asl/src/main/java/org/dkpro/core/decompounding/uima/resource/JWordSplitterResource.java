@@ -31,8 +31,7 @@ public class JWordSplitterResource
 {
     @SuppressWarnings({ "rawtypes" })
     @Override
-    public boolean initialize(ResourceSpecifier aSpecifier,
-            Map aAdditionalParams)
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
         throws ResourceInitializationException
     {
         if (!super.initialize(aSpecifier, aAdditionalParams)) {

@@ -43,19 +43,19 @@ public class UDPipe2DKPro
             MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
-        
+
         int i = 1; // the first tag is <root>
         for (Token t : tokens) {
             Word w = sentence.getWords().get(i);
             String xtag = w.getXpostag();
             String utag = w.getUpostag();
-            
+
             // For Norwegian xtag is not provided. It is a blank string.
-            // So the value of Utag is used as an replacement. 
+            // So the value of Utag is used as an replacement.
             if (xtag.length() == 0 && utag.length() > 0) {
                 xtag = utag;
             }
-            
+
             // Convert the tag produced by the tagger to an UIMA type, create an annotation
             // of this type, and add it to the document.
             Type posTag = mappingProvider.getTagType(xtag);
@@ -69,10 +69,10 @@ public class UDPipe2DKPro
                 posAnno.setCoarseValue(utag != null ? utag.intern() : null);
             }
             posAnno.addToIndexes();
-            
+
             // Connect the POS annotation to the respective token annotation
             t.setPos(posAnno);
-            
+
             if (StringUtils.isNotBlank(w.getLemma())) {
                 Lemma lemma = new Lemma(aJCas, t.getBegin(), t.getEnd());
                 lemma.setValue(w.getLemma());
@@ -91,13 +91,13 @@ public class UDPipe2DKPro
             i++;
         }
     }
-    
+
     public static void convertParse(Sentence sentence, List<Token> tokens, JCas aJCas,
             MappingProvider mappingProvider)
     {
         for (int i = 1; i < sentence.getWords().size(); i++) {
             Word w = sentence.getWords().get(i);
-            
+
             if (StringUtils.isNotBlank(w.getDeprel())) {
                 int depId = w.getId();
                 int govId = w.getHead();
@@ -106,13 +106,13 @@ public class UDPipe2DKPro
                 makeDependency(mappingProvider, aJCas, govId, depId, w.getDeprel(),
                         DependencyFlavor.BASIC, tokens);
             }
-            
+
             if (StringUtils.isNotBlank(w.getDeps())) {
                 // list items separated by vertical bar
                 String[] items = w.getDeps().split("\\|");
                 for (String item : items) {
                     String[] sItem = item.split(":");
-                    
+
                     int depId = w.getId();
                     int govId = Integer.valueOf(sItem[0]);
 
@@ -122,13 +122,13 @@ public class UDPipe2DKPro
             }
         }
     }
-    
+
     private static Dependency makeDependency(MappingProvider mappingProvider, JCas aJCas, int govId,
             int depId, String label, String flavor, List<Token> tokens)
     {
         // write dependency information as annotation to JCas
         Type depRel = mappingProvider.getTagType(label);
-        
+
         Dependency rel;
 
         if (govId == 0) {

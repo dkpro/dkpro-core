@@ -54,10 +54,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.ANNOTATION_OF_COMPOUNDING_FEATURES)
 @ResourceMetaData(name = "Compound Annotator")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
-        outputs = {
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart",
@@ -82,8 +80,7 @@ public class CompoundAnnotator
     private Ranker ranker;
 
     @Override
-    public void initialize(final UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(final UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         if (ranker == null) {
@@ -92,8 +89,7 @@ public class CompoundAnnotator
     }
 
     @Override
-    public void process(final JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(final JCas aJCas) throws AnalysisEngineProcessException
     {
         for (Token token : select(aJCas, Token.class)) {
             final String coveredText = token.getText();

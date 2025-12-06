@@ -53,25 +53,28 @@ import opennlp.tools.stemmer.snowball.SnowballStemmer;
 import opennlp.tools.stemmer.snowball.SnowballStemmer.ALGORITHM;
 
 /**
- * <p>UIMA wrapper for the Snowball stemmer included with OpenNLP. Annotation types to be stemmed
- * can be configured by a {@link FeaturePath}.</p>
- * <p>If you use this component in a pipeline which uses stop word removal, make sure that it
- * runs after the stop word removal step, so only words that are no stop words are stemmed.</p>
+ * <p>
+ * UIMA wrapper for the Snowball stemmer included with OpenNLP. Annotation types to be stemmed can
+ * be configured by a {@link FeaturePath}.
+ * </p>
+ * <p>
+ * If you use this component in a pipeline which uses stop word removal, make sure that it runs
+ * after the stop word removal step, so only words that are no stop words are stemmed.
+ * </p>
  *
  * @see FeaturePathAnnotatorBase
  */
 @Component(OperationType.STEMMER)
 @ResourceMetaData(name = "OpenNLP Snowball Stemmer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@LanguageCapability({ "ar", "da", "nl", "en", "fi", "fr", "de", "el", "hu", "ga", "it", "no", "pt", 
+@LanguageCapability({ "ar", "da", "nl", "en", "fi", "fr", "de", "el", "hu", "ga", "it", "no", "pt",
         "ro", "ru", "es", "sv", "tr" })
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
 public class OpenNlpSnowballStemmer
     extends FeaturePathAnnotatorBase
 {
-    private static final String MESSAGE_DIGEST = OpenNlpSnowballStemmer.class.getName() + "_Messages";
+    private static final String MESSAGE_DIGEST = OpenNlpSnowballStemmer.class.getName()
+            + "_Messages";
 
     /**
      * Use this language instead of the document language to resolve the model.
@@ -81,15 +84,31 @@ public class OpenNlpSnowballStemmer
     protected String language;
 
     /**
-     * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
-     * are lower-cased before being passed to the stemmer.
+     * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens are
+     * lower-cased before being passed to the stemmer.
      *
      * <table border="1">
      * <caption>Examples</caption>
-     * <tr><th></th><th>false (default)</th><th>true</th></tr>
-     * <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
-     * <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>
-     * <tr><td>educational</td><td>educ</td><td>educ</td></tr>
+     * <tr>
+     * <th></th>
+     * <th>false (default)</th>
+     * <th>true</th>
+     * </tr>
+     * <tr>
+     * <td>EDUCATIONAL</td>
+     * <td>EDUCATIONAL</td>
+     * <td>educ</td>
+     * </tr>
+     * <tr>
+     * <td>Educational</td>
+     * <td>Educat</td>
+     * <td>educ</td>
+     * </tr>
+     * <tr>
+     * <td>educational</td>
+     * <td>educ</td>
+     * <td>educ</td>
+     * </tr>
      * </table>
      */
     public static final String PARAM_LOWER_CASE = "lowerCase";
@@ -97,7 +116,7 @@ public class OpenNlpSnowballStemmer
     protected boolean lowerCase;
 
     public static final Map<String, ALGORITHM> languages = new HashMap<>();
-    
+
     static {
         languages.put("ar", ALGORITHM.ARABIC);
         languages.put("da", ALGORITHM.DANISH);
@@ -139,12 +158,12 @@ public class OpenNlpSnowballStemmer
 
         ALGORITHM algorithm = languages.get(jcas.getDocumentLanguage());
         if (algorithm == null) {
-            throw new AnalysisEngineProcessException(MESSAGE_DIGEST,
-                    "unsupported_language_error", new Object[] { lang });
+            throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "unsupported_language_error",
+                    new Object[] { lang });
         }
 
         Stemmer stemmer = new SnowballStemmer(algorithm);
-        
+
         for (String path : paths) {
 
             // Separate Typename and featurepath

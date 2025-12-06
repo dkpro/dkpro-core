@@ -68,9 +68,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Stop Word Remover")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord" })
 public class StopWordRemover
     extends JCasAnnotator_ImplBase
 {
@@ -81,8 +79,8 @@ public class StopWordRemover
     /**
      * A list of URLs from which to load the stop word lists. If an URL is prefixed with a language
      * code in square brackets, the stop word list is only used for documents in that language.
-     * Using no prefix or the prefix "[*]" causes the list to be used for every document.
-     * Example: "[de]classpath:/stopwords/en_articles.txt"
+     * Using no prefix or the prefix "[*]" causes the list to be used for every document. Example:
+     * "[de]classpath:/stopwords/en_articles.txt"
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
@@ -119,8 +117,7 @@ public class StopWordRemover
     private Map<String, StopWordSet> stopWordSets;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -177,8 +174,7 @@ public class StopWordRemover
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         JCas doc = getView(jcas, DOC_VIEW, null);
         JCas topic = getView(jcas, TOPIC_VIEW, null);
@@ -201,8 +197,7 @@ public class StopWordRemover
         }
     }
 
-    private void check(JCas aJCas)
-        throws FeaturePathException
+    private void check(JCas aJCas) throws FeaturePathException
     {
         Logger log = getContext().getLogger();
 
@@ -254,10 +249,10 @@ public class StopWordRemover
                     // Remove the annotation that matched the stop word
                     toRemove.add(anno);
                     if (log.isLoggable(FINE)) {
-                        log.log(FINE, "Removing ["
-                                + typeName.substring(typeName.lastIndexOf('.') + 1)
-                                + "] annotated as stop word [" + anno.getCoveredText() + "]@"
-                                + anno.getBegin() + ".." + anno.getEnd());
+                        log.log(FINE,
+                                "Removing [" + typeName.substring(typeName.lastIndexOf('.') + 1)
+                                        + "] annotated as stop word [" + anno.getCoveredText()
+                                        + "]@" + anno.getBegin() + ".." + anno.getEnd());
                     }
 
                     // Scan all potential annotations that may be covered the current
@@ -311,7 +306,8 @@ public class StopWordRemover
 
     }
 
-    static class BeginEndComparator implements Comparator<AnnotationFS>
+    static class BeginEndComparator
+        implements Comparator<AnnotationFS>
     {
         @Override
         public int compare(AnnotationFS aO1, AnnotationFS aO2)

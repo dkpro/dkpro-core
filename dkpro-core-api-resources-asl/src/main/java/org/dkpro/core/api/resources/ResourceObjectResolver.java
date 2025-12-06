@@ -46,19 +46,22 @@ public interface ResourceObjectResolver
         throws IOException;
 
     /**
-     * Try to fetch an artifact and its dependencies from the UKP model repository or from
-     * Maven Central.
+     * Try to fetch an artifact and its dependencies from the UKP model repository or from Maven
+     * Central.
      *
-     * @param aGroupId the group ID.
-     * @param aArtifactId the artifact ID.
-     * @param aVersion the version
+     * @param aGroupId
+     *            the group ID.
+     * @param aArtifactId
+     *            the artifact ID.
+     * @param aVersion
+     *            the version
      * @return a list of dependencies.
-     * @throws IOException if the dependencies cannot be resolved.
+     * @throws IOException
+     *             if the dependencies cannot be resolved.
      */
     List<File> resolveResoureArtifact(String aGroupId, String aArtifactId, String aVersion)
         throws IOException;
 
-    
     static Optional<ResourceObjectResolver> get()
     {
         ServiceLoader<ResourceObjectResolver> loader = ServiceLoader

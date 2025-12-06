@@ -38,58 +38,48 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 public class LxfReaderTest
 {
     @Test
-    public void testText()
-        throws Exception
+    public void testText() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LxfReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LxfReader.class,
                 LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/text/orig.lxf");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-    
+
         assertEquals("This is a test. And here is another one.\n", jcas.getDocumentText());
     }
 
     @Test
-    public void testTokenizerRepp()
-            throws Exception
+    public void testTokenizerRepp() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LxfReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LxfReader.class,
                 LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/repp/orig.lxf");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-    
-        String[] sentences = {
-                "This is a test.",
-                "And here is another one." };
-    
+
+        String[] sentences = { "This is a test.", "And here is another one." };
+
         String[] tokens = { "This", "is", "a", "test", ".", "And", "here", "is", "another", "one",
                 "." };
-        
+
         assertSentence(sentences, select(jcas, Sentence.class));
         assertToken(tokens, select(jcas, Token.class));
     }
-    
+
     @Test
-    public void testTokenizerReppHunpos()
-            throws Exception
+    public void testTokenizerReppHunpos() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LxfReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LxfReader.class,
                 LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/hunpos/orig.lxf");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-    
-        String[] sentences = {
-                "This is a test.",
-                "And here is another one." };
-    
+
+        String[] sentences = { "This is a test.", "And here is another one." };
+
         String[] tokens = { "This", "is", "a", "test", ".", "And", "here", "is", "another", "one",
                 "." };
 
         String[] pos = { "DT", "VBZ", "DT", "NN", ".", "CC", "RB", "VBZ", "DT", "NN", "." };
-        
+
         String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
                 "POS" };
 
@@ -98,31 +88,25 @@ public class LxfReaderTest
         assertPOS(posMapped, pos, select(jcas, POS.class));
     }
 
-    
     @Test
-    public void testTokenizerReppHunposBn()
-            throws Exception
+    public void testTokenizerReppHunposBn() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LxfReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LxfReader.class,
                 LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/maltparser/orig.lxf");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-    
-        String[] sentences = {
-                "This is a test.",
-                "And here is another one." };
-    
+
+        String[] sentences = { "This is a test.", "And here is another one." };
+
         String[] tokens = { "This", "is", "a", "test", ".", "And", "here", "is", "another", "one",
                 "." };
 
         String[] pos = { "DT", "VBZ", "DT", "NN", ".", "CC", "RB", "VBZ", "DT", "NN", "." };
-        
+
         String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
                 "POS" };
 
-        String[] dependencies = { 
-                "[  0,  4]Dependency(nsubj,basic) D[0,4](This) G[10,14](test)",
+        String[] dependencies = { "[  0,  4]Dependency(nsubj,basic) D[0,4](This) G[10,14](test)",
                 "[  5,  7]Dependency(cop,basic) D[5,7](is) G[10,14](test)",
                 "[  8,  9]Dependency(det,basic) D[8,9](a) G[10,14](test)",
                 "[ 10, 14]ROOT(ROOT,basic) D[10,14](test) G[10,14](test)",

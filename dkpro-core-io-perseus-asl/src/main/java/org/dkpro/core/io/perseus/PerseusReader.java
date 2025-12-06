@@ -66,15 +66,13 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Perseus Treebank XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_PERSEUS_XML})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_PERSEUS_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class PerseusReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -88,8 +86,7 @@ public class PerseusReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -119,8 +116,7 @@ public class PerseusReader
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -129,8 +125,7 @@ public class PerseusReader
     }
 
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -180,13 +175,13 @@ public class PerseusReader
         int sentenceEnd = aBuilder.getPosition();
         Map<Integer, PerseusWord> perseusWords = new LinkedHashMap<>();
         Map<Integer, Token> tokens = new LinkedHashMap<>();
-        
+
         for (PerseusWord w : aSentence.words) {
             Token token = aBuilder.add(w.form, Token.class);
             token.setId(w.id);
             tokens.put(Integer.valueOf(w.id), token);
             perseusWords.put(Integer.valueOf(w.id), w);
-            
+
             if (readLemma && w.lemma != null) {
                 Lemma lemma = new Lemma(aBuilder.getJCas(), token.getBegin(), token.getEnd());
                 lemma.setValue(w.lemma);
@@ -207,7 +202,7 @@ public class PerseusReader
             }
 
             token.addToIndexes();
-            
+
             // Remember position before adding space
             sentenceEnd = aBuilder.getPosition();
 
@@ -221,7 +216,7 @@ public class PerseusReader
             for (PerseusWord word : perseusWords.values()) {
                 int depId = Integer.valueOf(word.id);
                 int govId = word.head;
-                
+
                 // Model the root as a loop onto itself
                 Dependency rel;
                 if (govId == 0) {
@@ -244,7 +239,7 @@ public class PerseusReader
                     rel.setFlavor(DependencyFlavor.BASIC);
                     rel.addToIndexes();
                 }
-                
+
                 if (rel.getDependent() == null) {
                     throw new IllegalStateException(
                             "Referred dependent with ID [" + depId + "] not found");
@@ -254,7 +249,7 @@ public class PerseusReader
                             "Referred governor with ID [" + govId + "] not found");
                 }
             }
-        }        
+        }
         Sentence sentence = new Sentence(aBuilder.getJCas(), sentenceBegin, sentenceEnd);
         sentence.setId(String.valueOf(aSentence.id));
         sentence.addToIndexes();

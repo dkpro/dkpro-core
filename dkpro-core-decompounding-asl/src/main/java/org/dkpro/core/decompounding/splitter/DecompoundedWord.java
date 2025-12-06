@@ -288,7 +288,7 @@ public class DecompoundedWord
      * 
      * @return true if this instance is a decompounded word
      * 
-     * */
+     */
     public boolean isCompound()
     {
         return splits.size() != 1;
@@ -300,7 +300,7 @@ public class DecompoundedWord
      * 
      * @return true if this instance does not have a linking morpheme in the last fragment
      * 
-     * */
+     */
     public boolean hasLastFragmentMorpheme()
     {
         return splits.get(splits.size() - 1).hasMorpheme();

@@ -50,10 +50,8 @@ import opennlp.tools.util.Span;
  */
 @ResourceMetaData(name = "OpenNLP Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class OpenNlpSegmenter
     extends SegmenterBase
 {
@@ -74,16 +72,16 @@ public class OpenNlpSegmenter
     /**
      * Load the segmentation model from this location instead of locating the model automatically.
      */
-    public static final String PARAM_SEGMENTATION_MODEL_LOCATION = 
+    public static final String PARAM_SEGMENTATION_MODEL_LOCATION = //
             ComponentParameters.PARAM_SEGMENTATION_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_SEGMENTATION_MODEL_LOCATION, mandatory = false)
     @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_SENT)
     protected String segmentationModelLocation;
-    
+
     /**
      * Load the tokenization model from this location instead of locating the model automatically.
      */
-    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = 
+    public static final String PARAM_TOKENIZATION_MODEL_LOCATION =  //
             ComponentParameters.PARAM_TOKENIZATION_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_TOKENIZATION_MODEL_LOCATION, mandatory = false)
     @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
@@ -93,12 +91,12 @@ public class OpenNlpSegmenter
     private CasConfigurableProviderBase<TokenizerME> tokenModelProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        sentenceModelProvider = new CasConfigurableStreamProviderBase<SentenceDetectorME>() {
+        sentenceModelProvider = new CasConfigurableStreamProviderBase<SentenceDetectorME>()
+        {
             {
                 setContextObject(OpenNlpSegmenter.this);
 
@@ -116,15 +114,15 @@ public class OpenNlpSegmenter
             }
 
             @Override
-            protected SentenceDetectorME produceResource(InputStream aStream)
-                throws Exception
+            protected SentenceDetectorME produceResource(InputStream aStream) throws Exception
             {
                 SentenceModel model = new SentenceModel(aStream);
                 return new SentenceDetectorME(model);
             }
         };
 
-        tokenModelProvider = new CasConfigurableStreamProviderBase<TokenizerME>() {
+        tokenModelProvider = new CasConfigurableStreamProviderBase<TokenizerME>()
+        {
             {
                 setContextObject(OpenNlpSegmenter.this);
 
@@ -142,8 +140,7 @@ public class OpenNlpSegmenter
             }
 
             @Override
-            protected TokenizerME produceResource(InputStream aStream)
-                throws Exception
+            protected TokenizerME produceResource(InputStream aStream) throws Exception
             {
                 TokenizerModel model = new TokenizerModel(aStream);
                 return new TokenizerME(model);
@@ -153,15 +150,14 @@ public class OpenNlpSegmenter
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-        
+
         if (isWriteSentence()) {
             sentenceModelProvider.configure(cas);
         }
-        
+
         if (isWriteToken()) {
             tokenModelProvider.configure(cas);
         }
@@ -179,7 +175,7 @@ public class OpenNlpSegmenter
                 createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
             }
         }
-        
+
         if (isWriteToken()) {
             for (Sentence sent : selectCovered(aJCas, Sentence.class, aZoneBegin,
                     aZoneBegin + aText.length())) {

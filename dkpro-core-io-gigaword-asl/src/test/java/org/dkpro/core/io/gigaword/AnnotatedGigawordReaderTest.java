@@ -33,33 +33,29 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class AnnotatedGigawordReaderTest
 {
     @Test
-    public void collectArticlesFromAnnotatedGigaword()
-            throws Exception
+    public void collectArticlesFromAnnotatedGigaword() throws Exception
     {
         CollectionReader reader = createReader(AnnotatedGigawordReader.class,
                 AnnotatedGigawordReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts/*.txt");
-        
+
         JCas jcas = JCasFactory.createJCas();
 
         List<String> ids = new ArrayList<>();
         List<String> texts = new ArrayList<>();
-        
+
         while (reader.hasNext()) {
             jcas.reset();
             reader.getNext(jcas.getCas());
-            
+
             DocumentMetaData dmd = DocumentMetaData.get(jcas);
             ids.add(dmd.getDocumentUri().substring(dmd.getDocumentBaseUri().length()));
             texts.add(jcas.getDocumentText());
         }
-        
-        assertThat(ids)
-            .containsExactly(
-                "gigaword_test_1.txt#Test1", "gigaword_test_1.txt#Test2",
+
+        assertThat(ids).containsExactly("gigaword_test_1.txt#Test1", "gigaword_test_1.txt#Test2",
                 "gigaword_test_1.txt#Test3", "gigaword_test_2.txt#Test1",
                 "gigaword_test_2.txt#Test2", "gigaword_test_2.txt#Test3");
-        
-        assertThat(texts)
-            .allMatch(t -> t.contains("days left in the year"));
+
+        assertThat(texts).allMatch(t -> t.contains("days left in the year"));
     }
 }

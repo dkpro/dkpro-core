@@ -45,26 +45,23 @@ public class BreakIteratorSegmenterTest
     public void listLocales() throws Exception
     {
         List<String> supportedLanguages = Arrays.stream(BreakIterator.getAvailableLocales())
-            .map(l -> l.getLanguage())
-            .distinct()
-            .sorted()
-            .filter(lang -> lang.length() == 2)
-            // These language codes do not comply with ISO 639 / OMTD-SHARE
-            // "in" (Indonesian, should be "id")
-            // "iw" (Hebrew, should be "he")
-            // "ji" (Yiddish, should be "yi")
-            // Cf.: https://bugs.java.com/view_bug.do?bug_id=6457127
-            // Cf.: https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4140555
-            .filter(lang -> !asList("in", "iw", "ji").contains(lang))
-            .collect(Collectors.toList());
-        
+                .map(l -> l.getLanguage()).distinct().sorted().filter(lang -> lang.length() == 2)
+                // These language codes do not comply with ISO 639 / OMTD-SHARE
+                // "in" (Indonesian, should be "id")
+                // "iw" (Hebrew, should be "he")
+                // "ji" (Yiddish, should be "yi")
+                // Cf.: https://bugs.java.com/view_bug.do?bug_id=6457127
+                // Cf.: https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4140555
+                .filter(lang -> !asList("in", "iw", "ji").contains(lang))
+                .collect(Collectors.toList());
+
         System.out.printf("[");
         for (String l : supportedLanguages) {
             System.out.printf("\"%s\", ", l);
         }
         System.out.printf("]");
     }
-    
+
     @Test
     public void run() throws Throwable
     {
@@ -78,12 +75,12 @@ public class BreakIteratorSegmenterTest
     public void testJapanese() throws Exception
     {
         JCas jcas = JCasFactory.createText("滧の べ滦榥榜ぶ 廤ま楺獣お 䨣みゅ騪", "ja");
-        
+
         AnalysisEngine aed = createEngine(BreakIteratorSegmenter.class);
         aed.process(jcas);
-        
+
         String[] tokens = { "滧", "の", "べ", "滦榥榜", "ぶ", "廤", "ま", "楺獣", "お", "䨣", "みゅ", "騪" };
-        
+
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
 

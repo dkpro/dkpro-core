@@ -24,8 +24,7 @@ import org.junit.jupiter.api.Test;
 public class Conll2009ReaderWriterTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         testOneWay(Conll2009Reader.class, Conll2009Writer.class, "conll/2009/en-ref.conll",
                 "conll/2009/en-orig.conll");

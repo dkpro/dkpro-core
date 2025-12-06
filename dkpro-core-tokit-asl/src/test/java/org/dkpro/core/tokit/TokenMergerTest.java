@@ -48,8 +48,8 @@ public class TokenMergerTest
     @Test
     public void testSimpleMerge() throws Exception
     {
-        AnalysisEngine filter = createEngine(TokenMerger.class, 
-                TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class);
+        AnalysisEngine filter = createEngine(TokenMerger.class, TokenMerger.PARAM_ANNOTATION_TYPE,
+                NamedEntity.class);
 
         JCas jcas = initCas();
         filter.process(jcas);
@@ -58,38 +58,37 @@ public class TokenMergerTest
                 jcas.select(Token.class).map(Token::getCoveredText).collect(toList()));
     }
 
-//    @Test
-//    public void testWithConstraintMatch() throws Exception
-//    {
-//        AnalysisEngine filter = createEngine(TokenMerger.class, 
-//                TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class, 
-//                TokenMerger.PARAM_CONSTRAINT, ".[value = 'LOCATION']");
-//
-//        JCas jcas = initCas();
-//        filter.process(jcas);
-//
-//        assertEquals(asList("I", "love", "New York", "."), toText(select(jcas, Token.class)));
-//    }
-//
-//    @Test
-//    public void testWithConstraintNoMatch() throws Exception
-//    {
-//        AnalysisEngine filter = createEngine(TokenMerger.class, 
-//                TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class, 
-//                TokenMerger.PARAM_CONSTRAINT, ".[value = 'PERSON']");
-//
-//        JCas jcas = initCas();
-//        filter.process(jcas);
-//
-//        assertEquals(asList("I", "love", "New", "York", "."), toText(select(jcas, Token.class)));
-//    }
+    // @Test
+    // public void testWithConstraintMatch() throws Exception
+    // {
+    // AnalysisEngine filter = createEngine(TokenMerger.class,
+    // TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+    // TokenMerger.PARAM_CONSTRAINT, ".[value = 'LOCATION']");
+    //
+    // JCas jcas = initCas();
+    // filter.process(jcas);
+    //
+    // assertEquals(asList("I", "love", "New York", "."), toText(select(jcas, Token.class)));
+    // }
+    //
+    // @Test
+    // public void testWithConstraintNoMatch() throws Exception
+    // {
+    // AnalysisEngine filter = createEngine(TokenMerger.class,
+    // TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+    // TokenMerger.PARAM_CONSTRAINT, ".[value = 'PERSON']");
+    //
+    // JCas jcas = initCas();
+    // filter.process(jcas);
+    //
+    // assertEquals(asList("I", "love", "New", "York", "."), toText(select(jcas, Token.class)));
+    // }
 
     @Test
     public void testSimpleMergeLemmaJoin() throws Exception
     {
-        AnalysisEngine filter = createEngine(
-                TokenMerger.class, //
-                TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,  //
+        AnalysisEngine filter = createEngine(TokenMerger.class, //
+                TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class, //
                 TokenMerger.PARAM_LEMMA_MODE, LemmaMode.JOIN);
 
         JCas jcas = initCas();

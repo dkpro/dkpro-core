@@ -27,7 +27,7 @@ public class LxfAnnotatedObject
 {
     private int rank;
     private String type;
-    
+
     public String getType()
     {
         return type;
@@ -45,18 +45,17 @@ public class LxfAnnotatedObject
     {
         return type;
     }
-   
-    
+
     public String getFeature(String aName)
     {
-        if (annotations != null) {             
+        if (annotations != null) {
             return annotations.get(aName);
         }
         else {
             return null;
         }
     }
-    
+
     public void setFeature(String aName, String aValue)
     {
         if (annotations == null) {

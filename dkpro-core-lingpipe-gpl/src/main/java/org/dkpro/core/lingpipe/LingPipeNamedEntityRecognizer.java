@@ -68,11 +68,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "LingPipe Named Entity Recognizer")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class LingPipeNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
 {
@@ -99,19 +97,20 @@ public class LingPipeNamedEntityRecognizer
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Location from which the model is read.
      */
@@ -123,7 +122,7 @@ public class LingPipeNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = //
             ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
@@ -132,8 +131,7 @@ public class LingPipeNamedEntityRecognizer
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -144,10 +142,9 @@ public class LingPipeNamedEntityRecognizer
                 setDefault(LOCATION,
                         "classpath:/de/tudarmstadt/ukp/dkpro/core/lingpipe/lib/ner-${language}-${variant}.properties");
             }
-            
+
             @Override
-            protected Chunker produceResource(InputStream aStream)
-                throws Exception
+            protected Chunker produceResource(InputStream aStream) throws Exception
             {
                 ObjectInputStream ois = new ObjectInputStream(aStream);
                 Chunker chunker = (Chunker) ois.readObject();
@@ -157,10 +154,10 @@ public class LingPipeNamedEntityRecognizer
                 SingletonTagset tags = new SingletonTagset(NamedEntity.class, null);
                 if (chunker instanceof HmmChunker) {
                     HiddenMarkovModel hmm = ((HmmChunker) chunker).getDecoder().getHmm();
-                    
+
                     List<String> prefixes = asList("B_", "M_", "E_", "W_", "BB_O_", "EE_O_",
                             "WW_O_");
-                    
+
                     for (int n = 0; n < hmm.stateSymbolTable().numSymbols(); n++) {
                         String tag = hmm.stateSymbolTable().idToSymbol(n);
 
@@ -174,7 +171,7 @@ public class LingPipeNamedEntityRecognizer
                             // BOS is reserved by the system
                             continue;
                         }
-                        
+
                         tags.add(tag);
                     }
                 }
@@ -218,8 +215,7 @@ public class LingPipeNamedEntityRecognizer
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
         modelProvider.configure(cas);
@@ -230,7 +226,7 @@ public class LingPipeNamedEntityRecognizer
         String[] tokens = toText(tokenList).toArray(new String[tokenList.size()]);
 
         Chunking chunking = modelProvider.getResource().chunk(cas.getDocumentText());
-        
+
         // get the named entities and their character offsets
         for (Chunk namedEntity : chunking.chunkSet()) {
             Type type = mappingProvider.getTagType(namedEntity.type());

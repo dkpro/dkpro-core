@@ -36,27 +36,27 @@ public class DKPro2PubAnnotation
     private String spanTypeName;
     private String spanIdFeatureName;
     private String spanLabelFeatureName;
-    
+
     public void convert(JCas aJCas, PADocument aDoc)
     {
         aDoc.setText(aJCas.getDocumentText());
-        
+
         // Map metadata
         DocumentMetaData dmd = DocumentMetaData.get(aJCas);
         aDoc.setTarget(dmd.getDocumentUri());
         aDoc.setSourceDb(dmd.getCollectionId());
         aDoc.setSourceId(dmd.getDocumentId());
-        
+
         // Map span annotations
         CAS cas = aJCas.getCas();
         Type spanType = CasUtil.getAnnotationType(cas, spanTypeName);
         Feature spanIdFeature = spanType.getFeatureByBaseName(spanIdFeatureName);
         Feature spanLabelFeature = spanType.getFeatureByBaseName(spanLabelFeatureName);
-        
+
         for (AnnotationFS spanAnnotation : select(cas, spanType)) {
             PADenotation denotation = new PADenotation(spanAnnotation.getBegin(),
                     spanAnnotation.getEnd());
-            
+
             // Set the ID from the ID feature if one was specified, otherwise set it from the
             // annotation address.
             if (spanIdFeature != null) {
@@ -65,15 +65,15 @@ public class DKPro2PubAnnotation
             else {
                 denotation.setId(Integer.toString(((CASImpl) cas).ll_getFSRef(spanAnnotation)));
             }
-            
+
             if (spanLabelFeature != null) {
                 denotation.setObj(spanAnnotation.getFeatureValueAsString(spanLabelFeature));
             }
-            
+
             aDoc.addDenotation(denotation);
         }
     }
-    
+
     public void setSpanMapping(String aSpanType, String aSpanIdFeature, String aSpanLabelFeature)
     {
         spanTypeName = aSpanType;

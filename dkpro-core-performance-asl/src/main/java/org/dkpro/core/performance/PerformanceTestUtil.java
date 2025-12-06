@@ -59,7 +59,7 @@ public final class PerformanceTestUtil
         AnalysisEngine writer = createEngine(aWriterDesc);
 
         SummaryStatistics stats = new SummaryStatistics();
-        
+
         for (JCas jcas : aTestData) {
             long begin = System.currentTimeMillis();
             writer.process(jcas);
@@ -72,17 +72,17 @@ public final class PerformanceTestUtil
         return stats;
     }
 
-    public static SummaryStatistics measureReadPerformance(
-            CollectionReaderDescription aReaderDesc, JCas aJCas, int aIterations)
+    public static SummaryStatistics measureReadPerformance(CollectionReaderDescription aReaderDesc,
+            JCas aJCas, int aIterations)
         throws ResourceInitializationException, CollectionException, IOException,
         ResourceConfigurationException
     {
         CollectionReader reader = createReader(aReaderDesc);
 
         SummaryStatistics stats = new SummaryStatistics();
-        
+
         CAS cas = aJCas.getCas();
-        
+
         for (int i = 0; i < aIterations; i++) {
             long begin = System.currentTimeMillis();
             reader.getNext(cas);
@@ -100,27 +100,31 @@ public final class PerformanceTestUtil
     /**
      * Initializes a CAS with random text, tokens, and sentences.
      * 
-     * @param aJCas the CAS
-     * @param aTextSize the length of the text to be generated.
-     * @param aAnnotationCount the number of annotations to be generated.
-     * @param aSeed the random seed to allow for repeatable randomness.
+     * @param aJCas
+     *            the CAS
+     * @param aTextSize
+     *            the length of the text to be generated.
+     * @param aAnnotationCount
+     *            the number of annotations to be generated.
+     * @param aSeed
+     *            the random seed to allow for repeatable randomness.
      */
     public static void initRandomCas(JCas aJCas, int aTextSize, int aAnnotationCount, long aSeed)
     {
         List<Type> types = new ArrayList<Type>();
         types.add(getType(aJCas, Token.class));
         types.add(getType(aJCas, Sentence.class));
-//        Iterator<Type> i = aJCas.getTypeSystem().getTypeIterator();
-//        while (i.hasNext()) {
-//            Type t = i.next();
-//            if (t.isArray() || t.isPrimitive()) {
-//                continue;
-//            }
-//            if (aJCas.getDocumentAnnotationFs().getType().getName().equals(t.getName())) {
-//                continue;
-//            }
-//            types.add(t);
-//        }
+        // Iterator<Type> i = aJCas.getTypeSystem().getTypeIterator();
+        // while (i.hasNext()) {
+        // Type t = i.next();
+        // if (t.isArray() || t.isPrimitive()) {
+        // continue;
+        // }
+        // if (aJCas.getDocumentAnnotationFs().getType().getName().equals(t.getName())) {
+        // continue;
+        // }
+        // types.add(t);
+        // }
 
         // Initialize randomizer
         Random rnd = new Random(aSeed);
@@ -133,7 +137,7 @@ public final class PerformanceTestUtil
 
         // Generate random text
         aJCas.setDocumentText(RandomStringUtils.random(aTextSize));
-        
+
         // Generate random annotations
         CAS cas = aJCas.getCas();
         for (int n = 0; n < aAnnotationCount; n++) {

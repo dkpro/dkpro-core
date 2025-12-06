@@ -46,8 +46,7 @@ public class RTFReaderTest
      * @throws IOException
      */
     @Test
-    public void test()
-        throws UIMAException, IOException
+    public void test() throws UIMAException, IOException
     {
         File testFile = new File("src/test/resources/testfile.rtf");
         File output = new File("target/output.dump");
@@ -55,8 +54,7 @@ public class RTFReaderTest
         File testDump = new File("src/test/resources/testfile.dump");
 
         CollectionReaderDescription reader = createReaderDescription(RTFReader.class,
-                RTFReader.PARAM_SOURCE_LOCATION, testFile,
-                RTFReader.PARAM_LANGUAGE, "en");
+                RTFReader.PARAM_SOURCE_LOCATION, testFile, RTFReader.PARAM_LANGUAGE, "en");
 
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, output);
@@ -78,14 +76,13 @@ public class RTFReaderTest
         File testDump = new File("src/test/resources/testfiles.dump");
 
         CollectionReaderDescription reader = createReaderDescription(RTFReader.class,
-                RTFReader.PARAM_SOURCE_LOCATION, testFiles,
-                RTFReader.PARAM_LANGUAGE, "en");
+                RTFReader.PARAM_SOURCE_LOCATION, testFiles, RTFReader.PARAM_LANGUAGE, "en");
 
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, output);
 
         SimplePipeline.runPipeline(reader, writer);
-        
+
         String reference = FileUtils.readFileToString(testDump, "UTF-8").trim();
         String actual = FileUtils.readFileToString(output, "UTF-8").trim();
         reference = EOLUtils.normalizeLineEndings(reference);

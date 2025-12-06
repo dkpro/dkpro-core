@@ -49,17 +49,15 @@ public class MalletLdaTopicModelInferencerTest
     private static final String LANGUAGE = "en";
 
     @Test
-    public void testInferencer(@TempDir File tempDir)
-            throws UIMAException, IOException
+    public void testInferencer(@TempDir File tempDir) throws UIMAException, IOException
     {
         File modelFile = new File(tempDir, "model");
         trainModel(modelFile);
 
         // tag::example[]
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(

@@ -61,36 +61,35 @@ public class CombinationReader
     private CollectionReader currentReader = null;
 
     private List<CollectionReader> readers;
-    
+
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException 
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
-        
+
         readers = new ArrayList<>();
-        
+
         for (String readerFile : readerFiles) {
             try {
                 readers.add(CollectionReaderFactory.createReaderFromPath(readerFile));
-            } catch (UIMAException e) {
+            }
+            catch (UIMAException e) {
                 throw new ResourceInitializationException(e);
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 throw new ResourceInitializationException(e);
             }
         }
     }
 
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         currentReader.getNext(aCAS);
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         try {
             currentReader = getReader();
@@ -116,8 +115,7 @@ public class CombinationReader
         return currentReader.hasNext();
     }
 
-    private CollectionReader moreReadersToReadFrom()
-        throws Exception
+    private CollectionReader moreReadersToReadFrom() throws Exception
     {
         if (readerIdx + 1 < readers.size()) {
             // close the empty-read reader
@@ -129,8 +127,7 @@ public class CombinationReader
         return null;
     }
 
-    private CollectionReader getReader()
-        throws UIMAException, IOException
+    private CollectionReader getReader() throws UIMAException, IOException
     {
         return readers.get(readerIdx);
     }
@@ -140,9 +137,9 @@ public class CombinationReader
     {
         return currentReader.getProgress();
     }
-    
-    public static File descriptionToFile(CollectionReaderDescription desc) 
-            throws IOException, SAXException 
+
+    public static File descriptionToFile(CollectionReaderDescription desc)
+        throws IOException, SAXException
     {
         File tempFile = File.createTempFile("combReader", "desc");
         FileWriterWithEncoding writer = new FileWriterWithEncoding(tempFile, "UTF-8");

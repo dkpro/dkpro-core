@@ -43,17 +43,17 @@ public class LoadedDataset
     private DatasetFactory factory;
     private DatasetDescription description;
     private Split defaultSplit;
-    
+
     public LoadedDataset(DatasetFactory aFactory, DatasetDescription aDescription)
     {
         super();
         factory = aFactory;
         description = aDescription;
-        
-        File[] train =  getFiles(FileRole.TRAINING);
-        File[] dev =  getFiles(FileRole.DEVELOPMENT);
-        File[] test =  getFiles(FileRole.TESTING);
-        
+
+        File[] train = getFiles(FileRole.TRAINING);
+        File[] dev = getFiles(FileRole.DEVELOPMENT);
+        File[] test = getFiles(FileRole.TESTING);
+
         if (train.length > 0 || dev.length > 0 || test.length > 0) {
             defaultSplit = new SplitImpl(train, test, dev);
         }
@@ -70,7 +70,7 @@ public class LoadedDataset
     {
         return description.getLanguage();
     }
-    
+
     @Override
     public String getEncoding()
     {
@@ -81,7 +81,7 @@ public class LoadedDataset
     public File[] getDataFiles()
     {
         Set<File> all = new HashSet<>();
-        
+
         // Collect all data files
         all.addAll(asList(getFiles(FileRole.DATA)));
 
@@ -94,14 +94,16 @@ public class LoadedDataset
                 all.addAll(asList(split.getDevelopmentFiles()));
             }
         }
-        
+
         // Sort to ensure stable order
         File[] result = all.toArray(all.toArray(new File[all.size()]));
-        Arrays.sort(result, (a, b) -> { return a.getPath().compareTo(b.getPath()); });
-        
+        Arrays.sort(result, (a, b) -> {
+            return a.getPath().compareTo(b.getPath());
+        });
+
         return result;
     }
-    
+
     @Override
     public File[] getLicenseFiles()
     {
@@ -120,28 +122,30 @@ public class LoadedDataset
         Path baseDir = factory.resolve(description);
         return new File(baseDir.toFile(), aPath);
     }
-    
+
     private File[] getFiles(String aRole)
     {
         List<File> files = new ArrayList<>();
-        
+
         List<String> patterns = description.getRoles().get(aRole);
         if (patterns == null) {
             return new File[0];
         }
-        
+
         for (String pattern : patterns) {
             Path baseDir = factory.resolve(description);
-            
+
             Collection<File> matchedFiles = FileUtils.listFiles(baseDir.toFile(),
                     new AntFileFilter(baseDir, asList(pattern), null), TrueFileFilter.TRUE);
-            
+
             files.addAll(matchedFiles);
         }
-        
+
         File[] all = files.toArray(new File[files.size()]);
-        Arrays.sort(all, (File a, File b) -> { return a.getName().compareTo(b.getName()); });
-        
+        Arrays.sort(all, (File a, File b) -> {
+            return a.getName().compareTo(b.getName());
+        });
+
         return all;
     }
 }

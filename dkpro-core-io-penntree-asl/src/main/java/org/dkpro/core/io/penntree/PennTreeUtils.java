@@ -56,8 +56,8 @@ public class PennTreeUtils
     {
         PennTreeNode node = new PennTreeNode();
         if (aConstituent.getSyntacticFunction() != null) {
-            node.setLabel(aConstituent.getConstituentType() + '-'
-                    + aConstituent.getSyntacticFunction());
+            node.setLabel(
+                    aConstituent.getConstituentType() + '-' + aConstituent.getSyntacticFunction());
         }
         else {
             node.setLabel(aConstituent.getConstituentType());
@@ -86,7 +86,7 @@ public class PennTreeUtils
         node.setChildren(children);
         return node;
     }
-    
+
     public static String escapeToken(String aToken)
     {
         String value = ESCAPE.get(aToken);
@@ -194,7 +194,7 @@ public class PennTreeUtils
         toPennTree(sb, aNode, -1);
         return sb.toString().trim();
     }
-    
+
     public static String toPrettyPennTree(PennTreeNode aNode)
     {
         StringBuilder sb = new StringBuilder();
@@ -205,7 +205,7 @@ public class PennTreeUtils
     private static void toPennTree(StringBuilder aSb, PennTreeNode aNode, int aLevel)
     {
         boolean indentationEnabled = aLevel >= 0;
-        
+
         // This is a "(Label Token)"
         if (aNode.isPreTerminal()) {
             aSb.append('(');
@@ -221,7 +221,7 @@ public class PennTreeUtils
 
             aSb.append('(');
             aSb.append(aNode.getLabel());
-            
+
             PennTreeNode prevChild = null;
             Iterator<PennTreeNode> i = aNode.getChildren().iterator();
             while (i.hasNext()) {
@@ -239,11 +239,11 @@ public class PennTreeUtils
                 toPennTree(aSb, child, indentationEnabled ? aLevel + 1 : -1);
                 prevChild = child;
             }
-            
+
             aSb.append(')');
         }
     }
-    
+
     /**
      * Remove trailing or leading whitespace from the annotation.
      * 
@@ -258,17 +258,11 @@ public class PennTreeUtils
         int end = aSpan[1] - 1;
 
         CharSequence data = aText;
-        while (
-                (begin < (data.length() - 1))
-                && trimChar(data.charAt(begin))
-        ) {
-            begin ++;
+        while ((begin < (data.length() - 1)) && trimChar(data.charAt(begin))) {
+            begin++;
         }
-        while (
-                (end > 0)
-                && trimChar(data.charAt(end))
-        ) {
-            end --;
+        while ((end > 0) && trimChar(data.charAt(end))) {
+            end--;
         }
 
         end++;
@@ -285,15 +279,22 @@ public class PennTreeUtils
     public static boolean trimChar(final char aChar)
     {
         switch (aChar) {
-        case '\n':     return true; // Line break
-        case '\r':     return true; // Carriage return
-        case '\t':     return true; // Tab
-        case '\u200E': return true; // LEFT-TO-RIGHT MARK
-        case '\u200F': return true; // RIGHT-TO-LEFT MARK
-        case '\u2028': return true; // LINE SEPARATOR
-        case '\u2029': return true; // PARAGRAPH SEPARATOR
+        case '\n':
+            return true; // Line break
+        case '\r':
+            return true; // Carriage return
+        case '\t':
+            return true; // Tab
+        case '\u200E':
+            return true; // LEFT-TO-RIGHT MARK
+        case '\u200F':
+            return true; // RIGHT-TO-LEFT MARK
+        case '\u2028':
+            return true; // LINE SEPARATOR
+        case '\u2029':
+            return true; // PARAGRAPH SEPARATOR
         default:
-            return  Character.isWhitespace(aChar);
+            return Character.isWhitespace(aChar);
         }
     }
 
@@ -303,7 +304,7 @@ public class PennTreeUtils
         getPreTerminals(aNode, preTerminals);
         return preTerminals;
     }
-    
+
     private static void getPreTerminals(PennTreeNode aNode, List<PennTreeNode> aList)
     {
         if (aNode.isPreTerminal()) {

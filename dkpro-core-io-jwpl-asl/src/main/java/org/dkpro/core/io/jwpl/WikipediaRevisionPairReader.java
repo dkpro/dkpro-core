@@ -37,10 +37,8 @@ import org.dkpro.jwpl.revisionmachine.api.Revision;
 /**
  * Reads pairs of adjacent revisions of all articles.
  */
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class WikipediaRevisionPairReader
     extends WikipediaRevisionReaderBase
 {
@@ -51,7 +49,7 @@ public class WikipediaRevisionPairReader
     /**
      * Restrict revision pairs to cases where the length of the revisions differ more than this
      * value (counted in characters).
-     * */
+     */
     public static final String PARAM_MIN_CHANGE = "MinChange";
     @ConfigurationParameter(name = PARAM_MIN_CHANGE, mandatory = true, defaultValue = "0")
     private int minChange;
@@ -59,7 +57,7 @@ public class WikipediaRevisionPairReader
     /**
      * Restrict revision pairs to cases where the length of the revisions does not differ more than
      * this value (counted in characters).
-     * */
+     */
     public static final String PARAM_MAX_CHANGE = "MaxChange";
     @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory = true, defaultValue = "10000")
     private int maxChange;
@@ -74,13 +72,11 @@ public class WikipediaRevisionPairReader
     private int nrOfRevisionsProcessed;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         if (revisionIdFile != null || revisionIdParamArray != null) {
-            this.getLogger()
-                    .log(Level.WARNING,
-                            "Reading a predefined list of revisions is currently not supported by the WikipediaRevisionPairReader. Falling back to reading ALL revisions.");
+            this.getLogger().log(Level.WARNING,
+                    "Reading a predefined list of revisions is currently not supported by the WikipediaRevisionPairReader. Falling back to reading ALL revisions.");
             revisionIdFile = null;
             revisionIdParamArray = null;
             // TODO add support for reading a defined set of revisions (like the
@@ -92,16 +88,15 @@ public class WikipediaRevisionPairReader
     }
 
     @Override
-    public void getNext(JCas jcas)
-        throws IOException, CollectionException
+    public void getNext(JCas jcas) throws IOException, CollectionException
     {
         super.getNext(jcas);
 
         Timestamp currentTimestamp = timestampIter.next();
 
         if (currentTimestamp == null) {
-            throw new CollectionException(new Throwable(
-                    "Current timestamp is null. Upps ... should not happen."));
+            throw new CollectionException(
+                    new Throwable("Current timestamp is null. Upps ... should not happen."));
         }
 
         this.getLogger().log(Level.FINE, currentArticle.getPageId() + "-" + currentTimestamp);
@@ -191,8 +186,7 @@ public class WikipediaRevisionPairReader
 
     }
 
-    private Revision getRevision(Timestamp timestamp)
-        throws CollectionException
+    private Revision getRevision(Timestamp timestamp) throws CollectionException
     {
         Revision revision;
 

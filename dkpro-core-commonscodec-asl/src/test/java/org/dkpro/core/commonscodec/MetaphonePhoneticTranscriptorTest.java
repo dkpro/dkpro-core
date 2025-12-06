@@ -26,12 +26,11 @@ public class MetaphonePhoneticTranscriptorTest
 {
 
     @Test
-    public void metaphoneTest() throws Exception {
+    public void metaphoneTest() throws Exception
+    {
 
-        runTest(
-                createEngineDescription(MetaphonePhoneticTranscriptor.class),
-                "The knight entered the store in the night .",
-                "0", "NT", "ENTR", "0", "STR", "IN", "0", "NT", "."
-        );
+        runTest(createEngineDescription(MetaphonePhoneticTranscriptor.class),
+                "The knight entered the store in the night .", "0", "NT", "ENTR", "0", "STR", "IN",
+                "0", "NT", ".");
     }
 }

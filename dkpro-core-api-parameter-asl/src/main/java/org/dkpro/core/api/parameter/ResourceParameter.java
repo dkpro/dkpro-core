@@ -24,7 +24,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ResourceParameter {
+public @interface ResourceParameter
+{
     /**
      * The MIME types supported by this component.
      *

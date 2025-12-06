@@ -58,17 +58,20 @@ public class TextIterable
         }
     }
 
-    public Resource getCurrentResource() {
+    public Resource getCurrentResource()
+    {
         return currentResource;
     }
 
     @Override
-    public Iterator<CorpusText> iterator() {
+    public Iterator<CorpusText> iterator()
+    {
         return this;
     }
 
     @Override
-    public boolean hasNext() {
+    public boolean hasNext()
+    {
         if (texts.isEmpty()) {
             try {
                 fillTextQueue(BUFFER_SIZE);
@@ -88,11 +91,13 @@ public class TextIterable
     }
 
     @Override
-    public void remove() {
+    public void remove()
+    {
         throw new UnsupportedOperationException();
     }
 
-    private void fillTextQueue(int bufferSize) throws IOException {
+    private void fillTextQueue(int bufferSize) throws IOException
+    {
 
         // check if reader is still valid
         if (reader == null) {
@@ -104,8 +109,7 @@ public class TextIterable
         CorpusText text = null;
         CorpusSentence currentSentence = null;
 
-        while (texts.size() < bufferSize && (line = reader.readLine()) != null)
-        {
+        while (texts.size() < bufferSize && (line = reader.readLine()) != null) {
             if (line.startsWith("<text ")) {
                 String title = getTitle(line);
                 text = new CorpusText(title);
@@ -158,7 +162,8 @@ public class TextIterable
         }
     }
 
-    private String getTitle(String line) {
+    private String getTitle(String line)
+    {
         Matcher m = TITLE_PATTERN.matcher(line);
 
         if (m.find()) {
@@ -169,14 +174,15 @@ public class TextIterable
         }
     }
 
-    private BufferedReader getReader() throws FileNotFoundException, IOException {
+    private BufferedReader getReader() throws FileNotFoundException, IOException
+    {
         BufferedReader r = null;
         if (!fileQueue.isEmpty()) {
             currentResource = fileQueue.poll();
-            
+
             InputStream resolvedStream = CompressionUtils.getInputStream(currentResource.getPath(),
                     currentResource.getInputStream());
-                
+
             r = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
         }
         return r;

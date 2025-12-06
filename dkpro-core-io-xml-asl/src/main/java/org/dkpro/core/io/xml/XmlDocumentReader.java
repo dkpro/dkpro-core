@@ -49,18 +49,12 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(value = OperationType.READER)
 @ResourceMetaData(name = "XML Document Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                XmlReader.PARAM_SOURCE_LOCATION  })
-@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "org.dkpro.core.api.xml.type.XmlAttribute",
-                "org.dkpro.core.api.xml.type.XmlDocument", 
-                "org.dkpro.core.api.xml.type.XmlElement", 
-                "org.dkpro.core.api.xml.type.XmlNode",
-                "org.dkpro.core.api.xml.type.XmlTextNode" })
+@Parameters(exclude = { XmlReader.PARAM_SOURCE_LOCATION })
+@MimeTypeCapability({ MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "org.dkpro.core.api.xml.type.XmlAttribute", "org.dkpro.core.api.xml.type.XmlDocument",
+        "org.dkpro.core.api.xml.type.XmlElement", "org.dkpro.core.api.xml.type.XmlNode",
+        "org.dkpro.core.api.xml.type.XmlTextNode" })
 public class XmlDocumentReader
     extends JCasResourceCollectionReader_ImplBase
 {

@@ -37,7 +37,7 @@ public abstract class SplitterResource
      *
      * This external resource wraps the dictionary which shall be used by the splitter.
      *
-     * */
+     */
 
     public static final String PARAM_DICT_RESOURCE = "dictionaryResource";
     @ExternalResource(key = PARAM_DICT_RESOURCE)
@@ -47,7 +47,7 @@ public abstract class SplitterResource
      *
      * This external resource wraps the morphemes list which shall be used by the splitter.
      *
-     * */
+     */
 
     public static final String PARAM_MORPHEME_RESOURCE = "linkingMorphemeResource";
     @ExternalResource(key = PARAM_MORPHEME_RESOURCE)
@@ -66,7 +66,8 @@ public abstract class SplitterResource
     }
 
     @Override
-    public void afterResourcesInitialized() throws RuntimeException {
+    public void afterResourcesInitialized() throws RuntimeException
+    {
         try {
             splitter.setDictionary(dictResource.getDictionary());
             splitter.setLinkingMorphemes(morphemesResource.getLinkingMorphemes());

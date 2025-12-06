@@ -46,8 +46,8 @@ public class LittleEndianDataInputStream
     // to get at the low-level read methods of InputStream
     private InputStream in;
 
- // work array for buffering input
-    private byte[] w; 
+    // work array for buffering input
+    private byte[] w;
 
     public LittleEndianDataInputStream(final InputStream aIn)
     {
@@ -57,15 +57,13 @@ public class LittleEndianDataInputStream
     }
 
     @Override
-    public int available()
-        throws IOException
+    public int available() throws IOException
     {
         return d.available();
     }
 
     @Override
-    public final short readShort()
-        throws IOException
+    public final short readShort() throws IOException
     {
         d.readFully(w, 0, 2);
         return (short) ((w[1] & 0xff) << 8 | (w[0] & 0xff));
@@ -75,8 +73,7 @@ public class LittleEndianDataInputStream
      * Note, returns int even though it reads a short.
      */
     @Override
-    public final int readUnsignedShort()
-        throws IOException
+    public final int readUnsignedShort() throws IOException
     {
         d.readFully(w, 0, 2);
         return ((w[1] & 0xff) << 8 | (w[0] & 0xff));
@@ -86,8 +83,7 @@ public class LittleEndianDataInputStream
      * like DataInputStream.readChar except little endian.
      */
     @Override
-    public final char readChar()
-        throws IOException
+    public final char readChar() throws IOException
     {
         d.readFully(w, 0, 2);
         return (char) ((w[1] & 0xff) << 8 | (w[0] & 0xff));
@@ -97,8 +93,7 @@ public class LittleEndianDataInputStream
      * like DataInputStream.readInt except little endian.
      */
     @Override
-    public final int readInt()
-        throws IOException
+    public final int readInt() throws IOException
     {
         d.readFully(w, 0, 4);
         return (w[3]) << 24 | (w[2] & 0xff) << 16 | (w[1] & 0xff) << 8 | (w[0] & 0xff);
@@ -108,8 +103,7 @@ public class LittleEndianDataInputStream
      * like DataInputStream.readLong except little endian.
      */
     @Override
-    public final long readLong()
-        throws IOException
+    public final long readLong() throws IOException
     {
         d.readFully(w, 0, 8);
         return (long) (w[7]) << 56 | (long) (w[6] & 0xff) << 48 | (long) (w[5] & 0xff) << 40
@@ -118,93 +112,80 @@ public class LittleEndianDataInputStream
     }
 
     @Override
-    public final float readFloat()
-        throws IOException
+    public final float readFloat() throws IOException
     {
         return Float.intBitsToFloat(readInt());
     }
 
     @Override
-    public final double readDouble()
-        throws IOException
+    public final double readDouble() throws IOException
     {
         return Double.longBitsToDouble(readLong());
     }
 
     @Override
-    public final int read(final byte[] b, final int off, final int len)
-        throws IOException
+    public final int read(final byte[] b, final int off, final int len) throws IOException
     {
         return in.read(b, off, len);
     }
 
     @Override
-    public final void readFully(final byte[] b)
-        throws IOException
+    public final void readFully(final byte[] b) throws IOException
     {
         d.readFully(b, 0, b.length);
     }
 
     @Override
-    public final void readFully(final byte[] b, final int off, final int len)
-        throws IOException
+    public final void readFully(final byte[] b, final int off, final int len) throws IOException
     {
         d.readFully(b, off, len);
     }
 
     @Override
-    public final int skipBytes(final int n)
-        throws IOException
+    public final int skipBytes(final int n) throws IOException
     {
         return d.skipBytes(n);
     }
 
     @Override
-    public final boolean readBoolean()
-        throws IOException
+    public final boolean readBoolean() throws IOException
     {
         return d.readBoolean();
     }
 
     @Override
-    public final byte readByte()
-        throws IOException
+    public final byte readByte() throws IOException
     {
         return d.readByte();
     }
 
     @Override
-    public int read()
-        throws IOException
+    public int read() throws IOException
     {
         return in.read();
     }
 
     @Override
-    public final int readUnsignedByte()
-        throws IOException
+    public final int readUnsignedByte() throws IOException
     {
         return d.readUnsignedByte();
     }
 
     @Override
     @Deprecated
-    public final String readLine()
-        throws IOException
+    public final String readLine() throws IOException
     {
         return d.readLine();
     }
 
     @Override
-    public final String readUTF()
-        throws IOException
+    public final String readUTF() throws IOException
     {
         return d.readUTF();
     }
 
     @Override
-    public final void close()
-        throws IOException
+    public final void close() throws IOException
     {
         d.close();
     }

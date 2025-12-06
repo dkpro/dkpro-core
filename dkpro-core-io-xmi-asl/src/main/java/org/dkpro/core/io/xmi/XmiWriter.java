@@ -94,7 +94,8 @@ public class XmiWriter
     private String version;
 
     /**
-     * Sanitize illegal characters in the output by replacing them with a space character so offsets do not change.
+     * Sanitize illegal characters in the output by replacing them with a space character so offsets
+     * do not change.
      */
     public static final String PARAM_SANITIZE_ILLEGAL_CHARACTERS = "sanitizeIllegalCharacters";
     @ConfigurationParameter(name = PARAM_SANITIZE_ILLEGAL_CHARACTERS, defaultValue = "false")
@@ -115,7 +116,7 @@ public class XmiWriter
         }
 
         typeSystemWritten = false;
-        
+
         xmiCasSerializer = new XmiCasSerializer(null);
         sax2xml = new XMLSerializer(prettyPrint);
         sax2xml.setOutputProperty(OutputKeys.VERSION, version);
@@ -132,7 +133,7 @@ public class XmiWriter
                 contentHandler = new IllegalXmlCharacterSanitizingContentHandler(contentHandler,
                         version);
             }
-            
+
             xmiCasSerializer.serialize(aJCas.getCas(), contentHandler, null, null, null);
 
             if (!typeSystemWritten) {
@@ -157,7 +158,7 @@ public class XmiWriter
         if (typeSystemFile != null) {
             return CompressionUtils.getOutputStream(typeSystemFile);
         }
-        
+
         return getOutputStream("TypeSystem", ".xml");
     }
 }

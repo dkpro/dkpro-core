@@ -57,13 +57,10 @@ public class SequenceItem
     @Override
     public String toString()
     {
-        return new ToStringBuilder(this, ToStringStyle.NO_CLASS_NAME_STYLE)
-                .append("begin", begin)
-                .append("end", end)
-                .append("label", label)
-                .toString();
+        return new ToStringBuilder(this, ToStringStyle.NO_CLASS_NAME_STYLE).append("begin", begin)
+                .append("end", end).append("label", label).toString();
     }
-    
+
     public static List<SequenceItem> of(String... aLabels)
     {
         return of(1, aLabels);

@@ -120,8 +120,8 @@ public class IvyResourceObjectResolver
         // The dummy module is kept in the Ivy cache only temporary, so make use it is unique
         // using a UUID and make sure it is removed from the cache at the end.
         UUID uuid = UUID.randomUUID();
-        ModuleRevisionId moduleId = ModuleRevisionId
-                .newInstance("dkpro", uuid.toString(), "working");
+        ModuleRevisionId moduleId = ModuleRevisionId.newInstance("dkpro", uuid.toString(),
+                "working");
         DefaultModuleDescriptor md = DefaultModuleDescriptor.newDefaultInstance(moduleId);
         DefaultDependencyDescriptor dd = new DefaultDependencyDescriptor(md,
                 ModuleRevisionId.newInstance(aGroupId, aArtifactId, aVersion), false, false, true);
@@ -186,10 +186,8 @@ public class IvyResourceObjectResolver
                     && (model.getDependencyManagement().getDependencies() != null)) {
                 List<Dependency> deps = model.getDependencyManagement().getDependencies();
                 for (Dependency dep : deps) {
-                    if (
-                            StringUtils.equals(dep.getGroupId(), aModelGroupId) && 
-                            StringUtils.equals(dep.getArtifactId(), aModelArtifactId)
-                    ) {
+                    if (StringUtils.equals(dep.getGroupId(), aModelGroupId)
+                            && StringUtils.equals(dep.getArtifactId(), aModelArtifactId)) {
                         return dep.getVersion();
                     }
                 }
@@ -207,7 +205,7 @@ public class IvyResourceObjectResolver
         if (aClass == null) {
             throw new IllegalArgumentException("No context class specified");
         }
-        
+
         // Try to determine the location of the POM file belonging to the context object
         URL url = aClass.getResource(aClass.getSimpleName() + ".class");
         String classPart = aClass.getName().replace(".", "/") + ".class";
@@ -236,7 +234,7 @@ public class IvyResourceObjectResolver
             }
         }
 
-        // If the class is in a JAR (that should be the normal case), try deriving the 
+        // If the class is in a JAR (that should be the normal case), try deriving the
         // POM location from the JAR file name.
         if (urls.isEmpty()) {
             Pattern pattern = Pattern.compile(
@@ -254,9 +252,9 @@ public class IvyResourceObjectResolver
                 }
             }
         }
-        
+
         // Legacy lookup strategy deriving the POM location from the model artifact ID. This
-        // fails if a module is re-using models from another module (e.g. CoreNLP re-using 
+        // fails if a module is re-using models from another module (e.g. CoreNLP re-using
         // models from the StanfordNLP module).
         if (urls.isEmpty()) {
             // This is the default strategy supposed to look in the JAR
@@ -271,13 +269,13 @@ public class IvyResourceObjectResolver
                 urls.add(r.getURL());
             }
         }
-        
+
         // Bail out if no POM was found
         if (urls.isEmpty()) {
             throw new FileNotFoundException("No POM file found using the patterns " + lookupPatterns
                     + ". " + extraNotFoundInfo);
         }
-        
+
         return urls;
     }
 }

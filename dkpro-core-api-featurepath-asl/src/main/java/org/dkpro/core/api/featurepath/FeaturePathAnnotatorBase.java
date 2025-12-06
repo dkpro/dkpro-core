@@ -78,8 +78,7 @@ public abstract class FeaturePathAnnotatorBase
     protected FeaturePathInfo fp = new FeaturePathInfo();
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
 
         super.initialize(aContext);
@@ -118,8 +117,7 @@ public abstract class FeaturePathAnnotatorBase
      *             if an error occurs during the initialization of the {@link FeaturePathInfo}
      *             object.
      */
-    private void initializeFilter()
-        throws FeaturePathException
+    private void initializeFilter() throws FeaturePathException
     {
 
         this.filterFeaturePathInfo.initialize(this.filterFeaturePath);
@@ -135,7 +133,8 @@ public abstract class FeaturePathAnnotatorBase
             // operator must not be null
             // TODO Check me, can this happen? Can a
             if (filterConditionValue == null) {
-                throw new IllegalArgumentException("PARAM_FILTER_CONDITION_VALUE must not be null!");
+                throw new IllegalArgumentException(
+                        "PARAM_FILTER_CONDITION_VALUE must not be null!");
             }
         }
         // get condition operator
@@ -150,8 +149,7 @@ public abstract class FeaturePathAnnotatorBase
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         try {
             generateAnnotations(jcas);

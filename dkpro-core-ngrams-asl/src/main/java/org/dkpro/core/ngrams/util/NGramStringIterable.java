@@ -25,24 +25,24 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Creates a NGram iterable from a list of tokens.
- * It does not detect any sentence boundaries.
- * Thus, one should make sure to only add lists that reflect a sentence or a phrase.
+ * Creates a NGram iterable from a list of tokens. It does not detect any sentence boundaries. Thus,
+ * one should make sure to only add lists that reflect a sentence or a phrase.
  * 
  *
  */
-public class NGramStringIterable implements Iterable<String>
+public class NGramStringIterable
+    implements Iterable<String>
 {
     List<String> nGramList;
 
-//    /**
-//     * @param tokens An iterable of annotations.
-//     *      The {@link JCasUtil} method toText() is called to created the string representation. 
-//     */
-//    public NGramStringIterable(Iterable<AnnotationFS> annotations, int minN, int maxN)
-//    {
-//        this.nGramList = createNGramList(JCasUtil.toText(annotations), minN, maxN);
-//    }
+    // /**
+    // * @param tokens An iterable of annotations.
+    // * The {@link JCasUtil} method toText() is called to created the string representation.
+    // */
+    // public NGramStringIterable(Iterable<AnnotationFS> annotations, int minN, int maxN)
+    // {
+    // this.nGramList = createNGramList(JCasUtil.toText(annotations), minN, maxN);
+    // }
 
     /**
      * @param tokens
@@ -56,9 +56,10 @@ public class NGramStringIterable implements Iterable<String>
     {
         this.nGramList = createNGramList(tokens, minN, maxN);
     }
-    
+
     /**
-     * @param tokens An array of tokens.
+     * @param tokens
+     *            An array of tokens.
      * @param minN
      *            the minimal n-gram length.
      * @param maxN
@@ -69,7 +70,6 @@ public class NGramStringIterable implements Iterable<String>
         this.nGramList = createNGramList(Arrays.asList(tokens), minN, maxN);
     }
 
-    
     @Override
     public Iterator<String> iterator()
     {
@@ -107,9 +107,7 @@ public class NGramStringIterable implements Iterable<String>
 
         int size = tokenList.size();
         for (int i = 0; i < (size + 1 - k); i++) {
-            nGrams.add(
-                    StringUtils.join(tokenList.subList(i, i + k), ' ')
-            );
+            nGrams.add(StringUtils.join(tokenList.subList(i, i + k), ' '));
         }
 
         return nGrams;

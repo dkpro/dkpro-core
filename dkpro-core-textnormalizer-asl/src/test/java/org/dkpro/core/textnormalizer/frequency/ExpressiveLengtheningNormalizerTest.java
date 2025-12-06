@@ -29,8 +29,7 @@ import org.junit.jupiter.api.Test;
 public class ExpressiveLengtheningNormalizerTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         runTest("süüüüß", "süß");
         runTest("Kresssse", "Kresse");
@@ -43,13 +42,12 @@ public class ExpressiveLengtheningNormalizerTest
 
         AnalysisEngineDescription normalizer = createEngineDescription(
                 ExpressiveLengtheningNormalizer.class,
-                ExpressiveLengtheningNormalizer.RES_FREQUENCY_PROVIDER, 
-                        createResourceDescription(
-                                Web1TFrequencyCountResource.class,
-                                Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
-                                Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
-                                Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
-                                Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
+                ExpressiveLengtheningNormalizer.RES_FREQUENCY_PROVIDER,
+                createResourceDescription(Web1TFrequencyCountResource.class,
+                        Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
+                        Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
+                        Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
+                        Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
 
         assertTransformedText(normalizedText, inputText, "de", segmenter, normalizer);
     }

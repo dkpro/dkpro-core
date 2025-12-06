@@ -37,15 +37,14 @@ public class MalletLdaTopicModelUtilsTest
     private static final String LANGUAGE = "en";
 
     @Test
-    public void testGetTopWords(@TempDir File tempDir)
-            throws Exception
+    public void testGetTopWords(@TempDir File tempDir) throws Exception
     {
         File modelFile = new File(tempDir, "model");
         MalletLdaUtil.trainModel(modelFile);
 
         int nWords = 10;
-        List<Map<String, Double>> topWords = MalletLdaTopicModelUtils
-                .getTopWords(modelFile, nWords, false);
+        List<Map<String, Double>> topWords = MalletLdaTopicModelUtils.getTopWords(modelFile, nWords,
+                false);
 
         assertEquals(N_TOPICS, topWords.size());
         for (Map<String, Double> topic : topWords) {

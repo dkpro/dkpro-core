@@ -27,7 +27,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
- * @see <a href="http://www.pubannotation.org/docs/annotation-format/">PubAnnotation documentation</a>
+ * @see <a href="http://www.pubannotation.org/docs/annotation-format/">PubAnnotation
+ *      documentation</a>
  */
 @JsonPropertyOrder({ "target", "sourcedb", "sourceid", "text", "project", "denotations",
         "relations", "modifications", "namespaces" })
@@ -38,29 +39,29 @@ public class PADocument
 
     @JsonInclude(Include.NON_NULL)
     private String project;
-    
+
     @JsonProperty("sourcedb")
     @JsonInclude(Include.NON_NULL)
     private String sourceDb;
-    
+
     @JsonProperty("sourceid")
     @JsonInclude(Include.NON_NULL)
     private String sourceId;
-    
+
     private String text;
-    
+
     @JsonInclude(Include.NON_EMPTY)
     private List<PADenotation> denotations = new ArrayList<>();
-    
+
     @JsonInclude(Include.NON_EMPTY)
     private List<PARelation> relations = new ArrayList<>();
-    
+
     @JsonInclude(Include.NON_EMPTY)
     private List<PANamespace> namespaces = new ArrayList<>();
-    
+
     @JsonInclude(Include.NON_EMPTY)
     private List<PAModification> modifications = new ArrayList<>();
-    
+
     public PADocument()
     {
         // Default constructor
@@ -160,11 +161,9 @@ public class PADocument
     {
         modifications = aModifications;
     }
-    
+
     public Optional<PANamespace> getNamespace(String aPrefix)
     {
-        return namespaces.stream()
-                .filter(it -> it.getPrefix().equals(aPrefix))
-                .findFirst();
+        return namespaces.stream().filter(it -> it.getPrefix().equals(aPrefix)).findFirst();
     }
 }

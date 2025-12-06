@@ -69,10 +69,8 @@ import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
  */
 @ResourceMetaData(name = "GATE XML Writer (generic)")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_GATE_XML })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class GateXmlWriter2
     extends JCasFileWriter_ImplBase
 {
@@ -80,8 +78,7 @@ public class GateXmlWriter2
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
@@ -89,23 +86,20 @@ public class GateXmlWriter2
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
-    
+
     private DocumentExporter exporter;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
         exporter = new GateXMLExporter();
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         DocumentImpl document = new DocumentImpl();
         document.setContent(new DocumentContentImpl(aJCas.getDocumentText()));
@@ -129,7 +123,7 @@ public class GateXmlWriter2
             if (targetEncoding != null) {
                 document.setEncoding(targetEncoding);
             }
-            
+
             exporter.export(document, docOS);
         }
         catch (Exception e) {
@@ -143,7 +137,7 @@ public class GateXmlWriter2
         if (aFS.getCAS().getSofa() == aFS) {
             return null;
         }
-        
+
         int fsAddr = aFS.getCAS().getLowLevelCAS().ll_getFSRef(aFS);
         if (aProcessed.containsKey(fsAddr)) {
             return aAs.get(aProcessed.get(fsAddr));
@@ -152,12 +146,10 @@ public class GateXmlWriter2
         FeatureMap fm = new SimpleFeatureMapImpl();
         for (Feature aFeature : aFS.getType().getFeatures()) {
             System.out.printf("Processing %s%n", aFeature.getName());
-            
-            if (
-                    CAS.FEATURE_FULL_NAME_SOFA.equals(aFeature.getName()) ||
-                    CAS.FEATURE_FULL_NAME_BEGIN.equals(aFeature.getName()) ||
-                    CAS.FEATURE_FULL_NAME_END.equals(aFeature.getName())
-            ) {
+
+            if (CAS.FEATURE_FULL_NAME_SOFA.equals(aFeature.getName())
+                    || CAS.FEATURE_FULL_NAME_BEGIN.equals(aFeature.getName())
+                    || CAS.FEATURE_FULL_NAME_END.equals(aFeature.getName())) {
                 continue;
             }
 
@@ -304,7 +296,7 @@ public class GateXmlWriter2
                     throw new UnsupportedOperationException("Cannot convert FS lists yet");
                 }
                 }
-                
+
                 fm.put(aFeature.getShortName(), target);
             }
             else if (aFS.getCAS().getTypeSystem().subsumes(CasUtil.getType(aFS.getCAS(), TOP.class),
@@ -313,19 +305,19 @@ public class GateXmlWriter2
                         process(aProcessed, aAs, aFS.getFeatureValue(aFeature)));
             }
             else {
-                throw new IllegalArgumentException("Unable to convert value of feature ["
-                        + aFeature.getName() + "] with type [" + aFeature.getRange().getName()
-                        + "]]");
+                throw new IllegalArgumentException(
+                        "Unable to convert value of feature [" + aFeature.getName()
+                                + "] with type [" + aFeature.getRange().getName() + "]]");
             }
         }
-        
+
         Long begin = null;
         Long end = null;
         if (aFS instanceof AnnotationFS) {
             begin = Long.valueOf(((AnnotationFS) aFS).getBegin());
             end = Long.valueOf(((AnnotationFS) aFS).getEnd());
         }
-        
+
         Integer aid = aAs.add(begin, end, aFS.getType().getName(), fm);
         aProcessed.put((int) fsAddr, (int) aid);
         return aAs.get(aid);

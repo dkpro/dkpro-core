@@ -39,114 +39,92 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class ConllUReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ConllUReader.class),
-                createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false),
+        testRoundTrip(createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,
+                        false),
                 "conll/u/conllu-en-orig.conllu");
     }
 
     @Disabled("This unfortunately doesn't work yet.")
     @Test
-    public void roundTripV2EmptyNodes()
-        throws Exception
+    public void roundTripV2EmptyNodes() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ConllUReader.class),
+        testRoundTrip(createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class),
                 "conll/u_v2/conllu-empty_nodes.conllu");
     }
 
     @Test
-    public void roundTripV2MorphologicalAnnotation()
-        throws Exception
+    public void roundTripV2MorphologicalAnnotation() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ConllUReader.class),
+        testRoundTrip(createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class),
                 "conll/u_v2/conllu-morphological_annotation.conllu");
     }
 
     @Disabled("This unfortunately doesn't work yet.")
     @Test
-    public void roundTripV2ParagraphAndDocumentBoundaries()
-        throws Exception
+    public void roundTripV2ParagraphAndDocumentBoundaries() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ConllUReader.class),
-                createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
+        testRoundTrip(createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,
+                        true),
                 "conll/u_v2/conllu-paragraph_and_document_boundaries.conllu");
     }
 
     @Test
-    public void roundTripV2SentenceBoundariesAndComments()
-        throws Exception
+    public void roundTripV2SentenceBoundariesAndComments() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ConllUReader.class),
-                createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
+        testRoundTrip(createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,
+                        true),
                 "conll/u_v2/conllu-sentence_bounaries_and_comments.conllu");
     }
 
     @Test
-    public void roundTripV2SyntacticAnnotation(@TempDir File tempDir)
-        throws Exception
+    public void roundTripV2SyntacticAnnotation(@TempDir File tempDir) throws Exception
     {
         ReaderAssert.assertThat(ConllUReader.class)
-            .readingFrom("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu")
-            .asJCasList()
-            .extracting(
-                jcas -> select(jcas, Sentence.class).size(),
-                jcas -> select(jcas, Token.class).size())
-            .containsExactly(
-                tuple(1, 6));
-        
+                .readingFrom("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu")
+                .asJCasList().extracting(jcas -> select(jcas, Sentence.class).size(),
+                        jcas -> select(jcas, Token.class).size())
+                .containsExactly(tuple(1, 6));
+
         ReaderAssert.assertThat(ConllUReader.class)
-            .readingFrom("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu")
-            .usingWriter(ConllUWriter.class)
-            .writingTo(tempDir)
-            .outputAsString()
+                .readingFrom("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu")
+                .usingWriter(ConllUWriter.class).writingTo(tempDir).outputAsString()
                 .isEqualToNormalizingNewlines(contentOf(
-                        new File("src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu"),
+                        new File(
+                                "src/test/resources/conll/u_v2/conllu-syntactic_annotation.conllu"),
                         UTF_8));
     }
 
     @Disabled("This unfortunately doesn't work yet.")
     @Test
-    public void roundTripV2UntokenizedText()
-        throws Exception
+    public void roundTripV2UntokenizedText() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ConllUReader.class),
-                createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
+        testRoundTrip(createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,
+                        true),
                 "conll/u_v2/conllu-untokenized_text.conllu");
     }
 
     @Test
-    public void roundTripV2WordsAndTokens()
-        throws Exception
+    public void roundTripV2WordsAndTokens() throws Exception
     {
-        testRoundTrip(
-                createReaderDescription(ConllUReader.class),
+        testRoundTrip(createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class),
                 "conll/u_v2/conllu-words_and_tokens.conllu");
     }
 
     @Test
-    public void withComments()
-        throws Exception
+    public void withComments() throws Exception
     {
-        testOneWay(
-                createReaderDescription(ConllUReader.class),
-                createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false),
-                "conll/u/conllu-en-ref.conllu",
-                "conll/u/conllu-en-orig2.conllu");
+        testOneWay(createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,
+                        false),
+                "conll/u/conllu-en-ref.conllu", "conll/u/conllu-en-orig2.conllu");
     }
 }

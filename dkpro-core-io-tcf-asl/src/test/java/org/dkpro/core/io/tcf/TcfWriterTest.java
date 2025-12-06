@@ -43,13 +43,12 @@ public class TcfWriterTest
      *      preamble written twice if original file exists and is not TCF</a>
      */
     @Test
-    public void testOriginalNotTcf(@TempDir File tempDir)
-        throws Exception
+    public void testOriginalNotTcf(@TempDir File tempDir) throws Exception
     {
         File targetFolder = tempDir;
-        
+
         JCas jcas = JCasFactory.createJCas();
-        
+
         // Generate a fake metadata that points to a non-TCF file
         DocumentMetaData meta = DocumentMetaData.create(jcas);
         meta.setDocumentBaseUri(new File("src/test/resources").toURI().toURL().toString());
@@ -64,10 +63,9 @@ public class TcfWriterTest
 
         // Write as TCF
         AnalysisEngineDescription writer = createEngineDescription(TcfWriter.class,
-                TcfWriter.PARAM_TARGET_LOCATION, targetFolder,
-                TcfWriter.PARAM_OVERWRITE, true);
+                TcfWriter.PARAM_TARGET_LOCATION, targetFolder, TcfWriter.PARAM_OVERWRITE, true);
         SimplePipeline.runPipeline(jcas, writer);
-        
+
         // Read again as TCF
         CollectionReaderDescription reader = createReaderDescription(TcfReader.class,
                 TcfReader.PARAM_SOURCE_LOCATION, targetFolder.getPath() + "/*.tcf");

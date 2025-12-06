@@ -62,13 +62,12 @@ public class SharedDfModel
             Object... params)
         throws InvalidXMLException, MalformedURLException
     {
-        bindResourceUsingUrl(aaed, DfModel.class.getName(), SharedDfModel.class, new File(
-                pathToResource).toURI().toURL().toString(), params);
+        bindResourceUsingUrl(aaed, DfModel.class.getName(), SharedDfModel.class,
+                new File(pathToResource).toURI().toURL().toString(), params);
     }
 
     @Override
-    public void load(DataResource aData)
-        throws ResourceInitializationException
+    public void load(DataResource aData) throws ResourceInitializationException
     {
         try {
             dfModel = (DfModel) new ObjectInputStream(aData.getInputStream()).readObject();

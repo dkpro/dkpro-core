@@ -44,8 +44,7 @@ public class SharedFinder
     private Finder finder;
 
     @Override
-    public boolean initialize(ResourceSpecifier aSpecifier,
-            Map aAdditionalParams)
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
         throws ResourceInitializationException
     {
 

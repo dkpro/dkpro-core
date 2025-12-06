@@ -39,19 +39,17 @@ import com.nytlabs.corpus.NYTCorpusDocumentParser;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Reader for the News Industry Text Format (NITF). Was developed primarily to work with the 
- * New York Times Annotated Corpus.
+ * Reader for the News Industry Text Format (NITF). Was developed primarily to work with the New
+ * York Times Annotated Corpus.
  * 
  * @see <a href="http://www.nitf.org/">NITF</a>
  * @see <a href="https://catalog.ldc.upenn.edu/LDC2008T19">The New York Times Annotated Corpus</a>
  */
 @ResourceMetaData(name = "NITF Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_NITF_XML})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "org.dkpro.core.io.nift.metadata.ArticleMetaData" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_NITF_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "org.dkpro.core.io.nift.metadata.ArticleMetaData" })
 public class NitfReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -79,13 +77,13 @@ public class NitfReader
 
         Resource xmlFile = nextFile();
         initCas(aJCas, xmlFile);
-        
+
         try (InputStream is = xmlFile.getInputStream()) {
             NYTCorpusDocument nytDocument = parser
                     .parseNYTCorpusDocumentFromFile(xmlFile.getInputStream(), false);
 
             setDocumenText(aJCas, nytDocument.getBody());
-            
+
             ArticleMetaData articleMetaData = createNYTArticleMetaData(aJCas, nytDocument);
             articleMetaData.addToIndexes();
         }
@@ -100,7 +98,7 @@ public class NitfReader
             aJCas.setDocumentText("");
         }
     }
-    
+
     private boolean isBelowOffset()
     {
         return skipped < offset && getResourceIterator().hasNext();

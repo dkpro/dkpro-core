@@ -35,8 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class NoZeroSizeTokenAndSentenceCheckTest
 {
     @Test
-    public void testZeroLengthToken()
-        throws Exception
+    public void testZeroLengthToken() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
@@ -51,12 +50,11 @@ public class NoZeroSizeTokenAndSentenceCheckTest
     }
 
     @Test
-    public void testZeroLengthSentence()
-        throws Exception
+    public void testZeroLengthSentence() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
-        new Sentence(jcas, 3,3).addToIndexes();
+        new Sentence(jcas, 3, 3).addToIndexes();
 
         CasValidator validator = new CasValidator(NoZeroSizeTokensAndSentencesCheck.class);
         List<Message> messages = validator.analyze(jcas);
@@ -67,12 +65,11 @@ public class NoZeroSizeTokenAndSentenceCheckTest
     }
 
     @Test
-    public void testCorrectCas()
-        throws Exception
+    public void testCorrectCas() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
-        new Sentence(jcas, 0,4).addToIndexes();
+        new Sentence(jcas, 0, 4).addToIndexes();
         new Token(jcas, 1, 2).addToIndexes();
 
         CasValidator validator = new CasValidator(NoZeroSizeTokensAndSentencesCheck.class);

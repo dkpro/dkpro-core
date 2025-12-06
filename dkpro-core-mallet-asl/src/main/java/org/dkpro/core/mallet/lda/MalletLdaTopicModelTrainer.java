@@ -45,7 +45,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @ResourceMetaData(name = "Mallet LDA Topic Model Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class MalletLdaTopicModelTrainer
-        extends MalletModelTrainer
+    extends MalletModelTrainer
 {
     /**
      * The number of topics to estimate.
@@ -127,8 +127,7 @@ public class MalletLdaTopicModelTrainer
     private float beta;
 
     @Override
-    public void collectionProcessComplete()
-            throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         try {
             ParallelTopicModel model = new ParallelTopicModel(nTopics, alphaSum, beta);

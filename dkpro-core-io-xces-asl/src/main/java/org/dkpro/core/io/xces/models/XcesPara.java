@@ -27,6 +27,6 @@ public class XcesPara
     @XmlID
     @XmlAttribute
     public String id;
-    
+
     public List<XcesSentence> s;
 }

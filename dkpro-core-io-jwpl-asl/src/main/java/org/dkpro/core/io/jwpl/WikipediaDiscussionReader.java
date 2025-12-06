@@ -25,12 +25,11 @@ import org.dkpro.jwpl.parser.ParsedPage;
 /**
  * Reads all discussion pages.
  */
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig"})
-public class WikipediaDiscussionReader extends WikipediaStandardReaderBase
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig" })
+public class WikipediaDiscussionReader
+    extends WikipediaStandardReaderBase
 {
-    //TODO Use SWEBLE
+    // TODO Use SWEBLE
     @Override
     protected String getPlainDocumentText(Page page)
     {

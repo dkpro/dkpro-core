@@ -39,15 +39,14 @@ public class Web1TSorterTest
     Web1TFileSorter sorter;
 
     @Test
-    public void testSorter()
-        throws IOException
+    public void testSorter() throws IOException
     {
         Web1TFileSorter sorter = new Web1TFileSorter(filesToSort, comparator);
         sorter.sort();
         LinkedList<File> sortedFiles = sorter.getSortedFiles();
-        
+
         assertEquals(2, sortedFiles.size());
-        
+
         String TAB = "\t";
 
         // File #1
@@ -58,8 +57,8 @@ public class Web1TSorterTest
         assertEquals("a" + TAB + "3", lines[0]);
         assertEquals("although" + TAB + "4", lines[1]);
         assertEquals("annoying" + TAB + "5", lines[2]);
-        
-        //File #2
+
+        // File #2
         file = sortedFiles.pop();
         lines = getLines(file);
 
@@ -68,19 +67,18 @@ public class Web1TSorterTest
         assertEquals("oil" + TAB + "30", lines[1]);
         assertEquals("out" + TAB + "2", lines[2]);
         assertEquals("out-of-order" + TAB + "5", lines[3]);
-        
-        //Clean up calls
+
+        // Clean up calls
         sorter.cleanUp();
         sortedFiles = sorter.getSortedFiles();
         assertEquals(0, sortedFiles.size());
 
     }
 
-    private String[] getLines(File file)
-        throws IOException
+    private String[] getLines(File file) throws IOException
     {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),
-                "UTF-8"));
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
         LinkedList<String> lines = new LinkedList<String>();
 
@@ -89,7 +87,7 @@ public class Web1TSorterTest
             lines.add(line);
         }
         reader.close();
-        
+
         return lines.toArray(new String[0]);
     }
 

@@ -45,13 +45,11 @@ public class UDPipeParserTest
     }
 
     @Test
-    public void testNorwegian()
-        throws Exception
+    public void testNorwegian() throws Exception
     {
         JCas jcas = runTest("no", null, "Nichlas Sjøstedt Halvorsen har ikke angret.");
 
-        String[] dependencies = {
-                "[  0,  7]NSUBJ(nsubj,basic) D[0,7](Nichlas) G[36,43](angret.)",
+        String[] dependencies = { "[  0,  7]NSUBJ(nsubj,basic) D[0,7](Nichlas) G[36,43](angret.)",
                 "[  8, 16]Dependency(name,basic) D[8,16](Sjøstedt) G[0,7](Nichlas)",
                 "[ 17, 26]Dependency(name,basic) D[17,26](Halvorsen) G[0,7](Nichlas)",
                 "[ 27, 30]AUX0(aux,basic) D[27,30](har) G[36,43](angret.)",
@@ -64,14 +62,12 @@ public class UDPipeParserTest
         // AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
         JCas jcas = runTest("en", null, "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -90,10 +86,10 @@ public class UDPipeParserTest
                 "[102,110]ADVCL(advcl,basic) D[102,110](possible) G[52,60](contains)",
                 "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
 
-        //String[] unmappedDep = {};
+        // String[] unmappedDep = {};
 
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        //AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+        // AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
@@ -101,12 +97,11 @@ public class UDPipeParserTest
     {
         String variant = aVariant != null ? aVariant : "ud";
         AssumeResource.assumeResource(UDPipeParser.class, "parser", aLanguage, variant);
-        
+
         AggregateBuilder aggregate = new AggregateBuilder();
-        
+
         aggregate.add(createEngineDescription(UDPipePosTagger.class));
-        Object[] params = new Object[] {
-                UDPipeParser.PARAM_VARIANT, variant};
+        Object[] params = new Object[] { UDPipeParser.PARAM_VARIANT, variant };
         params = ArrayUtils.addAll(params, aExtraParams);
         aggregate.add(createEngineDescription(UDPipeParser.class, params));
 

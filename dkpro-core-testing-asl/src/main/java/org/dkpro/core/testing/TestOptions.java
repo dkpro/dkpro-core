@@ -31,25 +31,25 @@ public class TestOptions
     BiConsumer<File, File> resultAssertor;
     boolean keepDocumentMetadata = false;
     AnalysisEngineDescription processor;
-    
+
     public TestOptions skipCheck(Class<? extends Check> aCheck)
     {
         skippedChecks.add(aCheck);
         return this;
     }
-    
+
     public TestOptions resultAssertor(BiConsumer<File, File> aResultComparator)
     {
         resultAssertor = aResultComparator;
         return this;
     }
-    
+
     public TestOptions keepDocumentMetadata()
     {
         keepDocumentMetadata = true;
         return this;
     }
-    
+
     public TestOptions processor(AnalysisEngineDescription aProcessor)
     {
         processor = aProcessor;

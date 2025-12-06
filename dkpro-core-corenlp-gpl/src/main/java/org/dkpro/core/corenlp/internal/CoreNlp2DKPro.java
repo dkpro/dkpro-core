@@ -66,8 +66,7 @@ import edu.stanford.nlp.util.IntPair;
 
 public class CoreNlp2DKPro
 {
-    public static void convertPOSs(JCas aJCas, Annotation document,
-            MappingProvider mappingProvider)
+    public static void convertPOSs(JCas aJCas, Annotation document, MappingProvider mappingProvider)
     {
         for (CoreMap s : document.get(SentencesAnnotation.class)) {
             for (CoreLabel t : s.get(TokensAnnotation.class)) {
@@ -83,7 +82,7 @@ public class CoreNlp2DKPro
             }
         }
     }
-    
+
     public static void convertNamedEntities(JCas aJCas, Annotation document,
             MappingProvider mappingProvider)
     {
@@ -91,12 +90,12 @@ public class CoreNlp2DKPro
             for (CoreLabel t : s.get(TokensAnnotation.class)) {
                 Token token = t.get(TokenKey.class);
                 String tag = t.get(NamedEntityTagAnnotation.class);
-                
+
                 // "O" is the hard-coded tag in CoreNLP to indicate no NER on this token
                 if ("O".equals(tag)) {
                     continue;
                 }
-                
+
                 Type tagType = mappingProvider.getTagType(tag);
                 NamedEntity anno = (NamedEntity) aJCas.getCas().createAnnotation(tagType,
                         token.getBegin(), token.getEnd());
@@ -105,7 +104,7 @@ public class CoreNlp2DKPro
             }
         }
     }
-    
+
     public static void convertLemmas(JCas aJCas, Annotation document)
     {
         for (CoreMap s : document.get(SentencesAnnotation.class)) {
@@ -119,21 +118,21 @@ public class CoreNlp2DKPro
             }
         }
     }
-    
+
     public static void convertDependencies(JCas aJCas, Annotation document,
             MappingProvider mappingProvider)
     {
         for (CoreMap s : document.get(SentencesAnnotation.class)) {
             SemanticGraph graph = s.get(CollapsedDependenciesAnnotation.class);
-            //SemanticGraph graph = s.get(EnhancedDependenciesAnnotation.class);
-            
+            // SemanticGraph graph = s.get(EnhancedDependenciesAnnotation.class);
+
             // If there are no dependencies for this sentence, skip it. Might well mean we
             // skip all sentences because normally either there are dependencies for all or for
             // none.
             if (graph == null) {
                 continue;
             }
-            
+
             for (IndexedWord root : graph.getRoots()) {
                 Dependency dep = new ROOT(aJCas);
                 dep.setDependencyType("root");
@@ -144,23 +143,23 @@ public class CoreNlp2DKPro
                 dep.setFlavor(DependencyFlavor.BASIC);
                 dep.addToIndexes();
             }
-            
+
             for (SemanticGraphEdge edge : graph.edgeListSorted()) {
                 Token dependent = edge.getDependent().get(TokenKey.class);
                 Token governor = edge.getGovernor().get(TokenKey.class);
-                
+
                 // For the type mapping, we use getShortName() instead, because the <specific>
                 // actually doesn't change the relation type
                 String labelUsedForMapping = edge.getRelation().getShortName();
-                
+
                 // The nndepparser may produce labels in which the shortName contains a colon.
-                // These represent language-specific labels of the UD, cf: 
+                // These represent language-specific labels of the UD, cf:
                 // http://universaldependencies.github.io/docs/ext-dep-index.html
                 labelUsedForMapping = StringUtils.substringBefore(labelUsedForMapping, ":");
-                
+
                 // Need to use toString() here to get "<shortname>_<specific>"
                 String actualLabel = edge.getRelation().toString();
-                
+
                 Type depRel = mappingProvider.getTagType(labelUsedForMapping);
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
                 dep.setDependencyType(actualLabel != null ? actualLabel.intern() : null);
@@ -184,7 +183,7 @@ public class CoreNlp2DKPro
             convertConstituentTreeNode(aJCas, aTreebankLanguagePack, tree, null, aMappingProvider,
                     tokens);
         }
-        
+
     }
 
     private static org.apache.uima.jcas.tcas.Annotation convertConstituentTreeNode(JCas aJCas,
@@ -194,7 +193,7 @@ public class CoreNlp2DKPro
     {
         // Get node label
         String nodeLabelValue = aNode.value();
-        
+
         // Extract syntactic function from node label
         String syntacticFunction = null;
         AbstractTreebankLanguagePack tlp = (AbstractTreebankLanguagePack) aTreebankLanguagePack;
@@ -211,7 +210,7 @@ public class CoreNlp2DKPro
             IntPair span = aNode.getSpan();
             int begin = tokens.get(span.getSource()).get(CharacterOffsetBeginAnnotation.class);
             int end = tokens.get(span.getTarget()).get(CharacterOffsetEndAnnotation.class);
-            
+
             Constituent constituent = (Constituent) aJCas.getCas().createAnnotation(constType,
                     begin, end);
             constituent.setConstituentType(nodeLabelValue != null ? nodeLabelValue.intern() : null);
@@ -229,7 +228,7 @@ public class CoreNlp2DKPro
                     childAnnotations.add(childAnnotation);
                 }
             }
-            
+
             // Now that we know how many children we have, link annotation of
             // current node with its children
             constituent.setChildren(FSCollectionFactory.createFSArray(aJCas, childAnnotations));
@@ -253,7 +252,7 @@ public class CoreNlp2DKPro
             throw new IllegalArgumentException("Node must be either phrasal nor pre-terminal");
         }
     }
-    
+
     public static void convertPennTree(JCas aJCas, Annotation aDocument)
     {
         for (CoreMap s : aDocument.get(SentencesAnnotation.class)) {

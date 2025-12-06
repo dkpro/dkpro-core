@@ -44,8 +44,7 @@ public class StringSequenceGeneratorTest
      * @return a {@link JCas} with two tokens.
      * @throws UIMAException
      */
-    protected static JCas jCasWithTokens()
-            throws UIMAException
+    protected static JCas jCasWithTokens() throws UIMAException
     {
         JCas jCas = JCasFactory.createJCas();
         jCas.setDocumentText("Token1 Token2");
@@ -67,8 +66,7 @@ public class StringSequenceGeneratorTest
      * @return a {@link JCas}
      * @throws UIMAException
      */
-    protected static JCas jCasWithLemmas()
-            throws UIMAException
+    protected static JCas jCasWithLemmas() throws UIMAException
     {
         JCas jCas = JCasFactory.createJCas();
         jCas.setDocumentText("token1 token2");
@@ -93,8 +91,7 @@ public class StringSequenceGeneratorTest
         return jCas;
     }
 
-    protected static JCas jcasWithNamedEntity()
-            throws UIMAException
+    protected static JCas jcasWithNamedEntity() throws UIMAException
     {
         JCas jCas = JCasFactory.createJCas();
         jCas.setDocumentText("token1 token2");
@@ -120,8 +117,7 @@ public class StringSequenceGeneratorTest
      * @throws UIMAException
      * @see #jCasWithTokens()
      */
-    protected static JCas jCasWithSentence()
-            throws UIMAException
+    protected static JCas jCasWithSentence() throws UIMAException
     {
         JCas jCas = jCasWithTokens();
 
@@ -132,7 +128,7 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePath()
-            throws FeaturePathException, UIMAException, IOException
+        throws FeaturePathException, UIMAException, IOException
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -142,8 +138,7 @@ public class StringSequenceGeneratorTest
         JCas jCas = jCasWithTokens();
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .buildStringSequenceGenerator();
+                .featurePath(featurePath).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -153,7 +148,7 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePathLowercase()
-            throws FeaturePathException, UIMAException, IOException
+        throws FeaturePathException, UIMAException, IOException
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -163,9 +158,7 @@ public class StringSequenceGeneratorTest
         JCas jCas = jCasWithTokens();
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .lowercase(true)
-                .buildStringSequenceGenerator();
+                .featurePath(featurePath).lowercase(true).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -175,7 +168,7 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePathLemmas()
-            throws UIMAException, FeaturePathException, IOException
+        throws UIMAException, FeaturePathException, IOException
     {
         String featurePath = Token.class.getName() + "/lemma/value";
         int expectedSize = 2;
@@ -185,8 +178,7 @@ public class StringSequenceGeneratorTest
         JCas jCas = jCasWithLemmas();
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .buildStringSequenceGenerator();
+                .featurePath(featurePath).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -196,15 +188,14 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testFeaturePathNamedEntities()
-            throws UIMAException, IOException, FeaturePathException
+        throws UIMAException, IOException, FeaturePathException
     {
         String featurePath = NamedEntity.class.getCanonicalName();
         int expectedSize = 1;
         String expectedNamedEntity = "token1";
         JCas jCas = jcasWithNamedEntity();
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .buildStringSequenceGenerator();
+                .featurePath(featurePath).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -214,7 +205,7 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePathCovering()
-            throws FeaturePathException, UIMAException, IOException
+        throws FeaturePathException, UIMAException, IOException
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -225,9 +216,7 @@ public class StringSequenceGeneratorTest
         JCas jCas = jCasWithSentence();
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .featurePath(featurePath)
-                .lowercase(false)
-                .coveringType(covering)
+                .featurePath(featurePath).lowercase(false).coveringType(covering)
                 .buildStringSequenceGenerator();
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
@@ -239,8 +228,7 @@ public class StringSequenceGeneratorTest
     }
 
     @Test
-    public void testFilterRegex()
-            throws UIMAException, IOException, FeaturePathException
+    public void testFilterRegex() throws UIMAException, IOException, FeaturePathException
     {
         JCas jCas = jCasWithTokens();
         String filterRegex = ".*1";
@@ -249,8 +237,7 @@ public class StringSequenceGeneratorTest
         String expectedToken = "Token2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .filterRegex(filterRegex)
-                .buildStringSequenceGenerator();
+                .filterRegex(filterRegex).buildStringSequenceGenerator();
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
@@ -260,8 +247,7 @@ public class StringSequenceGeneratorTest
     }
 
     @Test
-    public void testFilterRegexReplace()
-            throws UIMAException, IOException, FeaturePathException
+    public void testFilterRegexReplace() throws UIMAException, IOException, FeaturePathException
     {
         JCas jCas = jCasWithTokens();
         String filterRegex = ".*1";
@@ -271,8 +257,7 @@ public class StringSequenceGeneratorTest
         String expectedToken2 = "Token2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .filterRegex(filterRegex)
-                .filterRegexReplacement(replacement)
+                .filterRegex(filterRegex).filterRegexReplacement(replacement)
                 .buildStringSequenceGenerator();
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
@@ -284,8 +269,7 @@ public class StringSequenceGeneratorTest
     }
 
     @Test
-    public void testFilterRegexMultiple()
-            throws UIMAException, IOException, FeaturePathException
+    public void testFilterRegexMultiple() throws UIMAException, IOException, FeaturePathException
     {
         JCas jCas = jCasWithTokens();
         String filterRegex1 = ".*1";
@@ -295,9 +279,7 @@ public class StringSequenceGeneratorTest
         String expectedToken = "Token2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .filterRegex(filterRegex1)
-                .filterRegex(filterRegex2)
-                .buildStringSequenceGenerator();
+                .filterRegex(filterRegex1).filterRegex(filterRegex2).buildStringSequenceGenerator();
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         String[] sequence = sequences.get(0);
@@ -306,8 +288,7 @@ public class StringSequenceGeneratorTest
     }
 
     @Test
-    public void testFilterStopwordsURL()
-            throws UIMAException, FeaturePathException, IOException
+    public void testFilterStopwordsURL() throws UIMAException, FeaturePathException, IOException
     {
         JCas jcas = jCasWithTokens();
         URL stopwordsFile = this.getClass().getResource("/stopwords.txt");
@@ -315,8 +296,7 @@ public class StringSequenceGeneratorTest
         String expectedFirst = "Token2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .stopwordsURL(stopwordsFile)
-                .buildStringSequenceGenerator();
+                .stopwordsURL(stopwordsFile).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
@@ -326,7 +306,7 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testFilterStopwordsFileString()
-            throws UIMAException, FeaturePathException, IOException
+        throws UIMAException, FeaturePathException, IOException
     {
         JCas jcas = jCasWithTokens();
         String stopwordsFile = "src/test/resources/stopwords.txt";
@@ -334,8 +314,7 @@ public class StringSequenceGeneratorTest
         String expectedFirst = "Token2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .stopwordsFile(stopwordsFile)
-                .buildStringSequenceGenerator();
+                .stopwordsFile(stopwordsFile).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
@@ -344,8 +323,7 @@ public class StringSequenceGeneratorTest
     }
 
     @Test
-    public void testFilterStopwordsFile()
-            throws UIMAException, FeaturePathException, IOException
+    public void testFilterStopwordsFile() throws UIMAException, FeaturePathException, IOException
     {
         JCas jcas = jCasWithTokens();
         File stopwordsFile = new File("src/test/resources/stopwords.txt");
@@ -353,8 +331,7 @@ public class StringSequenceGeneratorTest
         String expectedFirst = "Token2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .stopwordsFile(stopwordsFile)
-                .buildStringSequenceGenerator();
+                .stopwordsFile(stopwordsFile).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
@@ -362,10 +339,9 @@ public class StringSequenceGeneratorTest
         assertEquals(expectedFirst, sequence[0]);
     }
 
-    /* test character sequences*/
+    /* test character sequences */
     @Test
-    public void testCharacterSequence()
-            throws UIMAException, FeaturePathException, IOException
+    public void testCharacterSequence() throws UIMAException, FeaturePathException, IOException
     {
         JCas jcas = jCasWithTokens();
         int expectedSize = 13;
@@ -373,8 +349,7 @@ public class StringSequenceGeneratorTest
         String expectedLast = "2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .characters(true)
-                .buildStringSequenceGenerator();
+                .characters(true).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
@@ -385,16 +360,14 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testCharacterSequenceLowercase()
-            throws UIMAException, FeaturePathException, IOException
+        throws UIMAException, FeaturePathException, IOException
     {
         JCas jcas = jCasWithTokens();
         int expectedSize = 13;
         String expectedFirst = "t";
         String expectedLast = "2";
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .lowercase(true)
-                .characters(true)
-                .buildStringSequenceGenerator();
+                .lowercase(true).characters(true).buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
@@ -405,7 +378,7 @@ public class StringSequenceGeneratorTest
 
     @Test
     public void testCharacterSequenceWithCovering()
-            throws UIMAException, FeaturePathException, IOException
+        throws UIMAException, FeaturePathException, IOException
     {
         String covering = Sentence.class.getTypeName();
         JCas jCas = jCasWithSentence();
@@ -415,9 +388,7 @@ public class StringSequenceGeneratorTest
         String expectedLast = "2";
 
         StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                .coveringType(covering)
-                .characters(true)
-                .buildStringSequenceGenerator();
+                .coveringType(covering).characters(true).buildStringSequenceGenerator();
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(expectedSequences, sequences.size());

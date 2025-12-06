@@ -28,10 +28,10 @@ public class XcesToken
 
     @XmlAttribute(name = "word")
     public String word;
-    
+
     @XmlAttribute(name = "tag")
     public String tag;
-    
+
     @XmlAttribute(name = "lemma")
     public String lemma;
 }

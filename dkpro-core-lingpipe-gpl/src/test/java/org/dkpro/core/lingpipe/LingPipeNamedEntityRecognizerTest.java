@@ -32,32 +32,27 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 public class LingPipeNamedEntityRecognizerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
         JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
 
-        String[] ne = {
-                "[  0,  3]Organization(ORGANIZATION) (IBM)",
-                "[ 10, 14]Person(PERSON) (John)",
-                "[ 27, 34]Location(LOCATION) (Germany)" };
+        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (IBM)",
+                "[ 10, 14]Person(PERSON) (John)", "[ 27, 34]Location(LOCATION) (Germany)" };
 
         String[] tags = { "LOCATION", "ORGANIZATION", "PERSON" };
 
         AssertAnnotations.assertTagset(NamedEntity.class, null, tags, jcas);
-//        AssertAnnotations.assertTagsetMapping(NamedEntity.class, null, unmapped, jcas);
-        
+        // AssertAnnotations.assertTagsetMapping(NamedEntity.class, null, unmapped, jcas);
+
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
 
     @Test
-    public void testEnglishGenia()
-        throws Exception
+    public void testEnglishGenia() throws Exception
     {
         JCas jcas = runTest("en", "bio-genia", "IBM where John works is in Germany .");
 
-        String[] ne = {
-                "[  0,  3]NamedEntity(other_name) (IBM)" };
+        String[] ne = { "[  0,  3]NamedEntity(other_name) (IBM)" };
 
         String[] tags = { "DNA_N", "DNA_domain_or_region", "DNA_family_or_group", "DNA_molecule",
                 "DNA_substructure", "RNA_N", "RNA_domain_or_region", "RNA_family_or_group",
@@ -69,34 +64,31 @@ public class LingPipeNamedEntityRecognizerTest
                 "protein_molecule", "protein_substructure", "protein_subunit", "tissue", "virus" };
 
         AssertAnnotations.assertTagset(NamedEntity.class, null, tags, jcas);
-        
+
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
 
     @Test
-    public void testEnglishGenetag()
-        throws Exception
+    public void testEnglishGenetag() throws Exception
     {
         JCas jcas = runTest("en", "bio-genetag", "IBM where John works is in Germany .");
 
-        String[] ne = {
-                "[  0,  3]NamedEntity(GENE) (IBM)" };
+        String[] ne = { "[  0,  3]NamedEntity(GENE) (IBM)" };
 
         String[] tags = { "GENE" };
 
         AssertAnnotations.assertTagset(NamedEntity.class, null, tags, jcas);
-        
+
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
 
-//    @Test(expected = AnalysisEngineProcessException.class)
-//    public void testMissingModel() throws Exception
-//    {
-//        runTest("xx", null, "Xec xena Xeo .");
-//    }
+    // @Test(expected = AnalysisEngineProcessException.class)
+    // public void testMissingModel() throws Exception
+    // {
+    // runTest("xx", null, "Xec xena Xeo .");
+    // }
 
-    private JCas runTest(String language, String variant, String testDocument)
-        throws Exception
+    private JCas runTest(String language, String variant, String testDocument) throws Exception
     {
         AnalysisEngine engine = createEngine(LingPipeNamedEntityRecognizer.class,
                 LingPipeNamedEntityRecognizer.PARAM_VARIANT, variant,

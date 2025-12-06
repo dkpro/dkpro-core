@@ -25,10 +25,9 @@ import org.junit.jupiter.api.Test;
 public class JsonWriterTest
 {
     @Test
-    public void oneWay()
-        throws Exception
+    public void oneWay() throws Exception
     {
-        testOneWay(Conll2000Reader.class, JsonWriter.class,
-                "conll/2000/chunk2000_ref.json", "conll/2000/chunk2000_test.conll");
+        testOneWay(Conll2000Reader.class, JsonWriter.class, "conll/2000/chunk2000_ref.json",
+                "conll/2000/chunk2000_test.conll");
     }
 }

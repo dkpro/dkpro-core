@@ -31,11 +31,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 public class IllinoisLemmatizerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
-            "contains as many constituents and dependencies as possible .");
+        JCas jcas = runTest("en", "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .");
 
         String[] lemmas = { "we", "need", "a", "very", "complicate", "example", "sentence", ",",
                 "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
@@ -43,14 +42,12 @@ public class IllinoisLemmatizerTest
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
-    
-    private JCas runTest(String aLanguage, String aText)
-        throws Exception
+
+    private JCas runTest(String aLanguage, String aText) throws Exception
     {
         AnalysisEngineDescription engine;
-        
-        engine = createEngineDescription(
-                createEngineDescription(IllinoisPosTagger.class),
+
+        engine = createEngineDescription(createEngineDescription(IllinoisPosTagger.class),
                 createEngineDescription(IllinoisLemmatizer.class));
 
         return TestRunner.runTest(engine, aLanguage, aText);

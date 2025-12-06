@@ -40,8 +40,7 @@ public class RegexTokenFilterTest
     private static final String FILTER_REGEX = "^[A-ZÖÜÄ].{2,}";
 
     @Test
-    public void testNoMatch()
-        throws Exception
+    public void testNoMatch() throws Exception
     {
         String inputText = "Ich lebe in Braunschweig.";
         String filteredText = "Ich Braunschweig";
@@ -52,8 +51,8 @@ public class RegexTokenFilterTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription filter = createEngineDescription(RegexTokenFilter.class,
-                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX,
-                RegexTokenFilter.PARAM_MUST_MATCH, mustMatch);
+                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX, RegexTokenFilter.PARAM_MUST_MATCH,
+                mustMatch);
 
         AnalysisEngineDescription holder = createEngineDescription(JCasHolder.class);
 
@@ -67,8 +66,7 @@ public class RegexTokenFilterTest
     }
 
     @Test
-    public void testMatch()
-        throws Exception
+    public void testMatch() throws Exception
     {
         String inputText = "Ich lebe in Braunschweig.";
         String filteredText = "lebe in .";
@@ -79,8 +77,8 @@ public class RegexTokenFilterTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription filter = createEngineDescription(RegexTokenFilter.class,
-                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX,
-                RegexTokenFilter.PARAM_MUST_MATCH, mustMatch);
+                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX, RegexTokenFilter.PARAM_MUST_MATCH,
+                mustMatch);
 
         AnalysisEngineDescription holder = createEngineDescription(JCasHolder.class);
 

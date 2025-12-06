@@ -74,7 +74,7 @@ public class CasDumpWriter
     public static final String PATTERN_COLLECTION_ID = "^.*collectionId:.*$";
     public static final String PATTERN_DOCUMENT_URI = "^.*documentUri:.*$";
     public static final String PATTERN_DOCUMENT_BASE_URI = "^.*documentBaseUri:.*$";
-    
+
     /**
      * Output file. If multiple CASes as processed, their contents are concatenated into this file.
      * Mind that a test case using this consumer with multiple CASes requires a reader which
@@ -127,7 +127,7 @@ public class CasDumpWriter
     public static final String PARAM_SORT = "sort";
     @ConfigurationParameter(name = PARAM_SORT, mandatory = true, defaultValue = "true")
     private boolean sort;
-    
+
     private InExPattern[] cookedTypePatterns;
 
     private PrintWriter out;
@@ -135,8 +135,7 @@ public class CasDumpWriter
     private int iCas;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -166,8 +165,7 @@ public class CasDumpWriter
     }
 
     @Override
-    public void process(CAS aCAS)
-        throws AnalysisEngineProcessException
+    public void process(CAS aCAS) throws AnalysisEngineProcessException
     {
         out.println("======== CAS " + iCas + " begin ==================================");
         out.println();
@@ -243,14 +241,14 @@ public class CasDumpWriter
                     if (name != 0) {
                         return name;
                     }
-                    
+
                     // Last resort: try the address.
                     if (aO1 instanceof FeatureStructureImpl
                             && aO2 instanceof FeatureStructureImpl) {
                         return ((FeatureStructureImpl) aO1).getAddress()
                                 - ((FeatureStructureImpl) aO2).getAddress();
                     }
-                    
+
                     // Fall back to name.
                     return name;
                 }
@@ -301,13 +299,12 @@ public class CasDumpWriter
         processDocumentText(aCAS);
         processFeatureStructures(aCAS);
 
-        out.println("-------- View " + aCAS.getViewName()
-                + " end ----------------------------------");
+        out.println(
+                "-------- View " + aCAS.getViewName() + " end ----------------------------------");
         out.println();
     }
 
-    private void processSofaData(CAS aCAS)
-        throws AnalysisEngineProcessException
+    private void processSofaData(CAS aCAS) throws AnalysisEngineProcessException
     {
         out.println("Sofa data:");
 

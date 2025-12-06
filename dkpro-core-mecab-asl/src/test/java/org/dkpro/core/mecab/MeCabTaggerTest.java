@@ -45,7 +45,8 @@ import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
-public class MeCabTaggerTest {
+public class MeCabTaggerTest
+{
     @BeforeEach
     public void prepare()
     {
@@ -56,14 +57,13 @@ public class MeCabTaggerTest {
                 asList("linux-x86_64", "linux-x86_32", "osx-x86_64").contains(pd.getPlatformId()),
                 "Unsupported platform");
     }
-    
+
     @Test
-    public void testMeCabTaggerEngine() throws UIMAException, IOException {
-        CollectionReaderDescription reader = createReaderDescription(
-                TextReader.class, 
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja", 
-                TextReader.PARAM_PATTERNS, new String[] { "[+]*.txt" });
+    public void testMeCabTaggerEngine() throws UIMAException, IOException
+    {
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources", TextReader.PARAM_LANGUAGE,
+                "ja", TextReader.PARAM_PATTERNS, new String[] { "[+]*.txt" });
 
         AnalysisEngineDescription JTagger = createEngineDescription(MeCabTagger.class);
 
@@ -71,12 +71,11 @@ public class MeCabTaggerTest {
     }
 
     @Test
-    public void testMeCabTaggerFileInput() throws UIMAException, IOException {
-        CollectionReaderDescription reader = createReaderDescription(
-                TextReader.class, 
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja", 
-                TextReader.PARAM_PATTERNS, new String[] { "[+]test*.txt" });
+    public void testMeCabTaggerFileInput() throws UIMAException, IOException
+    {
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources", TextReader.PARAM_LANGUAGE,
+                "ja", TextReader.PARAM_PATTERNS, new String[] { "[+]test*.txt" });
 
         AnalysisEngine jTagger = createEngine(MeCabTagger.class);
         try {
@@ -101,7 +100,8 @@ public class MeCabTaggerTest {
                 sentences = JCasUtil.select(doc3, Sentence.class);
                 assertEquals(7, sentences.size());
             }
-        } finally {
+        }
+        finally {
             jTagger.destroy();
         }
     }

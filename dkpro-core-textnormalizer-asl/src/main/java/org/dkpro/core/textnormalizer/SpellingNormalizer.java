@@ -36,15 +36,12 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Spelling Normalizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" })
 public class SpellingNormalizer
     extends JCasTransformerChangeBased_ImplBase
 {
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         for (SpellingAnomaly anomaly : select(aInput, SpellingAnomaly.class)) {
             replace(anomaly.getBegin(), anomaly.getEnd(), getBestSuggestion(anomaly));

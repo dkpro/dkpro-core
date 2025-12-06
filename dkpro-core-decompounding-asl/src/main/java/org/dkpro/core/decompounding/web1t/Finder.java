@@ -43,7 +43,8 @@ import com.googlecode.jweb1t.JWeb1TSearcher;
 /**
  * This class searches on the Lucene Index for n-grams.
  */
-public class Finder implements Closeable
+public class Finder
+    implements Closeable
 {
     private final JWeb1TSearcher web1tSearcher;
     private final ParallelMultiSearcher searcher;
@@ -62,8 +63,7 @@ public class Finder implements Closeable
      * @throws IOException
      *             if the data could not be read.
      */
-    public Finder(File aIndexFolder, File nGramFolder)
-        throws IOException
+    public Finder(File aIndexFolder, File nGramFolder) throws IOException
     {
         List<IndexSearcher> searcherList = new ArrayList<IndexSearcher>();
         if (checkForIndex(aIndexFolder)) {
@@ -188,7 +188,7 @@ public class Finder implements Closeable
             // long now = System.currentTimeMillis();
             // System.out.printf(" (%d in %dms)%n", ngrams.size(), now - start);
             // for (NGram ng : ngrams) {
-            // System.out.printf("   %s%n", ng);
+            // System.out.printf(" %s%n", ng);
             // }
 
             return ngrams;
@@ -210,7 +210,7 @@ public class Finder implements Closeable
 
         return false;
     }
-    
+
     @Override
     public void close() throws IOException
     {
@@ -227,23 +227,20 @@ public class Finder implements Closeable
         private final List<NGramModel> ngrams = new ArrayList<NGramModel>();
 
         @Override
-        public void setScorer(Scorer aScorer)
-            throws IOException
+        public void setScorer(Scorer aScorer) throws IOException
         {
             // Not needed
         }
 
         @Override
-        public void collect(int aDoc)
-            throws IOException
+        public void collect(int aDoc) throws IOException
         {
             Document doc = reader.document(aDoc);
             ngrams.add(new NGramModel(doc.get("gram"), Integer.valueOf(doc.get("freq"))));
         }
 
         @Override
-        public void setNextReader(IndexReader aReader, int aDocBase)
-            throws IOException
+        public void setNextReader(IndexReader aReader, int aDocBase) throws IOException
         {
             reader = aReader;
             docBase = aDocBase;

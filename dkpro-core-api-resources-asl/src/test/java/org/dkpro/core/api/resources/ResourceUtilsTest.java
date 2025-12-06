@@ -39,8 +39,7 @@ import org.junit.jupiter.api.io.TempDir;
 public class ResourceUtilsTest
 {
     @Test
-    public void testGetUrlAsFile()
-        throws Exception
+    public void testGetUrlAsFile() throws Exception
     {
         URL url = new URL(
                 "jar:file:src/test/resources/testfiles.zip!/testfiles/FileSetCollectionReaderBase.class");
@@ -51,11 +50,9 @@ public class ResourceUtilsTest
     }
 
     @Test
-    public void testClasspathAsFolder()
-        throws Exception
+    public void testClasspathAsFolder() throws Exception
     {
-        File file = ResourceUtils
-                .getClasspathAsFolder("classpath:/org/dkpro/core/api", true);
+        File file = ResourceUtils.getClasspathAsFolder("classpath:/org/dkpro/core/api", true);
 
         List<Path> paths = new ArrayList<Path>();
         for (File f : FileUtils.listFiles(file, null, true)) {
@@ -75,8 +72,7 @@ public class ResourceUtilsTest
     }
 
     @Test
-    public void testWithSpace(@TempDir File tempDir)
-        throws Exception
+    public void testWithSpace(@TempDir File tempDir) throws Exception
     {
         File dir = new File(tempDir, "this is a test");
         dir.mkdirs();
@@ -91,20 +87,19 @@ public class ResourceUtilsTest
     }
 
     @Test
-    public void testGetUrlAsExecutable()
-        throws IOException
+    public void testGetUrlAsExecutable() throws IOException
     {
 
         URL url = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
                 + "FileSetCollectionReaderBase.class");
         File file = ResourceUtils.getUrlAsExecutable(url, false);
-        
+
         assertThat(file.getName()).endsWith("temp");
 
         URL url2 = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
                 + "ResourceCollectionReaderBase.class");
         file = ResourceUtils.getUrlAsExecutable(url2, true);
-        
+
         assertThat(file.getName()).endsWith("temp");
     }
 }
