@@ -31,7 +31,7 @@
   <description>Grammar checker based on LanguageTool (LGPL)</description>
 
   <properties>
-    <languagetool.version>6.4</languagetool.version>
+    <languagetool.version>6.7</languagetool.version>
   </properties>
 
   <dependencies>
