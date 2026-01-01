@@ -84,7 +84,8 @@
   </scm>
   
   <properties>
-    <build-ant-version>1.10.14</build-ant-version>
+    <maven.compiler.release>21</maven.compiler.release>
+    <build-ant-version>1.10.15</build-ant-version>
     <build-groovy-version>5.0.3</build-groovy-version>
     <build-asciidoctorj-pdf-version>2.3.23</build-asciidoctorj-pdf-version>
     <!-- Plugin versions managed centrally -->
@@ -93,7 +94,7 @@
     <spdx.plugin.version>1.0.3</spdx.plugin.version>
     <license.plugin.version>5.0.0</license.plugin.version>
     <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
-    <checkstyle.version>12.2.0</checkstyle.version>
+    <checkstyle.version>12.3.1</checkstyle.version>
   </properties>
 
   <modules>

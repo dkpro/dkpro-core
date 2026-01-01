@@ -32,7 +32,7 @@
   <description>http://haifengl.github.io/smile</description>
 
   <properties>
-    <smile.version>3.1.1</smile.version>
+    <smile.version>4.4.2</smile.version>
   </properties>
 
   <dependencies>
