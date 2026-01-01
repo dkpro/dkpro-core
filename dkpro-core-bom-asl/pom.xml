@@ -566,18 +566,5 @@
         </dependencies>
       </dependencyManagement>
     </profile>
-    <profile>
-      <!-- Profile for modules with dependencies that are not on Maven Central -->
-      <id>deps-not-on-maven-central</id>
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>org.dkpro.core</groupId>
-            <artifactId>dkpro-core-illinoisnlp-asl</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-    </profile>
   </profiles>
 </project>

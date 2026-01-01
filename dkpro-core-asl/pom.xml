@@ -183,21 +183,7 @@
             <enabled>true</enabled>
           </snapshots>
         </repository>
-        <repository>
-          <id>cogcomp.cs.uiuc.edu-releases</id>
-          <url>https://cogcomp.seas.upenn.edu/m2repo/</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
       </repositories>
-      <modules>
-        <!-- Processing modules -->
-        <module>../dkpro-core-illinoisnlp-asl</module>
-      </modules>
     </profile>
     <profile>
       <id>rat-check</id>
