@@ -68,7 +68,7 @@ public class IvyResourceObjectResolver
 
     private static final String DEFAULT_REPO_ID = "ukp-model-releases";
 
-    private static final String DEFAULT_REPO_URL = "http://zoidberg.ukp.informatik.tu-darmstadt.de/"
+    private static final String DEFAULT_REPO_URL = "https://zoidberg.ukp.informatik.tu-darmstadt.de/"
             + "artifactory/public-model-releases-local";
 
     private final Log log = LogFactory.getLog(ResourceObjectProviderBase.class);
