@@ -291,8 +291,8 @@ public class TeiReader
      * annotations to start and end at a non-whitespace character.
      */
     public static final String PARAM_ELEMENTS_TO_TRIM = "elementsToTrim";
-    @ConfigurationParameter(name = PARAM_ELEMENTS_TO_TRIM, defaultValue = {
-            TAG_SUNIT, TAG_U, TAG_PARAGRAPH, TAG_RS, TAG_WORD, TAG_CHARACTER, TAG_MULTIWORD })
+    @ConfigurationParameter(name = PARAM_ELEMENTS_TO_TRIM, defaultValue = { TAG_SUNIT, TAG_U,
+            TAG_PARAGRAPH, TAG_RS, TAG_WORD, TAG_CHARACTER, TAG_MULTIWORD })
     private Set<String> elementsToTrim;
 
     private Iterator<Element> teiElementIterator;

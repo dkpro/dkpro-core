@@ -81,7 +81,7 @@ public class OpenNlpSegmenter
     /**
      * Load the tokenization model from this location instead of locating the model automatically.
      */
-    public static final String PARAM_TOKENIZATION_MODEL_LOCATION =  //
+    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = //
             ComponentParameters.PARAM_TOKENIZATION_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_TOKENIZATION_MODEL_LOCATION, mandatory = false)
     @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
