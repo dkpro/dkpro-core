@@ -34,7 +34,9 @@ public abstract class CasConfigurableStreamProviderBase<M>
     @Override
     protected M produceResource(URL aUrl) throws IOException
     {
-        try (InputStream is = aUrl.openStream()) {
+        var connection = aUrl.openConnection();
+        connection.setUseCaches(false);
+        try (var is = connection.getInputStream()) {
             return produceResource(is);
         }
         catch (IOException e) {
