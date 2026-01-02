@@ -21,6 +21,7 @@ import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -72,7 +73,7 @@ import org.springframework.util.PropertyPlaceholderHelper;
  *            the kind of resource produced
  */
 public abstract class ResourceObjectProviderBase<M>
-    implements HasResourceMetadata
+    implements HasResourceMetadata, AutoCloseable, Closeable
 {
     private final Log log = LogFactory.getLog(ResourceObjectProviderBase.class);
 
@@ -179,7 +180,7 @@ public abstract class ResourceObjectProviderBase<M>
 
     private Map<String, HasResourceMetadata> imports = new HashMap<String, HasResourceMetadata>();
 
-    private ExtensibleURLClassLoader loader = new ExtensibleURLClassLoader(
+    private final ExtensibleURLClassLoader loader = new ExtensibleURLClassLoader(
             getClass().getClassLoader());
 
     private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, '\\',
@@ -207,6 +208,12 @@ public abstract class ResourceObjectProviderBase<M>
         setDefault(COMPONENT_GROUP_ID, "org.dkpro.core");
         setDefault(ARTIFACT_URI,
                 "mvn:${" + GROUP_ID + "}:${" + ARTIFACT_ID + "}:${" + VERSION + "}");
+    }
+
+    @Override
+    public void close() throws IOException
+    {
+        loader.close();
     }
 
     public void setOverride(String aKey, String aValue)
@@ -511,8 +518,9 @@ public abstract class ResourceObjectProviderBase<M>
         // file. If that points to a properties file again, repeat the process.
         // If at some point the location is marked as not required return null.
         while (url != null && url.getPath().endsWith(".properties")) {
-            Properties tmpResourceMetaData = PropertiesLoaderUtils
-                    .loadProperties(new UrlResource(url));
+            var res = new UrlResource(url);
+            res.setUseCaches(false);
+            var tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(res);
 
             // Values in the redirecting properties override values in the redirected-to
             // properties - except LOCATION
@@ -555,10 +563,11 @@ public abstract class ResourceObjectProviderBase<M>
         // and not for the properties file.
         if (modelMetaData == null) {
             try {
-                String modelMetaDataLocation = getModelMetaDataLocation(lastModelLocation);
-                URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
-                modelMetaData = PropertiesLoaderUtils
-                        .loadProperties(new UrlResource(modelMetaDataUrl));
+                var modelMetaDataLocation = getModelMetaDataLocation(lastModelLocation);
+                var modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
+                var res = new UrlResource(modelMetaDataUrl);
+                res.setUseCaches(false);
+                modelMetaData = PropertiesLoaderUtils.loadProperties(res);
             }
             catch (FileNotFoundException e2) {
                 // If no metadata was found, just leave the properties empty.

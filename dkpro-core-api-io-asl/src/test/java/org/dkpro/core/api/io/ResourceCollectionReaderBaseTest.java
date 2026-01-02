@@ -219,8 +219,7 @@ public class ResourceCollectionReaderBaseTest
     @Test
     public void testExternalLoaderLocator() throws Exception
     {
-        var locator = createResourceDescription(
-                ResourceLoaderLocator.class);
+        var locator = createResourceDescription(ResourceLoaderLocator.class);
         var reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/org/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS,

@@ -119,7 +119,7 @@ public class OpenNlpNamedEntityRecognizer
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
     @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = //
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**

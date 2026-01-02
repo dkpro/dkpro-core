@@ -45,9 +45,7 @@ import org.apache.uima.resource.ResourceInitializationException;
  * {@link CasFilter_ImplBase#createAggregateBuilderDescription(AnalysisEngineDescription...)}
  * method.
  * <p>
- * Note that methods such as
- * {@link SimplePipeline#runPipeline(CAS, AnalysisEngine...)}
- * and
+ * Note that methods such as {@link SimplePipeline#runPipeline(CAS, AnalysisEngine...)} and
  * {@link SimplePipeline#iteratePipeline(CollectionReaderDescription, AnalysisEngineDescription...)}
  * do not allow direct access to the JCas' produced by a JCasMultiplier.
  */

@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.opennlp;
 
+import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
@@ -200,6 +201,15 @@ public class OpenNlpPosTagger
         mappingProvider = MappingProviderFactory.createPosMappingProvider(this, posMappingLocation,
                 language, modelProvider);
         // end::mapping-provider-decl[]
+    }
+    
+    @Override
+    public void destroy()
+    {
+        super.destroy();
+
+        closeQuietly(mappingProvider);
+        closeQuietly(modelProvider);
     }
 
     @Override

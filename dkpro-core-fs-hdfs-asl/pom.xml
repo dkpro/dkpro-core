@@ -30,7 +30,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <hadoop.version>3.4.0</hadoop.version>
+    <hadoop.version>3.4.2</hadoop.version>
   </properties>
 
   <dependencies>
