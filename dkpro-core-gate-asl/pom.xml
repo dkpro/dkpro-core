@@ -31,9 +31,9 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <gate.version>8.6.1</gate.version>
-    <annie.version>8.6</annie.version>
-    <tools.version>8.6</tools.version>
+    <gate.version>9.0.1</gate.version>
+    <annie.version>9.1</annie.version>
+    <tools.version>9.0.1</tools.version>
   </properties>
 
   <dependencies>
