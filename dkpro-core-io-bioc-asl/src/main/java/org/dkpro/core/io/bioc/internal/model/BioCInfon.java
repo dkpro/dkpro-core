@@ -17,12 +17,15 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 public class BioCInfon
 {
+    @JacksonXmlProperty(isAttribute = true, localName = "key")
     private String key;
+
+    @JacksonXmlText
     private String value;
 
     public BioCInfon()
@@ -41,13 +44,11 @@ public class BioCInfon
         return key;
     }
 
-    @XmlAttribute(name = "key")
     public void setKey(String aKey)
     {
         key = aKey;
     }
 
-    @XmlValue
     public String getValue()
     {
         return value;

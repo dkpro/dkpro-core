@@ -24,12 +24,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@XmlTransient
 public abstract class BioCObject
 {
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "infon")
     private List<BioCInfon> infons;
 
     public List<BioCInfon> getInfons()
@@ -37,7 +38,6 @@ public abstract class BioCObject
         return infons;
     }
 
-    @XmlElement(name = "infon")
     public void setInfons(List<BioCInfon> aInfons)
     {
         infons = aInfons;

@@ -17,14 +17,17 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@XmlType(propOrder = { "infons", "offset", "text", "annotations", "relations" })
+@JsonPropertyOrder({ "infons", "offset", "text", "annotations", "relations" })
 public class BioCSentence
     extends BioCAnnotationContainer
 {
+    @JacksonXmlProperty(localName = "offset")
     private int offset;
+
+    @JacksonXmlProperty(localName = "text")
     private String text;
 
     public int getOffset()
@@ -32,7 +35,6 @@ public class BioCSentence
         return offset;
     }
 
-    @XmlElement(name = "offset")
     public void setOffset(int aOffset)
     {
         offset = aOffset;
@@ -43,7 +45,6 @@ public class BioCSentence
         return text;
     }
 
-    @XmlElement(name = "text")
     public void setText(String aText)
     {
         text = aText;

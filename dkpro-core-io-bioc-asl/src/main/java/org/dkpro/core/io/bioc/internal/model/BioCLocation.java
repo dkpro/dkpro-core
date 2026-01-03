@@ -17,12 +17,15 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class BioCLocation
 {
-    private int offset;
+    @JacksonXmlProperty(isAttribute = true, localName = "length")
     private int length;
+
+    @JacksonXmlProperty(isAttribute = true, localName = "offset")
+    private int offset;
 
     public BioCLocation()
     {
@@ -40,7 +43,6 @@ public class BioCLocation
         return offset;
     }
 
-    @XmlAttribute(name = "offset")
     public void setOffset(int aOffset)
     {
         offset = aOffset;
@@ -51,7 +53,6 @@ public class BioCLocation
         return length;
     }
 
-    @XmlAttribute(name = "length")
     public void setLength(int aLength)
     {
         length = aLength;

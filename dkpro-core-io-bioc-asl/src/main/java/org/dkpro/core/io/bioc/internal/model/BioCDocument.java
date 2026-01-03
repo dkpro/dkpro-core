@@ -19,14 +19,17 @@ package org.dkpro.core.io.bioc.internal.model;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@XmlRootElement(name = "document")
 public class BioCDocument
     extends BioCObject
 {
+    @JacksonXmlProperty(localName = "id")
     private String id;
+
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "passage")
     private List<BioCPassage> passages;
 
     public String getId()
@@ -34,7 +37,6 @@ public class BioCDocument
         return id;
     }
 
-    @XmlElement(name = "id")
     public void setId(String aId)
     {
         id = aId;
@@ -45,7 +47,6 @@ public class BioCDocument
         return passages;
     }
 
-    @XmlElement(name = "passage")
     public void setPassages(List<BioCPassage> aPassages)
     {
         passages = aPassages;

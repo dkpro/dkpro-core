@@ -34,13 +34,14 @@ import static org.dkpro.core.io.bioc.BioCComponent.transferFeatures;
 import static org.dkpro.core.io.webanno.tsv.internal.tsv3x.Tsv3XCasSchemaAnalyzer.isRelationLayer;
 import static org.slf4j.LoggerFactory.getLogger;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.cas.Type;
@@ -57,6 +58,9 @@ import org.dkpro.core.io.bioc.internal.model.BioCRelation;
 import org.dkpro.core.io.bioc.internal.model.BioCSentence;
 import org.slf4j.Logger;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
@@ -64,7 +68,7 @@ public class BioCToCas
 {
     private static final Logger LOG = getLogger(lookup().lookupClass());
 
-    public void parseXml(InputStream aReader, JCas aJCas) throws JAXBException, XMLStreamException
+    public void parseXml(InputStream aReader, JCas aJCas) throws XMLStreamException, IOException
     {
         var collection = loadBioCCollection(aReader);
 
@@ -79,15 +83,26 @@ public class BioCToCas
     }
 
     public BioCCollection loadBioCCollection(InputStream aReader)
-        throws XMLStreamException, JAXBException
+        throws XMLStreamException, IOException
     {
         var xmlInputFactory = XmlParserUtils.newXmlInputFactory();
         var xmlEventReader = xmlInputFactory.createXMLEventReader(aReader);
 
-        var context = JAXBContext.newInstance(BioCCollection.class);
-        var unmarshaller = context.createUnmarshaller();
+        var sw = new StringWriter();
+        var outFactory = XMLOutputFactory.newFactory();
+        var xew = outFactory.createXMLEventWriter(sw);
+        while (xmlEventReader.hasNext()) {
+            var e = xmlEventReader.nextEvent();
+            xew.add(e);
+        }
+        xew.flush();
+        xew.close();
 
-        var collection = unmarshaller.unmarshal(xmlEventReader, BioCCollection.class).getValue();
+        var xml = sw.toString();
+        var mapper = new XmlMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        var collection = mapper.readValue(xml, BioCCollection.class);
         return collection;
     }
 
@@ -226,7 +241,7 @@ public class BioCToCas
             var infons = bioCRelation.infonMap();
             var nodes = bioCRelation.nodeMap();
 
-            Type uimaType = guessBestRelationType(cas.getTypeSystem(), infons);
+            var uimaType = guessBestRelationType(cas.getTypeSystem(), infons);
             if (uimaType == null || !isRelationLayer(uimaType)) {
                 LOG.debug("Unable to find suitable UIMA type for relation annotation");
                 continue;

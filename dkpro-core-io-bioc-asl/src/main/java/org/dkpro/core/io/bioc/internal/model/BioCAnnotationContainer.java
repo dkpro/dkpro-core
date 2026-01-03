@@ -20,14 +20,18 @@ package org.dkpro.core.io.bioc.internal.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@XmlTransient
 public abstract class BioCAnnotationContainer
     extends BioCObject
 {
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "annotation")
     private List<BioCAnnotation> annotations;
+
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "relation")
     private List<BioCRelation> relations;
 
     public List<BioCAnnotation> getAnnotations()
@@ -35,7 +39,6 @@ public abstract class BioCAnnotationContainer
         return annotations;
     }
 
-    @XmlElement(name = "annotation")
     public void setAnnotations(List<BioCAnnotation> aAnnotations)
     {
         annotations = aAnnotations;
@@ -54,7 +57,6 @@ public abstract class BioCAnnotationContainer
         return relations;
     }
 
-    @XmlElement(name = "relation")
     public void setRelations(List<BioCRelation> aRelations)
     {
         relations = aRelations;

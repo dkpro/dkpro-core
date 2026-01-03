@@ -19,9 +19,7 @@ package org.dkpro.core.io.bioc;
 
 import static org.dkpro.core.io.bioc.BioCComponent.getCollectionMetadataField;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -36,6 +34,9 @@ import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.bioc.internal.CasToBioC;
 import org.dkpro.core.io.bioc.internal.model.BioCCollection;
+
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import eu.openminted.share.annotations.api.DocumentationResource;
@@ -74,30 +75,25 @@ public class BioCWriter
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
-    private JAXBContext context;
+    private XmlMapper mapper;
 
     @Override
     public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-
-        try {
-            context = JAXBContext.newInstance(BioCCollection.class);
-        }
-        catch (JAXBException e) {
-            throw new ResourceInitializationException(e);
-        }
+        mapper = new XmlMapper();
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, indent);
+        mapper.setSerializationInclusion(
+                com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY);
+        mapper.getFactory().configure(
+                com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_DECLARATION,
+                false);
     }
 
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (var docOS = getOutputStream(aJCas, filenameSuffix)) {
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            // Set to fragment mode to omit XML declaration
-            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-
             var bioCCollection = new BioCCollection();
 
             // Base-information - may be overwritten by the metadata fields below
@@ -114,7 +110,24 @@ public class BioCWriter
 
             new CasToBioC().convert(aJCas, bioCCollection);
 
-            marshaller.marshal(bioCCollection, docOS);
+            var xml = mapper.writeValueAsString(bioCCollection);
+
+            // Replace 2-space indents with 4-space indents
+            if (indent) {
+                var pattern = java.util.regex.Pattern.compile("(?m)^(  )+");
+                var matcher = pattern.matcher(xml);
+                var sb = new StringBuffer();
+                while (matcher.find()) {
+                    int spaces = matcher.group().length();
+                    matcher.appendReplacement(sb, " ".repeat(spaces * 2));
+                }
+                matcher.appendTail(sb);
+                xml = sb.toString();
+            }
+
+            var encoding = targetEncoding != null ? targetEncoding
+                    : StandardCharsets.UTF_8.name();
+            docOS.write(xml.getBytes(encoding));
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);

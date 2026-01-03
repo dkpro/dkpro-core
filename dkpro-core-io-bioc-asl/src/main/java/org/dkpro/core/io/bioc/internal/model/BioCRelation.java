@@ -23,13 +23,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class BioCRelation
     extends BioCObject
 {
+    @JacksonXmlProperty(isAttribute = true, localName = "id")
     private String id;
+
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "node")
     private List<BioCNode> nodes;
 
     public String getId()
@@ -37,7 +41,6 @@ public class BioCRelation
         return id;
     }
 
-    @XmlAttribute(name = "id")
     public void setId(String aId)
     {
         id = aId;
@@ -48,7 +51,6 @@ public class BioCRelation
         return nodes;
     }
 
-    @XmlElement(name = "node")
     public void setNodes(List<BioCNode> aNodes)
     {
         nodes = aNodes;

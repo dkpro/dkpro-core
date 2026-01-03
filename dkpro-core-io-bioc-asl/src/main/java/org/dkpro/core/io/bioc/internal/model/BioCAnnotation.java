@@ -19,22 +19,29 @@ package org.dkpro.core.io.bioc.internal.model;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+@JsonPropertyOrder({ "infons", "id", "locations", "text" })
 public class BioCAnnotation
     extends BioCObject
 {
+    @JacksonXmlProperty(isAttribute = true, localName = "id")
     private String id;
-    private String text;
+
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "location")
     private List<BioCLocation> locations;
+
+    @JacksonXmlProperty(localName = "text")
+    private String text;
 
     public String getId()
     {
         return id;
     }
 
-    @XmlAttribute(name = "id")
     public void setId(String aId)
     {
         id = aId;
@@ -45,7 +52,6 @@ public class BioCAnnotation
         return text;
     }
 
-    @XmlElement(name = "text")
     public void setText(String aText)
     {
         text = aText;
@@ -56,7 +62,6 @@ public class BioCAnnotation
         return locations;
     }
 
-    @XmlElement(name = "location")
     public void setLocations(List<BioCLocation> aLocations)
     {
         locations = aLocations;
