@@ -17,21 +17,19 @@
  */
 package org.dkpro.core.io.xces.models;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class XcesToken
 {
-    @XmlID
-    @XmlAttribute
+    @JacksonXmlProperty(isAttribute = true, localName = "id")
     public String id;
 
-    @XmlAttribute(name = "word")
+    @JacksonXmlProperty(isAttribute = true, localName = "word")
     public String word;
 
-    @XmlAttribute(name = "tag")
+    @JacksonXmlProperty(isAttribute = true, localName = "tag")
     public String tag;
 
-    @XmlAttribute(name = "lemma")
+    @JacksonXmlProperty(isAttribute = true, localName = "lemma")
     public String lemma;
 }

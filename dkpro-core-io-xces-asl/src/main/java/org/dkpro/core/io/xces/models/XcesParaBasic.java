@@ -17,16 +17,14 @@
  */
 package org.dkpro.core.io.xces.models;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlValue;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 public class XcesParaBasic
 {
-    @XmlID
-    @XmlAttribute
+    @JacksonXmlProperty(isAttribute = true, localName = "id")
     public String id;
 
-    @XmlValue
+    @JacksonXmlText
     public String s;
 }

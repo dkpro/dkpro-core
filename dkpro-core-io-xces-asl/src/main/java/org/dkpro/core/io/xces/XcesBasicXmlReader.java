@@ -22,16 +22,9 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.ValidationEvent;
-import javax.xml.bind.ValidationEventHandler;
-import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
+import javax.xml.stream.XMLStreamReader;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -44,6 +37,9 @@ import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.io.xces.models.XcesBodyBasic;
 import org.dkpro.core.io.xces.models.XcesParaBasic;
+
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import eu.openminted.share.annotations.api.DocumentationResource;
@@ -70,29 +66,17 @@ public class XcesBasicXmlReader
         try {
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
             XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-            XMLEventReader xmlEventReaderBasic = xmlInputFactory.createXMLEventReader(is);
+            XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(is);
 
-            // JAXB context for XCES body with basic type
-            JAXBContext contextBasic = JAXBContext.newInstance(XcesBodyBasic.class);
-            Unmarshaller unmarshallerBasic = contextBasic.createUnmarshaller();
-
-            unmarshallerBasic.setEventHandler(new ValidationEventHandler()
-            {
-                @Override
-                public boolean handleEvent(ValidationEvent event)
-                {
-                    throw new RuntimeException(event.getMessage(), event.getLinkedException());
-                }
-            });
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
             JCasBuilder jb = new JCasBuilder(aJCas);
 
-            XMLEvent eBasic = null;
-            while ((eBasic = xmlEventReaderBasic.peek()) != null) {
-                if (isStartElement(eBasic, "body")) {
+            while (xmlStreamReader.hasNext()) {
+                if (xmlStreamReader.isStartElement() && xmlStreamReader.getLocalName().equals("body")) {
                     try {
-                        XcesBodyBasic parasBasic = (XcesBodyBasic) unmarshallerBasic
-                                .unmarshal(xmlEventReaderBasic, XcesBodyBasic.class).getValue();
+                        XcesBodyBasic parasBasic = xmlMapper.readValue(xmlStreamReader, XcesBodyBasic.class);
                         readPara(jb, parasBasic);
                     }
                     catch (RuntimeException ex) {
@@ -100,18 +84,14 @@ public class XcesBasicXmlReader
                     }
                 }
                 else {
-                    xmlEventReaderBasic.next();
+                    xmlStreamReader.next();
                 }
-
             }
             jb.close();
 
         }
         catch (XMLStreamException ex1) {
             throw new IOException(ex1);
-        }
-        catch (JAXBException e1) {
-            throw new IOException(e1);
         }
         finally {
             closeQuietly(is);
@@ -136,11 +116,6 @@ public class XcesBasicXmlReader
         }
     }
 
-    public static boolean isStartElement(XMLEvent aEvent, String aElement)
-    {
-
-        return aEvent.isStartElement()
-                && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
-    }
+    // helper removed: using XMLStreamReader in this reader implementation
 
 }
