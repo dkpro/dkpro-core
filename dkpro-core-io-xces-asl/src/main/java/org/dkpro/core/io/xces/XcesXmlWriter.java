@@ -29,10 +29,6 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -47,6 +43,10 @@ import org.dkpro.core.io.xces.models.XcesBody;
 import org.dkpro.core.io.xces.models.XcesPara;
 import org.dkpro.core.io.xces.models.XcesSentence;
 import org.dkpro.core.io.xces.models.XcesToken;
+
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -88,60 +88,61 @@ public class XcesXmlWriter
         OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
         try {
-                docOS = getOutputStream(aJCas, filenameExtension);
-                XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
-                xmlEventWriter = new IndentingXMLEventWriter(
+            docOS = getOutputStream(aJCas, filenameExtension);
+            XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
+            xmlEventWriter = new IndentingXMLEventWriter(
                     xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
 
-                XMLEventFactory xmlef = XMLEventFactory.newInstance();
-                xmlEventWriter.add(xmlef.createStartDocument());
-                // Begin cesDoc
-                xmlEventWriter.add(xmlef.createStartElement("", "", "cesDoc"));
-                // Begin and End cesHeader
-                xmlEventWriter.add(xmlef.createStartElement("", "", "cesHeader"));
-                xmlEventWriter.add(xmlef.createEndElement("", "", "cesHeader"));
+            XMLEventFactory xmlef = XMLEventFactory.newInstance();
+            xmlEventWriter.add(xmlef.createStartDocument());
+            // Begin cesDoc
+            xmlEventWriter.add(xmlef.createStartElement("", "", "cesDoc"));
+            // Begin and End cesHeader
+            xmlEventWriter.add(xmlef.createStartElement("", "", "cesHeader"));
+            xmlEventWriter.add(xmlef.createEndElement("", "", "cesHeader"));
 
-                // Begin text and body
-                xmlEventWriter.add(xmlef.createStartElement("", "", "text"));
+            // Begin text and body
+            xmlEventWriter.add(xmlef.createStartElement("", "", "text"));
 
-                // Begin body of all the paragraphs
-                Collection<Paragraph> parasInCas = JCasUtil.select(aJCas, Paragraph.class);
-                XcesBody xb = convertToXcesPara(parasInCas);
+            // Begin body of all the paragraphs
+            Collection<Paragraph> parasInCas = JCasUtil.select(aJCas, Paragraph.class);
+            XcesBody xb = convertToXcesPara(parasInCas);
 
-                XmlMapper xmlMapper = new XmlMapper();
-                xmlMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-                xmlMapper.getFactory().configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, false);
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+            xmlMapper.getFactory().configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, false);
 
-                // write body element using XmlMapper without XML declaration
-                String bodyXml = xmlMapper.writer().withRootName("body").writeValueAsString(xb);
-                // remove any XML declaration (we already wrote one via XMLEventWriter)
-                bodyXml = bodyXml.replaceAll("<\\?xml[^>]*\\?>", "");
+            // write body element using XmlMapper without XML declaration
+            String bodyXml = xmlMapper.writer().withRootName("body").writeValueAsString(xb);
+            // remove any XML declaration (we already wrote one via XMLEventWriter)
+            bodyXml = bodyXml.replaceAll("<\\?xml[^>]*\\?>", "");
 
-                // write the body fragment into the existing XMLEventWriter by parsing
-                // the fragment and copying events (skip start/end document and processing instructions)
-                javax.xml.stream.XMLInputFactory xif = javax.xml.stream.XMLInputFactory.newInstance();
-                javax.xml.stream.XMLEventReader bodyReader = xif.createXMLEventReader(new java.io.StringReader(bodyXml));
-                while (bodyReader.hasNext()) {
-                    javax.xml.stream.events.XMLEvent ev = bodyReader.nextEvent();
-                    int type = ev.getEventType();
-                    if (type == javax.xml.stream.XMLStreamConstants.START_DOCUMENT
-                            || type == javax.xml.stream.XMLStreamConstants.END_DOCUMENT
-                            || type == javax.xml.stream.XMLStreamConstants.PROCESSING_INSTRUCTION) {
-                        continue;
-                    }
-                    if (ev.isCharacters() && ev.asCharacters().isWhiteSpace()) {
-                        // skip whitespace characters produced by XmlMapper so that the
-                        // IndentingXMLEventWriter can apply consistent indentation
-                        continue;
-                    }
-                    xmlEventWriter.add(ev);
+            // write the body fragment into the existing XMLEventWriter by parsing
+            // the fragment and copying events (skip start/end document and processing instructions)
+            javax.xml.stream.XMLInputFactory xif = javax.xml.stream.XMLInputFactory.newInstance();
+            javax.xml.stream.XMLEventReader bodyReader = xif
+                    .createXMLEventReader(new java.io.StringReader(bodyXml));
+            while (bodyReader.hasNext()) {
+                javax.xml.stream.events.XMLEvent ev = bodyReader.nextEvent();
+                int type = ev.getEventType();
+                if (type == javax.xml.stream.XMLStreamConstants.START_DOCUMENT
+                        || type == javax.xml.stream.XMLStreamConstants.END_DOCUMENT
+                        || type == javax.xml.stream.XMLStreamConstants.PROCESSING_INSTRUCTION) {
+                    continue;
                 }
-                bodyReader.close();
+                if (ev.isCharacters() && ev.asCharacters().isWhiteSpace()) {
+                    // skip whitespace characters produced by XmlMapper so that the
+                    // IndentingXMLEventWriter can apply consistent indentation
+                    continue;
+                }
+                xmlEventWriter.add(ev);
+            }
+            bodyReader.close();
 
-                // End body of all the paragraphs
-                xmlEventWriter.add(xmlef.createEndElement("", "", "text"));
-                xmlEventWriter.add(xmlef.createEndElement("", "", "cesDoc"));
-                xmlEventWriter.add(xmlef.createEndDocument());
+            // End body of all the paragraphs
+            xmlEventWriter.add(xmlef.createEndElement("", "", "text"));
+            xmlEventWriter.add(xmlef.createEndElement("", "", "cesDoc"));
+            xmlEventWriter.add(xmlef.createEndDocument());
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);

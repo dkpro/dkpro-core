@@ -40,8 +40,8 @@ import org.dkpro.core.io.xces.models.XcesPara;
 import org.dkpro.core.io.xces.models.XcesSentence;
 import org.dkpro.core.io.xces.models.XcesToken;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -83,7 +83,8 @@ public class XcesXmlReader
             JCasBuilder jb = new JCasBuilder(aJCas);
 
             while (xmlStreamReader.hasNext()) {
-                if (xmlStreamReader.isStartElement() && xmlStreamReader.getLocalName().equals("body")) {
+                if (xmlStreamReader.isStartElement()
+                        && xmlStreamReader.getLocalName().equals("body")) {
                     try {
                         XcesBody paras = xmlMapper.readValue(xmlStreamReader, XcesBody.class);
                         readPara(jb, paras);

@@ -38,8 +38,8 @@ import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.io.xces.models.XcesBodyBasic;
 import org.dkpro.core.io.xces.models.XcesParaBasic;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import eu.openminted.share.annotations.api.DocumentationResource;
@@ -74,9 +74,11 @@ public class XcesBasicXmlReader
             JCasBuilder jb = new JCasBuilder(aJCas);
 
             while (xmlStreamReader.hasNext()) {
-                if (xmlStreamReader.isStartElement() && xmlStreamReader.getLocalName().equals("body")) {
+                if (xmlStreamReader.isStartElement()
+                        && xmlStreamReader.getLocalName().equals("body")) {
                     try {
-                        XcesBodyBasic parasBasic = xmlMapper.readValue(xmlStreamReader, XcesBodyBasic.class);
+                        XcesBodyBasic parasBasic = xmlMapper.readValue(xmlStreamReader,
+                                XcesBodyBasic.class);
                         readPara(jb, parasBasic);
                     }
                     catch (RuntimeException ex) {

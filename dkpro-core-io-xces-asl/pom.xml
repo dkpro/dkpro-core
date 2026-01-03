@@ -115,9 +115,6 @@
             <usedDependencies combine.children="append">
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-en-chunking</usedDependency>
-              <!--
-                - JAXB runtime previously used; removed in favor of Jackson-XML
-              -->
             </usedDependencies>
           </configuration>
         </plugin>
