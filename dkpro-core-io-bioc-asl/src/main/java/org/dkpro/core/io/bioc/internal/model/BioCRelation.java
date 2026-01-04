@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
 
 public class BioCRelation
     extends BioCObject
@@ -32,23 +32,23 @@ public class BioCRelation
     private String id;
     private List<BioCNode> nodes;
 
+    @XmlAttribute(name = "id")
     public String getId()
     {
         return id;
     }
 
-    @XmlAttribute(name = "id")
     public void setId(String aId)
     {
         id = aId;
     }
 
+    @XmlElement(name = "node")
     public List<BioCNode> getNodes()
     {
         return nodes;
     }
 
-    @XmlElement(name = "node")
     public void setNodes(List<BioCNode> aNodes)
     {
         nodes = aNodes;

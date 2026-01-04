@@ -39,8 +39,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.cas.Type;
@@ -59,12 +57,14 @@ import org.slf4j.Logger;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 
 public class BioCToCas
 {
     private static final Logger LOG = getLogger(lookup().lookupClass());
 
-    public void parseXml(InputStream aReader, JCas aJCas) throws JAXBException, XMLStreamException
+    public void parseXml(InputStream aReader, JCas aJCas) throws XMLStreamException, JAXBException
     {
         var collection = loadBioCCollection(aReader);
 

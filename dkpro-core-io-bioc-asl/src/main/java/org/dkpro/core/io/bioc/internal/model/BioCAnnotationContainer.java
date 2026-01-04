@@ -20,41 +20,24 @@ package org.dkpro.core.io.bioc.internal.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
-@XmlTransient
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = { "relations" })
 public abstract class BioCAnnotationContainer
     extends BioCObject
 {
-    private List<BioCAnnotation> annotations;
     private List<BioCRelation> relations;
 
-    public List<BioCAnnotation> getAnnotations()
-    {
-        return annotations;
-    }
-
-    @XmlElement(name = "annotation")
-    public void setAnnotations(List<BioCAnnotation> aAnnotations)
-    {
-        annotations = aAnnotations;
-    }
-
-    public void addAnnotation(BioCAnnotation aAnnotation)
-    {
-        if (annotations == null) {
-            annotations = new ArrayList<>();
-        }
-        annotations.add(aAnnotation);
-    }
-
+    @XmlElement(name = "relation")
     public List<BioCRelation> getRelations()
     {
         return relations;
     }
 
-    @XmlElement(name = "relation")
     public void setRelations(List<BioCRelation> aRelations)
     {
         relations = aRelations;
@@ -67,4 +50,11 @@ public abstract class BioCAnnotationContainer
         }
         relations.add(aRelation);
     }
+
+    // Methods for annotations - subclasses must implement
+    public abstract List<BioCAnnotation> getAnnotations();
+
+    public abstract void setAnnotations(List<BioCAnnotation> aAnnotations);
+
+    public abstract void addAnnotation(BioCAnnotation aAnnotation);
 }

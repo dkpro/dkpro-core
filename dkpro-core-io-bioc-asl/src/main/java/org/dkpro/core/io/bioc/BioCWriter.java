@@ -19,10 +19,6 @@ package org.dkpro.core.io.bioc;
 
 import static org.dkpro.core.io.bioc.BioCComponent.getCollectionMetadataField;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -39,6 +35,9 @@ import org.dkpro.core.io.bioc.internal.model.BioCCollection;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 
 /**
  * Writer for the BioC format.
@@ -75,14 +74,17 @@ public class BioCWriter
     private String targetEncoding;
 
     private JAXBContext context;
+    private Marshaller marshaller;
 
     @Override
     public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-
         try {
             context = JAXBContext.newInstance(BioCCollection.class);
+            marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, indent);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, targetEncoding);
         }
         catch (JAXBException e) {
             throw new ResourceInitializationException(e);
@@ -93,11 +95,6 @@ public class BioCWriter
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (var docOS = getOutputStream(aJCas, filenameSuffix)) {
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            // Set to fragment mode to omit XML declaration
-            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-
             var bioCCollection = new BioCCollection();
 
             // Base-information - may be overwritten by the metadata fields below

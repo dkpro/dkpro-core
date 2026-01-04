@@ -17,12 +17,12 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 public class BioCLocation
 {
-    private int offset;
     private int length;
+    private int offset;
 
     public BioCLocation()
     {
@@ -35,25 +35,25 @@ public class BioCLocation
         length = aLength;
     }
 
-    public int getOffset()
-    {
-        return offset;
-    }
-
-    @XmlAttribute(name = "offset")
-    public void setOffset(int aOffset)
-    {
-        offset = aOffset;
-    }
-
+    @XmlAttribute(name = "length")
     public int getLength()
     {
         return length;
     }
 
-    @XmlAttribute(name = "length")
     public void setLength(int aLength)
     {
         length = aLength;
+    }
+
+    @XmlAttribute(name = "offset")
+    public int getOffset()
+    {
+        return offset;
+    }
+
+    public void setOffset(int aOffset)
+    {
+        offset = aOffset;
     }
 }

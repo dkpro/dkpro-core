@@ -19,33 +19,31 @@ package org.dkpro.core.io.bioc.internal.model;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
 
-@XmlRootElement(name = "document")
 public class BioCDocument
     extends BioCObject
 {
     private String id;
     private List<BioCPassage> passages;
 
+    @XmlElement(name = "id")
     public String getId()
     {
         return id;
     }
 
-    @XmlElement(name = "id")
     public void setId(String aId)
     {
         id = aId;
     }
 
+    @XmlElement(name = "passage")
     public List<BioCPassage> getPassages()
     {
         return passages;
     }
 
-    @XmlElement(name = "passage")
     public void setPassages(List<BioCPassage> aPassages)
     {
         passages = aPassages;

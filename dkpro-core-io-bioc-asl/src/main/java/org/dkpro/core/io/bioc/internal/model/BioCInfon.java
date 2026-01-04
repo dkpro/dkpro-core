@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlValue;
 
 public class BioCInfon
 {
@@ -36,12 +36,12 @@ public class BioCInfon
         value = aValue;
     }
 
+    @XmlAttribute(name = "key")
     public String getKey()
     {
         return key;
     }
 
-    @XmlAttribute(name = "key")
     public void setKey(String aKey)
     {
         key = aKey;

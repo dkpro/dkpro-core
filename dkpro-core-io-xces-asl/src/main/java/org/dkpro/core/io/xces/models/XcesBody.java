@@ -19,12 +19,12 @@ package org.dkpro.core.io.xces.models;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "body")
 public class XcesBody
 {
-    @XmlElement(name = "p", type = XcesPara.class)
+    @XmlElement(name = "p")
     public List<XcesPara> p;
 }

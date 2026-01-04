@@ -22,9 +22,6 @@ import static org.dkpro.core.io.bioc.BioCComponent.addCollectionMetadataField;
 import java.io.IOException;
 import java.util.Optional;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.UimaContext;
@@ -40,6 +37,9 @@ import org.dkpro.core.io.bioc.internal.BioCToCas;
 import org.dkpro.core.io.bioc.internal.model.BioCDocument;
 
 import eu.openminted.share.annotations.api.DocumentationResource;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * Reader for the BioC format.

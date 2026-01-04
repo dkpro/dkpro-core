@@ -17,47 +17,74 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder = { "infons", "offset", "text", "sentences", "annotations", "relations" })
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = { "offset", "text", "annotations", "sentences" })
 public class BioCPassage
     extends BioCAnnotationContainer
 {
     private int offset;
     private String text;
+    private List<BioCAnnotation> annotations;
     private List<BioCSentence> sentences;
 
+    @XmlElement(name = "offset")
     public int getOffset()
     {
         return offset;
     }
 
-    @XmlElement(name = "offset")
     public void setOffset(int aOffset)
     {
         offset = aOffset;
     }
 
+    @XmlElement(name = "text")
     public String getText()
     {
         return text;
     }
 
-    @XmlElement(name = "text")
     public void setText(String aText)
     {
         text = aText;
     }
 
+    @Override
+    @XmlElement(name = "annotation")
+    public List<BioCAnnotation> getAnnotations()
+    {
+        return annotations;
+    }
+
+    @Override
+    public void setAnnotations(List<BioCAnnotation> aAnnotations)
+    {
+        annotations = aAnnotations;
+    }
+
+    @Override
+    public void addAnnotation(BioCAnnotation aAnnotation)
+    {
+        if (annotations == null) {
+            annotations = new ArrayList<>();
+        }
+        annotations.add(aAnnotation);
+    }
+
+    @XmlElement(name = "sentence")
     public List<BioCSentence> getSentences()
     {
         return sentences;
     }
 
-    @XmlElement(name = "sentence")
     public void setSentences(List<BioCSentence> aSentences)
     {
         sentences = aSentences;

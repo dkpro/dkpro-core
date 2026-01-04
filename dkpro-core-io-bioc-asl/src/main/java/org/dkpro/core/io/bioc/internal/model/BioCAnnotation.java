@@ -19,46 +19,48 @@ package org.dkpro.core.io.bioc.internal.model;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
+@XmlType(propOrder = { "locations", "text" })
 public class BioCAnnotation
     extends BioCObject
 {
     private String id;
-    private String text;
     private List<BioCLocation> locations;
+    private String text;
 
+    @XmlAttribute(name = "id")
     public String getId()
     {
         return id;
     }
 
-    @XmlAttribute(name = "id")
     public void setId(String aId)
     {
         id = aId;
     }
 
-    public String getText()
-    {
-        return text;
-    }
-
-    @XmlElement(name = "text")
-    public void setText(String aText)
-    {
-        text = aText;
-    }
-
+    @XmlElement(name = "location")
     public List<BioCLocation> getLocations()
     {
         return locations;
     }
 
-    @XmlElement(name = "location")
     public void setLocations(List<BioCLocation> aLocations)
     {
         locations = aLocations;
+    }
+
+    @XmlElement(name = "text")
+    public String getText()
+    {
+        return text;
+    }
+
+    public void setText(String aText)
+    {
+        text = aText;
     }
 }

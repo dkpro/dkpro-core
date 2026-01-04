@@ -202,7 +202,7 @@ public class OpenNlpPosTagger
                 language, modelProvider);
         // end::mapping-provider-decl[]
     }
-    
+
     @Override
     public void destroy()
     {

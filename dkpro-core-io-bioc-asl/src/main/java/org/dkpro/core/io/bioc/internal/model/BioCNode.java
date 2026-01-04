@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 public class BioCNode
 {
@@ -35,23 +35,23 @@ public class BioCNode
         role = aRole;
     }
 
+    @XmlAttribute(name = "refid")
     public String getRefId()
     {
         return refId;
     }
 
-    @XmlAttribute(name = "refid")
     public void setRefId(String aRefId)
     {
         refId = aRefId;
     }
 
+    @XmlAttribute(name = "role")
     public String getRole()
     {
         return role;
     }
 
-    @XmlAttribute(name = "role")
     public void setRole(String aRole)
     {
         role = aRole;

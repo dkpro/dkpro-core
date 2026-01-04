@@ -25,12 +25,12 @@ import static org.dkpro.core.io.bioc.BioCComponent.E_SOURCE;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "collection")
-@XmlType(propOrder = { "source", "date", "key", "infons", "documents" })
+@XmlType(propOrder = { "source", "date", "key", "documents" })
 public class BioCCollection
     extends BioCObject
 {
@@ -39,45 +39,45 @@ public class BioCCollection
     private String key;
     private List<BioCDocument> documents;
 
+    @XmlElement(name = E_SOURCE)
     public String getSource()
     {
         return source;
     }
 
-    @XmlElement(name = E_SOURCE)
     public void setSource(String aSource)
     {
         source = aSource;
     }
 
+    @XmlElement(name = E_DATE)
     public String getDate()
     {
         return date;
     }
 
-    @XmlElement(name = E_DATE)
     public void setDate(String aDate)
     {
         date = aDate;
     }
 
+    @XmlElement(name = E_KEY)
     public String getKey()
     {
         return key;
     }
 
-    @XmlElement(name = E_KEY)
     public void setKey(String aKey)
     {
         key = aKey;
     }
 
+    @XmlElement(name = E_DOCUMENT)
     public List<BioCDocument> getDocuments()
     {
         return documents;
     }
 
-    @XmlElement(name = E_DOCUMENT)
     public void setDocuments(List<BioCDocument> aDocuments)
     {
         documents = aDocuments;

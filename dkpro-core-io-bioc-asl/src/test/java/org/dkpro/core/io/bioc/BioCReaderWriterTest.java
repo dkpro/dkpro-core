@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.io.bioc;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
 import static org.apache.uima.cas.CAS.TYPE_NAME_ANNOTATION;
 import static org.apache.uima.cas.CAS.TYPE_NAME_STRING;
@@ -26,8 +25,6 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescriptionFromPath;
 import static org.apache.uima.util.CasCreationUtils.mergeTypeSystems;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.contentOf;
 import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.dkpro.core.io.bioc.BioCComponent.FEAT_REL_SOURCE;
 import static org.dkpro.core.io.bioc.BioCComponent.FEAT_REL_TARGET;
@@ -35,6 +32,7 @@ import static org.dkpro.core.io.bioc.BioCReaderTest.BASIC_RELATION_LABEL_FEATURE
 import static org.dkpro.core.io.bioc.BioCReaderTest.BASIC_RELATION_LAYER_NAME;
 import static org.dkpro.core.io.bioc.BioCReaderTest.BASIC_SPAN_LABEL_FEATURE_NAME;
 import static org.dkpro.core.io.bioc.BioCReaderTest.BASIC_SPAN_LAYER_NAME;
+import static org.xmlunit.builder.Input.fromFile;
 
 import java.io.File;
 import java.util.Set;
@@ -49,6 +47,7 @@ import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.dkpro.core.io.xmi.XmiWriter;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.xmlunit.assertj3.XmlAssert;
 
 public class BioCReaderWriterTest
 {
@@ -95,11 +94,10 @@ public class BioCReaderWriterTest
 
         SimplePipeline.runPipeline(reader, writer, xmiWriter);
 
-        var reference = contentOf(new File(aReferenceFolder, REFERENCE_XML), UTF_8).trim();
-
-        var actual = contentOf(new File(targetFolder, DATA_XML), UTF_8).trim();
-
-        assertThat(actual).isEqualToNormalizingNewlines(reference);
+        // Use XML-aware comparison that ignores attribute order but respects element order
+        XmlAssert.assertThat(fromFile(new File(targetFolder, DATA_XML)))
+                .and(fromFile(new File(aReferenceFolder, REFERENCE_XML))).ignoreWhitespace()
+                .areSimilar();
     }
 
     private TypeSystemDescription createTestTypeSystem(File aReferenceFolder)

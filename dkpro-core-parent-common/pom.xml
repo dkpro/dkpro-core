@@ -290,7 +290,7 @@
       <dependency>
         <groupId>jaxen</groupId>
         <artifactId>jaxen</artifactId>
-        <version>1.2.0</version>
+        <version>2.0.0</version>
         <exclusions>
           <exclusion>
             <artifactId>dom4j</artifactId>
@@ -429,7 +429,12 @@
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>4.0.2</version>
+        <version>4.0.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-runtime</artifactId>
+        <version>4.0.5</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson</groupId>
