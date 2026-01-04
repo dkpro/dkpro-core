@@ -23,13 +23,15 @@
     <version>3.0.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <packaging>jar</packaging>
-  <artifactId>dkpro-core-doc-asl</artifactId>
-  <name>DKPro Core ASL - Documentation</name>
+
+  <artifactId>dkpro-core-doc</artifactId>
+  <name>DKPro Core - Documentation</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.groovy</groupId>

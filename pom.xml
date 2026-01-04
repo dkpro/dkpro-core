@@ -100,8 +100,7 @@
   <modules>
     <module>dkpro-core-parent-common</module>
     <module>dkpro-core-build</module>
-    <module>dkpro-core-bom-asl</module>
-    <module>dkpro-core-bom-gpl</module>
+    <module>dkpro-core-bom</module>
     <module>dkpro-core-asl</module>
     <module>dkpro-core-gpl</module>
     <!-- Documentation and examples modules -->
