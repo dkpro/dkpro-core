@@ -28,10 +28,6 @@
   <name>DKPro Core - Documentation</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
 
-  <properties>
-    <maven.deploy.skip>true</maven.deploy.skip>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.groovy</groupId>
