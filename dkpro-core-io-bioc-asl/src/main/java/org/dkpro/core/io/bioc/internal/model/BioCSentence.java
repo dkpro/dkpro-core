@@ -17,19 +17,24 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import java.util.ArrayList;
+import java.util.List;
 
-@JsonPropertyOrder({ "infons", "offset", "text", "annotations", "relations" })
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = { "offset", "text", "annotations" })
 public class BioCSentence
     extends BioCAnnotationContainer
 {
-    @JacksonXmlProperty(localName = "offset")
     private int offset;
-
-    @JacksonXmlProperty(localName = "text")
     private String text;
+    private List<BioCAnnotation> annotations;
 
+    @XmlElement(name = "offset")
     public int getOffset()
     {
         return offset;
@@ -40,6 +45,7 @@ public class BioCSentence
         offset = aOffset;
     }
 
+    @XmlElement(name = "text")
     public String getText()
     {
         return text;
@@ -48,5 +54,27 @@ public class BioCSentence
     public void setText(String aText)
     {
         text = aText;
+    }
+
+    @Override
+    @XmlElement(name = "annotation")
+    public List<BioCAnnotation> getAnnotations()
+    {
+        return annotations;
+    }
+
+    @Override
+    public void setAnnotations(List<BioCAnnotation> aAnnotations)
+    {
+        annotations = aAnnotations;
+    }
+
+    @Override
+    public void addAnnotation(BioCAnnotation aAnnotation)
+    {
+        if (annotations == null) {
+            annotations = new ArrayList<>();
+        }
+        annotations.add(aAnnotation);
     }
 }

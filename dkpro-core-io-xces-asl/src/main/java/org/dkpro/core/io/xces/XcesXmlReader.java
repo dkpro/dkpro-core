@@ -22,9 +22,11 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -40,15 +42,17 @@ import org.dkpro.core.io.xces.models.XcesPara;
 import org.dkpro.core.io.xces.models.XcesSentence;
 import org.dkpro.core.io.xces.models.XcesToken;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.ValidationEvent;
+import jakarta.xml.bind.ValidationEventHandler;
 
 /**
  * Reader for the XCES XML format.
@@ -75,18 +79,29 @@ public class XcesXmlReader
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
 
             XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-            XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(is);
+            XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(is);
 
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            JAXBContext context = JAXBContext.newInstance(XcesBody.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+
+            unmarshaller.setEventHandler(new ValidationEventHandler()
+            {
+                @Override
+                public boolean handleEvent(ValidationEvent event)
+                {
+                    throw new RuntimeException(event.getMessage(), event.getLinkedException());
+                }
+            });
 
             JCasBuilder jb = new JCasBuilder(aJCas);
 
-            while (xmlStreamReader.hasNext()) {
-                if (xmlStreamReader.isStartElement()
-                        && xmlStreamReader.getLocalName().equals("body")) {
+            XMLEvent e = null;
+            while ((e = xmlEventReader.peek()) != null) {
+
+                if (isStartElement(e, "body")) {
                     try {
-                        XcesBody paras = xmlMapper.readValue(xmlStreamReader, XcesBody.class);
+                        XcesBody paras = (XcesBody) unmarshaller
+                                .unmarshal(xmlEventReader, XcesBody.class).getValue();
                         readPara(jb, paras);
                     }
                     catch (RuntimeException ex) {
@@ -94,13 +109,16 @@ public class XcesXmlReader
                     }
                 }
                 else {
-                    xmlStreamReader.next();
+                    xmlEventReader.next();
                 }
             }
             jb.close();
         }
         catch (XMLStreamException ex1) {
             throw new IOException(ex1);
+        }
+        catch (JAXBException e1) {
+            throw new IOException(e1);
         }
         finally {
             closeQuietly(is);
@@ -165,5 +183,9 @@ public class XcesXmlReader
         }
     }
 
-    // helper removed: using XMLStreamReader in this reader implementation
+    public static boolean isStartElement(XMLEvent aEvent, String aElement)
+    {
+        return aEvent.isStartElement()
+                && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
+    }
 }

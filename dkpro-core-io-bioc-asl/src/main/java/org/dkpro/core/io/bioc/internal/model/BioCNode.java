@@ -17,14 +17,11 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 public class BioCNode
 {
-    @JacksonXmlProperty(isAttribute = true, localName = "refid")
     private String refId;
-
-    @JacksonXmlProperty(isAttribute = true, localName = "role")
     private String role;
 
     public BioCNode()
@@ -38,6 +35,7 @@ public class BioCNode
         role = aRole;
     }
 
+    @XmlAttribute(name = "refid")
     public String getRefId()
     {
         return refId;
@@ -48,6 +46,7 @@ public class BioCNode
         refId = aRefId;
     }
 
+    @XmlAttribute(name = "role")
     public String getRole()
     {
         return role;

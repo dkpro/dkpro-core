@@ -19,15 +19,16 @@ package org.dkpro.core.io.xces.models;
 
 import java.util.List;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlID;
 
 public class XcesPara
 {
-    @JacksonXmlProperty(isAttribute = true, localName = "id")
+    @XmlAttribute(name = "id")
+    @XmlID
     public String id;
 
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "s")
+    @XmlElement(name = "s")
     public List<XcesSentence> s;
 }

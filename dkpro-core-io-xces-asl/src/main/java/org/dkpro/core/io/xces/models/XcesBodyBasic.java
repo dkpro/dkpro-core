@@ -19,14 +19,12 @@ package org.dkpro.core.io.xces.models;
 
 import java.util.List;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
-@JacksonXmlRootElement(localName = "body")
+@XmlRootElement(name = "body")
 public class XcesBodyBasic
 {
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "p")
+    @XmlElement(name = "p")
     public List<XcesParaBasic> p;
 }

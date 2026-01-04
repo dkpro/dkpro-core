@@ -17,26 +17,25 @@
  */
 package org.dkpro.core.io.bioc.internal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
-@JsonPropertyOrder({ "infons", "offset", "text", "sentences", "annotations", "relations" })
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = { "offset", "text", "annotations", "sentences" })
 public class BioCPassage
     extends BioCAnnotationContainer
 {
-    @JacksonXmlProperty(localName = "offset")
     private int offset;
-
-    @JacksonXmlProperty(localName = "text")
     private String text;
-
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "sentence")
+    private List<BioCAnnotation> annotations;
     private List<BioCSentence> sentences;
 
+    @XmlElement(name = "offset")
     public int getOffset()
     {
         return offset;
@@ -47,6 +46,7 @@ public class BioCPassage
         offset = aOffset;
     }
 
+    @XmlElement(name = "text")
     public String getText()
     {
         return text;
@@ -57,6 +57,29 @@ public class BioCPassage
         text = aText;
     }
 
+    @Override
+    @XmlElement(name = "annotation")
+    public List<BioCAnnotation> getAnnotations()
+    {
+        return annotations;
+    }
+
+    @Override
+    public void setAnnotations(List<BioCAnnotation> aAnnotations)
+    {
+        annotations = aAnnotations;
+    }
+
+    @Override
+    public void addAnnotation(BioCAnnotation aAnnotation)
+    {
+        if (annotations == null) {
+            annotations = new ArrayList<>();
+        }
+        annotations.add(aAnnotation);
+    }
+
+    @XmlElement(name = "sentence")
     public List<BioCSentence> getSentences()
     {
         return sentences;

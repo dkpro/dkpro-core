@@ -25,29 +25,21 @@ import static org.dkpro.core.io.bioc.BioCComponent.E_SOURCE;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
-@JacksonXmlRootElement(localName = "collection")
-@JsonPropertyOrder({ "source", "date", "key", "infons", "documents" })
+@XmlRootElement(name = "collection")
+@XmlType(propOrder = { "source", "date", "key", "documents" })
 public class BioCCollection
     extends BioCObject
 {
-    @JacksonXmlProperty(localName = E_SOURCE)
     private String source;
-
-    @JacksonXmlProperty(localName = E_DATE)
     private String date;
-
-    @JacksonXmlProperty(localName = E_KEY)
     private String key;
-
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = E_DOCUMENT)
     private List<BioCDocument> documents;
 
+    @XmlElement(name = E_SOURCE)
     public String getSource()
     {
         return source;
@@ -58,6 +50,7 @@ public class BioCCollection
         source = aSource;
     }
 
+    @XmlElement(name = E_DATE)
     public String getDate()
     {
         return date;
@@ -68,6 +61,7 @@ public class BioCCollection
         date = aDate;
     }
 
+    @XmlElement(name = E_KEY)
     public String getKey()
     {
         return key;
@@ -78,6 +72,7 @@ public class BioCCollection
         key = aKey;
     }
 
+    @XmlElement(name = E_DOCUMENT)
     public List<BioCDocument> getDocuments()
     {
         return documents;

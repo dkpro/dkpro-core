@@ -20,10 +20,8 @@ package org.dkpro.core.io.bioc;
 import static org.dkpro.core.io.bioc.BioCComponent.addCollectionMetadataField;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Optional;
 
-import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.UimaContext;
@@ -38,10 +36,10 @@ import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.bioc.internal.BioCToCas;
 import org.dkpro.core.io.bioc.internal.model.BioCDocument;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-
 import eu.openminted.share.annotations.api.DocumentationResource;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * Reader for the BioC format.
@@ -53,20 +51,26 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class BioCReader
     extends BioCReaderImplBase
 {
-    private XmlMapper mapper;
+    private JAXBContext context;
+    private Unmarshaller unmarshaller;
     private Optional<BioCDocument> nextDocument;
 
     @Override
     public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        mapper = new XmlMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        try {
+            context = JAXBContext.newInstance(BioCDocument.class);
+        }
+        catch (JAXBException e) {
+            throw new ResourceInitializationException(e);
+        }
 
         try {
             nextDocument = nextBioCDocument();
         }
-        catch (CollectionException | XMLStreamException | IOException e) {
+        catch (CollectionException | XMLStreamException | JAXBException | IOException e) {
             throw new ResourceInitializationException(e);
         }
     }
@@ -90,14 +94,14 @@ public class BioCReader
         // DocumentMetaData.get(aJCas).setDocumentId(document.getId());
         // }
 
-        var jb = new JCasBuilder(aJCas);
+        JCasBuilder jb = new JCasBuilder(aJCas);
         new BioCToCas().readDocument(jb, document);
         jb.close();
 
         try {
             nextDocument = nextBioCDocument();
         }
-        catch (XMLStreamException | IOException e) {
+        catch (XMLStreamException | JAXBException e) {
             throw new IOException(e);
         }
     }
@@ -109,7 +113,7 @@ public class BioCReader
     }
 
     private Optional<BioCDocument> nextBioCDocument()
-        throws XMLStreamException, CollectionException, IOException
+        throws XMLStreamException, JAXBException, CollectionException, IOException
     {
         if (!isFileOpen()) {
             openNextFile();
@@ -127,43 +131,26 @@ public class BioCReader
     protected void openNextFile() throws IOException, XMLStreamException, CollectionException
     {
         super.openNextFile();
-        // no-op for XmlMapper-based parsing
+        try {
+            unmarshaller = context.createUnmarshaller();
+        }
+        catch (JAXBException e) {
+            new IOException(e);
+        }
     }
 
     @Override
     protected void closeFile()
     {
-        // mapper is reused, nothing to clear per-file
+        unmarshaller = null;
         super.closeFile();
     }
 
-    private Optional<BioCDocument> nextBioCDocumentInFile() throws XMLStreamException, IOException
+    private Optional<BioCDocument> nextBioCDocumentInFile() throws XMLStreamException, JAXBException
     {
         if (seekNextBioCDocumentInFile()) {
-            // Serialize the current <document> event sequence to a string and parse with XmlMapper
-            var sw = new StringWriter();
-            var outFactory = XMLOutputFactory.newFactory();
-            var xew = outFactory.createXMLEventWriter(sw);
-
-            int depth = 0;
-            while (getXmlEventReader().hasNext()) {
-                var e = getXmlEventReader().nextEvent();
-                xew.add(e);
-                if (e.isStartElement()) {
-                    depth++;
-                }
-                else if (e.isEndElement()) {
-                    depth--;
-                    if (depth == 0) {
-                        break;
-                    }
-                }
-            }
-            xew.flush();
-            xew.close();
-
-            var xml = sw.toString();
-            var document = mapper.readValue(xml, BioCDocument.class);
+            var document = unmarshaller.unmarshal(getXmlEventReader(), BioCDocument.class)
+                    .getValue();
             return Optional.of(document);
         }
 

@@ -104,8 +104,7 @@ public class OpenNlpPosTaggerTest
             String[] tagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
             String[] tags = { "DT", "VBZ", "DT", "NN", "." };
 
-            engine = createEngine(OpenNlpPosTagger.class,
-                    OpenNlpPosTagger.PARAM_MODEL_ARTIFACT_URI,
+            engine = createEngine(OpenNlpPosTagger.class, OpenNlpPosTagger.PARAM_MODEL_ARTIFACT_URI,
                     "mvn:de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent:20120616.1",
                     OpenNlpPosTagger.PARAM_VARIANT, "maxent", OpenNlpPosTagger.PARAM_PRINT_TAGSET,
                     true);
@@ -146,7 +145,7 @@ public class OpenNlpPosTaggerTest
             var jcas = TestRunner.runTest(engine, language, testDocument);
 
             assertPOS(tagClasses, tags, select(jcas, POS.class));
-            
+
             return jcas;
         }
         finally {

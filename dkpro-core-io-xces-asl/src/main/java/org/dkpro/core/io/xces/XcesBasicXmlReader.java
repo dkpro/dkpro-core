@@ -22,9 +22,11 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -38,11 +40,13 @@ import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.io.xces.models.XcesBodyBasic;
 import org.dkpro.core.io.xces.models.XcesParaBasic;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.ValidationEvent;
+import jakarta.xml.bind.ValidationEventHandler;
 
 /**
  * Reader for the basic XCES XML format.
@@ -66,19 +70,29 @@ public class XcesBasicXmlReader
         try {
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
             XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-            XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(is);
+            XMLEventReader xmlEventReaderBasic = xmlInputFactory.createXMLEventReader(is);
 
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            // JAXB context for XCES body with basic type
+            JAXBContext contextBasic = JAXBContext.newInstance(XcesBodyBasic.class);
+            Unmarshaller unmarshallerBasic = contextBasic.createUnmarshaller();
+
+            unmarshallerBasic.setEventHandler(new ValidationEventHandler()
+            {
+                @Override
+                public boolean handleEvent(ValidationEvent event)
+                {
+                    throw new RuntimeException(event.getMessage(), event.getLinkedException());
+                }
+            });
 
             JCasBuilder jb = new JCasBuilder(aJCas);
 
-            while (xmlStreamReader.hasNext()) {
-                if (xmlStreamReader.isStartElement()
-                        && xmlStreamReader.getLocalName().equals("body")) {
+            XMLEvent eBasic = null;
+            while ((eBasic = xmlEventReaderBasic.peek()) != null) {
+                if (isStartElement(eBasic, "body")) {
                     try {
-                        XcesBodyBasic parasBasic = xmlMapper.readValue(xmlStreamReader,
-                                XcesBodyBasic.class);
+                        XcesBodyBasic parasBasic = (XcesBodyBasic) unmarshallerBasic
+                                .unmarshal(xmlEventReaderBasic, XcesBodyBasic.class).getValue();
                         readPara(jb, parasBasic);
                     }
                     catch (RuntimeException ex) {
@@ -86,14 +100,18 @@ public class XcesBasicXmlReader
                     }
                 }
                 else {
-                    xmlStreamReader.next();
+                    xmlEventReaderBasic.next();
                 }
+
             }
             jb.close();
 
         }
         catch (XMLStreamException ex1) {
             throw new IOException(ex1);
+        }
+        catch (JAXBException e1) {
+            throw new IOException(e1);
         }
         finally {
             closeQuietly(is);
@@ -118,6 +136,11 @@ public class XcesBasicXmlReader
         }
     }
 
-    // helper removed: using XMLStreamReader in this reader implementation
+    public static boolean isStartElement(XMLEvent aEvent, String aElement)
+    {
+
+        return aEvent.isStartElement()
+                && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
+    }
 
 }
