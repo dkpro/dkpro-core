@@ -25,6 +25,7 @@
   </parent>
 
   <artifactId>dkpro-core-parent-common</artifactId>
+  <name>DKPro Core - Common Parent</name>
   <packaging>pom</packaging>
 
   <properties>

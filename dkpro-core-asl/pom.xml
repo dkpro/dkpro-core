@@ -110,10 +110,6 @@
     <module>../dkpro-core-decompounding-asl</module>
     <module>../dkpro-core-dictionaryannotator-asl</module>
     <module>../dkpro-core-eval-asl</module>
-    <!-- 
-      - Depends on a UIMAv2 version of DKPro TC   
-    <module>../dkpro-core-flextag-asl</module>
-    -->
     <module>../dkpro-core-frequency-asl</module>
     <module>../dkpro-core-gate-asl</module>
     <module>../dkpro-core-gosen-asl</module>
