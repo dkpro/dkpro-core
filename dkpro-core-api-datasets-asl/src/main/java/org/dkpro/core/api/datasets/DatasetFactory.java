@@ -18,14 +18,23 @@
 package org.dkpro.core.api.datasets;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.file.Files.copy;
+import static java.nio.file.Files.createDirectories;
+import static java.nio.file.Files.createFile;
+import static java.nio.file.Files.exists;
+import static java.nio.file.Files.newBufferedWriter;
 import static java.util.Collections.unmodifiableList;
+import static org.apache.commons.io.FileUtils.deleteQuietly;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.commons.lang3.StringUtils.normalizeSpace;
+import static org.dkpro.core.api.datasets.DatasetValidationPolicy.DESPERATE;
+import static org.dkpro.core.api.datasets.DatasetValidationPolicy.STRICT;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Writer;
-import java.net.URLConnection;
+import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,7 +42,6 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -44,11 +52,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.NullOutputStream;
-import org.apache.commons.lang3.StringUtils;
 import org.dkpro.core.api.datasets.internal.ActionDescriptionImpl;
 import org.dkpro.core.api.datasets.internal.ArtifactDescriptionImpl;
 import org.dkpro.core.api.datasets.internal.DatasetDescriptionImpl;
@@ -60,7 +66,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.TypeDescription;
@@ -73,13 +78,13 @@ public class DatasetFactory
 
     private static final DatasetValidationPolicy defaultVerificationPolicy = DatasetValidationPolicy
             .valueOf(System.getProperty(PROP_DATASET_VERIFICATION_POLICY,
-                    DatasetValidationPolicy.STRICT.name()));
+                    STRICT.name()));
 
     private Map<String, DatasetDescriptionImpl> datasets;
 
     private final Map<String, Class<? extends Action_ImplBase>> actionRegistry;
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private Path cacheRoot;
 
@@ -133,7 +138,7 @@ public class DatasetFactory
 
     public Dataset load(String aId, DatasetValidationPolicy aPolicy) throws IOException
     {
-        DatasetDescription desc = getDescription(aId);
+        var desc = getDescription(aId);
         if (desc == null) {
             throw new IllegalArgumentException("Unknown dataset [" + aId + "]");
         }
@@ -201,7 +206,7 @@ public class DatasetFactory
         // Load the YAML descriptions
         Map<String, DatasetDescriptionImpl> sets = new LinkedHashMap<>();
         for (Resource res : resources) {
-            log.debug("Loading [{}]", res);
+            LOG.debug("Loading [{}]", res);
             try (InputStream is = res.getInputStream()) {
                 String id = FilenameUtils.getBaseName(res.getFilename());
                 DatasetDescriptionImpl ds = yaml.loadAs(is, DatasetDescriptionImpl.class);
@@ -218,7 +223,7 @@ public class DatasetFactory
             }
         }
 
-        log.debug("Loaded [{}] dataset description", sets.size());
+        LOG.debug("Loaded [{}] dataset description", sets.size());
 
         return sets;
     }
@@ -258,19 +263,19 @@ public class DatasetFactory
     private void materialize(DatasetDescription aDataset, DatasetValidationPolicy aPolicy)
         throws IOException
     {
-        Path root = resolve(aDataset);
-        Collection<ArtifactDescription> artifacts = aDataset.getArtifacts().values();
+        var root = resolve(aDataset);
+        var artifacts = aDataset.getArtifacts().values();
 
         // First validate if local copies are still up-to-date
-        boolean reload = false;
-        packageValidationLoop: for (ArtifactDescription artifact : artifacts) {
-            Path cachedFile = resolve(aDataset, artifact);
-            if (!Files.exists(cachedFile)) {
+        var reload = false;
+        packageValidationLoop: for (var artifact : artifacts) {
+            var cachedFile = resolve(aDataset, artifact);
+            if (!exists(cachedFile)) {
                 continue;
             }
 
             if (artifact.getUrl() != null) {
-                boolean verificationOk = checkDigest(cachedFile, artifact);
+                var verificationOk = checkDigest(cachedFile, artifact);
                 if (!verificationOk) {
                     reload = true;
                     break packageValidationLoop;
@@ -280,16 +285,16 @@ public class DatasetFactory
 
         // If any of the packages are outdated, clear the cache and download again
         if (reload) {
-            if (!DatasetValidationPolicy.DESPERATE.equals(aPolicy)) {
-                log.info("Clearing local cache for [{}]", root);
-                FileUtils.deleteQuietly(root.toFile());
+            if (!DESPERATE.equals(aPolicy)) {
+                LOG.info("Clearing local cache for [{}]", root);
+                deleteQuietly(root.toFile());
             }
             else {
-                log.info("DESPERATE policy in effect. Not clearing local cache for [{}]", root);
+                LOG.info("DESPERATE policy in effect. Not clearing local cache for [{}]", root);
             }
         }
 
-        for (ArtifactDescription artifact : artifacts) {
+        for (var artifact : artifacts) {
             if (artifact.getText() != null) {
                 materializeEmbeddedText(artifact);
             }
@@ -299,11 +304,11 @@ public class DatasetFactory
                 }
                 catch (Exception e) {
                     if (artifact.isOptional()) {
-                        if (log.isDebugEnabled()) {
-                            log.warn("Skipping optional artifact [{}]", artifact.getName(), e);
+                        if (LOG.isDebugEnabled()) {
+                            LOG.warn("Skipping optional artifact [{}]", artifact.getName(), e);
                         }
                         else {
-                            log.warn("Skipping optional artifact [{}]: {}", artifact.getName(),
+                            LOG.warn("Skipping optional artifact [{}]: {}", artifact.getName(),
                                     e.getMessage());
                         }
                     }
@@ -315,25 +320,24 @@ public class DatasetFactory
         }
 
         // Perform a post-fetch action such as unpacking
-        Path postActionCompleteMarker = resolve(aDataset).resolve(".postComplete");
-        if (!Files.exists(postActionCompleteMarker)) {
-            for (ArtifactDescription artifact : artifacts) {
-                Path cachedFile = resolve(aDataset, artifact);
+        var postActionCompleteMarker = resolve(aDataset).resolve(".postComplete");
+        if (!exists(postActionCompleteMarker)) {
+            for (var artifact : artifacts) {
+                var cachedFile = resolve(aDataset, artifact);
 
-                List<ActionDescription> actions = artifact.getActions();
+                var actions = artifact.getActions();
                 if (actions != null && !actions.isEmpty()) {
                     try {
-                        for (ActionDescription action : actions) {
-                            log.info("Post-download action [{}]", action.getAction());
-                            Class<? extends Action_ImplBase> implClass = actionRegistry
-                                    .get(action.getAction());
+                        for (var action : actions) {
+                            LOG.info("Post-download action [{}]", action.getAction());
+                            var implClass = actionRegistry.get(action.getAction());
 
                             if (implClass == null) {
                                 throw new IllegalStateException("Unknown or unsupported action ["
                                         + action.getAction() + "]");
                             }
 
-                            Action_ImplBase impl = implClass.newInstance();
+                            var impl = implClass.newInstance();
                             impl.apply(action, aDataset, artifact, cachedFile);
                         }
                     }
@@ -345,7 +349,7 @@ public class DatasetFactory
                     }
                 }
             }
-            Files.createFile(postActionCompleteMarker);
+            createFile(postActionCompleteMarker);
         }
     }
 
@@ -353,32 +357,32 @@ public class DatasetFactory
             DatasetValidationPolicy aPolicy)
         throws IOException
     {
-        Path cachedFile = resolve(artifact.getDataset(), artifact);
+        var cachedFile = resolve(artifact.getDataset(), artifact);
 
-        if (Files.exists(cachedFile)) {
+        if (exists(cachedFile)) {
             return;
         }
 
-        Files.createDirectories(cachedFile.getParent());
+        createDirectories(cachedFile.getParent());
 
-        ResourceLoader resourceLoader = new DefaultResourceLoader(classLoader);
-        Resource res = resourceLoader.getResource(artifact.getUrl());
+        var resourceLoader = new DefaultResourceLoader(classLoader);
+        var res = resourceLoader.getResource(artifact.getUrl());
         if (!res.exists()) {
             throw new FileNotFoundException("Resource not found at [" + artifact.getUrl() + "]");
         }
 
-        if (log.isDebugEnabled()) {
-            log.debug("Fetching [{}] from [{}]", cachedFile, artifact.getUrl());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Fetching [{}] from [{}]", cachedFile, artifact.getUrl());
         }
         else {
-            log.info("Fetching [{}]", cachedFile);
+            LOG.info("Fetching [{}]", cachedFile);
         }
 
-        URLConnection connection = res.getURL().openConnection();
+        var connection = res.getURL().openConnection();
         connection.setRequestProperty("User-Agent", "Java");
 
-        try (InputStream is = connection.getInputStream()) {
-            Files.copy(is, cachedFile);
+        try (var is = connection.getInputStream()) {
+            copy(is, cachedFile);
         }
 
         boolean verificationOk = checkDigest(cachedFile, artifact);
@@ -388,12 +392,12 @@ public class DatasetFactory
                 throw new IOException("Checksum verification failed on [" + cachedFile
                         + "] STRICT policy in effect. Bailing out.");
             case CONTINUE:
-                log.warn(
+                LOG.warn(
                         "Checksum verification failed on [{}] CONTINUE policy in effect. Ignoring mismatch.",
                         cachedFile);
                 break;
             case DESPERATE:
-                log.warn(
+                LOG.warn(
                         "Checksum verification failed on [{}] DESPERATE policy in effect. Ignoring mismatch.",
                         cachedFile);
                 break;
@@ -405,21 +409,21 @@ public class DatasetFactory
 
     private void materializeEmbeddedText(ArtifactDescription artifact) throws IOException
     {
-        Path cachedFile = resolve(artifact.getDataset(), artifact);
+        var cachedFile = resolve(artifact.getDataset(), artifact);
 
         // Check if file on disk corresponds to text stored in artifact description
-        if (Files.exists(cachedFile)) {
-            String text = FileUtils.readFileToString(cachedFile.toFile(), UTF_8);
-            text = StringUtils.normalizeSpace(text);
-            if (StringUtils.normalizeSpace(artifact.getText()).equals(text)) {
+        if (exists(cachedFile)) {
+            var text = readFileToString(cachedFile.toFile(), UTF_8);
+            text = normalizeSpace(text);
+            if (normalizeSpace(artifact.getText()).equals(text)) {
                 return;
             }
         }
 
-        Files.createDirectories(cachedFile.getParent());
+        createDirectories(cachedFile.getParent());
 
-        log.info("Creating [{}]", cachedFile);
-        try (Writer out = Files.newBufferedWriter(cachedFile, StandardCharsets.UTF_8)) {
+        LOG.info("Creating [{}]", cachedFile);
+        try (var out = newBufferedWriter(cachedFile, StandardCharsets.UTF_8)) {
             out.write(artifact.getText());
         }
     }
@@ -431,8 +435,8 @@ public class DatasetFactory
         case BINARY:
             return Files.newInputStream(aFile);
         case TEXT:
-            String text = FileUtils.readFileToString(aFile.toFile(), UTF_8);
-            text = StringUtils.normalizeSpace(text);
+            var text = readFileToString(aFile.toFile(), UTF_8);
+            text = normalizeSpace(text);
             return IOUtils.toInputStream(text, UTF_8);
         default:
             throw new IllegalArgumentException(
@@ -453,22 +457,22 @@ public class DatasetFactory
         }
 
         try (InputStream is = getDigestInputStream(aFile, aArtifact)) {
-            DigestInputStream sha1Filter = new DigestInputStream(is, sha1);
-            DigestInputStream sha512Filter = new DigestInputStream(sha1Filter, sha512);
+            var sha1Filter = new DigestInputStream(is, sha1);
+            var sha512Filter = new DigestInputStream(sha1Filter, sha512);
             IOUtils.copy(sha512Filter, new NullOutputStream());
-            String sha1Hash = new String(Hex.encodeHex(sha1Filter.getMessageDigest().digest()));
-            String sha512Hash = new String(Hex.encodeHex(sha512Filter.getMessageDigest().digest()));
+            var sha1Hash = new String(Hex.encodeHex(sha1Filter.getMessageDigest().digest()));
+            var sha512Hash = new String(Hex.encodeHex(sha512Filter.getMessageDigest().digest()));
 
             if (aArtifact.getSha1() != null) {
                 if (!sha1Hash.equals(aArtifact.getSha1())) {
-                    log.info(
+                    LOG.info(
                             "Local SHA1 hash mismatch for artifact [{}] in dataset [{}] - expected [{}] - actual [{}] (mode: {})",
                             aArtifact.getName(), aArtifact.getDataset().getId(),
                             aArtifact.getSha1(), sha1Hash, aArtifact.getVerificationMode());
                     return false;
                 }
                 else if (aArtifact.getSha512() == null) {
-                    log.info(
+                    LOG.info(
                             "Local SHA1 hash verified for artifact [{}] in dataset [{}] (mode: {})",
                             aArtifact.getName(), aArtifact.getDataset().getId(),
                             aArtifact.getVerificationMode());
@@ -477,21 +481,21 @@ public class DatasetFactory
 
             if (aArtifact.getSha512() != null) {
                 if (!sha512Hash.equals(aArtifact.getSha512())) {
-                    log.info(
+                    LOG.info(
                             "Local SHA512 hash mismatch for artifact [{}] in dataset [{}] - expected [{}] - actual [{}] (mode: {})",
                             aArtifact.getName(), aArtifact.getDataset().getId(),
                             aArtifact.getSha512(), sha512Hash, aArtifact.getVerificationMode());
                     return false;
                 }
                 else {
-                    log.info(
+                    LOG.info(
                             "Local SHA512 hash verified for artifact [{}] in dataset [{}] (mode: {})",
                             aArtifact.getName(), aArtifact.getDataset().getId(),
                             aArtifact.getVerificationMode());
                 }
             }
             else {
-                log.info(
+                LOG.info(
                         "No SHA512 hash for artifact [{}] in dataset [{}] - it is recommended to add it: [{}]",
                         aArtifact.getName(), aArtifact.getDataset().getId(), sha512Hash);
             }
