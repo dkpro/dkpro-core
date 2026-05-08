@@ -77,8 +77,7 @@ public class DatasetFactory
     public static final String PROP_DATASET_VERIFICATION_POLICY = "dkpro.dataset.verification.policy";
 
     private static final DatasetValidationPolicy defaultVerificationPolicy = DatasetValidationPolicy
-            .valueOf(System.getProperty(PROP_DATASET_VERIFICATION_POLICY,
-                    STRICT.name()));
+            .valueOf(System.getProperty(PROP_DATASET_VERIFICATION_POLICY, STRICT.name()));
 
     private Map<String, DatasetDescriptionImpl> datasets;
 
