@@ -85,12 +85,12 @@
   
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
-    <build-ant-version>1.10.15</build-ant-version>
-    <build-groovy-version>5.0.3</build-groovy-version>
+    <build-ant-version>1.10.17</build-ant-version>
+    <build-groovy-version>5.0.6</build-groovy-version>
     <build-asciidoctorj-pdf-version>2.3.23</build-asciidoctorj-pdf-version>
     <!-- Plugin versions managed centrally -->
-    <versions.plugin.version>2.20.1</versions.plugin.version>
-    <gmavenplus.plugin.version>4.2.1</gmavenplus.plugin.version>
+    <versions.plugin.version>2.21.0</versions.plugin.version>
+    <gmavenplus.plugin.version>4.3.1</gmavenplus.plugin.version>
     <spdx.plugin.version>1.0.3</spdx.plugin.version>
     <license.plugin.version>5.0.0</license.plugin.version>
     <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
@@ -113,7 +113,7 @@
         <plugin>
           <groupId>com.rudikershaw.gitbuildhook</groupId>
           <artifactId>git-build-hook-maven-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.6.0</version>
         </plugin>
         <plugin>
           <groupId>org.sonatype.central</groupId>

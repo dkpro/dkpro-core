@@ -30,7 +30,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <jwpl.version>2.0.1</jwpl.version>
+    <jwpl.version>2.0.2</jwpl.version>
   </properties>
 
   <dependencies>
