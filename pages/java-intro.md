@@ -7,7 +7,7 @@ title: "Intro using Java"
 
 These steps install the basis system requirements needed to implement DKPro Core pipelines using the Java language. They need to be performed only once.
 
-   * Download and install the Java SE Development Kit 7 from the [Oracle Java Site][1]
+   * Download and install a Java SE Development Kit (JDK) 17 or higher (e.g. from [Adoptium][1])
    * Download and install the *Eclipse IDE for Java Developers* from the [Eclipse website][2]
       * The Eclipse IDE for Java Developers already contains support for the Java language and the Maven plugin that we require. Of course you can use any other Eclipse distribution that supports Java and manually install the Maven plugin.
 
@@ -16,9 +16,9 @@ These steps install the basis system requirements needed to implement DKPro Core
 For a start, let's try a simple analysis pipeline:
 
    * Read an English text file called "document.txt"
-   * Perform tokenization and sentence boundary detection using OpenNLP
-   * Perform lemmatization using !LanguageTool
-   * Perform dependency parsing using !MaltParser
+   * Perform tokenization and sentence boundary detection using [OpenNLP][opennlp]
+   * Perform lemmatization using [LanguageTool][languagetool]
+   * Perform dependency parsing using [MaltParser][maltparser]
    * Write the result to disk in CoNLL 2006 format
 
 Here is how to run that:
@@ -28,12 +28,12 @@ Here is how to run that:
    * Open the file *pom.xml*, switch to the tab *Dependencies* 
    * Add the following dependencies
 
-| *Group Id*                    | *Artifact Id*                                  | *Version* |
-| de.tudarmstadt.ukp.dkpro.core | de.tudarmstadt.ukp.dkpro.core.opennlp-asl      | 1.6.2     |
-| de.tudarmstadt.ukp.dkpro.core | de.tudarmstadt.ukp.dkpro.core.languagetool-asl | 1.6.2     |
-| de.tudarmstadt.ukp.dkpro.core | de.tudarmstadt.ukp.dkpro.core.maltparser-asl   | 1.6.2     |
-| de.tudarmstadt.ukp.dkpro.core | de.tudarmstadt.ukp.dkpro.core.io.text-asl      | 1.6.2     |
-| de.tudarmstadt.ukp.dkpro.core | de.tudarmstadt.ukp.dkpro.core.io.conll-asl     | 1.6.2     |
+| *Group Id*     | *Artifact Id*                  | *Version* |
+| org.dkpro.core | dkpro-core-opennlp-asl         | 2.5.0     |
+| org.dkpro.core | dkpro-core-languagetool-asl    | 2.5.0     |
+| org.dkpro.core | dkpro-core-maltparser-asl      | 2.5.0     |
+| org.dkpro.core | dkpro-core-io-text-asl         | 2.5.0     |
+| org.dkpro.core | dkpro-core-io-conll-asl        | 2.5.0     |
 
    * Create a new class file called *Pipeline.java* in the folder *src/main/java* and copy/paste the code below
    * Create a new text file called *document.txt* in the project root
@@ -46,12 +46,12 @@ package example;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolLemmatizer;
-import de.tudarmstadt.ukp.dkpro.core.maltparser.MaltParser;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
+import org.dkpro.core.io.conll.Conll2006Writer;
+import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.languagetool.LanguageToolLemmatizer;
+import org.dkpro.core.maltparser.MaltParser;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
+import org.dkpro.core.opennlp.OpenNlpSegmenter;
 
 public class Pipeline {
 
@@ -97,6 +97,9 @@ The result is written to a file called *document.txt.conll* and could look somet
 
 You can find many more examples of what you can do with DKPro Core and Java on our [Java recipes for DKPro Core pipelines][recipes] page and in the [DKPro Core examples project](https://github.com/dkpro/dkpro-core-examples).
 
-[1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
+[1]: https://adoptium.net/
 [2]: http://eclipse.org/downloads/
+[opennlp]: https://opennlp.apache.org/
+[languagetool]: https://languagetool.org/
+[maltparser]: https://www.maltparser.org/
 [recipes]: {{ site.url }}/java/recipes/

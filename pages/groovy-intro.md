@@ -9,23 +9,23 @@ title: "Intro using Groovy"
 
 ## Installing Java and Groovy
 
-These steps install the basis system requirements needed to implement DKPro Core pipelines using the [http://groovy.codehaus.org Groovy] language. They need to be performed only once.
+These steps install the basis system requirements needed to implement DKPro Core pipelines using the [Groovy][groovy] language. They need to be performed only once.
 
-   * Download and install the Java SE Development Kit 7 from the [Oracle Java Site][1]
+   * Download and install a Java SE Development Kit (JDK) 17 or higher (e.g. from [Adoptium][1])
    * Windows: download and run the Windows Installer from the [Groovy homepage][2]
-   * Linux/OS X: Open a terminal which we will use to install Groovy using [gvm][3]
+   * Linux/OS X: Open a terminal which we will use to install Groovy using [SDKMAN!][3]
       * `curl -s "https://get.sdkman.io" | bash`
-      * Open a new terminal window to activate gvm and in the new window enter
-      * `gvm install groovy`
+      * Open a new terminal window to activate SDKMAN! and in the new window enter
+      * `sdk install groovy`
 
 ## Running the pipeline
 
 For a start, let's try a simple analysis pipeline:
 
    * Read an English text file called "document.txt"
-   * Perform tokenization and sentence boundary detection using OpenNLP
-   * Perform lemmatization using LanguageTool
-   * Perform dependency parsing using MaltParser
+   * Perform tokenization and sentence boundary detection using [OpenNLP][opennlp]
+   * Perform lemmatization using [LanguageTool][languagetool]
+   * Perform dependency parsing using [MaltParser][maltparser]
    * Write the result to disk in CoNLL 2006 format
 
 Here is how to run that:
@@ -39,21 +39,21 @@ Here is how to run that:
 
 {% highlight groovy %}
 #!/usr/bin/env groovy
-@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.6.2',
-      module='de.tudarmstadt.ukp.dkpro.core.opennlp-asl')
-import de.tudarmstadt.ukp.dkpro.core.opennlp.*;
-@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.6.2',
-      module='de.tudarmstadt.ukp.dkpro.core.languagetool-asl')
-import de.tudarmstadt.ukp.dkpro.core.languagetool.*;
-@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.6.2',
-      module='de.tudarmstadt.ukp.dkpro.core.maltparser-asl')
-import de.tudarmstadt.ukp.dkpro.core.maltparser.*;
-@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.6.2',
-      module='de.tudarmstadt.ukp.dkpro.core.io.text-asl')
-import de.tudarmstadt.ukp.dkpro.core.io.text.*;
-@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.6.2',
-      module='de.tudarmstadt.ukp.dkpro.core.io.conll-asl')
-import de.tudarmstadt.ukp.dkpro.core.io.conll.*;
+@Grab(group='org.dkpro.core', version='2.5.0',
+      module='dkpro-core-opennlp-asl')
+import org.dkpro.core.opennlp.*;
+@Grab(group='org.dkpro.core', version='2.5.0',
+      module='dkpro-core-languagetool-asl')
+import org.dkpro.core.languagetool.*;
+@Grab(group='org.dkpro.core', version='2.5.0',
+      module='dkpro-core-maltparser-asl')
+import org.dkpro.core.maltparser.*;
+@Grab(group='org.dkpro.core', version='2.5.0',
+      module='dkpro-core-io-text-asl')
+import org.dkpro.core.io.text.*;
+@Grab(group='org.dkpro.core', version='2.5.0',
+      module='dkpro-core-io-conll-asl')
+import org.dkpro.core.io.conll.*;
 
 import static org.apache.uima.fit.pipeline.SimplePipeline.*;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
@@ -98,7 +98,11 @@ The result is written to a file called *document.txt.conll* and could look somet
 
 You can find many more examples of what you can do with DKPro Core and Groovy on our [Groovy recipes for DKPro Core pipelines][recipes] page
 
-[1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html 
-[2]: http://www.groovy-lang.org/download.html
-[3]: http://gvmtool.net
+[1]: https://adoptium.net/
+[2]: https://groovy.apache.org/download.html
+[3]: https://sdkman.io/
+[groovy]: https://groovy.apache.org/
+[opennlp]: https://opennlp.apache.org/
+[languagetool]: https://languagetool.org/
+[maltparser]: https://www.maltparser.org/
 [recipes]: {{ site.url }}/groovy/recipes/

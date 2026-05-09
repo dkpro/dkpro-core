@@ -7,35 +7,35 @@ title: "Intro using Jython"
 
 These steps install the basis system requirements needed to implement DKPro Core pipelines  using the Python language. They need to be performed only once.
 
-   * Download and install the Java SE Development Kit 7 from the [Oracle Java Site][jdk]
-   * Download the *Jython 2.7beta 3* traditional installer from [here][jython-installer]
-   * Double-click on the *jython-installer-2.7-b3.jar* to start the installer
-   * Install with all the default settings. This should install Jython to `C:\jython2.7b3`  
+   * Download and install a Java SE Development Kit (JDK) 17 or higher (e.g. from [Adoptium][jdk])
+   * Download the *Jython 2.7.3* traditional installer from [here][jython-installer]
+   * Double-click on the *jython-installer-2.7.3.jar* to start the installer
+   * Install with all the default settings. This should install Jython to `C:\jython2.7.3`
    * Download [jip][jip] (version 0.8.3 or higher)
-   * Unpack `jip-0.8.3.zip ` to `C:\`
+   * Unpack `jip-0.8.3.zip` to `C:\`
    * Open a command line window
-      * Go to the jip folder: `cd C:\jip` 
-      * Install jip: `C:\jython2.7b3\jython setup.py install`
+      * Go to the jip folder: `cd C:\jip`
+      * Install jip: `C:\jython2.7.3\jython setup.py install`
       * Close the window
-      * Now you can delete the folder `C:\jip` and the file `jip-0.8.3.zip ` again
+      * Now you can delete the folder `C:\jip` and the file `jip-0.8.3.zip` again
 
 ## Running the pipeline
 
 For a start, let's try a simple analysis pipeline:
 
    * Read an English text file called "document.txt"
-   * Perform tokenization and sentence boundary detection using OpenNLP
-   * Perform lemmatization using LanguageTool
-   * Perform dependency parsing using MaltParser
+   * Perform tokenization and sentence boundary detection using [OpenNLP][opennlp]
+   * Perform lemmatization using [LanguageTool][languagetool]
+   * Perform dependency parsing using [MaltParser][maltparser]
    * Write the result to disk in CoNLL 2006 format
 
 Here is how to run that:
 
    * Open a text editor and copy/paste the following script into it.
-   * Save the file under the name *pipeline.groovy*.
+   * Save the file under the name *pipeline.py*.
    * Create another text file in the editor, write some English text into it, and save under the name *document.txt*.
    * Open a command line in the directory to which you saved the two files
-   * Invoke the script using the command `groovy pipeline.groovy`
+   * Invoke the script using the command `jython pipeline.py`
       * This will take quite a while the first time because the software components and models are downloaded
 
 {% highlight python %}
@@ -47,16 +47,16 @@ Thread.currentThread().contextClassLoader = getSyspathJavaLoader()
 
 # Dependencies and imports for DKPro modules
 from jip.embed import require
-require('de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-asl:1.6.2')
-from de.tudarmstadt.ukp.dkpro.core.opennlp import *
-require('de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.languagetool-asl:1.6.2')
-from de.tudarmstadt.ukp.dkpro.core.languagetool import *
-require('de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.maltparser-asl:1.6.2')
-from de.tudarmstadt.ukp.dkpro.core.maltparser import *
-require('de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.io.text-asl:1.6.2')
-from de.tudarmstadt.ukp.dkpro.core.io.text import *
-require('de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.io.conll-asl:1.6.2')
-from de.tudarmstadt.ukp.dkpro.core.io.conll import *
+require('org.dkpro.core:dkpro-core-opennlp-asl:2.5.0')
+from org.dkpro.core.opennlp import *
+require('org.dkpro.core:dkpro-core-languagetool-asl:2.5.0')
+from org.dkpro.core.languagetool import *
+require('org.dkpro.core:dkpro-core-maltparser-asl:2.5.0')
+from org.dkpro.core.maltparser import *
+require('org.dkpro.core:dkpro-core-io-text-asl:2.5.0')
+from org.dkpro.core.io.text import *
+require('org.dkpro.core:dkpro-core-io-conll-asl:2.5.0')
+from org.dkpro.core.io.conll import *
 
 # uimaFIT imports
 from org.apache.uima.fit.pipeline.SimplePipeline import *
@@ -103,8 +103,11 @@ The result is written to a file called *document.txt.conll* and could look somet
 
 You can find many more examples of what you can do with DKPro Core and Java on our [Jython recipes for DKPro Core pipelines][recipes] page
 
-[jdk]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
-[jip]: https://pypi.python.org/pypi/jip
-[jython-installer]: http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.7-b3/jython-installer-2.7-b3.jar
+[jdk]: https://adoptium.net/
+[jip]: https://pypi.org/project/jip/
+[jython-installer]: https://repo1.maven.org/maven2/org/python/jython-installer/2.7.3/jython-installer-2.7.3.jar
+[opennlp]: https://opennlp.apache.org/
+[languagetool]: https://languagetool.org/
+[maltparser]: https://www.maltparser.org/
 [recipes]: {{ site.url }}/jython/recipes/
 
