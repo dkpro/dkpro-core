@@ -23,7 +23,8 @@ permalink: "/documentation/"
 ### DKPro Core {{ stable.version }}
 _latest release_
 
-* [Release Notes]({{site.sourceurl}}/releases/tag/{{ stable.tag }}){% for link in stable.doclinks %}
+{% assign stable_doclinks = stable.doclinks | default: site.data.default_doclinks %}
+* [Release Notes]({{site.sourceurl}}/releases/tag/{{ stable.tag }}){% for link in stable_doclinks %}
 * [{{ link.title }}]({{site.url}}/releases/{{ stable.version }}/{{ link.url }}){% endfor %}
 
 ## Developer Documentation

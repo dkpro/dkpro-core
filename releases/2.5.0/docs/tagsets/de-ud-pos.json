@@ -1,0 +1,75 @@
+{
+    "name": "Universal Dependencies POS tags",
+    "description": "No description.",
+    "language": "de",
+    "tags": [
+        {
+            "tag_name": "ADJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ADP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AUX",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CONJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DET",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "INTJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NOUN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NUM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PART",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PRON",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PROPN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PUNCT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SCONJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VERB",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "X",
+            "tag_description": "No description."
+        }
+    ]
+}

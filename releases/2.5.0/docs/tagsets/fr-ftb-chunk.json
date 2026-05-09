@@ -1,0 +1,59 @@
+{
+    "name": "French Treebank",
+    "description": "French Treebank Chunk Tags\n\nReferences:\n* http://www.llf.cnrs.fr/Gens/Abeille/French-Treebank-fr.php\n",
+    "language": "fr",
+    "tags": [
+        {
+            "tag_name": "0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AP",
+            "tag_description": "adjectival phrases"
+        },
+        {
+            "tag_name": "AdP",
+            "tag_description": "adverbial phrases"
+        },
+        {
+            "tag_name": "COORD",
+            "tag_description": "coordinated phrases"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "noun phrases"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "prepositional phrases"
+        },
+        {
+            "tag_name": "SENT",
+            "tag_description": "sentences"
+        },
+        {
+            "tag_name": "Sint",
+            "tag_description": "finite clauses"
+        },
+        {
+            "tag_name": "Srel",
+            "tag_description": "finite clauses"
+        },
+        {
+            "tag_name": "Ssub",
+            "tag_description": "finite clauses"
+        },
+        {
+            "tag_name": "VN",
+            "tag_description": "verbal nucleus"
+        },
+        {
+            "tag_name": "VPinf",
+            "tag_description": "infinitive clauses"
+        },
+        {
+            "tag_name": "VPpart",
+            "tag_description": "nonfinite clauses"
+        }
+    ]
+}

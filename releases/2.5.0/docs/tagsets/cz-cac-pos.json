@@ -1,0 +1,55 @@
+{
+    "name": "Czech Academic Corpus 1.0",
+    "description": "No description.\n\nReferences:\n* http://ufal.mff.cuni.cz/rest/CAC/doc-cac10/cac-guide/eng/html/chapter12.html\n",
+    "language": "cz",
+    "tags": [
+        {
+            "tag_name": "A",
+            "tag_description": "Adjective"
+        },
+        {
+            "tag_name": "C",
+            "tag_description": "Numeral"
+        },
+        {
+            "tag_name": "D",
+            "tag_description": "Adverb"
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "Interjection"
+        },
+        {
+            "tag_name": "J",
+            "tag_description": "Conjunction"
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "Noun"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "Pronoun"
+        },
+        {
+            "tag_name": "R",
+            "tag_description": "Preposition"
+        },
+        {
+            "tag_name": "T",
+            "tag_description": "Particle"
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "Verb"
+        },
+        {
+            "tag_name": "X",
+            "tag_description": "Unknown, Not Determined, Unclassifiable"
+        },
+        {
+            "tag_name": "Z",
+            "tag_description": "Punctuation (also used for the Sentence Boundary token)"
+        }
+    ]
+}

@@ -1,0 +1,119 @@
+{
+    "name": "LCMC",
+    "description": "The LCMC tagset\n\nReferences:\n* http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_tagset.htm\n",
+    "language": "zh",
+    "tags": [
+        {
+            "tag_name": "a",
+            "tag_description": "adjective\nag        adjective morpheme\nan        adjective with nominal function"
+        },
+        {
+            "tag_name": "ad",
+            "tag_description": "adjective as adverbial"
+        },
+        {
+            "tag_name": "b",
+            "tag_description": "non-predicate adjective"
+        },
+        {
+            "tag_name": "bg",
+            "tag_description": "non-predicate adjective morpheme"
+        },
+        {
+            "tag_name": "c",
+            "tag_description": "conjunction"
+        },
+        {
+            "tag_name": "cg",
+            "tag_description": "conjunction morpheme"
+        },
+        {
+            "tag_name": "d",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "dg",
+            "tag_description": "adverb morpheme"
+        },
+        {
+            "tag_name": "e",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "ew",
+            "tag_description": "sentential punctuation"
+        },
+        {
+            "tag_name": "m",
+            "tag_description": "numeral"
+        },
+        {
+            "tag_name": "mg",
+            "tag_description": "numeric morpheme"
+        },
+        {
+            "tag_name": "n",
+            "tag_description": "common noun"
+        },
+        {
+            "tag_name": "ng",
+            "tag_description": "noun morpheme"
+        },
+        {
+            "tag_name": "nr",
+            "tag_description": "personal name"
+        },
+        {
+            "tag_name": "ns",
+            "tag_description": "place name"
+        },
+        {
+            "tag_name": "nt",
+            "tag_description": "organization name"
+        },
+        {
+            "tag_name": "nx",
+            "tag_description": "nominal character string"
+        },
+        {
+            "tag_name": "nz",
+            "tag_description": "other proper noun"
+        },
+        {
+            "tag_name": "p",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "pg",
+            "tag_description": "preposition morpheme"
+        },
+        {
+            "tag_name": "r",
+            "tag_description": "pronoun"
+        },
+        {
+            "tag_name": "rg",
+            "tag_description": "pronoun morpheme"
+        },
+        {
+            "tag_name": "u",
+            "tag_description": "auxiliary"
+        },
+        {
+            "tag_name": "v",
+            "tag_description": "verb\nvd         verb as adverbial\nvg         verb morpheme\nvn         verb with nominal function"
+        },
+        {
+            "tag_name": "w",
+            "tag_description": "symbol and non-sentential punctuation"
+        },
+        {
+            "tag_name": "y",
+            "tag_description": "modal particle"
+        },
+        {
+            "tag_name": "yg",
+            "tag_description": "modal particle morpheme"
+        }
+    ]
+}

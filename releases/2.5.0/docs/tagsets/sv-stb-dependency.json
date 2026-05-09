@@ -1,0 +1,8 @@
+{
+    "name": "Swedish Treebank",
+    "description": "Swedish treebank dependencies\n\nReferences:\n* http://stp.lingfil.uu.se/~nivre/swedish_treebank/dep.html\n",
+    "language": "sv",
+    "tags": [
+        
+    ]
+}

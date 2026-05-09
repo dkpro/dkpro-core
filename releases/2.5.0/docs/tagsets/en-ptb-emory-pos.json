@@ -1,0 +1,255 @@
+{
+    "name": "Penn Treebank Tagset with Emory NLP extensions",
+    "description": "Source (PTB 1): http://faculty.washington.edu/dillon/GramResources/penntable.html\nSource (PTB 2): http://www.clips.ua.ac.be/pages/mbsp-tags\nSource (ClearNLP): http://clear.colorado.edu/compsem/documents/treebank_guidelines.pdf\nSource (Emory NLP4J): https://github.com/emorynlp/nlp4j/blob/master/md/components/part_of_speech_tagging.md",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "!",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "#",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "$",
+            "tag_description": "$ - Dollar"
+        },
+        {
+            "tag_name": "''",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "(",
+            "tag_description": "contextual separator, left paren"
+        },
+        {
+            "tag_name": ")",
+            "tag_description": "contextual separator, right paren"
+        },
+        {
+            "tag_name": ",",
+            "tag_description": "punctuation mark, comma"
+        },
+        {
+            "tag_name": "-",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "-LRB-",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "-RRB-",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": ".",
+            "tag_description": "punctuation mark, sentence closer"
+        },
+        {
+            "tag_name": ":",
+            "tag_description": "punctuation mark, colon"
+        },
+        {
+            "tag_name": ";",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "?",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ADD",
+            "tag_description": "Email"
+        },
+        {
+            "tag_name": "AFX",
+            "tag_description": "unbound affix (Warner et al., 2004)"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "1.\tCC\tCoordinating conjunction"
+        },
+        {
+            "tag_name": "CD",
+            "tag_description": "2.\tCD\tCardinal number"
+        },
+        {
+            "tag_name": "DT",
+            "tag_description": "3.\tDT\tDeterminer"
+        },
+        {
+            "tag_name": "EX",
+            "tag_description": "4.\tEX\tExistential there"
+        },
+        {
+            "tag_name": "FW",
+            "tag_description": "5.\tFW\tForeign word"
+        },
+        {
+            "tag_name": "GW",
+            "tag_description": "mistranscription (Taylor, 1996)"
+        },
+        {
+            "tag_name": "HYPH",
+            "tag_description": "unbound hyphen (Warner et al., 2004)"
+        },
+        {
+            "tag_name": "IN",
+            "tag_description": "6.\tIN\tPreposition or subordinating conjunction"
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "7.\tJJ\tAdjective"
+        },
+        {
+            "tag_name": "JJR",
+            "tag_description": "8.\tJJR\tAdjective, comparative"
+        },
+        {
+            "tag_name": "JJS",
+            "tag_description": "9.\tJJS\tAdjective, superlative"
+        },
+        {
+            "tag_name": "LS",
+            "tag_description": "10.\tLS\tList item marker"
+        },
+        {
+            "tag_name": "MD",
+            "tag_description": "11.\tMD\tModal"
+        },
+        {
+            "tag_name": "NFP",
+            "tag_description": "Superfluous punctuation"
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "12.\tNN\tNoun, singular or mass"
+        },
+        {
+            "tag_name": "NNP",
+            "tag_description": "14.\tNP\tProper noun, singular (PTB 2)"
+        },
+        {
+            "tag_name": "NNPS",
+            "tag_description": "15.\tNPS\tProper noun, plural (PTB 2)"
+        },
+        {
+            "tag_name": "NNS",
+            "tag_description": "13.\tNNS\tNoun, plural"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "14.\tNP\tProper noun, singular (PTB 1)"
+        },
+        {
+            "tag_name": "NPS",
+            "tag_description": "15.\tNPS\tProper noun, plural (PTB 1)"
+        },
+        {
+            "tag_name": "PDT",
+            "tag_description": "16.\tPDT\tPredeterminer"
+        },
+        {
+            "tag_name": "POS",
+            "tag_description": "17.\tPOS\tPossessive ending"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "18.\tPP\tPersonal pronoun"
+        },
+        {
+            "tag_name": "PP$",
+            "tag_description": "19.\tPP$\tPossessive pronoun"
+        },
+        {
+            "tag_name": "PRP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PRP$",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RB",
+            "tag_description": "20.\tRB\tAdverb"
+        },
+        {
+            "tag_name": "RBR",
+            "tag_description": "21.\tRBR\tAdverb, comparative"
+        },
+        {
+            "tag_name": "RBS",
+            "tag_description": "22.\tRBS\tAdverb, superlative"
+        },
+        {
+            "tag_name": "RP",
+            "tag_description": "23.\tRP\tParticle"
+        },
+        {
+            "tag_name": "SENT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "24.\tSYM\tSymbol"
+        },
+        {
+            "tag_name": "TO",
+            "tag_description": "25.\tTO\tto"
+        },
+        {
+            "tag_name": "UH",
+            "tag_description": "26.\tUH\tInterjection"
+        },
+        {
+            "tag_name": "VB",
+            "tag_description": "27.\tVB\tVerb, base form"
+        },
+        {
+            "tag_name": "VBD",
+            "tag_description": "28.\tVBD\tVerb, past tense"
+        },
+        {
+            "tag_name": "VBG",
+            "tag_description": "29.\tVBG\tVerb, gerund or present participle"
+        },
+        {
+            "tag_name": "VBN",
+            "tag_description": "30.\tVBN\tVerb, past participle"
+        },
+        {
+            "tag_name": "VBP",
+            "tag_description": "31.\tVBP\tVerb, non-3rd person singular present"
+        },
+        {
+            "tag_name": "VBZ",
+            "tag_description": "32.\tVBZ\tVerb, 3rd person singular present"
+        },
+        {
+            "tag_name": "WDT",
+            "tag_description": "33.\tWDT\tWh-determiner"
+        },
+        {
+            "tag_name": "WP",
+            "tag_description": "34.\tWP\tWh-pronoun"
+        },
+        {
+            "tag_name": "WP$",
+            "tag_description": "35.\tWP$\tPossessive wh-pronoun"
+        },
+        {
+            "tag_name": "WRB",
+            "tag_description": "36.\tWRB\tWh-adverb"
+        },
+        {
+            "tag_name": "XX",
+            "tag_description": "uninterpretable material (Mott et al., 2009)"
+        },
+        {
+            "tag_name": "``",
+            "tag_description": "No description."
+        }
+    ]
+}

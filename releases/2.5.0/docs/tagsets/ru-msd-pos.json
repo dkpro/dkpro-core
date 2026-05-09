@@ -1,0 +1,3783 @@
+{
+    "name": "MSD",
+    "description": "Morphosyntactic Specifications for Russian\n\nReferences:\n* http://corpus.leeds.ac.uk/mocky/msd-ru.html\n",
+    "language": "ru",
+    "tags": [
+        {
+            "tag_name": ",",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "-",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afcmsnf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfpgf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfsaf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfsas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfsdf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfsgf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfsif",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfslf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfsnf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpfsns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmpaf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmpdf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmpgf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmpif",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmplf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmpnf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmpns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsaf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsdf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsds",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsgf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsgs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsif",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmslf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsnf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpmsns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnpaf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnpnf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnsaf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnsdf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnsgf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnsif",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnslf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnsnf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Afpnsns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "C",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc---d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--dd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--gd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--id",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mc--n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcf-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcf-d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcf-g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcf-i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcf-l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcf-n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcm-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcm-d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcm-g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcm-i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcm-l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcm-n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcn-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcn-d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcn-g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcn-i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcn-l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mcn-n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo---d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo--g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo--i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pdd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pgd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pid",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pld",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-pnd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mo-sad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mof",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mof-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mof-d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mof-g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mof-i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mof-l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mof-n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsdd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsgd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsid",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsld",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mofsnd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mom-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mom-d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mom-g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mom-i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mom-l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mom-n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsgd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsid",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsld",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Momsnd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mon-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mon-d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mon-g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mon-i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mon-l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mon-n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsgd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsid",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Monsnd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccpay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccpdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccpgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccpiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccply",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccpny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsly",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nccsny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfply",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfpny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsly",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsnnl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsnnp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncfsvy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmply",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpnnl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmpny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsly",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsnnl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsnnp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsvn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncmsvy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnply",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnpny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsly",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnsny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcpay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsly",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npcsvy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfpay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfpdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfpgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfpiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfpny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsly",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npfsvy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmpay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmpdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmpgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmpiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmpny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmpvy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsay",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsdy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsgy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsiy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsly",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsny",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npmsvy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npnsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Npnsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-----a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-----r",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----an",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----ar",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----dn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----dr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----gn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----gr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----ir",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----ln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P----nn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---p-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---paa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pda",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pla",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pna",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---pnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---san",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sar",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sdr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sgr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sir",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---sln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P---snn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--f-aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--f-la",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fpaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fs-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsda",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsla",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsna",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--fsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--m-aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--m-ga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--m-ia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--m-la",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--mpga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--ms-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msda",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msla",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msna",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--msnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--n-an",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--n-ga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--n-la",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--n-na",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--npan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--npgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--npnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--ns-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsda",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsga",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsla",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsna",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P--nsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-pan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-pdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-pgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-pin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-pln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-pnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-san",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-sdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-sgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-sin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-sln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1-snn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-1nsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-pan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-pdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-pgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-pin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-pln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-pnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-san",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-sdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-sgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-sin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-sln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2-snn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2msdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-2nsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3-pan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3-pdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3-pgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3-pin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3-pln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3-pnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3-san",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3fsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3fsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3fsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3fsin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3fsln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3fsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3msan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3msdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3msgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3msin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3msln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3msnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3nsan",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3nsdn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3nsgn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3nsin",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3nsln",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-3nsnn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "R",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SENT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp-a",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp-d",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp-g",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp-i",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp-l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp-n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmg----a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmg----m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgp---a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgp---a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgp---m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgp---m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgs---a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgs---a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgs---m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmgs---m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmi-1--a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif1p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif1p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif1p-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif1s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif1s-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif1s-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif2p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif2p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif2p-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif2s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif2s-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif2s-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif3p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif3p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif3p-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif3s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif3s-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmif3s-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip---m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip1p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip1p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip1p-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip1s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip1s-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip1s-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip2p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip2p-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip2s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip2s-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip3p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip3p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip3p-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip3p-p-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip3s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip3s-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmip3s-p-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis---a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis---a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis---m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis--nm-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-p-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-p-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-p-p-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-s-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sfa-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sfa-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sfm-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sfm-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sfp-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sma-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sma-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-smm-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-smm-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-smp-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-smp-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sna-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-sna-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-snm-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-snm-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmis-snp-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm--s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-1p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-1p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-1p-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-1s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-1s-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-1s-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2--a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2--a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2p-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2p-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2p-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2p-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2s-a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2s-a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2s-m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmm-2s-m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmn----a-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmn----a-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmn----m-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmn----m-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmn----p-e",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-a-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-a-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-a-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-a-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-a-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-a-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-afea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-afed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-afeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-afei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-afel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-afen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-m-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-m-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-m-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-m-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-m-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-m-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-mfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-mfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-mfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-mfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-mfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-mfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-p-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-p-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-p-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-p-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-pfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-pfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-pfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-pfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-pfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-pfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-p-pse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-pma-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-s-a-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-s-afei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfa-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfa-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfa-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfa-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfa-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfa-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfafea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfafed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfafeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfafei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfafel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfafen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfm-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfm-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfm-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfm-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfm-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfm-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfmfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfmfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfmfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfmfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfmfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfmfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfp-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfp-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfp-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfp-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfp-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfpfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfpfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfpfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfpfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfpfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfpfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sfpse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sma-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sma-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sma-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sma-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sma-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sma-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smafea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smafed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smafeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smafei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smafel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smafen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smase",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smm-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smm-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smm-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smm-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smm-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smm-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smmfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smmfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smmfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smmfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smmfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smmfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smp-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smp-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smp-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smp-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smp-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smpfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smpfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smpfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smpfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smpfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smpfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-smpse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sna-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sna-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sna-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sna-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sna-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-sna-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snafea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snafed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snafeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snafei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snafel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snafen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snm-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snm-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snm-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snm-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snm-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snmfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snmfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snmfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snmfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snmfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snmfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snp-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snp-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snp-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snp-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snp-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snpfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snpfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snpfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snpfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snpfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snpfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmpp-snpse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-a-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-afpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-m-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-mfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-p-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-pse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-p-psp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-s-pfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-s-pfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfa-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfafpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfm-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfmfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfp-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sfpsp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sma-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smafpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-ed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smm-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smmfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smp-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-smpsp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-ei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-sna-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snafpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-ea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-eg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-en",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snm-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfed",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfei",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snmfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-pa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-pd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-pg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-pi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-pl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snp-pn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfea",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfeg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfpd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfpg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfpi",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfpl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpfpn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpse",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vmps-snpsp",
+            "tag_description": "No description."
+        }
+    ]
+}

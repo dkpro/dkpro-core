@@ -1,0 +1,51 @@
+{
+    "name": "CoNLL 2000",
+    "description": "Chunk labels used in the CoNLL 2000 shared task.\n\nReferences:\n* http://www.cnts.ua.ac.be/conll2000/pdf/12732tjo.pdf\n",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "ADJP",
+            "tag_description": "adjective phrase"
+        },
+        {
+            "tag_name": "ADVP",
+            "tag_description": "adverb phrase"
+        },
+        {
+            "tag_name": "CONJP",
+            "tag_description": "conjunction phrase"
+        },
+        {
+            "tag_name": "INTJ",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "LST",
+            "tag_description": "list marker"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "noun phrase"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "prepositional phrase"
+        },
+        {
+            "tag_name": "PRT",
+            "tag_description": "particles"
+        },
+        {
+            "tag_name": "SBAR",
+            "tag_description": "subordinate clause"
+        },
+        {
+            "tag_name": "UCP",
+            "tag_description": "unlike coordinated phrase"
+        },
+        {
+            "tag_name": "VP",
+            "tag_description": "verb phrase"
+        }
+    ]
+}

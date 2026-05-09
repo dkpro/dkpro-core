@@ -1,0 +1,103 @@
+{
+    "name": "arktweet",
+    "description": "No description.",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "!",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "#",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "$",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "&",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": ",",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "@",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "D",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "E",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "G",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "L",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "M",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "O",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "R",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "T",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "U",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "^",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "~",
+            "tag_description": "No description."
+        }
+    ]
+}

@@ -1,0 +1,2899 @@
+{
+    "name": "XIADA",
+    "description": "Tagset used by the XIADA: Etiquetador/Lematizador do Galego Actual\n\nReferences:\n* http://corpus.cirp.es/xiada/\n* http://corpus.cirp.es/xiada/etiquetario.html\n",
+    "language": "gl",
+    "tags": [
+        {
+            "tag_name": "A0aa",
+            "tag_description": "A - Adxectivo"
+        },
+        {
+            "tag_name": "A0ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A0as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A0fa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A0fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A0fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A0ma",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A0mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A0ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Acap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Acas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Acfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Acfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Acmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Acms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Cc",
+            "tag_description": "C - Conxunci\u00f3n"
+        },
+        {
+            "tag_name": "Cs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Cs+Ddfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Cs+Ddfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Cs+Ddmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Cs+Ddms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ddfp",
+            "tag_description": "D - Artigo"
+        },
+        {
+            "tag_name": "Ddfp+Spfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ddfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ddfs+Spfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ddmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ddmp+Spmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ddms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ddms+Spms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Difp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Difs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Dimp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Dims",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Dims+Spms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Edfp",
+            "tag_description": "E - Demostrativo"
+        },
+        {
+            "tag_name": "Edfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Edmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Edmp+Inmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Edms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Enfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Enfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Enmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Enms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Enns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gdaa",
+            "tag_description": "G - interrogativo/ exclamativo"
+        },
+        {
+            "tag_name": "Gdap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gdas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gdfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gdfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gdmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gdms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gnaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gnap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gnas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gnfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gnfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gnmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gnms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Iafp",
+            "tag_description": "I - Indefinido"
+        },
+        {
+            "tag_name": "Iafs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Iamp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Iams",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idfp+Ddfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idmp+Ddmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Idms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "In00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Inaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Inap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Inas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Infp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Infs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Inmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Inmp+Ddmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Inms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "La0",
+            "tag_description": "L - Locuci\u00f3n"
+        },
+        {
+            "tag_name": "Lcc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lcc+Ddfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lcc+Ddfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lcc+Ddmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lcc+Ddms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lcs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Ddfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Ddfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Ddmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Ddms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Difp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Difs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Dimp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Dims",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Edfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Edfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Edmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Enfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Enmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Enns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Idfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Idmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Ncdms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Lp0+Sp00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md1pfp",
+            "tag_description": "M - Posesivo"
+        },
+        {
+            "tag_name": "Md1pfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md1pmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md1pms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md1sfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md1sfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md1smp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md1sms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2pfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2pfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2pmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2pms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2sfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2sfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2smp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md2sms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3afp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3afs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3amp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3ams",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3pfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3pfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3pmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3pms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3sfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3sfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3smp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Md3sms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1pfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1pfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1pmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1pms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1sfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1sfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1smp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn1sms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2pfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2pfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2pmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2pms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2sfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2sfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2smp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn2sms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3afp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3afs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3amp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3ams",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3pfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3pfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3pmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3pms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3sfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3sfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3smp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Mn3sms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncdap",
+            "tag_description": "N - Numeral"
+        },
+        {
+            "tag_name": "Ncdfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncdfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncdmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncdms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ncnms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nodfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nodfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nodmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nodms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nonfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nonfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nonmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Nonms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "Preposici\u00f3n"
+        },
+        {
+            "tag_name": "P+Ddfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Ddfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Ddmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Ddms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Difp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Difs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Dimp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Dims",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Edfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Edfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Edmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Edmp+Inmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Edms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Enfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Enfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Enmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Enms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Enns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Iafp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Iamp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Idfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Idfp+Ddfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Idfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Idmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Idms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Infp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Infs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Inmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Inms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Ncdfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Ncdms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Ncnfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Rtp3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Rtp3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Rtp3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Rtp3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Sp00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Spfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Spfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Spmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Spms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P+Wn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P-Rtp3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q",
+            "tag_description": "Signo de puntuaci\u00f3n"
+        },
+        {
+            "tag_name": "Q!",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q\"",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q'",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q(",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q)",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q,",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q-",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q.",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q...",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q/",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q:",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q;",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q?",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q[",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q]",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q_",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q{",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q}",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q\u00a1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q\u00bf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa1ap",
+            "tag_description": "R - Pronome"
+        },
+        {
+            "tag_name": "Raa1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa1fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa2fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa2fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa2mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa2ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1ap+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1as+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1as+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1mp+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2ap+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2mp+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad2ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3as+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3fs+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3ms+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rad3ms+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf1fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf2fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf2fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf2mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Raf2ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn1fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn2fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn2fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn2mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn2ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtn3ns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp1fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp2fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp2fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp2mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp2ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Rtp3ns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SA0fs",
+            "tag_description": "S - Substantivo"
+        },
+        {
+            "tag_name": "Scaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scfa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scma",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Scms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Spf0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Spfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Spfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Spm0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Spmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Spms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tdfp",
+            "tag_description": "T - Relativo"
+        },
+        {
+            "tag_name": "Tdfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tdmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tdms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tnaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tnap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tnas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tnfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tnfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tnmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Tnms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000",
+            "tag_description": "V - Verbo"
+        },
+        {
+            "tag_name": "V0f000+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa1fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa2ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3as+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3as+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3fs+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3mp+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rad3ms+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raf1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raf1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raf2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Raf2fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f000+Rao3aa+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f10p+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f10p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f30p+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0f30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20p+Raf2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20s+Raa2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20s+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20s+Raf2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0m20s+Raf2ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0p0fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0p0fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0p0mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0p0ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad1as+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rad3ms+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x000+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V0x20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci10s+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci10s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci20s+Raa2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30p+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rad1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci30s+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vcia0s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10p+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10p+Raf1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raa1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raa1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Rad3as+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raf1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei10s+Raf1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei20s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei20s+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei20s+Raf2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Raa1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rao3aa+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30p+Rao3aa+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Raa1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Raa3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad1ms+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rao3aa+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vei30s+Rao3aa+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ves10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ves10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ves20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ves20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ves30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ves30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vesa0s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi10p+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi10p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi10p+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi10p+Raf1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi10s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30p+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30p+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30p+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30p+Rad3ms+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30p+Rao3aa+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rao3aa+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfi30s+Rao3aa+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfs10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfs10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfs20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfs20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfs30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfs30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vfsa0s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii10p+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii10s+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30p+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30p+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30p+Rad1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30p+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30p+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii30s+Rao3aa+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Viia0s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli30p+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli30s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli30s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vli30s+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vlia0s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raa2ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Rad2fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raf1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raf1fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10p+Raf1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raa1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raa1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raf1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raf1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi10s+Raf1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi20s+Raa2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi20s+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30p+Rao3aa+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa1mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad1ap+Raa3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad1fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad1ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad2as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad2fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad3as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad3fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rao3aa+Rad1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rao3aa+Rad3ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rao3aa+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rao3aa+Rad3mp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpi30s+Rao3aa+Rad3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps10p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps10p+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps10p+Raa3ms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps10p+Raf1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps10s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps20p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps20s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps30p",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps30p+Rad3fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps30p+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps30s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps30s+Raa1ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps30s+Rad1as",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vps30s+Rao3aa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vpsa0s",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Wg",
+            "tag_description": "W - Adverbio"
+        },
+        {
+            "tag_name": "Wm",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Wn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Wr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y",
+            "tag_description": "Interxecci\u00f3n"
+        },
+        {
+            "tag_name": "Za00",
+            "tag_description": "Z - Categor\u00eda perif\u00e9rica"
+        },
+        {
+            "tag_name": "Zaas",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zafp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zafs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zamp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zams",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zams+Ncnms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zf00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zg00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zgaa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zgfa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zgfp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zgfs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zgma",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zgmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zgms",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zo00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zs00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zs00+Ncdmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zs00+Ncnmp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zs00+Ncnms",
+            "tag_description": "No description."
+        }
+    ]
+}

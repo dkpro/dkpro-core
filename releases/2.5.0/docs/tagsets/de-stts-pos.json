@@ -1,0 +1,227 @@
+{
+    "name": "STTS",
+    "description": "Tag Table (1995/1999)\n\nSource: http://www.sfs.uni-tuebingen.de/resources/stts-1999.pdf\nhttp://www.ims.uni-stuttgart.de/forschung/ressourcen/lexika/TagSets/stts-table.html\n\n2012-05-06 - Added PROAV which replaces PAV in the Tiger 1 corpus.\nhttp://www.uni-potsdam.de/u/germanistik/ls_dgs/tiger1-intro.pdf\n\nReferences:\n* http://www.ims.uni-stuttgart.de/forschung/ressourcen/lexika/TagSets/stts-table.html\n",
+    "language": "de",
+    "tags": [
+        {
+            "tag_name": "$(",
+            "tag_description": "$(\tsonstige Satzzeichen; satzintern\t- [,]()"
+        },
+        {
+            "tag_name": "$,",
+            "tag_description": "$,\tKomma\t,"
+        },
+        {
+            "tag_name": "$.",
+            "tag_description": "$.\tSatzbeendende Interpunktion\t. ? ! ; :"
+        },
+        {
+            "tag_name": "ADJA",
+            "tag_description": "attributives Adjektiv\t[das] gro\u00dfe [Haus]"
+        },
+        {
+            "tag_name": "ADJD",
+            "tag_description": "adverbiales oder pr\u00e4dikatives Adjektiv\t[er f\u00e4hrt] schnell, [er ist] schnell"
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "Adverb\tschon, bald, doch"
+        },
+        {
+            "tag_name": "APPO",
+            "tag_description": "Postposition\t[ihm] zufolge, [der Sache] wegen"
+        },
+        {
+            "tag_name": "APPR",
+            "tag_description": "Pr\u00e4position; Zirkumposition links\tin [der Stadt], ohne [mich]"
+        },
+        {
+            "tag_name": "APPRART",
+            "tag_description": "Pr\u00e4position mit Artikel\tim [Haus], zur [Sache]"
+        },
+        {
+            "tag_name": "APZR",
+            "tag_description": "Zirkumposition rechts\t[von jetzt] an"
+        },
+        {
+            "tag_name": "ART",
+            "tag_description": "bestimmter oder unbestimmter Artikel\tder, die, das, ein, eine"
+        },
+        {
+            "tag_name": "CARD",
+            "tag_description": "Kardinalzahl\tzwei [M\u00e4nner], [im Jahre] 1994"
+        },
+        {
+            "tag_name": "FM",
+            "tag_description": "Fremdsprachliches Material\t[Er hat das mit ``] A big fish ['' \u00fcbersetzt]"
+        },
+        {
+            "tag_name": "ITJ",
+            "tag_description": "Interjektion\tmhm, ach, tja"
+        },
+        {
+            "tag_name": "KOKOM",
+            "tag_description": "Vergleichskonjunktion\tals, wie"
+        },
+        {
+            "tag_name": "KON",
+            "tag_description": "nebenordnende Konjunktion\tund, oder, aber"
+        },
+        {
+            "tag_name": "KOUI",
+            "tag_description": "unterordnende Konjunktion mit ``zu'' und Infinitiv\tum [zu leben], anstatt [zu fragen]"
+        },
+        {
+            "tag_name": "KOUS",
+            "tag_description": "unterordnende Konjunktion mit Satz\tweil, da\u00df, damit, wenn, ob"
+        },
+        {
+            "tag_name": "NE",
+            "tag_description": "Eigennamen\tHans, Hamburg, HSV"
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "normales Nomen\tTisch, Herr, [das] Reisen"
+        },
+        {
+            "tag_name": "PAV",
+            "tag_description": "Pronominaladverb\tdaf\u00fcr, dabei, deswegen, trotzdem"
+        },
+        {
+            "tag_name": "PDAT",
+            "tag_description": "attribuierendes Demonstrativpronomen\tjener [Mensch]"
+        },
+        {
+            "tag_name": "PDS",
+            "tag_description": "substituierendes Demonstrativpronomen\tdieser, jener"
+        },
+        {
+            "tag_name": "PIAT",
+            "tag_description": "attribuierendes Indefinitpronomen ohne Determiner\tkein [Mensch], irgendein [Glas]"
+        },
+        {
+            "tag_name": "PIDAT",
+            "tag_description": "attribuierendes Indefinitpronomen mit Determiner\t[ein] wenig [Wasser], [die] beiden [Br\u00fcder]"
+        },
+        {
+            "tag_name": "PIS",
+            "tag_description": "substituierendes Indefinitpronomen\tkeiner, viele, man, niemand"
+        },
+        {
+            "tag_name": "PPER",
+            "tag_description": "irreflexives Personalpronomen\tich, er, ihm, mich, dir"
+        },
+        {
+            "tag_name": "PPOSAT",
+            "tag_description": "attribuierendes Possessivpronomen\tmein [Buch], deine [Mutter]"
+        },
+        {
+            "tag_name": "PPOSS",
+            "tag_description": "substituierendes Possessivpronomen\tmeins, deiner"
+        },
+        {
+            "tag_name": "PRELAT",
+            "tag_description": "attribuierendes Relativpronomen\t[der Mann ,] dessen [Hund]"
+        },
+        {
+            "tag_name": "PRELS",
+            "tag_description": "substituierendes Relativpronomen\t[der Hund ,] der"
+        },
+        {
+            "tag_name": "PRF",
+            "tag_description": "reflexives Personalpronomen\tsich, einander, dich, mir"
+        },
+        {
+            "tag_name": "PROAV",
+            "tag_description": "Pronominaladverb\tdaf\u00fcr, dabei, deswegen, trotzdem (Tiger)"
+        },
+        {
+            "tag_name": "PTKA",
+            "tag_description": "Partikel bei Adjektiv oder Adverb\tam [sch\u00f6nsten], zu [schnell]"
+        },
+        {
+            "tag_name": "PTKANT",
+            "tag_description": "Antwortpartikel\tja, nein, danke, bitte"
+        },
+        {
+            "tag_name": "PTKNEG",
+            "tag_description": "Negationspartikel\tnicht"
+        },
+        {
+            "tag_name": "PTKVZ",
+            "tag_description": "abgetrennter Verbzusatz\t[er kommt] an, [er f\u00e4hrt] rad"
+        },
+        {
+            "tag_name": "PTKZU",
+            "tag_description": "``zu'' vor Infinitiv\tzu [gehen]"
+        },
+        {
+            "tag_name": "PWAT",
+            "tag_description": "attribuierendes Interrogativpronomen\twelche [Farbe], wessen [Hut]"
+        },
+        {
+            "tag_name": "PWAV",
+            "tag_description": "adverbiales Interrogativ- oder Relativpronomen\twarum, wo, wann, wor\u00fcber, wobei"
+        },
+        {
+            "tag_name": "PWS",
+            "tag_description": "substituierendes Interrogativpronomen\twer, was"
+        },
+        {
+            "tag_name": "TRUNC",
+            "tag_description": "Kompositions-Erstglied\tAn- [und Abreise]"
+        },
+        {
+            "tag_name": "VAFIN",
+            "tag_description": "finites Verb, aux\t[du] bist, [wir] werden"
+        },
+        {
+            "tag_name": "VAIMP",
+            "tag_description": "Imperativ, aux\tsei [ruhig !]"
+        },
+        {
+            "tag_name": "VAINF",
+            "tag_description": "Infinitiv, aux\twerden, sein"
+        },
+        {
+            "tag_name": "VAPP",
+            "tag_description": "Partizip Perfekt, aux\tgewesen"
+        },
+        {
+            "tag_name": "VMFIN",
+            "tag_description": "finites Verb, modal\td\u00fcrfen"
+        },
+        {
+            "tag_name": "VMINF",
+            "tag_description": "Infinitiv, modal\twollen"
+        },
+        {
+            "tag_name": "VMPP",
+            "tag_description": "Partizip Perfekt, modal\tgekonnt, [er hat gehen] k\u00f6nnen"
+        },
+        {
+            "tag_name": "VVFIN",
+            "tag_description": "finites Verb, voll\t[du] gehst, [wir] kommen [an]"
+        },
+        {
+            "tag_name": "VVIMP",
+            "tag_description": "Imperativ, voll\tkomm [!]"
+        },
+        {
+            "tag_name": "VVINF",
+            "tag_description": "Infinitiv, voll\tgehen, ankommen"
+        },
+        {
+            "tag_name": "VVIZU",
+            "tag_description": "Infinitiv mit ``zu'', voll\tanzukommen, loszulassen"
+        },
+        {
+            "tag_name": "VVPP",
+            "tag_description": "Partizip Perfekt, voll\tgegangen, angekommen"
+        },
+        {
+            "tag_name": "XY",
+            "tag_description": "Nichtwort, Sonderzeichen enthaltend\t3:7, H2O, D2XW3"
+        }
+    ]
+}

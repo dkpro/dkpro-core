@@ -1,0 +1,267 @@
+{
+    "name": "Parole (reduced)",
+    "description": "Parole Reduced Tagset\n\nReferences:\n* http://www.lsi.upc.edu/~nlp/SVMTool/parole.html\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "AO",
+            "tag_description": "Adjective, Ordinal"
+        },
+        {
+            "tag_name": "AQ",
+            "tag_description": "Adjective, Qualificator"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "Conjunction, Coordinate"
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "Conjunction, Subordinative"
+        },
+        {
+            "tag_name": "DA",
+            "tag_description": "Determiner, Article"
+        },
+        {
+            "tag_name": "DD",
+            "tag_description": "Determiner, Demonstrative"
+        },
+        {
+            "tag_name": "DE",
+            "tag_description": "Determiner, Exclamatory"
+        },
+        {
+            "tag_name": "DI",
+            "tag_description": "Determiner, Indefinite"
+        },
+        {
+            "tag_name": "DN",
+            "tag_description": "Determiner, Numeral"
+        },
+        {
+            "tag_name": "DP",
+            "tag_description": "Determiner, Possessive"
+        },
+        {
+            "tag_name": "DT",
+            "tag_description": "Determiner, Interrogative"
+        },
+        {
+            "tag_name": "Faa",
+            "tag_description": "Punctuation, \u00a1"
+        },
+        {
+            "tag_name": "Fat",
+            "tag_description": "Punctuation, !"
+        },
+        {
+            "tag_name": "Fc",
+            "tag_description": "Punctuation, ,"
+        },
+        {
+            "tag_name": "Fd",
+            "tag_description": "Punctuation, :"
+        },
+        {
+            "tag_name": "Fe",
+            "tag_description": "Punctuation, \""
+        },
+        {
+            "tag_name": "Fg",
+            "tag_description": "Punctuation, -"
+        },
+        {
+            "tag_name": "Fh",
+            "tag_description": "Punctuation, /"
+        },
+        {
+            "tag_name": "Fia",
+            "tag_description": "Punctuation, \u00bf"
+        },
+        {
+            "tag_name": "Fit",
+            "tag_description": "Punctuation, ?"
+        },
+        {
+            "tag_name": "Fp",
+            "tag_description": "Punctuation, ."
+        },
+        {
+            "tag_name": "Fpa",
+            "tag_description": "Punctuation, ("
+        },
+        {
+            "tag_name": "Fpt",
+            "tag_description": "Punctuation, )"
+        },
+        {
+            "tag_name": "Fs",
+            "tag_description": "Punctuation, ..."
+        },
+        {
+            "tag_name": "Fx",
+            "tag_description": "Punctuation, ;"
+        },
+        {
+            "tag_name": "Fz",
+            "tag_description": "Punctuation, other than those"
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "Interjection"
+        },
+        {
+            "tag_name": "NC",
+            "tag_description": "Noun, Common"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "Noun, Proper"
+        },
+        {
+            "tag_name": "P0",
+            "tag_description": "Pronoun, Clitic"
+        },
+        {
+            "tag_name": "PD",
+            "tag_description": "Pronoun, Demonstrative#"
+        },
+        {
+            "tag_name": "PE",
+            "tag_description": "Pronoun, Exclamatory"
+        },
+        {
+            "tag_name": "PI",
+            "tag_description": "Pronoun, Indefinite"
+        },
+        {
+            "tag_name": "PN",
+            "tag_description": "Pronoun, Numeral"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "Pronoun, Personal"
+        },
+        {
+            "tag_name": "PR",
+            "tag_description": "Pronoun, Relative"
+        },
+        {
+            "tag_name": "PT",
+            "tag_description": "Pronoun, Interrogative"
+        },
+        {
+            "tag_name": "PX",
+            "tag_description": "Pronoun, Possessive"
+        },
+        {
+            "tag_name": "RG",
+            "tag_description": "Adverb, General"
+        },
+        {
+            "tag_name": "RN",
+            "tag_description": "Adverb, Negative"
+        },
+        {
+            "tag_name": "SP",
+            "tag_description": "Adposition, Preposition"
+        },
+        {
+            "tag_name": "VAG",
+            "tag_description": "Verb, Auxiliar, Gerund"
+        },
+        {
+            "tag_name": "VAI",
+            "tag_description": "Verb, Auxiliar, Indicative"
+        },
+        {
+            "tag_name": "VAM",
+            "tag_description": "Verb, Auxiliar, Imperative"
+        },
+        {
+            "tag_name": "VAN",
+            "tag_description": "Verb, Auxiliar, Infinitive"
+        },
+        {
+            "tag_name": "VAP",
+            "tag_description": "Verb, Auxiliar, Participle"
+        },
+        {
+            "tag_name": "VAS",
+            "tag_description": "Verb, Auxiliar, Subjunctive"
+        },
+        {
+            "tag_name": "VMG",
+            "tag_description": "Verb, Main, Gerund"
+        },
+        {
+            "tag_name": "VMI",
+            "tag_description": "Verb, Main, Indicative"
+        },
+        {
+            "tag_name": "VMM",
+            "tag_description": "Verb, Main, Imperative"
+        },
+        {
+            "tag_name": "VMN",
+            "tag_description": "Verb, Main, Infinitive"
+        },
+        {
+            "tag_name": "VMP",
+            "tag_description": "Verb, Main, Participle"
+        },
+        {
+            "tag_name": "VMS",
+            "tag_description": "Verb, Main, Subjunctive"
+        },
+        {
+            "tag_name": "VSG",
+            "tag_description": "Verb, Semi-Auxiliar, Gerund"
+        },
+        {
+            "tag_name": "VSI",
+            "tag_description": "Verb, Semi-Auxiliar, Indicative"
+        },
+        {
+            "tag_name": "VSM",
+            "tag_description": "Verb, Semi-Auxiliar, Imperative"
+        },
+        {
+            "tag_name": "VSN",
+            "tag_description": "Verb, Semi-Auxiliar, Infinitive"
+        },
+        {
+            "tag_name": "VSP",
+            "tag_description": "Verb, Semi-Auxiliar, Participle"
+        },
+        {
+            "tag_name": "VSS",
+            "tag_description": "Verb, Semi-Auxiliar, Subjunctive"
+        },
+        {
+            "tag_name": "W",
+            "tag_description": "Date Times"
+        },
+        {
+            "tag_name": "X",
+            "tag_description": "Unknown"
+        },
+        {
+            "tag_name": "Y",
+            "tag_description": "Abbreviation"
+        },
+        {
+            "tag_name": "Z",
+            "tag_description": "Figures"
+        },
+        {
+            "tag_name": "Zm",
+            "tag_description": "Currency"
+        },
+        {
+            "tag_name": "Zp",
+            "tag_description": "Percentage"
+        }
+    ]
+}

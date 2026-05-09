@@ -1,0 +1,395 @@
+{
+    "name": "Tanl",
+    "description": "Tanl tagset adapted for Italian\n\nReferences:\n* Source: http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset\n",
+    "language": "it",
+    "tags": [
+        {
+            "tag_name": "APn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "APp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "APs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "An",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ap",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "As",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "B",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DE",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DI",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DQ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "E",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "EA",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "FB",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "FC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "FF",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "FS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NOn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NOp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NOs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PE",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PQ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RI",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SA",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SWn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SWp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SWs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Sp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ss",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "T",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAci",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAci3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAcp3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAdp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAdp3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAif",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAif3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAii",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAii3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAip",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAip3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAis",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAis3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAm",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMci",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMci3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMcp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMcp3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMdp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMdp3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMif",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMif3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMii",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMii3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMip",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMip3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMis",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMis3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vci3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vcp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vcp3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vdp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vdp3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vif",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vif3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vii3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vip",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vip3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vis",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vis3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vm",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vm3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Vp",
+            "tag_description": "No description."
+        }
+    ]
+}

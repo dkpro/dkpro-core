@@ -1,0 +1,8 @@
+{
+    "name": "SWATWOL",
+    "description": "Part-of-Speech Tagset of SWATWOL\n\nThe 74 tags currently listed are the simplified version of the SWATWOL tagset used by the\nSwahili TreeTagger model.\n\nISSUE: \"*\" is actually a tag in the TreeTagger file - it is also the special catch-all DKPro tag!!\nHowever, the \"*\" is not listed as a tag in the SWATWOL tagset documentation.\n\nReferences:\n* http://www.aakkl.helsinki.fi/cameel/corpus/swatags.pdf\n",
+    "language": "sw",
+    "tags": [
+        
+    ]
+}

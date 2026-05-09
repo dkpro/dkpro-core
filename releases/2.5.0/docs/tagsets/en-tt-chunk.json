@@ -1,0 +1,47 @@
+{
+    "name": "Penn Treebank (TreeTagger)",
+    "description": "English TreeTagger Chunk Tags\n\nThe English chunker was trained on the Penn treebank and uses the following chunk labels.\nThe TreeTagger models use different tag names than the PTB-2 chunk tags. E.g. NP becomes NC,\nADJP becomes ADJC, and so on.\n\nReferences:\n* ftp://ftp.ims.uni-stuttgart.de/pub/corpora/chunker-tagset-english.txt\n",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ADJC",
+            "tag_description": "adjective chunks (not inside of noun chunks)"
+        },
+        {
+            "tag_name": "ADVC",
+            "tag_description": "adverb chunks (not inside of noun or adjective chunks)"
+        },
+        {
+            "tag_name": "CONCJ",
+            "tag_description": "CONJC\t  complex coordinating conjunctions such as \"as well (as)\" or \"rather (than)\""
+        },
+        {
+            "tag_name": "INTJ",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "LST",
+            "tag_description": "enumeration symbol"
+        },
+        {
+            "tag_name": "NC",
+            "tag_description": "noun chunk (non-recursive noun phrase)"
+        },
+        {
+            "tag_name": "PC",
+            "tag_description": "prepositional chunk (usually embeds a noun chunk"
+        },
+        {
+            "tag_name": "PRT",
+            "tag_description": "verb particle"
+        },
+        {
+            "tag_name": "VC",
+            "tag_description": "verb complex"
+        }
+    ]
+}

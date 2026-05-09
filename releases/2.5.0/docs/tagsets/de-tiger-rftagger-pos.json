@@ -1,0 +1,83 @@
+{
+    "name": "TIGER (RfTagger)",
+    "description": "This file contains a tag-mapping as it is used by the German model of the RfTagger.\nThe mapping is a modified version of the STTS tagset.\nA fine-grained tag distinction is replaced by the morphological information the RfTagger outputs (e.g. tense, etc.)\nThe de-tiger-morph file contains the morphological mappings.\nhttps://www.sketchengine.co.uk/xdocumentation/wiki/tagsets/german_rftagger",
+    "language": "de",
+    "tags": [
+        {
+            "tag_name": "ADJA",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ADJD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "APPO",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "APPR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "APPRART",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "APZR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ART",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CARD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CONJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PRO",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PROADV",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SENT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VFIN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VIMP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VINF",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VPP",
+            "tag_description": "No description."
+        }
+    ]
+}

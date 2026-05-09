@@ -1,0 +1,79 @@
+{
+    "name": "Uppsala Persian Dependency Treebank",
+    "description": "No description.\n\nReferences:\n* http://stp.lingfil.uu.se/~mojgan/Manual.pdf\n",
+    "language": "fa",
+    "tags": [
+        {
+            "tag_name": "ADJ",
+            "tag_description": "Adjective"
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "Adverb"
+        },
+        {
+            "tag_name": "CLITIC",
+            "tag_description": "Accusative marker"
+        },
+        {
+            "tag_name": "CON",
+            "tag_description": "Conjunction"
+        },
+        {
+            "tag_name": "DELM",
+            "tag_description": "Delimiter"
+        },
+        {
+            "tag_name": "DET",
+            "tag_description": "Determiner"
+        },
+        {
+            "tag_name": "END",
+            "tag_description": "???"
+        },
+        {
+            "tag_name": "FW",
+            "tag_description": "Foreign Word"
+        },
+        {
+            "tag_name": "INT",
+            "tag_description": "Interjection"
+        },
+        {
+            "tag_name": "MID",
+            "tag_description": "???"
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "Noun"
+        },
+        {
+            "tag_name": "NUM",
+            "tag_description": "Numeral"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "Preposition"
+        },
+        {
+            "tag_name": "PREV",
+            "tag_description": "Preverbal particle"
+        },
+        {
+            "tag_name": "PRO",
+            "tag_description": "Pronoun"
+        },
+        {
+            "tag_name": "STPOS",
+            "tag_description": "???"
+        },
+        {
+            "tag_name": "STR",
+            "tag_description": "???"
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "Verb"
+        }
+    ]
+}

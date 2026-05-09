@@ -1,0 +1,59 @@
+{
+    "name": "Dutch Part-of-Speech Tags from IXA Alpino model",
+    "description": "No description.",
+    "language": "nl",
+    "tags": [
+        {
+            "tag_name": "Adj",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Adv",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Art",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Conj",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Int",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "MWU",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Misc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Num",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Prep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Pron",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Punc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V",
+            "tag_description": "No description."
+        }
+    ]
+}

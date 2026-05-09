@@ -15,7 +15,8 @@ Release date: {{ release.date }}
 else %}
 * [Release notes](https://github.com/dkpro/dkpro-core/releases/tag/{{ release.groupId }}-{{ release.version }}){% 
 endif %}
-{% for doclink in release.doclinks
+{% assign doclinks = release.doclinks | default: site.data.default_doclinks %}
+{% for doclink in doclinks
 %}* [{{ doclink.title }}]({{ site.url }}/releases/{{ release.version }}/{{ doclink.url }})
 {% 
 endfor %}

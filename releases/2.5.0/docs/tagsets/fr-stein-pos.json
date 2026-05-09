@@ -1,0 +1,139 @@
+{
+    "name": "Stein",
+    "description": "French TreeTagger Part-of-Speech Tags\n\nAchim Stein, April 2003\n\nReferences:\n* http://www.ims.uni-stuttgart.de/~schmid/french-tagset.html\n",
+    "language": "fr",
+    "tags": [
+        {
+            "tag_name": "ABR",
+            "tag_description": "abreviation"
+        },
+        {
+            "tag_name": "ADJ",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "DET:ART",
+            "tag_description": "article"
+        },
+        {
+            "tag_name": "DET:POS",
+            "tag_description": "possessive pronoun (ma, ta, ...)"
+        },
+        {
+            "tag_name": "INT",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "KON",
+            "tag_description": "conjunction"
+        },
+        {
+            "tag_name": "NAM",
+            "tag_description": "proper name"
+        },
+        {
+            "tag_name": "NOM",
+            "tag_description": "noun"
+        },
+        {
+            "tag_name": "NUM",
+            "tag_description": "numeral"
+        },
+        {
+            "tag_name": "PRO",
+            "tag_description": "pronoun"
+        },
+        {
+            "tag_name": "PRO:DEM",
+            "tag_description": "demonstrative pronoun"
+        },
+        {
+            "tag_name": "PRO:IND",
+            "tag_description": "indefinite pronoun"
+        },
+        {
+            "tag_name": "PRO:PER",
+            "tag_description": "personal pronoun"
+        },
+        {
+            "tag_name": "PRO:POS",
+            "tag_description": "possessive pronoun (mien, tien, ...)"
+        },
+        {
+            "tag_name": "PRO:REL",
+            "tag_description": "relative pronoun"
+        },
+        {
+            "tag_name": "PRP",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "PRP:det",
+            "tag_description": "preposition plus article (au,du,aux,des)"
+        },
+        {
+            "tag_name": "PUN",
+            "tag_description": "punctuation"
+        },
+        {
+            "tag_name": "PUN:cit",
+            "tag_description": "punctuation citation"
+        },
+        {
+            "tag_name": "SENT",
+            "tag_description": "sentence tag"
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "symbol"
+        },
+        {
+            "tag_name": "VER:cond",
+            "tag_description": "verb conditional"
+        },
+        {
+            "tag_name": "VER:futu",
+            "tag_description": "verb futur"
+        },
+        {
+            "tag_name": "VER:impe",
+            "tag_description": "verb imperative"
+        },
+        {
+            "tag_name": "VER:impf",
+            "tag_description": "verb imperfect"
+        },
+        {
+            "tag_name": "VER:infi",
+            "tag_description": "verb infinitive"
+        },
+        {
+            "tag_name": "VER:pper",
+            "tag_description": "verb past participle"
+        },
+        {
+            "tag_name": "VER:ppre",
+            "tag_description": "verb present participle"
+        },
+        {
+            "tag_name": "VER:pres",
+            "tag_description": "verb present"
+        },
+        {
+            "tag_name": "VER:simp",
+            "tag_description": "verb simple past"
+        },
+        {
+            "tag_name": "VER:subi",
+            "tag_description": "verb subjunctive imperfect"
+        },
+        {
+            "tag_name": "VER:subp",
+            "tag_description": "verb subjunctive present"
+        }
+    ]
+}

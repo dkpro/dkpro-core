@@ -1,0 +1,171 @@
+{
+    "name": "TreeTagger",
+    "description": "Dutch TreeTagger Part-of-Speech Tags\n\nReferences:\n* ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-tagset.txt\n",
+    "language": "nl",
+    "tags": [
+        {
+            "tag_name": "$.",
+            "tag_description": "$.\t\tsentence-final punctuation"
+        },
+        {
+            "tag_name": "adj",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "adj*kop",
+            "tag_description": "truncated adjective"
+        },
+        {
+            "tag_name": "adjabbr",
+            "tag_description": "abbreviated adjective"
+        },
+        {
+            "tag_name": "adv",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "advabbr",
+            "tag_description": "abbreviated adverb"
+        },
+        {
+            "tag_name": "conjcoord",
+            "tag_description": "coordinating conjunction"
+        },
+        {
+            "tag_name": "conjsubo",
+            "tag_description": "subordinating conjunction"
+        },
+        {
+            "tag_name": "det__art",
+            "tag_description": "article"
+        },
+        {
+            "tag_name": "det__demo",
+            "tag_description": "attributively used demonstrative pronoun"
+        },
+        {
+            "tag_name": "det__indef",
+            "tag_description": "attributively used indefinite pronoun"
+        },
+        {
+            "tag_name": "det__poss",
+            "tag_description": "attributively used possessive pronoun"
+        },
+        {
+            "tag_name": "det__quest",
+            "tag_description": "attributively used question pronoun"
+        },
+        {
+            "tag_name": "det__rel",
+            "tag_description": "attributively used relative pronoun"
+        },
+        {
+            "tag_name": "int",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "noun*kop",
+            "tag_description": "truncated noun"
+        },
+        {
+            "tag_name": "nounabbr",
+            "tag_description": "abbreviated noun"
+        },
+        {
+            "tag_name": "nounpl",
+            "tag_description": "plural noun"
+        },
+        {
+            "tag_name": "nounprop",
+            "tag_description": "proper name"
+        },
+        {
+            "tag_name": "nounsg",
+            "tag_description": "singular noun"
+        },
+        {
+            "tag_name": "num__card",
+            "tag_description": "cardinal number"
+        },
+        {
+            "tag_name": "num__ord",
+            "tag_description": "ordinal number"
+        },
+        {
+            "tag_name": "partte",
+            "tag_description": "particle \"te\""
+        },
+        {
+            "tag_name": "prep",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "prepabbr",
+            "tag_description": "abbreviated preposition"
+        },
+        {
+            "tag_name": "pronadv",
+            "tag_description": "pronomial adverb"
+        },
+        {
+            "tag_name": "prondemo",
+            "tag_description": "demonstrative pronoun (used substitutively)"
+        },
+        {
+            "tag_name": "pronindef",
+            "tag_description": "indefined pronoun"
+        },
+        {
+            "tag_name": "pronpers",
+            "tag_description": "personal pronoun"
+        },
+        {
+            "tag_name": "pronposs",
+            "tag_description": "possessive pronoun"
+        },
+        {
+            "tag_name": "pronquest",
+            "tag_description": "question pronoun"
+        },
+        {
+            "tag_name": "pronrefl",
+            "tag_description": "reflexive pronoun"
+        },
+        {
+            "tag_name": "pronrel",
+            "tag_description": "relative pronoun"
+        },
+        {
+            "tag_name": "punc",
+            "tag_description": "(non-sentential) punctuation"
+        },
+        {
+            "tag_name": "verbinf",
+            "tag_description": "infinitival verb"
+        },
+        {
+            "tag_name": "verbpapa",
+            "tag_description": "past participle verb"
+        },
+        {
+            "tag_name": "verbpastpl",
+            "tag_description": "plural past tense verb"
+        },
+        {
+            "tag_name": "verbpastsg",
+            "tag_description": "singular past tense verb"
+        },
+        {
+            "tag_name": "verbpresp",
+            "tag_description": "present participle verb"
+        },
+        {
+            "tag_name": "verbprespl",
+            "tag_description": "plural present tense verb"
+        },
+        {
+            "tag_name": "verbpressg",
+            "tag_description": "singular present tense verb"
+        }
+    ]
+}

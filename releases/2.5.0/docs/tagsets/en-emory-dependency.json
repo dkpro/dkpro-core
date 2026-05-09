@@ -1,0 +1,183 @@
+{
+    "name": "Emory NLP4J",
+    "description": "Emory NLP4J dependencies\n\nReferences:\n* https://github.com/emorynlp/nlp4j/blob/master/md/components/dependency_parsing.md\n",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "acl",
+            "tag_description": "Clausal modifier of noun"
+        },
+        {
+            "tag_name": "acomp",
+            "tag_description": "Adjectival complement"
+        },
+        {
+            "tag_name": "advcl",
+            "tag_description": "Adverbial clause modifier"
+        },
+        {
+            "tag_name": "advmod",
+            "tag_description": "Adverbial modifier"
+        },
+        {
+            "tag_name": "agent",
+            "tag_description": "Agent (passive)"
+        },
+        {
+            "tag_name": "appos",
+            "tag_description": "Appositional modifier"
+        },
+        {
+            "tag_name": "attr",
+            "tag_description": "Attribute"
+        },
+        {
+            "tag_name": "aux",
+            "tag_description": "Auxiliary verb"
+        },
+        {
+            "tag_name": "auxpass",
+            "tag_description": "Auxiliary verb (passive)"
+        },
+        {
+            "tag_name": "case",
+            "tag_description": "Case marker"
+        },
+        {
+            "tag_name": "cc",
+            "tag_description": "Coordinating conjunction"
+        },
+        {
+            "tag_name": "ccomp",
+            "tag_description": "Clausal complement"
+        },
+        {
+            "tag_name": "compound",
+            "tag_description": "Compound word"
+        },
+        {
+            "tag_name": "conj",
+            "tag_description": "Conjunct"
+        },
+        {
+            "tag_name": "csubj",
+            "tag_description": "Clausal subject"
+        },
+        {
+            "tag_name": "csubjpass",
+            "tag_description": "Clausal subject (passive)"
+        },
+        {
+            "tag_name": "dative",
+            "tag_description": "Dative"
+        },
+        {
+            "tag_name": "dep",
+            "tag_description": "Unclassified dependent"
+        },
+        {
+            "tag_name": "det",
+            "tag_description": "Determiner"
+        },
+        {
+            "tag_name": "discourse",
+            "tag_description": "Discourse element"
+        },
+        {
+            "tag_name": "dobj",
+            "tag_description": "Direct Object"
+        },
+        {
+            "tag_name": "expl",
+            "tag_description": "Expletive"
+        },
+        {
+            "tag_name": "mark",
+            "tag_description": "Marker"
+        },
+        {
+            "tag_name": "meta",
+            "tag_description": "Meta data"
+        },
+        {
+            "tag_name": "neg",
+            "tag_description": "Negation modifier"
+        },
+        {
+            "tag_name": "nmod",
+            "tag_description": "Modifier of nominal"
+        },
+        {
+            "tag_name": "npadvmod",
+            "tag_description": "Noun phrase as adverbial modifier"
+        },
+        {
+            "tag_name": "nsubj",
+            "tag_description": "Nominal subject"
+        },
+        {
+            "tag_name": "nsubjpass",
+            "tag_description": "Nominal subject (passive)"
+        },
+        {
+            "tag_name": "oprd",
+            "tag_description": "Object predicate"
+        },
+        {
+            "tag_name": "parataxis",
+            "tag_description": "Parataxis"
+        },
+        {
+            "tag_name": "pcomp",
+            "tag_description": "Preposition complement"
+        },
+        {
+            "tag_name": "pobj",
+            "tag_description": "Preposition object"
+        },
+        {
+            "tag_name": "poss",
+            "tag_description": "Possession modifier"
+        },
+        {
+            "tag_name": "preconj",
+            "tag_description": "Precorrelative conjunction"
+        },
+        {
+            "tag_name": "predet",
+            "tag_description": "Predeterminer"
+        },
+        {
+            "tag_name": "prep",
+            "tag_description": "Prepositional modifier"
+        },
+        {
+            "tag_name": "prt",
+            "tag_description": "Verb particle"
+        },
+        {
+            "tag_name": "punct",
+            "tag_description": "Punctuation"
+        },
+        {
+            "tag_name": "qmod",
+            "tag_description": "Modifier of quantifier"
+        },
+        {
+            "tag_name": "relcl",
+            "tag_description": "Relative clause modifier"
+        },
+        {
+            "tag_name": "root",
+            "tag_description": "Root"
+        },
+        {
+            "tag_name": "vocative",
+            "tag_description": "Vocative modifier"
+        },
+        {
+            "tag_name": "xcomp",
+            "tag_description": "Open clausal complement"
+        }
+    ]
+}

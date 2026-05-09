@@ -1,0 +1,135 @@
+{
+    "name": "Penn Arabic Treebank",
+    "description": "Adapted Penn Arabic Treebank tagset used by Stanford PosTagger\n\nReferences:\n* https://catalog.ldc.upenn.edu/docs/LDC2003T06/arabic-POStags-collapse-to-PennPOStags.txt\n",
+    "language": "ar",
+    "tags": [
+        {
+            "tag_name": "ADJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "coordinating conjunction"
+        },
+        {
+            "tag_name": "CD",
+            "tag_description": "cardinal number"
+        },
+        {
+            "tag_name": "DT",
+            "tag_description": "determiner/demonstrative pronoun"
+        },
+        {
+            "tag_name": "DTJJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTJJR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTNN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTNNP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTNNPS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTNNS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "FW",
+            "tag_description": "foreign word"
+        },
+        {
+            "tag_name": "IN",
+            "tag_description": "subordinating conjunction (FUNC_WORD) or preposition (PREP)"
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "JJR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "common noun, singular"
+        },
+        {
+            "tag_name": "NNP",
+            "tag_description": "proper noun, singular"
+        },
+        {
+            "tag_name": "NNPS",
+            "tag_description": "proper noun, plural or dual"
+        },
+        {
+            "tag_name": "NNS",
+            "tag_description": "common noun, plural or dual"
+        },
+        {
+            "tag_name": "NOUN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PRP",
+            "tag_description": "- personal pronoun\nPRP$ - possessive personal pronoun"
+        },
+        {
+            "tag_name": "PUNC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RB",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "RP",
+            "tag_description": "particle"
+        },
+        {
+            "tag_name": "UH",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "VB",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBD",
+            "tag_description": "perfect verb (***nb: perfect rather than past tense)"
+        },
+        {
+            "tag_name": "VBG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBN",
+            "tag_description": "passive verb (***nb: passive rather than past participle)"
+        },
+        {
+            "tag_name": "VBP",
+            "tag_description": "imperfect verb (***nb: imperfect rather than present tense)"
+        },
+        {
+            "tag_name": "VN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "WP",
+            "tag_description": "relative pronoun"
+        },
+        {
+            "tag_name": "WRB",
+            "tag_description": "wh-adverb"
+        }
+    ]
+}

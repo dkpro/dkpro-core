@@ -1,0 +1,135 @@
+{
+    "name": "Uppsala Persian Dependency Treebank",
+    "description": "No description.\n\nReferences:\n* http://stp.lingfil.uu.se/~mojgan/Manual.pdf\n",
+    "language": "fa",
+    "tags": [
+        {
+            "tag_name": "ADJ",
+            "tag_description": "Adjective"
+        },
+        {
+            "tag_name": "ADJ_CMPR",
+            "tag_description": "Comparative adjective"
+        },
+        {
+            "tag_name": "ADJ_INO",
+            "tag_description": "Participle adjective"
+        },
+        {
+            "tag_name": "ADJ_SUP",
+            "tag_description": "Superlative adjective"
+        },
+        {
+            "tag_name": "ADJ_VOC",
+            "tag_description": "Vocative adjective"
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "Adverb"
+        },
+        {
+            "tag_name": "ADV_COMP",
+            "tag_description": "Adverb of comparison"
+        },
+        {
+            "tag_name": "ADV_I",
+            "tag_description": "Adverb of interrogation"
+        },
+        {
+            "tag_name": "ADV_LOC",
+            "tag_description": "Adverb of location"
+        },
+        {
+            "tag_name": "ADV_NEG",
+            "tag_description": "Adverb of negation"
+        },
+        {
+            "tag_name": "ADV_TIME",
+            "tag_description": "Adverb of time"
+        },
+        {
+            "tag_name": "CLITIC",
+            "tag_description": "Accusative marker"
+        },
+        {
+            "tag_name": "CON",
+            "tag_description": "Conjunction"
+        },
+        {
+            "tag_name": "DELM",
+            "tag_description": "Delimiter"
+        },
+        {
+            "tag_name": "DET",
+            "tag_description": "Determiner"
+        },
+        {
+            "tag_name": "FW",
+            "tag_description": "Foreign Word"
+        },
+        {
+            "tag_name": "INT",
+            "tag_description": "Interjection"
+        },
+        {
+            "tag_name": "NUM",
+            "tag_description": "Numeral"
+        },
+        {
+            "tag_name": "N_PL",
+            "tag_description": "Plural noun"
+        },
+        {
+            "tag_name": "N_SING",
+            "tag_description": "Singular noun"
+        },
+        {
+            "tag_name": "N_VOC",
+            "tag_description": "Vocative noun"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "Preposition"
+        },
+        {
+            "tag_name": "PREV",
+            "tag_description": "Preverbal particle"
+        },
+        {
+            "tag_name": "PRO",
+            "tag_description": "Pronoun"
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "Symbol"
+        },
+        {
+            "tag_name": "V_AUX",
+            "tag_description": "Auxiliary verb"
+        },
+        {
+            "tag_name": "V_COP",
+            "tag_description": "Verb copula"
+        },
+        {
+            "tag_name": "V_IMP",
+            "tag_description": "Imperative verb"
+        },
+        {
+            "tag_name": "V_PA",
+            "tag_description": "Past tense verb"
+        },
+        {
+            "tag_name": "V_PP",
+            "tag_description": "Past participle verb"
+        },
+        {
+            "tag_name": "V_PRS",
+            "tag_description": "Present tense verb"
+        },
+        {
+            "tag_name": "V_SUB",
+            "tag_description": "Subjunctive verb"
+        }
+    ]
+}

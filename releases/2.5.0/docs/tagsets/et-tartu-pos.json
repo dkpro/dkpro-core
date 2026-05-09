@@ -1,0 +1,2139 @@
+{
+    "name": "Tartu",
+    "description": "Estonian POS tagset\n\nReferences:\n* http://www.cl.ut.ee/korpused/morfliides/seletus\n",
+    "language": "et",
+    "tags": [
+        {
+            "tag_name": "A.comp.pl.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.pl.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.comp.sg.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.A?",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Apl.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.adit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.pos.Asg.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.pl.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "A.super.sg.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "D",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "G",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "J.crd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "J.sub",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "K.post",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "K.pre",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.?.digit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.abes.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.abl.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.ad.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.all.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.el.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.es.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.gen.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.ill.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.in.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.kom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.nom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.part.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.term.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.pl.tr.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.abes.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.abl.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.ad.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.adit.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.all.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.el.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.es.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.gen.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.ill.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.in.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.kom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.nom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.part.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.term.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.card.sg.tr.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.?.digit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.?.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.abes.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.abes.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.abl.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.abl.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.ad.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.ad.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.all.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.all.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.el.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.el.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.es.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.es.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.gen.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.gen.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.ill.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.ill.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.in.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.in.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.kom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.kom.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.nom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.nom.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.part.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.part.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.term.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.term.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.tr.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.pl.tr.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.abes.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.abes.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.abl.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.abl.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.ad.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.ad.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.adit.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.adit.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.all.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.all.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.el.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.el.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.es.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.es.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.gen.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.gen.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.ill.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.ill.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.in.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.in.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.kom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.kom.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.nom.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.nom.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.part.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.part.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.term.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.term.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.tr.l",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N.ord.sg.tr.roman",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.pl.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.adit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P.sg.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.?",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.pl.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.adit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.com.sg.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.?",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.pl.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.adit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S.prop.sg.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "T",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.past.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.cond.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.ger",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps1.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps2.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps2.sg.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps3.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.imper.pres.ps3.sg.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.impf.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.indic.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.inf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.partic.past.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.partic.past.ps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.partic.pres.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.partic.pres.ps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.past.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.past.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.past.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.past.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.pres.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.quot.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.sup.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.sup.ps.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.sup.ps.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.sup.ps.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.sup.ps.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.aux.sup.ps.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.past.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.cond.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.ger",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps1.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps2.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps2.sg.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps3.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.imper.pres.ps3.sg.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.impf.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.indic.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.inf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.partic.past.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.partic.past.ps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.partic.pres.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.partic.pres.ps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.past.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.past.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.past.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.past.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.pres.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.quot.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.sup.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.sup.ps.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.sup.ps.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.sup.ps.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.sup.ps.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.main.sup.ps.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.past.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.cond.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.ger",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps1.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps2.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps2.sg.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps3.pl.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.imper.pres.ps3.sg.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.impf.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.ps1.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.ps1.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.ps2.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.ps2.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.ps3.pl.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.indic.pres.ps3.sg.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.inf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.partic.past.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.partic.past.ps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.partic.pres.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.partic.pres.ps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.past.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.past.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.past.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.past.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.pres.imps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.pres.imps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.pres.ps.af",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.quot.pres.ps.neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.sup.imps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.sup.ps.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.sup.ps.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.sup.ps.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.sup.ps.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "V.mod.sup.ps.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "X",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.adjectival",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.adverbial",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.?",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.pl.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.abes",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.abl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.ad",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.adit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.all",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.el",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.es",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.ill",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.in",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.kom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.part",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.term",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.nominal.sg.tr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Y.verbal",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Col",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Cpr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Cqu",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Csq",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Dsd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Dsh",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Ell",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Els",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Exc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Fst",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Int",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Opr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Oqu",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Osq",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Quo",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Scl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z.Sla",
+            "tag_description": "No description."
+        }
+    ]
+}

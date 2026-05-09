@@ -1,0 +1,8 @@
+{
+    "name": "Constraint-Dependenz Grammatik",
+    "description": "Constraint-Dependenz Grammatik (Foth ,2004)\n\nReferences:\n* http://nats-www.informatik.uni-hamburg.de/pub/CDG/DeutschGrammar/doc.p[Foth, 2004. \"Eine umfassende Constraint-Dependenz-Grammatik des Deutschen\"]\n* http://www.versley.de/versley_tlt05.pd[Versley, 2005. \"Parser evaluation across Text Types\"]\n",
+    "language": "de",
+    "tags": [
+        
+    ]
+}

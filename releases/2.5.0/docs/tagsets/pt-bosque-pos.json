@@ -1,0 +1,95 @@
+{
+    "name": "Bosque",
+    "description": "Portuguese Bosque Part-of-Speech Tags\n\nNOTE: the tags here are primarily from the universal pos tags list. Some of these tags do not\nappear in the documentation of the Bosque corpus, but they do appear in the CoGrOO models.\n\nReferences:\n* http://www.linguateca.pt/floresta/BibliaFlorestal/anexo4.html\n* http://code.google.com/p/universal-pos-tags/source/browse/trunk/pt-bosque.map\n",
+    "language": "pt",
+    "tags": [
+        {
+            "tag_name": "?",
+            "tag_description": "?\t."
+        },
+        {
+            "tag_name": "adj",
+            "tag_description": "ADJ"
+        },
+        {
+            "tag_name": "adv",
+            "tag_description": "ADV"
+        },
+        {
+            "tag_name": "art",
+            "tag_description": "DET"
+        },
+        {
+            "tag_name": "conj-c",
+            "tag_description": "CONJ"
+        },
+        {
+            "tag_name": "conj-s",
+            "tag_description": "CONJ"
+        },
+        {
+            "tag_name": "ec",
+            "tag_description": "X"
+        },
+        {
+            "tag_name": "in",
+            "tag_description": "X"
+        },
+        {
+            "tag_name": "n",
+            "tag_description": "NOUN"
+        },
+        {
+            "tag_name": "num",
+            "tag_description": "NUM"
+        },
+        {
+            "tag_name": "pp",
+            "tag_description": "NOUN"
+        },
+        {
+            "tag_name": "pron-det",
+            "tag_description": "PRON"
+        },
+        {
+            "tag_name": "pron-indp",
+            "tag_description": "PRON"
+        },
+        {
+            "tag_name": "pron-pers",
+            "tag_description": "PRON"
+        },
+        {
+            "tag_name": "prop",
+            "tag_description": "NOUN"
+        },
+        {
+            "tag_name": "prp",
+            "tag_description": "ADP"
+        },
+        {
+            "tag_name": "punc",
+            "tag_description": "."
+        },
+        {
+            "tag_name": "v-fin",
+            "tag_description": "VERB"
+        },
+        {
+            "tag_name": "v-ger",
+            "tag_description": "VERB"
+        },
+        {
+            "tag_name": "v-inf",
+            "tag_description": "VERB"
+        },
+        {
+            "tag_name": "v-pcp",
+            "tag_description": "VERB"
+        },
+        {
+            "tag_name": "vp",
+            "tag_description": "VERB"
+        }
+    ]
+}

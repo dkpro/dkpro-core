@@ -1,0 +1,155 @@
+{
+    "name": "TIGER",
+    "description": "TIGER Corpus Release 1 (July 2003) grammatical functions - Kantennamen\n\nReferences:\n* http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf\n",
+    "language": "de",
+    "tags": [
+        {
+            "tag_name": "AC",
+            "tag_description": "Adpositional Case marker - Adposition od. Kasusmarkierung"
+        },
+        {
+            "tag_name": "ADC",
+            "tag_description": "ADjective Component - Komponente eines komplexen Adjektivs"
+        },
+        {
+            "tag_name": "AG",
+            "tag_description": "Attribute, Genitive - Genitivattribut"
+        },
+        {
+            "tag_name": "AMS",
+            "tag_description": "Measure Argument of Adjective - Massangabe bei Adjektiv"
+        },
+        {
+            "tag_name": "APP",
+            "tag_description": "APPosition - Apposition"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "Comparative Complement - Vergleichskomplement"
+        },
+        {
+            "tag_name": "CD",
+            "tag_description": "coordinating conjunction"
+        },
+        {
+            "tag_name": "CJ",
+            "tag_description": "conjunct - Konjunkt"
+        },
+        {
+            "tag_name": "CM",
+            "tag_description": "CoMparative conjunction - Komparationskonjunkt (als, wie)"
+        },
+        {
+            "tag_name": "CP",
+            "tag_description": "ComPlementizer - Complementizer"
+        },
+        {
+            "tag_name": "CVC",
+            "tag_description": "Collocational Verb Construction - Funktionsverbgef\u00fcge"
+        },
+        {
+            "tag_name": "DA",
+            "tag_description": "DAtive - Dativobjekt oder freier Dativ\nuby: gf=complement, case=dative"
+        },
+        {
+            "tag_name": "DM",
+            "tag_description": "Discourse Marker - Diskurspartikel (ja, nein)"
+        },
+        {
+            "tag_name": "EP",
+            "tag_description": "ExPletive - Expletives es\nuby: sc=expletive"
+        },
+        {
+            "tag_name": "HD",
+            "tag_description": "HeaD - Kopf"
+        },
+        {
+            "tag_name": "JU",
+            "tag_description": "JUnctor - Junktor"
+        },
+        {
+            "tag_name": "MNR",
+            "tag_description": "Modifier of Np to the Right - postnominaler Modifikator"
+        },
+        {
+            "tag_name": "MO",
+            "tag_description": "MOdifier - Modifikator"
+        },
+        {
+            "tag_name": "NG",
+            "tag_description": "NeGation - Negation nicht"
+        },
+        {
+            "tag_name": "NK",
+            "tag_description": "Noun Kernel - Element der Kern-NP"
+        },
+        {
+            "tag_name": "NMC",
+            "tag_description": "NuMerical Component - Numeralien"
+        },
+        {
+            "tag_name": "OA",
+            "tag_description": "Object Accusative - Akkusativobjekt\nuby: gf=directObject, case=accusative"
+        },
+        {
+            "tag_name": "OA2",
+            "tag_description": "Object Accusative 2 - zweites Akkusativobjekt\nuby: gf=objectComplement"
+        },
+        {
+            "tag_name": "OC",
+            "tag_description": "Object Clausal - klausales Objekt\nuby: gf=directObject or complement, sc=subordinateClause or declarativeClause"
+        },
+        {
+            "tag_name": "OG",
+            "tag_description": "Object Genitive - Genitivobjekt\nuby: gf=complement, case=genitive"
+        },
+        {
+            "tag_name": "PD",
+            "tag_description": "PreDicative - Pr\u00e4dikativ"
+        },
+        {
+            "tag_name": "PG",
+            "tag_description": "Phrasaler Genitive - anstelle eines Genitivs verwendete \u2019von\u2019-PP"
+        },
+        {
+            "tag_name": "PH",
+            "tag_description": "placeholder - Platzhalter"
+        },
+        {
+            "tag_name": "PM",
+            "tag_description": "Morphological Particle - Morphologische Partikel (am)"
+        },
+        {
+            "tag_name": "PNC",
+            "tag_description": "proper noun component"
+        },
+        {
+            "tag_name": "RC",
+            "tag_description": "Relative Clause - Relativsatz"
+        },
+        {
+            "tag_name": "SB",
+            "tag_description": "SuBject - Subjekt\nuby: gf=subject"
+        },
+        {
+            "tag_name": "SBP",
+            "tag_description": "SuBject Passivised - (logisches) Subjekt im Passivsatz"
+        },
+        {
+            "tag_name": "SP",
+            "tag_description": "Subject or Predicative - Subjekt oder Pr\u00e4dikativ"
+        },
+        {
+            "tag_name": "SVP",
+            "tag_description": "Separable Verb Prefix - abgetrennter Verbpr\u00e4fix"
+        },
+        {
+            "tag_name": "UC",
+            "tag_description": "(idiosyncratic) unit component - fremdsprachliche Zitate"
+        },
+        {
+            "tag_name": "VO",
+            "tag_description": "Vocative - Anrede"
+        }
+    ]
+}

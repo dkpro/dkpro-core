@@ -1,0 +1,131 @@
+{
+    "name": "Ancora",
+    "description": "Ancora consituent tagset\n\nReferences:\n* http://clic.ub.edu/corpus/webfm_send/20[Ancora: Note on constituents annotation]\n* http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf[Taul\u00e9 et al. 2008. \"AnCora: Multilevel Annotated Corpora for Catalan and Spanish\"]\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "ROOT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S",
+            "tag_description": "clause"
+        },
+        {
+            "tag_name": "conj",
+            "tag_description": "conjunction"
+        },
+        {
+            "tag_name": "coord",
+            "tag_description": "coordination"
+        },
+        {
+            "tag_name": "gerundi",
+            "tag_description": "gerund"
+        },
+        {
+            "tag_name": "grup.a",
+            "tag_description": "adjective group"
+        },
+        {
+            "tag_name": "grup.adv",
+            "tag_description": "adverb group"
+        },
+        {
+            "tag_name": "grup.cc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "grup.cs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "grup.nom",
+            "tag_description": "noun group"
+        },
+        {
+            "tag_name": "grup.prep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "grup.pron",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "grup.verb",
+            "tag_description": "verb group"
+        },
+        {
+            "tag_name": "grup.w",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "grup.z",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "inc",
+            "tag_description": "inserted element"
+        },
+        {
+            "tag_name": "infinitiu",
+            "tag_description": "infinitive"
+        },
+        {
+            "tag_name": "interjeccio",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "morfema.pronominal",
+            "tag_description": "pronomial morpheme"
+        },
+        {
+            "tag_name": "morfema.verbal",
+            "tag_description": "verbal morpheme"
+        },
+        {
+            "tag_name": "neg",
+            "tag_description": "negation"
+        },
+        {
+            "tag_name": "participi",
+            "tag_description": "participle"
+        },
+        {
+            "tag_name": "prep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "relatiu",
+            "tag_description": "relative"
+        },
+        {
+            "tag_name": "s.a",
+            "tag_description": "adjective phrase"
+        },
+        {
+            "tag_name": "sa",
+            "tag_description": "adjective phrase (depending of an clausal structure)"
+        },
+        {
+            "tag_name": "sadv",
+            "tag_description": "adverbial phrase"
+        },
+        {
+            "tag_name": "sentence",
+            "tag_description": "main sentence"
+        },
+        {
+            "tag_name": "sn",
+            "tag_description": "noun phrase"
+        },
+        {
+            "tag_name": "sp",
+            "tag_description": "prepositional phrase"
+        },
+        {
+            "tag_name": "spec",
+            "tag_description": "specifier"
+        }
+    ]
+}

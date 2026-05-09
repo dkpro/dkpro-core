@@ -1,0 +1,151 @@
+{
+    "name": "Stein",
+    "description": "Italian TreeTagger Part-of-Speech Tags\n\nAchim Stein\n\nReferences:\n* ftp://ftp.ims.uni-stuttgart.de/pub/corpora/italian-tagset.txt\n",
+    "language": "it",
+    "tags": [
+        {
+            "tag_name": "ABR",
+            "tag_description": "abbreviation"
+        },
+        {
+            "tag_name": "ADJ",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "ADV",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "CON",
+            "tag_description": "conjunction"
+        },
+        {
+            "tag_name": "DET:def",
+            "tag_description": "definite article"
+        },
+        {
+            "tag_name": "DET:indef",
+            "tag_description": "indefinite article"
+        },
+        {
+            "tag_name": "INT",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "NOM",
+            "tag_description": "noun"
+        },
+        {
+            "tag_name": "NPR",
+            "tag_description": "name"
+        },
+        {
+            "tag_name": "NUM",
+            "tag_description": "numeral"
+        },
+        {
+            "tag_name": "PON",
+            "tag_description": "punctuation"
+        },
+        {
+            "tag_name": "PRE",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "PRE:det",
+            "tag_description": "preposition+article"
+        },
+        {
+            "tag_name": "PRO",
+            "tag_description": "pronoun"
+        },
+        {
+            "tag_name": "PRO:demo",
+            "tag_description": "demonstrative pronoun"
+        },
+        {
+            "tag_name": "PRO:indef",
+            "tag_description": "indefinite pronoun"
+        },
+        {
+            "tag_name": "PRO:inter",
+            "tag_description": "interrogative pronoun"
+        },
+        {
+            "tag_name": "PRO:pers",
+            "tag_description": "personal pronoun"
+        },
+        {
+            "tag_name": "PRO:poss",
+            "tag_description": "possessive pronoun"
+        },
+        {
+            "tag_name": "PRO:refl",
+            "tag_description": "PR:refl\treflexive pronoun"
+        },
+        {
+            "tag_name": "PRO:rela",
+            "tag_description": "relative pronoun"
+        },
+        {
+            "tag_name": "SENT",
+            "tag_description": "sentence marker"
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "symbol"
+        },
+        {
+            "tag_name": "VER:cimp",
+            "tag_description": "verb conjunctive imperfect"
+        },
+        {
+            "tag_name": "VER:cond",
+            "tag_description": "verb conditional"
+        },
+        {
+            "tag_name": "VER:cpre",
+            "tag_description": "verb conjunctive present"
+        },
+        {
+            "tag_name": "VER:futu",
+            "tag_description": "verb future tense"
+        },
+        {
+            "tag_name": "VER:geru",
+            "tag_description": "verb gerund"
+        },
+        {
+            "tag_name": "VER:impe",
+            "tag_description": "verb imperative"
+        },
+        {
+            "tag_name": "VER:impf",
+            "tag_description": "verb imperfect"
+        },
+        {
+            "tag_name": "VER:infi",
+            "tag_description": "verb infinitive"
+        },
+        {
+            "tag_name": "VER:pper",
+            "tag_description": "verb participle perfect"
+        },
+        {
+            "tag_name": "VER:ppre",
+            "tag_description": "verb participle present"
+        },
+        {
+            "tag_name": "VER:pres",
+            "tag_description": "verb present"
+        },
+        {
+            "tag_name": "VER:refl:infi",
+            "tag_description": "verb reflexive infinitive"
+        },
+        {
+            "tag_name": "VER:remo",
+            "tag_description": "verb simple past"
+        }
+    ]
+}

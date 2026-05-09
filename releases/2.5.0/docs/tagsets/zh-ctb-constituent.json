@@ -1,0 +1,115 @@
+{
+    "name": "Chinese Treebank",
+    "description": "Chinese Treebank Tagset\n\nReferences:\n* http://www.cis.upenn.edu/~chinese/parseguide.3rd.ch.pdf\n",
+    "language": "zh",
+    "tags": [
+        {
+            "tag_name": "ADJP",
+            "tag_description": "adjective phrase"
+        },
+        {
+            "tag_name": "ADVP",
+            "tag_description": "adverbial phrase headed by AD (adverb)"
+        },
+        {
+            "tag_name": "CLP",
+            "tag_description": "classifier phrase"
+        },
+        {
+            "tag_name": "CP",
+            "tag_description": "clause headed by C (complementizer)"
+        },
+        {
+            "tag_name": "DNP",
+            "tag_description": "phrase formed by \u2018\u2018XP + DEG\u2019\u2019"
+        },
+        {
+            "tag_name": "DP",
+            "tag_description": "determiner phrase"
+        },
+        {
+            "tag_name": "DVP",
+            "tag_description": "phrase formed by \u2018\u2018XP + DEV\u2019\u2019"
+        },
+        {
+            "tag_name": "FRAG",
+            "tag_description": "fragment"
+        },
+        {
+            "tag_name": "INTJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "IP",
+            "tag_description": "simple clause headed by I (INFL)"
+        },
+        {
+            "tag_name": "LCP",
+            "tag_description": "phrase formed by \u2018\u2018XP + LC\u2019\u2019"
+        },
+        {
+            "tag_name": "LST",
+            "tag_description": "list marker"
+        },
+        {
+            "tag_name": "MSP",
+            "tag_description": "some particles"
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "common noun"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "noun phrase"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "preposition phrase"
+        },
+        {
+            "tag_name": "PRN",
+            "tag_description": "parenthetical"
+        },
+        {
+            "tag_name": "QP",
+            "tag_description": "quantifier phrase"
+        },
+        {
+            "tag_name": "ROOT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "UCP",
+            "tag_description": "unidentical coordination phrase"
+        },
+        {
+            "tag_name": "VCD",
+            "tag_description": "coordinated verb compound"
+        },
+        {
+            "tag_name": "VCP",
+            "tag_description": "verb compounds formed by VV + VC"
+        },
+        {
+            "tag_name": "VNV",
+            "tag_description": "verb compounds formed by A-not-A or A-one-A"
+        },
+        {
+            "tag_name": "VP",
+            "tag_description": "verb phrase"
+        },
+        {
+            "tag_name": "VPT",
+            "tag_description": "potential form V-de-R or V-bu-R"
+        },
+        {
+            "tag_name": "VRD",
+            "tag_description": "verb resultative compound"
+        },
+        {
+            "tag_name": "VSB",
+            "tag_description": "verb compounds formed by a modifier + a head"
+        }
+    ]
+}

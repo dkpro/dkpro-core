@@ -1,0 +1,327 @@
+{
+    "name": "Brown (NLTK)",
+    "description": "tagset as in DKPro Toolbox",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "ABL",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ABN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ABX",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BE",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BED",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BEDZ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BEG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BEM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BEN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BER",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "BEZ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CDg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DO",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DOD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DOZ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTI",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTX",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "EX",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "HV",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "HVD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "HVG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "HVN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "HVZ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "IN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "JJR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "JJS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "JJT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "MD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NEG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NNS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NNSG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NNSg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NNg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NPS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NPSg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NPg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NRS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NRg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "OD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PNg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PPL",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PPLS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PPO",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PPS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PPSS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PPg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PPgg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "QL",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "QLP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RB",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RBR",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RBT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RBg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "TO",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "UH",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VB",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBZ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "WDT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "WPO",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "WPS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "WPg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "WQL",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "WRB",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pct",
+            "tag_description": "No description."
+        }
+    ]
+}

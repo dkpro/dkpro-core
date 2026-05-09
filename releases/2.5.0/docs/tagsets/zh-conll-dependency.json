@@ -1,0 +1,55 @@
+{
+    "name": "CoNLL 2008 Dependencies",
+    "description": "Dependency Syntax in the CoNLL Shared Task 2008\n\nReferences:\n* http://wacky.sslmit.unibo.it/lib/exe/fetch.php?media=papers:conll-syntax.pdf\n",
+    "language": "zh",
+    "tags": [
+        {
+            "tag_name": "AMOD",
+            "tag_description": "Modifier of adjective or adverb"
+        },
+        {
+            "tag_name": "DEP",
+            "tag_description": "Unclassified relation"
+        },
+        {
+            "tag_name": "NMOD",
+            "tag_description": "Modifier of nominal"
+        },
+        {
+            "tag_name": "OBJ",
+            "tag_description": "Direct or indirect object or clause complement"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "Punctuation"
+        },
+        {
+            "tag_name": "PMOD",
+            "tag_description": "Between preposition and its child in a PP"
+        },
+        {
+            "tag_name": "PRD",
+            "tag_description": "Predicative complement"
+        },
+        {
+            "tag_name": "ROOT",
+            "tag_description": "Root"
+        },
+        {
+            "tag_name": "SBAR",
+            "tag_description": "???"
+        },
+        {
+            "tag_name": "SUB",
+            "tag_description": "Between subordinating conjunction and verb"
+        },
+        {
+            "tag_name": "VC",
+            "tag_description": "Verb chain"
+        },
+        {
+            "tag_name": "VMOD",
+            "tag_description": "???"
+        }
+    ]
+}

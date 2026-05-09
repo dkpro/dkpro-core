@@ -1,0 +1,247 @@
+{
+    "name": "Stanford (3.4.1)",
+    "description": "Stanford typed dependencies\n\nChange in CoreNLP 3.3.1: In the English dependencies, \"infmod\" and \"partmod\" have been combined\ninto \"vmod\".\nChange in CoreNLP 3.4.1: In the English dependencies, \"xsubj\" has been merged into \"nsubj\"\n\nReferences:\n* http://nlp.stanford.edu/software/dependencies_manual.pdf\n",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "abbrev",
+            "tag_description": "abbreviation modifier"
+        },
+        {
+            "tag_name": "acomp",
+            "tag_description": "adjectival complement"
+        },
+        {
+            "tag_name": "advcl",
+            "tag_description": "adverbial clause modifier"
+        },
+        {
+            "tag_name": "advmod",
+            "tag_description": "adverbial modifier"
+        },
+        {
+            "tag_name": "agent",
+            "tag_description": "agent"
+        },
+        {
+            "tag_name": "amod",
+            "tag_description": "adjectival modifier"
+        },
+        {
+            "tag_name": "appos",
+            "tag_description": "appositional modifier"
+        },
+        {
+            "tag_name": "arg",
+            "tag_description": "argument"
+        },
+        {
+            "tag_name": "attr",
+            "tag_description": "attributive"
+        },
+        {
+            "tag_name": "aux",
+            "tag_description": "auxiliary"
+        },
+        {
+            "tag_name": "auxpass",
+            "tag_description": "passive auxiliary"
+        },
+        {
+            "tag_name": "cc",
+            "tag_description": "coordination"
+        },
+        {
+            "tag_name": "ccomp",
+            "tag_description": "clausal complement"
+        },
+        {
+            "tag_name": "comp",
+            "tag_description": "complement"
+        },
+        {
+            "tag_name": "complm",
+            "tag_description": "complementizer"
+        },
+        {
+            "tag_name": "conj",
+            "tag_description": "conjunct"
+        },
+        {
+            "tag_name": "cop",
+            "tag_description": "copula"
+        },
+        {
+            "tag_name": "csubj",
+            "tag_description": "clausal subject"
+        },
+        {
+            "tag_name": "csubjpass",
+            "tag_description": "clausal passive subject"
+        },
+        {
+            "tag_name": "dep",
+            "tag_description": "dependent"
+        },
+        {
+            "tag_name": "det",
+            "tag_description": "determiner"
+        },
+        {
+            "tag_name": "discourse",
+            "tag_description": "discourse element"
+        },
+        {
+            "tag_name": "dobj",
+            "tag_description": "direct object"
+        },
+        {
+            "tag_name": "expl",
+            "tag_description": "expletive"
+        },
+        {
+            "tag_name": "goeswith",
+            "tag_description": "goes with"
+        },
+        {
+            "tag_name": "iobj",
+            "tag_description": "indirect object"
+        },
+        {
+            "tag_name": "mark",
+            "tag_description": "marker"
+        },
+        {
+            "tag_name": "mod",
+            "tag_description": "modifier"
+        },
+        {
+            "tag_name": "mwe",
+            "tag_description": "multi-word expression"
+        },
+        {
+            "tag_name": "neg",
+            "tag_description": "negation modifier"
+        },
+        {
+            "tag_name": "nn",
+            "tag_description": "noun compound modifier"
+        },
+        {
+            "tag_name": "npadvmod",
+            "tag_description": "noun phrase as adverbial modifier"
+        },
+        {
+            "tag_name": "nsubj",
+            "tag_description": "nominal subject"
+        },
+        {
+            "tag_name": "nsubjpass",
+            "tag_description": "passive nominal subject"
+        },
+        {
+            "tag_name": "num",
+            "tag_description": "numeric modifier"
+        },
+        {
+            "tag_name": "number",
+            "tag_description": "element of compound number"
+        },
+        {
+            "tag_name": "obj",
+            "tag_description": "object"
+        },
+        {
+            "tag_name": "parataxis",
+            "tag_description": "parataxis"
+        },
+        {
+            "tag_name": "pcomp",
+            "tag_description": "prepositional complement"
+        },
+        {
+            "tag_name": "pobj",
+            "tag_description": "object of a preposition"
+        },
+        {
+            "tag_name": "poss",
+            "tag_description": "possession modifier"
+        },
+        {
+            "tag_name": "possessive",
+            "tag_description": "possessive modifier"
+        },
+        {
+            "tag_name": "preconj",
+            "tag_description": "preconjunct"
+        },
+        {
+            "tag_name": "pred",
+            "tag_description": "predicate"
+        },
+        {
+            "tag_name": "predet",
+            "tag_description": "predeterminer"
+        },
+        {
+            "tag_name": "prep",
+            "tag_description": "prepositional modifier"
+        },
+        {
+            "tag_name": "prepc",
+            "tag_description": "prepositional clausal modifier"
+        },
+        {
+            "tag_name": "prt",
+            "tag_description": "phrasal verb particle"
+        },
+        {
+            "tag_name": "punct",
+            "tag_description": "punctuation"
+        },
+        {
+            "tag_name": "purpcl",
+            "tag_description": "purpose clause modifier"
+        },
+        {
+            "tag_name": "quantmod",
+            "tag_description": "quantifier phrase modifier"
+        },
+        {
+            "tag_name": "rcmod",
+            "tag_description": "relative clause modifier"
+        },
+        {
+            "tag_name": "ref",
+            "tag_description": "referent"
+        },
+        {
+            "tag_name": "rel",
+            "tag_description": "relative"
+        },
+        {
+            "tag_name": "root",
+            "tag_description": "root"
+        },
+        {
+            "tag_name": "sdep",
+            "tag_description": "semantic dependent"
+        },
+        {
+            "tag_name": "subj",
+            "tag_description": "subject"
+        },
+        {
+            "tag_name": "tmod",
+            "tag_description": "temporal modifier"
+        },
+        {
+            "tag_name": "vmod",
+            "tag_description": "verb modifier"
+        },
+        {
+            "tag_name": "xcomp",
+            "tag_description": "open clausal complement"
+        }
+    ]
+}

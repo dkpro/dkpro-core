@@ -1,0 +1,147 @@
+{
+    "name": "CoNLL 2008",
+    "description": "CONLL 2008 Dependency labels\n\nReferences:\n* http://aclweb.org/anthology//W/W08/W08-2121.pdf\n",
+    "language": "zh",
+    "tags": [
+        {
+            "tag_name": "ADV",
+            "tag_description": "Unclassified adverbial"
+        },
+        {
+            "tag_name": "AMOD",
+            "tag_description": "Modifier of adjective or adverb"
+        },
+        {
+            "tag_name": "APPO",
+            "tag_description": "Apposition"
+        },
+        {
+            "tag_name": "BNF",
+            "tag_description": "Benefactor (the for phrase for verbs that undergo dative shift) DIR Direction\nuby: gf= prepositionalComplement, preposition=for"
+        },
+        {
+            "tag_name": "CONJ",
+            "tag_description": "Between conjunction and second conjunct in a coordination"
+        },
+        {
+            "tag_name": "COORD",
+            "tag_description": "Coordination"
+        },
+        {
+            "tag_name": "DEP",
+            "tag_description": "Unclassified relation"
+        },
+        {
+            "tag_name": "DTV",
+            "tag_description": "Dative (the to phrase for verbs that undergo dative shift) EXT Extent\nuby: gf= prepositionalComplement, preposition=to"
+        },
+        {
+            "tag_name": "EXTR",
+            "tag_description": "Extraposed element in expletive constructions"
+        },
+        {
+            "tag_name": "HMOD",
+            "tag_description": "Modifier in hyphenation, such as two in two-part HYPH Between first part of hyphenation and hyphen NAME Name-internal link"
+        },
+        {
+            "tag_name": "IM",
+            "tag_description": "Between infinitive marker and verb"
+        },
+        {
+            "tag_name": "LGS",
+            "tag_description": "Logical subject\nuby: gf=subj"
+        },
+        {
+            "tag_name": "LOC",
+            "tag_description": "Location"
+        },
+        {
+            "tag_name": "MNR",
+            "tag_description": "Manner"
+        },
+        {
+            "tag_name": "NAME",
+            "tag_description": "Name-internal link"
+        },
+        {
+            "tag_name": "NMOD",
+            "tag_description": "Modifier of nominal"
+        },
+        {
+            "tag_name": "OBJ",
+            "tag_description": "Direct or indirect object or clause complement\nuby: gf=complement"
+        },
+        {
+            "tag_name": "OPRD",
+            "tag_description": "Object complement\nuby: gf=objectComplement"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "Punctuation"
+        },
+        {
+            "tag_name": "PMOD",
+            "tag_description": "Between preposition and its child in a PP"
+        },
+        {
+            "tag_name": "POSTHON",
+            "tag_description": "Posthonorifics such as Jr, Inc."
+        },
+        {
+            "tag_name": "PRD",
+            "tag_description": "Predicative complement"
+        },
+        {
+            "tag_name": "PRN",
+            "tag_description": "Parenthetical"
+        },
+        {
+            "tag_name": "PRP",
+            "tag_description": "Purpose or reason"
+        },
+        {
+            "tag_name": "PRT",
+            "tag_description": "Particle"
+        },
+        {
+            "tag_name": "PUT",
+            "tag_description": "Various locative complements of the verb put"
+        },
+        {
+            "tag_name": "ROOT",
+            "tag_description": "Root"
+        },
+        {
+            "tag_name": "SBJ",
+            "tag_description": "Subject\nuby: gf=subj"
+        },
+        {
+            "tag_name": "SUB",
+            "tag_description": "Between subordinating conjunction and verb"
+        },
+        {
+            "tag_name": "SUFFIX",
+            "tag_description": "Possessive \u2019s"
+        },
+        {
+            "tag_name": "TITLE",
+            "tag_description": "Titles such as Mr, Dr"
+        },
+        {
+            "tag_name": "TMP",
+            "tag_description": "Temporal"
+        },
+        {
+            "tag_name": "VC",
+            "tag_description": "Verb chain"
+        },
+        {
+            "tag_name": "VMOD",
+            "tag_description": "Modifier of a verb (not in W08-2121.pdf)"
+        },
+        {
+            "tag_name": "VOC",
+            "tag_description": "Vocative"
+        }
+    ]
+}
