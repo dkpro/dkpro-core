@@ -1,0 +1,67 @@
+/* Click-to-load YouTube placeholder. The iframe is only created on click,
+ * and points at youtube-nocookie.com, so opening the page does not contact
+ * YouTube at all. */
+
+.yt-embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #1a1a1a linear-gradient(135deg, #2a2a2a 0%, #0a0a0a 100%);
+  overflow: hidden;
+}
+
+.yt-embed__btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.yt-embed__icon {
+  width: 68px;
+  height: 48px;
+}
+
+.yt-embed:hover .yt-embed__icon-bg,
+.yt-embed:focus .yt-embed__icon-bg {
+  fill: #f00;
+  fill-opacity: 1;
+}
+
+.yt-embed__title {
+  position: absolute;
+  top: 0.5em;
+  left: 0.8em;
+  right: 0.8em;
+  color: #fff;
+  font-size: 0.95em;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.yt-embed__notice {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ddd;
+  font-size: 0.78em;
+  line-height: 1.3;
+  padding: 0.55em 0.9em;
+  text-align: center;
+}
+
+.yt-embed__notice a {
+  color: #fff;
+  text-decoration: underline;
+}

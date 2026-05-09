@@ -52,8 +52,6 @@
   dropdown:
   - title: "Mailing lists"
     url: "/pages/mailinglists/"
-  - title: "Twitter"
-    url: "http://twitter.com/dkprocore"
   - title: "Contributing"
     url: "http://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTING.md"
   - title: "Contributors"

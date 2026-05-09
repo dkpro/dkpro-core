@@ -242,7 +242,7 @@ sass:
 #
 # used in _includes/footer_scripts.html
 
-google_analytics_tracking_id: UA-20506675-4
+#google_analytics_tracking_id: UA-20506675-4
 
 #      ____                   __  __      __  
 #     / __ \____  ___  ____  / / / /_  __/ /_ 

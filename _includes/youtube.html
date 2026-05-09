@@ -1,0 +1,17 @@
+{% unless youtube_embed_assets_loaded %}
+{% assign youtube_embed_assets_loaded = true %}
+<link rel="stylesheet" href="{{ site.url }}/assets/css/youtube-embed.css">
+<script src="{{ site.url }}/assets/js/youtube-embed.js" defer></script>
+{% endunless %}
+<div class="flex-video">
+<div class="yt-embed" data-id="{{ include.id }}"{% if include.title %} data-title="{{ include.title | xml_escape }}"{% endif %}>
+  {% if include.title %}<span class="yt-embed__title">{{ include.title }}</span>{% endif %}
+  <button type="button" class="yt-embed__btn" aria-label="Play video{% if include.title %}: {{ include.title | xml_escape }}{% endif %}">
+    <svg class="yt-embed__icon" viewBox="0 0 68 48">
+      <path class="yt-embed__icon-bg" d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#212121" fill-opacity="0.85"/>
+      <path d="M 45,24 27,14 27,34" fill="#fff"/>
+    </svg>
+  </button>
+  <span class="yt-embed__notice">Click play to load this video from YouTube (Google Ireland Ltd. / Google LLC, USA). YouTube will receive your IP address, browser information, and referrer. See our <a href="{{ site.url }}/privacy/">privacy policy</a> for details.</span>
+</div>
+</div>
