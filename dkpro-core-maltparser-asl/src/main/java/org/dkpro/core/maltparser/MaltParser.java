@@ -237,7 +237,13 @@ public class MaltParser
                     // However, Maltparser is not happy at all if the model file does not have the
                     // right name, so we are forced to create a temporary directory and place the
                     // file there.
-                    File modelFile = new File(workingDir, getRealName(aUrl));
+                    String realName = getRealName(aUrl);
+                    File modelFile = new File(workingDir, realName);
+                    if (!modelFile.toPath().toAbsolutePath().normalize()
+                            .startsWith(workingDir.toPath().toAbsolutePath().normalize())) {
+                        throw new IOException("Model name [" + realName
+                                + "] would escape working directory [" + workingDir + "]");
+                    }
                     if (!modelFile.exists()) {
                         InputStream is = null;
                         OutputStream os = null;

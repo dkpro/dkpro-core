@@ -255,7 +255,7 @@ public class FrequencyDistribution<T>
         freqDist = (Object2LongOpenHashMap<T>) in.readObject();
         in.close();
 
-        int samples = 0;
+        long samples = 0;
 
         LongIterator sampleIter = freqDist.values().iterator();
 

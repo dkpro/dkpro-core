@@ -5,7 +5,6 @@ application/vnd.xmi+xml=http://w3id.org/meta-share/omtd-share/Xmi
 #application/x.org.dkpro.ancora+xml
 application/x.org.dkpro.bnc+xml=http://w3id.org/meta-share/omtd-share/BncFormat
 application/x.org.dkpro.brat=http://w3id.org/meta-share/omtd-share/Brat
-#application/x.org.dkpro.core.lingpipe.ner
 #application/x.org.dkpro.core.opennlp.chunk
 #application/x.org.dkpro.core.opennlp.lemma
 #application/x.org.dkpro.core.opennlp.ner
