@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.textnormalizer.casfilter;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -63,7 +64,7 @@ public class CasFilter_ImplBaseTest
 
         SimplePipeline.runPipeline(reader, annotator, aggregator);
 
-        String output = FileUtils.readFileToString(tmpFile, "UTF-8");
+        String output = FileUtils.readFileToString(tmpFile, UTF_8);
         assertTrue(output.contains("======== CAS 0 ========"));
         assertTrue(output.contains(input));
         assertTrue(output.contains("Sentence"));
@@ -86,7 +87,7 @@ public class CasFilter_ImplBaseTest
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, annotator, aggregator);
-        assertTrue(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertTrue(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
@@ -106,7 +107,7 @@ public class CasFilter_ImplBaseTest
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertTrue(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertTrue(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
@@ -125,7 +126,7 @@ public class CasFilter_ImplBaseTest
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertFalse(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertFalse(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
@@ -145,7 +146,7 @@ public class CasFilter_ImplBaseTest
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertFalse(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertFalse(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
@@ -165,7 +166,7 @@ public class CasFilter_ImplBaseTest
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertTrue(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertTrue(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     public static class TestAnnotator

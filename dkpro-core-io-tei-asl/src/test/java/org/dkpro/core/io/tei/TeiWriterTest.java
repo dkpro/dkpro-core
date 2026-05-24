@@ -49,8 +49,6 @@ public class TeiWriterTest
 
         var ner = createEngineDescription(OpenNlpNamedEntityRecognizer.class);
 
-        // var dump = createEngineDescription(CasDumpWriter.class);
-
         var teiWriter = createEngineDescription(TeiWriter.class, TeiWriter.PARAM_TARGET_LOCATION,
                 targetFolder, TeiWriter.PARAM_WRITE_CONSTITUENT, true);
 

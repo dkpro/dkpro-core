@@ -1,501 +1,77 @@
-======== CAS 0 begin ==================================
+======== CAS 0 ========
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ
+<ANCHOR>,<COVERED_TEXT>,PosValue,coarseValue
+POS_ADJ[34-44]*@_InitialView,prächtiger,ADJA,ADJ
 
--------- View _InitialView begin ----------------------------------
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADV
+<ANCHOR>,<COVERED_TEXT>,PosValue,coarseValue
+POS_ADV[19-29]*@_InitialView,vielleicht,ADV,ADV
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 58
-   language: "de"
-   documentTitle: "tiger-sample.xml"
-   documentId: "tiger-sample.xml"
-   isLastSegment: false
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_DET
+<ANCHOR>,<COVERED_TEXT>,PosValue,coarseValue
+POS_DET[30-33]*@_InitialView,ein,ART,DET
 
-CAS-Text:
-`` Ross Perot wäre vielleicht ein prächtiger Diktator '' 
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN
+<ANCHOR>,<COVERED_TEXT>,PosValue,coarseValue
+POS_NOUN[45-53]*@_InitialView,Diktator,NN,NOUN
 
-[`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
-Sentence
-   sofa: _InitialView
-   begin: 0
-   end: 56
-   id: "s1"
-[`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
-PennTree
-   sofa: _InitialView
-   begin: 0
-   end: 56
-   PennTree: "(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) (ADV vielleicht) (NP..."
-[`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
-ROOT
-   sofa: _InitialView
-   begin: 0
-   end: 56
-   constituentType: "VROOT"
-   children: FSArray
-[``]
-POS_PUNCT
-   sofa: _InitialView
-   begin: 0
-   end: 2
-   PosValue: "$("
-   coarseValue: "PUNCT"
-[``]
-Lemma
-   sofa: _InitialView
-   begin: 0
-   end: 2
-   value: "--"
-[``]
-Token
-   sofa: _InitialView
-   begin: 0
-   end: 2
-   parent: ROOT
-      sofa: _InitialView
-      begin: 0
-      end: 56
-      constituentType: "VROOT"
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 0
-      end: 2
-      value: "--"
-   pos: POS_PUNCT
-      sofa: _InitialView
-      begin: 0
-      end: 2
-      PosValue: "$("
-      coarseValue: "PUNCT"
-   id: "s1_1"
-   order: 0
-[Ross Perot wäre vielleicht ein prächtiger Diktator]
-Constituent
-   sofa: _InitialView
-   begin: 3
-   end: 53
-   constituentType: "S"
-   parent: ROOT
-      sofa: _InitialView
-      begin: 0
-      end: 56
-      constituentType: "VROOT"
-      children: FSArray
-   children: FSArray
-[Ross Perot]
-Constituent
-   sofa: _InitialView
-   begin: 3
-   end: 13
-   constituentType: "PN"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 3
-      end: 53
-      constituentType: "S"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 56
-         constituentType: "VROOT"
-         children: FSArray
-      children: FSArray
-   children: FSArray
-   syntacticFunction: "SB"
-[Ross]
-POS_PROPN
-   sofa: _InitialView
-   begin: 3
-   end: 7
-   PosValue: "NE"
-   coarseValue: "PROPN"
-[Ross]
-Lemma
-   sofa: _InitialView
-   begin: 3
-   end: 7
-   value: "Ross"
-[Ross]
-Token
-   sofa: _InitialView
-   begin: 3
-   end: 7
-   parent: Constituent
-      sofa: _InitialView
-      begin: 3
-      end: 13
-      constituentType: "PN"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 3
-         end: 53
-         constituentType: "S"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 56
-            constituentType: "VROOT"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-      syntacticFunction: "SB"
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 3
-      end: 7
-      value: "Ross"
-   pos: POS_PROPN
-      sofa: _InitialView
-      begin: 3
-      end: 7
-      PosValue: "NE"
-      coarseValue: "PROPN"
-   id: "s1_2"
-   order: 0
-[Perot]
-POS_PROPN
-   sofa: _InitialView
-   begin: 8
-   end: 13
-   PosValue: "NE"
-   coarseValue: "PROPN"
-[Perot]
-Lemma
-   sofa: _InitialView
-   begin: 8
-   end: 13
-   value: "Perot"
-[Perot]
-Token
-   sofa: _InitialView
-   begin: 8
-   end: 13
-   parent: Constituent
-      sofa: _InitialView
-      begin: 3
-      end: 13
-      constituentType: "PN"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 3
-         end: 53
-         constituentType: "S"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 56
-            constituentType: "VROOT"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-      syntacticFunction: "SB"
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 8
-      end: 13
-      value: "Perot"
-   pos: POS_PROPN
-      sofa: _InitialView
-      begin: 8
-      end: 13
-      PosValue: "NE"
-      coarseValue: "PROPN"
-   id: "s1_3"
-   order: 0
-[wäre]
-POS_VERB
-   sofa: _InitialView
-   begin: 14
-   end: 18
-   PosValue: "VAFIN"
-   coarseValue: "VERB"
-[wäre]
-Lemma
-   sofa: _InitialView
-   begin: 14
-   end: 18
-   value: "sein"
-[wäre]
-Token
-   sofa: _InitialView
-   begin: 14
-   end: 18
-   parent: Constituent
-      sofa: _InitialView
-      begin: 3
-      end: 53
-      constituentType: "S"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 56
-         constituentType: "VROOT"
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 14
-      end: 18
-      value: "sein"
-   pos: POS_VERB
-      sofa: _InitialView
-      begin: 14
-      end: 18
-      PosValue: "VAFIN"
-      coarseValue: "VERB"
-   id: "s1_4"
-   order: 0
-[vielleicht]
-POS_ADV
-   sofa: _InitialView
-   begin: 19
-   end: 29
-   PosValue: "ADV"
-   coarseValue: "ADV"
-[vielleicht]
-Lemma
-   sofa: _InitialView
-   begin: 19
-   end: 29
-   value: "vielleicht"
-[vielleicht]
-Token
-   sofa: _InitialView
-   begin: 19
-   end: 29
-   parent: Constituent
-      sofa: _InitialView
-      begin: 3
-      end: 53
-      constituentType: "S"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 56
-         constituentType: "VROOT"
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 19
-      end: 29
-      value: "vielleicht"
-   pos: POS_ADV
-      sofa: _InitialView
-      begin: 19
-      end: 29
-      PosValue: "ADV"
-      coarseValue: "ADV"
-   id: "s1_5"
-   order: 0
-[ein prächtiger Diktator]
-Constituent
-   sofa: _InitialView
-   begin: 30
-   end: 53
-   constituentType: "NP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 3
-      end: 53
-      constituentType: "S"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 56
-         constituentType: "VROOT"
-         children: FSArray
-      children: FSArray
-   children: FSArray
-   syntacticFunction: "PD"
-[ein]
-POS_DET
-   sofa: _InitialView
-   begin: 30
-   end: 33
-   PosValue: "ART"
-   coarseValue: "DET"
-[ein]
-Lemma
-   sofa: _InitialView
-   begin: 30
-   end: 33
-   value: "ein"
-[ein]
-Token
-   sofa: _InitialView
-   begin: 30
-   end: 33
-   parent: Constituent
-      sofa: _InitialView
-      begin: 30
-      end: 53
-      constituentType: "NP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 3
-         end: 53
-         constituentType: "S"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 56
-            constituentType: "VROOT"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-      syntacticFunction: "PD"
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 30
-      end: 33
-      value: "ein"
-   pos: POS_DET
-      sofa: _InitialView
-      begin: 30
-      end: 33
-      PosValue: "ART"
-      coarseValue: "DET"
-   id: "s1_6"
-   order: 0
-[prächtiger]
-POS_ADJ
-   sofa: _InitialView
-   begin: 34
-   end: 44
-   PosValue: "ADJA"
-   coarseValue: "ADJ"
-[prächtiger]
-Lemma
-   sofa: _InitialView
-   begin: 34
-   end: 44
-   value: "prächtig"
-[prächtiger]
-Token
-   sofa: _InitialView
-   begin: 34
-   end: 44
-   parent: Constituent
-      sofa: _InitialView
-      begin: 30
-      end: 53
-      constituentType: "NP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 3
-         end: 53
-         constituentType: "S"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 56
-            constituentType: "VROOT"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-      syntacticFunction: "PD"
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 34
-      end: 44
-      value: "prächtig"
-   pos: POS_ADJ
-      sofa: _InitialView
-      begin: 34
-      end: 44
-      PosValue: "ADJA"
-      coarseValue: "ADJ"
-   id: "s1_7"
-   order: 0
-[Diktator]
-POS_NOUN
-   sofa: _InitialView
-   begin: 45
-   end: 53
-   PosValue: "NN"
-   coarseValue: "NOUN"
-[Diktator]
-Lemma
-   sofa: _InitialView
-   begin: 45
-   end: 53
-   value: "Diktator"
-[Diktator]
-Token
-   sofa: _InitialView
-   begin: 45
-   end: 53
-   parent: Constituent
-      sofa: _InitialView
-      begin: 30
-      end: 53
-      constituentType: "NP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 3
-         end: 53
-         constituentType: "S"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 56
-            constituentType: "VROOT"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-      syntacticFunction: "PD"
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 45
-      end: 53
-      value: "Diktator"
-   pos: POS_NOUN
-      sofa: _InitialView
-      begin: 45
-      end: 53
-      PosValue: "NN"
-      coarseValue: "NOUN"
-   id: "s1_8"
-   order: 0
-['']
-POS_PUNCT
-   sofa: _InitialView
-   begin: 54
-   end: 56
-   PosValue: "$("
-   coarseValue: "PUNCT"
-['']
-Lemma
-   sofa: _InitialView
-   begin: 54
-   end: 56
-   value: "--"
-['']
-Token
-   sofa: _InitialView
-   begin: 54
-   end: 56
-   parent: ROOT
-      sofa: _InitialView
-      begin: 0
-      end: 56
-      constituentType: "VROOT"
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 54
-      end: 56
-      value: "--"
-   pos: POS_PUNCT
-      sofa: _InitialView
-      begin: 54
-      end: 56
-      PosValue: "$("
-      coarseValue: "PUNCT"
-   id: "s1_9"
-   order: 0
--------- View _InitialView end ----------------------------------
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PROPN
+<ANCHOR>,<COVERED_TEXT>,PosValue,coarseValue
+POS_PROPN[3-7]*@_InitialView,Ross,NE,PROPN
+POS_PROPN[8-13]*@_InitialView,Perot,NE,PROPN
 
-======== CAS 0 end ==================================
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNCT
+<ANCHOR>,<COVERED_TEXT>,PosValue,coarseValue
+POS_PUNCT[0-2]*@_InitialView,``,$(,PUNCT
+POS_PUNCT[54-56]*@_InitialView,'',$(,PUNCT
+
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB
+<ANCHOR>,<COVERED_TEXT>,PosValue,coarseValue
+POS_VERB[14-18]*@_InitialView,wäre,VAFIN,VERB
+
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData
+<ANCHOR>,<COVERED_TEXT>,documentId,documentTitle,isLastSegment,language
+DocumentMetaData[0-58]*@_InitialView,`` Ross Perot ...Diktator '' \n,tiger-sample.xml,tiger-sample.xml,false,de
+
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma
+<ANCHOR>,<COVERED_TEXT>,value
+Lemma[0-2]*@_InitialView,``,--
+Lemma[3-7]*@_InitialView,Ross,Ross
+Lemma[8-13]*@_InitialView,Perot,Perot
+Lemma[14-18]*@_InitialView,wäre,sein
+Lemma[19-29]*@_InitialView,vielleicht,vielleicht
+Lemma[30-33]*@_InitialView,ein,ein
+Lemma[34-44]*@_InitialView,prächtiger,prächtig
+Lemma[45-53]*@_InitialView,Diktator,Diktator
+Lemma[54-56]*@_InitialView,'',--
+
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence
+<ANCHOR>,<COVERED_TEXT>,id
+Sentence[0-56]*@_InitialView,`` Ross Perot ...r Diktator '',s1
+
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token
+<ANCHOR>,<COVERED_TEXT>,form,id,lemma,morph,order,parent,pos,stem,syntacticFunction
+Token[0-2]*@_InitialView,``,<NULL>,s1_1,Lemma[0-2]*@_InitialView,<NULL>,0,ROOT[0-56]*@_InitialView,POS_PUNCT[0-2]*@_InitialView,<NULL>,<NULL>
+Token[3-7]*@_InitialView,Ross,<NULL>,s1_2,Lemma[3-7]*@_InitialView,<NULL>,0,Constituent[3-13]*@_InitialView,POS_PROPN[3-7]*@_InitialView,<NULL>,<NULL>
+Token[8-13]*@_InitialView,Perot,<NULL>,s1_3,Lemma[8-13]*@_InitialView,<NULL>,0,Constituent[3-13]*@_InitialView,POS_PROPN[8-13]*@_InitialView,<NULL>,<NULL>
+Token[14-18]*@_InitialView,wäre,<NULL>,s1_4,Lemma[14-18]*@_InitialView,<NULL>,0,Constituent[3-53]*@_InitialView,POS_VERB[14-18]*@_InitialView,<NULL>,<NULL>
+Token[19-29]*@_InitialView,vielleicht,<NULL>,s1_5,Lemma[19-29]*@_InitialView,<NULL>,0,Constituent[3-53]*@_InitialView,POS_ADV[19-29]*@_InitialView,<NULL>,<NULL>
+Token[30-33]*@_InitialView,ein,<NULL>,s1_6,Lemma[30-33]*@_InitialView,<NULL>,0,Constituent[30-53]*@_InitialView,POS_DET[30-33]*@_InitialView,<NULL>,<NULL>
+Token[34-44]*@_InitialView,prächtiger,<NULL>,s1_7,Lemma[34-44]*@_InitialView,<NULL>,0,Constituent[30-53]*@_InitialView,POS_ADJ[34-44]*@_InitialView,<NULL>,<NULL>
+Token[45-53]*@_InitialView,Diktator,<NULL>,s1_8,Lemma[45-53]*@_InitialView,<NULL>,0,Constituent[30-53]*@_InitialView,POS_NOUN[45-53]*@_InitialView,<NULL>,<NULL>
+Token[54-56]*@_InitialView,'',<NULL>,s1_9,Lemma[54-56]*@_InitialView,<NULL>,0,ROOT[0-56]*@_InitialView,POS_PUNCT[54-56]*@_InitialView,<NULL>,<NULL>
+
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree
+<ANCHOR>,<COVERED_TEXT>,PennTree,TransformationNames
+PennTree[0-56]*@_InitialView,`` Ross Perot ...r Diktator '',(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) (ADV vielleicht) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))) ($( '')),<NULL>
+
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+<ANCHOR>,<COVERED_TEXT>,children,constituentType,parent,syntacticFunction
+Constituent[3-53]*@_InitialView,Ross Perot wär...iger Diktator,"[Constituent[3-13]*@_InitialView,Token[14-18]*@_InitialView,Token[19-29]*@_InitialView,Constituent[30-53]*@_InitialView]",S,ROOT[0-56]*@_InitialView,<NULL>
+Constituent[3-13]*@_InitialView,Ross Perot,"[Token[3-7]*@_InitialView,Token[8-13]*@_InitialView]",PN,Constituent[3-53]*@_InitialView,SB
+Constituent[30-53]*@_InitialView,ein prächtiger Diktator,"[Token[30-33]*@_InitialView,Token[34-44]*@_InitialView,Token[45-53]*@_InitialView]",NP,Constituent[3-53]*@_InitialView,PD
+
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+<ANCHOR>,<COVERED_TEXT>,children,constituentType,parent,syntacticFunction
+ROOT[0-56]*@_InitialView,`` Ross Perot ...r Diktator '',"[Token[0-2]*@_InitialView,Constituent[3-53]*@_InitialView,Token[54-56]*@_InitialView]",VROOT,<NULL>,<NULL>
+

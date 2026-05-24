@@ -1,39 +1,11 @@
-======== CAS 0 begin ==================================
+======== CAS 0 ========
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData
+<ANCHOR>,<COVERED_TEXT>,documentId,documentTitle,isLastSegment,language
+DocumentMetaData[0-130]*@_InitialView,Αυτή είναι η π...στον κόσμο.\n\n,xces-basic.xml,xces-basic.xml,false,el
 
--------- View _InitialView begin ----------------------------------
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph
+<ANCHOR>,<COVERED_TEXT>,divType,id
+Paragraph[0-26]*@_InitialView,Αυτή είναι η πρώτη γραμμή.,<NULL>,<NULL>
+Paragraph[28-82]*@_InitialView,Αυτή είναι η π... άλλη γραμμή.,<NULL>,<NULL>
+Paragraph[84-128]*@_InitialView,Γίνε η αλλαγή ...ς στον κόσμο.,<NULL>,<NULL>
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 130
-   language: "el"
-   documentTitle: "xces-basic.xml"
-   documentId: "xces-basic.xml"
-   isLastSegment: false
-
-CAS-Text:
-Αυτή είναι η πρώτη γραμμή.
-
-Αυτή είναι η πρώτη γραμμή. Αυτό είναι μια άλλη γραμμή.
-
-Γίνε η αλλαγή που θέλεις να δεις στον κόσμο.
-
-
-[Αυτή είναι η πρώτη γραμμή.]
-Paragraph
-   sofa: _InitialView
-   begin: 0
-   end: 26
-[Αυτή είναι η πρώτη γραμμή. Αυτό είναι μια άλλη γραμμή.]
-Paragraph
-   sofa: _InitialView
-   begin: 28
-   end: 82
-[Γίνε η αλλαγή που θέλεις να δεις στον κόσμο.]
-Paragraph
-   sofa: _InitialView
-   begin: 84
-   end: 128
--------- View _InitialView end ----------------------------------
-
-======== CAS 0 end ==================================

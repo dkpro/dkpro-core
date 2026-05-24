@@ -29,14 +29,12 @@ import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.conll.Conll2012Writer;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -45,14 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 public class TigerXmlReaderTest
 {
-    @BeforeAll
-    static void setupClass()
-    {
-        // V2 FS toString needed for CasDumpWriter. Also see comment in the root-level pom.xml
-        // file where this property is globally set for all surefire runs
-        System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
-    }
-
     @Test
     public void test() throws Exception
     {
