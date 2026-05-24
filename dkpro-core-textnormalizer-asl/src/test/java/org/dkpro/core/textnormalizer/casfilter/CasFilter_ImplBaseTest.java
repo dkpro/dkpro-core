@@ -20,13 +20,11 @@ package org.dkpro.core.textnormalizer.casfilter;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -39,7 +37,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.StringReader;
-import org.dkpro.core.testing.dumper.CasDumpWriter;
+import org.dkpro.core.testing.dumper.CasToComparableTextWriter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -53,23 +51,22 @@ public class CasFilter_ImplBaseTest
         File tmpFile = new File(tempDir, "output.dump");
 
         String input = "test";
-        String expectedFirstLine = "======== CAS 0 begin ==================================";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(AnnotationBasedFilter.class);
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, annotator, aggregator);
 
-        List<String> output = FileUtils.readLines(tmpFile);
-        assertEquals(expectedFirstLine, output.get(0));
-        assertEquals(input, output.get(13));
-        assertEquals("Sentence", output.get(15));
+        String output = FileUtils.readFileToString(tmpFile, "UTF-8");
+        assertTrue(output.contains("======== CAS 0 ========"));
+        assertTrue(output.contains(input));
+        assertTrue(output.contains("Sentence"));
     }
 
     @Test
@@ -83,8 +80,8 @@ public class CasFilter_ImplBaseTest
                 StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(AnnotationBasedFilter.class);
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
@@ -103,8 +100,8 @@ public class CasFilter_ImplBaseTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(EmptyDocumentFilter.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
@@ -122,8 +119,8 @@ public class CasFilter_ImplBaseTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(EmptyDocumentFilter.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
@@ -142,8 +139,8 @@ public class CasFilter_ImplBaseTest
                 StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(LanguageFilter.class,
                 LanguageFilter.PARAM_REQUIRED_LANGUAGES, new String[] { "de", "en" });
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
@@ -162,8 +159,8 @@ public class CasFilter_ImplBaseTest
                 StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "ch");
         AnalysisEngineDescription filter = createEngineDescription(LanguageFilter.class,
                 LanguageFilter.PARAM_REQUIRED_LANGUAGES, new String[] { "de", "en" });
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 

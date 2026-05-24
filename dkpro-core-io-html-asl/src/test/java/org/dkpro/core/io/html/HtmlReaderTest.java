@@ -32,7 +32,7 @@ import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.dumper.CasDumpWriter;
+import org.dkpro.core.testing.dumper.CasToComparableTextWriter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -55,8 +55,9 @@ public class HtmlReaderTest
         CollectionReaderDescription reader = createReaderDescription(HtmlReader.class,
                 HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.google.de"));
 
-        AnalysisEngineDescription dumpWriter = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, new File(tempDir, "google.html.dump"));
+        AnalysisEngineDescription dumpWriter = createEngineDescription(
+                CasToComparableTextWriter.class, CasToComparableTextWriter.PARAM_TARGET_LOCATION,
+                new File(tempDir, "google.html.dump"));
 
         for (JCas jcas : new JCasIterable(reader, dumpWriter)) {
             dumpMetaData(DocumentMetaData.get(jcas));

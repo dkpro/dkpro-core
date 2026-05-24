@@ -68,10 +68,12 @@ public class CasToComparableTextWriter
 
     /**
      * Regex patterns matching fully-qualified feature names ({@code Type:feature}) that should be
-     * excluded from the output.
+     * excluded from the output. Defaults to excluding the path-leaking {@code DocumentMetaData} URI
+     * features so that reference fixtures stay machine-independent.
      */
     public static final String PARAM_EXCLUDE_FEATURE_PATTERNS = "excludeFeaturePatterns";
-    @ConfigurationParameter(name = PARAM_EXCLUDE_FEATURE_PATTERNS, mandatory = false)
+    @ConfigurationParameter(name = PARAM_EXCLUDE_FEATURE_PATTERNS, mandatory = true, defaultValue = {
+            ".*:documentUri", ".*:collectionId", ".*:documentBaseUri" })
     private String[] excludeFeaturePatterns;
 
     private PrintWriter out;

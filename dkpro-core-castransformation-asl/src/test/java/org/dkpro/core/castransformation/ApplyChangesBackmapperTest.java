@@ -40,7 +40,7 @@ import org.dkpro.core.castransformation.internal.AlignmentStorage;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.io.xmi.XmiWriter;
 import org.dkpro.core.testing.EOLUtils;
-import org.dkpro.core.testing.dumper.CasDumpWriter;
+import org.dkpro.core.testing.dumper.CasToComparableTextWriter;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -95,8 +95,9 @@ public class ApplyChangesBackmapperTest
         AnalysisEngineDescription xmiWriter = createEngineDescription(XmiWriter.class,
                 XmiWriter.PARAM_TARGET_LOCATION, output);
 
-        AnalysisEngineDescription dumpWriter = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, dumpFile);
+        AnalysisEngineDescription dumpWriter = createEngineDescription(
+                CasToComparableTextWriter.class, CasToComparableTextWriter.PARAM_TARGET_LOCATION,
+                dumpFile);
 
         AggregateBuilder builder = new AggregateBuilder();
         builder.add(deletes); // Removing some lines to make sure to confuse the backmapper
