@@ -5,7 +5,7 @@ author.
 
 LegacyPDFStreamEngine.java:
 
-This class was copied from PDFbox 2.0.9 because it could not be extended as it was package-private
+This class was copied from PDFbox 3.0.7 because it could not be extended as it was package-private
 in PDFBox.
 
 
