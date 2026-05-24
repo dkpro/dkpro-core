@@ -53,6 +53,7 @@
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>7.0.7</spring.version>
     <uima.version>3.6.1</uima.version>
+    <uima-io-json.version>0.5.0</uima-io-json.version>
     <uimafit.plugin.version>${uima.version}</uimafit.plugin.version>
   </properties>
 
@@ -170,6 +171,11 @@
         <version>${uima.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.uima</groupId>
+        <artifactId>uimaj-io-json</artifactId>
+        <version>${uima-io-json.version}</version>
       </dependency>
       <dependency>
         <groupId>org.yaml</groupId>
