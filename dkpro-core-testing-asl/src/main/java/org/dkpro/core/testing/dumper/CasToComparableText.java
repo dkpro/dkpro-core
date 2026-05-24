@@ -1124,7 +1124,7 @@ public class CasToComparableText
             }
 
             // Same name?
-            var nameCmp = aFS2.getType().getName().compareTo(aFS2.getType().getName());
+            var nameCmp = aFS1.getType().getName().compareTo(aFS2.getType().getName());
             if (nameCmp != 0) {
                 return nameCmp;
             }
@@ -1247,7 +1247,13 @@ public class CasToComparableText
         public boolean equals(Object obj)
         {
 
-            return stringValue.equals(((Anchor) obj).stringValue);
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof Anchor other)) {
+                return false;
+            }
+            return stringValue.equals(other.stringValue);
         }
     }
 
