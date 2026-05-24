@@ -1,4 +1,49 @@
 ======== CAS 0 ========
+
+-------- View _InitialView --------
+
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData
+<ANCHOR>,<COVERED_TEXT>,documentId,documentTitle,isLastSegment,language
+DocumentMetaData[0-141]*@_InitialView,Lumbo labi bum...Jalla Jamba.\n,input.txt,input.txt,false,en
+
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence
+<ANCHOR>,<COVERED_TEXT>,id
+Sentence[27-56]*@_InitialView,Labibi humba doopi jamba Too.,<NULL>
+Sentence[57-81]*@_InitialView,Mekoman jalla hembembel!,<NULL>
+Sentence[82-107]*@_InitialView,Labumbu jakka\nlembi nabi.,<NULL>
+Sentence[108-140]*@_InitialView,Humba jumbaba ... Jalla Jamba.,<NULL>
+
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token
+<ANCHOR>,<COVERED_TEXT>,form,id,lemma,morph,order,parent,pos,stem,syntacticFunction
+Token[27-33]*@_InitialView,Labibi,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[34-39]*@_InitialView,humba,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[40-45]*@_InitialView,doopi,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[46-51]*@_InitialView,jamba,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[52-55]*@_InitialView,Too,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[55-56]*@_InitialView,.,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[57-64]*@_InitialView,Mekoman,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[65-70]*@_InitialView,jalla,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[71-80]*@_InitialView,hembembel,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[80-81]*@_InitialView,"!",<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[82-89]*@_InitialView,Labumbu,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[90-95]*@_InitialView,jakka,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[96-101]*@_InitialView,lembi,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[102-106]*@_InitialView,nabi,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[106-107]*@_InitialView,.,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[108-113]*@_InitialView,Humba,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[114-121]*@_InitialView,jumbaba,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[122-127]*@_InitialView,tumba,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[128-133]*@_InitialView,Jalla,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[134-139]*@_InitialView,Jamba,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[139-140]*@_InitialView,.,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+
+de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation
+<ANCHOR>,<COVERED_TEXT>,operation,reason,value
+SofaChangeAnnotation[0-26]*@_InitialView,Lumbo labi bumbo nabi noo.,delete,<NULL>,<NULL>
+
+
+-------- View TargetView --------
+
 de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData
 <ANCHOR>,<COVERED_TEXT>,documentId,documentTitle,isLastSegment,language
 DocumentMetaData[0-115]*@TargetView," Labibi humba ...Jalla Jamba.\n",input.txt,input.txt,false,en

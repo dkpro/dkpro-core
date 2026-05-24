@@ -66,8 +66,8 @@ public class CasFilter_ImplBaseTest
 
         String output = FileUtils.readFileToString(tmpFile, UTF_8);
         assertTrue(output.contains("======== CAS 0 ========"));
-        assertTrue(output.contains(input));
-        assertTrue(output.contains("Sentence"));
+        assertTrue(output.contains("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"));
+        assertTrue(output.contains("Sentence[0-" + input.length() + "]"));
     }
 
     @Test

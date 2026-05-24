@@ -25,11 +25,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.commons.io.output.CloseShieldOutputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
@@ -107,17 +109,29 @@ public class CasToComparableTextWriter
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
-        var renderer = new CasToComparableText(aJCas, format);
-        if (excludeTypePatterns != null) {
-            renderer.setExcludeTypePatterns(Arrays.asList(excludeTypePatterns));
-        }
-        if (excludeFeaturePatterns != null) {
-            renderer.setExcludeFeaturePatterns(Arrays.asList(excludeFeaturePatterns));
-        }
-
         out.println("======== CAS " + iCas + " ========");
+
         try {
-            renderer.write(out);
+            var views = new ArrayList<CAS>();
+            aJCas.getCas().getViewIterator().forEachRemaining(views::add);
+            var multipleViews = views.size() > 1;
+
+            for (var view : views) {
+                if (multipleViews) {
+                    out.println();
+                    out.println("-------- View " + view.getViewName() + " --------");
+                    out.println();
+                }
+
+                var renderer = new CasToComparableText(view, format);
+                if (excludeTypePatterns != null) {
+                    renderer.setExcludeTypePatterns(Arrays.asList(excludeTypePatterns));
+                }
+                if (excludeFeaturePatterns != null) {
+                    renderer.setExcludeFeaturePatterns(Arrays.asList(excludeFeaturePatterns));
+                }
+                renderer.write(out);
+            }
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);

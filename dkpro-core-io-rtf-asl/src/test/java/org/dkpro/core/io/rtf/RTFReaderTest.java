@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
 public class RTFReaderTest
 {
     /**
-     * Simple test for reader / CASDumpWriter output.
+     * Simple test for reader / CasToComparableTextWriter output.
      *
      * @throws UIMAException
      * @throws IOException
