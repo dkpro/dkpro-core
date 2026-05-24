@@ -104,7 +104,9 @@ public class MalletEmbeddingsTrainer
         WordEmbeddings matrix = new WordEmbeddings(alphabet, dimensions, windowSize);
         matrix.setQueryWord(exampleWord);
         matrix.setMinDocumentLength(minDocumentLength);
-        matrix.countWords(instanceList);
+        // Mallet 2.1.0 added a frequent-word down-sampling factor; use the same
+        // default as Mallet's WordEmbeddings CLI (--frequency-factor 0.0001).
+        matrix.countWords(instanceList, 0.0001);
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 
         assert getTargetLocation() != null;

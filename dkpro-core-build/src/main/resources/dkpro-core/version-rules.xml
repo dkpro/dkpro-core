@@ -51,31 +51,90 @@
       </ignoreVersions>
     </rule>
     
-    <!-- PIN: Spring 4.x -->
-    <rule groupId="org.springframework" comparisonMethod="maven"> 
+    <!--
+      PIN: Lucene 4.4.x
+      dkpro-core-decompounding-asl uses Lucene 4-era APIs (e.g. ParallelMultiSearcher)
+      that were removed in Lucene 5; upgrading requires a code rewrite there.
+      -->
+    <rule groupId="org.apache.lucene" comparisonMethod="maven">
       <ignoreVersions>
-        <ignoreVersion type="regex">^5.*</ignoreVersion>
-      </ignoreVersions>
-    </rule>
-    
-    <!-- PIN: Xerces 2.9.1 -->
-    <rule groupId="xerces" artifactId="xercesImpl" comparisonMethod="maven"> 
-      <ignoreVersions>
-        <ignoreVersion type="regex">.*</ignoreVersion>
+        <ignoreVersion type="regex">^([4-9]|[1-9][0-9]+).*</ignoreVersion>
       </ignoreVersions>
     </rule>
 
-    <!-- PIN: stax2-api 3.x -->
-    <rule groupId="org.codehaus.woodstox" artifactId="stax2-api" comparisonMethod="maven"> 
+    <!--
+      PIN: Jena 5.x
+      Jena 6 renamed artifacts (jena-iri → jena-iri3986, jena-tdb → jena-tdb1) and
+      removed deprecated APIs up through Jena 4.10. Upgrading requires pom and
+      code changes; see https://github.com/apache/jena/blob/main/CHANGES.txt.
+      -->
+    <rule groupId="org.apache.jena" comparisonMethod="maven">
       <ignoreVersions>
-        <ignoreVersion type="regex">^4.*</ignoreVersion>
+        <ignoreVersion type="regex">^[6-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
       </ignoreVersions>
     </rule>
 
-    <!-- PIN: Lucene 4.4.x -->
-    <rule groupId="org.apache.lucene" comparisonMethod="maven"> 
+    <!--
+      PIN: Smile 4.x
+      Smile 5.x and 6.x jars are compiled to Java 25 bytecode (class major 69)
+      and will not load on our Java 21 target. They also rework smile.classification.*,
+      smile.data.*, and smile.math.*. See https://github.com/haifengl/smile/releases.
+      Revisit once dkpro-core bumps its Java baseline past 25.
+      -->
+    <rule groupId="com.github.haifengl" comparisonMethod="maven">
       <ignoreVersions>
+        <ignoreVersion type="regex">^[5-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      PIN: Hadoop 3.4.x
+      Hadoop 3.5 bumps the bundled Jetty to a version that enforces stricter
+      QueuedThreadPool budgets, which breaks MiniDFSCluster startup in
+      HdfsResourceLoaderLocatorTest with "Insufficient configured threads".
+      Revisit once Hadoop ships a release where MiniDFSCluster sizes its
+      embedded HTTP server appropriately for newer Jetty.
+      -->
+    <rule groupId="org.apache.hadoop" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^3\.[5-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^3\.[1-9][0-9]+.*</ignoreVersion>
         <ignoreVersion type="regex">^[4-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      PIN: com.sun.xml.bind:jaxb-core / jaxb-impl 2.x
+      The 2.x line is the last to implement the javax.xml.bind API; 3.x+ ships
+      the jakarta.xml.bind API. Our parent-common still wires the javax.* JAXB
+      artifacts (alongside the jakarta.* set) so this pair must stay on 2.x.
+      -->
+    <rule groupId="com.sun.xml.bind" artifactId="jaxb-core" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[3-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="com.sun.xml.bind" artifactId="jaxb-impl" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[3-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      PIN: SolrJ 9.x
+      Solr 10 renamed/moved client classes (SolrQuery moved package,
+      Http2SolrClient → HttpJettySolrClient), removed legacy Apache-HttpClient
+      based clients, and split out solr-solrj-jetty as a separate dep.
+      See https://solr.apache.org/guide/solr/latest/upgrade-notes/major-changes-in-solr-10.html.
+      -->
+    <rule groupId="org.apache.solr" artifactId="solr-solrj" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
       </ignoreVersions>
     </rule>
     
