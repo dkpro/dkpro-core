@@ -27,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -217,8 +218,13 @@ public abstract class JCasFileWriter_ImplBase
             }
 
             // Begin new entry
-            ZipEntry entry = new ZipEntry(
-                    zipEntryPrefix + aRelativePath + aExtension + compression.getExtension());
+            String entryName = zipEntryPrefix + aRelativePath + aExtension
+                    + compression.getExtension();
+            if (Paths.get(entryName).normalize().startsWith("..")) {
+                throw new IOException(
+                        "ZIP entry name [" + entryName + "] would escape archive root");
+            }
+            ZipEntry entry = new ZipEntry(entryName);
             zipOutputStream.putNextEntry(entry);
 
             // We return an OutputStream for an individual entry. When this is closed by the
