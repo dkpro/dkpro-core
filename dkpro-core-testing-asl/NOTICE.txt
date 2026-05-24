@@ -4,3 +4,7 @@ CasDumpWriter
 	Can be substitued by the official version when uimaFIT 2.2.0 is released. Mind that
 	Some parameters have been adapted to DKPro Core and IOTestRunner needs to be fixed
 	accordingly when updating to the official version.
+	
+CasToComparabeText / CasToComparabeText
+
+  Taken from Apache UIMA 3.7.0-SNAPSHOT.
