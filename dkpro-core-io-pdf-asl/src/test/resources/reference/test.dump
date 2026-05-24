@@ -1,40 +1,14 @@
-======== CAS 0 begin ==================================
+======== CAS 0 ========
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData
+<ANCHOR>,<COVERED_TEXT>,documentId,documentTitle,isLastSegment,language
+DocumentMetaData[0-109]*@_InitialView,This is a test...ution table.\n,test.pdf,test.pdf,false,x-unspecified
 
--------- View _InitialView begin ----------------------------------
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading
+<ANCHOR>,<COVERED_TEXT>,divType,id
+Heading[36-47]*@_InitialView,Überschrift,<NULL>,<NULL>
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 109
-   language: "x-unspecified"
-   documentTitle: "test.pdf"
-   documentId: "test.pdf"
-   isLastSegment: false
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph
+<ANCHOR>,<COVERED_TEXT>,divType,id
+Paragraph[0-34]*@_InitialView,This is a test...ist ein Test.,<NULL>,<NULL>
+Paragraph[49-108]*@_InitialView,Word with Umla...tution table.,<NULL>,<NULL>
 
-CAS-Text:
-This is a test.
-Dies ist ein Test.
-
-Überschrift
-
-Word with Umlauts (äöü) may require the substitution table.
-
-[This is a test.
-Dies ist ein Test.]
-Paragraph
-   sofa: _InitialView
-   begin: 0
-   end: 34
-[Überschrift]
-Heading
-   sofa: _InitialView
-   begin: 36
-   end: 47
-[Word with Umlauts (äöü) may require the substitution table.]
-Paragraph
-   sofa: _InitialView
-   begin: 49
-   end: 108
--------- View _InitialView end ----------------------------------
-
-======== CAS 0 end ==================================

@@ -45,7 +45,7 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.parameter.ComponentParameters;
-import org.dkpro.core.testing.dumper.CasDumpWriter;
+import org.dkpro.core.testing.dumper.CasToComparableTextWriter;
 import org.dkpro.core.testing.validation.CasValidator;
 import org.dkpro.core.testing.validation.Message;
 
@@ -133,8 +133,8 @@ public class IOTestRunner
                 + "-" + FilenameUtils.getBaseName(aFile);
         File output = new File("target/test-output/" + outputFolder + "/dump.txt");
 
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, output, CasDumpWriter.PARAM_SORT, true);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, output);
 
         testOneWay2(aReader, writer, aExpectedFile, "dump.txt", aFile, aOptions);
     }

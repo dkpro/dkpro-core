@@ -1,216 +1,47 @@
-======== CAS 0 begin ==================================
+======== CAS 0 ========
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData
+<ANCHOR>,<COVERED_TEXT>,documentId,documentTitle,isLastSegment,language
+DocumentMetaData[0-185]*@_InitialView,Aufgrund seine...lichkeit “ .\n,germeval2014_test.conll,germeval2014_test.conll,false,de
 
--------- View _InitialView begin ----------------------------------
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity
+<ANCHOR>,<COVERED_TEXT>,identifier,value
+NamedEntity[45-54]*@_InitialView,Stuttgart,<NULL>,LOC
+NamedEntity[57-69]*@_InitialView,Braunschweig,<NULL>,LOC
+NamedEntity[74-78]*@_InitialView,Bonn,<NULL>,LOC
+NamedEntity[122-139]*@_InitialView,Troia-Ausstellung,<NULL>,LOCpart
+NamedEntity[150-180]*@_InitialView,Troia - Traum und Wirklichkeit,<NULL>,OTH
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 185
-   language: "de"
-   documentTitle: "germeval2014_test.conll"
-   documentId: "germeval2014_test.conll"
-   isLastSegment: false
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence
+<ANCHOR>,<COVERED_TEXT>,id
+Sentence[0-184]*@_InitialView,Aufgrund seine...klichkeit “ .,<NULL>
 
-CAS-Text:
-Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token
+<ANCHOR>,<COVERED_TEXT>,form,id,lemma,morph,order,parent,pos,stem,syntacticFunction
+Token[0-8]*@_InitialView,Aufgrund,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[9-15]*@_InitialView,seiner,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[16-26]*@_InitialView,Initiative,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[27-31]*@_InitialView,fand,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[32-41]*@_InitialView,2001/2002,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[42-44]*@_InitialView,in,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[45-54]*@_InitialView,Stuttgart,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[55-56]*@_InitialView,"\,",<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[57-69]*@_InitialView,Braunschweig,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[70-73]*@_InitialView,und,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[74-78]*@_InitialView,Bonn,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[79-83]*@_InitialView,eine,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[84-89]*@_InitialView,große,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[90-93]*@_InitialView,und,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[94-107]*@_InitialView,publizistisch,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[108-121]*@_InitialView,vielbeachtete,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[122-139]*@_InitialView,Troia-Ausstellung,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[140-145]*@_InitialView,statt,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[146-147]*@_InitialView,"\,",<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[148-149]*@_InitialView,„,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[150-155]*@_InitialView,Troia,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[156-157]*@_InitialView,-,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[158-163]*@_InitialView,Traum,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[164-167]*@_InitialView,und,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[168-180]*@_InitialView,Wirklichkeit,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[181-182]*@_InitialView,“,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
+Token[183-184]*@_InitialView,.,<NULL>,<NULL>,<NULL>,<NULL>,0,<NULL>,<NULL>,<NULL>,<NULL>
 
-[Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .]
-Sentence
-   sofa: _InitialView
-   begin: 0
-   end: 184
-[Aufgrund]
-Token
-   sofa: _InitialView
-   begin: 0
-   end: 8
-   order: 0
-[seiner]
-Token
-   sofa: _InitialView
-   begin: 9
-   end: 15
-   order: 0
-[Initiative]
-Token
-   sofa: _InitialView
-   begin: 16
-   end: 26
-   order: 0
-[fand]
-Token
-   sofa: _InitialView
-   begin: 27
-   end: 31
-   order: 0
-[2001/2002]
-Token
-   sofa: _InitialView
-   begin: 32
-   end: 41
-   order: 0
-[in]
-Token
-   sofa: _InitialView
-   begin: 42
-   end: 44
-   order: 0
-[Stuttgart]
-NamedEntity
-   sofa: _InitialView
-   begin: 45
-   end: 54
-   value: "LOC"
-[Stuttgart]
-Token
-   sofa: _InitialView
-   begin: 45
-   end: 54
-   order: 0
-[,]
-Token
-   sofa: _InitialView
-   begin: 55
-   end: 56
-   order: 0
-[Braunschweig]
-NamedEntity
-   sofa: _InitialView
-   begin: 57
-   end: 69
-   value: "LOC"
-[Braunschweig]
-Token
-   sofa: _InitialView
-   begin: 57
-   end: 69
-   order: 0
-[und]
-Token
-   sofa: _InitialView
-   begin: 70
-   end: 73
-   order: 0
-[Bonn]
-NamedEntity
-   sofa: _InitialView
-   begin: 74
-   end: 78
-   value: "LOC"
-[Bonn]
-Token
-   sofa: _InitialView
-   begin: 74
-   end: 78
-   order: 0
-[eine]
-Token
-   sofa: _InitialView
-   begin: 79
-   end: 83
-   order: 0
-[große]
-Token
-   sofa: _InitialView
-   begin: 84
-   end: 89
-   order: 0
-[und]
-Token
-   sofa: _InitialView
-   begin: 90
-   end: 93
-   order: 0
-[publizistisch]
-Token
-   sofa: _InitialView
-   begin: 94
-   end: 107
-   order: 0
-[vielbeachtete]
-Token
-   sofa: _InitialView
-   begin: 108
-   end: 121
-   order: 0
-[Troia-Ausstellung]
-NamedEntity
-   sofa: _InitialView
-   begin: 122
-   end: 139
-   value: "LOCpart"
-[Troia-Ausstellung]
-Token
-   sofa: _InitialView
-   begin: 122
-   end: 139
-   order: 0
-[statt]
-Token
-   sofa: _InitialView
-   begin: 140
-   end: 145
-   order: 0
-[,]
-Token
-   sofa: _InitialView
-   begin: 146
-   end: 147
-   order: 0
-[„]
-Token
-   sofa: _InitialView
-   begin: 148
-   end: 149
-   order: 0
-[Troia - Traum und Wirklichkeit]
-NamedEntity
-   sofa: _InitialView
-   begin: 150
-   end: 180
-   value: "OTH"
-[Troia]
-Token
-   sofa: _InitialView
-   begin: 150
-   end: 155
-   order: 0
-[-]
-Token
-   sofa: _InitialView
-   begin: 156
-   end: 157
-   order: 0
-[Traum]
-Token
-   sofa: _InitialView
-   begin: 158
-   end: 163
-   order: 0
-[und]
-Token
-   sofa: _InitialView
-   begin: 164
-   end: 167
-   order: 0
-[Wirklichkeit]
-Token
-   sofa: _InitialView
-   begin: 168
-   end: 180
-   order: 0
-[“]
-Token
-   sofa: _InitialView
-   begin: 181
-   end: 182
-   order: 0
-[.]
-Token
-   sofa: _InitialView
-   begin: 183
-   end: 184
-   order: 0
--------- View _InitialView end ----------------------------------
-
-======== CAS 0 end ==================================

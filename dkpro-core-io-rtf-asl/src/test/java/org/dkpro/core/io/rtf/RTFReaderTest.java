@@ -29,9 +29,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.testing.EOLUtils;
+import org.dkpro.core.testing.dumper.CasToComparableTextWriter;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
 public class RTFReaderTest
 {
     /**
-     * Simple test for reader / CASDumpWriter output.
+     * Simple test for reader / CasToComparableTextWriter output.
      *
      * @throws UIMAException
      * @throws IOException
@@ -56,8 +56,8 @@ public class RTFReaderTest
         CollectionReaderDescription reader = createReaderDescription(RTFReader.class,
                 RTFReader.PARAM_SOURCE_LOCATION, testFile, RTFReader.PARAM_LANGUAGE, "en");
 
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, output);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, output);
 
         SimplePipeline.runPipeline(reader, writer);
         String reference = FileUtils.readFileToString(testDump, "UTF-8").trim();
@@ -78,8 +78,8 @@ public class RTFReaderTest
         CollectionReaderDescription reader = createReaderDescription(RTFReader.class,
                 RTFReader.PARAM_SOURCE_LOCATION, testFiles, RTFReader.PARAM_LANGUAGE, "en");
 
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, output);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, output);
 
         SimplePipeline.runPipeline(reader, writer);
 

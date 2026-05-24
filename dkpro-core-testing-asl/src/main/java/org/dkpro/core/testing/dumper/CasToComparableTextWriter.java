@@ -25,11 +25,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.output.CloseShieldOutputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
@@ -68,19 +72,61 @@ public class CasToComparableTextWriter
 
     /**
      * Regex patterns matching fully-qualified feature names ({@code Type:feature}) that should be
-     * excluded from the output.
+     * excluded from the output. Defaults to excluding the path-leaking {@code DocumentMetaData} URI
+     * features so that reference fixtures stay machine-independent.
      */
     public static final String PARAM_EXCLUDE_FEATURE_PATTERNS = "excludeFeaturePatterns";
-    @ConfigurationParameter(name = PARAM_EXCLUDE_FEATURE_PATTERNS, mandatory = false)
+    @ConfigurationParameter(name = PARAM_EXCLUDE_FEATURE_PATTERNS, mandatory = true, defaultValue = {
+            ".*:documentUri", ".*:collectionId", ".*:documentBaseUri" })
     private String[] excludeFeaturePatterns;
+
+    /**
+     * Prefix marking a view-pattern entry as an include rule.
+     */
+    public static final String INCLUDE_PREFIX = "+|";
+
+    /**
+     * Prefix marking a view-pattern entry as an exclude rule.
+     */
+    public static final String EXCLUDE_PREFIX = "-|";
+
+    /**
+     * Regex patterns selecting which CAS views to render. Each entry must be prefixed with
+     * {@value #INCLUDE_PREFIX} to include a view or {@value #EXCLUDE_PREFIX} to exclude it.
+     * Defaults to including all views.
+     */
+    public static final String PARAM_VIEW_PATTERNS = "viewPatterns";
+    @ConfigurationParameter(name = PARAM_VIEW_PATTERNS, mandatory = true, defaultValue = {
+            INCLUDE_PREFIX + ".*" })
+    private String[] viewPatterns;
 
     private PrintWriter out;
     private int iCas;
+    private List<Pattern> compiledIncludeViews;
+    private List<Pattern> compiledExcludeViews;
 
     @Override
     public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
+
+        compiledIncludeViews = new ArrayList<>();
+        compiledExcludeViews = new ArrayList<>();
+        for (var pattern : viewPatterns) {
+            if (pattern.startsWith(INCLUDE_PREFIX)) {
+                compiledIncludeViews
+                        .add(Pattern.compile(pattern.substring(INCLUDE_PREFIX.length())));
+            }
+            else if (pattern.startsWith(EXCLUDE_PREFIX)) {
+                compiledExcludeViews
+                        .add(Pattern.compile(pattern.substring(EXCLUDE_PREFIX.length())));
+            }
+            else {
+                throw new ResourceInitializationException(new IllegalArgumentException(
+                        "View pattern [" + pattern + "] must start with [" + INCLUDE_PREFIX
+                                + "] or [" + EXCLUDE_PREFIX + "]"));
+            }
+        }
 
         try {
             if ("-".equals(outputFile.getName())) {
@@ -105,17 +151,29 @@ public class CasToComparableTextWriter
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
-        var renderer = new CasToComparableText(aJCas, format);
-        if (excludeTypePatterns != null) {
-            renderer.setExcludeTypePatterns(Arrays.asList(excludeTypePatterns));
-        }
-        if (excludeFeaturePatterns != null) {
-            renderer.setExcludeFeaturePatterns(Arrays.asList(excludeFeaturePatterns));
-        }
-
         out.println("======== CAS " + iCas + " ========");
+
+        var selectedViews = new ArrayList<CAS>();
+        aJCas.getCas().getViewIterator().forEachRemaining(view -> {
+            var name = view.getViewName();
+            var included = compiledIncludeViews.isEmpty()
+                    || compiledIncludeViews.stream().anyMatch(p -> p.matcher(name).matches());
+            var excluded = compiledExcludeViews.stream().anyMatch(p -> p.matcher(name).matches());
+            if (included && !excluded) {
+                selectedViews.add(view);
+            }
+        });
+
+        boolean multipleViews = selectedViews.size() > 1;
         try {
-            renderer.write(out);
+            for (var view : selectedViews) {
+                if (multipleViews) {
+                    out.println();
+                    out.println("-------- View " + view.getViewName() + " --------");
+                    out.println();
+                }
+                renderView(view);
+            }
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
@@ -123,6 +181,19 @@ public class CasToComparableTextWriter
         out.flush();
 
         iCas++;
+    }
+
+    private void renderView(CAS aView) throws IOException
+    {
+
+        var renderer = new CasToComparableText(aView, format);
+        if (excludeTypePatterns != null) {
+            renderer.setExcludeTypePatterns(Arrays.asList(excludeTypePatterns));
+        }
+        if (excludeFeaturePatterns != null) {
+            renderer.setExcludeFeaturePatterns(Arrays.asList(excludeFeaturePatterns));
+        }
+        renderer.write(out);
     }
 
     @Override
