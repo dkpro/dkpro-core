@@ -60,8 +60,6 @@
     <module>../dkpro-core-api-ner-asl</module>
     <module>../dkpro-core-api-frequency-asl</module>
     <module>../dkpro-core-api-xml-asl</module>
-    <!-- FS modules -->
-    <module>../dkpro-core-fs-hdfs-asl</module>
     <!-- IO modules -->
     <module>../dkpro-core-io-aclanthology-asl</module>
     <module>../dkpro-core-io-ancora-asl</module>

@@ -220,7 +220,8 @@ public abstract class JCasFileWriter_ImplBase
             // Begin new entry
             String entryName = zipEntryPrefix + aRelativePath + aExtension
                     + compression.getExtension();
-            if (Paths.get(entryName).normalize().startsWith("..")) {
+            if (entryName.contains("..") || entryName.startsWith("/") || entryName.startsWith("\\")
+                    || Paths.get(entryName).isAbsolute()) {
                 throw new IOException(
                         "ZIP entry name [" + entryName + "] would escape archive root");
             }
