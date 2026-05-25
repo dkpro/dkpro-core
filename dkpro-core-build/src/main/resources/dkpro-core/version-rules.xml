@@ -90,23 +90,6 @@
     </rule>
 
     <!--
-      PIN: Hadoop 3.4.x
-      Hadoop 3.5 bumps the bundled Jetty to a version that enforces stricter
-      QueuedThreadPool budgets, which breaks MiniDFSCluster startup in
-      HdfsResourceLoaderLocatorTest with "Insufficient configured threads".
-      Revisit once Hadoop ships a release where MiniDFSCluster sizes its
-      embedded HTTP server appropriately for newer Jetty.
-      -->
-    <rule groupId="org.apache.hadoop" comparisonMethod="maven">
-      <ignoreVersions>
-        <ignoreVersion type="regex">^3\.[5-9].*</ignoreVersion>
-        <ignoreVersion type="regex">^3\.[1-9][0-9]+.*</ignoreVersion>
-        <ignoreVersion type="regex">^[4-9].*</ignoreVersion>
-        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
-      </ignoreVersions>
-    </rule>
-
-    <!--
       PIN: com.sun.xml.bind:jaxb-core / jaxb-impl 2.x
       The 2.x line is the last to implement the javax.xml.bind API; 3.x+ ships
       the jakarta.xml.bind API. Our parent-common still wires the javax.* JAXB
