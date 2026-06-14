@@ -42,8 +42,8 @@ public class CoreNlpNamedEntityRecognizerTest
 
         JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
 
-        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (IBM)",
-                "[ 10, 14]Person(PERSON) (John)", "[ 27, 34]Location(LOCATION) (Germany)" };
+        String[] ne = { "[  0,  3]NamedEntity(ORGANIZATION) (IBM)",
+                "[ 10, 14]NamedEntity(PERSON) (John)", "[ 27, 34]NamedEntity(LOCATION) (Germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -56,8 +56,8 @@ public class CoreNlpNamedEntityRecognizerTest
         JCas jcas = runTest("en", "all.3class.caseless.distsim.crf",
                 "ibm where john works is in germany .");
 
-        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (ibm)",
-                "[ 10, 14]Person(PERSON) (john)", "[ 27, 34]Location(LOCATION) (germany)" };
+        String[] ne = { "[  0,  3]NamedEntity(ORGANIZATION) (ibm)",
+                "[ 10, 14]NamedEntity(PERSON) (john)", "[ 27, 34]NamedEntity(LOCATION) (germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -70,8 +70,8 @@ public class CoreNlpNamedEntityRecognizerTest
         JCas jcas = runTest("en", "nowiki.3class.caseless.distsim.crf",
                 "ibm where john works is in germany .");
 
-        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (ibm)",
-                "[ 10, 14]Person(PERSON) (john)", "[ 27, 34]Location(LOCATION) (germany)" };
+        String[] ne = { "[  0,  3]NamedEntity(ORGANIZATION) (ibm)",
+                "[ 10, 14]NamedEntity(PERSON) (john)", "[ 27, 34]NamedEntity(LOCATION) (germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -84,8 +84,8 @@ public class CoreNlpNamedEntityRecognizerTest
         JCas jcas = runTest("en", "conll.4class.distsim.crf",
                 "IBM where John works is in Germany .");
 
-        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (IBM)",
-                "[ 10, 14]Person(PERSON) (John)", "[ 27, 34]Location(LOCATION) (Germany)" };
+        String[] ne = { "[  0,  3]NamedEntity(ORGANIZATION) (IBM)",
+                "[ 10, 14]NamedEntity(PERSON) (John)", "[ 27, 34]NamedEntity(LOCATION) (Germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -98,8 +98,8 @@ public class CoreNlpNamedEntityRecognizerTest
         JCas jcas = runTest("en", "conll.4class.caseless.distsim.crf",
                 "ibm where john works is in germany .");
 
-        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (ibm)",
-                "[ 10, 14]Person(PERSON) (john)", "[ 27, 34]Location(LOCATION) (germany)" };
+        String[] ne = { "[  0,  3]NamedEntity(ORGANIZATION) (ibm)",
+                "[ 10, 14]NamedEntity(PERSON) (john)", "[ 27, 34]NamedEntity(LOCATION) (germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -112,8 +112,8 @@ public class CoreNlpNamedEntityRecognizerTest
         JCas jcas = runTest("en", "conll.4class.caseless.distsim.crf",
                 "IBM where john works is in Germany .");
 
-        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (IBM)",
-                "[ 10, 14]Person(PERSON) (john)", "[ 27, 34]Location(LOCATION) (Germany)" };
+        String[] ne = { "[  0,  3]NamedEntity(ORGANIZATION) (IBM)",
+                "[ 10, 14]NamedEntity(PERSON) (john)", "[ 27, 34]NamedEntity(LOCATION) (Germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -125,8 +125,8 @@ public class CoreNlpNamedEntityRecognizerTest
 
         JCas jcas = runTest("en", "muc.7class.distsim.crf", "IBM where John works is in Germany .");
 
-        String[] ne = { "[  0,  3]Organization(ORGANIZATION) (IBM)",
-                "[ 10, 14]Person(PERSON) (John)", "[ 27, 34]Location(LOCATION) (Germany)" };
+        String[] ne = { "[  0,  3]NamedEntity(ORGANIZATION) (IBM)",
+                "[ 10, 14]NamedEntity(PERSON) (John)", "[ 27, 34]NamedEntity(LOCATION) (Germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -138,9 +138,9 @@ public class CoreNlpNamedEntityRecognizerTest
 
         JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
-        String[] ne = { "[  0,  6]Person(PERSON) (Markus)",
-                "[ 35, 38]Organization(ORGANIZATION) (SAP)",
-                "[ 42, 53]Location(LOCATION) (Deutschland)" };
+        String[] ne = { "[  0,  6]NamedEntity(PERSON) (Markus)",
+                "[ 35, 38]NamedEntity(ORGANIZATION) (SAP)",
+                "[ 42, 53]NamedEntity(LOCATION) (Deutschland)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -153,8 +153,8 @@ public class CoreNlpNamedEntityRecognizerTest
         JCas jcas = runTest("de", "hgc_175m_600.crf",
                 "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
-        String[] ne = { "[  0,  6]Person(I-PER) (Markus)", "[ 35, 38]Organization(I-ORG) (SAP)",
-                "[ 42, 53]Location(I-LOC) (Deutschland)" };
+        String[] ne = { "[  0,  6]NamedEntity(I-PER) (Markus)", "[ 35, 38]NamedEntity(I-ORG) (SAP)",
+                "[ 42, 53]NamedEntity(I-LOC) (Deutschland)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
@@ -166,8 +166,8 @@ public class CoreNlpNamedEntityRecognizerTest
 
         JCas jcas = runTest("es", null, "Hace 10 años Markus trabaja en SAP en Alemania .");
 
-        String[] ne = { "[ 13, 19]Person(PERS) (Markus)", "[ 31, 34]Organization(ORG) (SAP)",
-                "[ 38, 46]Location(LUG) (Alemania)" };
+        String[] ne = { "[ 13, 19]NamedEntity(PERS) (Markus)", "[ 31, 34]NamedEntity(ORG) (SAP)",
+                "[ 38, 46]NamedEntity(LUG) (Alemania)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }

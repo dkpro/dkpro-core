@@ -203,10 +203,10 @@
     <dependency:ADVMOD xmi:id="218" sofa="1" begin="205" end="216" Governor="68" Dependent="67" DependencyType="advmod"/>
     <dependency:ADVCL xmi:id="219" sofa="1" begin="170" end="176" Governor="68" Dependent="59" DependencyType="advcl"/>
     <dependency:CONJ xmi:id="220" sofa="1" begin="217" end="221" Governor="48" Dependent="68" DependencyType="conj_and"/>
-    <type4:Person xmi:id="221" sofa="1" begin="0" end="4" value="PERSON"/>
-    <type4:Person xmi:id="222" sofa="1" begin="65" end="69" value="PERSON"/>
-    <type4:Person xmi:id="223" sofa="1" begin="182" end="186" value="PERSON"/>
-    <type4:Person xmi:id="224" sofa="1" begin="200" end="204" value="PERSON"/>
+    <type4:NamedEntity xmi:id="221" sofa="1" begin="0" end="4" value="PERSON"/>
+    <type4:NamedEntity xmi:id="222" sofa="1" begin="65" end="69" value="PERSON"/>
+    <type4:NamedEntity xmi:id="223" sofa="1" begin="182" end="186" value="PERSON"/>
+    <type4:NamedEntity xmi:id="224" sofa="1" begin="200" end="204" value="PERSON"/>
     <type6:SemPred xmi:id="225" sofa="1" begin="5" end="9" arguments="2 3" category="go.02"/>
     <type6:SemPred xmi:id="227" sofa="1" begin="32" end="39" arguments="4 5" category="look.01"/>
     <type6:SemPred xmi:id="229" sofa="1" begin="78" end="81" arguments="6 7 8 9" category="meet.02"/>

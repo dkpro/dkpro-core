@@ -113,9 +113,7 @@ public class BratReaderWriterTest
     {
         testRoundTrip(createReaderDescription(BratReader.class,
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
-                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
+                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")),
                 createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
                         true),
                 "brat/document0a.ann");
@@ -135,15 +133,15 @@ public class BratReaderWriterTest
     {
         testOneWay(createReaderDescription(BratReader.class,
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
-                asList("Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location",
-                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+                asList("Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
                         "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
                 BratReader.PARAM_RELATION_TYPE_MAPPINGS,
                 asList("Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation"),
                 BratReader.PARAM_RELATION_TYPES,
                 asList("de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value"),
                 BratReader.PARAM_NOTE_MAPPINGS,
-                asList("de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization:value",
+                asList("de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:value",
                         "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:comment",
                         "de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg:comment")),
                 createEngineDescription(BratWriter.class, BratWriter.PARAM_RELATION_TYPES, asList(
@@ -156,21 +154,21 @@ public class BratReaderWriterTest
     {
         String mapping = String.join("\n", "{", "  'textTypeMapppings': [", "    {",
                 "      'from': 'Country',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'", "    },",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity'", "    },",
                 "    {", "      'from': 'Organization',",
-                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization'", "    },",
+                "      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity'", "    },",
                 "    {", "      'from': 'MERGE-ORG',",
                 "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg'", "    }",
                 "  ],", "  'relationTypeMapppings': [", "    {", "      'from': 'Origin',",
                 "      'to': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation'",
                 "    }", "  ],", "  'spans': [", "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location',",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',",
                 "      'defaultFeatureValues': {", "        'value': 'LOC'", "      }", "    }",
                 "  ],", "  'relations': [", "    {",
                 "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
                 "      'arg1': 'source',", "      'arg2': 'target',", "      'flags2': 'A',",
                 "      'subCatFeature': 'value'", "    }", "  ],", "  'comments': [", "    {",
-                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization',",
+                "      'type': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity',",
                 "      'feature': 'value'", "    },", "    {",
                 "      'type': 'de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation',",
                 "      'feature': 'comment'", "    },", "    {",
@@ -207,9 +205,7 @@ public class BratReaderWriterTest
         ReaderAssert.assertThat( //
                 BratReader.class, //
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
-                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"))
+                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"))
                 .readingFrom("src/test/resources/brat/document0c.ann") //
                 .usingWriter( //
                         BratWriter.class, //
@@ -225,9 +221,7 @@ public class BratReaderWriterTest
     {
         testOneWay(createReaderDescription(BratReader.class,
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
-                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
+                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")),
                 createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
                         true),
                 "brat/document0d-ref.ann", "brat/document0d.ann");

@@ -51,28 +51,12 @@ public class GateXmlWriterTest
     }
 
     @Test
-    public void oneWayNamedEntityGeneric() throws Exception
+    public void oneWayNamedEntity() throws Exception
     {
         testOneWay( //
                 Conll2002Reader.class, //
                 GateXmlWriter.class, //
-                "conll/2002/ner2002_ref_generic.xml", //
+                "conll/2002/ner2002_ref.xml", //
                 "conll/2002/ner2002_test.conll");
-    }
-
-    @Test
-    public void oneWayNamedEntitySpecific() throws Exception
-    {
-        testOneWay( //
-                createReaderDescription( //
-                        Conll2002Reader.class, //
-                        Conll2002Reader.PARAM_LANGUAGE, "en", //
-                        Conll2002Reader.PARAM_NAMED_ENTITY_MAPPING_LOCATION,
-                        "src/test/resources/conll/2002/ner2002_conll.map"),
-                createEngineDescription( //
-                        GateXmlWriter.class), //
-                "conll/2002/ner2002_ref_specific.xml", //
-                "conll/2002/ner2002_test.conll");
-
     }
 }

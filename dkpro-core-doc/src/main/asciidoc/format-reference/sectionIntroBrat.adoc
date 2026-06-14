@@ -63,7 +63,7 @@ features on the target UIMA types.
 The DKPro Core `BratReader` tries its best to map a given brat file into the UIMA type system of the
 CAS it is given. Thus, the `BratReader` is not bound strictly to the pre-defined DKPro Core types,
 but supports any custom types as well. Since the type names in UIMA are typically long (e.g.
-`de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location`) and the names used in brat tend to be short 
+`de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity`) and the names used in brat tend to be short
 (e.g. `LOC`), an explicit mapping is usually required. This mapping can be provided as JSON which
 needs to be passed to the `PARAM_MAPPINGS` parameter of the `BratReader`. Note that the parameter
 takes actual JSON, not the path to a JSON file.
@@ -102,12 +102,8 @@ For the purpose of mapping, brat event (`E`) and text (`T`) annotations are both
 {
   'textTypeMapppings': [
     {
-      'from': 'LOC',
-      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location'
-    },
-    {
-      'from': 'PER',
-      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person'
+      'from': '(LOC|PER|ORG)',
+      'to': 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity'
     },
     ...
   ],
