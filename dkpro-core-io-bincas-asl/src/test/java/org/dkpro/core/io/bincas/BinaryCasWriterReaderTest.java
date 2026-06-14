@@ -476,23 +476,15 @@ public class BinaryCasWriterReaderTest
                 TextReader.PARAM_PATTERNS, "*.txt", //
                 TextReader.PARAM_LANGUAGE, "latin");
 
-        AnalysisEngine writer;
-        if (false) {
-            writer = AnalysisEngineFactory.createEngine( //
-                    SerializedCasWriter.class, //
-                    SerializedCasWriter.PARAM_TARGET_LOCATION, aLocation, //
-                    SerializedCasWriter.PARAM_FILENAME_EXTENSION, ".bin", //
-                    SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION,
-                    aWriteTypeSystem ? new File(aLocation, "typesystem.bin") : null);
-        }
-        else {
-            writer = AnalysisEngineFactory.createEngine( //
-                    SerializedCasWriter.class, //
-                    SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder, //
-                    SerializedCasWriter.PARAM_FILENAME_EXTENSION, ".bin", //
-                    SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION,
-                    aWriteTypeSystem ? "typesystem.bin" : null);
-        }
+        // "S+" embeds the type system in the CAS file (matches the old SerializedCasWriter with no
+        // separate type system location), "S" writes the type system to a separate location.
+        AnalysisEngine writer = AnalysisEngineFactory.createEngine( //
+                BinaryCasWriter.class, //
+                BinaryCasWriter.PARAM_FORMAT, aWriteTypeSystem ? "S" : "S+", //
+                BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder, //
+                BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin", //
+                BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION,
+                aWriteTypeSystem ? "typesystem.bin" : null);
 
         runPipeline(reader, writer);
 

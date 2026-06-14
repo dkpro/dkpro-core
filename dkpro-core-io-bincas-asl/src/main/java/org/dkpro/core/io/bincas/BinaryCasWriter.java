@@ -170,8 +170,8 @@ public class BinaryCasWriter
      * type system file should be compressed or not is detected from the file name extension (e.g.
      * ".gz"). <br>
      * If this parameter is set, the type system and index repository are no longer serialized into
-     * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not read
-     * such files. Use this only if you really know what you are doing. <br>
+     * the same file as the test of the CAS. The {@link BinaryCasReader} can currently not read such
+     * files. Use this only if you really know what you are doing. <br>
      * This parameter has no effect if formats S+ or 6+ are used as the type system information is
      * embedded in each individual file. Otherwise, it is recommended that this parameter be set
      * unless some other mechanism is used to initialize the CAS with the same type system and index
