@@ -33,10 +33,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -112,23 +109,21 @@ public class DKPro2Gate
                 fm.put(TOKEN_LENGTH_FEATURE_NAME, ne.getCoveredText().length());
                 fm.put(TOKEN_STRING_FEATURE_NAME, ne.getCoveredText());
                 fm.put("value", ne.getValue());
-                fm.put("dkproType", ne.getClass().getSimpleName());
-                if (ne instanceof Person) {
-                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()),
-                            PERSON_ANNOTATION_TYPE, fm);
+                String gateType;
+                String value = ne.getValue();
+                if ("PER".equals(value) || "PERSON".equals(value)) {
+                    gateType = PERSON_ANNOTATION_TYPE;
                 }
-                else if (ne instanceof Location) {
-                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()),
-                            LOCATION_ANNOTATION_TYPE, fm);
+                else if ("LOC".equals(value) || "LOCATION".equals(value)) {
+                    gateType = LOCATION_ANNOTATION_TYPE;
                 }
-                else if (ne instanceof Organization) {
-                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()),
-                            ORGANIZATION_ANNOTATION_TYPE, fm);
+                else if ("ORG".equals(value) || "ORGANIZATION".equals(value)) {
+                    gateType = ORGANIZATION_ANNOTATION_TYPE;
                 }
                 else {
-                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()), "NamedEntity",
-                            fm);
+                    gateType = "NamedEntity";
                 }
+                as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()), gateType, fm);
             }
             else if (fs instanceof Sentence) {
                 Sentence s = (Sentence) fs;

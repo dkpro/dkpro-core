@@ -133,7 +133,7 @@ public class BratReader
      * 
      * <pre>
      * <code>
-     * Country -&gt; de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
+     * Country -&gt; de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity
      * </code>
      * </pre>
      */
