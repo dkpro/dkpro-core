@@ -44,10 +44,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Regex Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class RegexSegmenter
     extends SegmenterBase
 {
@@ -63,8 +61,7 @@ public class RegexSegmenter
      * tokenized with the pattern {@code [-\n]}.
      */
     public static final String PARAM_TOKEN_BOUNDARY_REGEX = "tokenBoundaryRegex";
-    @ConfigurationParameter(name = PARAM_TOKEN_BOUNDARY_REGEX, mandatory = true, 
-            defaultValue = WHITESPACE_PATTERN)
+    @ConfigurationParameter(name = PARAM_TOKEN_BOUNDARY_REGEX, mandatory = true, defaultValue = WHITESPACE_PATTERN)
     private String tokenBoundaryRegex;
     private Pattern tokenBoundaryPattern;
 
@@ -72,14 +69,12 @@ public class RegexSegmenter
      * Define the sentence boundary.
      */
     public static final String PARAM_SENTENCE_BOUNDARY_REGEX = "sentenceBoundaryRegex";
-    @ConfigurationParameter(name = PARAM_SENTENCE_BOUNDARY_REGEX, mandatory = true, 
-            defaultValue = LINEBREAK_PATTERN)
+    @ConfigurationParameter(name = PARAM_SENTENCE_BOUNDARY_REGEX, mandatory = true, defaultValue = LINEBREAK_PATTERN)
     private String sentenceBoundaryRegex;
     private Pattern sentenceBoundaryPattern;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         tokenBoundaryPattern = Pattern.compile(tokenBoundaryRegex);

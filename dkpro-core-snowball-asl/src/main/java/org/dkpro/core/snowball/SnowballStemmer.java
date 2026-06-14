@@ -52,10 +52,14 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * <p>UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can be configured by a
- * {@link FeaturePath}.</p>
- * <p>If you use this component in a pipeline which uses stop word removal, make sure that it
- * runs after the stop word removal step, so only words that are no stop words are stemmed.</p>
+ * <p>
+ * UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can be configured by a
+ * {@link FeaturePath}.
+ * </p>
+ * <p>
+ * If you use this component in a pipeline which uses stop word removal, make sure that it runs
+ * after the stop word removal step, so only words that are no stop words are stemmed.
+ * </p>
  *
  * @see <a href="http://snowball.tartarus.org/">Snowball stemmer homepage</a>
  * @see FeaturePathAnnotatorBase
@@ -66,9 +70,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "da", "nl", "en", "fi", "fr", "de", "hu", "it", "no", "pt", "ro", "ru", "es",
         "sv", "tr" })
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
 public class SnowballStemmer
     extends FeaturePathAnnotatorBase
 {
@@ -83,15 +85,31 @@ public class SnowballStemmer
     protected String language;
 
     /**
-     * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
-     * are lower-cased before being passed to the stemmer.
+     * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens are
+     * lower-cased before being passed to the stemmer.
      *
-     * <table border="1" cellspacing="0">
+     * <table border="1">
      * <caption>Examples</caption>
-     * <tr><th></th><th>false (default)</th><th>true</th></tr>
-     * <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
-     * <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>
-     * <tr><td>educational</td><td>educ</td><td>educ</td></tr>
+     * <tr>
+     * <th></th>
+     * <th>false (default)</th>
+     * <th>true</th>
+     * </tr>
+     * <tr>
+     * <td>EDUCATIONAL</td>
+     * <td>EDUCATIONAL</td>
+     * <td>educ</td>
+     * </tr>
+     * <tr>
+     * <td>Educational</td>
+     * <td>Educat</td>
+     * <td>educ</td>
+     * </tr>
+     * <tr>
+     * <td>educational</td>
+     * <td>educ</td>
+     * <td>educ</td>
+     * </tr>
      * </table>
      */
     public static final String PARAM_LOWER_CASE = "lowerCase";
@@ -176,8 +194,7 @@ public class SnowballStemmer
         }
     }
 
-    private SnowballProgram getSnowballProgram(JCas aCas)
-        throws AnalysisEngineProcessException
+    private SnowballProgram getSnowballProgram(JCas aCas) throws AnalysisEngineProcessException
     {
         // Try language set on analysis engine
         String lang = language;

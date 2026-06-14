@@ -25,7 +25,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -49,11 +51,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  * Base class for writers that write to the file system.
  */
 @Component(OperationType.WRITER)
-@Parameters(
-        exclude = { 
-                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
-                JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET,
-                JCasFileWriter_ImplBase.PARAM_OVERWRITE })
+@Parameters(exclude = { JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
+        JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET, JCasFileWriter_ImplBase.PARAM_OVERWRITE })
 public abstract class JCasFileWriter_ImplBase
     extends JCasConsumer_ImplBase
 {
@@ -105,11 +104,11 @@ public abstract class JCasFileWriter_ImplBase
     private boolean useDocumentId;
 
     /**
-     * URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+     * URL-encode the file name to avoid illegal characters (e.g. \, :, etc.)
      */
-    public static final String PARAM_ESCAPE_DOCUMENT_ID = "escapeDocumentId";
-    @ConfigurationParameter(name = PARAM_ESCAPE_DOCUMENT_ID, mandatory = true, defaultValue = "true")
-    private boolean escapeDocumentId;
+    public static final String PARAM_ESCAPE_FILENAME = "escapeFilename";
+    @ConfigurationParameter(name = PARAM_ESCAPE_FILENAME, mandatory = true, defaultValue = "false")
+    private boolean escapeFilename;
 
     /**
      * Allow overwriting target files (ignored when writing to ZIP archives).
@@ -117,13 +116,13 @@ public abstract class JCasFileWriter_ImplBase
     public static final String PARAM_OVERWRITE = "overwrite";
     @ConfigurationParameter(name = PARAM_OVERWRITE, mandatory = true, defaultValue = "false")
     private boolean overwrite;
-    
+
     private ZipOutputStream zipOutputStream;
     private String zipPath;
     private String zipEntryPrefix;
-    
+
     private OutputStream singularTargetStream;
-    
+
     protected CompressionMethod getCompressionMethod()
     {
         return compression;
@@ -139,9 +138,20 @@ public abstract class JCasFileWriter_ImplBase
         return useDocumentId;
     }
 
+    // This is just used for testing
+    /* default scope */ void setUseDocumentId(boolean aUseDocumentId)
+    {
+        useDocumentId = aUseDocumentId;
+    }
+
+    // This is just used for testing
+    /* default scope */ void setEscapeFilename(boolean aEscapeFilename)
+    {
+        escapeFilename = aEscapeFilename;
+    }
+
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         if (zipOutputStream != null) {
             closeQuietly(zipOutputStream);
@@ -151,9 +161,8 @@ public abstract class JCasFileWriter_ImplBase
         }
         super.collectionProcessComplete();
     }
-    
-    protected NamedOutputStream getOutputStream(JCas aJCas, String aExtension)
-        throws IOException
+
+    protected NamedOutputStream getOutputStream(JCas aJCas, String aExtension) throws IOException
     {
         if (targetLocation == null) {
             return new NamedOutputStream(null, new CloseShieldOutputStream(System.out));
@@ -170,7 +179,7 @@ public abstract class JCasFileWriter_ImplBase
     {
         return targetLocation;
     }
-    
+
     protected NamedOutputStream getOutputStream(String aRelativePath, String aExtension)
         throws IOException
     {
@@ -183,7 +192,8 @@ public abstract class JCasFileWriter_ImplBase
                     // Try handling URL-encoded location
                     zipPath = URI.create(URI.create(targetLocation).getRawSchemeSpecificPart())
                             .getSchemeSpecificPart();
-                } catch (IllegalArgumentException e) {
+                }
+                catch (IllegalArgumentException e) {
                     // If the location is not properly URL-encoded, just strip the prefix.
                     zipPath = targetLocation.substring(JAR_PREFIX.length());
                 }
@@ -193,7 +203,7 @@ public abstract class JCasFileWriter_ImplBase
                     zipEntryPrefix = zipPath.substring(sep + 1);
                     zipPath = zipPath.substring(0, sep);
                 }
-                
+
                 if (zipEntryPrefix.length() > 0 && !zipEntryPrefix.endsWith("/")) {
                     zipEntryPrefix += '/';
                 }
@@ -206,14 +216,20 @@ public abstract class JCasFileWriter_ImplBase
 
                 zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
             }
-            
+
             // Begin new entry
-            ZipEntry entry = new ZipEntry(zipEntryPrefix + aRelativePath + aExtension
-                    + compression.getExtension());
+            String entryName = zipEntryPrefix + aRelativePath + aExtension
+                    + compression.getExtension();
+            if (entryName.contains("..") || entryName.startsWith("/") || entryName.startsWith("\\")
+                    || Paths.get(entryName).isAbsolute()) {
+                throw new IOException(
+                        "ZIP entry name [" + entryName + "] would escape archive root");
+            }
+            ZipEntry entry = new ZipEntry(entryName);
             zipOutputStream.putNextEntry(entry);
-            
+
             // We return an OutputStream for an individual entry. When this is closed by the
-            // caller, it actually closes the entry. The full ZIP stream is closed when the 
+            // caller, it actually closes the entry. The full ZIP stream is closed when the
             // collectionProcessComplete event is triggered
             return new ZipEntryOutputStream(JAR_PREFIX + zipPath + '!' + entry.getName(),
                     zipOutputStream);
@@ -221,31 +237,31 @@ public abstract class JCasFileWriter_ImplBase
         else if (singularTarget) {
             File outputFile = new File(targetLocation);
             if (singularTargetStream == null) {
-                
+
                 if (!overwrite && outputFile.exists()) {
                     throw new IOException("Target file [" + outputFile
                             + "] already exists and overwriting not enabled.");
                 }
-                
+
                 singularTargetStream = CompressionUtils.getOutputStream(outputFile);
             }
             return new NamedOutputStream(outputFile.getAbsolutePath(),
                     new CloseShieldOutputStream(singularTargetStream));
         }
         else {
-            File outputFile = new File(targetLocation, aRelativePath + aExtension
-                    + compression.getExtension());
-            
+            File outputFile = new File(targetLocation,
+                    aRelativePath + aExtension + compression.getExtension());
+
             if (!overwrite && outputFile.exists()) {
                 throw new IOException("Target file [" + outputFile
                         + "] already exists and overwriting not enabled.");
             }
-            
+
             return new NamedOutputStream(outputFile.getAbsolutePath(),
                     CompressionUtils.getOutputStream(outputFile));
         }
     }
-    
+
     /**
      * Get the relative path from the CAS. If the CAS does not contain relative path information or
      * if {@link #PARAM_USE_DOCUMENT_ID} is set, the document ID is used.
@@ -266,12 +282,11 @@ public abstract class JCasFileWriter_ImplBase
                 baseUri += '/';
             }
 
-            String relativeDocumentPath;
             if ((docUri == null) || !docUri.startsWith(baseUri)) {
                 throw new IllegalStateException("Base URI [" + baseUri
                         + "] is not a prefix of document URI [" + docUri + "]");
             }
-            relativeDocumentPath = docUri.substring(baseUri.length());
+            String relativeDocumentPath = docUri.substring(baseUri.length());
             if (stripExtension) {
                 relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
             }
@@ -281,22 +296,32 @@ public abstract class JCasFileWriter_ImplBase
                 relativeDocumentPath = relativeDocumentPath.substring(1);
             }
 
+            if (!escapeFilename) {
+                try {
+                    relativeDocumentPath = URLDecoder.decode(relativeDocumentPath, "UTF-8");
+                }
+                catch (UnsupportedEncodingException e) {
+                    // UTF-8 must be supported on all Java platforms per specification. This should
+                    // not happen.
+                    throw new IllegalStateException(e);
+                }
+            }
+
             return relativeDocumentPath;
         }
         else {
-            String relativeDocumentPath;
             if (meta.getDocumentId() == null) {
                 throw new IllegalStateException(
                         "Neither base URI/document URI nor document ID set");
             }
 
-            relativeDocumentPath = meta.getDocumentId();
+            String relativeDocumentPath = meta.getDocumentId();
 
             if (stripExtension) {
                 relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
             }
 
-            if (escapeDocumentId) {
+            if (escapeFilename) {
                 try {
                     relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
                 }
@@ -330,58 +355,53 @@ public abstract class JCasFileWriter_ImplBase
         }
 
         @Override
-        public void write(int paramInt)
-            throws IOException
+        public void write(int paramInt) throws IOException
         {
             outputStream.write(paramInt);
         }
 
         @Override
-        public void write(byte[] paramArrayOfByte)
-            throws IOException
+        public void write(byte[] paramArrayOfByte) throws IOException
         {
             outputStream.write(paramArrayOfByte);
         }
 
         @Override
-        public void write(byte[] paramArrayOfByte, int paramInt1, int paramInt2)
-            throws IOException
+        public void write(byte[] paramArrayOfByte, int paramInt1, int paramInt2) throws IOException
         {
             outputStream.write(paramArrayOfByte, paramInt1, paramInt2);
         }
 
         @Override
-        public void flush()
-            throws IOException
+        public void flush() throws IOException
         {
             outputStream.flush();
         }
 
         @Override
-        public void close()
-            throws IOException
+        public void close() throws IOException
         {
             outputStream.close();
         }
-        
+
         @Override
         public String toString()
         {
             return getName() != null ? getName() : "<stdout>";
         }
     }
-    
-    private static class ZipEntryOutputStream extends NamedOutputStream
+
+    private static class ZipEntryOutputStream
+        extends NamedOutputStream
     {
 
         public ZipEntryOutputStream(String aName, ZipOutputStream aOutputStream)
         {
             super(aName, aOutputStream);
         }
-        
+
         @Override
-        public void close()
-            throws IOException
+        public void close() throws IOException
         {
             ((ZipOutputStream) outputStream).closeEntry();
         }

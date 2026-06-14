@@ -18,20 +18,17 @@
 package org.dkpro.core.langdetect;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LangDetectLanguageIdentifierTest
 {
     @Test
-    public void testLanguageDetectionEnglish()
-        throws Exception
+    public void testLanguageDetectionEnglish() throws Exception
     {
         JCas cas = runTest("This is sentence in any language");
 
@@ -39,8 +36,7 @@ public class LangDetectLanguageIdentifierTest
     }
 
     @Test
-    public void testLanguageDetectionGerman()
-        throws Exception
+    public void testLanguageDetectionGerman() throws Exception
     {
         JCas cas = runTest("Zehn zottige Ziegen ziehen zehn Zentner Zucker zum Zoo");
 
@@ -48,16 +44,14 @@ public class LangDetectLanguageIdentifierTest
     }
 
     @Test
-    public void testLanguageDetectionJapanese()
-        throws Exception
+    public void testLanguageDetectionJapanese() throws Exception
     {
         JCas cas = runTest("やまない雨はない");
 
         assertEquals("ja", cas.getDocumentLanguage());
     }
 
-    private JCas runTest(String text)
-        throws Exception
+    private JCas runTest(String text) throws Exception
     {
         AnalysisEngine engine = createEngine(LangDetectLanguageIdentifier.class,
                 LangDetectLanguageIdentifier.PARAM_SEED, 1234l);
@@ -66,7 +60,4 @@ public class LangDetectLanguageIdentifierTest
 
         return aJCas;
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -24,17 +24,22 @@ licenses:
 
 artifacts:
   README.txt:
-    url: http://www.linguateca.pt/floresta/CoNLL-X/readme.conll
-    sha1: 7afe672cba645d22fc037d8f6e2bf9d501d0aee6
+    url: https://www.linguateca.pt/floresta/CoNLL-X/readme.conll
+    sha1: 10da89fed0ecb888c8fc7fad350b1a11bb9050d7
+    sha512: 178e28f6d7e13728412736659e4afc2c46302f16c2bff860e39516707aeb5acc072bc3f0ab1852e35853b240051985b682e2e64f3483175bf941cf512cfc1b53
+    verificationMode: TEXT
   portuguese_bosque_train.conll:
-    url: http://www.linguateca.pt/floresta/CoNLL-X/portuguese_bosque_train.conll
+    url: https://www.linguateca.pt/floresta/CoNLL-X/portuguese_bosque_train.conll
     sha1: 29e630e207c74a42e0d2999193aa25d73f262920
+    sha512: 32efcaece5c81e6b2fb31efeba09613ae50374c0b89c83969f2c43ca3b2a527e6944a0727e2983e374824264ef0f0c398c18a5a1f75c42764d415fca0755e524
   portuguese_bosque_test_blind.conll:
-    url: http://www.linguateca.pt/floresta/CoNLL-X/portuguese_bosque_test_blind.conll
+    url: https://www.linguateca.pt/floresta/CoNLL-X/portuguese_bosque_test_blind.conll
     sha1: fabcfbd73a531e21786af9b8233f1a4aa78dfddb
+    sha512: fbd3382dfb5acd2a34d5ecd5cbe449c33e96b8618b69d1de772f70a799cfb5b684c209f193474e63683033528af4e5111c8c3c0af4168c3d121b448630bce424
   portuguese_bosque_test.conll:
-    url: http://www.linguateca.pt/floresta/CoNLL-X/portuguese_bosque_test.conll
+    url: https://www.linguateca.pt/floresta/CoNLL-X/portuguese_bosque_test.conll
     sha1: e399cdc1203df1ff43816f3f934223cb9a625992
+    sha512: 8d600d1158d87f446c2814f5adb74b8a7380cdffbf4a62e971d7d7775702b9574506b92fcfe347f0572976447a20b6499b8693ac412a89335fa71c00a1269730
 
 roles:
   training:

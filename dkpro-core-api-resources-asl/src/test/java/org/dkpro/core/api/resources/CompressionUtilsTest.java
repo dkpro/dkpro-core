@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.resources;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,14 +28,11 @@ import java.io.PrintWriter;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dkpro.core.api.resources.CompressionMethod;
-import org.dkpro.core.api.resources.CompressionUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CompressionUtilsTest
 {
-    private static void testCompression(CompressionMethod compressionMethod)
-            throws IOException
+    private static void testCompression(CompressionMethod compressionMethod) throws IOException
     {
         String text = StringUtils.repeat("This is a test. ", 100000);
 
@@ -51,8 +48,7 @@ public class CompressionUtilsTest
     }
 
     @Test
-    public void testUncompressed()
-            throws Exception
+    public void testUncompressed() throws Exception
     {
         CompressionMethod compressionMethod = CompressionMethod.NONE;
         String text = StringUtils.repeat("This is a test. ", 100000);
@@ -60,32 +56,28 @@ public class CompressionUtilsTest
     }
 
     @Test
-    public void testXZ()
-            throws Exception
+    public void testXZ() throws Exception
     {
         CompressionMethod compressionMethod = CompressionMethod.XZ;
         testCompression(compressionMethod);
     }
 
     @Test
-    public void testBZip2()
-            throws Exception
+    public void testBZip2() throws Exception
     {
         CompressionMethod compressionMethod = CompressionMethod.BZIP2;
         testCompression(compressionMethod);
     }
 
     @Test
-    public void testGZip()
-            throws Exception
+    public void testGZip() throws Exception
     {
         CompressionMethod compressionMethod = CompressionMethod.GZIP;
         testCompression(compressionMethod);
     }
 
     @Test
-    public void testPrintWriter()
-            throws IOException
+    public void testPrintWriter() throws IOException
     {
         CompressionMethod compressionMethod = CompressionMethod.XZ;
         String text = StringUtils.repeat("This is a test. ", 100000);

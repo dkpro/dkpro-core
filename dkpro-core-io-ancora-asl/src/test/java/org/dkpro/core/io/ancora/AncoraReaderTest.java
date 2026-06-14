@@ -21,11 +21,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.dkpro.core.io.ancora.AncoraReader;
 import org.dkpro.core.io.conll.Conll2006Writer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AncoraReaderTest
 {
@@ -34,9 +31,13 @@ public class AncoraReaderTest
     {
         testOneWay(
                 createReaderDescription(AncoraReader.class,
-                        AncoraReader.PARAM_SPLIT_MULTI_WORD_TOKENS ,false),
-                createEngineDescription(Conll2006Writer.class),
-                "ancora/19004_20000725.tbf.conll", // the reference file for the output
+                        AncoraReader.PARAM_SPLIT_MULTI_WORD_TOKENS, false),
+                createEngineDescription(Conll2006Writer.class), "ancora/19004_20000725.tbf.conll", // the
+                                                                                                   // reference
+                                                                                                   // file
+                                                                                                   // for
+                                                                                                   // the
+                                                                                                   // output
                 "ancora/19004_20000725.tbf.xml"); // the input file for the test
     }
 
@@ -50,7 +51,4 @@ public class AncoraReaderTest
                 "ancora/19004_20000725.tbf-split.conll", // the reference file for the output
                 "ancora/19004_20000725.tbf.xml"); // the input file for the test
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

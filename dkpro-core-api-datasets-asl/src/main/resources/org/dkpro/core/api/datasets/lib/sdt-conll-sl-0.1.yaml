@@ -30,6 +30,7 @@ artifacts:
   data.zip:
     url: http://nl.ijs.si/sdt/data/SDT-2006-01-06-CoNLL-X/data.zip
     sha1: 2bd85ad77c35d0c305a6afb7ee092676d5d22a35
+    sha512: 022d4ffc2dbbe54b660fc6bedb2fe92b8a1b610749e6973dbc3798792ce82f875313acf6420d499111a2b17b9b7180cda48ffa81a665ea876e72a12aa473a73b
     actions:
       - action: explode
         configuration: { strip: 3 }

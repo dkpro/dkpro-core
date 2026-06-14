@@ -17,11 +17,12 @@
  */
 package org.dkpro.core.io.text;
 
-import java.io.BufferedInputStream;
+import static org.dkpro.core.api.resources.CompressionUtils.getInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -31,7 +32,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
-import org.dkpro.core.api.resources.CompressionUtils;
 
 import com.ibm.icu.text.CharsetDetector;
 
@@ -43,9 +43,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "Text Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.TEXT_PLAIN)
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class TextReader
     extends ResourceCollectionReaderBase
 {
@@ -60,30 +58,38 @@ public class TextReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, //
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
+    /**
+     * Whether to remove a byte-order mark from the start of the text.
+     */
+    public static final String PARAM_INCLUDE_BOM = "includeBom";
+    @ConfigurationParameter(name = PARAM_INCLUDE_BOM, mandatory = true, defaultValue = "false")
+    private boolean includeBom;
+
     @Override
-    public void getNext(CAS aJCas)
-        throws IOException, CollectionException
+    public void getNext(CAS aJCas) throws IOException, CollectionException
     {
-        Resource res = nextFile();
+        var res = nextFile();
         initCas(aJCas, res);
 
-        try (InputStream is = new BufferedInputStream(
-                CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()))) {
+        try (var is = BOMInputStream.builder() //
+                .setInclude(includeBom) //
+                .setInputStream(getInputStream(res.getLocation(), res.getInputStream())) //
+                .get()) {
             String text;
 
             if (ENCODING_AUTO.equals(sourceEncoding)) {
-                CharsetDetector detector = new CharsetDetector();
+                var detector = new CharsetDetector();
                 text = IOUtils.toString(detector.getReader(is, null));
             }
             else {
                 text = IOUtils.toString(is, sourceEncoding);
             }
-            
-            aJCas.setDocumentText(text);        
+
+            aJCas.setDocumentText(text);
         }
     }
 }

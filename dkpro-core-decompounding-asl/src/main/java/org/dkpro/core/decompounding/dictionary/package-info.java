@@ -28,8 +28,8 @@
  * {@link org.dkpro.core.decompounding.dictionary.German98Dictionary}.
  * 
  * Additional this package contains the
- * {@link org.dkpro.core.decompounding.dictionary.LinkingMorphemes} class. This is a
- * simple dictionary and hold all possible morphemes.
+ * {@link org.dkpro.core.decompounding.dictionary.LinkingMorphemes} class. This is a simple
+ * dictionary and hold all possible morphemes.
  * 
  * If you want to code you own dictionary use the
  * {@link org.dkpro.core.decompounding.dictionary.Dictionary} interface.

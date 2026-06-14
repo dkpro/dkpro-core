@@ -19,7 +19,7 @@ package org.dkpro.core.io.tcf;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -28,11 +28,8 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.tcf.TcfReader;
-import org.dkpro.core.io.tcf.TcfWriter;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -46,13 +43,12 @@ public class TcfWriterTest
      *      preamble written twice if original file exists and is not TCF</a>
      */
     @Test
-    public void testOriginalNotTcf()
-        throws Exception
+    public void testOriginalNotTcf(@TempDir File tempDir) throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
+        File targetFolder = tempDir;
+
         JCas jcas = JCasFactory.createJCas();
-        
+
         // Generate a fake metadata that points to a non-TCF file
         DocumentMetaData meta = DocumentMetaData.create(jcas);
         meta.setDocumentBaseUri(new File("src/test/resources").toURI().toURL().toString());
@@ -67,10 +63,9 @@ public class TcfWriterTest
 
         // Write as TCF
         AnalysisEngineDescription writer = createEngineDescription(TcfWriter.class,
-                TcfWriter.PARAM_TARGET_LOCATION, targetFolder,
-                TcfWriter.PARAM_OVERWRITE, true);
+                TcfWriter.PARAM_TARGET_LOCATION, targetFolder, TcfWriter.PARAM_OVERWRITE, true);
         SimplePipeline.runPipeline(jcas, writer);
-        
+
         // Read again as TCF
         CollectionReaderDescription reader = createReaderDescription(TcfReader.class,
                 TcfReader.PARAM_SOURCE_LOCATION, targetFolder.getPath() + "/*.tcf");
@@ -78,7 +73,4 @@ public class TcfWriterTest
             assertEquals("okeydokey", jcas2.getDocumentText());
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

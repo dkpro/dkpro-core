@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.InputStream;
@@ -27,24 +27,22 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.dkpro.core.api.io.TextUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TextUtilsTest
 {
     private static final String STOPWORDS_LOCATION = "src/test/resources/stopwords.txt";
     private Set<String> EXPECTED_STOPWORDS = new HashSet<>();
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         EXPECTED_STOPWORDS.add("Token1");
     }
 
     @Test
-    public void testReadStopwordsFileString()
-            throws Exception
+    public void testReadStopwordsFileString() throws Exception
     {
         String stopwordsFile = STOPWORDS_LOCATION;
         Set<String> stopwords = TextUtils.readStopwordsFile(stopwordsFile, false);
@@ -52,8 +50,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsFile()
-            throws Exception
+    public void testReadStopwordsFile() throws Exception
     {
         File stopwordsFile = new File(STOPWORDS_LOCATION);
         Set<String> stopwords = TextUtils.readStopwordsFile(stopwordsFile, false);
@@ -61,8 +58,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsInputStream()
-            throws Exception
+    public void testReadStopwordsInputStream() throws Exception
     {
         InputStream stopwordsFile = Files.newInputStream(new File(STOPWORDS_LOCATION).toPath());
         Set<String> stopwords = TextUtils.readStopwordsInputStream(stopwordsFile, false);
@@ -70,8 +66,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsFile3()
-            throws Exception
+    public void testReadStopwordsFile3() throws Exception
     {
         Path stopwordsFile = new File(STOPWORDS_LOCATION).toPath();
         Set<String> stopwords = TextUtils.readStopwordsPath(stopwordsFile, false);
@@ -79,8 +74,7 @@ public class TextUtilsTest
     }
 
     @Test
-    public void testReadStopwordsURL()
-            throws Exception
+    public void testReadStopwordsURL() throws Exception
     {
         URL stopwordsURL = getClass().getResource("/stopwords.txt");
         Set<String> stopwords = TextUtils.readStopwordsURL(stopwordsURL, false);

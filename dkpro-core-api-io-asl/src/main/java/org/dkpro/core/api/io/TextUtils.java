@@ -36,13 +36,15 @@ public class TextUtils
      * <p>
      * Empty lines and lines starting with ("#") are filtered out.
      *
-     * @param file      input file
-     * @param lowercase if true, lowercase everything
+     * @param file
+     *            input file
+     * @param lowercase
+     *            if true, lowercase everything
      * @return a collection of unique stopwords
-     * @throws IOException if the file cannot be read
+     * @throws IOException
+     *             if the file cannot be read
      */
-    public static Set<String> readStopwordsFile(File file, boolean lowercase)
-            throws IOException
+    public static Set<String> readStopwordsFile(File file, boolean lowercase) throws IOException
     {
         return readStopwordsPath(file.toPath(), lowercase);
     }
@@ -52,13 +54,16 @@ public class TextUtils
      * <p>
      * Empty lines and lines starting with ("#") are filtered out.
      *
-     * @param location  input file location
-     * @param lowercase if true, lowercase everything
+     * @param location
+     *            input file location
+     * @param lowercase
+     *            if true, lowercase everything
      * @return a collection of unique stopwords
-     * @throws IOException if the file cannot be read
+     * @throws IOException
+     *             if the file cannot be read
      */
     public static Set<String> readStopwordsFile(String location, boolean lowercase)
-            throws IOException
+        throws IOException
     {
         return readStopwordsFile(new File(location), lowercase);
     }
@@ -68,8 +73,10 @@ public class TextUtils
      * <p>
      * Empty lines and lines starting with ("#") are filtered out.
      *
-     * @param inputStream input stream
-     * @param lowercase   if true, lowercase everything
+     * @param inputStream
+     *            input stream
+     * @param lowercase
+     *            if true, lowercase everything
      * @return a collection of unique stopwords
      */
     public static Set<String> readStopwordsInputStream(InputStream inputStream, boolean lowercase)
@@ -83,29 +90,27 @@ public class TextUtils
      * <p>
      * Empty lines and lines starting with ("#") are filtered out.
      *
-     * @param path      input file {@link Path}
-     * @param lowercase if true, lowercase everything
+     * @param path
+     *            input file {@link Path}
+     * @param lowercase
+     *            if true, lowercase everything
      * @return a collection of unique stopwords
-     * @throws IOException if the file cannot be read
+     * @throws IOException
+     *             if the file cannot be read
      */
-    public static Set<String> readStopwordsPath(Path path, boolean lowercase)
-            throws IOException
+    public static Set<String> readStopwordsPath(Path path, boolean lowercase) throws IOException
     {
         return readStopwordsInputStream(Files.newInputStream(path), lowercase);
     }
 
-    public static Set<String> readStopwordsURL(URL url, boolean lowercase)
-            throws IOException
+    public static Set<String> readStopwordsURL(URL url, boolean lowercase) throws IOException
     {
         return readStopwordsInputStream(url.openStream(), lowercase);
     }
 
     private static Set<String> readStream(Stream<String> s, boolean lowercase)
     {
-        return s.map(String::trim)
-                .filter(l -> !l.isEmpty())
-                .filter(l -> !l.startsWith("#"))
-                .map(l -> lowercase ? l.toLowerCase() : l)
-                .collect(Collectors.toSet());
+        return s.map(String::trim).filter(l -> !l.isEmpty()).filter(l -> !l.startsWith("#"))
+                .map(l -> lowercase ? l.toLowerCase() : l).collect(Collectors.toSet());
     }
 }

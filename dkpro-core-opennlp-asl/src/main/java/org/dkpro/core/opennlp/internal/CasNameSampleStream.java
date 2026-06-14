@@ -47,7 +47,8 @@ public class CasNameSampleStream
 
     private Predicate<NamedEntity> namedEntityFilter;
 
-    public void setNamedEntityFilter(Predicate<NamedEntity> namedEntityFilter) {
+    public void setNamedEntityFilter(Predicate<NamedEntity> namedEntityFilter)
+    {
         this.namedEntityFilter = namedEntityFilter;
     }
 
@@ -58,19 +59,19 @@ public class CasNameSampleStream
         // New document -> clear adaptive data
         clearAdaptiveData = true;
     }
-    
+
     @Override
     public boolean isActive()
     {
         return sentences != null && sentences.hasNext();
     }
-    
+
     @Override
     public NameSample produce(JCas aJCas)
     {
         // Process present sentences
         Sentence sentence = sentences.next();
-        
+
         // Index tokens
         Int2ObjectMap<Token> idxTokenOffset = new Int2ObjectOpenHashMap<>();
         Object2IntMap<Token> idxToken = new Object2IntOpenHashMap<>();
@@ -86,7 +87,7 @@ public class CasNameSampleStream
             words[idx] = t.getText();
             idx++;
         }
-                
+
         List<Span> names = new ArrayList<>();
         for (NamedEntity ne : selectCovered(NamedEntity.class, sentence)) {
 
@@ -103,19 +104,19 @@ public class CasNameSampleStream
         }
 
         Span[] nameSpans = NameFinderME.dropOverlappingSpans(names.toArray(new Span[names.size()]));
-        
+
         NameSample sample = new NameSample(words, nameSpans, clearAdaptiveData);
-        
+
         // Adaptive data should be cleared when a new document is processed, so whenever have
         // processed a sample (in particular the first), we set this flag to false. init()
         // will re-set it to true
         clearAdaptiveData = false;
-        
+
         // Block on next call to read
         if (!sentences.hasNext()) {
             documentComplete();
         }
-        
+
         return sample;
     }
 }

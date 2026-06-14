@@ -19,9 +19,9 @@ package org.dkpro.core.dictionaryannotator;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -29,8 +29,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.dictionaryannotator.DictionaryAnnotator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -60,8 +59,8 @@ public class DictionaryAnnotatorTest
     {
         AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
                 DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-                DictionaryAnnotator.PARAM_VALUE, "PERSON",
-                DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+                DictionaryAnnotator.PARAM_VALUE, "PERSON", DictionaryAnnotator.PARAM_MODEL_LOCATION,
+                "src/test/resources/persons.txt");
 
         JCas jcas = JCasFactory.createJCas();
         TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
@@ -122,8 +121,8 @@ public class DictionaryAnnotatorTest
     {
         AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
                 DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-                DictionaryAnnotator.PARAM_VALUE, "PERSON",
-                DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+                DictionaryAnnotator.PARAM_VALUE, "PERSON", DictionaryAnnotator.PARAM_MODEL_LOCATION,
+                "src/test/resources/persons.txt");
 
         JCas jcas = JCasFactory.createJCas();
         TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);

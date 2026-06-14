@@ -52,9 +52,8 @@ public class Web1TFileSplitter
 
     private List<File> splittedFiles = new LinkedList<File>();
 
-    public Web1TFileSplitter(File aInputFile, File aOutputFolder,
-            String aFileEncoding, FrequencyDistribution<String> aLetterFD,
-            double aThreshold, int aStartingFileNumber)
+    public Web1TFileSplitter(File aInputFile, File aOutputFolder, String aFileEncoding,
+            FrequencyDistribution<String> aLetterFD, double aThreshold, int aStartingFileNumber)
     {
         inputFile = aInputFile;
         outputFolder = aOutputFolder;
@@ -69,38 +68,37 @@ public class Web1TFileSplitter
         return new LinkedList<File>(splittedFiles);
     }
 
-    public void split()
-            throws IOException
+    public void split() throws IOException
     {
         Map<String, String> letterToFileNameMap = mapStartingLettersToFilenames();
         Map<String, File> fileMap = mapFileNamesToFileHandels(letterToFileNameMap);
-        Map<File, BufferedWriter> fileHandleToBufferdWriterMap = 
-                mapFileHandelsToWriterHandels(fileMap);
+        Map<File, BufferedWriter> fileHandleToBufferdWriterMap = mapFileHandelsToWriterHandels(
+                fileMap);
         Map<String, BufferedWriter> writerMap = mapFileNamesToWriterHandels(fileMap,
                 fileHandleToBufferdWriterMap);
 
         splittedFiles = generateListOfUniqueFiles(fileMap);
-        
+
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(inputFile), fileEncoding));
-    
+            reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(inputFile), fileEncoding));
+
             String TAB = "\t";
             String LF = "\n";
-    
+
             String readLine = null;
             while ((readLine = reader.readLine()) != null) {
-    
+
                 int indexOfTab = readLine.indexOf(TAB);
-    
+
                 if (indexOfTab == -1) {
                     log.warn("No tab found in line: " + readLine);
                     continue;
                 }
-    
+
                 String key = Web1TUtil.getStartingLetters(readLine, indexOfTab);
-    
+
                 Writer writer = writerMap.get(key);
                 if (writer == null) {
                     log.warn("No writer found for key: " + key);
@@ -111,7 +109,7 @@ public class Web1TFileSplitter
                         continue;
                     }
                 }
-    
+
                 writer.write(readLine);
                 writer.write(LF);
                 writer.flush();
@@ -127,8 +125,7 @@ public class Web1TFileSplitter
         }
     }
 
-    private Map<File, BufferedWriter> mapFileHandelsToWriterHandels(
-            Map<String, File> fileMap)
+    private Map<File, BufferedWriter> mapFileHandelsToWriterHandels(Map<String, File> fileMap)
         throws UnsupportedEncodingException, FileNotFoundException
     {
         Map<File, BufferedWriter> fileHandleToBufferdWriterMap = new HashMap<>();
@@ -144,14 +141,13 @@ public class Web1TFileSplitter
         return fileHandleToBufferdWriterMap;
     }
 
-    private Map<String, File> mapFileNamesToFileHandels(
-            Map<String, String> letterToFileNameMap)
+    private Map<String, File> mapFileNamesToFileHandels(Map<String, String> letterToFileNameMap)
     {
         Map<String, File> fileMap = new HashMap<String, File>();
 
         for (String key : letterToFileNameMap.keySet()) {
-            fileMap.put(key, new File(outputFolder + "/" + letterToFileNameMap.get(key)
-                            + "_unsorted"));
+            fileMap.put(key,
+                    new File(outputFolder + "/" + letterToFileNameMap.get(key) + "_unsorted"));
         }
         return fileMap;
     }
@@ -186,8 +182,7 @@ public class Web1TFileSplitter
         return letterToFileNameMap;
     }
 
-    private Map<String, BufferedWriter> mapFileNamesToWriterHandels(
-            Map<String, File> fileMap,
+    private Map<String, BufferedWriter> mapFileNamesToWriterHandels(Map<String, File> fileMap,
             Map<File, BufferedWriter> fileHandleToBufferdWriterMap)
         throws UnsupportedEncodingException, FileNotFoundException
     {

@@ -37,14 +37,15 @@ import org.apache.uima.cas.TypeSystem;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
-public class MappingProvider extends CasConfigurableProviderBase<Map<String, String>>
+public class MappingProvider
+    extends CasConfigurableProviderBase<Map<String, String>>
 {
     /**
      * Flag indicating whether the entire mapping mechanism should be skipped and the default base
      * type should always be applied.
      */
     public static final String MAPPING_ENABLED = "mappingEnabled";
-    
+
     public static final String BASE_TYPE = "baseType";
 
     private TypeSystem typeSystem;
@@ -58,13 +59,13 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
     protected void init()
     {
         super.init();
-        
+
         // Mappings are expected to be provided by the components, not to be resolved from
         // model artifacts.
         setDefault(GROUP_ID, null);
         setDefault(ARTIFACT_URI, null);
     }
-    
+
     @Override
     public void configure(CAS aCas) throws AnalysisEngineProcessException
     {
@@ -76,7 +77,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
             notFound = true;
             return;
         }
-        
+
         // Tag mappings can exist independently from the type mappings because tag mappings
         // are configured in the model metadata
         tagMappings = new HashMap<>();
@@ -108,7 +109,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
     public String getTag(String aTag)
     {
         String tag = aTag;
-        
+
         // Apply tag mapping if configured
         if (tagMappings != null) {
             String t = tagMappings.get(aTag);
@@ -116,7 +117,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
                 tag = t;
             }
         }
-        
+
         return tag;
     }
 
@@ -207,13 +208,13 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
     {
         URL url = aUrl;
         while (true) {
-            Properties tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
-                    url));
+            Properties tmpResourceMetaData = PropertiesLoaderUtils
+                    .loadProperties(new UrlResource(url));
 
             // Values in the redirecting properties override values in the redirected-to
             // properties - except META_REDIRECT
             getResourceMetaData().remove(META_REDIRECT);
-            
+
             Properties overrides = new Properties();
             for (String key : tmpResourceMetaData.stringPropertyNames()) {
                 if (key.startsWith(META_OVERRIDE)) {
@@ -221,7 +222,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
                             tmpResourceMetaData.getProperty(key));
                 }
             }
-            
+
             mergeProperties(getResourceMetaData(), overrides);
 
             String redirect = tmpResourceMetaData.getProperty(META_REDIRECT);
@@ -233,7 +234,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
             }
         }
     }
-    
+
     public void addTagMappingImport(String aLayerPrefix, HasResourceMetadata aSource)
     {
         tagMappingImports.put(aLayerPrefix, aSource);

@@ -22,12 +22,12 @@ import javax.xml.bind.annotation.XmlID;
 
 public class TigerSentence
 {
-    @XmlID 
+    @XmlID
     @XmlAttribute
     public String id;
 
     public TigerGraph graph;
-    
+
     public TigerSem sem;
 
     public String getText()

@@ -30,10 +30,13 @@ licenses:
 artifacts:
   README.txt:
     url: http://nl.ijs.si/sdt/data/SDT-2006-05-17/00README.txt
-    sha1: d2ac8d9f8b45ceae34ce77f57b354662292bd609
+    sha1: 9d047377eb96aa896461544cd1117b11b812809f
+    sha512: 2c11bf1b3c5960394dff57330b31020a51dae18bb0d91a7eac65ecfb4f6bb5eccb241b34036089bc58954b2f3752c9f0eab8672e8109b059c77a1c376679956b
+    verificationMode: TEXT
   sdt-conll.tbl:
     url: http://nl.ijs.si/sdt/data/SDT-2006-05-17/CONLL/sdt-conll.tbl
     sha1: 16cfa8a20ebf8ed0e4f13c0119c7aa76a2498b1f
+    sha512: 83359227235370ab16fe830d437bf4ca710d2b9a1e2885a8d0d44ec935aab2c187956a4ad0c5323eb7989c06c5f7326c843b1694a6de148de5c25cc8b0bd3958
       
 roles:
   licenses:

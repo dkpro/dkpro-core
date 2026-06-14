@@ -17,21 +17,17 @@
  */
 package org.dkpro.core.decompounding.web1t;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.store.FSDirectory;
-import org.dkpro.core.decompounding.web1t.Finder;
-import org.dkpro.core.decompounding.web1t.LuceneIndexer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LuceneIndexerTest
 {
@@ -42,18 +38,17 @@ public class LuceneIndexerTest
     private File targetIndex1;
     private File jWeb1T;
 
-    @Before
-    public void setUp()
-        throws Exception
+    @BeforeEach
+    public void setUp() throws Exception
     {
         source = new File("src/test/resources/n-grams");
         jWeb1T = new File("src/test/resources/web1t/de");
-        
+
         testOutput = new File("target/test-output/LuceneIndexerTest");
         index = new File(testOutput, "index");
         targetIndex0 = new File(testOutput, "index/0");
         targetIndex1 = new File(testOutput, "index/1");
-        
+
         // Create folder if not exists
         index.mkdirs();
 
@@ -66,17 +61,15 @@ public class LuceneIndexerTest
     public void testSearch() throws Exception
     {
         // Check if fields and all documents exists
-        try (
-                IndexReader ir0 = IndexReader.open(FSDirectory.open(targetIndex0));
-                IndexReader ir1 = IndexReader.open(FSDirectory.open(targetIndex1));
-        ) {
-            assertEquals("Number of documents", 3, ir0.numDocs() + ir1.numDocs());
+        try (IndexReader ir0 = IndexReader.open(FSDirectory.open(targetIndex0));
+                IndexReader ir1 = IndexReader.open(FSDirectory.open(targetIndex1));) {
+            assertEquals(3, ir0.numDocs() + ir1.numDocs(), "Number of documents");
 
             Document doc = ir0.document(0);
-            assertNotNull("Field: gram", doc.getField("gram"));
-            assertNotNull("Field: freq", doc.getField("freq"));
+            assertNotNull(doc.getField("gram"), "Field: gram");
+            assertNotNull(doc.getField("freq"), "Field: freq");
         }
-        
+
         // Search on the index
         try (Finder f = new Finder(index, jWeb1T)) {
             assertEquals(f.find("relax").size(), 3);
@@ -96,9 +89,8 @@ public class LuceneIndexerTest
         }
     }
 
-    @After
-    public void tearDown()
-        throws Exception
+    @AfterEach
+    public void tearDown() throws Exception
     {
         // Delete index again
         for (File f : index.listFiles()) {
@@ -110,7 +102,4 @@ public class LuceneIndexerTest
 
         index.delete();
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -22,6 +22,11 @@ import java.util.List;
 public interface ArtifactDescription
 {
     /**
+     * @return the dataset to which this artifact belongs.
+     */
+    DatasetDescription getDataset();
+
+    /**
      * @return artifact name/ID
      */
     String getName();
@@ -45,6 +50,16 @@ public interface ArtifactDescription
     String getSha1();
 
     /**
+     * @return SHA512 hash of the artifact.
+     */
+    String getSha512();
+
+    /**
+     * @return the verification mode.
+     */
+    VerificationMode getVerificationMode();
+
+    /**
      * Whether this artifact is shared between multiple datasets. If this flag is enabled, the
      * artifact may be stored in a special location within the cache, i.e. not under the dataset
      * folder.
@@ -59,4 +74,12 @@ public interface ArtifactDescription
      * @return list of actions.
      */
     List<ActionDescription> getActions();
+
+    /**
+     * Whether this artifact is optional. If an optional artifact cannot be located or downloaded
+     * (e.g. due to a network problem), then the rest materializes still.
+     * 
+     * @return optional status.
+     */
+    boolean isOptional();
 }

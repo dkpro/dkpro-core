@@ -24,11 +24,11 @@ public class PAModification
 {
     public static final String PRED_SPECULATION = "Speculation";
     public static final String PRED_NEGATION = "Negation";
-    
+
     private String id;
     private String pred;
     private String obj;
-    
+
     public PAModification()
     {
         // Default constructor

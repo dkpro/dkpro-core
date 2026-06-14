@@ -23,10 +23,10 @@ package org.dkpro.core.io.pubannotation.internal.model;
 public class PANamespace
 {
     public static final String PREFIX_BASE = "_base";
-    
+
     private String prefix;
     private String uri;
-    
+
     public PANamespace()
     {
         // Default constructor

@@ -38,6 +38,7 @@ import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * This abstract class defines parameters and methods that are common for Mallet model estimators.
@@ -51,18 +52,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  * @since 1.9.0
  */
 public abstract class MalletModelTrainer
-        extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
     private static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
     private static final Locale LOCALE = Locale.US;
 
     /**
-     * The annotation type to use as input tokens for the model estimation. For lemmas,
-     * use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
+     * The annotation type to use as input tokens for the model estimation. For lemmas, use
+     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = "tokenFeaturePath";
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, 
-            defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, defaultValue = Token._TypeName)
     private String tokenFeaturePath;
 
     /**
@@ -73,8 +73,7 @@ public abstract class MalletModelTrainer
      * {@link MalletEmbeddingsTrainer}! This might prevent the process from terminating.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
-            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -82,7 +81,7 @@ public abstract class MalletModelTrainer
      * {@link #PARAM_TOKEN_FEATURE_PATH}) that are shorter than the given value.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
-    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
+    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, defaultValue = "3")
     private int minTokenLength;
 
     /**
@@ -94,7 +93,7 @@ public abstract class MalletModelTrainer
      * By default, the full text is used as a document.
      */
     public static final String PARAM_COVERING_ANNOTATION_TYPE = "coveringAnnotationType";
-    @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, mandatory = true, defaultValue = "")
+    @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, defaultValue = "")
     private String coveringAnnotationType;
 
     /**
@@ -102,51 +101,50 @@ public abstract class MalletModelTrainer
      * ignored.
      */
     public static final String PARAM_USE_CHARACTERS = "useCharacters";
-    @ConfigurationParameter(name = PARAM_USE_CHARACTERS, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_USE_CHARACTERS, defaultValue = "false")
     private boolean useCharacters;
 
     /**
-     * If set to true (default: false), all tokens are lowercased.
+     * If set to true (default: false), all tokens are lower-cased.
      */
     public static final String PARAM_LOWERCASE = "lowercase";
-    @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_LOWERCASE, defaultValue = "false")
     private boolean lowercase;
 
     /**
-     * The location of the stopwords file.
+     * The location of the stop words file.
      */
     public static final String PARAM_STOPWORDS_FILE = "paramStopwordsFile";
-    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, defaultValue = "")
     private String stopwordsFile;
 
     /**
-     * If set, stopwords found in the {@link #PARAM_STOPWORDS_FILE} location are not removed, but
+     * If set, stop words found in the {@link #PARAM_STOPWORDS_FILE} location are not removed, but
      * replaced by the given string (e.g. {@code STOP}).
      */
     public static final String PARAM_STOPWORDS_REPLACEMENT = "paramStopwordsReplacement";
-    @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
+    @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, defaultValue = "")
     private String stopwordsReplacement;
 
     /**
      * Regular expression of tokens to be filtered.
      */
     public static final String PARAM_FILTER_REGEX = "filterRegex";
-    @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
+    @ConfigurationParameter(name = PARAM_FILTER_REGEX, defaultValue = "")
     private String filterRegex;
 
     /**
      * Value with which tokens matching the regular expression are replaced.
      */
     public static final String PARAM_FILTER_REGEX_REPLACEMENT = "filterRegexReplacement";
-    @ConfigurationParameter(name = PARAM_FILTER_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
+    @ConfigurationParameter(name = PARAM_FILTER_REGEX_REPLACEMENT, defaultValue = "")
     private String filterRegexReplacement;
 
     private InstanceList instanceList; // contains the Mallet instances
     private StringSequenceGenerator sequenceGenerator;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         if (getTargetLocation() == null) {
@@ -165,16 +163,11 @@ public abstract class MalletModelTrainer
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
 
         try {
-            sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                    .characters(useCharacters)
-                    .minTokenLength(minTokenLength)
-                    .stopwordsFile(stopwordsFile)
-                    .stopwordsReplacement(stopwordsReplacement)
-                    .featurePath(tokenFeaturePath)
-                    .filterRegex(filterRegex)
-                    .filterRegexReplacement(filterRegexReplacement)
-                    .coveringType(coveringAnnotationType)
-                    .lowercase(lowercase)
+            sequenceGenerator = new PhraseSequenceGenerator.Builder().characters(useCharacters)
+                    .minTokenLength(minTokenLength).stopwordsFile(stopwordsFile)
+                    .stopwordsReplacement(stopwordsReplacement).featurePath(tokenFeaturePath)
+                    .filterRegex(filterRegex).filterRegexReplacement(filterRegexReplacement)
+                    .coveringType(coveringAnnotationType).lowercase(lowercase)
                     .buildStringSequenceGenerator();
         }
         catch (IOException e) {
@@ -183,16 +176,14 @@ public abstract class MalletModelTrainer
     }
 
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
             /* retrieve token sequences and convert token sequences to instances */
-            sequenceGenerator.tokenSequences(aJCas).stream()
-                    .map(TokenSequence::new)
-                    .map(ts -> new Instance(ts, NONE_LABEL,
-                            metadata.getDocumentId(), metadata.getDocumentUri()))
+            sequenceGenerator.tokenSequences(aJCas).stream().map(TokenSequence::new)
+                    .map(ts -> new Instance(ts, NONE_LABEL, metadata.getDocumentId(),
+                            metadata.getDocumentUri()))
                     .forEach(instance -> instanceList.addThruPipe(instance));
         }
         catch (FeaturePathException e) {

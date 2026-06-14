@@ -28,6 +28,7 @@ import org.dkpro.core.api.segmentation.SegmenterBase;
 
 import com.ibm.icu.text.BreakIterator;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -45,9 +46,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
         "ro", "ru", "rw", "se", "sg", "si", "sk", "sl", "sn", "so", "sq", "sr", "sv", "sw", "ta",
         "te", "tg", "th", "ti", "to", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "wo", "yo", "zh",
         "zu" })
-@TypeCapability(
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class IcuSegmenter
     extends SegmenterBase
@@ -79,7 +78,7 @@ public class IcuSegmenter
             }
             else {
                 int[] span = new int[] { last, cur };
-                trim(aJCas.getDocumentText(), span);
+                TrimUtils.trim(aJCas.getDocumentText(), span);
                 processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]),
                         span[0]);
             }

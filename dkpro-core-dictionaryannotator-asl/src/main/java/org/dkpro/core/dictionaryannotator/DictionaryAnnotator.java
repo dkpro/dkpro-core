@@ -65,10 +65,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.GAZETEER_BASED_MATCHER)
 @ResourceMetaData(name = "Dictionary Annotator")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class DictionaryAnnotator
     extends JCasAnnotator_ImplBase
 {
@@ -111,8 +109,7 @@ public class DictionaryAnnotator
     private PhraseTree phrases;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -140,8 +137,7 @@ public class DictionaryAnnotator
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         Type type = getType(jcas.getCas(), annotationType);
 

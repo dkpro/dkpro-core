@@ -60,7 +60,7 @@ public class CompressionUtils
             return aLocation;
         }
     }
-    
+
     /**
      * Get an uncompressed input stream for a given input stream created for a particular location.
      * 
@@ -69,7 +69,8 @@ public class CompressionUtils
      * @param aStream
      *            a raw stream of potentially compressed data.
      * @return stream wrapped with a decompressing stream.
-     * @throws IOException if an I/O error has occurred,
+     * @throws IOException
+     *             if an I/O error has occurred,
      */
     public static InputStream getInputStream(String aLocation, InputStream aStream)
         throws IOException
@@ -101,8 +102,7 @@ public class CompressionUtils
      *             if an I/O error has occurred,
      * @see CompressionMethod
      */
-    public static OutputStream getOutputStream(File aFile)
-        throws IOException
+    public static OutputStream getOutputStream(File aFile) throws IOException
     {
         // Create parent folders for output file and set up stream
         if (aFile.getParentFile() != null) {

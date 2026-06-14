@@ -21,7 +21,7 @@ package org.dkpro.core.textnormalizer.transformation;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.transform.JCasTransformer_ImplBase;
 import org.dkpro.core.io.text.StringReader;
 import org.dkpro.core.textnormalizer.util.JCasHolder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -44,8 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class JCasTransformer_ImplBaseTest
 {
     @Test
-    public void testCopyNoAnnotations()
-        throws UIMAException, IOException
+    public void testCopyNoAnnotations() throws UIMAException, IOException
     {
         String inputText = "test";
         int exptectedTokens = 0;
@@ -53,8 +52,7 @@ public class JCasTransformer_ImplBaseTest
         int expectedSentences = 0;
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, inputText,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, inputText, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
         AnalysisEngineDescription transformer = createEngineDescription(TestTransformer.class);
         AnalysisEngineDescription holder = createEngineDescription(JCasHolder.class);
@@ -67,8 +65,7 @@ public class JCasTransformer_ImplBaseTest
     }
 
     @Test
-    public void testAllTypesToCopy()
-        throws UIMAException, IOException
+    public void testAllTypesToCopy() throws UIMAException, IOException
     {
         String inputText = "test";
         int expectedTokens = 2;
@@ -77,8 +74,7 @@ public class JCasTransformer_ImplBaseTest
         String[] typesToCopy = new String[] { Token.class.getName(), Sentence.class.getName() };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, inputText,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, inputText, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
         AnalysisEngineDescription transformer = createEngineDescription(TestTransformer.class,
                 TestTransformer.PARAM_TYPES_TO_COPY, typesToCopy);
@@ -92,8 +88,7 @@ public class JCasTransformer_ImplBaseTest
     }
 
     @Test
-    public void testOneTypeToCopy()
-        throws UIMAException, IOException
+    public void testOneTypeToCopy() throws UIMAException, IOException
     {
         String inputText = "test";
         int expectedTokens = 2;
@@ -102,8 +97,7 @@ public class JCasTransformer_ImplBaseTest
         String[] typesToCopy = new String[] { Token.class.getName() };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, inputText,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, inputText, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
         AnalysisEngineDescription transformer = createEngineDescription(TestTransformer.class,
                 TestTransformer.PARAM_TYPES_TO_COPY, typesToCopy);
@@ -120,8 +114,7 @@ public class JCasTransformer_ImplBaseTest
         extends JCasAnnotator_ImplBase
     {
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             Token token1 = new Token(aJCas);
             token1.setBegin(0);
@@ -144,8 +137,7 @@ public class JCasTransformer_ImplBaseTest
         extends JCasTransformer_ImplBase
     {
         @Override
-        public void process(JCas aInput, JCas aOutput)
-            throws AnalysisEngineProcessException
+        public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
         {
             // Just copy the text. DocumentMetaData has already been copied and the TYPES_TO_COPY
             // will be copied when this method returns.

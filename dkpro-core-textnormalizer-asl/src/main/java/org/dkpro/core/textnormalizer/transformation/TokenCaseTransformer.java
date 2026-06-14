@@ -65,8 +65,7 @@ public class TokenCaseTransformer
     private Case tokenCase;
 
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         Locale locale = Locale.forLanguageTag(aInput.getDocumentLanguage());
 

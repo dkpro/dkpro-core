@@ -18,7 +18,7 @@
 package org.dkpro.core.testing.validation.checks;
 
 import static org.dkpro.core.testing.validation.Message.Level.ERROR;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -26,26 +26,24 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.validation.CasValidator;
 import org.dkpro.core.testing.validation.Message;
-import org.dkpro.core.testing.validation.checks.PosAttachedToTokenCheck;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 public class PosAttachedToTokenCheckTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
         new POS(jcas, 0, 4).addToIndexes();
-        
+
         CasValidator validator = new CasValidator(PosAttachedToTokenCheck.class);
         List<Message> messages = validator.analyze(jcas);
-        
+
         messages.forEach(m -> System.out.println(m));
-        
+
         assertTrue(messages.stream().anyMatch(m -> m.level == ERROR));
     }
 }

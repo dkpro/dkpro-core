@@ -21,6 +21,7 @@ import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,25 +35,19 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.conll.Conll2006Reader;
-import org.dkpro.core.posfilter.PosFilter;
 import org.dkpro.core.snowball.SnowballStemmer;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import junit.framework.Assert;
 
 public class PosFilterTest
 {
     @Test
-    public void testEnglish1()
-        throws Exception
+    public void testEnglish1() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text1.conll";
 
@@ -64,8 +59,7 @@ public class PosFilterTest
     }
 
     @Test
-    public void testEnglish2()
-        throws Exception
+    public void testEnglish2() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text1.conll";
 
@@ -78,13 +72,12 @@ public class PosFilterTest
     }
 
     @Test
-    public void testEnglish3()
-        throws Exception
+    public void testEnglish3() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text2.conll";
 
         String[] tokens = { "This", "is", "a", "not", "so", "long", "test", "sentence", "." };
-        
+
         String[] lemmas = { "be", "long", "test", "sentence" };
 
         runTest("en", testDocument, tokens, lemmas, null, null, null,
@@ -93,15 +86,14 @@ public class PosFilterTest
     }
 
     @Test
-    public void testEnglish4()
-        throws Exception
+    public void testEnglish4() throws Exception
     {
         String testDocument = "src/test/resources/posfilter/text2.conll";
 
         String[] tokens = { "This", "is", "a", "not", "so", "long", "test", "sentence", "." };
-        
+
         String[] originalPos = { "VBZ", "JJ", "NN", "NN" };
-        
+
         String[] mappedPos = { "POS_VERB", "POS_ADJ", "POS_NOUN", "POS_NOUN" };
 
         runTest("en", testDocument, tokens, null, null, originalPos, mappedPos,
@@ -116,16 +108,15 @@ public class PosFilterTest
         List<Object> posFilterParams = new ArrayList<Object>();
         posFilterParams.addAll(asList(aExtraParams));
 
-        CollectionReaderDescription reader = createReaderDescription(Conll2006Reader.class, 
+        CollectionReaderDescription reader = createReaderDescription(Conll2006Reader.class,
                 Conll2006Reader.PARAM_SOURCE_LOCATION, testDocument,
-                Conll2006Reader.PARAM_POS_TAG_SET, "ptb",
-                Conll2006Reader.PARAM_LANGUAGE, "en");
-        
+                Conll2006Reader.PARAM_POS_TAG_SET, "ptb", Conll2006Reader.PARAM_LANGUAGE, "en");
+
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(SnowballStemmer.class),
                 createEngineDescription(PosFilter.class,
                         posFilterParams.toArray(new Object[posFilterParams.size()])));
-        
+
         JCas jcas = SimplePipeline.iteratePipeline(reader, aggregate).iterator().next();
 
         Type stemType = jcas.getCas().getTypeSystem().getType(Stem.class.getCanonicalName());
@@ -136,30 +127,21 @@ public class PosFilterTest
         if (aLemmas != null) {
             AssertAnnotations.assertLemma(aLemmas, select(jcas, Lemma.class));
             for (Token t : tokens) {
-                Assert.assertEquals(t.getLemma(), getAnnotation(lemmaType, t));
+                assertEquals(t.getLemma(), getAnnotation(lemmaType, t));
             }
         }
         if (aStems != null) {
             AssertAnnotations.assertStem(aStems, select(jcas, Stem.class));
             for (Token t : tokens) {
-                Assert.assertEquals(t.getStem(), getAnnotation(stemType, t));
+                assertEquals(t.getStem(), getAnnotation(stemType, t));
             }
         }
         if (aPOSs != null) {
             AssertAnnotations.assertPOS(aOrigPOSs, aPOSs, select(jcas, POS.class));
             for (Token t : tokens) {
-                Assert.assertEquals(t.getPos(), getAnnotation(posType, t));
+                assertEquals(t.getPos(), getAnnotation(posType, t));
             }
         }
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
 
     private AnnotationFS getAnnotation(Type type, AnnotationFS annotation)

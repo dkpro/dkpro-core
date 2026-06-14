@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2024
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -27,13 +27,9 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.corenlp.CoreNlpDependencyParser;
-import org.dkpro.core.corenlp.CoreNlpPosTagger;
 import org.dkpro.core.testing.AssumeResource;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -46,7 +42,7 @@ public class CoreNlpDependencyParserTest
             "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT",
             "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP",
             "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
-    
+
     private static final String[] STANFORD_DEPENDENCY_TAGS = { "acomp", "advcl", "advmod", "amod",
             "appos", "aux", "auxpass", "cc", "ccomp", "conj", "cop", "csubj", "csubjpass", "dep",
             "det", "discourse", "dobj", "expl", "iobj", "mark", "mwe", "neg", "nn", "npadvmod",
@@ -57,9 +53,9 @@ public class CoreNlpDependencyParserTest
     private static final String[] UNIVERSAL_DEPENDENCY_TAGS = { "acl", "acl:relcl", "advcl",
             "advmod", "amod", "appos", "aux", "auxpass", "case", "cc", "cc:preconj", "ccomp",
             "compound", "compound:prt", "conj", "cop", "csubj", "csubjpass", "dep", "det",
-            "det:predet", "discourse", "dobj", "expl", "iobj", "list", "mark", "mwe", "neg",
-            "nmod", "nmod:npmod", "nmod:poss", "nmod:tmod", "nsubj", "nsubjpass", "nummod",
-            "parataxis", "punct", "root", "xcomp" };
+            "det:predet", "discourse", "dobj", "expl", "iobj", "list", "mark", "mwe", "neg", "nmod",
+            "nmod:npmod", "nmod:poss", "nmod:tmod", "nsubj", "nsubjpass", "nummod", "parataxis",
+            "punct", "root", "xcomp" };
 
     private static final String[] PTB_POS_TAGS = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":",
             "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
@@ -74,14 +70,12 @@ public class CoreNlpDependencyParserTest
             "PREF", "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
     @Test
-    public void testEnglishStanfordDependencies()
-        throws Exception
+    public void testEnglishStanfordDependencies() throws Exception
     {
         JCas jcas = runTest("en", "sd", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -108,14 +102,12 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
-    public void testEnglishUniversalDependencies()
-        throws Exception
+    public void testEnglishUniversalDependencies() throws Exception
     {
         JCas jcas = runTest("en", "ud", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -125,11 +117,11 @@ public class CoreNlpDependencyParserTest
                 "[ 44, 45]PUNCT(punct,basic) D[44,45](,) G[35,43](sentence)",
                 "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
                 "[ 52, 60]Dependency(acl:relcl,basic) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]PREP(case,basic) D[61,63](as) G[69,81](constituents)",
+                "[ 61, 63]DOBJ(dobj,basic) D[61,63](as) G[52,60](contains)",
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(nmod:as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 69, 81]DEP(dep,basic) D[69,81](constituents) G[61,63](as)",
                 "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",
                 "[102,110]Dependency(acl,basic) D[102,110](possible) G[69,81](constituents)",
                 "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
@@ -146,14 +138,12 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
-    public void testEnglishWsjSd()
-        throws Exception
+    public void testEnglishWsjSd() throws Exception
     {
         JCas jcas = runTest("en", "wsj-sd", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -167,7 +157,7 @@ public class CoreNlpDependencyParserTest
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]POBJ(pobj,basic) D[69,81](constituents) G[61,63](as)",
                 "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(prep,basic) D[99,101](as) G[69,81](constituents)",
                 "[102,110]POBJ(pobj,basic) D[102,110](possible) G[99,101](as)",
                 "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
@@ -182,16 +172,13 @@ public class CoreNlpDependencyParserTest
         assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
-
     @Test
-    public void testEnglishWsjUd()
-        throws Exception
+    public void testEnglishWsjUd() throws Exception
     {
         JCas jcas = runTest("en", "wsj-ud", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
@@ -205,7 +192,7 @@ public class CoreNlpDependencyParserTest
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]Dependency(nmod:as,basic) D[69,81](constituents) G[52,60](contains)",
                 "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",
                 "[102,110]Dependency(acl,basic) D[102,110](possible) G[69,81](constituents)",
                 "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
@@ -216,7 +203,7 @@ public class CoreNlpDependencyParserTest
                 "expl", "iobj", "mark", "mwe", "neg", "nmod", "nmod:npmod", "nmod:poss",
                 "nmod:tmod", "nsubj", "nsubjpass", "nummod", "parataxis", "punct", "root",
                 "xcomp" };
-        
+
         String[] unmappedDep = { "acl:relcl", "cc:preconj", "compound:prt", "det:predet",
                 "nmod:npmod", "nmod:poss", "nmod:tmod" };
 
@@ -228,15 +215,13 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
-    public void testFrenchUniversalDependencies()
-        throws Exception
+    public void testFrenchUniversalDependencies() throws Exception
     {
         JCas jcas = runTest("fr", "ud", "Nous avons besoin d' une phrase par exemple très "
                 + "compliqué , qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] dependencies = {
-                "[  0,  4]ROOT(root,basic) D[0,4](Nous) G[0,4](Nous)",
+        String[] dependencies = { "[  0,  4]ROOT(root,basic) D[0,4](Nous) G[0,4](Nous)",
                 "[  5, 10]Dependency(nmod,basic) D[5,10](avons) G[0,4](Nous)",
                 "[ 11, 17]DOBJ(dobj,basic) D[11,17](besoin) G[5,10](avons)",
                 "[ 18, 20]PREP(case,basic) D[18,20](d') G[25,31](phrase)",
@@ -265,7 +250,7 @@ public class CoreNlpDependencyParserTest
                 "discourse", "dislocated", "dobj", "expl", "foreign", "goeswith", "iobj", "mark",
                 "mwe", "name", "neg", "nmod", "nmod:poss", "nsubj", "nsubjpass", "nummod",
                 "parataxis", "punct", "remnant", "reparandum", "root", "vocative", "xcomp" };
-        
+
         String[] unmappedDep = { "acl:relcl", "nmod:poss" };
 
         assertDependencies(dependencies, select(jcas, Dependency.class));
@@ -277,14 +262,12 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
-    public void testGermanUniversalDependencies()
-        throws Exception
+    public void testGermanUniversalDependencies() throws Exception
     {
         JCas jcas = runTest("de", "ud", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] dependencies = {
-                "[  0,  3]NSUBJ(nsubj,basic) D[0,3](Wir) G[4,12](brauchen)",
+        String[] dependencies = { "[  0,  3]NSUBJ(nsubj,basic) D[0,3](Wir) G[4,12](brauchen)",
                 "[  4, 12]ROOT(root,basic) D[4,12](brauchen) G[4,12](brauchen)",
                 "[ 13, 16]DET(det,basic) D[13,16](ein) G[36,44](Beispiel)",
                 "[ 17, 21]ADVMOD(advmod,basic) D[17,21](sehr) G[22,35](kompliziertes)",
@@ -296,15 +279,15 @@ public class CoreNlpDependencyParserTest
                 "[ 65, 70]AMOD(amod,basic) D[65,70](viele) G[71,84](Konstituenten)",
                 "[ 71, 84]DOBJ(dobj,basic) D[71,84](Konstituenten) G[101,111](beinhaltet)",
                 "[ 85, 88]CC(cc,basic) D[85,88](und) G[71,84](Konstituenten)",
-                "[ 89,100]CONJ(conj:und,basic) D[89,100](Dependenzen) G[71,84](Konstituenten)",
+                "[ 89,100]CONJ(conj,basic) D[89,100](Dependenzen) G[71,84](Konstituenten)",
                 "[101,111]Dependency(acl,basic) D[101,111](beinhaltet) G[4,12](brauchen)",
                 "[112,113]PUNCT(punct,basic) D[112,113](.) G[4,12](brauchen)" };
 
         String[] depTags = { "acl", "advcl", "advmod", "amod", "appos", "aux", "auxpass", "case",
                 "cc", "ccomp", "compound", "conj", "cop", "csubj", "csubjpass", "dep", "det",
                 "dobj", "expl", "iobj", "mark", "mwe", "name", "neg", "nmod", "nmod:poss", "nsubj",
-                "nsubjpass", "nummod", "parataxis", "punct", "root", "xcomp" }; 
-        
+                "nsubjpass", "nummod", "parataxis", "punct", "root", "xcomp" };
+
         String[] unmappedDep = { "nmod:poss" };
 
         String[] depParserPosTags = { "$,", "$.", "$[", "ADJA", "ADJD", "ADV", "APPO", "APPR",
@@ -313,23 +296,20 @@ public class CoreNlpDependencyParserTest
                 "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS",
                 "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VVFIN", "VVIMP",
                 "VVINF", "VVIZU", "VVPP", "XY" };
-        
+
         assertDependencies(dependencies, select(jcas, Dependency.class));
         assertTagset(CoreNlpPosTagger.class, POS.class, "stts", GERMAN_POS_TAGS, jcas);
         assertTagset(CoreNlpDependencyParser.class, POS.class, "stts", depParserPosTags, jcas);
         assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal", depTags, jcas);
         assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
-    
-    @Test
-    public void testChineseCtbConllDependencies()
-        throws Exception
-    {
-        JCas jcas = runTest("zh", "ctb-conll", 
-                "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
 
-        String[] dependencies = {
-                "[  0,  2]Dependency(SUB,basic) D[0,2](我们) G[3,5](需要)",
+    @Test
+    public void testChineseCtbConllDependencies() throws Exception
+    {
+        JCas jcas = runTest("zh", "ctb-conll", "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+
+        String[] dependencies = { "[  0,  2]Dependency(SUB,basic) D[0,2](我们) G[3,5](需要)",
                 "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]Dependency(AMOD,basic) D[6,8](一个) G[12,14](复杂)",
                 "[  9, 11]Dependency(AMOD,basic) D[9,11](非常) G[12,14](复杂)",
@@ -349,11 +329,11 @@ public class CoreNlpDependencyParserTest
 
         String[] depTags = { "AMOD", "DEP", "NMOD", "OBJ", "P", "PMOD", "PRD", "ROOT", "SBAR",
                 "SUB", "VC", "VMOD" };
-        
+
         String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
                 "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "ON", "P",
                 "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
-        
+
         String[] unmappedDep = {};
 
         assertDependencies(dependencies, select(jcas, Dependency.class));
@@ -370,17 +350,14 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
-    public void testChinesePtbConllDependencies()
-        throws Exception
+    public void testChinesePtbConllDependencies() throws Exception
     {
-        JCas jcas = runTest("zh", "ptb-conll", 
-                "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+        JCas jcas = runTest("zh", "ptb-conll", "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
 
-        // This output is bogus because the tagger we use here produced ctb tags and the model 
+        // This output is bogus because the tagger we use here produced ctb tags and the model
         // expects ptb tags. However, I didn't find any pos tagger model for chinese that produces
         // the ptb tags...
-        String[] dependencies = {
-                "[  0,  2]ROOT(root,basic) D[0,2](我们) G[0,2](我们)",
+        String[] dependencies = { "[  0,  2]ROOT(root,basic) D[0,2](我们) G[0,2](我们)",
                 "[  3,  5]Dependency(COORD,basic) D[3,5](需要) G[0,2](我们)",
                 "[  6,  8]Dependency(COORD,basic) D[6,8](一个) G[3,5](需要)",
                 "[  9, 11]Dependency(COORD,basic) D[9,11](非常) G[6,8](一个)",
@@ -400,11 +377,11 @@ public class CoreNlpDependencyParserTest
 
         String[] depTags = { "AMOD", "APPO", "CONJ", "COORD", "DEP", "IM", "NAME", "NMOD", "P",
                 "PMOD", "PRN", "PRT", "ROOT", "SUB", "SUFFIX", "VC", "VMOD" };
-        
+
         String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
                 "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "ON", "P",
                 "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
-        
+
         String[] unmappedDep = {};
 
         assertDependencies(dependencies, select(jcas, Dependency.class));
@@ -421,14 +398,11 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
-    public void testChineseUniversalDependencies()
-        throws Exception
+    public void testChineseUniversalDependencies() throws Exception
     {
-        JCas jcas = runTest("zh", "ud", 
-                "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+        JCas jcas = runTest("zh", "ud", "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
 
-        String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
+        String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
                 "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]DEP(dep,basic) D[6,8](一个) G[17,19](句子)",
                 "[  9, 11]ADVMOD(advmod,basic) D[9,11](非常) G[12,14](复杂)",
@@ -439,7 +413,7 @@ public class CoreNlpDependencyParserTest
                 "[ 23, 25]NSUBJ(nsubj,basic) D[23,25](其中) G[26,28](包含)",
                 "[ 26, 28]CCOMP(ccomp,basic) D[26,28](包含) G[3,5](需要)",
                 "[ 29, 31]DEP(dep,basic) D[29,31](许多) G[32,34](成分)",
-                "[ 32, 34]CONJ(conj:和,basic) D[32,34](成分) G[43,45](依赖)",
+                "[ 32, 34]CONJ(conj,basic) D[32,34](成分) G[43,45](依赖)",
                 "[ 35, 36]CC(cc,basic) D[35,36](和) G[43,45](依赖)",
                 "[ 37, 40]ADVMOD(advmod:dvp,basic) D[37,40](尽可能) G[43,45](依赖)",
                 "[ 41, 42]MARK(mark,basic) D[41,42](的) G[37,40](尽可能)",
@@ -453,11 +427,11 @@ public class CoreNlpDependencyParserTest
                 "mark:clf", "name", "neg", "nmod", "nmod:assmod", "nmod:poss", "nmod:prep",
                 "nmod:range", "nmod:tmod", "nmod:topic", "nsubj", "nsubj:xsubj", "nsubjpass",
                 "nummod", "parataxis:prnmod", "punct", "root", "xcomp" };
-        
+
         String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
                 "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "ON", "P",
                 "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
-        
+
         String[] unmappedDep = { "advcl:loc", "advmod:dvp", "advmod:loc", "advmod:rcomp",
                 "amod:ordmod", "aux:asp", "aux:ba", "aux:modal", "aux:prtmod", "compound:nn",
                 "compound:vc", "erased", "etc", "mark:clf", "nmod:assmod", "nmod:poss", "nmod:prep",
@@ -477,15 +451,13 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
-    public void testEnglishPtbConllDependencies()
-        throws Exception
+    public void testEnglishPtbConllDependencies() throws Exception
     {
         JCas jcas = runTest("en", "ptb-conll",
                 "We need a very complicated example sentence , which "
                         + "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = {
-                "[  0,  2]Dependency(VMOD,basic) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { "[  0,  2]Dependency(VMOD,basic) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(NMOD,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(AMOD,basic) D[10,14](very) G[15,26](complicated)",
@@ -525,25 +497,21 @@ public class CoreNlpDependencyParserTest
         assertTagset(Dependency.class, "conll", depTags, jcas);
         assertTagsetMapping(Dependency.class, "conll", unmappedDep, jcas);
     }
-    
+
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpDependencyParser.class, "depparser", aLanguage,
                 aVariant);
-        
+
         AggregateBuilder aggregate = new AggregateBuilder();
-        
+
         aggregate.add(createEngineDescription(CoreNlpPosTagger.class));
-        Object[] params = new Object[] {
-                CoreNlpDependencyParser.PARAM_VARIANT, aVariant,
-                CoreNlpDependencyParser.PARAM_PRINT_TAGSET, true};
+        Object[] params = new Object[] { CoreNlpDependencyParser.PARAM_VARIANT, aVariant,
+                CoreNlpDependencyParser.PARAM_PRINT_TAGSET, true };
         params = ArrayUtils.addAll(params, aExtraParams);
         aggregate.add(createEngineDescription(CoreNlpDependencyParser.class, params));
 
         return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

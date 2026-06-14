@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.conll;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor.BASIC;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -42,12 +43,12 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -57,48 +58,44 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a file in the CoNLL-2008 format.
  * 
- * @see <a href="http://surdeanu.info/conll08/">CoNLL 2008 Shared Task: Joint Learning of 
- *      Syntactic and Semantic Dependencies</a>
- * @see <a href="http://www.aclweb.org/anthology/W08-2121">The CoNLL-2008 Shared Task on
- *      Joint Parsing of Syntactic and Semantic Dependencies</a>
+ * @see <a href="http://surdeanu.info/conll08/">CoNLL 2008 Shared Task: Joint Learning of Syntactic
+ *      and Semantic Dependencies</a>
+ * @see <a href="http://www.aclweb.org/anthology/W08-2121">The CoNLL-2008 Shared Task on Joint
+ *      Parsing of Syntactic and Semantic Dependencies</a>
  */
 @ResourceMetaData(name = "CoNLL 2008 Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2008})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_2008 })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg" })
 public class Conll2008Reader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
      * Read part-of-speech information.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_POS, defaultValue = "true")
     private boolean readPos;
 
     /**
@@ -114,45 +111,42 @@ public class Conll2008Reader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-    
+
     /**
      * Read lemma information.
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
-    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, defaultValue = "true")
     private boolean readLemma;
 
     /**
      * Read syntactic dependency information.
      */
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
-    @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, defaultValue = "true")
     private boolean readDependency;
 
     /**
      * Read semantic predicate information.
      */
-    public static final String PARAM_READ_SEMANTIC_PREDICATE = 
-            ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
-    @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
+    @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, defaultValue = "true")
     private boolean readSemanticPredicate;
 
     private static final String UNUSED = "_";
 
     private static final int ID = 0;
-    private static final int FORM = 1; 
+    private static final int FORM = 1;
     private static final int LEMMA = 2;
     private static final int GPOS = 3;
     // private static final int PPOS = 4; // Ignored
@@ -163,22 +157,22 @@ public class Conll2008Reader
     private static final int DEPREL = 9;
     private static final int PRED = 10;
     private static final int APRED = 11;
-    
+
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
-                getLanguage());
+
+        if (readPos) {
+            posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                    getLanguage());
+        }
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -194,8 +188,7 @@ public class Conll2008Reader
         }
     }
 
-    public void convert(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    public void convert(JCas aJCas, BufferedReader aReader) throws IOException
     {
         if (readPos) {
             try {
@@ -205,15 +198,15 @@ public class Conll2008Reader
                 throw new IOException(e);
             }
         }
-        
+
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {
             if (words.isEmpty()) {
-                 // Ignore empty sentences. This can happen when there are multiple end-of-sentence
-                 // markers following each other.
-                continue; 
+                // Ignore empty sentences. This can happen when there are multiple end-of-sentence
+                // markers following each other.
+                continue;
             }
 
             int sentenceBegin = doc.getPosition();
@@ -226,86 +219,91 @@ public class Conll2008Reader
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
-                tokens.put(Integer.valueOf(word[ID]), token);
+                Token token = doc.add(trim(word[FORM]), Token.class);
+                tokens.put(Integer.valueOf(trim(word[ID])), token);
                 if (wordIterator.hasNext()) {
                     doc.add(" ");
                 }
 
                 // Read lemma
-                if (!UNUSED.equals(word[LEMMA]) && readLemma) {
+                String lemmaValue = trim(word[LEMMA]);
+                if (!UNUSED.equals(lemmaValue) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(word[LEMMA]);
+                    lemma.setValue(lemmaValue);
                     lemma.addToIndexes();
                     token.setLemma(lemma);
                 }
 
                 // Read part-of-speech tag
-                if (!UNUSED.equals(word[GPOS]) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(word[GPOS]);
+                String gPosValue = cleanTag(word[GPOS]);
+                if (!UNUSED.equals(gPosValue) && readPos) {
+                    Type posTag = posMappingProvider.getTagType(gPosValue);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[GPOS] != null ? word[GPOS].intern() : null);
+                    pos.setPosValue(gPosValue);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
 
-                if (!UNUSED.equals(word[PRED]) && readSemanticPredicate) {
+                String predValue = trim(word[PRED]);
+                if (!UNUSED.equals(predValue) && readSemanticPredicate) {
                     SemPred pred = new SemPred(aJCas, token.getBegin(), token.getEnd());
-                    pred.setCategory(word[PRED]);
+                    pred.setCategory(predValue);
                     pred.addToIndexes();
                     preds.add(pred);
                 }
-                
+
                 sentenceEnd = token.getEnd();
             }
 
             // Dependencies
             if (readDependency) {
                 for (String[] word : words) {
+                    String depRel = cleanTag(word[DEPREL]);
                     if (!UNUSED.equals(word[DEPREL])) {
-                        int depId = Integer.valueOf(word[ID]);
-                        int govId = Integer.valueOf(word[HEAD]);
-    
+                        int depId = Integer.valueOf(trim(word[ID]));
+                        int govId = Integer.valueOf(trim(word[HEAD]));
+
                         // Model the root as a loop onto itself
                         if (govId == 0) {
                             Dependency rel = new ROOT(aJCas);
                             rel.setGovernor(tokens.get(depId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                         else {
                             Dependency rel = new Dependency(aJCas);
                             rel.setGovernor(tokens.get(govId));
                             rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
+                            rel.setDependencyType(depRel);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
-                            rel.setFlavor(DependencyFlavor.BASIC);
+                            rel.setFlavor(BASIC);
                             rel.addToIndexes();
                         }
                     }
                 }
             }
-            
+
             // Semantic arguments
             if (readSemanticPredicate) {
                 // Get arguments for one predicate at a time
                 for (int p = 0; p < preds.size(); p++) {
                     List<SemArgLink> args = new ArrayList<>();
                     for (String[] word : words) {
-                        if (!UNUSED.equals(word[APRED + p])) {
-                            Token token = tokens.get(Integer.valueOf(word[ID]));
+                        String aPredValue = trim(word[APRED + p]);
+                        if (!UNUSED.equals(aPredValue)) {
+                            Token token = tokens.get(Integer.valueOf(trim(word[ID])));
                             SemArg arg = new SemArg(aJCas, token.getBegin(), token.getEnd());
                             arg.addToIndexes();
-                            
+
                             SemArgLink link = new SemArgLink(aJCas);
-                            link.setRole(word[APRED + p]);
+                            link.setRole(aPredValue);
                             link.setTarget(arg);
                             args.add(link);
                         }
@@ -329,8 +327,7 @@ public class Conll2008Reader
     /**
      * Read a single sentence.
      */
-    private static List<String[]> readSentence(BufferedReader aReader)
-        throws IOException
+    private static List<String[]> readSentence(BufferedReader aReader) throws IOException
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;
@@ -344,11 +341,11 @@ public class Conll2008Reader
                 break; // Consider end of sentence
             }
             String[] fields = line.split("\t");
-//            if (fields.length != 10) {
-//                throw new IOException(
-//                        "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
-//                                + fields.length + ": [" + line + "]");
-//            }
+            // if (fields.length != 10) {
+            // throw new IOException(
+            // "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
+            // + fields.length + ": [" + line + "]");
+            // }
             words.add(fields);
         }
 

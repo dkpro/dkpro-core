@@ -36,21 +36,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Segmenter for Japanese using <a href="https://github.com/atilika/kuromoji">Kuromojo</a>. 
+ * Segmenter for Japanese using <a href="https://github.com/atilika/kuromoji">Kuromojo</a>.
  */
 @ResourceMetaData(name = "Kuromoji Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("ja")
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class KuromojiSegmenter
     extends SegmenterBase
 {
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
     }
@@ -63,19 +60,19 @@ public class KuromojiSegmenter
         int sentenceEnd = text.indexOf("。");
         while (sentenceEnd > sentenceBegin) {
             String stext = text.substring(sentenceBegin, sentenceEnd + 1);
-            
+
             processSentence(aJCas, stext, zoneBegin + sentenceBegin);
-            
+
             sentenceBegin = sentenceEnd + 1;
             sentenceEnd = text.indexOf("。", sentenceBegin);
         }
-        
+
         if (sentenceBegin < text.length()) {
             String stext = text.substring(sentenceBegin, text.length());
             processSentence(aJCas, stext, zoneBegin + sentenceBegin);
         }
     }
-    
+
     private Sentence processSentence(JCas aJCas, String text, int zoneBegin)
     {
         String innerText = text;
@@ -84,29 +81,29 @@ public class KuromojiSegmenter
             innerText = text.substring(0, text.length() - 1);
             addFinalToken = true;
         }
-        
+
         Tokenizer tokenizer = new Tokenizer();
         List<Token> tokens = tokenizer.tokenize(innerText);
 
         Annotation firstToken = null;
         Annotation lastToken = null;
-        
+
         for (Token t : tokens) {
             Annotation ut = createToken(aJCas, t.getPosition() + zoneBegin,
                     t.getPosition() + t.getSurface().length() + zoneBegin);
-            
+
             // Tokenizer reports whitespace as tokens - we don't add whitespace-only tokens.
             if (ut == null) {
                 continue;
             }
-            
+
             if (firstToken == null) {
                 firstToken = ut;
             }
-            
+
             lastToken = ut;
         }
-        
+
         if (addFinalToken) {
             lastToken = createToken(aJCas, zoneBegin + text.length() - 1,
                     zoneBegin + text.length());

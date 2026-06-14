@@ -21,12 +21,12 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.dkpro.core.cisstem.util.CisStem;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class PerformanceTest
 {
-    @Ignore
+    @Disabled
     @Test
     public void testGerman() throws Exception
     {

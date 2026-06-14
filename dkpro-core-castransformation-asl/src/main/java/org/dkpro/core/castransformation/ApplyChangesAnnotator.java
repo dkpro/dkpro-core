@@ -39,13 +39,10 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "CAS Transformation - Apply")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-            "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"},
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-            "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
 
 public class ApplyChangesAnnotator
     extends JCasAnnotator_ImplBase
@@ -58,8 +55,7 @@ public class ApplyChangesAnnotator
     public static final String OP_DELETE = "delete";
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try {
             JCas sourceView = aJCas.getView(VIEW_SOURCE);

@@ -43,6 +43,7 @@ import org.apache.uima.util.CasToInlineXml;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.ResourceUtils;
+import org.dkpro.core.api.xml.XmlParserUtils;
 
 import eu.openminted.share.annotations.api.DocumentationResource;
 
@@ -68,10 +69,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Inline XML Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class InlineXmlWriter
     extends JCasFileWriter_ImplBase
 {
@@ -86,17 +85,17 @@ public class InlineXmlWriter
     private Transformer transformer;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
         if (xslt != null) {
-            TransformerFactory tf = TransformerFactory.newInstance();
             try {
+                TransformerFactory tf = XmlParserUtils.newTransformerFactory();
                 URL url = ResourceUtils.resolveLocation(xslt, this, getContext());
                 transformer = tf.newTransformer(new StreamSource(url.openStream()));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new ResourceInitializationException(e);
             }
         }
@@ -114,7 +113,8 @@ public class InlineXmlWriter
             final String xmlAnnotations = cas2xml.generateXML(aJCas.getCas());
             if (transformer != null) {
                 transformer.transform(
-                        new StreamSource(new ByteArrayInputStream(xmlAnnotations.getBytes("UTF-8"))),
+                        new StreamSource(
+                                new ByteArrayInputStream(xmlAnnotations.getBytes("UTF-8"))),
                         new StreamResult(docOS));
             }
             else {

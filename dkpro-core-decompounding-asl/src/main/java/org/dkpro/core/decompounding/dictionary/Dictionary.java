@@ -27,13 +27,16 @@ public interface Dictionary
 {
     /**
      * Checks if a word is in the dictionary.
-     * @param aWord a word.
-     * @return  if a word is in the dictionary.
+     * 
+     * @param aWord
+     *            a word.
+     * @return if a word is in the dictionary.
      */
     public boolean contains(String aWord);
 
     /**
      * Returns all words in the dictionary.
+     * 
      * @return all words in the dictionary.
      */
     public List<String> getAll();

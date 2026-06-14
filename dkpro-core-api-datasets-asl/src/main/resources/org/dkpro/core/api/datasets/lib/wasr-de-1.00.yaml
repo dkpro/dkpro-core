@@ -6,7 +6,7 @@ mediaType: text/x.org.dkpro.conll-2009
 encoding: UTF-8
 
 name: English Word Sense and Semantic Role Datasets (WaSR)
-url: https://www.ukp.tu-darmstadt.de/data/semantic-role-resources/knowledge-based-semantic-role-labeling/
+url: https://www.informatik.tu-darmstadt.de/ukp/research_6/data/semantic_role_resources/knowledge_based_semantic_role_labeling/index.en.jsp
 attribution: |
   Silvana Hartmann, Judith Eckle-Kohler, and Iryna Gurevych. Generating Training Data for Semantic
   Role Labeling based on Label Transfer from Linked Lexical Resources. In: Transactions of the
@@ -23,11 +23,14 @@ licenses:
 
 artifacts:
   LICENSE.txt:
-    url: http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    url: classpath:/org/dkpro/core/api/datasets/lib/common-licenses/CC-BY-NC-SA-3.0.txt
+    sha1: 90490d92475de1dc68502b6cdb317187c4336b36
+    sha512: ee6b27c709b76d32255ea3c1dd110b6238f5a6360d18cb59d8e7ce433cf22046fc9e13acf055682eacf832fc308e2fb3f842bf4a41ff5debf6e2c69775173cdb
+    verificationMode: TEXT
   data.tar.bz2:
-    url: "https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/data/semantic_role_resources/WaSR-de_v1.tar.bz2"
+    url: "https://fileserver.ukp.informatik.tu-darmstadt.de/UKP_Webpage/DATA/WaSR-de_v1.tar.bz2"
     sha1: b706711ae6fffc94409f80b635595bd45d8c2ece
+    sha512: ff2bc3becad49146873dc54644f299d1362f106258e0ed939e1c14058b02429372aa39d4027bf040845af6db20073c80a0813452cf103ffd0adf3d55eaea1704
     actions:
     - action: explode
       configuration: { strip: 1 }

@@ -1,6 +1,6 @@
 ar=factored
 de=factored
-en=rnn
+en=factored
 fr=factored
 zh=factored
-es=sr
+es=pcfg

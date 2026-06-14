@@ -46,9 +46,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Regex-based Token Transformer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class RegexBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {
@@ -68,16 +66,14 @@ public class RegexBasedTokenTransformer
     private String replacement;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         regexPattern = Pattern.compile(regex);
     };
 
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         select(aInput, Token.class).stream()
                 .filter(token -> regexPattern.matcher(token.getCoveredText()).matches())

@@ -37,10 +37,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  * Remove prefixes and suffixes from tokens.
  */
 @Component(OperationType.NORMALIZER)
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs = {
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class TokenTrimmer
     extends JCasAnnotator_ImplBase

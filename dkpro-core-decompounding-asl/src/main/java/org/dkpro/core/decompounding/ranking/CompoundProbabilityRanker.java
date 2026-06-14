@@ -39,7 +39,8 @@ public class CompoundProbabilityRanker
      *
      * Use {@link #setFinder(Finder)} before using this class
      */
-    public CompoundProbabilityRanker() {
+    public CompoundProbabilityRanker()
+    {
     }
 
     /**
@@ -75,9 +76,9 @@ public class CompoundProbabilityRanker
     /**
      * Calculates the weight for a split
      */
-    private float calcRank(DecompoundedWord aSplit)
+    private double calcRank(DecompoundedWord aSplit)
     {
-        float result = 0;
+        double result = 0;
 
         for (Fragment elem : aSplit.getSplits()) {
             result += -1 * Math

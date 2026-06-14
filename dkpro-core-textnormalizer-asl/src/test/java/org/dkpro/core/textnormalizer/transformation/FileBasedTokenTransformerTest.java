@@ -22,7 +22,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -34,8 +34,7 @@ public class FileBasedTokenTransformerTest
     private static final String WORDLIST = "src/test/resources/dictionary/ngerman";
 
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         String replacement = "INLIST";
 
@@ -50,8 +49,7 @@ public class FileBasedTokenTransformerTest
     }
 
     @Test
-    public void testIgnoreCase()
-        throws Exception
+    public void testIgnoreCase() throws Exception
     {
         String replacement = "INLIST";
 

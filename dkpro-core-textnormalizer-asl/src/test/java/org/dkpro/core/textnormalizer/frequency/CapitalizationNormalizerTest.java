@@ -18,19 +18,18 @@
 package org.dkpro.core.textnormalizer.frequency;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CapitalizationNormalizerTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         String inputText = "KResse KRESSE KressE Kresse";
         String normalizedText = "Kresse Kresse Kresse Kresse";
@@ -38,9 +37,8 @@ public class CapitalizationNormalizerTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription normalizer = createEngineDescription(
-                CapitalizationNormalizer.class,
-                CapitalizationNormalizer.RES_FREQUENCY_PROVIDER, createExternalResourceDescription(
-                        Web1TFrequencyCountResource.class,
+                CapitalizationNormalizer.class, CapitalizationNormalizer.RES_FREQUENCY_PROVIDER,
+                createResourceDescription(Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",

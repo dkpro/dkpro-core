@@ -31,17 +31,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Base class for all kinds of phonetic transcriptors based on Apache Commons Codec.
  */
-@TypeCapability(
-        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription" })
 public abstract class PhoneticTranscriptor_ImplBase
     extends JCasAnnotator_ImplBase
 {
     protected StringEncoder encoder;
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         for (Token token : JCasUtil.select(jcas, Token.class)) {
             PhoneticTranscription transcription = new PhoneticTranscription(jcas, token.getBegin(),
@@ -52,8 +51,7 @@ public abstract class PhoneticTranscriptor_ImplBase
         }
     }
 
-    protected String encode(String string)
-            throws AnalysisEngineProcessException
+    protected String encode(String string) throws AnalysisEngineProcessException
     {
         try {
             String encodedString = encoder.encode(string);

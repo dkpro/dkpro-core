@@ -23,30 +23,26 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 
-public class CisStemmerTest {
+public class CisStemmerTest
+{
 
     @Test
-    public void testGerman()
-        throws Exception
+    public void testGerman() throws Exception
     {
-        runTest("de", "Automobile Fenster", 
-                new String[] {"Automobil", "Fenst"} );
+        runTest("de", "Automobile Fenster", new String[] { "Automobil", "Fenst" });
     }
 
     @Test
-    public void testCaseInsensitive()
-        throws Exception
+    public void testCaseInsensitive() throws Exception
     {
-        runTest("de", "Automobile Fenster", 
-                new String[] {"automobil", "fen"},
+        runTest("de", "Automobile Fenster", new String[] { "automobil", "fen" },
                 CisStemmer.PARAM_LOWER_CASE, true);
     }
 
-  
     private JCas runTest(String aLanguage, String aText, String[] aStems, Object... aParams)
         throws Exception
     {
@@ -54,7 +50,7 @@ public class CisStemmerTest {
                 aLanguage, aText);
 
         AssertAnnotations.assertStem(aStems, select(result, Stem.class));
-        
+
         return result;
     }
 }

@@ -49,14 +49,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Penn Treebank Combined Format Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_PTB_COMBINED })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class PennTreebankCombinedReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -64,8 +62,7 @@ public class PennTreebankCombinedReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
@@ -78,45 +75,42 @@ public class PennTreebankCombinedReader
     protected String posTagset;
 
     /**
-     * Sets whether to create or not to create POS tags. The creation of
-     * constituent tags must be turned on for this to work.
+     * Sets whether to create or not to create POS tags. The creation of constituent tags must be
+     * turned on for this to work.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_POS, defaultValue = "true")
     private boolean createPosTags;
-    
+
     /**
-     * Use this constituent tag set to use to resolve the tag set mapping instead of using the
-     * tag set defined as part of the model meta data. This can be useful if a custom model is
-     * specified which does not have such meta data, or it can be used in readers.
+     * Use this constituent tag set to use to resolve the tag set mapping instead of using the tag
+     * set defined as part of the model meta data. This can be useful if a custom model is specified
+     * which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_CONSTITUENT_TAG_SET = 
-            ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
+    public static final String PARAM_CONSTITUENT_TAG_SET = ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
-    
+
     /**
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
-     * Load the constituent tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the constituent tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = //
             ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
@@ -127,7 +121,7 @@ public class PennTreebankCombinedReader
     public static final String PARAM_REMOVE_TRACES = "removeTraces";
     @ConfigurationParameter(name = PARAM_REMOVE_TRACES, mandatory = false, defaultValue = "true")
     private boolean removeTraces;
-    
+
     /**
      * Whether to render traces into the document text.
      */
@@ -136,38 +130,36 @@ public class PennTreebankCombinedReader
     private boolean writeTracesToText;
 
     private static final String NONE = "-NONE-";
-    
+
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
-    
+
     private PennTreeToJCasConverter converter;
 
     private int lineNumber = 0;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
                 getLanguage());
 
         constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, constituentTagset, getLanguage());
-        
+
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
         converter.setWriteTracesToText(writeTracesToText);
         converter.setCreatePosTags(createPosTags);
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas.getCas(), res);
-        
+
         try {
             posMappingProvider.configure(aJCas.getCas());
             constituentMappingProvider.configure(aJCas.getCas());
@@ -177,11 +169,11 @@ public class PennTreebankCombinedReader
         }
 
         StringBuilder text = new StringBuilder();
-        
+
         try (InputStream is = res.getInputStream()) {
             lineNumber = 0;
             LineIterator li = IOUtils.lineIterator(is, sourceEncoding);
-            
+
             while (li.hasNext()) {
                 PennTreeNode tree = readTree(li);
                 if (removeTraces) {
@@ -193,10 +185,10 @@ public class PennTreebankCombinedReader
                 text.append('\n');
             }
         }
-        
+
         aJCas.setDocumentText(text.toString());
     }
-    
+
     /**
      * Remove traces such as having the form {@code (NP-SBJ (-NONE- *))}
      */
@@ -209,8 +201,8 @@ public class PennTreebankCombinedReader
             return doRemoveTraces(aTree.getChildren().get(0));
         }
         else {
-            PennTreeNode[] children = aTree.getChildren().toArray(
-                    new PennTreeNode[aTree.getChildren().size()]);
+            PennTreeNode[] children = aTree.getChildren()
+                    .toArray(new PennTreeNode[aTree.getChildren().size()]);
             for (PennTreeNode c : children) {
                 boolean removeChild = doRemoveTraces(c);
                 if (removeChild) {
@@ -222,7 +214,7 @@ public class PennTreebankCombinedReader
     }
 
     private String lineBuffer = null;
-    
+
     private PennTreeNode readTree(LineIterator aLi)
     {
         StringBuilder tree = new StringBuilder();
@@ -230,21 +222,21 @@ public class PennTreebankCombinedReader
             String line = lineBuffer != null ? lineBuffer : aLi.nextLine();
             lineNumber++;
             lineBuffer = null;
-            
+
             if (StringUtils.isBlank(line)) {
                 continue;
             }
-            
-            // If the next line starts at the beginning and with an opening round bracket 
+
+            // If the next line starts at the beginning and with an opening round bracket
             if ((tree.length() > 0) && line.charAt(0) == '(') {
                 lineBuffer = line;
                 break;
             }
-            
+
             tree.append(line);
             tree.append('\n'); // Actually not needed - just in case we want to debug ;)
         }
-        
+
         try {
             return PennTreeUtils.parsePennTree(tree.toString());
         }

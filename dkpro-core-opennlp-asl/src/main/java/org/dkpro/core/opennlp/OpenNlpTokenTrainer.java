@@ -55,7 +55,6 @@ import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.tokenize.TokenizerFactory;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
-import opennlp.tools.tokenize.lang.Factory;
 import opennlp.tools.util.TrainingParameters;
 
 /**
@@ -63,14 +62,10 @@ import opennlp.tools.util.TrainingParameters;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
-@Parameters(
-        exclude = { 
-                OpenNlpTokenTrainer.PARAM_TARGET_LOCATION  })
+@Parameters(exclude = { OpenNlpTokenTrainer.PARAM_TARGET_LOCATION })
 @ResourceMetaData(name = "OpenNLP Tokenizer Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class OpenNlpTokenTrainer
     extends JCasConsumer_ImplBase
 {
@@ -78,59 +73,57 @@ public class OpenNlpTokenTrainer
      * Store this language to the model instead of the document language.
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    @ConfigurationParameter(name = PARAM_LANGUAGE)
     private String language;
 
     /**
      * Location to which the output is written.
      */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
-    @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
+    @ConfigurationParameter(name = PARAM_TARGET_LOCATION)
     private File targetLocation;
 
     /**
      * Training algorithm.
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
-            defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-    
+
     /**
      * Trainer type.
      */
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
-            defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     /**
      * Number of training iterations.
      */
     public static final String PARAM_ITERATIONS = "iterations";
-    @ConfigurationParameter(name = PARAM_ITERATIONS, mandatory = true, defaultValue = "100")
+    @ConfigurationParameter(name = PARAM_ITERATIONS, defaultValue = "100")
     private int iterations;
 
     /**
      * Frequency cut-off.
      */
     public static final String PARAM_CUTOFF = "cutoff";
-    @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
+    @ConfigurationParameter(name = PARAM_CUTOFF, defaultValue = "5")
     private int cutoff;
 
     /**
      * If true alpha numerics are skipped.
      */
     public static final String PARAM_USE_ALPHANUMERIC_OPTIMIZATION = "useAlphaNumericOptimization";
-    @ConfigurationParameter(name = PARAM_USE_ALPHANUMERIC_OPTIMIZATION, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_USE_ALPHANUMERIC_OPTIMIZATION, defaultValue = "true")
     private boolean useAlphaNumericOptimization;
 
     /**
      * Regular expression to detect alpha numerics.
      */
     public static final String PARAM_ALPHA_NUMERIC_PATTERN = "alphaNumericPattern";
-    @ConfigurationParameter(name = PARAM_ALPHA_NUMERIC_PATTERN, mandatory = false, 
-            defaultValue = Factory.DEFAULT_ALPHANUMERIC)
+    @ConfigurationParameter(name = PARAM_ALPHA_NUMERIC_PATTERN, mandatory = false, //
+            defaultValue = "^[A-Za-z0-9]+$" /* Factory. DEFAULT_ALPHANUMERIC */)
     private Pattern alphaNumericPattern;
 
     /**
@@ -139,41 +132,40 @@ public class OpenNlpTokenTrainer
     public static final String PARAM_ABBREVIATION_DICTIONARY_LOCATION = "abbreviationDictionaryLocation";
     @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_LOCATION, mandatory = false)
     private String abbreviationDictionaryLocation;
-    
+
     /**
      * Encoding of the abbreviation dictionary.
      */
     public static final String PARAM_ABBREVIATION_DICTIONARY_ENCODING = "abbreviationDictionaryEncoding";
-    @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_ENCODING, defaultValue = "UTF-8")
     private String abbreviationDictionaryEncoding;
 
     /**
      * Number of parallel threads.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, defaultValue = "1")
     private int numThreads;
-    
+
     private CasTokenSampleStream stream;
     private Dictionary abbreviationDictionary;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private Future<TokenizerModel> future;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         stream = new CasTokenSampleStream();
-        
+
         TrainingParameters params = new TrainingParameters();
         params.put(TrainingParameters.ALGORITHM_PARAM, algorithm);
         params.put(TrainingParameters.TRAINER_TYPE_PARAM, trainerType);
         params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(iterations));
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
-        
+
         if (abbreviationDictionaryLocation != null) {
             try {
                 URL abbrevUrl = ResourceUtils.resolveLocation(abbreviationDictionaryLocation,
@@ -190,11 +182,11 @@ public class OpenNlpTokenTrainer
         else {
             abbreviationDictionary = null;
         }
-        
+
         Callable<TokenizerModel> trainTask = () -> {
             try {
-                TokenizerFactory factory = new TokenizerFactory(language,
-                        abbreviationDictionary, useAlphaNumericOptimization, alphaNumericPattern);
+                TokenizerFactory factory = new TokenizerFactory(language, abbreviationDictionary,
+                        useAlphaNumericOptimization, alphaNumericPattern);
                 return TokenizerME.train(stream, factory, params);
             }
             catch (Throwable e) {
@@ -202,22 +194,20 @@ public class OpenNlpTokenTrainer
                 throw e;
             }
         };
-        
+
         future = executor.submit(trainTask);
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         if (!future.isCancelled()) {
             stream.send(aJCas);
         }
     }
-    
+
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         try {
             stream.close();
@@ -225,7 +215,7 @@ public class OpenNlpTokenTrainer
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         TokenizerModel model;
         try {
             model = future.get();
@@ -233,7 +223,7 @@ public class OpenNlpTokenTrainer
         catch (InterruptedException | ExecutionException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         try (OutputStream out = new FileOutputStream(targetLocation)) {
             model.serialize(out);
         }

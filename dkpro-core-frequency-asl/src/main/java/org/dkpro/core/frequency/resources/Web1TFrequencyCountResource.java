@@ -40,15 +40,15 @@ public final class Web1TFrequencyCountResource
     extends FrequencyCountResourceBase
 {
     // Attention! Can only have String parameters in external resources.
-    
+
     public static final String PARAM_MIN_NGRAM_LEVEL = "MinLevel";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_LEVEL, mandatory = true, defaultValue = "1")
     protected String minLevel;
-    
+
     public static final String PARAM_MAX_NGRAM_LEVEL = "MaxLevel";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_LEVEL, mandatory = true, defaultValue = "5")
     protected String maxLevel;
-    
+
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     protected String language;
@@ -59,16 +59,16 @@ public final class Web1TFrequencyCountResource
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_INDEX_PATH = "indexPath";
     @ConfigurationParameter(name = PARAM_INDEX_PATH, mandatory = false)
     protected String indexPath;
-    
+
     private CasConfigurableProviderBase<File> web1TFolderProvider;
-    
+
     @Override
     public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
         throws ResourceInitializationException
@@ -82,8 +82,8 @@ public final class Web1TFrequencyCountResource
             {
                 setContextObject(Web1TFrequencyCountResource.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.umlautnormalizer-model-normalizer-${language}-"
-                        + "${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.umlautnormalizer-model-normalizer-${language}-" + "${variant}");
                 setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/umlautnormalizer/lib/"
                         + "normalizer-${language}-${variant}.properties");
                 setDefault(VARIANT, "default");
@@ -97,24 +97,20 @@ public final class Web1TFrequencyCountResource
             @Override
             protected File produceResource(URL aUrl) throws IOException
             {
-                return ResourceUtils.getClasspathAsFolder(aUrl.toString(),true);
+                return ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
             }
         };
 
         return true;
     }
-    
+
     @Override
     protected void initializeProvider() throws ResourceInitializationException
     {
         try {
             web1TFolderProvider.configure();
-            provider = new Web1TFileAccessProvider(
-                    language,
-                    web1TFolderProvider.getResource(),
-                    new Integer(minLevel),
-                    new Integer(maxLevel)
-            );
+            provider = new Web1TFileAccessProvider(language, web1TFolderProvider.getResource(),
+                    new Integer(minLevel), new Integer(maxLevel));
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);

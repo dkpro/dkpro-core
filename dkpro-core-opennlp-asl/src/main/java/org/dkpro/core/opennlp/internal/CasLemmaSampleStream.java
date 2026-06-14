@@ -40,31 +40,31 @@ public class CasLemmaSampleStream
     {
         sentences = select(aJCas, Sentence.class).iterator();
     }
-    
+
     @Override
     public boolean isActive()
     {
         return sentences != null && sentences.hasNext();
     }
-    
+
     @Override
     public LemmaSample produce(JCas aJCas)
     {
         // Process present sentences
         Sentence sentence = sentences.next();
-        
+
         // Block on next call to read
         if (!sentences.hasNext()) {
             documentComplete();
         }
-        
+
         List<String> words = new ArrayList<>();
         List<String> tags = new ArrayList<>();
         List<String> lemmas = new ArrayList<>();
-        
+
         for (Token t : selectCovered(Token.class, sentence)) {
             words.add(t.getText());
-            
+
             if (t.getPos() == null) {
                 throw new IllegalStateException("Token [" + t.getText() + "] has no POS");
             }
@@ -75,7 +75,7 @@ public class CasLemmaSampleStream
             }
             lemmas.add(t.getLemma().getValue());
         }
-        
+
         return new LemmaSample(words, tags, lemmas);
     }
 }

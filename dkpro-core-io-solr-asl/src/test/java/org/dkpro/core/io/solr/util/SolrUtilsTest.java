@@ -17,11 +17,10 @@
  */
 package org.dkpro.core.io.solr.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.solr.common.SolrInputDocument;
-import org.dkpro.core.io.solr.util.SolrUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SolrUtilsTest
 {

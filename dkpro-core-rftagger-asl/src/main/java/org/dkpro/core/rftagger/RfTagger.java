@@ -69,13 +69,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.MORPHOLOGICAL_TAGGER)
 @ResourceMetaData(name = "RFTagger Morphological Analyzer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-    inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures" })
 public class RfTagger
     extends JCasAnnotator_ImplBase
 {
@@ -94,19 +91,20 @@ public class RfTagger
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -125,25 +123,22 @@ public class RfTagger
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
-     * Load the morphological features mapping from this location instead of locating the
-     * mapping automatically.
+     * Load the morphological features mapping from this location instead of locating the mapping
+     * automatically.
      */
-    public static final String PARAM_MORPH_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
 
@@ -151,7 +146,7 @@ public class RfTagger
      * Write the tag set(s) to the log when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     private MappingProvider mappingProvider;
@@ -165,8 +160,7 @@ public class RfTagger
     private String encodingLoadedFromModel;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -178,19 +172,18 @@ public class RfTagger
             {
                 setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/rftagger");
             }
-            
+
             @Override
-            protected File produceResource(URL aUrl)
-                throws IOException
+            protected File produceResource(URL aUrl) throws IOException
             {
                 Properties metadata = getResourceMetaData();
                 encodingLoadedFromModel = (String) metadata.get("model.encoding");
-                
-                SingletonTagset morphFeats = new SingletonTagset(
-                        MorphologicalFeatures.class, metadata.getProperty("morph.tagset"));
 
-                SingletonTagset posTags = new SingletonTagset(
-                        POS.class, metadata.getProperty("pos.tagset"));
+                SingletonTagset morphFeats = new SingletonTagset(MorphologicalFeatures.class,
+                        metadata.getProperty("morph.tagset"));
+
+                SingletonTagset posTags = new SingletonTagset(POS.class,
+                        metadata.getProperty("pos.tagset"));
 
                 try (LittleEndianDataInputStream is = new LittleEndianDataInputStream(
                         aUrl.openStream())) {
@@ -211,7 +204,7 @@ public class RfTagger
                 if (printTagSet) {
                     getLogger().info(getTagset().toString());
                 }
-                
+
                 // FIXME Actually, this is the place where the rftagger process should be
                 // started/stopped so that if the language changes during processing, the
                 // rftagger is reloaded with the required model.
@@ -239,8 +232,7 @@ public class RfTagger
         featuresParser = new MorphologicalFeaturesParser(this, modelProvider);
     }
 
-    private void ensureTaggerRunning()
-        throws AnalysisEngineProcessException
+    private void ensureTaggerRunning() throws AnalysisEngineProcessException
     {
         if (process == null) {
             try {
@@ -259,10 +251,10 @@ public class RfTagger
                 pb.command(cmd);
                 process = pb.start();
 
-                writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream(),
-                        getEncoding()));
-                reader = new BufferedReader(new InputStreamReader(process.getInputStream(),
-                        getEncoding()));
+                writer = new BufferedWriter(
+                        new OutputStreamWriter(process.getOutputStream(), getEncoding()));
+                reader = new BufferedReader(
+                        new InputStreamReader(process.getInputStream(), getEncoding()));
             }
             catch (Exception e) {
                 throw new AnalysisEngineProcessException(e);
@@ -284,8 +276,7 @@ public class RfTagger
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         configure(aJCas);
         ensureTaggerRunning();
@@ -293,8 +284,8 @@ public class RfTagger
         try {
             for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
                 StringBuilder sb = new StringBuilder();
-                List<Token> tokens = JCasUtil.selectCovered(aJCas, Token.class,
-                        sentence.getBegin(), sentence.getEnd());
+                List<Token> tokens = JCasUtil.selectCovered(aJCas, Token.class, sentence.getBegin(),
+                        sentence.getEnd());
                 for (Token token : tokens) {
                     sb.append(token.getText() + "\n");
                 }
@@ -308,8 +299,7 @@ public class RfTagger
         }
     }
 
-    private void configure(JCas aJCas)
-        throws AnalysisEngineProcessException
+    private void configure(JCas aJCas) throws AnalysisEngineProcessException
     {
         modelProvider.configure(aJCas.getCas());
         mappingProvider.configure(aJCas.getCas());
@@ -353,8 +343,7 @@ public class RfTagger
         return string.substring(0, idx);
     }
 
-    private List<String> readOutput()
-        throws IOException
+    private List<String> readOutput() throws IOException
     {
         List<String> readLines = new ArrayList<>();
 
@@ -369,8 +358,7 @@ public class RfTagger
         return readLines;
     }
 
-    private void writeInput(StringBuilder sb)
-        throws IOException
+    private void writeInput(StringBuilder sb) throws IOException
     {
         // the tagger waits of an empty line to mark end of sequence before it
         // starts tagging
@@ -382,8 +370,7 @@ public class RfTagger
     }
 
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         closeQuietly(writer);
         closeQuietly(reader);

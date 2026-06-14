@@ -45,8 +45,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Expressive Lengthening Normalizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class ExpressiveLengtheningNormalizer
     extends JCasTransformerChangeBased_ImplBase
 {
@@ -56,10 +55,9 @@ public class ExpressiveLengtheningNormalizer
     public static final String RES_FREQUENCY_PROVIDER = "FrequencyProvider";
     @ExternalResource(key = RES_FREQUENCY_PROVIDER, mandatory = true)
     protected FrequencyCountProvider frequencyProvider;
-    
+
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         // Pattern for repetitions of one character more than 2 times
         Pattern moreThanTwo = Pattern.compile("([a-zA-ZäöüÄÖÜß])\\1{2,}");
@@ -83,14 +81,13 @@ public class ExpressiveLengtheningNormalizer
                                     + ExceptionUtils.getRootCauseMessage(e));
                     replacement = tokenText;
                 }
-                
+
                 replace(token.getBegin(), token.getEnd(), replacement);
             }
-        }    
+        }
     }
 
-    public String getBestReplacement(String token)
-        throws IOException
+    public String getBestReplacement(String token) throws IOException
     {
         Pattern pattern = Pattern.compile("([a-zA-ZäöüÄÖÜß])\\1{1,}");
         Matcher matcher = pattern.matcher(token);
@@ -150,15 +147,14 @@ public class ExpressiveLengtheningNormalizer
         return getMostFrequentCandidate(candidates);
     }
 
-    private String getMostFrequentCandidate(List<String> candidates)
-        throws IOException
+    private String getMostFrequentCandidate(List<String> candidates) throws IOException
     {
         long bestScore = 0;
         String bestCandidate = "No Candidate has a score higher than 0";
 
         for (String currentCandidate : candidates) {
             long currentScore = frequencyProvider.getFrequency(currentCandidate);
-            //System.out.println(currentCandidate + " " + currentScore);
+            // System.out.println(currentCandidate + " " + currentScore);
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 bestCandidate = currentCandidate;

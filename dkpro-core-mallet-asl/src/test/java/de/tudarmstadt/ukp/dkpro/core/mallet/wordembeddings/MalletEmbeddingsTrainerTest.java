@@ -17,10 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,41 +40,36 @@ import org.dkpro.core.api.resources.CompressionMethod;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.mallet.wordembeddings.MalletEmbeddingsTrainer;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class MalletEmbeddingsTrainerTest
 {
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
-    @Test(timeout = 60000)
-    public void test()
-            throws UIMAException, IOException
+    @Test
+    public void test(@TempDir File tempDir) throws UIMAException, IOException
     {
         int expectedLength = 699;
 
         // tag::example[]
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
+        File embeddingsFile = new File(tempDir, "dummy.vec");
         int dimensions = 50;
         String coveringType = Sentence.class.getCanonicalName();
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, text,
-                TextReader.PARAM_LANGUAGE, "en");
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, text, TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription embeddings = createEngineDescription(
-                MalletEmbeddingsTrainer.class,
-                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                MalletEmbeddingsTrainer.PARAM_SINGULAR_TARGET, true,
-                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true,
-                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+        AnalysisEngineDescription embeddings = createEngineDescription( //
+                MalletEmbeddingsTrainer.class, //
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile, //
+                MalletEmbeddingsTrainer.PARAM_SINGULAR_TARGET, true, //
+                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true, //
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1, //
                 MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
         // end::example[]
@@ -82,7 +78,7 @@ public class MalletEmbeddingsTrainerTest
         assertEquals(expectedLength, output.size());
 
         /* assert dimensionality for each line */
-        output.stream()
+        output.stream() //
                 .map(line -> line.split(" "))
                 /* each line should have 1 + <#dimensions> fields */
                 .peek(line -> assertEquals(dimensions + 1, line.length))
@@ -92,43 +88,46 @@ public class MalletEmbeddingsTrainerTest
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
     }
 
-    @Test(timeout = 60000, expected = ResourceInitializationException.class)
-    public void testNoTarget()
-            throws IOException, UIMAException
+    @Test
+    public void testNoTarget() throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, text,
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, text, //
                 TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription embeddings = createEngineDescription(
-                MalletEmbeddingsTrainer.class,
+        AnalysisEngineDescription segmenter = createEngineDescription( //
+                BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription( //
+                MalletEmbeddingsTrainer.class, //
                 MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1);
-        SimplePipeline.runPipeline(reader, segmenter, embeddings);
+        assertThatExceptionOfType(ResourceInitializationException.class)
+                .isThrownBy(() -> SimplePipeline.runPipeline(reader, segmenter, embeddings));
     }
 
-    @Test(timeout = 60000)
-    public void testFilterRegex()
-            throws UIMAException, IOException
+    @Test
+    public void testFilterRegex(@TempDir File tempDir) throws UIMAException, IOException
     {
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
+        File embeddingsFile = new File(tempDir, "dummy.vec");
         int expectedLength = 629;
         String coveringType = Sentence.class.getCanonicalName();
 
         String filterRegex = ".*y"; // tokens ending with "y"
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, text,
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, text, //
                 TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription embeddings = createEngineDescription(
-                MalletEmbeddingsTrainer.class,
-                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true,
-                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
-                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType,
+        AnalysisEngineDescription segmenter = createEngineDescription( //
+                BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription( //
+                MalletEmbeddingsTrainer.class, //
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile, //
+                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true, //
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1, //
+                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType, //
                 MalletEmbeddingsTrainer.PARAM_FILTER_REGEX, filterRegex);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
@@ -136,80 +135,81 @@ public class MalletEmbeddingsTrainerTest
         assertEquals(expectedLength, output.size());
 
         /* assert that no token matches filter regex */
-        assertTrue(output.stream()
-                .map(line -> line.split(" "))
-                .map(tokens -> tokens[0])
+        assertTrue(output.stream() //
+                .map(line -> line.split(" ")) //
+                .map(tokens -> tokens[0]) //
                 .noneMatch(token -> token.matches(filterRegex)));
     }
 
-    @Test(timeout = 60000)
-    public void testCompressed()
-            throws UIMAException, IOException
+    @Test
+    public void testCompressed(@TempDir File tempDir) throws UIMAException, IOException
     {
         CompressionMethod compressionMethod = CompressionMethod.GZIP;
         File text = new File("src/test/resources/txt/*");
 
-        File targetDir = testContext.getTestOutputFolder();
+        File targetDir = tempDir;
         File targetFile = new File(targetDir, "embeddings" + compressionMethod.getExtension());
         int expectedLength = 699;
         int dimensions = 50;
         String covering = Sentence.class.getCanonicalName();
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, text,
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, text, //
                 TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription embeddings = createEngineDescription(
-                MalletEmbeddingsTrainer.class,
-                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, targetFile,
-                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering,
-                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+        AnalysisEngineDescription segmenter = createEngineDescription( //
+                BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription( //
+                MalletEmbeddingsTrainer.class, //
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, targetFile, //
+                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering, //
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1, //
                 MalletEmbeddingsTrainer.PARAM_COMPRESSION, compressionMethod);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
-        BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(CompressionUtils.getInputStream(
-                        targetFile.getAbsolutePath(), Files.newInputStream(targetFile.toPath()))));
-        String line;
-        int lineCounter = 0;
-        while ((line = bufferedReader.readLine()) != null) {
-            lineCounter++;
-            String[] fields = line.split(" ");
-            assertEquals(dimensions + 1, fields.length);
-            assertTrue(Arrays.stream(fields, 1, fields.length)
-                    .mapToDouble(Double::parseDouble)
-                    .allMatch(f -> 1 > f && -1 < f));
-        }
-        assertEquals(expectedLength, lineCounter);
+        try (var bufferedReader = new BufferedReader(
+                new InputStreamReader(CompressionUtils.getInputStream(targetFile.getAbsolutePath(),
+                        Files.newInputStream(targetFile.toPath()))))) {
+            String line;
+            int lineCounter = 0;
+            while ((line = bufferedReader.readLine()) != null) {
+                lineCounter++;
+                String[] fields = line.split(" ");
+                assertEquals(dimensions + 1, fields.length);
+                assertTrue(Arrays.stream(fields, 1, fields.length).mapToDouble(Double::parseDouble)
+                        .allMatch(f -> 1 > f && -1 < f));
+            }
+            assertEquals(expectedLength, lineCounter);
 
-        bufferedReader.close();
+        }
     }
 
-    @Test(timeout = 60000)
-    public void testCharacterEmbeddings()
-            throws IOException, UIMAException
+    @Test
+    public void testCharacterEmbeddings(@TempDir File tempDir) throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "embeddings.vec");
+        File embeddingsFile = new File(tempDir, "embeddings.vec");
         int expectedLength = 47;
         int dimensions = 50;
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, text,
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, text, //
                 TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription embeddings = createEngineDescription(
-                MalletEmbeddingsTrainer.class,
-                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                MalletEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
-                MalletEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
-                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+        AnalysisEngineDescription segmenter = createEngineDescription( //
+                BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription( //
+                MalletEmbeddingsTrainer.class, //
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile, //
+                MalletEmbeddingsTrainer.PARAM_USE_CHARACTERS, true, //
+                MalletEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a", //
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1, //
                 MalletEmbeddingsTrainer.PARAM_OVERWRITE, true);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         List<String> output = Files.readAllLines(embeddingsFile.toPath());
         assertEquals(expectedLength, output.size());
-        output.stream()
+        output.stream() //
                 .map(line -> line.split(" "))
                 /* each line should have 1 + <#dimensions> fields */
                 .peek(line -> assertEquals(dimensions + 1, line.length))
@@ -218,33 +218,35 @@ public class MalletEmbeddingsTrainerTest
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
     }
 
-    @Test(timeout = 60000)
-    public void testCharacterEmbeddingsTokens()
-            throws IOException, UIMAException
+    @Test
+    public void testCharacterEmbeddingsTokens(@TempDir File tempDir)
+        throws IOException, UIMAException
     {
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File(testContext.getTestOutputFolder(), "embeddings.vec");
+        File embeddingsFile = new File(tempDir, "embeddings.vec");
         int expectedLength = 46;
         int dimensions = 50;
         String covering = Token.class.getTypeName();
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, text,
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, text, //
                 TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription embeddings = createEngineDescription(
-                MalletEmbeddingsTrainer.class,
-                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                MalletEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
-                MalletEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
-                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
-                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true,
+        AnalysisEngineDescription segmenter = createEngineDescription( //
+                BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription( //
+                MalletEmbeddingsTrainer.class, //
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile, //
+                MalletEmbeddingsTrainer.PARAM_USE_CHARACTERS, true, //
+                MalletEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a", //
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1, //
+                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true, //
                 MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         List<String> output = Files.readAllLines(embeddingsFile.toPath());
         assertEquals(expectedLength, output.size());
-        output.stream()
+        output.stream() //
                 .map(line -> line.split(" "))
                 /* each line should have 1 + <#dimensions> fields */
                 .peek(line -> assertEquals(dimensions + 1, line.length))

@@ -42,14 +42,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.SPELLING_CHECKER)
 @ResourceMetaData(name = "Simple Spelling Corrector")
-@Parameters(
-        exclude = { 
-                NorvigSpellingCorrector.PARAM_MODEL_LOCATION  })
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+@Parameters(exclude = { NorvigSpellingCorrector.PARAM_MODEL_LOCATION })
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
 public class NorvigSpellingCorrector
     extends JCasAnnotator_ImplBase
 {
@@ -64,8 +60,7 @@ public class NorvigSpellingCorrector
     private NorvigSpellingAlgorithm spellingCorrector;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         try {
@@ -78,8 +73,7 @@ public class NorvigSpellingCorrector
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         for (Token t : select(jcas, Token.class)) {
             String token = t.getCoveredText();

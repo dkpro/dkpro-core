@@ -32,9 +32,9 @@ public class BioCodec
     private String markBegin = "B-";
     private String markIn = "I-";
     private String markOut = "O";
-    
+
     private final int offset;
-    
+
     public BioCodec()
     {
         this(1);
@@ -49,15 +49,15 @@ public class BioCodec
     public List<SequenceItem> decode(List<SequenceItem> aEncoded)
     {
         List<SequenceItem> decoded = new ArrayList<>();
-        
+
         Optional<SequenceItem> starter = Optional.empty();
         Optional<String> starterLabel = Optional.empty();
         Optional<SequenceItem> previous = Optional.empty();
-        
+
         Iterator<SequenceItem> i = aEncoded.iterator();
         while (i.hasNext()) {
             SequenceItem current = i.next();
-            
+
             // Sequence items may not overlap
             if (previous.isPresent()) {
                 SequenceItem prev = previous.get();
@@ -78,11 +78,11 @@ public class BioCodec
                 if (starter.isPresent()) {
                     assert previous.isPresent();
                     assert starterLabel.isPresent();
-                    
+
                     decoded.add(new SequenceItem(starter.get().getBegin(), previous.get().getEnd(),
                             starterLabel.get()));
                 }
-                
+
                 starter = Optional.of(current);
                 starterLabel = Optional.of(current.getLabel().substring(markBegin.length()));
             }
@@ -108,27 +108,27 @@ public class BioCodec
                 if (starter.isPresent()) {
                     // If there is a starter, there must be a previous
                     assert previous.isPresent();
-                    
+
                     decoded.add(new SequenceItem(starter.get().getBegin(), previous.get().getEnd(),
                             starterLabel.get()));
                 }
-                
+
                 starter = Optional.empty();
                 starterLabel = Optional.empty();
             }
             else {
                 throw new IllegalStateException("Illegal sequence marker: " + current);
             }
-            
+
             previous = Optional.of(current);
         }
-        
+
         // Commit active span at the end of the sequence
         if (starter.isPresent()) {
             decoded.add(new SequenceItem(starter.get().getBegin(), previous.get().getEnd(),
                     starterLabel.get()));
         }
-        
+
         return decoded;
     }
 
@@ -136,13 +136,13 @@ public class BioCodec
     public List<SequenceItem> encode(List<SequenceItem> aDecoded, int aLength)
     {
         List<SequenceItem> encoded = new ArrayList<>();
-        
+
         int idx = offset;
-        
+
         Iterator<SequenceItem> i = aDecoded.iterator();
         while (i.hasNext()) {
             SequenceItem current = i.next();
-            
+
             // Check overlap with already seen items
             if (idx > current.getBegin()) {
                 throw new IllegalStateException("Illegal sequence item span: " + current);
@@ -158,7 +158,7 @@ public class BioCodec
                 encoded.add(new SequenceItem(idx, idx, markOut));
                 idx++;
             }
-            
+
             // Generate "begin" item
             encoded.add(new SequenceItem(idx, idx, markBegin + current.getLabel()));
             idx++;
@@ -169,13 +169,13 @@ public class BioCodec
                 idx++;
             }
         }
-        
+
         // Generate "outside" items until the final length is reached
         while (idx < aLength + offset) {
             encoded.add(new SequenceItem(idx, idx, markOut));
             idx++;
         }
-        
+
         return encoded;
     }
 }

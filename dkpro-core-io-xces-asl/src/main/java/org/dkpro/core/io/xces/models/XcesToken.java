@@ -17,21 +17,21 @@
  */
 package org.dkpro.core.io.xces.models;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlID;
 
 public class XcesToken
 {
+    @XmlAttribute(name = "id")
     @XmlID
-    @XmlAttribute
     public String id;
 
     @XmlAttribute(name = "word")
     public String word;
-    
+
     @XmlAttribute(name = "tag")
     public String tag;
-    
+
     @XmlAttribute(name = "lemma")
     public String lemma;
 }

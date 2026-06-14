@@ -22,7 +22,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -32,8 +32,7 @@ import org.junit.Test;
 public class RegexBasedTokenTransformerTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         String regex = "^....$";
         String replacement = "4letters";
@@ -49,8 +48,7 @@ public class RegexBasedTokenTransformerTest
     }
 
     @Test
-    public void testNumbers()
-        throws Exception
+    public void testNumbers() throws Exception
     {
         String regex = "[0-9]+";
         String replacement = "0";

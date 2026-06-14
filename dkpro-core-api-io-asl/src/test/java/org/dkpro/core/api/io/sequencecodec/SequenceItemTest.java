@@ -21,8 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import org.dkpro.core.api.io.sequencecodec.SequenceItem;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SequenceItemTest
 {
@@ -30,11 +29,9 @@ public class SequenceItemTest
     public void testSpanSequenceConstructionWithDefaultOffset()
     {
         List<SequenceItem> sequence = SequenceItem.of("O", "B-PER", "I-PER", "O");
-        
-        assertThat(sequence).containsExactly(
-                new SequenceItem(1, 1, "O"), 
-                new SequenceItem(2, 2, "B-PER"),
-                new SequenceItem(3, 3, "I-PER"), 
+
+        assertThat(sequence).containsExactly(new SequenceItem(1, 1, "O"),
+                new SequenceItem(2, 2, "B-PER"), new SequenceItem(3, 3, "I-PER"),
                 new SequenceItem(4, 4, "O"));
     }
 
@@ -42,11 +39,9 @@ public class SequenceItemTest
     public void testSpanSequenceConstructionWithExplicitOffset()
     {
         List<SequenceItem> sequence = SequenceItem.of(0, "O", "B-PER", "I-PER", "O");
-        
-        assertThat(sequence).containsExactly(
-                new SequenceItem(0, 0, "O"), 
-                new SequenceItem(1, 1, "B-PER"),
-                new SequenceItem(2, 2, "I-PER"), 
+
+        assertThat(sequence).containsExactly(new SequenceItem(0, 0, "O"),
+                new SequenceItem(1, 1, "B-PER"), new SequenceItem(2, 2, "I-PER"),
                 new SequenceItem(3, 3, "O"));
     }
 }

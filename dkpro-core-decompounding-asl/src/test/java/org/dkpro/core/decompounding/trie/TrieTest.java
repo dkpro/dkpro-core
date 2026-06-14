@@ -18,15 +18,14 @@
 
 package org.dkpro.core.decompounding.trie;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.German98Dictionary;
-import org.dkpro.core.decompounding.trie.TrieStructure;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TrieTest
 {
@@ -82,8 +81,10 @@ public class TrieTest
     @Test
     public void testSimpleDict() throws IOException
     {
-        final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
+        final File affixFile = ResourceUtils.getUrlAsFile(
+                getClass().getResource(
+                        "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"),
+                false);
         final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
                 false);
@@ -108,8 +109,10 @@ public class TrieTest
     @Test
     public void testSimpleDictReverse() throws IOException
     {
-        final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
+        final File affixFile = ResourceUtils.getUrlAsFile(
+                getClass().getResource(
+                        "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"),
+                false);
         final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
                 false);

@@ -37,8 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * This base class is for all normalizers that need a frequency provider and replace based on a
  * list.
  */
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public abstract class ReplacementFrequencyNormalizer_ImplBase
     extends JCasTransformerChangeBased_ImplBase
 {
@@ -48,7 +47,7 @@ public abstract class ReplacementFrequencyNormalizer_ImplBase
     public static final String RES_FREQUENCY_PROVIDER = "frequencyProvider";
     @ExternalResource(key = RES_FREQUENCY_PROVIDER, mandatory = true)
     protected FrequencyCountProvider frequencyProvider;
-    
+
     /**
      * Minimum frequency count.
      */
@@ -59,8 +58,7 @@ public abstract class ReplacementFrequencyNormalizer_ImplBase
     protected Map<String, String> replacementMap;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         replacementMap = getReplacementMap();
@@ -70,8 +68,7 @@ public abstract class ReplacementFrequencyNormalizer_ImplBase
         throws ResourceInitializationException;
 
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         for (Token token : select(aInput, Token.class)) {
             String tokenString = token.getCoveredText();
@@ -82,9 +79,8 @@ public abstract class ReplacementFrequencyNormalizer_ImplBase
 
                 while ((index = tokenString.indexOf(entry.getKey(), currentIndex)) >= 0) {
                     currentIndex = index + 1;
-                    
-                    String changedToken = tokenString.substring(0, index)
-                            + entry.getValue()
+
+                    String changedToken = tokenString.substring(0, index) + entry.getValue()
                             + tokenString.substring(index + entry.getKey().length(),
                                     tokenString.length());
 
@@ -93,8 +89,8 @@ public abstract class ReplacementFrequencyNormalizer_ImplBase
                         long freqOrigToken = frequencyProvider.getFrequency(tokenString);
                         long freqChangedToken = frequencyProvider.getFrequency(changedToken);
 
-//                        System.out.println(tokenString + " - " + freqOrigToken);
-//                        System.out.println(changedToken + " - " + freqChangedToken);
+                        // System.out.println(tokenString + " - " + freqOrigToken);
+                        // System.out.println(changedToken + " - " + freqChangedToken);
 
                         // if absolute counts of replacement are too low or zero, do not change
                         if (freqChangedToken == 0 || freqChangedToken < minFrequencyThreshold) {
@@ -111,7 +107,7 @@ public abstract class ReplacementFrequencyNormalizer_ImplBase
                     }
                     catch (Exception e) {
                         throw new AnalysisEngineProcessException(e);
-                    }                    
+                    }
                 }
             }
             replace(token.getBegin(), token.getEnd(), tokenString);

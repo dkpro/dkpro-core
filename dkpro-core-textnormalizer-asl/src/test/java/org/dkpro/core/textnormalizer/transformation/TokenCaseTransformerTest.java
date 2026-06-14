@@ -29,15 +29,14 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class TokenCaseTransformerTest
 {
     @Test
-    public void testLowerCase()
-        throws Exception
+    public void testLowerCase() throws Exception
     {
         String inputText = "Ich lebe in Braunschweig-Stadt.";
         String normalizedText = "ich lebe in braunschweig-stadt.";
@@ -51,8 +50,7 @@ public class TokenCaseTransformerTest
     }
 
     @Test
-    public void testNormalCase()
-        throws Exception
+    public void testNormalCase() throws Exception
     {
         String inputText = "Ich lebe in BRAUNSCHWEIG-Stadt.";
         String normalizedText = "Ich lebe in Braunschweig-Stadt.";
@@ -66,8 +64,7 @@ public class TokenCaseTransformerTest
     }
 
     @Test
-    public void testNormalCaseHyphen()
-        throws ResourceInitializationException
+    public void testNormalCaseHyphen() throws ResourceInitializationException
     {
         String inputText = "-Ich lebe in BRAUNSCHWEIG-Stadt-";
         String normalizedText = "-Ich lebe in Braunschweig-Stadt-";
@@ -81,8 +78,7 @@ public class TokenCaseTransformerTest
     }
 
     @Test
-    public void testNormalCaseHyphen2()
-        throws ResourceInitializationException
+    public void testNormalCaseHyphen2() throws ResourceInitializationException
     {
         String inputText = "-Ich lebe in BRAUNSCHWEIG-stadt-";
         String normalizedText = "-Ich lebe in Braunschweig-stadt-";
@@ -96,8 +92,7 @@ public class TokenCaseTransformerTest
     }
 
     @Test
-    public void testNormalCase2()
-        throws UIMAException
+    public void testNormalCase2() throws UIMAException
     {
         String inputText = "Ich lebe in Braunschweig";
         String[] tokensExpected = new String[] { "Ich", "lebe", "in", "Braunschweig" };
@@ -112,8 +107,7 @@ public class TokenCaseTransformerTest
     }
 
     @Test
-    public void testUpperCase()
-        throws Exception
+    public void testUpperCase() throws Exception
     {
         String inputText = "Ich lebe in Braunschweig-Stadt.";
         String normalizedText = "ICH LEBE IN BRAUNSCHWEIG-STADT.";

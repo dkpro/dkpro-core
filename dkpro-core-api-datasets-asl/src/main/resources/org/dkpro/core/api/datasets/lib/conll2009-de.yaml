@@ -35,7 +35,7 @@ artifacts:
     # URL of the artifact
     url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-German-traindevB.zip"
     # Checksum used to validate download and cache integrity
-    sha1: ad4c03c3c4e4668c8beb34c399e71f539e6d633d
+    sha512: ae037e60d1065c72fdf7aca6507d1249538c9ae7f2f3662305787da8bd60afa810c43226d7b36712c627d371ab8dd3e01dd6565c65971ac9479584dcaaedb6dd
     actions:
       - action: explode                # Extract archive after downloading
         configuration: { strip: 1 }    # Remove one leading path element while extracting

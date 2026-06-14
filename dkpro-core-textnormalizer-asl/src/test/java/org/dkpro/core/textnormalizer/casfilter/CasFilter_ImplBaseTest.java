@@ -17,16 +17,15 @@
  */
 package org.dkpro.core.textnormalizer.casfilter;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -39,150 +38,135 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.StringReader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.dkpro.core.testing.dumper.CasDumpWriter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.testing.dumper.CasToComparableTextWriter;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class CasFilter_ImplBaseTest
 {
     @Test
-    public void testAnnotationFilterPass()
-        throws UIMAException, IOException
+    public void testAnnotationFilterPass(@TempDir File tempDir) throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
-        
-        String input = "test";
-        String expectedFirstLine = "======== CAS 0 begin ==================================";
+        File tmpFile = new File(tempDir, "output.dump");
 
-        CollectionReaderDescription reader = createReaderDescription(
-                StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+        String input = "test";
+
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(AnnotationBasedFilter.class);
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
-        AnalysisEngineDescription writer = createEngineDescription(
-                CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, annotator, aggregator);
 
-        List<String> output = FileUtils.readLines(tmpFile);
-        assertEquals(expectedFirstLine, output.get(0));
-        assertEquals(input, output.get(13));
-        assertEquals("Sentence", output.get(15));
+        String output = FileUtils.readFileToString(tmpFile, UTF_8);
+        assertTrue(output.contains("======== CAS 0 ========"));
+        assertTrue(output.contains("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"));
+        assertTrue(output.contains("Sentence[0-" + input.length() + "]"));
     }
 
     @Test
-    public void testAnnotationFilterRemove()
-        throws UIMAException, IOException
+    public void testAnnotationFilterRemove(@TempDir File tempDir) throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
-        
+        File tmpFile = new File(tempDir, "output.dump");
+
         String input = "";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(AnnotationBasedFilter.class);
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, annotator, aggregator);
-        assertTrue(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertTrue(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
-    public void testEmptyDocumentFilterRemove()
+    public void testEmptyDocumentFilterRemove(@TempDir File tempDir)
         throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
-        
+        File tmpFile = new File(tempDir, "output.dump");
+
         String input = "";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(EmptyDocumentFilter.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertTrue(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertTrue(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
-    public void testEmptyDocumentFilterPass()
-        throws UIMAException, IOException
+    public void testEmptyDocumentFilterPass(@TempDir File tempDir) throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        File tmpFile = new File(tempDir, "output.dump");
 
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(EmptyDocumentFilter.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertFalse(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertFalse(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
-    public void testLanguageFilterPass()
-        throws UIMAException, IOException
+    public void testLanguageFilterPass(@TempDir File tempDir) throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
-        
+        File tmpFile = new File(tempDir, "output.dump");
+
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(LanguageFilter.class,
                 LanguageFilter.PARAM_REQUIRED_LANGUAGES, new String[] { "de", "en" });
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertFalse(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertFalse(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     @Test
-    public void testLanguageFilterRemove()
-        throws UIMAException, IOException
+    public void testLanguageFilterRemove(@TempDir File tempDir) throws UIMAException, IOException
     {
-        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
-        
+        File tmpFile = new File(tempDir, "output.dump");
+
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, input,
-                StringReader.PARAM_LANGUAGE, "ch");
+                StringReader.PARAM_DOCUMENT_TEXT, input, StringReader.PARAM_LANGUAGE, "ch");
         AnalysisEngineDescription filter = createEngineDescription(LanguageFilter.class,
                 LanguageFilter.PARAM_REQUIRED_LANGUAGES, new String[] { "de", "en" });
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
+        AnalysisEngineDescription writer = createEngineDescription(CasToComparableTextWriter.class,
+                CasToComparableTextWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
 
         SimplePipeline.runPipeline(reader, aggregator);
-        assertTrue(FileUtils.readFileToString(tmpFile).isEmpty());
+        assertTrue(FileUtils.readFileToString(tmpFile, UTF_8).isEmpty());
     }
 
     public static class TestAnnotator
@@ -195,8 +179,7 @@ public class CasFilter_ImplBaseTest
          * @throws AnalysisEngineProcessException
          */
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             String text = aJCas.getDocumentText();
             if (text.length() > 0) {
@@ -244,7 +227,4 @@ public class CasFilter_ImplBaseTest
             return requiredLanguages.contains(aJCas.getDocumentLanguage());
         }
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

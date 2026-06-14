@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.lxf;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -35,30 +35,27 @@ import org.dkpro.core.io.lxf.internal.DKPro2Lxf;
 import org.dkpro.core.io.lxf.internal.Lxf2DKPro;
 import org.dkpro.core.io.lxf.internal.model.LxfGraph;
 import org.dkpro.core.io.lxf.internal.model.LxfObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LxfConverterTest
 {
     @Test
-    public void testText()
-        throws Exception
+    public void testText() throws Exception
     {
         Map<String, String> ids = new HashMap<>();
         test("src/test/resources/lxf/text/orig.lxf", false, ids);
     }
 
     @Test
-    public void testTextDelta()
-        throws Exception
+    public void testTextDelta() throws Exception
     {
         test("src/test/resources/lxf/text/orig.lxf", true, null);
     }
 
     @Test
-    public void testSentence()
-        throws Exception
+    public void testSentence() throws Exception
     {
         Map<String, String> ids = new HashMap<>();
         ids.put("sentence", "tokenizer");
@@ -66,15 +63,13 @@ public class LxfConverterTest
     }
 
     @Test
-    public void testSentenceDelta()
-        throws Exception
+    public void testSentenceDelta() throws Exception
     {
         test("src/test/resources/lxf/tokenizer/orig.lxf", true, null);
     }
 
     @Test
-    public void testToken()
-        throws Exception
+    public void testToken() throws Exception
     {
         Map<String, String> ids = new HashMap<>();
         ids.put("sentence", "tokenizer");
@@ -83,15 +78,13 @@ public class LxfConverterTest
     }
 
     @Test
-    public void testTokenDelta()
-        throws Exception
+    public void testTokenDelta() throws Exception
     {
         test("src/test/resources/lxf/repp/orig.lxf", true, null);
     }
 
     @Test
-    public void testMorpho()
-        throws Exception
+    public void testMorpho() throws Exception
     {
         Map<String, String> ids = new HashMap<>();
         ids.put("sentence", "tokenizer");
@@ -101,15 +94,13 @@ public class LxfConverterTest
     }
 
     @Test
-    public void testMorphoDelta()
-        throws Exception
+    public void testMorphoDelta() throws Exception
     {
         test("src/test/resources/lxf/hunpos/orig.lxf", true, null);
     }
 
     @Test
-    public void testDep()
-        throws Exception
+    public void testDep() throws Exception
     {
         Map<String, String> ids = new HashMap<>();
         ids.put("sentence", "tokenizer");
@@ -119,16 +110,13 @@ public class LxfConverterTest
         test("src/test/resources/lxf/maltparser/orig.lxf", false, ids);
     }
 
-    
     @Test
-    public void testDepDelta()
-        throws Exception
+    public void testDepDelta() throws Exception
     {
         test("src/test/resources/lxf/maltparser/orig.lxf", true, null);
     }
 
-    public void test(String aFile, boolean aDelta, Map<String, String> ids)
-        throws Exception
+    public void test(String aFile, boolean aDelta, Map<String, String> ids) throws Exception
     {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -155,7 +143,7 @@ public class LxfConverterTest
             assertEquals(0, outLxf.getRegions().size());
         }
         else {
-            DKPro2Lxf.convert(jcas, null, outLxf, ids,"dkpro");
+            DKPro2Lxf.convert(jcas, null, outLxf, ids, "dkpro");
             assertEquals(inLxf.getMedia().getData(), outLxf.getMedia().getData());
             assertEquals(ids(inLxf.getNodes()), ids(outLxf.getNodes()));
             assertEquals(ids(inLxf.getEdges()), ids(outLxf.getEdges()));

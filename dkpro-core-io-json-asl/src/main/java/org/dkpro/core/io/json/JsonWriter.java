@@ -47,33 +47,29 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "UIMA JSON CAS Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_JSON})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_JSON })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class JsonWriter
     extends JCasFileWriter_ImplBase
 {
     /**
      * Location to write the type system to. If this is not set, a file called typesystem.xml will
-     * be written to the XMI output path. If this is set, it is expected to be a file relative
-     * to the current work directory or an absolute file.
-     * <br>
-     * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the
-     * type system. Instead, if the file name ends in ".gz", the file will be compressed,
-     * otherwise not.
+     * be written to the XMI output path. If this is set, it is expected to be a file relative to
+     * the current work directory or an absolute file. <br>
+     * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the type
+     * system. Instead, if the file name ends in ".gz", the file will be compressed, otherwise not.
      */
     public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
     private File typeSystemFile;
-    
+
     /**
      * Whether to pretty-print the JSON output.
      */
     public static final String PARAM_PRETTY_PRINT = "prettyPrint";
     @ConfigurationParameter(name = PARAM_PRETTY_PRINT, mandatory = true, defaultValue = "true")
     private boolean prettyPrint;
-    
+
     /**
      * Whether to fields that have their default values from the JSON output.
      */
@@ -82,7 +78,7 @@ public class JsonWriter
     private boolean omitDefaultValues;
 
     /**
-     * The level of detail to use for the context (i.e. type system) information. 
+     * The level of detail to use for the context (i.e. type system) information.
      */
     public static final String PARAM_JSON_CONTEXT_FORMAT = "jsonContextFormat";
     @ConfigurationParameter(name = PARAM_JSON_CONTEXT_FORMAT, mandatory = true, defaultValue = "omitExpandedTypeNames")
@@ -93,8 +89,7 @@ public class JsonWriter
     private JsonCasSerializer jcs;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -106,12 +101,11 @@ public class JsonWriter
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (OutputStream docOS = getOutputStream(aJCas, ".json")) {
             jcs.serialize(aJCas.getCas(), docOS);
-            
+
             if (!typeSystemWritten) {
                 writeTypeSystem(aJCas);
                 typeSystemWritten = true;
@@ -122,12 +116,11 @@ public class JsonWriter
         }
     }
 
-    private void writeTypeSystem(JCas aJCas)
-        throws IOException, CASRuntimeException, SAXException
+    private void writeTypeSystem(JCas aJCas) throws IOException, CASRuntimeException, SAXException
     {
         @SuppressWarnings("resource")
         OutputStream typeOS = null;
-        
+
         try {
             if (typeSystemFile != null) {
                 typeOS = CompressionUtils.getOutputStream(typeSystemFile);

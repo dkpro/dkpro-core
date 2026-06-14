@@ -33,7 +33,7 @@ public class CasSentenceSampleStream
 {
     private List<Span> sentences;
     private String text;
-    
+
     @Override
     public void init(JCas aJCas)
     {
@@ -44,23 +44,23 @@ public class CasSentenceSampleStream
             sentences.add(s);
         }
     }
-    
+
     @Override
     public boolean isActive()
     {
         return sentences != null;
     }
-    
+
     @Override
     public SentenceSample produce(JCas aJCas)
     {
         SentenceSample sample = new SentenceSample(text,
                 sentences.toArray(new Span[sentences.size()]));
-        
+
         documentComplete();
         sentences = null;
         text = null;
-        
+
         return sample;
     }
 }

@@ -57,17 +57,12 @@ import eu.openminted.share.annotations.api.Parameters;
  */
 @ResourceMetaData(name = "UIMA XMI CAS Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
-                ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN,
-                ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES,
-                ResourceCollectionReaderBase.PARAM_LOG_FREQ,
-                XmiReader.PARAM_TYPE_SYSTEM_FILE })
-@MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@Parameters(exclude = { ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+        ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN,
+        ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES,
+        ResourceCollectionReaderBase.PARAM_LOG_FREQ, XmiReader.PARAM_TYPE_SYSTEM_FILE })
+@MimeTypeCapability({ MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class XmiReader
     extends ResourceCollectionReaderBase
 {
@@ -77,42 +72,41 @@ public class XmiReader
     public static final String PARAM_LENIENT = "lenient";
     @ConfigurationParameter(name = PARAM_LENIENT, mandatory = true, defaultValue = "false")
     private boolean lenient;
-    
+
     /**
-     * Add DKPro Core metadata if it is not already present in the document. 
+     * Add DKPro Core metadata if it is not already present in the document.
      */
     public static final String PARAM_ADD_DOCUMENT_METADATA = "addDocumentMetadata";
     @ConfigurationParameter(name = PARAM_ADD_DOCUMENT_METADATA, mandatory = true, defaultValue = "true")
     private boolean addDocumentMetadata;
-    
+
     /**
-     * Generate new DKPro Core document metadata (i.e. title, ID, URI) for the document instead
-     * of retaining what is already present in the XMI file.
+     * Generate new DKPro Core document metadata (i.e. title, ID, URI) for the document instead of
+     * retaining what is already present in the XMI file.
      */
     public static final String PARAM_OVERRIDE_DOCUMENT_METADATA = "overrideDocumentMetadata";
     @ConfigurationParameter(name = PARAM_OVERRIDE_DOCUMENT_METADATA, mandatory = true, defaultValue = "false")
     private boolean overrideDocumentMetadata;
-    
+
     /**
-     * Determines whether the type system from a currently read file should be merged 
-     * with the current type system.
+     * Determines whether the type system from a currently read file should be merged with the
+     * current type system.
      */
     public static final String PARAM_MERGE_TYPE_SYSTEM = "mergeTypeSystem";
     @ConfigurationParameter(name = PARAM_MERGE_TYPE_SYSTEM, mandatory = true, defaultValue = "false")
     private boolean mergeTypeSystem;
 
     /**
-     * If a type system is specified, then the type system already in the CAS is replaced
-     * by this one. Except if {@link XmiReader#PARAM_MERGE_TYPE_SYSTEM} is enabled, in which
-     * case it will be merged with the type system already present in the CAS.
+     * If a type system is specified, then the type system already in the CAS is replaced by this
+     * one. Except if {@link XmiReader#PARAM_MERGE_TYPE_SYSTEM} is enabled, in which case it will be
+     * merged with the type system already present in the CAS.
      */
     public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
     private File typeSystemFile;
-    
+
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         if (nonNull(typeSystemFile)) {
             try {
@@ -123,22 +117,23 @@ public class XmiReader
                 tsds.add(UIMAFramework.getXMLParser()
                         .parseTypeSystemDescription(new XMLInputSource(typeSystemFile)));
                 TypeSystemDescription merged = CasCreationUtils.mergeTypeSystems(tsds);
-                
+
                 // Create a temporary CAS with the merged TS
                 CAS mergedCas = CasCreationUtils.createCas(merged, null, null, null);
-                
+
                 // Create a holder for the CAS metadata
                 CASMgrSerializer casMgrSerializer = Serialization
                         .serializeCASMgr((CASImpl) mergedCas);
-    
+
                 // Reinitialize CAS with merged type system
-                ((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgrSerializer);
+                ((CASImpl) aCAS).getBinaryCasSerDes()
+                        .setupCasFromCasMgrSerializer(casMgrSerializer);
             }
             catch (InvalidXMLException | ResourceInitializationException e) {
                 throw new IOException(e);
             }
         }
-        
+
         Resource res = nextFile();
 
         // Read XMI file
@@ -149,7 +144,7 @@ public class XmiReader
         catch (SAXException e) {
             throw new IOException(e);
         }
-        
+
         // Handle DKPro Core DocumentMetaData
         AnnotationFS docAnno = aCAS.getDocumentAnnotation();
         if (docAnno.getType().getName().equals(DocumentMetaData.class.getName())) {

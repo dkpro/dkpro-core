@@ -24,10 +24,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
@@ -35,60 +33,53 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 public class SnowballStemmerTest
 {
     @Test
-    public void testGerman()
-        throws Exception
+    public void testGerman() throws Exception
     {
-        runTest("de", "Automobile Fenster", 
-                new String[] {"Automobil", "Fenst"} );
+        runTest("de", "Automobile Fenster", new String[] { "Automobil", "Fenst" });
     }
 
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        runTest("en", "computers Computers deliberately", 
-                new String[] {"comput", "Comput", "deliber"} );
-        
-        runTest("en", "We need a very complicated example sentence , which " +
-                "contains as many constituents and dependencies as possible .",
+        runTest("en", "computers Computers deliberately",
+                new String[] { "comput", "Comput", "deliber" });
+
+        runTest("en",
+                "We need a very complicated example sentence , which "
+                        + "contains as many constituents and dependencies as possible .",
                 new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",",
                         "which", "contain", "as", "mani", "constitu", "and", "depend", "as",
                         "possibl", "." });
     }
 
     @Test
-    public void testEnglishCaseInsensitive()
-        throws Exception
+    public void testEnglishCaseInsensitive() throws Exception
     {
-        runTest("en", "EDUCATIONAL Educational educational", 
-                new String[] {"educ", "educ", "educ"},
-                SnowballStemmer.PARAM_LOWER_CASE, true);
+        runTest("en", "EDUCATIONAL Educational educational",
+                new String[] { "educ", "educ", "educ" }, SnowballStemmer.PARAM_LOWER_CASE, true);
     }
 
     @Test
-    public void testEnglishCaseSensitive()
-        throws Exception
+    public void testEnglishCaseSensitive() throws Exception
     {
-        runTest("en", "EDUCATIONAL Educational educational", 
-                new String[] {"EDUCATIONAL", "Educat", "educ"},
-                SnowballStemmer.PARAM_LOWER_CASE, false);
+        runTest("en", "EDUCATIONAL Educational educational",
+                new String[] { "EDUCATIONAL", "Educat", "educ" }, SnowballStemmer.PARAM_LOWER_CASE,
+                false);
     }
 
     @Test
-    public void testEnglishCaseFiltered()
-        throws Exception
+    public void testEnglishCaseFiltered() throws Exception
     {
         String[] stems = { "educ" };
         String[] pos = { "NNS", "JJ", "NN", "NNS" };
-        
+
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(OpenNlpPosTagger.class),
-                createEngineDescription(SnowballStemmer.class, 
-                        SnowballStemmer.PARAM_LOWER_CASE, true,
-                        SnowballStemmer.PARAM_FILTER_FEATUREPATH, "pos/PosValue",
+                createEngineDescription(SnowballStemmer.class, SnowballStemmer.PARAM_LOWER_CASE,
+                        true, SnowballStemmer.PARAM_FILTER_FEATUREPATH, "pos/PosValue",
                         SnowballStemmer.PARAM_FILTER_CONDITION_OPERATOR, "EQUALS",
                         SnowballStemmer.PARAM_FILTER_CONDITION_VALUE, "JJ"));
-        
+
         JCas result = TestRunner.runTest(aggregate, "en", "Babies educational sleep .s");
 
         AssertAnnotations.assertStem(stems, select(result, Stem.class));
@@ -102,10 +93,7 @@ public class SnowballStemmerTest
                 aLanguage, aText);
 
         AssertAnnotations.assertStem(aStems, select(result, Stem.class));
-        
+
         return result;
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

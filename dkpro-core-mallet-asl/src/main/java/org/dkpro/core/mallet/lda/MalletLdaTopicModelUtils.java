@@ -53,7 +53,7 @@ public class MalletLdaTopicModelUtils
      */
     public static List<Map<String, Double>> getTopWords(File modelFile, int nWords,
             boolean normalize)
-                throws IOException
+        throws IOException
     {
         LOGGER.info("Reading model file " + modelFile + "...");
         ParallelTopicModel model;
@@ -74,7 +74,7 @@ public class MalletLdaTopicModelUtils
             // iterate over word IDs in topic (sorted by weight)
             for (IDSorter id : topic) {
                 // normalize
-                double weight = normalize ? id.getWeight() / alphabet.size() : id.getWeight(); 
+                double weight = normalize ? id.getWeight() / alphabet.size() : id.getWeight();
                 String word = (String) alphabet.lookupObject(id.getID());
 
                 topicWords.put(word, weight);

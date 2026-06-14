@@ -22,7 +22,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.testing.AssertAnnotations.assertChunks;
 import static org.dkpro.core.testing.AssertAnnotations.assertTagset;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -30,13 +31,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.dkpro.core.treetagger.TreeTaggerChunker;
-import org.dkpro.core.treetagger.TreeTaggerPosTagger;
-import org.junit.Assume;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
@@ -44,26 +40,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 public class TreeTaggerChunkerTest
 {
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
-        JCas jcas = runTest("en", null, "We need a very complicated example sentence, which " +
-                "contains as many constituents and dependencies as possible .");
+        JCas jcas = runTest("en", null, "We need a very complicated example sentence, which "
+                + "contains as many constituents and dependencies as possible .");
 
-        String[] chunks = new String[] { 
-                "[  0,  2]NC(NC) (We)", 
-                "[  3,  7]VC(VC) (need)",
-                "[  8, 44]NC(NC) (a very complicated example sentence,)",
-                "[ 45, 50]NC(NC) (which)", 
-                "[ 51, 59]VC(VC) (contains)", 
-                "[ 60, 62]PC(PC) (as)",
-                "[ 63, 97]NC(NC) (many constituents and dependencies)", 
-                "[ 98,100]PC(PC) (as)",
-                "[101,109]ADJC(ADJC) (possible)", 
-                "[110,111]O(O) (.)" };
+        String[] chunks = new String[] { "[  0,  2]NC(NC) (We)", "[  3,  7]VC(VC) (need)",
+                "[  8, 44]NC(NC) (a very complicated example sentence,)", "[ 45, 50]NC(NC) (which)",
+                "[ 51, 59]VC(VC) (contains)", "[ 60, 62]PC(PC) (as)",
+                "[ 63, 97]NC(NC) (many constituents and dependencies)", "[ 98,100]PC(PC) (as)",
+                "[101,109]ADJC(ADJC) (possible)", "[110,111]O(O) (.)" };
 
-        String[] chunkTags = new String[] { "ADJC", "ADVC", "CONJC", "INTJ", "LST", "NC", "O",
-                "PC", "PRT", "SBAR", "VC", "that" };
+        String[] chunkTags = new String[] { "ADJC", "ADVC", "CONJC", "INTJ", "LST", "NC", "O", "PC",
+                "PRT", "SBAR", "VC", "that" };
 
         // String[] unmappedChunk = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
@@ -73,23 +62,16 @@ public class TreeTaggerChunkerTest
     }
 
     @Test
-    public void testGerman()
-        throws Exception
+    public void testGerman() throws Exception
     {
         JCas jcas = runTest("de", null, "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] chunks = new String[] { 
-                "[  0,  3]NC(NC) (Wir)",
-                "[  4, 12]VC(VC) (brauchen)",
-                "[ 13, 44]NC(NC) (ein sehr kompliziertes Beispiel)",
-                "[ 45, 46]O(0) (,)",
-                "[ 47, 54]NC(NC) (welches)",
-                "[ 55, 64]O(0) (möglichst)",
-                "[ 65, 84]NC(NC) (viele Konstituenten)",
-                "[ 85, 88]O(0) (und)",
-                "[ 89,100]NC(NC) (Dependenzen)",
-                "[101,111]VC(VC) (beinhaltet)",
+        String[] chunks = new String[] { "[  0,  3]NC(NC) (Wir)", "[  4, 12]VC(VC) (brauchen)",
+                "[ 13, 44]NC(NC) (ein sehr kompliziertes Beispiel)", "[ 45, 46]O(0) (,)",
+                "[ 47, 54]NC(NC) (welches)", "[ 55, 64]O(0) (möglichst)",
+                "[ 65, 84]NC(NC) (viele Konstituenten)", "[ 85, 88]O(0) (und)",
+                "[ 89,100]NC(NC) (Dependenzen)", "[101,111]VC(VC) (beinhaltet)",
                 "[112,113]O(0) (.)" };
 
         String[] chunkTags = new String[] { "0", "NC", "PC", "VC" };
@@ -100,30 +82,21 @@ public class TreeTaggerChunkerTest
         assertTagset(Chunk.class, "tt", chunkTags, jcas);
         // FIXME assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
     }
-    
+
     @Test
-    public void testFrench()
-        throws Exception
+    public void testFrench() throws Exception
     {
         JCas jcas = runTest("fr", null, "Nous avons besoin d' une phrase par exemple très "
                 + "compliqué , qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] chunks = new String[] { 
-                "[  0, 17]VC(VN) (Nous avons besoin)",
-                "[ 18, 20]PC(PP) (d')",
-                "[ 21, 31]NC(NP) (une phrase)",
-                "[ 32, 35]PC(PP) (par)",
-                "[ 36, 43]NC(NP) (exemple)",
-                "[ 44, 60]ADJC(AP) (très compliqué ,)",
-                "[ 61, 64]NC(NP) (qui)",
-                "[ 65, 73]VC(VN) (contient)",
-                "[ 74, 90]NC(NP) (des constituants)",
-                "[ 91, 94]O(Ssub) (que)",
-                "[ 95,120]NC(NP) (de nombreuses dépendances)",
-                "[121,127]O(COORD) (et que)",
-                "[128,136]ADJC(AP) (possible)",
-                "[137,138]O(0) (.)" };
+        String[] chunks = new String[] { "[  0, 17]VC(VN) (Nous avons besoin)",
+                "[ 18, 20]PC(PP) (d')", "[ 21, 31]NC(NP) (une phrase)", "[ 32, 35]PC(PP) (par)",
+                "[ 36, 43]NC(NP) (exemple)", "[ 44, 60]ADJC(AP) (très compliqué ,)",
+                "[ 61, 64]NC(NP) (qui)", "[ 65, 73]VC(VN) (contient)",
+                "[ 74, 90]NC(NP) (des constituants)", "[ 91, 94]O(Ssub) (que)",
+                "[ 95,120]NC(NP) (de nombreuses dépendances)", "[121,127]O(COORD) (et que)",
+                "[128,136]ADJC(AP) (possible)", "[137,138]O(0) (.)" };
 
         String[] chunkTags = new String[] { "0", "AP", "AdP", "COORD", "NP", "PONCT:S", "PP",
                 "Sint", "Srel", "Ssub", "VN", "VPinf", "VPpart" };
@@ -135,22 +108,21 @@ public class TreeTaggerChunkerTest
         // FIXME assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
     }
 
-    private JCas runTest(String aLanguage, String aVariant, String aText)
-        throws Exception
+    private JCas runTest(String aLanguage, String aVariant, String aText) throws Exception
     {
         checkModelsAndBinary(aLanguage);
-        
+
         AnalysisEngineDescription tagger = createEngineDescription(TreeTaggerPosTagger.class);
 
         AnalysisEngineDescription chunker = createEngineDescription(TreeTaggerChunker.class,
-                TreeTaggerChunker.PARAM_VARIANT, aVariant, 
-                TreeTaggerChunker.PARAM_PRINT_TAGSET, true);
-        
+                TreeTaggerChunker.PARAM_VARIANT, aVariant, TreeTaggerChunker.PARAM_PRINT_TAGSET,
+                true);
+
         AnalysisEngineDescription aggregate = createEngineDescription(tagger, chunker);
-        
+
         return TestRunner.runTest(aggregate, aLanguage, aText);
     }
-    
+
     private JCas runTest(String aLanguage, String aText, String[] aLemmas, String[] aTags,
             String[] aTagClasses)
         throws Exception
@@ -187,14 +159,10 @@ public class TreeTaggerChunkerTest
 
     private void checkModelsAndBinary(String lang)
     {
-        Assume.assumeTrue(
-                getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-"
-                        + lang + "-le.bin") != null);
+        assumeTrue(getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-"
+                + lang + "-le.bin") != null);
 
-        Assume.assumeTrue(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
+        assumeTrue(getClass()
+                .getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -22,7 +22,7 @@ in the UIMA world. Most UIMA-related tools support it.
 The XMI format does not include type system information. It is therefore recommended to always
 configure the XmiWriter component to also write out the type system to a file.
 
-If you with to view anntated documents using the UIMA CAS Editor in Eclipse, you can e.g. set up
+If you with to view annotated documents using the UIMA CAS Editor in Eclipse, you can e.g. set up
 your XmiWriter in the following way to write out XMIs and a type system file:
 
 [source,java]

@@ -18,26 +18,24 @@
 package org.dkpro.core.io.lcc;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class LccReaderTest
 {
     @Test
-    public void testDefault()
-        throws Exception
+    public void testDefault() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LccReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LccReader.class,
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt");
-        
+
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
             if (i == 0) {
@@ -45,19 +43,17 @@ public class LccReaderTest
             }
             i++;
         }
-    
+
         assertEquals(3, i);
     }
 
     @Test
-    public void testSmallBuffer()
-        throws Exception
+    public void testSmallBuffer() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LccReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LccReader.class,
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt",
                 LccReader.PARAM_SENTENCES_PER_CAS, 2);
-        
+
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
             if (i == 0) {
@@ -65,19 +61,17 @@ public class LccReaderTest
             }
             i++;
         }
-    
+
         assertEquals(120, i);
     }
-    
+
     @Test
-    public void testBigBuffer()
-        throws Exception
+    public void testBigBuffer() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LccReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LccReader.class,
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt",
                 LccReader.PARAM_SENTENCES_PER_CAS, 300);
-        
+
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
             if (i == 0) {
@@ -85,20 +79,17 @@ public class LccReaderTest
             }
             i++;
         }
-    
+
         assertEquals(1, i);
     }
-    
+
     @Test
-    public void testSentenceWriting()
-        throws Exception
+    public void testSentenceWriting() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                LccReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(LccReader.class,
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt",
-                LccReader.PARAM_SENTENCES_PER_CAS, 100,
-                LccReader.PARAM_WRITE_SENTENCE, true);
-        
+                LccReader.PARAM_SENTENCES_PER_CAS, 100, LccReader.PARAM_WRITE_SENTENCE, true);
+
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
             if (i == 2) {
@@ -109,7 +100,7 @@ public class LccReaderTest
             }
             i++;
         }
-    
+
         assertEquals(3, i);
     }
 }

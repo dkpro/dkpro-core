@@ -21,7 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,12 +41,10 @@ import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
-import org.dkpro.core.opennlp.OpenNlpSegmenter;
-import org.dkpro.core.opennlp.OpenNlpSentenceTrainer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.testing.TestCache;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
@@ -55,53 +53,44 @@ public class OpenNlpSentenceTrainerTest
     private Dataset ds;
 
     @Test
-    public void test()
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
         Split split = ds.getDefaultSplit();
-        
+
         // Train model
         System.out.println("Training model from training data");
-        CollectionReaderDescription trainReader = createReaderDescription(
-                Conll2002Reader.class,
+        CollectionReaderDescription trainReader = createReaderDescription(Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
-                Conll2002Reader.PARAM_HAS_HEADER, true,
-                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
-        
-        AnalysisEngineDescription trainer = createEngineDescription(
-                OpenNlpSentenceTrainer.class,
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, Conll2002Reader.PARAM_HAS_HEADER,
+                true, Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
+
+        AnalysisEngineDescription trainer = createEngineDescription(OpenNlpSentenceTrainer.class,
                 OpenNlpSentenceTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
-                //OpenNlpSentenceTrainer.PARAM_EOS_CHARACTERS, new char[] { '.', '?' },
-                OpenNlpSentenceTrainer.PARAM_ABBREVIATION_DICTIONARY_LOCATION, 
-                        "src/test/resources/dict/abbreviation_de.txt",
-                OpenNlpSentenceTrainer.PARAM_NUM_THREADS, 2,
-                OpenNlpSentenceTrainer.PARAM_LANGUAGE, ds.getLanguage());
-        
+                // OpenNlpSentenceTrainer.PARAM_EOS_CHARACTERS, new char[] { '.', '?' },
+                OpenNlpSentenceTrainer.PARAM_ABBREVIATION_DICTIONARY_LOCATION,
+                "src/test/resources/dict/abbreviation_de.txt",
+                OpenNlpSentenceTrainer.PARAM_NUM_THREADS, 2, OpenNlpSentenceTrainer.PARAM_LANGUAGE,
+                ds.getLanguage());
+
         SimplePipeline.runPipeline(trainReader, trainer);
-        
+
         // Apply model and collect labels
         System.out.println("Applying model to test data");
-        CollectionReaderDescription testReader = createReaderDescription(
-                Conll2002Reader.class,
+        CollectionReaderDescription testReader = createReaderDescription(Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
-                Conll2002Reader.PARAM_HAS_HEADER, true,
-                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
-        
-        AnalysisEngineDescription stripper = createEngineDescription(
-                SentenceStripper.class);
-        
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                OpenNlpSegmenter.class,
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, Conll2002Reader.PARAM_HAS_HEADER,
+                true, Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
+
+        AnalysisEngineDescription stripper = createEngineDescription(SentenceStripper.class);
+
+        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_WRITE_TOKEN, false,
-                OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION, new File(targetFolder, "model.bin"));
+                OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION,
+                new File(targetFolder, "model.bin"));
 
         List<Span<String>> actual = EvalUtil.loadSamples(
                 iteratePipeline(testReader, stripper, segmenter), Sentence.class, null);
@@ -112,18 +101,17 @@ public class OpenNlpSentenceTrainerTest
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
-        
+
         assertEquals(0.937518, results.getFscore(), 0.0001);
         assertEquals(0.932157, results.getPrecision(), 0.0001);
         assertEquals(0.942941, results.getRecall(), 0.0001);
     }
-    
+
     public static class SentenceStripper
         extends JCasAnnotator_ImplBase
     {
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             for (Sentence s : select(aJCas, Sentence.class)) {
                 s.removeFromIndexes();
@@ -131,13 +119,10 @@ public class OpenNlpSentenceTrainerTest
         }
     }
 
-    @Before
+    @BeforeEach
     public void setup() throws IOException
     {
-        DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
+        DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("germeval2014-de");
-    }    
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+    }
 }

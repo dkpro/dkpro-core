@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "💡 Discussions (GitHub)"
+    url: https://github.com/dkpro/dkpro-core/discussions
+    about: Ideas, questions, ...

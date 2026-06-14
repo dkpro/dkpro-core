@@ -17,21 +17,18 @@
  */
 package org.dkpro.core.io.pubannotation;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class GenericPubAnnotationReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
         testOneWay(
                 createReaderDescription(GenericPubAnnotationReader.class,
@@ -42,13 +39,12 @@ public class GenericPubAnnotationReaderWriterTest
                         GenericPubAnnotationReader.PARAM_SPAN_TYPE, NamedEntity.class,
                         GenericPubAnnotationReader.PARAM_SPAN_LABEL_FEATURE, "value",
                         GenericPubAnnotationReader.PARAM_SPAN_ID_FEATURE, "identifier"),
-                "pubannotation/SPECIES800/19667393-ref.json", 
+                "pubannotation/SPECIES800/19667393-ref.json",
                 "pubannotation/SPECIES800/19667393.json");
     }
 
     @Test
-    public void roundTripResolveNamespaces()
-        throws Exception
+    public void roundTripResolveNamespaces() throws Exception
     {
         testOneWay(
                 createReaderDescription(GenericPubAnnotationReader.class,
@@ -60,10 +56,7 @@ public class GenericPubAnnotationReaderWriterTest
                         GenericPubAnnotationReader.PARAM_SPAN_TYPE, NamedEntity.class,
                         GenericPubAnnotationReader.PARAM_SPAN_LABEL_FEATURE, "value",
                         GenericPubAnnotationReader.PARAM_SPAN_ID_FEATURE, "identifier"),
-                "pubannotation/SPECIES800/19667393-ref-ns.json", 
+                "pubannotation/SPECIES800/19667393-ref-ns.json",
                 "pubannotation/SPECIES800/19667393.json");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

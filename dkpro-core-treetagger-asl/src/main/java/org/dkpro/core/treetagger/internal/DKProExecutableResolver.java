@@ -35,17 +35,17 @@ public class DKProExecutableResolver
 {
     private TreeTaggerWrapper<?> treetagger;
     private File executablePath;
-    
+
     public DKProExecutableResolver(TreeTaggerWrapper<?> aTreetagger)
     {
         treetagger = aTreetagger;
     }
-    
+
     public void setExecutablePath(File aExecutablePath)
     {
         executablePath = aExecutablePath;
     }
-    
+
     public File searchInFilesystem(final Set<String> aSearchedIn)
     {
         String platformId = treetagger.getPlatformDetector().getPlatformId();
@@ -57,8 +57,8 @@ public class DKProExecutableResolver
             }
 
             final File exe1 = new File(p + separator + "tree-tagger" + exeSuffix);
-            final File exe2 = new File(p + separator + platformId + separator + "tree-tagger"
-                    + exeSuffix);
+            final File exe2 = new File(
+                    p + separator + platformId + separator + "tree-tagger" + exeSuffix);
 
             aSearchedIn.add(exe1.getAbsolutePath());
             if (exe1.exists()) {
@@ -95,8 +95,7 @@ public class DKProExecutableResolver
     }
 
     @Override
-    public String getExecutable()
-        throws IOException
+    public String getExecutable() throws IOException
     {
         Set<String> searchedIn = new HashSet<String>();
 
@@ -112,12 +111,10 @@ public class DKProExecutableResolver
             }
         }
         if (exeFile == null) {
-            throw new IOException(
-                    "Unable to locate tree-tagger binary in the following locations "
-                            + searchedIn
-                            + ". Make sure the environment variable 'TREETAGGER_HOME' or "
-                            + "'TAGDIR' or the system property 'treetagger.home' point to the TreeTagger "
-                            + "installation directory.");
+            throw new IOException("Unable to locate tree-tagger binary in the following locations "
+                    + searchedIn + ". Make sure the environment variable 'TREETAGGER_HOME' or "
+                    + "'TAGDIR' or the system property 'treetagger.home' point to the TreeTagger "
+                    + "installation directory.");
         }
 
         exeFile.setExecutable(true);

@@ -21,11 +21,14 @@ licenses:
 
 artifacts:
   LICENSE.txt:
-    url: http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    url: classpath:/org/dkpro/core/api/datasets/lib/common-licenses/CC-BY-SA-3.0.txt
+    sha1: fb6f31be27fed5efbcd4c2e1e64c50de470364b1
+    sha512: ba59a7187a93fd7e0d4bcbf4f18076a341f8d4091d0ebc5d2b6f3ee7e8e3c79cd6c485640880def013e9116cba55c7ddc08890ff9859d0403f075393df45ea9f
+    verificationMode: TEXT
   perseus.zip:
     url: "https://github.com/PerseusDL/treebank_data/archive/f56a35f65ef15ac454f6fbd2cfc6ea97bf2ca9b8.zip"
     sha1: 140eee6d2e3e83745f95d3d5274d9e965d898980
+    sha512: b8fe14202b5dbe6d7c7b387f38a80036d62d3ecc860fa0fc1ee698ed10a8121b144c2c36b09b45fd6b4fb17a025f88e4669be66524b8a5b550c57032f789ceb4
     shared: true
     actions:
       - action: explode

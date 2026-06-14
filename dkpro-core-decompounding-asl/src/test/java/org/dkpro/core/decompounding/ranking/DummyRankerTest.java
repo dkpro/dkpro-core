@@ -18,15 +18,14 @@
 
 package org.dkpro.core.decompounding.ranking;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
-import org.dkpro.core.decompounding.ranking.DummyRanker;
 import org.dkpro.core.decompounding.splitter.DecompoundedWord;
 import org.dkpro.core.decompounding.splitter.DecompoundingTree;
 import org.dkpro.core.decompounding.trie.ValueNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DummyRankerTest
 {

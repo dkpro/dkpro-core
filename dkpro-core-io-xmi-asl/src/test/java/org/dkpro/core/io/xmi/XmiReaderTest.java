@@ -19,7 +19,7 @@ package org.dkpro.core.io.xmi;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 
@@ -29,10 +29,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.xmi.XmiReader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class XmiReaderTest
 {
@@ -40,14 +37,13 @@ public class XmiReaderTest
     public void testTypeSystemMerge() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
-        
-        CollectionReader reader = createReader(XmiReader.class,
-                XmiReader.PARAM_SOURCE_LOCATION, "src/test/resources/xmi/english.xmi",
-                XmiReader.PARAM_TYPE_SYSTEM_FILE, "src/test/resources/ts/typesystem.xml",
-                XmiReader.PARAM_MERGE_TYPE_SYSTEM, true);
-        
+
+        CollectionReader reader = createReader(XmiReader.class, XmiReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/xmi/english.xmi", XmiReader.PARAM_TYPE_SYSTEM_FILE,
+                "src/test/resources/ts/typesystem.xml", XmiReader.PARAM_MERGE_TYPE_SYSTEM, true);
+
         reader.getNext(jcas.getCas());
-        
+
         Type spanType = jcas.getTypeSystem().getType("de.tudarmstadt.ukp.dkpro.core.io.xmi.Span");
         AnnotationFS span = jcas.getCas().createAnnotation(spanType, 0, 1);
         jcas.getCas().addFsToIndexes(span);
@@ -57,12 +53,12 @@ public class XmiReaderTest
     public void testNoTypeSystemMerge() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
-        
-        CollectionReader reader = createReader(XmiReader.class,
-                XmiReader.PARAM_SOURCE_LOCATION, "src/test/resources/xmi/english.xmi");
-        
+
+        CollectionReader reader = createReader(XmiReader.class, XmiReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/xmi/english.xmi");
+
         reader.getNext(jcas.getCas());
-        
+
         Type spanType = jcas.getTypeSystem().getType("de.tudarmstadt.ukp.dkpro.core.io.xmi.Span");
         assertNull(spanType);
     }
@@ -71,16 +67,13 @@ public class XmiReaderTest
     public void testTypeSystemReplace() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
-        
-        CollectionReader reader = createReader(XmiReader.class,
-                XmiReader.PARAM_SOURCE_LOCATION, "src/test/resources/xmi/english.xmi",
-                XmiReader.PARAM_TYPE_SYSTEM_FILE, "src/test/resources/ts/typesystem.xml");
-        
+
+        CollectionReader reader = createReader(XmiReader.class, XmiReader.PARAM_SOURCE_LOCATION,
+                "src/test/resources/xmi/english.xmi", XmiReader.PARAM_TYPE_SYSTEM_FILE,
+                "src/test/resources/ts/typesystem.xml");
+
         assertThatThrownBy(() -> {
             reader.getNext(jcas.getCas());
         }).isInstanceOf(IOException.class).hasCauseInstanceOf(XCASParsingException.class);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

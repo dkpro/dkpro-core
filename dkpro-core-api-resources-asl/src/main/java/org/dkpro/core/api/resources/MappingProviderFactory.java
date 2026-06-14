@@ -39,27 +39,28 @@ public class MappingProviderFactory
         p.addImport(POS_TAGSET, aSource);
         return p;
     }
-    
+
     public static MappingProvider createPosMappingProvider(Object aContextObject,
             String aMappingLocation, String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
-        p.setDefault(LOCATION, "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
+        p.setDefault(LOCATION,
+                "classpath:/org/dkpro/core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
         p.setDefault(BASE_TYPE, "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS");
         p.setDefault(POS_TAGSET, "default");
         p.setOverride(LOCATION, aMappingLocation);
         p.setOverride(LANGUAGE, aLanguage);
         p.setOverride(POS_TAGSET, aTagset);
-        
+
         if (aContextObject != null) {
             p.setContextObject(aContextObject);
             p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
-        
+
         return p;
     }
-    
+
     public static MappingProvider createChunkMappingProvider(Object aContextObject,
             String aMappingLocation, String aLanguage, HasResourceMetadata aSource)
     {
@@ -68,7 +69,7 @@ public class MappingProviderFactory
         p.addImport(CHUNK_TAGSET, aSource);
         return p;
     }
-    
+
     public static MappingProvider createChunkMappingProvider(Object aContextObject,
             String aMappingLocation, String aTagset, String aLanguage)
     {
@@ -87,10 +88,10 @@ public class MappingProviderFactory
             p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
-        
+
         return p;
     }
-    
+
     public static MappingProvider createConstituentMappingProvider(Object aContextObject,
             String aMappingLocation, String aLanguage, HasResourceMetadata aSource)
     {
@@ -100,7 +101,7 @@ public class MappingProviderFactory
         p.addTagMappingImport("constituent", aSource);
         return p;
     }
-    
+
     public static MappingProvider createConstituentMappingProvider(Object aContextObject,
             String aMappingLocation, String aTagset, String aLanguage)
     {
@@ -118,7 +119,7 @@ public class MappingProviderFactory
             p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
-        
+
         return p;
     }
 
@@ -130,7 +131,7 @@ public class MappingProviderFactory
         p.addImport(DEPENDENCY_TAGSET, aSource);
         return p;
     }
-    
+
     public static MappingProvider createDependencyMappingProvider(Object aContextObject,
             String aMappingLocation, String aTagset, String aLanguage)
     {
@@ -149,7 +150,7 @@ public class MappingProviderFactory
             p.addAutoOverride(PARAM_MAPPING_ENABLED, MAPPING_ENABLED);
             p.applyAutoOverrides(aContextObject);
         }
-        
+
         return p;
     }
 
@@ -158,13 +159,13 @@ public class MappingProviderFactory
     {
         MappingProvider p = createNerMappingProvider(aContextObject, aMappingLocation, aLanguage,
                 aVariant);
-        
+
         p.addTagMappingImport("ner", aSource);
-        
+
         return p;
     }
 
-    public static MappingProvider createNerMappingProvider(Object aContextObject, 
+    public static MappingProvider createNerMappingProvider(Object aContextObject,
             String aMappingLocation, String aLanguage, String aVariant)
     {
         MappingProvider p = new MappingProvider();

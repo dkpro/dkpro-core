@@ -15,64 +15,152 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* First created by JCasGen Mon Nov 08 23:55:50 CET 2010 */
+/* Apache UIMA v3 - First created by JCasGen Fri Sep 08 09:51:28 EEST 2017 */
+
 package de.tudarmstadt.ukp.dkpro.core.api.metadata.type;
+
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.cas.impl.CASImpl;
+import org.apache.uima.cas.impl.TypeImpl;
+import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
-import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
 
 /**
+ * <p>
+ * The DocumentMetaData annotation stores information about a single processed document. There can
+ * only be one of these annotations per CAS. The annotation is created by readers and contains
+ * information to uniquely identify the document from which a CAS was created. Writer components use
+ * this information when determining under which filename a CAS is stored.
+ * <p>
+ * 
+ * <p>
+ * There are two principle ways of identifying a document:
+ * <p>
+ * 
+ * <ul>
+ * <li><b>collection id / document id:</b> this simple system identifies a document within a
+ * collection. The ID of the collection and the document are each simple strings without any further
+ * semantics such as e.g. a hierarchy. For this reason, this identification scheme is not well
+ * suited to preserve information about directory structures.</li>
+ * 
+ * <li><b>document base URI / document URI:</b> this system identifies a document using a URI. The
+ * base URI is used to derive the relative path of the document with respect to the base location
+ * from where it has been read. E.g. if the base URI is <code>file:/texts</code> and the document
+ * URI is <code>file:/texts/english/text1.txt</code>, then the relativ path of the document is
+ * <code>english/text1.txt</code>. This information is used by writers to recreate the directory
+ * structure found under the base location in the target location.</li>
+ * </ul>
+ * 
+ * <p>
+ * It is possible and indeed common for a writer to initialize both systems of identification. If
+ * both systems are present, most writers default to using the URI-based systems. However, most
+ * writers also allow forcing the use of the ID-based systems.
+ * </p>
+ * 
+ * <p>
+ * In addition to the features given here, there is a <i>language</i> feature inherited from UIMA's
+ * DocumentAnnotation. DKPro Core components expect a two letter ISO 639-1 language code there.
+ * </p>
+ * Updated by JCasGen Fri Sep 08 09:51:28 EEST 2017 XML source:
+ * /Users/bluefire/git/dkpro-core/dkpro-core-api-metadata-asl/target/jcasgen/typesystem.xml
+ * 
  * @generated
  */
 public class DocumentMetaData
     extends DocumentAnnotation
 {
+
     /**
      * @generated
      * @ordered
      */
+    @SuppressWarnings("hiding")
+    public final static String _TypeName = "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData";
+
+    /**
+     * @generated
+     * @ordered
+     */
+    @SuppressWarnings("hiding")
     public final static int typeIndexID = JCasRegistry.register(DocumentMetaData.class);
     /**
      * @generated
      * @ordered
      */
+    @SuppressWarnings("hiding")
     public final static int type = typeIndexID;
 
-    /** @generated */
+    /**
+     * @generated
+     * @return index of the type
+     */
     @Override
     public int getTypeIndexID()
     {
         return typeIndexID;
     }
 
+    /*
+     * ******************* Feature Offsets *
+     *******************/
+
+    public final static String _FeatName_documentTitle = "documentTitle";
+    public final static String _FeatName_documentId = "documentId";
+    public final static String _FeatName_documentUri = "documentUri";
+    public final static String _FeatName_collectionId = "collectionId";
+    public final static String _FeatName_documentBaseUri = "documentBaseUri";
+    public final static String _FeatName_isLastSegment = "isLastSegment";
+
+    /* Feature Adjusted Offsets */
+    private final static CallSite _FC_documentTitle = TypeSystemImpl
+            .createCallSite(DocumentMetaData.class, "documentTitle");
+    private final static MethodHandle _FH_documentTitle = _FC_documentTitle.dynamicInvoker();
+    private final static CallSite _FC_documentId = TypeSystemImpl
+            .createCallSite(DocumentMetaData.class, "documentId");
+    private final static MethodHandle _FH_documentId = _FC_documentId.dynamicInvoker();
+    private final static CallSite _FC_documentUri = TypeSystemImpl
+            .createCallSite(DocumentMetaData.class, "documentUri");
+    private final static MethodHandle _FH_documentUri = _FC_documentUri.dynamicInvoker();
+    private final static CallSite _FC_collectionId = TypeSystemImpl
+            .createCallSite(DocumentMetaData.class, "collectionId");
+    private final static MethodHandle _FH_collectionId = _FC_collectionId.dynamicInvoker();
+    private final static CallSite _FC_documentBaseUri = TypeSystemImpl
+            .createCallSite(DocumentMetaData.class, "documentBaseUri");
+    private final static MethodHandle _FH_documentBaseUri = _FC_documentBaseUri.dynamicInvoker();
+    private final static CallSite _FC_isLastSegment = TypeSystemImpl
+            .createCallSite(DocumentMetaData.class, "isLastSegment");
+    private final static MethodHandle _FH_isLastSegment = _FC_isLastSegment.dynamicInvoker();
+
     /**
      * Never called. Disable default constructor
-     *
+     * 
      * @generated
      */
     protected DocumentMetaData()
     {
-    }
+        /* intentionally empty block */}
 
     /**
      * Internal - constructor used by generator
      * 
      * @generated
-     * @param addr
-     *            low level Feature Structure reference
+     * @param casImpl
+     *            the CAS this Feature Structure belongs to
      * @param type
      *            the type of this Feature Structure
      */
-    public DocumentMetaData(int addr, TOP_Type type)
+    public DocumentMetaData(TypeImpl type, CASImpl casImpl)
     {
-        super(addr, type);
+        super(type, casImpl);
         readObject();
     }
 
@@ -106,12 +194,12 @@ public class DocumentMetaData
 
     /**
      * <!-- begin-user-doc --> Write your own initialization here <!-- end-user-doc -->
-     * 
+     *
      * @generated modifiable
      */
     private void readObject()
     {
-    }
+        /* default - does nothing empty block */}
 
     // *--------------*
     // * Feature: documentTitle
@@ -124,13 +212,7 @@ public class DocumentMetaData
      */
     public String getDocumentTitle()
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentTitle == null) {
-            jcasType.jcas.throwFeatMissing("documentTitle",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        return jcasType.ll_cas.ll_getStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentTitle);
+        return _getStringValueNc(wrapGetIntCatchException(_FH_documentTitle));
     }
 
     /**
@@ -142,13 +224,7 @@ public class DocumentMetaData
      */
     public void setDocumentTitle(String v)
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentTitle == null) {
-            jcasType.jcas.throwFeatMissing("documentTitle",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        jcasType.ll_cas.ll_setStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentTitle, v);
+        _setStringValueNfc(wrapGetIntCatchException(_FH_documentTitle), v);
     }
 
     // *--------------*
@@ -162,13 +238,7 @@ public class DocumentMetaData
      */
     public String getDocumentId()
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentId == null) {
-            jcasType.jcas.throwFeatMissing("documentId",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        return jcasType.ll_cas.ll_getStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentId);
+        return _getStringValueNc(wrapGetIntCatchException(_FH_documentId));
     }
 
     /**
@@ -180,13 +250,7 @@ public class DocumentMetaData
      */
     public void setDocumentId(String v)
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentId == null) {
-            jcasType.jcas.throwFeatMissing("documentId",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        jcasType.ll_cas.ll_setStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentId, v);
+        _setStringValueNfc(wrapGetIntCatchException(_FH_documentId), v);
     }
 
     // *--------------*
@@ -200,13 +264,7 @@ public class DocumentMetaData
      */
     public String getDocumentUri()
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentUri == null) {
-            jcasType.jcas.throwFeatMissing("documentUri",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        return jcasType.ll_cas.ll_getStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentUri);
+        return _getStringValueNc(wrapGetIntCatchException(_FH_documentUri));
     }
 
     /**
@@ -218,13 +276,7 @@ public class DocumentMetaData
      */
     public void setDocumentUri(String v)
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentUri == null) {
-            jcasType.jcas.throwFeatMissing("documentUri",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        jcasType.ll_cas.ll_setStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentUri, v);
+        _setStringValueNfc(wrapGetIntCatchException(_FH_documentUri), v);
     }
 
     // *--------------*
@@ -238,13 +290,7 @@ public class DocumentMetaData
      */
     public String getCollectionId()
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_collectionId == null) {
-            jcasType.jcas.throwFeatMissing("collectionId",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        return jcasType.ll_cas.ll_getStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_collectionId);
+        return _getStringValueNc(wrapGetIntCatchException(_FH_collectionId));
     }
 
     /**
@@ -256,13 +302,7 @@ public class DocumentMetaData
      */
     public void setCollectionId(String v)
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_collectionId == null) {
-            jcasType.jcas.throwFeatMissing("collectionId",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        jcasType.ll_cas.ll_setStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_collectionId, v);
+        _setStringValueNfc(wrapGetIntCatchException(_FH_collectionId), v);
     }
 
     // *--------------*
@@ -276,13 +316,7 @@ public class DocumentMetaData
      */
     public String getDocumentBaseUri()
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentBaseUri == null) {
-            jcasType.jcas.throwFeatMissing("documentBaseUri",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        return jcasType.ll_cas.ll_getStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentBaseUri);
+        return _getStringValueNc(wrapGetIntCatchException(_FH_documentBaseUri));
     }
 
     /**
@@ -294,13 +328,7 @@ public class DocumentMetaData
      */
     public void setDocumentBaseUri(String v)
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_documentBaseUri == null) {
-            jcasType.jcas.throwFeatMissing("documentBaseUri",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        jcasType.ll_cas.ll_setStringValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_documentBaseUri, v);
+        _setStringValueNfc(wrapGetIntCatchException(_FH_documentBaseUri), v);
     }
 
     // *--------------*
@@ -316,13 +344,7 @@ public class DocumentMetaData
      */
     public boolean getIsLastSegment()
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_isLastSegment == null) {
-            jcasType.jcas.throwFeatMissing("isLastSegment",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        return jcasType.ll_cas.ll_getBooleanValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_isLastSegment);
+        return _getBooleanValueNc(wrapGetIntCatchException(_FH_isLastSegment));
     }
 
     /**
@@ -336,13 +358,7 @@ public class DocumentMetaData
      */
     public void setIsLastSegment(boolean v)
     {
-        if (DocumentMetaData_Type.featOkTst
-                && ((DocumentMetaData_Type) jcasType).casFeat_isLastSegment == null) {
-            jcasType.jcas.throwFeatMissing("isLastSegment",
-                    "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-        }
-        jcasType.ll_cas.ll_setBooleanValue(addr,
-                ((DocumentMetaData_Type) jcasType).casFeatCode_isLastSegment, v);
+        _setBooleanValueNfc(wrapGetIntCatchException(_FH_isLastSegment), v);
     }
 
     /**

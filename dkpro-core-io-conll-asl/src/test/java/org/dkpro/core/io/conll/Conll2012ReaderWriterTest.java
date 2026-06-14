@@ -21,44 +21,48 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Conll2012ReaderWriterTest
 {
     @Test
-    public void test()
-        throws Exception
+    public void test() throws Exception
     {
         testRoundTrip(
                 createReaderDescription(Conll2012Reader.class,
-                        Conll2012Reader.PARAM_USE_HEADER_METADATA, false, 
-                        Conll2012Reader.PARAM_READ_LEMMA, true), 
-                createEngineDescription(Conll2012Writer.class), 
-                "conll/2012/en-orig.conll");
+                        Conll2012Reader.PARAM_USE_HEADER_METADATA, false,
+                        Conll2012Reader.PARAM_READ_LEMMA, true),
+                createEngineDescription(Conll2012Writer.class), "conll/2012/en-orig.conll");
     }
-    
-//    @Test
-//    public void generate()
-//            throws Exception
-//    {
-//        SimplePipeline.runPipeline(
-//                createReaderDescription(TextReader.class, 
-//                        TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/text/*.txt",
-//                        TextReader.PARAM_LANGUAGE, "en"),
-//                createEngineDescription(StanfordSegmenter.class),
-//                createEngineDescription(StanfordLemmatizer.class),
-//                createEngineDescription(StanfordPosTagger.class),
-//                createEngineDescription(StanfordParser.class),
-//                createEngineDescription(StanfordCoreferenceResolver.class),
-//                createEngineDescription(StanfordNamedEntityRecognizer.class),
-//                createEngineDescription(ClearNlpSemanticRoleLabeler.class),
-//                createEngineDescription(Conll2012Writer.class,
-//                        Conll2012Writer.PARAM_TARGET_LOCATION, "target/test-output/"+
-//                          testContext.getTestOutputFolderName()));
-//    }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+
+    @Test
+    public void test2() throws Exception
+    {
+        testRoundTrip(
+                createReaderDescription(Conll2012Reader.class,
+                        Conll2012Reader.PARAM_USE_HEADER_METADATA, false,
+                        Conll2012Reader.PARAM_READ_LEMMA, true),
+                createEngineDescription(Conll2012Writer.class),
+                "conll/2012/semeval1010-en-sample.conll");
+    }
+
+    // @Test
+    // public void generate()
+    // throws Exception
+    // {
+    // SimplePipeline.runPipeline(
+    // createReaderDescription(TextReader.class,
+    // TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/text/*.txt",
+    // TextReader.PARAM_LANGUAGE, "en"),
+    // createEngineDescription(StanfordSegmenter.class),
+    // createEngineDescription(StanfordLemmatizer.class),
+    // createEngineDescription(StanfordPosTagger.class),
+    // createEngineDescription(StanfordParser.class),
+    // createEngineDescription(StanfordCoreferenceResolver.class),
+    // createEngineDescription(StanfordNamedEntityRecognizer.class),
+    // createEngineDescription(ClearNlpSemanticRoleLabeler.class),
+    // createEngineDescription(Conll2012Writer.class,
+    // Conll2012Writer.PARAM_TARGET_LOCATION, "target/test-output/"+
+    // testContext.getTestOutputFolderName()));
+    // }
 }

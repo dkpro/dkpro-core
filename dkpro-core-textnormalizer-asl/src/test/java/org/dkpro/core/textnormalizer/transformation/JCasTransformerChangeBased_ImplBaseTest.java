@@ -19,29 +19,29 @@
 package org.dkpro.core.textnormalizer.transformation;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class JCasTransformerChangeBased_ImplBaseTest
 {
-    @Test(expected = IllegalStateException.class)
-    public void testOverlappingChanges()
-        throws Exception
+    @Test
+    public void testOverlappingChanges() throws Exception
     {
-        assertTransformedText("ERROR", "12345", "de",
-                createEngineDescription(OverlapTransformer.class));
+        assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> assertTransformedText("ERROR", "12345", "de",
+                        createEngineDescription(OverlapTransformer.class)));
     }
 
     public static class OverlapTransformer
         extends JCasTransformerChangeBased_ImplBase
     {
         @Override
-        public void process(JCas aInput, JCas aOutput)
-            throws AnalysisEngineProcessException
+        public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
         {
             insert(4, "lala");
             delete(3, 5);

@@ -30,32 +30,33 @@ import org.dkpro.core.api.embeddings.VectorizerUtils;
  * Use {@link #load(File)} to initialize.
  */
 public class TextFormatVectorizer
-        implements Vectorizer
+    implements Vectorizer
 {
     private Map<String, float[]> embeddings;
     private float[] unknownVector;
     private int dimensions;
     private boolean caseless;
 
-    private TextFormatVectorizer(Map<String, float[]> embeddings)
+    private TextFormatVectorizer(Map<String, float[]> aEmbeddings)
     {
-        assert !embeddings.isEmpty();
-        this.embeddings = embeddings;
-        dimensions = embeddings.values().iterator().next().length;
+        assert !aEmbeddings.isEmpty();
+        embeddings = aEmbeddings;
+        dimensions = aEmbeddings.values().iterator().next().length;
         unknownVector = VectorizerUtils.randomVector(dimensions);
-        caseless = embeddings.keySet().stream()
+        caseless = aEmbeddings.keySet().stream()
                 .allMatch(token -> token.equals(token.toLowerCase()));
     }
 
     /**
      * Load a text-format embeddings file (assuming no header line).
      *
-     * @param f the {@link File} containing the embeddings in text format
+     * @param f
+     *            the {@link File} containing the embeddings in text format
      * @return a new {@link TextFormatVectorizer}
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
-    public static Vectorizer load(File f)
-            throws IOException
+    public static Vectorizer load(File f) throws IOException
     {
         return load(f, false);
     }
@@ -63,51 +64,65 @@ public class TextFormatVectorizer
     /**
      * Load a text-format embeddings file.
      *
-     * @param embeddingsFile the {@link File} containing the embeddings in text format
-     * @param hasHeaderLine  if true, the first line in the file is expected to be a header line
+     * @param embeddingsFile
+     *            the {@link File} containing the embeddings in text format
+     * @param hasHeaderLine
+     *            if true, the first line in the file is expected to be a header line
      * @return a new {@link TextFormatVectorizer}
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
-    @SuppressWarnings("WeakerAccess")
-    public static Vectorizer load(File embeddingsFile, boolean hasHeaderLine)
-            throws IOException
+    public static Vectorizer load(File embeddingsFile, boolean hasHeaderLine) throws IOException
     {
         return new TextFormatVectorizer(
                 TextFormatVectorizerUtils.readEmbeddingFileTxt(embeddingsFile, hasHeaderLine));
     }
 
-    @Override public float[] vectorize(String token)
+    @Override
+    public float[] vectorize(String token)
     {
         if (caseless) {
             token = token.toLowerCase();
         }
+
         float[] vector = contains(token) ? embeddings.get(token) : unknownVector();
         assert vector.length == dimensions();
         return vector;
     }
 
-    @Override public boolean contains(String token)
+    @Override
+    public boolean contains(String token)
     {
         return embeddings.containsKey(token);
     }
 
-    @Override public float[] unknownVector()
+    @Override
+    public float[] unknownVector()
     {
         return unknownVector;
     }
 
-    @Override public int dimensions()
+    @Override
+    public int dimensions()
     {
         return dimensions;
     }
 
-    @Override public int size()
+    @Override
+    public int size()
     {
         return embeddings.size();
     }
 
-    @Override public boolean isCaseless()
+    @Override
+    public boolean isCaseless()
     {
         return caseless;
+    }
+
+    @Override
+    public void close() throws Exception
+    {
+        // Nothing to do
     }
 }

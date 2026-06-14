@@ -20,23 +20,18 @@ package org.dkpro.core.io.bnc;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.dkpro.core.io.bnc.BncReader;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BncReaderTest
 {
     @Test
     public void test() throws Exception
     {
-        testOneWay(
-                createReaderDescription(BncReader.class,
-                        BncReader.PARAM_LANGUAGE, "en"), 
-                "FX8.xml.dump", 
+        testOneWay( //
+                createReaderDescription( //
+                        BncReader.class, //
+                        BncReader.PARAM_LANGUAGE, "en"), //
+                "FX8.xml.dump", //
                 "FX8.xml");
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

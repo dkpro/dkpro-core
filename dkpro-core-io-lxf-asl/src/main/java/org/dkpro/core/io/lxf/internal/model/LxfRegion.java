@@ -26,7 +26,7 @@ public class LxfRegion
     {
         // Required for Jackson
     }
-    
+
     public LxfRegion(String aOrigin, int aIndex, int aBegin, int aEnd)
     {
         setOrigin(aOrigin);
@@ -35,7 +35,7 @@ public class LxfRegion
         // We assume here that the ID derives directly from origin and index!
         setId(String.format("%s-r%d@%d", getOrigin(), getIndex() + 1, 1));
     }
-    
+
     public int[] getAnchors()
     {
         return anchors;

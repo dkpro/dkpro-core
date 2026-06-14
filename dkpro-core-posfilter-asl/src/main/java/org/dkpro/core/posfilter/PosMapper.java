@@ -47,13 +47,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Maps existing POS tags from one tagset to another using a user provided properties file.
  */
 @ResourceMetaData(name = "POS Mapper")
-@TypeCapability(
-        inputs = {
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class PosMapper
     extends JCasAnnotator_ImplBase
 {
@@ -78,8 +75,7 @@ public class PosMapper
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -103,8 +99,7 @@ public class PosMapper
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         if (mappingProvider != null) {
             CAS cas = aJCas.getCas();

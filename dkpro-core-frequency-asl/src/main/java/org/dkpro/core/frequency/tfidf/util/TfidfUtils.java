@@ -44,8 +44,7 @@ public class TfidfUtils
      * @throws IOException
      *             if the model cannot be written.
      */
-    public static void writeDfModel(DfModel dfModel, String path)
-        throws IOException
+    public static void writeDfModel(DfModel dfModel, String path) throws IOException
     {
         serialize(dfModel, path);
     }
@@ -59,14 +58,12 @@ public class TfidfUtils
      * @throws IOException
      *             if the model could not be read.
      */
-    public static DfModel getDfModel(String path)
-        throws IOException
+    public static DfModel getDfModel(String path) throws IOException
     {
         return deserialize(path);
     }
 
-    public static void serialize(Object object, String fileName)
-        throws IOException
+    public static void serialize(Object object, String fileName) throws IOException
     {
         File file = new File(fileName);
         if (!file.exists()) {
@@ -75,7 +72,7 @@ public class TfidfUtils
         if (file.isDirectory()) {
             throw new IOException("A directory with that name exists!");
         }
-        
+
         try (ObjectOutputStream objOut = new ObjectOutputStream(
                 new BufferedOutputStream(new FileOutputStream(file)))) {
             objOut.writeObject(object);
@@ -85,8 +82,7 @@ public class TfidfUtils
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T deserialize(String filePath)
-        throws IOException
+    public static <T> T deserialize(String filePath) throws IOException
     {
         try (ObjectInputStream in = new ObjectInputStream(
                 new FileInputStream(new File(filePath)))) {

@@ -72,14 +72,14 @@ import mstparser.ParserOptions;
  * Dependency parsing using MSTParser.
  * <p>
  * Wrapper for the MSTParser (<b>high memory requirements</b>). More information about the parser
- * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a> <a
- * href="http://sourceforge.net/projects/mstparser/">here</a>
+ * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a>
+ * <a href="http://sourceforge.net/projects/mstparser/">here</a>
  * </p>
  * <p>
- * The MSTParser models tend to be very large, e.g. the <a
- * href="http://nlp.stanford.edu/software/stanford-dependencies.shtml">Eisner</a> model is about 600
- * MB uncompressed. With this model, parsing a simple sentence with MSTParser requires about 3 GB
- * heap memory.
+ * The MSTParser models tend to be very large, e.g. the
+ * <a href="http://nlp.stanford.edu/software/stanford-dependencies.shtml">Eisner</a> model is about
+ * 600 MB uncompressed. With this model, parsing a simple sentence with MSTParser requires about 3
+ * GB heap memory.
  * </p>
  * <p>
  * This component feeds MSTParser only with the FORM (token) and POS (part-of-speech) fields. LEMMA,
@@ -90,13 +90,10 @@ import mstparser.ParserOptions;
 @Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "MSTParser Dependency Parser")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class MstParser
     extends JCasAnnotator_ImplBase
 {
@@ -115,19 +112,20 @@ public class MstParser
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -139,30 +137,29 @@ public class MstParser
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
-     * Load the dependency to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the dependency to UIMA type mapping from this location instead of locating the mapping
+     * automatically.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = //
             ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
-    
+
     /**
-     * Specifies the order/scope of features. 1 only has features over single edges
-     * and 2 has features over pairs of adjacent edges in the tree. The model must have been
-     * trained with the respective order set here.
+     * Specifies the order/scope of features. 1 only has features over single edges and 2 has
+     * features over pairs of adjacent edges in the tree. The model must have been trained with the
+     * respective order set here.
      */
     public static final String PARAM_ORDER = "order";
     @ConfigurationParameter(name = PARAM_ORDER, mandatory = false)
@@ -178,8 +175,7 @@ public class MstParser
      *             Cannot be initialized
      */
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -191,10 +187,9 @@ public class MstParser
                 setDefault(LOCATION,
                         "classpath:/de/tudarmstadt/ukp/dkpro/core/mstparser/lib/parser-${language}-${variant}.properties");
             }
-            
+
             @Override
-            protected DependencyParser produceResource(URL aUrl)
-                throws IOException
+            protected DependencyParser produceResource(URL aUrl) throws IOException
             {
                 Properties metadata = getResourceMetaData();
 
@@ -202,7 +197,7 @@ public class MstParser
                 ParserOptions options = createOptions(aUrl, metadata);
                 DependencyPipe pipe = createPipe(options);
                 DependencyParser dp = loadParser(aUrl, pipe, options);
-                
+
                 // Check if the model order corresponds to the order the component is configured for
                 boolean secondOrderModel = isSecondOrderModel(pipe);
                 if (secondOrderModel != options.secondOrder) {
@@ -212,38 +207,38 @@ public class MstParser
                             + "for " + component + " order. I am going to reload the model now "
                             + "with the correct order. To avoid loading the model twice, please "
                             + "configure the component for the correct order.");
-                    
+
                     // Reconfigure pipe and reload
                     options.secondOrder = secondOrderModel;
                     pipe = createPipe(options);
                     dp = loadParser(aUrl, pipe, options);
                 }
-                                
+
                 // Extract dependency tagset
-                SingletonTagset depTags = new SingletonTagset(
-                        Dependency.class, metadata.getProperty("dependency.tagset"));
+                SingletonTagset depTags = new SingletonTagset(Dependency.class,
+                        metadata.getProperty("dependency.tagset"));
                 depTags.addAll(asList(pipe.types));
-                //depTags.remove("<no-type>");
+                // depTags.remove("<no-type>");
                 addTagset(depTags);
-                
+
                 // Extract POS tagset (from POS, not from CPOS!)
-                SingletonTagset posTags = new SingletonTagset(
-                        POS.class, metadata.getProperty("pos.tagset"));
+                SingletonTagset posTags = new SingletonTagset(POS.class,
+                        metadata.getProperty("pos.tagset"));
                 for (Object key : pipe.dataAlphabet.toArray()) {
                     if (key instanceof String) {
                         String sKey = (String) key;
-                        
+
                         // See mstparser.DependencyPipe.addLinearFeatures(...)
                         if (sKey.startsWith("POSPC=")) {
-                            String[] fragments = sKey.substring(6).split(" ",3);
+                            String[] fragments = sKey.substring(6).split(" ", 3);
                             posTags.add(fragments[0]);
                             posTags.add(fragments[1]);
                         }
                     }
                 }
-                //posTags.remove("<root-POS>");
-                addTagset(posTags);               
-                
+                // posTags.remove("<root-POS>");
+                addTagset(posTags);
+
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
                 }
@@ -251,7 +246,7 @@ public class MstParser
                 return dp;
             };
         };
-        
+
         mappingProvider = createDependencyMappingProvider(this, dependencyMappingLocation, language,
                 modelProvider);
     }
@@ -266,8 +261,7 @@ public class MstParser
      *             No parse created
      */
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         CAS cas = jcas.getCas();
         modelProvider.configure(cas);
@@ -278,7 +272,7 @@ public class MstParser
         if (!exists(jcas, Sentence.class) || !exists(jcas, Token.class)) {
             return;
         }
-        
+
         // currently the parser needs a file as input, it cannot yet work directly with the
         // cas-structure
         try {
@@ -320,7 +314,7 @@ public class MstParser
 
                 // write dependency information as annotation to JCas
                 Type depRel = mappingProvider.getTagType(instance.deprels[formsIndex]);
-                
+
                 if (head > 0) {
                     Dependency dep = (Dependency) cas.createFS(depRel);
                     dep.setDependencyType(instance.deprels[formsIndex]);
@@ -354,8 +348,7 @@ public class MstParser
      * @throws IOException
      *             The temporary file could not be created
      */
-    private String generateTempInputFile(JCas jcas)
-        throws IOException
+    private String generateTempInputFile(JCas jcas) throws IOException
     {
         File tempfile = File.createTempFile("MSTinput", "txt");
         BufferedWriter out = new BufferedWriter(new FileWriter(tempfile, true));
@@ -392,7 +385,7 @@ public class MstParser
         tempfile.deleteOnExit();
         return tempfile.getPath();
     }
-    
+
     /**
      * Checks if the data alphabet loaded into the pipe contains features that are only generated
      * when a second-order model has been trained.
@@ -413,7 +406,7 @@ public class MstParser
         }
         return false;
     }
-    
+
     private ParserOptions createOptions(URL aUrl, Properties aMetadata)
     {
         // mst.ParserOptions needs a String as argument
@@ -426,12 +419,11 @@ public class MstParser
         options.goldfile = "";
         options.testfile = "";
         options.modelName = aUrl.toString();
-        
+
         if (order == null) {
             String modelOrder = aMetadata.getProperty("mstparser.param.order");
             if (StringUtils.isNotEmpty(modelOrder)) {
-                getLogger().info(
-                        "Using model order (mstparser.param.order): " + modelOrder);
+                getLogger().info("Using model order (mstparser.param.order): " + modelOrder);
                 options.secondOrder = "2".equals(modelOrder.trim());
             }
             else {
@@ -443,10 +435,10 @@ public class MstParser
             getLogger().info("Using user-specified order: " + order);
             options.secondOrder = order == 2;
         }
-        
+
         return options;
     }
-    
+
     private DependencyParser loadParser(URL aUrl, DependencyPipe aPipe, ParserOptions aOptions)
         throws IOException
     {
@@ -461,12 +453,11 @@ public class MstParser
         finally {
             closeQuietly(is);
         }
-        
+
         return dp;
     }
-    
-    private DependencyPipe createPipe(ParserOptions aOptions)
-        throws IOException
+
+    private DependencyPipe createPipe(ParserOptions aOptions) throws IOException
     {
         return aOptions.secondOrder ? new DependencyPipe2O(aOptions) : new DependencyPipe(aOptions);
     }

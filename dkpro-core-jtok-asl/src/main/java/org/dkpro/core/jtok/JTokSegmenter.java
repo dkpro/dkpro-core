@@ -47,9 +47,8 @@ import de.dfki.lt.tools.tokenizer.output.Token;
  * JTok segmenter.
  */
 @ResourceMetaData(name = "JTok Segmenter")
-@LanguageCapability({"en", "de", "it"})
-@TypeCapability(outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+@LanguageCapability({ "en", "de", "it" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class JTokSegmenter
@@ -68,15 +67,14 @@ public class JTokSegmenter
     public static final String PARAM_PTB_ESCAPING = "ptbEscaping";
     @ConfigurationParameter(name = PARAM_PTB_ESCAPING, mandatory = true, defaultValue = "false")
     private boolean ptbEscaping;
-    
+
     private JTok tokenizer;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         Properties tokProps = new Properties();
         try (InputStream in = FileTools.openResourceFileAsStream(Paths.get("jtok/jtok.cfg"))) {
             tokProps.load(in);
@@ -84,30 +82,30 @@ public class JTokSegmenter
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-        
+
         // create new instance of JTok
         tokenizer = new JTok(tokProps);
     }
-    
+
     @Override
     protected void process(JCas aJCas, String text, int zoneBegin)
         throws AnalysisEngineProcessException
     {
         AnnotatedString s = tokenizer.tokenize(aJCas.getDocumentText(), getLanguage(aJCas));
         List<Paragraph> paragraphs = Outputter.createParagraphs(s);
-        
+
         for (Paragraph paragraph : paragraphs) {
             if (writeParagraph) {
                 Annotation p = new de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph(
                         aJCas, paragraph.getStartIndex(), paragraph.getEndIndex());
                 p.addToIndexes();
             }
-            
+
             for (TextUnit tu : paragraph.getTextUnits()) {
                 if (isWriteSentence()) {
                     createSentence(aJCas, tu.getStartIndex(), tu.getEndIndex());
                 }
-                
+
                 for (Token t : tu.getTokens()) {
                     if (isWriteToken()) {
                         if (ptbEscaping) {

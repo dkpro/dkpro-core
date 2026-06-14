@@ -34,19 +34,19 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.dkpro.core.io.jwpl.util.WikiUtils;
+import org.dkpro.jwpl.api.MetaData;
+import org.dkpro.jwpl.api.Page;
+import org.dkpro.jwpl.api.PageIterator;
+import org.dkpro.jwpl.api.exception.WikiTitleParsingException;
+import org.dkpro.jwpl.parser.mediawiki.FlushTemplates;
+import org.dkpro.jwpl.parser.mediawiki.MediaWikiParser;
+import org.dkpro.jwpl.parser.mediawiki.MediaWikiParserFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.wikipedia.api.MetaData;
-import de.tudarmstadt.ukp.wikipedia.api.Page;
-import de.tudarmstadt.ukp.wikipedia.api.PageIterator;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
 
 /**
- * Abstract base class for standard Wikipedia readers reading single articles
- * instead of revision pairs.
+ * Abstract base class for standard Wikipedia readers reading single articles instead of revision
+ * pairs.
  *
  *
  */
@@ -65,32 +65,30 @@ public abstract class WikipediaStandardReaderBase
     protected int pageBuffer;
 
     /**
-     * Defines the path to a file containing a line-separated list of
-     * page ids of the pages that should be retrieved. (Optional)
+     * Defines the path to a file containing a line-separated list of page ids of the pages that
+     * should be retrieved. (Optional)
      */
     public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIdsFromFile";
     @ConfigurationParameter(name = PARAM_PATH_TO_PAGE_ID_LIST, mandatory = false)
     protected String pageIdFile;
 
     /**
-     * Defines the path to a file containing a line-separated list of
-     * page titles of the pages that should be retrieved. (Optional)
+     * Defines the path to a file containing a line-separated list of page titles of the pages that
+     * should be retrieved. (Optional)
      */
     public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageTitleFromFile";
     @ConfigurationParameter(name = PARAM_PATH_TO_PAGE_TITLE_LIST, mandatory = false)
     protected String pageNameFile;
 
     /**
-     * Defines an array of
-     * page ids of the pages that should be retrieved. (Optional)
+     * Defines an array of page ids of the pages that should be retrieved. (Optional)
      */
     public static final String PARAM_PAGE_ID_LIST = "PageIdFromArray";
     @ConfigurationParameter(name = PARAM_PAGE_ID_LIST, mandatory = false)
     protected String[] pageIdParamArray;
 
     /**
-     * Defines an array of  page titles of the pages that should be retrieved.
-     * (Optional)
+     * Defines an array of page titles of the pages that should be retrieved. (Optional)
      */
     public static final String PARAM_PAGE_TITLE_LIST = "PageTitlesFromArray";
     @ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
@@ -109,8 +107,7 @@ public abstract class WikipediaStandardReaderBase
     protected MediaWikiParser parser;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -144,11 +141,10 @@ public abstract class WikipediaStandardReaderBase
             this.nrOfArticles = pageIds.size() + pageTitles.size();
             pageIter = new PageIterator(wiki, pageIds, pageTitles, pageBuffer);
         }
-        else //use iterator over all pages in the db
+        else // use iterator over all pages in the db
         {
             MetaData md = wiki.getMetaData();
-            this.nrOfArticles = md.getNumberOfPages()
-                    - md.getNumberOfDisambiguationPages()
+            this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages()
                     - md.getNumberOfRedirectPages();
 
             pageIter = new PageIterator(wiki, true, pageBuffer);
@@ -163,15 +159,13 @@ public abstract class WikipediaStandardReaderBase
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return pageIter.hasNext();
     }
 
     @Override
-    public void getNext(JCas jcas)
-        throws IOException, CollectionException
+    public void getNext(JCas jcas) throws IOException, CollectionException
     {
         super.getNext(jcas);
 
@@ -189,8 +183,7 @@ public abstract class WikipediaStandardReaderBase
             }
 
             if (outputPlainText) {
-                jcas.setDocumentText(WikiUtils
-                        .cleanText(getPlainDocumentText(page)));
+                jcas.setDocumentText(WikiUtils.cleanText(getPlainDocumentText(page)));
             }
             else {
                 jcas.setDocumentText(getDocumentText(page));
@@ -203,14 +196,12 @@ public abstract class WikipediaStandardReaderBase
         }
     }
 
-    protected abstract boolean isValidPage(Page page)
-        throws WikiTitleParsingException;
+    protected abstract boolean isValidPage(Page page) throws WikiTitleParsingException;
 
     @Override
     public Progress[] getProgress()
     {
-        return new Progress[] { new ProgressImpl(
-                Long.valueOf(currentArticleIndex).intValue(),
+        return new Progress[] { new ProgressImpl(Long.valueOf(currentArticleIndex).intValue(),
                 Long.valueOf(nrOfArticles).intValue(), Progress.ENTITIES) };
     }
 
@@ -221,8 +212,7 @@ public abstract class WikipediaStandardReaderBase
 
     protected abstract String getPlainDocumentText(Page page);
 
-    private void addDocumentMetaData(JCas jcas, Page page)
-        throws WikiTitleParsingException
+    private void addDocumentMetaData(JCas jcas, Page page) throws WikiTitleParsingException
     {
         String language = WikiUtils.jwplLanguage2dkproLanguage(dbconfig.getLanguage());
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
@@ -230,7 +220,8 @@ public abstract class WikipediaStandardReaderBase
         metaData.setCollectionId(Integer.valueOf(page.getPageId()).toString());
         metaData.setDocumentId(Integer.valueOf(page.getPageId()).toString());
         metaData.setDocumentBaseUri("http://" + language + ".wikipedia.org");
-        metaData.setDocumentUri("http://" + language + ".wikipedia.org/w/index.php?title=" + page.getTitle().getWikiStyleTitle());
+        metaData.setDocumentUri("http://" + language + ".wikipedia.org/w/index.php?title="
+                + page.getTitle().getWikiStyleTitle());
         metaData.setLanguage(language);
     }
 
@@ -243,8 +234,7 @@ public abstract class WikipediaStandardReaderBase
      * @throws IOException
      *             if any error occurs while reading the file
      */
-    private Set<String> loadFile(String fileName)
-        throws IOException
+    private Set<String> loadFile(String fileName) throws IOException
     {
         Set<String> container = new HashSet<String>();
 
@@ -276,9 +266,9 @@ public abstract class WikipediaStandardReaderBase
         return container;
     }
 
-    public Page getPage() {
+    public Page getPage()
+    {
         return page;
     }
-
 
 }

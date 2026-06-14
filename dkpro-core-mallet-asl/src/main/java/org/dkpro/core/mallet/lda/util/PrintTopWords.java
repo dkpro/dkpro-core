@@ -41,14 +41,13 @@ public class PrintTopWords
     private static int nWords;
     private static final Log LOG = LogFactory.getLog(PrintTopWords.class);
 
-    public static void main(String[] args)
-        throws IOException
+    public static void main(String[] args) throws IOException
     {
         setOptions(args);
         String targetFile = modelFile + TARGET_FILE_SUFFIX;
         LOG.info(String.format("%nReading model from '%s'.%nStoring topic words in '%s'.",
                 modelFile, targetFile));
-        
+
         ParallelTopicModel model;
         try {
             model = ParallelTopicModel.read(modelFile);

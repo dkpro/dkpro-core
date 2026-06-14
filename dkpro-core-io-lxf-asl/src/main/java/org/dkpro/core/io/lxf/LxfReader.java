@@ -43,34 +43,30 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "CLARINO LAP LXF Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_LXF_JSON })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class LxfReader
     extends JCasResourceCollectionReader_ImplBase
 {
     private ObjectMapper mapper;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         mapper = new ObjectMapper();
         // Hack because LXF dumper presently creates invalid JSON
         mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     }
-    
+
     @Override
-    public void getNext(JCas aCAS)
-        throws IOException, CollectionException
+    public void getNext(JCas aCAS) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aCAS, res);
@@ -79,7 +75,7 @@ public class LxfReader
             LxfGraph lxf = mapper.readValue(is, LxfGraph.class);
             Lxf2DKPro.convert(lxf, aCAS);
         }
-        
+
         // Allow to get information about everything added beyond this point
         aCAS.getCasImpl().createMarker();
     }

@@ -15,23 +15,24 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.dkpro.core</groupId>
     <artifactId>dkpro-core-asl</artifactId>
-    <version>1.11.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+
   <artifactId>dkpro-core-io-tika-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IO - Tika (v ${tika.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+
   <properties>
-    <tika.version>1.19.1</tika.version>
+    <tika.version>3.3.0</tika.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -48,45 +49,30 @@
     </dependency>
     <dependency>
       <groupId>org.apache.tika</groupId>
-      <artifactId>tika-parsers</artifactId>
+      <artifactId>tika-parsers-standard-package</artifactId>
       <version>${tika.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-io-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>eu.openminted.share.annotations</groupId>
       <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
-      <version>1.7.25</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>1.7.25</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -96,15 +82,18 @@
           <configuration>
             <usedDependencies combine.children="append">
               <!-- Parsers are not detected as a direct dependency due to plugin mechanism -->
-              <usedDependency>org.apache.tika:tika-parsers</usedDependency>
+              <usedDependency>org.apache.tika:tika-parsers-standard-package</usedDependency>
+            </usedDependencies>
+            <ignoredDependencies combine.children="append">
               <!-- 
                 - Logging is used via reflection and cannot be detected by Maven
               -->
-              <usedDependency>org.slf4j:slf4j-api</usedDependency>
-              <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
-              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
-              <usedDependency>org.slf4j:jul-to-slf4j</usedDependency>
-            </usedDependencies>
+              <ignoredDependency>org.slf4j:slf4j-api</ignoredDependency>
+              <ignoredDependency>org.slf4j:jcl-over-slf4j</ignoredDependency>
+              <ignoredDependency>org.slf4j:slf4j-log4j12</ignoredDependency>
+              <ignoredDependency>org.slf4j:slf4j-reload4j</ignoredDependency>
+              <ignoredDependency>org.slf4j:jul-to-slf4j</ignoredDependency>
+            </ignoredDependencies>
           </configuration>
         </plugin>
       </plugins>

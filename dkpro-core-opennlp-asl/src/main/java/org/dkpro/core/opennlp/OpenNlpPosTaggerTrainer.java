@@ -47,11 +47,9 @@ import opennlp.tools.util.model.BaseModel;
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TAGGER)
 @ResourceMetaData(name = "OpenNLP POS-Tagger Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class OpenNlpPosTaggerTrainer
     extends OpenNlpTrainerBase<CasPosSampleStream>
 {
@@ -59,70 +57,68 @@ public class OpenNlpPosTaggerTrainer
      * Store this language to the model instead of the document language.
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    @ConfigurationParameter(name = PARAM_LANGUAGE)
     private String language;
 
     /**
      * Training algorithm.
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
-            defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-    
+
     /**
      * Trainer type.
      */
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
-            defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     /**
      * Number of training iterations.
      */
     public static final String PARAM_ITERATIONS = "iterations";
-    @ConfigurationParameter(name = PARAM_ITERATIONS, mandatory = true, defaultValue = "100")
+    @ConfigurationParameter(name = PARAM_ITERATIONS, defaultValue = "100")
     private int iterations;
 
     /**
      * Frequency cut-off.
      */
     public static final String PARAM_CUTOFF = "cutoff";
-    @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
+    @ConfigurationParameter(name = PARAM_CUTOFF, defaultValue = "5")
     private int cutoff;
 
     /**
      * @see POSTaggerME#DEFAULT_BEAM_SIZE
      */
     public static final String PARAM_BEAMSIZE = "beamSize";
-    @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
+    @ConfigurationParameter(name = PARAM_BEAMSIZE, defaultValue = "3")
     private int beamSize;
-    
+
     /**
      * Number of parallel threads.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, defaultValue = "1")
     private int numThreads;
-    
+
     @Override
     public CasPosSampleStream makeSampleStream()
     {
         return new CasPosSampleStream();
     }
-    
+
     @Override
     public Callable<? extends BaseModel> makeTrainer()
     {
-        TrainingParameters params = new TrainingParameters();
+        var params = new TrainingParameters();
         params.put(TrainingParameters.ALGORITHM_PARAM, algorithm);
         params.put(TrainingParameters.TRAINER_TYPE_PARAM, trainerType);
         params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(iterations));
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
-        
+
         Callable<POSModel> trainTask = () -> {
             try {
                 return POSTaggerME.train(language, getStream(), params, new POSTaggerFactory());
@@ -132,7 +128,7 @@ public class OpenNlpPosTaggerTrainer
                 throw e;
             }
         };
-        
+
         return trainTask;
     }
 }

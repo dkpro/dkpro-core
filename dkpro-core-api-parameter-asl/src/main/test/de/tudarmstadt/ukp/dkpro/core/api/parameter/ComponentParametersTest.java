@@ -25,7 +25,7 @@ public class ComponentParametersTest
 {
     private int availableCpus;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         availableCpus = Runtime.getRuntime().availableProcessors();

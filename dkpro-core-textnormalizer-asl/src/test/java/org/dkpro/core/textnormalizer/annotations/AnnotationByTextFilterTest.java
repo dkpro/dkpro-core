@@ -30,7 +30,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.io.text.StringReader;
 import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -39,20 +39,18 @@ public class AnnotationByTextFilterTest
     private static final String LEXICON_FILE = "src/test/resources/sentiws_100.txt";
 
     @Test
-    public void testSentiTokens()
-        throws ResourceInitializationException
+    public void testSentiTokens() throws ResourceInitializationException
     {
         String inputText = "Ich begegne dem Abbau mit abfälligen Gedanken .";
         String[] expectedTokens = new String[] { "Abbau", "abfälligen" };
 
         CollectionReaderDescription stringReader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, inputText,
-                StringReader.PARAM_LANGUAGE, "de");
+                StringReader.PARAM_DOCUMENT_TEXT, inputText, StringReader.PARAM_LANGUAGE, "de");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription wordsFilter = createEngineDescription(
-                AnnotationByTextFilter.class,
-                AnnotationByTextFilter.PARAM_MODEL_LOCATION, LEXICON_FILE);
+                AnnotationByTextFilter.class, AnnotationByTextFilter.PARAM_MODEL_LOCATION,
+                LEXICON_FILE);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(stringReader, segmenter, wordsFilter)) {
             AssertAnnotations.assertToken(expectedTokens, select(jcas, Token.class));

@@ -26,8 +26,8 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.api.resources.DkproContext;
 import org.dkpro.core.io.tei.TeiReader;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
@@ -36,35 +36,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class PipelineExample
 {
 
-    @Ignore
+    @Disabled
     @Test
     public void pipelineTest() throws Exception
     {
-        String corpusPath = DkproContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
-        CollectionReader reader = createReader(
-                TeiReader.class,
-                TeiReader.PARAM_SOURCE_LOCATION, corpusPath,
-                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }
-        );
+        String corpusPath = DkproContext.getContext().getWorkspace("toolbox_corpora")
+                .getAbsolutePath() + "/brown_tei/";
+        CollectionReader reader = createReader(TeiReader.class, TeiReader.PARAM_SOURCE_LOCATION,
+                corpusPath, TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                BreakIteratorSegmenter.class
-        );
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription ngramWriter = createEngineDescription(
-                Web1TWriter.class,
-                Web1TWriter.PARAM_TARGET_LOCATION, "target/web1t/",
-                Web1TWriter.PARAM_INPUT_TYPES, new String[] { Token.class.getName() },
-                Web1TWriter.PARAM_MIN_NGRAM_LENGTH, 1,
-                Web1TWriter.PARAM_MAX_NGRAM_LENGTH, 3,
-                Web1TWriter.PARAM_MIN_FREQUENCY, 2
-        );
+        AnalysisEngineDescription ngramWriter = createEngineDescription(Web1TWriter.class,
+                Web1TWriter.PARAM_TARGET_LOCATION, "target/web1t/", Web1TWriter.PARAM_INPUT_TYPES,
+                new String[] { Token.class.getName() }, Web1TWriter.PARAM_MIN_NGRAM_LENGTH, 1,
+                Web1TWriter.PARAM_MAX_NGRAM_LENGTH, 3, Web1TWriter.PARAM_MIN_FREQUENCY, 2);
 
-        SimplePipeline.runPipeline(
-                reader,
-                segmenter,
-                ngramWriter
-        );
+        SimplePipeline.runPipeline(reader, segmenter, ngramWriter);
 
         JWeb1TIndexer indexCreator = new JWeb1TIndexer("target/web1t/", 3);
         indexCreator.create();

@@ -17,20 +17,39 @@
  */
 package org.dkpro.core.api.datasets.internal;
 
+import static org.dkpro.core.api.datasets.VerificationMode.BINARY;
+
 import java.util.List;
 
 import org.dkpro.core.api.datasets.ActionDescription;
 import org.dkpro.core.api.datasets.ArtifactDescription;
+import org.dkpro.core.api.datasets.DatasetDescription;
+import org.dkpro.core.api.datasets.VerificationMode;
 
 public class ArtifactDescriptionImpl
     implements ArtifactDescription
 {
+    private DatasetDescription dataset;
     private String name;
     private String text;
     private String url;
     private String sha1;
+    private String sha512;
+    private VerificationMode verificationMode = BINARY;
     private boolean shared;
+    private boolean optional;
     private List<ActionDescription> actions;
+
+    @Override
+    public DatasetDescription getDataset()
+    {
+        return dataset;
+    }
+
+    public void setDataset(DatasetDescription aDataset)
+    {
+        dataset = aDataset;
+    }
 
     @Override
     public String getName()
@@ -77,6 +96,28 @@ public class ArtifactDescriptionImpl
     }
 
     @Override
+    public String getSha512()
+    {
+        return sha512;
+    }
+
+    public void setSha512(String aSha512)
+    {
+        sha512 = aSha512;
+    }
+
+    @Override
+    public VerificationMode getVerificationMode()
+    {
+        return verificationMode;
+    }
+
+    public void setVerificationMode(VerificationMode aVerificationMode)
+    {
+        verificationMode = aVerificationMode;
+    }
+
+    @Override
     public List<ActionDescription> getActions()
     {
         return actions;
@@ -96,5 +137,16 @@ public class ArtifactDescriptionImpl
     public void setShared(boolean aShared)
     {
         shared = aShared;
+    }
+
+    @Override
+    public boolean isOptional()
+    {
+        return optional;
+    }
+
+    public void setOptional(boolean aOptional)
+    {
+        optional = aOptional;
     }
 }

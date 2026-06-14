@@ -59,7 +59,7 @@ public final class BerkeleyLmFrequencyCountProvider
 
         return true;
     }
-    
+
     @Override
     protected void initializeProvider() throws Exception
     {

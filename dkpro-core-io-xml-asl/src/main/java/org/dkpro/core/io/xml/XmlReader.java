@@ -54,19 +54,23 @@ import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Reader for XML files.
+ * Very basic reader to load texts from a XML file.
+ * <p>
+ * The XML file is expected to contain one or more elements under its root note and each of these is
+ * treated as a separate document. Each of these child elements may contain further children
+ * containing text which may or may not be included into the CAS document text, depending on
+ * {@link #PARAM_INCLUDE_TAG} and {@link #PARAM_EXCLUDE_TAG}.
+ * <p>
+ * If you are looking for a more generic XML reader which imports the structure of an XML file into
+ * a CAS, please look at {@link XmlDocumentReader}.
  */
 @Component(value = OperationType.READER)
 @ResourceMetaData(name = "XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@Parameters(
-        exclude = { 
-                XmlReader.PARAM_SOURCE_LOCATION  })
-@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field",
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@Parameters(exclude = { XmlReader.PARAM_SOURCE_LOCATION })
+@MimeTypeCapability({ MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field",
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class XmlReader
     extends CasCollectionReader_ImplBase
 {
@@ -133,14 +137,13 @@ public class XmlReader
 
     private int iDoc;
     private boolean useSubstitution;
-    private Map<String,String> substitution;
+    private Map<String, String> substitution;
 
     private String docIdElementLocalName;
     private String docIdAttributeName;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -159,18 +162,14 @@ public class XmlReader
             Collections.sort(xmlFiles);
         }
         else {
-            throw new ResourceInitializationException(
-                    MESSAGE_DIGEST,
-                    INVALID_PATH_EXCEPTION,
-                    new Object[] {inDir});
+            throw new ResourceInitializationException(MESSAGE_DIGEST, INVALID_PATH_EXCEPTION,
+                    new Object[] { inDir });
         }
 
         // if xmlFiles is not empty, then initialize the Stax Reader
         if (xmlFiles.isEmpty()) {
-            throw new ResourceInitializationException(
-                    MESSAGE_DIGEST,
-                    EMPTY_DIRECTORY_EXCEPTION,
-                    new Object[] {inDir});
+            throw new ResourceInitializationException(MESSAGE_DIGEST, EMPTY_DIRECTORY_EXCEPTION,
+                    new Object[] { inDir });
         }
 
         currentParsedFile = 0;
@@ -186,8 +185,7 @@ public class XmlReader
     }
 
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         JCas jcas;
         try {
@@ -202,8 +200,7 @@ public class XmlReader
             // if the last file is already done, then work on the next file
             if (xmlReader == null) {
                 WstxInputFactory factory = new WstxInputFactory();
-                xmlReader = factory.createXMLStreamReader(xmlFiles
-                        .get(currentParsedFile));
+                xmlReader = factory.createXMLStreamReader(xmlFiles.get(currentParsedFile));
                 iDoc = 0;
             }
 
@@ -218,26 +215,21 @@ public class XmlReader
                 xmlReader = null;
                 currentParsedFile++;
             }
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-            throw new CollectionException(e);
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        catch (Exception e) {
             throw new CollectionException(e);
         }
-
     }
 
     @Override
     public Progress[] getProgress()
     {
-        return new Progress[] { new ProgressImpl(currentParsedFile, xmlFiles
-                .size(), Progress.ENTITIES) };
+        return new Progress[] {
+                new ProgressImpl(currentParsedFile, xmlFiles.size(), Progress.ENTITIES) };
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         if (xmlReader != null) {
             // There is still more to parse in the current file
@@ -254,8 +246,7 @@ public class XmlReader
     }
 
     @Override
-    public void close()
-        throws IOException
+    public void close() throws IOException
     {
         // Nothing to do
     }
@@ -301,8 +292,7 @@ public class XmlReader
                 // If a docId has been captured, check if it valid and unique
                 if (id != null) {
                     if (docId != null) {
-                        throw new CollectionException(
-                                MULTIPLE_DOC_ID_EXCEPTION,
+                        throw new CollectionException(MULTIPLE_DOC_ID_EXCEPTION,
                                 new Object[] { docIdTag });
                     }
                     if (id.length() == 0) {
@@ -340,8 +330,8 @@ public class XmlReader
 
         // Add Document MetaData
         String fileName = xmlFiles.get(currentParsedFile).getName();
-//        String fileExtension = "";
-        int dotPlace = fileName.lastIndexOf ( '.' );
+        // String fileExtension = "";
+        int dotPlace = fileName.lastIndexOf('.');
         if (docIdTag != null) {
             if (docId == null) {
                 throw new CollectionException(MESSAGE_DIGEST, MISSING_DOC_ID_EXCEPTION,
@@ -361,17 +351,21 @@ public class XmlReader
         docMetaData.setDocumentUri(docUri + "#" + docId);
         docMetaData.setCollectionId(collectionId);
 
-//        System.out.println("Fetched document: "+docUri+"#"+docId);
+        // System.out.println("Fetched document: "+docUri+"#"+docId);
     }
 
     /**
-     * Create a field annotation for the given element name at the given location.
-     * If substitutions are used, the field is created using the substituted name.
+     * Create a field annotation for the given element name at the given location. If substitutions
+     * are used, the field is created using the substituted name.
      *
-     * @param jcas the JCas.
-     * @param localName the local name of the current XML element.
-     * @param begin the start offset.
-     * @param end the end offset.
+     * @param jcas
+     *            the JCas.
+     * @param localName
+     *            the local name of the current XML element.
+     * @param begin
+     *            the start offset.
+     * @param end
+     *            the end offset.
      */
     private void createFieldAnnotation(JCas jcas, String localName, int begin, int end)
     {
@@ -401,14 +395,17 @@ public class XmlReader
     }
 
     /**
-     * Process the text found within the given element. If text from the given
-     * element should be included in the document, then it is added and a proper
-     * {@link Field} annotation is created.
+     * Process the text found within the given element. If text from the given element should be
+     * included in the document, then it is added and a proper {@link Field} annotation is created.
      *
-     * @param jcas the JCas.
-     * @param localName the element in which the text was found
-     * @param elementText the text
-     * @param documentText the document text buffer
+     * @param jcas
+     *            the JCas.
+     * @param localName
+     *            the element in which the text was found
+     * @param elementText
+     *            the text
+     * @param documentText
+     *            the document text buffer
      */
     private void processText(JCas jcas, String localName, String elementText,
             StringBuilder documentText)
@@ -442,8 +439,7 @@ public class XmlReader
      *
      * @return the local name of the sub-document root element.
      */
-    private String seekSubDocumentRoot()
-        throws XMLStreamException, IOException
+    private String seekSubDocumentRoot() throws XMLStreamException, IOException
     {
         // if this is not the first document in the file then the current
         // element is the docTag
@@ -462,8 +458,7 @@ public class XmlReader
                 docTag = xmlReader.getName().getLocalPart();
             }
             else {
-                throw new IOException("file is empty: "
-                        + xmlFiles.get(currentParsedFile));
+                throw new IOException("file is empty: " + xmlFiles.get(currentParsedFile));
             }
         }
         return docTag;

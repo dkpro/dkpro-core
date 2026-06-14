@@ -48,13 +48,13 @@ public class GenericDKPro2PubAnnotation
     public void convert(JCas aJCas, PADocument aDoc)
     {
         aDoc.setText(aJCas.getDocumentText());
-        
+
         // Map metadata
         DocumentMetaData dmd = DocumentMetaData.get(aJCas);
         aDoc.setTarget(dmd.getDocumentUri());
         aDoc.setSourceDb(dmd.getCollectionId());
         aDoc.setSourceId(dmd.getDocumentId());
-        
+
         // Map span annotations
         CAS cas = aJCas.getCas();
 
@@ -69,18 +69,18 @@ public class GenericDKPro2PubAnnotation
             if (fs == aJCas.getDocumentAnnotationFs()) {
                 continue;
             }
-            
+
             if (fs instanceof AnnotationFS) {
                 warnings.add("Assuming annotation type [" + fs.getType().getName() + "] is span");
-                
+
                 AnnotationFS spanAnnotation = (AnnotationFS) fs;
-                
+
                 String id = Integer.toString(((CASImpl) cas).ll_getFSRef(spanAnnotation));
                 PADenotation denotation = new PADenotation(id, fs.getType().getName(),
                         spanAnnotation.getBegin(), spanAnnotation.getEnd());
-                
+
                 aDoc.addDenotation(denotation);
-                
+
                 writeAttributes(aDoc, denotation, spanAnnotation);
             }
             else {
@@ -89,11 +89,11 @@ public class GenericDKPro2PubAnnotation
         }
 
         // Handle relations now since now we can resolve their targets to IDs.
-//        for (FeatureStructure fs : relationFS) {
-//            writeRelationAnnotation(doc, fs);
-//        }
+        // for (FeatureStructure fs : relationFS) {
+        // writeRelationAnnotation(doc, fs);
+        // }
     }
-    
+
     private void writeAttributes(PADocument aDoc, PAIdentifiableObject aSubject,
             FeatureStructure aFS)
     {
@@ -102,34 +102,35 @@ public class GenericDKPro2PubAnnotation
             if (isInternalFeature(feat)) {
                 continue;
             }
-            
+
             // No need to write begin / end, they are already on the text annotation
-            if (CAS.FEATURE_FULL_NAME_BEGIN.equals(feat.getName()) || 
-                CAS.FEATURE_FULL_NAME_END.equals(feat.getName())) {
+            if (CAS.FEATURE_FULL_NAME_BEGIN.equals(feat.getName())
+                    || CAS.FEATURE_FULL_NAME_END.equals(feat.getName())) {
                 continue;
             }
-            
-//            // No need to write link endpoints again, they are already on the relation annotation
-//            RelationParam relParam = parsedRelationTypes.get(aFS.getType().getName());
-//            if (relParam != null) {
-//                if (relParam.getArg1().equals(feat.getShortName())
-//                        || relParam.getArg2().equals(feat.getShortName())) {
-//                    continue;
-//                }
-//            }
-            
+
+            // // No need to write link endpoints again, they are already on the relation annotation
+            // RelationParam relParam = parsedRelationTypes.get(aFS.getType().getName());
+            // if (relParam != null) {
+            // if (relParam.getArg1().equals(feat.getShortName())
+            // || relParam.getArg2().equals(feat.getShortName())) {
+            // continue;
+            // }
+            // }
+
             if (feat.getRange().isPrimitive()) {
                 writePrimitiveAttribute(aDoc, aSubject, aFS, feat);
             }
-//            // The following warning is not relevant for event annotations because these render
-//            // such features as slots.
-//            else if (!(aAnno instanceof BratEventAnnotation)) {
-//                warnings.add(
-//                        "Unable to render feature [" + feat.getName() + "] with range ["
-//                                + feat.getRange().getName() + "] as attribute");
-//            }
+            // // The following warning is not relevant for event annotations because these render
+            // // such features as slots.
+            // else if (!(aAnno instanceof BratEventAnnotation)) {
+            // warnings.add(
+            // "Unable to render feature [" + feat.getName() + "] with range ["
+            // + feat.getRange().getName() + "] as attribute");
+            // }
         }
-    }    
+    }
+
     private void writePrimitiveAttribute(PADocument aDoc, PAIdentifiableObject aSubject,
             FeatureStructure aFS, Feature feat)
     {
@@ -142,14 +143,14 @@ public class GenericDKPro2PubAnnotation
 
         aDoc.addAttribute(new PAAttribute(aSubject.getId(), feat.getShortName(), featureValue));
     }
-    
+
     private boolean isInternalFeature(Feature aFeature)
     {
         // https://issues.apache.org/jira/browse/UIMA-4565
         return "uima.cas.AnnotationBase:sofa".equals(aFeature.getName());
         // return CAS.FEATURE_FULL_NAME_SOFA.equals(aFeature.getName());
     }
-    
+
     /**
      * Some feature values do not need to be registered or cannot be registered because brat does
      * not support them.
@@ -169,12 +170,12 @@ public class GenericDKPro2PubAnnotation
             if (CAS.FEATURE_BASE_NAME_SOFA.equals(f.getShortName())) {
                 continue;
             }
-            
+
             if (!f.getRange().isPrimitive()) {
                 return true;
             }
         }
-        
+
         return false;
     }
 }

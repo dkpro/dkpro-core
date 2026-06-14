@@ -19,14 +19,14 @@ package org.dkpro.core.io.xces.models;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlID;
 
 public class XcesSentence
 {
-    @XmlID 
-    @XmlAttribute
+    @XmlAttribute(name = "id")
+    @XmlID
     public String id;
 
     @XmlElement(name = "t")

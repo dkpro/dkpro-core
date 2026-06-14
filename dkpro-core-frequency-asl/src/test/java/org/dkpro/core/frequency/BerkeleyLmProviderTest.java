@@ -17,24 +17,22 @@
  */
 package org.dkpro.core.frequency;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class BerkeleyLmProviderTest
 {
 
-    @Ignore
+    @Disabled
     @Test
-    public void berkeleyLMTest() throws Exception {
-        BerkeleyLmProvider lm  = new BerkeleyLmProvider(
-                "src/test/resources/test.ser",
-                "en"
-        );
+    public void berkeleyLMTest() throws Exception
+    {
+        BerkeleyLmProvider lm = new BerkeleyLmProvider("src/test/resources/test.ser", "en");
 
         assertEquals(50, lm.getFrequency("of the ("));
-        assertEquals(0.011155508, lm.getProbability("is"),     0.0000001);
-        assertEquals(-4.49582195, lm.getLogProbability("is"),  0.0000001);
+        assertEquals(0.011155508, lm.getProbability("is"), 0.0000001);
+        assertEquals(-4.49582195, lm.getLogProbability("is"), 0.0000001);
     }
 }

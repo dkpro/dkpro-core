@@ -40,18 +40,15 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Rich Text Format (RTF) Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_RTF, MimeTypes.TEXT_RTF})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_RTF, MimeTypes.TEXT_RTF })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class RTFReader
     extends ResourceCollectionReaderBase
 {
     private RTFEditorKit rtfParser;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -59,16 +56,14 @@ public class RTFReader
     }
 
     @Override
-    public void getNext(CAS aCas)
-        throws IOException, CollectionException
+    public void getNext(CAS aCas) throws IOException, CollectionException
     {
         Resource resource = nextFile();
         initCas(aCas, resource);
 
         try {
             Document document = readRTF(resource);
-            aCas.setDocumentText(document.getText(
-                    document.getStartPosition().getOffset(),
+            aCas.setDocumentText(document.getText(document.getStartPosition().getOffset(),
                     document.getEndPosition().getOffset()));
         }
         catch (BadLocationException e) {
@@ -88,8 +83,7 @@ public class RTFReader
      *             if {@link RTFEditorKit#read(java.io.InputStream, Document, int)} is called with
      *             an invalid location argument
      */
-    protected Document readRTF(Resource resource)
-        throws IOException, BadLocationException
+    protected Document readRTF(Resource resource) throws IOException, BadLocationException
     {
         Document document = rtfParser.createDefaultDocument();
         rtfParser.read(resource.getInputStream(), document, 0);

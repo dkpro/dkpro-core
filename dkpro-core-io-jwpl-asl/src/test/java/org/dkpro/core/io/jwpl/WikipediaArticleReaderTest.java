@@ -18,58 +18,55 @@
 package org.dkpro.core.io.jwpl;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
-import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.jwpl.WikipediaArticleReader;
-import org.dkpro.core.io.jwpl.WikipediaReaderBase;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.dkpro.jwpl.api.WikiConstants.Language;
+import org.junit.jupiter.api.Test;
 
-import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
-
-@Ignore("Relies on non-public server")
-public class WikipediaArticleReaderTest
+class WikipediaArticleReaderTest
 {
     @Test
-    public void wikipediaReaderTest()
-        throws Exception
+    void wikipediaReaderTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                WikipediaArticleReader.class,
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+        var reader = createReaderDescription( //
+                WikipediaArticleReader.class, //
+                WikipediaArticleReader.PARAM_HOST, "localhost", //
+                WikipediaArticleReader.PARAM_DB, "wikiapi_test", //
+                WikipediaArticleReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaArticleReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaArticleReader.PARAM_USER, "sa", //
+                WikipediaArticleReader.PARAM_PASSWORD, "", //
+                WikipediaArticleReader.PARAM_LANGUAGE, Language._test);
 
         int i = 0;
-        for (JCas jcas : new JCasIterable(reader)) {
+        for (var jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             i++;
         }
 
-        assertEquals(28, i);
+        assertEquals(30, i);
     }
 
     @Test
-    public void wikipediaArticleIdReaderTest()
-        throws Exception
+    void wikipediaArticleIdReaderTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                WikipediaArticleReader.class,
-                WikipediaArticleReader.PARAM_PAGE_ID_LIST, new String[]{"1041","103","107"},
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+        var reader = createReaderDescription( //
+                WikipediaArticleReader.class, //
+                WikipediaArticleReader.PARAM_PAGE_ID_LIST, new String[] { "1041", "103", "107" }, //
+                WikipediaArticleReader.PARAM_HOST, "localhost", //
+                WikipediaArticleReader.PARAM_DB, "wikiapi_test", //
+                WikipediaArticleReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaArticleReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaArticleReader.PARAM_USER, "sa", //
+                WikipediaArticleReader.PARAM_PASSWORD, "", //
+                WikipediaArticleReader.PARAM_LANGUAGE, Language._test);
 
         int i = 0;
-        for (JCas jcas : new JCasIterable(reader)) {
+        for (var jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             i++;
         }
@@ -78,20 +75,22 @@ public class WikipediaArticleReaderTest
     }
 
     @Test
-    public void wikipediaArticleTitleReaderTest()
-        throws Exception
+    public void wikipediaArticleTitleReaderTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                WikipediaArticleReader.class,
-                WikipediaArticleReader.PARAM_PAGE_TITLE_LIST, new String[]{"TK1","TK3"},
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+        var reader = createReaderDescription( //
+                WikipediaArticleReader.class, //
+                WikipediaArticleReader.PARAM_PAGE_TITLE_LIST, new String[] { "TK1", "TK3" }, //
+                WikipediaArticleReader.PARAM_HOST, "localhost", //
+                WikipediaArticleReader.PARAM_DB, "wikiapi_test", //
+                WikipediaArticleReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaArticleReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaArticleReader.PARAM_USER, "sa", //
+                WikipediaArticleReader.PARAM_PASSWORD, "", //
+                WikipediaArticleReader.PARAM_LANGUAGE, Language._test);
 
         int i = 0;
-        for (JCas jcas : new JCasIterable(reader)) {
+        for (var jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             i++;
         }
@@ -100,20 +99,22 @@ public class WikipediaArticleReaderTest
     }
 
     @Test
-    public void wikipediaArticleIdFileReaderTest()
-        throws Exception
+    public void wikipediaArticleIdFileReaderTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                WikipediaArticleReader.class,
-                WikipediaArticleReader.PARAM_PATH_TO_PAGE_ID_LIST, "src/test/resources/idList",
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+        var reader = createReaderDescription( //
+                WikipediaArticleReader.class, //
+                WikipediaArticleReader.PARAM_PATH_TO_PAGE_ID_LIST, "src/test/resources/idList", //
+                WikipediaArticleReader.PARAM_HOST, "localhost", //
+                WikipediaArticleReader.PARAM_DB, "wikiapi_test", //
+                WikipediaArticleReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaArticleReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaArticleReader.PARAM_USER, "sa", //
+                WikipediaArticleReader.PARAM_PASSWORD, "", //
+                WikipediaArticleReader.PARAM_LANGUAGE, Language._test);
 
         int i = 0;
-        for (JCas jcas : new JCasIterable(reader)) {
+        for (var jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             i++;
         }
@@ -122,20 +123,23 @@ public class WikipediaArticleReaderTest
     }
 
     @Test
-    public void wikipediaArticleTitleFileReaderTest()
-        throws Exception
+    public void wikipediaArticleTitleFileReaderTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                WikipediaArticleReader.class,
-                WikipediaArticleReader.PARAM_PATH_TO_PAGE_TITLE_LIST, "src/test/resources/titleList",
-                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-                WikipediaReaderBase.PARAM_USER,     "student",
-                WikipediaReaderBase.PARAM_PASSWORD, "student",
-                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+        var reader = createReaderDescription( //
+                WikipediaArticleReader.class, //
+                WikipediaArticleReader.PARAM_PATH_TO_PAGE_TITLE_LIST,
+                "src/test/resources/titleList", //
+                WikipediaArticleReader.PARAM_HOST, "localhost", //
+                WikipediaArticleReader.PARAM_DB, "wikiapi_test", //
+                WikipediaArticleReader.PARAM_JDBC_URL,
+                "jdbc:hsqldb:file:./src/test/resources/db/wikiapi_test", //
+                WikipediaArticleReader.PARAM_DRIVER, "org.hsqldb.jdbcDriver", //
+                WikipediaArticleReader.PARAM_USER, "sa", //
+                WikipediaArticleReader.PARAM_PASSWORD, "", //
+                WikipediaArticleReader.PARAM_LANGUAGE, Language._test);
 
         int i = 0;
-        for (JCas jcas : new JCasIterable(reader)) {
+        for (var jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             i++;
         }

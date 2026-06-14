@@ -22,7 +22,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.dkpro.core.mallet.lda.MalletLdaUtil.trainModel;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +33,9 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
@@ -50,21 +48,16 @@ public class MalletLdaTopicModelInferencerTest
     private static final int N_ITERATIONS = 50;
     private static final String LANGUAGE = "en";
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     @Test
-    public void testInferencer()
-            throws UIMAException, IOException
+    public void testInferencer(@TempDir File tempDir) throws UIMAException, IOException
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         trainModel(modelFile);
 
         // tag::example[]
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(

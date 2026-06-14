@@ -17,8 +17,8 @@
  */
 
 /**
- * Remove annotations on words with particular part of speech tags to exclude them
- * from further processing.
+ * Remove annotations on words with particular part of speech tags to exclude them from further
+ * processing.
  *
  * @since 1.1.0
  */

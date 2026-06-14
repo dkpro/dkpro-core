@@ -58,19 +58,17 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.SPELLING_CHECKER)
 @ResourceMetaData(name = "Jazzy Spellchecker")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs = {
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly",
-                "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction"})
+                "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction" })
 
 public class JazzyChecker
     extends JCasAnnotator_ImplBase
 {
     /**
-     * Location from which the model is read. The model file is a simple word-list with one word
-     * per line.
+     * Location from which the model is read. The model file is a simple word-list with one word per
+     * line.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
@@ -95,8 +93,7 @@ public class JazzyChecker
     private SpellDictionary dict;
 
     @Override
-    public void initialize(final UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(final UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         InputStream is = null;
@@ -115,13 +112,12 @@ public class JazzyChecker
     }
 
     @Override
-    public void process(final JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(final JCas jcas) throws AnalysisEngineProcessException
     {
-        
+
         AnnotationChecker.requireExists(this, jcas, this.getLogger(), Token.class);
-        AnnotationChecker.requireNotExists(this, jcas, this.getLogger(),
-                SpellingAnomaly.class, SuggestedAction.class);
+        AnnotationChecker.requireNotExists(this, jcas, this.getLogger(), SpellingAnomaly.class,
+                SuggestedAction.class);
 
         for (Token t : select(jcas, Token.class)) {
             String tokenText = t.getText();
@@ -167,7 +163,9 @@ public class JazzyChecker
         }
     }
 
-    class SuggestionCostTuples implements Iterable<SuggestionCostTuple> {
+    class SuggestionCostTuples
+        implements Iterable<SuggestionCostTuple>
+    {
         private final List<SuggestionCostTuple> tuples;
         private int maxCost;
 
@@ -177,7 +175,8 @@ public class JazzyChecker
             maxCost = 0;
         }
 
-        public void addTuple(String suggestion, int cost) {
+        public void addTuple(String suggestion, int cost)
+        {
             tuples.add(new SuggestionCostTuple(suggestion, cost));
 
             if (cost > maxCost) {
@@ -185,11 +184,13 @@ public class JazzyChecker
             }
         }
 
-        public int getMaxCost() {
+        public int getMaxCost()
+        {
             return maxCost;
         }
 
-        public int size() {
+        public int size()
+        {
             return tuples.size();
         }
 
@@ -200,7 +201,8 @@ public class JazzyChecker
         }
     }
 
-    class SuggestionCostTuple {
+    class SuggestionCostTuple
+    {
         private final String suggestion;
         private final Integer cost;
 

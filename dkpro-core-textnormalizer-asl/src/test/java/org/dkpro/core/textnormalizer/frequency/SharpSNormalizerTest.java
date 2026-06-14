@@ -18,38 +18,36 @@
 package org.dkpro.core.textnormalizer.frequency;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SharpSNormalizerTest
 {
     @Test
     public void test() throws Exception
     {
-        //check sharpS normalization
+        // check sharpS normalization
         test("süss", "süß");
     }
 
-    public void test(String inputText, String normalizedText)
-        throws Exception
+    public void test(String inputText, String normalizedText) throws Exception
     {
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription normalizer = createEngineDescription(
-                SharpSNormalizer.class,
-                SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD,0,
-                SharpSNormalizer.RES_FREQUENCY_PROVIDER, createExternalResourceDescription(
-                        Web1TFrequencyCountResource.class,
+        AnalysisEngineDescription normalizer = createEngineDescription(SharpSNormalizer.class,
+                SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, 0,
+                SharpSNormalizer.RES_FREQUENCY_PROVIDER,
+                createResourceDescription(Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
 
         assertTransformedText(normalizedText, inputText, "de", segmenter, normalizer);
-    }    
+    }
 }

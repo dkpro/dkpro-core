@@ -18,27 +18,24 @@
 package org.dkpro.core.io.aclanthology;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
-import org.dkpro.core.io.aclanthology.AclAnthologyReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class AclArcReaderTest
 {
     @Test
-    public void aclArcReaderTest()
-        throws Exception
+    public void aclArcReaderTest() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                AclAnthologyReader.class,
+        CollectionReaderDescription reader = createReaderDescription(AclAnthologyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/acl/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]**/*.txt" );
+                ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]**/*.txt");
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
@@ -46,9 +43,9 @@ public class AclArcReaderTest
             System.out.println(md.getDocumentUri());
 
             if (i < 2) {
-//                System.out.println(jcas.getDocumentText());
-//                System.out.println();
-//                System.out.println();
+                // System.out.println(jcas.getDocumentText());
+                // System.out.println();
+                // System.out.println();
             }
 
             i++;

@@ -55,7 +55,7 @@ public class Tsv3XSchemaAnalyzer
         TsvSchema schema = new TsvSchema();
 
         Set<Type> chainLinkTypes = new HashSet<>();
-        
+
         // Consider only direct subtypes of the UIMA Annotation type. Currently, WebAnno only
         // supports such layers.
         Type annotationType = aTypeSystem.getType(CAS.TYPE_NAME_ANNOTATION);
@@ -64,13 +64,13 @@ public class Tsv3XSchemaAnalyzer
             if (aTypeSystem.subsumes(documentAnnotationType, type)) {
                 continue;
             }
-            
+
             if (type.getName().equals(Token.class.getName())
                     || type.getName().equals(Sentence.class.getName())) {
                 continue;
             }
-            
-            switch (schema.getLayerType(type))  {
+
+            switch (schema.getLayerType(type)) {
             case RELATION:
                 schema.addColumn(new TsvColumn(type, RELATION,
                         type.getFeatureByBaseName(FEAT_REL_SOURCE), RELATION_REF));
@@ -78,11 +78,9 @@ public class Tsv3XSchemaAnalyzer
                 break;
             case CHAIN:
                 schema.addColumn(new TsvColumn(type, CHAIN,
-                        type.getFeatureByBaseName(COREFERENCE_TYPE_FEATURE),
-                        CHAIN_ELEMENT_TYPE));
+                        type.getFeatureByBaseName(COREFERENCE_TYPE_FEATURE), CHAIN_ELEMENT_TYPE));
                 schema.addColumn(new TsvColumn(type, CHAIN,
-                        type.getFeatureByBaseName(COREFERENCE_RELATION_FEATURE),
-                        CHAIN_LINK_TYPE));
+                        type.getFeatureByBaseName(COREFERENCE_RELATION_FEATURE), CHAIN_LINK_TYPE));
                 chainLinkTypes.add(type);
                 break;
             case SPAN:
@@ -91,7 +89,7 @@ public class Tsv3XSchemaAnalyzer
                 break;
             }
         }
-        
+
         // Scan again for the chain head types
         Type topType = aTypeSystem.getType(CAS.TYPE_NAME_ANNOTATION_BASE);
         for (Type type : aTypeSystem.getDirectSubtypes(topType)) {
@@ -100,18 +98,16 @@ public class Tsv3XSchemaAnalyzer
                 schema.addChainHeadType(type);
             }
         }
-        
+
         return schema;
     }
 
     private static void generateColumns(TypeSystem aTypeSystem, TsvSchema aSchema,
             LayerType aLayerType, Type aType)
     {
-        List<String> specialFeatures = asList(
-                CAS.FEATURE_FULL_NAME_BEGIN,
-                CAS.FEATURE_FULL_NAME_END,
-                CAS.FEATURE_FULL_NAME_SOFA);
-        
+        List<String> specialFeatures = asList(CAS.FEATURE_FULL_NAME_BEGIN,
+                CAS.FEATURE_FULL_NAME_END, CAS.FEATURE_FULL_NAME_SOFA);
+
         for (Feature feat : aType.getFeatures()) {
             if (specialFeatures.contains(feat.getName())) {
                 continue;
@@ -136,21 +132,21 @@ public class Tsv3XSchemaAnalyzer
     {
         // This could be written more efficiently using a single conjunction. The reason this
         // has not been done is to facilitate debugging.
-        
+
         boolean multiValued = feat.getRange().isArray() || aTypeSystem
                 .subsumes(aTypeSystem.getType(CAS.TYPE_NAME_LIST_BASE), feat.getRange());
-        
+
         if (!multiValued) {
             return false;
         }
-        
+
         boolean linkInheritsFromTop = CAS.TYPE_NAME_TOP
                 .equals(aTypeSystem.getParent(feat.getRange().getComponentType()).getName());
         boolean hasTargetFeature = feat.getRange().getComponentType()
                 .getFeatureByBaseName(FEAT_SLOT_TARGET) != null;
         boolean hasRoleFeature = feat.getRange().getComponentType()
                 .getFeatureByBaseName(FEAT_SLOT_ROLE) != null;
-        
+
         return linkInheritsFromTop && hasTargetFeature && hasRoleFeature;
     }
 
@@ -160,7 +156,7 @@ public class Tsv3XSchemaAnalyzer
         boolean hasSourceFeature = relSourceFeat != null && !isPrimitiveFeature(relSourceFeat);
         Feature relTargetFeat = aType.getFeatureByBaseName(FEAT_REL_TARGET);
         boolean hasTargetFeature = relTargetFeat != null && !isPrimitiveFeature(relTargetFeat);
-        
+
         return hasSourceFeature && hasTargetFeature;
     }
 
@@ -170,7 +166,7 @@ public class Tsv3XSchemaAnalyzer
         boolean hasRelationFeature = aType
                 .getFeatureByBaseName(COREFERENCE_RELATION_FEATURE) != null;
         boolean nameEndsInLink = aType.getName().endsWith("Link");
-        
+
         return hasTypeFeature && hasRelationFeature && nameEndsInLink;
     }
 

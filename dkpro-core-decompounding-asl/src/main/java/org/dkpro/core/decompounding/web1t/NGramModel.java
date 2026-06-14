@@ -63,5 +63,5 @@ public class NGramModel
     public String toString()
     {
         return "[" + gram + "] (freq=" + freq + ")";
-    }    
+    }
 }

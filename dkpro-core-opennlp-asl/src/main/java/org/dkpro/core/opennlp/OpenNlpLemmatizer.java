@@ -22,6 +22,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.UimaContext;
@@ -54,13 +55,10 @@ import opennlp.tools.lemmatizer.LemmatizerModel;
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "OpenNLP Lemmatizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"}, 
-        outputs = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class OpenNlpLemmatizer
     extends JCasAnnotator_ImplBase
 {
@@ -79,19 +77,20 @@ public class OpenNlpLemmatizer
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -110,8 +109,7 @@ public class OpenNlpLemmatizer
     private CasConfigurableProviderBase<LemmatizerME> modelProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -122,10 +120,9 @@ public class OpenNlpLemmatizer
                 setDefault(LOCATION,
                         "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/lemma-${language}-${variant}.properties");
             }
-            
+
             @Override
-            protected LemmatizerME produceResource(InputStream aStream)
-                throws Exception
+            protected LemmatizerME produceResource(InputStream aStream) throws Exception
             {
                 // Load the lemmatizer model from the location the model provider offers
                 LemmatizerModel model = new LemmatizerModel(aStream);
@@ -137,18 +134,17 @@ public class OpenNlpLemmatizer
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
         // Document-specific configuration of model and mapping provider in process()
         modelProvider.configure(cas);
 
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
-            
+
             String[] toks = new String[tokens.size()];
             String[] tags = new String[tokens.size()];
 
@@ -158,7 +154,7 @@ public class OpenNlpLemmatizer
                 tags[i] = t.getPosValue();
                 i++;
             }
-            
+
             // Fetch the OpenNLP lemmatizer instance configured with the right model and use it to
             // tag the text
             LemmatizerME lemmatizer = modelProvider.getResource();
@@ -169,7 +165,7 @@ public class OpenNlpLemmatizer
                 Lemma lemmaAnno = new Lemma(aJCas, t.getBegin(), t.getEnd());
                 lemmaAnno.setValue(lemmas[n]);
                 lemmaAnno.addToIndexes();
-                
+
                 // Connect the Lemma annotation to the respective token annotation
                 t.setLemma(lemmaAnno);
                 n++;

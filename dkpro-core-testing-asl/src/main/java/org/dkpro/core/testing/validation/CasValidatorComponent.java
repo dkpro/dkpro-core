@@ -40,8 +40,7 @@ public class CasValidatorComponent
     protected boolean strictCheck;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         getLogger().info("CasValidation process started.");
         List<Message> messages = validator.analyze(aJCas);

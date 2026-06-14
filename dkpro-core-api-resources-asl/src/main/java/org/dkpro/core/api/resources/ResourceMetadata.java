@@ -20,25 +20,25 @@ package org.dkpro.core.api.resources;
 public class ResourceMetadata
 {
     private static final String SEP = ".";
-    
+
     private static final String MODEL = "model";
-    
+
     private static final String CHUNK = "chunk";
     private static final String CONSTITUENT = "constituent";
     private static final String DEPENDENCY = "dependency";
     private static final String MORPH = "morph";
     private static final String POS = "pos";
     private static final String POS_COARSE = "pos.coarse";
-    
+
     private static final String CITE = "cite";
     private static final String BIBTEX = "bibtex";
-    
+
     private static final String URL = "url";
     private static final String TAG = "tag";
     private static final String MAP = "map";
     private static final String TAGSET = "tagset";
     private static final String ENCODING = "encoding";
-    
+
     public static final String META_CHUNK_TAGSET = CHUNK + SEP + TAGSET;
     public static final String META_CONSTITUENT_TAGSET = CONSTITUENT + SEP + TAGSET;
     public static final String META_DEPENDENCY_TAGSET = DEPENDENCY + SEP + TAGSET;
@@ -57,13 +57,13 @@ public class ResourceMetadata
      * model to replace "PONCT:S" with "SENT".
      */
     public static final String META_POS_TAG_MAP_PREFIX = POS + SEP + TAG + SEP + MAP + SEP;
-    
+
     public static final String DC = "DC";
     public static final String DC_TITLE = DC + SEP + "title";
     public static final String DC_CREATOR = DC + SEP + "creator";
     public static final String DC_IDENTIFIER = DC + SEP + "identifier";
     public static final String DC_RIGHTS = DC + SEP + "rights";
-    
+
     /**
      * @deprecated Use {@link #META_MODEL_ENCODING} instead.
      */

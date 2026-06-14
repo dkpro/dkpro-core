@@ -203,8 +203,7 @@ public class LuceneIndexer
      * @throws InterruptedException
      *             if threads were interrupted.
      */
-    public void index()
-        throws FileNotFoundException, InterruptedException
+    public void index() throws FileNotFoundException, InterruptedException
     {
         List<File> files;
 
@@ -242,8 +241,8 @@ public class LuceneIndexer
 
             logger.info(StringUtils.join(files.subList(start, end), ", "));
 
-            Worker w = new Worker(files.subList(start, end), new File(outputPath.getAbsoluteFile()
-                    + "/" + i), dictionary);
+            Worker w = new Worker(files.subList(start, end),
+                    new File(outputPath.getAbsoluteFile() + "/" + i), dictionary);
             w.start();
             workers[i] = w;
         }

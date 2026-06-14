@@ -17,14 +17,11 @@
  */
 package org.dkpro.core.io.xml;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -36,6 +33,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Logger;
 import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 import org.dkpro.core.api.parameter.MimeTypes;
+import org.dkpro.core.api.xml.XmlParserUtils;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -47,27 +45,20 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "XML Text Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 
 public class XmlTextReader
     extends ResourceCollectionReaderBase
 {
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aCAS, res);
 
-        InputStream is = null;
-
-        try {
+        try (InputStream is = res.getInputStream()) {
             JCas jcas = aCAS.getJCas();
-
-            is = res.getInputStream();
 
             // Create handler
             Handler handler = newSaxHandler();
@@ -75,8 +66,7 @@ public class XmlTextReader
             handler.setLogger(getLogger());
 
             // Parser XML
-            SAXParserFactory pf = SAXParserFactory.newInstance();
-            SAXParser parser = pf.newSAXParser();
+            SAXParser parser = XmlParserUtils.newSaxParser();
 
             InputSource source = new InputSource(is);
             source.setPublicId(res.getLocation());
@@ -88,17 +78,11 @@ public class XmlTextReader
                 aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
             }
         }
-        catch (CASException e) {
-            throw new CollectionException(e);
-        }
-        catch (ParserConfigurationException e) {
+        catch (CASException | ParserConfigurationException e) {
             throw new CollectionException(e);
         }
         catch (SAXException e) {
             throw new IOException(e);
-        }
-        finally {
-            closeQuietly(is);
         }
     }
 
@@ -144,22 +128,19 @@ public class XmlTextReader
         private final StringBuilder buffer = new StringBuilder();
 
         @Override
-        public void characters(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void characters(char[] aCh, int aStart, int aLength) throws SAXException
         {
             buffer.append(aCh, aStart, aLength);
         }
 
         @Override
-        public void ignorableWhitespace(char[] aCh, int aStart, int aLength)
-            throws SAXException
+        public void ignorableWhitespace(char[] aCh, int aStart, int aLength) throws SAXException
         {
             buffer.append(aCh, aStart, aLength);
         }
 
         @Override
-        public void endDocument()
-            throws SAXException
+        public void endDocument() throws SAXException
         {
             getJCas().setDocumentText(buffer.toString());
         }

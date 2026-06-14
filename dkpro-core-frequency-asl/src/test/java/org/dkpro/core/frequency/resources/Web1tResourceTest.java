@@ -19,7 +19,7 @@ package org.dkpro.core.frequency.resources;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -28,28 +28,30 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Web1tResourceTest
 {
-    public static class Annotator extends JCasAnnotator_ImplBase {
+    public static class Annotator
+        extends JCasAnnotator_ImplBase
+    {
         final static String MODEL_KEY = "FrequencyProvider";
         @ExternalResource(key = MODEL_KEY)
         private FrequencyCountProvider model;
 
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             System.out.println(model.getClass().getName());
         }
     }
 
     @Test
-    public void configureAggregatedExample() throws Exception {
+    public void configureAggregatedExample() throws Exception
+    {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-                Annotator.MODEL_KEY, createExternalResourceDescription(
-                        Web1TFrequencyCountResource.class,
+                Annotator.MODEL_KEY,
+                createResourceDescription(Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "en",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"));

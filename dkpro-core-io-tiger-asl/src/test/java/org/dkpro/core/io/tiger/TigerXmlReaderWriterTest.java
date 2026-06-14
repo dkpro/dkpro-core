@@ -21,48 +21,31 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.custommonkey.xmlunit.XMLAssert;
-import org.dkpro.core.io.tiger.TigerXmlReader;
-import org.dkpro.core.io.tiger.TigerXmlWriter;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.xmlunit.assertj3.XmlAssert;
+import org.xmlunit.builder.Input;
 
 public class TigerXmlReaderWriterTest
 {
     @Test
-    public void test() throws Exception
+    public void test(@TempDir File tempDir) throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-
-        CollectionReaderDescription reader = createReaderDescription(
-                TigerXmlReader.class,
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TigerXmlReader.PARAM_PATTERNS, "simple-sentence.xml");
-                
-        AnalysisEngineDescription writer = createEngineDescription(TigerXmlWriter.class,
-                TigerXmlWriter.PARAM_STRIP_EXTENSION, true,
-                TigerXmlWriter.PARAM_TARGET_LOCATION, targetFolder);
-        
-        SimplePipeline.runPipeline(reader, writer);
-        
-        try (
-                Reader expected = new InputStreamReader(new FileInputStream(
-                        "src/test/resources/simple-sentence.xml"), "UTF-8");
-                Reader actual = new InputStreamReader(new FileInputStream(
-                        new File(targetFolder, "simple-sentence.xml")), "UTF-8");
-        ) {
-            XMLAssert.assertXMLEqual(expected, actual);
-        }
-    }
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+        AnalysisEngineDescription writer = createEngineDescription(TigerXmlWriter.class,
+                TigerXmlWriter.PARAM_STRIP_EXTENSION, true, TigerXmlWriter.PARAM_TARGET_LOCATION,
+                tempDir);
+
+        SimplePipeline.runPipeline(reader, writer);
+
+        XmlAssert.assertThat(Input.fromFile(new File(tempDir, "simple-sentence.xml")))
+                .and(Input.fromFile("src/test/resources/simple-sentence.xml")).areSimilar();
+    }
 }

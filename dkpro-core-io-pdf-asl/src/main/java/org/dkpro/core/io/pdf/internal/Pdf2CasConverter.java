@@ -20,15 +20,18 @@ package org.dkpro.core.io.pdf.internal;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.TextPosition;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
-import org.dkpro.core.api.segmentation.SegmenterBase;
+
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.TrimUtils;
 
 /**
  * Converts a PDF to a CAS. Uses a substitution table.
@@ -46,16 +49,15 @@ public class Pdf2CasConverter
     private String paragraphType;
     private String headingType;
 
-    public Pdf2CasConverter()
-        throws IOException
+    public Pdf2CasConverter() throws IOException
     {
         super();
     }
 
-    public void writeText(final CAS aCas, final InputStream aIs)
-        throws IOException
+    public void writeText(final CAS aCas, final InputStream aIs) throws IOException
     {
-        final PDDocument doc = PDDocument.load(aIs);
+        var pdfBytes = IOUtils.toByteArray(aIs);
+        var doc = Loader.loadPDF(pdfBytes);
 
         try {
             if (doc.isEncrypted()) {
@@ -73,8 +75,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void startDocument(final PDDocument aPdf)
-        throws IOException
+    protected void startDocument(final PDDocument aPdf) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("<document>");
@@ -82,8 +83,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void endDocument(final PDDocument aPdf)
-        throws IOException
+    protected void endDocument(final PDDocument aPdf) throws IOException
     {
         cas.setDocumentText(text.toString());
 
@@ -93,8 +93,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void processLineSeparator()
-        throws IOException
+    protected void processLineSeparator() throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("<br/>");
@@ -108,8 +107,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void processWordSeparator()
-        throws IOException
+    protected void processWordSeparator() throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("< >");
@@ -147,8 +145,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void startRegion(final Style aStyle)
-        throws IOException
+    protected void startRegion(final Style aStyle) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("<" + aStyle + ">");
@@ -159,8 +156,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void endRegion(final Style aStyle)
-        throws IOException
+    protected void endRegion(final Style aStyle) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("</" + aStyle + ">");
@@ -183,8 +179,8 @@ public class Pdf2CasConverter
         text.append('\n');
 
         // Trim leading/trailing whitespace
-        int[] offsets = {begin, end};
-        SegmenterBase.trim(text, offsets);
+        int[] offsets = { begin, end };
+        TrimUtils.trim(text, offsets);
 
         // Add annotation
         switch (aStyle) {
@@ -211,8 +207,7 @@ public class Pdf2CasConverter
     }
 
     @Override
-    protected void writeCharacters(final TextPosition aText)
-        throws IOException
+    protected void writeCharacters(final TextPosition aText) throws IOException
     {
         if (log.isTraceEnabled()) {
             log.trace("[" + aText.getUnicode() + "]");
@@ -275,7 +270,8 @@ public class Pdf2CasConverter
                         }
                     }
                     catch (final NumberFormatException e) {
-                        log.warn("Invalid numeric entity in fragment [" + cand + "] - Dropping it.");
+                        log.warn(
+                                "Invalid numeric entity in fragment [" + cand + "] - Dropping it.");
                     }
 
                     // Expand the entity and set proper skip (if found)

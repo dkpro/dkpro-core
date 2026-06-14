@@ -36,7 +36,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.IobDecoder;
-import org.dkpro.core.api.metadata.Tagset;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.parameter.ResourceParameter;
@@ -62,13 +61,10 @@ import opennlp.tools.chunker.ChunkerModel;
 @Component(OperationType.CHUNKER)
 @ResourceMetaData(name = "OpenNLP Chunker")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class OpenNlpChunker
     extends JCasAnnotator_ImplBase
 {
@@ -87,19 +83,20 @@ public class OpenNlpChunker
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -112,16 +109,14 @@ public class OpenNlpChunker
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the chunk tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the chunk tag to UIMA type mapping from this location instead of locating the mapping
+     * automatically.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
 
@@ -129,33 +124,33 @@ public class OpenNlpChunker
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     private CasConfigurableProviderBase<Chunker> modelProvider;
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<Chunker>(this, "opennlp", "chunker") {
+        modelProvider = new ModelProviderBase<Chunker>(this, "opennlp", "chunker")
+        {
             {
                 setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(LOCATION,
                         "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/chunker-${language}-${variant}.properties");
             }
-            
-            @Override
-            protected Chunker produceResource(InputStream aStream)
-                throws Exception
-            {
-                ChunkerModel model = new ChunkerModel(aStream);
 
-                Tagset tsdp = new OpenNlpChunkerTagsetDescriptionProvider(getResourceMetaData()
-                        .getProperty("chunk.tagset"), Chunk.class, model.getChunkerModel());
+            @Override
+            protected Chunker produceResource(InputStream aStream) throws Exception
+            {
+                var model = new ChunkerModel(aStream);
+
+                var tsdp = new OpenNlpChunkerTagsetDescriptionProvider(
+                        getResourceMetaData().getProperty("chunk.tagset"), Chunk.class,
+                        model.getArtifact("chunker.model"));
                 addTagset(tsdp);
 
                 if (printTagSet) {
@@ -171,19 +166,18 @@ public class OpenNlpChunker
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
         modelProvider.configure(cas);
         mappingProvider.configure(cas);
-        
+
         Type chunkType = cas.getTypeSystem().getType(Chunk.class.getName());
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
 
         IobDecoder decoder = new IobDecoder(cas, chunkValue, mappingProvider);
-        
+
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             String[] tokenTexts = new String[tokens.size()];

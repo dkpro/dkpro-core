@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.io.web1t;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,8 +28,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import org.dkpro.core.io.web1t.util.Web1TFileConsolidator;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Web1TConsolidatorTest
 {
@@ -37,16 +37,14 @@ public class Web1TConsolidatorTest
     Comparator<String> comparator;
 
     @Test
-    public void testConsolidation()
-        throws IOException
+    public void testConsolidation() throws IOException
     {
-        Web1TFileConsolidator consolidator = new Web1TFileConsolidator(
-                filesToSort, comparator, "UTF-8", 1);
+        Web1TFileConsolidator consolidator = new Web1TFileConsolidator(filesToSort, comparator,
+                "UTF-8", 1);
 
         consolidator.consolidate();
 
-        LinkedList<File> consolidatedFiles = consolidator
-                .getConsolidatedFiles();
+        LinkedList<File> consolidatedFiles = consolidator.getConsolidatedFiles();
 
         String TAB = "\t";
 
@@ -78,16 +76,14 @@ public class Web1TConsolidatorTest
     }
 
     @Test
-    public void testConsolidationWithFreq10()
-        throws IOException
+    public void testConsolidationWithFreq10() throws IOException
     {
-        Web1TFileConsolidator consolidator = new Web1TFileConsolidator(
-                filesToSort, comparator, "UTF-8", 10);
+        Web1TFileConsolidator consolidator = new Web1TFileConsolidator(filesToSort, comparator,
+                "UTF-8", 10);
 
         consolidator.consolidate();
 
-        LinkedList<File> consolidatedFiles = consolidator
-                .getConsolidatedFiles();
+        LinkedList<File> consolidatedFiles = consolidator.getConsolidatedFiles();
 
         String TAB = "\t";
 
@@ -113,7 +109,7 @@ public class Web1TConsolidatorTest
 
     }
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         setUpFileList();
@@ -137,21 +133,18 @@ public class Web1TConsolidatorTest
     {
         filesToSort = new LinkedList<File>();
 
-        File file_1 = new File(
-                "src/test/resources/Web1TConsolidator/00000000_sorted");
-        File file_2 = new File(
-                "src/test/resources/Web1TConsolidator/00000001_sorted");
+        File file_1 = new File("src/test/resources/Web1TConsolidator/00000000_sorted");
+        File file_2 = new File("src/test/resources/Web1TConsolidator/00000001_sorted");
 
         filesToSort.add(file_1);
         filesToSort.add(file_2);
 
     }
 
-    private String[] getLines(File file)
-        throws IOException
+    private String[] getLines(File file) throws IOException
     {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                new FileInputStream(file), "UTF-8"));
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
         LinkedList<String> lines = new LinkedList<String>();
 

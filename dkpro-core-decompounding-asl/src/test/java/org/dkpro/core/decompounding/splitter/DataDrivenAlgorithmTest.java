@@ -19,7 +19,7 @@
 package org.dkpro.core.decompounding.splitter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import java.util.List;
 import org.dkpro.core.api.resources.ResourceUtils;
 import org.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import org.dkpro.core.decompounding.dictionary.SimpleDictionary;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DataDrivenAlgorithmTest
 {

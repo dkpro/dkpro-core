@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.syntax.tagset;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.dkpro.core.api.resources.MappingProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MappingsTest
 {
@@ -36,14 +36,12 @@ public class MappingsTest
     {
         Collection<File> files = FileUtils.listFiles(
                 new File("src/main/resources/org/dkpro/core/api/syntax/tagset"),
-                new WildcardFileFilter("*.map"),
-                TrueFileFilter.TRUE);
-        
+                new WildcardFileFilter("*.map"), TrueFileFilter.TRUE);
+
         assertTagsetMapping(files);
     }
-    
-    public static void assertTagsetMapping(Collection<File> files)
-        throws IOException
+
+    public static void assertTagsetMapping(Collection<File> files) throws IOException
     {
         for (File file : files) {
             boolean failure = false;

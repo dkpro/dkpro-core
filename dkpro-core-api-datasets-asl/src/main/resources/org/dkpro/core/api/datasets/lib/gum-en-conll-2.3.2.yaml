@@ -42,6 +42,7 @@ artifacts:
   gum.zip:
     url: "https://github.com/amir-zeldes/gum/archive/V2.3.2.zip"
     sha1: 471c3a35c2a0e9aee4bbff9a9cf05441fce3ef21
+    sha512: 713d731714ff037ab79ccc9db34a6de7b02c3d55adc67a9aeaad2d18c5f96cb12173fb6fe7fefd3aca6ffaba606932e392623f5acd1c56045536939f7ac74ea4
     actions:
       - action: explode
         configuration: { includes: ["dep/*", "LICENSE.txt", "README.md"], strip: 1 }

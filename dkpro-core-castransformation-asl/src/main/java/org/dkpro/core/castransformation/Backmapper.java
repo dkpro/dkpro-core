@@ -31,13 +31,13 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.internal.util.IntListIterator;
 import org.apache.uima.internal.util.PositiveIntSet;
 import org.apache.uima.internal.util.PositiveIntSet_impl;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.CasCopier;
+import org.apache.uima.util.Logger;
 import org.dkpro.core.api.transform.alignment.AlignedString;
 import org.dkpro.core.api.transform.alignment.ImmutableInterval;
 import org.dkpro.core.api.transform.alignment.Interval;
@@ -47,13 +47,13 @@ import org.dkpro.core.castransformation.internal.AlignmentStorage;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * After processing a file with the {@code ApplyChangesAnnotator} this annotator
- * can be used to map the annotations created in the cleaned view back to the
- * original view.
+ * After processing a file with the {@code ApplyChangesAnnotator} this annotator can be used to map
+ * the annotations created in the cleaned view back to the original view.
  * <p>
  * This annotator is able to resume the mapping after a CAS restore from any point after the cleaned
  * view has been created, as long as no changes were made to SofaChangeAnnotations in the original
  * view.
+ * 
  * @see ApplyChangesAnnotator
  */
 @ResourceMetaData(name = "CAS Transformation - Map back")
@@ -71,19 +71,18 @@ public class Backmapper
     public static final String PARAM_CHAIN = "Chain";
 
     @ConfigurationParameter(name = PARAM_CHAIN, mandatory = false, defaultValue = {
-            ApplyChangesAnnotator.VIEW_SOURCE, ApplyChangesAnnotator.VIEW_TARGET})
+            ApplyChangesAnnotator.VIEW_SOURCE, ApplyChangesAnnotator.VIEW_TARGET })
     protected LinkedList<String> sofaChain = new LinkedList<>();
 
     @Override
-    public void process(final JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(final JCas aJCas) throws AnalysisEngineProcessException
     {
         try {
             // Now we can copy the complete CAS while mapping back the offsets.
             // We first use the CAS copier and then update the offsets.
-            getLogger().info("Copying annotations from [" + sofaChain.getFirst() +
-                    "] to [" + sofaChain.getLast() + "]");
-            
+            getLogger().info("Copying annotations from [" + sofaChain.getFirst() + "] to ["
+                    + sofaChain.getLast() + "]");
+
             // Copy the annotations
             CAS sourceView = aJCas.getCas().getView(sofaChain.getFirst());
             CAS targetView = aJCas.getCas().getView(sofaChain.getLast());
@@ -99,11 +98,11 @@ public class Backmapper
                     // Skip document annotation
                     continue;
                 }
-                
+
                 // This returns either a new copy -- or -- if an FS has been copied as a
                 // transitively referenced feature of another FS, it will return an existing copy
                 FeatureStructure fsCopy = cc.copyFs(fs);
-                
+
                 // Make sure that the sofa annotation in the copy is set
                 if (fs instanceof AnnotationBaseFS) {
                     FeatureStructure sofa = fsCopy.getFeatureValue(mDestSofaFeature);
@@ -111,11 +110,11 @@ public class Backmapper
                         fsCopy.setFeatureValue(mDestSofaFeature, targetView.getSofa());
                     }
                 }
-                
+
                 // We will still update the offsets, so we do not index the copy just yet
                 copiedFs.add(targetView.getLowLevelCAS().ll_getFSRef(fsCopy));
             }
-            
+
             // Get the final target view
             JCas targetViewJCas = aJCas.getView(sofaChain.getLast());
 
@@ -130,13 +129,13 @@ public class Backmapper
                 // Ok, so now we update the offsets.
                 String realSource = aJCas.getCas().getView(source).getViewName();
                 String realTarget = aJCas.getCas().getView(target).getViewName();
-                
+
                 AlignedString as = getAlignedString(aJCas, realSource, realTarget);
 
                 updateOffsets(sourceView, targetViewJCas, as, copiedFs);
             }
             while (!workChain.isEmpty());
-            
+
             // Now we index the copied FSes again
             IntListIterator it = copiedFs.iterator();
             while (it.hasNext()) {
@@ -148,9 +147,10 @@ public class Backmapper
             throw new AnalysisEngineProcessException(e);
         }
     }
-    
+
     private AlignedString getAlignedString(JCas aSomeCase, String from, String to)
-            throws AnalysisEngineProcessException, CASException {
+        throws AnalysisEngineProcessException, CASException
+    {
         CAS baseCas = aSomeCase.getCasImpl().getBaseCAS();
 
         // Try to get the AlignedString for the current JCas.
@@ -160,12 +160,11 @@ public class Backmapper
         if (as == null) {
             // Attempt to reconstruct the alignment from the SofaChangeAnnotations.
             // This only works when they have not been altered in the mean time.
-            ExtendedLogger logger = getLogger();
+            Logger logger = getLogger();
             if (logger.isInfoEnabled()) {
                 logger.info("No mapping found from [" + from + "] to [" + to + "] on ["
                         + baseCas.hashCode() + "]. "
-                        + "Restoring mapping from SofaChangeAnnotation found in [" + to + "]."
-                );
+                        + "Restoring mapping from SofaChangeAnnotation found in [" + to + "].");
             }
             JCas view = aSomeCase.getCas().getView(to).getJCas();
             as = AlignmentFactory.createAlignmentsFor(view);
@@ -174,37 +173,37 @@ public class Backmapper
         // If there is none we have to fail. Practically this should never happen
         // when the alignment state is reconstructed in the previous step.
         if (as == null) {
-            throw new AnalysisEngineProcessException(new IllegalStateException(
-                    "No mapping found from [" + from + "] to [" + to + "] on ["
-                            + baseCas.hashCode() + "]"));
+            throw new AnalysisEngineProcessException(
+                    new IllegalStateException("No mapping found from [" + from + "] to [" + to
+                            + "] on [" + baseCas.hashCode() + "]"));
         }
 
         return as;
     }
 
-    private void updateOffsets(CAS sourceView, JCas targetView, AlignedString as, 
+    private void updateOffsets(CAS sourceView, JCas targetView, AlignedString as,
             PositiveIntSet aCopiedFs)
         throws CASException, AnalysisEngineProcessException
     {
         // We only update annotations that were copied, nothing that was already there.
         IntListIterator it = aCopiedFs.iterator();
-        
+
         while (it.hasNext()) {
             FeatureStructure fs = targetView.getLowLevelCas().ll_getFSForRef(it.next());
             if (fs instanceof Annotation) {
 
                 // Now we update the offsets
                 Annotation a = (Annotation) fs;
-//            System.out.printf("Orig   %s %3d %3d : %s%n", a.getType().getShortName(),
-//                    a.getBegin(), a.getEnd(),
-//                    sourceView.getDocumentText().substring(a.getBegin(), a.getEnd()));
-//            System.out.printf("Before %s %3d %3d : %s%n", a.getType().getShortName(),
-//                    a.getBegin(), a.getEnd(), a.getCoveredText());
+                // System.out.printf("Orig %s %3d %3d : %s%n", a.getType().getShortName(),
+                // a.getBegin(), a.getEnd(),
+                // sourceView.getDocumentText().substring(a.getBegin(), a.getEnd()));
+                // System.out.printf("Before %s %3d %3d : %s%n", a.getType().getShortName(),
+                // a.getBegin(), a.getEnd(), a.getCoveredText());
                 Interval resolved = as.resolve(new ImmutableInterval(a.getBegin(), a.getEnd()));
                 a.setBegin(resolved.getStart());
                 a.setEnd(resolved.getEnd());
-//            System.out.printf("After  %s %3d %3d : %s%n", a.getType().getShortName(),
-//                    a.getBegin(), a.getEnd(), a.getCoveredText());
+                // System.out.printf("After %s %3d %3d : %s%n", a.getType().getShortName(),
+                // a.getBegin(), a.getEnd(), a.getCoveredText());
             }
         }
     }

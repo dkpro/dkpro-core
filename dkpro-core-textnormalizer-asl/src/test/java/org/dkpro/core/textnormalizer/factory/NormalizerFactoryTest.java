@@ -17,8 +17,8 @@
  */
 package org.dkpro.core.textnormalizer.factory;
 
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.junit.Assert.assertEquals;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -28,9 +28,9 @@ import org.apache.uima.resource.ExternalResourceDescription;
 import org.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 import org.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
 import org.dkpro.core.textnormalizer.ReplacementFileNormalizer.TargetSurroundings;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
@@ -38,24 +38,23 @@ public class NormalizerFactoryTest
 {
     private ExternalResourceDescription frequencyProvider;
 
-    @Before
-    public void init() {
-        frequencyProvider = createExternalResourceDescription(
-                Web1TFrequencyCountResource.class,
+    @BeforeEach
+    public void init()
+    {
+        frequencyProvider = createResourceDescription(Web1TFrequencyCountResource.class,
                 Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                 Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                 Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
-                Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t");  
+                Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t");
     }
 
-    @Ignore("This test will not work while the module is in transition - after we need to fix it")
+    @Disabled("This test will not work while the module is in transition - after we need to fix it")
     @Test
     public void testNormalizerFactory() throws Exception
     {
         test("GMBH +++ Gewerkschaftb +++ HDL +++ :-)",
                 "GmbH +++ Gewerkschaft +++ Hab' dich lieb +++  lächeln ");
-    }    
-
+    }
 
     public void test(String input, String output) throws Exception
     {
@@ -74,21 +73,21 @@ public class NormalizerFactoryTest
         AnalysisEngineDescription normalizeEmoticons = nf.getReplacementNormalization(
                 "src/main/resources/replaceLists/emoticons_de.txt", SrcSurroundings.IRRELEVANT,
                 TargetSurroundings.WHITESPACE);
-    
-        AggregateBuilder ab = new AggregateBuilder();    
+
+        AggregateBuilder ab = new AggregateBuilder();
         ab.add(normalizeSharpSUmlaute);
         ab.add(normalizeRepitions);
         ab.add(normalizeCapitalization);
         ab.add(normalizeInternetslang);
         ab.add(normalizeSpelling);
         ab.add(normalizeEmoticons);
-    
+
         AnalysisEngine engine = ab.createAggregate();
         JCas jcas = engine.newJCas();
-        jcas.setDocumentText(input);    
+        jcas.setDocumentText(input);
         DocumentMetaData.create(jcas);
         engine.process(jcas);
-    
+
         JCas view0 = jcas.getView("_InitialView");
         JCas view1 = jcas.getView("view1");
         JCas view2 = jcas.getView("view2");
@@ -96,8 +95,8 @@ public class NormalizerFactoryTest
         JCas view4 = jcas.getView("view4");
         JCas view5 = jcas.getView("view5");
         JCas view6 = jcas.getView("view6");
-    
-        System.out.println("Original       :" + view0.getDocumentText());    
+
+        System.out.println("Original       :" + view0.getDocumentText());
         System.out.println("Umlaute        :" + view1.getDocumentText());
         System.out.println("Repitions      :" + view2.getDocumentText());
         System.out.println("Capitalization :" + view3.getDocumentText());
@@ -105,7 +104,7 @@ public class NormalizerFactoryTest
         System.out.println("Spelling       :" + view5.getDocumentText());
         System.out.println("Emoticons      :" + view6.getDocumentText());
         System.out.println("Perfect        :" + output);
-    
+
         assertEquals(output, view6.getDocumentText());
     }
 }

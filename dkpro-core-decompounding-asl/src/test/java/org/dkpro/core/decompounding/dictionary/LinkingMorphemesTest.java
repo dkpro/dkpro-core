@@ -18,14 +18,13 @@
 
 package org.dkpro.core.decompounding.dictionary;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dkpro.core.decompounding.dictionary.LinkingMorphemes;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LinkingMorphemesTest
 {

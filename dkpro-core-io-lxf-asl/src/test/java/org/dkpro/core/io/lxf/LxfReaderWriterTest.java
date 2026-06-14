@@ -19,15 +19,12 @@ package org.dkpro.core.io.lxf;
 
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LxfReaderWriterTest
 {
     @Test
-    public void roundTripText()
-        throws Exception
+    public void roundTripText() throws Exception
     {
         // testRoundTrip(
         // LxfReader.class, // the reader
@@ -40,8 +37,7 @@ public class LxfReaderWriterTest
     }
 
     @Test
-    public void roundTripTokenizer()
-        throws Exception
+    public void roundTripTokenizer() throws Exception
     {
         // testRoundTrip(
         // LxfReader.class, // the reader
@@ -52,11 +48,9 @@ public class LxfReaderWriterTest
                 LxfWriter.class, // the writer
                 "lxf/tokenizer/ref.lxf", "lxf/tokenizer/orig.lxf");
     }
-    
-    
+
     @Test
-    public void roundTripTokenizerRepp()
-        throws Exception
+    public void roundTripTokenizerRepp() throws Exception
     {
         // testRoundTrip(
         // LxfReader.class, // the reader
@@ -69,8 +63,7 @@ public class LxfReaderWriterTest
     }
 
     @Test
-    public void roundTripTokenizerReppHunpos()
-        throws Exception
+    public void roundTripTokenizerReppHunpos() throws Exception
     {
         // testRoundTrip(
         // LxfReader.class, // the reader
@@ -83,8 +76,7 @@ public class LxfReaderWriterTest
     }
 
     @Test
-    public void roundTripTokenizerReppHunposMaltParser()
-        throws Exception
+    public void roundTripTokenizerReppHunposMaltParser() throws Exception
     {
         // testRoundTrip(
         // LxfReader.class, // the reader
@@ -95,7 +87,4 @@ public class LxfReaderWriterTest
                 LxfWriter.class, // the writer
                 "lxf/maltparser/ref.lxf", "lxf/maltparser/orig.lxf");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

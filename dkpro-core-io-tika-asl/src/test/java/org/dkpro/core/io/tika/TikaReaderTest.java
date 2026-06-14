@@ -18,51 +18,45 @@
 package org.dkpro.core.io.tika;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TikaReaderTest
 {
     @Test
-    public void testText()
-        throws Exception
+    public void testText() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                TikaReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(TikaReader.class,
                 TikaReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-    
+
         assertEquals("This is a test. And here is another one.\n\n", jcas.getDocumentText());
     }
 
     @Test
-    public void testOdt()
-        throws Exception
+    public void testOdt() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                TikaReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(TikaReader.class,
                 TikaReader.PARAM_SOURCE_LOCATION, "src/test/resources/odt/sample.odt");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-    
+
         assertEquals("This is a test. And here is another one.\n\n", jcas.getDocumentText());
     }
 
     @Test
-    public void testDoc()
-        throws Exception
+    public void testDoc() throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                TikaReader.class, 
+        CollectionReaderDescription reader = createReaderDescription(TikaReader.class,
                 TikaReader.PARAM_SOURCE_LOCATION, "src/test/resources/doc/test.doc");
-        
+
         JCas jcas = new JCasIterable(reader).iterator().next();
-    
+
         assertEquals("test\n\n", jcas.getDocumentText());
     }
 }

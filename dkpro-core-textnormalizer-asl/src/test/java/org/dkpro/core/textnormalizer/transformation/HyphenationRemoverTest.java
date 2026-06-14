@@ -22,7 +22,7 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -32,18 +32,16 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.io.text.TokenizedTextWriter;
 import org.dkpro.core.opennlp.OpenNlpSegmenter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.EOLUtils;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class HyphenationRemoverTest
 {
     private static final String RESOURCE_GERMAN_DICTIONARY = "src/test/resources/dictionary/ngerman";
 
     @Test
-    public void testHyphenationRemover()
-        throws Exception
+    public void testHyphenationRemover() throws Exception
     {
         String inputText = "Ich habe ein- en super-tollen Bär-\nen.";
         String normalizedText = "Ich habe einen super-tollen Bären.";
@@ -55,33 +53,29 @@ public class HyphenationRemoverTest
     }
 
     @Test
-    public void testHyphenationRemoverInPipelineReaderWriter()
-        throws Exception
+    public void testHyphenationRemoverInPipelineReaderWriter(@TempDir File tempDir) throws Exception
     {
-        File outputPath = testContext.getTestOutputFolder();
-        
+        File outputPath = tempDir;
+
         final String language = "de";
         final String variant = "maxent";
         String sourcePath = "src/test/resources/texts/test3.txt";
 
-        final String expected = "Ich habe einen super-tollen Bären .\n" + 
-                "Für eine Registrierung einer Organisation und eine EMail Adresse .\n";
+        final String expected = "Ich habe einen super-tollen Bären .\n"
+                + "Für eine Registrierung einer Organisation und eine EMail Adresse .\n";
 
         /* process input file */
-        final CollectionReader reader = createReader(TextReader.class,
-                TextReader.PARAM_LANGUAGE, language,
-                TextReader.PARAM_SOURCE_LOCATION, sourcePath);
+        final CollectionReader reader = createReader(TextReader.class, TextReader.PARAM_LANGUAGE,
+                language, TextReader.PARAM_SOURCE_LOCATION, sourcePath);
 
         AnalysisEngineDescription hyphenationRemover = createEngineDescription(
-                HyphenationRemover.class, 
-                HyphenationRemover.PARAM_MODEL_LOCATION, RESOURCE_GERMAN_DICTIONARY);
+                HyphenationRemover.class, HyphenationRemover.PARAM_MODEL_LOCATION,
+                RESOURCE_GERMAN_DICTIONARY);
 
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                OpenNlpSegmenter.class,
+        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_VARIANT, variant);
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                TokenizedTextWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, new File(outputPath, "test3.txt"),
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
@@ -92,7 +86,4 @@ public class HyphenationRemoverTest
         actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(expected, actual);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

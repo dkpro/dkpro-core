@@ -39,26 +39,25 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class CjfNormalizer
     extends JCasTransformer_ImplBase
 {
-    public static enum Direction {
-        TO_TRADITIONAL,
-        TO_SIMPLIFIED
+    public static enum Direction
+    {
+        TO_TRADITIONAL, TO_SIMPLIFIED
     };
-    
+
     /**
      * Direction in which to perform the conversion ({@link Direction#TO_TRADITIONAL} or
      * {@link Direction#TO_SIMPLIFIED});
      */
     public static final String PARAM_DIRECTION = "direction";
     @ConfigurationParameter(name = PARAM_DIRECTION, mandatory = true, defaultValue = "TO_SIMPLIFIED")
-    private Direction direction; 
-    
+    private Direction direction;
+
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         String originalText = aInput.getDocumentText();
         String newText;
-        
+
         switch (direction) {
         case TO_SIMPLIFIED:
             newText = CJFBeanFactory.getChineseJF().chineseFan2Jan(originalText);
@@ -69,7 +68,7 @@ public class CjfNormalizer
         default:
             throw new IllegalArgumentException("Unknown directon [" + direction + "]");
         }
-        
+
         aOutput.setDocumentText(newText);
     }
 }

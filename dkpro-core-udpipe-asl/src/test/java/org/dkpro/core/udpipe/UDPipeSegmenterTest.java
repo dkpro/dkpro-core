@@ -17,42 +17,52 @@
  */
 package org.dkpro.core.udpipe;
 
+import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.api.resources.PlatformDetector;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class UDPipeSegmenterTest
 {
-  
-    @Test
-    public void testNorwegian()
-        throws Exception
+    @BeforeEach
+    public void prepare()
     {
-        runTest("no", null, "Storbritannia drøyer ikke. Storbritannia starter den formelle prosessen for utmelding av EU 29. mars, opplyser statsminister Theresa Mays kontor.",
-                new String[] { 
-                        "Storbritannia drøyer ikke.",
+        PlatformDetector pd = new PlatformDetector();
+        Assumptions
+                .assumeTrue(
+                        asList("linux-x86_32", "linux-x86_64", "osx-x86_64", "windows-x86_32",
+                                "windows-x86_64").contains(pd.getPlatformId()),
+                        "Unsupported platform");
+    }
+
+    @Test
+    public void testNorwegian() throws Exception
+    {
+        runTest("no", null,
+                "Storbritannia drøyer ikke. Storbritannia starter den formelle prosessen for utmelding av EU 29. mars, opplyser statsminister Theresa Mays kontor.",
+                new String[] { "Storbritannia drøyer ikke.",
                         "Storbritannia starter den formelle prosessen for utmelding av EU 29. "
-                        + "mars, opplyser statsminister Theresa Mays kontor." },
+                                + "mars, opplyser statsminister Theresa Mays kontor." },
                 new String[] { "Storbritannia", "drøyer", "ikke", ".", "Storbritannia", "starter",
                         "den", "formelle", "prosessen", "for", "utmelding", "av", "EU", "29.",
                         "mars", ",", "opplyser", "statsminister", "Theresa", "Mays", "kontor",
                         "." });
 
     }
-    
+
     @Test
-    public void testEnglish()
-        throws Exception
+    public void testEnglish() throws Exception
     {
         runTest("en", null,
                 "Good morning Mr. President. I would love to welcome you to S.H.I.E.L.D. 2.0.",
@@ -62,15 +72,15 @@ public class UDPipeSegmenterTest
                         "to", "welcome", "you", "to", "S.H.I.E.L.D.", "2.0", "." });
 
     }
-        
+
     private void runTest(String language, String aVariant, String testDocument, String[] sExpected,
             String[] tExpected)
         throws Exception
     {
         String variant = aVariant != null ? aVariant : "ud";
-        AnalysisEngine engine = createEngine(UDPipeSegmenter.class,
-                UDPipeSegmenter.PARAM_VARIANT, variant);
-        
+        AnalysisEngine engine = createEngine(UDPipeSegmenter.class, UDPipeSegmenter.PARAM_VARIANT,
+                variant);
+
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentLanguage(language);
         jcas.setDocumentText(testDocument);
@@ -79,9 +89,6 @@ public class UDPipeSegmenterTest
 
         AssertAnnotations.assertSentence(sExpected, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tExpected, select(jcas, Token.class));
-        
+
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

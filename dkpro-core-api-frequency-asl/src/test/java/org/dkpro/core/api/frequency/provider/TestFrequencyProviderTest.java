@@ -17,11 +17,9 @@
  */
 package org.dkpro.core.api.frequency.provider;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
-import org.dkpro.core.api.frequency.provider.TestFrequencyCountProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestFrequencyProviderTest
 {
@@ -40,7 +38,7 @@ public class TestFrequencyProviderTest
         assertEquals(10, provider.getFrequency("aa"));
         assertEquals(100, provider.getFrequency("aaa"));
         assertEquals(100, provider.getFrequency("a a"));
-    
+
         provider.setScaleDownFactor(20);
         assertEquals(0, provider.getFrequency("a"));
         assertEquals(5, provider.getFrequency("aa"));

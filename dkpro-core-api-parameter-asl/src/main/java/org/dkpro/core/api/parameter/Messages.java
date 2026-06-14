@@ -17,12 +17,10 @@
  */
 package org.dkpro.core.api.parameter;
 
-import org.dkpro.core.api.parameter.Messages;
-
 public final class Messages
 {
     public static final String BUNDLE = Messages.class.getName();
-    
+
     public static final String ERR_UNSUPPORTED_LANGUAGE = "err_unsupported_language";
 
     private Messages()

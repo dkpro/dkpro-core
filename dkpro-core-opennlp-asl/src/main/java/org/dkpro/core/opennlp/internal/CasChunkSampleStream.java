@@ -46,34 +46,34 @@ public class CasChunkSampleStream
     public void init(JCas aJCas)
     {
         sentences = select(aJCas, Sentence.class).iterator();
-        
+
         CAS cas = aJCas.getCas();
         Type chunkType = CasUtil.getType(cas, Chunk.class);
         Feature chunkTagFeature = chunkType.getFeatureByBaseName("chunkValue");
-        chunkEncoder = new  IobEncoder(cas, chunkType, chunkTagFeature);
+        chunkEncoder = new IobEncoder(cas, chunkType, chunkTagFeature);
     }
-    
+
     @Override
     public boolean isActive()
     {
         return sentences != null && sentences.hasNext();
     }
-    
+
     @Override
     public ChunkSample produce(JCas aJCas)
     {
         // Process present sentences
         Sentence sentence = sentences.next();
-        
+
         // Block on next call to read
         if (!sentences.hasNext()) {
             documentComplete();
         }
-        
+
         List<String> words = new ArrayList<>();
         List<String> tags = new ArrayList<>();
         List<String> preds = new ArrayList<>();
-        
+
         for (Token t : selectCovered(Token.class, sentence)) {
             words.add(t.getText());
             if (t.getPos() == null) {
@@ -82,7 +82,7 @@ public class CasChunkSampleStream
             tags.add(t.getPos().getPosValue());
             preds.add(chunkEncoder.encode(t));
         }
-        
+
         return new ChunkSample(words, tags, preds);
     }
 }

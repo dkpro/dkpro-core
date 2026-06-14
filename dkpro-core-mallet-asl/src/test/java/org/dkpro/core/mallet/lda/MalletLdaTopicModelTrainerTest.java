@@ -19,8 +19,8 @@ package org.dkpro.core.mallet.lda;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
@@ -28,28 +28,22 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
-import org.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import cc.mallet.topics.ParallelTopicModel;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class MalletLdaTopicModelTrainerTest
 {
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
 
-    @Test
-    public void testEstimator()
-            throws Exception
+    @org.junit.jupiter.api.Test
+    public void testEstimator(@TempDir File tempDir) throws Exception
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
 
         // tag::example[]
         int nTopics = 10;
@@ -57,15 +51,13 @@ public class MalletLdaTopicModelTrainerTest
         String language = "en";
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, language);
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, modelFile,
-                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
+                MalletLdaTopicModelTrainer.class, MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION,
+                modelFile, MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
         // end::example[]
@@ -76,25 +68,22 @@ public class MalletLdaTopicModelTrainerTest
     }
 
     @Test
-    public void testEstimatorSentence()
-            throws Exception
+    public void testEstimatorSentence(@TempDir File tempDir) throws Exception
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         int nTopics = 10;
         int nIterations = 50;
         String language = "en";
         String entity = Sentence.class.getName();
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, language);
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, modelFile,
-                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
+                MalletLdaTopicModelTrainer.class, MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION,
+                modelFile, MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
                 MalletLdaTopicModelTrainer.PARAM_COVERING_ANNOTATION_TYPE, entity);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
@@ -105,10 +94,9 @@ public class MalletLdaTopicModelTrainerTest
     }
 
     @Test
-    public void testEstimatorAlphaBeta()
-            throws Exception
+    public void testEstimatorAlphaBeta(@TempDir File tempDir) throws Exception
     {
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File modelFile = new File(tempDir, "model");
         int nTopics = 10;
         int nIterations = 50;
         float alpha = nTopics / 50.0f;
@@ -116,15 +104,13 @@ public class MalletLdaTopicModelTrainerTest
         String language = "en";
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
-                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, language);
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR, TextReader.PARAM_PATTERNS,
+                TXT_FILE_PATTERN, TextReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, modelFile,
-                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
+                MalletLdaTopicModelTrainer.class, MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION,
+                modelFile, MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
                 MalletLdaTopicModelTrainer.PARAM_ALPHA_SUM, alpha,
                 MalletLdaTopicModelTrainer.PARAM_BETA, beta);

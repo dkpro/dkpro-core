@@ -17,49 +17,42 @@
  */
 package org.dkpro.core.api.datasets;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import org.dkpro.core.api.datasets.Dataset;
-import org.dkpro.core.api.datasets.DatasetFactory;
-import org.dkpro.core.api.datasets.Split;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class DatasetFactoryTest
 {
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testOne()
-        throws Exception
+    public void testOne() throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
+        // Path cache = testContext.getTestOutputFolder().toPath();
+        Path cache = Paths.get("target/test-output/testLoadOne");
+
         DatasetFactory df = new DatasetFactory(cache);
         {
-            Dataset ds = df.load("wasr-en-xl-1.00");
+            Dataset ds = df.load("updt-fa-1.3");
             assertDatasetOk(ds);
         }
-//        {
-//            Dataset ds = df.load("ndt-nb-1.01");
-//            assertDatasetOk(ds);
-//        }
     }
-    
-    @Ignore("Used at times for offline testing / development")
+
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadAll()
-        throws Exception
+    public void testLoadAll() throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
+        Path cache = Paths.get("target/test-output/testLoadAll");
+
         DatasetFactory df = new DatasetFactory(cache);
         for (String id : df.listIds()) {
             Dataset ds = df.load(id);
@@ -67,13 +60,10 @@ public class DatasetFactoryTest
         }
     }
 
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testShared()
-        throws Exception
+    public void testShared(@TempDir Path cache) throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds1 = df.load("perseus-el-2.1");
         assertDatasetOk(ds1);
@@ -81,48 +71,43 @@ public class DatasetFactoryTest
         assertDatasetOk(ds2);
     }
 
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadSimple()
-        throws Exception
+    public void testLoadSimple(@TempDir Path cache) throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds = df.load("germeval2014-de");
         assertDatasetOk(ds);
     }
 
-    @Ignore("Used at times for offline testing / development")
+    @Disabled("Used at times for offline testing / development")
     @Test
-    public void testLoadWithExplode()
-        throws Exception
+    public void testLoadWithExplode(@TempDir Path cache) throws Exception
     {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
         DatasetFactory df = new DatasetFactory(cache);
         Dataset ds = df.load("brown-en-teixml");
         assertDatasetOk(ds);
-        
+
         assertFalse(Files.exists(cache.resolve("brownCorpus-TEI-XML/brown_tei/Corpus.xml")));
     }
 
     private void assertDatasetOk(Dataset ds)
     {
-        
+
         System.out.printf("Dataset         : %s%n", ds.getName());
         System.out.printf("Data files      : %d%n", ds.getDataFiles().length);
-        
+
         Split split = ds.getDefaultSplit();
         if (split != null) {
             System.out.printf("Training set    : %d%n",
                     split.getTrainingFiles() != null ? split.getTrainingFiles().length : "none");
             System.out.printf("Development set : %d%n",
-                    split.getDevelopmentFiles() != null ? split.getDevelopmentFiles().length : "none");
+                    split.getDevelopmentFiles() != null ? split.getDevelopmentFiles().length
+                            : "none");
             System.out.printf("Testing set     : %d%n",
                     split.getTestFiles() != null ? split.getTestFiles().length : "none");
         }
-        
+
         assertNotNull("Name not set", ds.getName());
         assertNotNull("Language not set", ds.getLanguage());
         if (split != null) {
@@ -139,11 +124,8 @@ public class DatasetFactoryTest
     {
         if (aFiles != null) {
             for (File f : aFiles) {
-                assertTrue("File does not exist: [" + f + "]", f.exists());
+                assertThat(f).exists();
             }
         }
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

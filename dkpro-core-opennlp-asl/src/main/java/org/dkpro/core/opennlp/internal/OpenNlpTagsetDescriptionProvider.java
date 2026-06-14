@@ -41,7 +41,7 @@ public class OpenNlpTagsetDescriptionProvider
         layer = aLayer.getName();
         model = aModel;
     }
-    
+
     public void setTagSplitPattern(String aTagSplitPattern)
     {
         tagSplitPattern = aTagSplitPattern;

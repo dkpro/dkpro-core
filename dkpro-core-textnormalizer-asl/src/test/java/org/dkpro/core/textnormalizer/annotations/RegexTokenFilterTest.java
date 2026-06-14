@@ -21,7 +21,7 @@ package org.dkpro.core.textnormalizer.annotations;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -30,7 +30,7 @@ import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.text.StringReader;
 import org.dkpro.core.textnormalizer.util.JCasHolder;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -40,8 +40,7 @@ public class RegexTokenFilterTest
     private static final String FILTER_REGEX = "^[A-ZÖÜÄ].{2,}";
 
     @Test
-    public void testNoMatch()
-        throws Exception
+    public void testNoMatch() throws Exception
     {
         String inputText = "Ich lebe in Braunschweig.";
         String filteredText = "Ich Braunschweig";
@@ -52,8 +51,8 @@ public class RegexTokenFilterTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription filter = createEngineDescription(RegexTokenFilter.class,
-                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX,
-                RegexTokenFilter.PARAM_MUST_MATCH, mustMatch);
+                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX, RegexTokenFilter.PARAM_MUST_MATCH,
+                mustMatch);
 
         AnalysisEngineDescription holder = createEngineDescription(JCasHolder.class);
 
@@ -67,8 +66,7 @@ public class RegexTokenFilterTest
     }
 
     @Test
-    public void testMatch()
-        throws Exception
+    public void testMatch() throws Exception
     {
         String inputText = "Ich lebe in Braunschweig.";
         String filteredText = "lebe in .";
@@ -79,8 +77,8 @@ public class RegexTokenFilterTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription filter = createEngineDescription(RegexTokenFilter.class,
-                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX,
-                RegexTokenFilter.PARAM_MUST_MATCH, mustMatch);
+                RegexTokenFilter.PARAM_REGEX, FILTER_REGEX, RegexTokenFilter.PARAM_MUST_MATCH,
+                mustMatch);
 
         AnalysisEngineDescription holder = createEngineDescription(JCasHolder.class);
 

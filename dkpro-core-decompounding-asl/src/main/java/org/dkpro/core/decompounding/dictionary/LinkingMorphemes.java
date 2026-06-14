@@ -72,8 +72,7 @@ public class LinkingMorphemes
      * @throws IOException
      *             if the data could not be read.
      */
-    public LinkingMorphemes(InputStream aStream)
-        throws IOException
+    public LinkingMorphemes(InputStream aStream) throws IOException
     {
         this(new BufferedReader(new InputStreamReader(aStream)));
     }
@@ -88,8 +87,7 @@ public class LinkingMorphemes
      * @throws IOException
      *             if the data could not be read.
      */
-    public LinkingMorphemes(File aMorphemesTextFile)
-        throws IOException
+    public LinkingMorphemes(File aMorphemesTextFile) throws IOException
     {
         this(new BufferedReader(new FileReader(aMorphemesTextFile)));
     }
@@ -104,8 +102,7 @@ public class LinkingMorphemes
      * @throws IOException
      *             if the data could not be read.
      */
-    public LinkingMorphemes(BufferedReader aReader)
-        throws IOException
+    public LinkingMorphemes(BufferedReader aReader) throws IOException
     {
         morphemes = new ArrayList<String>();
         String line;

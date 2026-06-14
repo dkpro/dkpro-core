@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc><titleStmt><title>input.xml</title></titleStmt></fileDesc></teiHeader><text><body>
+    
+      
+        
+          <s xml:id="s1"><p xml:id="p1"><w xml:id="t1">This</w>
+          <w xml:id="t2">is</w>
+          <w xml:id="t3">a</w>
+          <w xml:id="t4">test</w>
+          <c xml:id="t5">.</c></p></s>
+        
+      
+      
+        
+          <s xml:id="s2"><p xml:id="p2"><w xml:id="t6">This</w>
+          <w xml:id="t7">is</w>
+          <w xml:id="t8">a</w>
+          <w xml:id="t9">test</w>
+          <c xml:id="t10">.</c></p></s>
+        
+      
+    
+  </body></text></TEI>

@@ -40,19 +40,17 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Split up existing tokens again at particular split-chars.
- * The prefix states whether the split chars should be added as separate {@link Token Tokens}.
- * If the {@link #INCLUDE_PREFIX} precedes the split pattern, the pattern is included.
- * Consequently, patterns following the {@link #EXCLUDE_PREFIX}, will not be added as a Token.
+ * Split up existing tokens again at particular split-chars. The prefix states whether the split
+ * chars should be added as separate {@link Token Tokens}. If the {@link #INCLUDE_PREFIX} precedes
+ * the split pattern, the pattern is included. Consequently, patterns following the
+ * {@link #EXCLUDE_PREFIX}, will not be added as a Token.
  */
 @Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "Pattern-based Token Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class PatternBasedTokenSegmenter
     extends JCasAnnotator_ImplBase
 {

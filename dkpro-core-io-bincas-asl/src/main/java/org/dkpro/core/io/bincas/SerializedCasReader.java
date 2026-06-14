@@ -17,11 +17,13 @@
  */
 package org.dkpro.core.io.bincas;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
+import static java.io.ObjectInputFilter.Config.createFilter;
+import static java.lang.String.join;
 import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputFilter;
 import java.io.ObjectInputStream;
 
 import org.apache.uima.cas.CAS;
@@ -46,35 +48,40 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class SerializedCasReader
     extends ResourceCollectionReaderBase
 {
+    private final static ObjectInputFilter SERIALIZED_CAS_INPUT_FILTER = createFilter(join(";", //
+            CASCompleteSerializer.class.getName(), //
+            CASSerializer.class.getName(), //
+            CASMgrSerializer.class.getName(), //
+            String.class.getName(), //
+            "!*"));
+
     /**
      * The file from which to obtain the type system if it is not embedded in the serialized CAS.
      */
     public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
     private String typeSystemLocation;
-    
+
     private CASMgrSerializer casMgrSerializer;
-    
+
     @Override
-    public void getNext(CAS aCAS)
-        throws IOException, CollectionException
+    public void getNext(CAS aCAS) throws IOException, CollectionException
     {
         Resource res = nextFile();
-        ObjectInputStream is = null;
-        try {
-            is = new ObjectInputStream(CompressionUtils.getInputStream(res.getLocation(),
-                    res.getInputStream()));
-            
-            Object object = is.readObject();
+        try (var is = new ObjectInputStream(
+                CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()));) {
+            is.setObjectInputFilter(SERIALIZED_CAS_INPUT_FILTER);
+
+            var object = is.readObject();
             if (object instanceof CASCompleteSerializer) {
                 // Annotations and CAS metadata saved together
                 getLogger().debug("Reading CAS and type system from [" + res.getLocation() + "]");
-                CASCompleteSerializer serializer = (CASCompleteSerializer) object;
+                var serializer = (CASCompleteSerializer) object;
                 deserializeCASComplete(serializer, (CASImpl) aCAS);
             }
             else if (object instanceof CASSerializer) {
                 // Annotations and CAS metadata saved separately
-                CASCompleteSerializer serializer = new CASCompleteSerializer();
+                var serializer = new CASCompleteSerializer();
                 serializer.setCasMgrSerializer(readCasManager());
                 serializer.setCasSerializer((CASSerializer) object);
                 getLogger().debug("Reading CAS from [" + res.getLocation() + "]");
@@ -88,18 +95,15 @@ public class SerializedCasReader
         catch (ClassNotFoundException e) {
             throw new IOException(e);
         }
-        finally {
-            closeQuietly(is);
-        }
     }
-    
+
     private CASMgrSerializer readCasManager() throws IOException
     {
         // If we already read the type system, return it - do not read it again.
         if (casMgrSerializer != null) {
             return casMgrSerializer;
         }
-        
+
         org.springframework.core.io.Resource r;
         // Is absolute?
         if (typeSystemLocation.indexOf(':') != -1 || typeSystemLocation.startsWith("/")
@@ -113,19 +117,15 @@ public class SerializedCasReader
         }
         getLogger().debug("Reading type system from [" + r.getURI() + "]");
 
-        ObjectInputStream is = null;
-        try {
-            is = new ObjectInputStream(CompressionUtils.getInputStream(typeSystemLocation, 
-                    r.getInputStream()));
+        try (var is = new ObjectInputStream(
+                CompressionUtils.getInputStream(typeSystemLocation, r.getInputStream()))) {
+            is.setObjectInputFilter(SERIALIZED_CAS_INPUT_FILTER);
             casMgrSerializer = (CASMgrSerializer) is.readObject();
         }
         catch (ClassNotFoundException e) {
             throw new IOException(e);
         }
-        finally {
-            closeQuietly(is);
-        }
-        
+
         return casMgrSerializer;
     }
 }

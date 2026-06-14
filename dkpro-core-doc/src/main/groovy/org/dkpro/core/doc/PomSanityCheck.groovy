@@ -17,11 +17,12 @@
  */
 package org.dkpro.core.doc
 
-import static groovy.io.FileType.FILES
+import static groovy.io.FileType.FILES;
+import org.dkpro.meta.core.maven.ContextHolder
+import groovy.xml.XmlParser
 
-import org.dkpro.meta.core.maven.ContextHolder;
-
-class PomSanityCheck {
+class PomSanityCheck
+{
     public void run() {
         ContextHolder.log.info("Running POM sanity check ${ContextHolder.basedir}...")
         
@@ -57,9 +58,8 @@ class PomSanityCheck {
             }
         }
     }
-    
+
     public static void main(String... args) {
         new PomSanityCheck().run()
     }
 }
-

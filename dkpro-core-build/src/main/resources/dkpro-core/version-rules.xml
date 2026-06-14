@@ -1,0 +1,156 @@
+<ruleset comparisonMethod="maven"
+         xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0 http://mojo.codehaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
+  <ignoreVersions>
+    <ignoreVersion type="regex">.*-RC-?[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-rc-?[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*\.rc-?[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-alpha-?[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-Alpha-?[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-ALPHA-?[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-beta-?[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-M[0-9]*</ignoreVersion>
+    <ignoreVersion type="regex">.*-b[0-9]+</ignoreVersion>
+    <ignoreVersion type="regex">.*-b[0-9]+\.[0-9]+</ignoreVersion>
+    <ignoreVersion type="regex">.*-atlassian.*</ignoreVersion>
+  </ignoreVersions>
+  <rules>
+    <rule groupId="commons-codec" artifactId="commons-codec" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <rule groupId="commons-cli" artifactId="commons-cli" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <rule groupId="commons-collections" artifactId="commons-collections" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <rule groupId="commons-io" artifactId="commons-io" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <rule groupId="commons-lang" artifactId="commons-lang" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">[0-9]{8}(\.[0-9]{6})?</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <rule groupId="dom4j" artifactId="dom4j" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion>20040902.021138</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <!--
+      PIN: Lucene 4.4.x
+      dkpro-core-decompounding-asl uses Lucene 4-era APIs (e.g. ParallelMultiSearcher)
+      that were removed in Lucene 5; upgrading requires a code rewrite there.
+      -->
+    <rule groupId="org.apache.lucene" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^([4-9]|[1-9][0-9]+).*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      PIN: Jena 5.x
+      Jena 6 renamed artifacts (jena-iri → jena-iri3986, jena-tdb → jena-tdb1) and
+      removed deprecated APIs up through Jena 4.10. Upgrading requires pom and
+      code changes; see https://github.com/apache/jena/blob/main/CHANGES.txt.
+      -->
+    <rule groupId="org.apache.jena" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[6-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      PIN: Smile 4.x
+      Smile 5.x and 6.x jars are compiled to Java 25 bytecode (class major 69)
+      and will not load on our Java 21 target. They also rework smile.classification.*,
+      smile.data.*, and smile.math.*. See https://github.com/haifengl/smile/releases.
+      Revisit once dkpro-core bumps its Java baseline past 25.
+      -->
+    <rule groupId="com.github.haifengl" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[5-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      PIN: com.sun.xml.bind:jaxb-core / jaxb-impl 2.x
+      The 2.x line is the last to implement the javax.xml.bind API; 3.x+ ships
+      the jakarta.xml.bind API. Our parent-common still wires the javax.* JAXB
+      artifacts (alongside the jakarta.* set) so this pair must stay on 2.x.
+      -->
+    <rule groupId="com.sun.xml.bind" artifactId="jaxb-core" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[3-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="com.sun.xml.bind" artifactId="jaxb-impl" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[3-9].*</ignoreVersion>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      PIN: SolrJ 9.x
+      Solr 10 renamed/moved client classes (SolrQuery moved package,
+      Http2SolrClient → HttpJettySolrClient), removed legacy Apache-HttpClient
+      based clients, and split out solr-solrj-jetty as a separate dep.
+      See https://solr.apache.org/guide/solr/latest/upgrade-notes/major-changes-in-solr-10.html.
+      -->
+    <rule groupId="org.apache.solr" artifactId="solr-solrj" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <!-- PIN: Berkeleyparser r32 -->
+    <rule groupId="edu.berkeley.nlp" artifactId="berkeleyparser" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!-- 
+      - PIN: Berkeleyparser 0.232 
+      - 
+      - Upgrading to newer version breaks deserialization of StanfordNLP coref models.
+      -->
+    <rule groupId="com.googlecode.efficient-java-matrix-library" artifactId="ejml" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!-- Ignore old versions: jtok -->
+    <rule groupId="de.dfki.lt.jtok" artifactId="jtok-core" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion type="regex">2\.[0-9]{2}</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    
+    <!-- Bad models? -->
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.matetools-model-*" comparisonMethod="maven"> 
+      <ignoreVersions>
+        <ignoreVersion>20140113.0</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+  </rules>
+</ruleset>

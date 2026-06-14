@@ -17,9 +17,9 @@
  */
 package org.dkpro.core.frequency;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Web1TInMemoryFrequencyProviderTest
 {
@@ -29,10 +29,10 @@ public class Web1TInMemoryFrequencyProviderTest
         Web1TProviderBase web1t = new Web1TInMemoryProvider("en", "src/test/resources/web1t/", 2);
 
         assertEquals(2147436244l, web1t.getFrequency("!"));
-        assertEquals(528,         web1t.getFrequency("Nilmeier"));
-        assertEquals(106,         web1t.getFrequency("influx takes"));
-        assertEquals(69,          web1t.getFrequency("frist will"));
-        
+        assertEquals(528, web1t.getFrequency("Nilmeier"));
+        assertEquals(106, web1t.getFrequency("influx takes"));
+        assertEquals(69, web1t.getFrequency("frist will"));
+
         assertEquals(13893397919l, web1t.getNrOfNgrams(1));
         assertEquals(6042, web1t.getNrOfNgrams(2));
         assertEquals(11, web1t.getNrOfDistinctNgrams(1));

@@ -17,40 +17,32 @@
  */
 package org.dkpro.core.io.conll;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Conll2002ReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
-        testRoundTrip(Conll2002Reader.class, Conll2002Writer.class,
-                "conll/2002/ner2002_test.conll");
+        testRoundTrip(createReaderDescription(Conll2002Reader.class),
+                createEngineDescription(Conll2002Writer.class), "conll/2002/ner2002_test.conll");
     }
 
     @Test
-    public void testGermeval2014()
-        throws Exception
+    public void testGermeval2014() throws Exception
     {
-        testOneWay( 
-                createReaderDescription(Conll2002Reader.class,
-                        Conll2002Reader.PARAM_LANGUAGE, "de", 
-                        Conll2002Reader.PARAM_HAS_HEADER, true, 
-                        Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
+        testOneWay(
+                createReaderDescription(Conll2002Reader.class, Conll2002Reader.PARAM_LANGUAGE, "de",
+                        Conll2002Reader.PARAM_HAS_HEADER, true,
+                        Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                         Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                        Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true), 
-                "conll/2002/germeval2014_test.conll.out",
-                "conll/2002/germeval2014_test.conll");
+                        Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true),
+                "conll/2002/germeval2014_test.conll.out", "conll/2002/germeval2014_test.conll");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

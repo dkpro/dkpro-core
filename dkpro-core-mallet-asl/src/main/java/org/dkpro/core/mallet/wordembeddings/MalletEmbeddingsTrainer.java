@@ -47,7 +47,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "Mallet Embeddings Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class MalletEmbeddingsTrainer
-        extends MalletModelTrainer
+    extends MalletModelTrainer
 {
     /**
      * The number of negative samples to be generated for each token (default: 5).
@@ -86,15 +86,14 @@ public class MalletEmbeddingsTrainer
     private int minDocumentLength;
 
     @Override
-    public void collectionProcessComplete()
-            throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         InstanceList instanceList = getInstanceList();
         Alphabet alphabet = instanceList.getDataAlphabet();
         int vocabSize = alphabet.size();
 
-        getLogger().info(
-                String.format("Computing word embeddings with %d dimensions for %d tokens...",
+        getLogger()
+                .info(String.format("Computing word embeddings with %d dimensions for %d tokens...",
                         dimensions, vocabSize));
 
         if (vocabSize * dimensions * 2 > Integer.MAX_VALUE - 12) {
@@ -105,7 +104,9 @@ public class MalletEmbeddingsTrainer
         WordEmbeddings matrix = new WordEmbeddings(alphabet, dimensions, windowSize);
         matrix.setQueryWord(exampleWord);
         matrix.setMinDocumentLength(minDocumentLength);
-        matrix.countWords(instanceList);
+        // Mallet 2.1.0 added a frequent-word down-sampling factor; use the same
+        // default as Mallet's WordEmbeddings CLI (--frequency-factor 0.0001).
+        matrix.countWords(instanceList, 0.0001);
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 
         assert getTargetLocation() != null;

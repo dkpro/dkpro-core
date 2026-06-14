@@ -39,9 +39,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
  * @since 1.9.3
  */
 
-public class AlignmentFactory {
+public class AlignmentFactory
+{
 
-    public static AlignedString createAlignmentsFor(JCas aSourceView) {
+    public static AlignedString createAlignmentsFor(JCas aSourceView)
+    {
 
         FSIndex<Annotation> idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
 
@@ -75,8 +77,7 @@ public class AlignmentFactory {
                     SofaChangeAnnotation b = (SofaChangeAnnotation) it.get();
                     if (((top.getBegin() <= b.getBegin()) && // C1
                             (top.getEnd() > b.getBegin()) // C2
-                            )
-                            || ((top.getBegin() == b.getBegin()) && (top.getEnd() == b.getEnd()))) {
+                    ) || ((top.getBegin() == b.getBegin()) && (top.getEnd() == b.getEnd()))) {
                         // Found annotation covering current annotation. Skipping
                         // current annotation.
                     }

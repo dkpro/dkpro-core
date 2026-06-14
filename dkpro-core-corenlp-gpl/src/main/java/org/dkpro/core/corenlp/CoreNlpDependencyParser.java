@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2024
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -61,13 +61,10 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "CoreNLP Dependency Parser")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class CoreNlpDependencyParser
     extends JCasAnnotator_ImplBase
 {
@@ -75,7 +72,7 @@ public class CoreNlpDependencyParser
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     private boolean printTagSet;
 
     /**
@@ -94,19 +91,20 @@ public class CoreNlpDependencyParser
     private String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Location from which the model is read.
      */
@@ -125,39 +123,37 @@ public class CoreNlpDependencyParser
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = //
+    ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = //
             ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     private String dependencyMappingLocation;
-    
+
     /**
      * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_MAX_SENTENCE_LENGTH = 
-            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
-    @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
+    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, defaultValue = "2147483647")
     private int maxSentenceLength;
-    
+
     /**
      * Number of parallel threads to use.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
-            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
      * Maximum time to spend on a single sentence.
      */
     public static final String PARAM_MAX_TIME = "maxTime";
-    @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
+    @ConfigurationParameter(name = PARAM_MAX_TIME, defaultValue = "-1")
     private int maxTime;
 
     /**
@@ -166,7 +162,7 @@ public class CoreNlpDependencyParser
      * @see PTBEscapingProcessor
      */
     public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
-    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, defaultValue = "true")
     private boolean ptb3Escaping;
 
     /**
@@ -184,54 +180,51 @@ public class CoreNlpDependencyParser
     public static final String PARAM_QUOTE_END = "quoteEnd";
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
-    
+
     /**
      * Types of extra edges to add to the dependency tree.
      */
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
-    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, 
-            defaultValue = "NONE")
+    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, defaultValue = "NONE")
     GrammaticalStructure.Extras extraDependencies;
-    
+
     private CasConfigurableProviderBase<DependencyParseAnnotator> annotatorProvider;
     private MappingProvider mappingProvider;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         annotatorProvider = new CoreNlpDependencyParserModelProvider(this);
 
-        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(this, 
+        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(this,
                 dependencyMappingLocation, language, annotatorProvider);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-        
+
         annotatorProvider.configure(cas);
         mappingProvider.configure(cas);
-        
+
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
-        
+
         Annotation document = new Annotation((String) null);
         converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
-        
+
         // Transfer back into the CAS
         CoreNlp2DKPro.convertDependencies(aJCas, document, mappingProvider);
     }
@@ -242,38 +235,39 @@ public class CoreNlpDependencyParser
         public CoreNlpDependencyParserModelProvider(Object aObject)
         {
             super(aObject, "corenlp", "depparser");
-            
+
             setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
             setDefault(LOCATION,
                     "classpath:/de/tudarmstadt/ukp/dkpro/core/corenlp/lib/depparser-${language}-${variant}.properties");
         }
-        
+
         @Override
         @SuppressWarnings("unchecked")
         protected DependencyParseAnnotator produceResource(URL aUrl) throws IOException
         {
             String modelFile = aUrl.toString();
-            
+
             Properties metadata = getResourceMetaData();
-            
+
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
                 modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
             }
-            
+
             Properties coreNlpProps = new Properties();
             coreNlpProps.setProperty("model", modelFile);
             coreNlpProps.setProperty("testThreads", Integer.toString(numThreads));
             coreNlpProps.setProperty("sentenceTimeout", Integer.toString(maxTime));
             coreNlpProps.setProperty("extradependencies", extraDependencies.toString());
-            
-            // Workaround for https://mailman.stanford.edu/pipermail/parser-user/2016-March/003278.html
+
+            // Workaround for
+            // https://mailman.stanford.edu/pipermail/parser-user/2016-March/003278.html
             if ("en".equals(metadata.getProperty(LANGUAGE))
                     && "sd".equals(metadata.getProperty(VARIANT))) {
                 coreNlpProps.setProperty("language", "English");
             }
-            
+
             DependencyParseAnnotator annotator = new DependencyParseAnnotator(coreNlpProps);
 
             List<String> knownPos;
@@ -294,7 +288,7 @@ public class CoreNlpDependencyParser
             posTags.remove("-ROOT-");
             posTags.remove("-UNKNOWN-");
             addTagset(posTags, false);
-            
+
             SingletonTagset depTags = new SingletonTagset(Dependency.class,
                     metadata.getProperty(("dependency.tagset")));
             depTags.addAll(knownLabels);

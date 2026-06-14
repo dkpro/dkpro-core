@@ -40,10 +40,8 @@ import net.java.sen.dictionary.Token;
 @ResourceMetaData(name = "Gosen Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("ja")
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class GosenSegmenter
     extends SegmenterBase
 {
@@ -56,9 +54,9 @@ public class GosenSegmenter
             throw new AnalysisEngineProcessException(Messages.BUNDLE,
                     Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { language });
         }
-        
+
         StringTagger tagger = SenFactory.getStringTagger(null);
-        
+
         List<Token> tokens = new ArrayList<>();
         try {
             tokens = tagger.analyze(text, tokens);
@@ -66,7 +64,7 @@ public class GosenSegmenter
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         int sentenceBegin = -1;
         for (Token t : tokens) {
             de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token ut = createToken(aJCas,
@@ -74,7 +72,7 @@ public class GosenSegmenter
             if (sentenceBegin == -1) {
                 sentenceBegin = ut.getBegin();
             }
-            
+
             // End of sentence?
             if ("。".equals(ut.getText())) {
                 createSentence(aJCas, sentenceBegin, ut.getEnd());

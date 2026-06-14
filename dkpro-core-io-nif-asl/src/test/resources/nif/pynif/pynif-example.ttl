@@ -1,0 +1,42 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix dcterms: <http://purl.org/dc/terms/>
+
+<http://freme-project.eu> a nif:ContextCollection ;
+    nif:hasContext <http://freme-project.eu/doc32> ;
+    dcterms:conformsTo <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/2.1> .
+
+<http://freme-project.eu/doc32> a nif:Context,
+        nif:OffsetBasedString ;
+    nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+    nif:endIndex "33"^^xsd:nonNegativeInteger ;
+    nif:isString "Diego Maradona is from Argentina." .
+
+<http://freme-project.eu/doc32#offset_0_14> a nif:OffsetBasedString,
+        nif:Phrase ;
+    nif:anchorOf "Diego Maradona" ;
+    nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+    nif:endIndex "14"^^xsd:nonNegativeInteger ;
+    nif:referenceContext <http://freme-project.eu/doc32> ;
+    nif:taMsClassRef <http://dbpedia.org/ontology/SoccerManager> ;
+    itsrdf:taAnnotatorsRef <http://freme-project.eu/tools/freme-ner> ;
+    itsrdf:taClassRef <http://dbpedia.org/ontology/Person>,
+        <http://dbpedia.org/ontology/SportsManager>,
+        <http://nerd.eurecom.fr/ontology#Person> ;
+    itsrdf:taConfidence 9.869993e-01 ;
+    itsrdf:taIdentRef <http://dbpedia.org/resource/Diego_Maradona> .
+
+<http://freme-project.eu/doc32#offset_23_32> a nif:OffsetBasedString,
+        nif:Phrase ;
+    nif:anchorOf "Argentina" ;
+    nif:beginIndex "23"^^xsd:nonNegativeInteger ;
+    nif:endIndex "32"^^xsd:nonNegativeInteger ;
+    nif:referenceContext <http://freme-project.eu/doc32> ;
+    nif:taMsClassRef <http://dbpedia.org/resource/Argentina> ;
+    itsrdf:taAnnotatorsRef <http://freme-project.eu/tools/freme-ner> ;
+    itsrdf:taClassRef <http://dbpedia.org/ontology/Place>,
+        <http://dbpedia.org/ontology/PopulatedPlace>,
+        <http://nerd.eurecom.fr/ontology#Location> ;
+    itsrdf:taConfidence 9.804964e-01 .
+    

@@ -23,7 +23,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.canParameterBeSet;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParameter;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,64 +33,54 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.dkpro.core.io.penntree.PennTreebankCombinedReader;
-import org.dkpro.core.io.penntree.PennTreebankCombinedWriter;
 import org.dkpro.core.testing.EOLUtils;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class PennTreebankCombinedReaderWriterTest
 {
+    private @TempDir File tempDir;
+
     @Test
-    public void testTreeWithRoot()
-        throws Exception
+    public void testTreeWithRoot() throws Exception
     {
-        testRoundTrip("tree_with_ROOT.mrg", 
-                PennTreebankCombinedWriter.PARAM_NO_ROOT_LABEL, false);
+        testRoundTrip("tree_with_ROOT.mrg", PennTreebankCombinedWriter.PARAM_NO_ROOT_LABEL, false);
     }
 
     @Test
-    public void testTreeWithTraceRemoved()
-        throws Exception
+    public void testTreeWithTraceRemoved() throws Exception
     {
         testOneWay("tree_with_trace_filtered.mrg", "tree_with_trace.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
-    public void testTreeWithTrace()
-        throws Exception
+    public void testTreeWithTrace() throws Exception
     {
-        testRoundTrip("tree_with_trace.mrg",
-                PennTreebankCombinedReader.PARAM_REMOVE_TRACES, false,
+        testRoundTrip("tree_with_trace.mrg", PennTreebankCombinedReader.PARAM_REMOVE_TRACES, false,
                 PennTreebankCombinedReader.PARAM_WRITE_TRACES_TO_TEXT, true,
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
-    public void testTreeWithParentheses()
-        throws Exception
+    public void testTreeWithParentheses() throws Exception
     {
         testRoundTrip("tree_with_parentheses.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
-    public void testTreeWithDirectSpeech()
-        throws Exception
+    public void testTreeWithDirectSpeech() throws Exception
     {
         testRoundTrip("tree_with_direct_speech.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
-    @Ignore("This file contains trees in different variations of formatting that are not "
+    @Disabled("This file contains trees in different variations of formatting that are not "
             + "performed verbatim. Other tests check for individual tree structures.")
     @Test
-    public void testAll()
-        throws Exception
+    public void testAll() throws Exception
     {
         testRoundTrip("stanford-english-trees.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
@@ -101,7 +91,7 @@ public class PennTreebankCombinedReaderWriterTest
     {
         File reference = new File("src/test/resources/stanfordPennTrees/" + aExpectedFile);
         File input = new File("src/test/resources/stanfordPennTrees/" + aFile);
-        File output = new File("target/test-output/" + name.getMethodName());
+        File output = tempDir;
 
         List<Object> extraReaderParams = new ArrayList<>();
         extraReaderParams.add(PennTreebankCombinedReader.PARAM_SOURCE_LOCATION);
@@ -135,26 +125,8 @@ public class PennTreebankCombinedReaderWriterTest
         assertEquals(expected.trim(), actual.trim());
     }
 
-    
-
-    public void testRoundTrip(String aFile, Object... aExtraParams)
-        throws Exception
+    public void testRoundTrip(String aFile, Object... aExtraParams) throws Exception
     {
         testOneWay(aFile, aFile, aExtraParams);
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }

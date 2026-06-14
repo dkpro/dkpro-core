@@ -17,27 +17,21 @@
  */
 package org.dkpro.core.api.embeddings;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class VectorizerUtilsTest
 {
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     @Test
-    public void testRandomVectorStable()
-            throws IOException
+    public void testRandomVectorStable() throws IOException
     {
         float[] unk1 = VectorizerUtils.randomVector(3);
         float[] unk2 = VectorizerUtils.randomVector(3);
-        assertTrue("Random vector for unknown words should always be the same.",
-                Arrays.equals(unk1, unk2));
+        assertTrue(Arrays.equals(unk1, unk2),
+                "Random vector for unknown words should always be the same.");
     }
 }

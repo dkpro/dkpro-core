@@ -26,10 +26,10 @@ public final class MimeTypes
     public final static String APPLICATION_RTF = "application/rtf";
     public final static String APPLICATION_TEI_XML = "application/tei+xml";
     public final static String APPLICATION_VND_XMI_XML = "application/vnd.xmi+xml";
-    
-    
+
     // DKPro Core application types
     public final static String APPLICATION_X_ANCORA_XML = "application/x.org.dkpro.ancora+xml";
+    public final static String APPLICATION_X_BIOC = "application/x.org.dkpro.bioc+xml";
     public final static String APPLICATION_X_BNC = "application/x.org.dkpro.bnc+xml";
     public final static String APPLICATION_X_BRAT = "application/x.org.dkpro.brat";
     public final static String APPLICATION_X_DITOP = "application/x.org.dkpro.ditop";
@@ -42,6 +42,7 @@ public final class MimeTypes
     public final static String APPLICATION_X_LIF_JSON = "application/x.org.dkpro.lif+json";
     public final static String APPLICATION_X_LXF_JSON = "application/x.org.dkpro.lxf+json";
     public final static String APPLICATION_X_PUB_ANNOTATION_JSON = "application/x.org.dkpro.pubannotation+json";
+    public final static String APPLICATION_X_PERSEUS_XML = "application/x.org.dkpro.perseus+xml";
     public final static String APPLICATION_X_NEGRA3 = "application/x.org.dkpro.negra3";
     public final static String APPLICATION_X_NEGRA4 = "application/x.org.dkpro.negra4";
     public final static String APPLICATION_X_NIF_TURTLE = "application/x.org.dkpro.nif+turtle";
@@ -55,7 +56,7 @@ public final class MimeTypes
     public final static String APPLICATION_X_TUEBADZ_CHUNK = "application/x.org.dkpro.tuebadz-chunk";
     public final static String APPLICATION_X_XCES = "application/x.org.dkpro.xces+xml";
     public final static String APPLICATION_X_XCES_BASIC = "application/x.org.dkpro.xces-basic+xml";
-    
+
     // Standard text types (http://www.iana.org/assignments/media-types/media-types.xhtml)
     public final static String TEXT_CSV = "text/csv";
     public final static String TEXT_HTML = "text/html";
@@ -66,7 +67,7 @@ public final class MimeTypes
 
     // Non-standard text types
     public final static String TEXT_TCF = "text/tcf+xml";
-    
+
     // DKPro Core text types
     public final static String TEXT_X_CONLL_2000 = "text/x.org.dkpro.conll-2000";
     public final static String TEXT_X_CONLL_2002 = "text/x.org.dkpro.conll-2002";
@@ -98,9 +99,6 @@ public final class MimeTypes
     // StanfordNLP model types
     public final static String APPLICATION_X_STANFORDNLP_NER = "application/x.org.dkpro.core.stanfordnlp.ner";
     public final static String APPLICATION_X_STANFORDNLP_TAGGER = "application/x.org.dkpro.core.stanfordnlp.tagger";
-
-    // LingPipe model types
-    public final static String APPLICATION_X_LINGPIPE_NER = "application/x.org.dkpro.core.lingpipe.ner";
 
     // ArkTweet model types
     public final static String APPLICATION_X_ARKTWEET_TAGGER = "application/x.org.dkpro.core.arktweet.tagger";

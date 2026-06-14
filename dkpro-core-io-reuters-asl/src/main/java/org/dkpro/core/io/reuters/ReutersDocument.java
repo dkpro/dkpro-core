@@ -103,8 +103,7 @@ public class ReutersDocument
         }
     }
 
-    public void set(String key, String value)
-            throws ParseException
+    public void set(String key, String value) throws ParseException
     {
         switch (key) {
         case "LEWISSPLIT":
@@ -253,8 +252,7 @@ public class ReutersDocument
         return date;
     }
 
-    public void setDate(String date)
-            throws ParseException
+    public void setDate(String date) throws ParseException
     {
         setDate(dateFormat.parse(date));
     }

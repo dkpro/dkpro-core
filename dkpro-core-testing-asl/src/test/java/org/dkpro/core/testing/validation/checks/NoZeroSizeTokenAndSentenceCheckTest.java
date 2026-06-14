@@ -18,8 +18,8 @@
 package org.dkpro.core.testing.validation.checks;
 
 import static org.dkpro.core.testing.validation.Message.Level.ERROR;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -27,8 +27,7 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.validation.CasValidator;
 import org.dkpro.core.testing.validation.Message;
-import org.dkpro.core.testing.validation.checks.NoZeroSizeTokensAndSentencesCheck;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -36,8 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class NoZeroSizeTokenAndSentenceCheckTest
 {
     @Test
-    public void testZeroLengthToken()
-        throws Exception
+    public void testZeroLengthToken() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
@@ -52,12 +50,11 @@ public class NoZeroSizeTokenAndSentenceCheckTest
     }
 
     @Test
-    public void testZeroLengthSentence()
-        throws Exception
+    public void testZeroLengthSentence() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
-        new Sentence(jcas, 3,3).addToIndexes();
+        new Sentence(jcas, 3, 3).addToIndexes();
 
         CasValidator validator = new CasValidator(NoZeroSizeTokensAndSentencesCheck.class);
         List<Message> messages = validator.analyze(jcas);
@@ -68,12 +65,11 @@ public class NoZeroSizeTokenAndSentenceCheckTest
     }
 
     @Test
-    public void testCorrectCas()
-        throws Exception
+    public void testCorrectCas() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("test");
-        new Sentence(jcas, 0,4).addToIndexes();
+        new Sentence(jcas, 0, 4).addToIndexes();
         new Token(jcas, 1, 2).addToIndexes();
 
         CasValidator validator = new CasValidator(NoZeroSizeTokensAndSentencesCheck.class);

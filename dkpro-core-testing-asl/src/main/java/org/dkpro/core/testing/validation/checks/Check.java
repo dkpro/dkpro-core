@@ -22,6 +22,10 @@ import java.util.List;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.validation.Message;
 
+/**
+ * @deprecated Use the uimaFIT {@link org.apache.uima.fit.validation.ValidationCheck} instead.
+ */
+@Deprecated
 public interface Check
 {
     boolean check(JCas aCas, List<Message> aMessages);

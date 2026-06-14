@@ -19,25 +19,25 @@
 package org.dkpro.core.decompounding.splitter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.dkpro.core.decompounding.splitter.Fragment;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FragmentTest
 {
-
     @Test
     public void testCreate()
     {
         Fragment e = Fragment.createFromString("aktion(s)");
 
-        Assert.assertEquals("aktion", e.getWord());
-        Assert.assertEquals("s", e.getMorpheme());
+        assertEquals("aktion", e.getWord());
+        assertEquals("s", e.getMorpheme());
 
         e = Fragment.createFromString("plan");
-        Assert.assertEquals("plan", e.getWord());
-        Assert.assertEquals(null, e.getMorpheme());
+        assertEquals("plan", e.getWord());
+        assertEquals(null, e.getMorpheme());
     }
 
     @Test
@@ -46,10 +46,10 @@ public class FragmentTest
         Fragment e = new Fragment();
         e.setWord("aktion");
         e.setMorpheme("s");
-        Assert.assertEquals("aktion(s)", e.toString());
+        assertEquals("aktion(s)", e.toString());
 
         e.setMorpheme(null);
-        Assert.assertEquals("aktion", e.toString());
+        assertEquals("aktion", e.toString());
     }
 
     @Test
@@ -63,17 +63,17 @@ public class FragmentTest
         e2.setWord("aktion");
         e2.setMorpheme("s");
 
-        Assert.assertTrue(e1.equals(e1));
+        assertTrue(e1.equals(e1));
 
         e2.setMorpheme(null);
-        Assert.assertFalse(e1.equals(e2));
+        assertFalse(e1.equals(e2));
     }
 
     @Test
     public void testCreateFromString()
     {
         Fragment fragm = Fragment.createFromString("(");
-    
+
         assertThat(fragm.getWord()).isEqualTo("(");
     }
 }

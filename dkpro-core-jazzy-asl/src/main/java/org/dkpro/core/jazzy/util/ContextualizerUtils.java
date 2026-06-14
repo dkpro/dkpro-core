@@ -30,11 +30,10 @@ public class ContextualizerUtils
     public static int getCandidatePosition(Annotation candidate, List<Token> tokens)
     {
         int position = -1;
-        
+
         for (int i = 0; i < tokens.size(); i++) {
-            if (tokens.get(i).getBegin() == candidate.getBegin() &&
-                tokens.get(i).getEnd()   == candidate.getEnd())
-            {
+            if (tokens.get(i).getBegin() == candidate.getBegin()
+                    && tokens.get(i).getEnd() == candidate.getEnd()) {
                 position = i;
             }
         }
@@ -42,10 +41,11 @@ public class ContextualizerUtils
         return position;
     }
 
-    public static List<String> getChangedWords(String edit, List<String> words, int offset) {
+    public static List<String> getChangedWords(String edit, List<String> words, int offset)
+    {
         List<String> changedWords = new ArrayList<String>(words);
         changedWords.set(offset, edit);
-            
+
         return changedWords;
     }
 
@@ -55,18 +55,19 @@ public class ContextualizerUtils
         if (minOffset < 0) {
             minOffset = 0;
         }
-        
+
         int maxOffset = offset + windowSize;
         if (maxOffset >= words.size()) {
             maxOffset = words.size() - 1;
         }
-        
+
         List<String> changedWords = words.subList(minOffset, maxOffset + 1);
-            
+
         return changedWords;
     }
 
-    public static String getTrigram(String s1, String s2, String s3) {
+    public static String getTrigram(String s1, String s2, String s3)
+    {
         StringBuilder sb = new StringBuilder();
         sb.append(s1);
         sb.append(" ");

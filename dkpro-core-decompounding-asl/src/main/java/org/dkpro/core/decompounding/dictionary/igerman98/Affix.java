@@ -136,8 +136,7 @@ public class Affix
             regExp = String.format(SUFFIX_CONDITION_REGEX_PATTERN, aCondition);
             break;
         default:
-            throw new RuntimeException(type.toString()
-                    + " is not supported");
+            throw new RuntimeException(type.toString() + " is not supported");
         }
 
         conditionPattern = Pattern.compile(regExp);

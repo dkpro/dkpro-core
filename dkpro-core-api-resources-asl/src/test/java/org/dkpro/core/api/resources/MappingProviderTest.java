@@ -17,7 +17,7 @@
  */
 package org.dkpro.core.api.resources;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,9 +27,7 @@ import java.util.Properties;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.resource.metadata.impl.TypeSystemDescription_impl;
 import org.apache.uima.util.CasCreationUtils;
-import org.dkpro.core.api.resources.CasConfigurableProviderBase;
-import org.dkpro.core.api.resources.MappingProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MappingProviderTest
 {
@@ -85,8 +83,7 @@ public class MappingProviderTest
     @Test
     public void testTagsetChange() throws Exception
     {
-        CasConfigurableProviderBase<String> modelProvider = 
-                new CasConfigurableProviderBase<String>()
+        CasConfigurableProviderBase<String> modelProvider = new CasConfigurableProviderBase<String>()
         {
             {
                 setDefault(LOCATION, "src/test/resources/${language}.model");
@@ -124,8 +121,7 @@ public class MappingProviderTest
     @Test
     public void testRedirectedModel() throws Exception
     {
-        CasConfigurableProviderBase<String> modelProvider = 
-                new CasConfigurableProviderBase<String>()
+        CasConfigurableProviderBase<String> modelProvider = new CasConfigurableProviderBase<String>()
         {
             {
                 setDefault(LOCATION, "src/test/resources/${language}-redirect2.properties");

@@ -31,14 +31,13 @@ import org.dkpro.core.io.web1t.util.Web1TConverter;
 public class CreateNormalizerModel
 {
 
-    public static void main(String[] args)
-        throws Exception
+    public static void main(String[] args) throws Exception
     {
         FrequencyDistribution<String> freqDist = new FrequencyDistribution<String>();
 
         File context = DkproContext.getContext().getWorkspace("web1t");
-        FrequencyCountProvider provider = new Web1TFileAccessProvider("de",
-                new File(context, "de"), 1, 1);
+        FrequencyCountProvider provider = new Web1TFileAccessProvider("de", new File(context, "de"),
+                1, 1);
 
         Iterator<String> ngramIterator = provider.getNgramIterator(1);
         while (ngramIterator.hasNext()) {
@@ -50,8 +49,7 @@ public class CreateNormalizerModel
             }
         }
 
-        ConditionalFrequencyDistribution<Integer, String> cfd = 
-                new ConditionalFrequencyDistribution<Integer, String>();
+        ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
         cfd.setFrequencyDistribution(1, freqDist);
 
         Web1TConverter converter = new Web1TConverter("target/model");

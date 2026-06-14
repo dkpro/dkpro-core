@@ -1,0 +1,3 @@
+T1	Speaker 19 23	John
+T2	Quote 0 13	"I am hungry"
+E1	Speaker:T1 Speak:T2

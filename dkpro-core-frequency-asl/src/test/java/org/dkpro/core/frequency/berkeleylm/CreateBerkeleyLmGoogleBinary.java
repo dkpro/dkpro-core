@@ -29,12 +29,13 @@ public class CreateBerkeleyLmGoogleBinary
 {
     public static void main(String[] args) throws IOException
     {
-        String path = DkproContext.getContext().getWorkspace("berkeley_lm").getAbsolutePath();    
+        String path = DkproContext.getContext().getWorkspace("berkeley_lm").getAbsolutePath();
         run(path + "/en", "target/blm_en.ser");
         run(path + "/de", "target/blm_de.ser");
     }
 
-    private static void run(String path, String outFile) {
+    private static void run(String path, String outFile)
+    {
         Logger.setGlobalLogger(new Logger.SystemLogger(System.out, System.err));
         Logger.startTrack("Reading Lm File " + path + " . . . ");
         final NgramLanguageModel<String> lm = LmReaders.readLmFromGoogleNgramDir(path, true, true);
@@ -42,6 +43,6 @@ public class CreateBerkeleyLmGoogleBinary
         Logger.startTrack("Writing to file " + outFile + " . . . ");
         LmReaders.writeLmBinary(lm, outFile);
         Logger.endTrack();
-        
+
     }
 }

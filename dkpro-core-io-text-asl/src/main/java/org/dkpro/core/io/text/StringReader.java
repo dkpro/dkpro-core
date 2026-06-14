@@ -46,10 +46,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(value = OperationType.READER)
 @ResourceMetaData(name = "String Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_PLAIN})
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+@MimeTypeCapability({ MimeTypes.TEXT_PLAIN })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class StringReader
     extends JCasCollectionReader_ImplBase
 {
@@ -71,16 +69,14 @@ public class StringReader
      * The collection ID to set in the {@link DocumentMetaData}.
      */
     public static final String PARAM_COLLECTION_ID = "collectionId";
-    @ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = true,
-            defaultValue = "COLLECTION_ID")
+    @ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = true, defaultValue = "COLLECTION_ID")
     private String collectionId;
 
     /**
      * The document ID to set in the {@link DocumentMetaData}.
      */
     public static final String PARAM_DOCUMENT_ID = "documentId";
-    @ConfigurationParameter(name = PARAM_DOCUMENT_ID, mandatory = true,
-            defaultValue = "DOCUMENT_ID")
+    @ConfigurationParameter(name = PARAM_DOCUMENT_ID, mandatory = true, defaultValue = "DOCUMENT_ID")
     private String documentId;
 
     /**
@@ -100,16 +96,14 @@ public class StringReader
     private boolean isDone = false;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
         isDone = false;
     }
 
     @Override
-    public void getNext(JCas sJCas)
-        throws IOException
+    public void getNext(JCas sJCas) throws IOException
     {
         isDone = true;
 
@@ -124,8 +118,7 @@ public class StringReader
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return !isDone;
     }

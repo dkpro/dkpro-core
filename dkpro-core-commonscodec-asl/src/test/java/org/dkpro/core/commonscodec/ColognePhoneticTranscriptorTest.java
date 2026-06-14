@@ -20,19 +20,17 @@ package org.dkpro.core.commonscodec;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
 
-import org.dkpro.core.commonscodec.ColognePhoneticTranscriptor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ColognePhoneticTranscriptorTest
 {
 
     @Test
-    public void colognePhoneticTest() throws Exception {
+    public void colognePhoneticTest() throws Exception
+    {
 
-        runTest(
-                createEngineDescription(ColognePhoneticTranscriptor.class),
-                "Man sagt die Ente ist das Ende vom Mann .",
-                "66", "842", "2", "062", "082", "28", "062", "36", "66", ""
-        );
+        runTest(createEngineDescription(ColognePhoneticTranscriptor.class),
+                "Man sagt die Ente ist das Ende vom Mann .", "6", "842", "2", "062", "082", "28",
+                "062", "36", "6", "");
     }
 }

@@ -1,27 +1,17 @@
-/*
- * Copyright 2017
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * First created by JCasGen Thu Sep 15 23:03:44 EEST 2016 
- */
+
+/* Apache UIMA v3 - First created by JCasGen Sun Jan 28 11:38:37 CET 2018 */
+
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
+
+import org.apache.uima.cas.CASException;
+import org.apache.uima.cas.impl.CASImpl;
+import org.apache.uima.cas.impl.TypeImpl;
+import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
-import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
@@ -37,12 +27,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
  * surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns
  * a part-of-speech to each Token.
  * </p>
+ * Updated by JCasGen Sun Jan 28 11:38:37 CET 2018 XML source:
+ * /Users/bluefire/git/dkpro-core/dkpro-core-api-segmentation-asl/src/main/resources/desc/type/LexicalUnits_customized.xml
  * 
  * @generated
  */
 public class Token
     extends Annotation
 {
+
+    /**
+     * @generated
+     * @ordered
+     */
+    @SuppressWarnings("hiding")
+    public final static String _TypeName = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token";
+
     /**
      * @generated
      * @ordered
@@ -66,6 +66,39 @@ public class Token
         return typeIndexID;
     }
 
+    /*
+     * ******************* Feature Offsets *
+     *******************/
+
+    public final static String _FeatName_parent = "parent";
+    public final static String _FeatName_lemma = "lemma";
+    public final static String _FeatName_stem = "stem";
+    public final static String _FeatName_pos = "pos";
+    public final static String _FeatName_morph = "morph";
+    public final static String _FeatName_id = "id";
+    public final static String _FeatName_form = "form";
+    public final static String _FeatName_syntacticFunction = "syntacticFunction";
+
+    /* Feature Adjusted Offsets */
+    private final static CallSite _FC_parent = TypeSystemImpl.createCallSite(Token.class, "parent");
+    private final static MethodHandle _FH_parent = _FC_parent.dynamicInvoker();
+    private final static CallSite _FC_lemma = TypeSystemImpl.createCallSite(Token.class, "lemma");
+    private final static MethodHandle _FH_lemma = _FC_lemma.dynamicInvoker();
+    private final static CallSite _FC_stem = TypeSystemImpl.createCallSite(Token.class, "stem");
+    private final static MethodHandle _FH_stem = _FC_stem.dynamicInvoker();
+    private final static CallSite _FC_pos = TypeSystemImpl.createCallSite(Token.class, "pos");
+    private final static MethodHandle _FH_pos = _FC_pos.dynamicInvoker();
+    private final static CallSite _FC_morph = TypeSystemImpl.createCallSite(Token.class, "morph");
+    private final static MethodHandle _FH_morph = _FC_morph.dynamicInvoker();
+    private final static CallSite _FC_id = TypeSystemImpl.createCallSite(Token.class, "id");
+    private final static MethodHandle _FH_id = _FC_id.dynamicInvoker();
+    private final static CallSite _FC_form = TypeSystemImpl.createCallSite(Token.class, "form");
+    private final static MethodHandle _FH_form = _FC_form.dynamicInvoker();
+    private final static CallSite _FC_syntacticFunction = TypeSystemImpl.createCallSite(Token.class,
+            "syntacticFunction");
+    private final static MethodHandle _FH_syntacticFunction = _FC_syntacticFunction
+            .dynamicInvoker();
+
     /**
      * Never called. Disable default constructor
      * 
@@ -79,14 +112,14 @@ public class Token
      * Internal - constructor used by generator
      * 
      * @generated
-     * @param addr
-     *            low level Feature Structure reference
+     * @param casImpl
+     *            the CAS this Feature Structure belongs to
      * @param type
      *            the type of this Feature Structure
      */
-    public Token(int addr, TOP_Type type)
+    public Token(TypeImpl type, CASImpl casImpl)
     {
-        super(addr, type);
+        super(type, casImpl);
         readObject();
     }
 
@@ -141,12 +174,7 @@ public class Token
      */
     public Annotation getParent()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_parent == null) {
-            jcasType.jcas.throwFeatMissing("parent",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return (Annotation) (jcasType.ll_cas.ll_getFSForRef(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type) jcasType).casFeatCode_parent)));
+        return (Annotation) (_getFeatureValueNc(wrapGetIntCatchException(_FH_parent)));
     }
 
     /**
@@ -161,12 +189,7 @@ public class Token
      */
     public void setParent(Annotation v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_parent == null) {
-            jcasType.jcas.throwFeatMissing("parent",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type) jcasType).casFeatCode_parent,
-                jcasType.ll_cas.ll_getFSRef(v));
+        _setFeatureValueNcWj(wrapGetIntCatchException(_FH_parent), v);
     }
 
     // *--------------*
@@ -180,12 +203,7 @@ public class Token
      */
     public Lemma getLemma()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_lemma == null) {
-            jcasType.jcas.throwFeatMissing("lemma",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return (Lemma) (jcasType.ll_cas.ll_getFSForRef(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type) jcasType).casFeatCode_lemma)));
+        return (Lemma) (_getFeatureValueNc(wrapGetIntCatchException(_FH_lemma)));
     }
 
     /**
@@ -197,12 +215,7 @@ public class Token
      */
     public void setLemma(Lemma v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_lemma == null) {
-            jcasType.jcas.throwFeatMissing("lemma",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type) jcasType).casFeatCode_lemma,
-                jcasType.ll_cas.ll_getFSRef(v));
+        _setFeatureValueNcWj(wrapGetIntCatchException(_FH_lemma), v);
     }
 
     // *--------------*
@@ -216,12 +229,7 @@ public class Token
      */
     public Stem getStem()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_stem == null) {
-            jcasType.jcas.throwFeatMissing("stem",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return (Stem) (jcasType.ll_cas.ll_getFSForRef(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type) jcasType).casFeatCode_stem)));
+        return (Stem) (_getFeatureValueNc(wrapGetIntCatchException(_FH_stem)));
     }
 
     /**
@@ -233,12 +241,7 @@ public class Token
      */
     public void setStem(Stem v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_stem == null) {
-            jcasType.jcas.throwFeatMissing("stem",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type) jcasType).casFeatCode_stem,
-                jcasType.ll_cas.ll_getFSRef(v));
+        _setFeatureValueNcWj(wrapGetIntCatchException(_FH_stem), v);
     }
 
     // *--------------*
@@ -252,12 +255,7 @@ public class Token
      */
     public POS getPos()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_pos == null) {
-            jcasType.jcas.throwFeatMissing("pos",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return (POS) (jcasType.ll_cas.ll_getFSForRef(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type) jcasType).casFeatCode_pos)));
+        return (POS) (_getFeatureValueNc(wrapGetIntCatchException(_FH_pos)));
     }
 
     /**
@@ -269,12 +267,7 @@ public class Token
      */
     public void setPos(POS v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_pos == null) {
-            jcasType.jcas.throwFeatMissing("pos",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type) jcasType).casFeatCode_pos,
-                jcasType.ll_cas.ll_getFSRef(v));
+        _setFeatureValueNcWj(wrapGetIntCatchException(_FH_pos), v);
     }
 
     // *--------------*
@@ -288,12 +281,7 @@ public class Token
      */
     public MorphologicalFeatures getMorph()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_morph == null) {
-            jcasType.jcas.throwFeatMissing("morph",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return (MorphologicalFeatures) (jcasType.ll_cas.ll_getFSForRef(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type) jcasType).casFeatCode_morph)));
+        return (MorphologicalFeatures) (_getFeatureValueNc(wrapGetIntCatchException(_FH_morph)));
     }
 
     /**
@@ -305,12 +293,7 @@ public class Token
      */
     public void setMorph(MorphologicalFeatures v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_morph == null) {
-            jcasType.jcas.throwFeatMissing("morph",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type) jcasType).casFeatCode_morph,
-                jcasType.ll_cas.ll_getFSRef(v));
+        _setFeatureValueNcWj(wrapGetIntCatchException(_FH_morph), v);
     }
 
     // *--------------*
@@ -326,11 +309,7 @@ public class Token
      */
     public String getId()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_id == null) {
-            jcasType.jcas.throwFeatMissing("id",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return jcasType.ll_cas.ll_getStringValue(addr, ((Token_Type) jcasType).casFeatCode_id);
+        return _getStringValueNc(wrapGetIntCatchException(_FH_id));
     }
 
     /**
@@ -344,11 +323,7 @@ public class Token
      */
     public void setId(String v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_id == null) {
-            jcasType.jcas.throwFeatMissing("id",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setStringValue(addr, ((Token_Type) jcasType).casFeatCode_id, v);
+        _setStringValueNfc(wrapGetIntCatchException(_FH_id), v);
     }
 
     // *--------------*
@@ -363,12 +338,7 @@ public class Token
      */
     public TokenForm getForm()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_form == null) {
-            jcasType.jcas.throwFeatMissing("form",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return (TokenForm) (jcasType.ll_cas.ll_getFSForRef(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type) jcasType).casFeatCode_form)));
+        return (TokenForm) (_getFeatureValueNc(wrapGetIntCatchException(_FH_form)));
     }
 
     /**
@@ -381,12 +351,7 @@ public class Token
      */
     public void setForm(TokenForm v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_form == null) {
-            jcasType.jcas.throwFeatMissing("form",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type) jcasType).casFeatCode_form,
-                jcasType.ll_cas.ll_getFSRef(v));
+        _setFeatureValueNcWj(wrapGetIntCatchException(_FH_form), v);
     }
 
     // *--------------*
@@ -400,12 +365,7 @@ public class Token
      */
     public String getSyntacticFunction()
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_syntacticFunction == null) {
-            jcasType.jcas.throwFeatMissing("syntacticFunction",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        return jcasType.ll_cas.ll_getStringValue(addr,
-                ((Token_Type) jcasType).casFeatCode_syntacticFunction);
+        return _getStringValueNc(wrapGetIntCatchException(_FH_syntacticFunction));
     }
 
     /**
@@ -417,12 +377,7 @@ public class Token
      */
     public void setSyntacticFunction(String v)
     {
-        if (Token_Type.featOkTst && ((Token_Type) jcasType).casFeat_syntacticFunction == null) {
-            jcasType.jcas.throwFeatMissing("syntacticFunction",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-        }
-        jcasType.ll_cas.ll_setStringValue(addr,
-                ((Token_Type) jcasType).casFeatCode_syntacticFunction, v);
+        _setStringValueNfc(wrapGetIntCatchException(_FH_syntacticFunction), v);
     }
 
     /**
@@ -486,7 +441,14 @@ public class Token
         if (aText != null && !aText.equals(getCoveredText())) {
             // Create form annotation if none is here yet
             if (form == null) {
-                form = new TokenForm(jcasType.jcas, getBegin(), getEnd());
+                try {
+                    form = new TokenForm(getCAS().getJCas(), getBegin(), getEnd());
+                }
+                catch (CASException e) {
+                    // This should actually never happen since a JCas FS class should always be
+                    // associated with a JCas.
+                    throw new IllegalStateException(e);
+                }
                 form.addToIndexes();
             }
 

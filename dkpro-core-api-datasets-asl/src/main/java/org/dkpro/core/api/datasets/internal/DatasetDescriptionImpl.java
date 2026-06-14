@@ -32,7 +32,7 @@ public class DatasetDescriptionImpl
     implements DatasetDescription
 {
     private DatasetFactory owner;
-    
+
     /**
      * @deprecated to be superseded by groupId/datasetId/version/language/mediaType
      */

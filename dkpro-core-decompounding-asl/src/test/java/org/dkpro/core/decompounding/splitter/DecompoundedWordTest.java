@@ -19,17 +19,15 @@
 package org.dkpro.core.decompounding.splitter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.dkpro.core.decompounding.splitter.DecompoundedWord;
-import org.dkpro.core.decompounding.splitter.Fragment;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DecompoundedWordTest
 {
@@ -144,7 +142,7 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s1 = DecompoundedWord.createFromString("Aktion(s)+plan");
         DecompoundedWord s2 = DecompoundedWord.createFromString("Aktionsplan");
-        
+
         assertThat(s1.isCompound()).isTrue();
         assertThat(s2.isCompound()).isFalse();
     }
@@ -154,7 +152,7 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s1 = DecompoundedWord.createFromString("Aktion(s)+plan");
         DecompoundedWord s2 = DecompoundedWord.createFromString("unter+flur+konvektor(en)");
-        
+
         assertThat(s1.hasLastFragmentMorpheme()).isFalse();
         assertThat(s2.hasLastFragmentMorpheme()).isTrue();
     }

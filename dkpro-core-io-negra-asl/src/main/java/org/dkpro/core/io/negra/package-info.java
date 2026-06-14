@@ -17,7 +17,8 @@
  */
 
 /**
- * Support for the <a href="http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/negra-corpus.html/">NEGRA</a> 
+ * Support for the <a href=
+ * "http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/negra-corpus.html/">NEGRA</a>
  * export format.
  *
  * @since 1.2.0

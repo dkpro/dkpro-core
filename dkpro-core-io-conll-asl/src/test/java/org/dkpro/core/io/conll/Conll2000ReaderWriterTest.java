@@ -17,22 +17,20 @@
  */
 package org.dkpro.core.io.conll;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Conll2000ReaderWriterTest
 {
     @Test
-    public void roundTrip()
-        throws Exception
+    public void roundTrip() throws Exception
     {
-        testRoundTrip(Conll2000Reader.class, Conll2000Writer.class,
+        testRoundTrip( //
+                createReaderDescription(Conll2000Reader.class), //
+                createEngineDescription(Conll2000Writer.class), //
                 "conll/2000/chunk2000_test.conll");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

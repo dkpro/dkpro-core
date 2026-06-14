@@ -45,7 +45,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 public class DKPro2Lif
 {
     private static final String DKPRO_CORE_LIF_CONVERTER = "DKPro Core LIF Converter";
-    
+
     private static final String PHRASE_STRUCTURE = "phrasestruct";
     private static final String CONSTITUENT = "const";
     private static final String DEPENDENCY_STRUCTURE = "depstruct";
@@ -54,15 +54,15 @@ public class DKPro2Lif
     private static final String SENTENCE = "sent";
     private static final String TOKEN = "tok";
     private static final String NAMED_ENTITY = "ne";
-    
+
     private Object2IntOpenHashMap<String> counters = new Object2IntOpenHashMap<>();
     private Int2IntOpenHashMap ids = new Int2IntOpenHashMap();
-    
+
     public void convert(JCas aJCas, Container container)
     {
         container.setLanguage(aJCas.getDocumentLanguage());
         container.setText(aJCas.getDocumentText());
-        
+
         View view = container.newView();
 
         // Paragraph
@@ -96,7 +96,7 @@ public class DKPro2Lif
             convertDependencies(view, s);
         }
         view.addContains(Discriminators.Uri.DEPENDENCY, DKPRO_CORE_LIF_CONVERTER, "Dependencies");
-        
+
         // Constituents
         for (ROOT r : select(aJCas, ROOT.class)) {
             convertConstituents(view, r);
@@ -104,18 +104,18 @@ public class DKPro2Lif
         view.addContains(Discriminators.Uri.PHRASE_STRUCTURE, DKPRO_CORE_LIF_CONVERTER,
                 "Constituents");
     }
-    
+
     private void convertParagraph(View aTarget, Paragraph aParagraph)
     {
         aTarget.newAnnotation(id(PARAGRAPH, aParagraph), Discriminators.Uri.PARAGRAPH,
                 aParagraph.getBegin(), aParagraph.getEnd());
     }
-    
+
     private void convertSentence(View aTarget, Sentence aSentence)
     {
         aTarget.newAnnotation(id(SENTENCE, aSentence), Discriminators.Uri.SENTENCE,
                 aSentence.getBegin(), aSentence.getEnd());
-    }    
+    }
 
     private void convertToken(View aTarget, Token aToken)
     {
@@ -128,15 +128,15 @@ public class DKPro2Lif
         if (aToken.getLemma() != null) {
             a.addFeature(Features.Token.LEMMA, aToken.getLemma().getValue());
         }
-    }    
-    
+    }
+
     private void convertNamedEntity(View aTarget, NamedEntity aNamedEntity)
     {
         Annotation ne = aTarget.newAnnotation(id(NAMED_ENTITY, aNamedEntity), Discriminators.Uri.NE,
                 aNamedEntity.getBegin(), aNamedEntity.getEnd());
-        ne.setLabel(aNamedEntity.getValue());
+        ne.addFeature("category", aNamedEntity.getValue());
     }
-    
+
     private void convertDependencies(View aView, Sentence aSentence)
     {
         Set<String> depRelIds = new TreeSet<>();
@@ -158,18 +158,18 @@ public class DKPro2Lif
             depStruct.addFeature(Features.DependencyStructure.DEPENDENCIES, depRelIds);
         }
     }
-    
+
     private void convertConstituents(View aTarget, ROOT aRootConstituent)
     {
         Set<String> constituents = new LinkedHashSet<>();
         convertConstituent(aTarget, aRootConstituent, constituents);
-        
+
         Annotation phraseStruct = aTarget.newAnnotation(id(PHRASE_STRUCTURE, aRootConstituent),
                 Discriminators.Uri.PHRASE_STRUCTURE, aRootConstituent.getBegin(),
                 aRootConstituent.getEnd());
         phraseStruct.addFeature(Features.PhraseStructure.CONSTITUENTS, constituents);
     }
-    
+
     private void convertConstituent(View aView, org.apache.uima.jcas.tcas.Annotation aNode,
             Set<String> aConstituents)
     {
@@ -178,7 +178,7 @@ public class DKPro2Lif
             Annotation constituent = aView.newAnnotation(id(CONSTITUENT, aNode),
                     Discriminators.Uri.CONSTITUENT);
             aConstituents.add(constituent.getId());
-            
+
             for (org.apache.uima.jcas.tcas.Annotation child : select(
                     ((Constituent) aNode).getChildren(),
                     org.apache.uima.jcas.tcas.Annotation.class)) {
@@ -192,7 +192,7 @@ public class DKPro2Lif
             throw new IllegalStateException("Unexpected node type: " + aNode);
         }
     }
-    
+
     private String id(String aPrefix, TOP aFS)
     {
         int id;
@@ -206,7 +206,7 @@ public class DKPro2Lif
             ids.put(aFS.getAddress(), id);
             counters.put(aPrefix, id + 1);
         }
-        
+
         return aPrefix + '-' + id;
     }
 }

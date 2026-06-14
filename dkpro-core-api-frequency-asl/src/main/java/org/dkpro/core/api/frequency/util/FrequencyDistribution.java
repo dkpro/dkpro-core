@@ -38,23 +38,33 @@ import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 /**
  * It is basically a mapping from samples (keys) to long values (counts).
  * 
- * <p>Suppose we want to record the number of occurrences of each word in a sentence, 
- * then this class can be used as follows:</p>
+ * <p>
+ * Suppose we want to record the number of occurrences of each word in a sentence, then this class
+ * can be used as follows:
+ * </p>
  * 
- * <blockquote><pre>
+ * <blockquote>
+ * 
+ * <pre>
  * FrequencyDistribution&lt;String&gt; fd = new FrequencyDistribution&lt;String&gt;();
  * for (String word : "foo bar baz foo".split(" ")) {
  *     fd.inc(word);
  * }
  * System.out.println(fd.getCount("foo"));
- * </pre></blockquote>
+ * </pre>
  * 
- * <p>The last call to {@link FrequencyDistribution#getCount} will yield 2, because the
- * word "foo" has appeared twice in the given sequence of words.</p>
+ * </blockquote>
  * 
- * <p>This class was inspired by NLTK's <a
- * href="http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.FreqDist-class.html">
- * FreqDist</a>.</p>
+ * <p>
+ * The last call to {@link FrequencyDistribution#getCount} will yield 2, because the word "foo" has
+ * appeared twice in the given sequence of words.
+ * </p>
+ * 
+ * <p>
+ * This class was inspired by NLTK's
+ * <a href="http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.FreqDist-class.html">
+ * FreqDist</a>.
+ * </p>
  * 
  * @param <T>
  *            the type of the samples
@@ -63,7 +73,7 @@ import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 public class FrequencyDistribution<T>
     implements Serializable
 {
-    
+
     private static final long serialVersionUID = 150;
 
     private Object2LongOpenHashMap<T> freqDist;
@@ -198,57 +208,55 @@ public class FrequencyDistribution<T>
     public void addSample(T sample, long number)
     {
         this.n = this.n + number;
-        
+
         long sampleFreq = number;
         if (freqDist.containsKey(sample)) {
             sampleFreq = freqDist.get(sample) + number;
         }
         freqDist.put(sample, sampleFreq);
-        
+
         if (sampleFreq > maxFreq) {
             maxFreq = sampleFreq;
             maxSample = sample;
         }
     }
 
-
     /**
      * Returns the highest frequency that is currently stored.
      * 
      * @return highest frequency that is currently stored.
      */
-    public long getMaxFreq() {
+    public long getMaxFreq()
+    {
         return maxFreq;
     }
-    
+
     /**
      * Returns the sample which has currently the highest frequency. If there is more than one
      * sample which share the highest frequency, returns the one that was added first.
      * 
      * @return the sample which has currently the highest frequency
      */
-    public T getSampleWithMaxFreq() {
+    public T getSampleWithMaxFreq()
+    {
         return maxSample;
     }
-    
-    
-    public void save(File file)
-            throws IOException
+
+    public void save(File file) throws IOException
     {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
         out.writeObject(freqDist);
         out.close();
     }
 
-    public void load(File file)
-            throws IOException, ClassNotFoundException
+    public void load(File file) throws IOException, ClassNotFoundException
     {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
         freqDist = (Object2LongOpenHashMap<T>) in.readObject();
         in.close();
 
-        int samples = 0;
-        
+        long samples = 0;
+
         LongIterator sampleIter = freqDist.values().iterator();
 
         // determine total frequency
@@ -257,7 +265,7 @@ public class FrequencyDistribution<T>
             samples += count;
         }
         n = samples;
-        
+
         // determine max sample
         for (T key : freqDist.keySet()) {
             Long freq = freqDist.get(key);
@@ -275,7 +283,7 @@ public class FrequencyDistribution<T>
         maxSample = null;
         n = 0;
     }
-    
+
     /**
      * Returns the n most frequent samples in the distribution. The ordering within in a group of
      * samples with the same frequency is undefined.
@@ -284,37 +292,38 @@ public class FrequencyDistribution<T>
      *            the numer of most frequent samples to return.
      * @return the n most frequent samples in the distribution.
      */
-    public List<T> getMostFrequentSamples(int n) {
+    public List<T> getMostFrequentSamples(int n)
+    {
 
         MinMaxPriorityQueue<TermFreqTuple<T>> topN = MinMaxPriorityQueue.maximumSize(n).create();
 
         for (T key : this.getKeys()) {
             topN.add(new TermFreqTuple<T>(key, this.getCount(key)));
         }
-        
+
         List<T> topNList = new ArrayList<T>();
         while (!topN.isEmpty()) {
             topNList.add(topN.poll().getKey());
         }
-        
+
         return topNList;
     }
-    
+
     class ValueComparator
         implements Comparator<T>
     {
-    
+
         Map<T, Long> base;
-    
+
         public ValueComparator(Map<T, Long> base)
         {
             this.base = base;
         }
-    
+
         @Override
         public int compare(T a, T b)
         {
-    
+
             if (base.get(a) < base.get(b)) {
                 return 1;
             }

@@ -33,7 +33,7 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.io.text.StringReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -41,17 +41,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class WhitespaceSegmenterTest
 {
     @Test
-    public void simpleExample()
-        throws Exception
+    public void simpleExample() throws Exception
     {
-        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
+        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the
         // documentation. Do not remove these tags!
         // tag::example[]
         JCas jcas = JCasFactory.createText("This is sentence 1 .\nThis is number 2 .", "en");
-        
-        runPipeline(jcas,
-                createEngineDescription(WhitespaceSegmenter.class));
-        
+
+        runPipeline(jcas, createEngineDescription(WhitespaceSegmenter.class));
+
         for (Sentence s : select(jcas, Sentence.class)) {
             for (Token t : selectCovered(Token.class, s)) {
                 System.out.printf("[%s] ", t.getCoveredText());
@@ -59,28 +57,21 @@ public class WhitespaceSegmenterTest
             System.out.println();
         }
         // end::example[]
-        
-        assertToken(
-                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
-                        "." },
-                select(jcas, Token.class));
-        assertSentence(
-                new String[] { 
-                        "This is sentence 1 .",
-                        "This is number 2 ." },
+
+        assertToken(new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
+                "." }, select(jcas, Token.class));
+        assertSentence(new String[] { "This is sentence 1 .", "This is number 2 ." },
                 select(jcas, Sentence.class));
     }
-    
+
     @Test
-    public void test()
-        throws ResourceInitializationException
+    public void test() throws ResourceInitializationException
     {
         String text = "This is a tokenized text .";
         String[] expectedSentences = new String[] { "This is a tokenized text ." };
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text", "." };
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(WhitespaceSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -90,8 +81,7 @@ public class WhitespaceSegmenterTest
     }
 
     @Test
-    public void testTwoLines()
-        throws ResourceInitializationException
+    public void testTwoLines() throws ResourceInitializationException
     {
         String text = "This is a tokenized text .\nAnother line with tokens .";
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text", ".",
@@ -100,8 +90,7 @@ public class WhitespaceSegmenterTest
                 "Another line with tokens ." };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(WhitespaceSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -111,15 +100,13 @@ public class WhitespaceSegmenterTest
     }
 
     @Test
-    public void testNoPunctuation()
-        throws ResourceInitializationException
+    public void testNoPunctuation() throws ResourceInitializationException
     {
         String text = "This is a tokenized text";
         String[] expectedSentences = new String[] { "This is a tokenized text" };
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text" };
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(WhitespaceSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -129,15 +116,13 @@ public class WhitespaceSegmenterTest
     }
 
     @Test
-    public void testTrailingWhitespace()
-        throws ResourceInitializationException
+    public void testTrailingWhitespace() throws ResourceInitializationException
     {
         String text = "This is a tokenized text ";
         String[] expectedSentences = new String[] { "This is a tokenized text " };
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text" };
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(WhitespaceSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -147,8 +132,7 @@ public class WhitespaceSegmenterTest
     }
 
     @Test
-    public void testPunctuation()
-        throws ResourceInitializationException
+    public void testPunctuation() throws ResourceInitializationException
     {
         String text = "This , is a tokenized text , with a final period .";
         String[] expectedSentences = new String[] {
@@ -157,8 +141,7 @@ public class WhitespaceSegmenterTest
                 "with", "a", "final", "period", "." };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(WhitespaceSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
@@ -174,8 +157,7 @@ public class WhitespaceSegmenterTest
      * @deprecated Windows linebreaks are not supported
      */
     @Deprecated
-    public void testTwoLinesWindowsLineBreaks()
-        throws ResourceInitializationException
+    public void testTwoLinesWindowsLineBreaks() throws ResourceInitializationException
     {
         String text = "This is a tokenized text .\r\nAnother line with tokens .";
         String[] expectedTokens = new String[] { "This", "is", "a", "tokenized", "text", ".",
@@ -184,8 +166,7 @@ public class WhitespaceSegmenterTest
                 "Another line with tokens ." };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, text,
-                StringReader.PARAM_LANGUAGE, "en");
+                StringReader.PARAM_DOCUMENT_TEXT, text, StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(WhitespaceSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {

@@ -21,14 +21,14 @@ import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -40,7 +40,7 @@ public class CamelCaseSegmenterTest
     {
         AnalysisEngine seg = createEngine(CamelCaseTokenSegmenter.class);
 
-        //                0123456789012345678901
+        // 0123456789012345678901
         String content = "ThisIsACamel CaseText";
         JCas cas = seg.newJCas();
         cas.setDocumentText(content);
@@ -60,7 +60,7 @@ public class CamelCaseSegmenterTest
     {
         AnalysisEngine seg = createEngine(CamelCaseTokenSegmenter.class);
 
-        //                01234567890123456789012
+        // 01234567890123456789012
         String content = "GetFileUploadURLRequest";
         JCas cas = seg.newJCas();
         cas.setDocumentText(content);
@@ -79,7 +79,7 @@ public class CamelCaseSegmenterTest
     {
         AnalysisEngine seg = createEngine(CamelCaseTokenSegmenter.class);
 
-        //                01234567890123
+        // 01234567890123
         String content = "_ORGANIZATION";
         JCas cas = seg.newJCas();
         cas.setDocumentText(content);
@@ -99,13 +99,13 @@ public class CamelCaseSegmenterTest
     {
         // Verifying that the camel case token is marked up correctly when the optional markup type
         // is specified
-        AnalysisEngine seg = createEngine(
-                CamelCaseTokenSegmenter.class,
-                CamelCaseTokenSegmenter.PARAM_MARKUP_TYPE,
-                Split.class // Just reusing the Split annotation type for this test
+        AnalysisEngine seg = createEngine(CamelCaseTokenSegmenter.class,
+                CamelCaseTokenSegmenter.PARAM_MARKUP_TYPE, Split.class // Just reusing the Split
+                                                                       // annotation type for this
+                                                                       // test
         );
 
-        //                01234567890123456789012
+        // 01234567890123456789012
         String content = "Try getFileUploadURLRequest Now";
         JCas cas = seg.newJCas();
         cas.setDocumentText(content);

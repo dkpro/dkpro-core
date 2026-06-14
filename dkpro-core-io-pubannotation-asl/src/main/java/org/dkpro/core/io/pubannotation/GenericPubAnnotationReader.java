@@ -29,15 +29,15 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.io.pubannotation.internal.GenericPubAnnotation2DKPro;
 import org.dkpro.core.io.pubannotation.internal.model.PADocument;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * Reader for the PubAnnotation format.
@@ -60,10 +60,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * @see <a href="http://www.pubannotation.org/docs/annotation-format/">PubAnnotation format</a>
  */
 @ResourceMetaData(name = "PubAnnotation Reader")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_PUB_ANNOTATION_JSON})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_PUB_ANNOTATION_JSON })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class GenericPubAnnotationReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -80,7 +78,7 @@ public class GenericPubAnnotationReader
     public static final String PARAM_SPAN_ID_FEATURE = "spanIdFeature";
     @ConfigurationParameter(name = PARAM_SPAN_ID_FEATURE, mandatory = false)
     private String spanIdFeature;
-    
+
     /**
      * The feature on the span annotation type which receives the label.
      */
@@ -96,21 +94,19 @@ public class GenericPubAnnotationReader
     private boolean resolveNamespaces;
 
     private ObjectMapper mapper;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         mapper = new ObjectMapper();
         // Hack because LXF dumper presently creates invalid JSON
         mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     }
-    
+
     @Override
-    public void getNext(JCas aCAS)
-        throws IOException, CollectionException
+    public void getNext(JCas aCAS) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aCAS, res);

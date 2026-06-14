@@ -17,30 +17,32 @@
  */
 package org.dkpro.core.api.lexmorph.pos;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.api.lexmorph.pos.POSUtils;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
 
 public class POSUtilsTest
 {
-    
+
     @Test
-    public void testAssignCoarseValue() throws Exception {
+    public void testAssignCoarseValue() throws Exception
+    {
         JCas jcas = JCasFactory.createJCas();
         POS posPos = new POS(jcas);
         POS posNoun = new POS_NOUN(jcas);
-        
+
         POSUtils.assignCoarseValue(null);
         POSUtils.assignCoarseValue(posPos);
         POSUtils.assignCoarseValue(posNoun);
-        
-        Assert.assertNull(posPos.getCoarseValue());
-        Assert.assertEquals("NOUN", posNoun.getCoarseValue());
-        
+
+        assertNull(posPos.getCoarseValue());
+        assertEquals("NOUN", posNoun.getCoarseValue());
+
     }
 }

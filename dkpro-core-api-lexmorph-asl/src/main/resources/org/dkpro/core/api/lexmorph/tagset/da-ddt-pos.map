@@ -23,7 +23,7 @@ I=POS_INTJ
 # N     noun
 N=POS_NOUN
 # NP    proper noun
-N=POS_PROPN
+NP=POS_PROPN
 # NC    common noun
 NC=POS_NOUN
 # P     pronoun

@@ -23,8 +23,7 @@ import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.io.nitf.NitfReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class NitfReaderTest
 {
@@ -33,12 +32,9 @@ public class NitfReaderTest
     {
         final String DATA_PATH = "src/test/resources/data/";
 
-        CollectionReader articleReader = CollectionReaderFactory.createReader(
-                NitfReader.class,
-                NitfReader.PARAM_SOURCE_LOCATION, DATA_PATH,
-                NitfReader.PARAM_PATTERNS, "[+]/**/*.xml",
-                NitfReader.PARAM_LANGUAGE, "en",
-                NitfReader.PARAM_OFFSET, 0);
+        CollectionReader articleReader = CollectionReaderFactory.createReader(NitfReader.class,
+                NitfReader.PARAM_SOURCE_LOCATION, DATA_PATH, NitfReader.PARAM_PATTERNS,
+                "[+]/**/*.xml", NitfReader.PARAM_LANGUAGE, "en", NitfReader.PARAM_OFFSET, 0);
 
         AnalysisEngine extractor = AnalysisEngineFactory.createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, "-");

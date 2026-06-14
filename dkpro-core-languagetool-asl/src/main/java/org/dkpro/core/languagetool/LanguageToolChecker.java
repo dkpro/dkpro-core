@@ -17,8 +17,11 @@
  */
 package org.dkpro.core.languagetool;
 
+import static org.apache.uima.fit.util.FSCollectionFactory.createFSArray;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -40,6 +43,7 @@ import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
+import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
@@ -120,6 +124,14 @@ public class LanguageToolChecker
                 annotation.setBegin(match.getFromPos());
                 annotation.setEnd(match.getToPos());
                 annotation.setDescription(match.getMessage());
+                List<SuggestedAction> suggestions = new ArrayList<>();
+                for (String replacement : match.getSuggestedReplacements()) {
+                    SuggestedAction action = new SuggestedAction(aJCas, annotation.getBegin(),
+                            annotation.getEnd());
+                    action.setReplacement(replacement);
+                    suggestions.add(action);
+                }
+                annotation.setSuggestions(createFSArray(aJCas, suggestions));
                 annotation.addToIndexes();
                 getContext().getLogger().log(Level.FINEST, "Found: " + annotation);
             }

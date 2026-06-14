@@ -54,7 +54,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "Phrase Annotator")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class PhraseAnnotator
-        extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     /**
      * The feature path to use for building bigrams.
@@ -136,21 +136,15 @@ public class PhraseAnnotator
     private PhraseSequenceGenerator sequenceGenerator;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
         try {
-            sequenceGenerator = new PhraseSequenceGenerator.Builder()
-                    .featurePath(featurePath)
-                    .coveringType(coveringType)
-                    .lowercase(lowercase)
-                    .stopwordsFile(stopwordsFile)
-                    .stopwordsReplacement(stopwordsReplacement)
-                    .filterRegex(filterRegex)
-                    .filterRegexReplacement(regexReplacement)
-                    .build();
+            sequenceGenerator = new PhraseSequenceGenerator.Builder().featurePath(featurePath)
+                    .coveringType(coveringType).lowercase(lowercase).stopwordsFile(stopwordsFile)
+                    .stopwordsReplacement(stopwordsReplacement).filterRegex(filterRegex)
+                    .filterRegexReplacement(regexReplacement).build();
 
             readCounts();
         }
@@ -164,8 +158,7 @@ public class PhraseAnnotator
     }
 
     @Override
-    public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         List<LexicalPhrase[]> sequences;
         try {
@@ -179,10 +172,10 @@ public class PhraseAnnotator
         select(aJCas, LexicalPhrase.class).forEach(TOP::removeFromIndexes);
 
         for (LexicalPhrase[] sequence : sequences) {
-        /* iterate over sequences in document */
+            /* iterate over sequences in document */
 
             for (int i = 0; i < sequence.length; i++) {
-            /* iterate over tokens within sequence */
+                /* iterate over tokens within sequence */
                 LexicalPhrase phrase1 = sequence[i];
                 String token1 = phrase1.getText();
                 LexicalPhrase newPhrase = phrase1;
@@ -198,17 +191,16 @@ public class PhraseAnnotator
                         assert unigrams.containsKey(token2);
 
                         /* compute score */
-                        double score =
-                                (double) ((bigrams.get(bigram) - discount) * vocabularySize) /
-                                        (double) (unigrams.get(token1) * unigrams.get(token2));
+                        double score = (double) ((bigrams.get(bigram) - discount) * vocabularySize)
+                                / (double) (unigrams.get(token1) * unigrams.get(token2));
                         getLogger().debug(bigram + "\t" + score);
 
                         if (score >= threshold) {
-                        /* bigram phrase spanning two tokens found */
+                            /* bigram phrase spanning two tokens found */
                             newPhrase = new LexicalPhrase(aJCas, phrase1.getBegin(),
                                     phrase2.getEnd());
                             newPhrase.setText(bigram);
-                            i++;    // skip succeeding token
+                            i++; // skip succeeding token
                         }
                     }
                 }
@@ -221,10 +213,10 @@ public class PhraseAnnotator
     /**
      * Read the input file, adding unigrams and bigrams to the respective maps.
      *
-     * @throws IOException if the input file cannot be read
+     * @throws IOException
+     *             if the input file cannot be read
      */
-    private void readCounts()
-            throws IOException
+    private void readCounts() throws IOException
     {
         unigrams = new HashMap<>();
         bigrams = new HashMap<>();

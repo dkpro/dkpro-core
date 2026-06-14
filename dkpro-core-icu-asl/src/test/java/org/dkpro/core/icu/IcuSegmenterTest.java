@@ -31,11 +31,9 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.harness.SegmenterHarness;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.icu.text.BreakIterator;
 
@@ -44,72 +42,66 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class IcuSegmenterTest
 {
-    @Ignore("Only needed to get the list of the supported languages for the @LanguageCapability")
+    @Disabled("Only needed to get the list of the supported languages for the @LanguageCapability")
     @Test
     public void listLocales() throws Exception
     {
         List<String> supportedLanguages = Arrays.stream(BreakIterator.getAvailableLocales())
-            .map(l -> l.getLanguage())
-            .distinct()
-            .sorted()
-            .filter(lang -> lang.length() == 2)
-            // These language codes do not comply with ISO 639 / OMTD-SHARE
-            // "in" (Indonesian, should be "id")
-            // "iw" (Hebrew, should be "he")
-            // "ji" (Yiddish, should be "yi")
-            // Cf.: https://bugs.java.com/view_bug.do?bug_id=6457127
-            // Cf.: https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4140555
-            .filter(lang -> !asList("in", "iw", "ji").contains(lang))
-            .collect(Collectors.toList());
-        
+                .map(l -> l.getLanguage()).distinct().sorted().filter(lang -> lang.length() == 2)
+                // These language codes do not comply with ISO 639 / OMTD-SHARE
+                // "in" (Indonesian, should be "id")
+                // "iw" (Hebrew, should be "he")
+                // "ji" (Yiddish, should be "yi")
+                // Cf.: https://bugs.java.com/view_bug.do?bug_id=6457127
+                // Cf.: https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4140555
+                .filter(lang -> !asList("in", "iw", "ji").contains(lang))
+                .collect(Collectors.toList());
+
         System.out.printf("[");
         for (String l : supportedLanguages) {
             System.out.printf("\"%s\", ", l);
         }
         System.out.printf("]");
     }
-    
+
     @Test
     public void testJapanese() throws Exception
     {
         JCas jcas = JCasFactory.createText("滧の べ滦榥榜ぶ 廤ま楺獣お 䨣みゅ騪", "ja");
-        
+
         AnalysisEngine aed = createEngine(IcuSegmenter.class);
         aed.process(jcas);
-        
-        String[] tokens = { "滧", "の", "べ", "滦", "榥", "榜", "ぶ", "廤", "ま", "楺", "獣", "お", 
-                "䨣", "み", "ゅ", "騪" };
-        
+
+        String[] tokens = { "滧", "の", "べ", "滦", "榥", "榜", "ぶ", "廤", "ま", "楺", "獣", "お", "䨣", "み",
+                "ゅ", "騪" };
+
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
-    
+
     @Test
     public void testJapanese2() throws Exception
     {
         JCas jcas = JCasFactory.createText("1993年（平成5年）12月にはユネスコの世界遺産（文化遺産）"
-                + "に登録された[13]。この他、「国宝五城」[注釈 1]や「三名城」、"
-                + "「三大平山城・三大連立式平山城」の一つにも数えられている。", "ja");
-        
+                + "に登録された[13]。この他、「国宝五城」[注釈 1]や「三名城」、" + "「三大平山城・三大連立式平山城」の一つにも数えられている。", "ja");
+
         AnalysisEngine aed = createEngine(IcuSegmenter.class);
         aed.process(jcas);
-        
-        String[] sentences = { 
-                "1993年（平成5年）12月にはユネスコの世界遺産（文化遺産）に登録された[13]。",
+
+        String[] sentences = { "1993年（平成5年）12月にはユネスコの世界遺産（文化遺産）に登録された[13]。",
                 "この他、「国宝五城」[注釈 1]や「三名城」、「三大平山城・三大連立式平山城」の一つにも数えられている。" };
-        
+
         String[] tokens = { "1993", "年", "（", "平成", "5", "年", "）", "12", "月", "に", "は", "ユネスコ", "の",
                 "世界", "遺産", "（", "文化", "遺産", "）", "に", "登録", "さ", "れ", "た", "[", "13", "]", "。",
                 "この", "他", "、", "「", "国宝", "五城", "」", "[", "注釈", "1", "]", "や", "「", "三", "名城", "」",
                 "、", "「", "三大", "平山", "城", "・", "三大", "連立", "式", "平山", "城", "」", "の", "一つ", "に",
                 "も", "数", "え", "ら", "れ", "て", "いる", "。" };
-       
+
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
-    
+
     @Test
-    public void run()
-        throws Throwable
+    public void run() throws Throwable
     {
         AnalysisEngineDescription aed = createEngineDescription(IcuSegmenter.class);
 
@@ -118,12 +110,8 @@ public class IcuSegmenterTest
     }
 
     @Test
-    public void testZoning()
-        throws Exception
+    public void testZoning() throws Exception
     {
         SegmenterHarness.testZoning(IcuSegmenter.class);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

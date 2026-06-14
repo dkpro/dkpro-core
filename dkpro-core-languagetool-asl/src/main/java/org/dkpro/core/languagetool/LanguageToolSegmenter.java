@@ -38,13 +38,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "LanguageTool Segmenter")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
-    "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
-    "tl", "uk" })
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
-public class LanguageToolSegmenter extends SegmenterBase
+        "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
+        "tl", "uk" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+public class LanguageToolSegmenter
+    extends SegmenterBase
 {
     @Override
     protected void process(JCas aJCas, String aText, int aZoneBegin)
@@ -81,12 +80,12 @@ public class LanguageToolSegmenter extends SegmenterBase
                 if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
                     int suffix = t.indexOf('/');
                     if (suffix != -1) {
-                        t = t.substring(0,  suffix);
+                        t = t.substring(0, suffix);
                     }
                     tStart = s.indexOf(t, lastTStart);
-                    
+
                 }
-                
+
                 // The Chinese tokenizer normalizes from traditional to simplified Chinese.
                 // Maybe we have to undo this transformation.
                 if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
@@ -95,8 +94,8 @@ public class LanguageToolSegmenter extends SegmenterBase
                 }
 
                 if (tStart == -1) {
-                    throw new IllegalStateException("Token [" + t + "] not found in sentence [" + s
-                            + "]");
+                    throw new IllegalStateException(
+                            "Token [" + t + "] not found in sentence [" + s + "]");
                 }
 
                 int tEnd = tStart + t.length();

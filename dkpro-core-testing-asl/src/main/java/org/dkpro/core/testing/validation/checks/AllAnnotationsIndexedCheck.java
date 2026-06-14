@@ -34,16 +34,17 @@ public class AllAnnotationsIndexedCheck
     @Override
     public boolean check(JCas aCas, List<Message> aMessages)
     {
-        Map<FeatureStructure, FeatureStructure> nonIndexed = getNonIndexedFSesWithOwner(aCas
-                .getCas());
+        Map<FeatureStructure, FeatureStructure> nonIndexed = getNonIndexedFSesWithOwner(
+                aCas.getCas());
 
         if (!nonIndexed.isEmpty()) {
-            aMessages.add(new Message(this, ERROR, "Unindexed annotations: %d", nonIndexed.size()));
+            aMessages.add(new Message(this, ERROR, "Unindexed feature structures: %d",
+                    nonIndexed.size()));
 
             for (Entry<FeatureStructure, FeatureStructure> e : nonIndexed.entrySet()) {
                 aMessages.add(new Message(this, ERROR,
-                        "Non-index annotation [%s] reachable through [%s]", e.getKey(), e
-                                .getValue()));
+                        "Non-indexed feature structure [%s] reachable through [%s]", e.getKey(),
+                        e.getValue()));
             }
         }
 

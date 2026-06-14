@@ -20,21 +20,14 @@ package org.dkpro.core.io.json;
 import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.dkpro.core.io.conll.Conll2000Reader;
-import org.dkpro.core.io.json.JsonWriter;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class JsonWriterTest
 {
     @Test
-    public void oneWay()
-        throws Exception
+    public void oneWay() throws Exception
     {
-        testOneWay(Conll2000Reader.class, JsonWriter.class,
-                "conll/2000/chunk2000_ref.json", "conll/2000/chunk2000_test.conll");
+        testOneWay(Conll2000Reader.class, JsonWriter.class, "conll/2000/chunk2000_ref.json",
+                "conll/2000/chunk2000_test.conll");
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

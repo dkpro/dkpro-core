@@ -20,8 +20,8 @@ package org.dkpro.core.mallet.lda.io;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.dkpro.core.mallet.lda.MalletLdaUtil.trainModel;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,15 +34,10 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
-import org.dkpro.core.mallet.lda.io.MalletLdaTopicsProportionsSortedWriter;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-/**
- *
- */
 public class MalletLdaTopicsProportionsSortedWriterTest
 {
     private static final String CAS_DIR = "src/test/resources/txt";
@@ -52,15 +47,11 @@ public class MalletLdaTopicsProportionsSortedWriterTest
     private static final int N_ITERATIONS = 50;
     private static final String LANGUAGE = "en";
 
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
-
     @Test
-    public void test()
-            throws UIMAException, IOException
+    public void test(@TempDir File tempDir) throws UIMAException, IOException
     {
-        File targetFile = new File(testContext.getTestOutputFolder(), "topics.txt");
-        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        File targetFile = new File(tempDir, "topics.txt");
+        File modelFile = new File(tempDir, "model");
         trainModel(modelFile);
 
         int expectedLines = 2;
@@ -68,19 +59,20 @@ public class MalletLdaTopicsProportionsSortedWriterTest
         String expectedLine0Regex = "dummy1.txt(\t[0-9]+:0\\.[0-9]{4}){" + nTopicsOutput + "}";
         String expectedLine1Regex = "dummy2.txt(\t[0-9]+:0\\.[0-9]{4}){" + nTopicsOutput + "}";
 
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+        CollectionReaderDescription reader = createReaderDescription( //
+                TextReader.class, //
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR, //
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN, //
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletLdaTopicModelInferencer.class,
+        AnalysisEngineDescription inferencer = createEngineDescription( //
+                MalletLdaTopicModelInferencer.class, //
                 MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, modelFile);
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                MalletLdaTopicsProportionsSortedWriter.class,
-                MalletLdaTopicsProportionsSortedWriter.PARAM_TARGET_LOCATION, targetFile,
+        AnalysisEngineDescription writer = createEngineDescription( //
+                MalletLdaTopicsProportionsSortedWriter.class, //
+                MalletLdaTopicsProportionsSortedWriter.PARAM_TARGET_LOCATION, targetFile, //
                 MalletLdaTopicsProportionsSortedWriter.PARAM_N_TOPICS, nTopicsOutput);
 
         SimplePipeline.runPipeline(reader, segmenter, inferencer, writer);
@@ -90,8 +82,8 @@ public class MalletLdaTopicsProportionsSortedWriterTest
         assertEquals(expectedLines, lines.size());
 
         /* assert first field */
-        lines.stream()
-                .map(line -> line.split("\t"))
+        lines.stream() //
+                .map(line -> line.split("\t")) //
                 .forEach(fields -> assertTrue(fields[0].startsWith("dummy")));
     }
 }

@@ -29,7 +29,7 @@ public class TigerNode
 
     @XmlElement(name = "edge")
     public List<TigerEdge> edges;
-    
+
     @XmlElement(name = "secedge")
     public List<TigerEdge> secEdges;
 }

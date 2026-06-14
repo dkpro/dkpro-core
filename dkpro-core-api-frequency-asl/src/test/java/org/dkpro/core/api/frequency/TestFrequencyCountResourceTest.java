@@ -19,7 +19,7 @@ package org.dkpro.core.api.frequency;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -27,9 +27,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.api.frequency.TestFrequencyCountResource;
 import org.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestFrequencyCountResourceTest
 {
@@ -41,8 +40,7 @@ public class TestFrequencyCountResourceTest
         private FrequencyCountProvider provider;
 
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             try {
                 System.out.println(provider.getNrOfDistinctNgrams(1));
@@ -59,7 +57,7 @@ public class TestFrequencyCountResourceTest
     {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
                 Annotator.FREQUENCY_COUNT_RESOURCE,
-                createExternalResourceDescription(TestFrequencyCountResource.class,
+                createResourceDescription(TestFrequencyCountResource.class,
                         TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"));
 
         // Check the external resource was injected

@@ -32,8 +32,10 @@ public class VectorizerUtils
     /**
      * Create a random vector. Values are between -0.5 and 0.5,
      *
-     * @param aSize the dimensionality of the vector
-     * @param seed  The random seed
+     * @param aSize
+     *            the dimensionality of the vector
+     * @param seed
+     *            The random seed
      * @return a float[] of the specified size
      */
     public static float[] randomVector(int aSize, long seed)
@@ -47,12 +49,13 @@ public class VectorizerUtils
     }
 
     /**
-     * Create a random vector, calling {@link #randomVector(int, long)} with a
-     * stable random seed, i.e. always generating the same output.
+     * Create a random vector, calling {@link #randomVector(int, long)} with a stable random seed,
+     * i.e. always generating the same output.
      * <p>
      * Use {@link #randomVector(int, long)} to generate varying random vectors.
      *
-     * @param aSize the size of the vector
+     * @param aSize
+     *            the size of the vector
      * @return a float[] of the specified size.
      * @see #randomVector(int, long)
      */

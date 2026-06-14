@@ -48,6 +48,7 @@ artifacts:
   gum.tar.gz:
     url: "https://github.com/amir-zeldes/gum/archive/V4.1.0.tar.gz"
     sha1: 91ded1ba5b6c05fe8e70e42a0a36ee0d20556888
+    sha512: 4ca7a346f2f8d344db0ac798152fbafbf6fbb794047574f5dd0475050179a69ae9972312babae3c6fada9b4fcd313b1167f83e6a70bc6f292ce721bb12d2f3c6
     shared: true
     actions:
       - action: explode

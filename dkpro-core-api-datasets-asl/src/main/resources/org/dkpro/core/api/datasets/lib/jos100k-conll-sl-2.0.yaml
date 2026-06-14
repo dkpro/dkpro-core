@@ -25,11 +25,14 @@ licenses:
     
 artifacts:
   LICENSE.txt:
-    url: http://creativecommons.org/licenses/by-nc/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    url: classpath:/org/dkpro/core/api/datasets/lib/common-licenses/CC-BY-NC-3.0.txt
+    sha1: 23e82cd9f77862b5a26bf268aba9822784a9ab6a
+    sha512: 2ee0155e3dabdfaf004d40cef761e6ebdd7d6c15f33aa7ce969a0ba75905d56bb806597b816d55ef519aba40d380929f6d26e2d47cbb72dd80d9cc7dcee21d6a
+    verificationMode: TEXT
   data.zip:
     url: http://nl.ijs.si/jos/download/jos100kv2_0.zip
     sha1: 9f330ffd102cc5d5734fdaecbbf67751c84a1339
+    sha512: 3358d37ef31ee7ac6b5dbd846de6a2c56396cb4856efa00d7731011a603894720a3d922a108d14c62dd504b5b4909d5ce0e0d7699f350c7007a3e08409ee4ce2
     actions:
       - action: explode
         configuration: { strip: 1, includes: [ "00README.txt", "jos100kv2_0-sl.conll" ] }

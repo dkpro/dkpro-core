@@ -39,7 +39,8 @@ public class FrequencyGeometricMeanRanker
      *
      * Use {@link #setFinder(Finder)} before using this class
      */
-    public FrequencyGeometricMeanRanker() {
+    public FrequencyGeometricMeanRanker()
+    {
 
     }
 

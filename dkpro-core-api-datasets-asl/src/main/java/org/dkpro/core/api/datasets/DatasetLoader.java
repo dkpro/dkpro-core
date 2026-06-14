@@ -250,14 +250,14 @@ public class DatasetLoader
                 throw new IllegalStateException("Filename must not contain line break");
             }
 
-            Path base = aTarget.toPath().toAbsolutePath();
-            Path out = base.resolve(name).toAbsolutePath();
-            
+            Path base = aTarget.toPath().toAbsolutePath().normalize();
+            Path out = base.resolve(name).toAbsolutePath().normalize();
+
             if (!out.startsWith(base)) {
                 // Ignore attempts to write outside the base
                 continue;
             }
-            
+
             if (entry.isDirectory()) {
                 FileUtils.forceMkdir(out.toFile());
             }

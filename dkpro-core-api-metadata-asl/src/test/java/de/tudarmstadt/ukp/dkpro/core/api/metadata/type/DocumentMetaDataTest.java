@@ -18,14 +18,15 @@
 package de.tudarmstadt.ukp.dkpro.core.api.metadata.type;
 
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class DocumentMetaDataTest
 {
@@ -37,8 +38,7 @@ public class DocumentMetaDataTest
      *             if an error occurs.
      */
     @Test
-    public void doubleInitTest()
-        throws Exception
+    public void doubleInitTest() throws Exception
     {
         String documentText = "initialized";
         String documentLanguage = "en";
@@ -74,8 +74,7 @@ public class DocumentMetaDataTest
      *             if an error occurs.
      */
     @Test
-    public void offsetTest()
-        throws Exception
+    public void offsetTest() throws Exception
     {
         String documentText = "initialized";
 
@@ -103,12 +102,12 @@ public class DocumentMetaDataTest
      * @throws Exception
      *             if an error occurs.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void noAnnotationTest()
-        throws Exception
+    @Test
+    public void noAnnotationTest() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
-        DocumentMetaData.get(jcas);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> DocumentMetaData.get(jcas));
     }
 
     /**
@@ -118,15 +117,15 @@ public class DocumentMetaDataTest
      * @throws Exception
      *             if an error occurs.
      */
-    @Ignore("Test currently fails with UIMA 2.7.0-SNAPSHOT; FS is never indexed twice!")
-    @Test(expected = IllegalArgumentException.class)
-    public void tooManyAnnotationsTest1()
-        throws Exception
+    @Disabled("Test currently fails with UIMA 2.7.0-SNAPSHOT; FS is never indexed twice!")
+    @Test
+    public void tooManyAnnotationsTest1() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         DocumentMetaData meta = DocumentMetaData.create(jcas);
         meta.addToIndexes();
-        DocumentMetaData.get(jcas);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> DocumentMetaData.get(jcas));
     }
 
     /**
@@ -136,13 +135,13 @@ public class DocumentMetaDataTest
      * @throws Exception
      *             if an error occurs.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void tooManyAnnotationsTest2()
-        throws Exception
+    @Test
+    public void tooManyAnnotationsTest2() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("initialized");
         jcas.getDocumentAnnotationFs().addToIndexes();
-        DocumentMetaData.get(jcas);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> DocumentMetaData.get(jcas));
     }
 }

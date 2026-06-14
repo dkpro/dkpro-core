@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.UimaContext;
@@ -61,14 +62,11 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "UDPipe MorphoDiTa Morphological Analyzer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
-        outputs = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"})
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures" })
 public class UDPipePosTagger
     extends JCasAnnotator_ImplBase
 {
@@ -87,19 +85,20 @@ public class UDPipePosTagger
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -111,16 +110,14 @@ public class UDPipePosTagger
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = ComponentParameters.DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -128,8 +125,7 @@ public class UDPipePosTagger
     private MappingProvider mappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
@@ -137,8 +133,8 @@ public class UDPipePosTagger
         {
             {
                 setContextObject(UDPipePosTagger.this);
-                setDefault(LOCATION, "classpath:/org/dkpro/core/udpipe/lib/" +
-                        "tagger-${language}-${variant}.properties");
+                setDefault(LOCATION, "classpath:/org/dkpro/core/udpipe/lib/"
+                        + "tagger-${language}-${variant}.properties");
                 setDefault(VARIANT, "ud");
 
                 setOverride(LOCATION, modelLocation);
@@ -147,40 +143,38 @@ public class UDPipePosTagger
             }
 
             @Override
-            protected Model produceResource(URL aUrl)
-                throws IOException
+            protected Model produceResource(URL aUrl) throws IOException
             {
                 UDPipeUtils.init();
-                
+
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
                 return Model.load(modelFile.getAbsolutePath());
             }
         };
-        
+
         mappingProvider = MappingProviderFactory.createPosMappingProvider(this, posMappingLocation,
                 language, modelProvider);
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
 
         // Document-specific configuration of model and mapping provider in process()
         modelProvider.configure(cas);
-        
+
         // Mind the mapping provider must be configured after the model provider as it uses the
         // model metadata
         mappingProvider.configure(cas);
-        
-        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+
+        Map<Sentence, List<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
-            
+
             cz.cuni.mff.ufal.udpipe.Sentence udSent = new cz.cuni.mff.ufal.udpipe.Sentence();
             DKPro2UDPipe.convert(tokens, udSent);
-            
+
             ProcessingError error = new ProcessingError();
             modelProvider.getResource().tag(udSent, Model.getDEFAULT(), error);
             if (error.occurred()) {

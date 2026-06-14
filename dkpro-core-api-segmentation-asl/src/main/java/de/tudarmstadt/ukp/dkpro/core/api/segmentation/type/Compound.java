@@ -1,24 +1,41 @@
 
-/* First created by JCasGen Sat Aug 04 18:47:40 CEST 2012 */
+/* Apache UIMA v3 - First created by JCasGen Sun Jan 28 11:38:37 CET 2018 */
+
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.uima.cas.impl.CASImpl;
+import org.apache.uima.cas.impl.TypeImpl;
+import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.FSArray;
-import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
+ * This type represents a decompounding word, i.e.: flowerpot. Each Compound one have at least two
+ * Splits. Updated by JCasGen Sun Jan 28 11:38:37 CET 2018 XML source:
+ * /Users/bluefire/git/dkpro-core/dkpro-core-api-segmentation-asl/src/main/resources/desc/type/LexicalUnits_customized.xml
+ * 
  * @generated
  */
 public class Compound
     extends Annotation
 {
+
+    /**
+     * @generated
+     * @ordered
+     */
+    @SuppressWarnings("hiding")
+    public final static String _TypeName = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound";
+
     /**
      * @generated
      * @ordered
@@ -32,12 +49,26 @@ public class Compound
     @SuppressWarnings("hiding")
     public final static int type = typeIndexID;
 
-    /** @generated */
+    /**
+     * @generated
+     * @return index of the type
+     */
     @Override
     public int getTypeIndexID()
     {
         return typeIndexID;
     }
+
+    /*
+     * ******************* Feature Offsets *
+     *******************/
+
+    public final static String _FeatName_splits = "splits";
+
+    /* Feature Adjusted Offsets */
+    private final static CallSite _FC_splits = TypeSystemImpl.createCallSite(Compound.class,
+            "splits");
+    private final static MethodHandle _FH_splits = _FC_splits.dynamicInvoker();
 
     /**
      * Never called. Disable default constructor
@@ -52,14 +83,14 @@ public class Compound
      * Internal - constructor used by generator
      * 
      * @generated
-     * @param addr
-     *            low level Feature Structure reference
+     * @param casImpl
+     *            the CAS this Feature Structure belongs to
      * @param type
      *            the type of this Feature Structure
      */
-    public Compound(int addr, TOP_Type type)
+    public Compound(TypeImpl type, CASImpl casImpl)
     {
-        super(addr, type);
+        super(type, casImpl);
         readObject();
     }
 
@@ -93,7 +124,7 @@ public class Compound
 
     /**
      * <!-- begin-user-doc --> Write your own initialization here <!-- end-user-doc -->
-     * 
+     *
      * @generated modifiable
      */
     private void readObject()
@@ -111,12 +142,7 @@ public class Compound
      */
     public FSArray getSplits()
     {
-        if (Compound_Type.featOkTst && ((Compound_Type) jcasType).casFeat_splits == null) {
-            jcasType.jcas.throwFeatMissing("splits",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-        }
-        return (FSArray) (jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr,
-                ((Compound_Type) jcasType).casFeatCode_splits)));
+        return (FSArray) (_getFeatureValueNc(wrapGetIntCatchException(_FH_splits)));
     }
 
     /**
@@ -128,12 +154,7 @@ public class Compound
      */
     public void setSplits(FSArray v)
     {
-        if (Compound_Type.featOkTst && ((Compound_Type) jcasType).casFeat_splits == null) {
-            jcasType.jcas.throwFeatMissing("splits",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-        }
-        jcasType.ll_cas.ll_setRefValue(addr, ((Compound_Type) jcasType).casFeatCode_splits,
-                jcasType.ll_cas.ll_getFSRef(v));
+        _setFeatureValueNcWj(wrapGetIntCatchException(_FH_splits), v);
     }
 
     /**
@@ -147,16 +168,8 @@ public class Compound
      */
     public Split getSplits(int i)
     {
-        if (Compound_Type.featOkTst && ((Compound_Type) jcasType).casFeat_splits == null) {
-            jcasType.jcas.throwFeatMissing("splits",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-        }
-        jcasType.jcas.checkArrayBounds(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type) jcasType).casFeatCode_splits),
-                i);
-        return (Split) (jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type) jcasType).casFeatCode_splits),
-                i)));
+        return (Split) (((FSArray) (_getFeatureValueNc(wrapGetIntCatchException(_FH_splits))))
+                .get(i));
     }
 
     /**
@@ -171,16 +184,7 @@ public class Compound
      */
     public void setSplits(int i, Split v)
     {
-        if (Compound_Type.featOkTst && ((Compound_Type) jcasType).casFeat_splits == null) {
-            jcasType.jcas.throwFeatMissing("splits",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-        }
-        jcasType.jcas.checkArrayBounds(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type) jcasType).casFeatCode_splits),
-                i);
-        jcasType.ll_cas.ll_setRefArrayValue(
-                jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type) jcasType).casFeatCode_splits),
-                i, jcasType.ll_cas.ll_getFSRef(v));
+        ((FSArray) (_getFeatureValueNc(wrapGetIntCatchException(_FH_splits)))).set(i, v);
     }
 
     /**

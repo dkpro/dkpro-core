@@ -41,14 +41,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "Penn Treebank Combined Format Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
-@TypeCapability(
-        inputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_PTB_COMBINED })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class PennTreebankCombinedWriter
     extends JCasFileWriter_ImplBase
 {
@@ -56,25 +54,22 @@ public class PennTreebankCombinedWriter
      * Specify the suffix of output files. Default value <code>.mrg</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".mrg")
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, defaultValue = ".mrg")
     private String filenameSuffix;
 
     /**
      * Character encoding of the output data.
      */
-    public static final String PARAM_TARGET_ENCODING = 
-            ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
-    
+
     /**
      * Whether to force the root label to be empty.
      */
     public static final String PARAM_EMPTY_ROOT_LABEL = "emptyRootLabel";
-    @ConfigurationParameter(name = PARAM_EMPTY_ROOT_LABEL, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_EMPTY_ROOT_LABEL, defaultValue = "false")
     private boolean emptyRootLabel;
 
     /**
@@ -82,22 +77,21 @@ public class PennTreebankCombinedWriter
      * child (i.e. a sentence node).
      */
     public static final String PARAM_NO_ROOT_LABEL = "noRootLabel";
-    @ConfigurationParameter(name = PARAM_NO_ROOT_LABEL, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_NO_ROOT_LABEL, defaultValue = "false")
     private boolean noRootLabel = false;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         try (Writer docOS = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
                 targetEncoding)) {
             for (ROOT root : select(aJCas, ROOT.class)) {
                 PennTreeNode tree = PennTreeUtils.convertPennTree(root);
-                
+
                 if (emptyRootLabel) {
                     tree.setLabel("");
                 }
-                
+
                 if (noRootLabel) {
                     if (tree.getChildren().size() > 1) {
                         throw new IllegalStateException(
@@ -108,7 +102,7 @@ public class PennTreebankCombinedWriter
                     }
                     tree = tree.getChildren().get(0);
                 }
-                
+
                 String prettyTreeString = PennTreeUtils.toPrettyPennTree(tree);
                 docOS.append(prettyTreeString);
                 if (!prettyTreeString.endsWith("\n")) {

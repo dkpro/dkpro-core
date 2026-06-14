@@ -27,22 +27,21 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.jwpl.api.MetaData;
+import org.dkpro.jwpl.api.exception.WikiApiException;
+import org.dkpro.jwpl.revisionmachine.api.RevisionAPIConfiguration;
+import org.dkpro.jwpl.revisionmachine.api.RevisionApi;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo;
-import de.tudarmstadt.ukp.wikipedia.api.MetaData;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
-import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionAPIConfiguration;
-import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
 /**
  * Reads all general article infos without retrieving the whole Page objects
  */
-@TypeCapability(
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo"})
-public class WikipediaArticleInfoReader extends WikipediaReaderBase
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo" })
+public class WikipediaArticleInfoReader
+    extends WikipediaReaderBase
 {
     protected long currentArticleIndex;
     protected long nrOfArticles;
@@ -51,8 +50,8 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
     protected RevisionApi revApi;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException {
+    public void initialize(UimaContext context) throws ResourceInitializationException
+    {
         super.initialize(context);
 
         MetaData md = wiki.getMetaData();
@@ -72,26 +71,21 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
         idIter = wiki.getPageIds().iterator();
     }
 
-
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         return idIter.hasNext();
     }
 
-
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         super.getNext(aJCas);
 
         int id = idIter.next();
         currentArticleIndex++;
 
-        try
-        {
+        try {
             addDocumentMetaData(aJCas, id);
 
             ArticleInfo info = new ArticleInfo(aJCas);
@@ -102,25 +96,20 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
             info.addToIndexes();
         }
         catch (WikiApiException e) {
-            //could e.g. happen if no revision is available for this page
+            // could e.g. happen if no revision is available for this page
             getLogger().warn("Unable to fetch next article", e);
         }
     }
 
-
     @Override
     public Progress[] getProgress()
     {
-        return new Progress[] {
-                new ProgressImpl(
-                        Long.valueOf(currentArticleIndex).intValue(),
-                        Long.valueOf(nrOfArticles).intValue(),
-                        Progress.ENTITIES
-                )
-        };
+        return new Progress[] { new ProgressImpl(Long.valueOf(currentArticleIndex).intValue(),
+                Long.valueOf(nrOfArticles).intValue(), Progress.ENTITIES) };
     }
 
-    private void addDocumentMetaData(JCas jcas, int id) throws WikiApiException {
+    private void addDocumentMetaData(JCas jcas, int id) throws WikiApiException
+    {
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
         metaData.setDocumentTitle(wiki.getTitle(id).toString());
         metaData.setCollectionId(Integer.valueOf(id).toString());

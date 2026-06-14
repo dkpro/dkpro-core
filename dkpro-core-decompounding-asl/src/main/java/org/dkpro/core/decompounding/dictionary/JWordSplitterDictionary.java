@@ -68,8 +68,7 @@ public class JWordSplitterDictionary
      * @throws IOException
      *             if an I/O problem occurs.
      */
-    protected Set<String> readFileToSet(BufferedReader aReader)
-        throws IOException
+    protected Set<String> readFileToSet(BufferedReader aReader) throws IOException
     {
         Set<String> words = new HashSet<String>();
         String line;

@@ -40,27 +40,27 @@ public class CasPosSampleStream
     {
         sentences = select(aJCas, Sentence.class).iterator();
     }
-    
+
     @Override
     public boolean isActive()
     {
         return sentences != null && sentences.hasNext();
     }
-    
+
     @Override
     public POSSample produce(JCas aJCas)
     {
         // Process present sentences
         Sentence sentence = sentences.next();
-        
+
         // Block on next call to read
         if (!sentences.hasNext()) {
             documentComplete();
         }
-        
+
         List<String> words = new ArrayList<>();
         List<String> tags = new ArrayList<>();
-        
+
         for (Token t : selectCovered(Token.class, sentence)) {
             words.add(t.getText());
             if (t.getPos() == null) {
@@ -68,7 +68,7 @@ public class CasPosSampleStream
             }
             tags.add(t.getPos().getPosValue());
         }
-        
+
         return new POSSample(words, tags);
     }
 }

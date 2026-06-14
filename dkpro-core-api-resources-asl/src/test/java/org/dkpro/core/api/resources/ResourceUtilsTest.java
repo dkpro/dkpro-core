@@ -19,8 +19,8 @@ package org.dkpro.core.api.resources;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,19 +33,13 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.dkpro.core.api.resources.ResourceUtils;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class ResourceUtilsTest
 {
-    @Rule
-    public TemporaryFolder workspace = new TemporaryFolder();
-
     @Test
-    public void testGetUrlAsFile()
-        throws Exception
+    public void testGetUrlAsFile() throws Exception
     {
         URL url = new URL(
                 "jar:file:src/test/resources/testfiles.zip!/testfiles/FileSetCollectionReaderBase.class");
@@ -56,11 +50,9 @@ public class ResourceUtilsTest
     }
 
     @Test
-    public void testClasspathAsFolder()
-        throws Exception
+    public void testClasspathAsFolder() throws Exception
     {
-        File file = ResourceUtils
-                .getClasspathAsFolder("classpath:/org/dkpro/core/api", true);
+        File file = ResourceUtils.getClasspathAsFolder("classpath:/org/dkpro/core/api", true);
 
         List<Path> paths = new ArrayList<Path>();
         for (File f : FileUtils.listFiles(file, null, true)) {
@@ -80,10 +72,10 @@ public class ResourceUtilsTest
     }
 
     @Test
-    public void testWithSpace()
-        throws Exception
+    public void testWithSpace(@TempDir File tempDir) throws Exception
     {
-        File dir = workspace.newFolder("this is a test");
+        File dir = new File(tempDir, "this is a test");
+        dir.mkdirs();
         File file = new File(dir, "this is a file name.extension with spaces");
 
         System.out.println("Original: " + file);
@@ -95,20 +87,19 @@ public class ResourceUtilsTest
     }
 
     @Test
-    public void testGetUrlAsExecutable()
-        throws IOException
+    public void testGetUrlAsExecutable() throws IOException
     {
 
         URL url = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
                 + "FileSetCollectionReaderBase.class");
         File file = ResourceUtils.getUrlAsExecutable(url, false);
-        
+
         assertThat(file.getName()).endsWith("temp");
 
         URL url2 = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
                 + "ResourceCollectionReaderBase.class");
         file = ResourceUtils.getUrlAsExecutable(url2, true);
-        
+
         assertThat(file.getName()).endsWith("temp");
     }
 }

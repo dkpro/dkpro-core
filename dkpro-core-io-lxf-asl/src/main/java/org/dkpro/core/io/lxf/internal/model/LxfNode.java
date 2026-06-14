@@ -31,12 +31,12 @@ public class LxfNode
     {
         // Required for Jackson
     }
-    
+
     public LxfNode(String aLayer, String aOrigin, int aIndex, int aRank)
     {
         this(aLayer, aOrigin, aIndex, aRank, null);
     }
-    
+
     public LxfNode(String aLayer, String aOrigin, int aIndex, int aRank, LxfRegion aRegion)
     {
         setOrigin(aOrigin);
@@ -44,14 +44,14 @@ public class LxfNode
         setRank(aRank);
         // We assume here that the ID derives directly from origin, index and rank!
         setId(String.format("%s-n%d@%d", getOrigin(), getIndex() + 1, getRank() + 1));
-        
+
         if (aRegion != null) {
             setLinks(asList(singletonList(new String[] { aRegion.getOrigin(), aRegion.getId() })));
         }
-        
+
         setType(aLayer);
     }
-    
+
     public List<List<String[]>> getLinks()
     {
         return links;

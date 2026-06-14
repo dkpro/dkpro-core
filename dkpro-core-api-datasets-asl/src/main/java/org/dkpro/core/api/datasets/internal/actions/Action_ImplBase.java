@@ -26,5 +26,6 @@ import org.dkpro.core.api.datasets.DatasetDescription;
 public abstract class Action_ImplBase
 {
     public abstract void apply(ActionDescription aAction, DatasetDescription aDataset,
-            ArtifactDescription aPack, Path aCachedFile) throws Exception;
+            ArtifactDescription aPack, Path aCachedFile)
+        throws Exception;
 }

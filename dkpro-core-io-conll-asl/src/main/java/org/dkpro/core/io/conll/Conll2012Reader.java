@@ -18,6 +18,8 @@
 package org.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_ENCODING;
+import static org.dkpro.core.api.parameter.ComponentParameters.DEFAULT_MAPPING_ENABLED;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createConstituentMappingProvider;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -25,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -45,12 +48,12 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import org.dkpro.core.api.lexmorph.pos.POSUtils;
 import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 import org.dkpro.core.api.resources.CompressionUtils;
 import org.dkpro.core.api.resources.MappingProvider;
+import org.dkpro.core.io.conll.internal.ConllReader_ImplBase;
 import org.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import org.dkpro.core.io.penntree.PennTreeUtils;
 
@@ -71,40 +74,37 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 /**
  * Reads a file in the CoNLL-2012 format.
  * 
- * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
- *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
+ * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task: Modeling
+ *      Multilingual Unrestricted Coreference in OntoNotes</a>
  */
 @ResourceMetaData(name = "CoNLL 2012 Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_2012 })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense" })
 public class Conll2012Reader
-    extends JCasResourceCollectionReader_ImplBase
+    extends ConllReader_ImplBase
 {
     /**
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, defaultValue = DEFAULT_ENCODING)
     private String encoding;
 
     /**
      * Read part-of-speech information.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_POS, defaultValue = "true")
     private boolean readPos;
 
     /**
@@ -120,19 +120,17 @@ public class Conll2012Reader
      * Enable/disable type mapping.
      */
     public static final String PARAM_MAPPING_ENABLED = ComponentParameters.PARAM_MAPPING_ENABLED;
-    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, mandatory = true, defaultValue = 
-            ComponentParameters.DEFAULT_MAPPING_ENABLED)
+    @ConfigurationParameter(name = PARAM_MAPPING_ENABLED, defaultValue = DEFAULT_MAPPING_ENABLED)
     protected boolean mappingEnabled;
-    
+
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = 
-            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-    
+
     /**
      * Read lemma information.
      * <p>
@@ -140,61 +138,58 @@ public class Conll2012Reader
      * for predicates.
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
-    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, defaultValue = "false")
     private boolean readLemma;
 
     /**
      * Read semantic predicate information.
      */
-    public static final String PARAM_READ_SEMANTIC_PREDICATE = 
-            ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
-    @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
+    @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, defaultValue = "true")
     private boolean readSemanticPredicate;
 
     /**
      * Read word sense information.
      */
     public static final String PARAM_READ_WORD_SENSE = "readWordSense";
-    @ConfigurationParameter(name = PARAM_READ_WORD_SENSE, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_WORD_SENSE, defaultValue = "true")
     private boolean readWordSense;
 
     /**
      * Read syntactic constituent information.
      */
     public static final String PARAM_READ_CONSTITUENT = ComponentParameters.PARAM_READ_CONSTITUENT;
-    @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, defaultValue = "true")
     private boolean readConstituent;
 
     /**
      * Read co-reference information.
      */
     public static final String PARAM_READ_COREFERENCE = ComponentParameters.PARAM_READ_COREFERENCE;
-    @ConfigurationParameter(name = PARAM_READ_COREFERENCE, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_READ_COREFERENCE, defaultValue = "true")
     private boolean readCoreference;
 
     /**
      * Read named entity information.
      */
-    public static final String PARAM_READ_NAMED_ENTITY = 
-            ComponentParameters.PARAM_READ_NAMED_ENTITY;
-    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, defaultValue = "true")
     private boolean readNamedEntity;
 
     /**
-     * Use this constituent tag set to use to resolve the tag set mapping instead of using the
-     * tag set defined as part of the model meta data. This can be useful if a custom model is
-     * specified which does not have such meta data, or it can be used in readers.
+     * Use this constituent tag set to use to resolve the tag set mapping instead of using the tag
+     * set defined as part of the model meta data. This can be useful if a custom model is specified
+     * which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_CONSTITUENT_TAG_SET = 
-            ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
+    public static final String PARAM_CONSTITUENT_TAG_SET = ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
-    
+
     /**
-     * Load the constituent tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the constituent tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = //
             ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
@@ -205,18 +200,18 @@ public class Conll2012Reader
     public static final String PARAM_WRITE_TRACES_TO_TEXT = "writeTracesToText";
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;
-    
+
     /**
      * Use the document ID declared in the file header instead of using the filename.
      */
     public static final String PARAM_USE_HEADER_METADATA = "useHeaderMetadata";
-    @ConfigurationParameter(name = PARAM_USE_HEADER_METADATA, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_USE_HEADER_METADATA, defaultValue = "true")
     private boolean useHeaderMetadata;
 
     private static final String UNUSED = "-";
 
     // private static final int DOCUMENT_ID = 0; // Ignored
-    // private static final int PART_NUMBER = 1;  // Ignored
+    // private static final int PART_NUMBER = 1; // Ignored
     private static final int ID = 2;
     private static final int FORM = 3;
     private static final int POS = 4;
@@ -227,33 +222,35 @@ public class Conll2012Reader
     // private static final int SPEAKER = 9; // Ignored
     private static final int NAMED_ENTITIES = 10;
     private static final int APRED = 11;
-    
+
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
-    
+
     private PennTreeToJCasConverter converter;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
-                getLanguage());
 
-        constituentMappingProvider = createConstituentMappingProvider(this,
-                constituentMappingLocation, constituentTagset, getLanguage());
-        
+        if (readPos) {
+            posMappingProvider = createPosMappingProvider(this, posMappingLocation, posTagset,
+                    getLanguage());
+        }
+
+        if (readConstituent) {
+            constituentMappingProvider = createConstituentMappingProvider(this,
+                    constituentMappingLocation, constituentTagset, getLanguage());
+        }
+
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
         converter.setWriteTracesToText(writeTracesToText);
         converter.setCreatePosTags(false); // We handle POS tags via the column already
         converter.setRootLabel("TOP");
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -269,8 +266,7 @@ public class Conll2012Reader
         }
     }
 
-    public void convert(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    public void convert(JCas aJCas, BufferedReader aReader) throws IOException
     {
         try {
             if (readPos) {
@@ -284,22 +280,22 @@ public class Conll2012Reader
         catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
         }
-        
+
         Map<String, CoreferenceLink> chains = new HashMap<>();
-        
+
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         List<String[]> words;
         while ((words = readSentence(aJCas, aReader)) != null) {
             if (words.isEmpty()) {
-                 // Ignore empty sentences. This can happen when there are multiple end-of-sentence
-                 // markers following each other.
-                continue; 
+                // Ignore empty sentences. This can happen when there are multiple end-of-sentence
+                // markers following each other.
+                continue;
             }
 
             int sentenceBegin = doc.getPosition();
             int sentenceEnd = sentenceBegin;
-            
+
             StringBuilder parse = new StringBuilder();
 
             // Tokens, Lemma, POS
@@ -309,59 +305,66 @@ public class Conll2012Reader
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
                 // Read token
-                Token token = doc.add(word[FORM], Token.class);
-                tokenById.put(Integer.valueOf(word[ID]), token);
+                Token token = doc.add(trim(word[FORM]), Token.class);
+                tokenById.put(Integer.valueOf(trim(word[ID])), token);
                 if (wordIterator.hasNext()) {
                     doc.add(" ");
                 }
 
                 // Read lemma
-                if (!UNUSED.equals(word[LEMMA]) && readLemma) {
+                String lemmaValue = trim(word[LEMMA]);
+                if (!UNUSED.equals(lemmaValue) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(word[LEMMA]);
+                    lemma.setValue(lemmaValue);
                     lemma.addToIndexes();
                     token.setLemma(lemma);
                 }
 
                 // Read part-of-speech tag
-                if (!UNUSED.equals(word[POS]) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(word[POS]);
+                String posValue = cleanTag(word[POS]);
+                if (!UNUSED.equals(posValue) && readPos) {
+                    Type posTag = posMappingProvider.getTagType(posValue);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POS] != null ? word[POS].intern() : null);
+                    pos.setPosValue(posValue);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
 
-                if (!UNUSED.equals(word[PRED]) && readSemanticPredicate) {
+                String predValue = trim(word[PRED]);
+                if (!UNUSED.equals(predValue) && readSemanticPredicate) {
                     SemPred pred = new SemPred(aJCas, token.getBegin(), token.getEnd());
-                    pred.setCategory(word[PRED]);
+                    pred.setCategory(predValue);
                     pred.addToIndexes();
                     preds.add(pred);
                 }
 
-                if (!UNUSED.equals(word[PARSE]) && readConstituent) {
-                    String fixed = word[PARSE].replace("*",
-                            "(" + word[POS] + " " + word[FORM] + ")");
+                String constituentFragmentValue = trim(word[PARSE]);
+                if (!UNUSED.equals(constituentFragmentValue) && readConstituent) {
+                    String fixed = constituentFragmentValue.replace("*",
+                            "(" + posValue + " " + trim(word[FORM]) + ")");
                     parse.append(fixed);
                 }
-                
-                if (!UNUSED.equals(word[WORD_SENSE]) && readWordSense) {
+
+                String wordSenseValue = trim(word[WORD_SENSE]);
+                if (!UNUSED.equals(wordSenseValue) && readWordSense) {
                     WordSense wordSense = new WordSense(aJCas, token.getBegin(), token.getEnd());
-                    wordSense.setValue(word[WORD_SENSE]);
+                    wordSense.setValue(wordSenseValue);
                     wordSense.addToIndexes();
                 }
 
-                if (!UNUSED.equals(word[word.length - 1]) && readCoreference) {
-                    String[] chainFragments = word[word.length - 1].split("\\|");
+                String coreferenceValue = trim(word[word.length - 1]);
+                if (!UNUSED.equals(coreferenceValue) && readCoreference) {
+                    String[] chainFragments = Arrays.stream(coreferenceValue.split("\\|"))
+                            .map(this::trim).toArray(String[]::new);
                     for (String chainFragment : chainFragments) {
                         boolean beginning = chainFragment.startsWith("(");
                         boolean ending = chainFragment.endsWith(")");
-                        
+
                         String chainId = chainFragment.substring(beginning ? 1 : 0,
                                 ending ? chainFragment.length() - 1 : chainFragment.length());
-                        
+
                         CoreferenceLink link = chains.get(chainId);
                         if (beginning) {
                             if (link == null) {
@@ -378,7 +381,7 @@ public class Conll2012Reader
                             link.setReferenceType(chainId);
                             link.setBegin(token.getBegin());
                         }
-                        
+
                         if (ending) {
                             link.setEnd(token.getEnd());
                             link.addToIndexes();
@@ -387,46 +390,46 @@ public class Conll2012Reader
                         chains.put(chainId, link);
                     }
                 }
-                
+
                 sentenceEnd = token.getEnd();
             }
-            
+
             // Named entities
             if (readNamedEntity) {
                 int currentNeBegin = -1;
                 String currentNeType = null;
                 for (int i = 0; i < words.size(); i++) {
-                    String ne = words.get(i)[NAMED_ENTITIES];
+                    String ne = trim(words.get(i)[NAMED_ENTITIES]);
                     boolean beginning = ne.startsWith("(");
                     boolean ending = ne.endsWith(")");
-    
+
                     // When a NE is beginning, we remember what the NE is and where it began
                     if (beginning) {
                         // The NE is beginning with "(" and either ending with "(" or "*", so we
                         // trim the first and last character
-                        currentNeType = ne.substring(1, ne.length() - 1);
+                        currentNeType = cleanTag(ne.substring(1, ne.length() - 1));
                         currentNeBegin = i;
                     }
-                    
+
                     // We need to create an annotation if the current token is the end of an
                     // annotation
                     if (ending) {
                         // Determine begin and end of named entity
                         int begin = tokenById.get(currentNeBegin).getBegin();
                         int end = tokenById.get(i).getEnd();
-    
+
                         // Add named entity
                         NamedEntity namedEntity = new NamedEntity(aJCas, begin, end);
                         namedEntity.setValue(currentNeType);
                         namedEntity.addToIndexes();
-                        
+
                         // Forget remembered named entity
                         currentNeBegin = -1;
                         currentNeType = null;
                     }
                 }
             }
-            
+
             // Semantic arguments
             if (readSemanticPredicate) {
                 // Get arguments for one predicate at a time
@@ -437,7 +440,7 @@ public class Conll2012Reader
                     int currentArgBegin = -1;
                     String currentArgType = null;
                     for (int i = 0; i < words.size(); i++) {
-                        String ne = words.get(i)[APRED + p];
+                        String ne = trim(words.get(i)[APRED + p]);
                         boolean beginning = ne.startsWith("(");
                         boolean ending = ne.endsWith(")");
 
@@ -445,10 +448,10 @@ public class Conll2012Reader
                         if (beginning) {
                             // The arg is beginning with "(" and either ending with "(" or "*", so
                             // we trim the first and last character
-                            currentArgType = ne.substring(1, ne.length() - 1);
+                            currentArgType = cleanTag(ne.substring(1, ne.length() - 1));
                             currentArgBegin = i;
                         }
-                        
+
                         // We need to create an annotation if the current token is the end of an
                         // annotation
                         if (ending) {
@@ -461,27 +464,27 @@ public class Conll2012Reader
                             if (!(pred.getBegin() == begin && pred.getEnd() == end)) {
                                 SemArg arg = new SemArg(aJCas, begin, end);
                                 arg.addToIndexes();
-                                
+
                                 SemArgLink link = new SemArgLink(aJCas);
                                 link.setRole(currentArgType);
                                 link.setTarget(arg);
                                 args.add(link);
                             }
-                            
+
                             // Forget remembered arg
                             currentArgBegin = -1;
                             currentArgType = null;
                         }
-                    }                    
-                    
+                    }
+
                     pred.setArguments(FSCollectionFactory.createFSArray(aJCas, args));
                 }
             }
-            
+
             // Sentence
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
             sentence.addToIndexes();
-            
+
             if (readConstituent) {
                 converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
             }
@@ -496,8 +499,7 @@ public class Conll2012Reader
     /**
      * Read a single sentence.
      */
-    private List<String[]> readSentence(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    private List<String[]> readSentence(JCas aJCas, BufferedReader aReader) throws IOException
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;
@@ -514,7 +516,7 @@ public class Conll2012Reader
                         meta.setDocumentId(matcher.group(1) + '#' + matcher.group(2));
                     }
                 }
-                
+
                 // Comment/header line
                 continue;
             }
@@ -524,11 +526,11 @@ public class Conll2012Reader
                 break; // Consider end of sentence
             }
             String[] fields = line.split("\\s+");
-//            if (fields.length != 10) {
-//                throw new IOException(
-//                        "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
-//                                + fields.length + ": [" + line + "]");
-//            }
+            // if (fields.length != 10) {
+            // throw new IOException(
+            // "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
+            // + fields.length + ": [" + line + "]");
+            // }
             words.add(fields);
         }
 

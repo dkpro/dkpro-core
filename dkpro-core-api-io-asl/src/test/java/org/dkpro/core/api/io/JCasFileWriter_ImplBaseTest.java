@@ -20,7 +20,8 @@ package org.dkpro.core.api.io;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,23 +38,23 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class JCasFileWriter_ImplBaseTest
 {
     @Test
     public void writeToZip() throws Exception
     {
-        AnalysisEngine ae = createEngine(DummyWriter.class,
-                DummyWriter.PARAM_TARGET_LOCATION, "jar:file:target/out.zip",
-                DummyWriter.PARAM_OVERWRITE, true);
+        AnalysisEngine ae = createEngine(DummyWriter.class, DummyWriter.PARAM_TARGET_LOCATION,
+                "jar:file:target/out.zip", DummyWriter.PARAM_OVERWRITE, true);
         JCas jcas = JCasFactory.createJCas();
         ae.process(jcas);
         ae.process(jcas);
         ae.process(jcas);
         ae.collectionProcessComplete();
-     
+
         assertEquals(asList("file-0.txt", "file-1.txt", "file-2.txt"),
                 listContents("target/out.zip"));
     }
@@ -61,15 +62,14 @@ public class JCasFileWriter_ImplBaseTest
     @Test
     public void writeToZip2() throws Exception
     {
-        AnalysisEngine ae = createEngine(DummyWriter.class,
-                DummyWriter.PARAM_TARGET_LOCATION, "jar:file:target/out2.zip!test",
-                DummyWriter.PARAM_OVERWRITE, true);
+        AnalysisEngine ae = createEngine(DummyWriter.class, DummyWriter.PARAM_TARGET_LOCATION,
+                "jar:file:target/out2.zip!test", DummyWriter.PARAM_OVERWRITE, true);
         JCas jcas = JCasFactory.createJCas();
         ae.process(jcas);
         ae.process(jcas);
         ae.process(jcas);
         ae.collectionProcessComplete();
-        
+
         assertEquals(asList("test/file-0.txt", "test/file-1.txt", "test/file-2.txt"),
                 listContents("target/out2.zip"));
     }
@@ -78,26 +78,52 @@ public class JCasFileWriter_ImplBaseTest
     public void writeToSingularTarget() throws Exception
     {
         File target = new File("target/test-output/singular.txt");
-        
-        AnalysisEngine ae = createEngine(DummyWriter.class,
-                DummyWriter.PARAM_TARGET_LOCATION, target,
-                DummyWriter.PARAM_SINGULAR_TARGET, true,
-                DummyWriter.PARAM_OVERWRITE, true);
+
+        AnalysisEngine ae = createEngine(DummyWriter.class, DummyWriter.PARAM_TARGET_LOCATION,
+                target, DummyWriter.PARAM_SINGULAR_TARGET, true, DummyWriter.PARAM_OVERWRITE, true);
         JCas jcas = JCasFactory.createJCas();
         ae.process(jcas);
         ae.process(jcas);
         ae.process(jcas);
         ae.collectionProcessComplete();
-        
-        String expected = "This is the file 0\n" + 
-                "This is the file 1\n" + 
-                "This is the file 2\n";
-        
+
+        String expected = "This is the file 0\n" + "This is the file 1\n" + "This is the file 2\n";
+
         assertEquals(expected, FileUtils.readFileToString(target, "UTF-8"));
     }
 
-    private List<String> listContents(String aFile)
-        throws IOException
+    @Test
+    public void test__getRelativePath__FileNameContainsURLEscapedSpaces() throws Exception
+    {
+        JCas cas = JCasFactory.createJCas();
+
+        DocumentMetaData meta = DocumentMetaData.create(cas);
+        meta.setDocumentBaseUri("file:/");
+        meta.setDocumentUri("file:/hello%20world");
+        meta.setDocumentId("some id");
+
+        DummyWriter writer = new DummyWriter();
+
+        assertThat(writer.getRelativePath(cas)).isEqualTo("hello world");
+
+        writer.setUseDocumentId(false);
+        writer.setEscapeFilename(false);
+        assertThat(writer.getRelativePath(cas)).isEqualTo("hello world");
+
+        writer.setUseDocumentId(true);
+        writer.setEscapeFilename(false);
+        assertThat(writer.getRelativePath(cas)).isEqualTo("some id");
+
+        writer.setUseDocumentId(false);
+        writer.setEscapeFilename(true);
+        assertThat(writer.getRelativePath(cas)).isEqualTo("hello%20world");
+
+        writer.setUseDocumentId(true);
+        writer.setEscapeFilename(true);
+        assertThat(writer.getRelativePath(cas)).isEqualTo("some+id");
+    }
+
+    private List<String> listContents(String aFile) throws IOException
     {
         List<String> contents = new ArrayList<>();
         try (ZipFile zipFile = new ZipFile(aFile)) {
@@ -114,10 +140,9 @@ public class JCasFileWriter_ImplBaseTest
         extends JCasFileWriter_ImplBase
     {
         private int count = 0;
-        
+
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             Writer docOS = null;
             try {

@@ -43,9 +43,7 @@ public class SubstitutionTrieParser
         throws SAXException
     {
         if (localName.equals("substitution")) {
-            _trie.put(
-                    attributes.getValue("orig"),
-                    attributes.getValue("subst"));
+            _trie.put(attributes.getValue("orig"), attributes.getValue("subst"));
         }
     }
 

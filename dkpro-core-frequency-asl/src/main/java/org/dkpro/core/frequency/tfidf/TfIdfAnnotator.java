@@ -117,8 +117,7 @@ public class TfIdfAnnotator
     private DfModel dfModel;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
         try {
@@ -130,8 +129,7 @@ public class TfIdfAnnotator
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
 
         FreqDist<String> termFrequencies = getTermFrequencies(jcas);
@@ -168,8 +166,7 @@ public class TfIdfAnnotator
         }
     }
 
-    protected FreqDist<String> getTermFrequencies(JCas jcas)
-        throws AnalysisEngineProcessException
+    protected FreqDist<String> getTermFrequencies(JCas jcas) throws AnalysisEngineProcessException
     {
         // count all terms with the given annotation
         FreqDist<String> termFrequencies = new FreqDist<String>();
@@ -220,10 +217,8 @@ public class TfIdfAnnotator
     private void logTfidf(String term, int tf, int df, double tfidf)
     {
         if (getContext().getLogger().isLoggable(Level.FINEST)) {
-            getContext().getLogger().log(
-                    Level.FINEST,
-                    String.format(Locale.US, "\"%s\" (tf: %d, df: %d, tfidf: %.2f)", term, tf, df,
-                            tfidf));
+            getContext().getLogger().log(Level.FINEST, String.format(Locale.US,
+                    "\"%s\" (tf: %d, df: %d, tfidf: %.2f)", term, tf, df, tfidf));
         }
 
     }

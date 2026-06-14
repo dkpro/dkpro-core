@@ -33,11 +33,11 @@ public class UDDataset
 {
     private File baseDir;
     private Split defaultSplit;
-    
+
     public UDDataset(File aBaseDir)
     {
         baseDir = aBaseDir;
-        
+
         File[] train = baseDir.listFiles((File f) -> {
             return f.getName().endsWith("-train.conllu");
         });
@@ -55,7 +55,7 @@ public class UDDataset
     {
         return baseDir.getName();
     }
-    
+
     @Override
     public String getLanguage()
     {
@@ -67,7 +67,7 @@ public class UDDataset
     {
         return "UTF-8";
     }
-    
+
     @Override
     public File[] getLicenseFiles()
     {
@@ -82,16 +82,18 @@ public class UDDataset
         all.addAll(asList(defaultSplit.getTestFiles()));
         all.addAll(asList(defaultSplit.getDevelopmentFiles()));
         File[] result = all.toArray(all.toArray(new File[all.size()]));
-        Arrays.sort(result, (a, b) -> { return a.getPath().compareTo(b.getPath()); });
+        Arrays.sort(result, (a, b) -> {
+            return a.getPath().compareTo(b.getPath());
+        });
         return result;
     }
-    
+
     @Override
     public Split getDefaultSplit()
     {
         return defaultSplit;
     }
-    
+
     @Override
     public File getFile(String aPath)
     {

@@ -58,8 +58,7 @@ public class MalletLdaTopicsProportionsSortedWriter
     private BufferedWriter writer;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -85,21 +84,16 @@ public class MalletLdaTopicsProportionsSortedWriter
      * file.
      */
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         /* extract topic proportions */
-        double[] proportions = selectSingle(aJCas, TopicDistribution.class)
-                .getTopicProportions()
+        double[] proportions = selectSingle(aJCas, TopicDistribution.class).getTopicProportions()
                 .toArray();
 
         /* extract indexes of top n topics */
-        List<Integer> topIndexes = IntStream
-                .range(0, proportions.length)
-                .boxed()
+        List<Integer> topIndexes = IntStream.range(0, proportions.length).boxed()
                 .sorted((i1, i2) -> -Double.compare(proportions[i1], proportions[i2]))
-                .limit(nTopics)
-                .collect(Collectors.toList());
+                .limit(nTopics).collect(Collectors.toList());
 
         try {
             writer.write(DocumentMetaData.get(aJCas).getDocumentId());
@@ -114,8 +108,7 @@ public class MalletLdaTopicsProportionsSortedWriter
     }
 
     @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+    public void collectionProcessComplete() throws AnalysisEngineProcessException
     {
         super.collectionProcessComplete();
 

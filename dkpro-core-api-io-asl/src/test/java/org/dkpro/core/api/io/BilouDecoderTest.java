@@ -29,9 +29,8 @@ import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.api.io.BilouDecoder;
 import org.dkpro.core.api.resources.MappingProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
@@ -39,17 +38,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 public class BilouDecoderTest
 {
     @Test
-    public void bilouEncoderTest() 
-        throws Exception
+    public void bilouEncoderTest() throws Exception
     {
         String[] input = new String[] { "O", "O", "O", "B-NP", "I-NP", "I-NP", "L-NP", "O", "O",
                 "O", "O", "O", "U-NP", "O", "U-NP", "O", "O", "O" };
-        
-        String[] chunks = new String[] {
-                "[ 10, 43]Chunk(NP) (very complicated example sentence)",
-                "[ 69, 81]Chunk(NP) (constituents)",
-                "[ 86, 98]Chunk(NP) (dependencies)" };
-        
+
+        String[] chunks = new String[] { "[ 10, 43]Chunk(NP) (very complicated example sentence)",
+                "[ 69, 81]Chunk(NP) (constituents)", "[ 86, 98]Chunk(NP) (dependencies)" };
+
         JCas jcas = getJCas();
 
         MappingProvider mappingProvider = new MappingProvider();
@@ -63,15 +59,14 @@ public class BilouDecoderTest
 
         List<Token> tokens = new ArrayList<Token>(JCasUtil.select(jcas, Token.class));
         decoder.decode(tokens, input);
-        
+
         assertChunks(chunks, select(jcas, Chunk.class));
     }
-    
-    private JCas getJCas() 
-        throws Exception
+
+    private JCas getJCas() throws Exception
     {
-        String text = "We need a very complicated example sentence , which " +
-                "contains as many constituents and dependencies as possible .";
+        String text = "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .";
 
         JCas jcas = JCasFactory.createJCas();
         JCasBuilder cb = new JCasBuilder(jcas);
@@ -79,9 +74,9 @@ public class BilouDecoderTest
             cb.add(token, Token.class);
             cb.add(" ");
         }
-        
+
         cb.close();
-        
+
         return cb.getJCas();
     }
 }

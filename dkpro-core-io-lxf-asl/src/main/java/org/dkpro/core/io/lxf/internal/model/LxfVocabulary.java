@@ -24,13 +24,13 @@ public class LxfVocabulary
     public static final String ENTITY_EDGE = "edge";
     public static final String ENTITY_REGION = "region";
     public static final String TYPE_TEXT = "text";
-    
+
     // Tool types
     public static final String TOOL_TOKENIZER = "tokenizer";
     public static final String TOOL_REPP = "repp";
     public static final String TOOL_HUNPOS = "hunpos";
     public static final String TOOL_BN = "bn";
-    
+
     // Layers
     public static final String LAYER_LINKAGE = "linkage";
     public static final String LAYER_SENTENCE = "sentence";

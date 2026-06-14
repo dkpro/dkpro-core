@@ -23,13 +23,12 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.jazzy.JazzyChecker;
 import org.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SpellingNormalizerTest
 {
     @Test
-    public void testSpellCheckerNormalizer()
-        throws Exception
+    public void testSpellCheckerNormalizer() throws Exception
     {
         test("ich tesde meiine neue Rechtschreibbeprüfung.",
                 "ich teste meine neue Rechtschreibprüfung.");
@@ -38,13 +37,11 @@ public class SpellingNormalizerTest
         // test("LauFEN SCHIEßEN BaföG ÜBERlegen","laufen schießen BAföG überlegen");
     }
 
-    public void test(String inputText, String normalizedText)
-        throws Exception
+    public void test(String inputText, String normalizedText) throws Exception
     {
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription spellchecker = createEngineDescription(
-                JazzyChecker.class,
+        AnalysisEngineDescription spellchecker = createEngineDescription(JazzyChecker.class,
                 JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
 
         AnalysisEngineDescription normalizer = createEngineDescription(SpellingNormalizer.class);

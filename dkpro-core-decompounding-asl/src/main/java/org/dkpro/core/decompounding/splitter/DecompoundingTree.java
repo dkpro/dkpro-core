@@ -28,8 +28,8 @@ import java.util.Set;
 import org.dkpro.core.decompounding.trie.ValueNode;
 
 /**
- * A split tree. Holds all splits in a tree structure. This can help to see the
- * how the split algorithm works
+ * A split tree. Holds all splits in a tree structure. This can help to see the how the split
+ * algorithm works
  */
 public class DecompoundingTree
 {
@@ -64,7 +64,7 @@ public class DecompoundingTree
     {
         Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();
         getAllSplitsRecursive(splits, getRoot(), true);
-        
+
         return new ArrayList<DecompoundedWord>(splits);
     }
 
@@ -78,7 +78,7 @@ public class DecompoundingTree
     {
         Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();
         getAllSplitsRecursive(splits, getRoot(), false);
-        
+
         if (!splits.isEmpty()) {
             return new ArrayList<DecompoundedWord>(splits);
         }

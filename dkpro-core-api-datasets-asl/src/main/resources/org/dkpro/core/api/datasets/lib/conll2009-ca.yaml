@@ -30,6 +30,7 @@ artifacts:
   data.zip:
     url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Catalan-traindevC.zip"
     sha1: 500cbb81709012cce4d23bfa72d93c320b0b7e6f
+    sha512: de862ccb6ffca557453dc6d631d6b7b0125724aa56c357e67ebc38d792f866dc563dfd2dceca8c67050d4018759e499d966f19bca90048c303a4324c65a45d4d
     actions:
       - action: explode
         configuration: { strip: 1, includes: ["README.TXT", "datasets/*" ]}

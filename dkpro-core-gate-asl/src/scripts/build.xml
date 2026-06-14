@@ -46,7 +46,7 @@
         <mkdir dir="target/download/tmp"/>
         <unzip src="target/download/gate/gate-ALL.zip" dest="target/download/tmp">
             <patternset>
-                <include name="**/plugins/Tools/resources/morph/default.rul"/>      
+                <include name="**/plugins/Tools/resources/morph/default.rul"/>
             </patternset>
             <chainedmapper>
                 <mapper type="flatten"/>
@@ -75,8 +75,8 @@
         <mkdir dir="target/download/tmp"/>
         <unzip src="target/download/gate/gate-ALL.zip" dest="target/download/tmp">
             <patternset>
-                <include name="**/plugins/ANNIE/resources/heptag/lexicon"/>      
-                <include name="**/plugins/ANNIE/resources/heptag/ruleset"/>      
+                <include name="**/plugins/ANNIE/resources/heptag/lexicon"/>
+                <include name="**/plugins/ANNIE/resources/heptag/ruleset"/>
             </patternset>
             <chainedmapper>
                 <mapper type="flatten"/>

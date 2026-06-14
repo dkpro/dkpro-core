@@ -22,22 +22,18 @@ import static org.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.languagetool.CjfNormalizer.Direction;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CjfNormalizerTest
 {
     @Test
-    public void testToSimplified()
-        throws Exception
+    public void testToSimplified() throws Exception
     {
         runTest("毛澤東住在北京", "毛泽东住在北京", CjfNormalizer.Direction.TO_SIMPLIFIED);
     }
 
     @Test
-    public void testToTraditional()
-        throws Exception
+    public void testToTraditional() throws Exception
     {
         runTest("毛泽东住在北京", "毛澤東住在北京", CjfNormalizer.Direction.TO_TRADITIONAL);
     }
@@ -50,7 +46,4 @@ public class CjfNormalizerTest
 
         assertTransformedText(normalizedText, inputText, "zh", normalizer);
     }
-
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -17,23 +17,20 @@
  */
 package org.dkpro.core.io.pubannotation;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.dkpro.core.testing.IOTestRunner.testOneWay;
 
-import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader;
+import org.dkpro.core.io.conll.Conll2006Reader;
+import org.junit.jupiter.api.Test;
 
 public class GenericPubAnnotationWriterTest
 {
     @Test
     public void test() throws Exception
     {
-        testOneWay(
-                createReaderDescription(Conll2006Reader.class),
-                createEngineDescription(GenericPubAnnotationWriter.class),
-                "conll2006/fi-ref.json", 
+        testOneWay(createReaderDescription(Conll2006Reader.class),
+                createEngineDescription(GenericPubAnnotationWriter.class), "conll2006/fi-ref.json",
                 "conll2006/fi-orig.conll");
     }
 }

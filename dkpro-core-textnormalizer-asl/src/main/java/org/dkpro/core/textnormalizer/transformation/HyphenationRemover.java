@@ -42,7 +42,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Simple dictionary-based hyphenation remover. 
+ * Simple dictionary-based hyphenation remover.
  */
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Hyphenation Remover")
@@ -51,13 +51,12 @@ public class HyphenationRemover
     extends JCasTransformerChangeBased_ImplBase
 {
     /**
-     * Expect at least one whitespace character behind the dash to avoid
-     * conflating words which may be written with a dash or without, such as
-     * "non-empty" and "nonempty".
+     * Expect at least one whitespace character behind the dash to avoid conflating words which may
+     * be written with a dash or without, such as "non-empty" and "nonempty".
      */
-    private static final Pattern HYPHEN_PATTERN = Pattern.compile(
-            "\\b(\\p{L}+)-[\\p{Space}]+(\\p{L}+)\\b");
-    
+    private static final Pattern HYPHEN_PATTERN = Pattern
+            .compile("\\b(\\p{L}+)-[\\p{Space}]+(\\p{L}+)\\b");
+
     /**
      * Location from which the model is read. This is either a local path or a classpath location.
      * In the latter case, the model artifact (if any) is searched as well.
@@ -76,15 +75,14 @@ public class HyphenationRemover
     private Set<String> dict;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
 
         try {
             URL url = ResourceUtils.resolveLocation(modelLocation);
             try (InputStream is = url.openStream()) {
-                dict = new HashSet<>(IOUtils.readLines(is ,modelEncoding));
+                dict = new HashSet<>(IOUtils.readLines(is, modelEncoding));
             }
         }
         catch (IOException e) {
@@ -93,8 +91,7 @@ public class HyphenationRemover
     }
 
     @Override
-    public void process(JCas aInput, JCas aOutput)
-        throws AnalysisEngineProcessException
+    public void process(JCas aInput, JCas aOutput) throws AnalysisEngineProcessException
     {
         StringBuilder c_new = new StringBuilder();
         final Matcher m = HYPHEN_PATTERN.matcher(aInput.getDocumentText());
@@ -108,9 +105,9 @@ public class HyphenationRemover
 
             if (dict.contains(c_new.toString())) {
                 replace(m.start(1), m.end(2), c_new.toString());
-//                getLogger().info(
-//                        "Conflated: [" + aInput.getDocumentText().substring(m.start(1), m.end(2))
-//                                + "] to [" + c_new + "]");
+                // getLogger().info(
+                // "Conflated: [" + aInput.getDocumentText().substring(m.start(1), m.end(2))
+                // + "] to [" + c_new + "]");
             }
         }
     }

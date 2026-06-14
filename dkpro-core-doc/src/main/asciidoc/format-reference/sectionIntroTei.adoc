@@ -14,6 +14,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+The link:https://tei-c.org/guidelines/p5/[TEI P5 XML] format is a widely used standard format. It is a very complex format and furthermore is often extended for specific corpora. The reader and writer components offered by DKPro Core support various common element types, but by far not all.
+
 .Known corpora in this format
 * link:http://nltk.org/nltk_data/[Brown Corpus (TEI XML Version)]
 * link:http://www.textgrid.de/Digitale-Bibliothek[Digitale Bibliothek bei TextGrid]

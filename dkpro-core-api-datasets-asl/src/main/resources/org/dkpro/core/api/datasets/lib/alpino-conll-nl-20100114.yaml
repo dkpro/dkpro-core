@@ -21,10 +21,12 @@ description: |
 artifacts:
   cdb.conll.utf8:
     url: http://www.let.rug.nl/~bplank/alpino2conll/data/cdb.conll.utf8
-    sha1: 11313d405abb0f268247a2d5420afa413eb244e7
+    sha1: f5e1517383f4489c8cb0c75ad202ac57c21874fc
+    sha512: d3702175a3a233cd3b158ae5854ec28ae0bc058108b7c0dac071eff01383501d79c098ae3eeb04c516e105d07bb3dc69bbb7aef6eb19f97607ad73931ee80a48
   conll2006-test.conll:
     url: http://www.let.rug.nl/~bplank/alpino2conll/data/conll2006-test.conll
-    sha1: 11313d405abb0f268247a2d5420afa413eb244e7
+    sha1: c055154ae56dfa8c29d304ed852af90aedf00a5d
+    sha512: 34792f773363d4b25b396748fd78b14c0e88fc46793800148fa59855835077b1a2a67f56d4989fb58407a4dc79afdc8e09ab803b9dc32ceac22bd9f9d9a4725b
           
 roles:
   data:

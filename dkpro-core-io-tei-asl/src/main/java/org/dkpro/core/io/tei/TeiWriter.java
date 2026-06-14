@@ -17,10 +17,10 @@
  */
 package org.dkpro.core.io.tei;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
+import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_XML_ID;
 import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_BODY;
 import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_FILE_DESC;
 import static org.dkpro.core.io.tei.internal.TeiConstants.E_TEI_HEADER;
@@ -65,6 +65,7 @@ import org.dkpro.core.api.parameter.MimeTypes;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -78,17 +79,15 @@ import javanet.staxutils.IndentingXMLEventWriter;
  */
 @ResourceMetaData(name = "TEI XML Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
+@MimeTypeCapability({ MimeTypes.APPLICATION_TEI_XML })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class TeiWriter
     extends JCasFileWriter_ImplBase
 {
@@ -96,8 +95,7 @@ public class TeiWriter
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
@@ -112,16 +110,14 @@ public class TeiWriter
      * Write constituent annotations to the CAS. Disabled by default because it requires type
      * priorities to be set up (Constituents must have a higher prio than Tokens).
      */
-    public static final String PARAM_WRITE_CONSTITUENT = 
-            ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "false")
     private boolean writeConstituent;
 
     /**
      * Write named entity annotations to the CAS. Overlapping named entities are not supported.
      */
-    public static final String PARAM_WRITE_NAMED_ENTITY = 
-            ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
 
@@ -135,19 +131,16 @@ public class TeiWriter
     private final XMLEventFactory xmlef = XMLEventFactory.newInstance();
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         String text = aJCas.getDocumentText();
 
-        OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
-        try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
-            
+        try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
+
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlOutputFactory.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
-            
+
             xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS, "UTF-8");
             if (indent) {
                 xmlEventWriter = new IndentingXMLEventWriter(xmlEventWriter);
@@ -194,8 +187,8 @@ public class TeiWriter
                     // Check if next annotation is fully nested
                     if (cur == null || nextAnnot.getEnd() <= cur.getEnd()) {
                         // Text between current and next annotation
-                        xmlEventWriter.add(xmlef.createCharacters(text.substring(pos,
-                                nextAnnot.getBegin())));
+                        xmlEventWriter.add(
+                                xmlef.createCharacters(text.substring(pos, nextAnnot.getBegin())));
                         // Next annotation
                         xmlEventWriter
                                 .add(xmlef.createStartElement(new QName(TEI_NS, teiElement.get()),
@@ -263,31 +256,44 @@ public class TeiWriter
                     getLogger().warn("Error closing the XML event writer", e);
                 }
             }
-            
-            closeQuietly(docOS);
         }
     }
 
-    private Iterator<Attribute> getAttributes(Annotation aAnnotation) {
+    private Iterator<Attribute> getAttributes(Annotation aAnnotation)
+    {
         List<Attribute> attributes = new ArrayList<Attribute>();
         if (aAnnotation instanceof Token) {
-            Token t = (Token) aAnnotation;
-            if (t.getPos() != null) {
+            var t = (Token) aAnnotation;
+            if (t.getId() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_XML_ID, t.getId()));
+            }
+            if (t.getPos() != null && t.getPos().getPosValue() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_TYPE, t.getPos().getPosValue()));
             }
-            if (t.getLemma() != null) {
+            if (t.getLemma() != null && t.getLemma().getValue() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_LEMMA, t.getLemma().getValue()));
+            }
+        }
+        else if (aAnnotation instanceof Sentence) {
+            var s = (Sentence) aAnnotation;
+            if (s.getId() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_XML_ID, s.getId()));
+            }
+        }
+        else if (aAnnotation instanceof Div) {
+            var div = (Div) aAnnotation;
+            if (div.getId() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_XML_ID, div.getId()));
             }
         }
         else if (aAnnotation instanceof NamedEntity) {
             NamedEntity ne = (NamedEntity) aAnnotation;
-            attributes.add(xmlef.createAttribute(ATTR_TYPE, ne.getValue()));
+            if (ne.getValue() != null) {
+                attributes.add(xmlef.createAttribute(ATTR_TYPE, ne.getValue()));
+            }
         }
         else if (aAnnotation instanceof Constituent) {
             Constituent c = (Constituent) aAnnotation;
-            if ("ROOT".equals(c.getConstituentType())) {
-                System.out.println();
-            }
             if (c.getConstituentType() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_TYPE, c.getConstituentType()));
             }
@@ -300,13 +306,6 @@ public class TeiWriter
 
     private Optional<String> getTeiTag(Annotation aAnnotation)
     {
-        if (aAnnotation instanceof Constituent) {
-            Constituent c = (Constituent) aAnnotation;
-            if ("ROOT".equals(c.getConstituentType())) {
-                System.out.println();
-            }
-        }
-
         if (aAnnotation.getTypeIndexID() == Token.type) {
             if (cTextPattern.matcher(aAnnotation.getCoveredText()).matches()) {
                 return Optional.of(TAG_CHARACTER);

@@ -19,24 +19,23 @@ package org.dkpro.core.languagetool;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
+import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class LanguageToolCheckerTest
 {
     @Test
-    public void grammarCheckerTest()
-        throws Exception
+    public void grammarCheckerTest() throws Exception
     {
         String testDocument = "A sentence with a error in the Hitchhiker's Guide tot he Galaxy .";
 
@@ -54,11 +53,42 @@ public class LanguageToolCheckerTest
         for (GrammarAnomaly ga : select(aJCas, GrammarAnomaly.class)) {
             System.out.println("Error " + (count + 1) + " (" + ga.getBegin() + ", " + ga.getEnd()
                     + "):" + ga.getDescription());
+            for (SuggestedAction action : JCasUtil.select(ga.getSuggestions(),
+                    SuggestedAction.class)) {
+                System.out.printf("-> %s (score %f)%n", action.getReplacement(),
+                        action.getCertainty());
+            }
             count++;
         }
         assertEquals(count, 3);
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+
+    @Test
+    public void grammarCheckerTestFrench() throws Exception
+    {
+        String testDocument = "comment modifer un compte";
+
+        AnalysisEngine engine = createEngine(LanguageToolChecker.class,
+                LanguageToolChecker.PARAM_LANGUAGE, "fr");
+        JCas aJCas = engine.newJCas();
+
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
+        tb.buildTokens(aJCas, testDocument);
+
+        engine.process(aJCas);
+
+        // copy input match type annotations to an array
+        int count = 0;
+        for (GrammarAnomaly ga : select(aJCas, GrammarAnomaly.class)) {
+            System.out.println("Error " + (count + 1) + " (" + ga.getBegin() + ", " + ga.getEnd()
+                    + "):" + ga.getDescription());
+            for (SuggestedAction action : JCasUtil.select(ga.getSuggestions(),
+                    SuggestedAction.class)) {
+                System.out.printf("-> %s (score %f)%n", action.getReplacement(),
+                        action.getCertainty());
+            }
+            count++;
+        }
+        assertEquals(count, 2);
+    }
 }

@@ -40,14 +40,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatur
 
 public class MorphologicalFeaturesParser
     extends CasConfigurableProviderBase<List<AnalysisMapping>>
-{   
+{
     private static final String META_TYPE_BASE = "__META_TYPE_BASE__";
     private static final String META_REDIRECT = "__META_REDIRECT__";
     private static final String META_OVERRIDE = "__META_OVERRIDE__";
     private static final String META_SOURCE_URL = "__META_SOURCE_URL__";
-    
+
     public static final String META_MORPH_TAGSET = "morph.tagset";
-    
+
     private static final String IGNORE = "__IGNORE__";
     private boolean notFound = false;
 
@@ -60,23 +60,22 @@ public class MorphologicalFeaturesParser
     {
         // Nothing to do
     }
-    
+
     public MorphologicalFeaturesParser(Object aObject, HasResourceMetadata aModelProvider)
     {
         setContextObject(aObject);
 
         setDefault(META_MORPH_TAGSET, "default");
-        
+
         addAutoOverride(ComponentParameters.PARAM_MORPH_MAPPING_LOCATION, LOCATION);
         addAutoOverride(ComponentParameters.PARAM_LANGUAGE, LANGUAGE);
         applyAutoOverrides(aObject);
 
         addImport(META_MORPH_TAGSET, aModelProvider);
-    }    
-    
+    }
+
     @Override
-    public void configure(CAS aCas)
-        throws AnalysisEngineProcessException
+    public void configure(CAS aCas) throws AnalysisEngineProcessException
     {
         try {
             notFound = false;
@@ -121,7 +120,7 @@ public class MorphologicalFeaturesParser
 
         return features;
     }
-    
+
     public boolean canParse(String aAnalysis)
     {
         if (notFound) {
@@ -138,10 +137,9 @@ public class MorphologicalFeaturesParser
 
         return false;
     }
-    
+
     @Override
-    protected List<AnalysisMapping> produceResource(URL aUrl)
-        throws IOException
+    protected List<AnalysisMapping> produceResource(URL aUrl) throws IOException
     {
         if (aUrl != null) {
             List<AnalysisMapping> mappings = new ArrayList<>();

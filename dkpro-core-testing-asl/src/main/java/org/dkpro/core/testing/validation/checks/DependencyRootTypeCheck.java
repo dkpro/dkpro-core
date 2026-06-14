@@ -43,20 +43,17 @@ public class DependencyRootTypeCheck
             if (dependencies.isEmpty()) {
                 continue;
             }
-            
+
             List<Dependency> roots = dependencies.stream()
-                    .filter(dep -> 
-                        dep.getGovernor() != null && 
-                        dep.getDependent() != null &&
-                        dep.getGovernor() == dep.getDependent())
+                    .filter(dep -> dep.getGovernor() != null && dep.getDependent() != null
+                            && dep.getGovernor() == dep.getDependent())
                     .collect(Collectors.toList());
-            
-            roots.stream()
-                    .filter(dep -> !ROOT.class.equals(dep.getClass()))
+
+            roots.stream().filter(dep -> !ROOT.class.equals(dep.getClass()))
                     .forEach(dep -> aMessages.add(new Message(this, ERROR,
-                        "Root dependency is not of type [%s]: %s", ROOT.class.getName(), dep)));
+                            "Root dependency is not of type [%s]: %s", ROOT.class.getName(), dep)));
         }
-        
+
         return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
 }

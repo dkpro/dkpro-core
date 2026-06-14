@@ -1,0 +1,3 @@
+<root xmlns="http://defaultNamespace" xmlns:style="http://styleNamespace">
+  This is <style:b a="1" style:b="2">bold</style:b> text.
+</root>

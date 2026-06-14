@@ -17,11 +17,11 @@
  */
 package org.dkpro.core.eval;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -47,21 +47,21 @@ public class EvalUtil
 {
     public static <T extends Annotation> List<Span<String>> loadSamples(
             CollectionReaderDescription aReader, Class<T> aType)
-                throws UIMAException, IOException
+        throws UIMAException, IOException
     {
         return loadSamples(aReader, aType, null);
     }
-    
+
     public static <T extends Annotation> List<Span<String>> loadSamples(
             CollectionReaderDescription aReader, Class<T> aType, Function<T, String> aLabelFunction)
-                throws UIMAException, IOException
+        throws UIMAException, IOException
     {
         return loadSamples(iteratePipeline(aReader), aType, aLabelFunction);
     }
-    
-    public static <T extends Annotation> List<Span<String>> loadSamples(
-            JCasIterable aIterable, Class<T> aType, Function<T, String> aLabelFunction)
-                throws UIMAException, IOException
+
+    public static <T extends Annotation> List<Span<String>> loadSamples(JCasIterable aIterable,
+            Class<T> aType, Function<T, String> aLabelFunction)
+        throws UIMAException, IOException
     {
         List<Span<String>> samples = new ArrayList<>();
         for (JCas jcas : aIterable) {
@@ -74,28 +74,30 @@ public class EvalUtil
 
         return samples;
     }
-    
+
     public static Result dumpResults(File targetFolder, Collection<? extends Object> aExpected,
             Collection<? extends Object> aActual)
-                throws UnsupportedEncodingException, FileNotFoundException
+        throws UnsupportedEncodingException, IOException
     {
         System.out.println("Calculating F-measure");
         FMeasure fmeasure = new FMeasure();
         fmeasure.process(aExpected, aActual);
-        
+
         System.out.printf("F-score     %f%n", fmeasure.getFMeasure());
         System.out.printf("Precision   %f%n", fmeasure.getPrecision());
         System.out.printf("Recall      %f%n", fmeasure.getRecall());
-        
+
         Result results = new Result();
         results.setFscore(fmeasure.getFMeasure());
         results.setPrecision(fmeasure.getPrecision());
         results.setRecall(fmeasure.getRecall());
 
-        Yaml yaml = new Yaml();
-        yaml.dump(results, new OutputStreamWriter(
-                new FileOutputStream(new File(targetFolder, "results.yaml")), "UTF-8"));
-        
+        try (var os = new OutputStreamWriter(
+                new FileOutputStream(new File(targetFolder, "results.yaml")), UTF_8)) {
+            Yaml yaml = new Yaml();
+            yaml.dump(results, os);
+        }
+
         return results;
     }
 }

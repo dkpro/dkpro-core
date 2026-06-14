@@ -21,7 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,59 +40,50 @@ import org.dkpro.core.eval.EvalUtil;
 import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.ConllUReader;
-import org.dkpro.core.opennlp.OpenNlpSegmenter;
-import org.dkpro.core.opennlp.OpenNlpTokenTrainer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.testing.TestCache;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class OpenNlpTokenTrainerTest
 {
     private Dataset ds;
-    
+
     @Test
-    public void test()
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
         Split split = ds.getDefaultSplit();
-        
+
         // Train model
         System.out.println("Training model from training data");
-        CollectionReaderDescription trainReader = createReaderDescription(
-                ConllUReader.class,
-                ConllUReader.PARAM_PATTERNS, split.getTrainingFiles(),
-                ConllUReader.PARAM_LANGUAGE, ds.getLanguage());
-        
-        AnalysisEngineDescription trainer = createEngineDescription(
-                OpenNlpTokenTrainer.class,
+        CollectionReaderDescription trainReader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_PATTERNS, split.getTrainingFiles(), ConllUReader.PARAM_LANGUAGE,
+                ds.getLanguage());
+
+        AnalysisEngineDescription trainer = createEngineDescription(OpenNlpTokenTrainer.class,
                 OpenNlpTokenTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
-                OpenNlpTokenTrainer.PARAM_NUM_THREADS, 2,
-                OpenNlpTokenTrainer.PARAM_LANGUAGE, ds.getLanguage());
-        
+                OpenNlpTokenTrainer.PARAM_NUM_THREADS, 2, OpenNlpTokenTrainer.PARAM_LANGUAGE,
+                ds.getLanguage());
+
         SimplePipeline.runPipeline(trainReader, trainer);
-        
+
         // Apply model and collect labels
         System.out.println("Applying model to test data");
-        CollectionReaderDescription testReader = createReaderDescription(
-                ConllUReader.class,
-                ConllUReader.PARAM_PATTERNS, split.getTestFiles(),
-                ConllUReader.PARAM_LANGUAGE, ds.getLanguage());
-        
-        AnalysisEngineDescription stripper = createEngineDescription(
-                TokenStripper.class);
-        
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                OpenNlpSegmenter.class,
-                OpenNlpSegmenter.PARAM_WRITE_SENTENCE, false,
-                OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION, new File(targetFolder, "model.bin"));
+        CollectionReaderDescription testReader = createReaderDescription(ConllUReader.class,
+                ConllUReader.PARAM_PATTERNS, split.getTestFiles(), ConllUReader.PARAM_LANGUAGE,
+                ds.getLanguage());
 
-        List<Span<String>> actual = EvalUtil.loadSamples(
-                iteratePipeline(testReader, stripper, segmenter), Token.class, null);
+        AnalysisEngineDescription stripper = createEngineDescription(TokenStripper.class);
+
+        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
+                OpenNlpSegmenter.PARAM_WRITE_SENTENCE, false,
+                OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION,
+                new File(targetFolder, "model.bin"));
+
+        List<Span<String>> actual = EvalUtil
+                .loadSamples(iteratePipeline(testReader, stripper, segmenter), Token.class, null);
         System.out.printf("Actual samples: %d%n", actual.size());
 
         // Read reference data collect labels
@@ -100,18 +91,17 @@ public class OpenNlpTokenTrainerTest
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
-        
+
         assertEquals(0.978346, results.getFscore(), 0.0001);
         assertEquals(0.980009, results.getPrecision(), 0.0001);
         assertEquals(0.976690, results.getRecall(), 0.0001);
     }
-    
+
     public static class TokenStripper
         extends JCasAnnotator_ImplBase
     {
         @Override
-        public void process(JCas aJCas)
-            throws AnalysisEngineProcessException
+        public void process(JCas aJCas) throws AnalysisEngineProcessException
         {
             for (Token s : select(aJCas, Token.class)) {
                 s.removeFromIndexes();
@@ -119,13 +109,10 @@ public class OpenNlpTokenTrainerTest
         }
     }
 
-    @Before
+    @BeforeEach
     public void setup() throws IOException
     {
-        DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
+        DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("ud-en-conllu-1.4");
-    }    
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+    }
 }

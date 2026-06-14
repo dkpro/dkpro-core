@@ -32,17 +32,17 @@ public class OpenNlpSequenceTagsetDescriptionProvider
 {
     private String name;
     private String layer;
-    private SequenceClassificationModel<String> model;
+    private SequenceClassificationModel model;
     private String tagSplitPattern;
 
     public OpenNlpSequenceTagsetDescriptionProvider(String aName, Class<?> aLayer,
-            SequenceClassificationModel<String> aModel)
+            SequenceClassificationModel aModel)
     {
         name = aName;
         layer = aLayer.getName();
         model = aModel;
     }
-    
+
     public void setTagSplitPattern(String aTagSplitPattern)
     {
         tagSplitPattern = aTagSplitPattern;
@@ -68,7 +68,7 @@ public class OpenNlpSequenceTagsetDescriptionProvider
         return tagSet;
     }
 
-    public SequenceClassificationModel<String> getModel()
+    public SequenceClassificationModel getModel()
     {
         return model;
     }

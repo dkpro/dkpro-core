@@ -17,34 +17,31 @@
  */
 package org.dkpro.core.dictionaryannotator;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.dkpro.core.dictionaryannotator.PhraseTree;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PhraseTreeTest
 {
     private PhraseTree phrases;
-    
-    @Before
-    public void setUp()
-        throws Exception
+
+    @BeforeEach
+    public void setUp() throws Exception
     {
         phrases = new PhraseTree();
-        
+
         phrases.addPhrase("the red dog".split(" "));
         phrases.addPhrase("the red".split(" "));
         phrases.addPhrase("the new kid".split(" "));
         phrases.addPhrase("a".split(" "));
     }
-    
+
     @Test
-    public void containsTest()
-        throws Exception
+    public void containsTest() throws Exception
     {
         assertFalse(phrases.contains("the".split(" ")));
         assertFalse(phrases.contains("the new".split(" ")));
@@ -55,22 +52,21 @@ public class PhraseTreeTest
         assertTrue(phrases.contains("the red".split(" ")));
         assertTrue(phrases.contains("the new kid".split(" ")));
     }
-    
+
     @Test
-    public void matchTest()
-        throws Exception
+    public void matchTest() throws Exception
     {
         String[] sentence = "the red dog whines".split(" ");
         String[] longestMatch = phrases.getLongestMatch(sentence);
-        
+
         assertArrayEquals(longestMatch, "the red dog".split(" "));
-        
+
         sentence = "the".split(" ");
         assertNull(phrases.getLongestMatch(sentence));
-        
+
         sentence = "red dog".split(" ");
         assertNull(phrases.getLongestMatch(sentence));
-        
+
         sentence = "the new".split(" ");
         assertNull(phrases.getLongestMatch(sentence));
     }

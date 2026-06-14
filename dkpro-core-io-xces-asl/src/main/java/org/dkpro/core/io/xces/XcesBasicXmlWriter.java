@@ -24,9 +24,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
@@ -48,6 +45,9 @@ import org.dkpro.core.io.xces.models.XcesParaBasic;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.Marshaller;
 import javanet.staxutils.IndentingXMLEventWriter;
 
 /**
@@ -55,32 +55,27 @@ import javanet.staxutils.IndentingXMLEventWriter;
  */
 @ResourceMetaData(name = "XCES Basic XML Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES_BASIC})
-@TypeCapability(
-        inputs = {            
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_XCES_BASIC })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
 public class XcesBasicXmlWriter
     extends JCasFileWriter_ImplBase
 {
     /**
      * Use this filename extension.
      */
-    public static final String PARAM_FILENAME_EXTENSION = 
-            ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, defaultValue = ".xml")
     private String filenameExtension;
 
     /**
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
@@ -104,7 +99,7 @@ public class XcesBasicXmlWriter
             xmlEventWriter.add(xmlef.createStartElement("", "", "text"));
             // xmlEventWriter.add(xmlef.createStartElement("", "", "body"));
 
-            // Begin body of all the paragraphs            
+            // Begin body of all the paragraphs
             Collection<Paragraph> parasInCas = JCasUtil.select(aJCas, Paragraph.class);
             XcesBodyBasic xb = convertToXcesBasicPara(parasInCas);
             marshaller.marshal(
@@ -128,7 +123,7 @@ public class XcesBasicXmlWriter
                     getLogger().warn("Error closing the XML event writer", e);
                 }
             }
-            
+
             closeQuietly(docOS);
         }
     }

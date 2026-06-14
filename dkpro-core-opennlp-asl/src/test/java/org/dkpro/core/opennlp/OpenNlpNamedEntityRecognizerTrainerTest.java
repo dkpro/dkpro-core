@@ -20,7 +20,7 @@ package org.dkpro.core.opennlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,12 +38,10 @@ import org.dkpro.core.eval.model.Span;
 import org.dkpro.core.eval.report.Result;
 import org.dkpro.core.io.conll.Conll2002Reader;
 import org.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
-import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
-import org.dkpro.core.opennlp.OpenNlpNamedEntityRecognizerTrainer;
-import org.dkpro.core.testing.DkproTestContext;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.dkpro.core.testing.TestCache;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import opennlp.tools.ml.maxent.GISTrainer;
@@ -51,26 +49,21 @@ import opennlp.tools.ml.maxent.GISTrainer;
 public class OpenNlpNamedEntityRecognizerTrainerTest
 {
     private Dataset ds;
-    
+
     @Test
-    public void test()
-        throws Exception
+    public void test(@TempDir File targetFolder) throws Exception
     {
-        File targetFolder = testContext.getTestOutputFolder();
-        
         Split split = ds.getDefaultSplit();
-        
+
         // Train model
         File model = new File(targetFolder, "model.bin");
-        CollectionReaderDescription trainReader = createReaderDescription(
-                Conll2002Reader.class,
+        CollectionReaderDescription trainReader = createReaderDescription(Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
-                Conll2002Reader.PARAM_HAS_HEADER, true,
-                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
-        
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, Conll2002Reader.PARAM_HAS_HEADER,
+                true, Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
+
         AnalysisEngineDescription trainer = createEngineDescription(
                 OpenNlpNamedEntityRecognizerTrainer.class,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION, model,
@@ -79,51 +72,45 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_CUTOFF, 5,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_ITERATIONS, 10);
-        
+
         SimplePipeline.runPipeline(trainReader, trainer);
-        
+
         // Apply model and collect labels
         System.out.println("Applying model to test data");
-        CollectionReaderDescription testReader = createReaderDescription(
-                Conll2002Reader.class,
+        CollectionReaderDescription testReader = createReaderDescription(Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
-                Conll2002Reader.PARAM_LANGUAGE, "de",
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
+                Conll2002Reader.PARAM_LANGUAGE, "de", Conll2002Reader.PARAM_COLUMN_SEPARATOR,
+                ColumnSeparators.TAB.getName(), Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
                 Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, false);
-        
-        AnalysisEngineDescription ner = createEngineDescription(
-                OpenNlpNamedEntityRecognizer.class,
+
+        AnalysisEngineDescription ner = createEngineDescription(OpenNlpNamedEntityRecognizer.class,
                 OpenNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true,
                 OpenNlpNamedEntityRecognizer.PARAM_MODEL_LOCATION, model);
 
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner),
                 NamedEntity.class, ne -> ne.getValue());
         System.out.printf("Actual samples: %d%n", actual.size());
-        
+
         // Read reference data collect labels
-        ConfigurationParameterFactory.setParameter(testReader, 
+        ConfigurationParameterFactory.setParameter(testReader,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
-        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class, ne -> 
-                ne.getValue());
+        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class,
+                ne -> ne.getValue());
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
-        
+
         assertEquals(0.323254, results.getFscore(), 0.0001);
         assertEquals(0.877419, results.getPrecision(), 0.0001);
         assertEquals(0.198122, results.getRecall(), 0.0001);
     }
-    
-    @Before
+
+    @BeforeEach
     public void setup() throws IOException
     {
-        DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
+        DatasetFactory loader = new DatasetFactory(TestCache.getCacheFolder());
         ds = loader.load("germeval2014-de");
-    }    
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
+    }
 }

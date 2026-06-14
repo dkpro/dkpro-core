@@ -68,11 +68,10 @@ public class Web1TConverter
     private boolean writeIndexes = true;
     private float splitThreshold = 1.0f;
 
-    private Map<Integer, BufferedWriter> ngramWriters;
+    private Map<Integer, BufferedWriter> _ngramWriters;
     private Map<Integer, FrequencyDistribution<String>> letterFDs;
 
-    public Web1TConverter(String outputPath)
-        throws IOException
+    public Web1TConverter(String outputPath) throws IOException
     {
         super();
         init(outputPath);
@@ -82,28 +81,33 @@ public class Web1TConverter
         throws IOException
     {
         super();
-        this.minNgramLength = aMinNGramLength;
-        this.maxNgramLength = aMaxNGramLength;
+        minNgramLength = aMinNGramLength;
+        maxNgramLength = aMaxNGramLength;
         init(outputPath);
     }
 
     private void init(String aOutputPath) throws IOException
     {
-        this.outputPath = aOutputPath;
-
-        ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
-        letterFDs = initializeLetterFDs(minNgramLength, maxNgramLength);
-
         if (splitThreshold >= 100) {
             throw new IllegalArgumentException("Threshold has to be lower 100");
         }
+
+        outputPath = aOutputPath;
+
+        letterFDs = initializeLetterFDs(minNgramLength, maxNgramLength);
     }
 
-    public void add(JCas jcas, Set<String> inputPaths, Type sentenceType)
-        throws IOException
+    private Map<Integer, BufferedWriter> getNGramWriters() throws IOException
     {
-        ConditionalFrequencyDistribution<Integer, String> cfd = 
-                new ConditionalFrequencyDistribution<Integer, String>();
+        if (_ngramWriters == null) {
+            _ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
+        }
+        return _ngramWriters;
+    }
+
+    public void add(JCas jcas, Set<String> inputPaths, Type sentenceType) throws IOException
+    {
+        ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
 
         CAS cas = jcas.getCas();
 
@@ -127,8 +131,7 @@ public class Web1TConverter
                 }
 
                 for (int ngramLen = minNgramLength; ngramLen <= maxNgramLength; ngramLen++) {
-                    cfd.incAll(ngramLen,
-                            new NGramStringIterable(tokenStrings, ngramLen, ngramLen));
+                    cfd.incAll(ngramLen, new NGramStringIterable(tokenStrings, ngramLen, ngramLen));
                 }
             }
         }
@@ -136,17 +139,16 @@ public class Web1TConverter
         add(cfd);
     }
 
-    public void add(ConditionalFrequencyDistribution<Integer, String> cfd)
-        throws IOException
+    public void add(ConditionalFrequencyDistribution<Integer, String> cfd) throws IOException
     {
         writeFrequencyDistributionsToNGramFiles(cfd);
     }
 
-    public void createIndex()
-        throws IOException
+    public void createIndex() throws IOException
     {
-
-        closeWriters(ngramWriters.values());
+        if (_ngramWriters != null) {
+            closeWriters(_ngramWriters.values());
+        }
 
         Comparator<String> comparator = new Comparator<String>()
         {
@@ -223,8 +225,7 @@ public class Web1TConverter
         throws IOException
     {
         for (int level : cfd.getConditions()) {
-
-            if (!ngramWriters.containsKey(level)) {
+            if (!getNGramWriters().containsKey(level)) {
                 throw new IOException("No writer for ngram level " + level + " initialized.");
             }
 
@@ -237,7 +238,7 @@ public class Web1TConverter
         throws IOException
     {
         FrequencyDistribution<String> letterFD = letterFDs.get(level);
-        BufferedWriter writer = ngramWriters.get(level);
+        BufferedWriter writer = getNGramWriters().get(level);
         for (String key : cfd.getFrequencyDistribution(level).getKeys()) {
 
             // add starting letter to frequency distribution
@@ -366,22 +367,21 @@ public class Web1TConverter
      * Creates a new frequency distribution over the starting letters in the misc file as
      * preparation for splitting
      */
-    private FrequencyDistribution<String> createFreqDistForMiscFile(File misc)
-        throws IOException
+    private FrequencyDistribution<String> createFreqDistForMiscFile(File misc) throws IOException
     {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(misc),
-                outputEncoding));
+        try (var reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(misc), outputEncoding))) {
 
-        FrequencyDistribution<String> letterFD = new FrequencyDistribution<String>();
+            FrequencyDistribution<String> letterFD = new FrequencyDistribution<String>();
 
-        String readLine = null;
-        while ((readLine = reader.readLine()) != null) {
-            int indexOfTab = readLine.indexOf(TAB);
-            String key = getStartingLetters(readLine, indexOfTab);
-            letterFD.addSample(key, 1);
+            String readLine = null;
+            while ((readLine = reader.readLine()) != null) {
+                int indexOfTab = readLine.indexOf(TAB);
+                String key = getStartingLetters(readLine, indexOfTab);
+                letterFD.addSample(key, 1);
+            }
+            return letterFD;
         }
-        reader.close();
-        return letterFD;
     }
 
     // private void writeToLog(String desc, String entry) {
@@ -421,8 +421,7 @@ public class Web1TConverter
         return fdistMap;
     }
 
-    private Map<Integer, BufferedWriter> initializeWriters(int min, int max)
-        throws IOException
+    private Map<Integer, BufferedWriter> initializeWriters(int min, int max) throws IOException
     {
         Map<Integer, BufferedWriter> writers = new HashMap<>();
         for (int level = min; level <= max; level++) {
@@ -433,14 +432,13 @@ public class Web1TConverter
             }
             FileUtils.touch(outputFile);
 
-            writers.put(level, new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
-                    outputFile), outputEncoding)));
+            writers.put(level, new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(outputFile), outputEncoding)));
         }
         return writers;
     }
 
-    private void closeWriters(Collection<BufferedWriter> writers)
-        throws IOException
+    private void closeWriters(Collection<BufferedWriter> writers) throws IOException
     {
         for (BufferedWriter writer : writers) {
             writer.close();

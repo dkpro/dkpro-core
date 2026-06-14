@@ -22,7 +22,7 @@ import org.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
 public class AnnotatedGigawordArticle
 {
     private final Resource res;
-    
+
     private final String id;
 
     private final String text;
@@ -33,7 +33,7 @@ public class AnnotatedGigawordArticle
         id = aId;
         text = aText;
     }
-    
+
     public Resource getResource()
     {
         return res;

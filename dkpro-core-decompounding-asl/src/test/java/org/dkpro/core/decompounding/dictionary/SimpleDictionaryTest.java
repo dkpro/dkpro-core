@@ -19,22 +19,21 @@
 package org.dkpro.core.decompounding.dictionary;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.dkpro.core.api.resources.ResourceUtils;
-import org.dkpro.core.decompounding.dictionary.SimpleDictionary;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SimpleDictionaryTest
 {
     private SimpleDictionary dict;
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException
     {
         final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(

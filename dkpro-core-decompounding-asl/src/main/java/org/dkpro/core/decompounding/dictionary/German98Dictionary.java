@@ -37,8 +37,7 @@ import org.dkpro.core.decompounding.dictionary.igerman98.Affix;
 /**
  * The igerman98 dictionary from www.j3e.de/ispell/igerman98
  *
- * A current version of the german dictionary de_DE can be found in
- * /src/main/resources/de_DE.dic
+ * A current version of the german dictionary de_DE can be found in /src/main/resources/de_DE.dic
  *
  * This class can also be used to read other ispell/hunspell dictionaries.
  *
@@ -51,37 +50,30 @@ public class German98Dictionary
 
     private Map<Character, List<Affix>> affixes = new HashMap<Character, List<Affix>>();
 
-    public German98Dictionary(File aDict, File aAffix, String aEncoding)
-        throws IOException
+    public German98Dictionary(File aDict, File aAffix, String aEncoding) throws IOException
     {
-        try (
-                BufferedReader dis = new BufferedReader(
-                        new InputStreamReader(new FileInputStream(aDict), aEncoding));
+        try (BufferedReader dis = new BufferedReader(
+                new InputStreamReader(new FileInputStream(aDict), aEncoding));
                 BufferedReader ais = new BufferedReader(
-                        new InputStreamReader(new FileInputStream(aAffix), aEncoding));
-        ) {
+                        new InputStreamReader(new FileInputStream(aAffix), aEncoding));) {
             readAffixFile(ais);
             setWords(readFileToSet(dis));
         }
     }
 
     public German98Dictionary(InputStream aDictStream, InputStream aAffixStream, String aEncoding)
-            throws IOException
+        throws IOException
     {
-        try (
-                BufferedReader dis = new BufferedReader(
-                        new InputStreamReader(aDictStream, aEncoding));
+        try (BufferedReader dis = new BufferedReader(new InputStreamReader(aDictStream, aEncoding));
                 BufferedReader ais = new BufferedReader(
-                        new InputStreamReader(aAffixStream, aEncoding));
-        ) {
+                        new InputStreamReader(aAffixStream, aEncoding));) {
             readAffixFile(ais);
             setWords(readFileToSet(dis));
         }
     }
 
     @Override
-    protected Set<String> readFileToSet(BufferedReader aReader)
-        throws IOException
+    protected Set<String> readFileToSet(BufferedReader aReader) throws IOException
     {
         Set<String> words = new HashSet<String>();
 
@@ -146,10 +138,10 @@ public class German98Dictionary
      *            The header of the affix
      * @param aReader
      *            The file reader to read the rest of the affix
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
-    private void parseAffix(String aHeader, BufferedReader aReader)
-        throws IOException
+    private void parseAffix(String aHeader, BufferedReader aReader) throws IOException
     {
         String[] args = aHeader.split("\\s+");
 
@@ -159,8 +151,8 @@ public class German98Dictionary
         for (int i = 0; i < numLines; i++) {
             String line = aReader.readLine();
             if (line == null) {
-                throw new IOException("Unexpected end of file after reading [" + i +
-                        "] lines. Expected were [" + numLines + "] lines.");
+                throw new IOException("Unexpected end of file after reading [" + i
+                        + "] lines. Expected were [" + numLines + "] lines.");
             }
             String[] ruleArgs = line.split("\\s+");
             Character flag = ruleArgs[1].toCharArray()[0];

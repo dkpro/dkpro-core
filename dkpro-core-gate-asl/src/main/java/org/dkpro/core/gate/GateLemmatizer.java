@@ -54,11 +54,9 @@ import gate.creole.morph.Interpret;
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "GATE Lemmatizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class GateLemmatizer
     extends JCasAnnotator_ImplBase
 {
@@ -77,19 +75,20 @@ public class GateLemmatizer
     protected String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -105,18 +104,18 @@ public class GateLemmatizer
     private CasConfigurableProviderBase<Interpret> modelProvider;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
 
-        modelProvider = new CasConfigurableProviderBase<Interpret>() {
+        modelProvider = new CasConfigurableProviderBase<Interpret>()
+        {
             {
                 setContextObject(GateLemmatizer.this);
 
                 setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/gate");
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
-                        "lemmatizer-${language}-${variant}.properties");
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/"
+                        + "lemmatizer-${language}-${variant}.properties");
                 setDefault(VARIANT, "default");
 
                 setOverride(LOCATION, modelLocation);
@@ -140,8 +139,7 @@ public class GateLemmatizer
     }
 
     @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
+    public void process(JCas jcas) throws AnalysisEngineProcessException
     {
         modelProvider.configure(jcas.getCas());
 

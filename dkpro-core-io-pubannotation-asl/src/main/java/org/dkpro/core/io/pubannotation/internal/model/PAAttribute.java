@@ -26,13 +26,13 @@ public class PAAttribute
 {
     @JsonProperty("subj")
     private String subject;
-    
+
     @JsonProperty("pred")
     private String predicate;
-    
+
     @JsonProperty("obj")
     private String object;
-    
+
     public PAAttribute()
     {
         // Default constructor

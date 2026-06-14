@@ -24,21 +24,18 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.testing.AssertAnnotations;
-import org.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.testing.TestRunner;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 
 public class MorphaLemmatizerTest
 {
     @Test
-    public void testEnglishNoPos()
-        throws Exception
+    public void testEnglishNoPos() throws Exception
     {
-        JCas jcas = runTest("en", false, "We need a very complicated example sentence , which " +
-            "contains as many constituents and dependencies as possible .");
+        JCas jcas = runTest("en", false, "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .");
 
         String[] lemmas = { "We", "need", "a", "very", "complicate", "example", "sentence", ",",
                 "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
@@ -46,13 +43,12 @@ public class MorphaLemmatizerTest
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
-    
+
     @Test
-    public void testEnglishWithPos()
-        throws Exception
+    public void testEnglishWithPos() throws Exception
     {
-        JCas jcas = runTest("en", true, "We need a very complicated example sentence , which " +
-            "contains as many constituents and dependencies as possible .");
+        JCas jcas = runTest("en", true, "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .");
 
         String[] lemmas = { "We", "need", "a", "very", "complicated", "example", "sentence", ",",
                 "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
@@ -60,26 +56,20 @@ public class MorphaLemmatizerTest
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
-    
-    private JCas runTest(String aLanguage, boolean aUsePosTags, String aText)
-        throws Exception
+
+    private JCas runTest(String aLanguage, boolean aUsePosTags, String aText) throws Exception
     {
         AnalysisEngineDescription engine;
-        
+
         if (aUsePosTags) {
-            engine = createEngineDescription(
-                    createEngineDescription(OpenNlpPosTagger.class),
-                    createEngineDescription(MorphaLemmatizer.class,
-                            MorphaLemmatizer.PARAM_READ_POS, true));
+            engine = createEngineDescription(createEngineDescription(OpenNlpPosTagger.class),
+                    createEngineDescription(MorphaLemmatizer.class, MorphaLemmatizer.PARAM_READ_POS,
+                            true));
         }
         else {
-            engine = createEngineDescription(
-                    createEngineDescription(MorphaLemmatizer.class));
+            engine = createEngineDescription(createEngineDescription(MorphaLemmatizer.class));
         }
 
         return TestRunner.runTest(engine, aLanguage, aText);
     }
-    
-    @Rule
-    public DkproTestContext testContext = new DkproTestContext();
 }

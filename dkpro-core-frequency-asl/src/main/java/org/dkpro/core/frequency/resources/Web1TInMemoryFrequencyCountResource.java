@@ -44,7 +44,7 @@ public final class Web1TInMemoryFrequencyCountResource
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     protected String modelLocation;
-    
+
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     protected String language;
@@ -68,15 +68,14 @@ public final class Web1TInMemoryFrequencyCountResource
         return true;
     }
 
-    protected void initializeProvider()
-        throws Exception
+    protected void initializeProvider() throws Exception
     {
         provider = new Web1TInMemoryProvider(language, modelLocation, Integer.parseInt(maxLevel));
 
         // FIXME should not be necessary to call that here - other implementations might forget to
         // call it
-        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer
-                .parseInt(this.scaleDownFactor));
+        ((FrequencyCountProviderBase) provider)
+                .setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
     }
 
 }

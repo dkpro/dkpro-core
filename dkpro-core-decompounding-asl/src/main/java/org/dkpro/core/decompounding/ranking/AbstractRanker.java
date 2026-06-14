@@ -35,7 +35,8 @@ import org.dkpro.core.decompounding.web1t.NGramModel;
  * Contains base method for the ranking algorithms
  *
  */
-public abstract class AbstractRanker implements Ranker
+public abstract class AbstractRanker
+    implements Ranker
 {
     private Finder finder;
 
@@ -44,7 +45,8 @@ public abstract class AbstractRanker implements Ranker
      *
      * Use setFinder before using this class
      */
-    public AbstractRanker() {
+    public AbstractRanker()
+    {
 
     }
 
@@ -121,7 +123,8 @@ public abstract class AbstractRanker implements Ranker
     }
 
     @Override
-    public void setFinder(Finder aFinder) {
+    public void setFinder(Finder aFinder)
+    {
         finder = aFinder;
     }
 
@@ -132,7 +135,8 @@ public abstract class AbstractRanker implements Ranker
      *            the splits.
      * @return the filtered splits.
      */
-    public static List<DecompoundedWord> filterAndSort(List<DecompoundedWord> aSplits) {
+    public static List<DecompoundedWord> filterAndSort(List<DecompoundedWord> aSplits)
+    {
         List<DecompoundedWord> filtered = new ArrayList<DecompoundedWord>();
         for (DecompoundedWord s : aSplits) {
             if (!Double.isInfinite(s.getWeight()) && !Double.isInfinite(s.getWeight())
@@ -150,7 +154,8 @@ public abstract class AbstractRanker implements Ranker
     }
 
     @Override
-    public DecompoundedWord highestRank(DecompoundingTree aTree) {
+    public DecompoundedWord highestRank(DecompoundingTree aTree)
+    {
         return highestRank(aTree.getRoot(), null);
     }
 

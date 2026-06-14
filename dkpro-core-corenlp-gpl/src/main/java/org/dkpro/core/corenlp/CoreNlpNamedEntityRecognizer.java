@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018
+ * Copyright 2007-2024
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -64,11 +64,8 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "CoreNLP Named Entity Recognizer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class CoreNlpNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
@@ -77,7 +74,7 @@ public class CoreNlpNamedEntityRecognizer
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
@@ -96,19 +93,20 @@ public class CoreNlpNamedEntityRecognizer
     private String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
      * 
-     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
-     * the variant parameter to match the artifact. If the artifact contains the model in
-     * a non-default location, you  also have to specify the model location parameter, e.g.
-     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = 
-            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Location from which the model is read.
      */
@@ -126,32 +124,30 @@ public class CoreNlpNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = //
             ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     private String mappingLocation;
-    
+
     /**
      * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_MAX_SENTENCE_LENGTH = 
-            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
-    @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
+    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, defaultValue = "2147483647")
     private int maxSentenceLength;
 
     /**
      * Maximum time to spend on a single sentence.
      */
     public static final String PARAM_MAX_TIME = "maxTime";
-    @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
+    @ConfigurationParameter(name = PARAM_MAX_TIME, defaultValue = "-1")
     private int maxTime;
 
     /**
      * Number of parallel threads to use.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
-            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -160,7 +156,7 @@ public class CoreNlpNamedEntityRecognizer
      * @see PTBEscapingProcessor
      */
     public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
-    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, defaultValue = "true")
     private boolean ptb3Escaping;
 
     /**
@@ -178,34 +174,33 @@ public class CoreNlpNamedEntityRecognizer
     public static final String PARAM_QUOTE_END = "quoteEnd";
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
-    
+
     /**
      * @see NERClassifierCombiner#APPLY_NUMERIC_CLASSIFIERS_DEFAULT
      */
     public static final String PARAM_APPLY_NUMERIC_CLASSIFIERS = "applyNumericClassifiers";
-    @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, defaultValue = "true")
     private boolean applyNumericClassifiers;
 
-//    /**
-//     * Use SUTime if it is available on the classpath. SUTime only works for English.
-//     */
-//    public static final String PARAM_USE_SUTIME = "useSUTime";
-//    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue = "false")
+    // /**
+    // * Use SUTime if it is available on the classpath. SUTime only works for English.
+    // */
+    // public static final String PARAM_USE_SUTIME = "useSUTime";
+    // @ConfigurationParameter(name = PARAM_USE_SUTIME, defaultValue = "false")
     // FIXME Using USE_SUTIME_DEFAULT autodetects presence of SUTime. Need three values here:
     // on, off, auto
     private boolean useSUTime = false; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
 
     private boolean verbose = false;
-    
+
     private ModelProviderBase<NERCombinerAnnotator> annotatorProvider;
     private MappingProvider mappingProvider;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         annotatorProvider = new CoreNlpNamedEntityRecognizerModelProvider(this);
 
         mappingProvider = createNerMappingProvider(this, mappingLocation, language, variant,
@@ -213,29 +208,28 @@ public class CoreNlpNamedEntityRecognizer
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-        
+
         annotatorProvider.configure(cas);
         mappingProvider.configure(cas);
-        
+
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
-        
+
         Annotation document = new Annotation((String) null);
         converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
-        
+
         // Transfer back into the CAS
         CoreNlp2DKPro.convertNamedEntities(aJCas, document, mappingProvider);
     }
@@ -250,16 +244,16 @@ public class CoreNlpNamedEntityRecognizer
             setDefault(LOCATION,
                     "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-${language}-${variant}.properties");
         }
-        
+
         @Override
         protected NERCombinerAnnotator produceResource(URL aUrl) throws IOException
-        {                
+        {
             AbstractSequenceClassifier<CoreLabel> classifier = null;
-            
+
             Exception e1 = null;
             Exception e2 = null;
-            
-            //try loading as a CRFClassifier
+
+            // try loading as a CRFClassifier
             try (InputStream is = aUrl.openStream()) {
                 InputStream zis = is;
                 if (aUrl.toString().endsWith(".gz")) {
@@ -270,8 +264,8 @@ public class CoreNlpNamedEntityRecognizer
             catch (Exception e) {
                 e1 = e;
             }
-            
-            //try loading as a CMMClassifier
+
+            // try loading as a CMMClassifier
             if (classifier == null) {
                 try (InputStream is = aUrl.openStream()) {
                     InputStream zis = is;
@@ -284,13 +278,13 @@ public class CoreNlpNamedEntityRecognizer
                     e2 = e;
                 }
             }
-            
+
             if (classifier == null) {
                 getLogger().error("Unable to load as CRFClassifier", e1);
                 getLogger().error("Unable to load as CMMClassifier", e2);
                 throw new IOException("Unable to load model - see log for details.");
             }
-            
+
             if (printTagSet) {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Model contains [").append(classifier.classIndex.size())
@@ -308,9 +302,9 @@ public class CoreNlpNamedEntityRecognizer
 
             NERClassifierCombiner combiner = new NERClassifierCombiner(applyNumericClassifiers,
                     useSUTime, classifier);
-            
-            NERCombinerAnnotator annotator = new NERCombinerAnnotator(combiner, verbose,
-                    numThreads, maxTime, maxSentenceLength, false, false);
+
+            NERCombinerAnnotator annotator = new NERCombinerAnnotator(combiner, verbose, numThreads,
+                    maxTime, maxSentenceLength, false, false);
             return annotator;
         }
     }
