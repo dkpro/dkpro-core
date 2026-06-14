@@ -23,3 +23,9 @@
 *.ser binary
 *.png binary
 *.jpg binary
+# Office documents
+*.odp binary
+*.odt binary
+*.ods binary
+# Native executables without a file extension (e.g. the bundled tgrep2 binaries)
+tgrep2 binary
