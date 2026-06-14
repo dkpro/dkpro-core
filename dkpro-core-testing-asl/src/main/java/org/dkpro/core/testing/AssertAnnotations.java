@@ -70,7 +70,6 @@ import org.dkpro.core.testing.validation.checks.Check;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -83,9 +82,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -210,33 +207,6 @@ public class AssertAnnotations
 
         System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
         System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
-
-        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-    }
-
-    /**
-     * @param aExpected
-     *            expected morph tags
-     * @param aActual
-     *            actual morph tags
-     * @deprecated Use {@link #assertMorph(String[], Collection)}
-     */
-    @Deprecated
-    public static void assertMorpheme(String[] aExpected, Collection<Morpheme> aActual)
-    {
-        if (aExpected == null) {
-            return;
-        }
-
-        List<String> expected = asList(aExpected);
-        List<String> actual = new ArrayList<String>();
-
-        for (Morpheme a : aActual) {
-            actual.add(a.getMorphTag());
-        }
-
-        System.out.printf("%-20s - Expected: %s%n", "Morphemes", asCopyableString(expected));
-        System.out.printf("%-20s - Actual  : %s%n", "Morphemes", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
@@ -491,42 +461,6 @@ public class AssertAnnotations
         System.out.printf("%-20s - Actual  : %s%n", "Penn tree", actual);
 
         assertEquals(expected, actual);
-    }
-
-    /**
-     * @param aExpected
-     *            expected semantic predicates
-     * @param aActual
-     *            actual semantic predicates
-     * @deprecated Use {@link #assertSemPred(String[], Collection)}
-     */
-    @Deprecated
-    public static void assertSemanticPredicates(String[] aExpected,
-            Collection<SemanticPredicate> aActual)
-    {
-        List<String> expected = new ArrayList<String>(asList(aExpected));
-        List<String> actual = new ArrayList<String>();
-
-        for (SemanticPredicate p : aActual) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(p.getCoveredText()).append(" (").append(p.getCategory()).append("): [");
-            for (SemanticArgument a : select(p.getArguments(), SemanticArgument.class)) {
-                sb.append('(').append(a.getRole()).append(':').append(a.getCoveredText())
-                        .append(')');
-            }
-            sb.append(']');
-            actual.add(sb.toString());
-        }
-
-        Collections.sort(actual);
-        Collections.sort(expected);
-
-        System.out.printf("%-20s - Expected: %s%n", "Semantic predicates",
-                asCopyableString(expected));
-        System.out.printf("%-20s - Actual  : %s%n", "Semantic predicates",
-                asCopyableString(actual));
-
-        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
     public static void assertSemPred(String[] aExpected, Collection<SemPred> aActual)

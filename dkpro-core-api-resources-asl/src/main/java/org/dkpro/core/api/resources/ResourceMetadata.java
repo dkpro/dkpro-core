@@ -64,10 +64,4 @@ public class ResourceMetadata
     public static final String DC_IDENTIFIER = DC + SEP + "identifier";
     public static final String DC_RIGHTS = DC + SEP + "rights";
 
-    /**
-     * @deprecated Use {@link #META_MODEL_ENCODING} instead.
-     */
-    @Deprecated
-    public static final String META_ENCODING = "encoding";
-
 }

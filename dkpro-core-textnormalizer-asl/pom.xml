@@ -101,11 +101,13 @@
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-tokit-asl</artifactId>
       <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-jazzy-asl</artifactId>
       <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
@@ -196,7 +198,6 @@
               The following components require model files which cannot be provided on the
               OpenMinTeD platform.
              -->
-            <exclude>**/ReplacementFileNormalizer.xml</exclude>
             <exclude>**/DictionaryBasedTokenTransformer.xml</exclude>
             <exclude>**/FileBasedTokenTransformer.xml</exclude>
             <exclude>**/HyphenationRemover.xml</exclude>

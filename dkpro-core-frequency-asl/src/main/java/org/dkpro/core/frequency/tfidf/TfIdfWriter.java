@@ -43,8 +43,6 @@ import eu.openminted.share.annotations.api.Parameters;
 public class TfIdfWriter
     extends JCasAnnotator_ImplBase
 {
-    @Deprecated
-    public static final String PARAM_OUTPUT_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
     /**
      * Specifies the path and filename where the model file is written.
      */

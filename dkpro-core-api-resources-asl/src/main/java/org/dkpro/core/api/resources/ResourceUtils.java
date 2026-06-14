@@ -328,23 +328,6 @@ public class ResourceUtils
     }
 
     /**
-     * @param is
-     *            An {@link InputStream}.
-     * @param filename
-     *            The filename this stream was created from.
-     * @return A resolved {@link InputStream}
-     * @throws IOException
-     *             if something went wrong during resolving the input stream
-     * @deprecated Use {@link CompressionUtils#getInputStream(String, InputStream)}
-     */
-    @Deprecated
-    public static InputStream resolveCompressedInputStream(InputStream is, String filename)
-        throws IOException
-    {
-        return CompressionUtils.getInputStream(filename, is);
-    }
-
-    /**
      * Resolve a location (which can be many things) to an URL. If the location starts with
      * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
      * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
