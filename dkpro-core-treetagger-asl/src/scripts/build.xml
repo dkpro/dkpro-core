@@ -42,7 +42,7 @@
     <antcall target="es-tagger-le"/>
   </target>
 
-  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fi,fr,gl,hu,it,la,mn,nl,no,pl,pt,ru,sk,sl,sv,sw,uk,zh,jar-notice"/>
+  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fi,fr,gl,hu,id,it,la,mn,nl,no,pl,pt,ro,ru,sk,sl,sv,sw,uk,zh,jar-notice"/>
 
   <target name="bg">
     <antcall target="bg-tagger-le"/>
@@ -584,6 +584,39 @@
     </install-stub-and-upstream-file>
   </target>
 
+  <target name="id">
+    <antcall target="id-tagger-le"/>
+  </target>
+
+  <target name="id-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: indonesian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2022-01-03 | now        | b8b440461f2784e59cb119ea10033f7d (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/indonesian.par.gz"
+        dest="target/download/indonesian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/indonesian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/indonesian.par"
+        md5="b8b440461f2784e59cb119ea10033f7d"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20220103"
+        metaDataVersion="0"
+        tool="tagger"
+        language="id"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="it">
     <antcall target="it-tagger-le"/>
   </target>
@@ -828,7 +861,40 @@
       </metadata>
     </install-stub-and-upstream-file>
   </target>
-  
+
+  <target name="ro">
+    <antcall target="ro-tagger-le"/>
+  </target>
+
+  <target name="ro-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: romanian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | 3bb6819bfc22e22b29c99c7545d2c753 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/romanian.par.gz"
+        dest="target/download/romanian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/romanian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/romanian.par"
+        md5="3bb6819bfc22e22b29c99c7545d2c753"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="ro"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="ru">
     <antcall target="ru-tagger-le"/>
   </target>
