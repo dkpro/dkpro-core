@@ -1,0 +1,29 @@
+# TreeTagger Ancient Greek tagset
+#
+# Ancient Greek TreeTagger Part-of-Speech Tags. The tags are atomic, human-readable
+# word-class names. 'article' is mapped to POS_DET, 'proper' to POS_PROPN, 'unknown'
+# to POS_X and SENT to POS_PUNCT; the lemma-specific 'noun*bi/blos' and the 'verbb'
+# variant are mapped like 'noun' and 'verb' respectively.
+#
+# Source: extracted from the TreeTagger model using TT4J
+__META_SOURCE_URL__=https\://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+SENT=POS_PUNCT
+adjective=POS_ADJ
+adverb=POS_ADV
+article=POS_DET
+conjunction=POS_CONJ
+interjection=POS_INTJ
+noun=POS_NOUN
+noun*bi/blos=POS_NOUN
+particle=POS_PART
+preposition=POS_ADP
+pronoun=POS_PRON
+proper=POS_PROPN
+unknown=POS_X
+verb=POS_VERB
+verbb=POS_VERB
+
+# Catch-all rule
+*=POS

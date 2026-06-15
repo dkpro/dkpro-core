@@ -166,6 +166,11 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-fa-le</artifactId>
+        <version>20221031.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-fi-le</artifactId>
         <version>20140704.1</version>
       </dependency>
@@ -183,6 +188,11 @@
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-gmh-le</artifactId>
         <version>20161107.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-grc-le</artifactId>
+        <version>20181015.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -243,6 +253,11 @@
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-sk-le</artifactId>
         <version>20130725.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-sq-le</artifactId>
+        <version>20240223.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -336,7 +351,17 @@
         </dependency>
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-fa-le</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-gl-le</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-grc-le</artifactId>
           <scope>test</scope>
         </dependency>
         <dependency>
@@ -387,6 +412,11 @@
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-sk-le</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-sq-le</artifactId>
           <scope>test</scope>
         </dependency>
         <dependency>

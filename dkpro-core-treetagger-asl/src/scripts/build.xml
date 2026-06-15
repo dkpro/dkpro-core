@@ -42,7 +42,7 @@
     <antcall target="es-tagger-le"/>
   </target>
 
-  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fi,fr,gl,hu,id,it,la,mn,nl,no,pl,pt,ro,ru,sk,sl,sv,sw,uk,zh,jar-notice"/>
+  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fa,fi,fr,gl,grc,hu,id,it,la,mn,nl,no,pl,pt,ro,ru,sk,sl,sq,sv,sw,uk,zh,jar-notice"/>
 
   <target name="bg">
     <antcall target="bg-tagger-le"/>
@@ -380,6 +380,39 @@
     </install-stub-and-upstream-file>
   </target>
 
+  <target name="fa">
+    <antcall target="fa-tagger-le"/>
+  </target>
+
+  <target name="fa-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: persian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2022-10-31 | now        | 3e3714bf2347db639742740e7926bd5b (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/persian.par.gz"
+        dest="target/download/persian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/persian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/persian.par"
+        md5="3e3714bf2347db639742740e7926bd5b"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20221031"
+        metaDataVersion="0"
+        tool="tagger"
+        language="fa"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="fi">
     <antcall target="fi-tagger-le"/>
   </target>
@@ -547,6 +580,39 @@
       <metadata>
         <entry key="pos.tagset" value="universal"/>
         <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="grc">
+    <antcall target="grc-tagger-le"/>
+  </target>
+
+  <target name="grc-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: ancient-greek.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | b4ce02b05e8cc81a0671f45185682bd3 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/ancient-greek.par.gz"
+        dest="target/download/ancient-greek.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/ancient-greek.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/ancient-greek.par"
+        md5="b4ce02b05e8cc81a0671f45185682bd3"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="grc"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
       </metadata>
     </install-stub-and-upstream-file>
   </target>
@@ -994,6 +1060,39 @@
       </metadata>
     </install-stub-and-upstream-file>
       -->
+  </target>
+
+  <target name="sq">
+    <antcall target="sq-tagger-le"/>
+  </target>
+
+  <target name="sq-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: albanian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2024-02-23 | now        | f0ab0fcd77d15e9cb177e67eb84c0232 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/albanian.par.gz"
+        dest="target/download/albanian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/albanian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/albanian.par"
+        md5="f0ab0fcd77d15e9cb177e67eb84c0232"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20240223"
+        metaDataVersion="0"
+        tool="tagger"
+        language="sq"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
   </target>
 
   <target name="sv">
