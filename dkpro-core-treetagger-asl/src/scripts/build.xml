@@ -42,7 +42,7 @@
     <antcall target="es-tagger-le"/>
   </target>
 
-  <target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,ru,sk,sl,sw,zh,jar-notice"/>
+  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,ru,sk,sl,sv,sw,zh,jar-notice"/>
 
   <target name="bg">
     <antcall target="bg-tagger-le"/>
@@ -77,7 +77,73 @@
       </metadata>
     </install-stub-and-upstream-file>
   </target>
-  
+
+  <target name="ca">
+    <antcall target="ca-tagger-le"/>
+  </target>
+
+  <target name="ca-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: catalan.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | e4a47f69b0a88be86eac609cabdc02e0 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/catalan.par.gz"
+        dest="target/download/catalan.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/catalan.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/catalan.par"
+        md5="e4a47f69b0a88be86eac609cabdc02e0"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="ca"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="da">
+    <antcall target="da-tagger-le"/>
+  </target>
+
+  <target name="da-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: danish.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | 75ccb4a84b965db774a4cd8f05a90f2d (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/danish.par.gz"
+        dest="target/download/danish.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/danish.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/danish.par"
+        md5="75ccb4a84b965db774a4cd8f05a90f2d"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="da"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="parole-tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="de">
     <antcall target="de-tagger-le"/>
     <antcall target="de-chunker-le"/>
@@ -798,7 +864,40 @@
     </install-stub-and-upstream-file>
       -->
   </target>
-  
+
+  <target name="sv">
+    <antcall target="sv-tagger-le"/>
+  </target>
+
+  <target name="sv-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: swedish.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2021-10-01 | now        | fb81823859f3e5c479af46f5bd070f94 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/swedish.par.gz"
+        dest="target/download/swedish.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/swedish.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/swedish.par"
+        md5="fb81823859f3e5c479af46f5bd070f94"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20211001"
+        metaDataVersion="0"
+        tool="tagger"
+        language="sv"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="suc-tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="sw">
     <antcall target="sw-tagger-le"/>
   </target>
