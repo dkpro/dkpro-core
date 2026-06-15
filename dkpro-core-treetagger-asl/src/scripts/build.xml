@@ -42,7 +42,7 @@
     <antcall target="es-tagger-le"/>
   </target>
 
-  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fa,fi,fr,gl,grc,hu,id,it,la,mn,nl,no,pl,pt,ro,ru,sk,sl,sq,sv,sw,uk,zh,jar-notice"/>
+  <target name="separate-jars" depends="check-license,install-executables,bg,ca,cop,da,de,en,es,et,fa,fi,fr,gl,grc,ha,hu,id,it,la,mn,nl,no,pl,pt,ro,ru,sk,sl,sq,sv,sw,uk,zh,jar-notice"/>
 
   <target name="bg">
     <antcall target="bg-tagger-le"/>
@@ -102,6 +102,39 @@
         metaDataVersion="0"
         tool="tagger"
         language="ca"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="cop">
+    <antcall target="cop-tagger-le"/>
+  </target>
+
+  <target name="cop-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: coptic_coarse.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - Coptic SCRIPTORIUM (Amir Zeldes), coarse-grained model; uncompressed .par
+      - 2018-06-10 | now        | 4a79e6a932c447fdf90f1a40d2389202 (last commit)
+      -->
+      <get
+        src="https://raw.githubusercontent.com/CopticScriptorium/tagger-part-of-speech/master/coptic_coarse.par"
+        dest="target/download/coptic_coarse.par"
+        skipexisting="true"/>
+      <install-stub-and-upstream-file
+        file="target/download/coptic_coarse.par"
+        md5="4a79e6a932c447fdf90f1a40d2389202"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20180610"
+        metaDataVersion="0"
+        tool="tagger"
+        language="cop"
         variant="le"
         extension="bin">
       <metadata>
@@ -608,6 +641,39 @@
         metaDataVersion="0"
         tool="tagger"
         language="grc"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="ha">
+    <antcall target="ha-tagger-le"/>
+  </target>
+
+  <target name="ha-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: hausa_model.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - Hausa model (Amir Zeldes); uncompressed .par
+      - 2015-08-25 | now        | 8e4dfa2805282c13d48ca6c97193da24 (last commit)
+      -->
+      <get
+        src="https://raw.githubusercontent.com/amir-zeldes/hausa/master/hausa_model.par"
+        dest="target/download/hausa_model.par"
+        skipexisting="true"/>
+      <install-stub-and-upstream-file
+        file="target/download/hausa_model.par"
+        md5="8e4dfa2805282c13d48ca6c97193da24"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20150825"
+        metaDataVersion="0"
+        tool="tagger"
+        language="ha"
         variant="le"
         extension="bin">
       <metadata>

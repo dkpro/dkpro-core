@@ -1,0 +1,48 @@
+# TreeTagger Hausa tagset
+#
+# Hausa TreeTagger Part-of-Speech Tags created by Amir Zeldes. EXIST (existential
+# verboid) -> POS_VERB, FOC (focus/copula ne,ce) -> POS_AUX, FUT/PAC/PROG (TAM and
+# person-aspect complexes) -> POS_AUX, LINK (genitive linker na/ta) and NEG/PTC ->
+# POS_PART, PRP (preposition) -> POS_ADP, QUANT (quantifier) -> POS_DET, FM (foreign
+# material) -> POS_X, and the various P* pronouns -> POS_PRON. Portmanteau tags
+# (joined with '_', e.g. FUT_PAC, PREL_PROG) are mapped by their first component.
+#
+# Source: extracted from the TreeTagger model using TT4J
+__META_SOURCE_URL__=https\://github.com/amir-zeldes/hausa
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+ADJ=POS_ADJ
+ADV=POS_ADV
+CONJ=POS_CONJ
+EXIST=POS_VERB
+FM=POS_X
+FOC=POS_AUX
+FUT=POS_AUX
+FUT_PAC=POS_AUX
+INTJ=POS_INTJ
+LINK=POS_PART
+N=POS_NOUN
+NEG=POS_PART
+NEG_PAC=POS_PART
+NUM=POS_NUM
+PAC=POS_AUX
+PAC_V=POS_AUX
+PDEM=POS_PRON
+PIND=POS_PRON
+PINT=POS_PRON
+PPOS=POS_PRON
+PPRS=POS_PRON
+PPRS_FOC=POS_PRON
+PREL=POS_PRON
+PREL_PAC=POS_PRON
+PREL_PROG=POS_PRON
+PROG=POS_AUX
+PROG_PDEM=POS_AUX
+PRP=POS_ADP
+PTC=POS_PART
+PUNCT=POS_PUNCT
+QUANT=POS_DET
+V=POS_VERB
+
+# Catch-all rule
+*=POS

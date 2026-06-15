@@ -2801,6 +2801,33 @@ public class TreeTaggerPosTaggerTest
                 new String[] { "POS_DET", "POS_NUM", "POS_NOUN", "POS_AUX", "POS_PUNCT" });
     }
 
+    @Test
+    public void testCoptic() throws Exception
+    {
+        String[] tagset = { "A", "ADV", "ART", "A_PPER", "C", "CONJ", "COP", "C_PPER", "EXIST",
+                "FM", "FUT", "FW", "IMOD", "IMOD_PPER", "N", "NEG", "NUM", "N_PPER", "PDEM", "PINT",
+                "PPER", "PPOS", "PREP", "PREP_PPER", "PTC", "PUNCT", "UNKNOWN", "UNKOWN", "V",
+                "VBD", "V_PPER" };
+
+        runTest("cop", "tt", tagset, "ⲁ ⲡⲛⲟⲩⲧⲉ ⲥⲱⲧⲙ ⲉ ⲡϫⲟⲉⲓⲥ .",
+                new String[] { "ⲁ", "ⲡⲛⲟⲩⲧⲉ", "ⲥⲱⲧⲙ", "ⲉ", "ⲡϫⲟⲉⲓⲥ", "." },
+                new String[] { "A", "N", "V", "PREP", "N", "PUNCT" }, new String[] { "POS_AUX",
+                        "POS_NOUN", "POS_VERB", "POS_ADP", "POS_NOUN", "POS_PUNCT" });
+    }
+
+    @Test
+    public void testHausa() throws Exception
+    {
+        String[] tagset = { "ADJ", "ADV", "CONJ", "EXIST", "FM", "FOC", "FUT", "FUT_PAC", "INTJ",
+                "LINK", "N", "NEG", "NEG_PAC", "NUM", "PAC", "PAC_V", "PDEM", "PIND", "PINT",
+                "PPOS", "PPRS", "PPRS_FOC", "PREL", "PREL_PAC", "PREL_PROG", "PROG", "PROG_PDEM",
+                "PRP", "PTC", "PUNCT", "QUANT", "V" };
+
+        runTest("ha", "tt", tagset, "Wannan gida ne .", new String[] { "-", "-", "-", "-" },
+                new String[] { "PDEM", "N", "FOC", "PUNCT" },
+                new String[] { "POS_PRON", "POS_NOUN", "POS_AUX", "POS_PUNCT" });
+    }
+
     private JCas runTest(String language, String tagsetName, String[] tagset, String testDocument,
             String[] lemmas, String[] tags, String[] tagClasses)
         throws Exception

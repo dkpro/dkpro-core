@@ -141,6 +141,11 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-cop-le</artifactId>
+        <version>20180610.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-da-le</artifactId>
         <version>20181015.0</version>
       </dependency>
@@ -193,6 +198,11 @@
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-grc-le</artifactId>
         <version>20181015.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-ha-le</artifactId>
+        <version>20150825.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -326,6 +336,11 @@
         </dependency>
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-cop-le</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-da-le</artifactId>
           <scope>test</scope>
         </dependency>
@@ -362,6 +377,11 @@
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-grc-le</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-ha-le</artifactId>
           <scope>test</scope>
         </dependency>
         <dependency>
