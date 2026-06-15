@@ -254,20 +254,21 @@
       - 2013-10-07 | 2014-05-20 | 8488c4319fac414802637b654a61db37
       - 2014-05-20 | 2015-07-24 | 48f14061833274842d6cf5ed3db7b903
       - 2015-07-24 | 2016-12-22 | ea8142cb5a0efc59226a0f5d41d690ac
-          - 2016-12-22 | now        | eb4b3ef771e4ba2e21aa715ca5a08d5f
+          - 2016-12-22 | 2021-09-27 | eb4b3ef771e4ba2e21aa715ca5a08d5f
+          - 2021-09-27 | now        | b41f98726226f9c525b44f26d0079269 (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish.par.gz"
         dest="target/download/spanish.par.gz" 
         skipexisting="true"/>
     <gunzip src="target/download/spanish.par.gz"/>
       <install-stub-and-upstream-file 
         file="target/download/spanish.par" 
-        md5="eb4b3ef771e4ba2e21aa715ca5a08d5f"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        md5="b41f98726226f9c525b44f26d0079269"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20161222"
-        metaDataVersion="1"
+        upstreamVersion="20210927"
+        metaDataVersion="0"
         tool="tagger" 
         language="es" 
         variant="le" 
@@ -287,20 +288,21 @@
     <mkdir dir="target/download"/>
     
     <!-- FILE: estonian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - -
-      - 2011-01-24 | now        | 4a98b412e36afefbc204fca9e561f5cb
+      - 2011-01-24 | 2019-09-04 | 4a98b412e36afefbc204fca9e561f5cb
+      - 2019-09-04 | now        | 6946d72d317b034a84df070a80ed3d44 (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian.par.gz"
         dest="target/download/estonian.par.gz" 
         skipexisting="true"/>
     <gunzip src="target/download/estonian.par.gz"/>
       <install-stub-and-upstream-file 
         file="target/download/estonian.par" 
-        md5="4a98b412e36afefbc204fca9e561f5cb"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        md5="6946d72d317b034a84df070a80ed3d44"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20110124"
-        metaDataVersion="1"
+        upstreamVersion="20190904"
+        metaDataVersion="0"
         tool="tagger" 
         language="et" 
         variant="le" 
@@ -664,10 +666,11 @@
     <mkdir dir="target/download"/>
     
     <!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      - 2010-11-15 | now        | cf9855b4e215fa7a393700aa135830b0
+      - 2010-11-15 | 2026-06-15 | cf9855b4e215fa7a393700aa135830b0
+      - 2026-06-15 | now        | f482b6fbc0713cf138fe678ba3d842d3 (date observed; gamallo server sends no Last-Modified)
       -->
-      <get 
-        src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz" 
+      <get
+        src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
         dest="target/download/tree-taggerPT-GZ.tar.gz" 
         skipexisting="true"/>
     <gunzip src="target/download/tree-taggerPT-GZ.tar.gz"/>
@@ -679,11 +682,11 @@
       </untar>
       <install-stub-and-upstream-file 
         file="target/download/pt.par" 
-        md5="cf9855b4e215fa7a393700aa135830b0"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        md5="f482b6fbc0713cf138fe678ba3d842d3"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20101115"
-        metaDataVersion="2"
+        upstreamVersion="20260615"
+        metaDataVersion="0"
         tool="tagger" 
         language="pt" 
         variant="le" 
@@ -839,10 +842,13 @@
     
     <!-- FILE: tt-lcmc.tgz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-15 | now        | 7392059e61b5555ab984918e3dea9464
+      -
+      - 2026-06-15: Serge Sharoff's model moved from corpus.leeds.ac.uk (now dead) to
+      -             ssharoff.github.io; content is byte-identical (same md5).
       -->
-      <get 
-        src="http://corpus.leeds.ac.uk/tools/zh/tt-lcmc.tgz" 
-        dest="target/download/tt-lcmc.tar.gz" 
+      <get
+        src="https://ssharoff.github.io/tools/zh/tt-lcmc.tgz"
+        dest="target/download/tt-lcmc.tar.gz"
         skipexisting="true"/>
     <gunzip src="target/download/tt-lcmc.tar.gz"/>
       <untar src="target/download/tt-lcmc.tar" dest="target/download">
