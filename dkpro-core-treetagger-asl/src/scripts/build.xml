@@ -92,23 +92,24 @@
       - 2012-12-07 | 2017-03-16 | 54f16f045083ae6ebe8b9d9d4a24484e
       - 2017-03-16 | 2018-11-02 | 36183505f5ef1059aac104fb1fe1534d
       - 2018-11-02 | 2019-04-09 | 71bb01ee3b908c0b84a69fee7d34f829
-      - 2019-04-09 |   now      | 535cd21cdc137c32c2a376875be2099d
-      - 
+      - 2019-04-09 | 2020-06-22 | 535cd21cdc137c32c2a376875be2099d
+      - 2020-06-22 |   now      | fe3b3469a6b5e5fb446057699ad4f009 (upstream mtime)
+      -
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german.par.gz" 
-        dest="target/download/german.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german.par.gz"
+        dest="target/download/german.par.gz"
         skipexisting="true"/>
     <gunzip src="target/download/german.par.gz"/>
-      <install-stub-and-upstream-file 
-        file="target/download/german.par" 
-        md5="535cd21cdc137c32c2a376875be2099d"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+      <install-stub-and-upstream-file
+        file="target/download/german.par"
+        md5="fe3b3469a6b5e5fb446057699ad4f009"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20190409"
-        metaDataVersion="1"
-        tool="tagger" 
-        language="de" 
+        upstreamVersion="20200622"
+        metaDataVersion="0"
+        tool="tagger"
+        language="de"
         variant="le" 
         extension="bin">
       <metadata>
@@ -358,20 +359,21 @@
     
     <!-- FILE: french-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-01-11 | 2019-04-04 | 41d978f247b23d6fee733da32a55a775
-      - 2019-04-04 | now        | 5f11bd985160ed85b40fdde848f1b94f
+      - 2019-04-04 | 2023-03-13 | 5f11bd985160ed85b40fdde848f1b94f
+      - 2023-03-13 | now        | 87cce5866d7c3c5eaf80008021aa950c (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french.par.gz" 
-        dest="target/download/french.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french.par.gz"
+        dest="target/download/french.par.gz"
         skipexisting="true"/>
     <gunzip src="target/download/french.par.gz"/>
-      <install-stub-and-upstream-file 
-        file="target/download/french.par" 
-        md5="5f11bd985160ed85b40fdde848f1b94f"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+      <install-stub-and-upstream-file
+        file="target/download/french.par"
+        md5="87cce5866d7c3c5eaf80008021aa950c"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20190404"
-        metaDataVersion="1"
+        upstreamVersion="20230313"
+        metaDataVersion="0"
         tool="tagger" 
         language="fr" 
         variant="le" 
@@ -627,20 +629,21 @@
     
     <!-- polish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2014-06-02 | 2015-05-06 | e7ac63b234ed40f5e850bdac4c883ef1
-          - 2015-05-06 | now        | bec86e83c25ff19a7ce23e93f89168ee
+          - 2015-05-06 | 2021-06-02 | bec86e83c25ff19a7ce23e93f89168ee
+          - 2021-06-02 | now        | 0f2a90a27ea022e234b73f3c35b64bdd (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish.par.gz" 
-        dest="target/download/polish.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish.par.gz"
+        dest="target/download/polish.par.gz"
         skipexisting="true"/>
     <gunzip src="target/download/polish.par.gz"/>
-      <install-stub-and-upstream-file 
-        file="target/download/polish.par" 
-        md5="bec86e83c25ff19a7ce23e93f89168ee"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+      <install-stub-and-upstream-file
+        file="target/download/polish.par"
+        md5="0f2a90a27ea022e234b73f3c35b64bdd"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20150506"
-        metaDataVersion="1"
+        upstreamVersion="20210602"
+        metaDataVersion="0"
         tool="tagger" 
         language="pl" 
         variant="le" 
@@ -867,7 +870,7 @@
   </target>
   
   <target name="install-executables">
-    <property name="version.bin" value="20190408.0"/>
+    <property name="version.bin" value="20260614.0"/>
       
     <fail unless="outputDir">No output directory set.</fail>
     <mkdir dir="${outputDir}/bin"/>
@@ -880,13 +883,20 @@
       - produces different output on different platforms even when using the same model file
       - and supposedly the same version of the package (e.g. 3.2).
       -->
-    <!-- FILE: tree-tagger-MacOSX-3.2-intel.tar.gz - - - - - - - - - - - - - - - - - - - - - - -
+    <!-- FILE: tree-tagger-MacOSX-Intel-3.2.3.tar.gz - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
       - 2012-04-25 | 2019-04-08 | a47bac91b5f373c5ba8703faa5ec7dd7 : buffer flush after 10 lines with -prob , the file dropped on 2016-11-24 the intel but is the same
-      - 2019-04-08 | now        | 77f2f48149540d8569da6963b12c67b4
+      - 2019-04-08 | 2026-06-14 | 77f2f48149540d8569da6963b12c67b4 (was tree-tagger-MacOSX-3.2.2.tar.gz)
+      - 2020-10-19 | now        | e05e6914730bec69122300a5f5d8e986 (upstream renamed to MacOSX-Intel-3.2.3; upstream mtime)
       -->
-    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.2.tar.gz"
-      platform="osx-x86_64" file="tree-tagger" md5="77f2f48149540d8569da6963b12c67b4"/>
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-Intel-3.2.3.tar.gz"
+      platform="osx-x86_64" file="tree-tagger" md5="e05e6914730bec69122300a5f5d8e986"/>
+
+    <!-- FILE: tree-tagger-MacOSX-M1-3.2.3.tar.gz - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2022-08-25 | now        | ed25aba6d103c1c0ed00978ca1974027 (Apple Silicon native binary; upstream mtime)
+      -->
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-M1-3.2.3.tar.gz"
+      platform="osx-aarch64" file="tree-tagger" md5="ed25aba6d103c1c0ed00978ca1974027"/>
 
     <!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
@@ -909,10 +919,17 @@
       - 2013-11-18 | 2015-01-14 | cbc0833fd6cb8c1ec1ea4cae4d40b25a
       - 2015-01-14 | 2016-04-30 | 2a0a3740cc9a838949219caf0d64544c
       - 2016-04-30 | 2019-04-03 | 16cf3578fafd8c39b5b9df0077297025
-      - 2019-04-03 | now        | 3fc90c3908574890778af08fde90e065
+      - 2019-04-03 | 2026-06-14 | 3fc90c3908574890778af08fde90e065 (was tree-tagger-linux-3.2.2.tar.gz)
+      - 2023-03-29 | now        | eee191aa11a83ce86bd2e872068c0471 (tree-tagger-linux-3.2.5.tar.gz; upstream mtime)
       -->
-    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.2.tar.gz"
-      platform="linux-x86_64" file="tree-tagger" md5="3fc90c3908574890778af08fde90e065"/>
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.5.tar.gz"
+      platform="linux-x86_64" file="tree-tagger" md5="eee191aa11a83ce86bd2e872068c0471"/>
+
+    <!-- FILE: tree-tagger-ARM64-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-02-20 | now        | e42b858a4e71bcca634bc1ebd13eed32 (Linux ARM64 / aarch64; upstream mtime)
+      -->
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-ARM64-3.2.tar.gz"
+      platform="linux-aarch64" file="tree-tagger" md5="e42b858a4e71bcca634bc1ebd13eed32"/>
 
     <!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
       - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
@@ -932,20 +949,22 @@
       platform="solaris-sparc" file="tree-tagger" md5="bcebb9b9745e2ac12c5226a032b8bfb4"/>
       -->
       
-    <!-- FILE: tree-tagger-windows32-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    <!-- FILE: tree-tagger-windows32-3.2.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-19 | 2012-04-25 | 72a5489fe197b0173ea476e2224a6ad6
       - 2012-04-25 | 2015-03-25 | c88d7fe1aa63bebaccfa019c222f54ea : buffer flush after 10 lines with -prob
       - 2015-03-25 | 2019-04-08 | e78a1b710d738f9e29d4756ccac4fc3a
-      - 2019-04-08 | now        | 3fc521855221e3dfc82be95f2d324aea
-      -->
+      - 2019-04-08 | 2026-06-14 | 3fc521855221e3dfc82be95f2d324aea
+      - 2026-06-14 | now        | 32-bit Windows build no longer offered upstream (URL returns 404)
     <install-executable-file-zip url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows32-3.2.2.zip"
       platform="windows-x86_32" file="tree-tagger.exe" md5="3fc521855221e3dfc82be95f2d324aea"/>
-      
-    <!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      - 2019-04-08 | now        | 6bf25051fa133b42c222b6f02ecab9d0
       -->
-    <install-executable-file-zip url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.2.zip"
-      platform="windows-x86_64" file="tree-tagger.exe" md5="6bf25051fa133b42c222b6f02ecab9d0"/>
+
+    <!-- FILE: tree-tagger-windows-3.2.3a.zip - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2019-04-08 | 2026-06-14 | 6bf25051fa133b42c222b6f02ecab9d0 (was tree-tagger-windows-3.2.2.zip)
+      - 2023-12-03 | now        | a4581d0f651eca0c3ae91e239eacccf4 (tree-tagger-windows-3.2.3a.zip; upstream mtime)
+      -->
+    <install-executable-file-zip url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.3a.zip"
+      platform="windows-x86_64" file="tree-tagger.exe" md5="a4581d0f651eca0c3ae91e239eacccf4"/>
     
     <clean-pom/>
     <generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"

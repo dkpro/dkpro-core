@@ -65,7 +65,7 @@ public class SegmenterCompatibilityTest
     {
         int i = 0;
         for (Lemma lemmaAnnotation : actual) {
-            assertEquals("In position " + i, expected[i], lemmaAnnotation.getValue());
+            assertEquals(expected[i], lemmaAnnotation.getValue(), "In position " + i);
             i++;
         }
     }
