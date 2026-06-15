@@ -42,7 +42,7 @@
     <antcall target="es-tagger-le"/>
   </target>
 
-  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,ru,sk,sl,sv,sw,zh,jar-notice"/>
+  <target name="separate-jars" depends="check-license,install-executables,bg,ca,da,de,en,es,et,fi,fr,gl,hu,it,la,mn,nl,no,pl,pt,ru,sk,sl,sv,sw,uk,zh,jar-notice"/>
 
   <target name="bg">
     <antcall target="bg-tagger-le"/>
@@ -551,6 +551,38 @@
     </install-stub-and-upstream-file>
   </target>
 
+  <target name="hu">
+    <antcall target="hu-tagger-le"/>
+  </target>
+
+  <target name="hu-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: hungarian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2020-12-12 | now        | 1067ffe4d49b735e58f25c5a97d15ef3 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/hungarian.par.gz"
+        dest="target/download/hungarian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/hungarian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/hungarian.par"
+        md5="1067ffe4d49b735e58f25c5a97d15ef3"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20201212"
+        metaDataVersion="0"
+        tool="tagger"
+        language="hu"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
 
   <target name="it">
     <antcall target="it-tagger-le"/>
@@ -654,7 +686,40 @@
       </metadata>
     </install-stub-and-upstream-file>
   </target>
-  
+
+  <target name="no">
+    <antcall target="no-tagger-le"/>
+  </target>
+
+  <target name="no-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: norwegian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2019-05-21 | now        | 0ed108563585fd9c45a1e1e536040391 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/norwegian.par.gz"
+        dest="target/download/norwegian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/norwegian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/norwegian.par"
+        md5="0ed108563585fd9c45a1e1e536040391"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20190521"
+        metaDataVersion="0"
+        tool="tagger"
+        language="no"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="mn">
     <antcall target="mn-tagger-le"/>
   </target>
@@ -928,6 +993,39 @@
       <metadata>
           <entry key="pos.tagset" value="swatwol"/>
           <entry key="encoding" value="ISO-8859-1"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="uk">
+    <antcall target="uk-tagger-le"/>
+  </target>
+
+  <target name="uk-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: ukrainian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2023-01-30 | now        | 02187dade48761b29ac381314e6cbd22 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/ukrainian.par.gz"
+        dest="target/download/ukrainian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/ukrainian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/ukrainian.par"
+        md5="02187dade48761b29ac381314e6cbd22"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20230130"
+        metaDataVersion="0"
+        tool="tagger"
+        language="uk"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
       </metadata>
     </install-stub-and-upstream-file>
   </target>
