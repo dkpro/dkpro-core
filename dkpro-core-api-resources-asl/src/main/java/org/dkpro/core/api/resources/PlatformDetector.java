@@ -32,6 +32,7 @@ public class PlatformDetector
     public static final String ARCH_X86_32 = "x86_32";
     public static final String ARCH_X86_64 = "x86_64";
     public static final String ARCH_SPARC = "sparc";
+    public static final String ARCH_AARCH64 = "aarch64";
 
     private String _arch = "";
     private String _os = "";
@@ -80,7 +81,8 @@ public class PlatformDetector
     /**
      * Get the platform architecture.
      *
-     * @return {@literal "ppc"}, {@literal "x86_32"}, {@literal "x86_64"} or {"amd64"}
+     * @return {@literal "ppc"}, {@literal "x86_32"}, {@literal "x86_64"}, {@literal "aarch64"} or
+     *         {"amd64"}
      */
     public String getArch()
     {
@@ -156,6 +158,10 @@ public class PlatformDetector
         }
         if (_arch.equals("powerpc")) {
             _arch = ARCH_PPC;
+        }
+        // Apple Silicon and Linux ARM64 report "aarch64"; some JVMs report "arm64"
+        if (_arch.equals("arm64")) {
+            _arch = ARCH_AARCH64;
         }
 
         // Resolve name "synonyms"

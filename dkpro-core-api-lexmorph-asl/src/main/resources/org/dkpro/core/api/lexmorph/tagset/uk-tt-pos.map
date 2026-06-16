@@ -1,0 +1,34 @@
+# TreeTagger Ukrainian tagset
+#
+# Ukrainian TreeTagger Part-of-Speech Tags. The coarse part-of-speech is encoded in
+# the head of each tag (the part before the first '.') and follows the Universal
+# POS categories (ADJ, ADP, ADV, AUX, CCONJ/CONJ, DET, INTJ, NOUN, NUM, PART, PRON,
+# PROPN, PUNCT, SCONJ, SYM, VERB, X); the remainder encodes morphological features.
+# The '_' tag (unspecified) and SENT are mapped to POS_X and POS_PUNCT respectively.
+#
+# Source: extracted from the TreeTagger model using TT4J
+__META_SOURCE_URL__=https\://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+ADJ=POS_ADJ
+ADP=POS_ADP
+ADV=POS_ADV
+AUX=POS_AUX
+CCONJ=POS_CONJ
+DET=POS_DET
+INTJ=POS_INTJ
+NOUN=POS_NOUN
+NUM=POS_NUM
+PART=POS_PART
+PRON=POS_PRON
+PROPN=POS_PROPN
+PUNCT=POS_PUNCT
+SCONJ=POS_SCONJ
+SENT=POS_PUNCT
+SYM=POS_SYM
+VERB=POS_VERB
+X=POS_X
+_=POS_X
+
+# Catch-all rule
+*=POS

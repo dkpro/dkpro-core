@@ -42,7 +42,7 @@
     <antcall target="es-tagger-le"/>
   </target>
 
-  <target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,ru,sk,sl,sw,zh,jar-notice"/>
+  <target name="separate-jars" depends="check-license,install-executables,bg,ca,cop,da,de,en,es,et,fa,fi,fr,gl,grc,ha,hu,id,it,la,mn,nl,no,pl,pt,ro,ru,sk,sl,sq,sv,sw,uk,zh,jar-notice"/>
 
   <target name="bg">
     <antcall target="bg-tagger-le"/>
@@ -77,7 +77,106 @@
       </metadata>
     </install-stub-and-upstream-file>
   </target>
-  
+
+  <target name="ca">
+    <antcall target="ca-tagger-le"/>
+  </target>
+
+  <target name="ca-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: catalan.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | e4a47f69b0a88be86eac609cabdc02e0 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/catalan.par.gz"
+        dest="target/download/catalan.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/catalan.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/catalan.par"
+        md5="e4a47f69b0a88be86eac609cabdc02e0"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="ca"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="cop">
+    <antcall target="cop-tagger-le"/>
+  </target>
+
+  <target name="cop-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: coptic_coarse.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - Coptic SCRIPTORIUM (Amir Zeldes), coarse-grained model; uncompressed .par
+      - 2018-06-10 | now        | 4a79e6a932c447fdf90f1a40d2389202 (last commit)
+      -->
+      <get
+        src="https://raw.githubusercontent.com/CopticScriptorium/tagger-part-of-speech/master/coptic_coarse.par"
+        dest="target/download/coptic_coarse.par"
+        skipexisting="true"/>
+      <install-stub-and-upstream-file
+        file="target/download/coptic_coarse.par"
+        md5="4a79e6a932c447fdf90f1a40d2389202"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20180610"
+        metaDataVersion="0"
+        tool="tagger"
+        language="cop"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="da">
+    <antcall target="da-tagger-le"/>
+  </target>
+
+  <target name="da-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: danish.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | 75ccb4a84b965db774a4cd8f05a90f2d (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/danish.par.gz"
+        dest="target/download/danish.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/danish.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/danish.par"
+        md5="75ccb4a84b965db774a4cd8f05a90f2d"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="da"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="parole-tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="de">
     <antcall target="de-tagger-le"/>
     <antcall target="de-chunker-le"/>
@@ -92,23 +191,24 @@
       - 2012-12-07 | 2017-03-16 | 54f16f045083ae6ebe8b9d9d4a24484e
       - 2017-03-16 | 2018-11-02 | 36183505f5ef1059aac104fb1fe1534d
       - 2018-11-02 | 2019-04-09 | 71bb01ee3b908c0b84a69fee7d34f829
-      - 2019-04-09 |   now      | 535cd21cdc137c32c2a376875be2099d
-      - 
+      - 2019-04-09 | 2020-06-22 | 535cd21cdc137c32c2a376875be2099d
+      - 2020-06-22 |   now      | fe3b3469a6b5e5fb446057699ad4f009 (upstream mtime)
+      -
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german.par.gz" 
-        dest="target/download/german.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german.par.gz"
+        dest="target/download/german.par.gz"
         skipexisting="true"/>
     <gunzip src="target/download/german.par.gz"/>
-      <install-stub-and-upstream-file 
-        file="target/download/german.par" 
-        md5="535cd21cdc137c32c2a376875be2099d"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+      <install-stub-and-upstream-file
+        file="target/download/german.par"
+        md5="fe3b3469a6b5e5fb446057699ad4f009"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20190409"
-        metaDataVersion="1"
-        tool="tagger" 
-        language="de" 
+        upstreamVersion="20200622"
+        metaDataVersion="0"
+        tool="tagger"
+        language="de"
         variant="le" 
         extension="bin">
       <metadata>
@@ -253,20 +353,21 @@
       - 2013-10-07 | 2014-05-20 | 8488c4319fac414802637b654a61db37
       - 2014-05-20 | 2015-07-24 | 48f14061833274842d6cf5ed3db7b903
       - 2015-07-24 | 2016-12-22 | ea8142cb5a0efc59226a0f5d41d690ac
-          - 2016-12-22 | now        | eb4b3ef771e4ba2e21aa715ca5a08d5f
+          - 2016-12-22 | 2021-09-27 | eb4b3ef771e4ba2e21aa715ca5a08d5f
+          - 2021-09-27 | now        | b41f98726226f9c525b44f26d0079269 (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish.par.gz"
         dest="target/download/spanish.par.gz" 
         skipexisting="true"/>
     <gunzip src="target/download/spanish.par.gz"/>
       <install-stub-and-upstream-file 
         file="target/download/spanish.par" 
-        md5="eb4b3ef771e4ba2e21aa715ca5a08d5f"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        md5="b41f98726226f9c525b44f26d0079269"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20161222"
-        metaDataVersion="1"
+        upstreamVersion="20210927"
+        metaDataVersion="0"
         tool="tagger" 
         language="es" 
         variant="le" 
@@ -286,26 +387,60 @@
     <mkdir dir="target/download"/>
     
     <!-- FILE: estonian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - -
-      - 2011-01-24 | now        | 4a98b412e36afefbc204fca9e561f5cb
+      - 2011-01-24 | 2019-09-04 | 4a98b412e36afefbc204fca9e561f5cb
+      - 2019-09-04 | now        | 6946d72d317b034a84df070a80ed3d44 (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian.par.gz"
         dest="target/download/estonian.par.gz" 
         skipexisting="true"/>
     <gunzip src="target/download/estonian.par.gz"/>
       <install-stub-and-upstream-file 
         file="target/download/estonian.par" 
-        md5="4a98b412e36afefbc204fca9e561f5cb"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        md5="6946d72d317b034a84df070a80ed3d44"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20110124"
-        metaDataVersion="1"
+        upstreamVersion="20190904"
+        metaDataVersion="0"
         tool="tagger" 
         language="et" 
         variant="le" 
         extension="bin">
       <metadata>
           <entry key="pos.tagset" value="tartu"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="fa">
+    <antcall target="fa-tagger-le"/>
+  </target>
+
+  <target name="fa-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: persian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2022-10-31 | now        | 3e3714bf2347db639742740e7926bd5b (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/persian.par.gz"
+        dest="target/download/persian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/persian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/persian.par"
+        md5="3e3714bf2347db639742740e7926bd5b"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20221031"
+        metaDataVersion="0"
+        tool="tagger"
+        language="fa"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
           <entry key="encoding" value="UTF-8"/>
       </metadata>
     </install-stub-and-upstream-file>
@@ -358,20 +493,21 @@
     
     <!-- FILE: french-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-01-11 | 2019-04-04 | 41d978f247b23d6fee733da32a55a775
-      - 2019-04-04 | now        | 5f11bd985160ed85b40fdde848f1b94f
+      - 2019-04-04 | 2023-03-13 | 5f11bd985160ed85b40fdde848f1b94f
+      - 2023-03-13 | now        | 87cce5866d7c3c5eaf80008021aa950c (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french.par.gz" 
-        dest="target/download/french.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french.par.gz"
+        dest="target/download/french.par.gz"
         skipexisting="true"/>
     <gunzip src="target/download/french.par.gz"/>
-      <install-stub-and-upstream-file 
-        file="target/download/french.par" 
-        md5="5f11bd985160ed85b40fdde848f1b94f"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+      <install-stub-and-upstream-file
+        file="target/download/french.par"
+        md5="87cce5866d7c3c5eaf80008021aa950c"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20190404"
-        metaDataVersion="1"
+        upstreamVersion="20230313"
+        metaDataVersion="0"
         tool="tagger" 
         language="fr" 
         variant="le" 
@@ -481,6 +617,137 @@
     </install-stub-and-upstream-file>
   </target>
 
+  <target name="grc">
+    <antcall target="grc-tagger-le"/>
+  </target>
+
+  <target name="grc-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: ancient-greek.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | b4ce02b05e8cc81a0671f45185682bd3 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/ancient-greek.par.gz"
+        dest="target/download/ancient-greek.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/ancient-greek.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/ancient-greek.par"
+        md5="b4ce02b05e8cc81a0671f45185682bd3"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="grc"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="ha">
+    <antcall target="ha-tagger-le"/>
+  </target>
+
+  <target name="ha-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: hausa_model.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - Hausa model (Amir Zeldes); uncompressed .par
+      - 2015-08-25 | now        | 8e4dfa2805282c13d48ca6c97193da24 (last commit)
+      -->
+      <get
+        src="https://raw.githubusercontent.com/amir-zeldes/hausa/master/hausa_model.par"
+        dest="target/download/hausa_model.par"
+        skipexisting="true"/>
+      <install-stub-and-upstream-file
+        file="target/download/hausa_model.par"
+        md5="8e4dfa2805282c13d48ca6c97193da24"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20150825"
+        metaDataVersion="0"
+        tool="tagger"
+        language="ha"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="hu">
+    <antcall target="hu-tagger-le"/>
+  </target>
+
+  <target name="hu-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: hungarian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2020-12-12 | now        | 1067ffe4d49b735e58f25c5a97d15ef3 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/hungarian.par.gz"
+        dest="target/download/hungarian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/hungarian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/hungarian.par"
+        md5="1067ffe4d49b735e58f25c5a97d15ef3"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20201212"
+        metaDataVersion="0"
+        tool="tagger"
+        language="hu"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="id">
+    <antcall target="id-tagger-le"/>
+  </target>
+
+  <target name="id-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: indonesian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2022-01-03 | now        | b8b440461f2784e59cb119ea10033f7d (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/indonesian.par.gz"
+        dest="target/download/indonesian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/indonesian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/indonesian.par"
+        md5="b8b440461f2784e59cb119ea10033f7d"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20220103"
+        metaDataVersion="0"
+        tool="tagger"
+        language="id"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
 
   <target name="it">
     <antcall target="it-tagger-le"/>
@@ -584,7 +851,40 @@
       </metadata>
     </install-stub-and-upstream-file>
   </target>
-  
+
+  <target name="no">
+    <antcall target="no-tagger-le"/>
+  </target>
+
+  <target name="no-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: norwegian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2019-05-21 | now        | 0ed108563585fd9c45a1e1e536040391 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/norwegian.par.gz"
+        dest="target/download/norwegian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/norwegian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/norwegian.par"
+        md5="0ed108563585fd9c45a1e1e536040391"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20190521"
+        metaDataVersion="0"
+        tool="tagger"
+        language="no"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="mn">
     <antcall target="mn-tagger-le"/>
   </target>
@@ -627,20 +927,21 @@
     
     <!-- polish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2014-06-02 | 2015-05-06 | e7ac63b234ed40f5e850bdac4c883ef1
-          - 2015-05-06 | now        | bec86e83c25ff19a7ce23e93f89168ee
+          - 2015-05-06 | 2021-06-02 | bec86e83c25ff19a7ce23e93f89168ee
+          - 2021-06-02 | now        | 0f2a90a27ea022e234b73f3c35b64bdd (upstream mtime)
       -->
-      <get 
-        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish.par.gz" 
-        dest="target/download/polish.par.gz" 
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish.par.gz"
+        dest="target/download/polish.par.gz"
         skipexisting="true"/>
     <gunzip src="target/download/polish.par.gz"/>
-      <install-stub-and-upstream-file 
-        file="target/download/polish.par" 
-        md5="bec86e83c25ff19a7ce23e93f89168ee"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+      <install-stub-and-upstream-file
+        file="target/download/polish.par"
+        md5="0f2a90a27ea022e234b73f3c35b64bdd"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20150506"
-        metaDataVersion="1"
+        upstreamVersion="20210602"
+        metaDataVersion="0"
         tool="tagger" 
         language="pl" 
         variant="le" 
@@ -661,10 +962,11 @@
     <mkdir dir="target/download"/>
     
     <!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      - 2010-11-15 | now        | cf9855b4e215fa7a393700aa135830b0
+      - 2010-11-15 | 2026-06-15 | cf9855b4e215fa7a393700aa135830b0
+      - 2026-06-15 | now        | f482b6fbc0713cf138fe678ba3d842d3 (date observed; gamallo server sends no Last-Modified)
       -->
-      <get 
-        src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz" 
+      <get
+        src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
         dest="target/download/tree-taggerPT-GZ.tar.gz" 
         skipexisting="true"/>
     <gunzip src="target/download/tree-taggerPT-GZ.tar.gz"/>
@@ -676,11 +978,11 @@
       </untar>
       <install-stub-and-upstream-file 
         file="target/download/pt.par" 
-        md5="cf9855b4e215fa7a393700aa135830b0"
-        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        md5="f482b6fbc0713cf138fe678ba3d842d3"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-        upstreamVersion="20101115"
-        metaDataVersion="2"
+        upstreamVersion="20260615"
+        metaDataVersion="0"
         tool="tagger" 
         language="pt" 
         variant="le" 
@@ -691,7 +993,40 @@
       </metadata>
     </install-stub-and-upstream-file>
   </target>
-  
+
+  <target name="ro">
+    <antcall target="ro-tagger-le"/>
+  </target>
+
+  <target name="ro-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: romanian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | 3bb6819bfc22e22b29c99c7545d2c753 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/romanian.par.gz"
+        dest="target/download/romanian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/romanian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/romanian.par"
+        md5="3bb6819bfc22e22b29c99c7545d2c753"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="ro"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="ru">
     <antcall target="ru-tagger-le"/>
   </target>
@@ -792,7 +1127,73 @@
     </install-stub-and-upstream-file>
       -->
   </target>
-  
+
+  <target name="sq">
+    <antcall target="sq-tagger-le"/>
+  </target>
+
+  <target name="sq-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: albanian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2024-02-23 | now        | f0ab0fcd77d15e9cb177e67eb84c0232 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/albanian.par.gz"
+        dest="target/download/albanian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/albanian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/albanian.par"
+        md5="f0ab0fcd77d15e9cb177e67eb84c0232"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20240223"
+        metaDataVersion="0"
+        tool="tagger"
+        language="sq"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="sv">
+    <antcall target="sv-tagger-le"/>
+  </target>
+
+  <target name="sv-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: swedish.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2021-10-01 | now        | fb81823859f3e5c479af46f5bd070f94 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/swedish.par.gz"
+        dest="target/download/swedish.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/swedish.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/swedish.par"
+        md5="fb81823859f3e5c479af46f5bd070f94"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20211001"
+        metaDataVersion="0"
+        tool="tagger"
+        language="sv"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="suc-tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="sw">
     <antcall target="sw-tagger-le"/>
   </target>
@@ -827,6 +1228,39 @@
     </install-stub-and-upstream-file>
   </target>
 
+  <target name="uk">
+    <antcall target="uk-tagger-le"/>
+  </target>
+
+  <target name="uk-tagger-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: ukrainian.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2023-01-30 | now        | 02187dade48761b29ac381314e6cbd22 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/ukrainian.par.gz"
+        dest="target/download/ukrainian.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/ukrainian.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/ukrainian.par"
+        md5="02187dade48761b29ac381314e6cbd22"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20230130"
+        metaDataVersion="0"
+        tool="tagger"
+        language="uk"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="tt"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
   <target name="zh">
     <antcall target="zh-tagger-le"/>
   </target>
@@ -836,10 +1270,13 @@
     
     <!-- FILE: tt-lcmc.tgz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-15 | now        | 7392059e61b5555ab984918e3dea9464
+      -
+      - 2026-06-15: Serge Sharoff's model moved from corpus.leeds.ac.uk (now dead) to
+      -             ssharoff.github.io; content is byte-identical (same md5).
       -->
-      <get 
-        src="http://corpus.leeds.ac.uk/tools/zh/tt-lcmc.tgz" 
-        dest="target/download/tt-lcmc.tar.gz" 
+      <get
+        src="https://ssharoff.github.io/tools/zh/tt-lcmc.tgz"
+        dest="target/download/tt-lcmc.tar.gz"
         skipexisting="true"/>
     <gunzip src="target/download/tt-lcmc.tar.gz"/>
       <untar src="target/download/tt-lcmc.tar" dest="target/download">
@@ -867,7 +1304,7 @@
   </target>
   
   <target name="install-executables">
-    <property name="version.bin" value="20190408.0"/>
+    <property name="version.bin" value="20260614.0"/>
       
     <fail unless="outputDir">No output directory set.</fail>
     <mkdir dir="${outputDir}/bin"/>
@@ -880,13 +1317,20 @@
       - produces different output on different platforms even when using the same model file
       - and supposedly the same version of the package (e.g. 3.2).
       -->
-    <!-- FILE: tree-tagger-MacOSX-3.2-intel.tar.gz - - - - - - - - - - - - - - - - - - - - - - -
+    <!-- FILE: tree-tagger-MacOSX-Intel-3.2.3.tar.gz - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
       - 2012-04-25 | 2019-04-08 | a47bac91b5f373c5ba8703faa5ec7dd7 : buffer flush after 10 lines with -prob , the file dropped on 2016-11-24 the intel but is the same
-      - 2019-04-08 | now        | 77f2f48149540d8569da6963b12c67b4
+      - 2019-04-08 | 2026-06-14 | 77f2f48149540d8569da6963b12c67b4 (was tree-tagger-MacOSX-3.2.2.tar.gz)
+      - 2020-10-19 | now        | e05e6914730bec69122300a5f5d8e986 (upstream renamed to MacOSX-Intel-3.2.3; upstream mtime)
       -->
-    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.2.tar.gz"
-      platform="osx-x86_64" file="tree-tagger" md5="77f2f48149540d8569da6963b12c67b4"/>
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-Intel-3.2.3.tar.gz"
+      platform="osx-x86_64" file="tree-tagger" md5="e05e6914730bec69122300a5f5d8e986"/>
+
+    <!-- FILE: tree-tagger-MacOSX-M1-3.2.3.tar.gz - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2022-08-25 | now        | ed25aba6d103c1c0ed00978ca1974027 (Apple Silicon native binary; upstream mtime)
+      -->
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-M1-3.2.3.tar.gz"
+      platform="osx-aarch64" file="tree-tagger" md5="ed25aba6d103c1c0ed00978ca1974027"/>
 
     <!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
@@ -909,10 +1353,17 @@
       - 2013-11-18 | 2015-01-14 | cbc0833fd6cb8c1ec1ea4cae4d40b25a
       - 2015-01-14 | 2016-04-30 | 2a0a3740cc9a838949219caf0d64544c
       - 2016-04-30 | 2019-04-03 | 16cf3578fafd8c39b5b9df0077297025
-      - 2019-04-03 | now        | 3fc90c3908574890778af08fde90e065
+      - 2019-04-03 | 2026-06-14 | 3fc90c3908574890778af08fde90e065 (was tree-tagger-linux-3.2.2.tar.gz)
+      - 2023-03-29 | now        | eee191aa11a83ce86bd2e872068c0471 (tree-tagger-linux-3.2.5.tar.gz; upstream mtime)
       -->
-    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.2.tar.gz"
-      platform="linux-x86_64" file="tree-tagger" md5="3fc90c3908574890778af08fde90e065"/>
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.5.tar.gz"
+      platform="linux-x86_64" file="tree-tagger" md5="eee191aa11a83ce86bd2e872068c0471"/>
+
+    <!-- FILE: tree-tagger-ARM64-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-02-20 | now        | e42b858a4e71bcca634bc1ebd13eed32 (Linux ARM64 / aarch64; upstream mtime)
+      -->
+    <install-executable-file-tar url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-ARM64-3.2.tar.gz"
+      platform="linux-aarch64" file="tree-tagger" md5="e42b858a4e71bcca634bc1ebd13eed32"/>
 
     <!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
       - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
@@ -932,20 +1383,22 @@
       platform="solaris-sparc" file="tree-tagger" md5="bcebb9b9745e2ac12c5226a032b8bfb4"/>
       -->
       
-    <!-- FILE: tree-tagger-windows32-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    <!-- FILE: tree-tagger-windows32-3.2.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-19 | 2012-04-25 | 72a5489fe197b0173ea476e2224a6ad6
       - 2012-04-25 | 2015-03-25 | c88d7fe1aa63bebaccfa019c222f54ea : buffer flush after 10 lines with -prob
       - 2015-03-25 | 2019-04-08 | e78a1b710d738f9e29d4756ccac4fc3a
-      - 2019-04-08 | now        | 3fc521855221e3dfc82be95f2d324aea
-      -->
+      - 2019-04-08 | 2026-06-14 | 3fc521855221e3dfc82be95f2d324aea
+      - 2026-06-14 | now        | 32-bit Windows build no longer offered upstream (URL returns 404)
     <install-executable-file-zip url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows32-3.2.2.zip"
       platform="windows-x86_32" file="tree-tagger.exe" md5="3fc521855221e3dfc82be95f2d324aea"/>
-      
-    <!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      - 2019-04-08 | now        | 6bf25051fa133b42c222b6f02ecab9d0
       -->
-    <install-executable-file-zip url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.2.zip"
-      platform="windows-x86_64" file="tree-tagger.exe" md5="6bf25051fa133b42c222b6f02ecab9d0"/>
+
+    <!-- FILE: tree-tagger-windows-3.2.3a.zip - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2019-04-08 | 2026-06-14 | 6bf25051fa133b42c222b6f02ecab9d0 (was tree-tagger-windows-3.2.2.zip)
+      - 2023-12-03 | now        | a4581d0f651eca0c3ae91e239eacccf4 (tree-tagger-windows-3.2.3a.zip; upstream mtime)
+      -->
+    <install-executable-file-zip url="https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.3a.zip"
+      platform="windows-x86_64" file="tree-tagger.exe" md5="a4581d0f651eca0c3ae91e239eacccf4"/>
     
     <clean-pom/>
     <generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"

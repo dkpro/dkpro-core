@@ -1,0 +1,41 @@
+# TreeTagger Indonesian tagset
+#
+# Indonesian TreeTagger Part-of-Speech Tags, following the Indonesian tagset of
+# Dinakaramani et al. (2014). Each tag is a single atomic label (no morphological
+# features). WH (question word) conflates interrogative pronouns and adverbs and
+# is mapped to POS_PRON; MD (modal/auxiliary verb) to POS_AUX; NND (classifier/
+# measurement noun) to POS_NOUN; NEG and RP (particles) to POS_PART; Z and SENT
+# (punctuation) to POS_PUNCT.
+#
+# Source: extracted from the TreeTagger model using TT4J
+__META_SOURCE_URL__=https\://www.sketchengine.eu/indonesian-treetagger-tagset/
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+CC=POS_CONJ
+CD=POS_NUM
+DT=POS_DET
+FW=POS_X
+IN=POS_ADP
+JJ=POS_ADJ
+MD=POS_AUX
+NEG=POS_PART
+NN=POS_NOUN
+NND=POS_NOUN
+NNP=POS_PROPN
+OD=POS_NUM
+PR=POS_PRON
+PRP=POS_PRON
+RB=POS_ADV
+RP=POS_PART
+SC=POS_SCONJ
+SENT=POS_PUNCT
+SYM=POS_SYM
+UH=POS_INTJ
+VB=POS_VERB
+WH=POS_PRON
+X=POS_X
+Z=POS_PUNCT
+fw=POS_X
+
+# Catch-all rule
+*=POS

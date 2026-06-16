@@ -4,8 +4,6 @@
 #
 # Source: extracted from model using TT4J
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
-
-*=POS
 # ADJ
 # ADV
 # ADV+P
@@ -42,4 +40,40 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # V+U_d+P
 # VIRG
 # X
-
+# Undocumented in available sources (mapped to POS_X): B, E, F, G, IL, L
+ADJ=POS_ADJ
+ADV=POS_ADV
+ADV+P=POS_ADV
+B=POS_X
+CARD=POS_NUM
+CONJ=POS_CONJ
+DET=POS_DET
+DET+T=POS_DET
+E=POS_X
+F=POS_X
+G=POS_X
+I=POS_INTJ
+IL=POS_X
+L=POS_X
+L+DET=POS_X
+NOM=POS_NOUN
+P=POS_PRON
+P+P=POS_PRON
+PRP=POS_ADP
+PRP+ADJ=POS_ADP
+PRP+ADV=POS_ADP
+PRP+DET=POS_ADP
+PRP+NOM=POS_ADP
+PRP+P=POS_ADP
+PRP+PRP=POS_ADP
+QUOTE=POS_PUNCT
+SENT=POS_PUNCT
+V=POS_VERB
+V+P=POS_VERB
+V+P+P=POS_VERB
+V+P_d=POS_VERB
+V+U_d=POS_VERB
+V+U_d+P=POS_VERB
+VIRG=POS_PUNCT
+X=POS_X
+*=POS

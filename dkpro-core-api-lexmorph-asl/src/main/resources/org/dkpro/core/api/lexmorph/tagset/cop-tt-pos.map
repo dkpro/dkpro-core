@@ -1,0 +1,49 @@
+# Coptic SCRIPTORIUM tagset (coarse)
+#
+# Sahidic Coptic TreeTagger Part-of-Speech Tags (coarse-grained, 31 tags) created by
+# the Coptic SCRIPTORIUM project (Amir Zeldes). The coarse-POS mapping follows the
+# universal POS assignments of the UD_Coptic-Scriptorium treebank: A (conjugation
+# base) -> POS_AUX, ART -> POS_DET, C (converter) -> POS_SCONJ, COP (copula) ->
+# POS_PRON, EXIST (existential) -> POS_VERB, IMOD -> POS_NOUN, NEG -> POS_ADV,
+# PDEM/PPOS -> POS_DET, VBD (verboid) -> POS_VERB. Portmanteau tags ending in _PPER
+# (base + personal pronoun) -> POS_PRON, except V_PPER -> POS_VERB.
+#
+# Source: extracted from the TreeTagger model using TT4J
+__META_SOURCE_URL__=https\://github.com/CopticScriptorium/tagger-part-of-speech
+__META_SOURCE_URL__.1=https\://copticscriptorium.org/download/tools/scriptorium_tagset_documentation.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+A=POS_AUX
+ADV=POS_ADV
+ART=POS_DET
+A_PPER=POS_PRON
+C=POS_SCONJ
+CONJ=POS_CONJ
+COP=POS_PRON
+C_PPER=POS_PRON
+EXIST=POS_VERB
+FM=POS_X
+FUT=POS_AUX
+FW=POS_X
+IMOD=POS_NOUN
+IMOD_PPER=POS_PRON
+N=POS_NOUN
+NEG=POS_ADV
+NUM=POS_NUM
+N_PPER=POS_PRON
+PDEM=POS_DET
+PINT=POS_PRON
+PPER=POS_PRON
+PPOS=POS_DET
+PREP=POS_ADP
+PREP_PPER=POS_PRON
+PTC=POS_PART
+PUNCT=POS_PUNCT
+UNKNOWN=POS_X
+UNKOWN=POS_X
+V=POS_VERB
+VBD=POS_VERB
+V_PPER=POS_VERB
+
+# Catch-all rule
+*=POS
