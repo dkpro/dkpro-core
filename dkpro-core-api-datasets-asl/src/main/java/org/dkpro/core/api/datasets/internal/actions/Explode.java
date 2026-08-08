@@ -175,7 +175,7 @@ public class Explode
         try (Archive archive = new Archive(aArchive.toFile())) {
             FileHeader fh = archive.nextFileHeader();
             while (fh != null) {
-                String name = stripLeadingFolders(fh.getFileNameString(), strip);
+                String name = stripLeadingFolders(fh.getFileName(), strip);
 
                 if (name == null) {
                     // Stripped to null - nothing left to extract - continue;

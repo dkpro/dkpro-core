@@ -121,21 +121,6 @@
       </ignoreVersions>
     </rule>
     
-    <!--
-      PIN: junrar 7.x
-      junrar 8.x demoted FileHeader.getFileNameString() and getFileNameW() from public to
-      package-private (renamed to internalGetFileNameString()/internalGetFileNameW()) as part of
-      the RAR5 rework, which also dropped UnsupportedRarV5Exception and the unpack.vm package.
-      Explode.java in dkpro-core-api-datasets-asl calls getFileNameString(), so 8.x does not
-      compile. Upgrading requires reworking that call site against the new RAR5 API.
-      -->
-    <rule groupId="com.github.junrar" artifactId="junrar" comparisonMethod="maven">
-      <ignoreVersions>
-        <ignoreVersion type="regex">^[8-9].*</ignoreVersion>
-        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
-      </ignoreVersions>
-    </rule>
-
     <!-- PIN: Berkeleyparser r32 -->
     <rule groupId="edu.berkeley.nlp" artifactId="berkeleyparser" comparisonMethod="maven"> 
       <ignoreVersions>
