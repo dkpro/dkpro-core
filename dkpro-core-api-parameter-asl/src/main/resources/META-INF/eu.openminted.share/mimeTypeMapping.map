@@ -13,7 +13,6 @@ application/x.org.dkpro.brat=http://w3id.org/meta-share/omtd-share/Brat
 #application/x.org.dkpro.core.opennlp.token=
 #application/x.org.dkpro.core.stanfordnlp.ner=
 #application/x.org.dkpro.core.stanfordnlp.tagger=
-#application/x.org.dkpro.ditop=
 application/x.org.dkpro.gate+xml=http://w3id.org/meta-share/omtd-share/GateXml
 #application/x.org.dkpro.lif+json=
 #application/x.org.dkpro.lxf+json=
