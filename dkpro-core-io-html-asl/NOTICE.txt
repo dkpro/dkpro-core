@@ -1,5 +1,5 @@
 == JSoupUtils
 
-Methods in this class were copied from JSoup. They were private and could not be accessed.
+Methods in this class were copied from JSoup 1.23.1. They were private and could not be accessed.
 
 License: MIT
