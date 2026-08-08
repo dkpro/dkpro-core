@@ -75,6 +75,13 @@ import org.apache.pdfbox.pdmodel.font.PDFontDescriptor;
  *
  * DO NOT USE THIS CODE UNLESS YOU ARE WORKING WITH PDFTextStripper. THIS CODE IS DELIBERATELY
  * INCORRECT, USE PDFStreamEngine INSTEAD.
+ * <p>
+ * This class was copied from org.apache.pdfbox.text.LegacyPDFStreamEngine because it could not be
+ * extended as it was package-private in PDFBox. Apart from the package declaration, the resulting
+ * import of {@link org.apache.pdfbox.text.TextPosition} and code formatting, it is unmodified.
+ * <p>
+ * Last verified to be identical to the PDFBox 3.0.8 original. When upgrading PDFBox, re-compare
+ * this class against the upstream source and update this note.
  */
 class LegacyPDFStreamEngine
     extends PDFStreamEngine

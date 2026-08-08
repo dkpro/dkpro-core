@@ -30,6 +30,9 @@ import org.jsoup.nodes.TextNode;
 
 /**
  * Methods in this class were copied from JSoup. They were private and could not be accessed.
+ * <p>
+ * Last verified to be identical to the JSoup 1.23.1 originals. When upgrading JSoup, re-compare
+ * these methods against the upstream sources listed in the comments below and update this note.
  */
 public final class JSoupUtil
 {
