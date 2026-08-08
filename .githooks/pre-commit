@@ -26,7 +26,10 @@ printf '%s\n' "$MODULES" | tr ',' '\n' | sed 's/^/  - /'
 REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT"
 
-if ! mvn -q -pl "$MODULES" -Pspotless,checkstyle,experimental spotless:check checkstyle:check; then
+# The "experimental" profile only exists in the ASL aggregator, so it is requested
+# optionally ("?") - Maven fails the build outright if a profile named with -P is not
+# found in any project of the reactor, which would break every GPL-only commit.
+if ! mvn -q -pl "$MODULES" -Pspotless,checkstyle,'?experimental' spotless:check checkstyle:check; then
     cat >&2 <<'EOF'
 
 [pre-commit] Verification failed.
