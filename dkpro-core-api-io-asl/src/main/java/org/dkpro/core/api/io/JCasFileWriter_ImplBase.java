@@ -1,14 +1,14 @@
 /*
- * Copyright 2017
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -218,20 +219,22 @@ public abstract class JCasFileWriter_ImplBase
             }
 
             // Begin new entry
-            String entryName = zipEntryPrefix + aRelativePath + aExtension
+            String rawEntryName = zipEntryPrefix + aRelativePath + aExtension
                     + compression.getExtension();
-            if (entryName.contains("..") || entryName.startsWith("/") || entryName.startsWith("\\")
-                    || Paths.get(entryName).isAbsolute()) {
+            Path normalizedEntryPath = Paths.get(rawEntryName).normalize();
+            if (normalizedEntryPath.isAbsolute() || normalizedEntryPath.startsWith("..")) {
                 throw new IOException(
-                        "ZIP entry name [" + entryName + "] would escape archive root");
+                        "ZIP entry name [" + rawEntryName + "] would escape archive root");
             }
+
+            String entryName = normalizedEntryPath.toString().replace(File.separatorChar, '/');
             ZipEntry entry = new ZipEntry(entryName);
             zipOutputStream.putNextEntry(entry);
 
             // We return an OutputStream for an individual entry. When this is closed by the
             // caller, it actually closes the entry. The full ZIP stream is closed when the
             // collectionProcessComplete event is triggered
-            return new ZipEntryOutputStream(JAR_PREFIX + zipPath + '!' + entry.getName(),
+            return new ZipEntryOutputStream(JAR_PREFIX + zipPath + '!' + entryName,
                     zipOutputStream);
         }
         else if (singularTarget) {

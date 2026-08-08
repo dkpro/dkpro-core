@@ -29,7 +29,6 @@
   <packaging>pom</packaging>
 
   <properties>
-    <currentYear>2024</currentYear>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     <maven.surefire.heap>6g</maven.surefire.heap>
 
@@ -629,7 +628,7 @@
         <configuration>
           <componentVendor>DKPro Core Project</componentVendor>
           <componentCopyright>
-            Copyright ${project.inceptionYear}-${currentYear}
+            Copyright ${project.inceptionYear}-${dkpro.copyright.year}
             Ubiquitous Knowledge Processing (UKP) Lab
             Technische Universität Darmstadt
           </componentCopyright>
@@ -671,7 +670,7 @@
             <docbase>https://dkpro.github.io/dkpro-core/releases/${project.version}/docs</docbase>
             <resourceNameAddon>(DKPro Core)</resourceNameAddon>
             <resourceCopyright>
-              Copyright ${project.inceptionYear}-${currentYear}
+              Copyright ${project.inceptionYear}-${dkpro.copyright.year}
               Ubiquitous Knowledge Processing (UKP) Lab
               Technische Universität Darmstadt
               (Applies only to the DKPro Core UIMA wrapper. The copyright for wrapped tools and underlying

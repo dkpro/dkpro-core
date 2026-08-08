@@ -1,8 +1,9 @@
 <!--
 
-    Copyright 2007-2024
-    Ubiquitous Knowledge Processing (UKP) Lab
-    Technische Universität Darmstadt
+    Licensed to the Technische Universität Darmstadt under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,10 +58,6 @@
           <header>${basedir}/.license-header.txt</header>
           <failIfMissing>true</failIfMissing>
           <strictCheck>true</strictCheck>
-          <properties>
-            <inceptionYear>${project.inceptionYear}</inceptionYear>
-            <currentYear>${currentYear}</currentYear>
-          </properties>
           <excludes>
             <exclude>.checkstyle</exclude>
             <exclude>release.properties</exclude>
@@ -73,7 +70,6 @@
             <exclude>src/main/resources/**/*</exclude>
             <exclude>src/test/resources/**/*</exclude>
             <exclude>.license-header.txt</exclude>
-            <exclude>src/main/java/edu/stanford/nlp/parser/lexparser/**/*</exclude>
           </excludes>
           <mapping>
             <java>SLASHSTAR_STYLE</java>
