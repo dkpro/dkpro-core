@@ -31,7 +31,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <opennlp.version>2.5.9</opennlp.version>
+    <opennlp.version>2.5.11</opennlp.version>
   </properties>
 
   <dependencies>
