@@ -1,0 +1,17 @@
+== ReadabilityMeasures.java
+
+The readability measures implemented in this class (Kincaid, ARI, Coleman-Liau, Flesch, FOG, LIX,
+SMOG) are re-implementations in Java of the measures provided by the Linux "style" command, which
+is part of the GNU diction package.
+
+  https://www.gnu.org/software/diction/
+
+The measures themselves are published formulas from the readability literature and are implemented
+here independently. No source code from GNU diction has been copied.
+
+== WordSyllableCounter.java
+
+The syllable counting heuristic is based on the approach of the syll_en() and syll_de() functions
+of the Linux "style" command (GNU diction package). It is an independent re-implementation of the
+general approach (counting vowel groups with a small number of language-specific suffix rules) and
+does not reproduce the suffix and exception tables of the original C implementation.

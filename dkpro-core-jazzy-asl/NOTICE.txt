@@ -1,0 +1,8 @@
+== ContextualizerUtils.java
+
+These utility methods were copied from DKPro Spelling in order to avoid a dependency of DKPro Core
+on DKPro Spelling.
+
+DKPro Spelling is developed by the Ubiquitous Knowledge Processing (UKP) Lab, Technische
+Universität Darmstadt, and is licensed under the Apache License, Version 2.0 - the same license
+and copyright owner as this module.

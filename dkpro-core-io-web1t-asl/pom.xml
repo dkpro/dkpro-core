@@ -76,6 +76,17 @@
       <artifactId>com.googlecode.jweb1t</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.google.code.externalsortinginjava</groupId>
+      <artifactId>externalsortinginjava</artifactId>
+      <exclusions>
+        <!-- Only required by the unused com.google.code.externalsorting.csv package -->
+        <exclusion>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-csv</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
       <version>${project.version}</version>
@@ -162,37 +173,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>rat-check</id>
-      <activation>
-        <file>
-          <exists>src/main/java</exists>
-        </file>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.rat</groupId>
-            <artifactId>apache-rat-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>default</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>check</goal>
-                </goals>
-                <configuration>
-                  <excludes combine.children="append">
-                    <exclude>src/main/java/org/dkpro/core/io/web1t/util/ExternalSort.java</exclude>
-                  </excludes>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

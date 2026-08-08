@@ -369,6 +369,11 @@
         <version>1.4.0</version>
       </dependency>
       <dependency>
+        <groupId>com.google.code.externalsortinginjava</groupId>
+        <artifactId>externalsortinginjava</artifactId>
+        <version>0.6.6</version>
+      </dependency>
+      <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-reload4j</artifactId>
         <version>${slf4j.version}</version>

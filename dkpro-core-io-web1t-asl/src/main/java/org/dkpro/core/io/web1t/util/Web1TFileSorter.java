@@ -17,11 +17,15 @@
  */
 package org.dkpro.core.io.web1t.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.google.code.externalsorting.ExternalSort;
 
 public class Web1TFileSorter
 {
@@ -39,12 +43,15 @@ public class Web1TFileSorter
     {
         for (File file : inputFiles) {
 
-            List<File> l = ExternalSort.sortInBatch(file, comparator);
+            // The intermediate files are written as UTF-8 by Web1TFileSplitter, so the sorting
+            // has to use UTF-8 as well instead of the platform default encoding.
+            List<File> l = ExternalSort.sortInBatch(file, comparator,
+                    ExternalSort.DEFAULTMAXTEMPFILES, UTF_8, null, false);
 
             File sortedSplitFile = new File(
                     Web1TUtil.cutOffUnderscoredSuffixFromFileName(file) + "_sorted");
             sortedFiles.add(sortedSplitFile);
-            ExternalSort.mergeSortedFiles(l, sortedSplitFile, comparator);
+            ExternalSort.mergeSortedFiles(l, sortedSplitFile, comparator, UTF_8);
         }
     }
 

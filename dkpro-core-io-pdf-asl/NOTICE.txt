@@ -5,8 +5,16 @@ author.
 
 LegacyPDFStreamEngine.java:
 
-This class was copied from PDFbox 3.0.8 because it could not be extended as it was package-private
+This class was copied from PDFBox 3.0.8 because it could not be extended as it was package-private
 in PDFBox.
+
+Apache PDFBox
+Copyright 2002-2025 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+Licensed under the Apache License, Version 2.0.
 
 
 PDFLayoutEventStripper.java:

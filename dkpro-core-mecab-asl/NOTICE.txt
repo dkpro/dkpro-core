@@ -1,4 +1,10 @@
-/src/main/resources/de/tudarmstadt/ukp/dkpro/core/mecab/bin:
+== MeCab
 
-This folder contains pre-compiled MeCab binaries. MeCab is licensed under the GPL, LGPL and BSD
-licenses. For the purpose of this project, we choose the BSD conditions.
+This module provides a UIMA wrapper for MeCab. The MeCab library, its JNI bindings and the
+pre-compiled MeCab binaries are not contained in this module - they are obtained as Maven
+dependencies at build time.
+
+MeCab is licensed under the GPL, LGPL and BSD licenses. For the purpose of this project, we choose
+the BSD conditions.
+
+  https://taku910.github.io/mecab/

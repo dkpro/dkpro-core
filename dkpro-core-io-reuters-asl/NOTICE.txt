@@ -1,0 +1,14 @@
+== ExtractReuters.java
+
+This class is an adaption of the ExtractReuters class from the lucene-benchmark module of
+Apache Lucene.
+
+  http://lucene.apache.org/core/5_3_1/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html
+
+Apache Lucene
+Copyright 2005 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+Licensed under the Apache License, Version 2.0.
