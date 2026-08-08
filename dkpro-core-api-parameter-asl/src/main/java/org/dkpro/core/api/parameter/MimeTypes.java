@@ -32,7 +32,6 @@ public final class MimeTypes
     public final static String APPLICATION_X_BIOC = "application/x.org.dkpro.bioc+xml";
     public final static String APPLICATION_X_BNC = "application/x.org.dkpro.bnc+xml";
     public final static String APPLICATION_X_BRAT = "application/x.org.dkpro.brat";
-    public final static String APPLICATION_X_DITOP = "application/x.org.dkpro.ditop";
     public final static String APPLICATION_X_FANGORN = "application/x.org.dkpro.fangorn";
     public final static String APPLICATION_X_GATE_XML = "application/x.org.dkpro.gate+xml";
     public final static String APPLICATION_X_GRAF_XML = "application/x.org.dkpro.graf+xml";

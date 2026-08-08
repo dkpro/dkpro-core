@@ -69,7 +69,6 @@
     <module>../dkpro-core-io-brat-asl</module>
     <module>../dkpro-core-io-combination-asl</module>
     <module>../dkpro-core-io-conll-asl</module>
-    <module>../dkpro-core-io-ditop-asl</module>
     <module>../dkpro-core-io-gigaword-asl</module>
     <module>../dkpro-core-io-imscwb-asl</module>
     <module>../dkpro-core-io-html-asl</module>
