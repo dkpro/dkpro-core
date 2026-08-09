@@ -20,6 +20,7 @@ package org.dkpro.core.api.transform.alignment;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -87,15 +88,25 @@ public class AlignedString
 
     public void fireChange()
     {
-        // if (!_startDirty) {
-        // System.out.println("startDirty true");
-        // }
+        fireChange(new HashSet<AlignedString>());
+    }
+
+    /**
+     * Mark this level and all levels stacked on top of it as dirty. Propagation is recursive so
+     * that a change also reaches levels which do not directly wrap the changed level. The set of
+     * already notified levels guards against cycles.
+     */
+    private void fireChange(final Set<AlignedString> notified)
+    {
+        if (!notified.add(this)) {
+            return;
+        }
 
         _stringDirty = true;
         _startDirty = true;
+
         for (final AlignedString a : _changeListeners) {
-            a._stringDirty = true;
-            a._startDirty = true;
+            a.fireChange(notified);
         }
     }
 
@@ -474,7 +485,6 @@ public class AlignedString
                 seg = seg._next;
             }
             _startDirty = false;
-            System.out.println("startDirty false");
         }
     }
 
@@ -554,8 +564,32 @@ public class AlignedString
     }
 
     /**
+     * Drop zero-length oblique segments that mark the same position in the underlying data as their
+     * immediate zero-length neighbour. Such duplicates carry no additional information.
+     */
+    private void dropDuplicateMarkers(final AbstractDataSegment from)
+    {
+        if (from == null) {
+            return;
+        }
+
+        AbstractDataSegment s = from;
+        while (s != null && s._next != null) {
+            final AbstractDataSegment n = s._next;
+            if ((s instanceof ObliqueSegment) && (n instanceof ObliqueSegment) && (s.length() == 0)
+                    && (n.length() == 0) && (((ObliqueSegment) s)._end
+                            .getPosition() == ((ObliqueSegment) n)._end.getPosition())) {
+                n._prev._next = n._next;
+                n._next._prev = n._prev;
+                continue;
+            }
+            s = s._next;
+        }
+    }
+
+    /**
      * Deletes data.
-     * 
+     *
      * @param start
      *            the start offset.
      * @param end
@@ -579,7 +613,10 @@ public class AlignedString
     public void replace(final int start, final int end, final String d)
     {
         if (start == end) {
-            insert(start, d);
+            // Replacing an empty range is an insert - and inserting nothing is a no-op.
+            if (d != null) {
+                insert(start, d);
+            }
             return;
         }
 
@@ -602,8 +639,21 @@ public class AlignedString
             suffix = suffix.split(end);
 
             if (d == null || d.length() == 0) {
-                prefix._next = suffix;
-                suffix._prev = prefix;
+                // The segment between prefix and suffix covers the deleted data. Instead of
+                // unlinking it, collapse it to zero length so that it survives as a marker for
+                // the position at which data was deleted. Inverse-resolving an interval that
+                // was fully deleted relies on such a marker being present.
+                final AbstractDataSegment deleted = prefix._next;
+                if (deleted != suffix && deleted.collapse()) {
+                    deleted._prev = prefix;
+                    deleted._next = suffix;
+                    prefix._next = deleted;
+                    suffix._prev = deleted;
+                }
+                else {
+                    prefix._next = suffix;
+                    suffix._prev = prefix;
+                }
             }
             else {
                 final BaseSegment s = new BaseSegment(prefix, suffix, d);
@@ -631,9 +681,15 @@ public class AlignedString
 
             if (d == null || d.length() == 0) {
                 AbstractDataSegment s = prefix._next;
+                AbstractDataSegment marker = null;
                 while (s != suffix) {
                     if (s.isAnchor()) {
                         // anchors need to be preserved
+                    }
+                    else if (marker == null && s.collapse()) {
+                        // Keep the first collapsible segment as a zero-length marker for the
+                        // position at which the data was deleted.
+                        marker = s;
                     }
                     else {
                         // non-anchors need to be removed
@@ -653,6 +709,7 @@ public class AlignedString
         // Drop useless segments
         dropSuperflourous(prefix);
         dropSuperflourous(suffix);
+        dropDuplicateMarkers(prefix);
 
         // if (_log.isDebugEnabled()) {
         // _log.debug("post delete("+start+","+end+") - "+dataSegmentsToString());
@@ -844,6 +901,16 @@ public class AlignedString
 
         public abstract AbstractDataSegment split(int position);
 
+        /**
+         * Shrink the segment to zero length, retaining its position information. Returns
+         * {@code false} if the segment cannot serve as a zero-length marker and should rather be
+         * unlinked.
+         */
+        public boolean collapse()
+        {
+            return false;
+        }
+
         @Override
         public DataSegment getPrevious()
         {
@@ -968,7 +1035,7 @@ public class AlignedString
     class ObliqueSegment
         extends AbstractDataSegment
     {
-        private final Anchor _start;
+        private Anchor _start;
         private Anchor _end;
 
         public ObliqueSegment(final AbstractDataSegment prev, final AbstractDataSegment next,
@@ -1017,6 +1084,15 @@ public class AlignedString
             _next = suffix;
 
             return suffix;
+        }
+
+        @Override
+        public boolean collapse()
+        {
+            // Collapse onto the end anchor, consistent with the marker that a delete at the
+            // right-hand boundary of a segment leaves behind.
+            _start = _end;
+            return true;
         }
 
         @Override

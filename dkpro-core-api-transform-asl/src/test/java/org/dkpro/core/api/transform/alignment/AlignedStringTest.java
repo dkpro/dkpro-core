@@ -394,6 +394,108 @@ public class AlignedStringTest
     }
 
     /**
+     * A change on a level must also become visible on levels that do not wrap the changed level
+     * directly but only transitively.
+     */
+    @Test
+    public void testChangePropagatesTransitively()
+    {
+        final AlignedString l0 = new AlignedString("abcdef");
+        final AlignedString l1 = new AlignedString(l0);
+        final AlignedString l2 = new AlignedString(l1);
+
+        // Read once so that the caches are populated
+        assertEquals("abcdef", l2.get());
+
+        l0.insert(0, "ZZ");
+
+        assertEquals("ZZabcdef", l0.get());
+        assertEquals("ZZabcdef", l1.get());
+        assertEquals("ZZabcdef", l2.get());
+    }
+
+    /**
+     * Deleting an empty range must be a no-op rather than fail.
+     */
+    @Test
+    public void testDeleteEmptyRange()
+    {
+        top.delete(2, 2);
+
+        assertEquals(baseString, top.get());
+    }
+
+    /**
+     * Deleting multiple regions must leave a zero-length marker behind for every deleted region so
+     * that inverse-resolving a fully deleted region yields the position at which it was removed.
+     *
+     * @see <a href="https://github.com/dkpro/dkpro-core/issues/1482">Issue 1482</a>
+     */
+    @Test
+    public void testDeleteMultipleRegions()
+    {
+        // 11111111112222
+        // 012345678901234567890123
+        baseString = "<p>Hello<p>World</p></p>";
+        bottom = new AlignedString(baseString);
+        top = new AlignedString(bottom);
+
+        final ImmutableInterval[] tags = { new ImmutableInterval(0, 3),
+                new ImmutableInterval(8, 11), new ImmutableInterval(16, 20),
+                new ImmutableInterval(20, 24) };
+
+        // Delete back-to-front so that the offsets of the not-yet-deleted tags stay valid
+        for (int i = tags.length - 1; i >= 0; i--) {
+            top.delete(tags[i].getStart(), tags[i].getEnd());
+        }
+
+        assertEquals("HelloWorld", top.get());
+
+        // Every deleted tag must inverse-resolve to the empty interval at the position where it
+        // used to be - in particular the "<p>" between "Hello" and "World" must not collapse
+        // onto the end of the string.
+        assertEquals(new ImmutableInterval(0, 0), top.inverseResolve(tags[0]));
+        assertEquals(new ImmutableInterval(5, 5), top.inverseResolve(tags[1]));
+        assertEquals(new ImmutableInterval(10, 10), top.inverseResolve(tags[2]));
+        assertEquals(new ImmutableInterval(10, 10), top.inverseResolve(tags[3]));
+
+        // The text that survived must still resolve correctly in both directions
+        assertEquals(new ImmutableInterval(0, 5), top.inverseResolve(new ImmutableInterval(3, 8)));
+        assertEquals(new ImmutableInterval(5, 10),
+                top.inverseResolve(new ImmutableInterval(11, 16)));
+        assertEquals("Hello", bottom.get(top.resolve(new ImmutableInterval(0, 5)).getStart(),
+                top.resolve(new ImmutableInterval(0, 5)).getEnd()));
+        assertEquals("World", bottom.get(top.resolve(new ImmutableInterval(5, 10)).getStart(),
+                top.resolve(new ImmutableInterval(5, 10)).getEnd()));
+    }
+
+    /**
+     * Same as {@link #testDeleteMultipleRegions()} but deleting front-to-back, which exercises the
+     * other branch of {@code replace()}.
+     */
+    @Test
+    public void testDeleteMultipleRegionsAscending()
+    {
+        baseString = "<p>Hello<p>World</p></p>";
+        bottom = new AlignedString(baseString);
+        top = new AlignedString(bottom);
+
+        top.delete(0, 3); // <p>
+        top.delete(5, 8); // <p>
+        top.delete(10, 14); // </p>
+        top.delete(10, 14); // </p>
+
+        assertEquals("HelloWorld", top.get());
+
+        assertEquals(new ImmutableInterval(0, 0), top.inverseResolve(new ImmutableInterval(0, 3)));
+        assertEquals(new ImmutableInterval(5, 5), top.inverseResolve(new ImmutableInterval(8, 11)));
+        assertEquals(new ImmutableInterval(10, 10),
+                top.inverseResolve(new ImmutableInterval(16, 20)));
+        assertEquals(new ImmutableInterval(10, 10),
+                top.inverseResolve(new ImmutableInterval(20, 24)));
+    }
+
+    /**
      * For the given interval on the underlying data, get the corresponding interval on this level.
      *
      * Example: 11 11 11 111 12 012 34567 8901 23 45 678 90 AD |111|22ZZ2|3333|44|55|YYY|55|
