@@ -524,6 +524,88 @@ public class AlignedStringTest
     }
 
     /**
+     * Resolving a non-empty interval must never yield an empty interval - otherwise the
+     * corresponding text in the underlying data cannot be recovered.
+     * <p>
+     * A single character starting exactly at an anchor position is the critical case: anchors have
+     * zero width, so the segment that carries the last character of the interval must be used to
+     * determine the interval end, not the anchor sitting at that position.
+     */
+    @Test
+    public void testResolveSingleCharacterAtStart()
+    {
+        bottom = new AlignedString("abcdefghij");
+        top = new AlignedString(bottom);
+
+        // No modification at all - position 0 always coincides with the leading anchor
+        final Interval i = top.resolve(new ImmutableInterval(0, 1));
+
+        assertEquals(1, i.getLength());
+        assertEquals("a", bottom.get(i.getStart(), i.getEnd()));
+    }
+
+    /**
+     * Resolving a single character that starts at an anchor in the middle of the data must yield
+     * that character rather than an empty interval.
+     */
+    @Test
+    public void testResolveSingleCharacterAtInnerAnchor()
+    {
+        bottom = new AlignedString("abcdefghij");
+        top = new AlignedString(bottom);
+
+        // Force an anchor - and therefore a segment boundary - in the middle of the data
+        top.getAnchor(5);
+
+        final Interval i = top.resolve(new ImmutableInterval(5, 6));
+
+        assertEquals(1, i.getLength());
+        assertEquals("f", bottom.get(i.getStart(), i.getEnd()));
+    }
+
+    /**
+     * Every single character of a view must resolve to exactly the same character in the underlying
+     * data, whether or not the view was modified.
+     */
+    @Test
+    public void testResolveRoundTripsForEveryCharacter()
+    {
+        bottom = new AlignedString("abcdefghij");
+        top = new AlignedString(bottom);
+        top.delete(3, 7);
+
+        final String topText = top.get();
+        assertEquals("abchij", topText);
+
+        for (int p = 0; p < topText.length(); p++) {
+            final Interval i = top.resolve(new ImmutableInterval(p, p + 1));
+            assertEquals(String.valueOf(topText.charAt(p)), bottom.get(i.getStart(), i.getEnd()),
+                    "Character at position " + p + " does not resolve to itself");
+        }
+    }
+
+    /**
+     * Same as {@link #testResolveRoundTripsForEveryCharacter()} but on an unmodified view with an
+     * additional anchor, showing that the round trip does not depend on a deletion being present.
+     */
+    @Test
+    public void testResolveRoundTripsForEveryCharacterWithAnchors()
+    {
+        bottom = new AlignedString("abcdefghij");
+        top = new AlignedString(bottom);
+        top.getAnchor(5);
+
+        final String topText = top.get();
+        assertEquals("abcdefghij", topText);
+
+        for (int p = 0; p < topText.length(); p++) {
+            final Interval i = top.resolve(new ImmutableInterval(p, p + 1));
+            assertEquals(String.valueOf(topText.charAt(p)), bottom.get(i.getStart(), i.getEnd()),
+                    "Character at position " + p + " does not resolve to itself");
+        }
+    }
+
+    /**
      * The cached segment start positions must stay consistent with the actual segment chain.
      * <p>
      * {@code getAnchor()} splits a segment and inserts an anchor without firing a change, so
