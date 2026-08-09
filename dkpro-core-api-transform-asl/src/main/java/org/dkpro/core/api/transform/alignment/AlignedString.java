@@ -525,6 +525,13 @@ public class AlignedString
             prefix = _first;
             suffix = _first._next;
         }
+        else if (pos == length()) {
+            // When appending at the end of the data, the new segment goes between the last
+            // segment and the end boundary anchor - no splitting required. Looking the position
+            // up via getSegmentAt() would run off the end of the segment chain.
+            prefix = _last._prev;
+            suffix = _last;
+        }
         else {
             prefix = getSegmentAt(pos);
             suffix = prefix.split(pos);

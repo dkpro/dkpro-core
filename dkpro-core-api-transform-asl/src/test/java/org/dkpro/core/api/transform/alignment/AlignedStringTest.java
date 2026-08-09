@@ -20,6 +20,7 @@ package org.dkpro.core.api.transform.alignment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -423,6 +424,136 @@ public class AlignedStringTest
         top.delete(2, 2);
 
         assertEquals(baseString, top.get());
+    }
+
+    /**
+     * Appending at the end of the data must work, just like {@link StringBuilder#insert} allows
+     * inserting at {@code length()}.
+     */
+    @Test
+    public void testInsertAtEnd()
+    {
+        final int end = top.get().length();
+
+        top.insert(end, "!");
+
+        assertEquals(baseString + "!", top.get());
+    }
+
+    /**
+     * Same as {@link #testInsertAtEnd()} but on a plain (non-stacked) AlignedString, showing that
+     * the problem is not specific to stacking.
+     */
+    @Test
+    public void testInsertAtEndOnBase()
+    {
+        final AlignedString as = new AlignedString("abcdef");
+
+        as.insert(6, "!");
+
+        assertEquals("abcdef!", as.get());
+    }
+
+    /**
+     * Appending via {@code replace()} at the end must work as well - it delegates to
+     * {@code insert()}.
+     */
+    @Test
+    public void testReplaceAtEnd()
+    {
+        final int end = top.get().length();
+
+        top.replace(end, end, "!");
+
+        assertEquals(baseString + "!", top.get());
+    }
+
+    /**
+     * Appending repeatedly must keep the appended parts in the order in which they were added.
+     */
+    @Test
+    public void testInsertAtEndRepeatedly()
+    {
+        top.insert(top.get().length(), "X");
+        top.insert(top.get().length(), "Y");
+        top.insert(top.get().length(), "Z");
+
+        assertEquals(baseString + "XYZ", top.get());
+        assertEquals(baseString, bottom.get());
+    }
+
+    /**
+     * Appending after the end of the data was removed must append at the new end.
+     */
+    @Test
+    public void testInsertAtEndAfterDeletingTheEnd()
+    {
+        top.delete(4, top.get().length());
+        assertEquals("I am", top.get());
+
+        top.insert(top.get().length(), "!");
+
+        assertEquals("I am!", top.get());
+    }
+
+    /**
+     * Inserting beyond the end of the data must still be rejected.
+     */
+    @Test
+    public void testInsertBeyondEndFails()
+    {
+        final int beyondEnd = top.get().length() + 1;
+
+        assertThrows(IndexOutOfBoundsException.class, () -> top.insert(beyondEnd, "!"));
+    }
+
+    /**
+     * Text appended at the end must resolve correctly against the underlying data.
+     */
+    @Test
+    public void testResolveAfterInsertAtEnd()
+    {
+        top.insert(top.get().length(), "XY");
+
+        assertEquals(baseString + "XY", top.get());
+
+        // The part that exists in the underlying data must still map onto itself
+        final Interval i = top.resolve(new ImmutableInterval(0, baseString.length()));
+
+        assertEquals(baseString, bottom.get(i.getStart(), i.getEnd()));
+    }
+
+    /**
+     * The cached segment start positions must stay consistent with the actual segment chain.
+     * <p>
+     * {@code getAnchor()} splits a segment and inserts an anchor without firing a change, so
+     * {@code _startDirty} stays {@code false} even though the chain was restructured. Positions
+     * currently remain correct only because the freshly created segments carry an invalid cache
+     * marker which forces a recomputation. This test pins the externally observable invariant.
+     */
+    @Test
+    public void testSegmentStartsRemainConsistentAfterAnchorSplit()
+    {
+        bottom = new AlignedString("abcdefghij");
+        top = new AlignedString(bottom);
+
+        // Prime the caches
+        bottom.updateCaches();
+        top.updateCaches();
+
+        // Restructure the underlying chain without changing the text
+        bottom.getAnchor(5);
+
+        assertEquals("abcdefghij", bottom.get());
+        assertEquals("abcdefghij", top.get());
+
+        // Every segment must report the start position that the chain actually implies
+        int expectedStart = 0;
+        for (final AlignedString.DataSegment s : bottom) {
+            assertEquals(expectedStart, s.getStart(),
+                    "Segment reports a start position inconsistent with the segment chain");
+            expectedStart += s.length();
+        }
     }
 
     /**
