@@ -47,7 +47,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Generate sequences of phrases with optional stopword/regex-based filtering, and lowercasing.
  * Filtered tokens are added as {@link LexicalPhrase}s with empty text or a replacement of the text,
- * if {@link Builder#stopwordReplacement} and/or {@link Builder#filterRegexReplacement} were set.
+ * if {@link Builder#stopwordsReplacement(String)} and/or
+ * {@link Builder#filterRegexReplacement(String)} were set.
  * <p>
  * Initialize with {@link Builder#build()}.
  * <p>
@@ -168,8 +169,9 @@ public class PhraseSequenceGenerator
      * CAS.
      * <p>
      * Optionally, the tokens are filtered by stopwords and/or regular expressions. In matching
-     * elements, the phrase texts are replaced according to {@link Builder#stopwordReplacement} and
-     * {@link Builder#filterRegexReplacement}.
+     * elements, the phrase texts are replaced according to
+     * {@link Builder#stopwordsReplacement(String)} and
+     * {@link Builder#filterRegexReplacement(String)}.
      *
      * @param aJCas
      *            a {@link JCas}

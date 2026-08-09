@@ -640,8 +640,6 @@ public abstract class ResourceCollectionReaderBase
         return language;
     }
 
-    /**
-     */
     public static class Resource
     {
         private final String location;
