@@ -131,8 +131,19 @@ public class AlignedString
         // situation that startSeg may point into segment A, then follows a
         // deleted segment B and endSeg will point into C. The resolved interval
         // will thus contain A+B instead of only A.
-        final DataSegment endSeg = getSegmentAt(
-                (i.getStart() != i.getEnd()) ? i.getEnd() - 1 : i.getEnd(), true);
+        //
+        // For a non-empty interval we must not accept an anchor here: anchors have zero width
+        // and therefore never contain the last character of the interval. Returning the anchor
+        // that sits at the position of the last character would make the end-seeking loop below
+        // believe that it had to move right onto the containing segment, so that the start of
+        // that segment - rather than a position inside it - would be used as the interval end.
+        final DataSegment endSeg;
+        if (i.getStart() != i.getEnd()) {
+            endSeg = getSegmentAt(i.getEnd() - 1, false);
+        }
+        else {
+            endSeg = getSegmentAt(i.getEnd(), true);
+        }
 
         // For start find oblique segment here or to left.
         // If none start is start of first segment.
