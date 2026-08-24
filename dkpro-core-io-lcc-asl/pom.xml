@@ -44,22 +44,27 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-io-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-resources-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-segmentation-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-parameter-asl</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-testing-asl</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

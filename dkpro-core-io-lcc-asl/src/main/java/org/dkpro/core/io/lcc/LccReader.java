@@ -42,15 +42,12 @@ import org.dkpro.core.api.resources.CompressionUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
-
 /**
  * Reader for sentence-based Leipzig Corpora Collection files.
  */
 @ResourceMetaData(name = "Leipzig Corpora Collection Reader")
-@MimeTypeCapability({MimeTypes.TEXT_X_LCC})
-@TypeCapability(
-        outputs = { 
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+@MimeTypeCapability({ MimeTypes.TEXT_X_LCC })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class LccReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -58,38 +55,36 @@ public class LccReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
-            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
-    
+
     /**
      * Whether sentences should be written by the reader or not.
      */
     public static final String PARAM_WRITE_SENTENCE = ComponentParameters.PARAM_WRITE_SENTENCE;
     @ConfigurationParameter(name = PARAM_WRITE_SENTENCE, mandatory = true, defaultValue = "false")
     private boolean writeSentence;
-    
+
     /**
      * How many input sentences should be merged into one CAS.
      */
     public static final String PARAM_SENTENCES_PER_CAS = "sentencesPerCAS";
     @ConfigurationParameter(name = PARAM_SENTENCES_PER_CAS, mandatory = true, defaultValue = "100")
     private int sentencesPerCAS;
-    
+
     private Resource res;
     private int casOffset;
     private BufferedReader br;
     private List<String> sentenceBuffer;
 
     @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
+    public void initialize(UimaContext context) throws ResourceInitializationException
     {
         super.initialize(context);
-        
+
         casOffset = 0;
         sentenceBuffer = new ArrayList<>();
-        
+
         // Seek first article
         try {
             step();
@@ -100,8 +95,7 @@ public class LccReader
     }
 
     @Override
-    public boolean hasNext()
-        throws IOException, CollectionException
+    public boolean hasNext() throws IOException, CollectionException
     {
         // If there is still a buffer, then there is still data. This requires that we call
         // step() already during initialization.
@@ -109,9 +103,10 @@ public class LccReader
     }
 
     @Override
-    public void getNext(JCas aJCas) throws IOException, CollectionException {
+    public void getNext(JCas aJCas) throws IOException, CollectionException
+    {
         initCas(aJCas, res, String.valueOf(casOffset));
-        
+
         StringBuilder sb = new StringBuilder();
         int offset = 0;
         for (String sentence : sentenceBuffer) {
@@ -125,32 +120,33 @@ public class LccReader
             offset++;
         }
         aJCas.setDocumentText(sb.toString());
-        
+
         sentenceBuffer.clear();
         casOffset++;
         step();
     }
-    
+
     // TODO find some way to properly estimate progress
     @Override
-    public Progress[] getProgress() {
+    public Progress[] getProgress()
+    {
         return new Progress[] { new ProgressImpl(casOffset, casOffset, "document") };
     }
-    
+
     @Override
     public void destroy()
     {
         closeAll();
         super.destroy();
     }
-    
+
     private void closeAll()
     {
         res = null;
         closeQuietly(br);
         br = null;
     }
-    
+
     /**
      * Seek article in file. Stop once article element has been found without reading it.
      */
@@ -171,24 +167,24 @@ public class LccReader
                     return;
                 }
             }
-            
+
             // Fill buffer
             String line;
             while (sentenceBuffer.size() < sentencesPerCAS && (line = br.readLine()) != null) {
                 String[] parts = line.split("\t");
-                
+
                 if (parts.length != 2) {
                     throw new IOException("File not in LCC format: " + line);
                 }
-                
+
                 sentenceBuffer.add(parts[1]);
             }
-            
+
             // If buffer could be filled, return
             if (!sentenceBuffer.isEmpty()) {
                 return;
             }
-            
+
             // End of file reached
             closeAll();
         }

@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  *      documentation</a>
  */
 @JsonPropertyOrder({ "target", "sourcedb", "sourceid", "text", "project", "denotations",
-        "relations", "modifications", "namespaces" })
+        "relations", "attributions", "modifications", "namespaces" })
 public class PADocument
 {
     @JsonInclude(Include.NON_NULL)
@@ -55,6 +55,10 @@ public class PADocument
 
     @JsonInclude(Include.NON_EMPTY)
     private List<PARelation> relations = new ArrayList<>();
+
+    @JsonProperty("attributions")
+    @JsonInclude(Include.NON_EMPTY)
+    private List<PAAttribute> attributes = new ArrayList<>();
 
     @JsonInclude(Include.NON_EMPTY)
     private List<PANamespace> namespaces = new ArrayList<>();
@@ -160,6 +164,21 @@ public class PADocument
     public void setModifications(List<PAModification> aModifications)
     {
         modifications = aModifications;
+    }
+
+    public List<PAAttribute> getAttributes()
+    {
+        return attributes;
+    }
+
+    public void setAttributes(List<PAAttribute> aAttributes)
+    {
+        attributes = aAttributes;
+    }
+
+    public void addAttribute(PAAttribute aAttribute)
+    {
+        attributes.add(aAttribute);
     }
 
     public Optional<PANamespace> getNamespace(String aPrefix)
