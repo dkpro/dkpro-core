@@ -506,9 +506,7 @@ public class DKPro2Brat
 
     private boolean isInternalFeature(Feature aFeature)
     {
-        // https://issues.apache.org/jira/browse/UIMA-4565
-        return "uima.cas.AnnotationBase:sofa".equals(aFeature.getName());
-        // return CAS.FEATURE_FULL_NAME_SOFA.equals(aFeature.getName());
+        return CAS.FEATURE_FULL_NAME_SOFA.equals(aFeature.getName());
     }
 
     private void writePrimitiveAttribute(BratAnnotation aAnno, FeatureStructure aFS, Feature feat)
