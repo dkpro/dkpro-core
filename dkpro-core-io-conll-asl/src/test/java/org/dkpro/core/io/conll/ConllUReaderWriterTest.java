@@ -47,7 +47,10 @@ public class ConllUReaderWriterTest
                 "conll/u/conllu-en-orig.conllu");
     }
 
-    @Disabled("This unfortunately doesn't work yet.")
+    @Disabled("Empty nodes are disabled by default and are modelled as zero-width tokens when "
+            + "enabled, which NoZeroSizeTokensAndSentencesCheck - applied by IOTestRunner to all "
+            + "round-trip tests - rejects. The round trip itself works, see "
+            + "ConllUWriterTest.thatEmptyNodesRoundTrip.")
     @Test
     public void roundTripV2EmptyNodes() throws Exception
     {

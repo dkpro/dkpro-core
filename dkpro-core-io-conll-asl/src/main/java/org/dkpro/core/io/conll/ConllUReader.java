@@ -59,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -162,6 +163,20 @@ public class ConllUReader
     @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, defaultValue = "true")
     private boolean readParagraph;
 
+    /**
+     * Read empty nodes. Empty nodes have a decimal ID (e.g. {@code 5.1}) and are used in the
+     * enhanced dependency representation to stand in for elided material. Since they have no
+     * surface form, they are modelled as zero-width tokens which retain their original ID. If
+     * disabled, empty nodes and any enhanced dependencies referring to them are discarded.
+     * <p>
+     * This is disabled by default because zero-width tokens are not generally considered valid in
+     * DKPro Core - components may assume that every token covers at least one character. Enable
+     * this only if the consumers of the CAS are prepared to handle zero-width tokens.
+     */
+    public static final String PARAM_READ_EMPTY_NODES = "readEmptyNodes";
+    @ConfigurationParameter(name = PARAM_READ_EMPTY_NODES, defaultValue = "false")
+    private boolean readEmptyNodes;
+
     private static final String UNUSED = "_";
 
     private static final int ID = 0;
@@ -179,6 +194,16 @@ public class ConllUReader
     public static final String META_DOCUMENT_ID = "newdoc id";
     public static final String META_PARAGRAPH_ID = "newpar id";
     public static final String META_TEXT = "text";
+
+    /**
+     * Document boundary without an ID - the spec allows {@code # newdoc} without a value.
+     */
+    public static final String META_DOCUMENT = "newdoc";
+
+    /**
+     * Paragraph boundary without an ID - the spec allows {@code # newpar} without a value.
+     */
+    public static final String META_PARAGRAPH = "newpar";
 
     private MappingProvider posMappingProvider;
 
@@ -230,9 +255,14 @@ public class ConllUReader
             // Read sentence comments (if any)
             Map<String, String> comments = readSentenceComments(aReader);
 
-            if (!documentContainsParagraphInformation.isPresent()) {
-                documentContainsParagraphInformation = Optional
-                        .of(comments.keySet().contains(META_PARAGRAPH_ID));
+            boolean sentenceStartsParagraph = comments.keySet().contains(META_PARAGRAPH_ID)
+                    || comments.keySet().contains(META_PARAGRAPH);
+
+            // Whether the document uses paragraph markers is decided by the first sentence that
+            // carries one. Once a marker has been seen, it remains in effect for the rest of the
+            // document so that later markers are handled consistently with earlier ones.
+            if (!documentContainsParagraphInformation.isPresent() || sentenceStartsParagraph) {
+                documentContainsParagraphInformation = Optional.of(sentenceStartsParagraph);
             }
 
             // Read sentence
@@ -251,6 +281,9 @@ public class ConllUReader
                 documentIDValues.add(comments.get(META_DOCUMENT_ID));
             }
 
+            // A `SpaceAfter=No` on the last token of the previous sentence refers to the surface
+            // text within that sentence and must not suppress the separator to the next one -
+            // otherwise the two sentences would be glued together without any separator.
             if (!readParagraph || !documentContainsParagraphInformation.get()) {
                 if (doc.getPosition() > 0) {
                     doc.add("\n");
@@ -258,9 +291,14 @@ public class ConllUReader
                 }
             }
             else if (readParagraph) {
-                if (p != null && comments.keySet().contains(META_PARAGRAPH_ID)) {
+                if (p != null && sentenceStartsParagraph) {
                     doc.add("\n\n");
                     shouldAddSpace = false;
+                }
+                else if (doc.getPosition() > 0) {
+                    // Sentences within a paragraph are not separated by a line break, so a space
+                    // is required to keep them apart.
+                    shouldAddSpace = true;
                 }
             }
 
@@ -270,9 +308,13 @@ public class ConllUReader
             int surfaceBegin = -1;
             int surfaceEnd = -1;
             String surfaceString = null;
+            boolean mwtNoSpaceAfter = false;
 
             // Tokens, Lemma, POS
             Int2ObjectMap<Token> tokens = new Int2ObjectOpenHashMap<>();
+            // Empty nodes are addressed by their decimal ID (e.g. `5.1`), so they cannot be held in
+            // the integer-keyed token map.
+            Map<String, Token> emptyNodes = new LinkedHashMap<>();
             Iterator<String[]> wordIterator = words.iterator();
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
@@ -285,8 +327,36 @@ public class ConllUReader
                     surfaceBegin = Integer.valueOf(trim(fragments[0]));
                     surfaceEnd = Integer.valueOf(trim(fragments[1]));
                     surfaceString = formValue;
+                    // A multi-word token line carries the SpaceAfter information for the surface
+                    // form. The words it covers do not repeat it, so it must be picked up here -
+                    // but it only takes effect after the last covered word has been written.
+                    mwtNoSpaceAfter = StringUtils.contains(word[MISC], "SpaceAfter=No");
                     continue;
                 }
+
+                // Empty nodes (decimal IDs such as `5.1`) represent elided material in the enhanced
+                // dependency graph. They contribute no surface text, so they are modelled as
+                // zero-width tokens which retain their original ID. This keeps them addressable as
+                // governors of enhanced dependencies without affecting the document text.
+                if (idValue.contains(".")) {
+                    if (readEmptyNodes) {
+                        int pos = doc.getPosition();
+                        Token emptyNode = new Token(aJCas, pos, pos);
+                        emptyNode.setId(idValue);
+                        // The token covers no text, so the form has to be retained explicitly.
+                        TokenForm form = new TokenForm(aJCas, pos, pos);
+                        form.setValue(formValue);
+                        form.addToIndexes();
+                        emptyNode.setForm(form);
+                        emptyNode.addToIndexes();
+                        emptyNodes.put(idValue, emptyNode);
+                        readTokenAnnotations(aJCas, emptyNode, word);
+                    }
+                    // An empty node has no surface form, so it must neither consume the pending
+                    // space nor change whether the next token is preceded by one.
+                    continue;
+                }
+
                 // the following must be placed after check for dashes in ID in order not to insert
                 // unnecessary spaces
                 if (shouldAddSpace) {
@@ -302,65 +372,7 @@ public class ConllUReader
                 tokens.put(tokenIdx, token);
                 shouldAddSpace = !StringUtils.contains(word[MISC], "SpaceAfter=No");
 
-                // Read lemma
-                String lemmaValue = trim(word[LEMMA]);
-                if (!UNUSED.equals(lemmaValue) && readLemma) {
-                    Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-                    lemma.setValue(lemmaValue);
-                    lemma.addToIndexes();
-                    token.setLemma(lemma);
-                }
-
-                // Read part-of-speech tag
-                POS pos = null;
-                String cPosTag = cleanTag(word[CPOSTAG]);
-                String tag = useCPosAsPos ? cPosTag : cleanTag(word[POSTAG]);
-                if (!UNUSED.equals(tag) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(tag);
-                    pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
-                            token.getEnd());
-                    pos.setPosValue(tag);
-                }
-
-                // Read coarse part-of-speech tag
-                if (!UNUSED.equals(cPosTag) && readCPos) {
-                    if (pos == null) {
-                        pos = new POS(aJCas, token.getBegin(), token.getEnd());
-                    }
-                    pos.setCoarseValue(cPosTag);
-                }
-
-                if (pos != null) {
-                    pos.addToIndexes();
-                    token.setPos(pos);
-                }
-
-                // Read morphological features
-                String featsValue = cleanTag(word[FEATS]);
-                if (!UNUSED.equals(featsValue) && readMorph) {
-                    MorphologicalFeatures morphtag = new MorphologicalFeatures(aJCas,
-                            token.getBegin(), token.getEnd());
-                    morphtag.setValue(featsValue);
-                    morphtag.addToIndexes();
-                    token.setMorph(morphtag);
-
-                    // Try parsing out individual feature values. Since the DKPro Core
-                    // MorphologicalFeatures type is based on the definition from the UD project,
-                    // we can do this rather straightforwardly.
-                    Type morphType = morphtag.getType();
-                    String[] items = featsValue.split("\\|");
-                    for (String item : items) {
-                        String[] keyValue = item.split("=");
-                        StringBuilder key = new StringBuilder(trim(keyValue[0]));
-                        key.setCharAt(0, Character.toLowerCase(key.charAt(0)));
-                        String value = trim(keyValue[1]);
-
-                        Feature feat = morphType.getFeatureByBaseName(key.toString());
-                        if (feat != null) {
-                            morphtag.setStringValue(feat, value);
-                        }
-                    }
-                }
+                readTokenAnnotations(aJCas, token, word);
 
                 // Read surface form
                 if (tokenIdx == surfaceEnd) {
@@ -372,6 +384,12 @@ public class ConllUReader
                     surfaceBegin = -1;
                     surfaceEnd = -1;
                     surfaceString = null;
+                    // The SpaceAfter of the multi-word token line governs what follows the surface
+                    // form as a whole, so it overrides the value from the last covered word.
+                    if (mwtNoSpaceAfter) {
+                        shouldAddSpace = false;
+                        mwtNoSpaceAfter = false;
+                    }
                 }
 
                 sentenceEnd = token.getEnd();
@@ -380,28 +398,74 @@ public class ConllUReader
             // Dependencies
             if (readDependency) {
                 for (String[] word : words) {
-                    String depRelValue = cleanTag(word[DEPREL]);
+                    String idValue = trim(word[ID]);
 
-                    if (!UNUSED.equals(depRelValue)) {
-                        int depId = Integer.valueOf(trim(word[ID]));
-                        int govId = Integer.valueOf(trim(word[HEAD]));
+                    // Multi-word token lines never bear dependencies.
+                    if (idValue.contains("-")) {
+                        continue;
+                    }
 
-                        // Model the root as a loop onto itself
-                        makeDependency(aJCas, govId, depId, depRelValue, BASIC, tokens, word);
+                    boolean isEmptyNode = idValue.contains(".");
+
+                    // The empty node was not created, so nothing can refer to it.
+                    if (isEmptyNode && !readEmptyNodes) {
+                        continue;
+                    }
+
+                    // Basic dependencies are only defined for regular tokens - the HEAD and DEPREL
+                    // of an empty node are always unspecified.
+                    if (!isEmptyNode) {
+                        String depRelValue = cleanTag(word[DEPREL]);
+                        String headValue = trim(word[HEAD]);
+
+                        if (!UNUSED.equals(depRelValue) && !UNUSED.equals(headValue)) {
+                            int depId = Integer.valueOf(idValue);
+                            int govId = Integer.valueOf(headValue);
+
+                            // Model the root as a loop onto itself
+                            makeDependency(aJCas, govId, depId, depRelValue, BASIC, tokens, word);
+                        }
                     }
 
                     String depsValue = trim(word[DEPS]);
                     if (!UNUSED.equals(depsValue)) {
+                        Token dependent = isEmptyNode ? emptyNodes.get(idValue)
+                                : tokens.get(Integer.parseInt(idValue));
+
                         // list items separated by vertical bar
                         String[] items = depsValue.split("\\|");
                         for (String item : items) {
-                            String[] sItem = item.split(":");
+                            // The head is separated from the relation by the first colon. The
+                            // relation itself may contain further colons in its subtypes, e.g.
+                            // `5:conj:and`, which must be preserved.
+                            String[] sItem = trim(item).split(":", 2);
+                            if (sItem.length < 2) {
+                                continue;
+                            }
 
-                            int depId = Integer.valueOf(trim(word[ID]));
-                            int govId = Integer.valueOf(trim(sItem[0]));
+                            String govValue = trim(sItem[0]);
 
-                            makeDependency(aJCas, govId, depId, cleanTag(sItem[1]), ENHANCED,
-                                    tokens, word);
+                            // A head may be an empty node (e.g. `5.1:nsubj`).
+                            Token governor;
+                            if (govValue.contains(".")) {
+                                governor = emptyNodes.get(govValue);
+                            }
+                            else if ("0".equals(govValue)) {
+                                // The artificial root is modelled as a loop onto the dependent.
+                                governor = dependent;
+                            }
+                            else {
+                                governor = tokens.get(Integer.parseInt(govValue));
+                            }
+
+                            if (governor == null || dependent == null) {
+                                // Refers to a node which does not exist - e.g. an empty node in a
+                                // file where reading empty nodes is disabled.
+                                continue;
+                            }
+
+                            makeDependency(aJCas, governor, dependent, cleanTag(sItem[1]),
+                                    ENHANCED);
                         }
                     }
                 }
@@ -412,7 +476,8 @@ public class ConllUReader
             sentence.setId(comments.get(META_SEND_ID));
             sentence.addToIndexes();
 
-            if (comments.keySet().contains(META_PARAGRAPH_ID)) {
+            if (sentenceStartsParagraph) {
+                // May be null if the paragraph was marked using a valueless `# newpar` comment.
                 final String paragraphID = comments.get(META_PARAGRAPH_ID);
                 if (p != null) {
                     // do nothing
@@ -443,6 +508,81 @@ public class ConllUReader
         doc.close();
     }
 
+    /**
+     * Read the lemma, part-of-speech and morphological features of a word line and attach them to
+     * the given token. The token may be a zero-width token representing an empty node.
+     */
+    private void readTokenAnnotations(JCas aJCas, Token aToken, String[] aWord)
+    {
+        // Read lemma
+        String lemmaValue = trim(aWord[LEMMA]);
+        if (!UNUSED.equals(lemmaValue) && readLemma) {
+            Lemma lemma = new Lemma(aJCas, aToken.getBegin(), aToken.getEnd());
+            lemma.setValue(lemmaValue);
+            lemma.addToIndexes();
+            aToken.setLemma(lemma);
+        }
+
+        // Read part-of-speech tag
+        POS pos = null;
+        String cPosTag = cleanTag(aWord[CPOSTAG]);
+        String tag = useCPosAsPos ? cPosTag : cleanTag(aWord[POSTAG]);
+        if (!UNUSED.equals(tag) && readPos) {
+            Type posTag = posMappingProvider.getTagType(tag);
+            pos = (POS) aJCas.getCas().createAnnotation(posTag, aToken.getBegin(), aToken.getEnd());
+            pos.setPosValue(tag);
+        }
+
+        // Read coarse part-of-speech tag
+        if (!UNUSED.equals(cPosTag) && readCPos) {
+            if (pos == null) {
+                pos = new POS(aJCas, aToken.getBegin(), aToken.getEnd());
+            }
+            pos.setCoarseValue(cPosTag);
+        }
+
+        if (pos != null) {
+            pos.addToIndexes();
+            aToken.setPos(pos);
+        }
+
+        // Read morphological features
+        String featsValue = cleanTag(aWord[FEATS]);
+        if (!UNUSED.equals(featsValue) && readMorph) {
+            MorphologicalFeatures morphtag = new MorphologicalFeatures(aJCas, aToken.getBegin(),
+                    aToken.getEnd());
+            morphtag.setValue(featsValue);
+            morphtag.addToIndexes();
+            aToken.setMorph(morphtag);
+
+            // Try parsing out individual feature values. Since the DKPro Core
+            // MorphologicalFeatures type is based on the definition from the UD project,
+            // we can do this rather straightforwardly.
+            Type morphType = morphtag.getType();
+            String[] items = featsValue.split("\\|");
+            for (String item : items) {
+                // Feature values may themselves contain `=`, so split only on the first one. Items
+                // without any `=` have no corresponding feature and are therefore only retained as
+                // part of the raw value.
+                String[] keyValue = item.split("=", 2);
+                if (keyValue.length < 2) {
+                    continue;
+                }
+                StringBuilder key = new StringBuilder(trim(keyValue[0]));
+                if (key.length() == 0) {
+                    continue;
+                }
+                key.setCharAt(0, Character.toLowerCase(key.charAt(0)));
+                String value = trim(keyValue[1]);
+
+                Feature feat = morphType.getFeatureByBaseName(key.toString());
+                if (feat != null) {
+                    morphtag.setStringValue(feat, value);
+                }
+            }
+        }
+    }
+
     private Map<String, String> readSentenceComments(BufferedReader aReader) throws IOException
     {
         Map<String, String> comments = new LinkedHashMap<>();
@@ -452,14 +592,28 @@ public class ConllUReader
             aReader.mark(2);
             char character = (char) aReader.read();
             if ('#' == character) {
-                // Read the rest of the line
+                // Read the rest of the line - this is null if the file ends directly after the
+                // comment marker without a line break.
                 String line = aReader.readLine();
+                if (line == null) {
+                    break;
+                }
+
                 if (line.contains("=")) {
                     String[] parts = line.split("=", 2);
                     comments.put(parts[0].trim(), parts[1].trim());
                 }
                 else {
-                    // Comment or unknown header line
+                    // Valueless comments such as `# newdoc` and `# newpar` mark a boundary without
+                    // providing an ID. They are recorded with an empty value so that the boundary
+                    // is still detected.
+                    String key = line.trim();
+                    if (META_DOCUMENT.equals(key) || META_PARAGRAPH.equals(key)) {
+                        comments.put(key, null);
+                    }
+                    else {
+                        // Comment or unknown header line
+                    }
                 }
             }
             else {
@@ -486,7 +640,9 @@ public class ConllUReader
                 // Comment line
                 continue;
             }
-            String[] fields = line.split("\t");
+            // Use a negative limit so that trailing empty fields are retained - otherwise a line
+            // with an empty MISC field would appear to have only 9 fields.
+            String[] fields = line.split("\t", -1);
             if (fields.length != 10) {
                 throw new IOException(
                         "Invalid file format. Line needs to have 10 tab-separated fields, but it has "

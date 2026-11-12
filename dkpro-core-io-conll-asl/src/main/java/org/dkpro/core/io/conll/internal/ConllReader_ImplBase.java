@@ -60,19 +60,27 @@ public abstract class ConllReader_ImplBase
     protected Dependency makeDependency(JCas aJCas, int govId, int depId, String label,
             String flavor, Int2ObjectMap<Token> tokens, String[] word)
     {
-        Dependency rel;
+        // A governor ID of 0 refers to the artificial root, which is modelled as a loop of the
+        // dependent onto itself.
+        boolean isRoot = govId == 0;
 
-        if (govId == 0) {
-            rel = new ROOT(aJCas);
-            rel.setGovernor(tokens.get(depId));
-            rel.setDependent(tokens.get(depId));
-        }
-        else {
-            rel = new Dependency(aJCas);
-            rel.setGovernor(tokens.get(govId));
-            rel.setDependent(tokens.get(depId));
-        }
+        return makeDependency(aJCas, isRoot ? tokens.get(depId) : tokens.get(govId),
+                tokens.get(depId), label, flavor, isRoot);
+    }
 
+    protected Dependency makeDependency(JCas aJCas, Token aGovernor, Token aDependent, String label,
+            String flavor)
+    {
+        return makeDependency(aJCas, aGovernor, aDependent, label, flavor, aGovernor == aDependent);
+    }
+
+    protected Dependency makeDependency(JCas aJCas, Token aGovernor, Token aDependent, String label,
+            String flavor, boolean aRoot)
+    {
+        Dependency rel = aRoot ? new ROOT(aJCas) : new Dependency(aJCas);
+
+        rel.setGovernor(aGovernor);
+        rel.setDependent(aDependent);
         rel.setDependencyType(label);
         rel.setFlavor(flavor);
         rel.setBegin(rel.getDependent().getBegin());

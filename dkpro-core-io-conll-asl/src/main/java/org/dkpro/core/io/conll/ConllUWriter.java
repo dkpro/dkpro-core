@@ -40,6 +40,8 @@ import org.dkpro.core.api.parameter.ComponentParameters;
 import org.dkpro.core.api.parameter.MimeTypes;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -59,6 +61,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 @MimeTypeCapability({ MimeTypes.TEXT_X_CONLL_U })
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
@@ -133,6 +136,23 @@ public class ConllUWriter
     @ConfigurationParameter(name = PARAM_WRITE_TEXT_COMMENT, defaultValue = "true")
     private boolean writeTextHeader;
 
+    /**
+     * Write paragraph information as {@code # newpar id} comments.
+     */
+    public static final String PARAM_WRITE_PARAGRAPH = ComponentParameters.PARAM_WRITE_PARAGRAPH;
+    @ConfigurationParameter(name = PARAM_WRITE_PARAGRAPH, defaultValue = "true")
+    private boolean writeParagraph;
+
+    /**
+     * Write the document ID as a {@code # newdoc id} comment in front of the first sentence. This
+     * is disabled by default because the document ID is not necessarily derived from a
+     * {@code # newdoc id} comment - it may just as well have been derived from the file name, in
+     * which case writing it back out would add information that was not present in the input.
+     */
+    public static final String PARAM_WRITE_DOCUMENT_ID = "writeDocumentId";
+    @ConfigurationParameter(name = PARAM_WRITE_DOCUMENT_ID, defaultValue = "false")
+    private boolean writeDocumentId;
+
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
@@ -154,10 +174,38 @@ public class ConllUWriter
             surfaceBeginIdx.put(sf.getBegin(), sf);
         }
 
+        // Paragraphs are marked on the sentence that starts them, so index them by their begin
+        // offset to be able to detect where a new paragraph starts.
+        Int2ObjectMap<Paragraph> paragraphBeginIdx = new Int2ObjectOpenHashMap<>();
+        if (writeParagraph) {
+            for (Paragraph para : select(aJCas, Paragraph.class)) {
+                paragraphBeginIdx.put(para.getBegin(), para);
+            }
+        }
+
+        boolean firstSentence = true;
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Map<Token, Row> ctokens = new LinkedHashMap<>();
 
             // Comments
+            if (firstSentence && writeDocumentId) {
+                String documentId = DocumentMetaData.get(aJCas).getDocumentId();
+                if (documentId != null) {
+                    aOut.printf("# %s = %s\n", ConllUReader.META_DOCUMENT_ID, documentId);
+                }
+            }
+            firstSentence = false;
+
+            Paragraph para = paragraphBeginIdx.get(sentence.getBegin());
+            if (para != null) {
+                if (para.getId() != null) {
+                    aOut.printf("# %s = %s\n", ConllUReader.META_PARAGRAPH_ID, para.getId());
+                }
+                else {
+                    aOut.printf("# %s\n", ConllUReader.META_PARAGRAPH);
+                }
+            }
+
             if (sentence.getId() != null) {
                 aOut.printf("# %s = %s\n", ConllUReader.META_SEND_ID, sentence.getId());
             }
@@ -172,33 +220,91 @@ public class ConllUWriter
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
 
+            int tokenId = 0;
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
-                row.id = i + 1;
                 row.token = tokens.get(i);
-                row.noSpaceAfter = (i + 1 < tokens.size())
-                        && row.token.getEnd() == tokens.get(i + 1).getBegin();
+
+                // An empty node is modelled as a zero-width token carrying its original decimal ID
+                // (e.g. `5.1`). It is not part of the regular token numbering.
+                row.emptyNode = isEmptyNode(row.token);
+                if (row.emptyNode) {
+                    row.id = row.token.getId();
+                }
+                else {
+                    tokenId++;
+                    row.id = Integer.toString(tokenId);
+                    row.tokenId = tokenId;
+                }
+
+                if (!row.emptyNode) {
+                    // The next regular token determines whether a space follows. Empty nodes have
+                    // no
+                    // surface form and must therefore be skipped when looking ahead.
+                    Token next = null;
+                    for (int j = i + 1; j < tokens.size(); j++) {
+                        if (!isEmptyNode(tokens.get(j))) {
+                            next = tokens.get(j);
+                            break;
+                        }
+                    }
+
+                    if (next != null) {
+                        row.noSpaceAfter = row.token.getEnd() == next.getBegin();
+                    }
+                    else {
+                        // For the last token of the sentence, the following character is not
+                        // covered
+                        // by a token of this sentence, so consult the document text instead. Only
+                        // if
+                        // the token is directly followed by a non-whitespace character (or by
+                        // nothing at all) is there really no space after it.
+                        int end = row.token.getEnd();
+                        String text = aJCas.getDocumentText();
+                        row.noSpaceAfter = end < text.length()
+                                && !Character.isWhitespace(text.charAt(end));
+                    }
+                }
+
                 ctokens.put(row.token, row);
             }
 
             // Dependencies
             for (Dependency rel : selectCovered(Dependency.class, sentence)) {
+                Row row = ctokens.get(rel.getDependent());
+                if (row == null) {
+                    // The dependent is not a token of this sentence - such a relation cannot be
+                    // expressed in CoNLL-U, which addresses tokens by their in-sentence index.
+                    throw new IllegalStateException(
+                            "Illegal dependency structure - dependency [" + rel.getDependencyType()
+                                    + "] has a dependent which is not part of the sentence.");
+                }
+
                 if (StringUtils.isBlank(rel.getFlavor())
                         || DependencyFlavor.BASIC.equals(rel.getFlavor())) {
-                    ctokens.get(rel.getDependent()).deprel = rel;
+                    if (row.deprel != null) {
+                        String form = row.token.getCoveredText();
+                        if (!writeCovered) {
+                            form = row.token.getText();
+                        }
+
+                        throw new IllegalStateException(
+                                "Illegal basic dependency structure - token [" + form
+                                        + "] is dependent of more than one dependency.");
+                    }
+                    row.deprel = rel;
                 }
                 else {
-                    ctokens.get(rel.getDependent()).deps.add(rel);
+                    row.deps.add(rel);
                 }
             }
 
             // Write sentence in CONLL-U format
             for (Row row : ctokens.values()) {
 
-                String form = row.token.getCoveredText();
-                if (!writeCovered) {
-                    form = row.token.getText();
-                }
+                // An empty node covers no text, so its form can only come from the token form.
+                String form = (writeCovered && !row.emptyNode) ? row.token.getCoveredText()
+                        : row.token.getText();
 
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
@@ -219,17 +325,17 @@ public class ConllUWriter
                     cpos = posAnno.getCoarseValue();
                 }
 
-                int headId = UNUSED_INT;
+                String head = UNUSED;
                 String deprel = UNUSED;
                 String deps = UNUSED;
                 if (writeDependency) {
-                    if ((row.deprel != null)) {
+                    // The HEAD and DEPREL columns are only defined for regular tokens - an empty
+                    // node participates in the enhanced graph only.
+                    if (row.deprel != null && !row.emptyNode) {
                         deprel = row.deprel.getDependencyType();
-                        headId = ctokens.get(row.deprel.getGovernor()).id;
-                        if (headId == row.id) {
-                            // ROOT dependencies may be modeled as a loop, ignore these.
-                            headId = 0;
-                        }
+                        Row governor = governorRow(ctokens, row.deprel);
+                        // ROOT dependencies may be modeled as a loop, ignore these.
+                        head = governor == row ? "0" : Integer.toString(governor.tokenId);
                     }
 
                     StringBuilder depsBuf = new StringBuilder();
@@ -238,22 +344,14 @@ public class ConllUWriter
                             depsBuf.append('|');
                         }
                         // Resolve self-looping root to 0-indexed root
-                        int govId = ctokens.get(d.getGovernor()).id;
-                        if (govId == row.id) {
-                            govId = 0;
-                        }
-                        depsBuf.append(govId);
+                        Row governor = governorRow(ctokens, d);
+                        depsBuf.append(governor == row ? "0" : governor.id);
                         depsBuf.append(':');
                         depsBuf.append(d.getDependencyType());
                     }
                     if (depsBuf.length() > 0) {
                         deps = depsBuf.toString();
                     }
-                }
-
-                String head = UNUSED;
-                if (headId != UNUSED_INT) {
-                    head = Integer.toString(headId);
                 }
 
                 String feats = UNUSED;
@@ -266,18 +364,22 @@ public class ConllUWriter
                     misc = "SpaceAfter=No";
                 }
 
-                SurfaceForm sf = surfaceBeginIdx.get(row.token.getBegin());
+                // A zero-width empty node may share its begin offset with a surface form, but it is
+                // not the token that starts the multi-word token.
+                SurfaceForm sf = row.emptyNode ? null : surfaceBeginIdx.get(row.token.getBegin());
                 if (sf != null) {
                     @SuppressWarnings({ "unchecked", "rawtypes" })
                     List<Token> covered = (List) surfaceIdx.get(sf);
-                    int id1 = ctokens.get(covered.get(0)).id;
-                    int id2 = ctokens.get(covered.get(covered.size() - 1)).id;
+                    int id1 = ctokens.get(covered.get(0)).tokenId;
+                    int id2 = ctokens.get(covered.get(covered.size() - 1)).tokenId;
+                    // The ID column holds the `id1-id2` range, followed by the FORM and the eight
+                    // remaining columns which are all unused for a multi-word token.
                     aOut.printf("%d-%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id1, id2,
                             sf.getValue(), UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED,
                             UNUSED);
                 }
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id, form, lemma, cpos,
+                aOut.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id, form, lemma, cpos,
                         pos, feats, head, deprel, deps, misc);
             }
 
@@ -285,9 +387,46 @@ public class ConllUWriter
         }
     }
 
+    /**
+     * Resolve the row of the governor of the given dependency.
+     */
+    private static Row governorRow(Map<Token, Row> aCtokens, Dependency aRel)
+    {
+        Row governor = aCtokens.get(aRel.getGovernor());
+        if (governor == null) {
+            // CoNLL-U addresses heads by their in-sentence index, so a governor outside the
+            // sentence cannot be expressed.
+            throw new IllegalStateException(
+                    "Illegal dependency structure - dependency [" + aRel.getDependencyType()
+                            + "] has a governor which is not part of the sentence.");
+        }
+        return governor;
+    }
+
+    /**
+     * An empty node is a zero-width token which carries a decimal ID (e.g. {@code 5.1}).
+     */
+    private static boolean isEmptyNode(Token aToken)
+    {
+        return aToken.getBegin() == aToken.getEnd() && aToken.getId() != null
+                && aToken.getId().indexOf('.') >= 0;
+    }
+
     private static final class Row
     {
-        int id;
+        /**
+         * The ID as written to the ID column - an integer for regular tokens, a decimal ID for
+         * empty nodes.
+         */
+        String id;
+
+        /**
+         * The regular token index, or {@link #UNUSED_INT} for empty nodes which are not part of the
+         * regular token numbering.
+         */
+        int tokenId = UNUSED_INT;
+
+        boolean emptyNode;
         Token token;
         boolean noSpaceAfter;
         Dependency deprel;
