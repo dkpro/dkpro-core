@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.perseus;
 
+import static org.dkpro.core.api.xml.XmlParserUtils.newXmlInputFactoryAllowingDoctype;
 import static org.dkpro.core.api.resources.CompressionUtils.getInputStream;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
@@ -138,7 +139,7 @@ public class PerseusReader
         }
 
         try (InputStream is = getInputStream(res.getLocation(), res.getInputStream())) {
-            XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+            XMLInputFactory xmlInputFactory = newXmlInputFactoryAllowingDoctype();
             XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(is);
 
             JAXBContext context = JAXBContext.newInstance(PerseusSentence.class);

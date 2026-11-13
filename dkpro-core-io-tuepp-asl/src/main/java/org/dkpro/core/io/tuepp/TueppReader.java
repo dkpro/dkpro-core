@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.tuepp;
 
+import static org.dkpro.core.api.xml.XmlParserUtils.newXmlInputFactoryAllowingDoctype;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
 
 import java.io.IOException;
@@ -224,7 +225,7 @@ public class TueppReader
         try {
             context = JAXBContext.newInstance(TueppToken.class);
             unmarshaller = context.createUnmarshaller();
-            xmlInputFactory = XMLInputFactory.newInstance();
+            xmlInputFactory = newXmlInputFactoryAllowingDoctype();
         }
         catch (JAXBException e) {
             throw new ResourceInitializationException(e);

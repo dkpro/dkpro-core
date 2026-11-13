@@ -17,6 +17,14 @@
  */
 package org.dkpro.core.io.tei;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import static org.dkpro.core.testing.ExternalContentAssert.assertExternalContentNotIncluded;
+import static org.dkpro.core.testing.ExternalContentAssert.writeExternalFile;
+import static org.dkpro.core.testing.ExternalContentAssert.writeExternalDtdFile;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.uima.fit.factory.JCasFactory;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -209,5 +217,72 @@ public class TeiReaderTest
                         TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }, //
                         TeiReader.PARAM_READ_POS, true, //
                         TeiReader.PARAM_READ_TOKEN, false));
+    }
+
+    @Test
+    void thatExternalEntitiesAreNotIncluded(@TempDir Path aTempDir) throws Exception
+    {
+        var externalUri = writeExternalFile(aTempDir);
+
+        var input = writeDoctypeInput(aTempDir,
+                "<!DOCTYPE TEI [<!ENTITY ext SYSTEM '" + externalUri + "'>]>", "&ext;");
+
+        assertExternalContentNotIncluded(doctypeInputReader(input));
+    }
+
+    @Test
+    void thatExternalDtdIsNotLoaded(@TempDir Path aTempDir) throws Exception
+    {
+        var dtdUri = writeExternalDtdFile(aTempDir);
+
+        var input = writeDoctypeInput(aTempDir,
+                "<!DOCTYPE TEI [<!ENTITY % dtd SYSTEM '" + dtdUri + "'> %dtd;]>", "&ext;");
+
+        assertExternalContentNotIncluded(doctypeInputReader(input));
+    }
+
+    @Test
+    void thatDocumentsWithDoctypeCanBeRead(@TempDir Path aTempDir) throws Exception
+    {
+        var input = writeDoctypeInput(aTempDir,
+                "<!DOCTYPE TEI SYSTEM 'tei_all.dtd' [<!ENTITY i 'internal'>]>", "&i;");
+
+        var jcas = JCasFactory.createJCas();
+        var reader = createReader(doctypeInputReader(input));
+        assertThat(reader.hasNext()).isTrue();
+        reader.getNext(jcas.getCas());
+
+        assertThat(jcas.getDocumentText()).contains("Hello").contains("internal");
+    }
+
+    private static CollectionReaderDescription doctypeInputReader(Path aInput) throws Exception
+    {
+        return createReaderDescription( //
+                TeiReader.class, //
+                TeiReader.PARAM_LANGUAGE, "en", //
+                TeiReader.PARAM_SOURCE_LOCATION, aInput.toString());
+    }
+
+    private static Path writeDoctypeInput(Path aFolder, String aDoctype, String aWord)
+        throws Exception
+    {
+        var input = aFolder.resolve("input.xml");
+        Files.writeString(input, """
+                <?xml version="1.0" encoding="UTF-8"?>
+                %s
+                <TEI xmlns="http://www.tei-c.org/ns/1.0">
+                  <text>
+                    <body>
+                      <p>
+                        <s>
+                          <w>Hello</w>
+                          <w>%s</w>
+                        </s>
+                      </p>
+                    </body>
+                  </text>
+                </TEI>
+                """.formatted(aDoctype, aWord), UTF_8);
+        return input;
     }
 }

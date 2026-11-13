@@ -56,6 +56,11 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-xml-asl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-lexmorph-asl</artifactId>
       <version>${project.version}</version>
     </dependency>

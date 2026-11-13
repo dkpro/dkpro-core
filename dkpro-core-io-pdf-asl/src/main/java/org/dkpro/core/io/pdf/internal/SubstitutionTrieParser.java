@@ -17,15 +17,18 @@
  */
 package org.dkpro.core.io.pdf.internal;
 
+import static org.dkpro.core.api.xml.XmlParserUtils.newXmlReader;
+
 import java.io.IOException;
 import java.io.InputStream;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 public class SubstitutionTrieParser
     extends DefaultHandler
@@ -57,12 +60,12 @@ public class SubstitutionTrieParser
     public static void parse(final InputStream is, final Trie<String> trie) throws IOException
     {
         try {
-            final XMLReader xr = XMLReaderFactory.createXMLReader();
+            final XMLReader xr = newXmlReader();
             final SubstitutionTrieParser sp = new SubstitutionTrieParser(trie);
             xr.setContentHandler(sp);
             xr.parse(new InputSource(is));
         }
-        catch (final SAXException e) {
+        catch (final SAXException | ParserConfigurationException e) {
             throw new IOException(e);
         }
     }
