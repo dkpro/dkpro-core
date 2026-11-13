@@ -38,12 +38,16 @@ jobs:
       with:
         java-version: ${{ matrix.jdk }}
         distribution: 'temurin'
-        cache: maven
 
     - name: Set up cache date
       shell: bash
       run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
 
+    # We cache the Maven repository ourselves instead of using "cache: maven" in setup-java.
+    # setup-java keys its cache on a hash of all pom.xml files and restores exact matches only,
+    # so every POM change (e.g. any dependency upgrade) starts from an empty repository and
+    # downloads all the large model artifacts again. Our cache falls back to the most recent
+    # entry via restore-keys and is refreshed daily via the CACHE_DATE in its key.
     - name: Cache Maven repository
       id: maven-cache
       uses: actions/cache@v6.1.0

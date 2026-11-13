@@ -110,6 +110,13 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+/**
+ * Copied from Apache UIMA ({@code org.apache.uima.cas.serdes.CasToComparableText} in the test
+ * sources of {@code uimaj-core}), which does not ship it in a regular artifact.
+ * <p>
+ * Last verified to be identical to the UIMA 3.7.0 original, apart from formatting. When upgrading
+ * UIMA, re-compare this class against the upstream source and update this note.
+ */
 public class CasToComparableText
 {
 
