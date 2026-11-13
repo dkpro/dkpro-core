@@ -369,12 +369,6 @@ public class CoreNlpParser
         {
             String modelFile = aUrl.toString();
 
-            // Loading gzipped files from URL is broken in CoreNLP
-            // https://github.com/stanfordnlp/CoreNLP/issues/94
-            if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
-                modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
-            }
-
             Properties coreNlpProps = new Properties();
             // Need to set annotators because CoreNLP checks for the presence of the sentiment
             // annotator to decide the default value for "parse.binaryTrees"

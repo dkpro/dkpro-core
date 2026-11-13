@@ -34,7 +34,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <corenlp.version>4.5.10</corenlp.version>
+    <corenlp.version>4.6.0</corenlp.version>
   </properties>
 
   <dependencies>

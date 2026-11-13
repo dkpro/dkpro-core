@@ -152,5 +152,26 @@
         <ignoreVersion>20140113.0</ignoreVersion>
       </ignoreVersions>
     </rule>
+
+    <!--
+      - Not an upgrade: the 20120616.x builds of these OpenNLP models carry a wrong upstream date
+      - that was corrected to 20120131 (nb) and 20120410 (es) in 600eb471e (issue 364). The model
+      - binaries in the opennlp-upstream-* artifacts are byte-identical between the two dates.
+      -->
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-nb-maxent" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">20120616\..*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-nb-maxent" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">20120616\..*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-*" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">20120616\..*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
   </rules>
 </ruleset>
