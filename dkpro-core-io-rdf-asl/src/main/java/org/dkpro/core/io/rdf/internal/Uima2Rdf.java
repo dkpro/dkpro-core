@@ -24,8 +24,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.ontology.Individual;
-import org.apache.jena.ontology.OntModel;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.Feature;
@@ -51,7 +52,7 @@ public class Uima2Rdf
         }
     }
 
-    public void convert(JCas aJCas, OntModel aTarget) throws CASException
+    public void convert(JCas aJCas, Model aTarget) throws CASException
     {
         // Set up prefix mappings
         var ts = aJCas.getTypeSystem();
@@ -82,7 +83,7 @@ public class Uima2Rdf
         }
     }
 
-    private void convertView(JCas aJCas, OntModel aTarget)
+    private void convertView(JCas aJCas, Model aTarget)
     {
         // Shorten down variable name for model
         var m = aTarget;
@@ -105,15 +106,15 @@ public class Uima2Rdf
 
         // Set up the view itself
         var viewUri = format("%s#%d", docuri, aJCas.getLowLevelCas().ll_getFSRef(aJCas.getSofa()));
-        var rdfView = m.createIndividual(viewUri, tView);
+        var rdfView = m.createResource(viewUri, tView);
 
         for (var uimaFS : reachable) {
             var uri = format("%s#%d", docuri, aJCas.getLowLevelCas().ll_getFSRef(uimaFS));
-            var rdfFS = m.createIndividual(uri, m.createResource(rdfType(uimaFS.getType())));
+            var rdfFS = m.createResource(uri, m.createResource(rdfType(uimaFS.getType())));
 
             // The SoFa is not a regular FS - do not mark it as such
             if (uimaFS != aJCas.getSofa()) {
-                rdfFS.addOntClass(tFeatureStructure);
+                rdfFS.addProperty(RDF.type, tFeatureStructure);
             }
 
             // Internal UIMA information
@@ -126,9 +127,9 @@ public class Uima2Rdf
         }
     }
 
-    private void convertFeatures(String docuri, FeatureStructure uimaFS, Individual rdfFS)
+    private void convertFeatures(String docuri, FeatureStructure uimaFS, Resource rdfFS)
     {
-        var m = rdfFS.getOntModel();
+        var m = rdfFS.getModel();
 
         for (var uimaFeat : uimaFS.getType().getFeatures()) {
             var rdfFeat = m.createProperty(rdfFeature(uimaFeat));

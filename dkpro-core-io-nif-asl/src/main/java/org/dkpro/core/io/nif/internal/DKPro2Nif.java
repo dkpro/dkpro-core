@@ -23,10 +23,10 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import org.apache.jena.irix.IRIs;
-import org.apache.jena.ontology.Individual;
-import org.apache.jena.ontology.OntModel;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -38,10 +38,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class DKPro2Nif
 {
-    public static void convert(JCas aJCas, OntModel aTarget)
+    public static void convert(JCas aJCas, Model aTarget)
     {
         // Shorten down variable name for model
-        OntModel m = aTarget;
+        Model m = aTarget;
 
         // Set up query instances
         final Resource tContext = m.createResource(NIF.TYPE_CONTEXT);
@@ -75,12 +75,12 @@ public class DKPro2Nif
                 : "doc:" + dmd.getDocumentId();
 
         // Convert document -> context node
-        Individual context;
+        Resource context;
         {
             String uri = String.format("%s#offset_%d_%d", docuri, 0,
                     aJCas.getDocumentText().length());
-            context = m.createIndividual(uri, tContext);
-            context.addRDFType(tOffsetBasedString);
+            context = m.createResource(uri, tContext);
+            context.addProperty(RDF.type, tOffsetBasedString);
             context.addLiteral(pIsString, m.createTypedLiteral(aJCas.getDocumentText(), XSDstring));
             context.addLiteral(pBeginIndex, m.createTypedLiteral(0, XSDnonNegativeInteger));
             context.addLiteral(pEndIndex,
@@ -91,8 +91,8 @@ public class DKPro2Nif
         for (Heading uimaHeading : select(aJCas, Heading.class)) {
             String headingUri = String.format("%s#offset_%d_%d", docuri, uimaHeading.getBegin(),
                     uimaHeading.getEnd());
-            Individual nifTitle = m.createIndividual(headingUri, tTitle);
-            nifTitle.addRDFType(tOffsetBasedString);
+            Resource nifTitle = m.createResource(headingUri, tTitle);
+            nifTitle.addProperty(RDF.type, tOffsetBasedString);
             nifTitle.addProperty(pReferenceContext, context);
             nifTitle.addLiteral(pAnchorOf, uimaHeading.getCoveredText());
             nifTitle.addLiteral(pBeginIndex,
@@ -105,8 +105,8 @@ public class DKPro2Nif
         for (Paragraph uimaParagraph : select(aJCas, Paragraph.class)) {
             String paragraphUri = String.format("%s#offset_%d_%d", docuri, uimaParagraph.getBegin(),
                     uimaParagraph.getEnd());
-            Individual nifParagraph = m.createIndividual(paragraphUri, tParagraph);
-            nifParagraph.addRDFType(tOffsetBasedString);
+            Resource nifParagraph = m.createResource(paragraphUri, tParagraph);
+            nifParagraph.addProperty(RDF.type, tOffsetBasedString);
             nifParagraph.addProperty(pReferenceContext, context);
             nifParagraph.addLiteral(pAnchorOf, uimaParagraph.getCoveredText());
             nifParagraph.addLiteral(pBeginIndex,
@@ -116,12 +116,12 @@ public class DKPro2Nif
         }
 
         // Convert sentences
-        Individual previousNifSentence = null;
+        Resource previousNifSentence = null;
         for (Sentence uimaSentence : select(aJCas, Sentence.class)) {
             String sentenceUri = String.format("%s#offset_%d_%d", docuri, uimaSentence.getBegin(),
                     uimaSentence.getEnd());
-            Individual nifSentence = m.createIndividual(sentenceUri, tSentence);
-            nifSentence.addRDFType(tOffsetBasedString);
+            Resource nifSentence = m.createResource(sentenceUri, tSentence);
+            nifSentence.addProperty(RDF.type, tOffsetBasedString);
             nifSentence.addProperty(pReferenceContext, context);
             nifSentence.addLiteral(pAnchorOf, uimaSentence.getCoveredText());
             nifSentence.addLiteral(pBeginIndex,
@@ -137,12 +137,12 @@ public class DKPro2Nif
             previousNifSentence = nifSentence;
 
             // Convert tokens
-            Individual previousNifWord = null;
+            Resource previousNifWord = null;
             for (Token uimaToken : selectCovered(Token.class, uimaSentence)) {
                 String wordUri = String.format("%s#offset_%d_%d", docuri, uimaToken.getBegin(),
                         uimaToken.getEnd());
-                Individual nifWord = m.createIndividual(wordUri, tWord);
-                nifWord.addRDFType(tOffsetBasedString);
+                Resource nifWord = m.createResource(wordUri, tWord);
+                nifWord.addProperty(RDF.type, tOffsetBasedString);
                 nifWord.addProperty(pReferenceContext, context);
                 nifWord.addLiteral(pAnchorOf, uimaToken.getText());
                 nifWord.addLiteral(pBeginIndex,
@@ -203,8 +203,8 @@ public class DKPro2Nif
 
             String neUri = String.format("%s#offset_%d_%d", docuri, uimaNamedEntity.getBegin(),
                     uimaNamedEntity.getEnd());
-            Individual nifNamedEntity = m.createIndividual(neUri, tEntityOccurrence);
-            nifNamedEntity.addRDFType(tOffsetBasedString);
+            Resource nifNamedEntity = m.createResource(neUri, tEntityOccurrence);
+            nifNamedEntity.addProperty(RDF.type, tOffsetBasedString);
             nifNamedEntity.addProperty(pReferenceContext, context);
             nifNamedEntity.addLiteral(pAnchorOf, uimaNamedEntity.getCoveredText());
             nifNamedEntity.addLiteral(pBeginIndex,

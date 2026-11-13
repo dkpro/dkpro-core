@@ -19,7 +19,7 @@ package org.dkpro.core.io.nif;
 
 import java.io.OutputStream;
 
-import org.apache.jena.ontology.OntModel;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
@@ -72,15 +72,14 @@ public class NifWriter
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
-        OntModel model = ModelFactory.createOntologyModel();
+        Model model = ModelFactory.createDefaultModel();
         model.setNsPrefix(NIF.PREFIX_NIF, NIF.NS_NIF);
         model.setNsPrefix(ITS.PREFIX_ITS, ITS.NS_ITS);
 
         DKPro2Nif.convert(aJCas, model);
 
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
-            RDFDataMgr.write(docOS, model.getBaseModel(),
-                    RDFLanguages.fileExtToLang(filenameSuffix));
+            RDFDataMgr.write(docOS, model, RDFLanguages.fileExtToLang(filenameSuffix));
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
