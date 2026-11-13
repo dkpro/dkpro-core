@@ -180,13 +180,6 @@ public class CoreNlpSegmenter
                 if (aUrl != null) {
                     String modelFile = aUrl.toString();
 
-                    // Loading gzipped files from URL is broken in CoreNLP
-                    // https://github.com/stanfordnlp/CoreNLP/issues/94
-                    if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
-                        modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile,
-                                "!/");
-                    }
-
                     coreNlpProps.setProperty("segment.model", modelFile);
                 }
 

@@ -30,7 +30,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <tika.version>3.3.2</tika.version>
+    <tika.version>4.2.0</tika.version>
   </properties>
 
   <dependencies>
@@ -48,17 +48,6 @@
       <version>${tika.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.tika</groupId>
-      <artifactId>tika-parsers-standard-package</artifactId>
-      <version>${tika.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>xml-apis</groupId>
-          <artifactId>xml-apis</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>dkpro-core-api-io-asl</artifactId>
       <version>${project.version}</version>
@@ -71,6 +60,29 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
+    <!--
+      - Tika parsers are not a dependency of the reader. Users add the parser modules for the
+      - formats they need (or org.apache.tika:tika-parsers-standard-package as type pom for all
+      - standard formats). The tests only need the parsers for the formats they read.
+      -->
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-parser-text-module</artifactId>
+      <version>${tika.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-parser-miscoffice-module</artifactId>
+      <version>${tika.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-parser-microsoft-module</artifactId>
+      <version>${tika.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -82,7 +94,9 @@
           <configuration>
             <usedDependencies combine.children="append">
               <!-- Parsers are not detected as a direct dependency due to plugin mechanism -->
-              <usedDependency>org.apache.tika:tika-parsers-standard-package</usedDependency>
+              <usedDependency>org.apache.tika:tika-parser-text-module</usedDependency>
+              <usedDependency>org.apache.tika:tika-parser-miscoffice-module</usedDependency>
+              <usedDependency>org.apache.tika:tika-parser-microsoft-module</usedDependency>
             </usedDependencies>
             <ignoredDependencies combine.children="append">
               <!-- 

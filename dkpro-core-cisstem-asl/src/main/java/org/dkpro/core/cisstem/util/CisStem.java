@@ -23,8 +23,30 @@
  */
 package org.dkpro.core.cisstem.util;
 
+import java.util.regex.Pattern;
+
+/**
+ * CISTEM stemmer for German.
+ * <p>
+ * Copied from {@code Cistem.java} in
+ * <a href="https://github.com/LeonieWeissweiler/CISTEM">CISTEM</a>, which does not publish a Java
+ * artifact. Apart from the package declaration, the class name and code formatting, it is
+ * unmodified.
+ * <p>
+ * Last verified to be identical to upstream commit <a href=
+ * "https://github.com/LeonieWeissweiler/CISTEM/blob/8d4b2958769ad32a3320c05b7d845346f131bd4f/Cistem.java">8d4b295</a>
+ * (2020-06-26). When updating, re-compare this class against the upstream source and update this
+ * note and the NOTICE.txt file of this module.
+ */
 public class CisStem
 {
+    private static final Pattern GE_PATTERN = Pattern.compile("^ge(.{4,})");
+    private static final Pattern DOLLAR1_PATTERN = Pattern.compile("(.)\\1");
+    private static final Pattern ND_PATTERN = Pattern.compile("nd$");
+    private static final Pattern EMR_PATTERN = Pattern.compile("e[mr]$");
+    private static final Pattern T_PATTERN = Pattern.compile("t$");
+    private static final Pattern ESN_PATTERN = Pattern.compile("[esn]$");
+    private static final Pattern STAR_PATTERN = Pattern.compile("(.)\\*");
 
     public static String stem(String word)
     {
@@ -37,7 +59,6 @@ public class CisStem
             return word;
         }
 
-        // TODO use compiled pattern for performance?
         word = word.replace("Ü", "U");
         word = word.replace("Ö", "O");
         word = word.replace("Ä", "A");
@@ -50,22 +71,22 @@ public class CisStem
         word = word.toLowerCase();
 
         word = word.replace("ß", "ss");
-        word = word.replaceAll("^ge(.{4,})", "$1");
+        word = GE_PATTERN.matcher(word).replaceAll("$1");
         word = word.replace("sch", "$");
         word = word.replace("ei", "%");
         word = word.replace("ie", "&");
 
-        word = word.replaceAll("(.)\\1", "$1*");
+        word = DOLLAR1_PATTERN.matcher(word).replaceAll("$1*");
 
         while (word.length() > 3) {
             if (word.length() > 5) {
-                String newWord = word.replaceAll("e[mr]$", "");
+                String newWord = EMR_PATTERN.matcher(word).replaceAll("");
                 if (!word.equals(newWord)) {
                     word = newWord;
                     continue;
                 }
 
-                newWord = word.replaceAll("nd$", "");
+                newWord = ND_PATTERN.matcher(word).replaceAll("");
                 if (!word.equals(newWord)) {
                     word = newWord;
                     continue;
@@ -73,14 +94,14 @@ public class CisStem
             }
 
             if (!uppercase || case_insensitive) {
-                String newWord = word.replaceAll("t$", "");
+                final String newWord = T_PATTERN.matcher(word).replaceAll("");
                 if (!word.equals(newWord)) {
                     word = newWord;
                     continue;
                 }
             }
 
-            String newWord = word.replaceAll("[esn]$", "");
+            String newWord = ESN_PATTERN.matcher(word).replaceAll("");
             if (!word.equals(newWord)) {
                 word = newWord;
                 continue;
@@ -90,7 +111,7 @@ public class CisStem
             }
         }
 
-        word = word.replaceAll("(.)\\*", "$1$1");
+        word = STAR_PATTERN.matcher(word).replaceAll("$1$1");
         word = word.replace("&", "ie");
         word = word.replace("%", "ei");
         word = word.replace("$", "sch");
@@ -121,7 +142,7 @@ public class CisStem
         word = word.replace("ei", "%");
         word = word.replace("ie", "&");
 
-        word = word.replaceAll("(.)\\1", "$1*");
+        word = DOLLAR1_PATTERN.matcher(word).replaceAll("$1*");
 
         while (word.length() > 3) {
             if (word.length() > 5) {

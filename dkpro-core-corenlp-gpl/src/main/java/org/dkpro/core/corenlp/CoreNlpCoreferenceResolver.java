@@ -177,12 +177,6 @@ public class CoreNlpCoreferenceResolver
         {
             String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString()) + "/";
 
-            // Loading gzipped files from URL is broken in CoreNLP
-            // https://github.com/stanfordnlp/CoreNLP/issues/94
-            String logicalBase = getModelLocation(getAggregatedProperties());
-            logicalBase = FilenameUtils.getFullPathNoEndSeparator(logicalBase) + "/";
-            logicalBase = logicalBase.substring("classpath:/".length());
-
             Properties props = new Properties();
             props.setProperty(Constants.ALLOW_REPARSING_PROP, String.valueOf(false));
             props.setProperty(Constants.SIEVES_PROP, sieves);

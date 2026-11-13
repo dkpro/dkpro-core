@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.apache.commons.collections4.iterators.IteratorIterable;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.ontology.OntResource;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.vocabulary.RDF;
@@ -61,13 +60,13 @@ public class Rdf2Uima
         // the feature values just set because some of them may point to FSes not yet created
         var fses = m.listSubjectsWithProperty(RDF.type, tFeatureStructure).toList();
         for (var fs : fses) {
-            var uimaFS = initFS(fs.as(OntResource.class), aJCas);
+            var uimaFS = initFS(fs, aJCas);
             fsIndex.put(fs, uimaFS);
         }
 
         // Now fill the FSes with their feature values
         for (var fs : fses) {
-            convertFS(fs.as(OntResource.class), aJCas, fsIndex);
+            convertFS(fs, aJCas, fsIndex);
         }
 
         // Finally add the FSes to the indexes of the respective views
@@ -101,12 +100,12 @@ public class Rdf2Uima
         return view;
     }
 
-    public static FeatureStructure initFS(OntResource aFS, JCas aJCas)
+    public static FeatureStructure initFS(Resource aFS, JCas aJCas)
     {
         var cas = aJCas.getCas();
 
         // Figure out the UIMA type - there can be only one type per FS
-        var types = aFS.listRDFTypes(true).toSet();
+        var types = aFS.listProperties(RDF.type).mapWith(Statement::getResource).toSet();
         types.removeIf(res -> res.getURI().startsWith(RdfCas.NS_RDFCAS));
         assert types.size() == 1;
         var type = CasUtil.getType(cas,
@@ -124,7 +123,7 @@ public class Rdf2Uima
         return fs;
     }
 
-    public static FeatureStructure convertFS(OntResource aFS, JCas aJCas,
+    public static FeatureStructure convertFS(Resource aFS, JCas aJCas,
             Map<Resource, FeatureStructure> aFsIndex)
     {
         var fs = aFsIndex.get(aFS);

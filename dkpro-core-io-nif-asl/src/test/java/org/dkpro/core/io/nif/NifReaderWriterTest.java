@@ -29,7 +29,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.dkpro.core.testing.TestOptions;
@@ -109,7 +108,7 @@ public class NifReaderWriterTest
 
     private static void convert(String aIn, String aOut) throws Exception
     {
-        OntModel model = ModelFactory.createOntologyModel();
+        Model model = ModelFactory.createDefaultModel();
         try (InputStream is = new FileInputStream(aIn)) {
             model.read(is, null, "TURTLE");
         }

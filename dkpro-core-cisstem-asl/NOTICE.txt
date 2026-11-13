@@ -1,6 +1,7 @@
 == CisStem.java
 
 Obtained from https://github.com/LeonieWeissweiler/CISTEM
+(Cistem.java as of commit 8d4b2958769ad32a3320c05b7d845346f131bd4f, 2020-06-26)
 
 MIT License
 

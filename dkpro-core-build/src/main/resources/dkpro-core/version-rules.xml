@@ -63,19 +63,6 @@
     </rule>
 
     <!--
-      PIN: Jena 5.x
-      Jena 6 renamed artifacts (jena-iri → jena-iri3986, jena-tdb → jena-tdb1) and
-      removed deprecated APIs up through Jena 4.10. Upgrading requires pom and
-      code changes; see https://github.com/apache/jena/blob/main/CHANGES.txt.
-      -->
-    <rule groupId="org.apache.jena" comparisonMethod="maven">
-      <ignoreVersions>
-        <ignoreVersion type="regex">^[6-9].*</ignoreVersion>
-        <ignoreVersion type="regex">^[1-9][0-9]+.*</ignoreVersion>
-      </ignoreVersions>
-    </rule>
-
-    <!--
       PIN: Smile 4.x
       Smile 5.x and 6.x jars are compiled to Java 25 bytecode (class major 69)
       and will not load on our Java 21 target. They also rework smile.classification.*,
@@ -150,6 +137,27 @@
     <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.matetools-model-*" comparisonMethod="maven"> 
       <ignoreVersions>
         <ignoreVersion>20140113.0</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+
+    <!--
+      - Not an upgrade: the 20120616.x builds of these OpenNLP models carry a wrong upstream date
+      - that was corrected to 20120131 (nb) and 20120410 (es) in 600eb471e (issue 364). The model
+      - binaries in the opennlp-upstream-* artifacts are byte-identical between the two dates.
+      -->
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-nb-maxent" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">20120616\..*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-nb-maxent" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">20120616\..*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-*" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion type="regex">20120616\..*</ignoreVersion>
       </ignoreVersions>
     </rule>
   </rules>

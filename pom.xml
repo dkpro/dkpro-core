@@ -85,16 +85,16 @@
   
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
-    <build-ant-version>1.10.17</build-ant-version>
-    <build-groovy-version>5.0.8</build-groovy-version>
-    <build-asciidoctorj-pdf-version>2.3.23</build-asciidoctorj-pdf-version>
+    <build-ant-version>1.10.18</build-ant-version>
+    <build-groovy-version>6.0.0</build-groovy-version>
+    <build-asciidoctorj-pdf-version>2.3.27</build-asciidoctorj-pdf-version>
     <!-- Plugin versions managed centrally -->
-    <versions.plugin.version>2.21.0</versions.plugin.version>
+    <versions.plugin.version>2.25.1</versions.plugin.version>
     <gmavenplus.plugin.version>5.1.0</gmavenplus.plugin.version>
     <spdx.plugin.version>1.0.4</spdx.plugin.version>
-    <license.plugin.version>5.1.1</license.plugin.version>
+    <license.plugin.version>5.1.2</license.plugin.version>
     <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
-    <checkstyle.version>13.9.0</checkstyle.version>
+    <checkstyle.version>14.4.0</checkstyle.version>
   </properties>
 
   <modules>
@@ -181,6 +181,31 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-maven-for-plugins</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <!--
+                    jcasgen-maven-plugin 3.7.0 requires Maven 3.9.3; apache-rat-plugin 0.18 and
+                    versions-maven-plugin 2.25.1 require Maven 3.9. The parent POM only enforces
+                    3.8.8.
+                  -->
+                  <version>[3.9.3,)</version>
+                  <message>Maven 3.9.3 or newer is required by the plugins used in this build.</message>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <profiles>
@@ -203,7 +228,7 @@
             <plugin>
               <groupId>com.diffplug.spotless</groupId>
               <artifactId>spotless-maven-plugin</artifactId>
-              <version>3.9.0</version>
+              <version>3.11.0</version>
               <inherited>true</inherited>
               <configuration>
                 <java>

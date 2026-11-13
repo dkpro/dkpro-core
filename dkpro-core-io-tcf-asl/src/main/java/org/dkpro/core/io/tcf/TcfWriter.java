@@ -153,11 +153,14 @@ public class TcfWriter
                             casToTcfWriter(docIS, aJCas, docOS);
                             writeWithoutMerging = false;
                         }
-                        // See https://github.com/weblicht/wlfxb/issues/7
-                        // catch (WLFormatException ex) {
-                        // getLogger().debug("No source file to merge with: " + ex.getMessage());
-                        // }
-                        // Workaround: catch all exceptions
+                        // Workaround: catch all exceptions instead of only WLFormatException.
+                        // https://github.com/weblicht/wlfxb/issues/7 (non-TCF XML not reported
+                        // as WLFormatException) is fixed in wlfxb 1.4.3, but wlfxb 1.4.3 (and its
+                        // unmaintained upstream) still throws a NullPointerException from the
+                        // TextCorpusStreamedWithReplaceableLayers constructor if the source is
+                        // not valid UTF-8, e.g. when the source document was a PDF. Since merging
+                        // is enabled by default, such sources must fall back to writing without
+                        // merging.
                         catch (Exception ex) {
                             getLogger().debug("Source file is not TCF: " + ex.getMessage());
                         }

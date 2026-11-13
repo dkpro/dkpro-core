@@ -33,25 +33,24 @@
     <maven.surefire.heap>6g</maven.surefire.heap>
 
     <junit-jupiter.version>6.1.3</junit-jupiter.version>
-    <junit-platform.version>6.1.3</junit-platform.version>
-    <mockito.version>5.23.0</mockito.version>
+    <mockito.version>5.24.0</mockito.version>
     <assertj.version>3.27.7</assertj.version>
-    <xmlunit.version>2.13.0</xmlunit.version>
+    <xmlunit.version>2.14.0</xmlunit.version>
 
-    <ant-version>1.10.17</ant-version>
+    <ant-version>1.10.18</ant-version>
     <activation.version>1.2.0</activation.version>
-    <groovy.version>5.0.8</groovy.version>
-    <icu4j.version>78.3</icu4j.version>
-    <jackson.version>2.22.1</jackson.version>
-    <jena.version>5.6.0</jena.version>
+    <groovy.version>5.1.3</groovy.version>
+    <icu4j.version>79.1</icu4j.version>
+    <jackson.version>2.23.0</jackson.version>
+    <jena.version>6.2.0</jena.version>
     <log4j.version>2.26.1</log4j.version>
     <lucene.version>4.4.0</lucene.version>
     <omtd.version>3.0.2.7</omtd.version>
-    <slf4j.version>2.0.18</slf4j.version>
-    <snakeyaml.version>2.6</snakeyaml.version>
+    <slf4j.version>2.0.20</slf4j.version>
+    <snakeyaml.version>2.7</snakeyaml.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
-    <spring.version>7.0.8</spring.version>
-    <uima.version>3.6.1</uima.version>
+    <spring.version>7.0.10</spring.version>
+    <uima.version>3.7.0</uima.version>
     <uima-io-json.version>0.5.0</uima-io-json.version>
     <uimafit.plugin.version>${uima.version}</uimafit.plugin.version>
   </properties>
@@ -200,7 +199,7 @@
       <dependency>
         <groupId>com.fasterxml.woodstox</groupId>
         <artifactId>woodstox-core</artifactId>
-        <version>7.2.2</version>
+        <version>7.3.0</version>
         <exclusions>
           <exclusion>
             <groupId>javax.xml.stream</groupId>
@@ -216,7 +215,7 @@
       <dependency>
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>stax2-api</artifactId>
-        <version>4.3.0</version>
+        <version>4.3.2</version>
       </dependency>
       <dependency>
         <groupId>com.ibm.icu</groupId>
@@ -251,12 +250,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-collections4</artifactId>
-        <version>4.5.0</version>
+        <version>4.6.0</version>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.22.1</version>
+        <version>1.23.0</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -276,7 +275,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.20.0</version>
+        <version>3.22.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -336,7 +335,7 @@
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>33.6.0-jre</version>
+        <version>33.8.0-jre</version>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
@@ -435,7 +434,7 @@
       <dependency>
         <groupId>javax.activation</groupId>
         <artifactId>javax.activation-api</artifactId>
-        <version>1.2.0</version>
+        <version>${activation.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.persistence</groupId>
@@ -698,7 +697,7 @@
           <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>javax.activation-api</artifactId>
-            <version>1.2.0</version>
+            <version>${activation.version}</version>
           </dependency>
         </dependencies>
       </plugin>

@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.tika.exception.TikaException;
+import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.TikaCoreProperties;
 import org.apache.tika.parser.AutoDetectParser;
@@ -42,6 +43,13 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for many file formats based on Apache Tika.
+ * <p>
+ * This module only depends on {@code tika-core}, which does not contain any parsers. Add the Tika
+ * parser modules for the formats you want to read to your project, e.g.
+ * {@code org.apache.tika:tika-parser-microsoft-module} for Microsoft Office formats, or
+ * {@code org.apache.tika:tika-parsers-standard-package} (with {@code <type>pom</type>}) for all
+ * standard formats. Use the same Tika version as this module. Without a suitable parser, a document
+ * is read as empty text.
  */
 @ResourceMetaData(name = "Tika Multi-Format Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
@@ -103,8 +111,9 @@ public class TikaReader
         }
 
         String docText = null;
-        try (InputStream in = fileResource.getInputStream()) {
-            parser.parse(in, handler, metadata, parseContext);
+        try (InputStream in = fileResource.getInputStream();
+                TikaInputStream tis = TikaInputStream.get(in)) {
+            parser.parse(tis, handler, metadata, parseContext);
             docText = handler.toString();
         }
         catch (SAXException | TikaException e) {

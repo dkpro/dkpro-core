@@ -121,7 +121,7 @@ public class RdfCasReader
                     res = nextFile();
                     // inFileCount = 0;
                     try (var is = getInputStream(res.getLocation(), res.getInputStream())) {
-                        model = ModelFactory.createOntologyModel();
+                        model = ModelFactory.createDefaultModel();
                         RDFDataMgr.read(model, is, RDFLanguages.filenameToLang(
                                 CompressionUtils.stripCompressionExtension(res.getLocation())));
                     }

@@ -77,7 +77,7 @@ public class RdfCasWriter
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
-        var model = ModelFactory.createOntologyModel();
+        var model = ModelFactory.createDefaultModel();
 
         try {
             uima2rdf.convert(aJCas, model);
@@ -87,7 +87,7 @@ public class RdfCasWriter
         }
 
         try (var docOS = getOutputStream(aJCas, filenameSuffix)) {
-            RDFDataMgr.write(docOS, model.getBaseModel(), fileExtToLang(filenameSuffix));
+            RDFDataMgr.write(docOS, model, fileExtToLang(filenameSuffix));
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);

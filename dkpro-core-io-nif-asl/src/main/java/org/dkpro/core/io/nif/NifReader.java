@@ -179,7 +179,7 @@ public class NifReader
                     inFileCount = 0;
                     try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
                             res.getInputStream())) {
-                        model = ModelFactory.createOntologyModel();
+                        model = ModelFactory.createDefaultModel();
                         RDFDataMgr.read(model, is, RDFLanguages.filenameToLang(
                                 CompressionUtils.stripCompressionExtension(res.getLocation())));
                     }
