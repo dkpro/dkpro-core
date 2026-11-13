@@ -94,7 +94,7 @@
     <spdx.plugin.version>1.0.4</spdx.plugin.version>
     <license.plugin.version>5.1.2</license.plugin.version>
     <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
-    <checkstyle.version>13.11.0</checkstyle.version>
+    <checkstyle.version>14.4.0</checkstyle.version>
   </properties>
 
   <modules>
