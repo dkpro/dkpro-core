@@ -25,7 +25,7 @@ template: {
     templateType.name = "org.dummy.Example";
     templateType.features = [:];
     templateType.externalReferences = [[
-        source: "LAPPS",
+        source: "NIF",
         id: "http://some/example",
         rel: "similar"]];
     simpleTypes['TEMPLATE'] = templateType;

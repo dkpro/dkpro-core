@@ -265,7 +265,6 @@ de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData:
     isLastSegment:
       externalReferences: []
   externalReferences:
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Document', rel: similar}
   - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/DocumentAnnotationType', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField:
   features:
@@ -297,7 +296,6 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:
       externalReferences:
       - {source: ITS, id: 'http://www.w3.org/2005/11/its/rdf#taIdentRef', rel: similar}
   externalReferences:
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/NamedEntity', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2275', rel: similar}
   - {source: OWL, id: 'http://www.w3.org/2002/07/owl#Thing', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#EntityOccurrence', rel: similar}
@@ -351,7 +349,6 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram:
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph:
   features: {}
   externalReferences:
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Paragraph', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Paragraph', rel: similar}
   - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Paragraph', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
@@ -360,7 +357,6 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
       externalReferences: []
   externalReferences:
   - {source: GATE, id: 'Sentence', rel: similar }
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Sentence', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1386', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Sentence', rel: similar}
   - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Sentence', rel: similar}
@@ -398,7 +394,6 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token:
       externalReferences: []
   externalReferences:
   - {source: GATE, id: 'Token', rel: similar }
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Token', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1403', rel: similar}
   - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Sentence', rel: similar}
   - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Token', rel: similar}
@@ -477,8 +472,7 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.LST:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC:
   features: {}
-  externalReferences:
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/NounChunk', rel: similar}
+  externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O:
   features: {}
   externalReferences: []
@@ -490,8 +484,7 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PRT:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC:
   features: {}
-  externalReferences:
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/VerbChunk', rel: similar}
+  externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP:
   features: {}
   externalReferences: []
@@ -512,7 +505,6 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent:
     syntacticFunction:
       externalReferences: []
   externalReferences:
-  - {source: LAPPS, id: 'http//vocab.lappsgrid.org/Constituent', rel: similar}
   - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Constituent', rel: similar}
   - {source: OLiA, id: 'http://purl.org/olia/olia-top.owl#Constituent', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.FRAG:
@@ -667,7 +659,6 @@ de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:
     DependencyType:
       externalReferences: []
   externalReferences:
-  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Dependency', rel: similar}
   - {source: OMTD-SHARE, id: 'http://w3id.org/meta-share/omtd-share/Dependency', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.EXPL:
   features: {}

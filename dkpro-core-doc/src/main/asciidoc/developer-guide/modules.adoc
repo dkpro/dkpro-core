@@ -31,7 +31,7 @@ following types of modules:
   classes, type system definitions and JCas classes. Since API modules are used in many places,
   they must be licensed under the Apache License.
 * IO modules (`dkpro-core-io-NAME-LIC`) - these modules contain reader and writer components. They
-  are usually named after the file format (e.g. `lif`) or family of file formats they support
+  are usually named after the file format (e.g. `nif`) or family of file formats they support
   (e.g. `conll`).
 * FS modules (`dkpro-core-fs-NAME-LIC`) - these modules contain support for specific file systems.
   They are usually named after the file system type they support (e.g. `hdfs`).
@@ -52,7 +52,7 @@ The naming scheme applies in several occasions:
 * artifactId - the Maven artifactId as recorded in the `pom.xml` file. The groupId should always
   be `org.dkpro.core`.
 * Java packages - the module name translates roughly into the Java package names, e.g. the root
-  Java package in the module `dkpro-core-io-lif-asl` is `org.dkpro.core.io.lif`. 
+  Java package in the module `dkpro-core-io-conll-asl` is `org.dkpro.core.io.conll`. 
 
 == Module Hierarchy
 
