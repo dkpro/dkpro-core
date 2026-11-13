@@ -75,7 +75,6 @@
     <module>../dkpro-core-io-json-asl</module>
     <module>../dkpro-core-io-jdbc-asl</module>
     <module>../dkpro-core-io-jwpl-asl</module>
-    <module>../dkpro-core-io-lif-asl</module>
     <module>../dkpro-core-io-lxf-asl</module>
     <module>../dkpro-core-io-negra-asl</module>
     <module>../dkpro-core-io-nif-asl</module>
