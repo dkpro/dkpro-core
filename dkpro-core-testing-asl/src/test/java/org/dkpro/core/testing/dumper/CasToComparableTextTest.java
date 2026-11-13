@@ -38,6 +38,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Copied from Apache UIMA ({@code org.apache.uima.cas.serdes.CasToComparableTextTest} in the test
+ * sources of {@code uimaj-core}) together with {@link CasToComparableText}.
+ * <p>
+ * Last verified to be identical to the UIMA 3.7.0 original, apart from formatting. When upgrading
+ * UIMA, re-compare this class against the upstream source and update this note.
+ */
 class CasToComparableTextTest
 {
     private static final String TYPE_NAME_AKOF = "akof";

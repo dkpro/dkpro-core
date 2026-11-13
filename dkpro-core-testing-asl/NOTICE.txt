@@ -1,3 +1,27 @@
 CasToComparableText / CasToComparableTextTest
 
-  Taken from Apache UIMA 3.7.0.
+  Taken from Apache UIMA 3.7.0 (uimaj-core test sources). One method of CasToComparableText is
+  derived from uimaFIT FSUtil.
+
+Apache UIMA Java SDK
+Copyright 2006 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+Portions of UIMA were originally developed by
+International Business Machines Corporation and are
+licensed to the Apache Software Foundation under the
+"Software Grant License Agreement", informally known as the
+"IBM UIMA License Agreement".
+Copyright (c) 2003, 2006 IBM Corporation.
+
+Apache UIMA uimaFIT
+Copyright 2013-2020 The Apache Software Foundation
+
+Copyright 2009-2012 Regents of the University of Colorado.
+All rights reserved.
+
+Copyright 2009-2012 Ubiquitous Knowledge Processing (UKP) Lab.
+Technische Universität Darmstadt.
+All rights reserved.

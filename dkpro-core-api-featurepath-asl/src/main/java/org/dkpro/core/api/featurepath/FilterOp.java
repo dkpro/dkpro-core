@@ -16,7 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  *
- * Copied from the Apache UIMA Sandbox Dictionary Annotator.
+ * Copied from {@code org.apache.uima.annotator.dict_annot.impl.FilterOp} of the Apache UIMA Dictionary Annotator in uima-addons 2.3.1
+ * (https://github.com/apache/uima-addons/tree/uima-addons-2.3.1/DictionaryAnnotator). The
+ * uima-addons repository is archived, so there are no upstream changes to track.
  */
 package org.dkpro.core.api.featurepath;
 

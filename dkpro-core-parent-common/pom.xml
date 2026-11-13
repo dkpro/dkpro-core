@@ -33,7 +33,6 @@
     <maven.surefire.heap>6g</maven.surefire.heap>
 
     <junit-jupiter.version>6.1.3</junit-jupiter.version>
-    <junit-platform.version>6.1.3</junit-platform.version>
     <mockito.version>5.24.0</mockito.version>
     <assertj.version>3.27.7</assertj.version>
     <xmlunit.version>2.14.0</xmlunit.version>
@@ -435,7 +434,7 @@
       <dependency>
         <groupId>javax.activation</groupId>
         <artifactId>javax.activation-api</artifactId>
-        <version>1.2.0</version>
+        <version>${activation.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.persistence</groupId>
@@ -698,7 +697,7 @@
           <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>javax.activation-api</artifactId>
-            <version>1.2.0</version>
+            <version>${activation.version}</version>
           </dependency>
         </dependencies>
       </plugin>

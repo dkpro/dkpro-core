@@ -16,11 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  *
- * Copied from the Apache UIMA Sandbox Dictionary Annotator FeaturePathInfo_Impl.
+ * Copied from {@code org.apache.uima.annotator.dict_annot.impl.FeaturePathInfo_impl} of the Apache UIMA Dictionary Annotator in uima-addons 2.3.1
+ * (https://github.com/apache/uima-addons/tree/uima-addons-2.3.1/DictionaryAnnotator). The
+ * uima-addons repository is archived, so there are no upstream changes to track.
  *
  * CHANGES:
- * - Changed class name.
+ * - Changed class name and no longer implementing the upstream FeaturePathInfo interface.
  * - Replaced exceptions with FeaturePathExceptions.
+ * - Replaced the localized error messages from the Dictionary Annotator resource bundle with
+ *   fixed messages.
+ * - initialize() resets the feature path elements, so an instance can be re-initialized.
+ * - match() checks the conditions against the feature structure at the end of the path
+ *   (currentFS) instead of the start annotation (annotFS), fixing an upstream bug.
  */
 
 package org.dkpro.core.api.featurepath;

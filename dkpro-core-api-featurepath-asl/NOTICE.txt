@@ -1,7 +1,10 @@
 FilterOp.java, FeaturePathInfo.java, Condition.java:
 
-Apache UIMA
-Copyright 2006, 2009 The Apache Software Foundation
+  Copied from the Apache UIMA DictionaryAnnotator in uima-addons 2.3.1
+  (https://github.com/apache/uima-addons/tree/uima-addons-2.3.1/DictionaryAnnotator).
+
+Apache UIMA DictionaryAnnotator software component
+Copyright 2007-2011 The Apache Software Foundation
 
 This product includes software developed at
 The Apache Software Foundation (http://www.apache.org/).
