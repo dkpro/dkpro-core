@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.xml;
 
+import static org.dkpro.core.api.xml.XmlParserUtils.configureXmlInputFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -199,7 +201,7 @@ public class XmlReader
         try {
             // if the last file is already done, then work on the next file
             if (xmlReader == null) {
-                WstxInputFactory factory = new WstxInputFactory();
+                WstxInputFactory factory = configureXmlInputFactory(new WstxInputFactory());
                 xmlReader = factory.createXMLStreamReader(xmlFiles.get(currentParsedFile));
                 iDoc = 0;
             }
@@ -211,12 +213,11 @@ public class XmlReader
 
             iDoc++;
             if (xmlReader.getDepth() < 2) {
-                xmlReader.closeCompletely();
-                xmlReader = null;
-                currentParsedFile++;
+                closeXmlReader();
             }
         }
         catch (Exception e) {
+            closeXmlReader();
             throw new CollectionException(e);
         }
     }
@@ -248,7 +249,25 @@ public class XmlReader
     @Override
     public void close() throws IOException
     {
-        // Nothing to do
+        closeXmlReader();
+    }
+
+    private void closeXmlReader()
+    {
+        if (xmlReader == null) {
+            return;
+        }
+
+        try {
+            xmlReader.closeCompletely();
+        }
+        catch (XMLStreamException e) {
+            getLogger().warn("Unable to close XML reader", e);
+        }
+        finally {
+            xmlReader = null;
+            currentParsedFile++;
+        }
     }
 
     private void parseSubDocument(JCas jcas)

@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.tiger;
 
+import static org.dkpro.core.api.xml.XmlParserUtils.newXmlInputFactoryAllowingDoctype;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -178,7 +179,7 @@ public class TigerXmlReader
         try {
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
 
-            XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+            XMLInputFactory xmlInputFactory = newXmlInputFactoryAllowingDoctype();
             XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(is);
 
             JAXBContext context = JAXBContext.newInstance(Meta.class, AnnotationDecl.class,

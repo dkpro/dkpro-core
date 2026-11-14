@@ -17,6 +17,13 @@
  */
 package org.dkpro.core.io.tiger;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import org.junit.jupiter.api.io.TempDir;
+import static org.dkpro.core.testing.ExternalContentAssert.assertExternalContentNotIncluded;
+import static org.dkpro.core.testing.ExternalContentAssert.writeExternalDtdFile;
+
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -194,5 +201,42 @@ public class TigerXmlReaderTest
                 }
             }
         }
+    }
+
+    /**
+     * Tiger XML carries its text in attributes which cannot reference external entities directly,
+     * so we check that an external DTD referenced via a parameter entity is not loaded.
+     */
+    @Test
+    void thatExternalDtdIsNotLoaded(@TempDir Path aTempDir) throws Exception
+    {
+        var dtdUri = writeExternalDtdFile(aTempDir);
+
+        var input = aTempDir.resolve("input.xml");
+        Files.writeString(input, """
+                <?xml version="1.0" encoding="UTF-8"?>
+                <!DOCTYPE corpus [<!ENTITY %% dtd SYSTEM '%s'> %%dtd;]>
+                <corpus>
+                  <body>
+                    <s id="s_1">
+                      <graph discontinuous="false" root="s_1_2">
+                        <terminals>
+                          <t pos="NN" word="&ext;" id="s_1_1"></t>
+                        </terminals>
+                        <nonterminals>
+                          <nt cat="ROOT" id="s_1_2">
+                            <edge label="--" idref="s_1_1"></edge>
+                          </nt>
+                        </nonterminals>
+                      </graph>
+                    </s>
+                  </body>
+                </corpus>
+                """.formatted(dtdUri), UTF_8);
+
+        assertExternalContentNotIncluded(createReaderDescription( //
+                TigerXmlReader.class, //
+                TigerXmlReader.PARAM_LANGUAGE, "en", //
+                TigerXmlReader.PARAM_SOURCE_LOCATION, input.toString()));
     }
 }

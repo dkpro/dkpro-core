@@ -22,6 +22,8 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.dkpro.core.api.resources.MappingProviderFactory.createPosMappingProvider;
+import static org.dkpro.core.api.xml.XmlParserUtils.emptyEntityResolver;
+import static org.dkpro.core.api.xml.XmlParserUtils.newXmlReaderAllowingDoctype;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
 import static org.dkpro.core.io.tei.internal.TeiConstants.ATTR_POS;
@@ -47,6 +49,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.zip.GZIPInputStream;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -349,7 +353,11 @@ public class TeiReader
                 source.setPublicId(currentResource.getLocation());
                 source.setSystemId(currentResource.getLocation());
 
-                SAXReader reader = new SAXReader();
+                // TEI files may legitimately carry a DOCTYPE, so we accept it but never load
+                // external DTDs or entities. dom4j installs its own entity resolver when reading
+                // unless one has been set explicitly, so we set the empty resolver here.
+                SAXReader reader = new SAXReader(newXmlReaderAllowingDoctype());
+                reader.setEntityResolver(emptyEntityResolver());
                 Document xml = reader.read(source);
 
                 final XPath teiPath = new Dom4jXPath("//tei:TEI");
@@ -363,7 +371,7 @@ public class TeiReader
                 teiElementIterator = teiElements.iterator();
                 currentTeiElementNumber = 0;
             }
-            catch (DocumentException e) {
+            catch (DocumentException | ParserConfigurationException | SAXException e) {
                 throw new IOException(e);
             }
             catch (JaxenException e) {

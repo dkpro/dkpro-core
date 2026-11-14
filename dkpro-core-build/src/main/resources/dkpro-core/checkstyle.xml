@@ -22,8 +22,24 @@
 
   <module name="SuppressWithPlainTextCommentFilter"/>
 
+  <!--
+    XmlParserUtils is the one place allowed to create raw XML parsers. Test code is exempt
+    because it only parses fixed test data.
+  -->
+  <module name="SuppressionSingleFilter">
+    <property name="id" value="xmlParserCreation"/>
+    <property name="files" value="(XmlParserUtils\.java$)|([\\/]src[\\/]test[\\/])"/>
+  </module>
+
   <module name="TreeWalker">
     <module name="SuppressionCommentFilter"/>
+
+    <module name="RegexpSinglelineJava">
+      <property name="id" value="xmlParserCreation"/>
+      <property name="format" value="XMLInputFactory\s*\.\s*new(Instance|Factory|DefaultFactory)\s*\(|SAXParserFactory\s*\.\s*new(Default)?Instance\s*\(|DocumentBuilderFactory\s*\.\s*new(Default)?Instance\s*\(|XMLReaderFactory\s*\.\s*createXMLReader\s*\(|new\s+SAXReader\s*\(\s*\)|SAXReader\s*\.\s*createDefault\s*\(|(?&lt;!configureXmlInputFactory\()new\s+WstxInputFactory\s*\("/>
+      <property name="ignoreComments" value="true"/>
+      <property name="message" value="XML parsers must be created via org.dkpro.core.api.xml.XmlParserUtils to ensure a consistent parser configuration."/>
+    </module>
 
     <module name="OuterTypeFilename"/>
     <module name="OneTopLevelClass"/>

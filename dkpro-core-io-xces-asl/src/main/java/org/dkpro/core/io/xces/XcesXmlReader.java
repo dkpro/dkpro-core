@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.xces;
 
+import static org.dkpro.core.api.xml.XmlParserUtils.newXmlInputFactoryAllowingDoctype;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class XcesXmlReader
         try {
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
 
-            XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+            XMLInputFactory xmlInputFactory = newXmlInputFactoryAllowingDoctype();
             XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(is);
 
             JAXBContext context = JAXBContext.newInstance(XcesBody.class);
