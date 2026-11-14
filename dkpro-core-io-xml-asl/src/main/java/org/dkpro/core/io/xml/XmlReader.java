@@ -213,12 +213,11 @@ public class XmlReader
 
             iDoc++;
             if (xmlReader.getDepth() < 2) {
-                xmlReader.closeCompletely();
-                xmlReader = null;
-                currentParsedFile++;
+                closeXmlReader();
             }
         }
         catch (Exception e) {
+            closeXmlReader();
             throw new CollectionException(e);
         }
     }
@@ -250,7 +249,25 @@ public class XmlReader
     @Override
     public void close() throws IOException
     {
-        // Nothing to do
+        closeXmlReader();
+    }
+
+    private void closeXmlReader()
+    {
+        if (xmlReader == null) {
+            return;
+        }
+
+        try {
+            xmlReader.closeCompletely();
+        }
+        catch (XMLStreamException e) {
+            getLogger().warn("Unable to close XML reader", e);
+        }
+        finally {
+            xmlReader = null;
+            currentParsedFile++;
+        }
     }
 
     private void parseSubDocument(JCas jcas)

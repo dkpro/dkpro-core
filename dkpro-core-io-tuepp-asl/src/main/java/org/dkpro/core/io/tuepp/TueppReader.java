@@ -303,6 +303,7 @@ public class TueppReader
                 closeAll();
             }
             catch (XMLStreamException e) {
+                closeAll();
                 throw new IOException(e);
             }
         }

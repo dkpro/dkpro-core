@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.uima.cas.impl.XmiCasSerializer;
+import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 
@@ -91,8 +92,9 @@ public final class ExternalContentAssert
         throws Exception
     {
         var output = new StringBuilder();
+        CollectionReader reader = null;
         try {
-            var reader = createReader(aReader);
+            reader = createReader(aReader);
             var jcas = JCasFactory.createJCas();
             while (reader.hasNext()) {
                 reader.getNext(jcas.getCas());
@@ -105,6 +107,14 @@ public final class ExternalContentAssert
         catch (Exception e) {
             for (Throwable t = e; t != null; t = t.getCause()) {
                 output.append(t.getMessage()).append('\n');
+            }
+        }
+        finally {
+            // Make sure that files opened by the reader are released - otherwise the temporary
+            // folder containing the test data cannot be deleted on Windows.
+            if (reader != null) {
+                reader.close();
+                reader.destroy();
             }
         }
 
