@@ -37,10 +37,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.AbstractAppender;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.Property;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -49,7 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SubDocument;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
@@ -111,8 +119,7 @@ public class ConllUReaderTest
         final String expectedDocumentID = "conllu-paragraph_and_document_boundaries.conllu";
 
         assertEquals(expectedDocumentID, actualDocumentID, "Document ID mismatch");
-        assertThat(subDocuments(jcas)).extracting(SubDocument::getId)
-                .containsExactly("mf920901-001");
+        assertThat(subDocuments(jcas)).extracting(Document::getId).containsExactly("mf920901-001");
     }
 
     @Test
@@ -401,7 +408,7 @@ public class ConllUReaderTest
         List<String> paragraphs = select(jcas, Paragraph.class).stream() //
                 .map(Paragraph::getCoveredText) //
                 .collect(toList());
-        assertThat(paragraphs).contains("b");
+        assertThat(paragraphs).containsExactly("b");
     }
 
     /**
@@ -521,7 +528,7 @@ public class ConllUReaderTest
      * to the end of its last sentence.
      */
     @Test
-    public void thatNewdocCreatesSubDocumentSpans() throws Exception
+    public void thatNewdocCreatesDocumentSpans() throws Exception
     {
         JCas jcas = readString("# newdoc id = d1\n" //
                 + "# sent_id = s1\n" //
@@ -535,9 +542,9 @@ public class ConllUReaderTest
                 + "1\tc\tc\t_\t_\t_\t0\troot\t_\t_\n");
 
         List<Sentence> sentences = new ArrayList<>(select(jcas, Sentence.class));
-        List<SubDocument> subDocuments = subDocuments(jcas);
+        List<Document> subDocuments = subDocuments(jcas);
 
-        assertThat(subDocuments).extracting(SubDocument::getId).containsExactly("d1", "d2");
+        assertThat(subDocuments).extracting(Document::getId).containsExactly("d1", "d2");
 
         assertEquals(sentences.get(0).getBegin(), subDocuments.get(0).getBegin());
         assertEquals(sentences.get(1).getEnd(), subDocuments.get(0).getEnd());
@@ -550,7 +557,7 @@ public class ConllUReaderTest
      * sub-document span, just without an ID.
      */
     @Test
-    public void thatValuelessNewdocCreatesSubDocumentSpanWithoutId() throws Exception
+    public void thatValuelessNewdocCreatesDocumentSpanWithoutId() throws Exception
     {
         JCas jcas = readString("# newdoc\n" //
                 + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
@@ -568,7 +575,7 @@ public class ConllUReaderTest
      * sub-document, since the file provides no information about their document.
      */
     @Test
-    public void thatSentencesBeforeFirstNewdocAreNotInSubDocument() throws Exception
+    public void thatSentencesBeforeFirstNewdocAreNotInDocument() throws Exception
     {
         JCas jcas = readString("# sent_id = s1\n" //
                 + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
@@ -578,7 +585,7 @@ public class ConllUReaderTest
                 + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n");
 
         List<Sentence> sentences = new ArrayList<>(select(jcas, Sentence.class));
-        List<SubDocument> subDocuments = subDocuments(jcas);
+        List<Document> subDocuments = subDocuments(jcas);
 
         assertThat(subDocuments).hasSize(1);
         assertEquals(sentences.get(1).getBegin(), subDocuments.get(0).getBegin());
@@ -615,11 +622,273 @@ public class ConllUReaderTest
                 .noneMatch(p -> p.getBegin() <= s1.getBegin() && p.getEnd() >= s2.getEnd());
     }
 
-    private static List<SubDocument> subDocuments(JCas aJCas)
+    private static List<Document> subDocuments(JCas aJCas)
     {
-        List<SubDocument> subDocuments = new ArrayList<>(select(aJCas, SubDocument.class));
-        assertThat(subDocuments).allSatisfy(d -> assertThat(d.getDivType()).isEqualTo("subDoc"));
+        List<Document> subDocuments = new ArrayList<>(select(aJCas, Document.class));
+        assertThat(subDocuments).allSatisfy(d -> assertThat(d.getDivType()).isEqualTo("doc"));
         return subDocuments;
+    }
+
+    /**
+     * {@code SpaceAfter=No} must be matched as an exact MISC item. Other items merely containing
+     * this string (such as {@code CorrectSpaceAfter=No} in UD French-GSD, or
+     * {@code SpaceAfter=Nope}) must not remove the space - neither on word lines nor on multi-word
+     * token lines.
+     */
+    @Test
+    public void thatSpaceAfterNoIsMatchedExactly() throws Exception
+    {
+        JCas jcas = readString("1\tL\tle\t_\t_\t_\t2\tdet\t_\tCorrectSpaceAfter=No\n" //
+                + "2\teuro\teuro\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "3-4\tdu\t_\t_\t_\t_\t_\t_\t_\tCorrectSpaceAfter=No\n" //
+                + "3\tde\tde\t_\t_\t_\t5\tcase\t_\t_\n" //
+                + "4\tle\tle\t_\t_\t_\t5\tdet\t_\t_\n" //
+                + "5\tpays\tpays\t_\t_\t_\t2\tnmod\t_\tSpaceAfter=Nope\n" //
+                + "6\tx\tx\t_\t_\t_\t2\tdep\t_\tFoo=Bar|SpaceAfter=No\n" //
+                + "7\t.\t.\t_\t_\t_\t2\tpunct\t_\t_\n");
+
+        assertEquals("L euro de le pays x.", jcas.getDocumentText());
+    }
+
+    /**
+     * Sentences which are not part of any paragraph are placed on separate lines - also if other
+     * parts of the file use paragraph markers.
+     */
+    @Test
+    public void thatSentencesOutsideParagraphsArePlacedOnSeparateLines() throws Exception
+    {
+        JCas jcas = readString("# newdoc id = d1\n" //
+                + "# newpar id = p1\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newdoc id = d2\n" //
+                + "1\tc\tc\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "1\td\td\t_\t_\t_\t0\troot\t_\t_\n");
+
+        assertEquals("a b\n\nc\nd", jcas.getDocumentText());
+        assertThat(select(jcas, Paragraph.class)) //
+                .extracting(Paragraph::getCoveredText) //
+                .containsExactly("a b");
+    }
+
+    /**
+     * Documents are separated by an empty line, also if the file contains no paragraph markers.
+     */
+    @Test
+    public void thatDocumentsAreSeparatedByEmptyLine() throws Exception
+    {
+        JCas jcas = readString("# newdoc id = d1\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newdoc id = d2\n" //
+                + "1\tc\tc\t_\t_\t_\t0\troot\t_\t_\n");
+
+        assertEquals("a\nb\n\nc", jcas.getDocumentText());
+    }
+
+    /**
+     * Malformed multi-word token ranges - including ranges which do not refer to words of the
+     * sentence - make the file invalid and must be rejected with a message naming the range.
+     */
+    @Test
+    public void thatMalformedMultiwordTokenRangesAreRejected() throws Exception
+    {
+        for (String range : asList("2-1", "0-1", "1-", "a-b", "1-3")) {
+            assertRejected(range + "\tab\t_\t_\t_\t_\t_\t_\t_\t_\n" //
+                    + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                    + "2\tb\tb\t_\t_\t_\t1\tdep\t_\t_\n", //
+                    "[" + range + "]");
+        }
+    }
+
+    /**
+     * A word ID which is not a number makes the file invalid and must be rejected with a message
+     * naming the ID.
+     */
+    @Test
+    public void thatMalformedWordIdIsRejected() throws Exception
+    {
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "x\tb\tb\t_\t_\t_\t1\tdep\t_\t_\n", //
+                "[x]");
+    }
+
+    /**
+     * Each word ID may only occur once per sentence.
+     */
+    @Test
+    public void thatDuplicateWordIdIsRejected() throws Exception
+    {
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n", //
+                "[1]");
+    }
+
+    /**
+     * Malformed empty node IDs make the file invalid and must be rejected with a message naming the
+     * ID - whether empty nodes are read or not.
+     */
+    @Test
+    public void thatMalformedEmptyNodeIdsAreRejected() throws Exception
+    {
+        for (boolean readEmptyNodes : asList(true, false)) {
+            for (String id : asList("a.1", ".1", "1.")) {
+                assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                        + id + "\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n", //
+                        "[" + id + "]", //
+                        ConllUReader.PARAM_READ_EMPTY_NODES, readEmptyNodes);
+            }
+        }
+    }
+
+    /**
+     * A DEPS item must consist of a head and a non-empty relation.
+     */
+    @Test
+    public void thatMalformedDepsItemsAreRejected() throws Exception
+    {
+        for (String item : asList("1", "1:")) {
+            assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                    + "2\tb\tb\t_\t_\t_\t1\tdep\t" + item + "\t_\n", //
+                    "[" + item + "]");
+        }
+    }
+
+    /**
+     * A word cannot be its own head - neither in the basic nor in the enhanced graph. Such a
+     * relation must not be mistaken for the root, which is modelled as a loop in DKPro Core.
+     */
+    @Test
+    public void thatSelfLoopsAreRejected() throws Exception
+    {
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t2\tdep\t_\t_\n", //
+                "[2]");
+
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tdep\t2:dep\t_\n", //
+                "[2]");
+    }
+
+    /**
+     * If empty nodes are not read, relations involving them are dropped - but a head which is not a
+     * valid empty node ID must still be rejected instead of being counted as such a relation.
+     */
+    @Test
+    public void thatMalformedEmptyNodeHeadIsRejectedWhenEmptyNodesAreNotRead() throws Exception
+    {
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tdep\tx.y:dep\t_\n", //
+                "[x.y]");
+    }
+
+    /**
+     * If empty nodes are not read, the enhanced dependencies involving them are dropped. This must
+     * be reported by a single warning per document stating the number of dropped dependencies.
+     */
+    @Test
+    public void thatDroppedEmptyNodeRelationsAreReported() throws Throwable
+    {
+        List<String> warnings = captureWarnings(
+                () -> readString("1\tSue\tSue\t_\t_\t_\t2\tnsubj\t2:nsubj\t_\n"
+                        + "2\tlikes\tlike\t_\t_\t_\t0\troot\t0:root\t_\n"
+                        + "2.1\tlikes\tlike\t_\t_\t_\t_\t_\t2:conj\t_\n"
+                        + "3\ttea\ttea\t_\t_\t_\t2\tconj\t2.1:obj\t_\n"));
+
+        assertThat(warnings) //
+                .filteredOn(w -> w.contains("empty nodes")) //
+                .singleElement() //
+                .asString() //
+                .contains("Dropped 2 ");
+    }
+
+    /**
+     * A file may start with a UTF-8 byte order mark. It is not part of the content and must be
+     * skipped - also if the file starts with a comment.
+     */
+    @Test
+    public void thatByteOrderMarkIsSkipped() throws Exception
+    {
+        JCas withComment = readString("\uFEFF# sent_id = s1\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n");
+
+        assertEquals("a", withComment.getDocumentText());
+        assertThat(select(withComment, Sentence.class)) //
+                .extracting(Sentence::getId) //
+                .containsExactly("s1");
+
+        JCas withoutComment = readString("\uFEFF1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n");
+
+        assertEquals("a", withoutComment.getDocumentText());
+    }
+
+    /**
+     * Comment lines belong to the sentence they directly precede. Comments which are followed by an
+     * empty line or by the end of the file do not belong to any sentence. Since they may carry
+     * relevant information (e.g. a {@code # newdoc} boundary), they must be rejected with a message
+     * pointing at the comment instead of being dropped silently.
+     */
+    @Test
+    public void thatCommentsNotFollowedBySentenceAreRejected() throws Exception
+    {
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newdoc id = d2\n" //
+                + "\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n", //
+                "# newdoc id = d2");
+
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# some comment\n", //
+                "# some comment");
+    }
+
+    private void assertRejected(String aConllU, String aExpectedMention, Object... aParams)
+    {
+        assertThatThrownBy(() -> readString(aConllU, aParams)) //
+                .as("Input: %s", aConllU) //
+                .rootCause() //
+                .isInstanceOf(IOException.class) //
+                .hasMessageContaining(aExpectedMention);
+    }
+
+    /**
+     * Run the given action and capture the messages of all warnings logged during its execution.
+     */
+    private static List<String> captureWarnings(ThrowingCallable aAction) throws Throwable
+    {
+        List<String> messages = new ArrayList<>();
+        LoggerContext context = (LoggerContext) LogManager.getContext(false);
+        Configuration config = context.getConfiguration();
+        AbstractAppender appender = new AbstractAppender("capture", null, null, true,
+                Property.EMPTY_ARRAY)
+        {
+            @Override
+            public void append(LogEvent aEvent)
+            {
+                if (aEvent.getLevel().isMoreSpecificThan(Level.WARN)) {
+                    messages.add(aEvent.getMessage().getFormattedMessage());
+                }
+            }
+        };
+        appender.start();
+        config.getRootLogger().addAppender(appender, Level.WARN, null);
+        context.updateLoggers();
+        try {
+            aAction.call();
+        }
+        finally {
+            config.getRootLogger().removeAppender("capture");
+            context.updateLoggers();
+            appender.stop();
+        }
+        return messages;
     }
 
     /**

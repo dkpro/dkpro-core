@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
@@ -58,7 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SubDocument;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm;
@@ -68,8 +69,20 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 /**
  * Reads a file in the CoNLL-U format.
+ * <p>
+ * The document text is reconstructed from the words. Comments are mapped as follows:
+ * <ul>
+ * <li>{@code # newdoc} - a {@link Document} annotation covering the sentences of the document and
+ * holding its ID (if any). The document ID of the CAS is always derived from the file name, also if
+ * the file contains only a single document.</li>
+ * <li>{@code # newpar} - a {@link Paragraph} annotation covering the sentences of the paragraph and
+ * holding its ID (if any).</li>
+ * <li>{@code # sent_id} - the ID of the {@link Sentence}.</li>
+ * </ul>
+ * Other comments, including {@code # text}, are not retained. Of the MISC column, only
+ * {@code SpaceAfter=No} is used.
  * 
- * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
+ * @see <a href="https://universaldependencies.org/format.html">CoNLL-U Format</a>
  */
 @ResourceMetaData(name = "CoNLL-U Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
@@ -80,8 +93,10 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SubDocument",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ConllUReader
     extends ConllReader_ImplBase
@@ -160,8 +175,10 @@ public class ConllUReader
     private boolean readDependency;
 
     /**
-     * Read paragraph information. If no paragraph information is provided in the file, or if set to
-     * false, then output one sentence per line, separated by an empty line.
+     * Read paragraph information. If enabled, {@code # newpar} comments are turned into
+     * {@link Paragraph} annotations; sentences within a paragraph are separated by a space and
+     * paragraphs by an empty line. If no paragraph information is provided in the file, or if set
+     * to false, then each sentence is placed on its own line and no paragraphs are created.
      */
     public static final String PARAM_READ_PARAGRAPH = ComponentParameters.PARAM_READ_PARAGRAPH;
     @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, defaultValue = "true")
@@ -173,6 +190,11 @@ public class ConllUReader
      * surface form, they are modelled as zero-width tokens which retain their original ID. If
      * disabled, empty nodes and any enhanced dependencies referring to them are discarded and a
      * warning is logged.
+     * <p>
+     * Note that if two sentences directly touch (i.e. there is no whitespace between them), an
+     * empty node at their boundary is covered by both sentences. Its ID determines which sentence
+     * it belongs to: {@code 0.k} belongs to the following sentence, {@code i.k} to the preceding
+     * one.
      * <p>
      * This is disabled by default because zero-width tokens are not generally considered valid in
      * DKPro Core - components may assume that every token covers at least one character. Enable
@@ -211,10 +233,17 @@ public class ConllUReader
     public static final String META_PARAGRAPH = "newpar";
 
     /**
-     * The {@link Div#getDivType() div type} of the {@link SubDocument} annotations created for
+     * The {@link Div#getDivType() div type} of the {@link Document} annotations created for
      * {@code # newdoc} comments.
      */
-    public static final String DIV_TYPE_SUB_DOCUMENT = "subDoc";
+    public static final String DIV_TYPE_DOCUMENT = "doc";
+
+    private static final String SPACE_AFTER_NO = "SpaceAfter=No";
+
+    /**
+     * Empty nodes have IDs of the form {@code i.k} with {@code i >= 0} and {@code k >= 1}.
+     */
+    static final Pattern EMPTY_NODE_ID = Pattern.compile("\\d+\\.[1-9]\\d*");
 
     private MappingProvider posMappingProvider;
 
@@ -255,17 +284,23 @@ public class ConllUReader
             }
         }
 
+        // Skip a UTF-8 byte order mark at the start of the file - it is not part of the content.
+        aReader.mark(1);
+        if (aReader.read() != '\uFEFF') {
+            aReader.reset();
+        }
+
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         Paragraph p = null;
-        SubDocument subDocument = null;
+        Document subDocument = null;
         int lastSentenceEndPosition = 0;
         boolean shouldAddSpace = false;
-        boolean documentContainsParagraphInformation = false;
         int droppedEmptyNodeRelations = 0;
         while (true) {
             // Read sentence comments (if any)
-            Map<String, String> comments = readSentenceComments(aReader);
+            List<String> commentLines = new ArrayList<>();
+            Map<String, String> comments = readSentenceComments(aReader, commentLines);
 
             boolean sentenceStartsParagraph = comments.containsKey(META_PARAGRAPH_ID)
                     || comments.containsKey(META_PARAGRAPH);
@@ -274,6 +309,18 @@ public class ConllUReader
 
             // Read sentence
             List<String[]> words = readSentence(aReader);
+
+            // Comments belong to the sentence they directly precede. Comments followed by an empty
+            // line or by the end of the file belong to no sentence - and since they may carry
+            // relevant information (e.g. a document boundary), they must not be dropped silently.
+            if ((words == null || words.isEmpty()) && !commentLines.isEmpty()) {
+                throw new IOException(
+                        "Invalid file format. Comment lines must directly precede the "
+                                + "words of a sentence, but [" + commentLines.get(0)
+                                + "] is followed by "
+                                + (words == null ? "the end of the file." : "an empty line."));
+            }
+
             if (words == null) {
                 // End of file
                 break;
@@ -285,16 +332,10 @@ public class ConllUReader
                 continue;
             }
 
-            // Once a paragraph marker has been seen, sentences within a paragraph are separated by
-            // a space and paragraphs by an empty line. Before that (or if paragraphs are not read),
-            // each sentence goes on its own line.
-            if (readParagraph && sentenceStartsParagraph) {
-                documentContainsParagraphInformation = true;
-            }
-
-            addSentenceSeparator(doc,
-                    (readParagraph && sentenceStartsParagraph) || sentenceStartsDocument,
-                    !shouldAddSpace, documentContainsParagraphInformation);
+            boolean boundary = (readParagraph && sentenceStartsParagraph) || sentenceStartsDocument;
+            // A sentence continues the current paragraph if a paragraph is open and the sentence
+            // does not start a new paragraph or document.
+            addSentenceSeparator(doc, boundary, !shouldAddSpace, !boundary && p != null);
             shouldAddSpace = false;
 
             int sentenceBegin = doc.getPosition();
@@ -302,6 +343,7 @@ public class ConllUReader
 
             int surfaceBegin = -1;
             int surfaceEnd = -1;
+            String surfaceRange = null;
             String surfaceString = null;
             boolean mwtNoSpaceAfter = false;
 
@@ -318,14 +360,20 @@ public class ConllUReader
                 String formValue = trim(word[FORM]);
 
                 if (idValue.contains("-")) {
-                    String[] fragments = idValue.split("-");
-                    surfaceBegin = Integer.valueOf(trim(fragments[0]));
-                    surfaceEnd = Integer.valueOf(trim(fragments[1]));
+                    int[] range = parseRange(idValue, comments, words);
+                    if (surfaceRange != null || range[0] != tokens.size() + 1) {
+                        throw new IOException("Multi-word token range [" + idValue
+                                + "] must start at the word directly following it - in sentence "
+                                + sentenceDescription(comments, words));
+                    }
+                    surfaceBegin = range[0];
+                    surfaceEnd = range[1];
+                    surfaceRange = idValue;
                     surfaceString = formValue;
                     // A multi-word token line carries the SpaceAfter information for the surface
                     // form. The words it covers do not repeat it, so it must be picked up here -
                     // but it only takes effect after the last covered word has been written.
-                    mwtNoSpaceAfter = StringUtils.contains(word[MISC], "SpaceAfter=No");
+                    mwtNoSpaceAfter = isNoSpaceAfter(word[MISC]);
                     continue;
                 }
 
@@ -334,6 +382,13 @@ public class ConllUReader
                 // zero-width tokens which retain their original ID. This keeps them addressable as
                 // governors of enhanced dependencies without affecting the document text.
                 if (idValue.contains(".")) {
+                    // Validate the ID even if empty nodes are not read - the file is invalid
+                    // either way.
+                    if (!EMPTY_NODE_ID.matcher(idValue).matches()) {
+                        throw new IOException("Invalid empty node ID [" + idValue
+                                + "] - in sentence " + sentenceDescription(comments, words));
+                    }
+
                     if (readEmptyNodes) {
                         int pos = emptyNodePosition(idValue, tokens, sentenceBegin);
                         Token emptyNode = new Token(aJCas, pos, pos);
@@ -359,15 +414,24 @@ public class ConllUReader
                 }
 
                 // Read token
-                int tokenIdx = Integer.valueOf(idValue);
+                int tokenIdx = parseWordId(idValue, comments, words);
+                if (tokens.containsKey(tokenIdx)) {
+                    throw new IOException("Duplicate word ID [" + idValue + "] - in sentence "
+                            + sentenceDescription(comments, words));
+                }
                 Token token = doc.add(formValue, Token.class);
                 tokens.put(tokenIdx, token);
-                shouldAddSpace = !StringUtils.contains(word[MISC], "SpaceAfter=No");
+                shouldAddSpace = !isNoSpaceAfter(word[MISC]);
 
                 readTokenAnnotations(aJCas, token, word);
 
                 // Read surface form
                 if (tokenIdx == surfaceEnd) {
+                    if (tokens.get(surfaceBegin) == null) {
+                        throw new IOException("Multi-word token range [" + surfaceRange
+                                + "] refers to words which do not exist - in sentence "
+                                + sentenceDescription(comments, words));
+                    }
                     int begin = tokens.get(surfaceBegin).getBegin();
                     int end = tokens.get(surfaceEnd).getEnd();
                     SurfaceForm surfaceForm = new SurfaceForm(aJCas, begin, end);
@@ -375,6 +439,7 @@ public class ConllUReader
                     surfaceForm.addToIndexes();
                     surfaceBegin = -1;
                     surfaceEnd = -1;
+                    surfaceRange = null;
                     surfaceString = null;
                     // The SpaceAfter of the multi-word token line governs what follows the surface
                     // form as a whole, so it overrides the value from the last covered word.
@@ -385,6 +450,12 @@ public class ConllUReader
                 }
 
                 sentenceEnd = token.getEnd();
+            }
+
+            if (surfaceRange != null) {
+                throw new IOException("Multi-word token range [" + surfaceRange
+                        + "] refers to words which do not exist - in sentence "
+                        + sentenceDescription(comments, words));
             }
 
             // Dependencies
@@ -420,6 +491,11 @@ public class ConllUReader
                                         + "sentence " + sentenceDescription(comments, words));
                             }
                             int headIdx = parseHead(headValue, "HEAD", idValue, comments, words);
+                            if (headIdx == Integer.parseInt(idValue)) {
+                                throw new IOException("Word [" + idValue + "] has HEAD ["
+                                        + headValue + "] which refers to the word itself - in "
+                                        + "sentence " + sentenceDescription(comments, words));
+                            }
                             boolean isRoot = headIdx == 0;
                             // The root is modelled as a loop of the dependent onto itself
                             Token governor = isRoot ? dependent : tokens.get(headIdx);
@@ -442,19 +518,36 @@ public class ConllUReader
                         // list items separated by vertical bar
                         String[] items = depsValue.split("\\|");
                         for (String item : items) {
+                            if (StringUtils.isBlank(item)) {
+                                continue;
+                            }
+
                             // The head is separated from the relation by the first colon. The
                             // relation itself may contain further colons in its subtypes, e.g.
                             // `5:conj:and`, which must be preserved.
                             String[] sItem = trim(item).split(":", 2);
-                            if (sItem.length < 2) {
-                                continue;
+                            if (sItem.length < 2 || StringUtils.isBlank(sItem[1])) {
+                                throw new IOException("Word [" + idValue + "] has an invalid DEPS "
+                                        + "item [" + trim(item) + "] - it must consist of a head "
+                                        + "and a relation - in sentence "
+                                        + sentenceDescription(comments, words));
                             }
 
                             String govValue = trim(sItem[0]);
+                            if (govValue.equals(idValue)) {
+                                throw new IOException("Word [" + idValue + "] has a DEPS head ["
+                                        + govValue + "] which refers to the word itself - in "
+                                        + "sentence " + sentenceDescription(comments, words));
+                            }
 
                             // A head may be an empty node (e.g. `5.1:nsubj`).
                             Token governor;
                             if (govValue.contains(".")) {
+                                if (!EMPTY_NODE_ID.matcher(govValue).matches()) {
+                                    throw new IOException("Word [" + idValue + "] has a DEPS head ["
+                                            + govValue + "] which is not a valid ID - in sentence "
+                                            + sentenceDescription(comments, words));
+                                }
                                 if (!readEmptyNodes) {
                                     // Empty nodes are not read, so relations involving them are
                                     // dropped.
@@ -478,8 +571,8 @@ public class ConllUReader
                                         + "sentence " + sentenceDescription(comments, words));
                             }
 
-                            makeDependency(aJCas, governor, dependent, cleanTag(sItem[1]),
-                                    ENHANCED);
+                            makeDependency(aJCas, governor, dependent, cleanTag(sItem[1]), ENHANCED,
+                                    "0".equals(govValue));
                         }
                     }
                 }
@@ -495,9 +588,9 @@ public class ConllUReader
             if (sentenceStartsDocument) {
                 closeDiv(subDocument, lastSentenceEndPosition);
                 // May be null if the document was marked using a valueless `# newdoc` comment.
-                subDocument = new SubDocument(aJCas, sentenceBegin, sentenceEnd);
+                subDocument = new Document(aJCas, sentenceBegin, sentenceEnd);
                 subDocument.setId(comments.get(META_DOCUMENT_ID));
-                subDocument.setDivType(DIV_TYPE_SUB_DOCUMENT);
+                subDocument.setDivType(DIV_TYPE_DOCUMENT);
 
                 closeDiv(p, lastSentenceEndPosition);
                 p = null;
@@ -546,11 +639,11 @@ public class ConllUReader
      *            whether the next sentence starts a new paragraph or document.
      * @param aPreviousNoSpaceAfter
      *            whether the last word of the previous sentence had {@code SpaceAfter=No}.
-     * @param aParagraphMode
-     *            whether the document uses paragraph markers.
+     * @param aInParagraph
+     *            whether the next sentence continues the current paragraph.
      */
     private static void addSentenceSeparator(JCasBuilder aDoc, boolean aBoundary,
-            boolean aPreviousNoSpaceAfter, boolean aParagraphMode)
+            boolean aPreviousNoSpaceAfter, boolean aInParagraph)
     {
         if (aDoc.getPosition() == 0) {
             return;
@@ -560,8 +653,8 @@ public class ConllUReader
             // Paragraphs and documents are always separated by an empty line.
             aDoc.add("\n\n");
         }
-        else if (!aParagraphMode) {
-            // Without paragraph information, each sentence is placed on its own line. This line
+        else if (!aInParagraph) {
+            // Sentences which are not part of a paragraph are placed on their own line. This line
             // break is a convention of this reader and not part of the CoNLL-U data, so a
             // sentence-final `SpaceAfter=No` does not remove it. Older treebanks also use such a
             // `SpaceAfter=No` where the original text actually had a line break.
@@ -620,6 +713,77 @@ public class ConllUReader
                     + "] which is not a valid ID - in sentence "
                     + sentenceDescription(aComments, aWords));
         }
+    }
+
+    /**
+     * Whether the given MISC field contains the item {@code SpaceAfter=No}. The item must match
+     * exactly - other items merely containing this string (e.g. {@code CorrectSpaceAfter=No}) do
+     * not count.
+     */
+    private static boolean isNoSpaceAfter(String aMisc)
+    {
+        if (aMisc == null) {
+            return false;
+        }
+
+        for (String item : aMisc.split("\\|")) {
+            if (SPACE_AFTER_NO.equals(item.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Parse a multi-word token range such as {@code 2-3}.
+     *
+     * @return the IDs of the first and last word covered by the range.
+     * @throws IOException
+     *             if the range is malformed.
+     */
+    private static int[] parseRange(String aRange, Map<String, String> aComments,
+            List<String[]> aWords)
+        throws IOException
+    {
+        String[] fragments = aRange.split("-", -1);
+        try {
+            if (fragments.length == 2) {
+                int begin = Integer.parseInt(fragments[0].trim());
+                int end = Integer.parseInt(fragments[1].trim());
+                if (begin >= 1 && begin < end) {
+                    return new int[] { begin, end };
+                }
+            }
+        }
+        catch (NumberFormatException e) {
+            // Reported below
+        }
+
+        throw new IOException("Invalid multi-word token range [" + aRange + "] - in sentence "
+                + sentenceDescription(aComments, aWords));
+    }
+
+    /**
+     * Parse the ID of a regular word.
+     *
+     * @throws IOException
+     *             if the ID is not a positive integer.
+     */
+    private static int parseWordId(String aId, Map<String, String> aComments, List<String[]> aWords)
+        throws IOException
+    {
+        try {
+            int id = Integer.parseInt(aId);
+            if (id >= 1) {
+                return id;
+            }
+        }
+        catch (NumberFormatException e) {
+            // Reported below
+        }
+
+        throw new IOException("Invalid word ID [" + aId + "] - in sentence "
+                + sentenceDescription(aComments, aWords));
     }
 
     private static void closeDiv(Div aDiv, int aEnd)
@@ -715,7 +879,16 @@ public class ConllUReader
         }
     }
 
-    private Map<String, String> readSentenceComments(BufferedReader aReader) throws IOException
+    /**
+     * Read the comment lines preceding a sentence.
+     *
+     * @param aCommentLines
+     *            receives all non-empty comment lines as they appear in the file.
+     * @return the recognized comments by key.
+     */
+    private Map<String, String> readSentenceComments(BufferedReader aReader,
+            List<String> aCommentLines)
+        throws IOException
     {
         Map<String, String> comments = new LinkedHashMap<>();
 
@@ -731,14 +904,18 @@ public class ConllUReader
                     break;
                 }
 
+                if (!line.isBlank()) {
+                    aCommentLines.add("#" + line);
+                }
+
                 if (line.contains("=")) {
                     String[] parts = line.split("=", 2);
                     comments.put(parts[0].trim(), parts[1].trim());
                 }
                 else {
                     // Valueless comments such as `# newdoc` and `# newpar` mark a boundary without
-                    // providing an ID. They are recorded with an empty value so that the boundary
-                    // is still detected.
+                    // providing an ID. They are recorded with a null value so that the boundary is
+                    // still detected.
                     String key = line.trim();
                     if (META_DOCUMENT.equals(key) || META_PARAGRAPH.equals(key)) {
                         comments.put(key, null);

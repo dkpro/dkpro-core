@@ -29,6 +29,8 @@ import static org.dkpro.core.testing.IOTestRunner.testRoundTrip;
 import java.io.File;
 
 import org.dkpro.core.testing.ReaderAssert;
+import org.dkpro.core.testing.TestOptions;
+import org.dkpro.core.testing.validation.checks.NoZeroSizeTokensAndSentencesCheck;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -47,16 +49,20 @@ public class ConllUReaderWriterTest
                 "conll/u/conllu-en-orig.conllu");
     }
 
-    @Disabled("Empty nodes are disabled by default and are modelled as zero-width tokens when "
-            + "enabled, which NoZeroSizeTokensAndSentencesCheck - applied by IOTestRunner to all "
-            + "round-trip tests - rejects. The round trip itself works, see "
-            + "ConllUWriterTest.thatEmptyNodesRoundTrip.")
+    /**
+     * Empty nodes are modelled as zero-width tokens, which the
+     * {@link NoZeroSizeTokensAndSentencesCheck} would reject, so that check is skipped here.
+     */
     @Test
     public void roundTripV2EmptyNodes() throws Exception
     {
-        testRoundTrip(createReaderDescription(ConllUReader.class),
-                createEngineDescription(ConllUWriter.class),
-                "conll/u_v2/conllu-empty_nodes.conllu");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class, ConllUReader.PARAM_READ_EMPTY_NODES,
+                        true),
+                createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,
+                        false),
+                "conll/u_v2/conllu-empty_nodes.conllu",
+                new TestOptions().skipCheck(NoZeroSizeTokensAndSentencesCheck.class));
     }
 
     @Test

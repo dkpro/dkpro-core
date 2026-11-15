@@ -40,11 +40,14 @@ import org.apache.uima.jcas.JCas;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SubDocument;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
@@ -206,7 +209,7 @@ public class ConllUWriterTest
      * indentation).
      */
     @Test
-    public void thatSubDocumentsAreWrittenAsNewdoc(@TempDir File tempDir) throws Exception
+    public void thatDocumentsAreWrittenAsNewdoc(@TempDir File tempDir) throws Exception
     {
         JCas jcas = JCasFactory.createText("a b\n\n  c");
         new Sentence(jcas, 0, 1).addToIndexes();
@@ -216,13 +219,13 @@ public class ConllUWriterTest
         new Token(jcas, 2, 3).addToIndexes();
         new Token(jcas, 7, 8).addToIndexes();
 
-        SubDocument d1 = new SubDocument(jcas, 0, 3);
-        d1.setDivType("subDoc");
+        Document d1 = new Document(jcas, 0, 3);
+        d1.setDivType("doc");
         d1.setId("d1");
         d1.addToIndexes();
 
-        SubDocument d2 = new SubDocument(jcas, 5, 8);
-        d2.setDivType("subDoc");
+        Document d2 = new Document(jcas, 5, 8);
+        d2.setDivType("doc");
         d2.addToIndexes();
 
         DocumentMetaData.create(jcas).setDocumentId("output");
@@ -250,7 +253,7 @@ public class ConllUWriterTest
      * document ID, which is typically derived from the file name.
      */
     @Test
-    public void thatNoNewdocIsWrittenWithoutSubDocuments(@TempDir File tempDir) throws Exception
+    public void thatNoNewdocIsWrittenWithoutDocuments(@TempDir File tempDir) throws Exception
     {
         JCas jcas = JCasFactory.createText("a");
         new Sentence(jcas, 0, 1).addToIndexes();
@@ -474,8 +477,7 @@ public class ConllUWriterTest
                 ConllUReader.PARAM_LANGUAGE, "en", //
                 ConllUReader.PARAM_SOURCE_LOCATION, reference.getPath()),
                 createEngineDescription(ConllUWriter.class, //
-                        ConllUWriter.PARAM_TARGET_LOCATION, tempDir, //
-                        ConllUWriter.PARAM_WRITE_DOCUMENT_ID, true));
+                        ConllUWriter.PARAM_TARGET_LOCATION, tempDir));
 
         String actual = readFileToString(
                 new File(tempDir, "conllu-multiple_document_IDs.conllu.conllu"), "UTF-8");
@@ -506,7 +508,6 @@ public class ConllUWriterTest
                 ConllUReader.PARAM_SOURCE_LOCATION, source.getPath()),
                 createEngineDescription(ConllUWriter.class, //
                         ConllUWriter.PARAM_TARGET_LOCATION, tempDir, //
-                        ConllUWriter.PARAM_WRITE_DOCUMENT_ID, true, //
                         ConllUWriter.PARAM_OVERWRITE, true));
 
         String actual = readFileToString(new File(tempDir, "in.conllu.conllu"), "UTF-8");
@@ -552,6 +553,256 @@ public class ConllUWriterTest
         JCas actual = new JCasIterable(reader).iterator().next();
 
         assertThat(actual.getDocumentText()).isEqualTo("Hello.\nWorld.");
+    }
+
+    /**
+     * CoNLL-U uses {@code _} for unspecified values. Empty or missing values must therefore be
+     * written as {@code _} instead of producing empty columns or the text {@code null}.
+     */
+    @Test
+    public void thatMissingValuesAreWrittenAsPlaceholder(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b c");
+        new Sentence(jcas, 0, 5).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        Token b = token(jcas, 2, 3);
+        Token c = token(jcas, 4, 5);
+
+        // Multi-word token without a surface string
+        new SurfaceForm(jcas, 0, 3).addToIndexes();
+
+        Lemma emptyLemma = new Lemma(jcas, 0, 1);
+        emptyLemma.setValue("");
+        emptyLemma.addToIndexes();
+        a.setLemma(emptyLemma);
+
+        Lemma missingLemma = new Lemma(jcas, 2, 3);
+        missingLemma.addToIndexes();
+        b.setLemma(missingLemma);
+
+        POS emptyPos = new POS(jcas, 0, 1);
+        emptyPos.setPosValue("");
+        emptyPos.setCoarseValue("");
+        emptyPos.addToIndexes();
+        a.setPos(emptyPos);
+
+        MorphologicalFeatures emptyMorph = new MorphologicalFeatures(jcas, 0, 1);
+        emptyMorph.setValue("");
+        emptyMorph.addToIndexes();
+        a.setMorph(emptyMorph);
+
+        MorphologicalFeatures missingMorph = new MorphologicalFeatures(jcas, 4, 5);
+        missingMorph.addToIndexes();
+        c.setMorph(missingMorph);
+
+        assertThat(writeToString(jcas, tempDir)).isEqualToNormalizingNewlines(String.join("\n", //
+                "1-2\t_\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "1\ta\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "2\tb\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "3\tc\t_\t_\t_\t_\t_\t_\t_\t_"));
+    }
+
+    /**
+     * A dependency relation is mandatory in CoNLL-U - a dependency without a type cannot be written
+     * in the DEPREL or DEPS column.
+     */
+    @Test
+    public void thatMissingRelationTypeIsRejected(@TempDir File tempDir) throws Exception
+    {
+        for (String flavor : List.of(DependencyFlavor.BASIC, DependencyFlavor.ENHANCED)) {
+            for (String type : new String[] { null, "" }) {
+                JCas jcas = JCasFactory.createText("a b");
+                new Sentence(jcas, 0, 3).addToIndexes();
+                Token a = token(jcas, 0, 1);
+                Token b = token(jcas, 2, 3);
+                dependency(jcas, a, b, type, flavor);
+
+                assertWriterRejects(jcas, tempDir,
+                        DependencyFlavor.BASIC.equals(flavor) ? "DEPREL" : "DEPS");
+            }
+        }
+    }
+
+    /**
+     * The {@code |} character separates the items of the DEPS column, so it cannot be part of a
+     * relation in that column. Writing it would produce a file that cannot be read back.
+     */
+    @Test
+    public void thatPipeInDepsRelationIsRejected(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b");
+        new Sentence(jcas, 0, 3).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        Token b = token(jcas, 2, 3);
+        dependency(jcas, a, b, "x|y", DependencyFlavor.ENHANCED);
+
+        assertWriterRejects(jcas, tempDir, "DEPS");
+    }
+
+    /**
+     * A dependency without a dependent cannot be written and must be rejected with a helpful
+     * message instead of failing with a {@link NullPointerException}.
+     */
+    @Test
+    public void thatDependencyWithoutDependentIsRejected(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b");
+        new Sentence(jcas, 0, 3).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        token(jcas, 2, 3);
+        dependency(jcas, a, null, "dep", DependencyFlavor.BASIC);
+
+        assertWriterRejects(jcas, tempDir, "dependent");
+    }
+
+    /**
+     * Empty node IDs must have the form {@code i.k}, must refer to a word of the sentence and must
+     * be unique.
+     */
+    @Test
+    public void thatInvalidEmptyNodeIdsAreRejected(@TempDir File tempDir) throws Exception
+    {
+        for (List<String> ids : List.of(List.of("a.b"), List.of("1.x"), List.of("5.1"),
+                List.of("1.1", "1.1"))) {
+            JCas jcas = JCasFactory.createText("a b");
+            new Sentence(jcas, 0, 3).addToIndexes();
+            token(jcas, 0, 1);
+            token(jcas, 2, 3);
+            for (String id : ids) {
+                Token emptyNode = new Token(jcas, 1, 1);
+                emptyNode.setId(id);
+                emptyNode.addToIndexes();
+            }
+
+            assertWriterRejects(jcas, tempDir, "[" + ids.get(0) + "]");
+        }
+    }
+
+    /**
+     * A multi-word token must cover complete words and must not overlap with another multi-word
+     * token.
+     */
+    @Test
+    public void thatInvalidSurfaceFormsAreRejected(@TempDir File tempDir) throws Exception
+    {
+        // Surface form ends within the word it starts at
+        JCas partial = JCasFactory.createText("abc");
+        new Sentence(partial, 0, 3).addToIndexes();
+        token(partial, 0, 3);
+        surfaceForm(partial, 0, 2, "ab");
+        assertWriterRejects(partial, tempDir, "ab");
+
+        // Overlapping surface forms
+        JCas overlapping = JCasFactory.createText("a b c");
+        new Sentence(overlapping, 0, 5).addToIndexes();
+        token(overlapping, 0, 1);
+        token(overlapping, 2, 3);
+        token(overlapping, 4, 5);
+        surfaceForm(overlapping, 0, 3, "ab");
+        surfaceForm(overlapping, 2, 5, "bc");
+        assertWriterRejects(overlapping, tempDir, "bc");
+    }
+
+    /**
+     * A surface form covering only a single word is not a multi-word token. CoNLL-U cannot express
+     * it - a range must span at least two words - so it must be rejected instead of producing an
+     * invalid range such as {@code 1-1}.
+     */
+    @Test
+    public void thatSingleWordSurfaceFormIsRejected(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("ab c");
+        new Sentence(jcas, 0, 4).addToIndexes();
+        token(jcas, 0, 2);
+        token(jcas, 3, 4);
+        surfaceForm(jcas, 0, 2, "AB");
+
+        assertWriterRejects(jcas, tempDir, "AB");
+    }
+
+    /**
+     * The rule assigning an empty node at the boundary of two touching sentences by its ID must
+     * only be applied if the sentences actually touch. Otherwise, all empty nodes covered by a
+     * sentence belong to it - also if they are not placed exactly where the reader would place them
+     * (e.g. in a CAS built by another component).
+     */
+    @Test
+    public void thatEmptyNodesAreKeptIfSentencesDoNotTouch(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText(" a b");
+        new Sentence(jcas, 0, 4).addToIndexes();
+        token(jcas, 1, 2);
+        token(jcas, 3, 4);
+        // `0.1` not at the begin of the sentence, `1.1` not at the end of word 1
+        for (String[] node : new String[][] { { "0.1", "1" }, { "1.1", "0" } }) {
+            int offset = Integer.parseInt(node[1]);
+            Token emptyNode = new Token(jcas, offset, offset);
+            emptyNode.setId(node[0]);
+            emptyNode.addToIndexes();
+        }
+
+        assertThat(writeToString(jcas, tempDir).split("\n")) //
+                .extracting(line -> line.split("\t")[0]) //
+                .containsExactly("0.1", "1", "1.1", "2");
+    }
+
+    /**
+     * The HEAD and DEPREL columns of an empty node must always be empty, so a basic dependency
+     * whose dependent is an empty node cannot be expressed and must be rejected instead of being
+     * dropped silently.
+     */
+    @Test
+    public void thatBasicDependencyOfEmptyNodeIsRejected(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b");
+        new Sentence(jcas, 0, 3).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        token(jcas, 2, 3);
+        Token emptyNode = new Token(jcas, 1, 1);
+        emptyNode.setId("1.1");
+        emptyNode.addToIndexes();
+        dependency(jcas, a, emptyNode, "dep", DependencyFlavor.BASIC);
+
+        assertWriterRejects(jcas, tempDir, "[1.1]");
+    }
+
+    private static String writeToString(JCas aJCas, File aTempDir) throws Exception
+    {
+        DocumentMetaData.create(aJCas).setDocumentId("output");
+
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, aTempDir, //
+                ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false, //
+                ConllUWriter.PARAM_OVERWRITE, true);
+        writer.process(aJCas);
+
+        return readFileToString(new File(aTempDir, "output.conllu"), "UTF-8").trim();
+    }
+
+    private static Token token(JCas aJCas, int aBegin, int aEnd)
+    {
+        Token token = new Token(aJCas, aBegin, aEnd);
+        token.addToIndexes();
+        return token;
+    }
+
+    private static void surfaceForm(JCas aJCas, int aBegin, int aEnd, String aValue)
+    {
+        SurfaceForm surfaceForm = new SurfaceForm(aJCas, aBegin, aEnd);
+        surfaceForm.setValue(aValue);
+        surfaceForm.addToIndexes();
+    }
+
+    private static void dependency(JCas aJCas, Token aGovernor, Token aDependent, String aType,
+            String aFlavor)
+    {
+        Token anchor = aDependent != null ? aDependent : aGovernor;
+        Dependency dep = new Dependency(aJCas, anchor.getBegin(), anchor.getEnd());
+        dep.setGovernor(aGovernor);
+        dep.setDependent(aDependent);
+        dep.setDependencyType(aType);
+        dep.setFlavor(aFlavor);
+        dep.addToIndexes();
     }
 
     private static List<String> newdocLines(String aConllU)
