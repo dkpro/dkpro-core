@@ -139,7 +139,8 @@ public class ConllUWriterTest
      * node cannot be expressed and must be rejected instead of producing an invalid HEAD value.
      */
     @Test
-    public void thatBasicDependencyOnEmptyNodeIsRejected(@TempDir File tempDir) throws Exception
+    public void thatBasicDependencyGovernedByEmptyNodeIsRejected(@TempDir File tempDir)
+        throws Exception
     {
         JCas jcas = JCasFactory.createText("a b");
         new Sentence(jcas, 0, 3).addToIndexes();
@@ -164,7 +165,9 @@ public class ConllUWriterTest
                 ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
 
         assertThatThrownBy(() -> writer.process(jcas)) //
-                .hasRootCauseInstanceOf(IllegalStateException.class);
+                .rootCause() //
+                .isInstanceOf(IllegalStateException.class) //
+                .hasMessageContaining("[1.1]");
     }
 
     /**
@@ -200,7 +203,9 @@ public class ConllUWriterTest
                 ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
 
         assertThatThrownBy(() -> writer.process(jcas)) //
-                .hasRootCauseInstanceOf(IllegalStateException.class);
+                .rootCause() //
+                .isInstanceOf(IllegalStateException.class) //
+                .hasMessageContaining("more than one");
     }
 
     /**
@@ -336,7 +341,9 @@ public class ConllUWriterTest
                 ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
 
         assertThatThrownBy(() -> writer.process(jcas)) //
-                .hasRootCauseInstanceOf(IllegalStateException.class);
+                .rootCause() //
+                .isInstanceOf(IllegalStateException.class) //
+                .hasMessageContaining("more than one");
 
         assertThat(new File(tempDir, "output.conllu")).doesNotExist();
     }
@@ -752,7 +759,8 @@ public class ConllUWriterTest
      * dropped silently.
      */
     @Test
-    public void thatBasicDependencyOfEmptyNodeIsRejected(@TempDir File tempDir) throws Exception
+    public void thatBasicDependencyWithEmptyNodeAsDependentIsRejected(@TempDir File tempDir)
+        throws Exception
     {
         JCas jcas = JCasFactory.createText("a b");
         new Sentence(jcas, 0, 3).addToIndexes();
@@ -764,6 +772,208 @@ public class ConllUWriterTest
         dependency(jcas, a, emptyNode, "dep", DependencyFlavor.BASIC);
 
         assertWriterRejects(jcas, tempDir, "[1.1]");
+    }
+
+    /**
+     * If dependencies are not written, they must not be validated either - this allows writing data
+     * whose dependency structure cannot be expressed in CoNLL-U.
+     */
+    @Test
+    public void thatDependenciesAreIgnoredIfNotWritten(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b c");
+        new Sentence(jcas, 0, 5).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        Token b = token(jcas, 2, 3);
+        Token c = token(jcas, 4, 5);
+        dependency(jcas, a, c, "dep", DependencyFlavor.BASIC);
+        dependency(jcas, b, c, "dep", DependencyFlavor.BASIC);
+        dependency(jcas, a, null, "dep", DependencyFlavor.BASIC);
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir, //
+                ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false, //
+                ConllUWriter.PARAM_WRITE_DEPENDENCY, false);
+        writer.process(jcas);
+
+        assertThat(readFileToString(new File(tempDir, "output.conllu"), "UTF-8").trim())
+                .isEqualToNormalizingNewlines(String.join("\n", //
+                        "1\ta\t_\t_\t_\t_\t_\t_\t_\t_", //
+                        "2\tb\t_\t_\t_\t_\t_\t_\t_\t_", //
+                        "3\tc\t_\t_\t_\t_\t_\t_\t_\t_"));
+    }
+
+    /**
+     * {@code SpaceAfter} applies to tokens, not to the words of a multi-word token. If the words of
+     * a multi-word token touch, this must not produce {@code SpaceAfter=No} on the words.
+     */
+    @Test
+    public void thatWordsOfMultiwordTokenHaveNoSpaceAfter(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("del mar");
+        new Sentence(jcas, 0, 7).addToIndexes();
+        token(jcas, 0, 2);
+        token(jcas, 2, 3);
+        token(jcas, 4, 7);
+        surfaceForm(jcas, 0, 3, "del");
+
+        assertThat(writeToString(jcas, tempDir)).isEqualToNormalizingNewlines(String.join("\n", //
+                "1-2\tdel\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "1\tde\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "2\tl\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "3\tmar\t_\t_\t_\t_\t_\t_\t_\t_"));
+    }
+
+    /**
+     * The items of the DEPS column must be sorted by head and items with the same head by relation.
+     */
+    @Test
+    public void thatDepsWithSameHeadAreSortedByRelation(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b");
+        new Sentence(jcas, 0, 3).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        Token b = token(jcas, 2, 3);
+        dependency(jcas, a, b, "obj", DependencyFlavor.ENHANCED);
+        dependency(jcas, a, b, "nsubj", DependencyFlavor.ENHANCED);
+
+        assertThat(writeToString(jcas, tempDir).split("\n")) //
+                .contains("2\tb\t_\t_\t_\t_\t_\t_\t1:nsubj|1:obj\t_");
+    }
+
+    /**
+     * A multi-word token with an empty surface string is treated like one without a surface string
+     * - its words are retained in the {@code # text} comment.
+     */
+    @Test
+    public void thatEmptySurfaceStringDoesNotAffectTextComment(@TempDir File tempDir)
+        throws Exception
+    {
+        JCas jcas = JCasFactory.createText("de el x");
+        new Sentence(jcas, 0, 7).addToIndexes();
+        token(jcas, 0, 2);
+        token(jcas, 3, 5);
+        token(jcas, 6, 7);
+        surfaceForm(jcas, 0, 5, "");
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
+        writer.process(jcas);
+
+        assertThat(readFileToString(new File(tempDir, "output.conllu"), "UTF-8").split("\n")) //
+                .contains("# text = de el x", "1-2\t_\t_\t_\t_\t_\t_\t_\t_\t_");
+    }
+
+    /**
+     * Empty node IDs which are too large to be represented or which are not in canonical form (e.g.
+     * with leading zeros) must be rejected with a helpful message.
+     */
+    @Test
+    public void thatOversizedOrNonCanonicalEmptyNodeIdsAreRejected(@TempDir File tempDir)
+        throws Exception
+    {
+        for (String id : List.of("99999999999.1", "1.99999999999", "01.1")) {
+            JCas jcas = JCasFactory.createText("a b");
+            new Sentence(jcas, 0, 3).addToIndexes();
+            token(jcas, 0, 1);
+            token(jcas, 2, 3);
+            Token emptyNode = new Token(jcas, 1, 1);
+            emptyNode.setId(id);
+            emptyNode.addToIndexes();
+
+            assertWriterRejects(jcas, tempDir, "[" + id + "]");
+        }
+    }
+
+    /**
+     * An empty node at the offset where two sentences touch must be written exactly once - also if
+     * a zero-width sentence sits at the same offset.
+     */
+    @Test
+    public void thatZeroWidthSentenceDoesNotDuplicateEmptyNodes(@TempDir File tempDir)
+        throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a bcd");
+        new Sentence(jcas, 0, 3).addToIndexes();
+        new Sentence(jcas, 3, 3).addToIndexes();
+        new Sentence(jcas, 3, 5).addToIndexes();
+        token(jcas, 0, 1);
+        token(jcas, 2, 3);
+        token(jcas, 3, 4);
+        token(jcas, 4, 5);
+        for (String id : List.of("2.1", "0.1")) {
+            Token emptyNode = new Token(jcas, 3, 3);
+            emptyNode.setId(id);
+            emptyNode.addToIndexes();
+        }
+
+        List<String> lines = List.of(writeToString(jcas, tempDir).split("\n"));
+        assertThat(lines).filteredOn(line -> line.startsWith("2.1\t")).hasSize(1);
+        assertThat(lines).filteredOn(line -> line.startsWith("0.1\t")).hasSize(1);
+    }
+
+    /**
+     * A dependency which is not covered by any sentence cannot be assigned to a sentence and must
+     * be rejected instead of being dropped silently.
+     */
+    @Test
+    public void thatDependencyNotCoveredBySentenceIsRejected(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b");
+        new Sentence(jcas, 0, 1).addToIndexes();
+        new Sentence(jcas, 2, 3).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        Token b = token(jcas, 2, 3);
+        Dependency dep = new Dependency(jcas, 0, 3);
+        dep.setGovernor(a);
+        dep.setDependent(b);
+        dep.setDependencyType("dep");
+        dep.setFlavor(DependencyFlavor.BASIC);
+        dep.addToIndexes();
+
+        assertWriterRejects(jcas, tempDir, "dep");
+    }
+
+    /**
+     * A dependency without a governor must be reported as such rather than as a governor which is
+     * not part of the sentence.
+     */
+    @Test
+    public void thatDependencyWithoutGovernorIsRejected(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a");
+        new Sentence(jcas, 0, 1).addToIndexes();
+        Token a = token(jcas, 0, 1);
+        dependency(jcas, null, a, "root", DependencyFlavor.BASIC);
+
+        assertWriterRejects(jcas, tempDir, "no governor");
+    }
+
+    /**
+     * Paragraph and document markers are only written if enabled.
+     */
+    @Test
+    public void thatParagraphsAndDocumentsCanBeOmitted(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a");
+        new Sentence(jcas, 0, 1).addToIndexes();
+        token(jcas, 0, 1);
+        new Paragraph(jcas, 0, 1).addToIndexes();
+        Document document = new Document(jcas, 0, 1);
+        document.setId("d1");
+        document.addToIndexes();
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir, //
+                ConllUWriter.PARAM_WRITE_PARAGRAPH, false, //
+                ConllUWriter.PARAM_WRITE_DOCUMENTS, false);
+        writer.process(jcas);
+
+        assertThat(readFileToString(new File(tempDir, "output.conllu"), "UTF-8").split("\n")) //
+                .noneMatch(line -> line.startsWith("# newpar") || line.startsWith("# newdoc"));
     }
 
     private static String writeToString(JCas aJCas, File aTempDir) throws Exception

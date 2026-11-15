@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.comparingInt;
@@ -240,6 +241,7 @@ public class ConllUWriter
                 ? firstSentences(aJCas, Document.class)
                 : emptyMap();
 
+        Set<Dependency> writtenDependencies = new HashSet<>();
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             // Comments
             Document subDocument = subDocumentStarts.get(sentence);
@@ -268,8 +270,11 @@ public class ConllUWriter
 
             Map<Token, Row> ctokens = buildRows(aJCas, sentence, touchOffsets);
 
-            // Dependencies
-            for (Dependency rel : selectCovered(Dependency.class, sentence)) {
+            // Dependencies - not validated either if they are not written
+            List<Dependency> sentenceDependencies = writeDependency
+                    ? selectCovered(Dependency.class, sentence)
+                    : emptyList();
+            for (Dependency rel : sentenceDependencies) {
                 if (rel.getDependent() == null) {
                     throw new IllegalStateException("Illegal dependency structure - dependency ["
                             + rel.getDependencyType() + "] has no dependent.");
@@ -308,6 +313,7 @@ public class ConllUWriter
                 else {
                     row.deps.add(rel);
                 }
+                writtenDependencies.add(rel);
             }
 
             // Write sentence in CONLL-U format
@@ -335,7 +341,7 @@ public class ConllUWriter
                 if (writeDependency) {
                     // The HEAD and DEPREL columns are only defined for regular tokens - an empty
                     // node participates in the enhanced graph only.
-                    if (row.deprel != null && !row.emptyNode) {
+                    if (row.deprel != null) {
                         deprel = relation("DEPREL", row.deprel);
                         Row governor = governorRow(ctokens, row.deprel);
                         if (governor.emptyNode) {
@@ -356,7 +362,8 @@ public class ConllUWriter
                         depsItems.add(new String[] { governor == row ? "0" : governor.id,
                                 relation("DEPS", d) });
                     }
-                    depsItems.sort(comparing((String[] item) -> item[0], NODE_ID_ORDER));
+                    depsItems.sort(comparing((String[] item) -> item[0], NODE_ID_ORDER)
+                            .thenComparing(item -> item[1]));
                     if (!depsItems.isEmpty()) {
                         deps = depsItems.stream() //
                                 .map(item -> item[0] + ":" + item[1]) //
@@ -390,7 +397,8 @@ public class ConllUWriter
                     // The SpaceAfter of a multi-word token belongs on its range line, not on the
                     // last of its words.
                     String sfMisc = last.noSpaceAfter ? "SpaceAfter=No" : UNUSED;
-                    last.noSpaceAfter = false;
+                    // SpaceAfter applies to tokens, so the words themselves never carry it.
+                    covered.forEach(r -> r.noSpaceAfter = false);
                     // The ID column holds the `id1-id2` range, followed by the FORM and the eight
                     // remaining columns which are all unused for a multi-word token.
                     aOut.printf("%d-%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
@@ -408,6 +416,15 @@ public class ConllUWriter
             }
 
             aOut.println();
+        }
+
+        if (writeDependency) {
+            for (Dependency rel : select(aJCas, Dependency.class)) {
+                if (!writtenDependencies.contains(rel)) {
+                    throw new IllegalStateException("Illegal dependency structure - dependency ["
+                            + rel.getDependencyType() + "] is not covered by any sentence.");
+                }
+            }
         }
     }
 
@@ -487,7 +504,7 @@ public class ConllUWriter
         StringBuilder result = new StringBuilder();
         int pos = begin;
         for (SurfaceForm sf : selectCovered(SurfaceForm.class, aSentence)) {
-            if (sf.getValue() == null || sf.getBegin() < pos) {
+            if (StringUtils.isEmpty(sf.getValue()) || sf.getBegin() < pos) {
                 continue;
             }
             result.append(text, pos - begin, sf.getBegin() - begin);
@@ -587,6 +604,11 @@ public class ConllUWriter
      */
     private static Row governorRow(Map<Token, Row> aCtokens, Dependency aRel)
     {
+        if (aRel.getGovernor() == null) {
+            throw new IllegalStateException("Illegal dependency structure - dependency ["
+                    + aRel.getDependencyType() + "] has no governor.");
+        }
+
         Row governor = aCtokens.get(aRel.getGovernor());
         if (governor == null) {
             // CoNLL-U addresses heads by their in-sentence index, so a governor outside the
@@ -621,6 +643,11 @@ public class ConllUWriter
             // Not at the boundary to a touching neighbour sentence, so the node unambiguously
             // belongs to the sentence covering it.
             return true;
+        }
+
+        if (aSentence.getBegin() == aSentence.getEnd()) {
+            // A zero-width sentence at the boundary contains no words the node could belong to.
+            return false;
         }
 
         if (wordIndex(aEmptyNode) == 0) {

@@ -63,7 +63,7 @@ blank line and may be preceded by comment lines starting with `#`.
 | Dependency
 | Enhanced dependency graph as a list of head-deprel pairs. Read as dependencies with flavor
   `enhanced`. Relation subtypes containing colons (e.g. `conj:and`) are retained. Heads may refer
-  to empty nodes. When writing, the list is sorted by head.
+  to empty nodes. When writing, the list is sorted by head and then by relation.
 
 | MISC
 | see description
@@ -81,7 +81,7 @@ blank line and may be preceded by comment lines starting with `#`.
 | `# newdoc` / `# newdoc id = ...`
 | Document
 | Starts a new document within the file. A `Document` (with the div type `doc`) covers the
-  sentences of that document and holds its ID (if any). The document ID of the CAS is always derived from the file name, also if
+  sentences of that document and holds its ID (if any). The document ID of the CAS is always derived from the file path (relative to the source location), also if
   the file contains only one document. When writing, a `# newdoc` comment is emitted in front of
   the first sentence of each `Document` (parameter `writeDocuments`).
 
@@ -133,7 +133,8 @@ following word may share the same offset, the writer orders empty nodes by their
 their position in the CAS.
 
 If `readEmptyNodes` is disabled (the default), empty nodes are skipped and any enhanced dependencies
-involving them are dropped. A warning reporting the number of dropped dependencies is logged.
+involving them are dropped. A warning reporting the number of dropped empty nodes and dependencies
+is logged.
 
 .Validation
 The reader fails with an error message pointing at the problem if the file is invalid, in
@@ -141,23 +142,30 @@ particular if:
 
 * a line does not have 10 tab-separated columns (additional empty columns at the end of a line are
   tolerated),
-* a word ID, empty node ID or multi-word token range is malformed, a word ID occurs more than once,
-  or a multi-word token range does not refer to the words directly following it,
+* a word ID, empty node ID or multi-word token range is malformed (IDs must not have leading zeros
+  or a sign),
+* the word IDs do not form the sequence 1, 2, 3, ..., the empty nodes `i.1`, `i.2`, ... do not
+  directly follow word `i`, or a multi-word token range does not refer to the words directly
+  following it,
+* the FORM column is empty,
+* an empty node has no enhanced dependencies (DEPS),
+* HEAD and DEPREL are not either both specified or both unspecified,
 * a head is not a valid ID, does not refer to a word or node of the sentence, refers to the word
   itself, or a HEAD refers to an empty node,
 * a DEPS item does not consist of a head and a relation,
 * comment lines are not directly followed by the words of a sentence (i.e. they are followed by an
-  empty line or by the end of the file).
+  empty line or by the end of the file, or appear between word lines).
 
-If `readEmptyNodes` is disabled, DEPS heads referring to empty nodes are only checked for being
-valid IDs - the relations are dropped (see above). A UTF-8 byte order mark at the start of the file
-is skipped.
+These checks also apply to empty nodes if `readEmptyNodes` is disabled. If `readDependency` is
+disabled, the HEAD, DEPREL and DEPS columns are neither read nor validated. A UTF-8 byte order mark
+at the start of the file is skipped.
 
 The writer writes unspecified values (e.g. a missing lemma) as `_`. It fails if the data cannot be
 represented in CoNLL-U, in particular if:
 
 * a token is the dependent of more than one basic dependency,
-* a dependency has no dependent or governor, or connects tokens in different sentences,
+* a dependency has no dependent or governor, connects tokens in different sentences, or is not
+  covered by any sentence,
 * a dependency has no relation type, or the relation of an enhanced dependency contains `|`,
 * a basic dependency has an empty node as its governor or dependent,
 * an empty node ID does not have the form `i.k`, refers to a word which does not exist in the
@@ -168,7 +176,8 @@ represented in CoNLL-U, in particular if:
   a line break (CoNLL-U has no escape syntax). Line breaks in the `# text` comment are replaced
   with spaces instead.
 
-In this case, no output file is created.
+In this case, no output file is created. If `writeDependency` is disabled, dependencies are
+neither written nor validated.
 
 .Example
 [source,text,tabsize=0]

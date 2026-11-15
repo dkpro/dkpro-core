@@ -27,15 +27,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
@@ -44,6 +47,7 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.parameter.ComponentParameters;
@@ -73,8 +77,8 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * The document text is reconstructed from the words. Comments are mapped as follows:
  * <ul>
  * <li>{@code # newdoc} - a {@link Document} annotation covering the sentences of the document and
- * holding its ID (if any). The document ID of the CAS is always derived from the file name, also if
- * the file contains only a single document.</li>
+ * holding its ID (if any). The document ID of the CAS is always derived from the path of the file
+ * (relative to the source location), also if the file contains only a single document.</li>
  * <li>{@code # newpar} - a {@link Paragraph} annotation covering the sentences of the paragraph and
  * holding its ID (if any).</li>
  * <li>{@code # sent_id} - the ID of the {@link Sentence}.</li>
@@ -168,7 +172,8 @@ public class ConllUReader
     private boolean readLemma;
 
     /**
-     * Read syntactic dependency information.
+     * Read syntactic dependency information. If disabled, the HEAD, DEPREL and DEPS columns are
+     * neither read nor validated.
      */
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, defaultValue = "true")
@@ -179,6 +184,7 @@ public class ConllUReader
      * {@link Paragraph} annotations; sentences within a paragraph are separated by a space and
      * paragraphs by an empty line. If no paragraph information is provided in the file, or if set
      * to false, then each sentence is placed on its own line and no paragraphs are created.
+     * Documents are always separated by an empty line.
      */
     public static final String PARAM_READ_PARAGRAPH = ComponentParameters.PARAM_READ_PARAGRAPH;
     @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, defaultValue = "true")
@@ -189,7 +195,7 @@ public class ConllUReader
      * enhanced dependency representation to stand in for elided material. Since they have no
      * surface form, they are modelled as zero-width tokens which retain their original ID. If
      * disabled, empty nodes and any enhanced dependencies referring to them are discarded and a
-     * warning is logged.
+     * warning reporting the number of discarded empty nodes and dependencies is logged.
      * <p>
      * Note that if two sentences directly touch (i.e. there is no whitespace between them), an
      * empty node at their boundary is covered by both sentences. Its ID determines which sentence
@@ -240,10 +246,23 @@ public class ConllUReader
 
     private static final String SPACE_AFTER_NO = "SpaceAfter=No";
 
+    private static final String FEATURE_VALUE = "value";
+
     /**
      * Empty nodes have IDs of the form {@code i.k} with {@code i >= 0} and {@code k >= 1}.
      */
-    static final Pattern EMPTY_NODE_ID = Pattern.compile("\\d+\\.[1-9]\\d*");
+    static final Pattern EMPTY_NODE_ID = Pattern.compile("(0|[1-9]\\d{0,8})\\.[1-9]\\d{0,8}");
+
+    /**
+     * Regular word IDs are positive integers without leading zeros or sign. The length is limited
+     * so that every valid ID can be represented as an {@code int}.
+     */
+    private static final Pattern WORD_ID = Pattern.compile("[1-9]\\d{0,8}");
+
+    /**
+     * Heads are word IDs or {@code 0} for the root.
+     */
+    private static final Pattern HEAD_ID = Pattern.compile("0|[1-9]\\d{0,8}");
 
     private MappingProvider posMappingProvider;
 
@@ -296,6 +315,7 @@ public class ConllUReader
         Document subDocument = null;
         int lastSentenceEndPosition = 0;
         boolean shouldAddSpace = false;
+        int droppedEmptyNodes = 0;
         int droppedEmptyNodeRelations = 0;
         while (true) {
             // Read sentence comments (if any)
@@ -352,12 +372,19 @@ public class ConllUReader
             // Empty nodes are addressed by their decimal ID (e.g. `5.1`), so they cannot be held in
             // the integer-keyed token map.
             Map<String, Token> emptyNodes = new LinkedHashMap<>();
+            // The IDs of all empty nodes in the sentence - also if empty nodes are not read
+            Set<String> emptyNodeIds = new HashSet<>();
+            int lastEmptyNodeK = 0;
             Iterator<String[]> wordIterator = words.iterator();
             while (wordIterator.hasNext()) {
                 String[] word = wordIterator.next();
 
                 String idValue = trim(word[ID]);
                 String formValue = trim(word[FORM]);
+                if (formValue.isEmpty()) {
+                    throw new IOException("Line [" + idValue + "] has an empty FORM column - in "
+                            + "sentence " + sentenceDescription(comments, words));
+                }
 
                 if (idValue.contains("-")) {
                     int[] range = parseRange(idValue, comments, words);
@@ -389,8 +416,30 @@ public class ConllUReader
                                 + "] - in sentence " + sentenceDescription(comments, words));
                     }
 
-                    if (readEmptyNodes) {
-                        int pos = emptyNodePosition(idValue, tokens, sentenceBegin);
+                    // Empty nodes i.1, i.2, ... must directly follow word i (or precede the first
+                    // word for 0.k).
+                    int wordIdx = Integer.parseInt(idValue.substring(0, idValue.indexOf('.')));
+                    int k = Integer.parseInt(idValue.substring(idValue.indexOf('.') + 1));
+                    if (wordIdx != tokens.size() || k != lastEmptyNodeK + 1) {
+                        throw new IOException("Empty node [" + idValue + "] is out of sequence - "
+                                + "the empty nodes following word " + wordIdx + " must be numbered "
+                                + wordIdx + ".1, " + wordIdx + ".2, ... and directly follow that "
+                                + "word - in sentence " + sentenceDescription(comments, words));
+                    }
+                    lastEmptyNodeK = k;
+                    emptyNodeIds.add(idValue);
+
+                    if (UNUSED.equals(trim(word[DEPS]))) {
+                        throw new IOException("Empty node [" + idValue + "] has no enhanced "
+                                + "dependencies (DEPS) - in sentence "
+                                + sentenceDescription(comments, words));
+                    }
+
+                    if (!readEmptyNodes) {
+                        droppedEmptyNodes++;
+                    }
+                    else {
+                        int pos = wordIdx == 0 ? sentenceBegin : tokens.get(wordIdx).getEnd();
                         Token emptyNode = new Token(aJCas, pos, pos);
                         emptyNode.setId(idValue);
                         // The token covers no text, so the form has to be retained explicitly.
@@ -415,10 +464,12 @@ public class ConllUReader
 
                 // Read token
                 int tokenIdx = parseWordId(idValue, comments, words);
-                if (tokens.containsKey(tokenIdx)) {
-                    throw new IOException("Duplicate word ID [" + idValue + "] - in sentence "
-                            + sentenceDescription(comments, words));
+                if (tokenIdx != tokens.size() + 1) {
+                    throw new IOException("Word ID [" + idValue
+                            + "] is out of sequence - expected [" + (tokens.size() + 1)
+                            + "] - in sentence " + sentenceDescription(comments, words));
                 }
+                lastEmptyNodeK = 0;
                 Token token = doc.add(formValue, Token.class);
                 tokens.put(tokenIdx, token);
                 shouldAddSpace = !isNoSpaceAfter(word[MISC]);
@@ -481,6 +532,13 @@ public class ConllUReader
                     if (!isEmptyNode) {
                         String depRelValue = cleanTag(word[DEPREL]);
                         String headValue = trim(word[HEAD]);
+
+                        if (UNUSED.equals(depRelValue) != UNUSED.equals(headValue)) {
+                            throw new IOException("Word [" + idValue + "] has HEAD [" + headValue
+                                    + "] and DEPREL [" + depRelValue + "] - they must either both "
+                                    + "be specified or both be unspecified - in sentence "
+                                    + sentenceDescription(comments, words));
+                        }
 
                         if (!UNUSED.equals(depRelValue) && !UNUSED.equals(headValue)) {
                             Token dependent = tokens.get(Integer.parseInt(idValue));
@@ -548,6 +606,11 @@ public class ConllUReader
                                             + govValue + "] which is not a valid ID - in sentence "
                                             + sentenceDescription(comments, words));
                                 }
+                                if (!emptyNodeIds.contains(govValue)) {
+                                    throw new IOException("Word [" + idValue + "] has a DEPS head ["
+                                            + govValue + "] which does not refer to a node in "
+                                            + "sentence " + sentenceDescription(comments, words));
+                                }
                                 if (!readEmptyNodes) {
                                     // Empty nodes are not read, so relations involving them are
                                     // dropped.
@@ -610,11 +673,15 @@ public class ConllUReader
         closeDiv(p, lastSentenceEndPosition);
         closeDiv(subDocument, lastSentenceEndPosition);
 
-        if (droppedEmptyNodeRelations > 0) {
+        if (droppedEmptyNodes > 0) {
+            String documentUri = JCasUtil.select(aJCas, DocumentMetaData.class).stream() //
+                    .findFirst() //
+                    .map(DocumentMetaData::getDocumentUri) //
+                    .orElse("unknown document");
             getLogger().warn(String.format(
-                    "Dropped %d enhanced dependencies involving empty nodes in [%s] - set [%s] "
-                            + "to true to keep them",
-                    droppedEmptyNodeRelations, DocumentMetaData.get(aJCas).getDocumentUri(),
+                    "Dropped %d empty node(s) and %d enhanced dependencies involving them in "
+                            + "[%s] - set [%s] to true to keep them",
+                    droppedEmptyNodes, droppedEmptyNodeRelations, documentUri,
                     PARAM_READ_EMPTY_NODES));
         }
 
@@ -669,33 +736,6 @@ public class ConllUReader
     }
 
     /**
-     * Determine the offset of an empty node. Empty nodes {@code i.1}, {@code i.2}, ... stand for
-     * elided material following the word {@code i}, so they are placed as zero-width tokens at its
-     * end - i.e. at the position in the text where the elided material would be. If the word has
-     * {@code SpaceAfter=No}, this is also the begin of the next word, so the CAS index cannot be
-     * relied on to order empty nodes relative to their neighbours - the order is defined by the
-     * IDs. Empty nodes preceding the first word ({@code 0.1}, ...) are placed at the begin of the
-     * sentence.
-     */
-    private static int emptyNodePosition(String aId, Int2ObjectMap<Token> aTokens,
-            int aSentenceBegin)
-        throws IOException
-    {
-        int wordIdx = Integer.parseInt(aId.substring(0, aId.indexOf('.')));
-        if (wordIdx == 0) {
-            return aSentenceBegin;
-        }
-
-        Token word = aTokens.get(wordIdx);
-        if (word == null) {
-            throw new IOException("Empty node [" + aId + "] must follow word [" + wordIdx
-                    + "], but that word does not precede it");
-        }
-
-        return word.getEnd();
-    }
-
-    /**
      * Parse the index of the word a head refers to.
      *
      * @throws IOException
@@ -705,14 +745,12 @@ public class ConllUReader
             Map<String, String> aComments, List<String[]> aWords)
         throws IOException
     {
-        try {
-            return Integer.parseInt(aHead);
-        }
-        catch (NumberFormatException e) {
+        if (!HEAD_ID.matcher(aHead).matches()) {
             throw new IOException("Word [" + aWordId + "] has " + aColumn + " head [" + aHead
                     + "] which is not a valid ID - in sentence "
                     + sentenceDescription(aComments, aWords));
         }
+        return Integer.parseInt(aHead);
     }
 
     /**
@@ -746,17 +784,13 @@ public class ConllUReader
         throws IOException
     {
         String[] fragments = aRange.split("-", -1);
-        try {
-            if (fragments.length == 2) {
-                int begin = Integer.parseInt(fragments[0].trim());
-                int end = Integer.parseInt(fragments[1].trim());
-                if (begin >= 1 && begin < end) {
-                    return new int[] { begin, end };
-                }
+        if (fragments.length == 2 && WORD_ID.matcher(fragments[0].trim()).matches()
+                && WORD_ID.matcher(fragments[1].trim()).matches()) {
+            int begin = Integer.parseInt(fragments[0].trim());
+            int end = Integer.parseInt(fragments[1].trim());
+            if (begin < end) {
+                return new int[] { begin, end };
             }
-        }
-        catch (NumberFormatException e) {
-            // Reported below
         }
 
         throw new IOException("Invalid multi-word token range [" + aRange + "] - in sentence "
@@ -772,18 +806,11 @@ public class ConllUReader
     private static int parseWordId(String aId, Map<String, String> aComments, List<String[]> aWords)
         throws IOException
     {
-        try {
-            int id = Integer.parseInt(aId);
-            if (id >= 1) {
-                return id;
-            }
+        if (!WORD_ID.matcher(aId).matches()) {
+            throw new IOException("Invalid word ID [" + aId + "] - in sentence "
+                    + sentenceDescription(aComments, aWords));
         }
-        catch (NumberFormatException e) {
-            // Reported below
-        }
-
-        throw new IOException("Invalid word ID [" + aId + "] - in sentence "
-                + sentenceDescription(aComments, aWords));
+        return Integer.parseInt(aId);
     }
 
     private static void closeDiv(Div aDiv, int aEnd)
@@ -872,7 +899,13 @@ public class ConllUReader
                 String value = trim(keyValue[1]);
 
                 Feature feat = morphType.getFeatureByBaseName(key.toString());
-                if (feat != null) {
+                // Only map onto the UD features declared by the morphological features type itself
+                // -
+                // not onto inherited built-in features (e.g. `begin`) or onto the feature holding
+                // the raw FEATS string.
+                if (feat != null && morphType.equals(feat.getDomain())
+                        && !FEATURE_VALUE.equals(feat.getShortName())
+                        && CAS.TYPE_NAME_STRING.equals(feat.getRange().getName())) {
                     morphtag.setStringValue(feat, value);
                 }
             }
@@ -946,8 +979,11 @@ public class ConllUReader
                 break; // End of sentence
             }
             if (line.startsWith("#")) {
-                // Comment line
-                continue;
+                // Comments are only allowed before the words of a sentence
+                throw new IOException(
+                        "Invalid file format. Comment lines must directly precede the "
+                                + "words of a sentence, but [" + line
+                                + "] appears between word lines.");
             }
             // Use a negative limit so that trailing empty fields are retained - otherwise a line
             // with an empty MISC field would appear to have only 9 fields.

@@ -20,6 +20,7 @@ package org.dkpro.core.io.conll;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -32,7 +33,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +50,7 @@ import org.apache.logging.log4j.core.config.Property;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
@@ -125,10 +129,6 @@ public class ConllUReaderTest
     @Test
     public void testMultipleDocumentIDs() throws Exception
     {
-        // final TestAppender appender = new TestAppender();
-        // final Logger logger = Logger.getRootLogger();
-        // logger.addAppender(appender);
-        // try {
         CollectionReaderDescription reader = createReaderDescription(ConllUReader.class,
                 ConllUReader.PARAM_LANGUAGE, "en", ConllUReader.PARAM_SOURCE_LOCATION,
                 "src/test/resources/conll/u_v2/", ConllUReader.PARAM_PATTERNS,
@@ -801,10 +801,10 @@ public class ConllUReaderTest
                         + "3\ttea\ttea\t_\t_\t_\t2\tconj\t2.1:obj\t_\n"));
 
         assertThat(warnings) //
-                .filteredOn(w -> w.contains("empty nodes")) //
+                .filteredOn(w -> w.contains("empty node")) //
                 .singleElement() //
                 .asString() //
-                .contains("Dropped 2 ");
+                .contains("Dropped 1 empty node(s) and 2 enhanced dependencies");
     }
 
     /**
@@ -847,6 +847,285 @@ public class ConllUReaderTest
                 + "\n" //
                 + "# some comment\n", //
                 "# some comment");
+    }
+
+    /**
+     * Comment lines are only allowed before the words of a sentence. A comment between word lines
+     * (e.g. a misplaced {@code # newpar}) must be rejected instead of being dropped silently.
+     */
+    @Test
+    public void thatCommentBetweenWordLinesIsRejected() throws Exception
+    {
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "# newpar id = p2\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tdep\t_\t_\n", //
+                "# newpar id = p2");
+    }
+
+    /**
+     * Each empty node ID may only occur once per sentence - whether empty nodes are read or not.
+     */
+    @Test
+    public void thatDuplicateEmptyNodeIdIsRejected() throws Exception
+    {
+        for (boolean readEmptyNodes : asList(true, false)) {
+            assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                    + "1.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n" //
+                    + "1.1\ty\ty\t_\t_\t_\t_\t_\t1:dep\t_\n", //
+                    "[1.1]", //
+                    ConllUReader.PARAM_READ_EMPTY_NODES, readEmptyNodes);
+        }
+    }
+
+    /**
+     * IDs which are too large to be represented must be rejected with a helpful message instead of
+     * failing with a number format error.
+     */
+    @Test
+    public void thatOversizedIdsAreRejected() throws Exception
+    {
+        assertRejected("99999999999\ta\ta\t_\t_\t_\t0\troot\t_\t_\n", //
+                "[99999999999]");
+
+        for (boolean readEmptyNodes : asList(true, false)) {
+            assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                    + "99999999999.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n", //
+                    "[99999999999.1]", //
+                    ConllUReader.PARAM_READ_EMPTY_NODES, readEmptyNodes);
+        }
+    }
+
+    /**
+     * IDs and heads must be written in canonical form - without leading zeros or a sign. Otherwise,
+     * e.g. a DEPS head {@code 02} on word 2 would escape the self-loop check and be mistaken for
+     * the root.
+     */
+    @Test
+    public void thatNonCanonicalIdsAreRejected() throws Exception
+    {
+        // DEPS head with leading zero referring to the word itself
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tdep\t02:dep\t_\n", //
+                "[02]");
+
+        // DEPS head with sign
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tdep\t+1:dep\t_\n", //
+                "[+1]");
+
+        // HEAD with sign
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t+1\tdep\t_\t_\n", //
+                "[+1]");
+
+        // Word ID with leading zero
+        assertRejected("01\ta\ta\t_\t_\t_\t0\troot\t_\t_\n", //
+                "[01]");
+
+        // Empty node ID with leading zero
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "01.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n", //
+                "[01.1]", //
+                ConllUReader.PARAM_READ_EMPTY_NODES, true);
+    }
+
+    /**
+     * Word IDs must form the sequence 1, 2, 3, ... and empty nodes {@code i.1}, {@code i.2}, ...
+     * must directly follow word {@code i} - whether empty nodes are read or not.
+     */
+    @Test
+    public void thatIdsMustBeInSequence() throws Exception
+    {
+        // Gap
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "3\tb\tb\t_\t_\t_\t1\tdep\t_\t_\n", //
+                "[3]");
+
+        // Not starting at 1
+        assertRejected("2\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "1\tb\tb\t_\t_\t_\t2\tdep\t_\t_\n", //
+                "[2]");
+
+        for (boolean readEmptyNodes : asList(true, false)) {
+            // Empty node after the following word
+            assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                    + "2\tb\tb\t_\t_\t_\t1\tdep\t1:dep\t_\n" //
+                    + "1.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n", //
+                    "[1.1]", //
+                    ConllUReader.PARAM_READ_EMPTY_NODES, readEmptyNodes);
+
+            // Empty nodes not numbered from 1
+            assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                    + "1.2\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n", //
+                    "[1.2]", //
+                    ConllUReader.PARAM_READ_EMPTY_NODES, readEmptyNodes);
+        }
+    }
+
+    /**
+     * Errors concerning empty nodes must point at the sentence like all other errors.
+     */
+    @Test
+    public void thatEmptyNodeErrorNamesSentence() throws Exception
+    {
+        assertRejected("# sent_id = s1\n" //
+                + "1.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n", //
+                "[s1]", //
+                ConllUReader.PARAM_READ_EMPTY_NODES, true);
+    }
+
+    /**
+     * An empty node must have enhanced dependencies - otherwise it is not connected to anything.
+     */
+    @Test
+    public void thatEmptyNodeWithoutDepsIsRejected() throws Exception
+    {
+        for (boolean readEmptyNodes : asList(true, false)) {
+            assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                    + "1.1\tx\tx\t_\t_\t_\t_\t_\t_\t_\n", //
+                    "[1.1]", //
+                    ConllUReader.PARAM_READ_EMPTY_NODES, readEmptyNodes);
+        }
+    }
+
+    /**
+     * A DEPS head referring to an empty node which does not exist must be rejected - also if empty
+     * nodes are not read.
+     */
+    @Test
+    public void thatDepsHeadReferringToMissingEmptyNodeIsRejected() throws Exception
+    {
+        for (boolean readEmptyNodes : asList(true, false)) {
+            assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                    + "2\tb\tb\t_\t_\t_\t1\tdep\t7.1:dep\t_\n", //
+                    "[7.1]", //
+                    ConllUReader.PARAM_READ_EMPTY_NODES, readEmptyNodes);
+        }
+    }
+
+    /**
+     * HEAD and DEPREL must either both be specified or both be unspecified.
+     */
+    @Test
+    public void thatIncompleteBasicDependencyIsRejected() throws Exception
+    {
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\t_\t_\t_\n", //
+                "DEPREL");
+
+        assertRejected("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t_\tdep\t_\t_\n", //
+                "HEAD");
+    }
+
+    /**
+     * The FORM column must not be empty - a word without a form would become a zero-width token.
+     */
+    @Test
+    public void thatEmptyFormIsRejected() throws Exception
+    {
+        assertRejected("1\t\ta\t_\t_\t_\t0\troot\t_\t_\n", //
+                "FORM");
+    }
+
+    /**
+     * FEATS items are mapped onto the features of the morphological features annotation. Items
+     * which happen to match built-in features (e.g. {@code Begin}) or the feature holding the raw
+     * FEATS string ({@code Value}) must not be mapped - they must neither fail nor corrupt the
+     * annotation.
+     */
+    @Test
+    public void thatFeatsDoNotOverwriteBuiltInFeatures() throws Exception
+    {
+        JCas jcas = readString("1\ta\ta\t_\t_\tBegin=5|Value=X|Number=Sing\t0\troot\t_\t_\n");
+
+        MorphologicalFeatures morph = select(jcas, MorphologicalFeatures.class).iterator().next();
+        assertEquals("Begin=5|Value=X|Number=Sing", morph.getValue());
+        assertEquals("Sing", morph.getNumber());
+        assertEquals(0, morph.getBegin());
+        assertEquals(1, morph.getEnd());
+    }
+
+    /**
+     * A {@code # newdoc} comment with a value but without the {@code id} key still marks a document
+     * boundary. The value is not used as document ID.
+     */
+    @Test
+    public void thatNewdocWithoutIdKeyStartsDocumentWithoutId() throws Exception
+    {
+        JCas jcas = readString("# newdoc = X\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n");
+
+        assertThat(subDocuments(jcas)).singleElement() //
+                .satisfies(doc -> assertNull(doc.getId()));
+    }
+
+    /**
+     * If empty nodes are not read, this must be reported - also if no relations are read.
+     */
+    @Test
+    public void thatDroppedEmptyNodesAreReportedWithoutDependencies() throws Throwable
+    {
+        List<String> warnings = captureWarnings(() -> readString(
+                "1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" + "1.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n",
+                ConllUReader.PARAM_READ_DEPENDENCY, false));
+
+        assertThat(warnings) //
+                .filteredOn(w -> w.contains("empty node")) //
+                .singleElement() //
+                .asString() //
+                .contains("Dropped 1 empty node(s)");
+    }
+
+    /**
+     * The reader can also be invoked directly on a CAS without document metadata. Reporting dropped
+     * empty nodes must not fail in this case.
+     */
+    @Test
+    public void thatConvertWorksWithoutDocumentMetadata() throws Exception
+    {
+        ConllUReader reader = (ConllUReader) createReader(ConllUReader.class, //
+                ConllUReader.PARAM_LANGUAGE, "en", //
+                ConllUReader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/u/", //
+                ConllUReader.PARAM_PATTERNS, "conllu-en-orig.conllu");
+        JCas jcas = JCasFactory.createJCas();
+
+        reader.convert(jcas,
+                new BufferedReader(new StringReader("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n"
+                        + "1.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n")));
+
+        assertEquals("a", jcas.getDocumentText());
+    }
+
+    /**
+     * Files with Windows line endings must be read just like files with Unix line endings.
+     */
+    @Test
+    public void thatWindowsLineEndingsAreSupported() throws Exception
+    {
+        JCas jcas = readString("# sent_id = s1\r\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\tSpaceAfter=No\r\n" //
+                + "2\t.\t.\t_\t_\t_\t1\tpunct\t_\t_\r\n" //
+                + "\r\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\r\n");
+
+        assertEquals("a.\nb", jcas.getDocumentText());
+        assertThat(select(jcas, Sentence.class)).extracting(Sentence::getId) //
+                .containsExactly("s1", null);
+    }
+
+    /**
+     * If dependencies are not read, no dependency annotations are created.
+     */
+    @Test
+    public void thatDependenciesAreNotCreatedIfNotRead() throws Exception
+    {
+        JCas jcas = readString("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tdep\t1:dep\t_\n", //
+                ConllUReader.PARAM_READ_DEPENDENCY, false);
+
+        assertThat(select(jcas, Dependency.class)).isEmpty();
     }
 
     private void assertRejected(String aConllU, String aExpectedMention, Object... aParams)

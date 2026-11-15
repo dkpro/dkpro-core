@@ -69,12 +69,6 @@ public abstract class ConllReader_ImplBase
     }
 
     protected Dependency makeDependency(JCas aJCas, Token aGovernor, Token aDependent, String label,
-            String flavor)
-    {
-        return makeDependency(aJCas, aGovernor, aDependent, label, flavor, aGovernor == aDependent);
-    }
-
-    protected Dependency makeDependency(JCas aJCas, Token aGovernor, Token aDependent, String label,
             String flavor, boolean aRoot)
     {
         Dependency rel = aRoot ? new ROOT(aJCas) : new Dependency(aJCas);
