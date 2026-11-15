@@ -1,0 +1,10 @@
+# newpar
+# sent_id = s1
+# text = a
+1	a	a	_	_	_	0	root	0:root	_
+
+# sent_id = s2
+# text = b
+0.1	c	c	_	_	_	_	_	0:root	_
+1	b	b	_	_	_	0	root	0.1:obj	_
+

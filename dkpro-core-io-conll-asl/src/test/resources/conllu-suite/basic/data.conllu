@@ -1,0 +1,7 @@
+# sent_id = s1
+# text = Sue likes tea.
+1	Sue	Sue	_	_	_	2	nsubj	2:nsubj	_
+2	likes	likes	_	_	_	0	root	0:root	_
+3	tea	tea	_	_	_	2	obj	2:obj	SpaceAfter=No
+4	.	.	_	_	_	2	punct	2:punct	_
+

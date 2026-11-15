@@ -1,0 +1,6 @@
+# text = a b d
+1	a	a	_	_	_	0	root	0:root	_
+2	b	b	_	_	_	1	obj	3:dep|1:obj	_
+2.1	c	c	_	_	_	_	_	1:conj	_
+3	d	d	_	_	_	1	conj	2.1:nsubj|1:conj	_
+

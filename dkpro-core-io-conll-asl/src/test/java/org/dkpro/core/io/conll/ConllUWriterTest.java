@@ -163,6 +163,38 @@ public class ConllUWriterTest
     }
 
     /**
+     * An empty node covers no text. If it carries no token form either, the FORM column must
+     * contain the {@code _} placeholder instead of being left empty.
+     */
+    @Test
+    public void thatEmptyNodeWithoutFormIsWrittenAsPlaceholder(@TempDir File tempDir)
+        throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b");
+        new Sentence(jcas, 0, 3).addToIndexes();
+        new Token(jcas, 0, 1).addToIndexes();
+        Token emptyNode = new Token(jcas, 1, 1);
+        emptyNode.setId("1.1");
+        emptyNode.addToIndexes();
+        new Token(jcas, 2, 3).addToIndexes();
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir, //
+                ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false);
+
+        writer.process(jcas);
+
+        String actual = readFileToString(new File(tempDir, "output.conllu"), "UTF-8");
+
+        assertThat(actual.split("\n")) //
+                .filteredOn(line -> line.startsWith("1.1\t")) //
+                .singleElement() //
+                .satisfies(line -> assertThat(line.split("\t", -1)[1]).isEqualTo("_"));
+    }
+
+    /**
      * A paragraph may start with whitespace (e.g. indentation) before its first sentence. The
      * sentence still starts the paragraph and must be marked accordingly.
      */

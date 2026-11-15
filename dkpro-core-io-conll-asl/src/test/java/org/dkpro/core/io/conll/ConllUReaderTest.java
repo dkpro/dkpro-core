@@ -319,11 +319,12 @@ public class ConllUReaderTest
     }
 
     /**
-     * A `SpaceAfter=No` on the last token of a sentence refers to the sentence-internal surface
-     * text. It must not cause the following sentence to be glued to the current one.
+     * A `SpaceAfter=No` on the last token of a sentence indicates that there is no whitespace
+     * between this sentence and the next one (e.g. in Chinese or Japanese treebanks). Within a
+     * paragraph, the following sentence must therefore directly follow the current one.
      */
     @Test
-    public void thatSentenceFinalNoSpaceAfterDoesNotGlueSentences() throws Exception
+    public void thatSentenceFinalNoSpaceAfterIsHonoredInParagraph() throws Exception
     {
         JCas jcas = readString("# newpar id = p1\n" //
                 + "# sent_id = s1\n" //
@@ -332,7 +333,7 @@ public class ConllUReaderTest
                 + "# sent_id = s2\n" //
                 + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n");
 
-        assertEquals("a b", jcas.getDocumentText());
+        assertEquals("ab", jcas.getDocumentText());
     }
 
     /**
