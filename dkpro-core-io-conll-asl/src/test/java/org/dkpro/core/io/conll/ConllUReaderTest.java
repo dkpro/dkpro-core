@@ -47,6 +47,7 @@ import org.junit.jupiter.api.io.TempDir;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -105,9 +106,12 @@ public class ConllUReaderTest
         AnnotationIndex<DocumentMetaData> index = jcas.getAnnotationIndex(DocumentMetaData.class);
         DocumentMetaData m = index.iterator().get();
         final String actualDocumentID = m.getDocumentId();
-        final String expectedDocumentID = "mf920901-001";
+        // The CAS document ID is always derived from the file name - the `# newdoc id` is retained
+        // on the sub-document span instead.
+        final String expectedDocumentID = "conllu-paragraph_and_document_boundaries.conllu";
 
         assertEquals(expectedDocumentID, actualDocumentID, "Document ID mismatch");
+        assertThat(subDocuments(jcas)).extracting(Div::getId).containsExactly("mf920901-001");
     }
 
     @Test
@@ -127,7 +131,9 @@ public class ConllUReaderTest
         AnnotationIndex<DocumentMetaData> index = jcas.getAnnotationIndex(DocumentMetaData.class);
         DocumentMetaData m = index.iterator().get();
         final String actualDocumentID = m.getDocumentId();
-        final String expectedDocumentID = "mf920901-001;mf920901-002";
+        // The file contains several documents. Their IDs are retained on the sub-document spans,
+        // while the CAS document ID remains the one derived from the file name.
+        final String expectedDocumentID = "conllu-multiple_document_IDs.conllu";
 
         assertEquals(expectedDocumentID, actualDocumentID, "Document ID mismatch");
     }
@@ -452,6 +458,113 @@ public class ConllUReaderTest
 
         assertEquals("a\nb", jcas.getDocumentText());
         assertThat(select(jcas, Paragraph.class)).isEmpty();
+    }
+
+    /**
+     * A file may contain several documents, each starting with a {@code # newdoc} comment. Each
+     * document is represented as a sub-document span reaching from the begin of its first sentence
+     * to the end of its last sentence.
+     */
+    @Test
+    public void thatNewdocCreatesSubDocumentSpans() throws Exception
+    {
+        JCas jcas = readString("# newdoc id = d1\n" //
+                + "# sent_id = s1\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# sent_id = s2\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newdoc id = d2\n" //
+                + "# sent_id = s3\n" //
+                + "1\tc\tc\t_\t_\t_\t0\troot\t_\t_\n");
+
+        List<Sentence> sentences = new ArrayList<>(select(jcas, Sentence.class));
+        List<Div> subDocuments = subDocuments(jcas);
+
+        assertThat(subDocuments).extracting(Div::getId).containsExactly("d1", "d2");
+
+        assertEquals(sentences.get(0).getBegin(), subDocuments.get(0).getBegin());
+        assertEquals(sentences.get(1).getEnd(), subDocuments.get(0).getEnd());
+        assertEquals(sentences.get(2).getBegin(), subDocuments.get(1).getBegin());
+        assertEquals(sentences.get(2).getEnd(), subDocuments.get(1).getEnd());
+    }
+
+    /**
+     * The spec allows {@code # newdoc} without an ID. Such a document is still represented as a
+     * sub-document span, just without an ID.
+     */
+    @Test
+    public void thatValuelessNewdocCreatesSubDocumentSpanWithoutId() throws Exception
+    {
+        JCas jcas = readString("# newdoc\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newdoc\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n");
+
+        assertThat(subDocuments(jcas)).hasSize(2) //
+                .allSatisfy(div -> assertNull(div.getId()));
+    }
+
+    /**
+     * A file does not need to start with {@code # newdoc}, e.g. if a document was split between
+     * files. Sentences before the first {@code # newdoc} must not be attributed to any
+     * sub-document, since the file provides no information about their document.
+     */
+    @Test
+    public void thatSentencesBeforeFirstNewdocAreNotInSubDocument() throws Exception
+    {
+        JCas jcas = readString("# sent_id = s1\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newdoc id = d1\n" //
+                + "# sent_id = s2\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n");
+
+        List<Sentence> sentences = new ArrayList<>(select(jcas, Sentence.class));
+        List<Div> subDocuments = subDocuments(jcas);
+
+        assertThat(subDocuments).hasSize(1);
+        assertEquals(sentences.get(1).getBegin(), subDocuments.get(0).getBegin());
+        assertEquals(sentences.get(1).getEnd(), subDocuments.get(0).getEnd());
+    }
+
+    /**
+     * A paragraph cannot span across documents. A {@code # newdoc} therefore ends the current
+     * paragraph even if the new document does not start with a {@code # newpar}.
+     */
+    @Test
+    public void thatParagraphEndsAtDocumentBoundary() throws Exception
+    {
+        JCas jcas = readString("# newdoc id = d1\n" //
+                + "# newpar id = p1\n" //
+                + "# sent_id = s1\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newdoc id = d2\n" //
+                + "# sent_id = s2\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n");
+
+        List<Sentence> sentences = new ArrayList<>(select(jcas, Sentence.class));
+        Sentence s1 = sentences.get(0);
+        Sentence s2 = sentences.get(1);
+
+        Paragraph p1 = select(jcas, Paragraph.class).stream() //
+                .filter(p -> "p1".equals(p.getId())) //
+                .findFirst() //
+                .get();
+        assertEquals(s1.getEnd(), p1.getEnd());
+
+        assertThat(select(jcas, Paragraph.class)) //
+                .noneMatch(p -> p.getBegin() <= s1.getBegin() && p.getEnd() >= s2.getEnd());
+    }
+
+    private static List<Div> subDocuments(JCas aJCas)
+    {
+        return select(aJCas, Div.class).stream() //
+                .filter(div -> "subDoc".equals(div.getDivType())) //
+                .collect(toList());
     }
 
     /**

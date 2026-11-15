@@ -67,13 +67,18 @@ public class ConllUReaderWriterTest
                 "conll/u_v2/conllu-morphological_annotation.conllu");
     }
 
-    @Disabled("This unfortunately doesn't work yet.")
+    /**
+     * The document and paragraph boundaries must survive the round trip. The reference file differs
+     * from the input only in that arbitrary comments ({@code # text_en}) and arbitrary MISC values
+     * ({@code LId=...}) are not retained.
+     */
     @Test
     public void roundTripV2ParagraphAndDocumentBoundaries() throws Exception
     {
-        testRoundTrip(createReaderDescription(ConllUReader.class),
+        testOneWay(createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,
                         true),
+                "conll/u_v2/conllu-paragraph_and_document_boundaries-ref.conllu",
                 "conll/u_v2/conllu-paragraph_and_document_boundaries.conllu");
     }
 

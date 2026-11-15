@@ -42,6 +42,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -197,6 +198,144 @@ public class ConllUWriterTest
 
         assertThatThrownBy(() -> writer.process(jcas)) //
                 .hasRootCauseInstanceOf(IllegalStateException.class);
+    }
+
+    /**
+     * Sub-document spans are written as {@code # newdoc} comments in front of the first sentence
+     * they contain - by default, and also if the span starts before that sentence (e.g. due to
+     * indentation).
+     */
+    @Test
+    public void thatSubDocumentsAreWrittenAsNewdoc(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b\n\n  c");
+        new Sentence(jcas, 0, 1).addToIndexes();
+        new Sentence(jcas, 2, 3).addToIndexes();
+        new Sentence(jcas, 7, 8).addToIndexes();
+        new Token(jcas, 0, 1).addToIndexes();
+        new Token(jcas, 2, 3).addToIndexes();
+        new Token(jcas, 7, 8).addToIndexes();
+
+        Div d1 = new Div(jcas, 0, 3);
+        d1.setDivType("subDoc");
+        d1.setId("d1");
+        d1.addToIndexes();
+
+        Div d2 = new Div(jcas, 5, 8);
+        d2.setDivType("subDoc");
+        d2.addToIndexes();
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir, //
+                ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false);
+
+        writer.process(jcas);
+
+        String actual = readFileToString(new File(tempDir, "output.conllu"), "UTF-8").trim();
+
+        assertThat(actual).isEqualToNormalizingNewlines(String.join("\n", //
+                "# newdoc id = d1", //
+                "1\ta\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "", //
+                "1\tb\t_\t_\t_\t_\t_\t_\t_\t_", //
+                "", //
+                "# newdoc", //
+                "1\tc\t_\t_\t_\t_\t_\t_\t_\t_"));
+    }
+
+    /**
+     * Without sub-document spans, the writer must not invent a {@code # newdoc} comment from the
+     * document ID, which is typically derived from the file name.
+     */
+    @Test
+    public void thatNoNewdocIsWrittenWithoutSubDocuments(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a");
+        new Sentence(jcas, 0, 1).addToIndexes();
+        new Token(jcas, 0, 1).addToIndexes();
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
+
+        writer.process(jcas);
+
+        String actual = readFileToString(new File(tempDir, "output.conllu"), "UTF-8");
+
+        assertThat(newdocLines(actual)).isEmpty();
+    }
+
+    /**
+     * CoNLL-U addresses heads by their index within the sentence, so a dependency whose governor is
+     * in a different sentence cannot be expressed and must be rejected.
+     */
+    @Test
+    public void thatGovernorInOtherSentenceIsRejected(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b");
+        new Sentence(jcas, 0, 1).addToIndexes();
+        new Sentence(jcas, 2, 3).addToIndexes();
+        Token a = new Token(jcas, 0, 1);
+        a.addToIndexes();
+        Token b = new Token(jcas, 2, 3);
+        b.addToIndexes();
+
+        Dependency dep = new Dependency(jcas, 2, 3);
+        dep.setGovernor(a);
+        dep.setDependent(b);
+        dep.setDependencyType("dep");
+        dep.setFlavor(DependencyFlavor.BASIC);
+        dep.addToIndexes();
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
+
+        assertThatThrownBy(() -> writer.process(jcas)) //
+                .rootCause() //
+                .isInstanceOf(IllegalStateException.class) //
+                .hasMessageContaining("sentence");
+    }
+
+    /**
+     * If the CAS cannot be written, no output file must be left behind - an empty or partial file
+     * is useless and may be mistaken for a successful conversion.
+     */
+    @Test
+    public void thatNoOutputFileIsLeftBehindWhenWritingFails(@TempDir File tempDir) throws Exception
+    {
+        JCas jcas = JCasFactory.createText("a b c");
+        new Sentence(jcas, 0, 5).addToIndexes();
+        Token a = new Token(jcas, 0, 1);
+        a.addToIndexes();
+        Token b = new Token(jcas, 2, 3);
+        b.addToIndexes();
+        Token c = new Token(jcas, 4, 5);
+        c.addToIndexes();
+
+        // Two basic dependencies on the same token cannot be expressed and make the writer fail.
+        for (Token governor : List.of(a, b)) {
+            Dependency dep = new Dependency(jcas, 4, 5);
+            dep.setGovernor(governor);
+            dep.setDependent(c);
+            dep.setDependencyType("dep");
+            dep.setFlavor(DependencyFlavor.BASIC);
+            dep.addToIndexes();
+        }
+
+        DocumentMetaData.create(jcas).setDocumentId("output");
+
+        AnalysisEngine writer = createEngine(ConllUWriter.class, //
+                ConllUWriter.PARAM_TARGET_LOCATION, tempDir);
+
+        assertThatThrownBy(() -> writer.process(jcas)) //
+                .hasRootCauseInstanceOf(IllegalStateException.class);
+
+        assertThat(new File(tempDir, "output.conllu")).doesNotExist();
     }
 
     /**
