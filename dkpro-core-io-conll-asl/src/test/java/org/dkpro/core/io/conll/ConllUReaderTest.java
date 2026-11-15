@@ -27,10 +27,12 @@ import static org.dkpro.core.testing.AssertAnnotations.assertMorph;
 import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.dkpro.core.testing.AssertAnnotations.assertSentence;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -400,6 +402,56 @@ public class ConllUReaderTest
         JCas jcas = readString("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n\n#");
 
         assertEquals("a", jcas.getDocumentText());
+    }
+
+    /**
+     * A HEAD referring to a token which does not exist in the sentence makes the file invalid. The
+     * reader must fail with a message pointing at the offending head instead of creating a
+     * dependency without a governor.
+     */
+    @Test
+    public void thatBasicHeadReferringToMissingTokenIsRejected() throws Exception
+    {
+        assertThatThrownBy(() -> readString("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t9\tobj\t_\t_\n")) //
+                        .rootCause() //
+                        .isInstanceOf(IOException.class) //
+                        .hasMessageContaining("9");
+    }
+
+    /**
+     * An enhanced head referring to a token which does not exist in the sentence makes the file
+     * invalid. The reader must fail with a message pointing at the offending head instead of
+     * silently dropping the relation.
+     */
+    @Test
+    public void thatEnhancedHeadReferringToMissingTokenIsRejected() throws Exception
+    {
+        assertThatThrownBy(() -> readString("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tobj\t9:obj\t_\n")) //
+                        .rootCause() //
+                        .isInstanceOf(IOException.class) //
+                        .hasMessageContaining("9");
+    }
+
+    /**
+     * If reading paragraphs is disabled, paragraph markers must neither affect the text layout nor
+     * produce paragraph annotations - regardless of whether the marker carries an ID.
+     */
+    @Test
+    public void thatParagraphsAreNotCreatedWhenReadingParagraphsIsDisabled() throws Exception
+    {
+        JCas jcas = readString("# newpar id = p1\n" //
+                + "# sent_id = s1\n" //
+                + "1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "\n" //
+                + "# newpar\n" //
+                + "# sent_id = s2\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n", //
+                ConllUReader.PARAM_READ_PARAGRAPH, false);
+
+        assertEquals("a\nb", jcas.getDocumentText());
+        assertThat(select(jcas, Paragraph.class)).isEmpty();
     }
 
     /**
