@@ -42,9 +42,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SubDocument;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
@@ -216,12 +216,12 @@ public class ConllUWriterTest
         new Token(jcas, 2, 3).addToIndexes();
         new Token(jcas, 7, 8).addToIndexes();
 
-        Div d1 = new Div(jcas, 0, 3);
+        SubDocument d1 = new SubDocument(jcas, 0, 3);
         d1.setDivType("subDoc");
         d1.setId("d1");
         d1.addToIndexes();
 
-        Div d2 = new Div(jcas, 5, 8);
+        SubDocument d2 = new SubDocument(jcas, 5, 8);
         d2.setDivType("subDoc");
         d2.addToIndexes();
 
@@ -515,11 +515,15 @@ public class ConllUWriterTest
     }
 
     /**
-     * Sentences may directly follow each other without any whitespace in between. Writing such a
-     * document and reading it back in must preserve the text.
+     * Sentences may directly follow each other without any whitespace in between. The writer marks
+     * this with {@code SpaceAfter=No} on the last token of the sentence. Without paragraph
+     * information, the reader places each sentence on its own line regardless, since older
+     * treebanks use a sentence-final {@code SpaceAfter=No} where the original text had a line
+     * break. Exact reconstruction would require support for {@code SpacesAfter}.
      */
     @Test
-    public void thatSentencesWithoutSeparatorRoundTrip(@TempDir File tempDir) throws Exception
+    public void thatSentencesWithoutSeparatorAreReadBackOnSeparateLines(@TempDir File tempDir)
+        throws Exception
     {
         JCas jcas = JCasFactory.createText("Hello.World.");
         new Sentence(jcas, 0, 6).addToIndexes();
@@ -537,13 +541,17 @@ public class ConllUWriterTest
 
         writer.process(jcas);
 
+        File output = new File(tempDir, "output.conllu");
+        assertThat(readFileToString(output, "UTF-8").split("\n")) //
+                .contains("2\t.\t_\t_\t_\t_\t_\t_\t_\tSpaceAfter=No");
+
         CollectionReaderDescription reader = createReaderDescription(ConllUReader.class, //
                 ConllUReader.PARAM_LANGUAGE, "en", //
-                ConllUReader.PARAM_SOURCE_LOCATION, new File(tempDir, "output.conllu"));
+                ConllUReader.PARAM_SOURCE_LOCATION, output);
 
         JCas actual = new JCasIterable(reader).iterator().next();
 
-        assertThat(actual.getDocumentText()).isEqualTo("Hello.World.");
+        assertThat(actual.getDocumentText()).isEqualTo("Hello.\nWorld.");
     }
 
     private static List<String> newdocLines(String aConllU)

@@ -47,9 +47,9 @@ import org.junit.jupiter.api.io.TempDir;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SubDocument;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
@@ -111,7 +111,8 @@ public class ConllUReaderTest
         final String expectedDocumentID = "conllu-paragraph_and_document_boundaries.conllu";
 
         assertEquals(expectedDocumentID, actualDocumentID, "Document ID mismatch");
-        assertThat(subDocuments(jcas)).extracting(Div::getId).containsExactly("mf920901-001");
+        assertThat(subDocuments(jcas)).extracting(SubDocument::getId)
+                .containsExactly("mf920901-001");
     }
 
     @Test
@@ -171,34 +172,51 @@ public class ConllUReaderTest
     }
 
     /**
-     * An empty node following a token with {@code SpaceAfter=No} sits at the same offset as the
-     * begin of the next token. It must still be sorted in between the two regular tokens so that
-     * the original order is retained.
+     * Empty nodes {@code i.1}, {@code i.2}, ... stand for elided material following the word
+     * {@code i}, so they are placed as zero-width tokens at the end of that word - where the elided
+     * material would be in the text. This also holds if the word has {@code SpaceAfter=No}, even
+     * though the end of the word is then also the begin of the next word.
+     * <p>
+     * The CAS index cannot define an order between several empty nodes and the next word at the
+     * same offset, so the order is not tested here - it is defined by the IDs.
      */
     @Test
-    public void thatEmptyNodeAfterNoSpaceAfterTokenRetainsOrder() throws Exception
+    public void thatEmptyNodesArePlacedAfterPrecedingWord() throws Exception
     {
         JCas jcas = readString("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
                 + "2\tb\tb\t_\t_\t_\t1\tobj\t1:obj\tSpaceAfter=No\n" //
                 + "2.1\tc\tc\t_\t_\t_\t_\t_\t1:conj\t_\n" //
-                + "3\td\td\t_\t_\t_\t1\tconj\t2.1:obj\t_\n", //
+                + "2.2\te\te\t_\t_\t_\t_\t_\t1:conj\t_\n" //
+                + "3\td\td\t_\t_\t_\t1\tconj\t2.1:obj|2.2:obj\t_\n", //
                 ConllUReader.PARAM_READ_EMPTY_NODES, true);
 
         assertEquals("a bd", jcas.getDocumentText());
 
-        List<String> tokens = select(jcas, Token.class).stream() //
-                .map(t -> t.getId() != null ? t.getId() : t.getCoveredText()) //
+        Token b = select(jcas, Token.class).stream() //
+                .filter(t -> t.getId() == null && "b".equals(t.getCoveredText())) //
+                .findFirst() //
+                .get();
+
+        List<Token> emptyNodes = select(jcas, Token.class).stream() //
+                .filter(t -> t.getId() != null) //
                 .collect(toList());
 
-        assertEquals(asList("a", "b", "2.1", "d"), tokens);
+        assertThat(emptyNodes).extracting(Token::getId).containsExactlyInAnyOrder("2.1", "2.2");
+        assertThat(emptyNodes).allSatisfy(node -> {
+            assertThat(node.getBegin()).isEqualTo(node.getEnd());
+            assertThat(node.getBegin()).isEqualTo(b.getEnd());
+        });
     }
 
     /**
-     * An empty node may precede the first word of a sentence (ID {@code 0.1}). It must be part of
-     * that sentence, not of the preceding one.
+     * Empty nodes may precede the first word of a sentence (IDs {@code 0.1}, {@code 0.2}, ...).
+     * They must be part of that sentence, not of the preceding one.
+     * <p>
+     * The CAS index cannot define an order between the empty nodes and the first word at the same
+     * offset, so the order is not tested here - it is defined by the IDs.
      */
     @Test
-    public void thatEmptyNodeAtSentenceStartBelongsToItsSentence() throws Exception
+    public void thatEmptyNodesAtSentenceStartBelongToTheirSentence() throws Exception
     {
         JCas jcas = readString("# newpar id = p1\n" //
                 + "# sent_id = s1\n" //
@@ -206,7 +224,8 @@ public class ConllUReaderTest
                 + "\n" //
                 + "# sent_id = s2\n" //
                 + "0.1\tc\tc\t_\t_\t_\t_\t_\t0:root\t_\n" //
-                + "1\tb\tb\t_\t_\t_\t0\troot\t0.1:obj\t_\n", //
+                + "0.2\te\te\t_\t_\t_\t_\t_\t0:root\t_\n" //
+                + "1\tb\tb\t_\t_\t_\t0\troot\t0.1:obj|0.2:obj\t_\n", //
                 ConllUReader.PARAM_READ_EMPTY_NODES, true);
 
         assertEquals("a b", jcas.getDocumentText());
@@ -221,8 +240,8 @@ public class ConllUReaderTest
                 .map(t -> t.getId() != null ? t.getId() : t.getCoveredText()) //
                 .collect(toList());
 
-        assertEquals(asList("a"), s1Tokens);
-        assertEquals(asList("0.1", "b"), s2Tokens);
+        assertThat(s1Tokens).containsExactly("a");
+        assertThat(s2Tokens).containsExactlyInAnyOrder("0.1", "0.2", "b");
     }
 
     /**
@@ -426,6 +445,42 @@ public class ConllUReaderTest
     }
 
     /**
+     * The HEAD column can only refer to words or to the root ({@code 0}) - not to empty nodes. The
+     * reader must fail with a message pointing at the offending head instead of a bare number
+     * format error.
+     */
+    @Test
+    public void thatBasicHeadReferringToEmptyNodeIsRejected() throws Exception
+    {
+        assertThatThrownBy(() -> readString("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "1.1\tx\tx\t_\t_\t_\t_\t_\t1:dep\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1.1\tobj\t1.1:obj\t_\n")) //
+                        .rootCause() //
+                        .isInstanceOf(IOException.class) //
+                        .hasMessageContaining("1.1");
+    }
+
+    /**
+     * A head which is not a valid ID at all makes the file invalid. The reader must fail with a
+     * message pointing at the offending head instead of a bare number format error.
+     */
+    @Test
+    public void thatMalformedHeadIsRejected() throws Exception
+    {
+        assertThatThrownBy(() -> readString("1\ta\ta\t_\t_\t_\t0\troot\t_\t_\n" //
+                + "2\tb\tb\t_\t_\t_\tx\tobj\t_\t_\n")) //
+                        .rootCause() //
+                        .isInstanceOf(IOException.class) //
+                        .hasMessageContaining("[x]");
+
+        assertThatThrownBy(() -> readString("1\ta\ta\t_\t_\t_\t0\troot\t0:root\t_\n" //
+                + "2\tb\tb\t_\t_\t_\t1\tobj\tx:obj\t_\n")) //
+                        .rootCause() //
+                        .isInstanceOf(IOException.class) //
+                        .hasMessageContaining("[x]");
+    }
+
+    /**
      * An enhanced head referring to a token which does not exist in the sentence makes the file
      * invalid. The reader must fail with a message pointing at the offending head instead of
      * silently dropping the relation.
@@ -480,9 +535,9 @@ public class ConllUReaderTest
                 + "1\tc\tc\t_\t_\t_\t0\troot\t_\t_\n");
 
         List<Sentence> sentences = new ArrayList<>(select(jcas, Sentence.class));
-        List<Div> subDocuments = subDocuments(jcas);
+        List<SubDocument> subDocuments = subDocuments(jcas);
 
-        assertThat(subDocuments).extracting(Div::getId).containsExactly("d1", "d2");
+        assertThat(subDocuments).extracting(SubDocument::getId).containsExactly("d1", "d2");
 
         assertEquals(sentences.get(0).getBegin(), subDocuments.get(0).getBegin());
         assertEquals(sentences.get(1).getEnd(), subDocuments.get(0).getEnd());
@@ -523,7 +578,7 @@ public class ConllUReaderTest
                 + "1\tb\tb\t_\t_\t_\t0\troot\t_\t_\n");
 
         List<Sentence> sentences = new ArrayList<>(select(jcas, Sentence.class));
-        List<Div> subDocuments = subDocuments(jcas);
+        List<SubDocument> subDocuments = subDocuments(jcas);
 
         assertThat(subDocuments).hasSize(1);
         assertEquals(sentences.get(1).getBegin(), subDocuments.get(0).getBegin());
@@ -560,11 +615,11 @@ public class ConllUReaderTest
                 .noneMatch(p -> p.getBegin() <= s1.getBegin() && p.getEnd() >= s2.getEnd());
     }
 
-    private static List<Div> subDocuments(JCas aJCas)
+    private static List<SubDocument> subDocuments(JCas aJCas)
     {
-        return select(aJCas, Div.class).stream() //
-                .filter(div -> "subDoc".equals(div.getDivType())) //
-                .collect(toList());
+        List<SubDocument> subDocuments = new ArrayList<>(select(aJCas, SubDocument.class));
+        assertThat(subDocuments).allSatisfy(d -> assertThat(d.getDivType()).isEqualTo("subDoc"));
+        return subDocuments;
     }
 
     /**

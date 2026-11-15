@@ -1,21 +1,22 @@
 // Copyright 2018
 // Ubiquitous Knowledge Processing (UKP) Lab
 // Technische Universität Darmstadt
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 // http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-The CoNLL-U format format targets dependency parsing. Columns are tab-separated. Sentences are 
-separated by a blank new line.
+The CoNLL-U format is the format of the link:https://universaldependencies.org/format.html[Universal Dependencies]
+treebanks and targets dependency parsing. Columns are tab-separated. Sentences are separated by a
+blank line and may be preceded by comment lines starting with `#`.
 
 .Columns
 [cols="1,2,3", options="header"]
@@ -23,22 +24,25 @@ separated by a blank new line.
 | Column  | Type/Feature | Description
 
 | ID
-| ignored
-| Word index, integer starting at 1 for each new sentence; may be a range for tokens with multiple words.
+| see description
+| Word index, integer starting at 1 for each new sentence. A range (e.g. `2-3`) marks a multi-word
+  token: its words become separate `Token` annotations and the range line becomes a `SurfaceForm`
+  covering them, holding the surface string (e.g. `del` for `de` + `el`). A decimal number
+  (e.g. `5.1`) marks an empty node (see below).
 
 | FORM
 | Token
-| Word form or punctuation symbol.
+| Word form or punctuation symbol. For empty nodes, the form is stored as a `TokenForm`.
 
 | LEMMA
 | Lemma
 | Lemma or stem of word form.
 
-| CPOSTAG
+| UPOS
 | POS coarseValue
 | Part-of-speech tag from the universal POS tag set.
 
-| POSTAG
+| XPOS
 | POS PosValue
 | Language-specific part-of-speech tag; underscore if not available.
 
@@ -48,39 +52,119 @@ separated by a blank new line.
 
 | HEAD
 | Dependency
-| Head of the current token, which is either a value of ID or zero (0).
+| Head of the current word, which is either a value of ID or zero (0). The root is represented as a
+  `ROOT` dependency whose governor and dependent are the same token.
 
 | DEPREL
 | Dependency
-| Universal Stanford dependency relation to the HEAD (root iff HEAD = 0) or a defined language-specific subtype of one.
+| Universal dependency relation to the HEAD (root iff HEAD = 0) or a defined language-specific subtype of one. Read as a dependency with flavor `basic`.
 
 | DEPS
 | Dependency
-| List of secondary dependencies (head-deprel pairs).
+| Enhanced dependency graph as a list of head-deprel pairs. Read as dependencies with flavor
+  `enhanced`. Relation subtypes containing colons (e.g. `conj:and`) are retained. Heads may refer
+  to empty nodes. When writing, the list is sorted by head.
 
 | MISC
-| unused
-| Any other annotation. 
+| see description
+| Any other annotation. Only `SpaceAfter=No` is used: it determines whether there is a space after
+  a token in the document text. When writing, it is derived from the document text and placed on
+  the multi-word token line for multi-word tokens. Other values are not retained.
 |====
- 
+
+.Comments
+[cols="1,2,3", options="header"]
+|====
+| Comment  | Type/Feature | Description
+
+| `# newdoc` / `# newdoc id = ...`
+| SubDocument
+| Starts a new document within the file. A `SubDocument` covers the sentences of that document and
+  holds its ID (if any). The document ID of the CAS is always derived from the file name, also if
+  the file contains only one document. When writing, a `# newdoc` comment is emitted in front of
+  the first sentence of each `SubDocument` (parameter `writeDocumentId`).
+
+| `# newpar` / `# newpar id = ...`
+| Paragraph
+| Starts a new paragraph. A `Paragraph` covers the sentences of that paragraph and holds its ID (if
+  any). A paragraph ends at the next `# newpar` or `# newdoc`. Paragraphs are only read if the
+  parameter `readParagraph` is enabled. When writing, a `# newpar` comment is emitted in front of
+  the first sentence of each `Paragraph` (parameter `writeParagraph`).
+
+| `# sent_id = ...`
+| Sentence id
+| Sentence identifier.
+
+| `# text = ...`
+| -
+| Ignored when reading - the document text is reconstructed from the words. Generated from the
+  sentence text when writing (parameter `writeTextComment`). Line breaks in the sentence text are
+  replaced with spaces.
+|====
+
+Other comments are not retained.
+
+.Document text
+The reader reconstructs the document text from the words. Words are separated by a space unless
+the word has `SpaceAfter=No`. The words of a multi-word token are always separated by a space, so
+the document text contains `de el` rather than `del` - the original surface string is kept in the
+`SurfaceForm`. Sentences are separated as follows:
+
+* If the file contains no paragraph information (or `readParagraph` is disabled), each sentence is
+  placed on its own line. A `SpaceAfter=No` on the last word of a sentence does not remove this
+  line break.
+* Within a paragraph, sentences are separated by a space - or by nothing if the last word of the
+  previous sentence has `SpaceAfter=No` (e.g. in Chinese or Japanese text).
+* Paragraphs and documents are separated by an empty line.
+
+As CoNLL-U can only express whether there is a space after a word, other whitespace in the
+original text (e.g. line breaks within a paragraph or multiple spaces) is not reproduced.
+
+.Empty nodes
+Empty nodes (decimal IDs such as `5.1`) represent elided material in the enhanced dependency graph.
+As zero-width tokens are not generally considered valid in DKPro Core, empty nodes are only read if
+the parameter `readEmptyNodes` is enabled. In this case, an empty node `i.k` becomes a zero-width
+`Token` placed at the end of word `i` (or at the begin of the sentence for `0.k`). The token retains
+the original ID in its `id` feature and its form as a `TokenForm`. Since several empty nodes and the
+following word may share the same offset, the writer orders empty nodes by their ID rather than by
+their position in the CAS.
+
+If `readEmptyNodes` is disabled (the default), empty nodes are skipped and any enhanced dependencies
+involving them are dropped. A warning reporting the number of dropped dependencies is logged.
+
+.Validation
+The reader fails on lines which do not have 10 tab-separated columns (additional empty columns at the
+end of a line are tolerated) and on heads which do not refer to a word in the sentence. The writer
+fails if the data cannot be represented in CoNLL-U, in particular if:
+
+* a token is the dependent of more than one basic dependency,
+* a dependency connects tokens in different sentences,
+* a basic dependency has an empty node as its governor,
+* a value contains a tab or a line break (CoNLL-U has no escape syntax).
+
+In this case, no output file is created.
+
 .Example
 [source,text,tabsize=0]
 ----
-1	They	they	PRON	PRN	Case=Nom|Number=Plur	2	nsubj	4:nsubj	_
-2	buy	buy	VERB	VB	Number=Plur|Person=3|Tense=Pres	0	root	_	_
-3	and	and	CONJ	CC	_	2	cc	_	_
-4	sell	sell	VERB	VB	Number=Plur|Person=3|Tense=Pres	2	conj	0:root	_
-5	books	book	NOUN	NNS	Number=Plur	2	dobj	4:dobj	SpaceAfter=No
-6	.	.	PUNCT	.	_	2	punct	_	_
+# newdoc id = doc1
+# newpar id = doc1-p1
+# sent_id = doc1-p1-s1
+# text = They buy and sell books.
+1	They	they	PRON	PRN	Case=Nom|Number=Plur	2	nsubj	2:nsubj|4:nsubj	_
+2	buy	buy	VERB	VB	Number=Plur|Person=3|Tense=Pres	0	root	0:root	_
+3	and	and	CONJ	CC	_	4	cc	4:cc	_
+4	sell	sell	VERB	VB	Number=Plur|Person=3|Tense=Pres	2	conj	2:conj:and	_
+5	books	book	NOUN	NNS	Number=Plur	2	obj	2:obj|4:obj	SpaceAfter=No
+6	.	.	PUNCT	.	_	2	punct	2:punct	_
 ----
 
 .Known corpora in this format
 [cols="2*", options="header"]
 |====
-| Corpus 
+| Corpus
 | Language
 
 | link:http://universaldependencies.org[Universal Dependency Treebank]
 | Ancient Greek (to 1453) , Arabic , Basque , Bulgarian , Croatian , Czech , Danish , Dutch , English , Estonian , Finnish , French , German , Gothic , Modern Greek (1453-) , Hebrew , Hindi , Hungarian , Indonesian , Irish , Italian , Japanese , Latin , Norwegian , Church Slavic , Persian , Polish , Portuguese , Romanian , Slovenian , Spanish , Swedish , Tamil , Catalan , Chinese , Galician , Kazakh , Latvian , Russian , Turkish
 |====
-
