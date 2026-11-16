@@ -31,9 +31,9 @@
 11	benefits	benefits	NNS	_	_	_	_	10	OBJ	_	_	_	A1	A1	_	_	A1
 12	that	that	WDT	_	_	_	_	20	OBJ	_	_	_	_	_	_	_	_
 13	many	many	JJ	_	_	_	_	17	NMOD	_	_	_	_	_	_	_	_
-14	entry-level	entry-level	NN	_	_	_	_	16	HMOD	_	_	_	_	_	_	_	_
-15	_	_	_	_	_	_	_	14	HYPH	_	_	_	_	_	_	_	_
-16	_	_	_	_	_	_	_	17	NMOD	_	_	_	_	_	A1	_	_
+14	entry	entry	_	_	_	_	_	16	HMOD	_	_	_	_	_	_	_	_
+15	-	-	_	_	_	_	_	14	HYPH	_	_	_	_	_	_	_	_
+16	level	level	_	_	_	_	_	17	NMOD	_	_	_	_	_	A1	_	_
 17	jobs	jobs	NNS	_	_	_	_	18	SBJ	job.01	_	_	_	_	_	A0	A0
 18	do	do	VBP	_	_	_	_	11	NMOD	do.02	_	_	_	_	_	_	_
 19	n't	not	RB	_	_	_	_	18	ADV	_	_	_	_	_	_	_	_
