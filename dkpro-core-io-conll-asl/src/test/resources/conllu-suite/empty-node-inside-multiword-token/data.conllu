@@ -1,0 +1,6 @@
+1-2	ab	_	_	_	_	_	_	_	_
+1	a	a	_	_	_	0	root	0:root	_
+1.1	x	x	_	_	_	_	_	1:dep	_
+2	b	b	_	_	_	1	obj	1:obj	_
+3	c	c	_	_	_	1	obj	1:obj	_
+

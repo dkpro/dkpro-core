@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.util.Locale.ROOT;
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -228,12 +230,12 @@ public class Conll2008Writer
 
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
-                    lemma = row.token.getLemma().getValue();
+                    lemma = defaultIfBlank(row.token.getLemma().getValue(), UNUSED);
                 }
                 String gpos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
-                    gpos = posAnno.getPosValue();
+                    gpos = defaultIfBlank(posAnno.getPosValue(), UNUSED);
                 }
 
                 String ppos = UNUSED;
@@ -247,7 +249,7 @@ public class Conll2008Writer
                 int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 if (writeDependency && (row.deprel != null)) {
-                    deprel = row.deprel.getDependencyType();
+                    deprel = defaultIfBlank(row.deprel.getDependencyType(), UNUSED);
                     headId = ctokens.get(row.deprel.getGovernor()).id;
                     if (headId == row.id) {
                         // ROOT dependencies may be modeled as a loop, ignore these.
@@ -271,15 +273,16 @@ public class Conll2008Writer
                         if (apreds.length() > 0) {
                             apreds.append('\t');
                         }
-                        apreds.append(arg != null ? arg.getRole() : UNUSED);
+                        apreds.append(arg != null ? defaultIfBlank(arg.getRole(), UNUSED) : UNUSED);
                     }
                 }
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id, form, lemma,
-                        gpos, ppos, split_form, split_lemma, pposs, head, deprel, pred, apreds);
+                aOut.printf(ROOT, "%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id, form,
+                        lemma, gpos, ppos, split_form, split_lemma, pposs, head, deprel, pred,
+                        apreds);
             }
 
-            aOut.println();
+            aOut.print('\n');
         }
     }
 

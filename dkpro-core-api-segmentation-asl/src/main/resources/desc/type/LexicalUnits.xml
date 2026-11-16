@@ -40,7 +40,7 @@
     </typeDescription>    
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document</name>
-      <description/>
+      <description>A document contained within the CAS document, e.g. if a single file holds several documents (such as a CoNLL-U file with several "# newdoc" comments). The ID of the document is stored in the id feature.</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div</supertypeName>
     </typeDescription>
     <typeDescription>

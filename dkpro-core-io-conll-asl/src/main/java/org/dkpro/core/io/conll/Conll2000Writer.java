@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.util.Locale.ROOT;
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -147,7 +149,7 @@ public class Conll2000Writer
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
-                    pos = posAnno.getPosValue();
+                    pos = defaultIfBlank(posAnno.getPosValue(), UNUSED);
                 }
 
                 String chunk = UNUSED;
@@ -155,10 +157,10 @@ public class Conll2000Writer
                     chunk = row.chunk;
                 }
 
-                aOut.printf("%s %s %s\n", form, pos, chunk);
+                aOut.printf(ROOT, "%s %s %s\n", form, pos, chunk);
             }
 
-            aOut.println();
+            aOut.print('\n');
         }
     }
 

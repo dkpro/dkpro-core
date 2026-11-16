@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.util.Locale.ROOT;
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -192,19 +194,19 @@ public class ConllCoreNlpWriter
 
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
-                    lemma = row.token.getLemma().getValue();
+                    lemma = defaultIfBlank(row.token.getLemma().getValue(), UNUSED);
                 }
 
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
-                    pos = posAnno.getPosValue();
+                    pos = defaultIfBlank(posAnno.getPosValue(), UNUSED);
                 }
 
                 int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 if (writeDependency && (row.deprel != null)) {
-                    deprel = row.deprel.getDependencyType();
+                    deprel = defaultIfBlank(row.deprel.getDependencyType(), UNUSED);
                     headId = ctokens.get(row.deprel.getGovernor()).id;
                     if (headId == row.id) {
                         // ROOT dependencies may be modeled as a loop, ignore these.
@@ -222,11 +224,11 @@ public class ConllCoreNlpWriter
                     ner = row.ne;
                 }
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id, form, lemma, pos, ner, head,
-                        deprel);
+                aOut.printf(ROOT, "%d\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id, form, lemma, pos, ner,
+                        head, deprel);
             }
 
-            aOut.println();
+            aOut.print('\n');
         }
     }
 

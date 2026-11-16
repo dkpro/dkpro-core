@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.util.Locale.ROOT;
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
@@ -144,7 +146,7 @@ public class Conll2012Writer
                 partNumber = Integer.parseInt(StringUtils.substringAfterLast(documentId, "#"));
                 documentId = StringUtils.substringBeforeLast(documentId, "#");
             }
-            out.printf("#begin document (%s); part %03d%n", documentId, partNumber);
+            out.printf(ROOT, "#begin document (%s); part %03d\n", documentId, partNumber);
 
             convert(aJCas, out);
         }
@@ -275,13 +277,13 @@ public class Conll2012Writer
 
                 String lemma = UNUSED + " ";
                 if (writeLemma && (row.token.getLemma() != null)) {
-                    lemma = row.token.getLemma().getValue();
+                    lemma = defaultIfBlank(row.token.getLemma().getValue(), UNUSED);
                 }
 
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
-                    pos = posAnno.getPosValue();
+                    pos = defaultIfBlank(posAnno.getPosValue(), UNUSED);
                 }
 
                 String parse = row.parse;
@@ -292,7 +294,7 @@ public class Conll2012Writer
 
                 String wordSense = UNUSED;
                 if (row.wordSense != null) {
-                    wordSense = row.wordSense.getValue();
+                    wordSense = defaultIfBlank(row.wordSense.getValue(), UNUSED);
                 }
 
                 String speaker = UNUSED; // FIXME
@@ -336,7 +338,7 @@ public class Conll2012Writer
                             value = ALT_UNUSED + ' ';
                         }
 
-                        apreds.append(String.format("%10s", value));
+                        apreds.append(String.format(ROOT, "%10s", value));
 
                         argsCol++;
                     }
@@ -356,15 +358,15 @@ public class Conll2012Writer
                     coref.append(UNUSED);
                 }
 
-                aOut.printf("%s %3d %3d %10s %5s %13s %9s %3s %3s %10s %10s %10s %s\n", documentId,
-                        partNumber, id, form, pos, parse, lemma, pred, wordSense, speaker,
-                        namedEntity, apreds, coref);
+                aOut.printf(ROOT, "%s %3d %3d %10s %5s %13s %9s %3s %3s %10s %10s %10s %s\n",
+                        documentId, partNumber, id, form, pos, parse, lemma, pred, wordSense,
+                        speaker, namedEntity, apreds, coref);
             }
 
-            aOut.println();
+            aOut.print('\n');
         }
 
-        aOut.println("#end document");
+        aOut.print("#end document\n");
     }
 
     private String encodeMultiTokenAnnotation(Token aToken, AnnotationFS aAnnotation, String aLabel)

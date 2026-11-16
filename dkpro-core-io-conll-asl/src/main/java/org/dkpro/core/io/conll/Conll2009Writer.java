@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.util.Locale.ROOT;
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -230,27 +232,27 @@ public class Conll2009Writer
 
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
-                    lemma = row.token.getLemma().getValue();
+                    lemma = defaultIfBlank(row.token.getLemma().getValue(), UNUSED);
                 }
                 String plemma = lemma;
 
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
-                    pos = posAnno.getPosValue();
+                    pos = defaultIfBlank(posAnno.getPosValue(), UNUSED);
                 }
                 String ppos = pos;
 
                 String feat = UNUSED;
                 if (writeMorph && (row.feats != null)) {
-                    feat = row.feats.getValue();
+                    feat = defaultIfBlank(row.feats.getValue(), UNUSED);
                 }
                 String pfeat = feat;
 
                 int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 if (writeDependency && (row.deprel != null)) {
-                    deprel = row.deprel.getDependencyType();
+                    deprel = defaultIfBlank(row.deprel.getDependencyType(), UNUSED);
                     headId = ctokens.get(row.deprel.getGovernor()).id;
                     if (headId == row.id) {
                         // ROOT dependencies may be modeled as a loop, ignore these.
@@ -279,16 +281,16 @@ public class Conll2009Writer
                         if (apreds.length() > 0) {
                             apreds.append('\t');
                         }
-                        apreds.append(arg != null ? arg.getRole() : UNUSED);
+                        apreds.append(arg != null ? defaultIfBlank(arg.getRole(), UNUSED) : UNUSED);
                     }
                 }
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id,
-                        form, lemma, plemma, pos, ppos, feat, pfeat, head, phead, deprel, pdeprel,
-                        fillpred, pred, apreds);
+                aOut.printf(ROOT, "%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+                        id, form, lemma, plemma, pos, ppos, feat, pfeat, head, phead, deprel,
+                        pdeprel, fillpred, pred, apreds);
             }
 
-            aOut.println();
+            aOut.print('\n');
         }
     }
 
