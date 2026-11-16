@@ -1626,8 +1626,13 @@ public class TreeTaggerPosTaggerTest
 
     private void checkModelsAndBinary(String lang)
     {
+        checkModelsAndBinary(lang, "le");
+    }
+
+    private void checkModelsAndBinary(String aLanguage, String aVariant)
+    {
         assumeTrue(getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
-                + lang + "-le.bin") != null);
+                + aLanguage + "-" + aVariant + ".bin") != null);
 
         assumeTrue(getClass()
                 .getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null
@@ -1780,12 +1785,82 @@ public class TreeTaggerPosTaggerTest
     @Test
     public void testPortuguese() throws Exception
     {
+        String[] tagset = { "AO0", "AOS", "AQ0", "AQA", "AQC", "AQD", "AQS", "CC", "CS", "DA0",
+                "DD+DI", "DD0", "DI0", "DP1", "DP2", "DP3", "Fat", "Fc", "Fca", "Fct", "Fd", "Fe",
+                "Fg", "Fh", "Fia", "Fit", "Fla", "Flt", "Fp", "Fpa", "Fpt", "Fra", "Frt", "Fs",
+                "Ft", "Fx", "Fz", "I", "NCCN", "NCCP", "NCCS", "NCFN", "NCFP", "NCFS", "NCMN",
+                "NCMP", "NCMS", "NP0", "PD0", "PE0", "PI0", "PP+PP", "PP1", "PP1+PP3", "PP2", "PP3",
+                "PR0", "PT0", "PX1", "PX2", "PX3", "RG", "RN", "SP+DA", "SP+DD", "SP+PD", "SPS",
+                "SPS+DI0", "SPS+PD+PI", "SPS+PI0", "SPS+PP3", "SPS+RG", "SPS+SPS", "V+PP", "VMG",
+                "VMI", "VMM", "VMN", "VMP", "VMS", "Z" };
+
+        runTest("pt", "eagles-reduced", tagset, "Isto \u00e9 um teste .",
+                new String[] { "isto", "ser", "um", "teste", "." },
+                new String[] { "PD0", "VMI", "DI0", "NCMS", "Fp" },
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
+    }
+
+    @Test
+    public void testPortugueseFinegrained() throws Exception
+    {
+        String[] tagset = { "*+*", "AO0FP0", "AO0FS0", "AO0MP0", "AO0MS0", "AOSFP0", "AOSFS0",
+                "AOSMP0", "AOSMS0", "AQ0CN0", "AQ0CP0", "AQ0CS0", "AQ0FN0", "AQ0FP0", "AQ0FS0",
+                "AQ0MN0", "AQ0MP0", "AQ0MS0", "AQAFP0", "AQAFS0", "AQAMP0", "AQAMS0", "AQCCP0",
+                "AQCCS0", "AQCFP0", "AQCFS0", "AQCMP0", "AQCMS0", "AQDCP0", "AQDCS0", "AQDFP0",
+                "AQDFS0", "AQDMP0", "AQDMS0", "AQSCP0", "AQSCS0", "AQSFP0", "AQSFS0", "AQSMP0",
+                "AQSMS0", "CC", "CS", "DA0CN0", "DA0FP0", "DA0FS0", "DA0MP0", "DA0MS0", "DD0CP0",
+                "DD0CS0", "DD0FP0", "DD0FS0", "DD0MP0", "DD0MS0", "DI0CP0", "DI0CS0", "DI0FP0",
+                "DI0FS0", "DI0MP0", "DI0MS0", "DI0NN0", "DP1FPP", "DP1FPS", "DP1FSP", "DP1FSS",
+                "DP1MPP", "DP1MPS", "DP1MSP", "DP1MSS", "DP2FPP", "DP2FPS", "DP2FSP", "DP2FSS",
+                "DP2MPP", "DP2MPS", "DP2MSP", "DP2MSS", "DP3FPS", "DP3FSS", "DP3MPS", "DP3MSS",
+                "Fat", "Fc", "Fca", "Fct", "Fd", "Fe", "Fg", "Fh", "Fia", "Fit", "Fla", "Flt", "Fp",
+                "Fpa", "Fpt", "Fra", "Frt", "Fs", "Ft", "Fx", "Fz", "I", "NCCN000", "NCCP000",
+                "NCCP00D", "NCCS000", "NCCS00D", "NCFN000", "NCFP000", "NCFP00A", "NCFP00D",
+                "NCFS000", "NCFS00A", "NCFS00D", "NCMN000", "NCMP000", "NCMP00A", "NCMP00D",
+                "NCMS000", "NCMS00A", "NCMS00D", "NP00000", "PD0CN000", "PD0CP000", "PD0CS000",
+                "PD0FP000", "PD0FS000", "PD0MP000", "PD0MS000", "PD0NN000", "PE0CN000", "PE0CP000",
+                "PE0CS000", "PE0FP000", "PE0FS000", "PE0MP000", "PE0MS000", "PI0CN000", "PI0CP000",
+                "PI0CS000", "PI0FP000", "PI0FS000", "PI0MP000", "PI0MS000", "PI0NN000", "PP+PP",
+                "PP1CP000", "PP1CPO00", "PP1CS000", "PP1CS000+PP3FPA00", "PP1CSN00", "PP1CSO00",
+                "PP2CP000", "PP2CPN00", "PP2CS000", "PP2CSN00", "PP2CSO00", "PP3CN000", "PP3CP000",
+                "PP3CPD00", "PP3CS000", "PP3CSD00", "PP3CSO00", "PP3FP000", "PP3FPA00", "PP3FS000",
+                "PP3FSA00", "PP3MP000", "PP3MPA00", "PP3MS000", "PP3MSA00", "PR0CN000", "PR0CP000",
+                "PR0CS000", "PR0FP000", "PR0FS000", "PR0MP000", "PR0MS000", "PT0CN000", "PT0CP000",
+                "PT0CS000", "PT0FP000", "PT0FS000", "PT0MP000", "PT0MS000", "PX1FP0P0", "PX1FP0S0",
+                "PX1FS0P0", "PX1FS0S0", "PX1MP0P0", "PX1MP0S0", "PX1MS0P0", "PX1MS0S0", "PX2FP0P0",
+                "PX2FP0S0", "PX2FS0P0", "PX2FS0S0", "PX2MP0P0", "PX2MP0S0", "PX2MS0P0", "PX2MS0S0",
+                "PX3FP0P0", "PX3FP0S0", "PX3FS0P0", "PX3FS0S0", "PX3MP0P0", "PX3MP0S0", "PX3MS0P0",
+                "PX3MS0S0", "RG", "RN", "SP+DA", "SP+DD", "SP+PD", "SPS00", "SPS00+*",
+                "SPS00+DI0FP0", "SPS00+DI0FS0", "SPS00+DI0MP0", "SPS00+DI0MS0", "SPS00+PD+PI",
+                "SPS00+PI0CN000", "SPS00+PP3FP000", "SPS00+PP3FS000", "SPS00+PP3MP000",
+                "SPS00+PP3MS000", "SPS00+RG", "SPS00+SPS00", "V+PP", "VMG0000", "VMIC1P0",
+                "VMIC1S0", "VMIC2P0", "VMIC2S0", "VMIC3P0", "VMIC3S0", "VMIF1P0", "VMIF1S0",
+                "VMIF2P0", "VMIF2S0", "VMIF3P0", "VMIF3S0", "VMII1P0", "VMII1S0", "VMII2P0",
+                "VMII2S0", "VMII3P0", "VMII3S0", "VMIM1P0", "VMIM1S0", "VMIM2P0", "VMIM2S0",
+                "VMIM3P0", "VMIM3S0", "VMIP1P0", "VMIP1S0", "VMIP2P0", "VMIP2S0", "VMIP3P0",
+                "VMIP3S0", "VMIS1P0", "VMIS1S0", "VMIS2P0", "VMIS2S0", "VMIS3P0", "VMIS3S0",
+                "VMM01P0", "VMM02P0", "VMM02S0", "VMM03P0", "VMM03S0", "VMN0000", "VMN01P0",
+                "VMN01S0", "VMN02P0", "VMN02S0", "VMN03P0", "VMN03S0", "VMP0000", "VMP00P0",
+                "VMP00PF", "VMP00PM", "VMP00SF", "VMP00SM", "VMSF1P0", "VMSF1S0", "VMSF2P0",
+                "VMSF2S0", "VMSF3P0", "VMSF3S0", "VMSI1P0", "VMSI1S0", "VMSI2P0", "VMSI2S0",
+                "VMSI3P0", "VMSI3S0", "VMSP1P0", "VMSP1S0", "VMSP2P0", "VMSP2S0", "VMSP3P0",
+                "VMSP3S0", "Z" };
+
+        runTest("pt", "finegrained-le", "eagles", tagset, "Isto \u00e9 um teste .",
+                new String[] { "isto", "ser", "um", "teste", "." },
+                new String[] { "PD0NN000", "VMIP3S0", "DI0MS0", "NCMS000", "Fp" },
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
+    }
+
+    @Test
+    public void testPortugueseGamallo() throws Exception
+    {
         String[] tagset = { "ADJ", "ADV", "ADV+P", "B", "CARD", "CONJ", "DET", "DET+T", "E", "F",
                 "G", "I", "IL", "L", "L+DET", "NOM", "P", "P+P", "PRP", "PRP+ADJ", "PRP+ADV",
                 "PRP+DET", "PRP+NOM", "PRP+P", "PRP+PRP", "QUOTE", "SENT", "V", "V+P", "V+P+P",
                 "V+P_d", "V+U_d", "V+U_d+P", "VIRG", "X" };
 
-        runTest("pt", "gamallo", tagset, "Isto \u00e9 um teste .",
+        runTest("pt", "gamallo-le", "gamallo", tagset, "Isto \u00e9 um teste .",
                 new String[] { "isto", "ser", "um", "teste", "." },
                 new String[] { "P", "V", "DET", "NOM", "SENT" },
                 new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
@@ -2832,20 +2907,28 @@ public class TreeTaggerPosTaggerTest
             String[] lemmas, String[] tags, String[] tagClasses)
         throws Exception
     {
-        checkModelsAndBinary(language);
+        return runTest(language, "le", tagsetName, tagset, testDocument, lemmas, tags, tagClasses);
+    }
 
-        AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class,
+    private JCas runTest(String aLanguage, String aVariant, String aTagsetName, String[] aTagset,
+            String aTestDocument, String[] aLemmas, String[] aTags, String[] aTagClasses)
+        throws Exception
+    {
+        checkModelsAndBinary(aLanguage, aVariant);
+
+        AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class, //
+                TreeTaggerPosTagger.PARAM_VARIANT, aVariant, //
                 TreeTaggerPosTagger.PARAM_PRINT_TAGSET, true);
 
-        JCas aJCas = TestRunner.runTest(engine, language, testDocument);
+        JCas jcas = TestRunner.runTest(engine, aLanguage, aTestDocument);
 
-        AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
-        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
-        if (tagset != null) {
-            AssertAnnotations.assertTagset(POS.class, tagsetName, tagset, aJCas);
+        AssertAnnotations.assertLemma(aLemmas, select(jcas, Lemma.class));
+        AssertAnnotations.assertPOS(aTagClasses, aTags, select(jcas, POS.class));
+        if (aTagset != null) {
+            AssertAnnotations.assertTagset(POS.class, aTagsetName, aTagset, jcas);
         }
 
-        return aJCas;
+        return jcas;
     }
 
     /**

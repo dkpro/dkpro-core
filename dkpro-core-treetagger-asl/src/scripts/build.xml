@@ -956,36 +956,102 @@
   
   <target name="pt">
     <antcall target="pt-tagger-le"/>
+    <antcall target="pt-tagger-finegrained-le"/>
+    <antcall target="pt-tagger-gamallo-le"/>
   </target>
 
   <target name="pt-tagger-le">
     <mkdir dir="target/download"/>
-    
+
+    <!-- Up to model version 20260615.0, this model was obtained from Pablo Gamallo's website
+      - (http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz, ISO-8859-1, gamallo
+      - tagset). It is now obtained from the TreeTagger website (UTF-8, reduced EAGLES tagset).
+      -->
+    <!-- FILE: portuguese.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | f38cfc1470f914d414c531e60fc7b363 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/portuguese.par.gz"
+        dest="target/download/portuguese.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/portuguese.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/portuguese.par"
+        md5="f38cfc1470f914d414c531e60fc7b363"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="pt"
+        variant="le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="eagles-reduced"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="pt-tagger-finegrained-le">
+    <mkdir dir="target/download"/>
+
+    <!-- FILE: portuguese-finegrained.par.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      - 2018-10-15 | now        | 340ad070c890b2aec04bbff4b1eeae85 (upstream mtime)
+      -->
+      <get
+        src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/portuguese-finegrained.par.gz"
+        dest="target/download/portuguese-finegrained.par.gz"
+        skipexisting="true"/>
+    <gunzip src="target/download/portuguese-finegrained.par.gz"/>
+      <install-stub-and-upstream-file
+        file="target/download/portuguese-finegrained.par"
+        md5="340ad070c890b2aec04bbff4b1eeae85"
+        groupId="de.tudarmstadt.ukp.dkpro.core"
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+        upstreamVersion="20181015"
+        metaDataVersion="0"
+        tool="tagger"
+        language="pt"
+        variant="finegrained-le"
+        extension="bin">
+      <metadata>
+          <entry key="pos.tagset" value="eagles"/>
+          <entry key="encoding" value="UTF-8"/>
+      </metadata>
+    </install-stub-and-upstream-file>
+  </target>
+
+  <target name="pt-tagger-gamallo-le">
+    <mkdir dir="target/download"/>
+
+    <!-- Up to model version 20260615.0, this was the default model for Portuguese (variant "le").
+      -->
     <!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - 2010-11-15 | 2026-06-15 | cf9855b4e215fa7a393700aa135830b0
       - 2026-06-15 | now        | f482b6fbc0713cf138fe678ba3d842d3 (date observed; gamallo server sends no Last-Modified)
       -->
       <get
         src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
-        dest="target/download/tree-taggerPT-GZ.tar.gz" 
+        dest="target/download/tree-taggerPT-GZ.tar.gz"
         skipexisting="true"/>
     <gunzip src="target/download/tree-taggerPT-GZ.tar.gz"/>
       <untar src="target/download/tree-taggerPT-GZ.tar" dest="target/download">
         <patternset>
-          <include name="**/pt.par"/>    
+          <include name="**/pt.par"/>
       </patternset>
         <mapper type="flatten"/>
       </untar>
-      <install-stub-and-upstream-file 
-        file="target/download/pt.par" 
+      <install-stub-and-upstream-file
+        file="target/download/pt.par"
         md5="f482b6fbc0713cf138fe678ba3d842d3"
         groupId="de.tudarmstadt.ukp.dkpro.core"
         artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
         upstreamVersion="20260615"
         metaDataVersion="0"
-        tool="tagger" 
-        language="pt" 
-        variant="le" 
+        tool="tagger"
+        language="pt"
+        variant="gamallo-le"
         extension="bin">
       <metadata>
           <entry key="pos.tagset" value="gamallo"/>

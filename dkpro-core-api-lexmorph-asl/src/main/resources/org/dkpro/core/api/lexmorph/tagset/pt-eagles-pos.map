@@ -1,0 +1,619 @@
+# EAGLES
+#
+# Portuguese TreeTagger Part-of-Speech Tags (fine-grained EAGLES tagset) as used by the
+# fine-grained TreeTagger parameter file for Portuguese provided by Pablo Gamallo.
+#
+# Contractions (tags joined by '+') are mapped according to their first component.
+#
+# Source: tag list extracted from the TreeTagger model
+__META_SOURCE_URL__=https\://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/Portuguese-Tagset.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# *+*	Undocumented
+*+*=POS_X
+# AO0FP0	Adjective, ordinal
+AO0FP0=POS_ADJ
+# AO0FS0	Adjective, ordinal
+AO0FS0=POS_ADJ
+# AO0MP0	Adjective, ordinal
+AO0MP0=POS_ADJ
+# AO0MS0	Adjective, ordinal
+AO0MS0=POS_ADJ
+# AOSFP0	Adjective, ordinal
+AOSFP0=POS_ADJ
+# AOSFS0	Adjective, ordinal
+AOSFS0=POS_ADJ
+# AOSMP0	Adjective, ordinal
+AOSMP0=POS_ADJ
+# AOSMS0	Adjective, ordinal
+AOSMS0=POS_ADJ
+# AQ0CN0	Adjective, qualifying
+AQ0CN0=POS_ADJ
+# AQ0CP0	Adjective, qualifying
+AQ0CP0=POS_ADJ
+# AQ0CS0	Adjective, qualifying
+AQ0CS0=POS_ADJ
+# AQ0FN0	Adjective, qualifying
+AQ0FN0=POS_ADJ
+# AQ0FP0	Adjective, qualifying
+AQ0FP0=POS_ADJ
+# AQ0FS0	Adjective, qualifying
+AQ0FS0=POS_ADJ
+# AQ0MN0	Adjective, qualifying
+AQ0MN0=POS_ADJ
+# AQ0MP0	Adjective, qualifying
+AQ0MP0=POS_ADJ
+# AQ0MS0	Adjective, qualifying
+AQ0MS0=POS_ADJ
+# AQAFP0	Adjective, qualifying
+AQAFP0=POS_ADJ
+# AQAFS0	Adjective, qualifying
+AQAFS0=POS_ADJ
+# AQAMP0	Adjective, qualifying
+AQAMP0=POS_ADJ
+# AQAMS0	Adjective, qualifying
+AQAMS0=POS_ADJ
+# AQCCP0	Adjective, qualifying
+AQCCP0=POS_ADJ
+# AQCCS0	Adjective, qualifying
+AQCCS0=POS_ADJ
+# AQCFP0	Adjective, qualifying
+AQCFP0=POS_ADJ
+# AQCFS0	Adjective, qualifying
+AQCFS0=POS_ADJ
+# AQCMP0	Adjective, qualifying
+AQCMP0=POS_ADJ
+# AQCMS0	Adjective, qualifying
+AQCMS0=POS_ADJ
+# AQDCP0	Adjective, qualifying
+AQDCP0=POS_ADJ
+# AQDCS0	Adjective, qualifying
+AQDCS0=POS_ADJ
+# AQDFP0	Adjective, qualifying
+AQDFP0=POS_ADJ
+# AQDFS0	Adjective, qualifying
+AQDFS0=POS_ADJ
+# AQDMP0	Adjective, qualifying
+AQDMP0=POS_ADJ
+# AQDMS0	Adjective, qualifying
+AQDMS0=POS_ADJ
+# AQSCP0	Adjective, qualifying
+AQSCP0=POS_ADJ
+# AQSCS0	Adjective, qualifying
+AQSCS0=POS_ADJ
+# AQSFP0	Adjective, qualifying
+AQSFP0=POS_ADJ
+# AQSFS0	Adjective, qualifying
+AQSFS0=POS_ADJ
+# AQSMP0	Adjective, qualifying
+AQSMP0=POS_ADJ
+# AQSMS0	Adjective, qualifying
+AQSMS0=POS_ADJ
+# CC	Conjunction, coordinating
+CC=POS_CONJ
+# CS	Conjunction, subordinating
+CS=POS_SCONJ
+# DA0CN0	Determiner, article
+DA0CN0=POS_DET
+# DA0FP0	Determiner, article
+DA0FP0=POS_DET
+# DA0FS0	Determiner, article
+DA0FS0=POS_DET
+# DA0MP0	Determiner, article
+DA0MP0=POS_DET
+# DA0MS0	Determiner, article
+DA0MS0=POS_DET
+# DD0CP0	Determiner, demonstrative
+DD0CP0=POS_DET
+# DD0CS0	Determiner, demonstrative
+DD0CS0=POS_DET
+# DD0FP0	Determiner, demonstrative
+DD0FP0=POS_DET
+# DD0FS0	Determiner, demonstrative
+DD0FS0=POS_DET
+# DD0MP0	Determiner, demonstrative
+DD0MP0=POS_DET
+# DD0MS0	Determiner, demonstrative
+DD0MS0=POS_DET
+# DI0CP0	Determiner, indefinite
+DI0CP0=POS_DET
+# DI0CS0	Determiner, indefinite
+DI0CS0=POS_DET
+# DI0FP0	Determiner, indefinite
+DI0FP0=POS_DET
+# DI0FS0	Determiner, indefinite
+DI0FS0=POS_DET
+# DI0MP0	Determiner, indefinite
+DI0MP0=POS_DET
+# DI0MS0	Determiner, indefinite
+DI0MS0=POS_DET
+# DI0NN0	Determiner, indefinite
+DI0NN0=POS_DET
+# DP1FPP	Determiner, possessive
+DP1FPP=POS_DET
+# DP1FPS	Determiner, possessive
+DP1FPS=POS_DET
+# DP1FSP	Determiner, possessive
+DP1FSP=POS_DET
+# DP1FSS	Determiner, possessive
+DP1FSS=POS_DET
+# DP1MPP	Determiner, possessive
+DP1MPP=POS_DET
+# DP1MPS	Determiner, possessive
+DP1MPS=POS_DET
+# DP1MSP	Determiner, possessive
+DP1MSP=POS_DET
+# DP1MSS	Determiner, possessive
+DP1MSS=POS_DET
+# DP2FPP	Determiner, possessive
+DP2FPP=POS_DET
+# DP2FPS	Determiner, possessive
+DP2FPS=POS_DET
+# DP2FSP	Determiner, possessive
+DP2FSP=POS_DET
+# DP2FSS	Determiner, possessive
+DP2FSS=POS_DET
+# DP2MPP	Determiner, possessive
+DP2MPP=POS_DET
+# DP2MPS	Determiner, possessive
+DP2MPS=POS_DET
+# DP2MSP	Determiner, possessive
+DP2MSP=POS_DET
+# DP2MSS	Determiner, possessive
+DP2MSS=POS_DET
+# DP3FPS	Determiner, possessive
+DP3FPS=POS_DET
+# DP3FSS	Determiner, possessive
+DP3FSS=POS_DET
+# DP3MPS	Determiner, possessive
+DP3MPS=POS_DET
+# DP3MSS	Determiner, possessive
+DP3MSS=POS_DET
+# Fat	Punctuation
+Fat=POS_PUNCT
+# Fc	Punctuation
+Fc=POS_PUNCT
+# Fca	Punctuation
+Fca=POS_PUNCT
+# Fct	Punctuation
+Fct=POS_PUNCT
+# Fd	Punctuation
+Fd=POS_PUNCT
+# Fe	Punctuation
+Fe=POS_PUNCT
+# Fg	Punctuation
+Fg=POS_PUNCT
+# Fh	Punctuation
+Fh=POS_PUNCT
+# Fia	Punctuation
+Fia=POS_PUNCT
+# Fit	Punctuation
+Fit=POS_PUNCT
+# Fla	Punctuation
+Fla=POS_PUNCT
+# Flt	Punctuation
+Flt=POS_PUNCT
+# Fp	Punctuation
+Fp=POS_PUNCT
+# Fpa	Punctuation
+Fpa=POS_PUNCT
+# Fpt	Punctuation
+Fpt=POS_PUNCT
+# Fra	Punctuation
+Fra=POS_PUNCT
+# Frt	Punctuation
+Frt=POS_PUNCT
+# Fs	Punctuation
+Fs=POS_PUNCT
+# Ft	Punctuation
+Ft=POS_PUNCT
+# Fx	Punctuation
+Fx=POS_PUNCT
+# Fz	Punctuation
+Fz=POS_PUNCT
+# I	Interjection
+I=POS_INTJ
+# NCCN000	Noun, common
+NCCN000=POS_NOUN
+# NCCP000	Noun, common
+NCCP000=POS_NOUN
+# NCCP00D	Noun, common
+NCCP00D=POS_NOUN
+# NCCS000	Noun, common
+NCCS000=POS_NOUN
+# NCCS00D	Noun, common
+NCCS00D=POS_NOUN
+# NCFN000	Noun, common
+NCFN000=POS_NOUN
+# NCFP000	Noun, common
+NCFP000=POS_NOUN
+# NCFP00A	Noun, common
+NCFP00A=POS_NOUN
+# NCFP00D	Noun, common
+NCFP00D=POS_NOUN
+# NCFS000	Noun, common
+NCFS000=POS_NOUN
+# NCFS00A	Noun, common
+NCFS00A=POS_NOUN
+# NCFS00D	Noun, common
+NCFS00D=POS_NOUN
+# NCMN000	Noun, common
+NCMN000=POS_NOUN
+# NCMP000	Noun, common
+NCMP000=POS_NOUN
+# NCMP00A	Noun, common
+NCMP00A=POS_NOUN
+# NCMP00D	Noun, common
+NCMP00D=POS_NOUN
+# NCMS000	Noun, common
+NCMS000=POS_NOUN
+# NCMS00A	Noun, common
+NCMS00A=POS_NOUN
+# NCMS00D	Noun, common
+NCMS00D=POS_NOUN
+# NP00000	Noun, proper
+NP00000=POS_PROPN
+# PD0CN000	Pronoun, demonstrative
+PD0CN000=POS_PRON
+# PD0CP000	Pronoun, demonstrative
+PD0CP000=POS_PRON
+# PD0CS000	Pronoun, demonstrative
+PD0CS000=POS_PRON
+# PD0FP000	Pronoun, demonstrative
+PD0FP000=POS_PRON
+# PD0FS000	Pronoun, demonstrative
+PD0FS000=POS_PRON
+# PD0MP000	Pronoun, demonstrative
+PD0MP000=POS_PRON
+# PD0MS000	Pronoun, demonstrative
+PD0MS000=POS_PRON
+# PD0NN000	Pronoun, demonstrative
+PD0NN000=POS_PRON
+# PE0CN000	Pronoun, exclamative
+PE0CN000=POS_PRON
+# PE0CP000	Pronoun, exclamative
+PE0CP000=POS_PRON
+# PE0CS000	Pronoun, exclamative
+PE0CS000=POS_PRON
+# PE0FP000	Pronoun, exclamative
+PE0FP000=POS_PRON
+# PE0FS000	Pronoun, exclamative
+PE0FS000=POS_PRON
+# PE0MP000	Pronoun, exclamative
+PE0MP000=POS_PRON
+# PE0MS000	Pronoun, exclamative
+PE0MS000=POS_PRON
+# PI0CN000	Pronoun, indefinite
+PI0CN000=POS_PRON
+# PI0CP000	Pronoun, indefinite
+PI0CP000=POS_PRON
+# PI0CS000	Pronoun, indefinite
+PI0CS000=POS_PRON
+# PI0FP000	Pronoun, indefinite
+PI0FP000=POS_PRON
+# PI0FS000	Pronoun, indefinite
+PI0FS000=POS_PRON
+# PI0MP000	Pronoun, indefinite
+PI0MP000=POS_PRON
+# PI0MS000	Pronoun, indefinite
+PI0MS000=POS_PRON
+# PI0NN000	Pronoun, indefinite
+PI0NN000=POS_PRON
+# PP+PP	Pronoun, personal (contraction)
+PP+PP=POS_PRON
+# PP1CP000	Pronoun, personal
+PP1CP000=POS_PRON
+# PP1CPO00	Pronoun, personal
+PP1CPO00=POS_PRON
+# PP1CS000	Pronoun, personal
+PP1CS000=POS_PRON
+# PP1CS000+PP3FPA00	Pronoun, personal (contraction)
+PP1CS000+PP3FPA00=POS_PRON
+# PP1CSN00	Pronoun, personal
+PP1CSN00=POS_PRON
+# PP1CSO00	Pronoun, personal
+PP1CSO00=POS_PRON
+# PP2CP000	Pronoun, personal
+PP2CP000=POS_PRON
+# PP2CPN00	Pronoun, personal
+PP2CPN00=POS_PRON
+# PP2CS000	Pronoun, personal
+PP2CS000=POS_PRON
+# PP2CSN00	Pronoun, personal
+PP2CSN00=POS_PRON
+# PP2CSO00	Pronoun, personal
+PP2CSO00=POS_PRON
+# PP3CN000	Pronoun, personal
+PP3CN000=POS_PRON
+# PP3CP000	Pronoun, personal
+PP3CP000=POS_PRON
+# PP3CPD00	Pronoun, personal
+PP3CPD00=POS_PRON
+# PP3CS000	Pronoun, personal
+PP3CS000=POS_PRON
+# PP3CSD00	Pronoun, personal
+PP3CSD00=POS_PRON
+# PP3CSO00	Pronoun, personal
+PP3CSO00=POS_PRON
+# PP3FP000	Pronoun, personal
+PP3FP000=POS_PRON
+# PP3FPA00	Pronoun, personal
+PP3FPA00=POS_PRON
+# PP3FS000	Pronoun, personal
+PP3FS000=POS_PRON
+# PP3FSA00	Pronoun, personal
+PP3FSA00=POS_PRON
+# PP3MP000	Pronoun, personal
+PP3MP000=POS_PRON
+# PP3MPA00	Pronoun, personal
+PP3MPA00=POS_PRON
+# PP3MS000	Pronoun, personal
+PP3MS000=POS_PRON
+# PP3MSA00	Pronoun, personal
+PP3MSA00=POS_PRON
+# PR0CN000	Pronoun, relative
+PR0CN000=POS_PRON
+# PR0CP000	Pronoun, relative
+PR0CP000=POS_PRON
+# PR0CS000	Pronoun, relative
+PR0CS000=POS_PRON
+# PR0FP000	Pronoun, relative
+PR0FP000=POS_PRON
+# PR0FS000	Pronoun, relative
+PR0FS000=POS_PRON
+# PR0MP000	Pronoun, relative
+PR0MP000=POS_PRON
+# PR0MS000	Pronoun, relative
+PR0MS000=POS_PRON
+# PT0CN000	Pronoun, interrogative
+PT0CN000=POS_PRON
+# PT0CP000	Pronoun, interrogative
+PT0CP000=POS_PRON
+# PT0CS000	Pronoun, interrogative
+PT0CS000=POS_PRON
+# PT0FP000	Pronoun, interrogative
+PT0FP000=POS_PRON
+# PT0FS000	Pronoun, interrogative
+PT0FS000=POS_PRON
+# PT0MP000	Pronoun, interrogative
+PT0MP000=POS_PRON
+# PT0MS000	Pronoun, interrogative
+PT0MS000=POS_PRON
+# PX1FP0P0	Pronoun, possessive
+PX1FP0P0=POS_PRON
+# PX1FP0S0	Pronoun, possessive
+PX1FP0S0=POS_PRON
+# PX1FS0P0	Pronoun, possessive
+PX1FS0P0=POS_PRON
+# PX1FS0S0	Pronoun, possessive
+PX1FS0S0=POS_PRON
+# PX1MP0P0	Pronoun, possessive
+PX1MP0P0=POS_PRON
+# PX1MP0S0	Pronoun, possessive
+PX1MP0S0=POS_PRON
+# PX1MS0P0	Pronoun, possessive
+PX1MS0P0=POS_PRON
+# PX1MS0S0	Pronoun, possessive
+PX1MS0S0=POS_PRON
+# PX2FP0P0	Pronoun, possessive
+PX2FP0P0=POS_PRON
+# PX2FP0S0	Pronoun, possessive
+PX2FP0S0=POS_PRON
+# PX2FS0P0	Pronoun, possessive
+PX2FS0P0=POS_PRON
+# PX2FS0S0	Pronoun, possessive
+PX2FS0S0=POS_PRON
+# PX2MP0P0	Pronoun, possessive
+PX2MP0P0=POS_PRON
+# PX2MP0S0	Pronoun, possessive
+PX2MP0S0=POS_PRON
+# PX2MS0P0	Pronoun, possessive
+PX2MS0P0=POS_PRON
+# PX2MS0S0	Pronoun, possessive
+PX2MS0S0=POS_PRON
+# PX3FP0P0	Pronoun, possessive
+PX3FP0P0=POS_PRON
+# PX3FP0S0	Pronoun, possessive
+PX3FP0S0=POS_PRON
+# PX3FS0P0	Pronoun, possessive
+PX3FS0P0=POS_PRON
+# PX3FS0S0	Pronoun, possessive
+PX3FS0S0=POS_PRON
+# PX3MP0P0	Pronoun, possessive
+PX3MP0P0=POS_PRON
+# PX3MP0S0	Pronoun, possessive
+PX3MP0S0=POS_PRON
+# PX3MS0P0	Pronoun, possessive
+PX3MS0P0=POS_PRON
+# PX3MS0S0	Pronoun, possessive
+PX3MS0S0=POS_PRON
+# RG	Adverb, general
+RG=POS_ADV
+# RN	Adverb, negative
+RN=POS_ADV
+# SP+DA	Adposition, preposition (contraction)
+SP+DA=POS_ADP
+# SP+DD	Adposition, preposition (contraction)
+SP+DD=POS_ADP
+# SP+PD	Adposition, preposition (contraction)
+SP+PD=POS_ADP
+# SPS00	Adposition, preposition
+SPS00=POS_ADP
+# SPS00+*	Adposition, preposition (contraction)
+SPS00+*=POS_ADP
+# SPS00+DI0FP0	Adposition, preposition (contraction)
+SPS00+DI0FP0=POS_ADP
+# SPS00+DI0FS0	Adposition, preposition (contraction)
+SPS00+DI0FS0=POS_ADP
+# SPS00+DI0MP0	Adposition, preposition (contraction)
+SPS00+DI0MP0=POS_ADP
+# SPS00+DI0MS0	Adposition, preposition (contraction)
+SPS00+DI0MS0=POS_ADP
+# SPS00+PD+PI	Adposition, preposition (contraction)
+SPS00+PD+PI=POS_ADP
+# SPS00+PI0CN000	Adposition, preposition (contraction)
+SPS00+PI0CN000=POS_ADP
+# SPS00+PP3FP000	Adposition, preposition (contraction)
+SPS00+PP3FP000=POS_ADP
+# SPS00+PP3FS000	Adposition, preposition (contraction)
+SPS00+PP3FS000=POS_ADP
+# SPS00+PP3MP000	Adposition, preposition (contraction)
+SPS00+PP3MP000=POS_ADP
+# SPS00+PP3MS000	Adposition, preposition (contraction)
+SPS00+PP3MS000=POS_ADP
+# SPS00+RG	Adposition, preposition (contraction)
+SPS00+RG=POS_ADP
+# SPS00+SPS00	Adposition, preposition (contraction)
+SPS00+SPS00=POS_ADP
+# V+PP	Verb (contraction)
+V+PP=POS_VERB
+# VMG0000	Verb, main
+VMG0000=POS_VERB
+# VMIC1P0	Verb, main
+VMIC1P0=POS_VERB
+# VMIC1S0	Verb, main
+VMIC1S0=POS_VERB
+# VMIC2P0	Verb, main
+VMIC2P0=POS_VERB
+# VMIC2S0	Verb, main
+VMIC2S0=POS_VERB
+# VMIC3P0	Verb, main
+VMIC3P0=POS_VERB
+# VMIC3S0	Verb, main
+VMIC3S0=POS_VERB
+# VMIF1P0	Verb, main
+VMIF1P0=POS_VERB
+# VMIF1S0	Verb, main
+VMIF1S0=POS_VERB
+# VMIF2P0	Verb, main
+VMIF2P0=POS_VERB
+# VMIF2S0	Verb, main
+VMIF2S0=POS_VERB
+# VMIF3P0	Verb, main
+VMIF3P0=POS_VERB
+# VMIF3S0	Verb, main
+VMIF3S0=POS_VERB
+# VMII1P0	Verb, main
+VMII1P0=POS_VERB
+# VMII1S0	Verb, main
+VMII1S0=POS_VERB
+# VMII2P0	Verb, main
+VMII2P0=POS_VERB
+# VMII2S0	Verb, main
+VMII2S0=POS_VERB
+# VMII3P0	Verb, main
+VMII3P0=POS_VERB
+# VMII3S0	Verb, main
+VMII3S0=POS_VERB
+# VMIM1P0	Verb, main
+VMIM1P0=POS_VERB
+# VMIM1S0	Verb, main
+VMIM1S0=POS_VERB
+# VMIM2P0	Verb, main
+VMIM2P0=POS_VERB
+# VMIM2S0	Verb, main
+VMIM2S0=POS_VERB
+# VMIM3P0	Verb, main
+VMIM3P0=POS_VERB
+# VMIM3S0	Verb, main
+VMIM3S0=POS_VERB
+# VMIP1P0	Verb, main
+VMIP1P0=POS_VERB
+# VMIP1S0	Verb, main
+VMIP1S0=POS_VERB
+# VMIP2P0	Verb, main
+VMIP2P0=POS_VERB
+# VMIP2S0	Verb, main
+VMIP2S0=POS_VERB
+# VMIP3P0	Verb, main
+VMIP3P0=POS_VERB
+# VMIP3S0	Verb, main
+VMIP3S0=POS_VERB
+# VMIS1P0	Verb, main
+VMIS1P0=POS_VERB
+# VMIS1S0	Verb, main
+VMIS1S0=POS_VERB
+# VMIS2P0	Verb, main
+VMIS2P0=POS_VERB
+# VMIS2S0	Verb, main
+VMIS2S0=POS_VERB
+# VMIS3P0	Verb, main
+VMIS3P0=POS_VERB
+# VMIS3S0	Verb, main
+VMIS3S0=POS_VERB
+# VMM01P0	Verb, main
+VMM01P0=POS_VERB
+# VMM02P0	Verb, main
+VMM02P0=POS_VERB
+# VMM02S0	Verb, main
+VMM02S0=POS_VERB
+# VMM03P0	Verb, main
+VMM03P0=POS_VERB
+# VMM03S0	Verb, main
+VMM03S0=POS_VERB
+# VMN0000	Verb, main
+VMN0000=POS_VERB
+# VMN01P0	Verb, main
+VMN01P0=POS_VERB
+# VMN01S0	Verb, main
+VMN01S0=POS_VERB
+# VMN02P0	Verb, main
+VMN02P0=POS_VERB
+# VMN02S0	Verb, main
+VMN02S0=POS_VERB
+# VMN03P0	Verb, main
+VMN03P0=POS_VERB
+# VMN03S0	Verb, main
+VMN03S0=POS_VERB
+# VMP0000	Verb, main
+VMP0000=POS_VERB
+# VMP00P0	Verb, main
+VMP00P0=POS_VERB
+# VMP00PF	Verb, main
+VMP00PF=POS_VERB
+# VMP00PM	Verb, main
+VMP00PM=POS_VERB
+# VMP00SF	Verb, main
+VMP00SF=POS_VERB
+# VMP00SM	Verb, main
+VMP00SM=POS_VERB
+# VMSF1P0	Verb, main
+VMSF1P0=POS_VERB
+# VMSF1S0	Verb, main
+VMSF1S0=POS_VERB
+# VMSF2P0	Verb, main
+VMSF2P0=POS_VERB
+# VMSF2S0	Verb, main
+VMSF2S0=POS_VERB
+# VMSF3P0	Verb, main
+VMSF3P0=POS_VERB
+# VMSF3S0	Verb, main
+VMSF3S0=POS_VERB
+# VMSI1P0	Verb, main
+VMSI1P0=POS_VERB
+# VMSI1S0	Verb, main
+VMSI1S0=POS_VERB
+# VMSI2P0	Verb, main
+VMSI2P0=POS_VERB
+# VMSI2S0	Verb, main
+VMSI2S0=POS_VERB
+# VMSI3P0	Verb, main
+VMSI3P0=POS_VERB
+# VMSI3S0	Verb, main
+VMSI3S0=POS_VERB
+# VMSP1P0	Verb, main
+VMSP1P0=POS_VERB
+# VMSP1S0	Verb, main
+VMSP1S0=POS_VERB
+# VMSP2P0	Verb, main
+VMSP2P0=POS_VERB
+# VMSP2S0	Verb, main
+VMSP2S0=POS_VERB
+# VMSP3P0	Verb, main
+VMSP3P0=POS_VERB
+# VMSP3S0	Verb, main
+VMSP3S0=POS_VERB
+# Z	Numeral
+Z=POS_NUM
+
+*=POS
