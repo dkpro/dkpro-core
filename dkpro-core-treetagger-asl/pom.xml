@@ -247,6 +247,16 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pt-le</artifactId>
+        <version>20181015.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pt-finegrained-le</artifactId>
+        <version>20181015.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pt-gamallo-le</artifactId>
         <version>20260615.0</version>
       </dependency>
       <dependency>
@@ -397,6 +407,16 @@
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pt-le</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pt-finegrained-le</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pt-gamallo-le</artifactId>
           <scope>test</scope>
         </dependency>
         <dependency>

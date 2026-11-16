@@ -1,0 +1,175 @@
+# EAGLES (reduced)
+#
+# Portuguese TreeTagger Part-of-Speech Tags (reduced EAGLES tagset) as used by the
+# TreeTagger parameter file for Portuguese provided by Pablo Gamallo.
+#
+# Contractions (tags joined by '+') are mapped according to their first component.
+#
+# Source: tag list extracted from the TreeTagger model
+__META_SOURCE_URL__=https\://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/Portuguese-Tagset.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# AO0	Adjective, ordinal
+AO0=POS_ADJ
+# AOS	Adjective, ordinal
+AOS=POS_ADJ
+# AQ0	Adjective, qualifying
+AQ0=POS_ADJ
+# AQA	Adjective, qualifying
+AQA=POS_ADJ
+# AQC	Adjective, qualifying
+AQC=POS_ADJ
+# AQD	Adjective, qualifying
+AQD=POS_ADJ
+# AQS	Adjective, qualifying
+AQS=POS_ADJ
+# CC	Conjunction, coordinating
+CC=POS_CONJ
+# CS	Conjunction, subordinating
+CS=POS_SCONJ
+# DA0	Determiner, article
+DA0=POS_DET
+# DD+DI	Determiner, demonstrative (contraction)
+DD+DI=POS_DET
+# DD0	Determiner, demonstrative
+DD0=POS_DET
+# DI0	Determiner, indefinite
+DI0=POS_DET
+# DP1	Determiner, possessive
+DP1=POS_DET
+# DP2	Determiner, possessive
+DP2=POS_DET
+# DP3	Determiner, possessive
+DP3=POS_DET
+# Fat	Punctuation
+Fat=POS_PUNCT
+# Fc	Punctuation
+Fc=POS_PUNCT
+# Fca	Punctuation
+Fca=POS_PUNCT
+# Fct	Punctuation
+Fct=POS_PUNCT
+# Fd	Punctuation
+Fd=POS_PUNCT
+# Fe	Punctuation
+Fe=POS_PUNCT
+# Fg	Punctuation
+Fg=POS_PUNCT
+# Fh	Punctuation
+Fh=POS_PUNCT
+# Fia	Punctuation
+Fia=POS_PUNCT
+# Fit	Punctuation
+Fit=POS_PUNCT
+# Fla	Punctuation
+Fla=POS_PUNCT
+# Flt	Punctuation
+Flt=POS_PUNCT
+# Fp	Punctuation
+Fp=POS_PUNCT
+# Fpa	Punctuation
+Fpa=POS_PUNCT
+# Fpt	Punctuation
+Fpt=POS_PUNCT
+# Fra	Punctuation
+Fra=POS_PUNCT
+# Frt	Punctuation
+Frt=POS_PUNCT
+# Fs	Punctuation
+Fs=POS_PUNCT
+# Ft	Punctuation
+Ft=POS_PUNCT
+# Fx	Punctuation
+Fx=POS_PUNCT
+# Fz	Punctuation
+Fz=POS_PUNCT
+# I	Interjection
+I=POS_INTJ
+# NCCN	Noun, common
+NCCN=POS_NOUN
+# NCCP	Noun, common
+NCCP=POS_NOUN
+# NCCS	Noun, common
+NCCS=POS_NOUN
+# NCFN	Noun, common
+NCFN=POS_NOUN
+# NCFP	Noun, common
+NCFP=POS_NOUN
+# NCFS	Noun, common
+NCFS=POS_NOUN
+# NCMN	Noun, common
+NCMN=POS_NOUN
+# NCMP	Noun, common
+NCMP=POS_NOUN
+# NCMS	Noun, common
+NCMS=POS_NOUN
+# NP0	Noun, proper
+NP0=POS_PROPN
+# PD0	Pronoun, demonstrative
+PD0=POS_PRON
+# PE0	Pronoun, exclamative
+PE0=POS_PRON
+# PI0	Pronoun, indefinite
+PI0=POS_PRON
+# PP+PP	Pronoun, personal (contraction)
+PP+PP=POS_PRON
+# PP1	Pronoun, personal
+PP1=POS_PRON
+# PP1+PP3	Pronoun, personal (contraction)
+PP1+PP3=POS_PRON
+# PP2	Pronoun, personal
+PP2=POS_PRON
+# PP3	Pronoun, personal
+PP3=POS_PRON
+# PR0	Pronoun, relative
+PR0=POS_PRON
+# PT0	Pronoun, interrogative
+PT0=POS_PRON
+# PX1	Pronoun, possessive
+PX1=POS_PRON
+# PX2	Pronoun, possessive
+PX2=POS_PRON
+# PX3	Pronoun, possessive
+PX3=POS_PRON
+# RG	Adverb, general
+RG=POS_ADV
+# RN	Adverb, negative
+RN=POS_ADV
+# SP+DA	Adposition, preposition (contraction)
+SP+DA=POS_ADP
+# SP+DD	Adposition, preposition (contraction)
+SP+DD=POS_ADP
+# SP+PD	Adposition, preposition (contraction)
+SP+PD=POS_ADP
+# SPS	Adposition, preposition
+SPS=POS_ADP
+# SPS+DI0	Adposition, preposition (contraction)
+SPS+DI0=POS_ADP
+# SPS+PD+PI	Adposition, preposition (contraction)
+SPS+PD+PI=POS_ADP
+# SPS+PI0	Adposition, preposition (contraction)
+SPS+PI0=POS_ADP
+# SPS+PP3	Adposition, preposition (contraction)
+SPS+PP3=POS_ADP
+# SPS+RG	Adposition, preposition (contraction)
+SPS+RG=POS_ADP
+# SPS+SPS	Adposition, preposition (contraction)
+SPS+SPS=POS_ADP
+# V+PP	Verb (contraction)
+V+PP=POS_VERB
+# VMG	Verb, main
+VMG=POS_VERB
+# VMI	Verb, main
+VMI=POS_VERB
+# VMM	Verb, main
+VMM=POS_VERB
+# VMN	Verb, main
+VMN=POS_VERB
+# VMP	Verb, main
+VMP=POS_VERB
+# VMS	Verb, main
+VMS=POS_VERB
+# Z	Numeral
+Z=POS_NUM
+
+*=POS
