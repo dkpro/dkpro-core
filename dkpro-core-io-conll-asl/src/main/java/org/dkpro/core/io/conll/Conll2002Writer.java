@@ -17,6 +17,7 @@
  */
 package org.dkpro.core.io.conll;
 
+import static java.util.Locale.ROOT;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -141,10 +142,10 @@ public class Conll2002Writer
                     namedEntity = row.ne;
                 }
 
-                aOut.printf("%s %s\n", form, namedEntity);
+                aOut.printf(ROOT, "%s %s\n", form, namedEntity);
             }
 
-            aOut.println();
+            aOut.print('\n');
         }
     }
 

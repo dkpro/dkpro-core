@@ -79,7 +79,7 @@ public class ConllUReaderWriterTest
      * ({@code LId=...}) are not retained.
      */
     @Test
-    public void roundTripV2ParagraphAndDocumentBoundaries() throws Exception
+    public void oneWayV2ParagraphAndDocumentBoundaries() throws Exception
     {
         testOneWay(createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class, ConllUWriter.PARAM_WRITE_TEXT_COMMENT,

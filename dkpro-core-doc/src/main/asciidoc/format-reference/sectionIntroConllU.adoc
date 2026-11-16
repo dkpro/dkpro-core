@@ -14,8 +14,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-The CoNLL-U format is the format of the link:https://universaldependencies.org/format.html[Universal Dependencies]
-treebanks and targets dependency parsing. Columns are tab-separated. Sentences are separated by a
+The CoNLL-U format is the format of the
+link:https://universaldependencies.org/format.html[Universal Dependencies] treebanks and targets
+dependency parsing. Columns are tab-separated. Sentences are separated by a
 blank line and may be preceded by comment lines starting with `#`.
 
 .Columns
@@ -57,7 +58,11 @@ blank line and may be preceded by comment lines starting with `#`.
 
 | DEPREL
 | Dependency
-| Universal dependency relation to the HEAD (root iff HEAD = 0) or a defined language-specific subtype of one. Read as a dependency with flavor `basic`.
+| Universal dependency relation to the HEAD (root iff HEAD = 0) or a defined language-specific
+  subtype of one. Read as a dependency with flavor `basic`.
+  A HEAD with an unspecified DEPREL (`_`) is read as a dependency without a relation type (e.g. a
+  relation not yet labeled during annotation) and written the same way - unless the HEAD refers to
+  the word itself, which some tools write to indicate that a word has not been parsed.
 
 | DEPS
 | Dependency
@@ -81,8 +86,9 @@ blank line and may be preceded by comment lines starting with `#`.
 | `# newdoc` / `# newdoc id = ...`
 | Document
 | Starts a new document within the file. A `Document` (with the div type `doc`) covers the
-  sentences of that document and holds its ID (if any). The document ID of the CAS is always derived from the file path (relative to the source location), also if
-  the file contains only one document. When writing, a `# newdoc` comment is emitted in front of
+  sentences of that document and holds its ID (if any). The document ID of the CAS is always
+  derived from the file path (relative to the source location), also if the file contains only one
+  document. When writing, a `# newdoc` comment is emitted in front of
   the first sentence of each `Document` (parameter `writeDocuments`).
 
 | `# newpar` / `# newpar id = ...`
@@ -147,37 +153,76 @@ particular if:
 * the word IDs do not form the sequence 1, 2, 3, ..., the empty nodes `i.1`, `i.2`, ... do not
   directly follow word `i`, or a multi-word token range does not refer to the words directly
   following it,
-* the FORM column is empty,
+* a column is empty (unspecified values must be written as `_`),
+* a sentence contains no words, e.g. only empty nodes,
 * an empty node has no enhanced dependencies (DEPS),
-* HEAD and DEPREL are not either both specified or both unspecified,
+* a DEPREL is specified without a HEAD,
 * a head is not a valid ID, does not refer to a word or node of the sentence, refers to the word
-  itself, or a HEAD refers to an empty node,
-* a DEPS item does not consist of a head and a relation,
+  itself (unless the DEPREL is unspecified, see above), or a HEAD refers to an empty node,
+* a DEPS item does not consist of a head and a relation, or the DEPS column contains an empty item,
+* a word of a multi-word token has `SpaceAfter=No` (it belongs on the multi-word token line),
 * comment lines are not directly followed by the words of a sentence (i.e. they are followed by an
-  empty line or by the end of the file, or appear between word lines).
+  empty line or by the end of the file, or appear between word lines),
+* a `# newdoc` or `# newpar` comment is malformed, i.e. it is neither the plain comment nor of the
+  form `# newdoc id = ...` with a non-empty ID.
 
 These checks also apply to empty nodes if `readEmptyNodes` is disabled. If `readDependency` is
-disabled, the HEAD, DEPREL and DEPS columns are neither read nor validated. A UTF-8 byte order mark
-at the start of the file is skipped.
+disabled, the HEAD, DEPREL and DEPS columns are neither read nor validated (they may even be
+empty). If `readParagraph` is disabled, `# newpar` comments are not validated either. An empty MISC column and a UTF-8 byte order mark at the start of the file are tolerated.
+The error message names the file and the sentence (by its ID or its first line).
 
-The writer writes unspecified values (e.g. a missing lemma) as `_`. It fails if the data cannot be
-represented in CoNLL-U, in particular if:
+If the reader parameter `lenient` is enabled, deviations from the specification which older
+versions of the DKPro Core writer produced or the older reader accepted are accepted with a warning
+instead: `SpaceAfter=No` on the words of a multi-word token is applied to the words as if they were
+tokens, empty columns are treated as unspecified (`_`), comment lines between word lines or
+followed by an empty line or the end of the file are ignored, malformed `# newdoc` and `# newpar`
+comments (e.g. `# newdoc idd = x` or `# newpar id =`) mark a boundary without an ID, empty nodes
+without enhanced dependencies are read without them, and dependencies (HEAD or DEPS) whose head
+refers to the word itself or to a word which does not exist are dropped. The warnings are
+aggregated, i.e. each kind of deviation is reported once per document, together with the number of occurrences and an example.
 
+The writer writes unspecified values (e.g. a missing lemma or the relation type of a not yet
+labeled basic dependency) as `_`. The features in the FEATS column are sorted by name, as
+required by the specification. Sentences without words (i.e. without tokens or with only empty
+nodes) are skipped with a warning, together with their empty nodes and the dependencies involving
+them, since CoNLL-U does not support sentences without words. A `# newdoc` or `# newpar` comment
+for a document or paragraph without an ID (or with a blank ID) is written without an ID. If
+`writeDependency` is disabled, empty nodes are not written, since they only exist as part of the
+enhanced dependency graph. The writer fails if the data cannot
+be represented in CoNLL-U, in particular if:
+
+* a token is not covered by any sentence,
+* the form of a token (other than an empty node) is empty or consists only of whitespace,
 * a token is the dependent of more than one basic dependency,
-* a dependency has no dependent or governor, connects tokens in different sentences, or is not
-  covered by any sentence,
-* a dependency has no relation type, or the relation of an enhanced dependency contains `|`,
+* a dependency has no dependent or governor, connects tokens in different sentences, or its
+  dependent is not covered by any sentence,
+* an enhanced dependency has no relation type, or its relation contains `|`,
 * a basic dependency has an empty node as its governor or dependent,
 * an empty node ID does not have the form `i.k`, refers to a word which does not exist in the
   sentence, or occurs more than once in the sentence,
+* an empty node has no enhanced dependencies,
 * a `SurfaceForm` (multi-word token) does not cover at least two complete words, overlaps with
   another one, or spans multiple sentences,
 * a column value contains a tab or a line break, or a comment value (e.g. a sentence ID) contains
   a line break (CoNLL-U has no escape syntax). Line breaks in the `# text` comment are replaced
   with spaces instead.
+* a UPOS, XPOS, FEATS or relation value contains whitespace, or a FORM or LEMMA value starts or
+  ends with whitespace.
 
-In this case, no output file is created. If `writeDependency` is disabled, dependencies are
-neither written nor validated.
+In this case, no output file is created. The error message names the document and, where the
+problem concerns a particular sentence, the sentence (by its ID or its offsets). If
+`writeDependency` is disabled, dependencies are neither written nor validated.
+
+If the parameter `lenient` is enabled, such data is skipped and a warning is logged instead: of
+several basic dependencies on a token only the first valid one is written, other inexpressible
+dependencies, surface forms, tokens and empty nodes are omitted (dependencies involving an
+omitted token or empty node are omitted with it), tabs and line breaks in values are replaced with
+spaces, and other whitespace in values is kept. Empty nodes without enhanced dependencies are
+written nevertheless - the reader accepts them in lenient mode. This mode is intended for writing data which is still
+being edited, e.g. in an annotation tool.
+
+The empty nodes following a word are always renumbered `i.1`, `i.2`, ... in the order of their
+IDs, so the output remains valid if some of them have been removed.
 
 .Example
 [source,text,tabsize=0]

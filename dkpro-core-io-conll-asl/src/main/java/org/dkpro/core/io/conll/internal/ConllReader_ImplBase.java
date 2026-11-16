@@ -68,15 +68,15 @@ public abstract class ConllReader_ImplBase
                 tokens.get(depId), label, flavor, isRoot);
     }
 
-    protected Dependency makeDependency(JCas aJCas, Token aGovernor, Token aDependent, String label,
-            String flavor, boolean aRoot)
+    protected Dependency makeDependency(JCas aJCas, Token aGovernor, Token aDependent,
+            String aLabel, String aFlavor, boolean aRoot)
     {
         Dependency rel = aRoot ? new ROOT(aJCas) : new Dependency(aJCas);
 
         rel.setGovernor(aGovernor);
         rel.setDependent(aDependent);
-        rel.setDependencyType(label);
-        rel.setFlavor(flavor);
+        rel.setDependencyType(aLabel);
+        rel.setFlavor(aFlavor);
         rel.setBegin(rel.getDependent().getBegin());
         rel.setEnd(rel.getDependent().getEnd());
         rel.addToIndexes();

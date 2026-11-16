@@ -61,6 +61,10 @@ public class ConllUReaderWriterSuiteTest
     {
         File[] folders = new File("src/test/resources/conllu-suite/") //
                 .listFiles(File::isDirectory);
+        if (folders == null) {
+            throw new IllegalStateException("Test suite folder [src/test/resources/conllu-suite/] "
+                    + "not found - the test must run in the module directory.");
+        }
         Arrays.sort(folders);
         return asList(folders);
     }
