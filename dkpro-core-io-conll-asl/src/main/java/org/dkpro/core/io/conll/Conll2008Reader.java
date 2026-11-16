@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +62,12 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a file in the CoNLL-2008 format.
- * 
+ * <p>
+ * Words split at hyphens or slashes (e.g. {@code entry-level}) are read as one token per piece
+ * ({@code entry}, {@code -}, {@code level}) from the SPLIT_FORM and SPLIT_LEMMA columns, since the
+ * dependencies and semantic arguments refer to the pieces. These tokens do not receive a
+ * part-of-speech tag because the gold tag in the GPOS column applies to the original word.
+ *
  * @see <a href="http://surdeanu.info/conll08/">CoNLL 2008 Shared Task: Joint Learning of Syntactic
  *      and Semantic Dependencies</a>
  * @see <a href="http://www.aclweb.org/anthology/W08-2121">The CoNLL-2008 Shared Task on Joint
@@ -150,9 +154,9 @@ public class Conll2008Reader
     private static final int LEMMA = 2;
     private static final int GPOS = 3;
     // private static final int PPOS = 4; // Ignored
-    // private static final int SPLIT_FORM = 5; // Ignored
-    // private static final int SPLIT_LEMMA = 6; // Ignored
-    // private static final int PPOSS = 7; // Ignored
+    private static final int SPLIT_FORM = 5;
+    private static final int SPLIT_LEMMA = 6;
+    private static final int PPOSS = 7; // Only used to check the column count
     private static final int HEAD = 8;
     private static final int DEPREL = 9;
     private static final int PRED = 10;
@@ -215,18 +219,25 @@ public class Conll2008Reader
             // Tokens, Lemma, POS
             Map<Integer, Token> tokens = new HashMap<Integer, Token>();
             List<SemPred> preds = new ArrayList<>();
-            Iterator<String[]> wordIterator = words.iterator();
-            while (wordIterator.hasNext()) {
-                String[] word = wordIterator.next();
-                // Read token
-                Token token = doc.add(trim(word[FORM]), Token.class);
-                tokens.put(Integer.valueOf(trim(word[ID])), token);
-                if (wordIterator.hasNext()) {
+            for (int i = 0; i < words.size(); i++) {
+                String[] word = words.get(i);
+
+                // Words split at hyphens or slashes are represented by one row per piece. The
+                // FORM, LEMMA and GPOS columns describe the original word and are only set on the
+                // first piece, while the SPLIT_FORM and SPLIT_LEMMA columns describe the individual
+                // pieces. The pieces of a split word are not separated by whitespace.
+                boolean continuation = isSplitContinuation(words, i);
+                boolean split = continuation || isSplitContinuation(words, i + 1);
+                if (i > 0 && !continuation) {
                     doc.add(" ");
                 }
 
+                // Read token
+                Token token = doc.add(trim(word[split ? SPLIT_FORM : FORM]), Token.class);
+                tokens.put(Integer.valueOf(trim(word[ID])), token);
+
                 // Read lemma
-                String lemmaValue = trim(word[LEMMA]);
+                String lemmaValue = trim(word[split ? SPLIT_LEMMA : LEMMA]);
                 if (!UNUSED.equals(lemmaValue) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
                     lemma.setValue(lemmaValue);
@@ -234,9 +245,11 @@ public class Conll2008Reader
                     token.setLemma(lemma);
                 }
 
-                // Read part-of-speech tag
+                // Read part-of-speech tag - the gold tag in GPOS applies to the original word, so
+                // the pieces of a split word do not receive a tag. The PPOSS column only holds
+                // predicted tags.
                 String gPosValue = cleanTag(word[GPOS]);
-                if (!UNUSED.equals(gPosValue) && readPos) {
+                if (!split && !UNUSED.equals(gPosValue) && readPos) {
                     Type posTag = posMappingProvider.getTagType(gPosValue);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
@@ -322,6 +335,21 @@ public class Conll2008Reader
         }
 
         doc.close();
+    }
+
+    /**
+     * Whether the row at the given index continues a word that was split into several pieces. Such
+     * a row has no FORM, but has a SPLIT_FORM.
+     */
+    private boolean isSplitContinuation(List<String[]> aWords, int aIndex)
+    {
+        if (aIndex <= 0 || aIndex >= aWords.size()) {
+            return false;
+        }
+
+        String[] word = aWords.get(aIndex);
+        return word.length > PPOSS && UNUSED.equals(trim(word[FORM]))
+                && !UNUSED.equals(trim(word[SPLIT_FORM]));
     }
 
     /**
