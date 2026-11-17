@@ -35,7 +35,6 @@ import opennlp.tools.lemmatizer.LemmatizerME;
 import opennlp.tools.lemmatizer.LemmatizerModel;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
-import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.util.TrainingParameters;
 
 /**
@@ -59,7 +58,7 @@ public class OpenNlpLemmatizerTrainer
      * Training algorithm.
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = "MAXENT")
     private String algorithm;
 
     /**

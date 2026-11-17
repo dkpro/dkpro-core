@@ -44,7 +44,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import opennlp.tools.ml.maxent.GISTrainer;
+import opennlp.tools.ml.AlgorithmType;
 
 public class OpenNlpNamedEntityRecognizerTrainerTest
 {
@@ -68,7 +68,8 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
                 OpenNlpNamedEntityRecognizerTrainer.class,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION, model,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_LANGUAGE, "de",
-                OpenNlpNamedEntityRecognizerTrainer.PARAM_ALGORITHM, GISTrainer.MAXENT_VALUE,
+                OpenNlpNamedEntityRecognizerTrainer.PARAM_ALGORITHM,
+                AlgorithmType.MAXENT.getAlgorithmType(),
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_CUTOFF, 5,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_ITERATIONS, 10);
