@@ -47,6 +47,7 @@ import org.dkpro.core.api.resources.MappingProvider;
 import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.corenlp.internal.CoreNlp2DKPro;
 import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
+import org.dkpro.core.corenlp.internal.PosTagsetCompatibilityChecker;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -69,6 +70,9 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
+import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalStructureFactory;
+import edu.stanford.nlp.trees.international.pennchinese.UniversalChineseGrammaticalRelations;
+import edu.stanford.nlp.trees.international.pennchinese.UniversalChineseGrammaticalStructureFactory;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
@@ -190,13 +194,16 @@ public class CoreNlpParser
     private int maxTime;
 
     /**
-     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-). If not set, the setting is
+     * taken from the model metadata ({@code ptb3Escaping}). Models which do not declare it (models
+     * trained for CoreNLP 3.x and earlier) use escaping. Models for CoreNLP 4.x expect unescaped
+     * tokens.
      *
      * @see PTBEscapingProcessor
      */
     public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
-    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, defaultValue = "true")
-    private boolean ptb3Escaping;
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = false)
+    private Boolean ptb3Escaping;
 
     /**
      * List of extra token texts (usually single character strings) that should be treated like
@@ -260,11 +267,13 @@ public class CoreNlpParser
     private boolean writeDependency;
 
     /**
-     * Generate original Stanford Dependencies grammatical relations instead of Universal
-     * Dependencies.
+     * Generate original Stanford Dependencies grammatical relations ({@code stanford341} tagset)
+     * instead of Universal Dependencies. Only affects languages for which CoreNLP converts
+     * constituency trees to dependencies: English (Universal Dependencies v2, {@code ud2} tagset)
+     * and Chinese (Universal Dependencies v1, {@code universal} tagset).
      */
     public static final String PARAM_ORIGINAL_DEPENDENCIES = "originalDependencies";
-    @ConfigurationParameter(name = PARAM_ORIGINAL_DEPENDENCIES, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_ORIGINAL_DEPENDENCIES, defaultValue = "false")
     private boolean originalDependencies;
 
     /**
@@ -275,6 +284,7 @@ public class CoreNlpParser
     private boolean keepPunctuation;
 
     private CasConfigurableProviderBase<ParserAnnotator> annotatorProvider;
+    private PosTagsetCompatibilityChecker posTagsetChecker;
     private MappingProvider dependencyMappingProvider;
     private MappingProvider constituentMappingProvider;
     private MappingProvider posMappingProvider;
@@ -285,6 +295,8 @@ public class CoreNlpParser
         super.initialize(aContext);
 
         annotatorProvider = new CoreNlpParserModelProvider(this);
+
+        posTagsetChecker = new PosTagsetCompatibilityChecker();
 
         constituentMappingProvider = createConstituentMappingProvider(this,
                 constituentMappingLocation, language, annotatorProvider);
@@ -305,9 +317,19 @@ public class CoreNlpParser
 
         annotatorProvider.configure(cas);
 
+        if (readPos) {
+            // Warn if the POS tags in the CAS do not match the tagset expected by the model
+            String posTagsetWarning = posTagsetChecker.check(aJCas, annotatorProvider.getResource(),
+                    annotatorProvider.getResourceMetaData());
+            if (posTagsetWarning != null) {
+                getContext().getLogger().log(WARNING, posTagsetWarning);
+            }
+        }
+
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
-        converter.setPtb3Escaping(ptb3Escaping);
+        converter.setPtb3Escaping(DKPro2CoreNlp.resolvePtb3Escaping(ptb3Escaping,
+                annotatorProvider.getResourceMetaData()));
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
@@ -430,6 +452,8 @@ public class CoreNlpParser
                 }
                 posTags.remove(Lexicon.BOUNDARY_TAG);
                 addTagset(posTags, writePos);
+                posTagsetChecker.registerModel(annotator,
+                        posTags.listTags(posTags.getLayer(), posTags.getTagset()));
             }
 
             // https://mailman.stanford.edu/pipermail/parser-user/2012-November/002117.html
@@ -505,6 +529,10 @@ public class CoreNlpParser
             // https://mailman.stanford.edu/pipermail/java-nlp-user/2016-January/007417.html
             // https://mailman.stanford.edu/pipermail/java-nlp-user/2013-December/004429.html
             if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+                // The dependency mapping is selected via the model metadata
+                if (metadata.getProperty("dependency.tagset") == null) {
+                    metadata.setProperty("dependency.tagset", "stanford341");
+                }
                 SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford341");
                 for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
                     depTags.add(r.getShortName());
@@ -515,7 +543,12 @@ public class CoreNlpParser
             }
             else if (gsf != null
                     && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
-                SingletonTagset depTags = new SingletonTagset(Dependency.class, "universal");
+                // CoreNLP 4.x produces Universal Dependencies v2. The dependency mapping is
+                // selected via the model metadata
+                if (metadata.getProperty("dependency.tagset") == null) {
+                    metadata.setProperty("dependency.tagset", "ud2");
+                }
+                SingletonTagset depTags = new SingletonTagset(Dependency.class, "ud2");
                 for (GrammaticalRelation r : UniversalEnglishGrammaticalRelations.values()) {
                     depTags.add(r.getShortName());
                 }
@@ -523,9 +556,29 @@ public class CoreNlpParser
                     addTagset(depTags, writeDependency);
                 }
             }
-            else if (gsf != null && ChineseGrammaticalRelations.class.equals(gsf.getClass())) {
-                SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford");
+            else if (gsf != null
+                    && ChineseGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+                // The dependency mapping is selected via the model metadata
+                if (metadata.getProperty("dependency.tagset") == null) {
+                    metadata.setProperty("dependency.tagset", "stanford341");
+                }
+                SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford341");
                 for (GrammaticalRelation r : ChineseGrammaticalRelations.values()) {
+                    depTags.add(r.getShortName());
+                }
+                if (writeDependency) {
+                    addTagset(depTags, writeDependency);
+                }
+            }
+            else if (gsf != null
+                    && UniversalChineseGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+                // CoreNLP produces Universal Dependencies v1 for Chinese. The dependency mapping
+                // is selected via the model metadata
+                if (metadata.getProperty("dependency.tagset") == null) {
+                    metadata.setProperty("dependency.tagset", "universal");
+                }
+                SingletonTagset depTags = new SingletonTagset(Dependency.class, "universal");
+                for (GrammaticalRelation r : UniversalChineseGrammaticalRelations.values()) {
                     depTags.add(r.getShortName());
                 }
                 if (writeDependency) {

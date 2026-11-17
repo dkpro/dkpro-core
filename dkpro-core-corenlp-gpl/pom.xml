@@ -190,12 +190,17 @@
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</artifactId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-ud</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -369,7 +374,12 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-ud</artifactId>
-        <version>20161213.1</version>
+        <version>20241017.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-fr-ud</artifactId>
+        <version>20200420.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -394,7 +404,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</artifactId>
-        <version>20181002.1</version>
+        <version>20201103.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -544,32 +554,22 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-de-ud</artifactId>
-        <version>20161213.1</version>
+        <version>20241017.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-sd</artifactId>
-        <version>20150418.1</version>
+        <version>20201106.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-ud</artifactId>
-        <version>20161213.1</version>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-wsj-sd</artifactId>
-        <version>20150418.1</version>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-wsj-ud</artifactId>
-        <version>20161213.1</version>
+        <version>20201106.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-fr-ud</artifactId>
-        <version>20180227.1</version>
+        <version>20200420.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -605,8 +605,9 @@
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-factored</usedDependency>
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-ud</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-sd</usedDependency>
             </usedDependencies>
           </configuration>
@@ -711,6 +712,16 @@
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-fr-ud</artifactId>
           <scope>test</scope>
         </dependency>
         <dependency>
@@ -865,16 +876,6 @@
         </dependency>
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-          <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-wsj-sd</artifactId>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-          <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-wsj-ud</artifactId>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-fr-ud</artifactId>
           <scope>test</scope>
         </dependency>
@@ -912,8 +913,6 @@
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-de-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-ptb-conll</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-ud</usedDependency>
-                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-wsj-sd</usedDependency>
-                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-wsj-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-fr-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-zh-ctb-conll</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-zh-ptb-conll</usedDependency>
@@ -953,6 +952,8 @@
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-xinhua-factored</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-default</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-fr-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast-caseless</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-hgc</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-caseless-left3words-distsim</usedDependency>

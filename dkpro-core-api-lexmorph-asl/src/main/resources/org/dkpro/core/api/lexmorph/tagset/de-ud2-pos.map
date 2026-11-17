@@ -1,0 +1,23 @@
+# Universal Dependencies v2 POS tags
+
+__META_SOURCE_URL__=https://universaldependencies.org/u/pos/index.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+*=POS
+ADJ=POS_ADJ
+ADP=POS_ADP
+ADV=POS_ADV
+AUX=POS_AUX
+CCONJ=POS_CONJ
+DET=POS_DET
+INTJ=POS_INTJ
+NOUN=POS_NOUN
+NUM=POS_NUM
+PART=POS_PART
+PRON=POS_PRON
+PROPN=POS_PROPN
+PUNCT=POS_PUNCT
+SCONJ=POS_SCONJ
+SYM=POS_SYM
+VERB=POS_VERB
+X=POS_X

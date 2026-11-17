@@ -20,6 +20,7 @@
 package org.dkpro.core.corenlp;
 
 import static org.apache.uima.util.Level.INFO;
+import static org.apache.uima.util.Level.WARNING;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,6 +45,7 @@ import org.dkpro.core.api.resources.MappingProviderFactory;
 import org.dkpro.core.api.resources.ModelProviderBase;
 import org.dkpro.core.corenlp.internal.CoreNlp2DKPro;
 import org.dkpro.core.corenlp.internal.DKPro2CoreNlp;
+import org.dkpro.core.corenlp.internal.PosTagsetCompatibilityChecker;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -158,13 +160,16 @@ public class CoreNlpDependencyParser
     private int maxTime;
 
     /**
-     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-). If not set, the setting is
+     * taken from the model metadata ({@code ptb3Escaping}). Models which do not declare it (models
+     * trained for CoreNLP 3.x and earlier) use escaping. Models for CoreNLP 4.x expect unescaped
+     * tokens.
      *
      * @see PTBEscapingProcessor
      */
     public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
-    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, defaultValue = "true")
-    private boolean ptb3Escaping;
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = false)
+    private Boolean ptb3Escaping;
 
     /**
      * List of extra token texts (usually single character strings) that should be treated like
@@ -190,6 +195,7 @@ public class CoreNlpDependencyParser
     GrammaticalStructure.Extras extraDependencies;
 
     private CasConfigurableProviderBase<DependencyParseAnnotator> annotatorProvider;
+    private PosTagsetCompatibilityChecker posTagsetChecker;
     private MappingProvider mappingProvider;
 
     @Override
@@ -198,6 +204,8 @@ public class CoreNlpDependencyParser
         super.initialize(aContext);
 
         annotatorProvider = new CoreNlpDependencyParserModelProvider(this);
+
+        posTagsetChecker = new PosTagsetCompatibilityChecker();
 
         mappingProvider = MappingProviderFactory.createDependencyMappingProvider(this,
                 dependencyMappingLocation, language, annotatorProvider);
@@ -213,9 +221,17 @@ public class CoreNlpDependencyParser
         annotatorProvider.configure(cas);
         mappingProvider.configure(cas);
 
+        // Warn if the POS tags in the CAS do not match the tagset expected by the model
+        String posTagsetWarning = posTagsetChecker.check(aJCas, annotatorProvider.getResource(),
+                annotatorProvider.getResourceMetaData());
+        if (posTagsetWarning != null) {
+            getContext().getLogger().log(WARNING, posTagsetWarning);
+        }
+
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
-        converter.setPtb3Escaping(ptb3Escaping);
+        converter.setPtb3Escaping(DKPro2CoreNlp.resolvePtb3Escaping(ptb3Escaping,
+                annotatorProvider.getResourceMetaData()));
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
@@ -283,6 +299,8 @@ public class CoreNlpDependencyParser
             posTags.remove("-ROOT-");
             posTags.remove("-UNKNOWN-");
             addTagset(posTags, false);
+            posTagsetChecker.registerModel(annotator,
+                    posTags.listTags(posTags.getLayer(), posTags.getTagset()));
 
             SingletonTagset depTags = new SingletonTagset(Dependency.class,
                     metadata.getProperty(("dependency.tagset")));

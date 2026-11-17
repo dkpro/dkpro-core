@@ -154,9 +154,13 @@ public class CoreNlp2DKPro
                 String labelUsedForMapping = edge.getRelation().getShortName();
 
                 // The nndepparser may produce labels in which the shortName contains a colon.
-                // These represent language-specific labels of the UD, cf:
-                // http://universaldependencies.github.io/docs/ext-dep-index.html
-                labelUsedForMapping = StringUtils.substringBefore(labelUsedForMapping, ":");
+                // These represent subtypes of the UD relations (e.g. nsubj:pass), cf:
+                // https://universaldependencies.org/u/dep/index.html
+                // If the mapping has an entry for the full subtype, we use that. Otherwise, we
+                // fall back to the base relation.
+                if (!mappingProvider.isExplicitlyMapped(labelUsedForMapping)) {
+                    labelUsedForMapping = StringUtils.substringBefore(labelUsedForMapping, ":");
+                }
 
                 // Need to use toString() here to get "<shortname>_<specific>"
                 String actualLabel = edge.getRelation().toString();

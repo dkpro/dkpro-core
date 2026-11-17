@@ -54,6 +54,14 @@ public class CoreNlpLemmatizerTest
     }
 
     @Test
+    public void testBrackets() throws Exception
+    {
+        // PTB3 escaping is disabled by default, so brackets are not lemmatized as -lrb-/-rrb-
+        runTest("en", "This is a ( test ) .",
+                new String[] { "this", "be", "a", "(", "test", ")", "." });
+    }
+
+    @Test
     public void testNotEnglish() throws Exception
     {
         assertThatExceptionOfType(AnalysisEngineProcessException.class)

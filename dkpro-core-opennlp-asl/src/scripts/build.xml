@@ -51,7 +51,7 @@
       - 2012-06-16 | now        | f304792bd8f1d93963ce4091847c6c7e
       -->
     <get 
-      src="http://opennlp.sourceforge.net/models-1.5/da-sent.bin" 
+      src="https://downloads.sourceforge.net/project/opennlp/models-1.5/da-sent.bin" 
       dest="target/download/da-sentence-maxent.bin" 
       skipexisting="true"/>
     <install-stub-and-upstream-file 
@@ -74,7 +74,7 @@
       - 2012-06-16 | now        | 4ae06365f2e956885133f69542f3c30d
       -->
     <get 
-      src="http://opennlp.sourceforge.net/models-1.5/da-token.bin" 
+      src="https://downloads.sourceforge.net/project/opennlp/models-1.5/da-token.bin" 
       dest="target/download/da-token-maxent.bin" 
       skipexisting="true"/>
     <install-stub-and-upstream-file 
@@ -97,7 +97,7 @@
       - 2012-06-16 | now        | 5194e5c81bde38b7df95a1550e3f4998
       -->
     <get 
-      src="http://opennlp.sourceforge.net/models-1.5/da-pos-maxent.bin" 
+      src="https://downloads.sourceforge.net/project/opennlp/models-1.5/da-pos-maxent.bin" 
       dest="target/download/da-pos-maxent.bin" 
       skipexisting="true"/>
 
@@ -123,7 +123,7 @@
       - 2012-06-16 | now        | 595322af76e464a647b745b463847008
       -->
     <get 
-      src="http://opennlp.sourceforge.net/models-1.5/da-pos-perceptron.bin" 
+      src="https://downloads.sourceforge.net/project/opennlp/models-1.5/da-pos-perceptron.bin" 
       dest="target/download/da-pos-perceptron.bin" 
       skipexisting="true"/>
 
@@ -160,7 +160,7 @@
       - 2012-06-16 | now        | 1e8a9b9ce05d91abbd1d1d9f4192fdeb
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/de-sent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/de-sent.bin" 
         dest="target/download/de-sentence-maxent.bin" skipexisting="true"/>
       <install-stub-and-upstream-file 
         file="target/download/de-sentence-maxent.bin" 
@@ -181,7 +181,7 @@
       - 2012-06-16 | now        | c74d9064dadb542abf89151d60d0377f
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/de-token.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/de-token.bin" 
         dest="target/download/de-token-maxent.bin" skipexisting="true"/>
       <install-stub-and-upstream-file 
         file="target/download/de-token-maxent.bin" 
@@ -202,7 +202,7 @@
       - 2012-06-16 | now        | c55c14eeb598885170678293745aea15
       -->
     <get 
-      src="http://opennlp.sourceforge.net/models-1.5/de-pos-maxent.bin" 
+      src="https://downloads.sourceforge.net/project/opennlp/models-1.5/de-pos-maxent.bin" 
       dest="target/download/de-pos-maxent.bin" 
       skipexisting="true"/>
     <install-stub-and-upstream-file 
@@ -227,7 +227,7 @@
       - 2012-06-16 | now        | 568ca555cbe29b5e0e6ba24cc7da573a
       -->
     <get 
-      src="http://opennlp.sourceforge.net/models-1.5/de-pos-perceptron.bin" 
+      src="https://downloads.sourceforge.net/project/opennlp/models-1.5/de-pos-perceptron.bin" 
       dest="target/download/de-pos-perceptron.bin" 
       skipexisting="true"/>
     <install-stub-and-upstream-file 
@@ -355,7 +355,7 @@
       - 2012-06-16 | now        | 3822c5f82cb4ba139284631d2f6b7fde
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-sent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-sent.bin" 
         dest="target/download/en-sentence-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -378,7 +378,7 @@
       - 2012-06-16 | now        | f38628ea25fc246e99fc5e93f9bb5497
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-token.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-token.bin" 
         dest="target/download/en-token-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -401,7 +401,7 @@
       - 2012-06-16 | now        | db2cd70395b9e2e4c6b9957015a10607
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-pos-maxent.bin" 
         dest="target/download/en-pos-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -427,7 +427,7 @@
       - 2012-06-16 | now        | d25e11a2da118803aefa131b00c590bf
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-pos-perceptron.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-pos-perceptron.bin" 
         dest="target/download/en-pos-perceptron.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -453,7 +453,7 @@
       - 2012-06-16 | now        | f058c62bcdab7b6d6113a3ceea213b91
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-chunker.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-chunker.bin" 
         dest="target/download/en-chunker.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -504,7 +504,7 @@
       - 2012-06-16 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-parser-chunking.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-parser-chunking.bin" 
         dest="target/download/en-parser-chunking.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -531,7 +531,7 @@
       - 2010-09-07 | now        | 4bf8335b9db6ced81a5f35f1c04c187d
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-ner-date.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-ner-date.bin" 
         dest="target/download/en-ner-date.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -551,10 +551,10 @@
   <target name="en-ner-location">
     <mkdir dir="target/download"/>
     <!-- FILE: models-1.5/en-ner-location.bin - - - - - - - - - - - - - - - - - - - - - - - - -
-      - 2010-09-07 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
+      - 2010-09-07 | now        | 0e67e6ad484406c125faead56b5c225e
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-ner-location.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-ner-location.bin" 
         dest="target/download/en-ner-location.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -577,7 +577,7 @@
       - 2010-09-07 | now        | af6fa575ace9f9ad81eb7ba21ff0b421
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-ner-money.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-ner-money.bin" 
         dest="target/download/en-ner-money.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -600,7 +600,7 @@
       - 2010-09-07 | now        | 8042a4164d73879abcf2a53c91bd247a
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-ner-organization.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-ner-organization.bin" 
         dest="target/download/en-ner-organization.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -623,7 +623,7 @@
       - 2010-09-07 | now        | b3f1b2cba4c28efbe6e0c9ccca3c9a23
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-ner-percentage.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-ner-percentage.bin" 
         dest="target/download/en-ner-percentage.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -646,7 +646,7 @@
       - 2013-06-24 | now        | 909b9017a13b2d69ccdca4cf91a9639c
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-ner-person.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-ner-person.bin" 
         dest="target/download/en-ner-person.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -669,7 +669,7 @@
       - 2010-09-07 | now        | 692f8074bfa60d21afe67cef5fa2e2a7
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/en-ner-time.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/en-ner-time.bin" 
         dest="target/download/en-ner-time.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -831,7 +831,7 @@
       - 2010-09-08 | now        | 383b1bb68554cdfddbaa053325300a48
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/es-ner-person.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/es-ner-person.bin" 
         dest="target/download/es-ner-person.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -853,7 +853,7 @@
       - 2010-09-08 | now        | e498aaf5784cfcb9c32ff921b93cb178
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/es-ner-organization.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/es-ner-organization.bin" 
         dest="target/download/es-ner-organization.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -875,7 +875,7 @@
       - 2010-09-08 | now        | cc0d07a0a2373ae71da60b6108fe010f
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/es-ner-location.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/es-ner-location.bin" 
         dest="target/download/es-ner-location.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -897,7 +897,7 @@
       - 2010-09-08 | now        | a287e609616d6c185995ede1fd25788f
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/es-ner-misc.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/es-ner-misc.bin" 
         dest="target/download/es-ner-misc.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1140,7 +1140,7 @@
       - 2012-06-16 | now        | ecada3d204663a244d6cca24aa5b89b4
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-sent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-sent.bin" 
         dest="target/download/nl-sentence-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1163,7 +1163,7 @@
       - 2012-06-16 | now        | b83a0b4134e83995ab56c6a71d0c7a07
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-token.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-token.bin" 
         dest="target/download/nl-token-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1186,7 +1186,7 @@
       - 2012-06-16 | now        | 4f61da5d7bef54ff98d3605fcafa5a70
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-pos-maxent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-pos-maxent.bin" 
         dest="target/download/nl-pos-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1212,7 +1212,7 @@
       - 2012-06-16 | now        | d81d2e3745ad194fa2e40e9264175f4f
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-pos-perceptron.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-pos-perceptron.bin" 
         dest="target/download/nl-pos-perceptron.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1238,7 +1238,7 @@
       - 2010-09-08 | now        | 2587cde2383916ef39f1079d9d109510
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-ner-person.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-ner-person.bin" 
         dest="target/download/nl-ner-person.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1261,7 +1261,7 @@
       - 2010-09-08 | now        | a6b49193d9d89c0dd6e27ca3e8648ef6
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-ner-organization.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-ner-organization.bin" 
         dest="target/download/nl-ner-organization.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1284,7 +1284,7 @@
       - 2010-09-08 | now        | 5904fa5e5eede095529ea4aec2c12736
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-ner-location.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-ner-location.bin" 
         dest="target/download/nl-ner-location.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1307,7 +1307,7 @@
       - 2010-09-08 | now        | 34989e1fb6137b0e63cba70591d49e62
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/nl-ner-misc.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/nl-ner-misc.bin" 
         dest="target/download/nl-ner-misc.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1339,7 +1339,7 @@
       - 2012-06-16 | now        | 3bde4737d5b9ad9a8a8410d29c94bb84
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/pt-sent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/pt-sent.bin" 
         dest="target/download/pt-sentence-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1362,7 +1362,7 @@
       - 2012-06-16 | now        | 0fd481285c400c7c93c5b625f8844eb3
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/pt-token.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/pt-token.bin" 
         dest="target/download/pt-token-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1385,7 +1385,7 @@
       - 2012-06-16 | now        | 517c428be748b79ec2d0ad084f5329b1
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/pt-pos-maxent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/pt-pos-maxent.bin" 
         dest="target/download/pt-pos-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1411,7 +1411,7 @@
       - 2012-06-16 | now        | d53490bda3717523e16250fc7328ff86
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/pt-pos-perceptron.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/pt-pos-perceptron.bin" 
         dest="target/download/pt-pos-perceptron.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1434,7 +1434,7 @@
   <target name="pt-tagger-mm-maxent">
     <mkdir dir="target/download"/>
     <get 
-        src="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
+        src="https://downloads.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
         dest="target/download/aelius.zip" 
         skipexisting="true"/>
 
@@ -1513,7 +1513,7 @@
       - 2012-06-16 | now        | 81a3bf1d4c552db190a90630acc4d15f
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/se-sent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/se-sent.bin" 
         dest="target/download/sv-sentence-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1536,7 +1536,7 @@
       - 2012-06-16 | now        | f49dbe3706547e308f4f70fb470992c2
       -->
       <get 
-      src="http://opennlp.sourceforge.net/models-1.5/se-token.bin" 
+      src="https://downloads.sourceforge.net/project/opennlp/models-1.5/se-token.bin" 
         dest="target/download/sv-token-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1559,7 +1559,7 @@
       - 2012-06-16 | now        | 8cd96306df690f24ced060f0071e506e
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/se-pos-maxent.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/se-pos-maxent.bin" 
         dest="target/download/sv-pos-maxent.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -1585,7 +1585,7 @@
       - 2012-06-16 | now        | d38f7eccf72033e3c8b1703396db72ec
       -->
       <get 
-        src="http://opennlp.sourceforge.net/models-1.5/se-pos-perceptron.bin" 
+        src="https://downloads.sourceforge.net/project/opennlp/models-1.5/se-pos-perceptron.bin" 
         dest="target/download/sv-pos-perceptron.bin" 
         skipexisting="true"/>
       <install-stub-and-upstream-file 

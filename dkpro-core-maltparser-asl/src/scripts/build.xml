@@ -158,7 +158,7 @@
 		  - 2012-03-12 | now        | 6f81de28b4c3f1f309a578d7d21fcb6e
 		  -->
     	<get 
-    		src="http://www.maltparser.org/mco/english_parser/engmalt.poly-1.7.mco" 
+    		src="https://www.maltparser.org/mco/english_parser/engmalt.poly-1.7.mco" 
     		dest="target/download/en-malt.poly.mco" 
     		skipexisting="true"/>
     	<install-stub-and-upstream-file 
@@ -182,7 +182,7 @@
 		  - 2012-03-12 | now        | ca24797d5470763d41e142c977f54321
 		  -->
 		<get 
-			src="http://www.maltparser.org/mco/english_parser/engmalt.linear-1.7.mco" 
+			src="https://www.maltparser.org/mco/english_parser/engmalt.linear-1.7.mco" 
 			dest="target/download/en-malt.linear.mco" 
 			skipexisting="true"/>
     	<install-stub-and-upstream-file 
@@ -357,7 +357,7 @@
 		  - 2012-03-12 | now        | a1fab4c0efd7dba980fe710636efad9c
 		  -->
 		<get 
-			src="http://www.maltparser.org/mco/french_parser/fremalt-1.7.mco" 
+			src="https://www.maltparser.org/mco/french_parser/fremalt-1.7.mco" 
 			dest="target/download/fr-malt-linear.mco" 
 			skipexisting="true"/>
     	<install-stub-and-upstream-file 
@@ -454,7 +454,7 @@
 		  - 2012-09-25 | now        | 7969078c343a7b43d5da2a6cb7270932
 		  -->
 		<get 
-			src="http://www.maltparser.org/mco/swedish_parser/swemalt-1.7.2.mco" 
+			src="https://www.maltparser.org/mco/swedish_parser/swemalt-1.7.2.mco" 
 			dest="target/download/sv-malt-linear.mco" 
 			skipexisting="true"/>
     	<install-stub-and-upstream-file 
