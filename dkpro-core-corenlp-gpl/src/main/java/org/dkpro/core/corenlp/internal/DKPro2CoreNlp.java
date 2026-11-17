@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.cas.CASException;
@@ -79,6 +80,12 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class DKPro2CoreNlp
 {
+    /**
+     * Model metadata key declaring whether a model expects PTB3-escaped tokens (e.g. {@code -LRB-}
+     * instead of {@code (}).
+     */
+    public static final String META_PTB3_ESCAPING = "ptb3Escaping";
+
     private CoreLabelTokenFactory tokenFactory = new CoreLabelTokenFactory();
 
     private boolean ptb3Escaping;
@@ -115,6 +122,35 @@ public class DKPro2CoreNlp
     public void setPtb3Escaping(boolean aPtb3Escaping)
     {
         ptb3Escaping = aPtb3Escaping;
+    }
+
+    /**
+     * Determines whether PTB3 escaping should be applied. An explicitly configured value takes
+     * precedence. Otherwise, the value declared in the model metadata under
+     * {@link #META_PTB3_ESCAPING} is used. If the model does not declare it, escaping is enabled
+     * because that is what models trained for CoreNLP 3.x and earlier expect. Models for CoreNLP
+     * 4.x expect unescaped tokens and declare {@code ptb3Escaping=false}.
+     *
+     * @param aConfiguredValue
+     *            the value configured on the component or {@code null} if not configured.
+     * @param aModelMetadata
+     *            the metadata of the model or {@code null} if not available.
+     * @return whether PTB3 escaping should be applied.
+     */
+    public static boolean resolvePtb3Escaping(Boolean aConfiguredValue, Properties aModelMetadata)
+    {
+        if (aConfiguredValue != null) {
+            return aConfiguredValue;
+        }
+
+        if (aModelMetadata != null) {
+            String value = aModelMetadata.getProperty(META_PTB3_ESCAPING);
+            if (value != null) {
+                return Boolean.parseBoolean(value);
+            }
+        }
+
+        return true;
     }
 
     public List<String> getQuoteBegin()

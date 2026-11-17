@@ -59,12 +59,14 @@ public class CoreNlpLemmatizer
     extends JCasAnnotator_ImplBase
 {
     /**
-     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-). Disabled by default to
+     * match the CoreNLP 4.x models which expect unescaped tokens. If enabled, e.g. brackets are
+     * lemmatized as {@code -lrb-} and {@code -rrb-}.
      *
      * @see PTBEscapingProcessor
      */
     public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
-    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue = "false")
     private boolean ptb3Escaping;
 
     /**

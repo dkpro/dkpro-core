@@ -182,6 +182,24 @@ public class MappingProvider
         return type;
     }
 
+    /**
+     * Checks whether there is an explicit mapping for the given tag, i.e. whether the tag would be
+     * mapped without resorting to the fallback ({@code *}) mapping.
+     *
+     * @param aTag
+     *            a tag.
+     * @return whether the tag is explicitly mapped. If no mapping could be loaded, this is always
+     *         {@code false}.
+     */
+    public boolean isExplicitlyMapped(String aTag)
+    {
+        if (notFound || getResource() == null) {
+            return false;
+        }
+
+        return getResource().containsKey(getTag(aTag));
+    }
+
     public Set<String> getTags()
     {
         return MappingUtils.stripMetadata(getResource().keySet());

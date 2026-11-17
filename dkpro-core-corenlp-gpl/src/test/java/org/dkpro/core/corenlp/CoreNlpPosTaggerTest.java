@@ -75,12 +75,17 @@ public class CoreNlpPosTaggerTest
     @Test
     public void testGerman() throws Exception
     {
-        runTest("de", "Das ist ein Test .", new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
+        // The default German model is the UD model which matches the German UD dependency parser
+        runTest("de", "Das ist ein Test .", new String[] { "PRON", "AUX", "DET", "NOUN", "PUNCT" },
+                new String[] { "POS_PRON", "POS_AUX", "POS_DET", "POS_NOUN", "POS_PUNCT" });
+
+        runTest("de", "fast", "Das ist ein Test .",
+                new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
                 new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("de", "ud", "Das ist ein Test .",
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" },
-                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
+                new String[] { "PRON", "AUX", "DET", "NOUN", "PUNCT" },
+                new String[] { "POS_PRON", "POS_AUX", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("de", "hgc", "Das ist ein Test .",
                 new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
@@ -103,7 +108,7 @@ public class CoreNlpPosTaggerTest
     @Test
     public void testFrench() throws Exception
     {
-        JCas jcas = runTest("fr", null, "Nous avons besoin d' une phrase par exemple très "
+        JCas jcas = runTest("fr", "default", "Nous avons besoin d' une phrase par exemple très "
                 + "compliqué , qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
@@ -134,13 +139,16 @@ public class CoreNlpPosTaggerTest
     @Test
     public void testFrench2() throws Exception
     {
+        // The default French model is the UD model which matches the French UD dependency parser.
+        // CoreNLP 4.x expects multi-word tokens to be split (e.g. "du" into "de le") which our
+        // tokenization does not do, so "du" is tagged as DET and "français" as ADJ here.
         JCas jcas = runTest("fr", null, "La traduction d' un texte du français vers l' anglais .");
 
-        String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "NC", "P", "DET", "NC",
-                "PUNC" };
+        String[] posOriginal = { "DET", "NOUN", "ADP", "DET", "NOUN", "DET", "ADJ", "ADP", "DET",
+                "NOUN", "PUNCT" };
 
-        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP",
-                "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_DET",
+                "POS_ADJ", "POS_ADP", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }

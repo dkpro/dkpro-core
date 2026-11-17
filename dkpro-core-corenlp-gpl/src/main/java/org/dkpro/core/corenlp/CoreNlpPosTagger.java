@@ -147,13 +147,16 @@ public class CoreNlpPosTagger
     private int numThreads;
 
     /**
-     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-). If not set, the setting is
+     * taken from the model metadata ({@code ptb3Escaping}). Models which do not declare it (models
+     * trained for CoreNLP 3.x and earlier) use escaping. Models for CoreNLP 4.x expect unescaped
+     * tokens.
      *
      * @see PTBEscapingProcessor
      */
     public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
-    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, defaultValue = "true")
-    private boolean ptb3Escaping;
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = false)
+    private Boolean ptb3Escaping;
 
     /**
      * List of extra token texts (usually single character strings) that should be treated like
@@ -197,7 +200,8 @@ public class CoreNlpPosTagger
 
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
-        converter.setPtb3Escaping(ptb3Escaping);
+        converter.setPtb3Escaping(DKPro2CoreNlp.resolvePtb3Escaping(ptb3Escaping,
+                annotatorProvider.getResourceMetaData()));
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);

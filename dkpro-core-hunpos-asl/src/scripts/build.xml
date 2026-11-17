@@ -298,7 +298,7 @@
     <mkdir dir="target/download"/>
 
     <get 
-        src="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
+        src="https://downloads.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
         dest="target/download/aelius.zip" 
         skipexisting="true"/>
 

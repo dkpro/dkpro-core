@@ -52,7 +52,7 @@
     <mkdir dir="target/download"/>
     
     <!-- FILE: bulgarian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-      - 2014-07-02 | now        | ee595fb1643760a94591cee91b556911
+      - 2014-07-02 | 2016-04-30 | ee595fb1643760a94591cee91b556911
       - 2016-04-30 | now        | 4cae50b7d8adb8269f583052a69e9184
       -->
       <get 

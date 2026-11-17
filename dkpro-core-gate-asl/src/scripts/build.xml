@@ -42,11 +42,19 @@
         <antcall target="en-heptag-annie"/>
 	</target>
 
-    <target name="en-lemma-default" depends="download-gate">
+    <!-- Up to GATE 8.4, the resources were obtained from the GATE distribution ZIP on
+      - SourceForge (gate-8.2-build5482-ALL.zip, no longer available). Since GATE 8.5, the
+      - plugins are distributed as separate Maven artifacts. The resource files are
+      - byte-identical, so the model versions are unchanged.
+      -->
+    <target name="en-lemma-default" depends="download-gate-tools">
+        <!-- FILE: default.rul - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-05-31 | now        | e6fb67f55ba5781dddc105d7e72428e6
+          -->
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/gate/gate-ALL.zip" dest="target/download/tmp">
+        <unzip src="target/download/gate/tools.jar" dest="target/download/tmp">
             <patternset>
-                <include name="**/plugins/Tools/resources/morph/default.rul"/>
+                <include name="resources/morph/default.rul"/>
             </patternset>
             <chainedmapper>
                 <mapper type="flatten"/>
@@ -71,12 +79,18 @@
         <delete dir="target/download/tmp"/>
     </target>
 	
-	<target name="en-heptag-annie" depends="download-gate">
+	<target name="en-heptag-annie" depends="download-gate-annie">
+        <!-- FILE: heptag/lexicon - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-05-31 | now        | 9cfccd577eceab84d439432fa225970d
+          -
+          - FILE: heptag/ruleset - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-05-31 | now        | 66559b4a0d24cce3a1d6321518050128
+          -->
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/gate/gate-ALL.zip" dest="target/download/tmp">
+        <unzip src="target/download/gate/annie.jar" dest="target/download/tmp">
             <patternset>
-                <include name="**/plugins/ANNIE/resources/heptag/lexicon"/>
-                <include name="**/plugins/ANNIE/resources/heptag/ruleset"/>
+                <include name="resources/heptag/lexicon"/>
+                <include name="resources/heptag/ruleset"/>
             </patternset>
             <chainedmapper>
                 <mapper type="flatten"/>
@@ -99,14 +113,15 @@
         <delete dir="target/download/tmp"/>
 	</target>
 	
-    <target name="-check-download-gate">
-        <available property="download-gate.DONE" file="target/download/gate/DONE"/>
+    <target name="download-gate-tools">
+        <mkdir dir="target/download/gate"/>
+        <get src="https://repo1.maven.org/maven2/uk/ac/gate/plugins/tools/9.0.1/tools-9.0.1.jar"
+            dest="target/download/gate/tools.jar" skipexisting="true"/>
     </target>
 
-    <target name="download-gate" depends="-check-download-gate" unless="download-gate.DONE">
+    <target name="download-gate-annie">
         <mkdir dir="target/download/gate"/>
-        <get src="http://vorboss.dl.sourceforge.net/project/gate/gate/8.2/gate-8.2-build5482-ALL.zip" 
-            dest="target/download/gate/gate-ALL.zip" skipexisting="true"/>
-        <touch file="target/download/gate/DONE"/>
+        <get src="https://repo1.maven.org/maven2/uk/ac/gate/plugins/annie/9.1/annie-9.1.jar"
+            dest="target/download/gate/annie.jar" skipexisting="true"/>
     </target>
 </project>

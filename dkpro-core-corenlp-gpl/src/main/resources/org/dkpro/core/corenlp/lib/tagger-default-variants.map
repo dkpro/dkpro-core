@@ -1,6 +1,6 @@
 ar=default
-de=fast
-fr=default
-en=bidirectional-distsim
+de=ud
+fr=ud
+en=left3words-distsim
 es=distsim
 zh=distsim

@@ -81,6 +81,15 @@ public class CoreNlpParserTest
 
     private static final String[] ENGLISH_CONSTITUENT_UNMAPPED = {};
 
+    private static final String[] ENGLISH_UD2_DEPENDENCY_TAGS = { "acl", "acl:relcl", "advcl",
+            "advmod", "amod", "appos", "arg", "aux", "aux:pass", "case", "cc", "cc:preconj",
+            "ccomp", "comp", "compound", "compound:prt", "conj", "cop", "csubj", "csubj:pass",
+            "csubj:xsubj", "csubjpass:xsubj", "dep", "det", "det:predet", "det:qmod", "discourse",
+            "expl", "fixed", "flat", "goeswith", "gov", "iobj", "list", "mark", "mod", "name",
+            "neg", "nmod", "nmod:poss", "nsubj", "nsubj:pass", "nsubj:pass:xsubj", "nsubj:xsubj",
+            "nummod", "obj", "obl", "obl:agent", "obl:npmod", "obl:tmod", "orphan", "parataxis",
+            "pred", "prep", "punct", "ref", "rel", "sdep", "subj", "xcomp" };
+
     private static final String[] ENGLISH_DEPENDENCY_TAGS = { "acomp", "advcl", "advmod", "agent",
             "amod", "appos", "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
             "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
@@ -199,8 +208,11 @@ public class CoreNlpParserTest
     @Test
     public void testEnglishPcfg() throws Exception
     {
-        JCas jcas = runTest("en", "pcfg", "We need a very complicated example sentence , which "
-                + "contains as many constituents and dependencies as possible .");
+        // Stanford Dependencies are no longer the default
+        JCas jcas = runTest("en", "pcfg",
+                "We need a very complicated example sentence , which "
+                        + "contains as many constituents and dependencies as possible .",
+                CoreNlpParser.PARAM_ORIGINAL_DEPENDENCIES, true);
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,98",
                 "NP 8,110", "NP 8,43", "PP 61,98", "PP 99,110", "ROOT 0,112", "S 0,112", "S 52,110",
@@ -269,15 +281,17 @@ public class CoreNlpParserTest
                 "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 27, 34]NN(compound,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(obj,basic) D[35,43](sentence) G[3,7](need)",
                 "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 52, 60]RCMOD(acl:relcl,basic) D[52,60](contains) G[35,43](sentence)",
                 "[ 61, 63]ADVMOD(advmod,basic) D[61,63](as) G[64,68](many)",
                 "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]DOBJ(dobj,basic) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[52,60](contains)" };
+                "[ 69, 81]DOBJ(obj,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 82, 85]CC(cc,basic) D[82,85](and) G[86,98](dependencies)",
+                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",
+                "[102,110]ADVCL(advcl,basic) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN",
                 "POS_NOUN", "POS_PUNCT", "POS_DET", "POS_VERB", "POS_ADV", "POS_ADJ", "POS_NOUN",
@@ -301,8 +315,13 @@ public class CoreNlpParserTest
         assertTagsetMapping(POS.class, "ptb", ENGLISH_POS_UNMAPPED, jcas);
         assertTagset(Constituent.class, "ptb", ENGLISH_CONSTITUENT_TAGS, jcas);
         assertTagsetMapping(Constituent.class, "ptb", ENGLISH_CONSTITUENT_UNMAPPED, jcas);
-        assertTagset(Dependency.class, "stanford341", ENGLISH_DEPENDENCY_TAGS, jcas);
-        assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
+        assertTagset(Dependency.class, "ud2", ENGLISH_UD2_DEPENDENCY_TAGS, jcas);
+        // CoreNLP-internal relations, enhanced labels and UD v1 leftovers in the CoreNLP relation
+        // list. Subtypes fall back to their base relation during mapping.
+        String[] unmappedUd2Dep = { "arg", "comp", "csubj:xsubj", "csubjpass:xsubj", "det:qmod",
+                "gov", "mod", "name", "neg", "nsubj:pass:xsubj", "nsubj:xsubj", "pred", "prep",
+                "ref", "rel", "sdep", "subj" };
+        assertTagsetMapping(Dependency.class, "ud2", unmappedUd2Dep, jcas);
     }
 
     // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
@@ -802,7 +821,9 @@ public class CoreNlpParserTest
     @Test
     public void testChineseFactored() throws Exception
     {
-        JCas jcas = runTest("zh", "factored", "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+        // Stanford Dependencies are no longer the default
+        JCas jcas = runTest("zh", "factored", "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。",
+                CoreNlpParser.PARAM_ORIGINAL_DEPENDENCIES, true);
 
         String[] constituentMapped = { "ADJP 12,14", "ADJP 9,14", "ADVP 20,22", "ADVP 37,40",
                 "ADVP 9,11", "NP 0,2", "NP 17,19", "NP 23,25", "NP 29,34", "NP 32,34", "NP 6,19",
@@ -891,19 +912,19 @@ public class CoreNlpParserTest
 
         String[] dependencies = { "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
                 "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
-                "[  6,  8]Dependency(nummod,basic) D[6,8](一个) G[43,45](依赖)",
+                "[  6,  8]DEP(dep,basic) D[6,8](一个) G[43,45](依赖)",
                 "[  9, 11]ADVMOD(advmod,basic) D[9,11](非常) G[12,14](复杂)",
-                "[ 12, 14]RCMOD(rcmod,basic) D[12,14](复杂) G[17,19](句子)",
-                "[ 15, 16]Dependency(cpm,basic) D[15,16](的) G[12,14](复杂)",
+                "[ 12, 14]AMOD(amod,basic) D[12,14](复杂) G[17,19](句子)",
+                "[ 15, 16]MARK(mark,basic) D[15,16](的) G[12,14](复杂)",
                 "[ 17, 19]NSUBJ(nsubj,basic) D[17,19](句子) G[26,28](包含)",
                 "[ 20, 22]ADVMOD(advmod,basic) D[20,22](例如) G[26,28](包含)",
                 "[ 23, 25]NSUBJ(nsubj,basic) D[23,25](其中) G[26,28](包含)",
-                "[ 26, 28]RCMOD(rcmod,basic) D[26,28](包含) G[43,45](依赖)",
-                "[ 29, 31]Dependency(nummod,basic) D[29,31](许多) G[32,34](成分)",
+                "[ 26, 28]Dependency(acl,basic) D[26,28](包含) G[43,45](依赖)",
+                "[ 29, 31]DEP(dep,basic) D[29,31](许多) G[32,34](成分)",
                 "[ 32, 34]DOBJ(dobj,basic) D[32,34](成分) G[26,28](包含)",
                 "[ 35, 36]CC(cc,basic) D[35,36](和) G[26,28](包含)",
                 "[ 37, 40]CONJ(conj,basic) D[37,40](尽可能) G[26,28](包含)",
-                "[ 41, 42]Dependency(cpm,basic) D[41,42](的) G[26,28](包含)",
+                "[ 41, 42]MARK(mark,basic) D[41,42](的) G[26,28](包含)",
                 "[ 43, 45]DOBJ(dobj,basic) D[43,45](依赖) G[3,5](需要)" };
 
         String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NUM", "POS_ADJ", "POS_VERB", "POS_PART",
