@@ -17,23 +17,17 @@
  */
 package org.dkpro.core.opennlp;
 
+import static java.util.Locale.ROOT;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.FSIterator;
-import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeaturePath;
-import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
-import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
@@ -149,29 +143,29 @@ public class OpenNlpSnowballStemmer
         throws AnalysisEngineProcessException, FeaturePathException
     {
         // CAS is necessary to retrieve values
-        CAS currCAS = jcas.getCas();
+        var currCAS = jcas.getCas();
 
-        String lang = language != null ? language : jcas.getDocumentLanguage();
+        var lang = language != null ? language : jcas.getDocumentLanguage();
         if (isBlank(lang)) {
             throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "no_language_error", null);
         }
 
-        ALGORITHM algorithm = languages.get(jcas.getDocumentLanguage());
+        var algorithm = languages.get(lang);
         if (algorithm == null) {
             throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "unsupported_language_error",
                     new Object[] { lang });
         }
 
-        Stemmer stemmer = new SnowballStemmer(algorithm);
+        var stemmer = new SnowballStemmer(algorithm);
 
-        for (String path : paths) {
+        for (var path : paths) {
 
             // Separate Typename and featurepath
-            String[] segments = path.split("/", 2);
-            String typeName = segments[0];
+            var segments = path.split("/", 2);
+            var typeName = segments[0];
 
             // Try to get the type from the typesystem of the CAS
-            Type t = currCAS.getTypeSystem().getType(typeName);
+            var t = currCAS.getTypeSystem().getType(typeName);
             if (t == null) {
                 throw new IllegalStateException("Type [" + typeName + "] not found in type system");
             }
@@ -181,11 +175,11 @@ public class OpenNlpSnowballStemmer
             initializeFeaturePathInfoFrom(fp, segments);
 
             // get the annotations
-            AnnotationIndex<?> idx = currCAS.getAnnotationIndex(t);
-            FSIterator<?> iterator = idx.iterator();
+            var idx = currCAS.getAnnotationIndex(t);
+            var iterator = idx.iterator();
 
             while (iterator.hasNext()) {
-                AnnotationFS fs = (AnnotationFS) iterator.next();
+                var fs = (AnnotationFS) iterator.next();
 
                 try {
                     if (this.filterFeaturePath != null) {
@@ -222,19 +216,19 @@ public class OpenNlpSnowballStemmer
         throws AnalysisEngineProcessException
     {
         // Check for blank text, it makes no sense to add a stem then (and raised an exception)
-        String value = fp.getValue(fs);
-        if (!StringUtils.isBlank(value)) {
+        var value = fp.getValue(fs);
+        if (!isBlank(value)) {
             if (lowerCase) {
                 // Fixme - should use locale/language defined in CAS.
-                value = value.toLowerCase(Locale.US);
+                value = value.toLowerCase(ROOT);
             }
 
-            Stem stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
+            var stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
             stemAnnot.setValue(aStemmer.stem(value).toString());
             stemAnnot.addToIndexes(jcas);
 
             // Try setting the "stem" feature on Tokens.
-            Feature feat = fs.getType().getFeatureByBaseName("stem");
+            var feat = fs.getType().getFeatureByBaseName("stem");
             if (feat != null && feat.getRange() != null
                     && jcas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
                 fs.setFeatureValue(feat, stemAnnot);

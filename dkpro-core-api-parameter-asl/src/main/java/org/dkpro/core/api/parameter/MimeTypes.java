@@ -88,6 +88,7 @@ public final class MimeTypes
 
     // OpenNLP model types
     public final static String APPLICATION_X_OPENNLP_CHUNK = "application/x.org.dkpro.core.opennlp.chunk";
+    public final static String APPLICATION_X_OPENNLP_DEPPARSE = "application/x.org.dkpro.core.opennlp.depparse";
     public final static String APPLICATION_X_OPENNLP_LEMMA = "application/x.org.dkpro.core.opennlp.lemma";
     public final static String APPLICATION_X_OPENNLP_NER = "application/x.org.dkpro.core.opennlp.ner";
     public final static String APPLICATION_X_OPENNLP_PARSER = "application/x.org.dkpro.core.opennlp.parser";
