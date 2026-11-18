@@ -19,10 +19,11 @@ package org.dkpro.core.opennlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static org.dkpro.core.testing.AssertAnnotations.assertStem;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.testing.AssertAnnotations;
 import org.dkpro.core.testing.TestRunner;
 import org.junit.jupiter.api.Test;
 
@@ -49,6 +50,14 @@ public class OpenNlpSnowballStemmerTest
                 new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",",
                         "which", "contain", "as", "mani", "constitu", "and", "depend", "as",
                         "possibl", "." });
+    }
+
+    @Test
+    public void testLanguageParameterOverridesDocumentLanguage() throws Exception
+    {
+        // Document language is English, but the German stemmer must be used
+        runTest("en", "Automobile Fenster", new String[] { "Automobil", "Fenst" },
+                OpenNlpSnowballStemmer.PARAM_LANGUAGE, "de");
     }
 
     @Test
@@ -81,19 +90,19 @@ public class OpenNlpSnowballStemmerTest
                         OpenNlpSnowballStemmer.PARAM_FILTER_CONDITION_OPERATOR, "EQUALS",
                         OpenNlpSnowballStemmer.PARAM_FILTER_CONDITION_VALUE, "JJ"));
 
-        JCas result = TestRunner.runTest(aggregate, "en", "Babies educational sleep .s");
+        var result = TestRunner.runTest(aggregate, "en", "Babies educational sleep .s");
 
-        AssertAnnotations.assertStem(stems, select(result, Stem.class));
-        AssertAnnotations.assertPOS(null, pos, select(result, POS.class));
+        assertStem(stems, select(result, Stem.class));
+        assertPOS(null, pos, select(result, POS.class));
     }
 
     private JCas runTest(String aLanguage, String aText, String[] aStems, Object... aParams)
         throws Exception
     {
-        JCas result = TestRunner.runTest(
+        var result = TestRunner.runTest(
                 createEngineDescription(OpenNlpSnowballStemmer.class, aParams), aLanguage, aText);
 
-        AssertAnnotations.assertStem(aStems, select(result, Stem.class));
+        assertStem(aStems, select(result, Stem.class));
 
         return result;
     }
