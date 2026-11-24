@@ -33,7 +33,6 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
-import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerFactory;
 import opennlp.tools.postag.POSTaggerME;
@@ -64,7 +63,7 @@ public class OpenNlpPosTaggerTrainer
      * Training algorithm.
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = "MAXENT")
     private String algorithm;
 
     /**

@@ -1,0 +1,8 @@
+SET UTF-8
+
+SFX S Y 1
+SFX S 0 s .
+
+SFX D Y 2
+SFX D 0 d e
+SFX D 0 ed [^e]

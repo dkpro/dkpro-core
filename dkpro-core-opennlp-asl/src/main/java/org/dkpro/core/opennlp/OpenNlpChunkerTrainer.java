@@ -35,7 +35,6 @@ import opennlp.tools.chunker.ChunkerME;
 import opennlp.tools.chunker.ChunkerModel;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
-import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.util.TrainingParameters;
 import opennlp.tools.util.model.BaseModel;
 
@@ -60,7 +59,7 @@ public class OpenNlpChunkerTrainer
      * Training algorithm.
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, defaultValue = "MAXENT")
     private String algorithm;
 
     /**

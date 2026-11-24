@@ -1,0 +1,3 @@
+# Custom stop words for testing
+fox
+Dog

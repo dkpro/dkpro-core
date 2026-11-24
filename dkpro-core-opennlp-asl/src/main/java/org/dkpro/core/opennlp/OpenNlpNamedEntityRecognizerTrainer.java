@@ -49,9 +49,9 @@ import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
+import opennlp.tools.ml.AlgorithmType;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
-import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.ml.maxent.quasinewton.QNTrainer;
 import opennlp.tools.ml.perceptron.PerceptronTrainer;
 import opennlp.tools.ml.perceptron.SimplePerceptronSequenceTrainer;
@@ -122,7 +122,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
     protected String acceptedTagsRegex;
 
     /**
-     * @see GISTrainer#MAXENT_VALUE
+     * @see AlgorithmType#MAXENT
      * @see QNTrainer#MAXENT_QN_VALUE
      * @see PerceptronTrainer#PERCEPTRON_VALUE
      * @see SimplePerceptronSequenceTrainer#PERCEPTRON_SEQUENCE_VALUE

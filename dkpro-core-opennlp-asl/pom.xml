@@ -31,7 +31,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
 
   <properties>
-    <opennlp.version>2.5.12</opennlp.version>
+    <opennlp.version>3.0.0</opennlp.version>
   </properties>
 
   <dependencies>
@@ -45,11 +45,36 @@
     </dependency>
     <dependency>
       <groupId>org.apache.opennlp</groupId>
-      <artifactId>opennlp-tools</artifactId>
+      <artifactId>opennlp-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-runtime</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-ml-commons</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-ml-maxent</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-ml-perceptron</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-ml-bayes</artifactId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>it.unimi.dsi</groupId>
       <artifactId>fastutil</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -171,6 +196,41 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.apache.opennlp</groupId>
+        <artifactId>opennlp-api</artifactId>
+        <version>${opennlp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.opennlp</groupId>
+        <artifactId>opennlp-runtime</artifactId>
+        <version>${opennlp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.opennlp</groupId>
+        <artifactId>opennlp-ml-commons</artifactId>
+        <version>${opennlp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.opennlp</groupId>
+        <artifactId>opennlp-ml-maxent</artifactId>
+        <version>${opennlp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.opennlp</groupId>
+        <artifactId>opennlp-ml-perceptron</artifactId>
+        <version>${opennlp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.opennlp</groupId>
+        <artifactId>opennlp-ml-bayes</artifactId>
+        <version>${opennlp.version}</version>
+      </dependency>
+      <!--
+        - Not used by this module, but managed so that modules importing this POM (e.g. for
+        - LanguageTool which depends on opennlp-tools 1.9.x) do not end up with an old
+        - opennlp-tools next to the split OpenNLP 3 artifacts.
+        -->
       <dependency>
         <groupId>org.apache.opennlp</groupId>
         <artifactId>opennlp-tools</artifactId>
@@ -489,6 +549,13 @@
             <usedDependencies>
               <!-- Reflection-only test dependency -->
               <usedDependency>org.dkpro.core:dkpro-core-ivy-resolver-asl</usedDependency>
+              <!--
+                - OpenNLP ML implementations are loaded by name at runtime when models are
+                - loaded or trained. Our code only references inlined constants from them.
+                -->
+              <usedDependency>org.apache.opennlp:opennlp-ml-maxent</usedDependency>
+              <usedDependency>org.apache.opennlp:opennlp-ml-perceptron</usedDependency>
+              <usedDependency>org.apache.opennlp:opennlp-ml-bayes</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</usedDependency>
